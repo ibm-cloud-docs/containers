@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-03-07"
+lastupdated: "2024-03-08"
 
 
 keywords: containers
@@ -237,6 +237,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar24)
+
+    * [08 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar0824)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on patch updates.
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch update.
 
     * [06 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar0624)
 
@@ -7148,6 +7154,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
+    * [Change log for 5.2.17_535, released 08 March 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.17_535_is_block_relnote)
+
     * [Change log for version 5.2.15_501, released 08 February 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.15_501_is_block_relnote)
 
     * [Change log for version 5.2.14_485, released 10 January 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.14_485_is_block_relnote)
@@ -7159,6 +7167,8 @@ subcollection: containers
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+    * [Change log for 5.1.22_522, released 08 March 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.22_522_is_block_relnote)
 
     * [Change log for version 5.1.21_506, released 08 February 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.21_506_is_block_relnote)
 
@@ -7315,6 +7325,8 @@ subcollection: containers
 [{{site.data.keyword.filestorage_vpc_full_notm}} add-on change log](/docs/containers?topic=containers-versions-vpc-file-addon#versions-vpc-file-addon)
 
 * [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
+
+    * [Change log for 1.2.7_154, released 08 March 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.7_154_is_block_relnote)
 
     * [Change log for version 1.2.6_130, released 08 February 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.6_130_is_file_relnote)
 
