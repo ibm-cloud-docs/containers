@@ -52,9 +52,9 @@ toc:
       - topicgroup:
           label: Planning your cluster environment
           topics:
-          - kube-strategy.md
           - cluster-create.md
           - access-apikey.md
+          - kube-strategy.md
           - cluster-plan-ha.md
           - worker-plan.md
           - cluster-plan-network-vpc.md

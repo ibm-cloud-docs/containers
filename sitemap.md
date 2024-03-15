@@ -2740,35 +2740,17 @@ subcollection: containers
 {: #sitemap_planning_your_cluster_environment}
 
 
-[Sizing your cluster environment](/docs/containers?topic=containers-strategy#strategy)
-
-* [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
-
-* [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
-
-* [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
-
-* [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
-
-* [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
-
-    * [Consider your worker node capacity](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
-
-    * [Provision different types of machines for a mix of computing resources](/docs/containers?topic=containers-strategy#env_resources_provision_types)
-
-    * [Set up multiple namespaces when you have multiple teams and projects that share the cluster](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
-
-    * [Set resource quotas so that users in your cluster must use resource requests and limits](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
-
 [Preparing your account to create clusters](/docs/containers?topic=containers-clusters#clusters)
 
 * [Create or upgrade your account](/docs/containers?topic=containers-clusters#prepare-create-account)
 
-* [Set up an API key](/docs/containers?topic=containers-clusters#prepare-create-api-key)
+* [Setting user permissions](/docs/containers?topic=containers-clusters#prepare-verify-permissions)
 
-* [Verify your permissions](/docs/containers?topic=containers-clusters#prepare-verify-permissions)
+* [Plan your resource groups](/docs/containers?topic=containers-clusters#prepare-resource-groups)
 
-* [Create your first cluster](/docs/containers?topic=containers-clusters#next_steps)
+* [Cluster-specific account setup](/docs/containers?topic=containers-clusters#prepare-cluster-account)
+
+* [Next steps](/docs/containers?topic=containers-clusters#next-steps)
 
 [Setting up your API key credentials](/docs/containers?topic=containers-access-creds#access-creds)
 
@@ -2807,6 +2789,24 @@ subcollection: containers
     * [Assigning infrastructure access through the console](/docs/containers?topic=containers-access-creds#infra_console)
 
     * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-access-creds#infra_cli)
+
+[Creating a cluster environment strategy](/docs/containers?topic=containers-strategy#strategy)
+
+* [What type of cluster should I get?](/docs/containers?topic=containers-strategy#env_flavors)
+
+* [Do I actually need multiple clusters or can I just add more workers to one cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
+
+* [How do I name my clusters?](/docs/containers?topic=containers-strategy#naming)
+
+* [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
+
+* [What type of worker node flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors_node)
+
+* [How do I determine worker node capacity for my resources?](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
+
+* [How do I manage teams and projects?](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
+
+* [ How do I manage resource requests and limits?](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
@@ -9710,6 +9710,8 @@ subcollection: containers
 * [`Deploy_failed` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-deploy-failed)
 
 * [`Normal` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-normal)
+
+* [`NotReady` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-notready)
 
 * [`Provisioned` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-provisioned)
 
