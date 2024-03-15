@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-15"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
@@ -235,7 +235,7 @@ The following table shows the different options that you have when you configure
 ### Forwarding logs to your own server over the `udp` or `tcp` protocols
 {: #enable-forwarding-udp-tcp}
 
-1. Ensure that you have the [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
+1. Ensure that you have the [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
@@ -261,7 +261,7 @@ The following table shows the different options that you have when you configure
 The following steps are general instructions. Before you use the container in a production environment, be sure that any security requirements are met.
 {: tip}
 
-1. Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
+1. Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-iam-platform-access-roles):
     - **Editor** or **Administrator** platform access role for the cluster
     - **Writer** or **Manager** service access role for the `kube-system` namespace
 

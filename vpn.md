@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-15"
 
 
 keywords: kubernetes, vyatta, strongswan, ipsec, on-prem
@@ -176,7 +176,7 @@ Before you install the strongSwan Helm chart, you must decide on your strongSwan
 
 Before you begin
 - Install an IPSec VPN gateway in your on-premises data center.
-- Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for the `default` namespace.
+- Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-iam-platform-access-roles) for the `default` namespace.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
     All strongSwan configurations are permitted in standard clusters.
     {: note}

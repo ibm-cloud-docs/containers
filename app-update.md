@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-15"
 
 
 keywords: kubernetes
@@ -50,7 +50,7 @@ Want to scale your worker nodes instead of your pods? Check out the [cluster aut
 
 Before you begin
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To scale your apps,
 
@@ -92,7 +92,7 @@ Want to prevent downtime during your rolling update? Be sure to specify a [readi
 Before you begin
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 * Create a [deployment](/docs/containers?topic=containers-deploy_app#app_cli).
-* Make sure that you have a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
+* Make sure that you have a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To manage rolling updates to your apps,
 
@@ -229,7 +229,7 @@ To see a list of supported integrations and steps for setting up a continuous de
 When you use a [version control system such as Git](/docs/containers?topic=containers-plan_deploy#deploy_organize), configuration management projects such as [`kustomize`](/docs/containers?topic=containers-kustomize), or continuous delivery tools such as [Razee](https://razee.io/){: external} in your cluster, you can deploy your app configuration files quickly from cluster to cluster. Sometimes you have only a few deployments that you tested in a cluster and prefer to copy these deployments and redeploy in another cluster.
 {: shortdesc}
 
-Before you begin, you need two clusters and the **Manager** [service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces in both clusters so that you can copy all the resources from one cluster and deploy them to another.
+Before you begin, you need two clusters and the **Manager** [service access role](/docs/containers?topic=containers-iam-platform-access-roles) for all namespaces in both clusters so that you can copy all the resources from one cluster and deploy them to another.
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 2. List all the configuration files in your cluster and verify that you want to copy these configurations.

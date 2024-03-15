@@ -65,6 +65,28 @@ subcollection: containers
 * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
 
 
+## IAM roles and actions
+{: #sitemap_iam_roles_and_actions}
+
+
+[IAM roles and actions](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
+
+* [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
+
+* [Required permissions to create a cluster](/docs/containers?topic=containers-iam-platform-access-roles#cluster-create-permissions)
+
+* [Example custom IAM roles](/docs/containers?topic=containers-iam-platform-access-roles#example-iam)
+
+
+## Understanding Classic infrastructure credentials
+{: #sitemap_understanding_classic_infrastructure_credentials}
+
+
+[Understanding Classic infrastructure credentials](/docs/containers?topic=containers-classic-credentials#classic-credentials)
+
+* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-classic-credentials#credentials)
+
+
 ## Your responsibilities with using {{site.data.keyword.containerlong_notm}}
 {: #sitemap_your_responsibilities_with_using_}
 
@@ -2752,43 +2774,9 @@ subcollection: containers
 
 * [Next steps](/docs/containers?topic=containers-clusters#next-steps)
 
-[Setting up your API key credentials](/docs/containers?topic=containers-access-creds#access-creds)
+[Setting which credentials to use for creating clusters](/docs/containers?topic=containers-access-creds#access-creds)
 
-* [Setting up the API key for most use cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
-
-* [Understanding other options than the API key](/docs/containers?topic=containers-access-creds#api_key_other)
-
-* [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about)
-
-    * [What is the API key used for?](/docs/containers?topic=containers-access-creds#api-key-uses)
-
-    * [How many API keys do I need?](/docs/containers?topic=containers-access-creds#how-many-apikeys)
-
-    * [How do I set up the API key?](/docs/containers?topic=containers-access-creds#howto-api-key-setup)
-
-    * [What permissions does the user who sets the API key need? How do I give the user these permissions?](/docs/containers?topic=containers-access-creds#what-perms-api-key)
-
-    * [How do I limit which commands a user can run?](/docs/containers?topic=containers-access-creds#limit-apikey-scopes)
-
-    * [What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?](/docs/containers?topic=containers-access-creds#non-superuser)
-
-    * [What happens if the user who set up the API key for a region and resource group leaves the company?](/docs/containers?topic=containers-access-creds#apikey-user-leaves)
-
-    * [How can I lock down my cluster if my API key becomes compromised?](/docs/containers?topic=containers-access-creds#apikey-lockdown)
-
-* [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-access-creds#owner_permissions)
-
-* [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra)
-
-* [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-access-creds#default_account)
-
-* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-access-creds#credentials)
-
-* [Customizing classic infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access)
-
-    * [Assigning infrastructure access through the console](/docs/containers?topic=containers-access-creds#infra_console)
-
-    * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-access-creds#infra_cli)
+* [Setting the cluster credentials](/docs/containers?topic=containers-access-creds#admin-set-credentials)
 
 [Creating a cluster environment strategy](/docs/containers?topic=containers-strategy#strategy)
 
@@ -3010,7 +2998,7 @@ subcollection: containers
 
 * [Next steps](/docs/containers?topic=containers-encryption#encryption-next-steps)
 
-[Storage overview](/docs/containers?topic=containers-storage-plan#storage-plan)
+[{{site.data.keyword.containerlong_notm}} storage overview](/docs/containers?topic=containers-storage-plan#storage-plan)
 
 * [Non-persistent storage options](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
 
@@ -3393,17 +3381,7 @@ subcollection: containers
 
     * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-access-overview#resource_groups)
 
-[Controlling user access with {{site.data.keyword.cloud_notm}} IAM and Kubernetes RBAC](/docs/containers?topic=containers-users#users)
-
-* [Example cluster use cases and IAM roles](/docs/containers?topic=containers-users#example-iam)
-
-* [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
-
-* [Assign {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
-
-    * [Assigning {{site.data.keyword.cloud_notm}} IAM _platform_ roles from the CLI](/docs/containers?topic=containers-users#add_users_cli_platform)
-
-    * [Assigning {{site.data.keyword.cloud_notm}} IAM _service_ roles from the CLI:**](/docs/containers?topic=containers-users#add_users_cli_service)
+[Controlling user access Kubernetes role-based access control](/docs/containers?topic=containers-users#users)
 
 * [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
 
@@ -3423,21 +3401,17 @@ subcollection: containers
 
     * [What are some common operations that I might want to extend permissions for a default cluster role?](/docs/containers?topic=containers-users#common-rbac-operations)
 
-* [Checking user permissions](/docs/containers?topic=containers-users#checking-perms)
+* [Checking RBAC roles](/docs/containers?topic=containers-users#checking-rbac)
 
-    * [Checking IAM platform and service access roles](/docs/containers?topic=containers-users#checking-iam)
+    * [Checking RBAC roles from the UI](/docs/containers?topic=containers-users#checking-rbac-ui)
 
-    * [Checking RBAC roles](/docs/containers?topic=containers-users#checking-rbac)
+    * [Checking RBAC roles with the CLI](/docs/containers?topic=containers-users#checking-rbac-cli)
 
-    * [Checking infrastructure roles](/docs/containers?topic=containers-users#checking-infra)
+* [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-users#rbac_service)
 
-* [Removing user permissions](/docs/containers?topic=containers-users#removing)
+    * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-users#rbac_ref)
 
-    * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
-
-    * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
-
-    * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
+    * [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-users#iam-issuer-users)
 
 [Authorizing pods in your cluster to {{site.data.keyword.cloud_notm}} services with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity#pod-iam-identity)
 
@@ -3454,6 +3428,14 @@ subcollection: containers
 * [Creating a {{site.data.keyword.containershort}} cluster by using Terraform](/docs/containers?topic=containers-terraform-setup#terraform-cluster-create)
 
 * [Assigning IAM user access to {{site.data.keyword.containershort}} clusters](/docs/containers?topic=containers-terraform-setup#terraform-cluster-IAM)
+
+[Removing users](/docs/containers?topic=containers-removing-user-permissions#removing-user-permissions)
+
+* [Checking whether the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-removing-user-permissions#removing_check_infra)
+
+* [Removing {{site.data.keyword.cloud_notm}} IAM platform permissions and the associated pre-defined RBAC permissions](/docs/containers?topic=containers-removing-user-permissions#remove_iam_rbac)
+
+    * [Removing custom RBAC permissions](/docs/containers?topic=containers-removing-user-permissions#remove_custom_rbac)
 
 
 ## Securing cluster workloads
@@ -9271,27 +9253,9 @@ subcollection: containers
 * [Worker nodes and worker pools](/docs/containers?topic=containers-api-at-iam#ks-workers)
 
 
-## IAM and user access permissions
-{: #sitemap_iam_and_user_access_permissions}
+## Classic infrastructure roles
+{: #sitemap_classic_infrastructure_roles}
 
-
-[Understanding user access permissions](/docs/containers?topic=containers-access_reference#access_reference)
-
-* [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
-
-[IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
-
-* [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
-
-[IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles)
-
-* [Kubernetes Service](/docs/containers?topic=containers-iam-service-access-roles#iam-service-access-roles-include-containers-kubernetes-roles)
-
-* [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-iam-service-access-roles#rbac_service)
-
-* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-iam-service-access-roles#rbac_ref)
-
-* [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-iam-service-access-roles#iam-issuer-users)
 
 [Classic infrastructure roles](/docs/containers?topic=containers-classic-roles#classic-roles)
 
@@ -9490,6 +9454,12 @@ subcollection: containers
 * [What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
 
 * [What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
+
+    * [What permissions does the user who sets the API key need? How do I give the user these permissions?](/docs/containers?topic=containers-faqs#what-perms-api-key)
+
+    * [What happens if the user who set up the API key for a region and resource group leaves the company?](/docs/containers?topic=containers-faqs#apikey-user-leaves)
+
+    * [How can I lock down my cluster if my API key becomes compromised?](/docs/containers?topic=containers-faqs#apikey-lockdown)
 
 * [How do I rotate the cluster API key in the event of a leak?](/docs/containers?topic=containers-faqs#faq_api_key_leak)
 

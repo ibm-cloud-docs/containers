@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-14"
+lastupdated: "2024-03-15"
 
 
-keywords: kubernetes, infrastructure, rbac, policy
+keywords: containers, kubernetes, infrastructure, rbac, policy
 
 subcollection: containers
 
@@ -13,9 +13,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
-
 
 
 # Understanding access control for clusters
@@ -38,13 +35,13 @@ Your clusters use {{site.data.keyword.cloud_notm}} Identity and Access Managemen
 
 1. [Understand how roles, users, and resources in your account](#access_policies) can be managed.
 1. [Set the API key](#api_key) for all the regions and resource groups that you want to create clusters in.
-1. Invite users to your account and [assign them {{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms) for the service (**containers-kubernetes** in the API or CLI, and **Kubernetes Service** in the console).
+1. Invite users to your account and [assign them {{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-iam-platform-access-roles) for the service (**containers-kubernetes** in the API or CLI, and **Kubernetes Service** in the console).
 
     Do not assign {{site.data.keyword.cloud_notm}} IAM platform access roles at the same time as a service access role. You must assign platform and service access roles separately.
     {: note}
 
-1. If you use Kubernetes namespaces to isolate resources within the cluster, grant access to namespaces by [assigning users {{site.data.keyword.cloud_notm}} IAM service access roles for the namespaces](/docs/containers?topic=containers-users#checking-perms).
-1. For any automation tooling such as in your CI/CD pipeline, set up service accounts and [assign the service accounts Kubernetes RBAC permissions](/docs/containers?topic=containers-users#rbac)).
+1. If you use Kubernetes namespaces to isolate resources within the cluster, grant access to namespaces by [assigning users {{site.data.keyword.cloud_notm}} IAM service access roles for the namespaces](/docs/containers?topic=containers-iam-platform-access-roles).
+1. For any automation tooling such as in your CI/CD pipeline, set up service accounts and [assign the service accounts Kubernetes RBAC permissions](/docs/containers?topic=containers-users#rbac).
 
 For more information about setting up your account and resources, see [best practices for organizing users, teams, and applications](/docs/account?topic=account-account_setup).
 {: tip}
@@ -85,7 +82,7 @@ You must define access policies for every user that works with {{site.data.keywo
 
 
 
-To see the specific {{site.data.keyword.containerlong_notm}} permissions that can be performed with each role, check out the [User access permissions](/docs/containers?topic=containers-access_reference).
+To see the specific {{site.data.keyword.containerlong_notm}} permissions that can be performed with each role, check out the [User access permissions](/docs/containers?topic=containers-iam-platform-access-roles).
 {: tip}
 
 #### Overview of {{site.data.keyword.cloud_notm}} IAM platform access roles
@@ -113,7 +110,7 @@ Service access roles are synchronized with corresponding Kubernetes RBAC policie
 
 You can scope the policy for service access roles by resource group, region, or cluster instance. Further, you can also scope service access roles to Kubernetes namespaces that are in all, individual, or region-wide clusters. When you scope a service access role to a namespace, you can't apply the policy to a resource group or assign a platform access role at the same time.
 
-If you assigned only service access roles to users, the users must [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-deploy_app#db_cli) instead of the {{site.data.keyword.cloud_notm}} console. Otherwise, [give the users the platform **Viewer** role](/docs/containers?topic=containers-users#add_users_cli_platform).
+If you assigned only service access roles to users, the users must [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-deploy_app#db_cli) instead of the {{site.data.keyword.cloud_notm}} console. Otherwise, give the users the platform **Viewer** role.
 
 #### Overview of RBAC
 {: #role-binding}
@@ -137,7 +134,7 @@ Classic infrastructure roles enable access to your classic IBM Cloud infrastruct
 
 Set up a user with **Super User** infrastructure role, and store this user's infrastructure credentials in an API key. Then, set the API key in each region and resource group that you want to create clusters in. After you set up the API key, other users that you grant access to {{site.data.keyword.containerlong_notm}} don't need infrastructure roles as the API key is shared for all users within the region. Instead, {{site.data.keyword.cloud_notm}} IAM platform access roles determine the infrastructure actions that users are allowed to perform.
 
-If you don't want to set up the API key with full **Super User** infrastructure permissions or you need to grant specific device access to users, you can [customize infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access).
+If you don't want to set up the API key with full **Super User** infrastructure permissions or you need to grant specific device access to users, you can [customize infrastructure permissions](/docs/containers?topic=containers-classic-roles).
 
 Example actions that are permitted by infrastructure roles are viewing the details of cluster worker node machines or editing networking and storage resources.
 
@@ -155,8 +152,6 @@ Individual users
 
 Multiple users in an access group
 :   You can create a group of users and then assign permissions to that group. For example, you can group all team leaders and assign administrator access to the group. Then, you can group all developers and assign only write access to that group. You can assign more than one {{site.data.keyword.cloud_notm}} IAM role to each access group. When you assign permissions to a group, any user that is added or removed from that group is affected. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.
-
-
 
 
 {{site.data.keyword.cloud_notm}} IAM roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](/docs/containers?topic=containers-users#rbac).

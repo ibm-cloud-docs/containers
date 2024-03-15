@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-15"
 
 
 keywords: kubernetes
@@ -38,7 +38,7 @@ If this cluster is an existing one:
 *  The pod might have exceeded a resource request or limit.
 
 
-This task requires the {{site.data.keyword.cloud_notm}} IAM [**Administrator** platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster and the [**Manager** service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces.
+This task requires the {{site.data.keyword.cloud_notm}} IAM [**Administrator** platform access role](/docs/containers?topic=containers-iam-platform-access-roles) for the cluster and the [**Manager** service access role](/docs/containers?topic=containers-iam-platform-access-roles) for all namespaces.
 {: tsResolve}
 
 If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.

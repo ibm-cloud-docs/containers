@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-15"
 
 
 keywords: kubernetes, istio, add-on
@@ -28,7 +28,7 @@ Review the following list of {{site.data.keyword.cloud_notm}} Identity and Acces
 
 For more information, see the following topics.
 - [{{site.data.keyword.containerlong_notm}} API docs](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external}
-- [User access permissions](/docs/containers?topic=containers-access_reference)
+- [User access permissions](/docs/containers?topic=containers-iam-platform-access-roles)
 - [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).
 
 ## Account

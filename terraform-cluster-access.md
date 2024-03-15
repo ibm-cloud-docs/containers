@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-15"
 
 
 keywords: kubernetes, terraform, create, cluster, access
@@ -33,7 +33,7 @@ Looking for a managed Terraform on {{site.data.keyword.cloud}} solution? Try out
 Before you can assign cluster access by using Terraform, follow the steps to create a {{site.data.keyword.containershort}} cluster using Terraform. If you already have a cluster, see [Assigning IAM user access](#terraform-cluster-IAM).
 {: shortdesc}
 
-Before you begin, make sure that you have the [required access](/docs/containers?topic=containers-access_reference) to create and work with {{site.data.keyword.containerlong_notm}} resources. 
+Before you begin, make sure that you have the [required access](/docs/containers?topic=containers-iam-platform-access-roles) to create and work with {{site.data.keyword.containerlong_notm}} resources. 
 
 1. Follow the [Terraform on {{site.data.keyword.cloud}} getting started tutorial](/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-getting-started) to install the Terraform CLI and configure the {{site.data.keyword.cloud}} Provider plug-in for Terraform. The plug-in abstracts the {{site.data.keyword.cloud}} APIs that are used to provision, update, or delete {{site.data.keyword.containershort}} service instances and resources. 
 

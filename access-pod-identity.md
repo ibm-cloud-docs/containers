@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-03-15"
 
 
 keywords: kubernetes, infrastructure, rbac, policy
@@ -43,7 +43,7 @@ To use {{site.data.keyword.cloud_notm}} IAM identities for pods in your cluster,
 
 
 Minimum required permissions
-- **Viewer** [platform](/docs/containers?topic=containers-iam-platform-access-roles) access role and the **Writer** [service](/docs/containers?topic=containers-iam-service-access-roles) access role for the cluster in {{site.data.keyword.cloud_notm}} IAM for **{{site.data.keyword.containershort}}**.
+- **Viewer** [platform](/docs/containers?topic=containers-iam-platform-access-roles) access role and the **Writer** [service](/docs/containers?topic=containers-iam-platform-access-roles) access role for the cluster in {{site.data.keyword.cloud_notm}} IAM for **{{site.data.keyword.containershort}}**.
 - The `iam-identity.profile.create` and `iam-identity.profile.linkToResource` actions for the [IAM identity service](/docs/account?topic=account-iam-service-roles-actions#iam-identity-roles).
 
 

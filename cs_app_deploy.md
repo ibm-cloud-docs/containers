@@ -38,8 +38,8 @@ To check the logs for individual app pods, you can run `kubectl logs <pod name>`
 {: important}
 
 Before you begin
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
-- To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
+- To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-iam-platform-access-roles). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
@@ -113,8 +113,8 @@ Before you begin
 
 - [Install the required CLIs](/docs/containers?topic=containers-cli-install).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
-- To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-users#checking-perms). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
+- To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-iam-platform-access-roles). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 
 To deploy your app,
 
@@ -140,7 +140,7 @@ Before you begin
 
 - Install the required [CLIs](/docs/containers?topic=containers-cli-install).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To deploy your app,
 
@@ -171,7 +171,6 @@ When you deploy an app, the app pods indiscriminately deploy to various worker n
 
 Before you begin
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the Kubernetes namespace.
 - **Optional**: [Set a label for the worker pool](/docs/containers?topic=containers-worker-tag-label) that you want to run the app on.
 
 To deploy apps to specific worker nodes,
@@ -321,7 +320,7 @@ Before you begin
     - [Classic flavors](/docs/containers?topic=containers-classic-flavors)
     - [VPC flavors](/docs/containers?topic=containers-vpc-flavors)
 
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#checking-perms) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the cluster.
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the cluster.
 
 To run a workload on a GPU machine,
 

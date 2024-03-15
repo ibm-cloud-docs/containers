@@ -457,8 +457,6 @@ Worker node fix packs are available.
 
 
 
-
-
 ### 14 December 2023
 {: #containers-dec1423}
 {: release-note}
@@ -5240,7 +5238,7 @@ Worker node versions
 {: release-note}
 
 API key
-:   Added more information about [how the {{site.data.keyword.containerlong_notm}} API key is used](/docs/containers?topic=containers-access-creds#api_key_about).
+:   Added more information about how the {{site.data.keyword.containerlong_notm}} API key is used.
 
 
 

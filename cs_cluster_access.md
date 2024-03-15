@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-03-15"
 
 
 keywords: kubernetes, clusters
@@ -266,7 +266,7 @@ The Kubernetes master is accessible through the private cloud service endpoint i
 Control access to your private cloud service endpoint by creating a subnet allowlist.
 {: shortdesc}
 
-After you [grant users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#checking-perms), you can add a secondary layer of security by creating an allowlist for the private cloud service endpoint. Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint.
+After you [grant users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-iam-platform-access-roles), you can add a secondary layer of security by creating an allowlist for the private cloud service endpoint. Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint.
 
 If you want to allow requests from a different VPC than the one your cluster is in, you must include the cloud service endpoint for that VPC in the allowlist.
 {: note}
@@ -285,7 +285,7 @@ If the public cloud service endpoint is enabled for your cluster, authorized req
 
 Before you begin:
 * [Access your cluster through the private cloud service endpoint](#access_private_se).
-* [Grant users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#checking-perms).
+* [Grant users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-iam-platform-access-roles).
 
 To create a private cloud service endpoint allowlist:
 

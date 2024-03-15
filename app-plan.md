@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-05"
+lastupdated: "2024-03-15"
 
 
 keywords: kubernetes, deploy
@@ -423,7 +423,7 @@ After you deploy your app, you can control who can access the app, and monitor t
 The account and cluster administrators can control access on many different levels: the cluster, Kubernetes namespace, pod, and container.
 {: shortdesc}
 
-With {{site.data.keyword.cloud_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level. You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers?topic=containers-users#users).
+With {{site.data.keyword.cloud_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level. You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers?topic=containers-users).
 
 To control access at the pod level, you can configure [pod security policies (PSPs)](/docs/containers?topic=containers-psp).
 

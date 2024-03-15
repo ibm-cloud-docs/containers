@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-01-18"
+lastupdated: "2024-03-15"
 
 
 keywords: ingress, expose apps, ingress resource, ALB, domain
@@ -28,7 +28,7 @@ Create an Ingress resource to configure your Ingress components, define rules fo
 Follow these preparation steps before you begin.
 {: shortdesc}
 
-1. Make sure that you have the correct permissions to set up Ingress. The following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms) are required:
+1. Make sure that you have the correct permissions to set up Ingress. The following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-iam-platform-access-roles) are required:
     - **Administrator** platform access role for the cluster
     - **Manager** service access role in all namespaces
 

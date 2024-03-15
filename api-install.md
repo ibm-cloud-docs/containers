@@ -5,7 +5,7 @@ copyright:
 lastupdated: "2024-03-15"
 
 
-keywords: kubernetes, ic, ks, kubectl, api
+keywords: containers, kubernetes, ic, ks, kubectl, api
 
 subcollection: containers
 
@@ -273,7 +273,7 @@ When you use the API for automation, be sure to rely on the responses from the A
 ## Working with your cluster by using the Kubernetes API
 {: #kube_api}
 
-You can use the [Kubernetes API](https://kubernetes.io/docs/reference/using-api/){: external} to interact with your cluster in {{site.data.keyword.containerlong_notm}}. For authentication details, see [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-iam-service-access-roles#iam-issuer-users).
+You can use the [Kubernetes API](https://kubernetes.io/docs/reference/using-api/){: external} to interact with your cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 The following instructions require public network access in your cluster to connect to the public cloud service endpoint of your Kubernetes master.
