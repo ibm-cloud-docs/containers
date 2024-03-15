@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-23"
+lastupdated: "2024-03-15"
 
 
 keywords: containers, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
@@ -358,13 +358,13 @@ Complete the following steps to update your worker nodes by using the CLI.
     {: pre}
 
 4. Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.27 to 1.28, include the `--update` option.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.28 to 1.29, include the `--update` option.
         ```sh
         ibmcloud ks worker replace --cluster CLUSTER --worker WORKER-NODE-ID --update
         ```
         {: pre}
 
-    *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.27.8_1530 to 1.27.9_1533, don't include the `--update` option.
+    *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.28.8_1530 to 1.28.9_1533, don't include the `--update` option.
         ```sh
         ibmcloud ks worker replace --cluster CLUSTER --worker WORKER-NODE-ID
         ```
