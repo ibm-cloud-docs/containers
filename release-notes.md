@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-08"
+lastupdated: "2024-03-15"
 
 
 keywords: containers, kubernetes, release notes
@@ -30,6 +30,27 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2024
 {: #containers-mar24}
+
+### 15 March 2024
+{: #containers-mar1524}
+{: release-note}
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [1.29](/docs/containers?topic=containers-changelog_129)
+:   [1.28](/docs/containers?topic=containers-changelog_128)
+:   [1.27](/docs/containers?topic=containers-changelog_127)
+:   [1.26](/docs/containers?topic=containers-changelog_126)
+
+Version 1.29 is the default version for {{site.data.keyword.containerlong_notm}}.
+:   For a complete list of available versions, see the [version information](/docs/openshift?topic=openshift-openshift_versions).
+
+
+
+
+
 
 ### 08 March 2024
 {: #containers-mar0824}
