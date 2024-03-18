@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-02-16"
+lastupdated: "2024-03-18"
 
 
 keywords: kubernetes, deploy, pod security admission, pod security, security profiles
@@ -174,11 +174,13 @@ For Kubernetes 1.24 clusters the `apiVersion` must be `pod-security.admission.co
     {: codeblock}
 
 1. Make the customizations that you want to use. Review the following the information about each section of the configuration.
+
     `defaults`
     :   The `defaults` section of the configuration defines cluster-wide defaults for namespaces that do not have pod security labels. The fields can have the same values as the corresponding namespace labels.
 
     `exemptions`
     :   The `exemptions` section of the configuration allows you to create pods that are otherwise prohibited because of the policy associated with a specific namespace. Exemption dimensions include the following cases.
+    
         - Usernames: Requests from users with an exempt authenticated (or impersonated) username are ignored. Usernames are typically IAM users or service accounts. For example `usernames: [ "IAM#user@example.com" ]`. You can also exempt the username associated with an `admin kubeconfig` client certificate. If you want to specify an `admin kubeconfig` certificate, the username is the `CN` component of the current client-certificate.
 
             ```sh
