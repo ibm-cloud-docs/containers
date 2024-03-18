@@ -764,7 +764,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT_TYPE
 
 Minimum required permissions
 :   **Viewer** or **Reader** {{site.data.keyword.cloud_notm}} IAM service access role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform access role or only a service access role, additional constraints apply.
-* **Platform**: If you have only a platform access role, you can perform this command, but you need a [service access role](/docs/containers?topic=containers-users#checking-perms) or a [custom RBAC policy](/docs/containers?topic=containers-access-overview#role-binding) to perform Kubernetes actions in the cluster.
+* **Platform**: If you have only a platform access role, you can perform this command, but you need a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) or a [custom RBAC policy](/docs/containers?topic=containers-access-overview#role-binding) to perform Kubernetes actions in the cluster.
 * **Service**: If you have only a service access role, you can perform this command. However, your cluster admin must give you the cluster name and ID because you can't run the `ibmcloud ks cluster ls` command or open the {{site.data.keyword.containerlong_notm}} console to view clusters. After you receive the cluster name and ID, you can [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-deploy_app#db_cli) and work with Kubernetes.
 
 **Command options**:
@@ -787,7 +787,7 @@ Minimum required permissions
      {: note}
 
 `--skip-rbac`
-:    Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-iam-service-access-roles) to manage all your RBAC users, don't include this option.
+:    Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-iam-platform-access-roles) to manage all your RBAC users, don't include this option.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -961,15 +961,15 @@ VPC Gen 2 cluster flavors with instance storage are available for allowlisted ac
 
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--cluster-security-group GROUP_ID] [--operating-system UBUNTU_20_64] [--version MAJOR.MINOR.PATCH] [--workers NUMBER_WORKERS_PER_ZONE]  [--disable-outbound-traffic-protection] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID][--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [-q] [--secondary-storage STORAGE]
+ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--cluster-security-group GROUP_ID] [--operating-system UBUNTU_20_64] [--version MAJOR.MINOR.PATCH] [--workers NUMBER_WORKERS_PER_ZONE] [--dedicated-host-pool POOL] [--disable-outbound-traffic-protection] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID][--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [-q] [--secondary-storage STORAGE]
 ```
 {: pre}
 
 Minimum required permissions
 :   [**Administrator** platform access role for VPC Infrastructure](/docs/vpc?topic=vpc-iam-getting-started).
-:   [**Administrator** platform access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}} at the account level.
-:   [**Writer** or **Manager** service access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}}.
-:   [**Administrator** platform access role](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.registrylong_notm}} at the account level.
+:   [**Administrator** platform access role](/docs/containers?topic=containers-iam-platform-access-roles) for {{site.data.keyword.containerlong_notm}} at the account level.
+:   [**Writer** or **Manager** service access role](/docs/containers?topic=containers-iam-platform-access-roles) for {{site.data.keyword.containerlong_notm}}.
+:   [**Administrator** platform access role](/docs/containers?topic=containers-iam-platform-access-roles) for {{site.data.keyword.registrylong_notm}} at the account level.
 
 **Command options**:
 
@@ -993,6 +993,11 @@ Minimum required permissions
 
 `--flavor FLAVOR`
 :    Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.
+
+
+
+`--dedicated-host-pool POOL`
+:    Optional. The ID of the dedicated host pool where you want to run your workers. 
 
 `--workers NUMBER_WORKERS_PER_ZONE`
 :    Optional: Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
@@ -2256,7 +2261,7 @@ ibmcloud ks cluster subnet add --cluster my_cluster --subnet-id 1643389
 Create a portable classic subnet in an IBM Cloud infrastructure account on your public or private VLAN and make it available to a cluster.
 {: shortdesc}
 
-Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time. When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time. If you use the same subnet across multiple clusters, your default Ingress TLS certificate might become invalidated. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time. When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time. If you use the same subnet across multiple clusters, your default Ingress TLS certificate might become invalidated. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** infrastructure permission, or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 {: important}
 
 ```sh
@@ -2345,7 +2350,7 @@ Bring your own private subnet to your {{site.data.keyword.containerlong_notm}} c
 This command is deprecated. Add an existing IBM Cloud infrastructure subnet to your cluster by running [`ibmcloud ks cluster subnet add`](#cs_cluster_subnet_add).
 {: deprecated}
 
-When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time. If you use the same subnet across multiple clusters, your default Ingress TLS certificate might become invalidated. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time. If you use the same subnet across multiple clusters, your default Ingress TLS certificate might become invalidated. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** infrastructure permission, or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 {: important}
 
 ```sh
@@ -3361,7 +3366,7 @@ Add a worker pool to a VPC cluster. No worker nodes are created until you [add z
 {: shortdesc}
 
 ```sh
-ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> [--operating-system SYSTEM][--vpc-id <VPC ID>] [--label KEY1=VALUE1] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID] [--operating-system SYSTEM] [-q] [--security-group GROUP ...] [--output json]
+ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> [--operating-system SYSTEM][--dedicated-host-pool POOL][--vpc-id <VPC ID>] [--label KEY1=VALUE1] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID] [--operating-system SYSTEM] [-q] [--secondary-storage STORAGE] [--security-group GROUP ...] [--output json]
 ```
 {: pre}
 
@@ -3386,6 +3391,9 @@ Minimum required permissions
 
 `--flavor FLAVOR`
 :    Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.
+
+`--dedicated-host-pool POOL`
+:    Optional. The ID of the dedicated host pool where you want to run your workers. 
 
 `--vpc-id VPC_ID`
 :    Optional: Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If this option is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.
@@ -3876,12 +3884,12 @@ Minimum required permissions
 :    The ID of the private VLAN. This value is conditional.
      If you have a private VLAN in the zone, this value must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run `ibmcloud ks cluster get --cluster <cluster> --show-resources`. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.
      If you don't have a private or public VLAN in that zone, don't specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.
-     In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+     In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** infrastructure permission, or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 
 `--public-vlan PUBLIC_VLAN`
 :    The ID of the public VLAN. This value is required if you want to expose workloads on the nodes to the public after you create the cluster. It must match the public VLAN ID of one or more of the worker nodes in the cluster for the zone. To see the VLANs that you have available, run `ibmcloud ks cluster get --cluster <cluster> --show-resources`. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.
      If you don't have a private or public VLAN in that zone, don't specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.
-     In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+     In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** infrastructure permission, or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
      {: note}
 
 `--private-only`
@@ -7592,7 +7600,7 @@ View information about the API key for a cluster or reset it to a new key.
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
-View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key that {{site.data.keyword.containerlong_notm}} uses to authenticate certain requests like infrastructure in the region and resource group. For more information, see [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about).
+View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key that {{site.data.keyword.containerlong_notm}} uses to authenticate certain requests like infrastructure in the region and resource group.
 {: shortdesc}
 
 To create a different API key for the resource group and region, use the [`ibmcloud ks api-key reset`](#cs_api_key_reset) command.
@@ -7635,13 +7643,13 @@ ibmcloud ks api-key info --cluster my_cluster
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
-Create an {{site.data.keyword.cloud_notm}} IAM API key that impersonates the user's permissions to authenticate requests for all clusters in the current resource group and region. For more information, see [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about).
+Create an {{site.data.keyword.cloud_notm}} IAM API key that impersonates the user's permissions to authenticate requests for all clusters in the current resource group and region.
 {: shortdesc}
 
 If you use the {{site.data.keyword.block_storage_is_short}} or cluster autoscaler add-ons in your cluster, you must re-create the add-on controller pods after you reset your API key. For more information, see [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts) and [Autoscaling fails after API key reset](/docs/containers?topic=containers-ts-storage-ca-apikey-reset).
 {: important}
 
-Before you use this command, make sure that the user who runs this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-access_reference#cluster_create_permissions). Target the resource group and region that you want to set the API key for. When the API key is reset, the previous API key that was used, if any, for the region and resource group is now obsolete. You can then delete the old API key from your list of API keys. Before you reset the API key, check whether you have other services that use the existing API key, such as a [key management service (KMS) provider](/docs/containers?topic=containers-encryption) or [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr).
+Before you use this command, make sure that the user who runs this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-iam-platform-access-roles). Target the resource group and region that you want to set the API key for. When the API key is reset, the previous API key that was used, if any, for the region and resource group is now obsolete. You can then delete the old API key from your list of API keys. Before you reset the API key, check whether you have other services that use the existing API key, such as a [key management service (KMS) provider](/docs/containers?topic=containers-encryption) or [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr).
 {: important}
 
 ```sh
@@ -7731,7 +7739,7 @@ If IBM Cloud infrastructure credentials are manually set for a region and a reso
 
 You can't set multiple credentials for the same {{site.data.keyword.containerlong_notm}} resource group and region.
 
-Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-users#users).
+Before you use this command, make sure that the user whose credentials are used has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-users).
 {: important}
 
 ```sh
@@ -7829,12 +7837,12 @@ If the infrastructure credentials for the region and resource group are missing 
 For a list of common use cases by permission, see [Infrastructure roles](/docs/containers?topic=containers-classic-roles).
 
 What if I see an infrastructure permission that I can't find in the console or [Infrastructure roles](/docs/containers?topic=containers-classic-roles) table?
-:   `Support Case` permissions are managed in a different part of the console than infrastructure permissions. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access).
+:   `Support Case` permissions are managed in a different part of the console than infrastructure permissions. See [Customizing infrastructure permissions](/docs/containers?topic=containers-classic-roles).
 
 Which infrastructure permissions do I assign?
 :   If your company's policies for permissions are strict, you might need to limit the `suggested` permissions for your cluster's use case. Otherwise, make sure that your infrastructure credentials for the region and resource group include all the `required` and `suggested` permissions.
 
-For most use cases, [set up the API key](/docs/containers?topic=containers-access-creds) for the region and resource group with the appropriate infrastructure permissions. If you need to use another infrastructure account that differs from your current account, [set up manual credentials](/docs/containers?topic=containers-access-creds#credentials).
+For most use cases, [set up the API key](/docs/containers?topic=containers-iam-platform-access-roles) for the region and resource group with the appropriate infrastructure permissions. If you need to use another infrastructure account that differs from your current account, [set up manual credentials](/docs/containers?topic=containers-classic-credentials).
 
 How do I control what actions the users can perform?
 :   After infrastructure credentials are set up, you can control what actions your users can perform by assigning them [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles).

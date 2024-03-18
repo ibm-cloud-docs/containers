@@ -404,7 +404,7 @@ Autorecovery requires at least one healthy worker node to function properly. Con
 {: note}
 
 Before you begin:
-- Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
+- Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-iam-platform-access-roles):
     - **Administrator** platform access role for the cluster
     - **Writer** or **Manager** service access role for the `kube-system` namespace
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)

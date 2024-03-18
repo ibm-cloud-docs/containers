@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-18"
+lastupdated: "2024-03-15"
 
 
 keywords: containers, kubernetes, clusters, worker nodes, worker pools, delete
@@ -38,7 +38,7 @@ No backups are created of your cluster or your data in your persistent storage. 
 
 **Before you begin**:
 * Note your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure resources that are not automatically deleted with your cluster.
-* Make sure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
+* Make sure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
 * If you want to delete the data in your persistent storage, review the delete options for the type of storage that you use.
     * [File storage](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
     * [Block storage](/docs/containers?topic=containers-block_storage#cleanup_block) for classic clusters

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-18"
 
 
 keywords: containers, kubernetes, release notes
@@ -30,6 +30,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2024
 {: #containers-mar24}
+
+
+
 
 ### 15 March 2024
 {: #containers-mar1524}
@@ -452,8 +455,6 @@ Worker node fix packs are available.
     - [1.27.8_1558](/docs/containers?topic=containers-changelog_127)
     - [1.26.11_1566](/docs/containers?topic=containers-changelog_126)
     - [1.25.16_1571](/docs/containers?topic=containers-changelog_125)
-
-
 
 
 
@@ -5240,7 +5241,7 @@ Worker node versions
 {: release-note}
 
 API key
-:   Added more information about [how the {{site.data.keyword.containerlong_notm}} API key is used](/docs/containers?topic=containers-access-creds#api_key_about).
+:   Added more information about how the {{site.data.keyword.containerlong_notm}} API key is used.
 
 
 

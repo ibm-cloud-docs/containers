@@ -59,8 +59,8 @@ This tutorial is intended for software developers and network administrators who
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 - Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
-    - [Any platform access role](/docs/containers?topic=containers-users#checking-perms)
-    - [The **Writer** or **Manager** service access role](/docs/containers?topic=containers-users#checking-perms)
+    - [Any platform access role](/docs/containers?topic=containers-iam-platform-access-roles)
+    - [The **Writer** or **Manager** service access role](/docs/containers?topic=containers-iam-platform-access-roles)
 
 
 ## Deploy an app and expose it by using an NLB

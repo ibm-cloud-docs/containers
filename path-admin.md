@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-29"
+lastupdated: "2024-03-18"
 
 
 keywords: kubernetes, containers
@@ -63,10 +63,10 @@ Create a cluster with infrastructure, network, and availability setups that are 
     3. Spread your cluster across availability zones [adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc). 
 4. **User access**:
     1. Make sure that your authorized cluster users can now also access the cluster by planning your user access strategy.
-    2. [Pick the correct access policy and role for your users](/docs/containers?topic=containers-access-overview#access_roles).
+    2. [Pick the correct access policy and role for your users](/docs/containers?topic=containers-iam-platform-access-roles).
     3. [Understand access roles for individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access-overview#iam_individuals_groups).
     4. [Choose the scope of user access to cluster instances, Kubernetes namespace, or resource groups](/docs/containers?topic=containers-access-overview#resource_groups).
-    5. Allow users to create apps or audit your cluster activity by [assigning cluster access](/docs/containers?topic=containers-users#checking-perms). To see specific permissions and actions that you can grant users, see the [user access permissions reference](/docs/containers?topic=containers-access_reference).
+    5. Allow users to create apps or audit your cluster activity by [assigning cluster access](/docs/containers?topic=containers-iam-platform-access-roles). To see specific permissions and actions that you can grant users, see the [user access permissions reference](/docs/containers?topic=containers-iam-platform-access-roles).
 
 
 
