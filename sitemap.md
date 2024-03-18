@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-18"
 
 
 keywords: containers
@@ -3521,6 +3521,21 @@ subcollection: containers
 * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
 
+## Restricting network traffic to edge worker nodes
+{: #sitemap_restricting_network_traffic_to_edge_worker_nodes}
+
+
+[Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge#edge)
+
+* [Isolating NLB workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes_nlb)
+
+* [Isolating ALB workloads to edge worker nodes](/docs/containers?topic=containers-edge#edge_nodes_alb)
+
+* [Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge#edge_workloads)
+
+* [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge#sysdig-edge)
+
+
 ## Controlling network traffic in Classic clusters
 {: #sitemap_controlling_network_traffic_in_classic_clusters}
 
@@ -3592,14 +3607,6 @@ subcollection: containers
 * [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_firewall)
 
     * [Getting your {{site.data.keyword.containershort}} subnet IP addresses](/docs/containers?topic=containers-firewall#iam_cidr_ip)
-
-[Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge#edge)
-
-* [Isolating networking workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes)
-
-* [Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge#edge_workloads)
-
-* [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge#sysdig-edge)
 
 [Configuring classic subnets and IP addresses](/docs/containers?topic=containers-subnets#subnets)
 
