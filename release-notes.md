@@ -34,6 +34,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
+### 18 March 2024
+{: #containers-mar1824}
+{: release-note}
+
+
+Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+
+
+
+
 ### 15 March 2024
 {: #containers-mar1524}
 {: release-note}
