@@ -54,7 +54,6 @@ toc:
           label: Planning your cluster environment
           topics:
           - cluster-create.md
-          - access-apikey.md
           - kube-strategy.md
           - cluster-plan-ha.md
           - worker-plan.md
@@ -338,6 +337,7 @@ toc:
       - topicgroup:
           label: Ingress version history
           topics:
+          - cl-ingress-alb.md
           - cs_versions_ingress.md
           - ibm-k8s-controller-config-change-log.md
       - topicgroup:
