@@ -17,7 +17,6 @@ toc:
       - getting-started.md
       - overview.md
       - iam-platform-access-roles.md
-      - classic-credentials.md
       - responsibilities.md
       - topicgroup:
           label: Use cases
@@ -88,6 +87,7 @@ toc:
           - dedicated-hosts.md
           - worker-os-check.md
           - host-maintenance.md
+          - access-apikey.md
           - ubuntu-migrate.md
           - worker-tag-label.md
       - topicgroup:
@@ -109,6 +109,7 @@ toc:
           label: Managing access control
           topics:
           - access-overview.md
+          - classic-credentials.md
           - access-iam-rbac.md
           - access-pod-identity.md
           - terraform-cluster-access.md
@@ -447,6 +448,7 @@ toc:
               - ts-kube-dashboord-oom.md
               - ts-admin-cert.md
               - ts-vpc-byok-encrypted-storage.md
+              - ts-sbd-cluster-create-quota.md
           - topicgroup:
               label: Worker nodes
               topics:
@@ -476,6 +478,8 @@ toc:
               - ts-app-07-svc-name.md
               - ts-app-svc-key.md
               - ts-app-helm-install.md
+              - ts-sbd-app-not-working.md
+              - ts-sbd-nodeport-not-working.md
           - topicgroup:
               label: Cluster autoscaler
               topics:

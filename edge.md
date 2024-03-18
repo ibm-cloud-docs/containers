@@ -152,7 +152,7 @@ The steps to isolate ALB workloads to edge nodes is the same for both classic an
 
 Before you begin
 
-* Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
+* Ensure that you have the following IAM roles:
     * Any platform access role for the cluster
     * **Writer** or **Manager** service access role for all namespaces
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)

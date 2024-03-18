@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-18"
 
 
 keywords: containers, kubernetes, clusters, worker nodes, worker pools, vpc-gen2
@@ -77,6 +77,8 @@ Worker pool encryption
 
 Master service endpoint
 :    Service endpoints provide communication to the master. You can choose to configure your cluster with a private service endpoint or both a public and a private cloud service endpoint. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw).
+
+
 
 
 

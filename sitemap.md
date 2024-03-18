@@ -73,18 +73,9 @@ subcollection: containers
 
 * [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
 
-* [Required permissions to create a cluster](/docs/containers?topic=containers-iam-platform-access-roles#cluster-create-permissions)
+* [Permissions to create a cluster](/docs/containers?topic=containers-iam-platform-access-roles#cluster-create-permissions)
 
 * [Example custom IAM roles](/docs/containers?topic=containers-iam-platform-access-roles#example-iam)
-
-
-## Understanding Classic infrastructure credentials
-{: #sitemap_understanding_classic_infrastructure_credentials}
-
-
-[Understanding Classic infrastructure credentials](/docs/containers?topic=containers-classic-credentials#classic-credentials)
-
-* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-classic-credentials#credentials)
 
 
 ## Your responsibilities with using {{site.data.keyword.containerlong_notm}}
@@ -2774,9 +2765,9 @@ subcollection: containers
 
 * [Next steps](/docs/containers?topic=containers-clusters#next-steps)
 
-[Setting which credentials to use for creating clusters](/docs/containers?topic=containers-access-creds#access-creds)
+[Setting the cluster credentials](/docs/containers?topic=containers-access-creds#access-creds)
 
-* [Setting the cluster credentials](/docs/containers?topic=containers-access-creds#admin-set-credentials)
+* [Resetting the cluster API key](/docs/containers?topic=containers-access-creds#admin-set-credentials)
 
 [Creating a cluster environment strategy](/docs/containers?topic=containers-strategy#strategy)
 
@@ -3174,6 +3165,10 @@ subcollection: containers
 
     * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
 
+[Setting the cluster credentials](/docs/containers?topic=containers-access-creds#access-creds)
+
+* [Resetting the cluster API key](/docs/containers?topic=containers-access-creds#admin-set-credentials)
+
 [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
 
 * [Prerequisites](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
@@ -3371,15 +3366,13 @@ subcollection: containers
 
     * [{{site.data.keyword.cloud_notm}} access control](/docs/containers?topic=containers-access-overview#access-checklist-iam)
 
-    * [Other types of access control](/docs/containers?topic=containers-access-overview#access-checklist-other)
-
-* [Understanding IAM access policies and roles](/docs/containers?topic=containers-access-overview#access_policies)
-
-    * [Pick the correct access policy and role for your users](/docs/containers?topic=containers-access-overview#access_roles)
-
     * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access-overview#iam_individuals_groups)
 
     * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-access-overview#resource_groups)
+
+[Understanding Classic infrastructure credentials](/docs/containers?topic=containers-classic-credentials#classic-credentials)
+
+* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-classic-credentials#credentials)
 
 [Controlling user access Kubernetes role-based access control](/docs/containers?topic=containers-users#users)
 
