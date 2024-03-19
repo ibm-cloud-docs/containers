@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-19"
 
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
@@ -66,7 +66,7 @@ The following table describes each portion of the subdomain.
 |`*`|The wildcard for the subdomain is registered by default for your cluster.|
 |`<cluster_name>`|The name of your cluster. \n - If the cluster name is 26 characters or fewer and the cluster name is unique in this region, the entire cluster name is included and is not modified: `myclustername`. \n - If the cluster name is 26 characters or fewer and there is an existing cluster of the same name in this region, the entire cluster name is included and a dash with six random characters is added: `myclustername-ABC123`. \n - If the cluster name is 26 characters or greater and the cluster name is unique in this region, only the first 24 characters of the cluster name are used: `myveryverylongclusternam`. \n - If the cluster name is 26 characters or greater and there is an existing cluster of the same name in this region, only the first 17 characters of the cluster name are used and a dash with six random characters is added: `myveryverylongclu-ABC123`.|
 |`<globally_unique_account_HASH>`|A globally unique HASH is created for your {{site.data.keyword.cloud_notm}} account. All subdomains that you create for NLBs in clusters in your account use this globally unique HASH.|
-|`0000`|The first and second characters indicate a public or a private (internal) subdomain. `00` indicates a subdomain that has a public DNS entry. `i0` indicates a subdomain that has a private DNS entry. The third and fourth characters, such as `00` or another number, act as a counter for each subdomain that is created in your cluster.|
+|`0000`|Acts as a counter for each subdomain that is created in your cluster.|
 |`<region>`|The region that the cluster is created in.|
 |`containers.appdomain.cloud`|The subdomain for {{site.data.keyword.containerlong_notm}} subdomains.|
 {: caption="Understanding the Ingress subdomain format"}
