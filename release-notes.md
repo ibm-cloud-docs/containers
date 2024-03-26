@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-18"
+lastupdated: "2024-03-26"
 
 
 keywords: containers, kubernetes, release notes
@@ -31,6 +31,27 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2024
 {: #containers-mar24}
 
+### 25 March 2024
+{: #containers-mar2524}
+{: release-note}
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [1.29](/docs/containers?topic=containers-changelog_129)
+:   [1.28](/docs/containers?topic=containers-changelog_128)
+:   [1.27](/docs/containers?topic=containers-changelog_127)
+:   [1.26](/docs/containers?topic=containers-changelog_126)
+
+
+
+
+
+
+New! NVIDIA L40 GPU support. You can now create VPC clusters with worker nodes which have NVIDIA L40 GPUs.
+:   L40 GPU support is available in {{site.data.keyword.containerlong_notm}} clusters at version 1.28 or later with `gx3` worker nodes.
+:   When you provision a version 1.28 or later VPC cluster with `gx3` worker nodes, or add a `gx3` worker pool to an existing 1.28 or later VPC cluster, the GPU drivers are automatically installed and you can get started right away. For more information, see [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app).
 
 
 

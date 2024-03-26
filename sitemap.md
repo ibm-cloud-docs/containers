@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-03-22"
+lastupdated: "2024-03-26"
 
 
 keywords: containers
@@ -250,6 +250,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar24)
+
+    * [25 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar2524)
+
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+
+        * New! NVIDIA L40 GPU support. You can now create VPC clusters with worker nodes which have NVIDIA L40 GPUs.
 
     * [18 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar1824)
 
@@ -6158,6 +6164,8 @@ subcollection: containers
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
 
+    * [Change log for worker node fix pack 1.29.3_1532, released 25 March 2024](/docs/containers?topic=containers-changelog_129#1293_1532_W)
+
     * [Change log for worker node fix pack 1.29.2_1529, released 13 March 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W)
 
     * [Change log for master fix pack 1.29.2_1528, released 28 February 2024](/docs/containers?topic=containers-changelog_129#1292_1528_M)
@@ -6238,6 +6246,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.8_1551, released 25 March 2024](/docs/containers?topic=containers-changelog_128#1288_1551_W)
 
     * [Change log for worker node fix pack 1.28.7_1549, released 13 March 2024](/docs/containers?topic=containers-changelog_128#1287_1549_W)
 
@@ -6337,6 +6347,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.12_1570, released 25 March 2024](/docs/containers?topic=containers-changelog_127#12712_1570_W)
 
     * [Change log for worker node fix pack 1.27.11_1568, released 13 March 2024](/docs/containers?topic=containers-changelog_127#12711_1568_W)
 
@@ -6462,6 +6474,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.15_1579, released 25 March 2024](/docs/containers?topic=containers-changelog_126#12615_1579_W)
 
     * [Change log for worker node fix pack 1.26.14_1577, released 13 March 2024](/docs/containers?topic=containers-changelog_126#12614_1577_W)
 
