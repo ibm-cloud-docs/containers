@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-03-19"
+lastupdated: "2024-03-26"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -43,6 +43,21 @@ Review the version 1.27 change log.
 
 
 
+
+
+### Change log for worker node fix pack 1.27.12_1570, released 25 March 2024
+{: #12712_1570_W}
+
+The following table shows the changes that are in the worker node fix pack 1.27.12_1570. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 packages | 5.4.0-173-generic | 5.4.0-174-generic | Worker node kernel and package updates for [CVE-2012-6655](https://nvd.nist.gov/vuln/detail/CVE-2012-6655){: external}, [CVE-2023-23000](https://nvd.nist.gov/vuln/detail/CVE-2023-23000){: external}, [CVE-2023-23004](https://nvd.nist.gov/vuln/detail/CVE-2023-23004){: external}, [CVE-2024-1086](https://nvd.nist.gov/vuln/detail/CVE-2024-1086){: external}, [CVE-2024-22667](https://nvd.nist.gov/vuln/detail/CVE-2024-22667){: external}, [CVE-2024-24855](https://nvd.nist.gov/vuln/detail/CVE-2024-24855){: external}. |
+| Kubernetes | 1.27.11 | 1.27.12 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.12){: external}. |
+| Containerd | 1.7.14 | 1.7.14 | N/A |
+| HAProxy | 512b32 | 512b32 | N/A |
+{: caption="Changes since version 1.27.11_1568" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.27.11_1568, released 13 March 2024
