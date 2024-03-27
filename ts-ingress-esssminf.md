@@ -2,10 +2,10 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-03-04"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, ingress, troubleshoot ingress, secrets manager missing, esssminf
+keywords: containers, {{site.data.keyword.containerlong_notm}}, ingress, troubleshoot ingress, secrets manager missing, esssminf
 
 subcollection: containers
 content-type: troubleshoot

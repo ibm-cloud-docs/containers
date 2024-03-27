@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-03-21"
+lastupdated: "2024-03-27"
 
-keywords: containers, add-ons, cluster addon
+keywords: containers, {{site.data.keyword.containerlong_notm}}, add-ons, cluster addon
 
 subcollection: containers
 

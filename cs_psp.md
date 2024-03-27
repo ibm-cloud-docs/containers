@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-27"
 
 
 keywords: kubernetes
@@ -83,7 +83,7 @@ You can modify these RBAC roles to remove or add administrators, users, services
 
 Before you begin
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-* Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](/docs/containers?topic=containers-users) or the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview){: external}.
+* Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](/docs/containers?topic=containers-iam-platform-access-roles) or the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview){: external}.
 * Ensure you have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-iam-platform-access-roles) for all namespaces.
 
 When you modify the default configuration, you can prevent important cluster actions, such as pod deployments or cluster updates. Test your changes in a non-production cluster that other teams don't rely on.

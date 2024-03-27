@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-26"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, kubernetes, release notes
+keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
 
 subcollection: containers
 
@@ -5465,7 +5465,7 @@ New! CIS Kubernetes Benchmark
 {: release-note}
 
 CA certificate rotation
-:   Added steps to [revoke existing certificate authority (CA) certificates in your cluster and issue new CA certificates](/docs/containers?topic=containers-security#cert-rotate).
+:   Added steps to [revoke existing certificate authority (CA) certificates in your cluster and issue new CA certificates](/docs/containers?topic=containers-cert-rotate).
 
 
   

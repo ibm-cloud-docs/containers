@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-22"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, object storage, plug-in, change log
+keywords: containers, {{site.data.keyword.containerlong_notm}}, object storage, plug-in, change log
 
 subcollection: containers
 

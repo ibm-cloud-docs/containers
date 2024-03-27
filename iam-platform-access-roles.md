@@ -2,9 +2,9 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-18"
+lastupdated: "2024-03-27"
 
-keywords: containers, kubernetes, infrastructure, policy, users, permissions, access, roles
+keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, policy, users, permissions, access, roles
 
 subcollection: containers
 
@@ -27,10 +27,10 @@ For a list of all IBM services and their associated roles and actions, see [IAM 
 
 
 Platform access roles
-:   With platform access roles, users can manage resources like clusters, worker pools, worker nodes, and add-ons. Example actions that are permitted by platform access roles are creating or removing clusters, binding services to a cluster, managing networking and storage resources, or adding extra worker nodes. You can set the policies for these roles by resource group, region, or cluster instance. You can't scope a platform access role by namespace within a cluster. Platform access roles don't grant access to the Kubernetes API to manage resources within the cluster, like Kubernetes pods, namespaces, or services. However, users can still perform the `ibmcloud ks cluster config` command to set the Kubernetes context to the cluster. Then, you can authorize the users to perform select Kubernetes actions by using [custom RBAC policies](/docs/containers?topic=containers-access-overview#role-binding). You might do this if your organization currently uses custom RBAC policies to control Kubernetes access and plans to continue using custom RBAC instead of service access roles.
+:   With platform access roles, users can manage resources like clusters, worker pools, worker nodes, and add-ons. Example actions that are permitted by platform access roles are creating or removing clusters, binding services to a cluster, managing networking and storage resources, or adding extra worker nodes. You can set the policies for these roles by resource group, region, or cluster instance. You can't scope a platform access role by namespace within a cluster. Platform access roles don't grant access to the Kubernetes API to manage resources within the cluster, like Kubernetes pods, namespaces, or services.
 
 Service access roles
-:   Use service access roles to grant users access to manage Kubernetes resources within {{site.data.keyword.containerlong_notm}} clusters. Service access roles are synchronized with corresponding Kubernetes RBAC policies in a cluster. As such, service access roles grant access to the Kubernetes API, dashboard, and CLI (`kubectl`). Example actions that are permitted by service access roles include creating app deployments, adding namespaces, or setting up configmaps. You can scope the policy for service access roles by resource group, region, or cluster instance. Further, you can also scope service access roles to Kubernetes namespaces that are in all clusters, individual clusters, or clusters in a specific region.
+:   Use service access roles to grant users access to manage Kubernetes resources within {{site.data.keyword.containerlong_notm}} clusters. Service access roles are synchronized with corresponding [Kubernetes RBAC policies](/docs/containers?topic=containers-understand-rbac) in a cluster. As such, service access roles grant access to the Kubernetes API, dashboard, and CLI (`kubectl`). Example actions that are permitted by service access roles include creating app deployments, adding namespaces, or setting up configmaps. You can scope the policy for service access roles by resource group, region, or cluster instance. Further, you can also scope service access roles to Kubernetes namespaces that are in all clusters, individual clusters, or clusters in a specific region. 
 
 ## Permissions to create a cluster
 {: #cluster-create-permissions}

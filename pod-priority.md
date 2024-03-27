@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-27"
 
 
 keywords: kubernetes
@@ -30,7 +30,7 @@ Why do I set pod priority?
 By setting pod priority, you can help prevent lower priority workloads from impacting critical workloads in your cluster, especially in cases where the cluster starts to reach its resource capacity.
 
 
-Make sure that you have [set up proper user access](/docs/containers?topic=containers-users) to your cluster, and if applicable, [pod security policies (PSPs)](/docs/containers?topic=containers-psp). Access policies and PSPs can help prevent untrusted users from deploying high priority pods that prevent other pods from scheduling.
+Make sure that you have [set up proper user access](/docs/containers?topic=containers-iam-platform-access-roles) to your cluster, and if applicable, [pod security policies (PSPs)](/docs/containers?topic=containers-psp). Access policies and PSPs can help prevent untrusted users from deploying high priority pods that prevent other pods from scheduling.
 {: tip}
 
 

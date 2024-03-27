@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-02"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, kubernetes, red hat, encrypt, security, kms, root key, crk
+keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, red hat, encrypt, security, kms, root key, crk
 
 subcollection: containers
 

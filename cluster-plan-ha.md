@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, ha, high availability, failover, kubernetes, multi az, multi-az, szr, mzr
+keywords: containers, {{site.data.keyword.containerlong_notm}}, ha, high availability, failover, kubernetes, multi az, multi-az, szr, mzr
 
 subcollection: containers
 

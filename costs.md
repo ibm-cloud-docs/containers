@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, iro, openshift, red hat, red hat openshift
+keywords: containers, {{site.data.keyword.containerlong_notm}}, iro, openshift, red hat, red hat openshift
 
 subcollection: containers
 

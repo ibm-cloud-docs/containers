@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-08"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, block, storage, add-on, changelog
+keywords: containers, {{site.data.keyword.containerlong_notm}}, block, storage, add-on, changelog
 
 subcollection: containers
 
