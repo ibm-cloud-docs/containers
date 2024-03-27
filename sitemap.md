@@ -2777,21 +2777,21 @@ subcollection: containers
 
 [Creating a cluster environment strategy](/docs/containers?topic=containers-strategy#strategy)
 
-* [What type of cluster should I get?](/docs/containers?topic=containers-strategy#env_flavors)
+* [Decide how many clusters to create](/docs/containers?topic=containers-strategy#env_multicluster)
 
-* [Do I actually need multiple clusters or can I just add more workers to one cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
+* [Select a cluster type](/docs/containers?topic=containers-strategy#env_flavors)
 
-* [How do I name my clusters?](/docs/containers?topic=containers-strategy#naming)
+* [Define a cluster naming strategy](/docs/containers?topic=containers-strategy#naming)
 
-* [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
+* [Decide how many worker nodes for each cluster](/docs/containers?topic=containers-strategy#sizing_workers)
 
-* [What type of worker node flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors_node)
+* [Select worker node flavors](/docs/containers?topic=containers-strategy#env_flavors_node)
 
-* [How do I determine worker node capacity for my resources?](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
+* [Determine worker node capacity for the resources](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
 
-* [How do I manage teams and projects?](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
+* [Choose how many namespaces to create](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
 
-* [ How do I manage resource requests and limits?](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
+* [Establish resource requests and limits](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
