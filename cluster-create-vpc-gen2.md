@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-03-28"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, clusters, worker nodes, worker pools, vpc-gen2
@@ -382,7 +382,7 @@ Terraform on {{site.data.keyword.cloud_notm}} enables predictable and consistent
 {: #cluster-create-vpc-next-steps}
 
 
-* Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access) or [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
+* Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access) or [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access). If you have multiple public clusters with exposed apps, consider connecting them with a [global load balancer](/docs/containers?topic=containers-ha_clusters&interface=ui#multiple-clusters-glb) for high availability. 
 * Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account or with resources in other VPCs by [setting up the {{site.data.keyword.vpc_short}} VPN](/docs/containers?topic=containers-vpc-vpnaas).
 * [Add rules to the security group for your worker nodes](/docs/containers?topic=containers-vpc-network-policy) to control ingress and egress traffic to your VPC subnets.
 

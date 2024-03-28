@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-03-28"
 
 
 keywords: containers
@@ -2795,19 +2795,15 @@ subcollection: containers
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
-* [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha_clusters#fault_domains)
+* [High availability at different levels](/docs/containers?topic=containers-ha_clusters#ha_levels)
+
+* [Resource distribution for high availability](/docs/containers?topic=containers-ha_clusters#ha_distribution)
 
 * [Single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone)
 
 * [Multizone clusters](/docs/containers?topic=containers-ha_clusters#mz-clusters)
 
-    * [How is my {{site.data.keyword.containerlong_notm}} master set up?](/docs/containers?topic=containers-ha_clusters#mz-master-setup)
-
-    * [Do I have to do anything so that the master can communicate with the workers across zones?](/docs/containers?topic=containers-ha_clusters#mz-master-communication)
-
-    * [Can I convert my single zone cluster to a multizone cluster?](/docs/containers?topic=containers-ha_clusters#convert-sz-to-mz)
-
-    * [Do my apps automatically spread across zones?](/docs/containers?topic=containers-ha_clusters#multizone-apps-faq)
+    * [Multizone cluster FAQ](/docs/containers?topic=containers-ha_clusters#mz-cluster-faq)
 
 * [Multiple public clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple-clusters-glb)
 
@@ -2816,10 +2812,6 @@ subcollection: containers
     * [What if I want to set up multiple clusters across regions?](/docs/containers?topic=containers-ha_clusters#multiple-regions-setup)
 
     * [What options do I have to load balance workloads across multiple clusters?](/docs/containers?topic=containers-ha_clusters#multiple-cluster-lb-options)
-
-    * [Setting up a CIS global load balancer](/docs/containers?topic=containers-ha_clusters#cis-global-lb-setup)
-
-    * [Setting up your own global load balancer](/docs/containers?topic=containers-ha_clusters#byo-global-lb-setup)
 
     * [What if I want to load balance workloads on the private network?](/docs/containers?topic=containers-ha_clusters#glb-private)
 
