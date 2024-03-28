@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-17"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, kubernetes, help, cluster, upgrades,
+keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, help, cluster, upgrades,
 
 subcollection: containers
 

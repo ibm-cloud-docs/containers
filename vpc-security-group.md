@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, kubernetes, firewall, acl, acls, access control list, rules, security group
+keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, firewall, acl, acls, access control list, rules, security group
 
 subcollection: containers
 

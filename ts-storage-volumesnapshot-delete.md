@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-03-04"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, snapshot, storage
+keywords: containers, {{site.data.keyword.containerlong_notm}}, snapshot, storage
 
 subcollection: containers
 

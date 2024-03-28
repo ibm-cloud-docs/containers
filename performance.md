@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, kubernetes, kernel, performance
+keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
 
 subcollection: containers
 

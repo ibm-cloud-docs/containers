@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, subnet, detach
+keywords: containers, {{site.data.keyword.containerlong_notm}}, subnet, detach
 
 subcollection: containers
 

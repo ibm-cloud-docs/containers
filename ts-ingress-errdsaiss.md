@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, errdsaiss, ingress, domain, third party, external domain
+keywords: containers, {{site.data.keyword.containerlong_notm}}, errdsaiss, ingress, domain, third party, external domain
 
 subcollection: containers
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-27"
 
 
 keywords: ingress, expose apps, ingress resource, ALB, domain
@@ -141,10 +141,11 @@ Create the Ingress resource to define the routing rules that the Ingress control
 
     `annotations`
     :   `kubernetes.io/ingress.class`: Specify the Ingress class to apply. The IBM-provided Ingress classes are `"public-iks-k8s-nginx"` for public ALBs and `"private-iks-k8s-nginx"` for private ALBs. 
-    :    For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, don't specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass`](#ingress-custom-domain) resource and a `ibm-ingress-deploy-config` configmap. To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are not supported.
+    :   Specify this custom class in an [`IngressClass`](#ingress-custom-domain) resource and a `ibm-ingress-deploy-config` configmap. To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are not supported.
+    :   Note: For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, don't specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field.
 
     `ingressClassName`
-    :   The Ingress class name. 
+    :   The Ingress class name. The IBM-provided Ingress classes are `public-iks-k8s-nginx` for public ALBs and `private-iks-k8s-nginx` for private ALBs.
   
     `tls.hosts`
     :   To use TLS, replace `<domain>` with the IBM-provided Ingress subdomain or your custom domain.

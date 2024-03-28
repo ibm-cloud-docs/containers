@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, clusters, worker nodes, worker pools
+keywords: containers, {{site.data.keyword.containerlong_notm}}, clusters, worker nodes, worker pools
 
 subcollection: containers
 

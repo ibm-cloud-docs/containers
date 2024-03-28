@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-28"
 
 
 keywords: kubernetes, subnets, ips, vlans, networking
@@ -369,7 +369,7 @@ Portable public IP addresses are charged monthly. If you remove portable public 
 {: note}
 
 Before you begin
-- Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles) for the cluster.
+- Ensure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles) for the cluster.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To order a subnet,
@@ -414,7 +414,7 @@ You can get more portable IPs for NLB services by making an existing subnet in a
 {: shortdesc}
 
 Before you begin
-- Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles) for the cluster.
+- Ensure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles) for the cluster.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 To make a subnet available to your cluster,

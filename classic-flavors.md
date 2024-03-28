@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-01"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, kubernetes, node scaling, ca, autoscaler
+keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, node scaling, ca, autoscaler
 
 subcollection: containers
 

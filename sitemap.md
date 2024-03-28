@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-03-26"
+lastupdated: "2024-03-28"
 
 
 keywords: containers
@@ -2777,37 +2777,33 @@ subcollection: containers
 
 [Creating a cluster environment strategy](/docs/containers?topic=containers-strategy#strategy)
 
-* [What type of cluster should I get?](/docs/containers?topic=containers-strategy#env_flavors)
+* [Decide how many clusters to create](/docs/containers?topic=containers-strategy#env_multicluster)
 
-* [Do I actually need multiple clusters or can I just add more workers to one cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
+* [Select a cluster type](/docs/containers?topic=containers-strategy#env_flavors)
 
-* [How do I name my clusters?](/docs/containers?topic=containers-strategy#naming)
+* [Define a cluster naming strategy](/docs/containers?topic=containers-strategy#naming)
 
-* [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
+* [Decide how many worker nodes for each cluster](/docs/containers?topic=containers-strategy#sizing_workers)
 
-* [What type of worker node flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors_node)
+* [Select worker node flavors](/docs/containers?topic=containers-strategy#env_flavors_node)
 
-* [How do I determine worker node capacity for my resources?](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
+* [Determine worker node capacity for the resources](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
 
-* [How do I manage teams and projects?](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
+* [Choose how many namespaces to create](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
 
-* [ How do I manage resource requests and limits?](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
+* [Establish resource requests and limits](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
-* [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha_clusters#fault_domains)
+* [High availability at different levels](/docs/containers?topic=containers-ha_clusters#ha_levels)
+
+* [Resource distribution for high availability](/docs/containers?topic=containers-ha_clusters#ha_distribution)
 
 * [Single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone)
 
 * [Multizone clusters](/docs/containers?topic=containers-ha_clusters#mz-clusters)
 
-    * [How is my {{site.data.keyword.containerlong_notm}} master set up?](/docs/containers?topic=containers-ha_clusters#mz-master-setup)
-
-    * [Do I have to do anything so that the master can communicate with the workers across zones?](/docs/containers?topic=containers-ha_clusters#mz-master-communication)
-
-    * [Can I convert my single zone cluster to a multizone cluster?](/docs/containers?topic=containers-ha_clusters#convert-sz-to-mz)
-
-    * [Do my apps automatically spread across zones?](/docs/containers?topic=containers-ha_clusters#multizone-apps-faq)
+    * [Multizone cluster FAQ](/docs/containers?topic=containers-ha_clusters#mz-cluster-faq)
 
 * [Multiple public clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple-clusters-glb)
 
@@ -2816,10 +2812,6 @@ subcollection: containers
     * [What if I want to set up multiple clusters across regions?](/docs/containers?topic=containers-ha_clusters#multiple-regions-setup)
 
     * [What options do I have to load balance workloads across multiple clusters?](/docs/containers?topic=containers-ha_clusters#multiple-cluster-lb-options)
-
-    * [Setting up a CIS global load balancer](/docs/containers?topic=containers-ha_clusters#cis-global-lb-setup)
-
-    * [Setting up your own global load balancer](/docs/containers?topic=containers-ha_clusters#byo-global-lb-setup)
 
     * [What if I want to load balance workloads on the private network?](/docs/containers?topic=containers-ha_clusters#glb-private)
 
@@ -3175,6 +3167,8 @@ subcollection: containers
 
 * [Resetting the cluster API key](/docs/containers?topic=containers-access-creds#admin-set-credentials)
 
+[Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate#cert-rotate)
+
 [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
 
 * [Prerequisites](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
@@ -3234,8 +3228,6 @@ subcollection: containers
     * [What does {{site.data.keyword.containerlong_notm}} do to secure my API server and etcd data store?](/docs/containers?topic=containers-security#secure-api-server)
 
     * [What else can I do to secure my API server?](/docs/containers?topic=containers-security#api-server-what-else)
-
-    * [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
 
 * [Worker node](/docs/containers?topic=containers-security#workernodes)
 
@@ -3380,37 +3372,35 @@ subcollection: containers
 
 * [Accessing a different classic infrastructure account](/docs/containers?topic=containers-classic-credentials#credentials)
 
-[Controlling user access Kubernetes role-based access control](/docs/containers?topic=containers-users#users)
+[Understanding RBAC permissions](/docs/containers?topic=containers-understand-rbac#understand-rbac)
 
-* [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
+* [What are the types of RBAC roles?](/docs/containers?topic=containers-understand-rbac#rbac-types)
 
-    * [What are the types of RBAC roles?](/docs/containers?topic=containers-users#rbac-types)
+* [What are RBAC role bindings and cluster role bindings?](/docs/containers?topic=containers-understand-rbac#what-is-rbac)
 
-    * [What are RBAC role bindings and cluster role bindings?](/docs/containers?topic=containers-users#what-is-rbac)
+* [What do these roles look like in my cluster?](/docs/containers?topic=containers-understand-rbac#what-do-roles-look-like)
 
-    * [What do these roles look like in my cluster?](/docs/containers?topic=containers-users#what-do-roles-look-like)
+* [Can I create custom roles or cluster roles?](/docs/containers?topic=containers-understand-rbac#create-custom-rbac-roles)
 
-    * [Can I create custom roles or cluster roles?](/docs/containers?topic=containers-users#create-custom-rbac-roles)
+* [When do I need to use custom cluster role bindings and role bindings?](/docs/containers?topic=containers-understand-rbac#when-do-i-use-custom-rbac)
 
-    * [When do I need to use custom cluster role bindings and role bindings?](/docs/containers?topic=containers-users#when-do-i-use-custom-rbac)
+* [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-understand-rbac#rbac)
 
-* [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
+* [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-understand-rbac#rbac_aggregate)
 
-* [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
+    * [What are some common operations that I might want to extend permissions for a default cluster role?](/docs/containers?topic=containers-understand-rbac#common-rbac-operations)
 
-    * [What are some common operations that I might want to extend permissions for a default cluster role?](/docs/containers?topic=containers-users#common-rbac-operations)
+* [Checking RBAC roles](/docs/containers?topic=containers-understand-rbac#checking-rbac)
 
-* [Checking RBAC roles](/docs/containers?topic=containers-users#checking-rbac)
+    * [Checking RBAC roles from the UI](/docs/containers?topic=containers-understand-rbac#checking-rbac-ui)
 
-    * [Checking RBAC roles from the UI](/docs/containers?topic=containers-users#checking-rbac-ui)
+    * [Checking RBAC roles with the CLI](/docs/containers?topic=containers-understand-rbac#checking-rbac-cli)
 
-    * [Checking RBAC roles with the CLI](/docs/containers?topic=containers-users#checking-rbac-cli)
+* [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-understand-rbac#rbac_service)
 
-* [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-users#rbac_service)
+    * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-understand-rbac#rbac_ref)
 
-    * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-users#rbac_ref)
-
-    * [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-users#iam-issuer-users)
+    * [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-understand-rbac#iam-issuer-users)
 
 [Authorizing pods in your cluster to {{site.data.keyword.cloud_notm}} services with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity#pod-iam-identity)
 

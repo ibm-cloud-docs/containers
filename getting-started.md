@@ -2,10 +2,10 @@
 
 copyright:
   years: 2023, 2024
-lastupdated: "2024-02-21"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, kubernetes cluster,  vpc cluster, classic cluster, clusters
+keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes cluster,  vpc cluster, classic cluster, clusters
 
 subcollection: containers
 

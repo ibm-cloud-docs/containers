@@ -2,10 +2,10 @@
 
 copyright:
   years: 2024, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, clusters, access, endpoint, credentials, classic
+keywords: containers, {{site.data.keyword.containerlong_notm}}, clusters, access, endpoint, credentials, classic
 
 subcollection: containers
 

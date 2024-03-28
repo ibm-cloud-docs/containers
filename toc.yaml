@@ -87,6 +87,7 @@ toc:
           - worker-os-check.md
           - host-maintenance.md
           - access-apikey.md
+          - ca-rotate.md
           - ubuntu-migrate.md
           - worker-tag-label.md
       - topicgroup:

@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-26"
+lastupdated: "2024-03-28"
 
 
-keywords: containers, kubernetes, release notes
+keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
 
 subcollection: containers
 
@@ -2766,8 +2766,6 @@ Ingress ALB change log updates
 Cluster autoscaler add-on
 :   Version `1.0.5_728` is available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
-
-
 ### 18 July 2022
 {: #containers-july1822}
 {: release-note}
@@ -5465,7 +5463,7 @@ New! CIS Kubernetes Benchmark
 {: release-note}
 
 CA certificate rotation
-:   Added steps to [revoke existing certificate authority (CA) certificates in your cluster and issue new CA certificates](/docs/containers?topic=containers-security#cert-rotate).
+:   Added steps to [revoke existing certificate authority (CA) certificates in your cluster and issue new CA certificates](/docs/containers?topic=containers-cert-rotate).
 
 
   

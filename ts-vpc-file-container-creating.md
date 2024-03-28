@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-01-30"
+lastupdated: "2024-03-27"
 
 
-keywords: containers, storage, container creating, file
+keywords: containers, {{site.data.keyword.containerlong_notm}}, storage, container creating, file
 
 subcollection: containers
 
