@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-03-28"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -2765,8 +2765,6 @@ Ingress ALB change log updates
 
 Cluster autoscaler add-on
 :   Version `1.0.5_728` is available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
-
-
 
 ### 18 July 2022
 {: #containers-july1822}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-03-28"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
@@ -62,7 +62,7 @@ What process can I follow to update the master?
 ### Steps to update the cluster master
 {: #master-steps}
 
-Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
+Before you begin, make sure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
 
 To update the Kubernetes master _major_ or _minor_ version:
 
@@ -143,7 +143,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 - Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
 - If you want to apply a patch update, review the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
 - Consider adding more worker nodes so that your cluster has enough capacity to rescheduling your workloads during the update. For more information, see [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc).
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
+- Make sure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
 
 ### Updating classic worker nodes in the CLI with a configmap
 {: #worker-up-configmap}
@@ -341,7 +341,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 - [Update the master](#master). The worker node version can't be higher than the API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
 - If you want to apply a patch update, review the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
+- Make sure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
 
 ### Updating VPC worker nodes in the CLI
 {: #vpc_worker_cli}
@@ -397,7 +397,7 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Data on the worker node is deleted. Consider storing your data on persistent storage outside of the worker node.
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
+- Make sure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
 
 To update flavors:
 

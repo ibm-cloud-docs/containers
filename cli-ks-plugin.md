@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-03-28"
 
 
 keywords: kubernetes
@@ -3482,7 +3482,7 @@ ibmcloud ks worker-pool get --worker-pool pool1 --cluster my_cluster
 Remove all custom Kubernetes labels from all worker nodes in a worker pool.
 {: shortdesc}
 
-To remove an individual label from a worker pool, you can run the `ibmcloud ks worker-pool label set` command with only the custom labels that you want to keep.
+Currently it is not possible to remove an individual taint from a working pool. Instead use `kubectl taint node <worker_privateIP> key:effect-` command to remove a taint from an individual worker node.
 {: tip}
 
 ```sh

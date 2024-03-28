@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-03-28"
 
 
 keywords: kubernetes
@@ -117,9 +117,7 @@ Error from server: error dialing backend: EOF
 Review and complete the following the steps for your cluster version.
 {: tsResolve}
 
-{{site.data.keyword.containerlong_notm}} 1.21 and later. 
-:   The Konnectivity VPN connection between the master node and worker nodes is not functioning properly.
-
+- Version 1.21 and later the Konnectivity VPN connection between the master node and worker nodes is not functioning properly.
 - The cluster has both private and public service endpoints enabled.
 - Service endpoints or VRF are not enabled in the account.
 
