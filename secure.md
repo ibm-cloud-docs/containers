@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-03-29"
 
 
 keywords: kubernetes, containers
@@ -112,9 +112,6 @@ CIS Kubernetes master benchmark
 
 Secure communication via TLS
 :   To use {{site.data.keyword.containerlong_notm}}, you must authenticate with the service by using your credentials. When you are authenticated, {{site.data.keyword.containerlong_notm}} generates TLS certificates that encrypt the communication to and from the Kubernetes API server and etcd data store to ensure a secure end-to-end communication between the worker nodes and the Kubernetes master. These certificates are never shared across clusters or across Kubernetes master components.
-
-    Need to revoke existing certificates and create new certificates for your cluster? Check out [Rotating CA certificates in your cluster](#cert-rotate).
-    {: tip}
     
 Connectivity to worker nodes
 :   Although Kubernetes secures the communication between the master and worker nodes by using the `https` protocol, no authentication is provided on the worker node by default. To secure this communication, {{site.data.keyword.containerlong_notm}} automatically sets up an Konnectivity connection between the Kubernetes master and the worker node when the cluster is created.
@@ -463,7 +460,7 @@ What is a Kubernetes namespace and why should I use it?
 :   Every cluster is set up with a set of default Kubernetes namespaces that include the deployments and services that are required for {{site.data.keyword.containerlong_notm}} to run properly and manage the cluster. For more information, see the [service architecture](/docs/containers?topic=containers-service-arch). 
 :   Cluster administrators automatically have access to these namespaces and can set up additional namespaces in the cluster. 
 
-For every namespace that you have in the cluster, make sure to set up proper [RBAC policies](/docs/containers?topic=containers-understand-rbac to limit access to this namespace, control what gets deployed, and to set proper [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/){: external} and [limit ranges](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/){: external}.
+For every namespace that you have in the cluster, make sure to set up proper [RBAC policies](/docs/containers?topic=containers-understand-rbac) to limit access to this namespace, control what gets deployed, and to set proper [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/){: external} and [limit ranges](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/){: external}.
 {: important}
 
 ### Should I set up a single-tenant or a multi-tenant cluster?
