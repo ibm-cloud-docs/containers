@@ -129,7 +129,6 @@ The following table shows the changes that are in the worker node fix pack 1.29.
 | GPU device plug-in and installer | d992fea | 71cb7f7 | Security fixes for [CVE-2023-50387](https://nvd.nist.gov/vuln/detail/CVE-2023-50387){: external}, [CVE-2023-50868](https://nvd.nist.gov/vuln/detail/CVE-2023-50868){: external}. |
 
 | Containerd | N/A | 1.7.13 | N/A |
-
 {: caption="Changes since version N/A" caption-side="bottom"}
 
 
