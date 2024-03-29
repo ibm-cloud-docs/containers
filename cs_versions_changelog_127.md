@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-03-26"
+lastupdated: "2024-03-29"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -43,6 +43,30 @@ Review the version 1.27 change log.
 
 
 
+
+
+### Change log for master fix pack 1.27.12_1569, released 27 March 2024
+{: #12712_1569_M}
+
+The following table shows the changes that are in the master fix pack 1.27.12_1569. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.4.7 | v1.4.8 | New version contains updates and security fixes. |
+| Gateway-enabled cluster controller | 2415 | 2502 | New version contains updates and security fixes. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1534 | 1537 | New version contains security fixes. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.18 | v2.4.19 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.27.11-2 | v1.27.12-1 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 441 | 442 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | 90a78ef | 803912f | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.7 | v2.8.8 | New version contains updates and security fixes. |
+| Kubernetes | v1.27.11 | v1.27.12 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.12){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.22.28 | 1.23.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.23.0){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2807 | 2831 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.11 | v0.13.12 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.12){: external}. |
+{: caption="Changes since version 1.27.11_1566" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.27.12_1570, released 25 March 2024
