@@ -9807,11 +9807,11 @@ subcollection: containers
 
 * [Debugging by using `kubectl exec`](/docs/containers?topic=containers-cs_ssh_worker#kubectl-exec)
 
-* [Debugging by creating a pod with root SSH access](/docs/containers?topic=containers-cs_ssh_worker#pod-ssh)
+* [Debugging by enabling root SSH access on a worker node](/docs/containers?topic=containers-cs_ssh_worker#pod-ssh)
 
-    * [Private network](/docs/containers?topic=containers-cs_ssh_worker#ssh-private-network)
+    * [SSH into the worker on the private network](/docs/containers?topic=containers-cs_ssh_worker#ssh-private-network)
 
-    * [Public network classic clusters that are connected to a public VLAN only](/docs/containers?topic=containers-cs_ssh_worker#public-network-only-classic-debug)
+    * [SSH into the worker node on the public network](/docs/containers?topic=containers-cs_ssh_worker#public-network-only-classic-debug)
 
     * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
 
