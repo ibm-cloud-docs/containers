@@ -249,6 +249,16 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr24)
+
+    * [03 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr0324)
+
+        * Istio add-on patch updates.
+
+        * ALB OAuth Proxy add-on patch updates.
+
+        * {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch updates. Additionally, version 1.0.9 version of cluster autoscaler add-on is deprecated and becomes unsupported on 30 April 2024.
+
 * [March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar24)
 
     * [27 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar2724)
@@ -6694,6 +6704,8 @@ subcollection: containers
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
+    * [Changelog for 1.20.4, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1204)
+
     * [Changelog for 1.20.3, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1203)
 
     * [Change log for 1.20.2, released 07 February 2024](/docs/containers?topic=containers-istio-changelog#1202)
@@ -6703,6 +6715,8 @@ subcollection: containers
     * [Change log for 1.20.0, released 7 December 2023](/docs/containers?topic=containers-istio-changelog#1200)
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
+
+    * [Changelog for 1.19.8, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1198)
 
     * [Changelog for 1.19.7, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1197)
 
@@ -6974,7 +6988,13 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-ca_changelog#0121_ca_addon)
 
+    * [Change log for patch update 1.2.1_418, released 02 April 2024](/docs/containers?topic=containers-ca_changelog#121418_ca)
+
     * [Change log for patch update 1.2.1_395, released 28 February 2024](/docs/containers?topic=containers-ca_changelog#121395_ca)
+
+* [Version 1.2.0](/docs/containers?topic=containers-ca_changelog#0120_ca_addon)
+
+    * [Change log for patch update 1.2.0_410, released 02 April 2024](/docs/containers?topic=containers-ca_changelog#120410_ca)
 
     * [Change log for patch update 1.2.0_365, released 21 February 2024](/docs/containers?topic=containers-ca_changelog#120365_ca)
 
@@ -7011,6 +7031,8 @@ subcollection: containers
     * [Change log for patch update 1.1.0_429, released 16 March 2022](/docs/containers?topic=containers-ca_changelog#110429_ca)
 
 * [Version 1.0.9](/docs/containers?topic=containers-ca_changelog#0109_ca_addon)
+
+    * [Change log for patch update 1.0.9_411, released 02 April 2024](/docs/containers?topic=containers-ca_changelog#109411_ca)
 
     * [Change log for patch update 1.0.9_377, released 21 February 2024](/docs/containers?topic=containers-ca_changelog#109377_ca)
 
@@ -7487,6 +7509,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2_0_0)
+
+    * [Version 2.0.0_2156, released 03 April 2024](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_2156)
 
     * [Version 2.0.0_2063, released on 16 January 2024](/docs/containers?topic=containers-alb-oauth-proxy-changelog#2.0.0_2063)
 

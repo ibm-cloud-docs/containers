@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-04-02"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -268,7 +268,10 @@ Update your Istio add-on to the latest version, which is tested by {{site.data.k
 Do not use `istioctl` to update the version of Istio that is installed by the managed add-on. Only use the following steps to update your managed Istio add-on, which includes an update of the Istio version.
 {: important}
 
-Version 1.18 will be unsupported on 21 February 2024. Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.18 that is supported by {{site.data.keyword.containerlong_notm}}.
+Version 1.19 is unsupported on 08 May 2024. Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.20 that is supported by {{site.data.keyword.containerlong_notm}}.
+{: important}
+
+Version 1.18 is unsupported on 21 February 2024. Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.19 that is supported by {{site.data.keyword.containerlong_notm}}.
 {: important}
 
 Version 1.17 is unsupported as of 6 December 2023. Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.18 that is supported by {{site.data.keyword.containerlong_notm}}.
