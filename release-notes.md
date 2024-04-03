@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-02"
+lastupdated: "2024-04-03"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -44,8 +44,11 @@ ALB OAuth Proxy add-on patch updates.
 
 
 
-{{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch updates. Additionally, version 1.0.9 version of cluster autoscaler add-on is deprecated and becomes unsupported on 30 April 2024.
+{{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch updates.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+Version 1.0.9 of the cluster autoscaler add-on is deprecated with an end of support date of 30 April 2024.
+:   Update to a supported version of the add-on before 30 April 2024.
 
 
 
