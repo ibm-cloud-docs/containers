@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-29"
+lastupdated: "2024-04-03"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -26,6 +26,34 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## April 2024
+{: #containers-apr24}
+
+### 03 April 2024
+{: #containers-apr0324}
+{: release-note}
+
+
+
+Istio add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+ALB OAuth Proxy add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+
+
+
+{{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch updates.
+:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
+
+Version 1.0.9 of the cluster autoscaler add-on is deprecated with an end of support date of 30 April 2024.
+:   Update to a supported version of the add-on before 30 April 2024.
+
+
+
+
+
 
 
 ## March 2024
