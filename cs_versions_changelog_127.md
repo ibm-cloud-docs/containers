@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-03-29"
+lastupdated: "2024-04-04"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -59,7 +59,7 @@ The following table shows the changes that are in the master fix pack 1.27.12_15
 | {{site.data.keyword.IBM_notm}} Calico extension | 1534 | 1537 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.18 | v2.4.19 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.27.11-2 | v1.27.12-1 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 441 | 442 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 441 | 442 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | 90a78ef | 803912f | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.7 | v2.8.8 | New version contains updates and security fixes. |
 | Kubernetes | v1.27.11 | v1.27.12 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.12){: external}. |
@@ -115,7 +115,7 @@ The following table shows the changes that are in the master fix pack 1.27.11_15
 | {{site.data.keyword.IBM_notm}} Calico extension | 1525 | 1534 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.14 | v2.4.18 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.27.10-3 | v1.27.11-2 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 439 | 441 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 439 | 441 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 7185ea1 | bd30030 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.6 | v2.8.7 | New version contains updates and security fixes. |
 | Kubernetes | v1.27.10 | v1.27.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.11){: external}. |

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-29"
+lastupdated: "2024-04-04"
 
 
 keywords: kubernetes
@@ -1031,10 +1031,7 @@ Minimum required permissions
      The subnet must be specified in CIDR format with a size of at least `/24`, which allows a maximum of 255 services in the cluster, or larger. The subnet that you choose must be within one of the following ranges.
      - `172.17.0.0 - 172.17.255.255`
      - `172.21.0.0 - 172.31.255.255`
-
      - `192.168.0.0 - 192.168.255.255`
-
-
      - `198.18.0.0 - 198.19.255.255`
 
 :    Note that the pod and service subnets can't overlap.

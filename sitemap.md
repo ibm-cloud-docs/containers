@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-03"
+lastupdated: "2024-04-04"
 
 
 keywords: containers
@@ -3141,21 +3141,21 @@ subcollection: containers
 
     * [Prerequisites](/docs/containers?topic=containers-update#vpc_worker_prereqs)
 
-    * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update#vpc_worker_cli)
+    * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update&interface=cli#vpc_worker_cli)
 
-    * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update#vpc_worker_ui)
+    * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update&interface=ui#vpc_worker_ui)
 
-* [Updating flavors (machine types)](/docs/containers?topic=containers-update#machine_type)
+* [Updating flavors (machine types)](/docs/containers?topic=containers-update&interface=ui#machine_type)
 
-* [How are worker pools scaled down?](/docs/containers?topic=containers-update#worker-scaledown-logic)
+* [How are worker pools scaled down?](/docs/containers?topic=containers-update&interface=ui#worker-scaledown-logic)
 
-* [Updating cluster components](/docs/containers?topic=containers-update#components)
+* [Updating cluster components](/docs/containers?topic=containers-update&interface=ui#components)
 
-    * [Managing automatic updates for Fluentd](/docs/containers?topic=containers-update#logging-up)
+    * [Managing automatic updates for Fluentd](/docs/containers?topic=containers-update&interface=ui#logging-up)
 
-    * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update#alb)
+    * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update&interface=ui#alb)
 
-* [Updating managed add-ons](/docs/containers?topic=containers-update#addons)
+* [Updating managed add-ons](/docs/containers?topic=containers-update&interface=ui#addons)
 
 [Creating and managing dedicated hosts on VPC Gen 2 infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
 
@@ -3708,55 +3708,53 @@ subcollection: containers
 {: #sitemap_controlling_network_traffic_in_vpc_clusters}
 
 
-[Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#vpc-network-policy)
+[Understanding VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
 
-* [Comparison of network security options](/docs/containers?topic=containers-vpc-network-policy#comparison)
+* [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group#managed-vpe-gateways)
 
-* [Access control lists (ACLs) or security groups?](/docs/containers?topic=containers-vpc-network-policy#acl-sg-compare)
-
-[Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
-
-* [VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-groups-details)
+* [Managed security groups](/docs/containers?topic=containers-vpc-security-group#managed-sgs)
 
     * [Security groups applied to cluster workers](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster-workers)
 
     * [Security groups applied to VPE gateways and VPC ALBs](/docs/containers?topic=containers-vpc-security-group#vpc-sg-vpe-alb)
 
-* [Viewing VPC security groups in the CLI](/docs/containers?topic=containers-vpc-security-group&interface=cli#vpc-sg-cli)
+* [Minimum inbound and outbound requirements](/docs/containers?topic=containers-vpc-security-group#vpc-sg-inbound-outbound)
 
-* [Viewing the default VPC security groups in the UI](/docs/containers?topic=containers-vpc-security-group&interface=ui#vpc-sg-ui)
+    * [Required inbound and outbound rules for cluster workers](/docs/containers?topic=containers-vpc-security-group#required-group-rules-workers)
 
-* [Minimum inbound and outbound requirements](/docs/containers?topic=containers-vpc-security-group&interface=ui#vpc-sg-inbound-outbound)
+    * [Required rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-security-group#rules-sg-128)
 
-    * [Required inbound and outbound rules for cluster workers](/docs/containers?topic=containers-vpc-security-group&interface=ui#required-group-rules-workers)
+    * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group#required-group-rules-alb)
 
-    * [Required rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-security-group&interface=ui#rules-sg-128)
+* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group#vpc-security-group-loadbalancer-outbound)
 
-    * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group&interface=ui#required-group-rules-alb)
+[Creating and managing VPC security groups](/docs/containers?topic=containers-vpc-security-group-manage#vpc-security-group-manage)
 
-* [Creating security group rules](/docs/containers?topic=containers-vpc-security-group&interface=ui#vpc-sg-create-rules)
+* [Adding security groups during cluster creation](/docs/containers?topic=containers-vpc-security-group-manage#vpc-sg-cluster)
 
-    * [Creating rules in the console](/docs/containers?topic=containers-vpc-security-group&interface=ui#security-group-inbound-rules)
+    * [If you only want the default VPC and cluster security groups and no additional security groups](/docs/containers?topic=containers-vpc-security-group-manage#default-sgs-only)
 
-    * [Creating rules in the command line](/docs/containers?topic=containers-vpc-security-group&interface=cli#security_groups_cli)
+    * [If you only want the cluster security group and not the default VPC security group](/docs/containers?topic=containers-vpc-security-group-manage#cluster-sg-only)
 
-* [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group&interface=cli#vpc-sg-cluster)
+    * [If you want the cluster security group and your own additional security groups](/docs/containers?topic=containers-vpc-security-group-manage#cluster-customer-sgs)
 
-    * [If you only want the default VPC and cluster security groups and no additional security groups](/docs/containers?topic=containers-vpc-security-group&interface=cli#default-sgs-only)
+    * [If you only want your own security groups](/docs/containers?topic=containers-vpc-security-group-manage#customer-sgs-only)
 
-    * [If you only want the cluster security group and not the default VPC security group](/docs/containers?topic=containers-vpc-security-group&interface=cli#cluster-sg-only)
+* [Adding security groups to worker pools during creation](/docs/containers?topic=containers-vpc-security-group-manage#vpc-sg-worker-pool)
 
-    * [If you want the cluster security group and your own additional security groups](/docs/containers?topic=containers-vpc-security-group&interface=cli#cluster-customer-sgs)
+    * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#no-worker-sgs)
 
-    * [If you only want your own security groups](/docs/containers?topic=containers-vpc-security-group&interface=cli#customer-sgs-only)
+    * [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
 
-* [Adding security groups to worker pools at worker pool create time](/docs/containers?topic=containers-vpc-security-group&interface=cli#vpc-sg-worker-pool)
+* [Viewing security groups](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#vpc-sg-cli)
 
-    * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group&interface=cli#no-worker-sgs)
+* [Viewing security groups in the console](/docs/containers?topic=containers-vpc-security-group-manage&interface=ui#vpc-sg-ui)
 
-    * [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group&interface=cli#worker-sgs)
+* [Creating security group rules in the console](/docs/containers?topic=containers-vpc-security-group-manage&interface=ui#security-group-inbound-rules)
 
-* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group&interface=cli#vpc-security-group-loadbalancer-outbound)
+* [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#security_groups_cli)
+
+* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#vpc-security-group-loadbalancer-outbound)
 
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
@@ -3808,17 +3806,17 @@ subcollection: containers
 
 * [Creating a VPC subnet and attaching a public gateway](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet)
 
-    * [Creating a VPC subnet in the console](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_ui)
+    * [Creating a VPC subnet in the console](/docs/containers?topic=containers-vpc-subnets&interface=ui#create_vpc_subnet_ui)
 
-    * [Creating a VPC subnet in the CLI](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_cli)
+    * [Creating a VPC subnet in the CLI](/docs/containers?topic=containers-vpc-subnets&interface=cli#create_vpc_subnet_cli)
 
-* [Creating VPC subnets for classic access](/docs/containers?topic=containers-vpc-subnets#classic_access_subnets)
+* [Creating VPC subnets for classic access](/docs/containers?topic=containers-vpc-subnets&interface=cli#classic_access_subnets)
 
-    * [Creating VPC subnets for classic access in the console](/docs/containers?topic=containers-vpc-subnets#ca_subnet_ui)
+    * [Creating VPC subnets for classic access in the console](/docs/containers?topic=containers-vpc-subnets&interface=ui#ca_subnet_ui)
 
-    * [Creating VPC subnets for classic access from the CLI](/docs/containers?topic=containers-vpc-subnets#ca_subnet_cli)
+    * [Creating VPC subnets for classic access from the CLI](/docs/containers?topic=containers-vpc-subnets&interface=cli#ca_subnet_cli)
 
-* [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-subnets#vpc-restrict-gateway)
+* [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-subnets&interface=cli#vpc-restrict-gateway)
 
 [Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpnaas)
 
@@ -9555,6 +9553,16 @@ subcollection: containers
 
 * [Can I use other IBM Cloud services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
 
+* [How do I install a Cloud Pak in my {{site.data.keyword.openshiftlong_notm}} cluster? How do I access it later?](/docs/containers?topic=containers-faqs#cloud_pak_manage)
+
+* [Can I use the {{site.data.keyword.redhat_openshift_notm}} entitlement that comes with my Cloud Pak for my cluster?](/docs/containers?topic=containers-faqs#cloud_pak_byo_entitlement)
+
+* [Can I install multiple Cloud Paks in the same {{site.data.keyword.openshiftlong_notm}} cluster?](/docs/containers?topic=containers-faqs#cloud_pak_multiple)
+
+* [What is included in a Cloud Pak?](/docs/containers?topic=containers-faqs#cloud_pak_included)
+
+* [What else do I need to know to use Cloud Paks?](/docs/containers?topic=containers-faqs#cloud_paks_other)
+
 * [Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
 
 * [What am I charged for? Can I estimate and control costs in my cluster?](/docs/containers?topic=containers-faqs#charges)
@@ -9568,13 +9576,49 @@ subcollection: containers
 * [What operations are blocked if my cluster is running an unsupported operating system?](/docs/containers?topic=containers-faqs#unsupported_os)
 
 
+## Best practices for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_best_practices_for_}
+
+
+[Best practices for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-best-practices#best-practices)
+
+* [Keep your cluster environment up to date](/docs/containers?topic=containers-best-practices#bp-1)
+
+* [Keep your command line tools up to date](/docs/containers?topic=containers-best-practices#bp-2)
+
+* [Document your environment architectrure](/docs/containers?topic=containers-best-practices#bp-3)
+
+* [Subscribe to RSS](/docs/containers?topic=containers-best-practices#bp-4)
+
+
 ## Running tests with the Diagnostics and Debug Tool
 {: #sitemap_running_tests_with_the_diagnostics_and_debug_tool}
 
 
 [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
 
-* [Enabling the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
+* [Enable and run the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
+
+
+## Debugging guide for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_debugging_guide_for_}
+
+
+[Debugging guide for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-debug_clusters#debug_clusters)
+
+* [Step 1: Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-debug_clusters#troubleshooting-environments)
+
+* [Step 2: Get your cluster state and status and review the common issues](/docs/containers?topic=containers-debug_clusters#ts-2)
+
+* [Step 3: Gather details and document the problem](/docs/containers?topic=containers-debug_clusters#ts-3)
+
+* [Step 4: Running tests to rule in or rule out each component](/docs/containers?topic=containers-debug_clusters#ts-4)
+
+* [Step 5: Gathering more data](/docs/containers?topic=containers-debug_clusters#ts-5)
+
+* [Step 6: Reach out in Slack or review user forums for similar issues](/docs/containers?topic=containers-debug_clusters#ts-6)
+
+* [Next steps](/docs/containers?topic=containers-debug_clusters#advanced-ts-next)
 
 
 ## Troubleshooting
@@ -9585,8 +9629,6 @@ subcollection: containers
 ### Clusters and masters
 {: #sitemap_clusters_and_masters}
 
-
-[Debugging clusters](/docs/containers?topic=containers-debug_clusters#debug_clusters)
 
 [Debugging webhooks](/docs/containers?topic=containers-ts-webhook-debug#ts-webhook-debug)
 
@@ -10285,25 +10327,11 @@ subcollection: containers
 [Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint#px-kms-endpoint)
 
 
-## Getting help and support
-{: #sitemap_getting_help_and_support}
+## Contacting support
+{: #sitemap_contacting_support}
 
 
-[Getting help and support](/docs/containers?topic=containers-get-help#get-help)
-
-* [Best practices](/docs/containers?topic=containers-get-help#help-general)
-
-* [Step 1: Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-get-help#help-cloud-status)
-
-* [Step 2: Gather details and document the problem](/docs/containers?topic=containers-get-help#ts-app-debug-gather)
-
-* [Step 3: Running tests to rule in or rule out each component](/docs/containers?topic=containers-get-help#ts-app-debug-narrow-1)
-
-* [Step 4: Gathering more data](/docs/containers?topic=containers-get-help#ts-app-debug-gather-again)
-
-* [Step 4: Reach out in Slack or review user forums for similar issues](/docs/containers?topic=containers-get-help#feedback-qs)
-
-* [Contacting support](/docs/containers?topic=containers-get-help#help-support)
+[Contacting support](/docs/containers?topic=containers-get-help#get-help)
 
 
 ## Service limitations
