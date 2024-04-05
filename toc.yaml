@@ -16,7 +16,6 @@ toc:
       topics:
       - getting-started.md
       - overview.md
-      - iam-platform-access-roles.md
       - responsibilities.md
       - topicgroup:
           label: Use cases
@@ -53,7 +52,6 @@ toc:
       - topicgroup:
           label: Planning your cluster environment
           topics:
-          - cluster-create.md
           - kube-strategy.md
           - cluster-plan-ha.md
           - worker-plan.md
@@ -62,6 +60,11 @@ toc:
           - encryption.md
           - storage-plan.md
           - document-environment.md
+      - topicgroup:
+          label: Preparing your account
+          topics:
+          - cluster-create.md
+          - iam-platform-access-roles.md
       - topicgroup:
           label: Creating clusters
           topics:
@@ -434,6 +437,7 @@ toc:
               - ts-cluster-create-delete.md
               - ts-cluster-no-vpc.md
               - ts-resource-group-permissions.md
+              - ts-etcd-capacity.md
               - ts-pod-security-reset.md
               - ts-pod-security-125.md
               - ts-cluster-icr-pull-img.md

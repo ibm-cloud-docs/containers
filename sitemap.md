@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-04"
+lastupdated: "2024-04-05"
 
 
 keywords: containers
@@ -63,19 +63,6 @@ subcollection: containers
 * [Comparison between {{site.data.keyword.redhat_openshift_notm}} and Kubernetes clusters](/docs/containers?topic=containers-overview#openshift_kubernetes)
 
 * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
-
-
-## IAM roles and actions
-{: #sitemap_iam_roles_and_actions}
-
-
-[IAM roles and actions](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
-
-* [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
-
-* [Permissions to create a cluster](/docs/containers?topic=containers-iam-platform-access-roles#cluster-create-permissions)
-
-* [Example custom IAM roles](/docs/containers?topic=containers-iam-platform-access-roles#example-iam)
 
 
 ## Your responsibilities with using {{site.data.keyword.containerlong_notm}}
@@ -2779,18 +2766,6 @@ subcollection: containers
 {: #sitemap_planning_your_cluster_environment}
 
 
-[Preparing your account to create clusters](/docs/containers?topic=containers-clusters#clusters)
-
-* [Create or upgrade your account](/docs/containers?topic=containers-clusters#prepare-create-account)
-
-* [Setting user permissions](/docs/containers?topic=containers-clusters#prepare-verify-permissions)
-
-* [Plan your resource groups](/docs/containers?topic=containers-clusters#prepare-resource-groups)
-
-* [Cluster-specific account setup](/docs/containers?topic=containers-clusters#prepare-cluster-account)
-
-* [Next steps](/docs/containers?topic=containers-clusters#next-steps)
-
 [Creating a cluster environment strategy](/docs/containers?topic=containers-strategy#strategy)
 
 * [Decide how many clusters to create](/docs/containers?topic=containers-strategy#env_multicluster)
@@ -3024,6 +2999,31 @@ subcollection: containers
 * [Step 2: Choose a tool](/docs/containers?topic=containers-document-environment#choose-arch-tool)
 
 * [Step 3: Create the diagram](/docs/containers?topic=containers-document-environment#create-arch-diagram)
+
+
+## Preparing your account
+{: #sitemap_preparing_your_account}
+
+
+[Preparing your account to create clusters](/docs/containers?topic=containers-clusters#clusters)
+
+* [Create or upgrade your account](/docs/containers?topic=containers-clusters#prepare-create-account)
+
+* [Setting user permissions](/docs/containers?topic=containers-clusters#prepare-verify-permissions)
+
+* [Plan your resource groups](/docs/containers?topic=containers-clusters#prepare-resource-groups)
+
+* [Cluster-specific account setup](/docs/containers?topic=containers-clusters#prepare-cluster-account)
+
+* [Next steps](/docs/containers?topic=containers-clusters#next-steps)
+
+[IAM roles and actions](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
+
+* [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
+
+* [Permissions to create a cluster](/docs/containers?topic=containers-iam-platform-access-roles#cluster-create-permissions)
+
+* [Example custom IAM roles](/docs/containers?topic=containers-iam-platform-access-roles#example-iam)
 
 
 ## Creating clusters
@@ -9699,6 +9699,8 @@ subcollection: containers
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
 
 [Why do I get an `infrastructure operation failed` error when creating a VPC cluster?](/docs/containers?topic=containers-ts-resource-group-permissions#ts-resource-group-permissions)
+
+[Why do I see an `etcd database size is approaching the maximum` error?](/docs/containers?topic=containers-ts-etcd-capacity#ts-etcd-capacity)
 
 [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 
