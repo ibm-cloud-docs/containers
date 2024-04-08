@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-04-04"
 
 
-keywords: kubernetes, help, network, connectivity
+keywords: {{site.data.keyword.containerlong_notm}}, containers, kubernetes, help, network, connectivity
 
 subcollection: containers
 
@@ -14,9 +14,6 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
-
 
 
 # Debugging worker nodes

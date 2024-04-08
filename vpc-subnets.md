@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-04-04"
 
 
-keywords: kubernetes, ips, vlans, networking, public gateway
+keywords: containers, {{site.data.keyword.containerlong_notm}} kubernetes, ips, vlans, networking, public gateway
 
 subcollection: containers
 
@@ -14,9 +14,6 @@ subcollection: containers
 
 
 {{site.data.keyword.attribute-definition-list}}
-
-
-
 
 
 # Configuring VPC subnets
@@ -158,7 +155,7 @@ Network segmentation describes the approach to divide a network into multiple su
 
 Subnets provide a channel for connectivity among the worker nodes within the cluster. Additionally, any system that is connected to any of the private subnets in the same VPC can communicate with workers. For example, all subnets in one VPC can communicate through private layer 3 routing with a built-in VPC router.
 
-If you have multiple clusters that must communicate with each other, you can create the clusters in the same VPC. However, if your clusters don't need to communicate, you can achieve better network segmentation by creating the clusters in separate VPCs. You can also create [access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy) for your VPC subnets to mediate traffic on the private network. ACLs consist of inbound and outbound rules that define which ingress and egress is permitted for each VPC subnet.
+If you have multiple clusters that must communicate with each other, you can create the clusters in the same VPC. However, if your clusters don't need to communicate, you can achieve better network segmentation by creating the clusters in separate VPCs. You can also create [access control lists (ACLs)](/docs/containers?topic=containers-vpc-acls&interface=ui) for your VPC subnets to mediate traffic on the private network. ACLs consist of inbound and outbound rules that define which ingress and egress is permitted for each VPC subnet.
 
 ### VPC networking limitations
 {: #vpc_basics_limitations}
@@ -187,6 +184,7 @@ Create a VPC subnet for your cluster and optionally attach a public gateway to t
 
 ### Creating a VPC subnet in the console
 {: #create_vpc_subnet_ui}
+{: ui}
 
 Use the {{site.data.keyword.cloud_notm}} console to create a VPC subnet for your cluster and optionally attach a public gateway to the subnet.
 {: shortdesc}
@@ -205,6 +203,7 @@ Use the {{site.data.keyword.cloud_notm}} console to create a VPC subnet for your
 
 ### Creating a VPC subnet in the CLI
 {: #create_vpc_subnet_cli}
+{: cli}
 
 Use the {{site.data.keyword.cloud_notm}} CLI to create a VPC subnet for your cluster and optionally attach a public gateway to the subnet.
 {: shortdesc}
@@ -310,6 +309,7 @@ If you enable classic access when you create your VPC, [classic access default a
 
 ### Creating VPC subnets for classic access in the console
 {: #ca_subnet_ui}
+{: ui}
 
 1. Create a classic access VPC without default address prefixes.
     1. From the [Virtual Private Clouds dashboard](https://cloud.ibm.com/vpc/provision/vpc), click **Create**.
@@ -335,6 +335,7 @@ If you enable classic access when you create your VPC, [classic access default a
 
 ### Creating VPC subnets for classic access from the CLI
 {: #ca_subnet_cli}
+{: cli}
 
 1. In your command line, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the `--sso` option to log in.
     ```sh
@@ -601,6 +602,6 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
         ```
         {: screen}
 
-9. Optional: If you use [access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy) to control your cluster network traffic, create inbound and outbound rules in this subnet's ACL to allow ingress from and egress to the external public endpoints that your pods must access.
+9. Optional: If you use [access control lists (ACLs)](/docs/containers?topic=containers-vpc-acls&interface=ui) to control your cluster network traffic, create inbound and outbound rules in this subnet's ACL to allow ingress from and egress to the external public endpoints that your pods must access.
 
 

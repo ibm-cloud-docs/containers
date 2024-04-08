@@ -16,7 +16,6 @@ toc:
       topics:
       - getting-started.md
       - overview.md
-      - iam-platform-access-roles.md
       - responsibilities.md
       - topicgroup:
           label: Use cases
@@ -53,7 +52,6 @@ toc:
       - topicgroup:
           label: Planning your cluster environment
           topics:
-          - cluster-create.md
           - kube-strategy.md
           - cluster-plan-ha.md
           - worker-plan.md
@@ -62,6 +60,11 @@ toc:
           - encryption.md
           - storage-plan.md
           - document-environment.md
+      - topicgroup:
+          label: Preparing your account
+          topics:
+          - cluster-create.md
+          - iam-platform-access-roles.md
       - topicgroup:
           label: Creating clusters
           topics:
@@ -135,8 +138,8 @@ toc:
       - topicgroup:
           label: Controlling network traffic in VPC clusters
           topics:
-          - vpc-network-policy.md
           - vpc-security-group.md
+          - vpc-security-group-manage.md
           - vpc-acls.md
           - vpc-kube-policies.md
           - vpc-firewall.md
@@ -417,14 +420,15 @@ toc:
       topics:
       - include: ../get-support/ViewStatus.md
       - faqs.md
+      - best-practices.md
       - ts-debug-tool.md
+      - ts-cluster-debug.md
       - topicgroup:
           label: Troubleshooting
           topics:
           - topicgroup:
               label: Clusters and masters
               topics:
-              - ts-cluster-debug.md
               - ts-webhook-debug.md
               - ts-cluster-master.md
               - ts-cluster-master-upgrade.md
@@ -433,6 +437,7 @@ toc:
               - ts-cluster-create-delete.md
               - ts-cluster-no-vpc.md
               - ts-resource-group-permissions.md
+              - ts-etcd-capacity.md
               - ts-pod-security-reset.md
               - ts-pod-security-125.md
               - ts-cluster-icr-pull-img.md
@@ -450,6 +455,7 @@ toc:
               - ts-admin-cert.md
               - ts-vpc-byok-encrypted-storage.md
               - ts-sbd-cluster-create-quota.md
+              - ts-sbd-non-sbd-clusters.md
           - topicgroup:
               label: Worker nodes
               topics:
@@ -505,6 +511,7 @@ toc:
               - ts-calico-log-level.md
               - ts-keepalive-sysctl.md
               - ts-slow-dns-lookup.md
+              - ts-sbd-custom-dns.md
           - topicgroup:
               label: Logging and monitoring
               topics:

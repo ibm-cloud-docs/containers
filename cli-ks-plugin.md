@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-29"
+lastupdated: "2024-04-08"
 
 
 keywords: kubernetes
@@ -1031,10 +1031,7 @@ Minimum required permissions
      The subnet must be specified in CIDR format with a size of at least `/24`, which allows a maximum of 255 services in the cluster, or larger. The subnet that you choose must be within one of the following ranges.
      - `172.17.0.0 - 172.17.255.255`
      - `172.21.0.0 - 172.31.255.255`
-
      - `192.168.0.0 - 192.168.255.255`
-
-
      - `198.18.0.0 - 198.19.255.255`
 
 :    Note that the pod and service subnets can't overlap.
@@ -6902,7 +6899,7 @@ Publicly expose your app by creating a DNS subdomain to register a network load 
 {: shortdesc}
 
 ```sh
-ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3_IP ...] [--secret-namespace NAMESPACE] [--dns-type public] --type public [--output json] [-q]
+ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3_IP ...] [--secret-namespace NAMESPACE] [--output json] [-q]
 ```
 {: pre}
 
@@ -6919,9 +6916,6 @@ Minimum required permissions
 
 `--secret-namespace NAMESPACE`
 :    The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you don't specify a namespace, the secret is automatically created in the `default` namespace.
-
-`--dns-type public`
-:    The DNS provider type for subdomain registration. Currently, only `public` is supported.
 
 `--type public`
 :    The subdomain type. Currently, only `public` is supported.
@@ -6953,7 +6947,7 @@ Create a DNS record for a Network Load Balancer for VPC or Application Load Bala
 When you create a Network Load Balancer for VPC, the load balancer is assigned external IP addresses for each zone in your cluster. When you create an Application Load Balancer for VPC, the load balancer is assigned a hostname. If you want an app subdomain with TLS termination, you can use the `ibmcloud ks nlb-dns create vpc-gen2` command to create a DNS record for the IP addresses or hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you. You can create subdomains for both public and private VPC load balancers.
 
 ```sh
-ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER (--lb-host VPC_ALB_HOSTNAME | --ip VPC_NLB_IP) [--dns-type public] [--secret-namespace NAMESPACE] [--type (public|private)] [--output json] [-q]
+ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER (--lb-host VPC_ALB_HOSTNAME | --ip VPC_NLB_IP) [--secret-namespace NAMESPACE] [--type (public|private)] [--output json] [-q]
 ```
 {: pre}
 
@@ -6968,14 +6962,8 @@ Minimum required permissions
 `--lb-host VPC_ALB_HOSTNAME` | `--ip VPC_NLB_IP`
 :    For VPC application load balancers, the load balancer hostname. To see load balancer hostnames, run `kubectl get svc -o wide`. For VPC network load balancers, the external IP addresses. To specify multiple IP addresses, use multiple `--ip` options. To see load balancer IP addresses, run `kubectl get svc -o wide`.
 
-`--dns-type public`
-:    The DNS provider type for the subdomain registration. Currently, only `public` DNS is supported.
-
 `--secret-namespace NAMESPACE`
 :    The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you don't specify a namespace, the secret is automatically created in the `default` namespace.
-
-`--type (public|private)`
-:    The VPC load balancer type.
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
