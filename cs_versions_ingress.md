@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-02-29"
+lastupdated: "2024-04-08"
 
 
 keywords: kubernetes, nginx, ingress controller
@@ -13,10 +13,10 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Ingress ALB version change log
+# Archive: Ingress ALB version change log
 {: #cs_versions_ingress}
 
-Your {{site.data.keyword.containerlong}} cluster comes with components, such as Ingress ALB components, that are updated automatically by IBM. You can also disable automatic updates for some components and manually update them separately from the master and worker nodes. Refer to the tables in the following sections for a summary of changes for each version.
+Review change logs for versions released before 22 February, 2024 and versions that are no longer supported.
 {: shortdesc}
 
 Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security) for security vulnerabilities that affect {{site.data.keyword.containerlong_notm}}. You can filter the results to view only Kubernetes Cluster security bulletins that are relevant to {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}}. Change log entries that address other security vulnerabilities but don't also refer to an IBM Security Bulletin are for vulnerabilities that are not known to affect {{site.data.keyword.containerlong_notm}} in normal usage. If you run privileged containers, run commands on the workers, or execute untrusted code, then you might be at risk.

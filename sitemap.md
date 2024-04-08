@@ -7613,7 +7613,7 @@ subcollection: containers
 
     * [1.6.4_6344_iks, released 22 February 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.6.4_6344_iks)
 
-[Ingress ALB version change log](/docs/containers?topic=containers-cs_versions_ingress#cs_versions_ingress)
+[Archive: Ingress ALB version change log](/docs/containers?topic=containers-cs_versions_ingress#cs_versions_ingress)
 
 * [Kubernetes Ingress image change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog)
 
