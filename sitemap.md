@@ -5397,8 +5397,6 @@ subcollection: containers
 
 * [Modifying worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
 
-    * [Modifying worker node kernel settings](/docs/containers?topic=containers-kernel#worker-kernel-ds)
-
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 
 * [Optimizing network keepalive `sysctl` settings](/docs/containers?topic=containers-kernel#keepalive-iks)
