@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-04"
+lastupdated: "2024-04-09"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -29,6 +29,26 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## April 2024
 {: #containers-apr24}
+
+
+
+### 09 April 2024
+{: #containers-apr0924}
+{: release-note}
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [1.29](/docs/containers?topic=containers-changelog_129)
+:   [1.28](/docs/containers?topic=containers-changelog_128)
+:   [1.27](/docs/containers?topic=containers-changelog_127)
+:   [1.26](/docs/containers?topic=containers-changelog_126)
+
+
+
+
+
 
 
 
