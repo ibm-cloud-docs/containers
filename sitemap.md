@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-09"
+lastupdated: "2024-04-10"
 
 
 keywords: containers
@@ -2720,52 +2720,6 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
-## Installing the CLI
-{: #sitemap_installing_the_cli}
-
-
-[Installing the CLI](/docs/containers?topic=containers-cli-install#cli-install)
-
-* [Understanding the CLI tools](/docs/containers?topic=containers-cli-install#cli-understand)
-
-* [Run the installation command](/docs/containers?topic=containers-cli-install#cli-install-include-step1-install-idt)
-
-* [Verify the installation](/docs/containers?topic=containers-cli-install#cli-install-include-step2-verify-idt)
-
-* [Install CLI plug-ins and tools](/docs/containers?topic=containers-cli-install#cli-install-include-step3-install-idt-manually)
-
-* [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
-
-[Updating the CLI](/docs/containers?topic=containers-cli-update#cli-update)
-
-* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-update#cli-update-include-update-ibmcloud-cli)
-
-* [Updating installed plug-ins](/docs/containers?topic=containers-cli-update#cli-update-include-cli-update-plugin)
-
-[Uninstalling the stand-alone {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-ibmcloud-cli)
-
-* [Uninstalling on Windows](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-windows)
-
-* [Uninstalling on Linux and macOS](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-linux-macos)
-
-
-## Setting up the API
-{: #sitemap_setting_up_the_api}
-
-
-[Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
-
-* [About the API](/docs/containers?topic=containers-cs_api_install#api_about)
-
-* [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_api_install#cs_api)
-
-* [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_api_install#kube_api)
-
-* [Refreshing IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
-
-* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
-
-
 ## Planning your cluster environment
 {: #sitemap_planning_your_cluster_environment}
 
@@ -3028,6 +2982,52 @@ subcollection: containers
 * [Permissions to create a cluster](/docs/containers?topic=containers-iam-platform-access-roles#cluster-create-permissions)
 
 * [Example custom IAM roles](/docs/containers?topic=containers-iam-platform-access-roles#example-iam)
+
+
+## Installing the CLI
+{: #sitemap_installing_the_cli}
+
+
+[Installing the CLI](/docs/containers?topic=containers-cli-install#cli-install)
+
+* [Understanding the CLI tools](/docs/containers?topic=containers-cli-install#cli-understand)
+
+* [Run the installation command](/docs/containers?topic=containers-cli-install#cli-install-include-step1-install-idt)
+
+* [Verify the installation](/docs/containers?topic=containers-cli-install#cli-install-include-step2-verify-idt)
+
+* [Install CLI plug-ins and tools](/docs/containers?topic=containers-cli-install#cli-install-include-step3-install-idt-manually)
+
+* [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
+
+[Updating the CLI](/docs/containers?topic=containers-cli-update#cli-update)
+
+* [Updating the {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-update#cli-update-include-update-ibmcloud-cli)
+
+* [Updating installed plug-ins](/docs/containers?topic=containers-cli-update#cli-update-include-cli-update-plugin)
+
+[Uninstalling the stand-alone {{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-ibmcloud-cli)
+
+* [Uninstalling on Windows](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-windows)
+
+* [Uninstalling on Linux and macOS](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-linux-macos)
+
+
+## Setting up the API
+{: #sitemap_setting_up_the_api}
+
+
+[Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
+
+* [About the API](/docs/containers?topic=containers-cs_api_install#api_about)
+
+* [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_api_install#cs_api)
+
+* [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_api_install#kube_api)
+
+* [Refreshing IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
+
+* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
 
 
 ## Creating clusters
