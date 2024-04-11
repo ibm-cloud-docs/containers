@@ -9594,7 +9594,7 @@ subcollection: containers
 
 * [Keep your command line tools up to date](/docs/containers?topic=containers-best-practices#bp-2)
 
-* [Document your environment architectrure](/docs/containers?topic=containers-best-practices#bp-3)
+* [Document your environment architecture](/docs/containers?topic=containers-best-practices#bp-3)
 
 * [Subscribe to RSS](/docs/containers?topic=containers-best-practices#bp-4)
 

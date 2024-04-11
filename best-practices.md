@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-04-04"
+lastupdated: "2024-04-11"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, best practices
@@ -32,7 +32,7 @@ In the command line, you are notified when updates to the `ibmcloud` CLI and plu
 
 Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cli-install) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/releases/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
 
-## Document your environment architectrure
+## Document your environment architecture
 {: #bp-3}
 
 Maintaining up-to-date documentation and diagrams can help when debugging issues. For more information, see [Documenting your environment architecture](/docs/containers?topic=containers-document-environment).

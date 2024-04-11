@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-28"
+lastupdated: "2024-04-11"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, ha, high availability, failover, kubernetes, multi az, multi-az, szr, mzr
@@ -71,7 +71,7 @@ Your users are less likely to experience downtime when you distribute your apps 
 {: tip}
 
 [Single zone clusters](#single_zone) [Classic only]{: tag-classic-inf}
-:   Single zone clusters have worker nodes that are distributed across replicas on separate physical hosts within a single zone.  This option protects against certain outages, such as during a master update, and is simpler to manage. However, it does not protect your apps in the event that an entire zone experiences an outage. Single zone clusters deployed in certain locations can later be convereted to multi zone clusters.
+:   Single zone clusters have worker nodes that are distributed across replicas on separate physical hosts within a single zone.  This option protects against certain outages, such as during a master update, and is simpler to manage. However, it does not protect your apps in the event that an entire zone experiences an outage. Single zone clusters deployed in certain locations can later be converted to multi zone clusters.
 
 [Multi zone clusters](#mz-clusters) [Classic]{: tag-classic-inf} [VPC]{: tag-vpc}
 :   Multi zone clusters have worker nodes automatically deployed with three replicas spread across multiple zones. If an entire zone experiences an outage, your workload is scheduled onto worker nodes in the other zones, protecting your app from the outage. 
@@ -173,5 +173,6 @@ To load balance workloads across your apps, add the public IP addresses of your 
 {: #glb-private}
 
 {{site.data.keyword.cloud_notm}} does not offer a global load balancer service on the private network. However, you can connect your cluster to a private load balancer that you host in your on-prem network by using one of the [supported VPN options](/docs/containers?topic=containers-vpn). Make sure to expose your apps on the private network by using [Application Load Balancers (ALBs)](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-albs) or [Network Load Balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about), and use the private IP address in your VPN settings to connect your app to your on-prem network.
+
 
 
