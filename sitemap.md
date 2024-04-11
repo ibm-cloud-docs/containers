@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-10"
+lastupdated: "2024-04-11"
 
 
 keywords: containers
@@ -6180,7 +6180,7 @@ subcollection: containers
 
     * [Change log for master fix pack 1.29.2_1528, released 28 February 2024](/docs/containers?topic=containers-changelog_129#1292_1528_M)
 
-    * [Change log for worker node fix pack 1.29.2_1529, released 26 February 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W)
+    * [Change log for worker node fix pack 1.29.2_1529, released 26 February 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W_feb)
 
     * [Change log for master fix pack 1.29.1_1524 and worker node fix pack 1.29.1_1525, released 14 February 2024](/docs/containers?topic=containers-changelog_129#1291_1524M_and_1291_1525W)
 
@@ -9594,7 +9594,7 @@ subcollection: containers
 
 * [Keep your command line tools up to date](/docs/containers?topic=containers-best-practices#bp-2)
 
-* [Document your environment architectrure](/docs/containers?topic=containers-best-practices#bp-3)
+* [Document your environment architecture](/docs/containers?topic=containers-best-practices#bp-3)
 
 * [Subscribe to RSS](/docs/containers?topic=containers-best-practices#bp-4)
 

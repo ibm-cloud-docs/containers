@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-04"
+lastupdated: "2024-04-11"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -192,7 +192,7 @@ For more information about the components of your cluster and how you can meet s
 
 At a minimum, the **Administrators** or **Compliance Management** roles have permissions to create a cluster. However, you might need additional permissions for other services and integrations that you use in your cluster. For more information, see [Permissions to create a cluster](/docs/containers?topic=containers-iam-platform-access-roles).
 
-To check a user's permissions, review the access policies and access groups of the user in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/iam/iam-platform-access-roles){: external}, or use the `ibmcloud iam user-policies <user>` command.
+To check a user's permissions, review the access policies and access groups of the user in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/iam/users){: external}, or use the `ibmcloud iam user-policies <user>` command.
 
 If the API key is based on one user, how are other cluster users in the region and resource group affected?
 {: #apikey-users}

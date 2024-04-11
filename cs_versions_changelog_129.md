@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-04-09"
+lastupdated: "2024-04-11"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -78,7 +78,7 @@ The following table shows the changes that are in the master fix pack 1.29.3_153
 | Kubernetes NodeLocal DNS cache | 1.22.28 | 1.23.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.23.0){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2807 | 2831 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.11 | v0.13.12 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.12){: external}. |
-| Tigera Operator | v1.32.4-82-iks | v1.32.5-91-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.5-91-iks){: external}. |
+| Tigera Operator | v1.32.4-82-iks | v1.32.5-91-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.6){: external}. |
 {: caption="Changes since version 1.29.2_1528" caption-side="bottom"}
 
 
@@ -134,7 +134,7 @@ The following table shows the changes that are in the master fix pack 1.29.2_152
 
 
 ### Change log for worker node fix pack 1.29.2_1529, released 26 February 2024
-{: #1292_1529_W}
+{: #1292_1529_W_feb}
 
 The following table shows the changes that are in the worker node fix pack 1.29.2_1529. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
