@@ -6712,9 +6712,9 @@ subcollection: containers
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
-    * [Changelog for 1.20.4, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1204)
+    * [Change log for 1.20.4, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1204)
 
-    * [Changelog for 1.20.3, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1203)
+    * [Change log for 1.20.3, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1203)
 
     * [Change log for 1.20.2, released 07 February 2024](/docs/containers?topic=containers-istio-changelog#1202)
 
@@ -6724,9 +6724,9 @@ subcollection: containers
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
 
-    * [Changelog for 1.19.8, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1198)
+    * [Change log for 1.19.8, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1198)
 
-    * [Changelog for 1.19.7, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1197)
+    * [Change log for 1.19.7, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1197)
 
     * [Change log for 1.19.6, released 07 February 2024](/docs/containers?topic=containers-istio-changelog#1196)
 
