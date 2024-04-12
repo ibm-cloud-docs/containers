@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-11"
+lastupdated: "2024-04-12"
 
 
 keywords: containers
@@ -2738,9 +2738,9 @@ subcollection: containers
 
 * [Determine worker node capacity for the resources](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
 
-* [Choose how many namespaces to create](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
+* [Choose how many namespaces to create within the cluster](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
 
-* [Establish resource requests and limits](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
+* [Establish resource requests and limits for the namespaces](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
