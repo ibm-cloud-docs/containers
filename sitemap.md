@@ -5200,7 +5200,7 @@ subcollection: containers
 
 * [Adding a backup location to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-storage)
 
-* [Adding an {{site.data.keyword.containerlong_notm}} cluster to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
+* [Adding {{site.data.keyword.containerlong_notm}} clusters to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
 
 * [Installing Stork on a non-Portworx cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-stork)
 
@@ -9614,7 +9614,7 @@ subcollection: containers
 
 [Debugging guide for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-debug_clusters#debug_clusters)
 
-* [Step 1: Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-debug_clusters#troubleshooting-environments)
+* [Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-debug_clusters#troubleshooting-environments)
 
 * [Step 2: Get your cluster state and status and review the common issues](/docs/containers?topic=containers-debug_clusters#ts-2)
 

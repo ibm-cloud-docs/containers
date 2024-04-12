@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-04-12"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, rbac, policy, providers, benefits
@@ -199,7 +199,7 @@ Highly available masters
 :   Spread your masters across zones in a [multizone cluster](/docs/containers?topic=containers-ha_clusters#mz-clusters) to protect your cluster from zonal failures.
 
 Image security compliance with Vulnerability Advisor
-:   Set up your own repo in our secured Docker private image registry where images are stored and shared by all users in the organization.
+:   Set up your own repo in a secured Docker private image registry where images are stored and shared by all users in the organization.
 :   Benefit from automatic scanning of images in your private {{site.data.keyword.cloud_notm}} registry.
 :   Review recommendations specific to the operating system used in the image to fix potential vulnerabilities.
 

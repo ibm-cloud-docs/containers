@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-02-19"
+lastupdated: "2024-04-12"
 
 
 keywords: portworx, kubernetes
@@ -156,7 +156,7 @@ Before you begin, [log in to the Portworx Backup console](#px-backup-ui). Note t
     5. In the **Endpoint** field, enter the endpoint for your bucket that you retrieved earlier.
     6. Click **Add+** to create the backup location.
 
-## Adding an {{site.data.keyword.containerlong_notm}} cluster to your Portworx Backup service
+## Adding {{site.data.keyword.containerlong_notm}} clusters to your Portworx Backup service
 {: #px-backup-cluster}
 
 Add the {{site.data.keyword.containerlong_notm}} cluster that you want to back up with PX-Backup. You can select any cluster in your account, including the cluster where you installed PX-Backup.
@@ -168,7 +168,7 @@ Before you begin:
 
 The `kubeconfig` in clusters with Portworx Backup expires after 24 hours. To prevent your cluster's `kubeconfig` file from expiring, set the context with your cluster using the `--admin` option.
 `
-ibmcloud ks cluster config --cluster <cluster_name> --admin
+ibmcloud ks cluster config --cluster <cluster_name> --admin --endpoint private
 `
 {: tip}
 
