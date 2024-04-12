@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-09"
+lastupdated: "2024-04-12"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -3458,7 +3458,7 @@ Container service CLI
 
 
 Kubernetes Ingress image
-:   Versions 1.1.1_1996_iks, 1.0.3_1995_iks, and 0.49.3_1994_iks of the [Kubernetes Ingress image](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) are released.
+:   Versions 1.1.1_1996_iks, 1.0.3_1995_iks, and 0.49.3_1994_iks of the [Kubernetes Ingress image](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) are released.
 
 
 
@@ -3616,7 +3616,7 @@ ALB OAuth Proxy add-on
 
 
 Kubernetes Ingress image
-:   Versions 1.1.1_1949_iks, 1.0.3_1933_iks, and 0.49.3_1941_iks of the [Kubernetes Ingress image](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) are released.
+:   Versions 1.1.1_1949_iks, 1.0.3_1933_iks, and 0.49.3_1941_iks of the [Kubernetes Ingress image](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) are released.
   
 Kubernetes Ingress annotations
 :   Clusters created on or after 31 January 2022 by default no longer support server-snippet annotations in Ingress resources for the managed Kubernetes Ingress Controller (ALB). All new clusters are deployed with the `allow-server-snippets` configuration set to `false`, which prevents the ALB from correctly processing Ingress resources with the offending annotations. You must edit the ConfigMap manually to change this setting in order for the add-on to work.
@@ -3813,7 +3813,7 @@ ALB OAuth Proxy add-on
 :   Versions 1.0.0_756 and 2.0.0_755 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
 
 Kubernetes Ingress image
-:   Versions `1.0.3_1730_iks` and `0.49.3_1830_iks` of the [Kubernetes Ingress image](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) are released.
+:   Versions `1.0.3_1730_iks` and `0.49.3_1830_iks` of the [Kubernetes Ingress image](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) are released.
 
 
 
@@ -4081,7 +4081,7 @@ Worker node fix pack update
 {: release-note}
 
 Ingress ALB change log
-:   Updated the [change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for versions `0.48.1_1613_iks`, `0.47.0_1614_iks`, and `0.43.0_1612_iks`.
+:   Updated the [change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for versions `0.48.1_1613_iks`, `0.47.0_1614_iks`, and `0.43.0_1612_iks`.
 
 
 
@@ -4156,7 +4156,7 @@ Registry token update
 :   Registry tokens are no longer accepted for authentication in {{site.data.keyword.registrylong_notm}}. Update your clusters to use {{site.data.keyword.cloud_notm}} IAM authentication. For more information, see [Accessing {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-registry_access). For more information about Registry token deprecation, see [IBM Cloud Container Registry Deprecates Registry Tokens for Authentication](https://www.ibm.com/blog/announcement/ibm-cloud-container-registry-deprecates-registry-tokens-for-authentication/){: external}.
 
 Ingress change logs
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for versions `0.48.1_1541_iks`, `0.47.0_1540_iks`, and `0.43.0_1539_iks`. Version `0.45.0_1482_iks` is removed.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for versions `0.48.1_1541_iks`, `0.47.0_1540_iks`, and `0.43.0_1539_iks`. Version `0.45.0_1482_iks` is removed.
 
 
   
@@ -4188,7 +4188,7 @@ Istio add-on change log
 {: release-note}
 
 Ingress change logs
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for versions `0.48.1_1465_iks`, `0.47.0_1480_iks`, and `0.45.0_1482_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for versions `0.48.1_1465_iks`, `0.47.0_1480_iks`, and `0.45.0_1482_iks`.
 
 
 
@@ -4209,7 +4209,7 @@ CLI change log
 {: release-note}
 
 Ingress change logs
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for versions `0.47.0_1434_iks` and `0.45.0_1435_iks`. Version `0.35.0` is now unsupported. 
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for versions `0.47.0_1434_iks` and `0.45.0_1435_iks`. Version `0.35.0` is now unsupported. 
 
 Worker node versions
 :   Worker node fix pack update change log documentation is available for version [1.21.3_1526](/docs/containers?topic=containers-changelog_121#1213_1526), [1.20.9_1548](/docs/containers?topic=containers-changelog_120#1209_1548), [1.19.13_1555](/docs/containers?topic=containers-changelog_119#11913_1555), and [1.18.20_1560](/docs/containers?topic=containers-118_changelog#11820_1560).
@@ -4268,7 +4268,7 @@ Snapshots
 {: release-note}
 
 Ingress change logs
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for versions `0.47.0_1376_iks`, `0.45.0_1375_iks`, and `0.35.0_1374_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for versions `0.47.0_1376_iks`, `0.45.0_1375_iks`, and `0.35.0_1374_iks`.
 
 Worker node versions
 :   Worker node fix pack update change log documentation is available for version [1.21.2_1523](/docs/containers?topic=containers-changelog_121#1212_1523), [1.20.8_1545](/docs/containers?topic=containers-changelog_120#1208_1545), [1.19.12_1552](/docs/containers?topic=containers-changelog_119#11912_1552), [1.18.20_1557](/docs/containers?topic=containers-118_changelog#11820_1557), and [1.17.17_1567](/docs/containers?topic=containers-117_changelog#11717_1567_worker).
@@ -4330,7 +4330,7 @@ Worker node versions
 {: release-note}
 
 Ingress change logs
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the release of version 0.47.0 of the Kubernetes Ingress image.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the release of version 0.47.0 of the Kubernetes Ingress image.
 
 New! The `addon options` command is now available
 :   For more information, see [`addon options`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_options).
@@ -4360,7 +4360,7 @@ New! Private VPC NLB
 {: release-note}
 
 Ingress change logs
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for versions 0.45.0, 0.35.0, and 0.34.1 of the Kubernetes Ingress image.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for versions 0.45.0, 0.35.0, and 0.34.1 of the Kubernetes Ingress image.
 
 
 
@@ -4553,7 +4553,7 @@ Worker node versions
 {: release-note}
 
 Ingress change logs
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the release of version 0.45.0 of the Kubernetes Ingress image. Version 0.33.0 is now unsupported.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the release of version 0.45.0 of the Kubernetes Ingress image. Version 0.33.0 is now unsupported.
 
 
 
@@ -4580,7 +4580,7 @@ Cluster autoscaler add-on
 
   
 Ingress change logs
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.
 
 
 
@@ -4612,7 +4612,7 @@ Worker node versions
 
 
 Ingress change logs
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.
 
 
 
@@ -4700,7 +4700,7 @@ Istio add-on
 
 
 Ingress ALB change log
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.
 
 
 
@@ -4761,7 +4761,7 @@ Deprecated fields across events
 {: release-note}
 
 Ingress ALB change log
-:   Updated the [`nginx-ingress` build to 2458](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
+:   Updated the [`nginx-ingress` build to 2458](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 ### 12 March 2021
 {: #containers-march1221}
@@ -4913,7 +4913,7 @@ Gateway firewalls and Calico policies
 {: release-note}
 
 Ingress ALB change log
-:   Updated the [`nginx-ingress` build to 2452](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
+:   Updated the [`nginx-ingress` build to 2452](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 Gateway firewalls and Calico policies
 :   For classic clusters in Dallas, Washington D.C., and Frankfurt, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.
@@ -4997,7 +4997,7 @@ Private Kubernetes Ingress
 {: release-note}
 
 Ingress ALB change log
-:   Updated the [`nginx-ingress` build to 2424](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
+:   Updated the [`nginx-ingress` build to 2424](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 Master versions
 :   Master fix pack update change log documentation is available for version [1.19.7_1532](/docs/containers?topic=containers-changelog_119#1197_1532_master), [1.18.15_1538](/docs/containers?topic=containers-118_changelog#11815_1538_master), [1.17.17_1551](/docs/containers?topic=containers-117_changelog#11717_1551_master), and [1.16.15_1557](/docs/containers?topic=containers-116_changelog#11615_1557_master).
@@ -5089,7 +5089,7 @@ Back up and restore
 
 Ingress ALB change log
 :   Updated the latest [Kubernetes Ingress image build to `0.35.0_826_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_35_0).
-:   Updated the [`ingress-auth` build to 954](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
+:   Updated the [`ingress-auth` build to 954](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
   
 ### 16 December 2020
@@ -5114,7 +5114,7 @@ Cluster autoscaler
 
 Ingress ALB change log
 :   Updated the latest [Kubernetes Ingress image build to `0.35.0_767_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_35_0).
-:   Updated the [`nginx-ingress` build to 2410 and the `ingress-auth` build to 947](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
+:   Updated the [`nginx-ingress` build to 2410 and the `ingress-auth` build to 947](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 Master versions
 :   Master fix pack update change log documentation is available.
@@ -5224,7 +5224,7 @@ New! Portieris for image security enforcement
 {: release-note}
 
 Ingress ALB change log
-:   Updated the [`nginx-ingress` build to 653 and the `ingress-auth` build to 425](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
+:   Updated the [`nginx-ingress` build to 653 and the `ingress-auth` build to 425](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 ### 18 November 2020
 {: #containers-nov1820}
@@ -5440,7 +5440,7 @@ Default version
 :   The default version for clusters is now 1.18.
 
 Ingress ALB change log
-:   Updated the [`nginx-ingress` build to 652 and the `ingress-auth` build to 424](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
+:   Updated the [`nginx-ingress` build to 652 and the `ingress-auth` build to 424](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 ## September 2020
 {: #containers-sep20}
@@ -5475,7 +5475,7 @@ CLI change log
 {: release-note}
 
 Ingress ALB change log
-:   Updated the [`nginx-ingress` build to 651 and the `ingress-auth` build to 423](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.
+:   Updated the [`nginx-ingress` build to 651 and the `ingress-auth` build to 423](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 
 

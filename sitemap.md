@@ -4525,11 +4525,13 @@ subcollection: containers
 
 * [Updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-update)
 
-    * [Manually updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#update-alb)
-
-    * [Managing automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate)
+    * [Enabling automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate)
 
     * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-ingress-alb-manage#alb-scheduled-updates)
+
+    * [Disabling automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate)
+
+    * [Applying manual updates](/docs/containers?topic=containers-ingress-alb-manage#update-alb)
 
 * [Choosing a supported image version](/docs/containers?topic=containers-ingress-alb-manage#alb-version-choose)
 
@@ -7624,8 +7626,6 @@ subcollection: containers
     * [1.6.4_6344_iks, released 22 February 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.6.4_6344_iks)
 
 [Archive: Ingress ALB version change log](/docs/containers?topic=containers-cs_versions_ingress#cs_versions_ingress)
-
-* [Kubernetes Ingress image change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog)
 
 * [Version 1.9.4](/docs/containers?topic=containers-cs_versions_ingress#1_9_4)
 
