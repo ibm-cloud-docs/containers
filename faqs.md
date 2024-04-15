@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-12"
+lastupdated: "2024-04-15"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -38,6 +38,18 @@ Kubernetes is an open source platform for managing containerized workloads and s
 
 For more information about Kubernetes, see the [Kubernetes documentation](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational){: external}.
 
+## How do I create a {{site.data.keyword.containerlong_notm}} cluster?
+{: #faq-cluster-create}
+{: faq}
+{: support}
+
+To create a {{site.data.keyword.containerlong_notm}} cluster, first decide if you to want follow a tutorial for a basic cluster setup or design your own cluster environment.
+
+I want to follow a tutorial
+:   Begin by reviewing the [Getting started](/docs/containers?topic=containers-getting-started) doc, then [choose one of the available tutorials](/docs/containers?topic=containers-getting-started#getting-started-create).
+
+I want to design my own cluster environment
+:   Begin by reviewing the [Getting started](/docs/containers?topic=containers-getting-started)  doc, then [create your cluster environment strategy](/docs/containers?topic=containers-getting-started#getting-started-strategy).
 
 
 ## How does {{site.data.keyword.containerlong_notm}} work?

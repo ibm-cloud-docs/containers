@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-12"
+lastupdated: "2024-04-15"
 
 
 keywords: containers
@@ -38,6 +38,8 @@ subcollection: containers
 * [Review the basics](/docs/containers?topic=containers-getting-started#getting-started-basics)
 
 * [Prepare your account](/docs/containers?topic=containers-getting-started#getting-started-prepare-account)
+
+* [Create a cluster environment strategy](/docs/containers?topic=containers-getting-started#getting-started-strategy)
 
 * [Create a cluster](/docs/containers?topic=containers-getting-started#getting-started-create)
 
@@ -9511,6 +9513,8 @@ subcollection: containers
 
 * [What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
 
+* [How do I create a {{site.data.keyword.containerlong_notm}} cluster?](/docs/containers?topic=containers-faqs#faq-cluster-create)
+
 * [How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
 
 * [Why should I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#faq_benefits)
@@ -9608,23 +9612,23 @@ subcollection: containers
 * [Enable and run the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
 
 
-## Debugging guide for {{site.data.keyword.containerlong_notm}}
-{: #sitemap_debugging_guide_for_}
+## Troubleshooting apps in {{site.data.keyword.containerlong_notm}}
+{: #sitemap_troubleshooting_apps_in_}
 
 
-[Debugging guide for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-debug_clusters#debug_clusters)
+[Troubleshooting apps in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-debug_clusters#debug_clusters)
 
 * [Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-debug_clusters#troubleshooting-environments)
 
-* [Step 2: Get your cluster state and status and review the common issues](/docs/containers?topic=containers-debug_clusters#ts-2)
+* [Get your cluster state and status and review the common issues](/docs/containers?topic=containers-debug_clusters#ts-2)
 
-* [Step 3: Gather details and document the problem](/docs/containers?topic=containers-debug_clusters#ts-3)
+* [Gather details and document the problem](/docs/containers?topic=containers-debug_clusters#ts-3)
 
-* [Step 4: Running tests to rule in or rule out each component](/docs/containers?topic=containers-debug_clusters#ts-4)
+* [Running tests to rule in or rule out each component](/docs/containers?topic=containers-debug_clusters#ts-4)
 
-* [Step 5: Gathering more data](/docs/containers?topic=containers-debug_clusters#ts-5)
+* [Gathering more data](/docs/containers?topic=containers-debug_clusters#ts-5)
 
-* [Step 6: Reach out in Slack or review user forums for similar issues](/docs/containers?topic=containers-debug_clusters#ts-6)
+* [Reach out in Slack or review user forums for similar issues](/docs/containers?topic=containers-debug_clusters#ts-6)
 
 * [Next steps](/docs/containers?topic=containers-debug_clusters#advanced-ts-next)
 
