@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-11"
+lastupdated: "2024-04-12"
 
 
 keywords: containers
@@ -2738,9 +2738,9 @@ subcollection: containers
 
 * [Determine worker node capacity for the resources](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
 
-* [Choose how many namespaces to create](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
+* [Choose how many namespaces to create within the cluster](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
 
-* [Establish resource requests and limits](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
+* [Establish resource requests and limits for the namespaces](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
 
@@ -4525,11 +4525,13 @@ subcollection: containers
 
 * [Updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-update)
 
-    * [Manually updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#update-alb)
-
-    * [Managing automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate)
+    * [Enabling automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate)
 
     * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-ingress-alb-manage#alb-scheduled-updates)
+
+    * [Disabling automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate)
+
+    * [Applying manual updates](/docs/containers?topic=containers-ingress-alb-manage#update-alb)
 
 * [Choosing a supported image version](/docs/containers?topic=containers-ingress-alb-manage#alb-version-choose)
 
@@ -5200,7 +5202,7 @@ subcollection: containers
 
 * [Adding a backup location to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-storage)
 
-* [Adding an {{site.data.keyword.containerlong_notm}} cluster to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
+* [Adding {{site.data.keyword.containerlong_notm}} clusters to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
 
 * [Installing Stork on a non-Portworx cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-stork)
 
@@ -6712,9 +6714,9 @@ subcollection: containers
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
-    * [Changelog for 1.20.4, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1204)
+    * [Change log for 1.20.4, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1204)
 
-    * [Changelog for 1.20.3, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1203)
+    * [Change log for 1.20.3, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1203)
 
     * [Change log for 1.20.2, released 07 February 2024](/docs/containers?topic=containers-istio-changelog#1202)
 
@@ -6724,9 +6726,9 @@ subcollection: containers
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
 
-    * [Changelog for 1.19.8, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1198)
+    * [Change log for 1.19.8, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1198)
 
-    * [Changelog for 1.19.7, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1197)
+    * [Change log for 1.19.7, released 06 March 2024](/docs/containers?topic=containers-istio-changelog#1197)
 
     * [Change log for 1.19.6, released 07 February 2024](/docs/containers?topic=containers-istio-changelog#1196)
 
@@ -7624,8 +7626,6 @@ subcollection: containers
     * [1.6.4_6344_iks, released 22 February 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.6.4_6344_iks)
 
 [Archive: Ingress ALB version change log](/docs/containers?topic=containers-cs_versions_ingress#cs_versions_ingress)
-
-* [Kubernetes Ingress image change log](/docs/containers?topic=containers-cs_versions_ingress#kube_ingress_changelog)
 
 * [Version 1.9.4](/docs/containers?topic=containers-cs_versions_ingress#1_9_4)
 
@@ -9614,7 +9614,7 @@ subcollection: containers
 
 [Debugging guide for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-debug_clusters#debug_clusters)
 
-* [Step 1: Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-debug_clusters#troubleshooting-environments)
+* [Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-debug_clusters#troubleshooting-environments)
 
 * [Step 2: Get your cluster state and status and review the common issues](/docs/containers?topic=containers-debug_clusters#ts-2)
 

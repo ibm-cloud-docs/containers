@@ -454,8 +454,6 @@ toc:
               - ts-kube-dashboord-oom.md
               - ts-admin-cert.md
               - ts-vpc-byok-encrypted-storage.md
-              - ts-sbd-cluster-create-quota.md
-              - ts-sbd-non-sbd-clusters.md
           - topicgroup:
               label: Worker nodes
               topics:
@@ -475,7 +473,6 @@ toc:
           - topicgroup:
               label: Apps and services
               topics:
-              - ts-app-debug.md
               - ts-app-01-debug.md
               - ts-app-02-imgpull.md
               - ts-app-container-start.md
@@ -485,8 +482,6 @@ toc:
               - ts-app-07-svc-name.md
               - ts-app-svc-key.md
               - ts-app-helm-install.md
-              - ts-sbd-app-not-working.md
-              - ts-sbd-nodeport-not-working.md
           - topicgroup:
               label: Cluster autoscaler
               topics:
@@ -511,7 +506,6 @@ toc:
               - ts-calico-log-level.md
               - ts-keepalive-sysctl.md
               - ts-slow-dns-lookup.md
-              - ts-sbd-custom-dns.md
           - topicgroup:
               label: Logging and monitoring
               topics:
