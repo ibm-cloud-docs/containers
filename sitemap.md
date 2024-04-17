@@ -9523,7 +9523,7 @@ subcollection: containers
 
 * [What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
 
-* [How do I create a {{site.data.keyword.containerlong_notm}} cluster?](/docs/containers?topic=containers-faqs#faq-cluster-create)
+* [How do I create an {{site.data.keyword.containerlong_notm}} cluster?](/docs/containers?topic=containers-faqs#faq-cluster-create)
 
 * [How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
 

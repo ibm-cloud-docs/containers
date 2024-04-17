@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2024
-lastupdated: "2024-04-16"
+lastupdated: "2024-04-17"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes cluster,  vpc cluster, classic cluster, clusters
@@ -59,7 +59,7 @@ Follow a tutorial, or set up your own custom cluster environment. Review the fol
 
 | Type | Level | Time | Description |
 | --- | --- | --- | --- | --- |
-| [Tutorial]{: tag-green} | Beginner | 60 minutes | Follow the steps in this tutorial to create your own Virtual Private Cloud (VPC), then create a {{site.data.keyword.containerlong_notm}} cluster by using the CLI. For more information, see [Create a cluster in your own Virtual Private Cloud](/docs/containers?topic=containers-vpc_ks_tutorial). |
+| [Tutorial]{: tag-green} | Beginner | 60 minutes | Follow the steps in this tutorial to create your own Virtual Private Cloud (VPC), then create an {{site.data.keyword.containerlong_notm}} cluster by using the CLI. For more information, see [Create a cluster in your own Virtual Private Cloud](/docs/containers?topic=containers-vpc_ks_tutorial). |
 | Custom deployment | Intermediate | 1-3 hours | [Create a custom cluster on Classic infrastructure](/docs/containers?topic=containers-cluster-create-classic). |
 | Custom deployment | Intermediate | 1-3 hours | [Create a custom cluster on VPC infrastructure](/docs/containers?topic=containers-cluster-create-vpc-gen2). |
 {: caption="Options for creating a cluster" caption-side="bottom"}
