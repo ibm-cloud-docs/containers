@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-04-12"
+lastupdated: "2024-04-17"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -76,7 +76,7 @@ To set a time for automatic updates, you set the `updateStartTime` and `updateEn
 ### Disabling automatic updates
 {: #autoupdate}
 
-To receive bugfixes and security updates, keep automatic updates enabled. When automatic updates are disabled, you are responsible for updating your ALBs manually.
+To receive bug fixes and security updates, keep automatic updates enabled. When automatic updates are disabled, you are responsible for updating your ALBs manually.
 {: important}
 
 You can disable automatic updates for your ALBs by running [`ibmcloud ks ingress alb autoupdate disable -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable).
