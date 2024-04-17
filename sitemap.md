@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-15"
+lastupdated: "2024-04-17"
 
 
 keywords: containers
@@ -3794,8 +3794,6 @@ subcollection: containers
 
     * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
 
-* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-vpc-firewall#iam_allowlist_vpc)
-
 [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets#vpc-subnets)
 
 * [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
@@ -5556,6 +5554,14 @@ subcollection: containers
 
     * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-kubernetes-service-cli#cluster_master_audit_webhook)
 
+* [`ibmcloud ks cluster master console-oauth-access get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-options)
+
+* [`ibmcloud ks cluster master console-oauth-access set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-options)
+
     * [`ibmcloud ks cluster master pod-security get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-get)
 
     * [`ibmcloud ks cluster master pod-security policy disable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-disable)
@@ -5911,6 +5917,10 @@ subcollection: containers
     * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update)
 
 * [`security-group` commands](/docs/containers?topic=containers-kubernetes-service-cli#security_group)
+
+* [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-options)
 
     * [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_reset)
 
