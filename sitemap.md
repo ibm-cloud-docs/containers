@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-16"
+lastupdated: "2024-04-17"
 
 
 keywords: containers
@@ -5917,6 +5917,10 @@ subcollection: containers
     * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update)
 
 * [`security-group` commands](/docs/containers?topic=containers-kubernetes-service-cli#security_group)
+
+* [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-options)
 
     * [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_reset)
 
