@@ -5948,7 +5948,7 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
-* [Version v1.0.613](/docs/containers?topic=containers-cs_cli_changelog#cli-010601)
+* [Version v1.0.613](/docs/containers?topic=containers-cs_cli_changelog#cli-010613)
 
 * [Version v1.0.601](/docs/containers?topic=containers-cs_cli_changelog#cli-010601)
 
