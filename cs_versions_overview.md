@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-04-19"
 
 
 keywords: kubernetes, versions, update, upgrade
@@ -12,8 +12,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
 
 
 
@@ -73,23 +71,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
-
-## Checking a cluster's Kubernetes server version
-{: #cs_server_version}
-
-To check the server version of a cluster, log in to the cluster and run the following command.
-{: shortdesc}
-
-```sh
-kubectl version  --short | grep -i server
-```
-{: pre}
-
-Example output
-```sh
-Server Version: v1.29+IKS
-```
-{: screen}
 
 ## Update types
 {: #update_types}

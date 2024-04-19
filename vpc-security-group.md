@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-05"
+lastupdated: "2024-04-19"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, firewall, acl, acls, access control list, rules, security group
@@ -46,7 +46,7 @@ When the first VPC cluster at {{site.data.keyword.containerlong_notm}} 1.28+ is 
 
 The following VPE gateways are created automatically when you create a VPC cluster. 
 
-| Gateway | Description |
+| VPE Gateway | Description |
 | --- | --- |
 | {{site.data.keyword.registrylong_notm}} | [Shared]{: tag-cool-gray} Pull container images from {{site.data.keyword.registrylong_notm}} to apps running in your cluster. 
 | {{site.data.keyword.cos_full_notm}} s3 gateway | [Shared]{: tag-cool-gray} Access the COS APIs. |
@@ -200,7 +200,7 @@ Follow the steps to allow worker nodes to connect to the Ingress LoadBalancer.
     
 1. Create outbound security rules to each of the IP address that you retrieved earlier and port 443.
     ```sh
-    ibmcloud is security-group-rule-add <sg> outbound tcp --port-min 443 --port-max 443 --remote 150.XXX.XXX.XXX
+    ibmcloud is sg-rulec <sg> outbound tcp --port-min 443 --port-max 443 --remote 150.XXX.XXX.XXX
     ```
     {: pre}
     

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-28"
+lastupdated: "2024-04-19"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, clusters, worker nodes, worker pools, classic, create
@@ -51,6 +51,7 @@ Kubernetes version
 Worker pool
 :    The cluster worker pool defines the number and type of worker nodes that run your workload. You can change your worker pool details at anytime.
 :    - **Flavor**: The flavor defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the zone in which you deploy the cluster. For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). 
+:    - **Operating system** and **Architecture**:  For a list of the available operating systems and architectures by cluster version, see the [available versions](/docs/containers?topic=containers-cs_versions#cs_versions_available).
 :    - **Worker nodes per zone**: For high availability, at least 3 worker nodes per zone are recommended. 
 :    - **Encrypt local disk**: By default, [worker nodes feature AES 256-bit disk encryption](/docs/containers?topic=containers-security#workernodes). You can choose to turn off disk encryption when you create the cluster.
 
@@ -194,10 +195,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
     The subnet that you choose must be within one of the following ranges:
         - `172.17.0.0 - 172.17.255.255`
         - `172.21.0.0 - 172.31.255.255`
-
         - `192.168.0.0 - 192.168.255.255`
-
-
         - `198.18.0.0 - 198.19.255.255`
         
 
@@ -206,10 +204,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
     :   The subnet must be specified in CIDR format with a size of at least `/24`, which allows a maximum of 255 services in the cluster, or larger. The subnet that you choose must be within one of the following ranges:
         - `172.17.0.0 - 172.17.255.255`
         - `172.21.0.0 - 172.31.255.255`
-
         - `192.168.0.0 - 192.168.255.255`
-
-
         - `198.18.0.0 - 198.19.255.255`
         
     :   Note that the pod and service subnets can't overlap. The pod subnet is in the 172.30.0.0/16 range by default.
@@ -268,7 +263,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 {: #cluster_create_classic}
 {: cli}
 
-Classic cluster, shared virtual machine
+Example command to create a Classic cluster on shared virtual machine.
 
 ```sh
 ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3
@@ -276,21 +271,22 @@ ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4
 {: pre}
 
 
-Classic cluster, bare metal
+Example command to create a Classic cluster on bare metal.
 
 ```sh
 ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
 ```
 {: pre}
 
-Classic cluster that uses private VLANs and the private cloud service endpoint only:
+Example command to create a Classic cluster that uses private VLANs and the private cloud service endpoint only.
+
 ```sh
 ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --private-vlan <private_VLAN_ID> --private-only --private-service-endpoint
 ```
 {: pre}
 
 
-For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-mz), [add zones](/docs/containers?topic=containers-add-workers-classic):
+For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-mz), [add zones](/docs/containers?topic=containers-add-workers-classic). Example command to add a zone to a Classic cluster.
 ```sh
 ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
 ```

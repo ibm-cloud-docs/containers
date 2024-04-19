@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-04-19"
 
 
 keywords: kubernetes
@@ -315,6 +315,9 @@ In the following steps, you learn how to deploy workloads that require the GPU. 
 You can also try mathematically intensive workloads such as the [TensorFlow](https://www.tensorflow.org/){: external} machine learning framework with [this Kubernetes demo](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow){: external}.
 {: tip}
 
+### Prerequisites
+{: #gpu-prereqs}
+
 Before you begin
 - Create a [cluster](/docs/containers?topic=containers-clusters) or worker pool that uses a GPU flavor. Keep in mind that setting up a bare metal machine can take more than one business day to complete. For a list of available flavors, see the following links.
     - [Classic flavors](/docs/containers?topic=containers-classic-flavors)
@@ -322,7 +325,10 @@ Before you begin
 
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the cluster.
 
-To run a workload on a GPU machine,
+
+
+### Deploying a workload
+{: #gpu-workload}
 
 1. Create a YAML file. In this example, a `Job` YAML manages batch-like workloads by making a short-lived pod that runs until the command completes and successfully terminates.
 
