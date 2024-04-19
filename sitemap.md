@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-18"
+lastupdated: "2024-04-19"
 
 
 keywords: containers
@@ -3133,6 +3133,18 @@ subcollection: containers
 {: #sitemap_managing_the_cluster_and_worker_node_lifecycle}
 
 
+[Checking your cluster version, operating system, and Kubernetes server version](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
+
+* [Checking your cluster master version, worker node version, and worker node operating system in the console](/docs/containers?topic=containers-flavor-os-check&interface=ui#cluster-version-ui)
+
+* [Checking your cluster master version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#cluster-version-cli)
+
+* [Checking your worker node version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-version-cli)
+
+* [Checking a cluster's Kubernetes server version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#kube-version-check)
+
+* [Checking your worker node operating system in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-os-check)
+
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
 
 * [Updating the master](/docs/containers?topic=containers-update#master)
@@ -3176,8 +3188,6 @@ subcollection: containers
 * [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
 
 * [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
-
-[Checking your worker node operating system](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
 
 [Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
 
@@ -4196,6 +4206,10 @@ subcollection: containers
 * [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity)
 
 * [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
+
+    * [Prerequisites](/docs/containers?topic=containers-deploy_app#gpu-prereqs)
+
+    * [Deploying a workload](/docs/containers?topic=containers-deploy_app#gpu-workload)
 
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 
@@ -6138,8 +6152,6 @@ subcollection: containers
 [Kubernetes version information](/docs/containers?topic=containers-cs_versions#cs_versions)
 
 * [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
-
-* [Checking a cluster's Kubernetes server version](/docs/containers?topic=containers-cs_versions#cs_server_version)
 
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
 

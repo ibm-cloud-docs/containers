@@ -85,9 +85,9 @@ toc:
       - topicgroup:
           label: Managing the cluster and worker node lifecycle
           topics:
+          - worker-os-check.md
           - update.md
           - dedicated-hosts.md
-          - worker-os-check.md
           - host-maintenance.md
           - access-apikey.md
           - ca-rotate.md

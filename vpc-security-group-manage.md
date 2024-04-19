@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-04-04"
+lastupdated: "2024-04-19"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, firewall, acl, acls, access control list, rules, security group
@@ -274,17 +274,17 @@ Use the {{site.data.keyword.cloud_notm}} CLI to add inbound and outbound rules t
     ```
     {: pre}
 
-    * To create inbound traffic rules, use the [`ibmcloud is security-group-rule-add <sg> inbound` command](/docs/vpc?topic=vpc-vpc-reference#security-group-rule-add).
+    * To create inbound traffic rules, use the [`ibmcloud is sg-rulec <sg> inbound` command](/docs/vpc?topic=vpc-vpc-reference#sg-rulec).
         ```sh
-        ibmcloud is security-group-rule-add $sg inbound <protocol> [--remote <remote_address> | <CIDR_block> | <security_group_ID>] [--icmp-type <icmp_type> [--icmp-code <icmp_code>]] [--port-min <port_min>] [--port-max <port_max>]
+        ibmcloud is sg-rulec $sg inbound <protocol> [--remote <remote_address> | <CIDR_block> | <security_group_ID>] [--icmp-type <icmp_type> [--icmp-code <icmp_code>]] [--port-min <port_min>] [--port-max <port_max>]
         ```
         {: pre}
         
         
-    * To create outbound traffic rules, use the [`ibmcloud is security-group-rule-add <sg> outbound` command](/docs/vpc?topic=vpc-vpc-reference#security-group-rule-add).
+    * To create outbound traffic rules, use the [`ibmcloud is sg-rulec <sg> outbound` command](/docs/vpc?topic=vpc-vpc-reference#sg-rulec).
 
         ```sh
-        ibmcloud is security-group-rule-add $sg outbound <protocol> [--remote <remote_address> | <CIDR_block> | <security_group_ID>] [--icmp-type <icmp_type> [--icmp-code <icmp_code>]] [--port-min <port_min>] [--port-max <port_max>]
+        ibmcloud is sg-rulec $sg outbound <protocol> [--remote <remote_address> | <CIDR_block> | <security_group_ID>] [--icmp-type <icmp_type> [--icmp-code <icmp_code>]] [--port-min <port_min>] [--port-max <port_max>]
         ```
         {: pre}
         
@@ -346,7 +346,7 @@ Follow the steps to allow worker nodes to connect to the Ingress LoadBalancer.
     
 1. Create outbound security rules to each of the IP address that you retrieved earlier and port 443.
     ```sh
-    ibmcloud is security-group-rule-add <sg> outbound tcp --port-min 443 --port-max 443 --remote 150.XXX.XXX.XXX
+    ibmcloud is sg-rulec <sg> outbound tcp --port-min 443 --port-max 443 --remote 150.XXX.XXX.XXX
     ```
     {: pre}
     

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-04-04"
+lastupdated: "2024-04-19"
 
 
 keywords: kubernetes, clusters
@@ -320,17 +320,24 @@ Your authorized users can now continue with [Accessing clusters through the priv
 1. Set up your {{site.data.keyword.vpc_short}} VPN and connect to your VPC through VPN.
 
     1. Configure a [client-to-site](/docs/vpc?topic=vpc-vpn-client-to-site-overview) or [site-to-site](/docs/vpc?topic=vpc-vpn-onprem-example) VPN to your VPC. For example, you might choose to set up a client-to-site connection with a VPN Client.
-    2. In case of client-to-site VPN for {{site.data.keyword.vpc_short}} service, you must specify the {{site.data.keyword.vpc_short}} Private DNS service addresses when you provision the VPN server as mentioned in the [considerations](/docs/vpc?topic=vpc-client-to-site-vpn-planning#existing-vpc-configuration-considerations), and you must create a VPN route after the VPN server is provisioned, with destination `161.26.0.0/16` and action `translate`.
-    3. In case of site-to-site VPN for {{site.data.keyword.vpc_short}} service, you must follow the [Accessing service endpoints through VPN guide](/docs/vpc?topic=vpc-build-se-connectivity-using-vpn) and configure the {{site.data.keyword.vpc_short}} Private DNS service addresses.
-    4. Verify that you are connected to the VPC through your {{site.data.keyword.vpc_short}} VPN connection.
+    1. In case of client-to-site VPN for {{site.data.keyword.vpc_short}} service, you must specify the {{site.data.keyword.vpc_short}} Private DNS service addresses when you provision the VPN server as mentioned in the [considerations](/docs/vpc?topic=vpc-client-to-site-vpn-planning#existing-vpc-configuration-considerations), and you must create a VPN route after the VPN server is provisioned, with destination `161.26.0.0/16` and action `translate`.
+    1. In case of site-to-site VPN for {{site.data.keyword.vpc_short}} service, follow the [Accessing service endpoints through VPN guide](/docs/vpc?topic=vpc-build-se-connectivity-using-vpn) and configure the {{site.data.keyword.vpc_short}} Private DNS service addresses.
+    1. Verify that you are connected to the VPC through your {{site.data.keyword.vpc_short}} VPN connection.
 
-2. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
+1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
     ```sh
     ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint vpe
     ```
     {: pre}
 
-3. Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
+1. **1.30 and later** Add a security group rule to the `kube-vpegw-<clusterID>` for your VPN. The remote resource in this example comes from the VPN’s client IP CIDR. You can find your VPE port by running `ibmcloud ks cluster get -c CLUSTER`.
+
+    ```sh
+    ibmcloud is sg-rulec kube-vpegw-<clusterID> inbound tcp --port-min 30829  --port-max 30829 --remote 192.168.192.0/22
+    ```
+    {: pre}
+
+1. Verify that the Kubernetes context is set to your cluster.
     ```sh
     kubectl config current-context
     ```
