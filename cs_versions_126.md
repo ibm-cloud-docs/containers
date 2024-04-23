@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-02-16"
+lastupdated: "2024-04-23"
 
 
 keywords: kubernetes, containers, 126, version 126, 126 update actions
@@ -49,7 +49,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 | Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
 |------|------|----------|----------|
-| 1.26 | Yes | 01 February 2023 | 24 April 2024`†` |
+| 1.26 | Yes | {{site.data.keyword.kubernetes_126_release_date}} | {{site.data.keyword.kubernetes_126_unsupported_date}} `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.26" caption-side="bottom"}
 
 ## Preparing to update
