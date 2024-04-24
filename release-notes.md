@@ -35,8 +35,35 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: release-note}
 
 
+
+
+
+
+{{site.data.keyword.containerlong_notm}} master and worker node fix packs.
+:   Master fix pack are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [1.29](/docs/containers?topic=containers-changelog_129)
+:   [1.28](/docs/containers?topic=containers-changelog_128)
+:   [1.27](/docs/containers?topic=containers-changelog_127)
+:   [1.26](/docs/containers?topic=containers-changelog_126)
+
+
+
+
+
+
+
+
 Istio add-on versions `1.21.1`, `1.20.5`, and `1.19.9` are available.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
+{{site.data.keyword.cos_full_notm}} plug-in version `2.2.25`.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
+{{site.data.keyword.containerlong_notm}} CLI version `1.0.617` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 
 
 ### 18 April 2024

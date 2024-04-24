@@ -242,7 +242,13 @@ subcollection: containers
 
     * [24 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr2424)
 
+        * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
+
         * Istio add-on versions `1.21.1`, `1.20.5`, and `1.19.9` are available.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.25`.
+
+        * {{site.data.keyword.containerlong_notm}} CLI version `1.0.617` is available.
 
     * [18 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr1824)
 
@@ -2780,7 +2786,7 @@ subcollection: containers
 
     * [What hardware options are available to me?](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
 
-    * [What flavors are available to me?](/docs/containers?topic=containers-planning_worker_nodes#available-flavors)
+    * [Which operating systems are available?](/docs/containers?topic=containers-planning_worker_nodes#worker-os-options)
 
     * [Can I combine different flavors in a cluster?](/docs/containers?topic=containers-planning_worker_nodes#combine-flavors)
 
@@ -3756,9 +3762,7 @@ subcollection: containers
 
 * [Adding security groups during cluster creation](/docs/containers?topic=containers-vpc-security-group-manage#vpc-sg-cluster)
 
-    * [If you only want the default VPC and cluster security groups and no additional security groups](/docs/containers?topic=containers-vpc-security-group-manage#default-sgs-only)
-
-    * [If you only want the cluster security group and not the default VPC security group](/docs/containers?topic=containers-vpc-security-group-manage#cluster-sg-only)
+    * [If you only want the default security groups](/docs/containers?topic=containers-vpc-security-group-manage#default-sgs-only)
 
     * [If you want the cluster security group and your own additional security groups](/docs/containers?topic=containers-vpc-security-group-manage#cluster-customer-sgs)
 
@@ -3768,7 +3772,7 @@ subcollection: containers
 
     * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#no-worker-sgs)
 
-    * [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
+    * [If you want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
 
 * [Viewing security groups](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#vpc-sg-cli)
 
@@ -5904,7 +5908,17 @@ subcollection: containers
 
     * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get)
 
-* [`vpcs` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vpcs)
+* [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-options)
+
+* [`ibmcloud ks vpc outbound-traffic-protection disable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-options)
+
+* [`ibmcloud ks vpc outbound-traffic-protection enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-options)
 
 * [`flavor` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types)
 
@@ -5953,6 +5967,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.617](/docs/containers?topic=containers-cs_cli_changelog#cli-010617)
 
 * [Version v1.0.613](/docs/containers?topic=containers-cs_cli_changelog#cli-010613)
 
@@ -7437,6 +7453,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.25, released 24 April 2024](/docs/containers?topic=containers-cos_plugin_changelog#02225_object_plugin)
 
 * [Change log for version 2.2.24, released 22 February 2024](/docs/containers?topic=containers-cos_plugin_changelog#02224_object_plugin)
 

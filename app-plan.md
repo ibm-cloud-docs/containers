@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-04-24"
 
 
-keywords: kubernetes, deploy
+keywords: kubernetes, deploy, app, containers
 
 subcollection: containers
 
@@ -21,7 +21,7 @@ subcollection: containers
 # Planning app deployments
 {: #plan_deploy}
 
-Before you deploy an app to an {{site.data.keyword.containerlong}} cluster, decide how you want to set up your app so that your app can be accessed properly and be integrated with other services in {{site.data.keyword.cloud_notm}}.
+Before you deploy an app to your {{site.data.keyword.containerlong_notm}} cluster, decide how you want to set up your app so that your app can be accessed properly and be integrated with other services in {{site.data.keyword.cloud_notm}}.
 {: shortdesc}
 
 ## Moving workloads to {{site.data.keyword.containerlong_notm}}
