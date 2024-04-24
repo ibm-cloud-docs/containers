@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-04-11"
+lastupdated: "2024-04-24"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -40,6 +40,29 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.29 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.29.4_1535, released 24 April 2024
+{: #1294_1535_M}
+
+The following table shows the changes that are in the master fix pack 1.29.4_1535. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.27.3 | v3.27.2 | See the [Calico release notes](https://docs.tigera.io/calico/3.27/release-notes/#v3.27.2){: external}. |
+| Cluster health image | v1.4.8 | v1.4.9 | New version contains updates and security fixes. |
+| etcd | v3.5.12 | v3.5.13 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.13){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.3-1 | v1.29.4-1 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.1 | v1.1.2 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | bd30030 | 4c5d156 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.9.4 | v2.9.5 | New version contains updates and security fixes. |
+| Kubernetes | v1.29.3 | v1.29.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.4){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2831 | 2867 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.12 | v0.13.13 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.13){: external}. |
+| Tigera Operator | v1.32.7-97-iks | v1.32.5-91-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.5){: external}. |
+{: caption="Changes since version 1.29.3_1531" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.29.3_1533, released 8 April 2024
