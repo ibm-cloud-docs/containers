@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-04-12"
+lastupdated: "2024-04-24"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -29,8 +29,51 @@ To view a list of add-ons and the supported cluster versions, run the following 
 ibmcloud ks cluster addon versions
 {: pre}
 
+
+## Version 1.21
+{: #v121}
+
+### Change log for 1.21.1, released 26 April 2024
+{: #1211}
+
+Review the changes that are included in version 1.21.1 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.20.5
+
+Current version
+:   1.21.1
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.21.0](https://istio.io/latest/news/releases/1.21.x/announcing-1.21/){:external} and [Istio 1.21.1](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.1/){: external}.
+:   `Addon-Istio` no longer deletes the `managed-istio` IOP when you disable the addon. If you choose to disable `addon-istio`, you can choose between uninstalling or unmanaging Istio. See the [Setting up Istio](/docs/containers?topic=containers-istio) documentation for more information.
+
+
 ## Version 1.20
 {: #v120}
+
+### Changelog for 1.20.5, released 24 April 2024
+{: #1205}
+
+Review the changes that are included in version 1.20.5 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.20.4
+
+Current version
+:   1.20.5
+
+Updates in this version
+:   For more information, see the [Istio security bulletin 2024-002](https://istio.io/latest/news/security/istio-security-2024-002){: external}.
+
+:   See the Istio release notes for [Istio 1.20.5](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.5/){: external}.
+
+:   Resolves the following CVEs:
+    - [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}
+    - [CVE-2024-28085](https://nvd.nist.gov/vuln/detail/CVE-2024-28085){: external}
+    - [CVE-2022-3715](https://nvd.nist.gov/vuln/detail/CVE-2022-3715){: external}
 
 ### Change log for 1.20.4, released 03 April 2024
 {: #1204}
@@ -149,6 +192,27 @@ Updates in this version
 
 ## Version 1.19
 {: #v119}
+
+### Change log for 1.19.9, released 24 April 2024
+{: #1199}
+
+Review the changes that are included in version 1.19.9 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.19.8
+
+Current version
+:   1.19.9
+
+Updates in this version
+:   This is the final version of addon-istio 1.19. Addon-istio 1.19 is unsupported on 08 May 2024.
+:   For more information, see the [Istio security bulletin 2024-002](https://istio.io/latest/news/security/istio-security-2024-002){: external}.
+:   See the Istio release notes for [Istio 1.19.9](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.9/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}
+    - [CVE-2024-28085](https://nvd.nist.gov/vuln/detail/CVE-2024-28085){: external}
+    - [CVE-2022-3715](https://nvd.nist.gov/vuln/detail/CVE-2022-3715){: external}
 
 ### Change log for 1.19.8, released 03 April 2024
 {: #1198}

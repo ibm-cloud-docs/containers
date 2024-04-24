@@ -240,6 +240,10 @@ subcollection: containers
 
 * [April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr24)
 
+    * [24 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr2424)
+
+        * Istio add-on versions `1.21.1`, `1.20.5`, and `1.19.9` are available.
+
     * [18 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr1824)
 
         * {{site.data.keyword.containerlong_notm}} CLI version `1.0.613` is available.
@@ -4264,33 +4268,21 @@ subcollection: containers
 
 [Setting up Istio](/docs/containers?topic=containers-istio#istio)
 
-* [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
+* [Setting up the Istio managed add-on](/docs/containers?topic=containers-istio#addon)
 
-    * [Installing the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#istio_install-console)
+    * [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
 
-    * [Installing the Istio add-on with the CLI](/docs/containers?topic=containers-istio&interface=cli#istio_install-cli)
+    * [Updating the Istio add-on](/docs/containers?topic=containers-istio#istio_update)
+
+    * [Customizing the Istio installation](/docs/containers?topic=containers-istio#customize)
+
+    * [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio#istio_uninstall)
+
+    * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
+
+    * [Troubleshooting the Istio add-on](/docs/containers?topic=containers-istio#istio-ts)
 
 * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl)
-
-* [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=cli#customize)
-
-* [Updating the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_update)
-
-    * [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_minor)
-
-    * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio&interface=cli#update_client_sidecar)
-
-* [Uninstalling Istio](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
-
-    * [Step 1: Managing resources before uninstallation](/docs/containers?topic=containers-istio&interface=cli#uninstall_resources)
-
-    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_addon)
-
-    * [Step 3: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
-
-    * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_other)
-
-* [Troubleshooting](/docs/containers?topic=containers-istio&interface=cli#istio-ts)
 
 [Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh#istio-mesh)
 
@@ -6750,7 +6742,13 @@ subcollection: containers
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
+* [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
+
+    * [Change log for 1.21.1, released 26 April 2024](/docs/containers?topic=containers-istio-changelog#1211)
+
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
+
+    * [Changelog for 1.20.5, released 24 April 2024](/docs/containers?topic=containers-istio-changelog#1205)
 
     * [Change log for 1.20.4, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1204)
 
@@ -6763,6 +6761,8 @@ subcollection: containers
     * [Change log for 1.20.0, released 7 December 2023](/docs/containers?topic=containers-istio-changelog#1200)
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
+
+    * [Change log for 1.19.9, released 24 April 2024](/docs/containers?topic=containers-istio-changelog#1199)
 
     * [Change log for 1.19.8, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1198)
 
