@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-19"
+lastupdated: "2024-04-24"
 
 
 keywords: containers
@@ -239,6 +239,16 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr24)
+
+    * [24 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr2424)
+
+        * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
+
+        * Istio add-on versions `1.21.1`, `1.20.5`, and `1.19.9` are available.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.25`.
+
+        * {{site.data.keyword.containerlong_notm}} CLI version `1.0.617` is available.
 
     * [18 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr1824)
 
@@ -2776,7 +2786,7 @@ subcollection: containers
 
     * [What hardware options are available to me?](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
 
-    * [What flavors are available to me?](/docs/containers?topic=containers-planning_worker_nodes#available-flavors)
+    * [Which operating systems are available?](/docs/containers?topic=containers-planning_worker_nodes#worker-os-options)
 
     * [Can I combine different flavors in a cluster?](/docs/containers?topic=containers-planning_worker_nodes#combine-flavors)
 
@@ -3752,9 +3762,7 @@ subcollection: containers
 
 * [Adding security groups during cluster creation](/docs/containers?topic=containers-vpc-security-group-manage#vpc-sg-cluster)
 
-    * [If you only want the default VPC and cluster security groups and no additional security groups](/docs/containers?topic=containers-vpc-security-group-manage#default-sgs-only)
-
-    * [If you only want the cluster security group and not the default VPC security group](/docs/containers?topic=containers-vpc-security-group-manage#cluster-sg-only)
+    * [If you only want the default security groups](/docs/containers?topic=containers-vpc-security-group-manage#default-sgs-only)
 
     * [If you want the cluster security group and your own additional security groups](/docs/containers?topic=containers-vpc-security-group-manage#cluster-customer-sgs)
 
@@ -3764,7 +3772,7 @@ subcollection: containers
 
     * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#no-worker-sgs)
 
-    * [If you do want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
+    * [If you want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
 
 * [Viewing security groups](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#vpc-sg-cli)
 
@@ -4264,33 +4272,21 @@ subcollection: containers
 
 [Setting up Istio](/docs/containers?topic=containers-istio#istio)
 
-* [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
+* [Setting up the Istio managed add-on](/docs/containers?topic=containers-istio#addon)
 
-    * [Installing the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#istio_install-console)
+    * [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
 
-    * [Installing the Istio add-on with the CLI](/docs/containers?topic=containers-istio&interface=cli#istio_install-cli)
+    * [Updating the Istio add-on](/docs/containers?topic=containers-istio#istio_update)
+
+    * [Customizing the Istio installation](/docs/containers?topic=containers-istio#customize)
+
+    * [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio#istio_uninstall)
+
+    * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
+
+    * [Troubleshooting the Istio add-on](/docs/containers?topic=containers-istio#istio-ts)
 
 * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl)
-
-* [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=cli#customize)
-
-* [Updating the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_update)
-
-    * [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_minor)
-
-    * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio&interface=cli#update_client_sidecar)
-
-* [Uninstalling Istio](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
-
-    * [Step 1: Managing resources before uninstallation](/docs/containers?topic=containers-istio&interface=cli#uninstall_resources)
-
-    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_addon)
-
-    * [Step 3: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
-
-    * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_other)
-
-* [Troubleshooting](/docs/containers?topic=containers-istio&interface=cli#istio-ts)
 
 [Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh#istio-mesh)
 
@@ -5912,7 +5908,17 @@ subcollection: containers
 
     * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get)
 
-* [`vpcs` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vpcs)
+* [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-options)
+
+* [`ibmcloud ks vpc outbound-traffic-protection disable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-options)
+
+* [`ibmcloud ks vpc outbound-traffic-protection enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-options)
 
 * [`flavor` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types)
 
@@ -5961,6 +5967,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.617](/docs/containers?topic=containers-cs_cli_changelog#cli-010617)
 
 * [Version v1.0.613](/docs/containers?topic=containers-cs_cli_changelog#cli-010613)
 
@@ -6202,6 +6210,8 @@ subcollection: containers
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
 
+    * [Change log for master fix pack 1.29.4_1535, released 24 April 2024](/docs/containers?topic=containers-changelog_129#1294_1535_M)
+
     * [Change log for worker node fix pack 1.29.3_1533, released 8 April 2024](/docs/containers?topic=containers-changelog_129#1293_1533_W)
 
     * [Change log for master fix pack 1.29.3_1531, released 27 March 2024](/docs/containers?topic=containers-changelog_129#1293_1531_M)
@@ -6288,6 +6298,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for master fix pack 1.28.9_1554, released 24 April 2024](/docs/containers?topic=containers-changelog_128#1289_1554_M)
 
     * [Change log for worker node fix pack 1.28.8_1552, released 8 April 2024](/docs/containers?topic=containers-changelog_128#1288_1552_W)
 
@@ -6393,6 +6405,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for master fix pack 1.27.13_1572, released 24 April 2024](/docs/containers?topic=containers-changelog_127#12713_1572_M)
 
     * [Change log for worker node fix pack 1.27.12_1571, released 8 April 2024](/docs/containers?topic=containers-changelog_127#12712_1571_W)
 
@@ -6524,6 +6538,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for master fix pack 1.26.15_1581, released 24 April 2024](/docs/containers?topic=containers-changelog_126#12615_1581_M)
 
     * [Change log for worker node fix pack 1.26.15_1580, released 8 April 2024](/docs/containers?topic=containers-changelog_126#12615_1580_W)
 
@@ -6742,7 +6758,13 @@ subcollection: containers
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
+* [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
+
+    * [Change log for 1.21.1, released 26 April 2024](/docs/containers?topic=containers-istio-changelog#1211)
+
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
+
+    * [Changelog for 1.20.5, released 24 April 2024](/docs/containers?topic=containers-istio-changelog#1205)
 
     * [Change log for 1.20.4, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1204)
 
@@ -6755,6 +6777,8 @@ subcollection: containers
     * [Change log for 1.20.0, released 7 December 2023](/docs/containers?topic=containers-istio-changelog#1200)
 
 * [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
+
+    * [Change log for 1.19.9, released 24 April 2024](/docs/containers?topic=containers-istio-changelog#1199)
 
     * [Change log for 1.19.8, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1198)
 
@@ -7430,6 +7454,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.25, released 24 April 2024](/docs/containers?topic=containers-cos_plugin_changelog#02225_object_plugin)
+
 * [Change log for version 2.2.24, released 22 February 2024](/docs/containers?topic=containers-cos_plugin_changelog#02224_object_plugin)
 
 * [Change log for version 2.2.23, released 29 January 2024](/docs/containers?topic=containers-cos_plugin_changelog#02223_object_plugin)
@@ -7627,9 +7653,17 @@ subcollection: containers
 
 * [Version 1.9.6](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6)
 
+    * [1.9.6_6547_iks, released 17 April 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6547_iks)
+
+    * [1.9.6_6505_iks, released 08 April 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6505_iks)
+
     * [1.9.6_6450_iks, released 18 March 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6450_iks)
 
 * [Version 1.9.4](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4)
+
+    * [1.9.4_6553_iks, released 17 April 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6553_iks)
+
+    * [1.9.4_6489_iks, released 08 April 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6489_iks)
 
     * [1.9.4_6447_iks, released 18 March 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6447_iks)
 
@@ -7638,6 +7672,10 @@ subcollection: containers
     * [1.9.4_6359_iks, released 22 February 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6359_iks)
 
 * [Version 1.8.5](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5)
+
+    * [1.8.5_6560_iks, released 17 April 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5_6560_iks)
+
+    * [1.8.5_6488_iks, released 08 April 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5_6488_iks)
 
     * [1.8.5_6449_iks, released 18 March 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5_6449_iks)
 
@@ -7648,6 +7686,10 @@ subcollection: containers
     * [1.8.4_6363_iks, released 22 February 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.4_6363_iks)
 
 * [Version 1.6.4](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.6.4)
+
+    * [1.6.4_6555_iks, released 17 April 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.6.4_6555_iks)
+
+    * [1.6.4_6487_iks, released 08 April 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.6.4_6487_iks)
 
     * [1.6.4_6448_iks, released 18 March 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.6.4_6448_iks)
 

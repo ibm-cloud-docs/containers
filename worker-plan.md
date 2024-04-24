@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-04-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, multi az, multi-az, szr, mzr
@@ -46,18 +46,28 @@ The worker node flavors and isolation levels that are available to you depend on
 
 ![Hardware options for worker nodes in a standard cluster](images/cs_clusters_hardware.png){: caption="Figure 1. Hardware options for worker nodes in a standard cluster" caption-side="bottom"}
 
-### What flavors are available to me?
-{: #available-flavors}
-
 Classic clusters
 :   Worker nodes can be created on [virtual](#vm) and [bare metal](#bm) worker nodes. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for [software-defined storage](#sds) solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes.
-
 
 VPC clusters
 :   Worker nodes can be provisioned using virtual worker nodes on standard infrastructure or dedicated hosts.
 
 {{site.data.keyword.satelliteshort}} clusters
 :   Worker nodes can be provisioned on virtual machines in cloud providers such as AWS, Azure, GCP and more. Or, worker nodes can be provisioned using your own, on-premises, infrastructure.
+
+
+### Which operating systems are available?
+{: #worker-os-options}
+
+Review the following operating systems in {{site.data.keyword.containerlong_notm}}
+
+
+
+Ubuntu 20.04
+:   For more information, see the [Ubuntu 20.04 release notes](https://wiki.ubuntu.com/FocalFossa/ReleaseNotes){: external}
+
+
+
 
 
 ### Can I combine different flavors in a cluster?

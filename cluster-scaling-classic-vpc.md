@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-18"
+lastupdated: "2024-04-24"
 
 
-keywords: kubernetes, node scaling, ca, autoscaler
+keywords: kubernetes, node scaling, ca, autoscaler, containers
 
 subcollection: containers
 
@@ -24,9 +24,6 @@ subcollection: containers
 
 With the `cluster-autoscaler` add-on, you can scale the worker pools in your {{site.data.keyword.containerlong}} classic or VPC cluster automatically to increase or decrease the number of worker nodes in the worker pool based on the sizing needs of your scheduled workloads. The `cluster-autoscaler` add-on is based on the [Kubernetes Cluster-Autoscaler project](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler){: external}. For a list of supported add-on versions by cluster version, see [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions).
 {: shortdesc}
-
-
-
 
 
 You can't enable the cluster autoscaler on worker pools that use reservations.

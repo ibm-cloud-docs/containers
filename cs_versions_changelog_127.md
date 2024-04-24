@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-04-09"
+lastupdated: "2024-04-24"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -43,6 +43,28 @@ Review the version 1.27 change log.
 
 
 
+
+
+### Change log for master fix pack 1.27.13_1572, released 24 April 2024
+{: #12713_1572_M}
+
+The following table shows the changes that are in the master fix pack 1.27.13_1572. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.4.8 | v1.4.9 | New version contains updates and security fixes. |
+| etcd | v3.5.12 | v3.5.13 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.13){: external}. |
+| GPU device plug-in and installer | 71cb7f7 | 206b5a6 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.27.12-1 | v1.27.12-10 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | 803912f | 50808cc | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | bd30030 | 4c5d156 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.8 | v2.8.9 | New version contains updates and security fixes. |
+| Kubernetes | v1.27.12 | v1.27.13 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.13){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2831 | 2867 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.12 | v0.13.13 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.13){: external}. |
+{: caption="Changes since version 1.27.12_1569" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.27.12_1571, released 8 April 2024

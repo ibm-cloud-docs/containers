@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-04-24"
 
 
 keywords: kubernetes
@@ -309,7 +309,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 ## ibmcloud ks vpcs 
 {: #icks_map_vpcs}
 
-[List all VPCs in the targeted resource group. If no resource group is targeted, then all VPCs in the account are listed.](/docs/containers?topic=containers-kubernetes-service-cli#cs_vpcs).
+[List all VPCs in the targeted resource group. If no resource group is targeted, then all VPCs in the account are listed.](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli).
 {: shortdesc}
 
 ## ibmcloud ks flavors

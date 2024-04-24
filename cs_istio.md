@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-04-02"
+lastupdated: "2024-04-24"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -21,17 +21,18 @@ subcollection: containers
 # Setting up Istio
 {: #istio}
 
+
+## Setting up the Istio managed add-on
+{: #addon}
+
 Istio on {{site.data.keyword.containerlong}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools.
 {: shortdesc}
 
-With one click, you can get all Istio core components up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on so that {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
 
-
-
-## Installing the Istio add-on
+### Installing the Istio add-on
 {: #istio_install}
 
-In Kubernetes clusters, you can install the generally available managed Istio add-on.
+Instead of the community Istio, you can install the managed Istio add-on.
 {: shortdesc}
 
 Before you begin
@@ -41,8 +42,8 @@ Before you begin
 * You can't run community Istio concurrently with the managed Istio add-on in your cluster. If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 * Classic multizone clusters: Ensure that you enable a [Virtual Routing and Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Manage Network VLAN Spanning** infrastructure permission, or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 
-### Installing the Istio add-on from the console
-{: #istio_install-console}
+#### Installing the Istio add-on from the console
+{: #istio_install_console}
 {: ui}
 
 1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the Istio add-on.
@@ -55,8 +56,8 @@ Before you begin
 
 5. On the Managed Istio card, verify that the add-on is listed.
 
-### Installing the Istio add-on with the CLI
-{: #istio_install-cli}
+#### Installing the Istio add-on with the CLI
+{: #istio_install_cli}
 {: cli}
 
 [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
@@ -102,182 +103,20 @@ Before you begin
 
 
 
-## Installing the `istioctl` CLI
-{: #istioctl}
-{: cli}
-
-Install the `istioctl` CLI client. For more information, see the [`istioctl` command reference](https://istio.io/latest/docs/reference/commands/istioctl/){: external}.
-
-1. Check the version of Istio that you installed.
-    ```sh
-    istioctl version
-    ```
-    {: pre}
-
-2. Download the version of `istioctl` that matches your cluster's Istio version.
-    ```sh
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.20.0 sh -
-    ```
-    {: pre}
-
-3. Navigate to the Istio package directory.
-    ```sh
-    cd istio-1.20.0
-    ```
-    {: pre}
-
-4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
-    ```sh
-    export PATH=$PWD/bin:$PATH
-    ```
-    {: pre}
-
-
-
-## Customizing the Istio installation
-{: #customize}
-
-You can customize a set of Istio configuration options by editing the `managed-istio-custom` ConfigMap resource. These settings include extra control over monitoring, logging, and networking in your control plane and service mesh.
-{: shortdesc}
-
-1. Describe the `managed-istio-custom` ConfigMap resource to review its contents and the in-line documentation.
-    ```sh
-    kubectl describe cm managed-istio-custom -n ibm-operators
-    ```
-    {: pre}
-
-2. Edit the `managed-istio-custom` ConfigMap resource.
-    ```sh
-    kubectl edit cm managed-istio-custom -n ibm-operators
-    ```
-    {: pre}
-
-3. In the `data` section, add the `<key>: "<value>"` pair of one or more of the following configuration options.
-
-    `istio-components-pilot-requests-cpu`
-    :   Default value: `"500m"`
-    :   Configure the CPU request in `milli` CPU for the `istiod` component pod.
-        Use caution when changing this value. Setting this value too low might prevent the control plane from working properly, and setting this value too high might prevent the `istiod` pod from being scheduled.
-        {: important}
-
-    `istio-global-logging-level`
-    :   Default value: `"default:info"`
-    :   Define the scope of logs and the level of log messages for control plane components. A scope represents a functional area within a control plane component and each scope supports specific log information levels. The `default` logging scope, which is for non-categorized log messages, is applied to all components in the control plane at the basic `info` level.
-    :   To specify log levels for individual component scopes, enter a comma-separated list of scopes and levels, such as `"<scope>:<level>,<scope>:<level>"`. For a list of the scopes for each control plane component and the information level of log messages, see the [Istio component logging documentation](https://istio.io/latest/docs/ops/diagnostic-tools/component-logging/){: external}.
-        To change the log level of the data plane, use the `istioctl proxy-config log <pod> --level <level>` command.
-        {: tip}
-      
-    `istio-global-outboundTrafficPolicy-mode`
-    :   Default value: `"ALLOW_ANY"`
-    :   By default, all outbound traffic from the service mesh is permitted. To block outbound traffic from the service mesh to any host that is not defined in the service registry or that does not have a `ServiceEntry` within the service mesh, set to `REGISTRY_ONLY`.
-    
-    `istio-egressgateway-public-1-enabled`
-    :   Default value: `"true"`
-    :   To disable the default Istio egress gateway, set to `"false"`. For example, you might [create a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead.
-
-    `istio-global-proxy-accessLogFile`
-    :   Default value: `""`
-    :   Envoy proxies print access information to their standard output. These logs are helpful when you debug ingress or egress issues. To view this access information when running `kubectl logs` commands for the Envoy containers, set to `"/dev/stdout"`.
-    
-    `istio-ingressgateway-public-1|2|3-enabled`
-    :   Default value: `"true"` in zone 1 only.
-    :   To make your apps more highly available, set to `"true"` for each zone where you want a public `istio-ingressgateway` load balancer to be created. To use [custom ingress gateways](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead of the default ingress gateway, you can set to `"false"`.
-    
-    `istio-ingressgateway-zone-1|2|3`
-    :   Default value: `"<zone>"`
-    :   The zones where your worker nodes are deployed, which are automatically populated when you install the add-on and whenever you apply an Istio patch update. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields. Note that if the zones that are listed in this setting are out of sync with your cluster zones, you can restart the auto population job by running `kubectl delete pod -n ibm-system -l addon.cleanup=istio` and `kubectl delete job -n ibm-system -l addon.cleanup=istio`.
-    
-    `istio-monitoring-telemetry`
-    :   Default value: `"true"`
-    :   By default, telemetry metrics and Prometheus support is enabled. To remove any performance issues associated with telemetry metrics and disable all monitoring, set to `"false"`.
-    
-    `istio-meshConfig-enableTracing`
-    :   Default value: `"true"`
-    :   By default, Istio generates trace spans for 1 out of every 100 requests. To disable trace spans, set to `"false"`.
-    
-    `istio-pilot-traceSampling`
-    :   Default value: `"1.0"`
-    :   By default, Istio [generates trace spans for 1 out of every 100 requests](https://istio.io/latest/docs/tasks/observability/distributed-tracing/overview/#trace-sampling){: external}, which is a sampling rate of 1%. To generate more trace spans, increase the percentage value.
-
-    `istio-components-pilot-hpa-maxReplicas`
-    :   Default value: `"5"`
-    :   By default, Istio sets the default horizontal pod autoscaler (HPA) max pods for istiod to 5. Do not increase this value unless you have a large service mesh where istiod needs increased resources to update the configurations.
-
-    For example, your ConfigMap might look like the following example.
-    ```yaml
-    apiVersion: v1
-    data:
-      istio-ingressgateway-zone-1: dal10
-      <key: value> # such as istio-egressgateway-public-1-enabled: "false"
-    kind: ConfigMap
-    metadata:
-      name: managed-istio-custom
-      namespace: ibm-operators
-    ```
-    {: screen}
-
-    Don't see an option from this table in your ConfigMap? Because your ConfigMap contains user-defined values, the ConfigMap is not updated with any options that are released over time. Instead, you can back up a copy of your ConfigMap and delete the ConfigMap from your cluster. After about 5 minutes, a default ConfigMap that contains the new options is created in your cluster. Then, you can copy your previously configured settings from your backup to this default ConfigMap, configure any new settings, and apply the changes.
-    {: tip}
-
-4. Save and close the configuration file.
-
-5. If you changed the `istio-global-logging-level` or `istio-global-proxy-accessLogFile` settings, you must restart your data plane pods to apply the changes to them.
-
-    1. Get the list of all data plane pods that are not in the `istio-system` namespace.
-    
-        ```sh
-        istioctl version --short=false | grep "data plane version" | grep -v istio-system
-        ```
-        {: pre}
-
-        Example output
-
-        ```sh
-        data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.20.0"}
-        data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.20.0"}
-        data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"1.20.0"}
-        data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"1.20.0"}
-        data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"1.20.0"}
-        data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"1.20.0"}
-        ```
-        {: screen}
-
-    2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.20.0"}`.
-        ```sh
-        kubectl delete pod <pod_name> -n <namespace>
-        ```
-        {: pre}
-
-Want to change a ConfigMap setting?
-:   If you want to change a setting that you added to the ConfigMap, you can use a patch script. For example, if you added the `istio-global-proxy-accessLogFile: "/dev/stdout"` setting and later want to change it back to `""`, you can run `kubectl patch cm managed-istio-custom -n ibm-operators --type='json' -p='[{"op": "add", "path": "/data/istio-global-proxy-accessLogFile", "value":""}]'`. 
-
-Need to debug your customization setup?
-:   Check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio changes that you make.
-{: tip}
-
-If you disable the Istio add-on, the `managed-istio-custom` ConfigMap is not removed during uninstallation. When you re-enable the Istio add-on, your customized ConfigMap is applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default ConfigMap is applied during installation.
-{: note}
-
-
-## Updating the Istio add-on
+### Updating the Istio add-on
 {: #istio_update}
 
-Update your Istio add-on to the latest version, which is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}.
+Update your Istio add-on, which is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 Do not use `istioctl` to update the version of Istio that is installed by the managed add-on. Only use the following steps to update your managed Istio add-on, which includes an update of the Istio version.
 {: important}
 
-Version 1.19 is unsupported on 08 May 2024. Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.20 that is supported by {{site.data.keyword.containerlong_notm}}.
+To update from unsupported versions of the Istio add-on, update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version that is supported by {{site.data.keyword.containerlong_notm}}.
 {: important}
 
-Version 1.18 is unsupported on 21 February 2024. Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.19 that is supported by {{site.data.keyword.containerlong_notm}}.
-{: important}
 
-Version 1.17 is unsupported as of 6 December 2023. Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.18 that is supported by {{site.data.keyword.containerlong_notm}}.
-{: important}
-
-### Updating the minor version of the Istio add-on
+#### Updating the minor version of the Istio add-on
 {: #istio_minor}
 
 {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. To update your Istio components to the next minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.9 to 1.10, you must manually update your add-on. You can only manually update Istio one version at a time.
@@ -435,7 +274,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
 
 1. [Update your `istioctl` client and sidecars](#update_client_sidecar).
 
-### Updating the `istioctl` client and sidecars
+#### Updating the `istioctl` client and sidecars
 {: #update_client_sidecar}
 
 Whenever the Istio managed add-on is updated, update your `istioctl` client and the Istio sidecars for your app.
@@ -496,59 +335,172 @@ For example, the patch version of your add-on might be updated automatically by 
     {: pre}
 
 
+### Customizing the Istio installation
+{: #customize}
 
-## Uninstalling Istio
+You can customize a set of Istio configuration options by editing the `managed-istio-custom` ConfigMap resource. These settings include extra control over monitoring, logging, and networking in your control plane and service mesh.
+{: shortdesc}
+
+1. Describe the `managed-istio-custom` ConfigMap resource to review its contents and the in-line documentation.
+    ```sh
+    kubectl describe cm managed-istio-custom -n ibm-operators
+    ```
+    {: pre}
+
+2. Edit the `managed-istio-custom` ConfigMap resource.
+    ```sh
+    kubectl edit cm managed-istio-custom -n ibm-operators
+    ```
+    {: pre}
+
+3. In the `data` section, add the `<key>: "<value>"` pair of one or more of the following configuration options.
+
+    `istio-components-pilot-requests-cpu`
+    :   Default value: `"500m"`
+    :   Configure the CPU request in `milli` CPU for the `istiod` component pod.
+        Use caution when changing this value. Setting this value too low might prevent the control plane from working properly, and setting this value too high might prevent the `istiod` pod from being scheduled.
+        {: important}
+
+    `istio-global-logging-level`
+    :   Default value: `"default:info"`
+    :   Define the scope of logs and the level of log messages for control plane components. A scope represents a functional area within a control plane component and each scope supports specific log information levels. The `default` logging scope, which is for non-categorized log messages, is applied to all components in the control plane at the basic `info` level.
+    :   To specify log levels for individual component scopes, enter a comma-separated list of scopes and levels, such as `"<scope>:<level>,<scope>:<level>"`. For a list of the scopes for each control plane component and the information level of log messages, see the [Istio component logging documentation](https://istio.io/latest/docs/ops/diagnostic-tools/component-logging/){: external}.
+        To change the log level of the data plane, use the `istioctl proxy-config log <pod> --level <level>` command.
+        {: tip}
+      
+    `istio-global-outboundTrafficPolicy-mode`
+    :   Default value: `"ALLOW_ANY"`
+    :   By default, all outbound traffic from the service mesh is permitted. To block outbound traffic from the service mesh to any host that is not defined in the service registry or that does not have a `ServiceEntry` within the service mesh, set to `REGISTRY_ONLY`.
+    
+    `istio-egressgateway-public-1-enabled`
+    :   Default value: `"true"`
+    :   To disable the default Istio egress gateway, set to `"false"`. For example, you might [create a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead.
+
+    `istio-global-proxy-accessLogFile`
+    :   Default value: `""`
+    :   Envoy proxies print access information to their standard output. These logs are helpful when you debug ingress or egress issues. To view this access information when running `kubectl logs` commands for the Envoy containers, set to `"/dev/stdout"`.
+    
+    `istio-ingressgateway-public-1|2|3-enabled`
+    :   Default value: `"true"` in zone 1 only.
+    :   To make your apps more highly available, set to `"true"` for each zone where you want a public `istio-ingressgateway` load balancer to be created. To use [custom ingress gateways](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead of the default ingress gateway, you can set to `"false"`.
+    
+    `istio-ingressgateway-zone-1|2|3`
+    :   Default value: `"<zone>"`
+    :   The zones where your worker nodes are deployed, which are automatically populated when you install the add-on and whenever you apply an Istio patch update. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields. Note that if the zones that are listed in this setting are out of sync with your cluster zones, you can restart the auto population job by running `kubectl delete pod -n ibm-system -l addon.cleanup=istio` and `kubectl delete job -n ibm-system -l addon.cleanup=istio`.
+    
+    `istio-monitoring-telemetry`
+    :   Default value: `"true"`
+    :   By default, telemetry metrics and Prometheus support is enabled. To remove any performance issues associated with telemetry metrics and disable all monitoring, set to `"false"`.
+    
+    `istio-meshConfig-enableTracing`
+    :   Default value: `"true"`
+    :   By default, Istio generates trace spans for 1 out of every 100 requests. To disable trace spans, set to `"false"`.
+    
+    `istio-pilot-traceSampling`
+    :   Default value: `"1.0"`
+    :   By default, Istio [generates trace spans for 1 out of every 100 requests](https://istio.io/latest/docs/tasks/observability/distributed-tracing/overview/#trace-sampling){: external}, which is a sampling rate of 1%. To generate more trace spans, increase the percentage value.
+
+    `istio-components-pilot-hpa-maxReplicas`
+    :   Default value: `"5"`
+    :   By default, Istio sets the default horizontal pod autoscaler (HPA) max pods for istiod to 5. Do not increase this value unless you have a large service mesh where istiod needs increased resources to update the configurations.
+
+    For example, your ConfigMap might look like the following example.
+    ```yaml
+    apiVersion: v1
+    data:
+      istio-ingressgateway-zone-1: dal10
+      <key: value> # such as istio-egressgateway-public-1-enabled: "false"
+    kind: ConfigMap
+    metadata:
+      name: managed-istio-custom
+      namespace: ibm-operators
+    ```
+    {: screen}
+
+    Don't see an option from this table in your ConfigMap? Because your ConfigMap contains user-defined values, the ConfigMap is not updated with any options that are released over time. Instead, you can back up a copy of your ConfigMap and delete the ConfigMap from your cluster. After about 5 minutes, a default ConfigMap that contains the new options is created in your cluster. Then, you can copy your previously configured settings from your backup to this default ConfigMap, configure any new settings, and apply the changes.
+    {: tip}
+
+4. Save and close the configuration file.
+
+5. If you changed the `istio-global-logging-level` or `istio-global-proxy-accessLogFile` settings, you must restart your data plane pods to apply the changes to them.
+
+    1. Get the list of all data plane pods that are not in the `istio-system` namespace.
+    
+        ```sh
+        istioctl version --short=false | grep "data plane version" | grep -v istio-system
+        ```
+        {: pre}
+
+        Example output
+
+        ```sh
+        data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.20.0"}
+        data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.20.0"}
+        data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"1.20.0"}
+        data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"1.20.0"}
+        data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"1.20.0"}
+        data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"1.20.0"}
+        ```
+        {: screen}
+
+    2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.20.0"}`.
+        ```sh
+        kubectl delete pod <pod_name> -n <namespace>
+        ```
+        {: pre}
+
+Want to change a ConfigMap setting?
+:   If you want to change a setting that you added to the ConfigMap, you can use a patch script. For example, if you added the `istio-global-proxy-accessLogFile: "/dev/stdout"` setting and later want to change it back to `""`, you can run `kubectl patch cm managed-istio-custom -n ibm-operators --type='json' -p='[{"op": "add", "path": "/data/istio-global-proxy-accessLogFile", "value":""}]'`. 
+
+Need to debug your customization setup?
+:   Check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio changes that you make.
+{: tip}
+
+If you disable the Istio add-on, the `managed-istio-custom` ConfigMap is not removed during uninstallation. When you re-enable the Istio add-on, your customized ConfigMap is applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default ConfigMap is applied during installation.
+{: note}
+
+### Uninstalling the Istio add-on
 {: #istio_uninstall}
 
-If you're finished working with Istio, you can clean up the Istio resources in your cluster by uninstalling the Istio add-ons.
+If you're finished working with Istio, you can clean up the Istio resources in your cluster and uninstall the Istio add-ons.
 {: shortdesc}
 
-### Step 1: Managing resources before uninstallation
+#### Step 1: Saving resources before uninstallation
 {: #uninstall_resources}
 
-Review the following optional steps for saving or deleting custom Istio resources before you uninstall Istio.
+Any resources that you created or modified in the `istio-system` namespace are removed. To keep these resources, save them before you uninstall the Istio add-on.
 {: shortdesc}
 
-1. Any resources that you created or modified in the `istio-system` namespace and all Kubernetes resources that were automatically generated by custom resource definitions (CRDs) are removed. If you want to keep these resources, save them before you uninstall the Istio add-on.
-    1. Save any resources, such as configuration files for any services or apps, that you created or modified in the `istio-system` namespace.
-    
-        ```sh
-        kubectl get pod <pod_name> -o yaml -n istio-system
-        ```
-        {: pre}
-
-    2. Get the CRDs in `istio-system`.
-    
-        ```sh
-        kubectl get crd -n istio-system
-        ```
-        {: pre}
-
-    3. Save the Kubernetes resources that were automatically generated by these CRDs to a YAML file on your local machine.
-
-2. The `managed-istio-custom` ConfigMap is not removed during uninstallation. If you later re-enable the Istio add-on, any [customized settings that you made to the ConfigMap](#customize) are applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap.
+1. Save the `managed-istio-custom` ConfigMap to troubleshoot a problem or to reinstall the add-on later.
 
     ```sh
-    kubectl delete cm -n ibm-operators managed-istio-custom
+    kubectl get cm -n ibm-operators managed-istio-custom -o yaml > Customizations.yaml
     ```
     {: pre}
 
-3. Delete any custom Istio operator (IOP) resources that you created, such as for a custom ingress gateway. When you run this command, the Istio operator automatically removes any resources that the IOP resource created, such as deployments or services.
+2. Save all IstioOperator CRs (IOPs).
 
+    a. List the IOP resources:
     ```sh
-    kubectl delete IstioOperator <resource_name> -n <namespace>
+    kubectl get iop -A
+    ```
+    {: pre}
+
+    b. For each IOP resource listed, save each to a file:
+    ```sh
+    kubectl get iop -n <IOP_namespace> <IOP_name> -o yaml > <IOP_name>.yaml
     ```
     {: pre}
 
 
 
-### Step 2: Uninstalling the Istio add-on
+#### Step 2: Uninstalling the Istio add-on
 {: #istio_uninstall_addon}
 
-Uninstall the add-on from the console or CLI.
+Uninstall the add-on from the console or CLI. For Istio 1.20 and earlier, any custom Istio operator (IOP) resources are automatically deleted.
 {: shortdesc}
 
-#### Uninstalling the Istio add-on from the console
+##### Uninstalling the Istio add-on from the console
 {: #istio_uninstall_ui}
 {: ui}
 
@@ -562,11 +514,11 @@ Uninstall the add-on from the console or CLI.
 
 5. On the Managed Istio card, verify that the add-on you uninstalled is no longer listed.
 
-#### Uninstalling managed Istio add-ons from the CLI
+##### Uninstalling the Istio add-ons from the CLI
 {: #istio_uninstall_cli}
 {: cli}
 
-If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras` add-ons, skip steps 1 and 2.
+If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras` add-ons, skip steps 1 and 2. 
 {: tip}
 
 1. Disable the `istio-sample-bookinfo` add-on.
@@ -593,15 +545,41 @@ If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras`
     ```
     {: pre}
 
+#### Step 3: Removing resources
+{: #istio_remove_resources}
 
-### Step 3: Remove the Istio operator
+After the resources are saved and the addon is disabled, the resources can be removed.
+{: shortdesc}
+
+1. The `managed-istio-custom` ConfigMap is not removed during uninstallation. If you later re-enable the Istio add-on, any [customized settings that you made to the ConfigMap](#customize) are applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap.
+
+    ```sh
+    kubectl delete cm -n ibm-operators managed-istio-custom
+    ```
+    {: pre}
+
+2. Delete any custom Istio operator (IOP) resources that you created, such as for a custom ingress gateway. When you run this command, the Istio operator automatically removes any resources that the IOP resource created, such as deployments or services.
+
+    ```sh
+    kubectl delete IstioOperator <resource_name> -n <namespace>
+    ```
+    {: pre}
+
+3. For Istio 1.21 and later, delete the `managed-istio` IOP.
+
+    ```sh
+    kubectl delete iop -n ibm-operators managed-istio
+    ```
+    {: pre}
+
+4. Wait 10 minutes before continuing to the next step.
+
+
+#### Step 4: Remove the Istio operator
 {: #istio_uninstall_operator}
 
 After the add-on is completely uninstalled, you can remove the Istio operator.
 {: shortdesc}
-
-#### Version 1.10 or later
-{: #istio_uninstall_operator-110}
 
 Delete the Istio operator deployment, service account, cluster role binding, and cluster role.
 ```sh
@@ -612,14 +590,6 @@ kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
 ```
 {: pre}
 
-#### Version 1.9 or earlier 
-{: #istio_uninstall_operator-19}
-
-Delete the Istio operator pod's CSV.
-```sh
-kubectl delete clusterserviceversion -n ibm-operators -l addon.name=istio --ignore-not-found=true
-```
-{: pre}
 
 ### Uninstalling other Istio installations in your cluster
 {: #istio_uninstall_other}
@@ -660,11 +630,44 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 
 
 
-## Troubleshooting
+### Troubleshooting the Istio add-on
 {: #istio-ts}
 
 To resolve some common issues that you might encounter when you use the managed Istio add-on, see [Troubleshooting managed add-ons](/docs/containers?topic=containers-debug_addons).
 {: shortdesc}
+
+
+
+## Installing the `istioctl` CLI
+{: #istioctl}
+{: cli}
+
+Install the `istioctl` CLI client on your computer. For more information, see the [`istioctl` command reference](https://istio.io/latest/docs/reference/commands/istioctl/){: external}.
+
+1. Check the version of Istio that you installed in your cluster.
+    ```sh
+    istioctl version
+    ```
+    {: pre}
+
+2. Download the version of `istioctl` that matches your cluster's Istio version to your computer.
+    ```sh
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.20.0 sh -
+    ```
+    {: pre}
+
+3. Navigate to the Istio package directory.
+    ```sh
+    cd istio-1.20.0
+    ```
+    {: pre}
+
+4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
+    ```sh
+    export PATH=$PWD/bin:$PATH
+    ```
+    {: pre}
+
 
 
 
