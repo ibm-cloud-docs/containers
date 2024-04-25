@@ -10046,6 +10046,18 @@ subcollection: containers
 {: #sitemap_cluster_network}
 
 
+[Debugging network connections between pods](/docs/containers?topic=containers-debug_pods#debug_pods)
+
+* [Check the health of your cluster components and networking pods](/docs/containers?topic=containers-debug_pods#debug_pods_health)
+
+* [Debug with test pods](/docs/containers?topic=containers-debug_pods#debug_pods_test)
+
+    * [Setting up the pods](/docs/containers?topic=containers-debug_pods#debug_pods_test_setup)
+
+    * [Running tests within the pods](/docs/containers?topic=containers-debug_pods#debug_pods_test_run)
+
+    * [Identifying issues](/docs/containers?topic=containers-debug_pods#debug_pods_test_id)
+
 [Why does DNS resolution fail when CoreDNS pods are restarted?](/docs/containers?topic=containers-coredns_lameduck#coredns_lameduck)
 
 [Why can't I establish VPN connectivity with the strongSwan Helm chart?](/docs/containers?topic=containers-cs_vpn_fails#cs_vpn_fails)
