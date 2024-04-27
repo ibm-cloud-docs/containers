@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-04-25"
+lastupdated: "2024-04-27"
 
 
 keywords: containers
@@ -4287,6 +4287,20 @@ subcollection: containers
     * [Troubleshooting the Istio add-on](/docs/containers?topic=containers-istio#istio-ts)
 
 * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl)
+
+* [Migrating from Istio add-on 1.21 to community Istio 1.21](/docs/containers?topic=containers-istio&interface=cli#migrate)
+
+    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#migrate_disable_ui)
+
+    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio&interface=cli#migrate_disable_cli)
+
+    * [Step 2: Removing the Istio operator](/docs/containers?topic=containers-istio&interface=cli#migrate_uninstall_operator)
+
+    * [Step 3: Saving resources](/docs/containers?topic=containers-istio&interface=cli#migrate_resources)
+
+    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_installer)
+
+    * [Step 5: Removing the ConfigMap](/docs/containers?topic=containers-istio&interface=cli#migrate_configmap)
 
 [Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh#istio-mesh)
 
