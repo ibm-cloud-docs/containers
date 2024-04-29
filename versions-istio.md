@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-04-24"
+lastupdated: "2024-04-29"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -26,8 +26,12 @@ View information for patch and minor version updates to the [managed Istio add-o
 
 To view a list of add-ons and the supported cluster versions, run the following command or see the [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions).
 
+```sh
 ibmcloud ks cluster addon versions
+```
 {: pre}
+
+
 
 
 ## Version 1.21
