@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-25"
+lastupdated: "2024-04-29"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -29,6 +29,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## April 2024
 {: #containers-apr24}
+
+
+
+### 29 April 2024
+{: #containers-apr2924}
+{: release-note}
+
+Ingress ConfigMap update
+:   For more information, see the [change log](https://cloud.ibm.com/docs/containers?topic=containers-ibm-k8s-controller-config-change-log).
+
+
 
 ### 24 April 2024
 {: #containers-apr2424}

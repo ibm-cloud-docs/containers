@@ -240,6 +240,10 @@ subcollection: containers
 
 * [April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr24)
 
+    * [29 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr2924)
+
+        * Ingress ConfigMap update
+
     * [24 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr2424)
 
         * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
@@ -4149,7 +4153,7 @@ subcollection: containers
 
     * [After I deploy my app, how can I monitor its health?](/docs/containers?topic=containers-plan_deploy#app_plan_logmet_monitor)
 
-[Building containers from images](/docs/containers?topic=containers-images#images)
+[Building images for your apps](/docs/containers?topic=containers-images#images)
 
 * [Deploying containers from an {{site.data.keyword.registrylong_notm}} image to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace)
 
@@ -7852,6 +7856,8 @@ subcollection: containers
     * [Version 0.32.0 (unsupported)](/docs/containers?topic=containers-cs_versions_ingress#0_32_0)
 
 [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ibm-k8s-controller-config-change-log)
+
+* [29 April 2024](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-29-apr-2024)
 
 * [3 October 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-3-oct-2022)
 

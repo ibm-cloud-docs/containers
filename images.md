@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-04-29"
 
 
-keywords: kubernetes, registry, pull secret, secrets
+keywords: kubernetes, registry, pull secret, secrets, containers
 
 subcollection: containers
 
@@ -16,9 +16,7 @@ subcollection: containers
 
 
 
-
-
-# Building containers from images
+# Building images for your apps
 {: #images}
 
 A Docker image is the basis for every container that you create with {{site.data.keyword.containerlong}}.
