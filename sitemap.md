@@ -4561,7 +4561,7 @@ subcollection: containers
 
     * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-ingress-alb-manage#alb-scheduled-updates)
 
-    * [Disabling automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate)
+    * [Disabling automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate_disable)
 
     * [Applying manual updates](/docs/containers?topic=containers-ingress-alb-manage#update-alb)
 
@@ -6792,7 +6792,7 @@ subcollection: containers
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
-    * [Changelog for 1.20.5, released 24 April 2024](/docs/containers?topic=containers-istio-changelog#1205)
+    * [Change log for 1.20.5, released 24 April 2024](/docs/containers?topic=containers-istio-changelog#1205)
 
     * [Change log for 1.20.4, released 03 April 2024](/docs/containers?topic=containers-istio-changelog#1204)
 

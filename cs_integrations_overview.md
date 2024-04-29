@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-02-08"
+lastupdated: "2024-04-29"
 
 
 keywords: kubernetes, helm
@@ -138,7 +138,6 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 
 |Service|Description|Classic|VPC|
 |----|------------|----|----|
-|{{site.data.keyword.blockchainfull_notm}} Platform v2|Deploy and manage your own {{site.data.keyword.blockchainfull_notm}} Platform on {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.blockchainfull_notm}} Platform v2, you can host {{site.data.keyword.blockchainfull_notm}} networks or create organizations that can join other {{site.data.keyword.blockchainfull_notm}} v2 networks. For more information about how to set up {{site.data.keyword.blockchainfull_notm}} in {{site.data.keyword.containerlong_notm}}, see [About {{site.data.keyword.blockchainfull_notm}} Platform](/docs/blockchain?topic=blockchain-get-started-ibp).|Yes| |
 |Cloud databases|You can choose between various {{site.data.keyword.cloud_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog?category=databases){: external}.|Yes|Yes|
 {: caption="Table 7. Database services" caption-side="bottom"}
 

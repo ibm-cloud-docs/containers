@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-04-27"
+lastupdated: "2024-04-29"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -548,7 +548,7 @@ If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras`
 #### Step 3: Removing resources
 {: #istio_remove_resources}
 
-After the resources are saved and the addon is disabled, the resources can be removed.
+After the resources are saved and the add-on is disabled, the resources can be removed.
 {: shortdesc}
 
 1. The `managed-istio-custom` ConfigMap is not removed during uninstallation. If you later re-enable the Istio add-on, any [customized settings that you made to the ConfigMap](#customize) are applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap.
