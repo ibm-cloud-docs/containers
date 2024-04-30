@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-04-17"
+lastupdated: "2024-04-29"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -74,7 +74,7 @@ To set a time for automatic updates, you set the `updateStartTime` and `updateEn
 
 
 ### Disabling automatic updates
-{: #autoupdate}
+{: #autoupdate_disable}
 
 To receive bug fixes and security updates, keep automatic updates enabled. When automatic updates are disabled, you are responsible for updating your ALBs manually.
 {: important}

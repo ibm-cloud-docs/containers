@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2022-08-02"
+lastupdated: "2024-04-29"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -562,8 +562,6 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
         {: screen}
 
     3. Save and close the file. Your changes are applied automatically.
-
-5. If you use {{site.data.keyword.blockchainfull}}, you must [re-establish connectivity between the {{site.data.keyword.blockchain}} management console and your cluster](/docs/blockchain?topic=blockchain-ibp-console-manage-console#ibp-console-refresh).
 
 
 

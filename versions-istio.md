@@ -50,14 +50,14 @@ Current version
 :   1.21.1
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.21.0](https://istio.io/latest/news/releases/1.21.x/announcing-1.21/){:external} and [Istio 1.21.1](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.1/){: external}.
+:   See the Istio release notes for [Istio 1.21.0](https://istio.io/latest/news/releases/1.21.x/announcing-1.21/){: external} and [Istio 1.21.1](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.1/){: external}.
 :   `Addon-Istio` no longer deletes the `managed-istio` IOP when you disable the addon. If you choose to disable `addon-istio`, you can choose between uninstalling or unmanaging Istio. See the [Setting up Istio](/docs/containers?topic=containers-istio) documentation for more information.
 
 
 ## Version 1.20
 {: #v120}
 
-### Changelog for 1.20.5, released 24 April 2024
+### Change log for 1.20.5, released 24 April 2024
 {: #1205}
 
 Review the changes that are included in version 1.20.5 of the managed Istio add-on.
