@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-04-29"
+lastupdated: "2024-04-30"
 
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
@@ -60,7 +60,7 @@ The following table shows the changes that are in the master fix pack 1.28.9_155
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | 803912f | 50808cc | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | bd30030 | 4c5d156 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.8 | v2.8.9 | New version contains updates and security fixes. |
-| Kubernetes | v1.28.8 | v1.28.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.9){: external}. |
+| Kubernetes | v1.28.8 | v1.28.9 | Update resolves [CVE-2024-3177](https://nvd.nist.gov/vuln/detail/CVE-2024-3177). For more information, see the [Security Bulletin](https://www.ibm.com/support/pages/node/7148966){: external} and the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.9){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2831 | 2867 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.12 | v0.13.13 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.13){: external}. |
 {: caption="Changes since version 1.28.8_1550" caption-side="bottom"}
