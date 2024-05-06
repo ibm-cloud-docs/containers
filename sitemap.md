@@ -240,6 +240,10 @@ subcollection: containers
 
 * [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
 
+    * [05 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0524)
+
+        * {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch updates.
+
     * [02 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0224)
 
         * {{site.data.keyword.containerlong_notm}} CLI version `1.0.618` is available.
@@ -7088,11 +7092,15 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-ca_changelog#0121_ca_addon)
 
+    * [Change log for patch update 1.2.1_425, released 05 May 2024](/docs/containers?topic=containers-ca_changelog#121425_ca)
+
     * [Change log for patch update 1.2.1_418, released 02 April 2024](/docs/containers?topic=containers-ca_changelog#121418_ca)
 
     * [Change log for patch update 1.2.1_395, released 28 February 2024](/docs/containers?topic=containers-ca_changelog#121395_ca)
 
 * [Version 1.2.0](/docs/containers?topic=containers-ca_changelog#0120_ca_addon)
+
+    * [Change log for patch update 1.2.0_426, released 05 May 2024](/docs/containers?topic=containers-ca_changelog#120426_ca)
 
     * [Change log for patch update 1.2.0_410, released 02 April 2024](/docs/containers?topic=containers-ca_changelog#120410_ca)
 
