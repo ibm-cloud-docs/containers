@@ -240,6 +240,10 @@ subcollection: containers
 
 * [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
 
+    * [07 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0724)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs.
+
     * [05 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0524)
 
         * {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch updates.
