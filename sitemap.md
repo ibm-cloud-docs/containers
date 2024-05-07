@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-05-06"
+lastupdated: "2024-05-07"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
+
+    * [07 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0724)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs.
 
     * [05 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0524)
 
@@ -6240,6 +6244,8 @@ subcollection: containers
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
 
+    * [Change log for worker node fix pack 1.29.4_1537, released 06 May 2024](/docs/containers?topic=containers-changelog_129#1294_1537_W)
+
     * [Change log for master fix pack 1.29.4_1535, released 24 April 2024](/docs/containers?topic=containers-changelog_129#1294_1535_M)
 
     * [Change log for worker node fix pack 1.29.4_1536, released 22 April 2024](/docs/containers?topic=containers-changelog_129#1294_1536_W)
@@ -6330,6 +6336,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.9_1556, released 06 May 2024](/docs/containers?topic=containers-changelog_128#1289_1556_W)
 
     * [Change log for master fix pack 1.28.9_1554, released 24 April 2024](/docs/containers?topic=containers-changelog_128#1289_1554_M)
 
@@ -6439,6 +6447,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.13_1574, released 06 May 2024](/docs/containers?topic=containers-changelog_127#12713_1574_W)
 
     * [Change log for master fix pack 1.27.13_1572, released 24 April 2024](/docs/containers?topic=containers-changelog_127#12713_1572_M)
 
@@ -6574,6 +6584,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
 
 * [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
+
+    * [Change log for worker node fix pack 1.26.15_1583, released 06 May 2024](/docs/containers?topic=containers-changelog_126#12615_1583_W)
 
     * [Change log for master fix pack 1.26.15_1581, released 24 April 2024](/docs/containers?topic=containers-changelog_126#12615_1581_M)
 
