@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-05-07"
+lastupdated: "2024-05-08"
 
 
 keywords: containers
@@ -239,6 +239,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
+
+    * [08 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0824)
+
+        * Istio add-on versions `1.21.2` and `1.20.6` are available.
+
+        * ALB OAuth Proxy add-on patch updates.
 
     * [07 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0724)
 
@@ -6812,9 +6818,13 @@ subcollection: containers
 
 * [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
 
+    * [Change log for 1.21.2, released 8 May 2024](/docs/containers?topic=containers-istio-changelog#1212)
+
     * [Change log for 1.21.1, released 26 April 2024](/docs/containers?topic=containers-istio-changelog#1211)
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
+
+    * [Change log for 1.20.6, released 8 May 2024](/docs/containers?topic=containers-istio-changelog#1206)
 
     * [Change log for 1.20.5, released 24 April 2024](/docs/containers?topic=containers-istio-changelog#1205)
 
@@ -7627,6 +7637,12 @@ subcollection: containers
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog#backup_restore_changelog)
 
 * [Change log for 1.0.5, released 17 December 2020](/docs/containers?topic=containers-backup_restore_changelog#0105_br_chart)
+
+[ALB OAuth Proxy add on version change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-change-log)
+
+* [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-2.0.0)
+
+    * [2.0.0_2250, released 08 May 24](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-2.0.0_2250)
 
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
 
