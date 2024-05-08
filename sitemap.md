@@ -242,6 +242,8 @@ subcollection: containers
 
     * [08 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0824)
 
+        * Istio add-on versions `1.21.2` and `1.20.6` are available.
+
         * ALB OAuth Proxy add-on patch updates.
 
     * [07 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0724)
@@ -6816,9 +6818,13 @@ subcollection: containers
 
 * [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
 
+    * [Change log for 1.21.2, released 8 May 2024](/docs/containers?topic=containers-istio-changelog#1212)
+
     * [Change log for 1.21.1, released 26 April 2024](/docs/containers?topic=containers-istio-changelog#1211)
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
+
+    * [Change log for 1.20.6, released 8 May 2024](/docs/containers?topic=containers-istio-changelog#1206)
 
     * [Change log for 1.20.5, released 24 April 2024](/docs/containers?topic=containers-istio-changelog#1205)
 

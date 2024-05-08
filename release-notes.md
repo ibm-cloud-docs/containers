@@ -34,9 +34,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+Istio add-on versions `1.21.2` and `1.20.6` are available.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
+
+
 ALB OAuth Proxy add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
-
 
 
 
