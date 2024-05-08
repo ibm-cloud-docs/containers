@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-07"
+lastupdated: "2024-05-08"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -27,6 +27,22 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## May 2024
 {: #containers-may24}
+
+### 08 May 2024
+{: #containers-may0824}
+{: release-note}
+
+
+
+ALB OAuth Proxy add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
+
+
+
+
+
+
+
 
 ### 07 May 2024
 {: #containers-may0724}
