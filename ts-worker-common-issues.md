@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-05-10"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -179,7 +179,7 @@ As the **user**, follow these steps:
 4. Contact the owner of the {{site.data.keyword.cloud_notm}} account and report that the API key owner has insufficient permissions in IBM Cloud infrastructure or might be pending to be deleted.
 
 As the **account owner**, follow these steps:
-1. Review the [required classic permissions in IBM Cloud infrastructure](/docs/containers?topic=containers-classic-roles) to perform the action that previously failed. For the VPC infrastructure provider, the API key owner must have the **Administrator** platform access role.
+1. Review the [required classic permissions in IBM Cloud infrastructure](/docs/containers?topic=containers-iam-platform-access-roles) to perform the action that previously failed. For the VPC infrastructure provider, the API key owner must have the **Administrator** platform access role.
 2. Fix the permissions of the API key owner or create a new API key by using the [`ibmcloud ks api-key reset --region <region>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_api_key_reset) command.
 3. If you or another account admin manually set IBM Cloud infrastructure credentials in your account, run [`ibmcloud ks credential unset --region <region>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_unset) to remove the credentials from your account.
 
