@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-08"
+lastupdated: "2024-05-10"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -27,6 +27,27 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## May 2024
 {: #containers-may24}
+
+
+### 10 May 2024
+{: #containers-may1024}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} add-on patch update.
+:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+{{site.data.keyword.filestorage_vpc_full_notm}} add-on patch update.
+:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+
+
+
+
+
+Istio add-on version `1.19` is no longer supported.
+:   Update the add-on in your clusters to a supported version. For more information, see the [Updating the Istio add-on](/docs/containers?topic=containers-istio&interface=ui#istio_update) and the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
 
 ### 08 May 2024
 {: #containers-may0824}

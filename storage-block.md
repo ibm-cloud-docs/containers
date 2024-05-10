@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-05-10"
 
 
 keywords: kubernetes
@@ -27,7 +27,7 @@ subcollection: containers
 Keep in mind the following requirements when you use the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in.
 {: important}
 
-{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure.  If you have a VPC cluster, see [Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-vpc-block#vpc-block-reference).
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure.  If you have a VPC cluster, see [Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-storage-block-vpc-sc-ref).
 
 
 If your cluster can't access the public network, such as a private cluster behind a firewall or a cluster with only the private cloud service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your {{site.data.keyword.blockstorageshort}} instance over the private network.

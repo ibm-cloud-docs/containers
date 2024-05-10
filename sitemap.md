@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-05-08"
+lastupdated: "2024-05-10"
 
 
 keywords: containers
@@ -239,6 +239,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
+
+    * [10 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may1024)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on patch update.
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch update.
+
+        * Istio add-on version `1.19` is no longer supported.
 
     * [08 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may0824)
 
@@ -3023,6 +3031,12 @@ subcollection: containers
 
 * [Example custom IAM roles](/docs/containers?topic=containers-iam-platform-access-roles#example-iam)
 
+* [Classic infrastructure roles](/docs/containers?topic=containers-iam-platform-access-roles#classic-roles)
+
+    * [Required classic infrastructure permissions](/docs/containers?topic=containers-iam-platform-access-roles#required-classic-rbac)
+
+    * [Suggested classic infrastructure permissions](/docs/containers?topic=containers-iam-platform-access-roles#classic-rbac-suggested)
+
 
 ## Installing the CLI
 {: #sitemap_installing_the_cli}
@@ -4930,15 +4944,7 @@ subcollection: containers
 
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 
-* [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
-
-    * [10 IOPs tier](/docs/containers?topic=containers-vpc-block#10iops-sc-vpc-block)
-
-    * [5 IOPs tier](/docs/containers?topic=containers-vpc-block#5iops-sc-vpc-block)
-
-    * [Custom](/docs/containers?topic=containers-vpc-block#custom-sc-vpc-block)
-
-    * [General purpose](/docs/containers?topic=containers-vpc-block#gen-purp-sc-vpc-block)
+* [Understanding volume request capacity](/docs/containers?topic=containers-vpc-block#vpc-block-volume-capacity)
 
 [Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
@@ -4991,6 +4997,8 @@ subcollection: containers
 [Removing {{site.data.keyword.block_storage_is_short}} from your cluster](/docs/containers?topic=containers-storage-block-vpc-remove#storage-block-vpc-remove)
 
 * [Cleaning up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-block-vpc-remove#cleaning-up-block-vpc)
+
+[{{site.data.keyword.block_storage_is_short}} storage class reference](/docs/containers?topic=containers-storage-block-vpc-sc-ref#storage-block-vpc-sc-ref)
 
 
 ## Setting up {{site.data.keyword.filestorage_short}}
@@ -5075,6 +5083,8 @@ subcollection: containers
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
 * [Quick start for {{site.data.keyword.filestorage_vpc_short}} with dynamic provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-dynamic)
+
+* [Expanding a mounted volume](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-expansion)
 
 * [Attaching existing file storage to an app](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-static)
 
@@ -6758,8 +6768,6 @@ subcollection: containers
 
 * [`image-key-synchronizer` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
 
-* [`istio` 1.19](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.19)
-
 * [`istio` 1.20](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.20)
 
 * [`istio` 1.21](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.21)
@@ -6769,6 +6777,8 @@ subcollection: containers
 * [`openshift-data-foundation` 4.13.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.13.0)
 
 * [`openshift-data-foundation` 4.14.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.14.0)
+
+* [`openshift-data-foundation` 4.15.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.15.0)
 
 * [`static-route` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#static-route-1.0.0)
 
@@ -7318,6 +7328,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
+    * [Change log for version 5.2.18_539, released 10 May 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.18_539_is_block_relnote)
+
     * [Change log for 5.2.17_535, released 08 March 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.17_535_is_block_relnote)
 
     * [Change log for version 5.2.15_501, released 08 February 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.15_501_is_block_relnote)
@@ -7331,6 +7343,8 @@ subcollection: containers
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+    * [Change log for version 5.1.23_543, released 10 May 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.23_543_is_block_relnote)
 
     * [Change log for 5.1.22_522, released 08 March 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.22_522_is_block_relnote)
 
@@ -7489,6 +7503,8 @@ subcollection: containers
 [{{site.data.keyword.filestorage_vpc_full_notm}} add-on change log](/docs/containers?topic=containers-versions-vpc-file-addon#versions-vpc-file-addon)
 
 * [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
+
+    * [Change log for 1.2.8_174, released 10 May 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.8_174_is_block_relnote)
 
     * [Change log for 1.2.7_154, released 08 March 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.7_154_is_block_relnote)
 
@@ -9485,17 +9501,6 @@ subcollection: containers
 * [Storage](/docs/containers?topic=containers-api-at-iam#ks-storage)
 
 * [Worker nodes and worker pools](/docs/containers?topic=containers-api-at-iam#ks-workers)
-
-
-## Classic infrastructure roles
-{: #sitemap_classic_infrastructure_roles}
-
-
-[Classic infrastructure roles](/docs/containers?topic=containers-classic-roles#classic-roles)
-
-* [Required classic infrastructure permissions](/docs/containers?topic=containers-classic-roles#required-classic-rbac)
-
-* [Suggested classic infrastructure permissions](/docs/containers?topic=containers-classic-roles#classic-rbac-suggested)
 
 
 ## Locations
