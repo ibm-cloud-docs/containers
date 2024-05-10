@@ -49,6 +49,9 @@ Istio add-on version `1.19` is no longer supported.
 
 
 
+
+
+
 ### 08 May 2024
 {: #containers-may0824}
 {: release-note}
