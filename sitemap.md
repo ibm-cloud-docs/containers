@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-05-08"
+lastupdated: "2024-05-10"
 
 
 keywords: containers
@@ -6758,8 +6758,6 @@ subcollection: containers
 
 * [`image-key-synchronizer` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
 
-* [`istio` 1.19](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.19)
-
 * [`istio` 1.20](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.20)
 
 * [`istio` 1.21](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.21)
@@ -6769,6 +6767,8 @@ subcollection: containers
 * [`openshift-data-foundation` 4.13.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.13.0)
 
 * [`openshift-data-foundation` 4.14.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.14.0)
+
+* [`openshift-data-foundation` 4.15.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.15.0)
 
 * [`static-route` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#static-route-1.0.0)
 
