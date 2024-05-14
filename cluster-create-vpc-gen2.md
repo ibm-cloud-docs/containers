@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-24"
+lastupdated: "2024-05-14"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, clusters, worker nodes, worker pools, vpc-gen2
@@ -162,7 +162,7 @@ Observability integrations
     :   The Kubernetes version for the cluster master node. To see available versions, run `ibmcloud ks versions`.
     
     `--workers <number>`
-    :   Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). This value is optional.
+    :   Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created.
 
     `--operating-system UBUNTU_20_64`
 :   Optional. The operating system of the worker nodes in your cluster. For a list of available operating sysems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). If no option is specified, the default operating system that corresponds to the cluster version is used.

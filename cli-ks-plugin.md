@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-05-10"
+lastupdated: "2024-05-14"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{product_name_notm}}
@@ -22,7 +22,7 @@ subcollection: containers
 Refer to these commands to create and manage **both community Kubernetes or {{site.data.keyword.redhat_openshift_notm}} clusters** in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-* **Community Kubernetes**: [Install the Kubernetes CLI plug-in](/docs/containers?topic=containers-cli-install).
+* **Kubernetes**: [Install the Kubernetes CLI plug-in](/docs/containers?topic=containers-cli-install).
 * **OpenShift**: [Install the {{site.data.keyword.redhat_openshift_notm}} CLI plug-in](/docs/containers?topic=containers-cli-install).
 
 In the command line, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and options.
@@ -878,8 +878,8 @@ Minimum required permissions
      After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 
-`--workers WORKER`
-:    Optional: Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
+`--workers WORKERS`
+:    **Optional**: Specify the number of worker nodes to include in the cluster. The default value is 1.
      If you create a cluster with only one worker node per zone, you might experience issues with Ingress. For high availability, create a cluster with at least two workers per zone. Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
      {: important}
 
@@ -1000,15 +1000,13 @@ Minimum required permissions
 
 
 `--preview PREVIEW`
-:    Optional. Specify one or more cluster level preview features, such as `fips`.
+:    Optional: Specify one or more cluster level preview features, such as `fips`.
 
 `--dedicated-host-pool POOL`
-:    Optional. The ID of the dedicated host pool where you want to run your workers. 
+:    Optional: The ID of the dedicated host pool where you want to run your workers. 
 
 `--workers NUMBER_WORKERS_PER_ZONE`
-:    Optional: Specify the number of worker nodes to include in the cluster. If you don't specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
-      Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
-      {: important}
+:    Optional: Specify the number of worker nodes to include in the cluster. The default value is 1.
 
 `--disable-outbound-traffic-protection`
 :    Include this option to allow public outbound access from the cluster workers. By default, public outbound access is blocked in OpenShift versions 4.15 and later and Kubernetes versions 1.30 and later.
@@ -3382,7 +3380,7 @@ Minimum required permissions
 :    Choose a machine type, or flavor. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types).
 
 `--size-per-zone WORKERS_PER_ZONE`
-:    The number of workers to create in each zone. This value is required, and must be 2 or greater. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
+:    The number of workers to create in each zone.
 
 `--hardware ISOLATION`
 :    Required: The level of hardware isolation for your worker node. Use `dedicated` if you want to have available physical resources that are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. For bare metal flavors, specify `dedicated`.
@@ -3441,7 +3439,7 @@ Minimum required permissions
 :    Required: Specify the name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-gen2`.
 
 `--size-per-zone NUMBER_WORKERS_PER_ZONE`
-:    Specify the number of worker nodes to create per zone in this worker pool. No worker nodes are created until you [add zones](#cli_zone-add-vpc-gen2) to the worker pool. This value is required, and must be 2 or greater. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
+:    Specify the number of worker nodes to create per zone in this worker pool. No worker nodes are created until you [add zones](#cli_zone-add-vpc-gen2) to the worker pool.
 
 `--operating-system UBUNTU_20_64`
 :   Optional. The operating system of the worker nodes in your cluster. For a list of available operating sysems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). If no option is specified, the default operating system that corresponds to the cluster version is used.
@@ -3717,7 +3715,7 @@ Minimum required permissions
 :    Required: The name of the worker node pool that you want to update.
 
 `--size-per-zone WORKERS_PER_ZONE`
-:    The number of workers that you want to have in each zone. This value is required, and must be 1 or greater. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
+:    The number of workers that you want to have in each zone.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
