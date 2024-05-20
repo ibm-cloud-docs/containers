@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-02-01"
+lastupdated: "2024-05-20"
 
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
@@ -243,7 +243,7 @@ The following table shows the changes that are in the master fix pack 1.25.13_15
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.25.1-amd64 | v3.25.2-amd64 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/#v3.25.2){: external}. |
+| Calico | v3.25.1-amd64 | v3.25.2-amd64 | See the [Calico release notes](https://archive-os-3-25.netlify.app/calico/3.25/release-notes/){: external}. |
 | Cluster health image | v1.3.24 | v1.4.2 | Updated `Go` to version `1.20.8` and updated dependencies. Updated to new base image. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.5 | v2.4.10 | Updated `Go dependencies`. Updated to newer UBI base image. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.25.12-4 | v1.25.13-3 | Updated to support the `Kubernetes 1.25.13` release. Updated `Go` to version `1.20.7` and updated `Go dependencies`. |
@@ -384,7 +384,7 @@ The following table shows the changes that are in the master fix pack 1.25.11_15
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.24.5 | v3.25.1 | See the [Calico release notes](https://docs.tigera.io/calico/3.25/release-notes/#v3.25.1){: external}. |
+| Calico | v3.24.5 | v3.25.1 | See the [Calico release notes](https://archive-os-3-25.netlify.app/calico/3.25/release-notes/){: external}. |
 | Cluster health image | v1.3.20 | v1.3.21 | Updated `Go` dependencies and to `Go` version `1.19.10`. |
 | etcd | v3.5.8 | v3.5.9 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.9){: external}. |
 | Gateway-enabled cluster controller | 2106 | 2322 | Updated image to resolve [CVE-2023-2650](https://nvd.nist.gov/vuln/detail/CVE-2023-2650){: external}. |
