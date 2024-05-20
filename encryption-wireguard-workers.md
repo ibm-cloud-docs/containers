@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2024
-lastupdated: "2024-02-06"
+lastupdated: "2024-05-20"
 
 
 keywords: kubernetes, help, wireguard, worker encryption
@@ -28,7 +28,7 @@ You can encrypt data that flows between worker nodes in your cluster by using Wi
 - WireGuard is not FIPS or FedRamp compliant.
 - You cannot alter the WireGuard configuration after it is enabled. However, you can disable it.
 
-For more information on this configuration setting, see [Enable WireGuard for a cluster](https://docs.tigera.io/calico/3.25/network-policy/encrypt-cluster-pod-traffic#enable-wireguard-for-a-cluster){: external} in the Calico documentation.
+For more information on this configuration setting, see [Enable WireGuard for a cluster](https://archive-os-3-25.netlify.app/calico/3.25/network-policy/encrypt-cluster-pod-traffic/#enable-wireguard-for-a-cluster){: external} in the Calico documentation.
 {: tip}
 
 
@@ -125,4 +125,5 @@ If you no longer need worker-to-worker encryption in your cluster, you can disab
       wireguardEnabled: false
     ```
     {: screen}
+
 

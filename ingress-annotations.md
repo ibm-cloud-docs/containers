@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2022
-lastupdated: "2024-04-29"
+lastupdated: "2024-05-20"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -168,7 +168,7 @@ By default, insecure HTTP client requests redirect to HTTPS. To disable this set
 Set the browser to access the domain only by using HTTPS. This option is enabled by default. 
 {: shortdesc}
 
-* To add max age and subdomain granularity, see [this NGINX blog](https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/){: external}.
+* To add max age and subdomain granularity, see [this NGINX blog](https://blog.nginx.org/blog/http-strict-transport-security-hsts-and-nginx){: external}.
 * To disable, set the `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#hsts){: external}.
     ```sh
     hsts: false
