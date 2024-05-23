@@ -240,6 +240,10 @@ subcollection: containers
 
 * [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
 
+    * [23 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may2324)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs.
+
     * [10 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may1024)
 
         * {{site.data.keyword.block_storage_is_short}} add-on patch update.
