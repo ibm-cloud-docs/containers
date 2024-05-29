@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-05-23"
+lastupdated: "2024-05-29"
 
 
 keywords: containers
@@ -239,6 +239,20 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
+
+    * [29 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may2924)
+
+        * New! {{site.data.keyword.containerlong_notm}} version 1.30.
+
+        * Important networking changes for {{site.data.keyword.containerlong_notm}} VPC clusters created at version 1.30.
+
+        * Important changes to the default cluster provisioning behavior for new VPC clusters beginning with version 1.30.
+
+        * Managing outbound traffic protection in new version 1.30 VPC clusters.
+
+        * {{site.data.keyword.containerlong_notm}} version 1.27 is deprecated.
+
+        * The {{site.data.keyword.filestorage_vpc_full_notm}} add-on is generally available.
 
     * [23 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may2324)
 
@@ -3446,16 +3460,6 @@ subcollection: containers
 {: #sitemap_managing_access_control}
 
 
-[Understanding access control for clusters](/docs/containers?topic=containers-access-overview#access-overview)
-
-* [Access control checklist](/docs/containers?topic=containers-access-overview#access-checklist)
-
-    * [{{site.data.keyword.cloud_notm}} access control](/docs/containers?topic=containers-access-overview#access-checklist-iam)
-
-    * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access-overview#iam_individuals_groups)
-
-    * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-access-overview#resource_groups)
-
 [Understanding Classic infrastructure credentials](/docs/containers?topic=containers-classic-credentials#classic-credentials)
 
 * [Accessing a different classic infrastructure account](/docs/containers?topic=containers-classic-credentials#credentials)
@@ -3780,7 +3784,25 @@ subcollection: containers
 {: #sitemap_controlling_network_traffic_in_vpc_clusters}
 
 
-[Understanding VPC security groups](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
+[Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference#vpc-security-group-reference)
+
+* [Overview](/docs/containers?topic=containers-vpc-security-group-reference#sbd-overview)
+
+* [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group-reference#managed-vpe-gateways)
+
+* [Managed security groups](/docs/containers?topic=containers-vpc-security-group-reference#sbd-managed-groups)
+
+    * [Worker security group](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-kube-clusterid)
+
+    * [Master VPE gateway security group](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-kube-vpegw-cluster-id)
+
+    * [Shared VPE gateway security group](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-kube-vpegw-vpc-id)
+
+    * [Load balancer services security group](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-kube-lbaas-cluster-ID)
+
+* [Limitations](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-limitations)
+
+[Understanding VPC security groups in version 1.29 and earlier](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
 
 * [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group#managed-vpe-gateways)
 
@@ -5084,19 +5106,23 @@ subcollection: containers
 
 * [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-install#prereqs-store-file-vpc)
 
+* [Next steps](/docs/containers?topic=containers-storage-file-vpc-install#vpc-enable-next-steps)
+
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
-* [Quick start for {{site.data.keyword.filestorage_vpc_short}} with dynamic provisioning](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-dynamic)
+* [Prerequisites for cluster version 1.25 and later](/docs/containers?topic=containers-storage-file-vpc-apps#prereqs-vpc-file-versions)
+
+* [Quick start for {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-dynamic)
 
 * [Expanding a mounted volume](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-expansion)
 
 * [Attaching existing file storage to an app](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-static)
 
-* [Deploying an app that runs as non-root](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-non-root-app)
-
 * [Creating a custom storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
 
-* [Limiting file share access by worker node, zone, or worker pool](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-setup)
+* [Deploying an app that runs as non-root](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-non-root-app)
+
+* [Limiting file share access by worker pool, zone, or worker node](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-setup)
 
     * [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-prereqs)
 
@@ -6240,6 +6266,41 @@ subcollection: containers
     * [What else can I do to increase the security and compliance of my cluster?](/docs/containers?topic=containers-cis-benchmark#benchmark-what-else)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
+
+
+### Version 1.30
+{: #sitemap_version_130}
+
+
+[1.30 version information and update actions](/docs/containers?topic=containers-cs_versions_130#cs_versions_130)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_130#release_timeline_130)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_130#prep-up-130)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_130#before_130)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_130#after_130)
+
+* [Important networking changes for VPC clusters created at version 1.30](/docs/containers?topic=containers-cs_versions_130#understand-sbd)
+
+    * [Which connections are allowed?](/docs/containers?topic=containers-cs_versions_130#sbd-allowed-connections)
+
+    * [Which connections are blocked?](/docs/containers?topic=containers-cs_versions_130#sbd-blocked-connections)
+
+    * [Changes to worker-to-master backup communication](/docs/containers?topic=containers-cs_versions_130#backup-considerations)
+
+* [Allowing outbound traffic after creating a 1.30 cluster](/docs/containers?topic=containers-cs_versions_130#sbd-allow-outbound-after)
+
+* [Common issues and troubleshooting](/docs/containers?topic=containers-cs_versions_130#sbd-common-ts)
+
+[Kubernetes version 1.30 change log](/docs/containers?topic=containers-changelog_130#changelog_130)
+
+* [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
+
+* [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
+
+    * [Change log for master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024](/docs/containers?topic=containers-changelog_130#1301_1520M_and_1300_1518W)
 
 
 ### Version 1.29
@@ -9946,6 +10007,12 @@ subcollection: containers
 [Why can't I create a new admin certificate?](/docs/containers?topic=containers-ts_admin-cert#ts_admin-cert)
 
 [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
+
+[When I try to create a version 1.30 cluster, I see a VPC quota error](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#ts-sbd-cluster-create-quota)
+
+* [If you exceeded the number of security groups allowed per VPC](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-rules-per-vpc)
+
+* [If you exceeded the number of remote rules per security group](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-remote-rules)
 
 
 ### Worker nodes
