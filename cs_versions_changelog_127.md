@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-05-23"
+lastupdated: "2024-05-29"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -17,6 +17,9 @@ subcollection: containers
 
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.27. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
+
+Kubernetes version 1.27 is deprecated. Update your cluster to at least [version 1.28](/docs/containers?topic=containers-cs_versions_128) as soon as possible.
+{: deprecated}
 
 ## Overview
 {: #changelog_overview_127}
