@@ -37,8 +37,8 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 [Latest]{: tag-green} 1.30
-- Release date: None
-- End of support: None
+- Release date: 29 May 2024
+- End of support: 13 August 2025†
 - Operating systems: `UBUNTU_20_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_130)
 - [Change log](/docs/containers?topic=containers-changelog_130)
@@ -59,7 +59,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 1.27
 - Release date: 24 May 2023
-- End of support: 14 August 2024†
+- End of support: 14 August 2024
 - Operating systems: `UBUNTU_20_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_127)
 - [Change log](/docs/containers?topic=containers-changelog_127)

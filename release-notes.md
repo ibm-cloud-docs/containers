@@ -59,7 +59,7 @@ Managing outbound traffic protection in new version 1.30 VPC clusters.
 
 
 The {{site.data.keyword.filestorage_vpc_full_notm}} add-on is generally available.
-:   For more information, see [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} for VPC add-on](containers?topic=containers-storage-file-vpc-install).
+:   For more information, see [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} for VPC add-on](/docs/containers?topic=containers-storage-file-vpc-install).
 
 
 
