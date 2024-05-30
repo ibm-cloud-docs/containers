@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-05-30"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -28,18 +28,30 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## May 2024
 {: #containers-may24}
 
+
+
+
+
+### 30 May 2024
+{: #containers-may3024}
+{: release-note}
+
+Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+
+
+
 ### 29 May 2024
 {: #containers-may2924}
 {: release-note}
 
 
 
-
-
-
-
 New! {{site.data.keyword.containerlong_notm}} version 1.30.
 :   You can now create or [update clusters to Kubernetes version 1.30](/docs/containers?topic=containers-cs_versions_130). With Kubernetes 1.30, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
+{{site.data.keyword.containerlong_notm}} version version 1.30 Kubernetes certification
+:   {{site.data.keyword.containerlong_notm}} version [1.30](/docs/containers?topic=containers-cs_versions_130) is now Kubernetes certified.
 
 Important networking changes for {{site.data.keyword.containerlong_notm}} VPC clusters created at version 1.30.
 :   For more information, see the [130 version information](/docs/openshift?topic=openshift-cs_versions_130) and [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference).
@@ -58,8 +70,19 @@ Managing outbound traffic protection in new version 1.30 VPC clusters.
 
 
 
-The {{site.data.keyword.filestorage_vpc_full_notm}} add-on is generally available.
-:   For more information, see [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} for VPC add-on](/docs/containers?topic=containers-storage-file-vpc-install).
+
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Master fix pack are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [1.29](/docs/containers?topic=containers-changelog_129)
+:   [1.28](/docs/containers?topic=containers-changelog_128)
+:   [1.27](/docs/containers?topic=containers-changelog_127)
+
+
+
+
+
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-05-30"
 
 
 keywords: containers
@@ -240,9 +240,15 @@ subcollection: containers
 
 * [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
 
+    * [30 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may3024)
+
+        * Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
+
     * [29 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may2924)
 
         * New! {{site.data.keyword.containerlong_notm}} version 1.30.
+
+        * {{site.data.keyword.containerlong_notm}} version version 1.30 Kubernetes certification
 
         * Important networking changes for {{site.data.keyword.containerlong_notm}} VPC clusters created at version 1.30.
 
@@ -252,7 +258,7 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} version 1.27 is deprecated.
 
-        * The {{site.data.keyword.filestorage_vpc_full_notm}} add-on is generally available.
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
 
     * [23 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may2324)
 
@@ -6325,6 +6331,8 @@ subcollection: containers
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
 
+    * [Change log for master fix pack 1.29.5_1540, released 29 May 2024](/docs/containers?topic=containers-changelog_129#1295_1540_M)
+
     * [Change log for worker node fix pack 1.29.4_1538, released 23 May 2024](/docs/containers?topic=containers-changelog_129#1294_1538_W)
 
     * [Change log for worker node fix pack 1.29.4_1537, released 06 May 2024](/docs/containers?topic=containers-changelog_129#1294_1537_W)
@@ -6419,6 +6427,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for master fix pack 1.28.10_1560, released 29 May 2024](/docs/containers?topic=containers-changelog_128#12810_1560_M)
 
     * [Change log for worker node fix pack 1.28.9_1557, released 23 May 2024](/docs/containers?topic=containers-changelog_128#1289_1557_W)
 
@@ -6532,6 +6542,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for master fix pack 1.27.14_1577, released 29 May 2024](/docs/containers?topic=containers-changelog_127#12714_1577_M)
 
     * [Change log for worker node fix pack 1.27.13_1575, released 23 May 2024](/docs/containers?topic=containers-changelog_127#12713_1575_W)
 
