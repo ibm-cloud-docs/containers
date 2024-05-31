@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-04-29"
+lastupdated: "2024-05-31"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, firewall, acl, acls, access control list, rules, security group
@@ -153,7 +153,7 @@ Follow the steps to view details about the VPC security groups.
     ```
     {: screen}
 
-1. List the security groups attached to the VPC that your cluster is in. The VPC security group is assigned a randomly generated name, such as `trench-hexagon-matriarch-flower`. The VPC cluster security group is named in the format of `kube-<cluster-ID>`. The {{site.data.keyword.containershort_notm}} security group is named in the format of `kube-<vpc-ID>`. 
+1. List the security groups attached to the VPC that your cluster is in. The VPC security group is assigned a randomly generated name, such as `trench-hexagon-matriarch-flower`. The cluster security group is named in the format of `kube-<cluster-ID>`. The VPC security group is named in the format of `kube-<vpc-ID>`. 
 
     ```sh
     ibmcloud is sgs | grep <vpc_name>
