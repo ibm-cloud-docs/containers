@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-06-03"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, clusters, worker nodes, worker pools, vpc-gen2
@@ -21,8 +21,6 @@ subcollection: containers
 
 Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a standard VPC cluster, and customize your cluster to meet the high availability and security requirements of your apps.
 {: shortdesc}
-
-
 
 ## Prerequisites and notes
 {: #cluster-create-vpc-prereq}
@@ -83,6 +81,11 @@ Master service endpoint
 :    Service endpoints provide communication to the master. You can choose to configure your cluster with a private service endpoint or both a public and a private cloud service endpoint. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw).
 
 
+
+
+
+Outbound traffic protection  
+:   The default behavior for clusters at version 1.30 and later is to allow only the necessary networking traffic for the cluster to function and disable all other outbound connections. If you have apps or services that require connection to the public Internet, such as GitHub repositories, Docker Hub, , note that you must either disable outbound traffic protection completely (so that all outbound traffic is allowed), or add security group rules to allow only the outbound traffic that you require.
 
 
 
@@ -206,6 +209,9 @@ Observability integrations
 
     `--secondary-storage STORAGE`
     :    Optional. The storage option for the flavor. For example, `900gb.5iops-tier`. When you add a secondary disk, that disk is used for the container runtime, while the primary disk is used for the operating system. To view the storage options for a flavor, run the `ibmcloud ks flavor get --flavor FLAVOR --zone ZONE --provider vpc-gen2` command. To view a list of VPC worker node flavors, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors&interface=ui).
+
+    `--disable-outbound-traffic-protection`  
+    :   Optional.
     
 5. Verify that the creation of the cluster was requested. It can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
     ```sh

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-30"
+lastupdated: "2024-06-03"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -25,6 +25,21 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+
+
+## June 2024
+{: #containers-june24}
+
+
+### 3 June 2024
+{: #containers-june0324}
+{: release-note}
+
+{{site.data.keyword.containerlong_notm}} version 1.26 is no longer supported.
+:   Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
+
+
+
 ## May 2024
 {: #containers-may24}
 
@@ -37,7 +52,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: release-note}
 
 Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   Version 1.6.4 is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+
+
 
 
 
@@ -54,11 +71,11 @@ New! {{site.data.keyword.containerlong_notm}} version 1.30.
 :   {{site.data.keyword.containerlong_notm}} version [1.30](/docs/containers?topic=containers-cs_versions_130) is now Kubernetes certified.
 
 Important networking changes for {{site.data.keyword.containerlong_notm}} VPC clusters created at version 1.30.
-:   For more information, see the [130 version information](/docs/openshift?topic=openshift-cs_versions_130) and [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference).
+:   For more information, see the [130 version information](/docs/containers?topic=containers-cs_versions_130) and [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference).
 
 Important changes to the default cluster provisioning behavior for new VPC clusters beginning with version 1.30.
 :   Beginning with version 1.30, there is a new option available at cluster creation time via the UI, CLI, API, and Terraform. This new option manages outbound traffic protection for the cluster. The default behavior is to have outbound traffic protection enabled, which means new version 1.30 VPC clusters won't have access the public internet by default. If your cluster needs access to the public internet, you must specifically include the option (from the UI, CLI, API, and Terraform) to disable outbound traffic protection. Note that you can also disable outbound traffic protection after your cluster is created. You can also selectively allow outbound traffic as needed after your cluster is created. If you provision clusters via automation, make sure to adjust your automation accordingly.
-:   For more information, see the [1.30 version information](/docs/openshift?topic=openshift-cs_versions_130), [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference), and [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound).
+:   For more information, see the [1.30 version information](/docs/containers?topic=containers-cs_versions_130), [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference), and [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound).
 
 Managing outbound traffic protection in new version 1.30 VPC clusters.
 :   With the introduction of Secure by Default Cluster VPC networking in version 1.30 and later clusters, there are several scenarios where you might need to adjust the security group settings for your clusters to allow outbound traffic to certain resources. For more information, see [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound).
@@ -515,6 +532,7 @@ Ingress ALB versions `1.9.4_6359_iks` and `1.8.4_6363_iks` are available for {{s
 
 
 
+
 ### 14 February 2024
 {: #containers-feb1424}
 {: release-note}
@@ -531,6 +549,7 @@ Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico comp
 
 {{site.data.keyword.containerlong_notm}} version 1.26 is deprecated.
 :   Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
+
 
 
 

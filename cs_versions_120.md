@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-06-03"
 
 
 keywords: kubernetes, 1.20, versions, update, upgrade
@@ -10,6 +10,8 @@ keywords: kubernetes, 1.20, versions, update, upgrade
 subcollection: containers
 
 ---
+
+{{site.data.keyword.attribute-definition-list}}
 
 # 1.20 version information and update actions
 {: #cs_versions_120}

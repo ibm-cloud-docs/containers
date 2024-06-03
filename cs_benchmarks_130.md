@@ -1,36 +1,32 @@
 ---
 
 copyright: 
-  years: 2023, 2024
+  years: 2024, 2024
 lastupdated: "2024-06-03"
 
-
-keywords: kubernetes, containers, benchmarks, 1.29, CIS benchmarks
+keywords: kubernetes, containers, benchmarks, 1.30, CIS benchmarks
 
 subcollection: containers
-
 
 ---
 
 {{site.data.keyword.attribute-definition-list}}
 
+# Kubernetes version 1.30 CIS Kubernetes Benchmark
+{: #cis-benchmark-130}
 
-# Kubernetes version 1.29 CIS Kubernetes Benchmark
-{: #cis-benchmark-129}
-
-The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external} as a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations. This document contains the results of the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes version 1.29. For more information or help understanding the benchmark, see [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use).
+The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external} as a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations. This document contains the results of the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes version 1.30. For more information or help understanding the benchmark, see [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use).
 {: shortdesc}
 
 
-
 ## 1 Master node security configuration
-{: #cis-section-1-129}
+{: #cis-section-1-130}
 
 Review the Master node security configuration results of the version 1.5 CIS Kubernetes benchmark.
 {: shortdesc}
 
 ### 1.1 Master node configuration files
-{: #cis-benchmark-11-129}
+{: #cis-benchmark-11-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
@@ -58,11 +54,11 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 {: caption="Section 1.1 Master node benchmark results" caption-side="bottom"}
 
 ### 1.2 API server
-{: #cis-benchmark-12-129}
+{: #cis-benchmark-12-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
-| 1.2.1 | Ensure that the `--anonymous-auth` argument is set to false | Not Scored | 1 | [Fail](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
+| 1.2.1 | Ensure that the `--anonymous-auth` argument is set to false | Not Scored | 1 | [Fail](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
 | 1.2.2 | Ensure that the `--basic-auth-file` argument is not set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.3 | Ensure that the `--token-auth-file` parameter is not set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.4 | Ensure that the `--kubelet-https` argument is set to true | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
@@ -71,22 +67,22 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 | 1.2.7 | Ensure that the `--authorization-mode` argument is not set to AlwaysAllow | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.8 | Ensure that the `--authorization-mode` argument includes Node | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.9 | Ensure that the `--authorization-mode` argument includes RBAC | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.2.10 | Ensure that the admission control plugin EventRateLimit is set | Not Scored | 1 | [Fail](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
+| 1.2.10 | Ensure that the admission control plugin EventRateLimit is set | Not Scored | 1 | [Fail](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
 | 1.2.11 | Ensure that the admission control plugin AlwaysAdmit is not set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.2.12 | Ensure that the admission control plugin AlwaysPullImages is set | Not Scored | 1 | [Fail](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
-| 1.2.13 | Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used | Not Scored | 1 | [Pass](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
+| 1.2.12 | Ensure that the admission control plugin AlwaysPullImages is set | Not Scored | 1 | [Fail](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
+| 1.2.13 | Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used | Not Scored | 1 | [Pass](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
 | 1.2.14 | Ensure that the admission control plugin ServiceAccount is set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.15 | Ensure that the admission control plugin NamespaceLifecycle is set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.2.16 | Ensure that the admission control plugin PodSecurityPolicy is set | Scored | 1 | [Pass](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
+| 1.2.16 | Ensure that the admission control plugin PodSecurityPolicy is set | Scored | 1 | [Pass](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
 | 1.2.17 | Ensure that the admission control plugin NodeRestriction is set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.18 | Ensure that the `--insecure-bind-address` argument is not set | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.19 | Ensure that the `--insecure-port` argument is set to 0 | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.20 | Ensure that the `--secure-port` argument is not set to 0 | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.21 | Ensure that the `--profiling` argument is set to false | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.2.22 | Ensure that the `--audit-log-path` argument is set | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
-| 1.2.23 | Ensure that the `--audit-log-maxage` argument is set to 30 or as appropriate | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
-| 1.2.24 | Ensure that the `--audit-log-maxbackup` argument is set to 10 or as appropriate | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
-| 1.2.25 | Ensure that the `--audit-log-maxsize` argument is set to 100 or as appropriate | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
+| 1.2.22 | Ensure that the `--audit-log-path` argument is set | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
+| 1.2.23 | Ensure that the `--audit-log-maxage` argument is set to 30 or as appropriate | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
+| 1.2.24 | Ensure that the `--audit-log-maxbackup` argument is set to 10 or as appropriate | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
+| 1.2.25 | Ensure that the `--audit-log-maxsize` argument is set to 100 or as appropriate | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
 | 1.2.26 | Ensure that the `--request-timeout` argument is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.27 | Ensure that the `--service-account-lookup` argument is set to true | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.28 | Ensure that the `--service-account-key-file` argument is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
@@ -94,13 +90,13 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 | 1.2.30 | Ensure that the `--tls-cert-file` and `--tls-private-key-file` arguments are set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.31 | Ensure that the `--client-ca-file` argument is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.32 | Ensure that the `--etcd-cafile` argument is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.2.33 | Ensure that the `--encryption-provider-config` argument is set as appropriate | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
-| 1.2.34 | Ensure that encryption providers are appropriately configured | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
+| 1.2.33 | Ensure that the `--encryption-provider-config` argument is set as appropriate | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
+| 1.2.34 | Ensure that encryption providers are appropriately configured | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
 | 1.2.35 | Ensure that the API Server only makes use of Strong Cryptographic Ciphers | Not Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 {: caption="Section 1.2 API server benchmark results" caption-side="bottom"}
 
 ### 1.3 Controller manager
-{: #cis-benchmark-13-129}
+{: #cis-benchmark-13-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
@@ -109,12 +105,12 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 | 1.3.3 | Ensure that the `--use-service-account-credentials` argument is set to true | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.3.4 | Ensure that the `--service-account-private-key-file` argument is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.3.5 | Ensure that the `--root-ca-file` argument is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.3.6 | Ensure that the RotateKubeletServerCertificate argument is set to true | Scored | 2 | [Fail](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
+| 1.3.6 | Ensure that the RotateKubeletServerCertificate argument is set to true | Scored | 2 | [Fail](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
 | 1.3.7 | Ensure that the `--bind-address` argument is set to `127.0.0.1` | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 {: caption="Section 1.3 Controller manager benchmark results" caption-side="bottom"}
 
 ### 1.4 Scheduler
-{: #cis-benchmark-14-129}
+{: #cis-benchmark-14-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
@@ -123,7 +119,7 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 {: caption="Section 1.4 Scheduler benchmark results" caption-side="bottom"}
 
 ## 2 Etcd node configuration
-{: #cis-section-2-129}
+{: #cis-section-2-130}
 
 Review the Etcd Node Configuration results of the version 1.5 CIS Kubernetes benchmark.
 {: shortdesc}
@@ -140,13 +136,13 @@ Review the Etcd Node Configuration results of the version 1.5 CIS Kubernetes ben
 {: caption="Section 2 Etcd node configuration benchmark results" caption-side="bottom"}
 
 ## 3 Control plane configuration
-{: #cis-section-3-129}
+{: #cis-section-3-130}
 
 Review the Control Plane Configuration results of the version 1.5 CIS Kubernetes benchmark.
 {: shortdesc}
 
 ### 3.1 Authentication and authorization
-{: #cis-benchmark-31-129}
+{: #cis-benchmark-31-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
@@ -154,22 +150,22 @@ Review the Control Plane Configuration results of the version 1.5 CIS Kubernetes
 {: caption="Section 3.1 Authentication and authorization benchmark results" caption-side="bottom"}
 
 ### 3.2 Logging
-{: #cis-benchmark-32-129}
+{: #cis-benchmark-32-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
-| 3.2.1 | Ensure that a minimal audit policy is created | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
-| 3.2.2 | Ensure that the audit policy covers key security concerns | Not Scored | 2 | [Fail](#cis-benchmark-remediations-129) | Shared |
+| 3.2.1 | Ensure that a minimal audit policy is created | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
+| 3.2.2 | Ensure that the audit policy covers key security concerns | Not Scored | 2 | [Fail](#cis-benchmark-remediations-130) | Shared |
 {: caption="Section 3.2 Logging benchmark results" caption-side="bottom"}
 
 ## 4 Worker node security configuration
-{: #cis-section-4-129}
+{: #cis-section-4-130}
 
 Review the Worker Node Security Configuration results of the version 1.5 CIS Kubernetes benchmark.
 {: shortdesc}
 
 ### 4.1 Worker node configuration files
-{: #cis-benchmark-41-129}
+{: #cis-benchmark-41-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
@@ -186,7 +182,7 @@ Review the Worker Node Security Configuration results of the version 1.5 CIS Kub
 {: caption="Section 4.1 Worker node configuration files benchmark results" caption-side="bottom"}
 
 ### 4.2 Kubelet
-{: #cis-benchmark-42-129}
+{: #cis-benchmark-42-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
@@ -195,91 +191,91 @@ Review the Worker Node Security Configuration results of the version 1.5 CIS Kub
 | 4.2.3 | Ensure that the `--client-ca-file` argument is set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 4.2.4 | Ensure that the `--read-only-port` argument is set to 0 | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 4.2.5 | Ensure that the `--streaming-connection-idle-timeout` argument is not set to 0 | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 4.2.6 | Ensure that the `--protect-kernel-defaults` argument is set to true | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
+| 4.2.6 | Ensure that the `--protect-kernel-defaults` argument is set to true | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
 | 4.2.7 | Ensure that the `--make-iptables-util-chains` argument is set to true | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 4.2.8 | Ensure that the `--hostname-override` argument is not set | Not Scored | 1 | [Fail](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
+| 4.2.8 | Ensure that the `--hostname-override` argument is not set | Not Scored | 1 | [Fail](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
 | 4.2.9 | Ensure that the `--event-qps` argument is set to 0 or a level which ensures appropriate event capture | Not Scored | 2 | Pass | {{site.data.keyword.IBM_notm}}|
 | 4.2.10 | Ensure that the `--tls-cert-file` and `--tls-private-key-file` arguments are set as appropriate | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 4.2.11 | Ensure that the `--rotate-certificates` argument is not set to false | Scored | 1 | [Pass](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
-| 4.2.12 | Ensure that the RotateKubeletServerCertificate argument is set to true | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | {{site.data.keyword.IBM_notm}}|
+| 4.2.11 | Ensure that the `--rotate-certificates` argument is not set to false | Scored | 1 | [Pass](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
+| 4.2.12 | Ensure that the RotateKubeletServerCertificate argument is set to true | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | {{site.data.keyword.IBM_notm}}|
 | 4.2.13 | Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers | Not Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 {: caption="Section 4.2 Kubelet benchmark results" caption-side="bottom"}
 
 ## 5 Kubernetes policies
-{: #cis-section-5-129}
+{: #cis-section-5-130}
 
 Review the Kubernetes Policies results of the version 1.5 CIS Kubernetes benchmark.
 {: shortdesc}
 
 ### 5.1 RBAC and service accounts
-{: #cis-benchmark-51-129}
+{: #cis-benchmark-51-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.1.1 | Ensure that the cluster-admin role is only used where required | Not Scored | 1 | Pass | Shared |
-| 5.1.2 | Minimize access to secrets | Not Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
-| 5.1.3 | Minimize wildcard use in Roles and ClusterRoles | Not Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
+| 5.1.2 | Minimize access to secrets | Not Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
+| 5.1.3 | Minimize wildcard use in Roles and ClusterRoles | Not Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
 | 5.1.4 | Minimize access to create pods | Not Scored | 1 | Pass | Shared |
-| 5.1.5 | Ensure that default service accounts are not actively used. | Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
-| 5.1.6 | Ensure that Service Account Tokens are only mounted where necessary | Not Scored | 1 | [Fail](#cis-benchmark-remediations-129) | Shared |
+| 5.1.5 | Ensure that default service accounts are not actively used. | Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
+| 5.1.6 | Ensure that Service Account Tokens are only mounted where necessary | Not Scored | 1 | [Fail](#cis-benchmark-remediations-130) | Shared |
 {: caption="Section 5.1 RBAC and service accounts benchmark results" caption-side="bottom"}
 
 ### 5.2 Pod security policies
-{: #cis-benchmark-52-129}
+{: #cis-benchmark-52-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
-| 5.2.1 | Minimize the admission of privileged containers | Not Scored | 1 | [Pass](#cis-benchmark-remediations-129) | Shared |
-| 5.2.2 | Minimize the admission of containers wishing to share the host process ID namespace | Scored | 1 | [Pass](#cis-benchmark-remediations-129) | Shared |
-| 5.2.3 | Minimize the admission of containers wishing to share the host IPC namespace | Scored | 1 | [Pass](#cis-benchmark-remediations-129) | Shared |
-| 5.2.4 | Minimize the admission of containers wishing to share the host network namespace | Scored | 1 | [Pass](#cis-benchmark-remediations-129) | Shared |
-| 5.2.5 | Minimize the admission of containers with allowPrivilegeEscalation | Scored | 1 | [Pass](#cis-benchmark-remediations-129) | Shared |
-| 5.2.6 | Minimize the admission of root containers | Not Scored | 2 | [Pass](#cis-benchmark-remediations-129) | Shared |
-| 5.2.7 | Minimize the admission of containers with the NET_RAW capability | Not Scored | 1 | [Pass](#cis-benchmark-remediations-129) | Shared |
-| 5.2.8 | Minimize the admission of containers with added capabilities | Not Scored | 1 | [Pass](#cis-benchmark-remediations-129) | Shared |
-| 5.2.9 | Minimize the admission of containers with capabilities assigned | Not Scored | 2 | [Pass](#cis-benchmark-remediations-129) | Shared |
+| 5.2.1 | Minimize the admission of privileged containers | Not Scored | 1 | [Pass](#cis-benchmark-remediations-130) | Shared |
+| 5.2.2 | Minimize the admission of containers wishing to share the host process ID namespace | Scored | 1 | [Pass](#cis-benchmark-remediations-130) | Shared |
+| 5.2.3 | Minimize the admission of containers wishing to share the host IPC namespace | Scored | 1 | [Pass](#cis-benchmark-remediations-130) | Shared |
+| 5.2.4 | Minimize the admission of containers wishing to share the host network namespace | Scored | 1 | [Pass](#cis-benchmark-remediations-130) | Shared |
+| 5.2.5 | Minimize the admission of containers with allowPrivilegeEscalation | Scored | 1 | [Pass](#cis-benchmark-remediations-130) | Shared |
+| 5.2.6 | Minimize the admission of root containers | Not Scored | 2 | [Pass](#cis-benchmark-remediations-130) | Shared |
+| 5.2.7 | Minimize the admission of containers with the NET_RAW capability | Not Scored | 1 | [Pass](#cis-benchmark-remediations-130) | Shared |
+| 5.2.8 | Minimize the admission of containers with added capabilities | Not Scored | 1 | [Pass](#cis-benchmark-remediations-130) | Shared |
+| 5.2.9 | Minimize the admission of containers with capabilities assigned | Not Scored | 2 | [Pass](#cis-benchmark-remediations-130) | Shared |
 {: caption="Section 5.2 Pod security policies benchmark results" caption-side="bottom"}
 
 ### 5.3 Network policies and CNI
-{: #cis-benchmark-53-129}
+{: #cis-benchmark-53-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.3.1 | Ensure that the CNI in use supports Network Policies | Not Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 5.3.2 | Ensure that all Namespaces have Network Policies defined | Scored | 2 | [Fail](#cis-benchmark-remediations-129) | Shared |
+| 5.3.2 | Ensure that all Namespaces have Network Policies defined | Scored | 2 | [Fail](#cis-benchmark-remediations-130) | Shared |
 {: caption="Section 5.3 Network policies and CNI benchmark results" caption-side="bottom"}
 
 ### 5.4 Secrets management
-{: #cis-benchmark-54-129}
+{: #cis-benchmark-54-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.4.1 | Prefer using secrets as files over secrets as environment variables | Not Scored | 1 | Pass | Shared |
-| 5.4.2 | Consider external secret storage | Not Scored | 2 | [Fail](#cis-benchmark-remediations-129) | Shared |
+| 5.4.2 | Consider external secret storage | Not Scored | 2 | [Fail](#cis-benchmark-remediations-130) | Shared |
 {: caption="Section 5.4 Secrets management benchmark results" caption-side="bottom"}
 
 ### 5.5 Extensible admission control
-{: #cis-benchmark-55-129}
+{: #cis-benchmark-55-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
-| 5.5.1 | Configure Image Provenance using ImagePolicyWebhook admission controller | Not Scored | 2 | [Fail](#cis-benchmark-remediations-129) | Shared |
+| 5.5.1 | Configure Image Provenance using ImagePolicyWebhook admission controller | Not Scored | 2 | [Fail](#cis-benchmark-remediations-130) | Shared |
 {: caption="Section 5.5 Extensible admission control benchmark results" caption-side="bottom"}
 
 
 ### 5.6 General policies
-{: #cis-benchmark-56-129}
+{: #cis-benchmark-56-130}
 
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.6.1 | Create administrative boundaries between resources using namespaces | Not Scored | 1 | Pass | Shared |
-| 5.6.2 | Ensure that the `seccomp` profile is set to docker/default in your pod definitions | Not Scored | 2 | [Fail](#cis-benchmark-remediations-129) | Shared |
-| 5.6.3 | Apply Security Context to Your Pods and Containers | Not Scored | 2 | [Fail](#cis-benchmark-remediations-129) | Shared |
-| 5.6.4 | The default namespace should not be used | Scored | 2 | [Fail](#cis-benchmark-remediations-129) | Shared |
+| 5.6.2 | Ensure that the `seccomp` profile is set to docker/default in your pod definitions | Not Scored | 2 | [Fail](#cis-benchmark-remediations-130) | Shared |
+| 5.6.3 | Apply Security Context to Your Pods and Containers | Not Scored | 2 | [Fail](#cis-benchmark-remediations-130) | Shared |
+| 5.6.4 | The default namespace should not be used | Scored | 2 | [Fail](#cis-benchmark-remediations-130) | Shared |
 {: caption="Section 5.6 General policies benchmark results" caption-side="bottom"}
 
 ## {{site.data.keyword.IBM_notm}} remediations and explanations
-{: #cis-benchmark-remediations-129}
+{: #cis-benchmark-remediations-130}
 
 Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark results.
 {: shortdesc}
@@ -324,6 +320,5 @@ Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark resu
 | 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a [pod or container `securityContext`](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | 5.6.4 | {{site.data.keyword.containerlong_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Explanation and remediation" caption-side="bottom"}
-
 
 

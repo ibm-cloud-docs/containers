@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-06-03"
 
 
 keywords: kubernetes, containers, benchmarks, 1.28, CIS benchmarks
@@ -11,6 +11,8 @@ subcollection: containers
 
 
 ---
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Kubernetes version 1.28 CIS Kubernetes Benchmark
 {: #cis-benchmark-128}

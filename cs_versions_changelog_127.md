@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-05-30"
+lastupdated: "2024-06-03"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -11,6 +11,8 @@ subcollection: containers
 
 
 ---
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Kubernetes version 1.27 change log
 {: #changelog_127}

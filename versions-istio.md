@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-05-08"
+lastupdated: "2024-06-03"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -71,7 +71,7 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.21.0](https://istio.io/latest/news/releases/1.21.x/announcing-1.21/){: external} and [Istio 1.21.1](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.1/){: external}.
-:   `Addon-Istio` no longer deletes the `managed-istio` IOP when you disable the add-on. If you choose to disable `addon-istio`, you can choose between uninstalling or unmanaging Istio. See the [Setting up Istio](/docs/containers?topic=containers-istio) documentation for more information.
+:   `Addon-Istio` no longer deletes the `managed-istio` IOP when you disable the add-on. If you choose to disable `addon-istio`, you can choose between uninstalling or no longer managing Istio. See the [Setting up Istio](/docs/containers?topic=containers-istio) documentation for more information.
 
 
 ## Version 1.20

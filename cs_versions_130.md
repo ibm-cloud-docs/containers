@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-05-30"
+lastupdated: "2024-06-03"
 
 
 keywords: kubernetes, containers, 130, version 130, 130 update actions
@@ -161,6 +161,5 @@ For more information, see [Managing outbound traffic protection in VPC clusters]
 - [When I update my cluster to secure by default, my nodeport app no longer works](/docs/containers?topic=containers-ts-sbd-nodeport-not-working).
 - [Why do I see DNS failures after adding a custom DNS resolver?](/docs/containers?topic=containers-ts-sbd-custom-dns).
 - [After creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters).
-
 
 
