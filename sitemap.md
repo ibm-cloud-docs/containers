@@ -6382,7 +6382,7 @@ subcollection: containers
 
     * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-55-130)
 
-    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-56-130)
+    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-56-130)
 
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-remediations-130)
 
