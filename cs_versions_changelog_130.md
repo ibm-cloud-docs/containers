@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-06-03"
 
 
 keywords: kubernetes, containers, change log, 130 change log, 130 updates
@@ -11,6 +11,8 @@ subcollection: containers
 
 
 ---
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Kubernetes version 1.30 change log
 {: #changelog_130}
@@ -50,8 +52,6 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 | Kubernetes Metrics Server | v0.6.4 | v0.7.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.7.1). |
 | Kubernetes snapshot controller | v6.3.0 | v6.3.3 | See the [Kubernetes snapshot controller release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v6.3.3). |
 {: caption="Changes since version 1.29" caption-side="bottom"}
-
-
 
 
 

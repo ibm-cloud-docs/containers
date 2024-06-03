@@ -2,11 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-06-03"
 
 
-keywords: kubernetes,containers
-, help, network, connectivity
+keywords: kubernetes, containers, help, network, connectivity
 
 subcollection: containers
 

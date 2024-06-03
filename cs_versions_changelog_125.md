@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-05-20"
+lastupdated: "2024-06-03"
 
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
@@ -11,6 +11,8 @@ subcollection: containers
 
 
 ---
+
+{{site.data.keyword.attribute-definition-list}}
 
 # Kubernetes version 1.25 change log
 {: #changelog_125}

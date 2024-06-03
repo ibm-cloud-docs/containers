@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-05-30"
+lastupdated: "2024-06-03"
 
 
 keywords: containers
@@ -237,6 +237,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
+
+    * [3 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june0324)
+
+        * {{site.data.keyword.containerlong_notm}} version 1.26 is no longer supported.
 
 * [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
 
@@ -3808,6 +3814,36 @@ subcollection: containers
 
 * [Limitations](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-limitations)
 
+[Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound#sbd-allow-outbound)
+
+* [Disabling outbound traffic protection when creating a cluster](/docs/containers?topic=containers-sbd-allow-outbound#new-cluster-sbd)
+
+    * [Option 1: Disabling outbound traffic protection when you create a cluster](/docs/containers?topic=containers-sbd-allow-outbound#sbd-disable-1)
+
+    * [Option 2: Allowing outbound traffic through a custom security group](/docs/containers?topic=containers-sbd-allow-outbound#sbd-disable-2)
+
+* [Disabling outbound traffic protection for existing clusters](/docs/containers?topic=containers-sbd-allow-outbound#existing-cluster-sbd)
+
+    * [Option 1: Disabling outbound traffic protection from the CLI](/docs/containers?topic=containers-sbd-allow-outbound#sbd-disable-cli-option)
+
+    * [Option 2: Adding a security group rule to the default cluster worker security group](/docs/containers?topic=containers-sbd-allow-outbound#sbd-disable-custom-sg)
+
+* [Enabling outbound traffic protection for existing clusters](/docs/containers?topic=containers-sbd-allow-outbound#sbd-enable-existing)
+
+* [Example scenarios for selectively allowing outbound traffic](/docs/containers?topic=containers-sbd-allow-outbound#sbd-examples)
+
+    * [Accessing images from external container registries like DockerHub or `quay.io`](/docs/containers?topic=containers-sbd-allow-outbound#sbd-example-quay)
+
+    * [Accessing 1.30 clusters and the web console over the VPE](/docs/containers?topic=containers-sbd-allow-outbound#sbd-example-vpe)
+
+    * [Allowing outbound traffic for webhooks](/docs/containers?topic=containers-sbd-allow-outbound#sbd-example-webhook)
+
+    * [Allowing outbound traffic to a public service](/docs/containers?topic=containers-sbd-allow-outbound#sbd-example-gh)
+
+    * [Considerations for hub and spoke VPCs with outbound traffic protection](/docs/containers?topic=containers-sbd-allow-outbound#sbd-example-hubspoke)
+
+    * [Allowing temporary traffic to the cluster API server over the public network](/docs/containers?topic=containers-sbd-allow-outbound#sbd-example-api-server-backup)
+
 [Understanding VPC security groups in version 1.29 and earlier](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
 
 * [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group#managed-vpe-gateways)
@@ -6307,6 +6343,48 @@ subcollection: containers
 * [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
 
     * [Change log for master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024](/docs/containers?topic=containers-changelog_130#1301_1520M_and_1300_1518W)
+
+[Kubernetes version 1.30 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-130)
+
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-130#cis-section-1-130)
+
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-11-130)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-12-130)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-13-130)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-14-130)
+
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-130#cis-section-2-130)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-130#cis-section-3-130)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-31-130)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-32-130)
+
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-130#cis-section-4-130)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-41-130)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-42-130)
+
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-130#cis-section-5-130)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-51-130)
+
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-52-130)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-53-130)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-54-130)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-55-130)
+
+    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-56-130)
+
+* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-remediations-130)
 
 
 ### Version 1.29
@@ -9910,6 +9988,8 @@ subcollection: containers
 
 [Why do I see a `Cannot complete cluster master upgrade` message?](/docs/containers?topic=containers-ts-cluster-master-upgrade#ts-cluster-master-upgrade)
 
+[Why do I see the error `Cannot complete cluster master upgrade because there is a migration in progress`?](/docs/containers?topic=containers-ts-resource-migration#ts-resource-migration)
+
 [Cluster states](/docs/containers?topic=containers-cluster-states-reference#cluster-states-reference)
 
 * [Aborted](/docs/containers?topic=containers-cluster-states-reference#cluster-state-aborted)
@@ -10031,6 +10111,8 @@ subcollection: containers
 * [If you exceeded the number of security groups allowed per VPC](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-rules-per-vpc)
 
 * [If you exceeded the number of remote rules per security group](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-remote-rules)
+
+[I use custom security groups and after creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters#ts-sbd-other-clusters)
 
 
 ### Worker nodes
@@ -10194,6 +10276,12 @@ subcollection: containers
 
 [Why can't I install a Helm chart with updated configuration values?](/docs/containers?topic=containers-ts-app-helm-install#ts-app-helm-install)
 
+[After creating a version 1.30 cluster, my app no longer works](/docs/containers?topic=containers-ts-sbd-app-not-working#ts-sbd-app-not-working)
+
+* [Allowing outbound access](/docs/containers?topic=containers-ts-sbd-app-not-working#allow-outbound-ts)
+
+[When I update my cluster to 1.30 or later, my nodeport app no longer works](/docs/containers?topic=containers-ts-sbd-nodeport-not-working#ts-sbd-nodeport-not-working)
+
 
 ### Cluster autoscaler
 {: #sitemap_cluster_autoscaler}
@@ -10279,6 +10367,12 @@ subcollection: containers
 [Why does my pod with long running TCP connections get disconnected?](/docs/containers?topic=containers-ts-keepalive-sysctl#ts-keepalive-sysctl)
 
 [Why are DNS lookups from certain pods so slow?](/docs/containers?topic=containers-ts-slow-dns-lookup#ts-slow-dns-lookup)
+
+[Why do I see DNS failures after adding a custom DNS resolver?](/docs/containers?topic=containers-ts-sbd-custom-dns#ts-sbd-custom-dns)
+
+* [Other scenarios](/docs/containers?topic=containers-ts-sbd-custom-dns#sbd-dns-scenarios)
+
+    * [If the cluster is created after the DNS resolver is created](/docs/containers?topic=containers-ts-sbd-custom-dns#sbd-dns-after)
 
 
 ### Logging and monitoring

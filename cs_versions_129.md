@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-05-16"
+lastupdated: "2024-06-03"
 
 
 keywords: kubernetes, containers, 129, version 129, 129 update actions
@@ -66,6 +66,7 @@ The following table shows the actions that you must take before you update the K
 | Tigera operator namespace migration | Tigera operator component is added and manages the Calico installation. As a result, Calico resources run in the `calico-system` and `tigera-operator` namespaces instead of `kube-system`. These namespaces are configured to be privileged like the `kube-system` namespace. During an upgrade, the Tigera operator migrates Calico resources and customizations from the `kube-system` namespace to the `calico-system` namespace. You can continue normal cluster operations during the migration because the migration might be in progress after the cluster master upgrade is completed. If your apps or operations tooling rely on Calico running in the `kube-system` namespace, update them accordingly.  For more information, see [Understanding the Tigera migration](#129-tigera-migration). |
 | Calico custom resource short names | For new clusters, Calico custom resource short names `gnp` and `heps` are removed from the `globalnetworkpolicies.crd.projectcalico.org` and `hostendpoints.crd.projectcalico.org` custom resource definitions. Upgraded clusters retain the short names. Either way, if your `kubectl` commands rely on the short names, update them to use the standard names of `globalnetworkpolicies` and  `hostendpoints` instead. |
 | Legacy service account token cleanup | [Kubernetes legacy service account token cleaner](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#legacy-serviceaccount-token-cleaner) automatically labels, invalidates, and deletes unused legacy service account tokens. Tokens are labeled and invalidated when unused for one year, and then if unused for another year, deleted. You can use the `kubectl get secrets -A -l kubernetes.io/legacy-token-last-used -L kubernetes.io/legacy-token-last-used` command to determine when a legacy service account token was last used and the  `kubectl get secrets -A -l kubernetes.io/legacy-token-invalid-since -L kubernetes.io/legacy-token-invalid-since` command to determine if any legacy service account tokens are invalid and future candidates for deletion. Tokens labeled as invalid can be re-actived by removing the `kubernetes.io/legacy-token-invalid-since` label. For more information about these labels, see [`kubernetes.io/legacy-token-last-used`](https://kubernetes.io/docs/reference/labels-annotations-taints/#kubernetes-io-legacy-token-last-used) and [`kubernetes.io/legacy-token-invalid-since`](https://kubernetes.io/docs/reference/labels-annotations-taints/#kubernetes-io-legacy-token-invalid-since). |
+| **Removed**: Node `Hostname` address type | Kubernetes no longer adds `Hostname` address type to `.status.addresses`.  If you rely on the previous behavior, migrate to the `InternalIP` address type instead. For more information, see the related [Kubernetes community issue](https://github.com/kubernetes/kubernetes/issues/124453){: external} |
 {: caption="Changes to make before you update the master to Kubernetes 1.29" caption-side="bottom"}
 
 
