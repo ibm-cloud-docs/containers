@@ -327,12 +327,6 @@ toc:
               - cs_versions_127.md
               - cs_versions_changelog_127.md
               - cs_benchmarks_127.md
-          - topicgroup:
-              label: Version 1.26
-              topics:
-              - cs_versions_126.md
-              - cs_versions_changelog_126.md
-              - cs_benchmarks_126.md 
       - topicgroup:
           label: Add-on version history
           topics:
@@ -356,6 +350,12 @@ toc:
       - topicgroup:
           label: Archived version history
           topics:
+          - topicgroup:
+              label: Version 1.26
+              topics:
+              - cs_versions_126.md
+              - cs_versions_changelog_126.md
+              - cs_benchmarks_126.md
           - topicgroup:
               label: Version 1.25
               topics:
