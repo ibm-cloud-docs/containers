@@ -7668,6 +7668,8 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-2.0.0)
 
+    * [2.0.0_2266, released 04 June 24](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-2.0.0_2266)
+
     * [2.0.0_2250, released 08 May 24](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-2.0.0_2250)
 
 [ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog#alb-oauth-proxy-changelog)
