@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-03"
+lastupdated: "2024-06-04"
 
 
 keywords: containers
@@ -239,6 +239,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
+
+    * [4 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june0424)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs.
+
+        * ALB OAuth Proxy add-on patch updates.
 
     * [3 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june0324)
 
@@ -6342,6 +6348,8 @@ subcollection: containers
 
 * [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
 
+    * [Change log for worker node fix pack 1.30.1_1521, released 03 June 2024](/docs/containers?topic=containers-changelog_130#1301_1521_W)
+
     * [Change log for master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024](/docs/containers?topic=containers-changelog_130#1301_1520M_and_1300_1518W)
 
 [Kubernetes version 1.30 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-130)
@@ -6408,6 +6416,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
+
+    * [Change log for worker node fix pack 1.29.5_1541, released 03 June 2024](/docs/containers?topic=containers-changelog_129#1295_1541_W)
 
     * [Change log for master fix pack 1.29.5_1540, released 29 May 2024](/docs/containers?topic=containers-changelog_129#1295_1540_M)
 
@@ -6505,6 +6515,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.10_1561, released 03 June 2024](/docs/containers?topic=containers-changelog_128#12810_1561_W)
 
     * [Change log for master fix pack 1.28.10_1560, released 29 May 2024](/docs/containers?topic=containers-changelog_128#12810_1560_M)
 
@@ -6620,6 +6632,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.14_1578, released 03 June 2024](/docs/containers?topic=containers-changelog_127#12714_1578_W)
 
     * [Change log for master fix pack 1.27.14_1577, released 29 May 2024](/docs/containers?topic=containers-changelog_127#12714_1577_M)
 
