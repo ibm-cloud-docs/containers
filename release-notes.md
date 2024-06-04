@@ -26,7 +26,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: tip}
 
 
-
 ## June 2024
 {: #containers-june24}
   
