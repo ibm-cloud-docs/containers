@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2023, 2023
-lastupdated: "2023-08-01"
+  years: 2023, 2024
+lastupdated: "2024-06-06"
 
 connectivitykeywords: kubernetes, errhpaetpi, ingress, autoscaler, alb
 
@@ -43,7 +43,7 @@ To resolve the issue, choose one of the following options.
 Before you change the `ExternalTrafficPolicy` setting, review the information about [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer&interface=ui#lb_source_ip) for details on how this change might impact your cluster setup. If you decide that need to maintain source IP preservation, follow the step to disable ALB autoscaling instead.
 {: important}
 
-- **To change the `ExternalTrafficPolicy` setting**
+- To change the `ExternalTrafficPolicy` setting.
 
     1. Run the command to edit the load balancer service.
         ```sh
@@ -57,7 +57,7 @@ Before you change the `ExternalTrafficPolicy` setting, review the information ab
 
     1. If the issue persists, contact support. Include a detailed list of the troubleshooting steps you took. Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
 
-- **To disable ALB autoscaling**
+- To disable ALB autoscaling.
 
     1. Run the command to disable autoscaling for the cluster.
         ```sh

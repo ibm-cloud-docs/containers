@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes
@@ -374,7 +374,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     ```
     {: pre}
 
-    **Example CLI output**
+    Example CLI output
     ```sh
     NAME:                     hw-lb-svc
     Namespace:                default

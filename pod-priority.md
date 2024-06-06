@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, containers
@@ -34,7 +34,8 @@ Make sure that you have [set up proper user access](/docs/containers?topic=conta
 {: tip}
 
 
-**How does priority scheduling and preemption work?** {: #priority_scheduling}
+## How does priority scheduling and preemption work?
+{: #priority_scheduling}
 
 In general, pending pods that have a higher priority are scheduled before lower prioritized pods. If you don't have enough resources remaining in your worker nodes, the Kubernetes scheduler can preempt (remove) pods to free up enough resources for the higher prioritized pods to be scheduled. Preemption is also affected by graceful termination periods, pod disruption budgets, and worker node affinity.
 

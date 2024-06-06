@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-04-23"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, containers, 126, version 126, 126 update actions
@@ -23,8 +23,8 @@ Review information about version 1.26 of {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
 
-Kubernetes version 1.26 is deprecated. Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
-{: deprecated}
+Kubernetes version 1.26 is no longer supported. Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
+{: important}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
 {: tip}
@@ -47,7 +47,7 @@ The following table includes the expected release timeline for version 1.26 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-| Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
+| Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
 |------|------|----------|----------|
 | 1.26 | Yes | {{site.data.keyword.kubernetes_126_release_date}} | {{site.data.keyword.kubernetes_126_unsupported_date}} `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.26" caption-side="bottom"}
