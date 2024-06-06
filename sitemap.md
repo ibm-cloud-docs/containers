@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-04"
+lastupdated: "2024-06-06"
 
 
 keywords: containers
@@ -7667,6 +7667,8 @@ subcollection: containers
 [ALB OAuth Proxy add on version change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-change-log)
 
 * [Version 2.0.0](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-2.0.0)
+
+    * [2.0.0_2301, released 06 June 24](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-2.0.0_2301)
 
     * [2.0.0_2266, released 04 June 24](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-2.0.0_2266)
 
