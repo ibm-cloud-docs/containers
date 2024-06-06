@@ -39,7 +39,7 @@ The following table includes the expected release timeline for version 1.30 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-| Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
+| Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
 | 1.30 | Yes | {{site.data.keyword.kubernetes_130_release_date}} | {{site.data.keyword.kubernetes_130_unsupported_date}} `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.30" caption-side="bottom"}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-06-03"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
@@ -17,11 +17,10 @@ subcollection: containers
 # Kubernetes version 1.25 change log
 {: #changelog_125}
 
-View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.25. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
-{: shortdesc}
-
-Kubernetes version 1.25 is no longer supported. Update your cluster to at least [version 1.26](/docs/containers?topic=containers-cs_versions_126) as soon as possible.
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
+
+
 
 ## Overview
 {: #changelog_overview_125}

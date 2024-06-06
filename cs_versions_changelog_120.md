@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2024
-lastupdated: "2024-03-26"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.20
@@ -18,8 +18,8 @@ subcollection: containers
 # Kubernetes version 1.20 change log
 {: #changelog_120}
 
-Version 1.20 is unsupported. You can review the following archive of 1.20 change logs.
-{: shortdesc}
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 ## Overview
 {: #changelog_overview_120}

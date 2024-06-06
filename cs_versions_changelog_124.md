@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-06-03"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, containers
@@ -18,11 +18,9 @@ subcollection: containers
 # Kubernetes version 1.24 change log
 {: #changelog_124}
 
-View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.24. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
-{: shortdesc}
-
-Kubernetes version 1.24 is unsupported. Update your cluster to at least [version 1.25](/docs/containers?topic=containers-cs_versions_125) as soon as possible.
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
+
 
 ## Overview
 {: #changelog_overview_124}

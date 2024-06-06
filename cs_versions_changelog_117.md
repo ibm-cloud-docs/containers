@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2024
-lastupdated: "2024-01-05"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
@@ -17,12 +17,12 @@ subcollection: containers
 
 
 
-# Version 1.17 change log (unsupported as of 2 July 2021)
+# Version 1.17 change log
 {: #117_changelog}
 
 
-Version 1.17 is unsupported. You can review the following archive of 1.17 change logs.
-{: shortdesc}
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 ## Change log for worker node fix pack 1.17.17_1568, released 19 July 2021
 {: #11717_1568}

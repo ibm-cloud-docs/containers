@@ -22,7 +22,7 @@ subcollection: containers
 Review information about version 1.27 of {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Kubernetes version 1.27 is deprecated. Update your cluster to at least [version 1.28](/docs/containers?topic=containers-cs_versions_128) as soon as possible.
+This version deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: deprecated}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
@@ -47,7 +47,7 @@ The following table includes the expected release timeline for version 1.27 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-| Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
+| Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
 | 1.27 | Yes | {{site.data.keyword.kubernetes_127_release_date}} | {{site.data.keyword.kubernetes_127_unsupported_date}} `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.27" caption-side="bottom"}

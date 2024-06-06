@@ -20,7 +20,7 @@ subcollection: containers
 {: #cs_versions_124}
 
 
-Kubernetes version 1.24 is unsupported. Update your cluster to at least [version 1.25](/docs/containers?topic=containers-cs_versions_125) as soon as possible.
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 Review information about version 1.24 of {{site.data.keyword.containerlong}}, released {{site.data.keyword.kubernetes_124_release_date}}.
@@ -46,7 +46,7 @@ The following table includes the expected release timeline for version 1.24 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-|  Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
+|  Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
 | 1.24 | Yes | 09 Jun 2022 | {{site.data.keyword.kubernetes_124_unsupported_date}} |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.24" caption-side="bottom"}
