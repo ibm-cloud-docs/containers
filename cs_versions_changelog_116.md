@@ -21,7 +21,7 @@ subcollection: containers
 {: #116_changelog}
 
 
-This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 ## Change log for master fix pack 1.16.15_1557, released 19 January 2021

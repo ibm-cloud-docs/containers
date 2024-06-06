@@ -21,7 +21,7 @@ subcollection: containers
 {: #118_changelog}
 
 
-This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 ## Change log for worker node fix pack 1.18.20_1566, released 27 September 2021

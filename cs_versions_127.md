@@ -22,7 +22,7 @@ subcollection: containers
 Review information about version 1.27 of {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-This version deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: deprecated}
 
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).

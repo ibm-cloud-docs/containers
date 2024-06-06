@@ -20,7 +20,7 @@ subcollection: containers
 {: #cs_versions_124}
 
 
-This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 Review information about version 1.24 of {{site.data.keyword.containerlong}}, released {{site.data.keyword.kubernetes_124_release_date}}.

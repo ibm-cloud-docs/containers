@@ -19,7 +19,7 @@ subcollection: containers
 # Kubernetes version 1.21 change log
 {: #changelog_121}
 
-This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.21. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
