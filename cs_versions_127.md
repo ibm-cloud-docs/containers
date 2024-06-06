@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-05-30"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, containers, 127, version 127, 127 update actions
@@ -47,7 +47,7 @@ The following table includes the expected release timeline for version 1.27 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-| Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
+| Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
 |------|------|----------|----------|
 | 1.27 | Yes | {{site.data.keyword.kubernetes_127_release_date}} | {{site.data.keyword.kubernetes_127_unsupported_date}} `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.27" caption-side="bottom"}

@@ -240,6 +240,10 @@ subcollection: containers
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
 
+    * [5 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june0524)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.26`.
+
     * [4 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june0424)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs.
@@ -3565,6 +3569,8 @@ subcollection: containers
 
 [Setting pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)
 
+* [How does priority scheduling and preemption work?](/docs/containers?topic=containers-pod_priority#priority_scheduling)
+
 * [Understanding default priority classes](/docs/containers?topic=containers-pod_priority#default_priority_class)
 
 * [Creating a priority class](/docs/containers?topic=containers-pod_priority#create_priority_class)
@@ -4169,7 +4175,7 @@ subcollection: containers
 
     * [Updating your image pull secret](/docs/containers?topic=containers-registry#update-pull-secret)
 
-* [Using an image pull secret to access images in other {{site.data.keyword.cloud_notm}} accounts or external private registries from non-default Kubernetes namespaces](/docs/containers?topic=containers-registry#other)
+* [Using an image pull secret to access images in other accounts or external private registries from non-default Kubernetes namespaces](/docs/containers?topic=containers-registry#other)
 
     * [Copying an existing image pull secret](/docs/containers?topic=containers-registry#copy_imagePullSecret)
 
@@ -4509,9 +4515,23 @@ subcollection: containers
 
 * [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
 
-    * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public)
+* [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public)
 
-    * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public_vpc)
+    * [NLB v1.0](/docs/containers?topic=containers-cs_network_planning#classic-nlb-1-pattern)
+
+    * [NLB v2.0](/docs/containers?topic=containers-cs_network_planning#classic-nlb-2-pattern)
+
+    * [Istio + NLB subdomain](/docs/containers?topic=containers-cs_network_planning#classic-nlb-with-istio-pattern)
+
+    * [Ingress ALB](/docs/containers?topic=containers-cs_network_planning#classic-ingress-abl-pattern)
+
+* [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public_vpc)
+
+    * [VPC load balancer](/docs/containers?topic=containers-cs_network_planning#vpc-load-balancer)
+
+    * [Istio](/docs/containers?topic=containers-cs_network_planning#vpc-istio-pattern)
+
+    * [Ingress ALB](/docs/containers?topic=containers-cs_network_planning#ingress-alb)
 
 * [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access)
 
@@ -7546,6 +7566,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.26, released 5 June 2024](/docs/containers?topic=containers-cos_plugin_changelog#02226_object_plugin)
+
 * [Change log for version 2.2.25, released 24 April 2024](/docs/containers?topic=containers-cos_plugin_changelog#02225_object_plugin)
 
 * [Change log for version 2.2.24, released 22 February 2024](/docs/containers?topic=containers-cos_plugin_changelog#02224_object_plugin)
@@ -9915,7 +9937,7 @@ subcollection: containers
 
 * [Can I use other IBM Cloud services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
 
-* [How do I install a Cloud Pak in my {{site.data.keyword.openshiftlong_notm}} cluster? How do I access it later?](/docs/containers?topic=containers-faqs#cloud_pak_manage)
+* [How do I install a Cloud Pak in my cluster?](/docs/containers?topic=containers-faqs#cloud_pak_manage)
 
 * [Can I use the {{site.data.keyword.redhat_openshift_notm}} entitlement that comes with my Cloud Pak for my cluster?](/docs/containers?topic=containers-faqs#cloud_pak_byo_entitlement)
 
@@ -10241,7 +10263,7 @@ subcollection: containers
 
 [Classic: Why can't I add worker nodes with an invalid VLAN ID?](/docs/containers?topic=containers-suspended#suspended)
 
-[Classic: Why do I see a timeout error when I try to log in to a pod on a new worker node?](/docs/containers?topic=containers-cs_nodes_duplicate_ip#cs_nodes_duplicate_ip)
+[Why do I see a timeout error when I try to log in to a pod on a new worker node?](/docs/containers?topic=containers-cs_nodes_duplicate_ip#cs_nodes_duplicate_ip)
 
 [Why can't I SSH into my worker node?](/docs/containers?topic=containers-cs_ssh_worker#cs_ssh_worker)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-03"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, 1.20, versions, update, upgrade
@@ -40,7 +40,7 @@ The following table includes the expected release timeline for version 1.20 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-|  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
+|  Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
 |------|------|----------|----------|
 | 1.20 | Unsupported | 16 Feb 2021 | 19 June 2022 |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.20" caption-side="bottom"}

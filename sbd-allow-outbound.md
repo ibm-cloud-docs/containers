@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-03"
+lastupdated: "2024-06-06"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, outbound traffic protection, 1.30
 
@@ -130,7 +130,7 @@ Beginning with 1.30 clusters, an additional security group rule is needed for VP
     ```
     {: pre}
 
-1. Get the "Client IP pool" of your VPN server.
+1. Get the **Client IP pool** of your VPN server.
     ```sh
     ibmcloud is vpn-server | grep "Client IP pool"
     ```

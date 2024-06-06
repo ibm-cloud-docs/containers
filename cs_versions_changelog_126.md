@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-03"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
@@ -21,8 +21,8 @@ View information about version changes for major, minor, and patch updates that 
 {: shortdesc}
 
 
-Kubernetes version 1.26 is deprecated. Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
-{: deprecated}
+Kubernetes version 1.26 is no longer supported. Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
+{: important}
 
 
 ## Overview

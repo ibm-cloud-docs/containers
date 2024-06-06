@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, containers, 1.24 update actions
@@ -46,7 +46,7 @@ The following table includes the expected release timeline for version 1.24 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-|  Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
+|  Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
 |------|------|----------|----------|
 | 1.24 | Yes | 09 Jun 2022 | {{site.data.keyword.kubernetes_124_unsupported_date}} |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.24" caption-side="bottom"}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-04-04"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, containers, 128, version 128, 128 update actions
@@ -42,7 +42,7 @@ The following table includes the expected release timeline for version 1.28 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-| Version | Supported? | {{site.data.keyword.containerlong_notm}} \n release date | {{site.data.keyword.containerlong_notm}} \n unsupported date |
+| Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
 |------|------|----------|----------|
 | 1.28 | Yes | {{site.data.keyword.kubernetes_128_release_date}} | {{site.data.keyword.kubernetes_128_unsupported_date}} `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.28" caption-side="bottom"}

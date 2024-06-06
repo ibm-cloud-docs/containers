@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-06-06"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, registry, pull secret, secrets
@@ -220,7 +220,7 @@ To update your cluster image pull secret in the `default` Kubernetes namespace.
 
 
 
-## Using an image pull secret to access images in other {{site.data.keyword.cloud_notm}} accounts or external private registries from non-default Kubernetes namespaces
+## Using an image pull secret to access images in other accounts or external private registries from non-default Kubernetes namespaces
 {: #other}
 
 Set up your own image pull secret in your cluster to deploy containers to Kubernetes namespaces other than `default`, use images that are stored in other {{site.data.keyword.cloud_notm}} accounts, or use images that are stored in external private registries. Further, you might create your own image pull secret to apply IAM access policies that restrict permissions to specific registry image namespaces, or actions (such as `push` or `pull`).

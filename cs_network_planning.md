@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-19"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, networking
@@ -145,76 +145,87 @@ When an app is publicly exposed, anyone that has the public service IP address o
 
 The public network interface for worker nodes is protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports. These ports are opened so that IBM can monitor network traffic and automatically install security updates for the Kubernetes master, and so that connections can be established to NodePort, LoadBalancer, and Ingress services. For more information about these policies, including how to modify them, see [Network policies](/docs/containers?topic=containers-network_policies#network_policies).
 
-### Choosing a deployment pattern for classic clusters
+## Choosing a deployment pattern for classic clusters
 {: #pattern_public}
 
 To make an app publicly available to the internet in a classic cluster, choose a load balancing deployment pattern that uses public NodePort, LoadBalancer, or Ingress services. The following table describes each possible deployment pattern, why you might use it, and how to set it up. For basic information about the networking services that these deployment patterns use, see [Understanding Kubernetes service types](#external).
 
 
-NodePort
-:   **Load-balancing method**: Port on a worker node that exposes the app on the worker's public IP address
-:   **Use case**: Test public access to one app or provide access for only a short amount of time.
-:   **Implementation**: [Create a public NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config).
 
 
-NLB v1.0 (+ subdomain)
-:   **Load-balancing method**: Basic load balancing that exposes the app with an IP address or a subdomain.
-:   **Use case**: Quickly expose one app to the public with an IP address or a subdomain that supports SSL termination.
-:   **Implementation**:
-        1. Create a public network load balancer (NLB) 1.0 in a [single](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.  
-        2. Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.
+### NLB v1.0
+{: #classic-nlb-1-pattern}
+
+- **Load-balancing method**: Basic load balancing that exposes the app with an IP address or a subdomain.
+-  **Use case**: Quickly expose one app to the public with an IP address or a subdomain that supports SSL termination.
+- **Implementation**:
+    1. Create a public network load balancer (NLB) 1.0 in a [single](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.  
+    2. Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.
     
-NLB v2.0 (+ subdomain)
-:   **Load-balancing method**: DSR load balancing that exposes the app with an IP address or a subdomain
-:   **Use case**: Expose an app that might receive high levels of traffic to the public with an IP address or a subdomain that supports SSL termination.
-:   **Implementation**: 
-        1. Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).
-        2. Create a public NLB 2.0 in a [single](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config) cluster.
-        3. Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.
+### NLB v2.0
+{: #classic-nlb-2-pattern}
+
+- **Load-balancing method**: DSR load balancing that exposes the app with an IP address or a subdomain
+
+- **Use case**: Expose an app that might receive high levels of traffic to the public with an IP address or a subdomain that supports SSL termination.
+- **Implementation**: 
+    1. Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).
+    2. Create a public NLB 2.0 in a [single](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config) cluster.
+    3. Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.
     
-Istio + NLB subdomain
-:   **Load-balancing method**: Basic load balancing that exposes the app with a subdomain and uses Istio routing rules.
-:   **Use case**: Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public subdomain.
-:   **Implementation**:
-        1. Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).
-        2. Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).
-        3. Register the default Istio load balancer with [a subdomain](/docs/containers?topic=containers-istio-mesh#istio_expose).
+### Istio + NLB subdomain
+{: #classic-nlb-with-istio-pattern}
+
+- **Load-balancing method**: Basic load balancing that exposes the app with a subdomain and uses Istio routing rules.
+- **Use case**: Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public subdomain.
+- **Implementation**:
+    1. Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).
+    2. Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).
+    3. Register the default Istio load balancer with [a subdomain](/docs/containers?topic=containers-istio-mesh#istio_expose).
         
-Ingress ALB
-:   **Load-balancing method**: HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules.
-:   **Use case**: Implement custom routing rules and SSL termination for multiple apps.
-:   **Implementation**:
-        1. Create an [Ingress service](/docs/containers?topic=containers-managed-ingress-setup) for the public ALB.
-        2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
+### Ingress ALB
+{: #classic-ingress-abl-pattern}
+
+- **Load-balancing method**: HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules.
+- **Use case**: Implement custom routing rules and SSL termination for multiple apps.
+- **Implementation**:
+    1. Create an [Ingress service](/docs/containers?topic=containers-managed-ingress-setup) for the public ALB.
+    2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
 
 
-### Choosing a deployment pattern for VPC clusters
+## Choosing a deployment pattern for VPC clusters
 {: #pattern_public_vpc}
 
 To make an app publicly available to the internet in a VPC cluster, choose a load balancing deployment pattern that uses public `LoadBalancer` or `Ingress` services. The following table describes each possible deployment pattern, why you might use it, and how to set it up. For basic information about the networking services that these deployment patterns use, see [Understanding Kubernetes service types](#external).
 {: shortdesc}
 
 
-VPC load balancer
-:   **Load-balancing method**: Basic load balancing that exposes the app with a hostname
-:   **Use case**: Quickly expose one app to the public with a VPC load balancer-assigned hostname.
-:   **Implementation**: [Create a public `LoadBalancer` service](/docs/containers?topic=containers-vpc-lbaas) in your cluster. A VPC load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.
+### VPC load balancer
+{: vpc-loadbal-pattern}
 
-Istio
-:   **Load-balancing method**: Basic load balancing that exposes the app with a hostname and uses Istio routing rules
-:   **Use case**: Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public hostname.
-:   **Implementation**: 
+- **Load-balancing method**: Basic load balancing that exposes the app with a hostname
+- **Use case**: Quickly expose one app to the public with a VPC load balancer-assigned hostname.
+- **Implementation**: [Create a public `LoadBalancer` service](/docs/containers?topic=containers-vpc-lbaas) in your cluster. A VPC load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.
+
+### Istio
+{: #vpc-istio-pattern}
+
+- **Load-balancing method**: Basic load balancing that exposes the app with a hostname and uses Istio routing rules
+- **Use case**: Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public hostname.
+- **Implementation**: 
         1. Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).
         2. Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).
         3. Register the default Istio load balancer with [a hostname](/docs/containers?topic=containers-istio-mesh#istio_expose).
         
         
-Ingress ALB
-:   **Load-balancing method**: HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules.
-:   **Use case**: Implement custom routing rules and SSL termination for multiple apps.
-:   **Implementation**: 
-        1. Create an [Ingress service](/docs/containers?topic=containers-managed-ingress-setup) for the public ALB.
-        2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
+### Ingress ALB
+{: vpc-ingress-alb-pattern}
+
+- **Load-balancing method**: HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules.
+- **Use case**: Implement custom routing rules and SSL termination for multiple apps.
+- **Implementation**: 
+    1. Create an [Ingress service](/docs/containers?topic=containers-managed-ingress-setup) for the public ALB.
+    2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
 
 
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
@@ -88,7 +88,6 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
 
     
     
-    **Kubernetes**
     ```yaml
     apiVersion: v1
     kind: List
