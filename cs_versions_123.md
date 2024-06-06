@@ -19,7 +19,7 @@ subcollection: containers
 # 1.23 version information and update actions
 {: #cs_versions_123}
 
-Kubernetes version 1.23 is no longer supported. Update your cluster to at least [version 1.24](/docs/containers?topic=containers-cs_versions_124) as soon as possible.
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 Review information about version 1.23.
@@ -40,7 +40,7 @@ The following table includes the expected release timeline for version 1.23 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-|  Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
+|  Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
 | 1.23 | Yes | 09 Feb 2022 |  08 May 2023 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.23" caption-side="bottom"}

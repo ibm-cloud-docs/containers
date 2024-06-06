@@ -16,7 +16,7 @@ subcollection: containers
 # 1.20 version information and update actions
 {: #cs_versions_120}
 
-Kubernetes version 1.20 is unsupported as of 19 June 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 Review information about version 1.20 of {{site.data.keyword.containerlong}}, released 16 Feb 2021.

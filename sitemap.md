@@ -9444,7 +9444,7 @@ subcollection: containers
 
 * [Change log for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-118_changelog#1182_1512)
 
-[Version 1.17 change log (unsupported as of 2 July 2021)](/docs/containers?topic=containers-117_changelog#117_changelog)
+[Version 1.17 change log](/docs/containers?topic=containers-117_changelog#117_changelog)
 
 * [Change log for worker node fix pack 1.17.17_1568, released 19 July 2021](/docs/containers?topic=containers-117_changelog#11717_1568)
 
@@ -9556,7 +9556,7 @@ subcollection: containers
 
 * [Change log for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-117_changelog#1172_1515)
 
-[Version 1.16 change log (unsupported as of 31 January 2021)](/docs/containers?topic=containers-116_changelog#116_changelog)
+[Version 1.16 change log](/docs/containers?topic=containers-116_changelog#116_changelog)
 
 * [Change log for master fix pack 1.16.15_1557, released 19 January 2021](/docs/containers?topic=containers-116_changelog#11615_1557_master)
 

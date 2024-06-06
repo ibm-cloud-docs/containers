@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2024
-lastupdated: "2024-01-05"
+lastupdated: "2024-06-06"
 
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
@@ -20,8 +20,8 @@ subcollection: containers
 # Kubernetes version 1.19 change log
 {: #changelog_119}
 
-Version 1.19 is unsupported. You can review the following archive of 1.19 change logs.
-{: shortdesc}
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 ## Overview
 {: #changelog_overview_119}

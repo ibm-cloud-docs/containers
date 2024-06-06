@@ -17,11 +17,10 @@ subcollection: containers
 # Kubernetes version 1.26 change log
 {: #changelog_126}
 
-View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.26. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
-{: shortdesc}
 
 
-Kubernetes version 1.26 is no longer supported. Update your cluster to at least [version 1.27](/docs/containers?topic=containers-cs_versions_127) as soon as possible.
+
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 

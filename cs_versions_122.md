@@ -19,7 +19,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-Kubernetes version 1.22 is no longer supported.
+This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 
@@ -41,7 +41,7 @@ The following table includes the expected release timeline for version 1.22 of {
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-|  Version | Supported? | {{site.data.keyword.containerlong_notm}} | Release date | {{site.data.keyword.containerlong_notm}} | Unsupported date |
+|  Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
 | 1.22 | Yes | 29 Sept 2021 | 14 Dec 2022 `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.22" caption-side="bottom"}
