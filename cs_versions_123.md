@@ -19,7 +19,7 @@ subcollection: containers
 # 1.23 version information and update actions
 {: #cs_versions_123}
 
-This version no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 Review information about version 1.23.
