@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-06-07"
 
 
 keywords: containers
@@ -4527,11 +4527,11 @@ subcollection: containers
 
 * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public_vpc)
 
-    * [VPC load balancer](/docs/containers?topic=containers-cs_network_planning#vpc-load-balancer)
+    * [VPC load balancer](/docs/containers?topic=containers-cs_network_planning#vpc-loadbal-pattern)
 
     * [Istio](/docs/containers?topic=containers-cs_network_planning#vpc-istio-pattern)
 
-    * [Ingress ALB](/docs/containers?topic=containers-cs_network_planning#ingress-alb)
+    * [Ingress ALB](/docs/containers?topic=containers-cs_network_planning#vpc-ingress-alb-pattern)
 
 * [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access)
 

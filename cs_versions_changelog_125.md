@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-06-07"
 
 
 keywords: kubernetes, containers, change log, 125 change log, 125 updates
@@ -17,8 +17,12 @@ subcollection: containers
 # Kubernetes version 1.25 change log
 {: #changelog_125}
 
+
+
 This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
+
+
 
 
 
