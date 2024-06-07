@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-06-07"
 
 
 keywords: kubernetes, networking
@@ -201,7 +201,7 @@ To make an app publicly available to the internet in a VPC cluster, choose a loa
 
 
 ### VPC load balancer
-{: vpc-loadbal-pattern}
+{: #vpc-loadbal-pattern}
 
 - **Load-balancing method**: Basic load balancing that exposes the app with a hostname
 - **Use case**: Quickly expose one app to the public with a VPC load balancer-assigned hostname.
@@ -219,7 +219,7 @@ To make an app publicly available to the internet in a VPC cluster, choose a loa
         
         
 ### Ingress ALB
-{: vpc-ingress-alb-pattern}
+{: #vpc-ingress-alb-pattern}
 
 - **Load-balancing method**: HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules.
 - **Use case**: Implement custom routing rules and SSL termination for multiple apps.

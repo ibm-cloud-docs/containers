@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-06-07"
 
 
 keywords: kubernetes, 1.22, versions, update, upgrade
@@ -19,8 +19,12 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
+
+
 This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
+
+
 
 
 Review information about version 1.22 of {{site.data.keyword.containerlong}}, released 29 Sept 2021.

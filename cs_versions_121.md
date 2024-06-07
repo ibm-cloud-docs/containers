@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-06-07"
 
 
 keywords: kubernetes, 1.21, versions, update, upgrade
@@ -18,8 +18,12 @@ subcollection: containers
 # 1.21 version information and update actions
 {: #cs_versions_121}
 
+
+
 This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
+
+
 
 Review information about version 1.21 of {{site.data.keyword.containerlong}}, released 09 Jun 2021.
 {: shortdesc}

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-06-07"
 
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch
@@ -21,8 +21,12 @@ subcollection: containers
 {: #118_changelog}
 
 
+
+
 This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
+
+
 
 ## Change log for worker node fix pack 1.18.20_1566, released 27 September 2021
 {: #11820_1566}
