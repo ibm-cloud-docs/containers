@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-06-10"
 
 
 keywords: ingress, expose apps, ingress resource, ALB, domain
@@ -220,7 +220,7 @@ If you do not want to use the IBM-provided Ingress subdomain, you can use your o
 Follow the steps to create a custom domain for public ALBs.
 {: shortdesc}
 
-1. Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/dns?topic=dns-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`. Note that domains are limited to 130 characters or fewer in Kubernetes version 1.20 or later.
+1. Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/dns-svcs?topic=dns-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`. Note that domains are limited to 130 characters or fewer in Kubernetes version 1.20 or later.
 
 2. Define an alias for your custom domain by specifying the IBM-provided subdomain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster get --cluster <cluster_name>` and look for the **Ingress subdomain** field.
 
