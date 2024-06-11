@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-06-10"
 
 
 keywords: containers
@@ -5561,7 +5561,7 @@ subcollection: containers
 
     * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
 
-* [Modifying worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
+* [Modifying worker node kernel settings to optimize performance](/docs/containers?topic=containers-kernel#worker-kernel-ds)
 
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 
