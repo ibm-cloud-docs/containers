@@ -80,7 +80,7 @@ ALB OAuth Proxy add-on patch updates.
 {: release-note}
 
 Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
-:   Version 1.6.4 is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   Version 1.6.4 is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -321,7 +321,7 @@ Istio add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 ALB OAuth Proxy add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -387,7 +387,7 @@ New! NVIDIA L40 GPU support. You can now create VPC clusters with worker nodes w
 
 
 Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -499,7 +499,7 @@ New! NVIDIA L4 GPU support. You can now create VPC clusters with worker nodes wh
 
 
 Ingress ALB patch updates `1.9.4_6376_iks`, `1.8.4_6375_iks`, and `1.6.4_6374_iks` for {{site.data.keyword.containerlong_notm}}.
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -542,7 +542,7 @@ Kubernetes version 1.29 certification
 {: release-note}
 
 Ingress ALB versions `1.9.4_6359_iks` and `1.8.4_6363_iks` are available for {{site.data.keyword.containerlong_notm}}.
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -595,7 +595,7 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
     - [1.26.13_1571](/docs/containers?topic=containers-changelog_126)
 
 Ingress ALB versions `1.9.4_6346_iks`, `1.8.4_6345_iks`, `1.6.4_6344_iks` are available for {{site.data.keyword.containerlong_notm}}.
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -634,7 +634,7 @@ Istio add-on versions `1.20.2`, `1.19.6`, and `1.18.7` are available.
 
   
 Ingress ALB updates
-:   Ingress ALB versions `1.9.4_6292_iks`, `1.8.4_6291_iks`, `1.6.4_6293_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   Ingress ALB versions `1.9.4_6292_iks`, `1.8.4_6291_iks`, `1.6.4_6293_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -697,7 +697,7 @@ Worker node fix packs are available.
 
   
 Ingress ALB updates
-:   Ingress ALB versions `1.9.4_6251_iks`, `1.8.4_6245_iks`, `1.6.4_6250_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   Ingress ALB versions `1.9.4_6251_iks`, `1.8.4_6245_iks`, `1.6.4_6250_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -741,7 +741,7 @@ Cluster autoscaler add-on patch updates `1.2.0_322` and `1.0.9_328`.
 
 
 ALB OAuth Proxy add-on version `2.0.0_2063`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -760,7 +760,7 @@ Subscribe to the {{site.data.keyword.cloud_notm}} documentation release notes vi
 
   
 Ingress ALB updates
-:   Ingress ALB versions `1.9.4_6161_iks`, `1.8.4_6173_iks`, `1.6.4_6177_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   Ingress ALB versions `1.9.4_6161_iks`, `1.8.4_6173_iks`, `1.6.4_6177_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 Istio cluster add-on versions `1.20.0`, `1.19.5`, and `1.18.6`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
@@ -897,7 +897,7 @@ Istio add-on version `1.19.4`.
 
   
 Ingress ALB updates
-:   Ingress ALB versions `1.9.4_5886_iks`, `1.8.4_5885_iks`, `1.6.4_5884_iks` are available. 1.9.4 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   Ingress ALB versions `1.9.4_5886_iks`, `1.8.4_5885_iks`, `1.6.4_5884_iks` are available. 1.9.4 is now the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 Worker node fix packs are available. 
@@ -963,7 +963,7 @@ Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, a
 
 
 Ingress ALB updates
-:    Ingress ALB versions `1.9.4_5756_iks`, `1.8.4_5757_iks`, `1.6.4_5727_iks` are available. For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:    Ingress ALB versions `1.9.4_5756_iks`, `1.8.4_5757_iks`, `1.6.4_5727_iks` are available. For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1054,7 +1054,7 @@ CLI version `1.0.579` is available.
 
 
 Ingress ALB updates
-:    Ingress ALB versions `1.9.4_5698_iks`, `1.8.4_5644_iks`, `1.6.4_5642_iks` are available. Version `1.8.4_5644_iks` is now the default version. Version `1.5.1` is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:    Ingress ALB versions `1.9.4_5698_iks`, `1.8.4_5644_iks`, `1.6.4_5642_iks` are available. Version `1.8.4_5644_iks` is now the default version. Version `1.5.1` is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1110,7 +1110,7 @@ Master fix packs are available.
 
 
 ALB OAuth Proxy add-on version `2.0.0_1901`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -1137,7 +1137,7 @@ Worker node fix packs are available.
 
 
 Ingress ALB version `1.8.4_5586_ikss`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1151,7 +1151,7 @@ Istio add-on version `1.18.5` and `1.17.8`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
   
 ALB OAuth Proxy add-on version `2.0.0_1889`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -1163,7 +1163,7 @@ ALB OAuth Proxy add-on version `2.0.0_1889`.
 {: release-note}
 
 Ingress ALB versions `1.8.1_5543_iks`, `1.6.4_5544_iks`, and `1.5.1_5542_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1172,7 +1172,7 @@ Ingress ALB versions `1.8.1_5543_iks`, `1.6.4_5544_iks`, and `1.5.1_5542_iks`
 {: release-note}
 
 Ingress ALB versions `1.5.1_5436_iks`, `1.6.4_5435_iks`, and `1.8.1_5434_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.19`
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
@@ -1218,7 +1218,7 @@ Worker node fix packs are available.
 {: release-note} 
 
 Ingress ALB versions `1.8.1_5384_iks`, `1.6.4_5406_iks`, and `1.5.1_5407_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1270,7 +1270,7 @@ Worker node fix packs are available.
 
 
 ALB OAuth Proxy add-on version `2.0.0_1843`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
   
 
 
@@ -1389,7 +1389,7 @@ Worker node fix packs are available.
 {: release-note} 
 
 Ingress ALB versions `1.8.1_5317_iks`, `1.6.4_5270_iks`, and `1.5.1_5318_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1447,7 +1447,7 @@ Worker node fix packs are available.
 {: release-note}
 
 ALB OAuth Proxy add-on version `2.0.0_1715`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -1560,7 +1560,7 @@ Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1`.
 {: release-note} 
 
 Ingress ALB versions `1.6.4_5219_iks`, `1.5.1_5217_iks`, and `1.4.0_5218_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1624,7 +1624,7 @@ Worker node fix packs `1.24.15_1576`, `1.25.11_1552`, `1.26.6_1544`, and `1.27.3
 {: release-note}
 
 ALB OAuth Proxy add-on version `2.0.0_1669`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -1664,7 +1664,7 @@ Pod security admission updates
 {: release-note} 
 
 Ingress ALB versions `1.6.4_5161_iks`, `1.5.1_5160_iks`, and `1.4.0_5159_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1785,7 +1785,7 @@ Istio add-on version `1.16.5`.
 {: release-note}
 
 Ingress ALB versions `1.6.4_5067_iks`, `1.5.1_5074_iks`, and `1.4.0_5068_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1846,7 +1846,7 @@ Worker node fix packs `1.24.14_1570`, `1.25.10_1546`, and `1.26.5_1538`.
 {: release-note}
 
 Ingress ALB versions `1.6.4_4170_iks`, `1.5.1_4168_iks`, and `1.4.0_4169_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1896,7 +1896,7 @@ Worker node fix packs `1.24.13_1567`, `1.25.9_1544`, and `1.26.4_1536`.
 {: release-note}
 
 Ingress ALB version `1.6.4_4117_iks`, `1.5.1_4113_iks`, and `1.4.0_4114_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -1922,7 +1922,7 @@ Ingress ALB version `1.6.4_4117_iks`, `1.5.1_4113_iks`, and `1.4.0_4114_iks`
 
   
 Ingress ALB version `1.6.4_4073_iks`, `1.5.1_4064_iks`, and `1.4.0_4062_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
   
 Master fix packs `1.23.17_1576`, `1.24.13_1566`, `1.25.9_1543`, and `1.26.4_1535`.
 :   For more information, see the change logs: [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), [1.25](/docs/containers?topic=containers-changelog_125), and [1.26](/docs/containers?topic=containers-changelog_126).
@@ -1962,7 +1962,7 @@ Istio add-on version `1.16.4` and `1.17.2`.
 {: release-note}
 
 ALB OAuth Proxy add-on version `2.0.0_1528`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -1973,7 +1973,7 @@ ALB OAuth Proxy add-on version `2.0.0_1528`.
 {: release-note}
 
 Ingress ALB version `1.6.4_3976_iks`, `1.5.1_3977_iks`, and `1.4.0_3978_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -2004,7 +2004,7 @@ Cluster autoscaler add-on versions `1.0.6_1010`, `1.0.7_1021`, and `1.0.8_1016`.
 {: release-note}
 
 Ingress ALB version `1.4.0_3953_iks`, `1.5.1_3951_iks`, and `1.6.4_3947_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -2058,7 +2058,7 @@ Worker node fix packs `1.23.17_1570`, `1.24.12_1560`, `1.25.8_1537`, and `1.26.3
 {: release-note}
 
 Ingress ALB version `1.4.0_3896_iks`, `1.5.1_3897_iks`, and `1.6.4_3898_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -2095,7 +2095,7 @@ Cluster autoscaler add-on version `1.1.0_978`.
 
 
 Ingress ALB version `1.4.0_3862_iks`, `1.5.1_3863_iks`, and `1.6.4_3864_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 Worker node fix packs `1.23.16_1568`, `1.24.10_1558`, `1.25.6_1535`, and `1.26.1_1525`.
@@ -2162,7 +2162,7 @@ CLI version `1.0.498`.
 :   For more information, see the [change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ALB OAuth Proxy add-on version `2.0.0_1487`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 ## February 2023
@@ -2188,7 +2188,7 @@ Worker node fix packs `1.23.16_1563`, `1.24.10_1554`, `1.25.6_1532`, and `1.26.1
 {: release-note}
 
 Ingress ALB version `1.3.1_3807_iks`, `1.4.0_3808_iks`, and `1.5.1_3809_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -2199,7 +2199,7 @@ Ingress ALB version `1.3.1_3807_iks`, `1.4.0_3808_iks`, and `1.5.1_3809_iks`
 {: release-note}
 
 ALB OAuth Proxy add-on version `2.0.0_1469`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -2220,7 +2220,7 @@ ALB OAuth Proxy add-on version `2.0.0_1469`.
 {: release-note}
 
 Ingress ALB version `1.3.1_3777_iks`, `1.4.0_3783_iks`, and `1.5.1_3779_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
   
@@ -2263,7 +2263,7 @@ New troubleshooting doc for how to recover after deleting a portable subnet in C
 
 
 Ingress ALB version `1.3.1_3754_iks` and `1.4.0_3755_iks`
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -2282,7 +2282,7 @@ Ingress ALB version `1.3.1_3754_iks` and `1.4.0_3755_iks`
 {: release-note}
 
 ALB OAuth Proxy add-on version `2.0.0_1420`.
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -2347,7 +2347,7 @@ CLI version `1.0.489`.
 
 
 Ingress ALB version `1.5.1_3705_iks`, `1.4.0_3703_iks`, and `1.3.1_3704_iks`.
-:   For more information, see the [change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -2365,7 +2365,7 @@ Cluster autoscaler add-on version `1.0.7_940`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 Ingress ALB version `1.3.1_3685_iks`, `1.4.0_3684_iks`, and `1.5.1_3683_iks`
-:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 ### 23 January 2023
@@ -2419,7 +2419,7 @@ Cluster autoscaler add-on versions `1.0.5_898`, `1.0.6_899`, `1.0.7_900`, and `1
 {: release-note}
 
 Ingress ALB version `1.3.1_3538_iks`, and `1.4.0_3537_iks`
-:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -2458,10 +2458,10 @@ Worker node fix packs `1.22.17_1583`, `1.23.15_1556`, `1.24.9_1548`, and `1.25.5
 
 
 Ingress ALB version `1.2.1_3299_iks`, `1.3.1_3298_iks`, and `1.4.0_3297_iks`
-:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 ALB OAuth Proxy add-on version 2.0.0_1354
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -2496,7 +2496,7 @@ CLI version 1.0.480 change log update
 
 
 Ingress ALB version `1.4.0_3212_iks` change log updates
-:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -2514,7 +2514,7 @@ Ingress ALB version `1.4.0_3212_iks` change log updates
 {: release-note}
 
 Ingress ALB version `1.3.1_3192_iks` change log updates
-:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 
@@ -2527,7 +2527,7 @@ Ingress ALB version `1.3.1_3192_iks` change log updates
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 Ingress ALB version `1.2.1_3186_iks` change log updates
-:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress).
+:   For more information, see the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
  Worker node fix packs 1.22.16_1580, 1.23.14_1554, 1.24.8_1546, and 1.25.4_1524
 :   For more information, see the change logs: [1.22.16_1580](/docs/containers?topic=containers-changelog_122), [1.23.14_1554](/docs/containers?topic=containers-changelog_123), [1.24.8_1546](/docs/containers?topic=containers-changelog_124), and [1.25.4_1524](/docs/containers?topic=containers-changelog_125).
@@ -2552,7 +2552,7 @@ Istio add-on version `1.16.0`
 
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for version `1.3.1_3108_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for version `1.3.1_3108_iks`.
 
 
 
@@ -2587,7 +2587,7 @@ Worker node fix pack 1.22.16_1579, 1.23.14_1553, 1.24.8_1545, and 1.25.4_1523
 
 
 ALB OAuth Proxy add-on version 2.0.0_1315
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
   
 Master fix pack 1.22.16_1578, 1.23.14_1552, 1.24.8_1544, and 1.25.4_1522
 :   For more information, see the change logs: [1.22](/docs/containers?topic=containers-changelog_122), [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
@@ -2671,7 +2671,7 @@ Cluster autoscaler add-on version `1.0.7_883`.
 {: release-note}
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for version `1.3.0_2907_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for version `1.3.0_2907_iks`.
 
 
 
@@ -2682,7 +2682,7 @@ Ingress ALB change log updates
 
 
 ALB OAuth Proxy add-on version 2.0.0_1297
-:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 Master fix pack 1.22.15_1576, 1.23.13_1550, 1.24.7_1542, and 1.25.3_1520
 :   For more information, see the change logs: [1.22](/docs/containers?topic=containers-changelog_122), [1.23](/docs/containers?topic=containers-changelog_123), [1.24](/docs/containers?topic=containers-changelog_124), and [1.25](/docs/containers?topic=containers-changelog_125).
@@ -2712,7 +2712,7 @@ Istio add-on
 {: release-note}
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.3.0_2847_iks`, `1.2.1_2809_iks`, and `1.1.2_2808_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.3.0_2847_iks`, `1.2.1_2809_iks`, and `1.1.2_2808_iks`.
 
 ### 21 October 2022
 {: #containers-oct2122}
@@ -2799,10 +2799,10 @@ Ingress ConfigMap change log updates
 :   Updated the [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log).
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.2.1_2646_iks` and `1.1.2_2645_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.2.1_2646_iks` and `1.1.2_2645_iks`.
 
 ALB OAuth Proxy add-on
-:   Version 2.0.0_1265 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released. 
+:   Version 2.0.0_1265 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) is released. 
 
 
 
@@ -2861,7 +2861,7 @@ CLI change log update
 
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.2.1_2558_iks` and `1.1.2_2586_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.2.1_2558_iks` and `1.1.2_2586_iks`.
 
 
 
@@ -2911,7 +2911,7 @@ CLI change log update
 
 
 ALB OAuth Proxy add-on
-:   Version 2.0.0_1214 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released. 
+:   Version 2.0.0_1214 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) is released. 
 
 ### 8 September 2022
 {: #containers-sep0822}
@@ -2963,7 +2963,7 @@ CLI change log update
 
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.2.1_2506_iks` and `1.1.2_2507_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.2.1_2506_iks` and `1.1.2_2507_iks`.
 
 
 
@@ -3010,7 +3010,7 @@ Dynamically provision {{site.data.keyword.cos_full_notm}} buckets with quotas en
 
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.2.1_2487_iks` and `1.1.2_2488_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.2.1_2487_iks` and `1.1.2_2488_iks`.
 
 
 
@@ -3036,7 +3036,7 @@ New! {{site.data.keyword.filestorage_vpc_full_notm}} CSI Driver (Beta)
 {: release-note}
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.2.1_2426_iks` and `1.1.2_2411_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.2.1_2426_iks` and `1.1.2_2411_iks`.
 
 
 
@@ -3086,7 +3086,7 @@ Cluster autoscaler add-on
 
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.1.2_2368_iks` and `1.2.1_2415_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.1.2_2368_iks` and `1.2.1_2415_iks`.
 
 
 
@@ -3142,7 +3142,7 @@ CLI change log update
 {: release-note} 
  
 ALB OAuth Proxy add-on
-:   Version 2.0.0_1187 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released. 
+:   Version 2.0.0_1187 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) is released. 
 
 
 
@@ -3156,7 +3156,7 @@ Worker node fix pack
 
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for version `1.1.2_2305_iks`. Version `0.49.3` is no longer supported.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for version `1.1.2_2305_iks`. Version `0.49.3` is no longer supported.
 
 ## June 2022
 {: #containers-jun22}
@@ -3277,7 +3277,7 @@ Istio add-on
 :   {{site.data.keyword.containerlong_notm}} clusters running in Washington, D.C. (`us-east`) now send logs to {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} instances in the same region, Washington, D.C. (`us-east`). For more information, see [{{site.data.keyword.at_full_notm}}](/docs/containers?topic=containers-at_events).
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for version `1.2.1_2337_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for version `1.2.1_2337_iks`.
 
 {{site.data.keyword.block_storage_is_short}} add-on.
 :   [Version 5.0.0-beta_1125](/docs/containers?topic=containers-vpc_bs_changelog) is available for allowlisted accounts.
@@ -3364,7 +3364,7 @@ Istio add-on
 :   Version [`1.12.7`](/docs/containers?topic=containers-istio-changelog#1127) is available.
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.2.0_2251_iks`, `1.1.2_2252_iks`, and `0.49.3_2253_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.2.0_2251_iks`, `1.1.2_2252_iks`, and `0.49.3_2253_iks`.
 
 
 ### 16 May 2022
@@ -3375,7 +3375,7 @@ Cluster autoscaler add-on
 :   Versions `1.0.5_628` and `1.1.0_615` are available. See [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 ALB OAuth Proxy add-on
-:   Version 1.0.0 is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   Version 1.0.0 is no longer supported. For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 ### 12 May 2022
 {: #containers-may1222}
@@ -3406,9 +3406,9 @@ Worker node fix pack
 
   
 ALB OAuth Proxy add-on
-:   Version 2.0.0_1064 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released.
+:   Version 2.0.0_1064 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) is released.
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.2.0_2147_iks`, `1.1.2_2146_iks`, and `0.49.3_2145_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.2.0_2147_iks`, `1.1.2_2146_iks`, and `0.49.3_2145_iks`.
 
 
 
@@ -3441,7 +3441,7 @@ Cluster security groups
 {: release-note}
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for version `1.2.0_2131_iks`. Version `1.1.1` is no longer available.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for version `1.2.0_2131_iks`. Version `1.1.1` is no longer available.
 
 
 CLI change log update
@@ -3463,7 +3463,7 @@ Worker node fix pack
 {: release-note}
   
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.1.2_2121_iks`, `1.1.1_2119_iks`, and `0.49.3_2120_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.1.2_2121_iks`, `1.1.1_2119_iks`, and `0.49.3_2120_iks`.
   
 
 
@@ -3518,7 +3518,7 @@ Worker node fix pack
 
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.1.2_2084_iks`, `1.1.1_2085_iks`, and `0.49.3_2083_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.1.2_2084_iks`, `1.1.1_2085_iks`, and `0.49.3_2083_iks`.
 
 
 
@@ -3573,7 +3573,7 @@ Worker node fix pack update.
 
   
 ALB OAuth Proxy add-on
-:   Versions 1.0.0_1024 and 2.0.0_1023 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
+:   Versions 1.0.0_1024 and 2.0.0_1023 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) are released.
 
 
 
@@ -3585,7 +3585,7 @@ Hong Kong (`HKG02`) and Seoul (`SEO01`) are deprecated and become unsupported la
 :   To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG02`) and Seoul (`SEO01`) clusters by 28 September 2022. Clusters remaining in these data centers after 28 September 2022 will be removed. Cluster creation in these locations will be stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `1.1.2_2050_iks`, `1.1.1_1996_iks`, and `0.49.3_1994_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `1.1.2_2050_iks`, `1.1.1_1996_iks`, and `0.49.3_1994_iks`.
 
 Istio add-on
 :   Versions [`1.13.2`](/docs/containers?topic=containers-istio-changelog#1132), [`1.12.5`](/docs/containers?topic=containers-istio-changelog#1125), and [`1.11.8`](/docs/containers?topic=containers-istio-changelog#1118) are available. Note that this is the final update for version 1.11. 
@@ -3701,7 +3701,7 @@ Cluster autoscaler
 
   
 ALB OAuth Proxy add-on
-:   Versions 1.0.0_1001 and 2.0.0_999 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
+:   Versions 1.0.0_1001 and 2.0.0_999 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) are released.
 
 
 Worker node fix pack
@@ -3796,7 +3796,7 @@ Certified Kubernetes
 
   
 ALB OAuth Proxy add-on
-:   Version 2.0.0_981 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) is released.
+:   Version 2.0.0_981 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) is released.
 
 
 
@@ -3867,7 +3867,7 @@ Version change log
 {: release-note}
 
 ALB OAuth Proxy add-on
-:   Versions 1.0.0_924 and 2.0.0_923 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
+:   Versions 1.0.0_924 and 2.0.0_923 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) are released.
 
 
 
@@ -4071,7 +4071,7 @@ Cluster autoscaler add-on.
 
 
 ALB OAuth Proxy add-on
-:   Versions 1.0.0_756 and 2.0.0_755 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) are released.
+:   Versions 1.0.0_756 and 2.0.0_755 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) are released.
 
 Kubernetes Ingress image
 :   Versions `1.0.3_1730_iks` and `0.49.3_1830_iks` of the [Kubernetes Ingress image](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) are released.
@@ -4182,7 +4182,7 @@ Worker node fix pack update
 {: release-note}
 
 Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cs_versions_ingress) for versions `0.49.3_1745_iks` and `1.0.3_1730_iks`.
+:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for versions `0.49.3_1745_iks` and `1.0.3_1730_iks`.
 
 ### 18 October 2021
 {: #containers-oct1821}
@@ -4301,7 +4301,7 @@ Review the release notes for 22 September 2021.
 {: shortdesc}
 
 Ingress ALB version change log
-:   [Version `1.0.0_1699_iks`](/docs/containers?topic=containers-cs_versions_ingress#1_0_0) is now available. Updates for versions [`0.48.1_1698_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_48_0) and [`0.43.0_1697_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_47_0) are available in the change log. 
+:   [Version `1.0.0_1699_iks`](/docs/containers?topic=containers-ingress-alb-change-log#1_0_0) is now available. Updates for versions [`0.48.1_1698_iks`](/docs/containers?topic=containers-ingress-alb-change-log#0_48_0) and [`0.43.0_1697_iks`](/docs/containers?topic=containers-ingress-alb-change-log#0_47_0) are available in the change log. 
 
 
 
@@ -4324,7 +4324,7 @@ Review the release notes for 14 September 2021.
 {: shortdesc}
 
 Ingress ALB version change log
-:   [Version `1.0.0_1645_iks`](/docs/containers?topic=containers-cs_versions_ingress#1_0_0) is now available. Updates for versions [`0.48.1_1613_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_48_0) and [`0.47.0_1614_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_47_0) are available in the change log. 
+:   [Version `1.0.0_1645_iks`](/docs/containers?topic=containers-ingress-alb-change-log#1_0_0) is now available. Updates for versions [`0.48.1_1613_iks`](/docs/containers?topic=containers-ingress-alb-change-log#0_48_0) and [`0.47.0_1614_iks`](/docs/containers?topic=containers-ingress-alb-change-log#0_47_0) are available in the change log. 
 
 Istio add-on change log
 :   [Version `1.10.4`](/docs/containers?topic=containers-istio-changelog#1104) and [version `1.9.8`](/docs/containers?topic=containers-istio-changelog#198) of the Istio managed add-on is released.
@@ -4422,7 +4422,7 @@ Ingress change logs
 
   
 ALB OAuth Proxy
-:   Updated the version change log for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   Updated the version change log for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 
 
@@ -4454,7 +4454,7 @@ Ingress change logs
 
 
 ALB OAuth Proxy
-:   Updated the version change log for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   Updated the version change log for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
  
 
@@ -4605,7 +4605,7 @@ New! The `addon options` command is now available
 
 
 ALB OAuth Proxy
-:   Updated the version change log for the [ALB OAuth Proxy](/docs/containers?topic=containers-alb-oauth-proxy-changelog) add-on.
+:   Updated the version change log for the [ALB OAuth Proxy](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log) add-on.
 
 
 
@@ -4830,7 +4830,7 @@ New! Toronto multizone region for VPC
 {: release-note}
 
 add-on change logs
-:   Updated version change logs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   Updated version change logs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 Cluster autoscaler add-on
 :   [Patch update `1.0.2_256`](/docs/containers?topic=containers-ca_changelog) of the cluster autoscaler add-on is available.
@@ -4922,7 +4922,7 @@ New! image security add-on
 {: release-note}
 
 add-on change logs
-:   Added version change logs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+:   Added version change logs for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
 
 Master versions
 :   Master fix pack update change log documentation is available for version [1.20.5_1533](/docs/containers?topic=containers-changelog_120#1205_1533), [1.19.9_1540](/docs/containers?topic=containers-changelog_119#1199_1540), [1.18.17_1546](/docs/containers?topic=containers-118_changelog#11817_1546), and [1.17.17_1557](/docs/containers?topic=containers-117_changelog#11717_1557).
@@ -5300,7 +5300,7 @@ Removal of data center support
 {: release-note}
 
 Ingress ALB change log
-:   Updated the latest [Kubernetes Ingress image build to `0.35.0_869_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_35_0).
+:   Updated the latest [Kubernetes Ingress image build to `0.35.0_869_iks`](/docs/containers?topic=containers-ingress-alb-change-log#0_35_0).
 
 
 
@@ -5349,7 +5349,7 @@ Back up and restore
 
 
 Ingress ALB change log
-:   Updated the latest [Kubernetes Ingress image build to `0.35.0_826_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_35_0).
+:   Updated the latest [Kubernetes Ingress image build to `0.35.0_826_iks`](/docs/containers?topic=containers-ingress-alb-change-log#0_35_0).
 :   Updated the [`ingress-auth` build to 954](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
   
@@ -5374,7 +5374,7 @@ Cluster autoscaler
 
 
 Ingress ALB change log
-:   Updated the latest [Kubernetes Ingress image build to `0.35.0_767_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_35_0).
+:   Updated the latest [Kubernetes Ingress image build to `0.35.0_767_iks`](/docs/containers?topic=containers-ingress-alb-change-log#0_35_0).
 :   Updated the [`nginx-ingress` build to 2410 and the `ingress-auth` build to 947](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) for the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 Master versions
@@ -5674,7 +5674,7 @@ Versions
 {: release-note}
 
 Ingress ALB change log
-:   Updated the [Kubernetes Ingress image build to `0.35.0_474_iks`](/docs/containers?topic=containers-cs_versions_ingress#0_35_0).
+:   Updated the [Kubernetes Ingress image build to `0.35.0_474_iks`](/docs/containers?topic=containers-ingress-alb-change-log#0_35_0).
 
 ### 6 October 2020
 {: #containers-oct0620}

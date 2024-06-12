@@ -7696,73 +7696,73 @@ subcollection: containers
 
     * [2.0.0_2250, released 08 May 24](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#alb-oauth-proxy-add-on-2.0.0_2250)
 
-    * [Version 2.0.0_2156, released 03 April 2024](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_2156)
+    * [2.0.0_2156, released 03 April 2024](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_2156)
 
-    * [Version 2.0.0_2063, released on 16 January 2024](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_2063)
+    * [2.0.0_2063, released on 16 January 2024](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_2063)
 
-    * [Version 2.0.0_1901, released on 25 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1901)
+    * [2.0.0_1901, released on 25 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1901)
 
-    * [Version 2.0.0_1889, released on 18 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1889)
+    * [2.0.0_1889, released on 18 October 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1889)
 
-    * [Version 2.0.0_1843, released on 26 September 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1843)
+    * [2.0.0_1843, released on 26 September 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1843)
 
-    * [Version 2.0.0_1715, released on 9 August 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1715)
+    * [2.0.0_1715, released on 9 August 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1715)
 
-    * [Version 2.0.0_1669, released on 12 July 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1669)
+    * [2.0.0_1669, released on 12 July 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1669)
 
-    * [Version 2.0.0_1528, released on 13 April 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1528)
+    * [2.0.0_1528, released on 13 April 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2.0.0_1528)
 
-    * [Version 2.0.0_1487, released on 1 March 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1487)
+    * [2.0.0_1487, released on 1 March 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1487)
 
-    * [Version 2.0.0_1469, released on 22 February 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1469)
+    * [2.0.0_1469, released on 22 February 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1469)
 
-    * [Version 2.0.0_1420, released on 8 February 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1420)
+    * [2.0.0_1420, released on 8 February 2023](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1420)
 
-    * [Version 2.0.0_1354, released on 15 December 2022](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1354)
+    * [2.0.0_1354, released on 15 December 2022](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1354)
 
-    * [Version 2.0.0_1315, released on 16 November 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1315)
+    * [2.0.0_1315, released on 16 November 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1315)
 
-    * [Version 2.0.0_1297, released on 27 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1297)
+    * [2.0.0_1297, released on 27 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1297)
 
-    * [Version 2.0.0_1265, released on 3 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1265)
+    * [2.0.0_1265, released on 3 October 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1265)
 
-    * [Version 2.0.0_1214, released on 12 September 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1214)
+    * [2.0.0_1214, released on 12 September 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1214)
 
-    * [Version 2.0.0_1187, released on 7 July 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1187)
+    * [2.0.0_1187, released on 7 July 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1187)
 
-    * [Version 2.0.0_1064, released on 4 May 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1064)
+    * [2.0.0_1064, released on 4 May 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1064)
 
-    * [Version 2.0.0_1023, released on 24 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1023)
+    * [2.0.0_1023, released on 24 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_1023)
 
-    * [Version 2.0.0_999, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_999)
+    * [2.0.0_999, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_999)
 
-    * [Version 2.0.0_981, released on 10 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_981)
+    * [2.0.0_981, released on 10 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_981)
 
-    * [Version 2.0.0_923, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_923)
+    * [2.0.0_923, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_923)
 
-    * [Version 2.0.0_755, released on 19 November 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_755)
+    * [2.0.0_755, released on 19 November 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_755)
 
-    * [Version 2.0.0_704, released on 15 September 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_704)
+    * [2.0.0_704, released on 15 September 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#2_0_0_704)
 
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0-oauth)
 
-    * [Version 1.0.0_1024, released on 24 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_1024)
+    * [1.0.0_1024, released on 24 March 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_1024)
 
-    * [Version 1.0.0_1001, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_1001)
+    * [1.0.0_1001, released on 28 February 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_1001)
 
-    * [Version 1.0.0_924, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_924)
+    * [1.0.0_924, released on 26 January 2022.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_924)
 
-    * [Version 1.0.0_756, released on 19 November 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_756)
+    * [1.0.0_756, released on 19 November 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_756)
 
-    * [Version 1.0.0_684, released on 23 August 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_684)
+    * [1.0.0_684, released on 23 August 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_684)
 
-    * [Version 1.0.0_638, released on 10 August 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_638)
+    * [1.0.0_638, released on 10 August 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_638)
 
-    * [Version 1.0.0_618, released on 17 June 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_618)
+    * [1.0.0_618, released on 17 June 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_618)
 
-    * [Version 1.0.0_590, released on 19 April 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_590)
+    * [1.0.0_590, released on 19 April 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_590)
 
-    * [Version 1.0.0_574, released on 30 March 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_574)
+    * [1.0.0_574, released on 30 March 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_574)
 
 
 ## Ingress version history
