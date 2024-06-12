@@ -340,12 +340,10 @@ toc:
           - versions-static-route.md
           - versions-backup-restore.md
           - cl-alb-oauth-proxy-add-on.md
-          - cs_versions_alb_oauth_proxy.md
       - topicgroup:
           label: Ingress version history
           topics:
           - cl-ingress-alb.md
-          - cs_versions_ingress.md
           - ibm-k8s-controller-config-change-log.md
       - topicgroup:
           label: Archived version history
