@@ -240,6 +240,10 @@ subcollection: containers
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
 
+    * [13 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1324)
+
+        * {{site.data.keyword.containerlong_notm}} CLI version `1.0.628` is available.
+
     * [5 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june0524)
 
         * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.26`.
@@ -6113,6 +6117,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.628](/docs/containers?topic=containers-cs_cli_changelog#cli-010628)
 
 * [Version v1.0.618](/docs/containers?topic=containers-cs_cli_changelog#cli-010618)
 
