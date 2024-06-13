@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-02"
+lastupdated: "2024-06-13"
 
 
 keywords: kubernetes, node scaling, ca, autoscaler
@@ -100,6 +100,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
+
 ## Sao Paulo (`br-sao`)
 {: #sao-paulo-br-sao}
 
@@ -164,6 +165,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: #br-sao-memory-table}
 {: tab-title="Memory"}
 {: tab-group="br-sao-tables"}
+
 
 
 
@@ -237,6 +239,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
+
 ## Frankfurt (`eu-de`)
 {: #frankfurt-eu-de}
 
@@ -306,6 +309,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
+
 ## Madrid (`eu-es`)
 {: #madrid-eu-es}
 
@@ -370,6 +374,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: #eu-es-memory-table}
 {: tab-title="Memory"}
 {: tab-group="eu-es-tables"}
+
 
 
 
@@ -443,6 +448,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
+
 ## Osaka (`jp-osa`)
 {: #osaka-jp-osa}
 
@@ -494,6 +500,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: #jp-osa-memory-table}
 {: tab-title="Memory"}
 {: tab-group="jp-osa-tables"}
+
 
 
 
@@ -567,6 +574,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
+
 ## Washington DC (`us-east`)
 {: #washington-dc-us-east}
 
@@ -636,6 +644,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
+
 ## Dallas (`us-south`)
 {: #dallas-us-south}
 
@@ -701,6 +710,7 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 {: #us-south-memory-table}
 {: tab-title="Memory"}
 {: tab-group="us-south-tables"}
+
 
 
 
