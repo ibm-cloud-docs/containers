@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-13"
+lastupdated: "2024-06-14"
 
 
 keywords: containers
@@ -4941,7 +4941,7 @@ subcollection: containers
 
 * [Setting up encryption for {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_encryption_setup)
 
-    * [Encrypting volume data by using a custom storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
+    * [Encrypting volume data by using your own storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
 
     * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
 
@@ -5016,7 +5016,7 @@ subcollection: containers
 
 * [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
 
-    * [Recreating custom storage classes after updating to version 4.2](/docs/containers?topic=containers-vpc-block#recreate-sc-42)
+    * [Re-creating your own storage classes after updating to version 4.2](/docs/containers?topic=containers-vpc-block#recreate-sc-42)
 
 * [Setting up encryption for {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
 
@@ -5024,7 +5024,7 @@ subcollection: containers
 
     * [Changing the default storage class](/docs/containers?topic=containers-vpc-block#vpc-block-default-edit)
 
-    * [Creating a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
+    * [Creating your own storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
 
     * [Verifying your {{site.data.keyword.block_storage_is_short}} file system](/docs/containers?topic=containers-vpc-block#vpc-block-fs-verify)
 
@@ -5190,7 +5190,7 @@ subcollection: containers
 
 * [Attaching existing file storage to an app](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-static)
 
-* [Creating a custom storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
+* [Creating your own storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
 
 * [Deploying an app that runs as non-root](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-non-root-app)
 
@@ -10152,7 +10152,7 @@ subcollection: containers
 
 * [If you exceeded the number of remote rules per security group](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-remote-rules)
 
-[I use custom security groups and after creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters#ts-sbd-other-clusters)
+[After creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters#ts-sbd-other-clusters)
 
 
 ### Worker nodes
@@ -10263,7 +10263,7 @@ subcollection: containers
 
 [Classic: Why can't I add worker nodes with an invalid VLAN ID?](/docs/containers?topic=containers-suspended#suspended)
 
-[Why do I see a timeout error when I try to log in to a pod on a new worker node?](/docs/containers?topic=containers-cs_nodes_duplicate_ip#cs_nodes_duplicate_ip)
+[Why do I see a timeout error when I try to log in to a pod?](/docs/containers?topic=containers-cs_nodes_duplicate_ip#cs_nodes_duplicate_ip)
 
 [Why can't I SSH into my worker node?](/docs/containers?topic=containers-cs_ssh_worker#cs_ssh_worker)
 
@@ -10615,7 +10615,7 @@ subcollection: containers
 
 [Why does my {{site.data.keyword.filestorage_vpc_short}} deployment fail due to a permissions error?](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-storage-vpc-file-non-root)
 
-* [Create custom storage class and specify the `uid` and `gid` your app needs](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-new-sc)
+* [Create your own storage class and specify the `uid` and `gid` your app needs](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-new-sc)
 
 * [Edit your app to run as root with `fsGroup: 0`](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-yaml-sc)
 

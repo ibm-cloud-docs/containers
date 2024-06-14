@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-04"
+lastupdated: "2024-06-14"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, firewall, rules, security group, 1.30, networking, secure by default, outbound traffic protection
@@ -29,7 +29,7 @@ Beginning with new VPC clusters that are created at version 1.30, {{site.data.ke
 ## Overview
 {: #sbd-overview}
 
-With Secure by Default Networking, when you provision a new {{site.data.keyword.containerlong_notm}} VPC cluster at version 4.15 or later, only the traffic that is necessary for the cluster to function is allowed and all other access is blocked. To implement Secure by Default Networking, {{site.data.keyword.containerlong_notm}} uses various security groups and security group rules to protect cluster components. These security groups and rules are automatically created and attached to your worker nodes, load balancers, and cluster-related VPE gateways.
+With Secure by Default Networking, when you provision a new {{site.data.keyword.containerlong_notm}} VPC cluster at version 1.30 or later, only the traffic that is necessary for the cluster to function is allowed and all other access is blocked. To implement Secure by Default Networking, {{site.data.keyword.containerlong_notm}} uses various security groups and security group rules to protect cluster components. These security groups and rules are automatically created and attached to your worker nodes, load balancers, and cluster-related VPE gateways.
 
 ![VPC security groups](images/vpc-security-group.svg "VPC security groups"){: caption="Figure 1. This image shows the VPC security groups applied to your VPC and clusters." caption-side="bottom"}
 

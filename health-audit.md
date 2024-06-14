@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-11"
+lastupdated: "2024-06-14"
 
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
@@ -28,7 +28,7 @@ Forward audit logs for {{site.data.keyword.containerlong_notm}}, the Kubernetes 
 ## Kubernetes API server audit logs
 {: #audit-api-server}
 
-To monitor user-initiated, Kubernetes administrative activity made within your cluster, you can collect and forward audit events that are passed through your Kubernetes API server to {{site.data.keyword.la_full_notm}} or an external server. Although the Kubernetes API server for your cluster is enabled for auditing by default, no auditing data is available until you set up log forwarding.
+To monitor user-initiated, Kubernetes administrative activity made within your cluster, you can collect and forward audit events that are passed through your Kubernetes API server to {{site.data.keyword.la_full_notm}} or an external server.
 {: shortdesc}
 
 ### Considerations and prerequisites
@@ -40,7 +40,7 @@ Before you set up a Kubernetes API audit configuration, review the following inf
 
 
 
-Audit logs use the following policies in the `IBM-Cloud/kube-samples` [GitHub repo](https://github.com/IBM-Cloud/kube-samples){: external}.
+**Versions 1.30 and later**: Audit logs use the following policies in the `IBM-Cloud/kube-samples` [GitHub repo](https://github.com/IBM-Cloud/kube-samples){: external}.
 
 - [`default` policy](https://github.com/IBM-Cloud/kube-samples/blob/master/kube-audit/kube-audit-policy.yaml){: external}.
 - [`verbose` policy](https://github.com/IBM-Cloud/kube-samples/blob/master/kube-audit/kube-audit-policy-verbose.yaml){: external}.
