@@ -38,7 +38,7 @@ If your cluster can't access the public network, such as a private cluster behin
 [Classic infrastructure]{: tag-classic-inf}
 
 
-The steps on this page apply to classic clusters only. On VPC clusters, the {{site.data.keyword.block_storage_is_short}} add-on is installed by default. For more information, see [Setting up Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block).
+The steps on this page apply to classic clusters only. On VPC clusters, the {{site.data.keyword.block_storage_is_short}} cluster add-on is installed by default. For more information, see [Setting up Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block).
 {: important}
 
 

@@ -23,8 +23,11 @@ subcollection: containers
 When you set up persistent storage in your cluster, you have three main components: the Kubernetes persistent volume claim (PVC) that requests storage, the Kubernetes persistent volume (PV) that is mounted to a pod and described in the PVC, and the file share. Depending on how you created your storage, you might need to delete all three components separately. 
 {: shortdesc}
 
+The {{site.data.keyword.filestorage_vpc_short}} cluster add-on is available in Beta. 
+{: beta}
 
-## Updating the {{site.data.keyword.filestorage_vpc_short}} add-on
+
+## Updating the {{site.data.keyword.filestorage_vpc_short}} cluster add-on
 {: #storage-file-vpc-update}
 
 [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
