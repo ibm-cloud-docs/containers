@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-14"
+lastupdated: "2024-06-17"
 
 
 keywords: containers
@@ -240,7 +240,7 @@ subcollection: containers
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
 
-    * [13 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1324)
+    * [17 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1724)
 
         * {{site.data.keyword.containerlong_notm}} CLI version `1.0.628` is available.
 
