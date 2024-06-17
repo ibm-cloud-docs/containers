@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-06-14"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, {{site.data.keyword.containerlong_notm}}, outbound traffic protection, cluster create, quota, limitations
 
@@ -15,7 +15,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-# I use custom security groups and after creating a version 1.30 cluster, applications running in other clusters in my VPC are failing
+# After creating a version 1.30 cluster, applications running in other clusters in my VPC are failing
 {: #ts-sbd-other-clusters}
 
 

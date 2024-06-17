@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-12"
+lastupdated: "2024-06-17"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
+
+    * [17 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1724)
+
+        * {{site.data.keyword.containerlong_notm}} CLI version `1.0.628` is available.
 
     * [5 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june0524)
 
@@ -4937,7 +4941,7 @@ subcollection: containers
 
 * [Setting up encryption for {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_encryption_setup)
 
-    * [Encrypting volume data by using a custom storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
+    * [Encrypting volume data by using your own storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
 
     * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
 
@@ -5010,9 +5014,9 @@ subcollection: containers
 
 * [Using an existing {{site.data.keyword.block_storage_is_short}} instance](/docs/containers?topic=containers-vpc-block#vpc-block-static)
 
-* [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
+* [Updating the {{site.data.keyword.block_storage_is_short}} cluster add-on](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
 
-    * [Recreating custom storage classes after updating to version 4.2](/docs/containers?topic=containers-vpc-block#recreate-sc-42)
+    * [Re-creating your own storage classes after updating to version 4.2](/docs/containers?topic=containers-vpc-block#recreate-sc-42)
 
 * [Setting up encryption for {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
 
@@ -5020,7 +5024,7 @@ subcollection: containers
 
     * [Changing the default storage class](/docs/containers?topic=containers-vpc-block#vpc-block-default-edit)
 
-    * [Creating a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
+    * [Creating your own storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
 
     * [Verifying your {{site.data.keyword.block_storage_is_short}} file system](/docs/containers?topic=containers-vpc-block#vpc-block-fs-verify)
 
@@ -5040,7 +5044,7 @@ subcollection: containers
 
 * [Understanding volume request capacity](/docs/containers?topic=containers-vpc-block#vpc-block-volume-capacity)
 
-[Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
+[Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} cluster add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
 * [Creating an app deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
 
@@ -5058,9 +5062,9 @@ subcollection: containers
 
 * [{{site.data.keyword.block_storage_is_short}} configmap reference](/docs/containers?topic=containers-storage-block-vpc-configmap#storage-block-vpc-configmap-reference)
 
-[Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#storage-block-vpc-trusted-profiles)
+[Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} cluster add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#storage-block-vpc-trusted-profiles)
 
-* [Enabling the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-addon-enable-trusted)
+* [Enabling the {{site.data.keyword.block_storage_is_short}} cluster add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-addon-enable-trusted)
 
 * [Setting up trusted profiles](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-block-setup-trusted)
 
@@ -5170,7 +5174,7 @@ subcollection: containers
 {: #sitemap_setting_up_file_storage_for_vpc}
 
 
-[Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
+[Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
 
 * [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-install#prereqs-store-file-vpc)
 
@@ -5178,15 +5182,13 @@ subcollection: containers
 
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
-* [Prerequisites for cluster version 1.25 and later](/docs/containers?topic=containers-storage-file-vpc-apps#prereqs-vpc-file-versions)
-
 * [Quick start for {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-dynamic)
 
 * [Expanding a mounted volume](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-expansion)
 
 * [Attaching existing file storage to an app](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-static)
 
-* [Creating a custom storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
+* [Creating your own storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
 
 * [Deploying an app that runs as non-root](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-non-root-app)
 
@@ -5204,7 +5206,7 @@ subcollection: containers
 
 [Managing {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-managing)
 
-* [Updating the {{site.data.keyword.filestorage_vpc_short}} add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
+* [Updating the {{site.data.keyword.filestorage_vpc_short}} cluster add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
 
 * [Understanding your storage removal options](/docs/containers?topic=containers-storage-file-vpc-managing#vpc_storage_delete_options_file)
 
@@ -6113,6 +6115,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.628](/docs/containers?topic=containers-cs_cli_changelog#cli-010628)
 
 * [Version v1.0.618](/docs/containers?topic=containers-cs_cli_changelog#cli-010618)
 
@@ -7354,7 +7358,7 @@ subcollection: containers
 
     * [Change log for patch update 1.0.1_114, released 10 September 2020](/docs/containers?topic=containers-ca_changelog#101114_ca)
 
-[{{site.data.keyword.block_storage_is_short}} add-on change log](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
+[{{site.data.keyword.block_storage_is_short}} cluster add-on change log](/docs/containers?topic=containers-vpc_bs_changelog#vpc_bs_changelog)
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
@@ -7530,7 +7534,7 @@ subcollection: containers
 
     * [Version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
-[{{site.data.keyword.filestorage_vpc_full_notm}} add-on change log](/docs/containers?topic=containers-versions-vpc-file-addon#versions-vpc-file-addon)
+[{{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on change log](/docs/containers?topic=containers-versions-vpc-file-addon#versions-vpc-file-addon)
 
 * [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
 
@@ -10146,7 +10150,7 @@ subcollection: containers
 
 * [If you exceeded the number of remote rules per security group](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-remote-rules)
 
-[I use custom security groups and after creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters#ts-sbd-other-clusters)
+[After creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters#ts-sbd-other-clusters)
 
 
 ### Worker nodes
@@ -10257,7 +10261,7 @@ subcollection: containers
 
 [Classic: Why can't I add worker nodes with an invalid VLAN ID?](/docs/containers?topic=containers-suspended#suspended)
 
-[Why do I see a timeout error when I try to log in to a pod on a new worker node?](/docs/containers?topic=containers-cs_nodes_duplicate_ip#cs_nodes_duplicate_ip)
+[Why do I see a timeout error when I try to log in to a pod?](/docs/containers?topic=containers-cs_nodes_duplicate_ip#cs_nodes_duplicate_ip)
 
 [Why can't I SSH into my worker node?](/docs/containers?topic=containers-cs_ssh_worker#cs_ssh_worker)
 
@@ -10609,7 +10613,7 @@ subcollection: containers
 
 [Why does my {{site.data.keyword.filestorage_vpc_short}} deployment fail due to a permissions error?](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-storage-vpc-file-non-root)
 
-* [Create custom storage class and specify the `uid` and `gid` your app needs](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-new-sc)
+* [Create your own storage class and specify the `uid` and `gid` your app needs](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-new-sc)
 
 * [Edit your app to run as root with `fsGroup: 0`](/docs/containers?topic=containers-ts-storage-vpc-file-non-root#ts-vpc-yaml-sc)
 

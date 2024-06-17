@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-06-14"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}
@@ -286,13 +286,19 @@ Review the feature gates that are applied to all master and worker node componen
 In cluster version 1.26 and later, you can use the **`kubectl get --raw /metrics | grep kubernetes_feature_enabled`** command to determine if a feature gate is enabled or disabled.
 {: tip}
 
+
+
 1.30
 :   `CustomCPUCFSQuotaPeriod=true`
+:   `UnauthenticatedHTTP2DOSMitigation=true`
+:   `StrictCostEnforcementForVAP=true`
+:   `StrictCostEnforcementForWebhooks=true`
 
 1.29
 :   `CustomCPUCFSQuotaPeriod=true`
 :   `KMSv1=true`
 :   `StructuredAuthenticationConfiguration=true`
+:   `UnauthenticatedHTTP2DOSMitigation=true`
 
 1.28
 :   `CustomCPUCFSQuotaPeriod=true`
