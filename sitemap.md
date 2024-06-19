@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-17"
+lastupdated: "2024-06-19"
 
 
 keywords: containers
@@ -239,6 +239,18 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
+
+    * [20 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2024)
+
+        * Cluster autoscaler add-on version `1.2.2_452`.
+
+    * [19 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1924)
+
+    * [19 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1924)
+
+        * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
+
+        * Istio add-on versions `1.21.3` and `1.20.7` are available.
 
     * [17 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1724)
 
@@ -4179,7 +4191,7 @@ subcollection: containers
 
     * [Updating your image pull secret](/docs/containers?topic=containers-registry#update-pull-secret)
 
-* [Using an image pull secret to access images in other accounts or external private registries from non-default Kubernetes namespaces](/docs/containers?topic=containers-registry#other)
+* [Using an image pull secret to access images in external private registries](/docs/containers?topic=containers-registry#other)
 
     * [Copying an existing image pull secret](/docs/containers?topic=containers-registry#copy_imagePullSecret)
 
@@ -5175,8 +5187,6 @@ subcollection: containers
 
 
 [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
-
-* [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-install#prereqs-store-file-vpc)
 
 * [Next steps](/docs/containers?topic=containers-storage-file-vpc-install#vpc-enable-next-steps)
 
@@ -6372,6 +6382,10 @@ subcollection: containers
 
 * [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
 
+    * [Change log for master fix pack 1.30.2_1525, released 19 June 2024](/docs/containers?topic=containers-changelog_130#1302_1525_M)
+
+    * [Change log for worker node fix pack 1.30.2_1526, released 18 June 2024](/docs/containers?topic=containers-changelog_130#1302_1526_W)
+
     * [Change log for worker node fix pack 1.30.1_1521, released 03 June 2024](/docs/containers?topic=containers-changelog_130#1301_1521_W)
 
     * [Change log for master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024](/docs/containers?topic=containers-changelog_130#1301_1520M_and_1300_1518W)
@@ -6440,6 +6454,10 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
+
+    * [Change log for master fix pack 1.29.6_1545, released 19 June 2024](/docs/containers?topic=containers-changelog_129#1296_1545_M)
+
+    * [Change log for worker node fix pack 1.29.6_1546, released 18 June 2024](/docs/containers?topic=containers-changelog_129#1296_1546_W)
 
     * [Change log for worker node fix pack 1.29.5_1541, released 03 June 2024](/docs/containers?topic=containers-changelog_129#1295_1541_W)
 
@@ -6539,6 +6557,10 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for master fix pack 1.28.11_1564, released 19 June 2024](/docs/containers?topic=containers-changelog_128#12811_1564_M)
+
+    * [Change log for worker node fix pack 1.28.11_1565, released 18 June 2024](/docs/containers?topic=containers-changelog_128#12811_1565_W)
 
     * [Change log for worker node fix pack 1.28.10_1561, released 03 June 2024](/docs/containers?topic=containers-changelog_128#12810_1561_W)
 
@@ -6656,6 +6678,10 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for master fix pack 1.27.15_1581, released 19 June 2024](/docs/containers?topic=containers-changelog_127#12715_1581_M)
+
+    * [Change log for worker node fix pack 1.27.15_1582, released 18 June 2024](/docs/containers?topic=containers-changelog_127#12715_1582_W)
 
     * [Change log for worker node fix pack 1.27.14_1578, released 03 June 2024](/docs/containers?topic=containers-changelog_127#12714_1578_W)
 
@@ -6862,11 +6888,15 @@ subcollection: containers
 
 * [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
 
+    * [Changelog for 1.21.3, released 19 June 2024](/docs/containers?topic=containers-istio-changelog#1213)
+
     * [Change log for 1.21.2, released 8 May 2024](/docs/containers?topic=containers-istio-changelog#1212)
 
     * [Change log for 1.21.1, released 26 April 2024](/docs/containers?topic=containers-istio-changelog#1211)
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
+
+    * [Changelog for 1.20.7, released 19 June 2024](/docs/containers?topic=containers-istio-changelog#1207)
 
     * [Change log for 1.20.6, released 8 May 2024](/docs/containers?topic=containers-istio-changelog#1206)
 
@@ -7155,6 +7185,10 @@ subcollection: containers
 * [Change log for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
+
+* [Version 1.2.2](/docs/containers?topic=containers-ca_changelog#0122_ca_addon)
+
+    * [Change log for patch update 1.2.2_452, released 20 June 2024](/docs/containers?topic=containers-ca_changelog#122452_ca)
 
 * [Version 1.2.1](/docs/containers?topic=containers-ca_changelog#0121_ca_addon)
 
