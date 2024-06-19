@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-03"
+lastupdated: "2024-06-19"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -32,10 +32,29 @@ ibmcloud ks cluster addon versions
 {: pre}
 
 
-
-
 ## Version 1.21
 {: #v121}
+
+### Changelog for 1.21.3, released 19 June 2024
+{: #1213}
+
+Review the changes that are included in version 1.21.3 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.21.2
+
+Current version
+:   1.21.3
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.21.3](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.3/.){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-2961](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2961){: external}
+    - [CVE-2024-28182](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-28182){: external}
+    - [usn- 6737-1](https://ubuntu.com/security/notices/USN-6737-1){: external}
+    - [usn-6754-1](https://ubuntu.com/security/notices/USN-6754-1){: external}
+ :   For more information, see the [Istio security bulletin 2024-004](https://istio.io/latest/news/security/istio-security-2024-004/){: external}
 
 ### Change log for 1.21.2, released 8 May 2024
 {: #1212}
@@ -76,6 +95,28 @@ Updates in this version
 
 ## Version 1.20
 {: #v120}
+
+### Changelog for 1.20.7, released 19 June 2024
+{: #1207}
+
+Review the changes that are included in version 1.20.7 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.20.6
+
+Current version
+:   1.20.7
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.20.7](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.7/.){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-2961](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2961){: external}
+    - [CVE-2024-28182](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-28182){: external}
+    - [usn- 6737-1](https://ubuntu.com/security/notices/USN-6737-1){: external}
+    - [usn-6754-1](https://ubuntu.com/security/notices/USN-6754-1){: external}
+:   For more information, see the [Istio security bulletin 2024-004](https://istio.io/latest/news/security/istio-security-2024-004/){: external}   
+
 
 ### Change log for 1.20.6, released 8 May 2024
 {: #1206}

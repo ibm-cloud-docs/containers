@@ -2,3 +2,4 @@
 /docs/containers?topic=containers-ingress-alb-manage
 /docs/containers?topic=containers-managed-ingress-about
 /docs/containers?topic=containers-managed-ingress-setup
+https://workbench.cisecurity.org

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-06-19"
 
 
 keywords: kubernetes, containers, 130, version 130, 130 update actions
@@ -53,9 +53,6 @@ This information summarizes updates that are likely to have an impact on deploye
 
 
 The Istio cluster add-on does not yet support version 1.30. If your apps use Istio, do not upgrade your cluster to version 1.30.
-{: important}
-
-The cluster autoscaler add-on does not yet support version 1.30. If your apps use cluster autoscaler, do not upgrade your cluster to version 1.30.
 {: important}
 
 [Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.30. If your apps use Portworx, do not upgrade your cluster to version 1.30.
