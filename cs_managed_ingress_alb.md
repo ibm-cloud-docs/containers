@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-06-12"
+lastupdated: "2024-06-20"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -237,7 +237,7 @@ When you create a multizone cluster, a default public ALB is created in each zon
 By default, each ALB has 2 replicas. You can customize your ALB processing capabilities by manually changing the number of ALB pods or by enabling dynamic, automatic scaling. 
 {: shortdesc}
 
-A single ALB pod can handle a large amount of requests. If you experience timeouts, slow responses or other signs of overload, check the state of your backend application. Make sure that ALB is the bottleneck of your application before scaling ALB pods, otherwise it may not provide the expected results.
+A single ALB pod can handle a large amount of requests. If you experience timeouts, slow responses or other signs of overload, check the state of your backend application. Make sure that ALB is the bottleneck of your application before scaling ALB pods, otherwise it might not provide the expected results.
 
 **For classic clusters**: If the ALB's load balancer service configuration has the `externalTrafficPolicy` set to `Local`, do not scale above 2 replicas. Classic load balancers run with a fixed configuration of 2 replicas, and can only forward traffic to ALB pods that are located on the same node as the load balancer pods. 
 

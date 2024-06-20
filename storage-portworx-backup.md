@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-06-20"
 
 
 keywords: portworx, kubernetes, containers
@@ -52,7 +52,7 @@ Before you begin:
 7. In the **Kubernetes or OpenShift cluster name** field, select the cluster where you want to install PX-Backup.
 8. Enter the name of the Kubernetes namespace where you want to install your Portworx Backup service components. Do not use the `kube-system` or `default` namespace. If the Kubernetes namespace that you enter does not already exist in your cluster, it is automatically created during the installation.
 9. Select an existing storage class in your cluster to provision persistent volumes for the Portworx Backup service. The service uses this storage to store service metadata and is not used to back up your apps and data. [Your apps and data are backed up to an {{site.data.keyword.cos_full_notm}} service instance](#px-backup-storage).
-10. Click **Create** to begin the Portworx Backup installation. The installation may take a few minutes to complete.
+10. Click **Create** to begin the Portworx Backup installation. The installation might take a few minutes to complete.
 11. [Verify that your Portworx Backup service is installed correctly](#px-backup-verify).
 
 

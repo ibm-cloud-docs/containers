@@ -114,7 +114,7 @@
     "Add-on health state and its descriptions in kubernetes",
     "Kubernetes sdd-on health state critical normal pending updating warning ",
     "Kubernetes cluster resources low, not enough workers in Ready state.",
-    "Istio data plane components may need to be updated",
+    "Istio data plane components might need to be updated",
     "view the status of a kubernetes cluster add-on",
     "check the health of a cluster add-on"
   ],

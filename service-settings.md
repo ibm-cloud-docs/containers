@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-14"
+lastupdated: "2024-06-20"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}
@@ -277,8 +277,11 @@ Feature gates
 {: #feature-gates}
 
 
-Review the feature gates that are applied to all master and worker node components by default in {{site.data.keyword.containerlong_notm}} clusters. These feature gates differ from the ones that are set up in community distributions. In clusters that run version 1.23 or earlier, the {{site.data.keyword.cloud_notm}} provider version enables Kubernetes APIs and features that are at beta. In version 1.24 and later, most new beta features are disabled by default. Kubernetes alpha features, which are subject to change, are disabled in all versions. 
+
+Review the feature gates that are applied to all master and worker node components by default in {{site.data.keyword.containerlong_notm}} clusters. These feature gates differ from the ones that are set up in community distributions. In Kubernetes, most new beta features are disabled by default. Alpha features, which are subject to change, are disabled in all versions.
 {: shortdesc}
+
+
 
 
 

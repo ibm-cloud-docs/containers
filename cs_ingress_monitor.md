@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-06-20"
 
 
 keywords: kubernetes, iks, ingress, monitoring
@@ -38,7 +38,7 @@ Gain operational visibility into the performance and health of your Kubernetes I
     2. Click **Monitoring sources**.
     3. Follow the instructions for installing a monitoring agent to your cluster.
     
-    Note that it may take a few minutes for your agent to finish installing.
+    Note that it might take a few minutes for your agent to finish installing.
 
 3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **Open Dashboard** for the instance that you provisioned.
 

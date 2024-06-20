@@ -509,7 +509,6 @@ toc:
               - ts-network-calico-node.md
               - ts-network-subnet-recover.md
               - ts-network-snat-125.md
-              - ts-network-egress-124.md
               - ts-network-strongswan-install-new.md
               - ts-network-strongswan-network-nodes.md
               - ts-network-classic121.md

@@ -5239,6 +5239,10 @@ subcollection: containers
 
 * [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-storage-cos-understand#create_cos_secret)
 
+    * [Prerequisites](/docs/containers?topic=containers-storage-cos-understand#cos-secret-prereqs)
+
+    * [Creating an object storage secret in your cluster](/docs/containers?topic=containers-storage-cos-understand#cos-secret-create)
+
 * [Limitations](/docs/containers?topic=containers-storage-cos-understand#cos_limitations)
 
 [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
@@ -10423,8 +10427,6 @@ subcollection: containers
 [I deleted a portable subnet and now my Classic cluster my Load Balancers are failing. How do I recover?](/docs/containers?topic=containers-ts-network-subnet-recover#ts-network-subnet-recover)
 
 [Why am I running out of SNAT ports for egress connections from pods in my cluster?](/docs/containers?topic=containers-ts-network-snat-125#ts-network-snat-125)
-
-[Why am I seeing egress connection failures from pods?](/docs/containers?topic=containers-ts-network-egress-124#ts-network-egress-124)
 
 [Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release#cs_strongswan_release)
 

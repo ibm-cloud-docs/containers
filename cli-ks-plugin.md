@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-03"
+lastupdated: "2024-06-20"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -1308,7 +1308,7 @@ Minimum required permissions
 :    Optional: The file path for the corresponding client key that is used to connect to the remote logging service.
 
 `--policy POLICY`
-:    Optional: The type of policy that is used for auditing. Use `default` or `verbose`. Note that the `verbose` policy type audits a larger number of API transactions, which may impact cluster performance, and is only recommended for occasional use.
+:    Optional: The type of policy that is used for auditing. Use `default` or `verbose`. Note that the `verbose` policy type audits a larger number of API transactions, which might impact cluster performance, and is only recommended for occasional use.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.

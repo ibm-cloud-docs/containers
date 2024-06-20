@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-06-20"
 
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.19
@@ -47,8 +47,6 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.19 change log.
 {: shortdesc}
 
-Kubernetes version 1.19 is deprecated, with a tentative unsupported date of 14 Mar 2022. Update your cluster to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
-{: deprecated}
 
 ### Change log for worker node fix pack 1.19.16_1579, released 14 March 2022
 {: #11916_1579-1}
@@ -287,7 +285,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Calico | N/A | N/A | Increased liveness and readiness probe timeouts to 10 seconds. |
 | Gateway-enabled cluster controller | 1444 | 1510 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
 | GPU device plug-in and installer | a9461a8 | eb817b2 | Updated to use `Go` version `1.16.7`. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.14-1 | v1.19.15-1 | Updated to support the Kubernetes `1.19.15` release. Fixed a bug that may cause node initialization to fail when a new node reuses the name of a deleted node. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.14-1 | v1.19.15-1 | Updated to support the Kubernetes `1.19.15` release. Fixed a bug that might cause node initialization to fail when a new node reuses the name of a deleted node. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 945df65 | e3cb629 | Updated to use `Go` version `1.16.7`. |
 | {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} plug-in and monitor | 398 | 400 | Updated to use `Go` version `1.16.7`. Updated universal base image (UBI) to the latest `8.4-208` version to resolve CVEs. |
 | Kubernetes | v1.19.14 | v1.19.15 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.15){: external}. |
