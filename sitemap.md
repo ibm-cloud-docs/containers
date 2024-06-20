@@ -246,6 +246,8 @@ subcollection: containers
 
         * Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 
+        * Istio add-on versions `1.22.1` is available.
+
     * [19 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1924)
 
         * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
@@ -6885,6 +6887,10 @@ subcollection: containers
 * [01 January 2019](/docs/containers?topic=containers-fluentd_changelog#01-jan-2019)
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.22](/docs/containers?topic=containers-istio-changelog#v122)
+
+    * [Changelog for 1.22.1, released 21 June 2024](/docs/containers?topic=containers-istio-changelog#1221)
 
 * [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
 

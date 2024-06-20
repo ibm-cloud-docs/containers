@@ -26,8 +26,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: tip}
 
 
-
-
 ## June 2024
 {: #containers-june24}
 
@@ -43,14 +41,14 @@ Cluster autoscaler add-on patch update for {{site.data.keyword.containerlong_not
 Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 :   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
-
+Istio add-on versions `1.22.1` is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
 
 ### 19 June 2024
 {: #containers-june1924}
 {: release-note}
-
 
 
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-19"
+lastupdated: "2024-06-20"
 
 
 keywords: kubernetes, containers, 130, version 130, 130 update actions
@@ -50,10 +50,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 This information summarizes updates that are likely to have an impact on deployed apps when you update a cluster to version 1.30. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.30.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_130) for version 1.30. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
-
-
-The Istio cluster add-on does not yet support version 1.30. If your apps use Istio, do not upgrade your cluster to version 1.30.
-{: important}
 
 [Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.30. If your apps use Portworx, do not upgrade your cluster to version 1.30.
 {: important}
