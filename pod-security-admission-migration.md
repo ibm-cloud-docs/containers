@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-06-20"
 
 
 keywords: kubernetes, deploy, migrating psps to pod security, pod security admission, migrate to pod security admission
@@ -205,7 +205,7 @@ Several of the following Pod Security migration steps include links to sections 
 ### Step 1: Enable Pod Security admission in your 1.24 cluster
 {: #psa-migration-enable-124}
 
-Enable Pod Security admission in your 1.24 cluster. This command updates the cluster master to use the new Pod Security admission configuration. It may take a few minutes for the cluster master to update.
+Enable Pod Security admission in your 1.24 cluster. This command updates the cluster master to use the new Pod Security admission configuration. It might take a few minutes for the cluster master to update.
 
 ```sh
 ibmcloud ks cluster master pod-security set --cluster <CLUSTER>

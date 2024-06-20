@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-06-20"
 
 
 keywords: kubernetes, containers, 128, version 128, 128 update actions
@@ -87,7 +87,7 @@ The following table shows the actions that you must take before you update the K
 ## Networking changes for VPC clusters
 {: #networking_128}
 
-In version 1.27 and earlier, VPC clusters pull images from the IBM Cloud Container Registry through a private cloud service endpoint for the Container Registry. For version 1.28 and later, this network path is updated so that images are pulled through a VPE gateway instead of a private service endpoint. This change affects all clusters in a VPC; when you create or update a single cluster in a VPC to version 1.28, all clusters in that VPC, regardless of their version, have their network path updated. Depending on the setup of your security groups, network ACLs, and network policies, you may need to make changes to ensure that your workers continue to successfully pull container images after updating to version 1.28. 
+In version 1.27 and earlier, VPC clusters pull images from the IBM Cloud Container Registry through a private cloud service endpoint for the Container Registry. For version 1.28 and later, this network path is updated so that images are pulled through a VPE gateway instead of a private service endpoint. This change affects all clusters in a VPC; when you create or update a single cluster in a VPC to version 1.28, all clusters in that VPC, regardless of their version, have their network path updated. Depending on the setup of your security groups, network ACLs, and network policies, you might need to make changes to ensure that your workers continue to successfully pull container images after updating to version 1.28. 
 {: shortdesc}
 
 The following image shows the new network path for version 1.28, which uses a VPE Gateway for Registry instead of the private service endpoint.
@@ -96,7 +96,7 @@ The following image shows the new network path for version 1.28, which uses a VP
 
 
 
-With the network path updates in version 1.28, creating or updating a VPC cluster to run at version 1.28 adds a new VPE gateway to your VPC. This VPE gateway is specifically used for pulling images from the IBM Cloud Container Registry and is assigned one IP address for each zone in the VPC that has at least one cluster worker. DNS entries are added to the entire VPC that resolve all `icr.io` domain names to the new VPE gateway IP addresses. Depending on how you have configured your network security components, you may need to act to ensure that connections to the new VPE are allowed. 
+With the network path updates in version 1.28, creating or updating a VPC cluster to run at version 1.28 adds a new VPE gateway to your VPC. This VPE gateway is specifically used for pulling images from the IBM Cloud Container Registry and is assigned one IP address for each zone in the VPC that has at least one cluster worker. DNS entries are added to the entire VPC that resolve all `icr.io` domain names to the new VPE gateway IP addresses. Depending on how you have configured your network security components, you might need to act to ensure that connections to the new VPE are allowed. 
 
 
 ### What do I need to do?

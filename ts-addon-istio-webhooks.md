@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-06-20"
 
 
 keywords: kubernetes, help
@@ -37,8 +37,8 @@ istio   1.12      updating       (1.11 --> 1.12)
 Additionally, when you check the logs for the `addon-istio-operator` pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`, you see the following error messages.
 
 ```sh
-Error [IST0139] (MutatingWebhookConfiguration istio-sidecar-injector) Webhook overlaps with others: [istio-sidecar-injector/namespace.sidecar-injector.istio.io]. This may cause injection to occur twice.
-Error [IST0139] (MutatingWebhookConfiguration istio-sidecar-injector) Webhook overlaps with others: [istio-sidecar-injector/sidecar-injector.istio.io]. This may cause injection to occur twice.
+Error [IST0139] (MutatingWebhookConfiguration istio-sidecar-injector) Webhook overlaps with others: [istio-sidecar-injector/namespace.sidecar-injector.istio.io]. This might cause injection to occur twice.
+Error [IST0139] (MutatingWebhookConfiguration istio-sidecar-injector) Webhook overlaps with others: [istio-sidecar-injector/sidecar-injector.istio.io]. This might cause injection to occur twice.
 ```
 {: screen}
 

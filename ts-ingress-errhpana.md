@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2023, 2023
-lastupdated: "2023-08-01"
+  years: 2023, 2024
+lastupdated: "2024-06-20"
 
 connectivitykeywords: kubernetes, errhpana, ingress, autoscaler, alb
 
@@ -32,7 +32,7 @@ Autoscaling is failing (ERRHPANA).
 There are issues with the horizontal pod autoscaler (HPA) resource that are preventing autoscaling from functioning. 
 {: tsCauses}
 
-View the HPA resource status for additional information on the error. Check the resource for issues or formatting errors that may prevent the autoscaler from functioning.
+View the HPA resource status for additional information on the error. Check the resource for issues or formatting errors that might prevent the autoscaler from functioning.
 {: tsResolve}
 
 For more information on ALB autoscaling, see [Dynamically scaling ALBs with autoscaler](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler).

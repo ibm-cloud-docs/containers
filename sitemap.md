@@ -246,6 +246,8 @@ subcollection: containers
 
         * Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 
+        * Istio add-on versions `1.22.1` is available.
+
     * [19 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1924)
 
         * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
@@ -5237,6 +5239,10 @@ subcollection: containers
 
 * [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-storage-cos-understand#create_cos_secret)
 
+    * [Prerequisites](/docs/containers?topic=containers-storage-cos-understand#cos-secret-prereqs)
+
+    * [Creating an object storage secret in your cluster](/docs/containers?topic=containers-storage-cos-understand#cos-secret-create)
+
 * [Limitations](/docs/containers?topic=containers-storage-cos-understand#cos_limitations)
 
 [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
@@ -6885,6 +6891,10 @@ subcollection: containers
 * [01 January 2019](/docs/containers?topic=containers-fluentd_changelog#01-jan-2019)
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.22](/docs/containers?topic=containers-istio-changelog#v122)
+
+    * [Changelog for 1.22.1, released 21 June 2024](/docs/containers?topic=containers-istio-changelog#1221)
 
 * [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
 
@@ -10417,8 +10427,6 @@ subcollection: containers
 [I deleted a portable subnet and now my Classic cluster my Load Balancers are failing. How do I recover?](/docs/containers?topic=containers-ts-network-subnet-recover#ts-network-subnet-recover)
 
 [Why am I running out of SNAT ports for egress connections from pods in my cluster?](/docs/containers?topic=containers-ts-network-snat-125#ts-network-snat-125)
-
-[Why am I seeing egress connection failures from pods?](/docs/containers?topic=containers-ts-network-egress-124#ts-network-egress-124)
 
 [Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release#cs_strongswan_release)
 

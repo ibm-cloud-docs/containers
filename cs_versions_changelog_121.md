@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-06-20"
 
 
 keywords: kubernetes, versions, update, upgrade, BOM, bill of materials, versions, patch, 1.21
@@ -694,7 +694,7 @@ The following table shows the changes that are in the master fix pack patch upda
 | Calico | v3.19.1 | v3.19.3 | See the [Calico release notes](https://docs.tigera.io/archive){: external}. Increased liveness and readiness probe timeouts to 10 seconds. |
 | Gateway-enabled cluster controller | 1444 | 1510 | Updated image for [CVE-2021-3711](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3711){: external} and [CVE-2021-3712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3712){: external}. |
 | GPU device plug-in and installer | 8c8bcdf | 58d7589 | Updated to use `Go` version `1.16.7`. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.4-1 | v1.21.5-1 | Updated to support the Kubernetes `1.21.5` release and to use `Go` version `1.16.8` and `calicoctl` version `3.19.3`. Fixed a bug that may cause node initialization to fail when a new node reuses the name of a deleted node. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.21.4-1 | v1.21.5-1 | Updated to support the Kubernetes `1.21.5` release and to use `Go` version `1.16.8` and `calicoctl` version `3.19.3`. Fixed a bug that might cause node initialization to fail when a new node reuses the name of a deleted node. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 398 | 400 | Updated to use `Go` version `1.16.7`. Updated universal base image (UBI) to the latest `8.4-208` version to resolve CVEs. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 945df65 | e3cb629 | Updated to use `Go` version `1.16.7`. |
 | Konnectivity agent | v0.0.21e_231_iks | v0.0.23_245_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.23){: external}. |

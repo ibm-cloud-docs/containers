@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-06-20"
 
 
 keywords: kubernetes, 1.23, versions, update, upgrade
@@ -55,8 +55,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 This information summarizes updates that are likely to have and impact on deployed apps when you update a cluster to version 1.23. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.23.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_123) for version 1.23. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}. 
 {: shortdesc}
 
-Kubernetes version 1.23 becomes unsupported on 08 May 2023. Update your cluster to at least [version 1.24](/docs/containers?topic=containers-cs_versions_124) as soon as possible.
-{: deprecated}
 
 ### Update before master
 {: #123_before_123}
@@ -80,7 +78,7 @@ The following table shows the actions that you must take after you update the Ku
 
 | Type | Description|
 | --- | --- |
-| Operator Lifecycle Manager (OLM) install no longer managed | OLM is no longer installed nor managed by IBM. Existing installs are unchanged and no longer managed after the update. If you are using the OLM components then you must manage updates. If unused, you may [uninstall the OLM components](/docs/containers?topic=containers-ts-delete-olm). Refer to the [open source documentation](https://olm.operatorframework.io/){: external} for information on available resources including how to install a new instance of OLM on your cluster. |
+| Operator Lifecycle Manager (OLM) install no longer managed | OLM is no longer installed nor managed by IBM. Existing installs are unchanged and no longer managed after the update. If you are using the OLM components then you must manage updates. If unused, you might [uninstall the OLM components](/docs/containers?topic=containers-ts-delete-olm). Refer to the [open source documentation](https://olm.operatorframework.io/){: external} for information on available resources including how to install a new instance of OLM on your cluster. |
 | Recreate volume snapshots | Volume snapshots must be recreated after the update. Run `kubectl get volumesnapshots -A` to get a list of volume snapshots. |
 {: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="bottom"}
 
