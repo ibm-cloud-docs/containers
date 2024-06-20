@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-19"
+lastupdated: "2024-06-20"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -35,13 +35,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-june2024}
 {: release-note}
 
-Cluster autoscaler add-on version `1.2.2_452`.
+Cluster autoscaler add-on patch update for {{site.data.keyword.containerlong_notm}}.
 :   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 
-### 19 June 2024
-{: #containers-june1924}
-{: release-note}
+
+Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+
+
+
 
 
 ### 19 June 2024

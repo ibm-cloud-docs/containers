@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-19"
+lastupdated: "2024-06-20"
 
 
 keywords: containers
@@ -242,9 +242,9 @@ subcollection: containers
 
     * [20 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2024)
 
-        * Cluster autoscaler add-on version `1.2.2_452`.
+        * Cluster autoscaler add-on patch update for {{site.data.keyword.containerlong_notm}}.
 
-    * [19 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1924)
+        * Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 
     * [19 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1924)
 
@@ -7811,6 +7811,8 @@ subcollection: containers
 
 * [Version 1.9.6](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6)
 
+    * [1.9.6_6779_iks, released 20 June 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6779_iks)
+
     * [1.9.6_6650_iks, released 30 May 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6650_iks)
 
     * [1.9.6_6634_iks, released 18 May 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6634_iks)
@@ -7824,6 +7826,8 @@ subcollection: containers
     * [1.9.6_6450_iks, released 18 March 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6450_iks)
 
 * [Version 1.9.4](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4)
+
+    * [1.9.4_6775_iks, released 20 June 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6775_iks)
 
     * [1.9.4_6675_iks, released 30 May 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6675_iks)
 
@@ -7842,6 +7846,8 @@ subcollection: containers
     * [1.9.4_6359_iks, released 22 February 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6359_iks)
 
 * [Version 1.8.5](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5)
+
+    * [1.8.5_6773_iks, released 20 June 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5_6773_iks)
 
     * [1.8.5_6676_iks, released 30 May 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5_6676_iks)
 
