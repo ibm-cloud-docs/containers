@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-06-21"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -182,6 +182,9 @@ Each ALB in a zone is deployed as two pods on different worker nodes. To scale u
 
 When you create a multizone cluster, a default public ALB is created in each zone where you have worker nodes. If you later remove one of these original three zones and add workers in a different zone, a default public ALB is not created in that new zone. You can manually create an ALB to process connections in that new zone.
 {: tip}
+
+When using Ingress resource validation, every create and update request is validated by all ALBs. If no pods are running for a particular ALB instance, you might be unable to apply Ingress resources on your cluster. Make sure to have at least one running pod for each ALB in enabled state. For more information, see [Ingress deployment customization reference](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom).
+{: note}
 
 1. In each zone where you have worker nodes, create an ALB.
 

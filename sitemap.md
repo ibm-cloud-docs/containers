@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-06-21"
 
 
 keywords: containers
@@ -247,6 +247,8 @@ subcollection: containers
         * Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 
         * Istio add-on versions `1.22.1` is available.
+
+        * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
 
     * [19 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1924)
 
