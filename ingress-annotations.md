@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-12"
+lastupdated: "2024-06-21"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -473,8 +473,8 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
       name: ibm-ingress-deploy-config
       namespace: kube-system
     data:
-      <alb1-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "defaultConfig":"<namespace>/<configmap-name>","enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
-      <alb2-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+      <alb1-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "defaultConfig":"<namespace>/<configmap-name>","enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>", "enableIngressValidation":"<true|false>"}'
+      <alb2-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>", "enableIngressValidation":"<true|false>"}'
     ```
     {: screen}
 
@@ -517,6 +517,9 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
     
     `tcpServicesConfig`
     :   Specify a ConfigMap and the namespace that the ConfigMap is in, such as [`kube-system/tcp-services`](#tcp-ports-non-standard), that contains information about accessing your app service through a non-standard TCP port.
+
+    `enableIngressValidation`
+    :   Enable the deployment of Ingress validating webhook for this ALB. The webhook validates Ingress resources before being applied on the cluster to prevent invalid configurations. (The ALB will only process Ingress resources that belong to the Ingress class it exposes.) Default: `"false"`.
 
 
 2. Create the `ibm-ingress-deploy-config` ConfigMap in your cluster.
