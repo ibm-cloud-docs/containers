@@ -240,7 +240,7 @@ subcollection: containers
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
 
-    * [21 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2024)
+    * [21 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2124)
 
         * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
 
