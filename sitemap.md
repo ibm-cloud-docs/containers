@@ -240,6 +240,14 @@ subcollection: containers
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
 
+    * [21 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2024)
+
+        * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+
+        * {{site.data.keyword.block_storage_is_short}} add-on patch updates.
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch updates.
+
     * [20 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2024)
 
         * Cluster autoscaler add-on patch update for {{site.data.keyword.containerlong_notm}}.
@@ -247,8 +255,6 @@ subcollection: containers
         * Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 
         * Istio add-on versions `1.22.1` is available.
-
-        * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
 
     * [19 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1924)
 
@@ -6840,6 +6846,8 @@ subcollection: containers
 
 * [`istio` 1.21](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.21)
 
+* [`istio` 1.22](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.22)
+
 * [`openshift-data-foundation` 4.12.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.12.0)
 
 * [`openshift-data-foundation` 4.13.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.13.0)
@@ -7204,6 +7212,8 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-ca_changelog#0121_ca_addon)
 
+    * [Change log for patch update 1.2.1_444, released 21 June 2024](/docs/containers?topic=containers-ca_changelog#121444_ca)
+
     * [Change log for patch update 1.2.1_425, released 05 May 2024](/docs/containers?topic=containers-ca_changelog#121425_ca)
 
     * [Change log for patch update 1.2.1_418, released 02 April 2024](/docs/containers?topic=containers-ca_changelog#121418_ca)
@@ -7211,6 +7221,8 @@ subcollection: containers
     * [Change log for patch update 1.2.1_395, released 28 February 2024](/docs/containers?topic=containers-ca_changelog#121395_ca)
 
 * [Version 1.2.0](/docs/containers?topic=containers-ca_changelog#0120_ca_addon)
+
+    * [Change log for patch update 1.2.0_443, released 21 June 2024](/docs/containers?topic=containers-ca_changelog#120443_ca)
 
     * [Change log for patch update 1.2.0_426, released 05 May 2024](/docs/containers?topic=containers-ca_changelog#120426_ca)
 
@@ -7408,6 +7420,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
+    * [Change log for version 5.2.19_570, released 21 June 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.19_570_is_block_relnote)
+
     * [Change log for version 5.2.18_539, released 10 May 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.18_539_is_block_relnote)
 
     * [Change log for 5.2.17_535, released 08 March 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.17_535_is_block_relnote)
@@ -7423,6 +7437,8 @@ subcollection: containers
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+    * [Change log for version 5.1.24_567, released 21 June 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.24_567_is_block_relnote)
 
     * [Change log for version 5.1.23_543, released 10 May 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.23_543_is_block_relnote)
 
@@ -7584,9 +7600,11 @@ subcollection: containers
 
 * [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
 
-    * [Change log for 1.2.8_174, released 10 May 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.8_174_is_block_relnote)
+    * [Change log for version 1.2.9_245, released 21 June 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.9_245_is_file_relnote)
 
-    * [Change log for 1.2.7_154, released 08 March 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.7_154_is_block_relnote)
+    * [Change log for 1.2.8_174, released 10 May 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.8_174_is_file_relnote)
+
+    * [Change log for 1.2.7_154, released 08 March 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.7_154_is_file_relnote)
 
     * [Change log for version 1.2.6_130, released 08 February 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.6_130_is_file_relnote)
 

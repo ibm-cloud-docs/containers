@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-06-21"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -29,6 +29,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## June 2024
 {: #containers-june24}
 
+
+### 21 June 2024
+{: #containers-june2024}
+{: release-note}
+
+Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
+
+{{site.data.keyword.block_storage_is_short}} add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+{{site.data.keyword.filestorage_vpc_full_notm}} add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+
 ### 20 June 2024
 {: #containers-june2024}
 {: release-note}
@@ -36,11 +50,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Cluster autoscaler add-on patch update for {{site.data.keyword.containerlong_notm}}.
 :   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
+
+
 Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 :   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 Istio add-on versions `1.22.1` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
 
 
 ### 19 June 2024
