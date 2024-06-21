@@ -248,8 +248,6 @@ subcollection: containers
 
         * Istio add-on versions `1.22.1` is available.
 
-        * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
-
     * [19 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june1924)
 
         * {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
@@ -6839,6 +6837,8 @@ subcollection: containers
 * [`istio` 1.20](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.20)
 
 * [`istio` 1.21](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.21)
+
+* [`istio` 1.22](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.22)
 
 * [`openshift-data-foundation` 4.12.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.12.0)
 
