@@ -240,6 +240,10 @@ subcollection: containers
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
 
+    * [21 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2024)
+
+        * Cluster autoscaler add-on patch update for {{site.data.keyword.containerlong_notm}}.
+
     * [20 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2024)
 
         * Cluster autoscaler add-on patch update for {{site.data.keyword.containerlong_notm}}.
@@ -7204,6 +7208,8 @@ subcollection: containers
 
 * [Version 1.2.1](/docs/containers?topic=containers-ca_changelog#0121_ca_addon)
 
+    * [Change log for patch update 1.2.1_444, released 21 June 2024](/docs/containers?topic=containers-ca_changelog#121444_ca)
+
     * [Change log for patch update 1.2.1_425, released 05 May 2024](/docs/containers?topic=containers-ca_changelog#121425_ca)
 
     * [Change log for patch update 1.2.1_418, released 02 April 2024](/docs/containers?topic=containers-ca_changelog#121418_ca)
@@ -7211,6 +7217,8 @@ subcollection: containers
     * [Change log for patch update 1.2.1_395, released 28 February 2024](/docs/containers?topic=containers-ca_changelog#121395_ca)
 
 * [Version 1.2.0](/docs/containers?topic=containers-ca_changelog#0120_ca_addon)
+
+    * [Change log for patch update 1.2.0_443, released 21 June 2024](/docs/containers?topic=containers-ca_changelog#120443_ca)
 
     * [Change log for patch update 1.2.0_426, released 05 May 2024](/docs/containers?topic=containers-ca_changelog#120426_ca)
 
