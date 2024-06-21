@@ -42,12 +42,6 @@ Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 Istio add-on versions `1.22.1` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
-{{site.data.keyword.containerlong_notm}} master and worker node fix packs.
-:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [1.30](/docs/containers?topic=containers-changelog_130)
-:   [1.29](/docs/containers?topic=containers-changelog_129)
-:   [1.28](/docs/containers?topic=containers-changelog_128)
-:   [1.27](/docs/containers?topic=containers-changelog_127)
 
 ### 19 June 2024
 {: #containers-june1924}
