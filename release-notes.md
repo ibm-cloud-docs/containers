@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-21"
+lastupdated: "2024-06-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -28,6 +28,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2024
 {: #containers-june24}
+
+
+
+### 24 June 2024
+{: #containers-june2424}
+{: release-note}
+
+Version 1.30 is the default version for {{site.data.keyword.containerlong_notm}}.
+:   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
+
+
+
 
 
 ### 21 June 2024

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-21"
+lastupdated: "2024-06-24"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june24)
+
+    * [24 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2424)
+
+        * Version 1.30 is the default version for {{site.data.keyword.containerlong_notm}}.
 
     * [21 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2124)
 
@@ -6833,6 +6837,8 @@ subcollection: containers
 * [`cluster-autoscaler` 1.2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.0)
 
 * [`cluster-autoscaler` 1.2.1](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.1)
+
+* [`cluster-autoscaler` 1.2.2](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.2)
 
 * [`csutil` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-1.0.0)
 
