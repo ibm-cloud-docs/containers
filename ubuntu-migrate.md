@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-06-24"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -18,14 +18,27 @@ subcollection: containers
 # Migrating to a new Ubuntu version
 {: #ubuntu-migrate}
 
-To migrate your worker nodes to a new Ubuntu version, you must provision a new worker pool, add worker nodes to the new pool, then remove the original worker pool.
+To migrate your worker nodes to a new Ubuntu version, you must provision a new worker pool, add worker nodes to the new pool, then remove the original worker pool. The default operating system for all supported {{site.data.keyword.containerlong_notm}} cluster versions is Ubuntu 20. Additionally, Ubuntu 24 is available for early access with limitations. 
 {: shortdesc}
 
-`UBUNTU_20_64` is the default operating system for all supported {{site.data.keyword.containerlong_notm}} cluster versions. Creating clusters with `UBUNTU_18_64` is no longer supported. To avoid disruptions to your workload, migrate your worker nodes to `UBUNTU_20_64` as soon as possible.
-{: note}
+## Ubuntu 24 limitations
+{: #ubuntu-24-lim}
 
-With the release of `UBUNTU_20_64`, some worker node flavors are deprecated. If you have worker nodes with these flavors, you must provision worker nodes with a new flavor during the migration process. The deprecated flavors are: `mb3c.4x32, mb3c.16x64, ms3c.4x32.1.9tb.ssd, ms3c.16x64.1.9tb.ssd, ms3c.28x256.3.8tb.ssd, ms3c.28x512.4x3.8tb.ssd, mr3c.28x512, md3c.16x64.4x4tb, md3c.28x512.4x4tb, mg3c.16x128, mg3c.28x256`.
+Ubuntu 24 is available for early release and should not be used for production workloads. Make sure you understand the limitations for this version before you begin any migrations.
 {: important}
+
+Ubuntu 24 is available in Beta. The following limitations and disclaimers apply.
+{: beta}
+
+- Should not be used for production workloads.
+- Available for cluster versions 1.29 and later.
+- Supported for virtual servers only. Cannot be used with bare metal servers. 
+- Not available for GPU worker node flavors. 
+- NTP uses `timesyncd`. Related commands might be updated.  
+- The following add-ons and features are not supported. Do not migrate your worker nodes if you use these features:
+    - CSUtil add-on
+    - Object storage plug-in
+    - Portworx
 
 ## Prerequisites
 {: #ubuntu-migrate-prereqs}
@@ -51,19 +64,19 @@ Migrate your worker nodes to use Ubuntu 20. These steps apply to all supported c
 {: shortdesc}
 
 
-1. In your cluster, create a new worker pool for the Ubuntu 20 worker nodes. Include the `--operating-system=UBUNTU_20_64` option. Make sure that the number of nodes specified with the `--size-per-zone` option matches the number of Ubuntu 18 worker nodes that you are replacing. Also, be sure to include the custom labels that you retrieved earlier.
+1. In your cluster, create a new worker pool for the Ubuntu 20 worker nodes. Include the `--operating-system=UBUNTU_24_64` option. Make sure that the number of nodes specified with the `--size-per-zone` option matches the number of Ubuntu 18 worker nodes that you are replacing. Also, be sure to include the custom labels that you retrieved earlier.
 
     **For classic clusters**. See the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create) for command details.
 
     ```sh
-    ibmcloud ks worker-pool create classic --name NAME --cluster CLUSTER --flavor FLAVOR --operating-system UBUNTU_20_64 --size-per-zone WORKERS-PER-ZONE --label LABEL --label LABEL
+    ibmcloud ks worker-pool create classic --name NAME --cluster CLUSTER --flavor FLAVOR --operating-system UBUNTU_24_64 --size-per-zone WORKERS-PER-ZONE --label LABEL --label LABEL
     ```
     {: pre}
 
     **For VPC clusters**. See the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2) for command details.
 
     ```sh
-    ibmcloud ks worker-pool create vpc-gen2 --name NAME --cluster CLUSTER --flavor FLAVOR --operating-system UBUNTU_20_64 --size-per-zone WORKERS-PER-ZONE --label LABEL --label LABEL
+    ibmcloud ks worker-pool create vpc-gen2 --name NAME --cluster CLUSTER --flavor FLAVOR --operating-system UBUNTU_24_64 --size-per-zone WORKERS-PER-ZONE --label LABEL --label LABEL
     ```
     {: pre}
 

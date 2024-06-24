@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-06-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, clusters, worker nodes, worker pools, vpc-gen2
@@ -68,6 +68,7 @@ Worker Pool
 :    - **Worker nodes per zone**: For high availability, at least 3 worker nodes per zone are recommended.
 :    - **Flavor**: The flavor defines the architecture, amount of virtual CPU, memory, GPU, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the zone in which you deploy the cluster. For a list of available flavors, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors). 
         - When you choose a flavor in the console, you can filter available flavors by **Machine type**, **Architecture**, and **Operating System**. Available machine types are `shared` or `dedicated`. Note that the `dedicated` option is only available if you already have a [dedicated host pool](/docs/containers?topic=containers-dedicated-hosts#setup-dedicated-host-cli) in your account. For a list of the available operating systems and architectures by cluster version, see the [available versions](/docs/containers?topic=containers-cs_versions#cs_versions_available).
+        - **NOTE**: Ubuntu 20 is the default operating system for all supported {{site.data.keyword.containerlong_notm}} cluster versions. Ubuntu 24 is now available in Beta. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin any migrations.
 :    - **Encrypt local disk**: By default, [worker nodes feature AES 256-bit disk encryption](/docs/containers?topic=containers-security#workernodes). You can choose to turn off disk encryption when you create the cluster. If you enable encryption, each worker node in the worker pool then is encrypted by using the KMS provider credentials that you manage. Only the `default` worker pool's nodes are encrypted. After you create the cluster, if you create more worker pools, you must enable encryption in each pool separately. Each worker pool in your cluster can use the same KMS instance and root key, the same KMS instance with different root keys, or different instances.
 :   - **Secondary Storage**: You can provision a secondary disk to your worker nodes, such as a `900gb.5iops-tier` block storage disk. When you add a secondary disk, that disk is used for the container runtime, while the primary disk is used for the operating system. Secondary disks are useful in scenarios where more container storage is needed, such as running pods with large images. Note that when using secondary storage pods might not be able to utilize the full IOPS/bandwidth capabilities of the volumes due to the overhead of overlay file systems. Secondary disks are provisioned in your account and you can see them in VPC console. The charges for these disks are separate to the cost of each worker and show as a different line item on your bill. These secondary volumes also count toward the quota usage for the your account. If you plan to use secondary storage on nodes where Persistent Volumes could be attached it is highly recommended to use the 10-iops tiers or higher. This is because the storage bandwidth allocation for the nodes is shared between secondary storage volumes and any attached PVCs. When using 5-iops, tiers this can lead to degraded performance for pulling images or for pods writing to the storage. For more information on bandwidth allocation see [Bandwidth Allocation in Virtual Server Instances](https://www.ibm.com/blog/bandwidth-allocation-in-virtual-server-instances/).{: external}
 :   - **GPU**: If you plan to deploy AI, visual, or high-quality graphics workloads to your cluster, make sure you select a GPU worker node flavor.
@@ -224,7 +225,7 @@ Observability integrations
     When the provisioning of your Kubernetes master is completed, the state of your cluster changes to **normal**. After the Kubernetes master is ready, your worker nodes are set up.
     ```sh
     NAME         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
-    mycluster    aaf97a8843a29941b49a598f516da72101   normal   20170201162433   3          Dallas     1.29.6_1526      Default               vpc-gen2
+    mycluster    aaf97a8843a29941b49a598f516da72101   normal   20170201162433   3          Dallas     1.30.2_1526      Default               vpc-gen2
     ```
     {: screen}
 
@@ -237,7 +238,7 @@ Observability integrations
     When the worker nodes are ready, the worker node **State** changes to `normal` and the **Status** changes to `Ready`. When the node **Status** changes to `Ready`, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
     ```sh
     ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   b3c.4x16.encrypted  normal   Ready    dal10   1.29.6_1526
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   b3c.4x16.encrypted  normal   Ready    dal10   1.30.2_1526
     ```
     {: screen}
 
@@ -257,14 +258,14 @@ Flavors with instance storage are available for allowlisted accounts. To get add
 Example command to create a VPC cluster with 3 worker nodes in `us-east-1`.
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name my_cluster --version 1.29_openshift --zone us-east-1 --vpc-id VPC-ID --subnet-id VPC-SUBNET-ID --flavor bx2.4x16 --workers 3
+ibmcloud ks cluster create vpc-gen2 --name my_cluster --version 1.30_openshift --zone us-east-1 --vpc-id VPC-ID --subnet-id VPC-SUBNET-ID --flavor bx2.4x16 --workers 3
 ```
 {: pre}
 
 Example command to create a VPC cluster with 3 worker nodes in `us-east-1` with a customer pod subnet and size.
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name my_cluster --version 1.29_openshift --zone us-east-1 --vpc-id VPC-ID --subnet-id VPC-SUBNET-ID --flavor bx2.4x16 --workers 3  -pod-subnet 0.0.0.0/15
+ibmcloud ks cluster create vpc-gen2 --name my_cluster --version 1.30_openshift --zone us-east-1 --vpc-id VPC-ID --subnet-id VPC-SUBNET-ID --flavor bx2.4x16 --workers 3  -pod-subnet 0.0.0.0/15
 ```
 {: pre}
 
