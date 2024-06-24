@@ -48,6 +48,9 @@ Ubuntu 24 in Beta
 Storage optimized flavors for {{site.data.keyword.containerlong_notm}} VPC clusters
 :   New storage optimizied `ox2` flavors are available. For more information, see the [VPC flavors](/docs/containers?topic=containers-vpc-flavors).
 
+{{site.data.keyword.containerlong_notm}} CLI version `1.0.630` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 
 ### 21 June 2024
 {: #containers-june2124}

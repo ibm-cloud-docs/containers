@@ -248,6 +248,8 @@ subcollection: containers
 
         * Storage optimized flavors for {{site.data.keyword.containerlong_notm}} VPC clusters
 
+        * {{site.data.keyword.containerlong_notm}} CLI version `1.0.630` is available.
+
     * [21 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2124)
 
         * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
@@ -6149,6 +6151,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.630](/docs/containers?topic=containers-cs_cli_changelog#cli-010630)
 
 * [Version v1.0.628](/docs/containers?topic=containers-cs_cli_changelog#cli-010628)
 
