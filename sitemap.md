@@ -3325,6 +3325,8 @@ subcollection: containers
 
 [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
 
+* [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
+
 * [Prerequisites](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
 
 * [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
