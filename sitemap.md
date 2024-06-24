@@ -244,6 +244,10 @@ subcollection: containers
 
         * Version 1.30 is the default version for {{site.data.keyword.containerlong_notm}}.
 
+        * Ubuntu 24 in Beta
+
+        * Storage optimized flavors for {{site.data.keyword.containerlong_notm}} VPC clusters
+
     * [21 June 2024](/docs/containers?topic=containers-containers-relnotes#containers-june2124)
 
         * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.

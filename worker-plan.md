@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-24"
+lastupdated: "2024-06-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, multi az, multi-az, szr, mzr
@@ -65,6 +65,19 @@ Review the following operating systems in {{site.data.keyword.containerlong_notm
 
 Ubuntu 20.04
 :   For more information, see the [Ubuntu 20.04 release notes](https://wiki.ubuntu.com/FocalFossa/ReleaseNotes){: external}
+
+Ubuntu 24 (Beta)
+:   [Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate) is available in Beta. The following limitations and disclaimers apply.
+    - Should not be used for production workloads.
+    - Available for cluster versions 1.29 and later.
+    - Supported for virtual servers only. Cannot be used with bare metal servers. 
+    - Not available for GPU worker node flavors. 
+    - NTP uses `timesyncd`. Related commands might be updated.  
+    - The following add-ons and features are not supported. Do not migrate your worker nodes if you use these features:
+        - CSUtil add-on
+        - Object storage plug-in
+        - Portworx
+
 
 
 

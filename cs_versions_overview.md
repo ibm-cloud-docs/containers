@@ -67,6 +67,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
+
+Ubuntu 20 is the default operating system for all supported {{site.data.keyword.containerlong_notm}} cluster versions. Ubuntu 24 is now available in Beta. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin any migrations.
+{: important}
+
 ## Update types
 {: #update_types}
 
