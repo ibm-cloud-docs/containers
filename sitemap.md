@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-24"
+lastupdated: "2024-06-25"
 
 
 keywords: containers
@@ -4590,13 +4590,15 @@ subcollection: containers
 
 [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas#vpc-lbaas)
 
-* [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
+* [Loadbalancer types](/docs/containers?topic=containers-vpc-lbaas#vpc-lbaas-types)
 
-* [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
+    * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
+
+    * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
 
 * [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
 
-    * [Setting up a public VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_pub)
+* [Setting up a public VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_pub)
 
     * [Setting up an NLB using port range](/docs/containers?topic=containers-vpc-lbaas#nlb-setup-portrange)
 
