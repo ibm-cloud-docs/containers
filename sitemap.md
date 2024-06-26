@@ -3333,7 +3333,7 @@ subcollection: containers
 
 * [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
 
-* [Prerequisites](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
+* [Before you begin](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
 
 * [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
 
