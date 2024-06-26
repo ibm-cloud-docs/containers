@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-21"
+lastupdated: "2024-06-26"
 
 connectivitykeywords: kubernetes, ingress, webhook, alb, validation
 
@@ -76,7 +76,7 @@ For debugging the webhook itself, review our documentation on [Debugging webhook
 ## Disabling the validation feature
 {: #disable-validation}
 
-In some cases you might want to disable the validation webhook as part of a debugging or restoring service. In order to do this, you have to set the `enableIngressValidation` config option to `"false"` in the [ConfigMap for customizing ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom).
+Sometimes you might want to disable the validation webhook as part of a debugging or restoring service. To do this, you must set the `enableIngressValidation` config option to `"false"` in the [ConfigMap for customizing ingress deployment](/docs/containers?topic=containers-comm-ingress-annotations#create-ingress-configmap-custom).
 
 Note that this configuration option exists per ALB so you can selectively enable or disable this feature for individual ALB deployments.
 

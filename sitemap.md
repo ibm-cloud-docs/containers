@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-25"
+lastupdated: "2024-06-26"
 
 
 keywords: containers
@@ -5242,7 +5242,9 @@ subcollection: containers
 
 * [Updating the {{site.data.keyword.filestorage_vpc_short}} cluster add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
 
-* [Understanding your storage removal options](/docs/containers?topic=containers-storage-file-vpc-managing#vpc_storage_delete_options_file)
+* [Disabling the add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-disable)
+
+* [Understanding your storage removal options](/docs/containers?topic=containers-storage-file-vpc-managing#vpc-storage-delete-options-file)
 
 * [Cleaning up persistent storage](/docs/containers?topic=containers-storage-file-vpc-managing#vpc-storage-remove-file)
 
@@ -6922,11 +6924,11 @@ subcollection: containers
 
 * [Version 1.22](/docs/containers?topic=containers-istio-changelog#v122)
 
-    * [Changelog for 1.22.1, released 21 June 2024](/docs/containers?topic=containers-istio-changelog#1221)
+    * [Change log for 1.22.1, released 21 June 2024](/docs/containers?topic=containers-istio-changelog#1221)
 
 * [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
 
-    * [Changelog for 1.21.3, released 19 June 2024](/docs/containers?topic=containers-istio-changelog#1213)
+    * [Change log for 1.21.3, released 19 June 2024](/docs/containers?topic=containers-istio-changelog#1213)
 
     * [Change log for 1.21.2, released 8 May 2024](/docs/containers?topic=containers-istio-changelog#1212)
 
@@ -6934,7 +6936,7 @@ subcollection: containers
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
-    * [Changelog for 1.20.7, released 19 June 2024](/docs/containers?topic=containers-istio-changelog#1207)
+    * [Change log for 1.20.7, released 19 June 2024](/docs/containers?topic=containers-istio-changelog#1207)
 
     * [Change log for 1.20.6, released 8 May 2024](/docs/containers?topic=containers-istio-changelog#1206)
 

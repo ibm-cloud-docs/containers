@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-06-26"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -34,7 +34,7 @@ ibmcloud ks cluster addon versions
 ## Version 1.22
 {: #v122}
 
-### Changelog for 1.22.1, released 21 June 2024
+### Change log for 1.22.1, released 21 June 2024
 {: #1221}
 
 Review the changes that are included in version 1.22.1 of the managed Istio add-on.
@@ -53,7 +53,7 @@ Updates in this version
 ## Version 1.21
 {: #v121}
 
-### Changelog for 1.21.3, released 19 June 2024
+### Change log for 1.21.3, released 19 June 2024
 {: #1213}
 
 Review the changes that are included in version 1.21.3 of the managed Istio add-on.
@@ -114,7 +114,7 @@ Updates in this version
 ## Version 1.20
 {: #v120}
 
-### Changelog for 1.20.7, released 19 June 2024
+### Change log for 1.20.7, released 19 June 2024
 {: #1207}
 
 Review the changes that are included in version 1.20.7 of the managed Istio add-on.
