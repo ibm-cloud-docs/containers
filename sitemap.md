@@ -3333,7 +3333,7 @@ subcollection: containers
 
 * [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
 
-* [Prerequisites](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
+* [Before you begin](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
 
 * [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
 
@@ -4779,7 +4779,7 @@ subcollection: containers
 
     * [Create a domain](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-cis-create)
 
-    * [Adding DNS credentials for an external provider](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domains-ext-cred)
+* [Adding credentials and setting up domains from other external providers](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-external)
 
     * [Adding Akamai credentials](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domains-ext-cred-ak)
 

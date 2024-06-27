@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-06-24"
+lastupdated: "2024-06-26"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -40,7 +40,7 @@ Ubuntu 24 is available in Beta. The following limitations and disclaimers apply.
     - Object storage plug-in
     - Portworx
 
-## Prerequisites
+## Before you begin
 {: #ubuntu-migrate-prereqs}
 
 1. Review your worker pool operating systems to determine which pools you need to migrate.
@@ -60,11 +60,11 @@ Ubuntu 24 is available in Beta. The following limitations and disclaimers apply.
 ## Migration steps
 {: #ubuntu-migrate-steps}
 
-Migrate your worker nodes to use Ubuntu 20. These steps apply to all supported cluster versions.
+Migrate your worker nodes to use Ubuntu 24. These steps apply to all supported cluster versions.
 {: shortdesc}
 
 
-1. In your cluster, create a new worker pool for the Ubuntu 20 worker nodes. Include the `--operating-system=UBUNTU_24_64` option. Make sure that the number of nodes specified with the `--size-per-zone` option matches the number of Ubuntu 18 worker nodes that you are replacing. Also, be sure to include the custom labels that you retrieved earlier.
+1. In your cluster, create a new worker pool for the Ubuntu 24 worker nodes. Include the `--operating-system=UBUNTU_24_64` option. Make sure that the number of nodes specified with the `--size-per-zone` option matches the number of Ubuntu 20 worker nodes that you are replacing. Also, be sure to include the custom labels that you retrieved earlier.
 
     **For classic clusters**. See the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create) for command details.
 
@@ -87,9 +87,9 @@ Migrate your worker nodes to use Ubuntu 20. These steps apply to all supported c
     ```
     {: pre}
 
-1. Prepare to add a zone to your worker pool. When you add a zone, the number of worker nodes you specified with the `--size-per-zone` option are added to the zone. These worker nodes run the Ubuntu 20 operating system. 
+1. Prepare to add a zone to your worker pool. When you add a zone, the number of worker nodes you specified with the `--size-per-zone` option are added to the zone. These worker nodes run the Ubuntu 24 operating system. 
 
-    **Classic and VPC clusters**: If possible, use the same Classic VLAN or VPC subnet for the new zone as you are using for the Ubuntu 18 worker pool.
+    **Classic and VPC clusters**: If possible, use the same Classic VLAN or VPC subnet for the new zone as you are using for the Ubuntu 20 worker pool.
     {: important}
 
     If you need to use a different Classic VLAN or VPC Subnet for these new nodes, note that switching your worker nodes to a different Classic VLAN or VPC subnet can have significant effects your workload and cluster functionality. For example, you might experience the following.
@@ -121,7 +121,7 @@ Migrate your worker nodes to use Ubuntu 20. These steps apply to all supported c
 ## Removing your old worker pools
 {: #ubuntu-migrate-removal}
 
-Before you remove your Ubuntu 18 worker pools, consider scaling them down   and keeping them for several days before you remove them. This way, you can scale the worker pool back up if your workload experiences disruptions during the migration process. When you determine that your workload is stable and functions normally, you can remove the Ubuntu 18 worker pool.
+Before you remove your Ubuntu 20 worker pools, consider scaling them down and keeping them for several days before you remove them. This way, you can scale the worker pool back up if your workload experiences disruptions during the migration process. When you determine that your workload is stable and functions normally, you can remove the Ubuntu 20 worker pool.
 {: important}
 
 
