@@ -5245,7 +5245,7 @@ subcollection: containers
 
 * [Limiting file share access by worker pool, zone, or worker node](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-setup)
 
-    * [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-prereqs)
+    * [Before you begin](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-prereqs)
 
     * [Limiting file share access to pods on one worker node](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-one-worker)
 
