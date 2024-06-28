@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-26"
+lastupdated: "2024-06-28"
 
 
 keywords: containers
@@ -4612,6 +4612,8 @@ subcollection: containers
 
     * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 
+    * [Registering a private DNS record for a private VPC ALB](/docs/containers?topic=containers-vpc-lbaas#vpc_alb_private_dns)
+
 * [Persistent VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_persist)
 
 * [Moving a VPC load balancer from one cluster to another](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move)
@@ -4959,6 +4961,15 @@ subcollection: containers
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
+## Enabling the IBM Storage Operator cluster add-on
+{: #sitemap_enabling_the_ibm_storage_operator_cluster_add-on}
+
+
+[Enabling the IBM Storage Operator cluster add-on](/docs/containers?topic=containers-storage-operator#storage-operator)
+
+* [Disabling the `ibm-storage-operator` add-on](/docs/containers?topic=containers-storage-operator#storage-operator-disable)
+
+
 ## Setting up {{site.data.keyword.blockstorageshort}}
 {: #sitemap_setting_up_}
 
@@ -5218,13 +5229,19 @@ subcollection: containers
 
 * [Quick start for {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-dynamic)
 
-* [Expanding a mounted volume](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-expansion)
+* [Setting up volume expansion](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-expansion)
+
+    * [Before you begin](/docs/containers?topic=containers-storage-file-vpc-apps#before-vpc-file-expansion)
+
+    * [Expanding a mounted volume](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-volume-expansion)
 
 * [Attaching existing file storage to an app](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-static)
 
 * [Creating your own storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
 
 * [Deploying an app that runs as non-root](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-non-root-app)
+
+* [Setting up encryption in-transit (EIT)](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-eit)
 
 * [Limiting file share access by worker pool, zone, or worker node](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-setup)
 
@@ -5241,6 +5258,8 @@ subcollection: containers
 [Managing {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-managing)
 
 * [Updating the {{site.data.keyword.filestorage_vpc_short}} cluster add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
+
+* [Updating encryption in-transit (EIT) packages](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-eit-packages)
 
 * [Disabling the add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-disable)
 
@@ -7618,6 +7637,10 @@ subcollection: containers
 
 [{{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on change log](/docs/containers?topic=containers-versions-vpc-file-addon#versions-vpc-file-addon)
 
+* [Version 2.0](/docs/containers?topic=containers-versions-vpc-file-addon#020_is_file)
+
+    * [Change log for version 2.0.4_232, released 1 July 2024](/docs/containers?topic=containers-versions-vpc-file-addon#change-log-for-version-204_232-released-1-july-2024)
+
 * [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
 
     * [Change log for version 1.2.9_245, released 21 June 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.9_245_is_file_relnote)
@@ -7851,6 +7874,12 @@ subcollection: containers
     * [1.0.0_590, released on 19 April 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_590)
 
     * [1.0.0_574, released on 30 March 2021.](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log#1_0_0_574)
+
+[IBM storage operator add-on change log](/docs/containers?topic=containers-versions-ibm-storage-operator#versions-ibm-storage-operator)
+
+* [Version 1.0.0](/docs/containers?topic=containers-versions-ibm-storage-operator#ibm-storage-operator-1.0.0)
+
+    * [1.0.0_2186, released 29 May 2024](/docs/containers?topic=containers-versions-ibm-storage-operator#ibm-storage-operator-1.0.0-initial)
 
 
 ## Ingress version history
@@ -10710,6 +10739,10 @@ subcollection: containers
 * [Verifying the read and write permissions for the non-root user](/docs/containers?topic=containers-cs_storage_nonroot#verify-rw-permissions)
 
 [Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes#readonly_nodes)
+
+[Why do I see an `UnresponsiveMountHelperContainerUtility` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-unresponsive#ts-storage-vpc-file-eit-unresponsive)
+
+[Why do I see a `MetadataServiceNotEnabled` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-access#ts-storage-vpc-file-eit-access)
 
 [Storage: Feedback, questions, and support](/docs/containers?topic=containers-getting_help_storage#getting_help_storage)
 
