@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-06-28"
+lastupdated: "2024-07-01"
 
 
 keywords: containers
@@ -10608,6 +10608,14 @@ subcollection: containers
 * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-ingress-debug#one_alb)
 
 [Gathering Ingress logs](/docs/containers?topic=containers-ingress-must-gather#ingress-must-gather)
+
+[Ingress resource operations refused by validating webhook](/docs/containers?topic=containers-ts-ingress-webhook#ts-ingress-webhook)
+
+* [Invalid configurations denied by the validation webhook](/docs/containers?topic=containers-ts-ingress-webhook#invalid-config)
+
+* [The webhook itself is failing](/docs/containers?topic=containers-ts-ingress-webhook#webhook-debug)
+
+* [Disabling the validation feature](/docs/containers?topic=containers-ts-ingress-webhook#disable-validation)
 
 [Classic clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-cs_ingress_fails#cs_ingress_fails)
 
