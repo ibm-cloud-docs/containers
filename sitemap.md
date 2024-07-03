@@ -5235,6 +5235,8 @@ subcollection: containers
 
 * [Quick start for {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-add-file-dynamic)
 
+* [Migrating to a new storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-expansion-migration)
+
 * [Setting up volume expansion](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-expansion)
 
     * [Before you begin](/docs/containers?topic=containers-storage-file-vpc-apps#before-vpc-file-expansion)
