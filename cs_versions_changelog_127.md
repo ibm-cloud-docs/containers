@@ -54,7 +54,7 @@ Review the version 1.27 change log.
 
 
 
-### Change log for worker node fix pack 1.27.15_1583, released 08 July 2024
+### Change log for worker node fix pack 1.27.15_1583, released 09 July 2024
 {: #12715_1583_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.15_1583. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.

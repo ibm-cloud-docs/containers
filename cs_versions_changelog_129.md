@@ -44,7 +44,7 @@ Review the version 1.29 change log.
 {: shortdesc}
 
 
-### Change log for worker node fix pack 1.29.6_1547, released 08 July 2024
+### Change log for worker node fix pack 1.29.6_1547, released 09 July 2024
 {: #1296_1547_W}
 
 The following table shows the changes that are in the worker node fix pack 1.29.6_1547. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.

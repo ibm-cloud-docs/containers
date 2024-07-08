@@ -38,7 +38,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 ## Version 1.30 change log
 {: #130_changelog}
 
-### Change log for worker node fix pack 1.30.2_1527, released 08 July 2024
+### Change log for worker node fix pack 1.30.2_1527, released 09 July 2024
 {: #1302_1527_W}
 
 The following table shows the changes that are in the worker node fix pack 1.30.2_1527. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
