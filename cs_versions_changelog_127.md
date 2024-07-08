@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-07-08"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -52,6 +52,20 @@ Review the version 1.27 change log.
 
 
 
+
+
+### Change log for worker node fix pack 1.27.15_1583, released 08 July 2024
+{: #12715_1583_W}
+
+The following table shows the changes that are in the worker node fix pack 1.27.15_1583. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 packages | 5.4.0-186-generic | 5.4.0-187-generic | Worker node kernel & package updates for [CVE-2022-4968](https://nvd.nist.gov/vuln/detail/CVE-2022-4968){: external}, [CVE-2024-2201](https://nvd.nist.gov/vuln/detail/CVE-2024-2201){: external}, [CVE-2024-26643](https://nvd.nist.gov/vuln/detail/CVE-2024-26643){: external}, [CVE-2024-26925](https://nvd.nist.gov/vuln/detail/CVE-2024-26925){: external}, [CVE-2024-32002](https://nvd.nist.gov/vuln/detail/CVE-2024-32002){: external}, [CVE-2024-38428](https://nvd.nist.gov/vuln/detail/CVE-2024-38428){: external}. |
+| HAProxy | 18889dd | e77d4ca | New version contains security fixes |
+| GPU device plug-in and installer | 8ef78ef | fbdf629 | New version contains updates and security fixes. |
+{: caption="Changes since version 1.27.15_1582" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.27.15_1581, released 19 June 2024
