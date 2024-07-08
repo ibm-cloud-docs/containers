@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-07-08"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, audit
@@ -16,7 +16,7 @@ subcollection: containers
 
 
 # {{site.data.keyword.at_full_notm}} events
-{: #at_events}
+{: #at_events_ref}
 
 You can view, manage, and audit user-initiated activities in your {{site.data.keyword.containerlong}} community Kubernetes or {{site.data.keyword.redhat_openshift_notm}} cluster by using the {{site.data.keyword.at_full}} service.
 {: shortdesc}
