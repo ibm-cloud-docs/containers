@@ -28,8 +28,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## July 2024
 {: #containers-july24}
 
-### 8 July 2024
-{: #containers-july824}
+
+### 9 July 2024
+{: #containers-july924}
 {: release-note}
 
 
@@ -52,9 +53,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2024
 {: #containers-june24}
-
-
-
 
 ### 24 June 2024
 {: #containers-june2424}

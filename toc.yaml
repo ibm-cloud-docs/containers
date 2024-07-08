@@ -404,7 +404,7 @@ toc:
       - topicgroup:
           label: Activity Tracker events
           topics:
-          - at-events.md
+          - at-events-ref.md
           - api-at-iam.md
       - locations.md
       - cs_integrations_overview.md
