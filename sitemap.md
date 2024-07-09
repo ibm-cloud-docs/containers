@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-08"
+lastupdated: "2024-07-09"
 
 
 keywords: containers
@@ -240,7 +240,13 @@ subcollection: containers
 
 * [July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july24)
 
+    * [10 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1024)
+
+        * {{site.data.keyword.containerlong_notm}} CLI version `1.0.635` is available.
+
     * [9 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july924)
+
+        * {{site.data.keyword.containerlong_notm}} CLI version `1.0.632` is available.
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs.
 
@@ -6186,6 +6192,10 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.635](/docs/containers?topic=containers-cs_cli_changelog#cli-010635)
+
+* [Version v1.0.632](/docs/containers?topic=containers-cs_cli_changelog#cli-010632)
 
 * [Version v1.0.630](/docs/containers?topic=containers-cs_cli_changelog#cli-010630)
 
