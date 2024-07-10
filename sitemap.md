@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-09"
+lastupdated: "2024-07-10"
 
 
 keywords: containers
@@ -5258,6 +5258,8 @@ subcollection: containers
 * [Creating your own storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
 
 * [Deploying an app that runs as non-root](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-non-root-app)
+
+* [Setting up your KMS provider for encrypting {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-kms)
 
 * [Setting up encryption in-transit (EIT)](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-eit)
 
