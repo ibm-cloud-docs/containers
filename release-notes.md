@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-09"
+lastupdated: "2024-07-11"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -27,6 +27,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2024
 {: #containers-july24}
+
+
+
+### 11 July 2024
+
+Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+
+
 
 ### 10 July 2024
 {: #containers-july1024}
