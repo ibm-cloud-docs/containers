@@ -240,6 +240,10 @@ subcollection: containers
 
 * [July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july24)
 
+    * [11 July 2024](/docs/containers?topic=containers-containers-relnotes#11-july-2024)
+
+        * Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
+
     * [10 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1024)
 
         * {{site.data.keyword.containerlong_notm}} CLI version `1.0.635` is available.
