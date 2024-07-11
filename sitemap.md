@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-10"
+lastupdated: "2024-07-11"
 
 
 keywords: containers
@@ -7926,6 +7926,8 @@ subcollection: containers
 
 * [Version 1.9.6](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6)
 
+    * [1.9.6_6846_iks, released 11 July 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6846_iks)
+
     * [1.9.6_6779_iks, released 20 June 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6779_iks)
 
     * [1.9.6_6650_iks, released 30 May 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6650_iks)
@@ -7941,6 +7943,8 @@ subcollection: containers
     * [1.9.6_6450_iks, released 18 March 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.6_6450_iks)
 
 * [Version 1.9.4](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4)
+
+    * [1.9.4_6848_iks, released 11 July 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6848_iks)
 
     * [1.9.4_6775_iks, released 20 June 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6775_iks)
 
@@ -7961,6 +7965,8 @@ subcollection: containers
     * [1.9.4_6359_iks, released 22 February 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.9.4_6359_iks)
 
 * [Version 1.8.5](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5)
+
+    * [1.8.5_6847_iks, released 11 July 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5_6847_iks)
 
     * [1.8.5_6773_iks, released 20 June 24](/docs/containers?topic=containers-ingress-alb-change-log#ingress-alb-1.8.5_6773_iks)
 
