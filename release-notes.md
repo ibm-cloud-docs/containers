@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-11"
+lastupdated: "2024-07-12"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -28,9 +28,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## July 2024
 {: #containers-july24}
 
+### 12 July 2024
+{: #containers-july1224}
+{: release-note}
+
+{{site.data.keyword.containerlong_notm}} CLI version `1.0.638` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
 
 
 ### 11 July 2024
+{: #containers-july1124}
+{: release-note}
+
 
 Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 :   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
