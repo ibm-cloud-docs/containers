@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-11"
+lastupdated: "2024-07-12"
 
 
 keywords: containers
@@ -240,7 +240,11 @@ subcollection: containers
 
 * [July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july24)
 
-    * [11 July 2024](/docs/containers?topic=containers-containers-relnotes#11-july-2024)
+    * [12 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1224)
+
+        * {{site.data.keyword.containerlong_notm}} CLI version `1.0.638` is available.
+
+    * [11 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1124)
 
         * Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 
@@ -6198,6 +6202,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.638](/docs/containers?topic=containers-cs_cli_changelog#cli-010638)
 
 * [Version v1.0.635](/docs/containers?topic=containers-cs_cli_changelog#cli-010635)
 
