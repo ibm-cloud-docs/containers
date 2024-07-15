@@ -10828,6 +10828,8 @@ subcollection: containers
 
 [Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes#readonly_nodes)
 
+[Why do I see a `MountingTargetFailed` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-mount-failed#ts-storage-vpc-file-eit-mount-failed)
+
 [Why do I see an `UnresponsiveMountHelperContainerUtility` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-unresponsive#ts-storage-vpc-file-eit-unresponsive)
 
 [Why do I see a `MetadataServiceNotEnabled` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-access#ts-storage-vpc-file-eit-access)
