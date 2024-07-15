@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-12"
+lastupdated: "2024-07-15"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -27,6 +27,37 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2024
 {: #containers-july24}
+
+### 15 July 2024
+{: #containers-july1524}
+{: release-note}
+
+
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [1.30](/docs/containers?topic=containers-changelog_130)
+:   [1.29](/docs/containers?topic=containers-changelog_129)
+:   [1.28](/docs/containers?topic=containers-changelog_128)
+:   [1.27](/docs/containers?topic=containers-changelog_127)
+
+
+
+
+{{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+{{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+
+Storage Operator cluster add-on patch update.
+:   For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
+
+
+
+
 
 ### 12 July 2024
 {: #containers-july1224}

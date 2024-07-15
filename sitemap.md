@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-12"
+lastupdated: "2024-07-15"
 
 
 keywords: containers
@@ -239,6 +239,16 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july24)
+
+    * [15 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1524)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs.
+
+        * {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
+
+        * Storage Operator cluster add-on patch update.
 
     * [12 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1224)
 
@@ -6467,6 +6477,8 @@ subcollection: containers
 
 * [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
 
+    * [Change log for worker node fix pack 1.30.2_1528, released 15 July 2024](/docs/containers?topic=containers-changelog_130#1302_1528_W)
+
     * [Change log for worker node fix pack 1.30.2_1527, released 09 July 2024](/docs/containers?topic=containers-changelog_130#1302_1527_W)
 
     * [Change log for master fix pack 1.30.2_1525, released 19 June 2024](/docs/containers?topic=containers-changelog_130#1302_1525_M)
@@ -6541,6 +6553,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
+
+    * [Change log for worker node fix pack 1.29.6_1548, released 15 July 2024](/docs/containers?topic=containers-changelog_129#1296_1548_W)
 
     * [Change log for worker node fix pack 1.29.6_1547, released 09 July 2024](/docs/containers?topic=containers-changelog_129#1296_1547_W)
 
@@ -6646,6 +6660,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.11_1567, released 15 July 2024](/docs/containers?topic=containers-changelog_128#12811_1567_W)
 
     * [Change log for worker node fix pack 1.28.11_1566, released 09 July 2024](/docs/containers?topic=containers-changelog_128#12811_1566_W)
 
@@ -6769,6 +6785,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.15_1584, released 15 July 2024](/docs/containers?topic=containers-changelog_127#12715_1584_W)
 
     * [Change log for worker node fix pack 1.27.15_1583, released 09 July 2024](/docs/containers?topic=containers-changelog_127#12715_1583_W)
 
@@ -7505,6 +7523,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
+    * [Change log for version 5.2.20_579, released 15 July 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.20_579_is_block_relnote)
+
     * [Change log for version 5.2.19_570, released 21 June 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.19_570_is_block_relnote)
 
     * [Change log for version 5.2.18_539, released 10 May 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.18_539_is_block_relnote)
@@ -7522,6 +7542,8 @@ subcollection: containers
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+    * [Change log for version 5.1.25_574, released 15 July 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.25_574_is_block_relnote)
 
     * [Change log for version 5.1.24_567, released 21 June 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.24_567_is_block_relnote)
 
@@ -7685,9 +7707,13 @@ subcollection: containers
 
 * [Version 2.0](/docs/containers?topic=containers-versions-vpc-file-addon#020_is_file)
 
+    * [Change log for version 2.0.5_253, released 15 July 2024](/docs/containers?topic=containers-versions-vpc-file-addon#2.0.5_253_is_file_relnote)
+
     * [Change log for version 2.0.4_232, released 3 July 2024](/docs/containers?topic=containers-versions-vpc-file-addon#2.0.4_232_is_file_relnote)
 
 * [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
+
+    * [Change log for version 1.2.10_254, released 15 July 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.10_254_is_file_relnote)
 
     * [Change log for version 1.2.9_245, released 21 June 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.9_245_is_file_relnote)
 
@@ -7925,7 +7951,9 @@ subcollection: containers
 
 * [Version 1.0.0](/docs/containers?topic=containers-versions-ibm-storage-operator#ibm-storage-operator-1.0.0)
 
-    * [1.0.0_2186, released 29 May 2024](/docs/containers?topic=containers-versions-ibm-storage-operator#ibm-storage-operator-1.0.0-initial)
+    * [Change log for version 1.0.12_147, released 15 July 2024](/docs/containers?topic=containers-versions-ibm-storage-operator#ibm-storage-operator-1.0.12_147)
+
+    * [1.0.10_141, released 03 July 2024](/docs/containers?topic=containers-versions-ibm-storage-operator#ibm-storage-operator-1.0.0-initial)
 
 
 ## Ingress version history
