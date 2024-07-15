@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-28"
+lastupdated: "2024-07-15"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, add-on, storage operator
@@ -83,4 +83,3 @@ Note that you can't disable the add-on if there are other add-ons are using the 
     ibmcloud ks cluster addon disable ibm-storage-operator -c CLUSTER
     ```
     {: pre}
-
