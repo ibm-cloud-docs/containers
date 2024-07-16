@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-15"
+lastupdated: "2024-07-16"
 
 
 keywords: containers
@@ -240,6 +240,10 @@ subcollection: containers
 
 * [July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july24)
 
+    * [17 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1724)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [15 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1524)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs.
@@ -249,6 +253,8 @@ subcollection: containers
         * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
 
         * Storage Operator cluster add-on patch update.
+
+        * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
 
     * [12 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1224)
 
@@ -7311,9 +7317,13 @@ subcollection: containers
 
 * [Version 1.2.2](/docs/containers?topic=containers-ca_changelog#0122_ca_addon)
 
+    * [Change log for patch update 1.2.2_466, released 15 July 2024](/docs/containers?topic=containers-ca_changelog#122_466_ca)
+
     * [Change log for patch update 1.2.2_452, released 20 June 2024](/docs/containers?topic=containers-ca_changelog#122452_ca)
 
 * [Version 1.2.1](/docs/containers?topic=containers-ca_changelog#0121_ca_addon)
+
+    * [Change log for patch update 1.2.1_467, released 15 July 2024](/docs/containers?topic=containers-ca_changelog#121_467_ca)
 
     * [Change log for patch update 1.2.1_444, released 21 June 2024](/docs/containers?topic=containers-ca_changelog#121444_ca)
 
@@ -7324,6 +7334,8 @@ subcollection: containers
     * [Change log for patch update 1.2.1_395, released 28 February 2024](/docs/containers?topic=containers-ca_changelog#121395_ca)
 
 * [Version 1.2.0](/docs/containers?topic=containers-ca_changelog#0120_ca_addon)
+
+    * [Change log for patch update 1.2.0_468, released 15 July 2024](/docs/containers?topic=containers-ca_changelog#120_468_ca)
 
     * [Change log for patch update 1.2.0_443, released 21 June 2024](/docs/containers?topic=containers-ca_changelog#120443_ca)
 
@@ -7748,6 +7760,10 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.28, released 17 July 2024](/docs/containers?topic=containers-cos_plugin_changelog#02228_object_plugin)
+
+* [Change log for version 2.2.27, released 17 July 2024](/docs/containers?topic=containers-cos_plugin_changelog#02227_object_plugin)
 
 * [Change log for version 2.2.26, released 5 June 2024](/docs/containers?topic=containers-cos_plugin_changelog#02226_object_plugin)
 
