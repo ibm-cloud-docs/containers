@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-16"
+lastupdated: "2024-07-17"
 
 
 keywords: containers
@@ -10849,6 +10849,8 @@ subcollection: containers
 [Why do I see an `UnresponsiveMountHelperContainerUtility` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-unresponsive#ts-storage-vpc-file-eit-unresponsive)
 
 [Why do I see a `MetadataServiceNotEnabled` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-access#ts-storage-vpc-file-eit-access)
+
+[Why does PVC creation fail for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-pvc-fails#ts-storage-vpc-file-eit-pvc-fails)
 
 [Storage: Feedback, questions, and support](/docs/containers?topic=containers-getting_help_storage#getting_help_storage)
 
