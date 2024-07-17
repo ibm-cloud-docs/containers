@@ -244,6 +244,8 @@ subcollection: containers
 
         * {{site.data.keyword.cos_full_notm}} plug-in updates.
 
+        * {{site.data.keyword.containerlong_notm}} CLI version `1.0.640` is available.
+
     * [15 July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july1524)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs.
@@ -6218,6 +6220,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.640](/docs/containers?topic=containers-cs_cli_changelog#cli-010640)
 
 * [Version v1.0.638](/docs/containers?topic=containers-cs_cli_changelog#cli-010638)
 
