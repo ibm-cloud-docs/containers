@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-26"
+lastupdated: "2024-07-18"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -24,10 +24,10 @@ View information for patch and minor version updates to the [managed Istio add-o
 * **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.8 to 1.9, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor). When a minor version (`n`) of the Istio add-on is released, 1 minor version behind (`n-1`) is supported for typically 6 weeks after the latest version release date.
 * **`istioctl` and sidecar updates**: Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 
-To view a list of add-ons and the supported cluster versions, run the following command or see the [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions).
+To view a list of add-ons and the supported cluster versions, run the following command or see the [Supported cluster add-on versions](/docs/<containers>containers</containers><openshift>openshift</openshift>?topic=<containers>containers</containers><openshift>openshift</openshift>-supported-cluster-addon-versions).
 
 ```sh
-ibmcloud ks cluster addon versions
+<containers>ibmcloud ks</containers><openshift>ibmcloud oc</openshift> cluster addon versions
 ```
 {: pre}
 
@@ -47,7 +47,7 @@ Current version
 :   1.22.1
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.22.0](https://istio.io/latest/news/releases/1.22.x/announcing-1.22/){:external} and [Istio 1.22.1](https://istio.io/latest/news/releases/1.20.x/announcing-1.22.1/.){:external}.
+:   See the Istio release notes for [Istio 1.22.0](https://istio.io/latest/news/releases/1.22.x/announcing-1.22/){:external} and [Istio 1.22.1](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.1/.){:external}.
 
 
 ## Version 1.21

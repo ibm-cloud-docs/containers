@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-17"
+lastupdated: "2024-07-18"
 
 
 keywords: containers
@@ -3421,15 +3421,15 @@ subcollection: containers
 {: #sitemap_enhancing_security}
 
 
-[Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
+[Security for <containers>{{site.data.keyword.containerlong_notm}}</containers><openshift>{{site.data.keyword.openshiftlong_notm}}</openshift>](/docs/containers?topic=containers-security#security)
 
 * [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
 
-* [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
+* [<containers>Kubernetes</containers><openshift>{{site.data.keyword.redhat_openshift_notm}}</openshift> API server and etcd](/docs/containers?topic=containers-security#apiserver)
 
     * [How is access to my API server granted?](/docs/containers?topic=containers-security#api-server-access)
 
-    * [What does {{site.data.keyword.containerlong_notm}} do to secure my API server and etcd data store?](/docs/containers?topic=containers-security#secure-api-server)
+    * [What does <containers>{{site.data.keyword.containerlong_notm}}</containers><openshift>{{site.data.keyword.openshiftlong_notm}}</openshift> do to secure my API server and etcd data store?](/docs/containers?topic=containers-security#secure-api-server)
 
     * [What else can I do to secure my API server?](/docs/containers?topic=containers-security#api-server-what-else)
 
@@ -3459,6 +3459,8 @@ subcollection: containers
 
     * [What else can I do to reduce the surface for external attacks for VPC clusters?](/docs/containers?topic=containers-security#vpc-external-what-else)
 
+    * [Securely expose apps with routes](/docs/containers?topic=containers-security#expose-apps-with-routes)
+
     * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
 
     * [Can I use security groups to manage my cluster's network traffic?](/docs/containers?topic=containers-security#can-i-use-security-groups)
@@ -3470,6 +3472,8 @@ subcollection: containers
 * [Persistent storage](/docs/containers?topic=containers-security#storage)
 
 * [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
+
+* [Container runtime](/docs/containers?topic=containers-security#container-runtime)
 
 * [Image and registry](/docs/containers?topic=containers-security#images_registry)
 
@@ -5469,7 +5473,7 @@ subcollection: containers
 
 * [Adding a backup location to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-storage)
 
-* [Adding {{site.data.keyword.containerlong_notm}} clusters to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
+* [Adding <containers>{{site.data.keyword.containerlong_notm}}</containers><openshift>{{site.data.keyword.openshiftlong_notm}}</openshift> clusters to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
 
 * [Installing Stork on a non-Portworx cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-stork)
 
