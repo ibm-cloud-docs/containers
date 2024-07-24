@@ -10730,7 +10730,7 @@ subcollection: containers
 
 * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-ingress-debug#one_alb)
 
-[Gathering Ingress logs](/docs/containers?topic=containers-ingress-must-gather#ingress-must-gather)
+[Gathering Ingress details for debugging](/docs/containers?topic=containers-ingress-must-gather#ingress-must-gather)
 
 [Ingress resource operations refused by validating webhook](/docs/containers?topic=containers-ts-ingress-webhook#ts-ingress-webhook)
 

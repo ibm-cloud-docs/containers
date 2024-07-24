@@ -16,11 +16,11 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Gathering Ingress logs
+# Gathering Ingress details for debugging
 {: #ingress-must-gather}
 {: support}
 
-Run the following commands to gather the required logs for debugging Ingress.
+Run the following commands to gather the required logs and details for debugging Ingress.
 {: shortdesc}
 
 1. Get nodes and node labels.
@@ -97,8 +97,9 @@ Run the following commands to gather the required logs for debugging Ingress.
     ```
     {: pre}
     
-Review the output for error messages, then review the list of [Ingress and routers troubleshooting topics](/docs/containers?topic=containers-ingress-status) for help resolving common Ingress issues.
-{: tip}
+
+1. Save the information you've gathered and Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+
 
 
 
