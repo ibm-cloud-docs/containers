@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-07-16"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, containers
@@ -116,7 +116,7 @@ When a new image is available, edit the add-on configmap and specify the new ima
     ```
     {: pre}
 
-    Example output.
+    Example output
 
     ```yaml
     PACKAGE_DEPLOYER_VERSION: v1.0.0

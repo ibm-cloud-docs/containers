@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-18"
+lastupdated: "2024-07-24"
 
 
 keywords: containers
@@ -3421,15 +3421,15 @@ subcollection: containers
 {: #sitemap_enhancing_security}
 
 
-[Security for <containers>{{site.data.keyword.containerlong_notm}}</containers><openshift>{{site.data.keyword.openshiftlong_notm}}</openshift>](/docs/containers?topic=containers-security#security)
+[Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
 
 * [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
 
-* [<containers>Kubernetes</containers><openshift>{{site.data.keyword.redhat_openshift_notm}}</openshift> API server and etcd](/docs/containers?topic=containers-security#apiserver)
+* [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
 
     * [How is access to my API server granted?](/docs/containers?topic=containers-security#api-server-access)
 
-    * [What does <containers>{{site.data.keyword.containerlong_notm}}</containers><openshift>{{site.data.keyword.openshiftlong_notm}}</openshift> do to secure my API server and etcd data store?](/docs/containers?topic=containers-security#secure-api-server)
+    * [What does {{site.data.keyword.containerlong_notm}} do to secure my API server and etcd data store?](/docs/containers?topic=containers-security#secure-api-server)
 
     * [What else can I do to secure my API server?](/docs/containers?topic=containers-security#api-server-what-else)
 
@@ -3459,8 +3459,6 @@ subcollection: containers
 
     * [What else can I do to reduce the surface for external attacks for VPC clusters?](/docs/containers?topic=containers-security#vpc-external-what-else)
 
-    * [Securely expose apps with routes](/docs/containers?topic=containers-security#expose-apps-with-routes)
-
     * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
 
     * [Can I use security groups to manage my cluster's network traffic?](/docs/containers?topic=containers-security#can-i-use-security-groups)
@@ -3472,8 +3470,6 @@ subcollection: containers
 * [Persistent storage](/docs/containers?topic=containers-security#storage)
 
 * [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
-
-* [Container runtime](/docs/containers?topic=containers-security#container-runtime)
 
 * [Image and registry](/docs/containers?topic=containers-security#images_registry)
 
@@ -3708,21 +3704,6 @@ subcollection: containers
     * [Step 7: Optional. Upgrade your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-cluster-upgrade)
 
 * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
-
-
-## Restricting network traffic to edge worker nodes
-{: #sitemap_restricting_network_traffic_to_edge_worker_nodes}
-
-
-[Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge#edge)
-
-* [Isolating NLB workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes_nlb)
-
-* [Isolating ALB workloads to edge worker nodes](/docs/containers?topic=containers-edge#edge_nodes_alb)
-
-* [Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge#edge_workloads)
-
-* [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge#sysdig-edge)
 
 
 ## Controlling network traffic in Classic clusters
@@ -4720,6 +4701,16 @@ subcollection: containers
 
     * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
 
+[ Isolating Classic NLBs to edge worker nodes](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic)
+
+[Isolating network workloads to edge nodes in VPC clusters](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads)
+
+* [Prerequisites](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-pre)
+
+* [Isolating workloads to edge nodes](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-steps)
+
+* [Next steps](/docs/containers?topic=containers-edge-vpc-workloads#edge-workloads-vpc-next)
+
 [Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
 
 * [Registering NLB IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
@@ -4860,6 +4851,8 @@ subcollection: containers
     * [Regenerating the certificate for an Ingress domain](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-manage-secrets-regen)
 
     * [Deleting an Ingress domain secret](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-manage-secrets-rm)
+
+[Isolating Ingress resources to edge worker nodes](/docs/containers?topic=containers-edge#edge)
 
 [Customizing ALB routing](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
 
@@ -5005,6 +4998,20 @@ subcollection: containers
 * [Controlling access to your secrets with secret groups](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_groups)
 
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
+
+
+## Preventing app workloads from running on edge worker nodes
+{: #sitemap_preventing_app_workloads_from_running_on_edge_worker_nodes}
+
+
+[Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prevent)
+
+
+## Deploying the Sysdig agent on edge worker nodes
+{: #sitemap_deploying_the_sysdig_agent_on_edge_worker_nodes}
+
+
+[Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge-sysdig#edge-sysdig)
 
 
 ## Enabling the IBM Storage Operator cluster add-on
@@ -5378,6 +5385,18 @@ subcollection: containers
 
 [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
 
+[Migrating Cloud Object Storage (COS) resources between IBM Cloud accounts](/docs/containers?topic=containers-storage-rclone-migration#storage-rclone-migration)
+
+* [Prerequisites](/docs/containers?topic=containers-storage-rclone-migration#rclone-migration-prereqs)
+
+* [Configuring `rclone`](/docs/containers?topic=containers-storage-rclone-migration#rclone-config)
+
+* [Syncing between COS buckets](/docs/containers?topic=containers-storage-rclone-migration#rclone-inspect)
+
+* [Syncing contents between buckets](/docs/containers?topic=containers-storage-rclone-migration#rclone-sync)
+
+* [Next steps](/docs/containers?topic=containers-storage-rclone-migration#rclone-next-steps)
+
 [Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
 
 
@@ -5473,7 +5492,7 @@ subcollection: containers
 
 * [Adding a backup location to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-storage)
 
-* [Adding <containers>{{site.data.keyword.containerlong_notm}}</containers><openshift>{{site.data.keyword.openshiftlong_notm}}</openshift> clusters to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
+* [Adding {{site.data.keyword.containerlong_notm}} clusters to your Portworx Backup service](/docs/containers?topic=containers-storage_portworx_backup#px-backup-cluster)
 
 * [Installing Stork on a non-Portworx cluster](/docs/containers?topic=containers-storage_portworx_backup#px-backup-stork)
 

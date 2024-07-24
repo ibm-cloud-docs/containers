@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2021, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, containers
@@ -25,6 +25,13 @@ content-type: troubleshoot
 {: support}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
+
+
+
+In version 1.29 and later, the Calico Operator determines the number of `calico-typha` pods based on the number of cluster workers and does not consider tainted nodes. If you have fewer than 3 untainted nodes in your cluster, or have a very large cluster with a small number of untainted nodes, you might have one or more `calico-typha` pods are stuck in `Pending` state because the pod can't find an untainted node to run on. In most cases, this doesn't cause an issue as long as there is at least one `calico-typha` pod in Running state. However, for high availability it is recommended to have at least two `calico-typha` pods running at all times. As a best practice, make sure that there are enough untainted nodes to run all the `calico-typha` pods that are created by the Calico operator.
+{: note}
+
+
 
 You experience issues with Calico components such as pods that don't deploy or intermittent networking issues. 
 {: tsSymptoms}

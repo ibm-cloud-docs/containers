@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, mzr, szr, multizone, multi az
@@ -79,6 +79,7 @@ If you create a classic cluster in a multizone region, the replicas of your high
 | North America | United States | Dallas | us-dal | dal10, dal12, dal13 |
 | North America | United States | Washington DC | us-wdc | wdc04, wdc06, wdc07 |
 {: caption="Available multizone metro locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="bottom"}
+{: #classic-multizone-locations-table}
 
 
 
@@ -107,6 +108,7 @@ Classic single zone clusters are managed from the regional endpoint located in t
 | North America | United States | San Jose | us-sjc | sjc03, sjc04 | US South (`us-south`) |
 | South America | Brazil | Sao Paulo | br-sao | sao01 | US South (`us-south`) |
 {: caption="Available single zone data center locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="bottom"}
+{: #classic-single-zone-locations-table}
 
 
 
@@ -129,6 +131,7 @@ VPC resources are provisioned in a region, which is a separate group of zones wi
 | North America | United States | Washington DC | us-east | us-east-1, us-east-2, us-east-3 |
 | South America | Brazil | `†` São Paulo | br-sao | br-sao-1, br-sao-2, br-sao-3 |
 {: caption="Available multizone metro locations for VPC clusters in {{site.data.keyword.containerlong_notm}}." caption-side="bottom"}
+{: #vpc-gen2-multizone-locations-table}
 
 
 

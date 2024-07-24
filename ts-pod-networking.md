@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-07-24"
 
 
 keywords: pods, pod connectvity, networking, pod networking, pod trouble shooting, pod debug
@@ -52,7 +52,7 @@ Follow these steps to check the health of your components. Networking issues mig
         - Exactly one `calico-kube-controllers` pod per cluster. 
         - At least one `coredns` pod per cluster. Larger clusters might have more than one. 
 
-        Example output. 
+        Example output 
 
         ```sh
         NAMESPACE       NAME                                       READY   STATUS     RESTARTS    AGE   IP              NODE           NOMINATED NODE   READINESS GATES
@@ -236,7 +236,7 @@ Run `curl`, `ping`, and `nc` commands to test each pod's network connection and 
     ```
     {: pre}
 
-    Example output. 
+    Example output 
 
     ```sh
     NAME               READY   STATUS    RESTARTS   AGE   IP               NODE             NOMINATED NODE   READINESS GATES
@@ -314,7 +314,7 @@ Run `curl`, `ping`, and `nc` commands to test each pod's network connection and 
     ```
     {: pre}
 
-    Example output. 
+    Example output 
 
     ```sh
     172.21.0.1
@@ -326,7 +326,7 @@ Run `curl`, `ping`, and `nc` commands to test each pod's network connection and 
     ```
     {: pre}
 
-    Example output. 
+    Example output 
 
     ```sh
     23.50.74.64
@@ -340,7 +340,7 @@ Run `curl`, `ping`, and `nc` commands to test each pod's network connection and 
     ```
     {: pre}
 
-    Example output.
+    Example output
 
     ```sh
     {

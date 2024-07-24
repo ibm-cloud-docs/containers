@@ -124,7 +124,6 @@ toc:
           - kubeapi-priority.md
           - pod-security-admission.md
           - pod-security-admission-migration.md
-      - edge.md
       - topicgroup: 
           label: Controlling network traffic in Classic clusters
           topics:
@@ -195,6 +194,8 @@ toc:
               - lb-about.md
               - lb.md
               - lb-v2.md
+              - edge-classic-nlb.md
+              - edge-vpc-lb.md
               - lb-dns.md
           - topicgroup:
               label: Exposing apps with Ingress
@@ -203,6 +204,7 @@ toc:
               - cs_managed_ingress_setup.md
               - cs_managed_ingress_alb.md
               - ingress-domains.md
+              - edge-ingress.md
               - ingress-annotations.md
               - cs_ingress_monitor.md
           - topicgroup:
@@ -210,6 +212,8 @@ toc:
               topics:
               - secrets.md
               - secrets-mgr.md
+      - edge-workload-prevent.md
+      - edge-sysdig.md
       - storage-operator.md
       - storage-block.md
       - topicgroup:   
@@ -238,6 +242,7 @@ toc:
           - storage-cos-apps.md
           - storage-cos-tutorial-quota.md
           - storage-cos-vpc-ip.md
+          - storage-rclone-migration.md
           - storage-cos-reference.md
       - topicgroup:
           label: Setting up Portworx

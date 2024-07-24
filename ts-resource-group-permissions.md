@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-03-27"
+lastupdated: "2024-07-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, subnet, detach, specified subnet, infrastructure operation failed
@@ -45,7 +45,7 @@ Complete the following steps to resolve the issue.
     ```
     {: pre}
 
-    Example output.
+    Example output
     ```sh
     ic ks api-key info -c docs
     Getting information about the API key owner for cluster docs...

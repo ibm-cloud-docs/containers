@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-06-21"
+lastupdated: "2024-07-24"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -484,7 +484,7 @@ Removing all workers from a VLAN removes the IP address of the ALB in the VLAN's
     ```
     {: pre}
 
-    Example output.
+    Example output
 
     ```sh
     Non-authoritative answer:

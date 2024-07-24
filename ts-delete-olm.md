@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, OLM, operator lifecycle manager, delete olm, delete operator lifecycle manager components
@@ -33,7 +33,7 @@ If you want to continue using OLM components in your cluster, or you want to ins
     ```
     {: pre}
 
-    Example output.
+    Example output
 
     ```sh
     NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
