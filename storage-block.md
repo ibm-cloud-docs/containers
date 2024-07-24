@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-28"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, containers
@@ -136,7 +136,7 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
     ```
     {: pre}
     
-    Example output.
+    Example output
     ```sh
     NAME            READY   UP-TO-DATE   AVAILABLE   AGE
     my-deployment   1/1     1            1           3m19s
@@ -149,7 +149,7 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
     ```
     {: pre}
     
-    Example output.
+    Example output
     ```sh
     NAME                            READY   STATUS    RESTARTS   AGE
     my-deployment-ccdf87dfb-vzn95   1/1     Running   0          5m27s
@@ -163,7 +163,7 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
     ```
     {: pre}
     
-    Example output.
+    Example output
     ```sh
     2022-01-21 14:18:59
     ```
@@ -293,7 +293,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-    Example output.
+    Example output
     
     ```sh
     ibmcloud-block-storage-driver-kh4mt                              1/1       Running   0          27d       10.118.98.19   10.118.98.19
@@ -310,7 +310,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-    Example output.
+    Example output
     
     ```sh
     ibmc-block-bronze                      ibm.io/ibmc-block   Delete          Immediate           true                   148m
@@ -358,7 +358,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-    Example output.
+    Example output
     
     ```sh
     NAME            NAMESPACE   REVISION    UPDATED                             STATUS      CHART                                   APP VERSION
@@ -1266,7 +1266,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
     ```
     {: pre}
     
-    Example output.
+    Example output
     ```sh
     2022-01-21 16:11:00
     ```

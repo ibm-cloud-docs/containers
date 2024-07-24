@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-26"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -47,7 +47,7 @@ Current version
 :   1.22.1
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.22.0](https://istio.io/latest/news/releases/1.22.x/announcing-1.22/){:external} and [Istio 1.22.1](https://istio.io/latest/news/releases/1.20.x/announcing-1.22.1/.){:external}.
+:   See the Istio release notes for [Istio 1.22.0](https://istio.io/latest/news/releases/1.22.x/announcing-1.22/){:external} and [Istio 1.22.1](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.1/.){:external}.
 
 
 ## Version 1.21

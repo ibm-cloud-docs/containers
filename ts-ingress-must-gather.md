@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-07-24"
 
 
-keywords: kubernetes, help, network, connectivity
+keywords: containers, kubernetes, help, network, connectivity, ingress, must gather
 
 subcollection: containers
 
@@ -16,27 +16,13 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Gathering Ingress logs
+# Gathering Ingress details for debugging
 {: #ingress-must-gather}
 {: support}
 
-Run the following commands to gather the required logs for debugging Ingress.
+Run the following commands to gather the required logs and details for debugging Ingress.
 {: shortdesc}
 
-1. List ALBs.
-
-    ```sh
-    ibmcloud ks ingress alb ls -c CLUSTERID
-    ```
-    {: pre}
-
-1. Get the Ingress status.
-
-    ```sh
-    ibmcloud ks ingress status-report get -c CLUSTERID
-    ```
-    {: pre}
-    
 1. Get nodes and node labels.
 
     ```sh
@@ -48,6 +34,23 @@ Run the following commands to gather the required logs for debugging Ingress.
 
     ```sh
     kubectl get endpoints -o wide
+    ```
+    {: pre}
+
+1. Get the Ingress status.
+
+    ```sh
+    ibmcloud ks ingress status-report get -c CLUSTERID
+    ```
+    {: pre}
+    
+
+
+
+1. List ALBs.
+
+    ```sh
+    ibmcloud ks ingress alb ls -c CLUSTERID
     ```
     {: pre}
 
@@ -78,6 +81,14 @@ Run the following commands to gather the required logs for debugging Ingress.
     kubectl get pods -n kube-system | grep alb
     ```
     {: pre}
+
+
+
+1. List your cluster subdomains.
+    ```sh
+    ibmcloud ks ingress domain ls -c CLUSTERID
+    ```
+    {: pre}
     
 1. Run an `nslookup` on your Ingress subdomain.
 
@@ -86,8 +97,9 @@ Run the following commands to gather the required logs for debugging Ingress.
     ```
     {: pre}
     
-Review the output for error messages, then review the list of [Ingress and routers troubleshooting topics](/docs/openshift?topic=openshift-sitemap#sitemap_ingress_and_routers) for help resolving common Ingress issues.
-{: tip}
+
+1. Save the information you've gathered and Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+
 
 
 

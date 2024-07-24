@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2024
-lastupdated: "2024-05-20"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, help, wireguard, worker encryption
@@ -42,7 +42,7 @@ For more information on this configuration setting, see [Enable WireGuard for a 
     ```
     {: pre}
 
-    Example output.
+    Example output
     ```sh
     felixconfiguration.crd.projectcalico.org/default patched
     ```
@@ -55,7 +55,7 @@ For more information on this configuration setting, see [Enable WireGuard for a 
     ```
     {: pre}
 
-    Example output.
+    Example output
 
     ```yaml
     apiVersion: crd.projectcalico.org/v1

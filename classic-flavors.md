@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-21"
+lastupdated: "2024-07-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, node scaling, ca, autoscaler
@@ -116,8 +116,6 @@ Review the classic worker node flavors by metro.
 
 
 
-
-
 ## Chennai (`che`)
 {: #chennai-che}
 
@@ -203,8 +201,6 @@ Review the classic worker node flavors by metro.
 {: #che-memory-table}
 {: tab-title="Memory"}
 {: tab-group="che-tables"}
-
-
 
 
 
@@ -301,8 +297,6 @@ Review the classic worker node flavors by metro.
 
 
 
-
-
 ## Frankfurt (`fra`)
 {: #frankfurt-fra}
 
@@ -388,8 +382,6 @@ Review the classic worker node flavors by metro.
 {: #fra-memory-table}
 {: tab-title="Memory"}
 {: tab-group="fra-tables"}
-
-
 
 
 
@@ -483,8 +475,6 @@ Review the classic worker node flavors by metro.
 
 
 
-
-
 ## Milan (`mil`)
 {: #milan-mil}
 
@@ -571,8 +561,6 @@ Review the classic worker node flavors by metro.
 
 
 
-
-
 ## Montreal (`mon`)
 {: #montreal-mon}
 
@@ -655,8 +643,6 @@ Review the classic worker node flavors by metro.
 {: #mon-memory-table}
 {: tab-title="Memory"}
 {: tab-group="mon-tables"}
-
-
 
 
 
@@ -753,8 +739,6 @@ Review the classic worker node flavors by metro.
 
 
 
-
-
 ## Paris (`par`)
 {: #paris-par}
 
@@ -844,8 +828,6 @@ Review the classic worker node flavors by metro.
 
 
 
-
-
 ## Sao Paulo (`sao`)
 {: #sao-paulo-sao}
 
@@ -879,8 +861,6 @@ Review the classic worker node flavors by metro.
 {: #sao-memory-table}
 {: tab-title="Memory"}
 {: tab-group="sao-tables"}
-
-
 
 
 
@@ -935,8 +915,6 @@ Review the classic worker node flavors by metro.
 
 
 
-
-
 ## Singapore (`sng`)
 {: #singapore-sng}
 
@@ -982,8 +960,6 @@ Review the classic worker node flavors by metro.
 {: #sng-memory-table}
 {: tab-title="Memory"}
 {: tab-group="sng-tables"}
-
-
 
 
 
@@ -1077,8 +1053,6 @@ Review the classic worker node flavors by metro.
 
 
 
-
-
 ## Tokyo (`tok`)
 {: #tokyo-tok}
 
@@ -1164,8 +1138,6 @@ Review the classic worker node flavors by metro.
 {: #tok-memory-table}
 {: tab-title="Memory"}
 {: tab-group="tok-tables"}
-
-
 
 
 
@@ -1259,8 +1231,6 @@ Review the classic worker node flavors by metro.
 
 
 
-
-
 ## Washington DC (`wdc`)
 {: #washington-dc-wdc}
 
@@ -1346,8 +1316,6 @@ Review the classic worker node flavors by metro.
 {: #wdc-memory-table}
 {: tab-title="Memory"}
 {: tab-group="wdc-tables"}
-
-
 
 
 

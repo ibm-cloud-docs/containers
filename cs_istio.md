@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -155,7 +155,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
         ```
         {: pre}
 
-        Example output.
+        Example output
 
         ```sh
         NAME                     WEBHOOKS   AGE
@@ -170,7 +170,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
         ```
         {: pre}
 
-        Example output.
+        Example output
 
         ```sh
         mutatingwebhookconfiguration.admissionregistration.k8s.io "istio-sidecar-injector" deleted
@@ -184,7 +184,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
         ```
         {: pre}
 
-        Example output.
+        Example output
 
         ```sh
         NAME                     WEBHOOKS   AGE
@@ -199,7 +199,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
         ```
         {: pre}
 
-        Example output.
+        Example output
 
         ```txt
         NAME                           WEBHOOKS   AGE
@@ -215,7 +215,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
         ```
         {: pre}
 
-        Example output.
+        Example output
 
         ```sh
         validatingwebhookconfiguration.admissionregistration.k8s.io "istiod-istio-system" deleted
@@ -229,7 +229,7 @@ You can't revert your managed Istio add-on to a previous version. If you want to
         ```
         {: pre}
 
-        Example output.
+        Example output
 
         ```sh
         NAME                           WEBHOOKS   AGE

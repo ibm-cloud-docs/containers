@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-07-16"
+lastupdated: "2024-07-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, add-on, file
@@ -64,7 +64,7 @@ Need to update the add-on to a newer version? See [Updating the {{site.data.keyw
     ```
     {: pre}
 
-    Example output.
+    Example output
     ```sh
     Enabling add-on vpc-file-csi-driver(2.0) for cluster devcluster2...
     The add-on might take several minutes to deploy and become ready for use.

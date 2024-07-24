@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-12"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, containers, app protocol, application protocol
@@ -230,7 +230,7 @@ Expose your app to public network traffic by setting up a Kubernetes `LoadBalanc
     :   **Optional**. The maximum number of health check retries for the VPC load balancer. By default, this value is set to `2`, and has a minimum of `1` and a maximum of `10`.
     
     `selector`
-    :   **Optional**. The label key (<selector_key>) and value (<selector_value>) that you used in the `spec.template.metadata.labels` section of your app deployment YAML. This custom label identifies all pods where your app runs to include them in the load balancing.
+    :   **Optional**. The label key (`<selector_key>`) and value (`<selector_value>`) that you used in the `spec.template.metadata.labels` section of your app deployment YAML. This custom label identifies all pods where your app runs to include them in the load balancing.
 
     `port`
     :   **Optional**. The port that the service listens on.
@@ -828,7 +828,7 @@ To enable your app to receive public or private requests,
     :   Optional. Can be applied only for private VPC ALBs in version 1.28 or later. The DNS `zone` to associate with this load balancer. For more information, see [Registering a private DNS record](#vpc_alb_private_dns).
 
     `selector`
-    :   The label key (<selector_key>) and value (<selector_value>) that you used in the `spec.template.metadata.labels` section of your app deployment YAML. This custom label identifies all pods where your app runs to include them in the load balancing.
+    :   The label key (`<selector_key>`) and value (`<selector_value>`) that you used in the `spec.template.metadata.labels` section of your app deployment YAML. This custom label identifies all pods where your app runs to include them in the load balancing.
 
     `port`
     :   The port that the service listens on.
@@ -1152,7 +1152,7 @@ After you have created a VPC NLB, you can not reconfigure the listening subnet i
     ```
     {: pre}
 
-    Example output.
+    Example output
 
     ```sh
     NAME                     TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                        AGE
@@ -1170,7 +1170,7 @@ After you have created a VPC NLB, you can not reconfigure the listening subnet i
     ```
     {: pre}
 
-    Example output.
+    Example output
 
     ```sh
     ID                                          Name                                                         Family        Subnets                                       Is public   Provision status   Operating status   Resource group      
@@ -1208,7 +1208,7 @@ After you have created a VPC NLB, you can not reconfigure the listening subnet i
     ```
     {: pre}
 
-    Example output.
+    Example output
 
     ```sh
     NAME:                     my-load-balancer
@@ -1243,7 +1243,7 @@ After you have created a VPC NLB, you can not reconfigure the listening subnet i
     ```
     {: pre}
 
-    Example output.
+    Example output
 
     ```sh
     ID                                          Name                                                         Family        Subnets                                       Is public   Provision status   Operating status   Resource group     

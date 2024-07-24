@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-04-29"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, helm
@@ -110,7 +110,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |Aqua Security|As a supplement to [Vulnerability Advisor](/docs/Registry?topic=Registry-va_index){: external}, you can use [Aqua Security](https://www.aquasec.com/){: external} to improve the security of container deployments by reducing what your app is allowed to do. For more information, see [Securing container deployments on {{site.data.keyword.cloud_notm}} with Aqua Security](https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security){: external}.|Yes|Yes|
 |{{site.data.keyword.registrylong_notm}}|Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the [{{site.data.keyword.registrylong}} documentation](/docs/Registry?topic=Registry-getting-started){: external}.|Yes|Yes|
 |{{site.data.keyword.keymanagementservicefull_notm}}|Encrypt the Kubernetes secrets that are in your cluster by [enabling a key management service (KMS) provider](/docs/containers?topic=containers-encryption-setup). Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information. |Yes|Yes|
-|NeuVector|Protect containers with a cloud-native firewall by using [NeuVector](https://www.suse.com/neuvector/){: external}.|Yes|Yes|
+|NeuVector|Protect containers with a cloud-native firewall by using [NeuVector](https://www.suse.com/products/neuvector/){: external}.|Yes|Yes|
 |{{site.data.keyword.secrets-manager_full_notm}}| Ingress secrets and certificates| You can use {{site.data.keyword.secrets-manager_short}} to store and manage your Ingress secrets and certificates. For more information, see [Setting up {{site.data.keyword.secrets-manager_short}} in your Kubernetes Service cluster](/docs/containers?topic=containers-secrets-mgr).|Yes|Yes|
 |Twistlock|As a supplement to [Vulnerability Advisor](/docs/Registry?topic=Registry-va_index){: external}, you can use [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){: external} to manage firewalls, threat protection, and incident response.|Yes|Yes|
 {: caption="Table 5. Security services" caption-side="bottom"}

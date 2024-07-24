@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-04-04"
+lastupdated: "2024-07-24"
 
 
 keywords: kubernetes, lb1.0, nlb
@@ -77,7 +77,7 @@ To set up an NLB 1.0 service in a multizone cluster:
         :   Annotation to specify a VLAN that the load balancer service deploys to. To see VLANs, run `ibmcloud ks vlan ls --zone <zone>`.
         
         `selector`
-        :   The label key (<selector_key>) and value (<selector_value>) that you used in the `spec.template.metadata.labels` section of your app deployment YAML.
+        :   The label key (`<selector_key>`) and value (`<selector_value>`) that you used in the `spec.template.metadata.labels` section of your app deployment YAML.
         
         `port`
         :   The port that the service listens on.
@@ -208,7 +208,7 @@ To create an NLB 1.0 service in a single-zone cluster:
         `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan:`
         :   Annotation to specify a VLAN that the load balancer service deploys to. To see VLANs, run `ibmcloud ks vlan ls --zone <zone>`.
         `selector`
-        :   The label key (<selector_key>) and value (<selector_value>) that you used in the `spec.template.metadata.labels` section of your app deployment YAML.
+        :   The label key (`<selector_key>`) and value (`<selector_value>`) that you used in the `spec.template.metadata.labels` section of your app deployment YAML.
         
         `port`
         :   The port that the service listens on.
