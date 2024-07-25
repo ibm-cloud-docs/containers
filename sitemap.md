@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-07-25"
 
 
 keywords: containers
@@ -10135,8 +10135,6 @@ subcollection: containers
 
 * [Does the service come with a managed Kubernetes master and worker nodes?](/docs/containers?topic=containers-faqs#managed_master_worker)
 
-* [Are the master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
-
 * [What kinds of workloads can I move to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#move_to_cloud)
 
 * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-faqs#infra_packaging)
@@ -10172,6 +10170,26 @@ subcollection: containers
 * [Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
 
 * [Is the service highly available?](/docs/containers?topic=containers-faqs#ha_sla)
+
+* [How do multizone clusters work?](/docs/containers?topic=containers-faqs#mz-cluster-faq)
+
+    * [How is my {{site.data.keyword.containerlong_notm}} master set up?](/docs/containers?topic=containers-faqs#mz-master-setup)
+
+    * [Do I have to do anything so that the master can communicate with the workers across zones?](/docs/containers?topic=containers-faqs#mz-master-communication)
+
+    * [Can I convert my single zone cluster to a multizone cluster?](/docs/containers?topic=containers-faqs#convert-sz-to-mz)
+
+* [What if I want to set up multiple clusters across regions?](/docs/containers?topic=containers-faqs#multiple-regions-setup)
+
+* [What options do I have to load balance workloads across multiple clusters?](/docs/containers?topic=containers-faqs#multiple-cluster-lb-options)
+
+* [What if I want to load balance workloads on the private network?](/docs/containers?topic=containers-faqs#glb-private)
+
+* [Are the master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
+
+* [Do my apps automatically spread across zones?](/docs/containers?topic=containers-faqs#multizone-apps-faq)
+
+* [Are the worker nodes encrypted?](/docs/containers?topic=containers-faqs#encrypted-flavors)
 
 * [What compliance standards does the service meet?](/docs/containers?topic=containers-faqs#standards)
 

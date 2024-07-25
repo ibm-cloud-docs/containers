@@ -2,13 +2,12 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-24"
+lastupdated: "2024-07-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, multi az, multi-az, szr, mzr
 
 subcollection: containers
-
 
 ---
 
