@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-29"
+lastupdated: "2024-07-30"
 
 
 keywords: containers
@@ -6399,18 +6399,6 @@ subcollection: containers
 * [Version 1.0.15](/docs/containers?topic=containers-cs_cli_changelog#cli-1015)
 
 * [Version 1.0.0](/docs/containers?topic=containers-cs_cli_changelog#cli-100)
-
-* [Deprecated versions](/docs/containers?topic=containers-cs_cli_changelog#deprecated)
-
-    * [Updating to version 1.0 of the plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta)
-
-    * [Version 0.4](/docs/containers?topic=containers-cs_cli_changelog#04)
-
-    * [Version 0.3](/docs/containers?topic=containers-cs_cli_changelog#03)
-
-    * [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
-
-    * [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
 
 [Observability plug-in CLI](/docs/containers?topic=containers-observability_cli#observability_cli)
 
