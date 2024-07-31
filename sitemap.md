@@ -9966,8 +9966,6 @@ subcollection: containers
 
 * [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
 
-    * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
-
     * [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
 
     * [Classic single zone regions](/docs/containers?topic=containers-regions-and-zones#zones-sz)
