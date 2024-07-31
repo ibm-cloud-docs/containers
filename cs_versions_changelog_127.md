@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-07-29"
+lastupdated: "2024-07-31"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -52,6 +52,29 @@ Review the version 1.27 change log.
 
 
 
+
+
+### Change log for master fix pack 1.27.16_1587, released 31 July 2024
+{: #12716_1587_M}
+
+The following table shows the changes that are in the master fix pack 1.27.16_1587. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.4.11 | v1.5.7 | New version contains updates and security fixes. |
+| etcd | v3.5.13 | v3.5.14 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.14){: external}. |
+| GPU device plug-in and installer | 10ea2b1 | 184b5e2 | New version contains updates and security fixes. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1595 | 1598 | New version contains security fixes. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.20 | v2.4.23 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 443 | 445 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 14d0ab5 | 312030f | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.11 | v2.8.12 | New version contains updates and security fixes. |
+| Kubernetes | v1.27.15 | v1.27.16 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.16){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2933 | 2967 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.16 | v0.13.17 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.17){: external}. |
+{: caption="Changes since version 1.27.15_1581" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.27.15_1588, released 29 July 2024

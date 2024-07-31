@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-07-29"
+lastupdated: "2024-07-31"
 
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
@@ -43,6 +43,31 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.28 change log.
 {: shortdesc}
 
+
+
+### Change log for master fix pack 1.28.12_1573, released 31 July 2024
+{: #12812_1573_M}
+
+The following table shows the changes that are in the master fix pack 1.28.12_1573. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.27.2 | v3.27.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.27/release-notes/#v3.27.4){: external}. |
+| Cluster health image | v1.4.11 | v1.5.7 | New version contains updates and security fixes. |
+| etcd | v3.5.13 | v3.5.14 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.14){: external}. |
+| GPU device plug-in and installer | 10ea2b1 | 184b5e2 | New version contains updates and security fixes. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1595 | 1598 | New version contains security fixes. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.20 | v2.4.23 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.28.10-5 | v1.28.12-1 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 443 | 445 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 14d0ab5 | 312030f | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.11 | v2.8.12 | New version contains updates and security fixes. |
+| Kubernetes | v1.28.11 | v1.28.12 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.12){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2933 | 2967 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.16 | v0.13.17 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.17){: external}. |
+{: caption="Changes since version 1.28.11_1564" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.28.12_1574, released 29 July 2024
