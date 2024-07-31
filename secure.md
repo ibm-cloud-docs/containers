@@ -5,7 +5,7 @@ copyright:
 lastupdated: "2024-07-31"
 
 
-keywords: kubernetes, containers
+keywords: containers
 
 subcollection: containers
 
@@ -430,8 +430,6 @@ To protect your apps, consider to address the following areas:
 2. **Scan images before they deploy into production:**  Make sure to scan every image before you deploy a container from it. For example, if you use {{site.data.keyword.registrylong_notm}}, all images are automatically scanned for vulnerabilities when you push the image to your namespace. If vulnerabilities are found, consider eliminating the vulnerabilities or block deployment for those images. Find a person or team in your organization who is responsible for monitoring and removing vulnerabilities. Depending on your organizational structure, this person might be part of a security, operations, or deployment team. Enable [content trust](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent) so that images must be approved by a trusted signer before they can be pushed to the container registry. Then, [install the open source Portieris project](https://github.com/IBM/portieris){: external} admission controller to block container deployments from unsigned images.
 
 3. **Regularly scan running containers:**. Even if you deployed a container from an image that passes the vulnerability check, the operating system or binaries that run in the container might get vulnerable over time. To protect your app, you must ensure that running containers are regularly scanned so that you can detect and remediate vulnerabilities. Depending on the app, to add extra security, you can establish a job that takes down vulnerable containers after they are detected.
-
-![Deploying containers with trusted content](images/cs_image_security.png "Deploying containers with trusted content"){: caption="Figure 1. Deploying containers with trusted content" caption-side="bottom"})
 
 
 |Security feature|Description|
