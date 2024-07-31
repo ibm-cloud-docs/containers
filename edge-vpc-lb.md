@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-07-31"
 
 
 keywords: containers, kubernetes, affinity, taint, edge node, edge
@@ -69,7 +69,8 @@ Add the `dedicated=edge` label to worker nodes in your cluster. The labels ensur
 
 
 
-[Isolate Ingress resources to edge worker nodes](/docs/containers?topic=containers-edge-ingress-albs).
+[Isolate Ingress resources to edge worker nodes](/docs/containers?topic=containers-edge#edge).
+
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-30"
+lastupdated: "2024-07-31"
 
 
 keywords: containers
@@ -2922,17 +2922,17 @@ subcollection: containers
 
 * [Multizone clusters](/docs/containers?topic=containers-ha_clusters#mz-clusters)
 
-    * [Multizone cluster FAQ](/docs/containers?topic=containers-ha_clusters#mz-cluster-faq)
+    * [Multizone cluster FAQ](/docs/containers?topic=containers-ha_clusters#mz-cluster-faq-plan)
 
 * [Multiple public clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple-clusters-glb)
 
     * [Why do I need 3 clusters in three zones?](/docs/containers?topic=containers-ha_clusters#multicluster-three-zones)
 
-    * [What if I want to set up multiple clusters across regions?](/docs/containers?topic=containers-ha_clusters#multiple-regions-setup)
+    * [What if I want to set up multiple clusters across regions?](/docs/containers?topic=containers-ha_clusters#multiple-regions-setup-plan)
 
-    * [What options do I have to load balance workloads across multiple clusters?](/docs/containers?topic=containers-ha_clusters#multiple-cluster-lb-options)
+    * [What options do I have to load balance workloads across multiple clusters?](/docs/containers?topic=containers-ha_clusters#multiple-cluster-lb-options-plan)
 
-    * [What if I want to load balance workloads on the private network?](/docs/containers?topic=containers-ha_clusters#glb-private)
+    * [What if I want to load balance workloads on the private network?](/docs/containers?topic=containers-ha_clusters#glb-private-plan)
 
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 
@@ -2946,7 +2946,7 @@ subcollection: containers
 
     * [How can I change worker node flavors?](/docs/containers?topic=containers-planning_worker_nodes#change-flavors)
 
-    * [Are the worker nodes encrypted?](/docs/containers?topic=containers-planning_worker_nodes#encrypted-flavors)
+    * [Are the worker nodes encrypted?](/docs/containers?topic=containers-planning_worker_nodes#encrypted-flavor-plan)
 
     * [How do I manage my worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#flavor-manage)
 
@@ -3943,7 +3943,7 @@ subcollection: containers
 
     * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group#required-group-rules-alb)
 
-* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group#vpc-security-group-loadbalancer-outbound)
+* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group#vpc-security-group-loadbalancer-outbound-vr)
 
 [Creating and managing VPC security groups](/docs/containers?topic=containers-vpc-security-group-manage#vpc-security-group-manage)
 
@@ -9965,8 +9965,6 @@ subcollection: containers
 [Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 
 * [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
-
-    * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
 
     * [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
 

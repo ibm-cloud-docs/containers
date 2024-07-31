@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-29"
+lastupdated: "2024-07-31"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -3472,7 +3472,7 @@ Istio add-on
 {: release-note}
 
 {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} changes
-:   {{site.data.keyword.containerlong_notm}} clusters running in Washington, D.C. (`us-east`) now send logs to {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} instances in the same region, Washington, D.C. (`us-east`). For more information, see [{{site.data.keyword.at_full_notm}}](/docs/containers?topic=containers-at_events).
+:   {{site.data.keyword.containerlong_notm}} clusters running in Washington, D.C. (`us-east`) now send logs to {{site.data.keyword.loganalysisshort}} and {{site.data.keyword.at_full_notm}} instances in the same region, Washington, D.C. (`us-east`). For more information, see [{{site.data.keyword.at_full_notm}}](/docs/containers?topic=containers-at_events_ref).
 
 Ingress ALB change log updates
 :   Updated the [Ingress ALB change log](/docs/containers?topic=containers-ingress-alb-change-log) for version `1.2.1_2337_iks`.
@@ -5048,7 +5048,7 @@ Ingress change logs
 {: release-note}
 
 New fields and events for {{site.data.keyword.at_short}}
-:   To align with event auditing standards across {{site.data.keyword.cloud_notm}}, the previously deprecated cluster fields and events are now replaced by new fields and events. For an updated list of events, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).
+:   To align with event auditing standards across {{site.data.keyword.cloud_notm}}, the previously deprecated cluster fields and events are now replaced by new fields and events. For an updated list of events, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events_ref).
 
 ### 15 April 2021
 {: #containers-april1521}

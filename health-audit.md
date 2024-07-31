@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-14"
+lastupdated: "2024-07-31"
 
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
@@ -578,6 +578,6 @@ See [Verifying, updating, and deleting log forwarding](/docs/containers?topic=co
 ## Service audit logs
 {: #audit-service}
 
-By default, {{site.data.keyword.containerlong_notm}} generates and sends events to {{site.data.keyword.at_full_notm}}. To see these events, you must create an {{site.data.keyword.at_full_notm}} instance. For more information, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).
+By default, {{site.data.keyword.containerlong_notm}} generates and sends events to {{site.data.keyword.at_full_notm}}. To see these events, you must create an {{site.data.keyword.at_full_notm}} instance. For more information, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events_ref).
 
 
