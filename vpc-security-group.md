@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-07-31"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, firewall, acl, acls, access control list, rules, security group
@@ -173,7 +173,7 @@ By default, traffic rules for VPC ALBs are covered by the `kube-<vpcID>` securit
 
 
 ## Allow worker nodes to connect to the Ingress LoadBalancer
-{: #vpc-security-group-loadbalancer-outbound}
+{: #vpc-security-group-loadbalancer-outbound-vr}
 
 Follow the steps to allow worker nodes to connect to the Ingress LoadBalancer.
 {: shortdesc}

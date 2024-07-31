@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-07-31"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, multi az, multi-az, szr, mzr
@@ -93,7 +93,7 @@ Yes. To add different flavors to your cluster, you must [create another worker p
 See [updating flavors](/docs/containers?topic=containers-update#machine_type).
 
 ### Are the worker nodes encrypted?
-{: #encrypted-flavors}
+{: #encrypted-flavor-plan}
 
 The secondary disk of the worker node is encrypted. For more information, see [Overview of cluster encryption](/docs/containers?topic=containers-encryption). After you create a worker pool, you might notice that the worker node flavor has `.encrypted` in the name, such as `b3c.4x16.encrypted`.
 
