@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-08-01"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, red hat, encrypt, security, kms, root key, crk
@@ -17,7 +17,7 @@ subcollection: containers
 # Encryption overview
 {: #encryption}
 
-[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [{{site.data.keyword.satelliteshort}}]{: tag-satellite}
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Protect sensitive information in your {{site.data.keyword.containerlong}} cluster to ensure data integrity and to prevent your data from being exposed to unauthorized users by setting up a key management service (KMS) provider.
 {: shortdesc}

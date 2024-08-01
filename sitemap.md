@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-08-01"
 
 
 keywords: containers
@@ -5357,6 +5357,8 @@ subcollection: containers
 
 [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#storage_cos_install)
 
+* [Installing the plug-in via Helm](/docs/containers?topic=containers-storage_cos_install#storage_cos_install_helm)
+
 * [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#update_cos_plugin)
 
 * [Removing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install#remove_cos_plugin)
@@ -5408,6 +5410,8 @@ subcollection: containers
 * [Next steps](/docs/containers?topic=containers-storage-rclone-migration#rclone-next-steps)
 
 [Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
+
+* [{{site.data.keyword.cos_full_notm}} Helm chart storage classes](/docs/containers?topic=containers-storage_cos_reference#cos-sc-ref-helm)
 
 
 ## Setting up Portworx
