@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-08-01"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}
@@ -101,7 +101,7 @@ Review the default settings for the `kube-controller-manager` master component i
 {: shortdesc}
 
 Node monitor grace period
-:   `node-monitor-grace-period=50s` (Kubernetes version 1.30 and later)
+:   `node-monitor-grace-period=50s`
 
 Feature gates
 :   See [Feature gates](#feature-gates)
