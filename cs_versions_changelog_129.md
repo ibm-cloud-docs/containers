@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-08-01"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -55,7 +55,7 @@ The following table shows the changes that are in the master fix pack 1.29.7_155
 | --- | --- | --- | --- |
 | Calico | v3.27.2 | v3.27.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.27/release-notes/#v3.27.4){: external}. |
 | Cluster health image | v1.4.11 | v1.5.7 | New version contains updates and security fixes. |
-| etcd | v3.5.13 | v3.5.14 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.14){: external}. |
+| etcd | v3.5.13 | v3.5.14 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.14){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.9 | v2.5.12 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.5-5 | v1.29.7-1 | New version contains updates and security fixes. |
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 443 | 445 | New version contains updates and security fixes. |
