@@ -3887,7 +3887,7 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-vpc-security-group-reference#sbd-overview)
 
-* [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group-reference#managed-vpe-gateways)
+* [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group-reference#sbd-managed-vpe-gateways)
 
 * [Managed security groups](/docs/containers?topic=containers-vpc-security-group-reference#sbd-managed-groups)
 

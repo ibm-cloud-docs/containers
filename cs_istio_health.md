@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-08-05"
 
 
 keywords: kubernetes, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
@@ -72,7 +72,7 @@ Gain operational visibility into the performance and health of your Istio-manage
 
 To deploy monitoring agents to your cluster, complete the following steps.
 
-1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
+1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observability/monitoring/create){: external}.
 
 2. [Configure a monitoring agent in your cluster.](/docs/monitoring?topic=monitoring-kubernetes_cluster)
 
