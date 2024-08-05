@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-01"
+lastupdated: "2024-08-05"
 
 
 keywords: containers
@@ -3887,7 +3887,7 @@ subcollection: containers
 
 * [Overview](/docs/containers?topic=containers-vpc-security-group-reference#sbd-overview)
 
-* [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group-reference#managed-vpe-gateways)
+* [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group-reference#sbd-managed-vpe-gateways)
 
 * [Managed security groups](/docs/containers?topic=containers-vpc-security-group-reference#sbd-managed-groups)
 

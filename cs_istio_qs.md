@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-08-05"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -257,7 +257,7 @@ Use one of the {{site.data.keyword.mon_short}} predefined Istio dashboards to mo
 
 To deploy monitoring agents to your cluster, complete the following steps.
 
-1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
+1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observability/monitoring/create){: external}.
 
 2. [Configure a monitoring agent in your cluster.](/docs/monitoring?topic=monitoring-kubernetes_cluster)
 

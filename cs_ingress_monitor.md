@@ -2,7 +2,7 @@
 
 copyright:
   years: 2021, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-08-05"
 
 
 keywords: kubernetes, iks, ingress, monitoring
@@ -30,7 +30,7 @@ You can monitor the Kubernetes Ingress ALBs by using {{site.data.keyword.mon_ful
 Gain operational visibility into the performance and health of your Kubernetes Ingress ALBs by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}. When you deploy a monitoring agent to the worker nodes in your cluster, Monitoring is already automatically enabled to detect and scrape the data  and then display them in your {{site.data.keyword.mon_full_notm}} dashboard.
 {: shortdesc}
 
-1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
+1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observability/monitoring/create){: external}.
 
 2. Configure a monitoring agent in your cluster.
 
