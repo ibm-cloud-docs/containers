@@ -3353,6 +3353,8 @@ subcollection: containers
 
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label&interface=cli#worker_pool_labels)
 
+[Checking worker node resource reserves](/docs/containers?topic=containers-resource-limit-node#resource-limit-node)
+
 
 ## Setting up encryption
 {: #sitemap_setting_up_encryption}
@@ -9999,19 +10001,8 @@ subcollection: containers
 * [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
 
 
-## Related links
-{: #sitemap_related_links}
-
-
-[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
-
-[IBM Developer - Containers](https://developer.ibm.com/technologies/containers/){: external}
-
-[IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
-
-
-## VPC flavors
-{: #sitemap_vpc_flavors}
+## Worker node flavors
+{: #sitemap_worker_node_flavors}
 
 
 [VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
@@ -10035,11 +10026,6 @@ subcollection: containers
 * [Washington DC (`us-east`)](/docs/containers?topic=containers-vpc-flavors#washington-dc-us-east)
 
 * [Dallas (`us-south`)](/docs/containers?topic=containers-vpc-flavors#dallas-us-south)
-
-
-## Classic flavors
-{: #sitemap_classic_flavors}
-
 
 [Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
 
@@ -10075,19 +10061,20 @@ subcollection: containers
 
 * [Washington DC (`wdc`)](/docs/containers?topic=containers-classic-flavors#washington-dc-wdc)
 
+[Bare metal flavors](/docs/containers?topic=containers-flavors-bm#flavors-bm)
 
-## Available flavors for bare metal
-{: #sitemap_available_flavors_for_bare_metal}
-
-
-[Available flavors for bare metal](/docs/containers?topic=containers-flavors-bm#flavors-bm)
+[SDS flavors](/docs/containers?topic=containers-flavors-sds#flavors-sds)
 
 
-## Available flavors for SDS
-{: #sitemap_available_flavors_for_sds}
+## Related links
+{: #sitemap_related_links}
 
 
-[Available flavors for SDS](/docs/containers?topic=containers-flavors-sds#flavors-sds)
+[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
+
+[IBM Developer - Containers](https://developer.ibm.com/technologies/containers/){: external}
+
+[IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
 ## Viewing cloud status

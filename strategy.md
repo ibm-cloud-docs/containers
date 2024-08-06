@@ -66,8 +66,7 @@ A zone failure affects all physical compute hosts and NFS storage. Failures incl
 
   
 
-* **Multiple clusters linked with load balancers** [Classic]{: tag-classic-inf} [VPC]{: tag-vpc}: 
-: To protect your app from a master failure or for classic clusters that must reside in one of the supported [single zone locations](/docs/containers?topic=containers-regions-and-zones#zones-sz), you can create multiple clusters in different zones within a region, and connect them with a global load balancer. This option is useful if you must provision a cluster in a single zone region, but you still want the benefits of multizone availability. 
+* **Multiple clusters linked with load balancers** [Classic]{: tag-classic-inf} [VPC]{: tag-vpc}: To protect your app from a master failure or for classic clusters that must reside in one of the supported [single zone locations](/docs/containers?topic=containers-regions-and-zones#zones-sz), you can create multiple clusters in different zones within a region, and connect them with a global load balancer. This option is useful if you must provision a cluster in a single zone region, but you still want the benefits of multizone availability. 
 
   To connect multiple clusters with a global load balancer, the clusters must be set up with public network connectivity and your apps must be exposed through [Ingress](/docs/containers?topic=containers-managed-ingress-about), [routes](/docs/openshift?topic=openshift-openshift_routes), or with a [Kubernetes load balancer service](/docs/containers?topic=containers-loadbalancer-qs).
 
@@ -108,7 +107,6 @@ Classic clusters
 The operating systems avaiable to you depend on the cluster type you chose.
 
 
-
 Ubuntu 20.04
 :   For more information, see the [Ubuntu 20.04 release notes](https://wiki.ubuntu.com/FocalFossa/ReleaseNotes){: external}
 
@@ -127,9 +125,6 @@ Ubuntu 24 (Beta)
 
 
 
-
-
-
 ## Define a cluster naming strategy
 {: #naming}
 
@@ -140,14 +135,14 @@ Consider giving clusters unique names across resource groups and regions in your
 ## Decide how many worker nodes for each cluster
 {: #sizing_workers}
 
-The total number of worker nodes in a cluster determine the compute capacity that is available to your apps in the cluster.
-
-* **Single zone clusters** [Classic only]{: tag-classic-inf}: Plan to have at least three worker nodes in your cluster. Further, you want one extra node's worth of CPU and memory capacity available within the cluster. If your apps require less resources than the resources that are available on the worker node, you might be able to limit the number of pods that you deploy to one worker node. 
+The total number of worker nodes in a cluster determine the compute capacity that is available to your apps in the cluster. You can protect your setup during a worker node failure by setting up multiple worker nodes in your cluster. Worker node failures can include hardware outages, such as power, cooling, or networking, and issues on the VM itself. 
 
 * **Multizone clusters** [Classic]{: tag-classic-inf} [VPC]{: tag-vpc}: Plan to have at least two worker nodes per zone, so six nodes across three zones in total. Additionally, plan for the total capacity of your cluster to be at least 150% of your total workload's required capacity, so that if one zone goes down, you have resources available to maintain the workload.
 
   The level of availability that you set up for your cluster impacts your coverage under the [{{site.data.keyword.cloud_notm}} HA service level agreement terms](/docs/overview?topic=overview-slas). For example, to receive full HA coverage under the SLA terms, you must set up a multizone cluster with a total of at least 6 worker nodes, two worker nodes per zone that are evenly spread across three zones.
   {: important}
+
+* **Single zone clusters** [Classic only]{: tag-classic-inf}: Plan to have at least three worker nodes in your cluster. Further, you want one extra node's worth of CPU and memory capacity available within the cluster. If your apps require less resources than the resources that are available on the worker node, you might be able to limit the number of pods that you deploy to one worker node. 
 
 Keep in mind:
 - You can try out [the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon) to be sure that you always have enough worker nodes to cover your workload.
@@ -159,9 +154,7 @@ Keep in mind:
 ## Select worker node flavors
 {: #env_flavors_node}
 
-A worker node is a VM that runs on physical hardware. Worker node failures include hardware outages, such as power, cooling, or networking, and issues on the VM itself. You can protect your setup during a worker node failure by setting up multiple worker nodes in your cluster. For more information, see [Creating clusters with multiple worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create).
-
-A worker node flavor describes the compute resources, such as CPU, memory, and disk capacity that you get when you provision your worker node. Worker nodes of the same flavor are grouped in worker node pools. 
+A worker node is a VM that runs on physical hardware. A worker node flavor describes the compute resources, such as CPU, memory, and disk capacity that you get when you provision your worker node. Worker nodes of the same flavor are grouped in worker node pools. 
 
 As you were choosing a cluster type, you already thought about how worker node flavor location and machine type impact your decision. As you choose between worker node flavors, consider the following.
 
@@ -192,7 +185,7 @@ As you were choosing a cluster type, you already thought about how worker node f
 
 - **Size**: Larger nodes can be more cost efficient than smaller nodes, particularly for workloads that are designed to gain efficiency when they process on a high-performance machine. However, if a large worker node goes down, you need to be sure that your cluster has enough capacity to safely reschedule all the workload pods onto other worker nodes in the cluster. Smaller worker nodes can help you scale safely. [Learn more about capacity](#env_resources_worker_capacity).
 
-- **Storage**: Every VM comes with an attached disk for storage of information that the VM needs to run, such as OS file system, container runtime, and the `kubelet`.  Local storage on the worker node is for short-term processing only, and the storage disks are wiped when you delete, reload, replace, or update the worker node. For persistent storage solutions for your apps, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage-plan). Additionally, classic and VPC infrastructure differ in the disk setup.
+- **Storage**: Every VM comes with an attached disk for storage of information that the VM needs to run, such as OS file system, container runtime, and the `kubelet`.  Local storage on the worker node is for short-term processing only, and the storage disks are wiped when you delete, reload, replace, or update the worker node. Additionally, classic and VPC infrastructure differ in the disk setup.
 
   * **Classic VMs**: Classic VMs have two attached disks. The primary storage disk has 25 GB for the OS file system, and the auxiliary storage disk has 100 GB for data such as the container runtime and the `kubelet`. For reliability, the primary and auxiliary storage volumes are local disks instead of storage area networking (SAN). Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. The auxiliary disk is encrypted by default.
   * **VPC compute VMs**: VPC VMs have one primary disk that is a block storage volume that is attached via the network. The storage layer is not separated from the other networking layers, and both network and storage traffic are routed on the same network. The primary storage disk is used for storing data such as the OS file system, container runtime, and `kubelet`, and is [encrypted by default](/docs/vpc?topic=vpc-block-storage-about#vpc-storage-encryption). For VPC clusters, you can also provision a secondary disk on your worker nodes. This optional disk is provisioned in your account and you can can see them in VPC console. The charges for these disks are separate to the cost of each worker and show as a different line item on your bill. These secondary volumes also count toward the quota usage for the your account. To prevent default pod evictions, 10% of the Kubernetes data disk (auxiliary disk in classic, primary boot disk in VPC) is reserved for system components.
@@ -230,8 +223,8 @@ To get the most out of your worker node's performance, consider the following as
 
 - **Leave room for runtime requirements**: [Worker nodes must reserve certain amounts of CPU and memory resources](/docs/containers?topic=containers-resource-limit-node) to run required components, such as the operating system or container runtime. 
 
-[Reserved capacity and reserved instances](/docs/virtual-servers?topic=virtual-servers-provisioning-reserved-capacity-and-instances) are not supported.
-{: tip}
+    [Reserved capacity and reserved instances](/docs/virtual-servers?topic=virtual-servers-provisioning-reserved-capacity-and-instances) are not supported.
+    {: tip}
 
 
 

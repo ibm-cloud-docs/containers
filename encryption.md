@@ -105,4 +105,4 @@ You can set up encryption for the data flowing between the worker nodes in your 
 ## Next steps
 {: #plan-storage-next}
 
-To continue the planning process, choose a [storage option](/docs/containers?topic=containers-storage-plan). If you're ready to get started with encryption, move on to[create a KMS instance and root key](/docs/containers?topic=containers-encryption-setup). 
+To continue the planning process, choose a [storage option](/docs/containers?topic=containers-storage-plan). If you're ready to get started with encryption, move on to [creating a KMS instance and root key](/docs/containers?topic=containers-encryption-setup). 
