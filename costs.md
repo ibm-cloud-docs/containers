@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-02"
+lastupdated: "2024-08-06"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, iro, openshift, red hat, red hat openshift
@@ -58,8 +58,6 @@ When do worker nodes begin to incur charges?**
 
     **VPC Generation 2 only**: Prices vary by region where the underlying worker node infrastructure resides, and you can get sustained usage discounts. For more information, see [What are the regional uplift charges and sustained usage discounts for VPC worker nodes?](#charges_vpc_gen2).
     {: note}
-
-For more information about worker node specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
 
 
@@ -163,7 +161,7 @@ The following steps present a general process to manage costs for your {{site.da
 2. Plan the type of cluster that you need.
     * [Size your cluster to support your workloads](/docs/containers?topic=containers-strategy), including the network bandwidth that your workloads need.
     * [Decide the cluster environment that you want](/docs/containers?topic=containers-strategy).
-    * [Consider the availability that you want for your cluster](/docs/containers?topic=containers-ha_clusters). For example, a basic high availability setup is one multizone cluster with two worker nodes in each of three zones, for a minimum total of 6 worker nodes.
+    * [Consider the availability that you want for your cluster](/docs/containers?topic=containers-strategy). For example, a basic high availability setup is one multizone cluster with two worker nodes in each of three zones, for a minimum total of 6 worker nodes.
 3. Check out other {{site.data.keyword.cloud_notm}} services, add-ons, operators, and other third-party software that you might use that can increase your cost. To get an idea of what other costs clusters typically incur, review [Understanding costs for your clusters](#costs-for-clusters).
 4. [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/products/kubernetes-service){: external}.
 5. Manage the lifecycle of your cluster to control costs.

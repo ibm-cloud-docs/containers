@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-08-06"
 
 
 keywords: kubernetes, containers network
@@ -209,7 +209,7 @@ If your app workload requires other {{site.data.keyword.cloud_notm}} services, y
 
 After you test your app, you can expose it to the internet by creating a public Kubernetes `LoadBalancer` service or using the default public Ingress application load balancers (ALBs). The VPC load balancer that is automatically created in your VPC outside of your cluster when you use one of these services routes traffic to your app. You can improve the security of your cluster and control public network traffic to your apps by replacing the `kube-<vpc-id>` security group, which is automatically applied to the VPC ALB, with a security group that you create and manage. When applied to ALBs, security groups control which inbound traffic is permitted to your cluster through the ALB. 
 
-Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC clusters](/docs/containers?topic=containers-clusters).
+Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-strategy) setup, see [Creating VPC clusters](/docs/containers?topic=containers-clusters).
 
 
 
@@ -246,7 +246,7 @@ If your app workload requires other {{site.data.keyword.cloud_notm}} services th
 
 After you test your app, you can expose it to the internet by creating a public Kubernetes `LoadBalancer` service or using the default public Ingress application load balancers (ALBs). The VPC load balancer that is automatically created in your VPC outside of your cluster when you use one of these services routes traffic to your app. You can improve the security of your cluster and control public traffic apps by modifying the default VPC security group for your cluster. Security groups consist of rules that define which inbound traffic is permitted for your worker nodes. For example, you can use inbound rules to control incoming public traffic to your apps through the VPC load balancer, and outbound rules to control outgoing requests from your apps through the public gateway.
 
-Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC clusters](/docs/containers?topic=containers-clusters).
+Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-strategy) setup, see [Creating VPC clusters](/docs/containers?topic=containers-clusters).
 
 
 
@@ -281,4 +281,10 @@ To connect your cluster with your on-premises data center, you can set up the VP
 
 After you test your app, you can expose it to the private network by creating a private Kubernetes `LoadBalancer` service or using the default private Ingress application load balancers (ALBs). The VPC load balancer that is automatically created in your VPC outside of your cluster when you use one of these services routes traffic to your app. Note that the VPC load balancer exposes your app to the private network only so that any on-premises system with a connection to the VPC subnet can access the app. You can improve the security of your cluster and control public traffic apps by modifying the default VPC security group for your cluster. Security groups consist of rules that define which inbound traffic is permitted for your worker nodes.
 
-Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC clusters](/docs/containers?topic=containers-clusters).
+Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-strategy) setup, see [Creating VPC clusters](/docs/containers?topic=containers-clusters).
+
+
+## Next steps
+{: #plan-encryption-next-vpc}
+
+To continue the planning process, learn about protecting sensitive information in your cluster by making decisions about the level of [encryption](/docs/containers?topic=containers-encryption) you must configure. If you're ready to get started setting up networking, move on to [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference). 

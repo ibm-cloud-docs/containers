@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-08-06"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, oc, ks
@@ -707,7 +707,7 @@ Version 1.0.57 of the CLI was released on 7 May 2020.
 Version 1.0.28 of the CLI was released on 6 April 2020.
 
 - Adds the optional `--alb-id` option to `ibmcloud ks alb update` so that you can specify IDs of individual ALBs to update. 
-- Adds the optional `--show-storage` option to `ibmcloud ks flavors` to show additional raw disks that are available for [SDS worker node flavors](/docs/containers?topic=containers-planning_worker_nodes#sds). 
+- Adds the optional `--show-storage` option to `ibmcloud ks flavors` to show additional raw disks that are available for [SDS worker node flavors](/docs/containers?topic=containers-flavors-sds). 
 - Adds a message to the output of `ibmcloud ks pull-secret apply` about the amount of time it takes for the pull secrets to be applied to your cluster.
 
 ## Version 1.0.15

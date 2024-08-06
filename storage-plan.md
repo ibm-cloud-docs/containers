@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-08-06"
 
 
 keywords: planning, storage, cluster, container storage, cloud storage, kubernetes service, containers
@@ -293,6 +293,7 @@ The following sections show the options that you have in {{site.data.keyword.con
 {: tab-group="multi-zone-storage"}
 
 
+## Next steps
+{: #plan-document-next}
 
-
-
+To continue the planning process, [document your environment architecture](/docs/containers?topic=containers-document-environment). 

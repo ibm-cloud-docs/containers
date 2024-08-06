@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-08-06"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
@@ -32,7 +32,7 @@ If you choose to change the default settings, you are doing so at your own risk.
 ## Default worker node settings
 {: #worker-default}
 
-By default, your worker nodes have the operating system and compute hardware of the [worker node flavor](/docs/containers?topic=containers-planning_worker_nodes) that you choose when you create the worker pool.
+By default, your worker nodes have the operating system and compute hardware of the worker node flavor that you choose when you create the worker pool.
 {: shortdesc}
 
 ### Customizing the operating system
