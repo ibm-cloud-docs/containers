@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-08-06"
 
 
 keywords: containers
@@ -191,7 +191,7 @@ CIS Kubernetes worker node benchmark
 :   To configure {{site.data.keyword.containerlong_notm}}, IBM engineers follow relevant cybersecurity practices from the Kubernetes worker node benchmark that is published by the [Center of Internet Security (CIS)](https://www.cisecurity.org/benchmark/kubernetes/){: external}. You can review the compliance of worker nodes against [CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test) standards.
 
 Compute isolation
-:   Worker nodes are dedicated to a cluster and don't host workloads of other clusters. When you create a standard classic cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that run on shared or dedicated physical hardware. Worker nodes in a VPC cluster can be provisioned as virtual machines on shared infrastructure only.
+:   Worker nodes are dedicated to a cluster and don't host workloads of other clusters. When you create a standard classic cluster, you can choose to provision your worker nodes as physical machines (bare metal) or as virtual machines that run on shared or dedicated physical hardware. Worker nodes in a VPC cluster can be provisioned as virtual machines on shared infrastructure only.
 
 Option to deploy bare metal on classic
 :   If you create a standard classic cluster, you can choose to provision your worker nodes on bare metal physical servers (instead of virtual server instances). With bare metal machines, you have additional control over the compute host, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Bare metal servers are dedicated to you, with all its resources available for cluster usage.

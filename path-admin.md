@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-12"
+lastupdated: "2024-08-06"
 
 
 keywords: kubernetes, containers
@@ -41,8 +41,8 @@ Start by designing a cluster for maximum availability and capacity for your work
     2. Plan your cluster network setup.
         - [Understanding VPC cluster network basics](/docs/containers?topic=containers-plan_vpc_basics).
         - [Understanding Classic cluster network basics](/docs/containers?topic=containers-plan_basics).
-    3. Plan your cluster for [high availability](/docs/containers?topic=containers-ha_clusters).
-    4. Plan your [worker node setup](/docs/containers?topic=containers-planning_worker_nodes).
+    3. Plan your cluster for [high availability](/docs/containers?topic=containers-strategy).
+    4. Plan your [worker node setup](/docs/containers?topic=containers-strategy#env_flavors_node).
 
 Looking for serverless? Try [{{site.data.keyword.codeengineshort}}](/docs/codeengine?topic=codeengine-getting-started).
 {: tip}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-05"
+lastupdated: "2024-08-06"
 
 
 keywords: containers
@@ -2900,11 +2900,15 @@ subcollection: containers
 {: #sitemap_planning_your_cluster_environment}
 
 
-[Creating a cluster environment strategy](/docs/containers?topic=containers-strategy#strategy)
+[Creating a highly available cluster strategy](/docs/containers?topic=containers-strategy#strategy)
 
 * [Decide how many clusters to create](/docs/containers?topic=containers-strategy#env_multicluster)
 
+* [Determine how many locations are needed](/docs/containers?topic=containers-strategy#plan_locations)
+
 * [Select a cluster type](/docs/containers?topic=containers-strategy#env_flavors)
+
+* [Select an operating system for the cluster](/docs/containers?topic=containers-strategy#os)
 
 * [Define a cluster naming strategy](/docs/containers?topic=containers-strategy#naming)
 
@@ -2918,69 +2922,11 @@ subcollection: containers
 
 * [Establish resource requests and limits for the namespaces](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
 
-[Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters#ha_clusters)
+    * [Learn how to manage worker nodes](/docs/containers?topic=containers-strategy#flavor-manage)
 
-* [High availability at different levels](/docs/containers?topic=containers-ha_clusters#ha_levels)
+* [Make your apps highly available too](/docs/containers?topic=containers-strategy#apps-ha)
 
-* [Resource distribution for high availability](/docs/containers?topic=containers-ha_clusters#ha_distribution)
-
-* [Single zone clusters](/docs/containers?topic=containers-ha_clusters#single_zone)
-
-* [Multizone clusters](/docs/containers?topic=containers-ha_clusters#mz-clusters)
-
-    * [Multizone cluster FAQ](/docs/containers?topic=containers-ha_clusters#mz-cluster-faq-plan)
-
-* [Multiple public clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple-clusters-glb)
-
-    * [Why do I need 3 clusters in three zones?](/docs/containers?topic=containers-ha_clusters#multicluster-three-zones)
-
-    * [What if I want to set up multiple clusters across regions?](/docs/containers?topic=containers-ha_clusters#multiple-regions-setup-plan)
-
-    * [What options do I have to load balance workloads across multiple clusters?](/docs/containers?topic=containers-ha_clusters#multiple-cluster-lb-options-plan)
-
-    * [What if I want to load balance workloads on the private network?](/docs/containers?topic=containers-ha_clusters#glb-private-plan)
-
-[Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
-
-* [Worker node FAQs](/docs/containers?topic=containers-planning_worker_nodes#worker-plan-faqs)
-
-    * [What hardware options are available to me?](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
-
-    * [Which operating systems are available?](/docs/containers?topic=containers-planning_worker_nodes#worker-os-options)
-
-    * [Can I combine different flavors in a cluster?](/docs/containers?topic=containers-planning_worker_nodes#combine-flavors)
-
-    * [How can I change worker node flavors?](/docs/containers?topic=containers-planning_worker_nodes#change-flavors)
-
-    * [Are the worker nodes encrypted?](/docs/containers?topic=containers-planning_worker_nodes#encrypted-flavor-plan)
-
-    * [How do I manage my worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#flavor-manage)
-
-    * [What storage options are available on worker nodes?](/docs/containers?topic=containers-planning_worker_nodes#hardware-options)
-
-    * [What limitations do I need to be aware of?](/docs/containers?topic=containers-planning_worker_nodes#flavor-limitations)
-
-    * [What operations are blocked if my worker node is running an unsupported operating system?](/docs/containers?topic=containers-planning_worker_nodes#unsupported-os)
-
-* [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm)
-
-    * [Planning considerations for VMs](/docs/containers?topic=containers-planning_worker_nodes#vm-planning)
-
-    * [Available flavors for VMs](/docs/containers?topic=containers-planning_worker_nodes#vm-table)
-
-* [Physical machines (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm)
-
-    * [Planning considerations for bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm-planning)
-
-    * [Available flavors for bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm-table)
-
-* [Software-defined storage (SDS) machines](/docs/containers?topic=containers-planning_worker_nodes#sds)
-
-    * [Planning considerations for SDS](/docs/containers?topic=containers-planning_worker_nodes#sds-planning)
-
-    * [Available flavors for SDS](/docs/containers?topic=containers-planning_worker_nodes#sds-table)
-
-* [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
+* [Next steps](/docs/containers?topic=containers-strategy#plan-network-next)
 
 [Understanding VPC cluster networking](/docs/containers?topic=containers-plan_vpc_basics#plan_vpc_basics)
 
@@ -3040,6 +2986,8 @@ subcollection: containers
 
     * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-external)
 
+* [Next steps](/docs/containers?topic=containers-plan_vpc_basics#plan-encryption-next-vpc)
+
 [Understanding Classic cluster networking](/docs/containers?topic=containers-plan_basics#plan_basics)
 
 * [Worker-to-worker communication: classic VLANs and subnets](/docs/containers?topic=containers-plan_basics#worker-worker)
@@ -3098,6 +3046,8 @@ subcollection: containers
 
     * [External communication to apps that run on worker nodes for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-external)
 
+* [Next steps](/docs/containers?topic=containers-plan_basics#plan-encryption-next-cl)
+
 [Encryption overview](/docs/containers?topic=containers-encryption#encryption)
 
 * [Control plane](/docs/containers?topic=containers-encryption#control-plane-encryption)
@@ -3110,7 +3060,7 @@ subcollection: containers
 
 * [Worker-to-worker traffic](/docs/containers?topic=containers-encryption#worker-to-worker-encryption)
 
-* [Next steps](/docs/containers?topic=containers-encryption#encryption-next-steps)
+* [Next steps](/docs/containers?topic=containers-encryption#plan-storage-next)
 
 [{{site.data.keyword.containerlong_notm}} storage overview](/docs/containers?topic=containers-storage-plan#storage-plan)
 
@@ -3119,6 +3069,8 @@ subcollection: containers
 * [Single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
 
 * [Multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
+
+* [Next steps](/docs/containers?topic=containers-storage-plan#plan-document-next)
 
 [Documenting your environment architecture](/docs/containers?topic=containers-document-environment#document-environment)
 
@@ -3133,6 +3085,8 @@ subcollection: containers
 * [Step 2: Choose a tool](/docs/containers?topic=containers-document-environment#choose-arch-tool)
 
 * [Step 3: Create the diagram](/docs/containers?topic=containers-document-environment#create-arch-diagram)
+
+* [Next steps](/docs/containers?topic=containers-document-environment#plan-prepare)
 
 
 ## Preparing your account
@@ -3398,6 +3352,8 @@ subcollection: containers
 * [Adding tags to clusters with the CLI](/docs/containers?topic=containers-worker-tag-label&interface=cli#add-tags-cli)
 
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label&interface=cli#worker_pool_labels)
+
+[Checking worker node resource reserves](/docs/containers?topic=containers-resource-limit-node#resource-limit-node)
 
 
 ## Setting up encryption
@@ -10045,19 +10001,8 @@ subcollection: containers
 * [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
 
 
-## Related links
-{: #sitemap_related_links}
-
-
-[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
-
-[IBM Developer - Containers](https://developer.ibm.com/technologies/containers/){: external}
-
-[IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
-
-
-## VPC flavors
-{: #sitemap_vpc_flavors}
+## Worker node flavors
+{: #sitemap_worker_node_flavors}
 
 
 [VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
@@ -10081,11 +10026,6 @@ subcollection: containers
 * [Washington DC (`us-east`)](/docs/containers?topic=containers-vpc-flavors#washington-dc-us-east)
 
 * [Dallas (`us-south`)](/docs/containers?topic=containers-vpc-flavors#dallas-us-south)
-
-
-## Classic flavors
-{: #sitemap_classic_flavors}
-
 
 [Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
 
@@ -10120,6 +10060,21 @@ subcollection: containers
 * [Toronto (`tor`)](/docs/containers?topic=containers-classic-flavors#toronto-tor)
 
 * [Washington DC (`wdc`)](/docs/containers?topic=containers-classic-flavors#washington-dc-wdc)
+
+[Bare metal flavors](/docs/containers?topic=containers-flavors-bm#flavors-bm)
+
+[SDS flavors](/docs/containers?topic=containers-flavors-sds#flavors-sds)
+
+
+## Related links
+{: #sitemap_related_links}
+
+
+[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
+
+[IBM Developer - Containers](https://developer.ibm.com/technologies/containers/){: external}
+
+[IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
 ## Viewing cloud status

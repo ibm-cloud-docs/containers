@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-16"
+lastupdated: "2024-08-06"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, clusters, worker nodes, worker pools, add, classic
@@ -65,7 +65,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: pre}
 
-1. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
+1. For each zone, review the available flavors for worker nodes.
 
     ```sh
     ibmcloud ks flavors --zone <zone>

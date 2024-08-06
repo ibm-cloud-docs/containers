@@ -45,9 +45,7 @@ toc:
       - topicgroup:
           label: Planning your cluster environment
           topics:
-          - kube-strategy.md
-          - cluster-plan-ha.md
-          - worker-plan.md
+          - strategy.md
           - cluster-plan-network-vpc.md
           - cluster-plan-network-classic.md
           - encryption.md
@@ -93,6 +91,7 @@ toc:
           - ca-rotate.md
           - ubuntu-migrate.md
           - worker-tag-label.md
+          - resource-limit-node.md
       - topicgroup:
           label: Setting up encryption
           topics:
@@ -415,6 +414,13 @@ toc:
       - cs_integrations_overview.md
       - service-settings.md
       - topicgroup:
+          label: Worker node flavors
+          topics:
+          - vpc-flavors.md
+          - classic-flavors.md
+          - flavors-bm.md
+          - flavors-sds.md
+      - topicgroup:
           label: Related links
           topics:
           - link: 
@@ -426,8 +432,6 @@ toc:
           - link: 
               label: IBM Developer - Kubernetes
               href: https://developer.ibm.com/components/kubernetes/
-      - vpc-flavors.md
-      - classic-flavors.md
   - navgroup: 
       id: help
       topics:
