@@ -496,6 +496,10 @@ toc:
               - ts-worker-pod-timeout.md
               - ts-worker-ssh-fail.md
           - topicgroup:
+              label: Permissions and credentials
+              topics:
+              - ts-perms-creds.md            
+          - topicgroup:
               label: Apps and services
               topics:
               - ts-app-01-debug.md

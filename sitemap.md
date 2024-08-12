@@ -10466,6 +10466,15 @@ subcollection: containers
     * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
 
 
+### Permissions and credentials
+{: #sitemap_permissions_and_credentials}
+
+
+[Resolving permission and credential errors](/docs/containers?topic=containers-ts-perms-creds#ts-perms-creds)
+
+* [Invalid API key](/docs/containers?topic=containers-ts-perms-creds#invalid_apikey)
+
+
 ### Apps and services
 {: #sitemap_apps_and_services}
 
