@@ -186,16 +186,21 @@ toc:
           topics:
           - cs_network_planning.md
           - topicgroup:
-              label: Exposing apps with load balancers
+              label: Exposing apps with Classic load balancers
               topics:
-              - lb-quickstart.md
-              - vpc_lbaas.md
               - lb-about.md
               - lb.md
               - lb-v2.md
               - edge-classic-nlb.md
               - edge-vpc-lb.md
               - lb-dns.md
+          - topicgroup:
+              label: Exposing apps with VPC load balancers
+              topics:
+              - vpc_lb_about.md
+              - vpc_alb.md
+              - vpc_nlb.md
+              - vpc_lb_manage.md
           - topicgroup:
               label: Exposing apps with Ingress
               topics:
@@ -490,6 +495,10 @@ toc:
               - ts-worker-invalid-vlan.md
               - ts-worker-pod-timeout.md
               - ts-worker-ssh-fail.md
+          - topicgroup:
+              label: Permissions and credentials
+              topics:
+              - ts-perms-creds.md            
           - topicgroup:
               label: Apps and services
               topics:

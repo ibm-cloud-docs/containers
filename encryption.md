@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-06"
+lastupdated: "2024-08-12"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, red hat, encrypt, security, kms, root key, crk
@@ -23,6 +23,9 @@ Protect sensitive information in your {{site.data.keyword.containerlong}} cluste
 {: shortdesc}
 
 {{site.data.keyword.containerlong_notm}} offers encryption at several layers in your cluster. In some cases, encryption is managed by IBM and in other cases you have the option to bring your own KMS provider credentials to manage encryption yourself.
+
+When you're done with this page, [try out the quiz](https://quizzes.12dekrh4l1b4.us-south.codeengine.appdomain.cloud/containers/strategy/quiz.php).
+{: tip}
 
 The following table outlines the encryption options for {{site.data.keyword.containerlong_notm}} clusters.
 
@@ -104,5 +107,8 @@ You can set up encryption for the data flowing between the worker nodes in your 
 
 ## Next steps
 {: #plan-storage-next}
+
+[Test your knowledge with a quiz](https://quizzes.12dekrh4l1b4.us-south.codeengine.appdomain.cloud/containers/encryption/quiz.php).
+{: tip}
 
 To continue the planning process, choose a [storage option](/docs/containers?topic=containers-storage-plan). If you're ready to get started with encryption, move on to [creating a KMS instance and root key](/docs/containers?topic=containers-encryption-setup). 

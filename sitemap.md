@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-08"
+lastupdated: "2024-08-12"
 
 
 keywords: containers
@@ -4571,59 +4571,9 @@ subcollection: containers
     * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_vpc)
 
 
-### Exposing apps with load balancers
-{: #sitemap_exposing_apps_with_load_balancers}
+### Exposing apps with Classic load balancers
+{: #sitemap_exposing_apps_with_classic_load_balancers}
 
-
-[Quick start for load balancers](/docs/containers?topic=containers-loadbalancer-qs#loadbalancer-qs)
-
-* [Exposing an app by using an NLB in a classic cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_classic)
-
-* [Exposing an app by using a VPC load balancer in a VPC cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_vpc)
-
-[Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas#vpc-lbaas)
-
-* [Loadbalancer types](/docs/containers?topic=containers-vpc-lbaas#vpc-lbaas-types)
-
-    * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
-
-    * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
-
-* [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
-
-* [Setting up a public VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_pub)
-
-    * [Setting up an NLB using port range](/docs/containers?topic=containers-vpc-lbaas#nlb-setup-portrange)
-
-    * [Setting up a private VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_priv)
-
-    * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns)
-
-* [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
-
-    * [Setting up a public or private VPC ALB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_alb_pub_priv)
-
-    * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
-
-    * [Registering a private DNS record for a private VPC ALB](/docs/containers?topic=containers-vpc-lbaas#vpc_alb_private_dns)
-
-* [Persistent VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_persist)
-
-* [Moving a VPC load balancer from one cluster to another](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move)
-
-    * [Detaching a VPC load balancer from a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_detach)
-
-    * [Attaching a VPC load balancer to a cluster](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_move_attach)
-
-* [Health checks for load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health)
-
-    * [Customizing health checks for VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_custom)
-
-    * [Enabling TCP health checks for UDP load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_udp)
-
-* [Changing load balancer subnets or zones](/docs/containers?topic=containers-vpc-lbaas#lbaas_change_subnets)
-
-* [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
 [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about#loadbalancer-about)
 
@@ -4686,6 +4636,11 @@ subcollection: containers
 * [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
 
     * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
+
+
+### Exposing apps with VPC load balancers
+{: #sitemap_exposing_apps_with_vpc_load_balancers}
+
 
 
 ### Exposing apps with Ingress
@@ -10509,6 +10464,15 @@ subcollection: containers
     * [SSH into the worker node on the public network](/docs/containers?topic=containers-cs_ssh_worker#public-network-only-classic-debug)
 
     * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
+
+
+### Permissions and credentials
+{: #sitemap_permissions_and_credentials}
+
+
+[Resolving permission and credential errors](/docs/containers?topic=containers-ts-perms-creds#ts-perms-creds)
+
+* [Invalid API key](/docs/containers?topic=containers-ts-perms-creds#invalid_apikey)
 
 
 ### Apps and services
