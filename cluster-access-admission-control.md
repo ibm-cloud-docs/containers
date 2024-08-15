@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-08-07"
+lastupdated: "2024-08-15"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, webhooks, admission control, 
@@ -48,7 +48,7 @@ Keep in mind the following best practices and considerations when you configure 
 - Add [liveness and readiness probes](/docs/containers?topic=containers-app#probe) to help make sure your webhook container is running and ready to serve requests.
 - Set pod [anti-affinity scheduling rules](/docs/containers?topic=containers-app#affinity) to prefer that your webhook pods run on different worker nodes and zones when possible. You might use [pod topology](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/){: external} instead. However, avoid [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} or forced affinity that might restrict where the webhook pods can be scheduled.
 - [Set pod priority](/docs/containers?topic=containers-pod_priority) to `system-cluster-critical` for the webhook pods so that other pods can't take resources from your webhook pods.
-- Scope your webhook to the appropriate namespace. Avoid webhooks that process resources that run in system-critical namespaces that are set up in your cluster by default, such as `kube-system`, `ibm-system`, `ibm-operators`, `calico-system`, `tigera-operator` and `openshift-*` namespaces.
+- Scope your webhook to the appropriate namespace. Avoid webhooks that process resources that run in system-critical namespaces that are set up in your cluster by default, such as `kube-system`, `ibm-system`, `ibm-operators`, `calico-apiserver`, `calico-system`, `tigera-operator` and `openshift-*` namespaces.
 - Review the `namespaceSelector` option. You can add labels to the certain critical namespaces, such as `kube-system`, so the webhook is not called for these cases. This setup is called an "opt out" style configuration. Or, you can configure the `namespaceSelector` option so the webhook is called only for namespaces that have a specific label. This setup is called an "opt in" configuration. Depending on the purpose of the webhook, it might be important that the webhook be called for all namespaces. Review the `namespaceSelector` configuration options in the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#matching-requests-namespaceselector){: external} and adjust your webhook configuration.
 - Make sure that the worker nodes in your cluster are [the correct size for running your webhook applications](/docs/containers?topic=containers-strategy). For example, if your pods request more CPU or memory than the worker node can provide, the pods are not scheduled.
 
