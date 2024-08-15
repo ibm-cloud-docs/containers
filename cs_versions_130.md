@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-08-15"
 
 
 keywords: kubernetes, containers, 130, version 130, 130 update actions
@@ -106,7 +106,7 @@ Some key notes for Secure by Default Networking are:
 - If your VPC uses a custom DNS resolver, provisioning a new version 1.30 cluster automatically adds rules allowing traffic through the resolver IP addresses on your IKS-managed security group (`kube-<clusterID>`).
 
 
-For an overview of Secure by Default Cluster VPC networking, including the security groups, rules, and VPEs that are created by default, see [Understanding Secure by Default Cluster VPC Networking](/docs/openshift?topic=openshift-vpc-security-group-reference).
+For an overview of Secure by Default Cluster VPC networking, including the security groups, rules, and VPEs that are created by default, see [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference).
 
 
 
