@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-14"
+lastupdated: "2024-08-15"
 
 
 keywords: containers
@@ -6481,6 +6481,8 @@ subcollection: containers
 
 * [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
 
+    * [Change log for worker node fix pack 1.30.3_1533, released 12 August 2024](/docs/containers?topic=containers-changelog_130#1303_1533_W)
+
     * [Change log for master fix pack 1.30.3_1531, released 31 July 2024](/docs/containers?topic=containers-changelog_130#1303_1531_M)
 
     * [Change log for worker node fix pack 1.30.3_1532, released 29 July 2024](/docs/containers?topic=containers-changelog_130#1303_1532_W)
@@ -6561,6 +6563,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
+
+    * [Change log for worker node fix pack 1.29.7_1555, released 12 August 2024](/docs/containers?topic=containers-changelog_129#1297_1555_W)
 
     * [Change log for master fix pack 1.29.7_1553, released 31 July 2024](/docs/containers?topic=containers-changelog_129#1297_1553_M)
 
@@ -6672,6 +6676,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.12_1575, released 12 August 2024](/docs/containers?topic=containers-changelog_128#12812_1575_W)
 
     * [Change log for master fix pack 1.28.12_1573, released 31 July 2024](/docs/containers?topic=containers-changelog_128#12812_1573_M)
 
@@ -6801,6 +6807,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
 
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
+
+    * [Change log for worker node fix pack 1.27.16_1589, released 12 August 2024](/docs/containers?topic=containers-changelog_127#12716_1589_W)
 
     * [Change log for master fix pack 1.27.16_1587, released 31 July 2024](/docs/containers?topic=containers-changelog_127#12716_1587_M)
 
@@ -10920,6 +10928,8 @@ subcollection: containers
 [Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block#readonly_block)
 
 [Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu#block_helm_cpu)
+
+[Why does my block storage PVC remain in a pending state?](/docs/containers?topic=containers-block_pvc_pending#block_pvc_pending)
 
 [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts#vpc-block-api-key-reset-ts)
 

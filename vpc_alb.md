@@ -1,8 +1,7 @@
 ---
-
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-08-14"
+lastupdated: "2024-08-15"
 
 keywords: alb, application load balancer, vpc alb, dns, public lb, private lb
 
