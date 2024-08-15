@@ -1,9 +1,8 @@
-
 ---
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-13"
+lastupdated: "2024-08-14"
 
 
 keywords: kubernetes, containers, app protocol, application protocol
@@ -135,7 +134,4 @@ Review the following default settings and limitations.
     * VPC NLBs forward incoming traffic to all worker nodes in the cluster unless you restrict incoming traffic to specific worker nodes with the `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-node-selector` or `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone annotations`. To limit traffic to a specific zone, you can use these annotations to specify worker nodes in that zone. 
 * Disabling load balancer NodePort allocation is not supported for VPC load balancers. 
 * VPC NLBs can be set up with both UDP and TCP on the same VPC LB, but the listening port must be different.
-
-
-
 

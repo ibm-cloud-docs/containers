@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-12"
+lastupdated: "2024-08-14"
 
 
 keywords: containers
@@ -3740,7 +3740,7 @@ subcollection: containers
 
 * [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-firewall#firewall_workers)
 
-* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_firewall)
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} network zones](/docs/containers?topic=containers-firewall#iam_firewall)
 
     * [Getting your {{site.data.keyword.containershort}} subnet IP addresses](/docs/containers?topic=containers-firewall#iam_cidr_ip)
 
@@ -4641,6 +4641,64 @@ subcollection: containers
 ### Exposing apps with VPC load balancers
 {: #sitemap_exposing_apps_with_vpc_load_balancers}
 
+
+[About VPC load balancers](/docs/containers?topic=containers-vpclb-about#vpclb-about)
+
+* [Load balancer types](/docs/containers?topic=containers-vpclb-about#vpclb-types)
+
+    * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-alb)
+
+    * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-nlb)
+
+* [Limitations](/docs/containers?topic=containers-vpclb-about#vpclb_limit)
+
+[Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#setup_vpc_ks_vpc_lb)
+
+* [Setting up a public or private VPC ALB](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#setup_vpc_alb_pub_priv)
+
+* [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_lb_dns)
+
+    * [Registering a private DNS record for a private VPC ALB](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_alb_private_dns)
+
+* [Annotations and specifications](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_alb_annotations)
+
+    * [Required annotations and specifications](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_nlb_annotations_req)
+
+    * [Optional annotations and specifications](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_nlb_annotations_opt)
+
+[Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_nlb#setup_vpc_nlb)
+
+* [Setting up a public or private VPC NLB](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_pub_priv)
+
+    * [Before you begin](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_before)
+
+    * [Configure the `LoadBalancer` service](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_config)
+
+    * [Setting up a public NLB using a port range](/docs/containers?topic=containers-setup_vpc_nlb#nlb-setup-portrange)
+
+* [Annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_annotations)
+
+    * [Required annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_annotations_req)
+
+    * [Optional annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_annotations_opt)
+
+[Managing VPC load balancers](/docs/containers?topic=containers-vpclb_manage#vpclb_manage)
+
+* [Persistent VPC load balancers](/docs/containers?topic=containers-vpclb_manage#vpc_lb_persist)
+
+* [Moving a VPC load balancer from one cluster to another](/docs/containers?topic=containers-vpclb_manage#vpc_lb_move)
+
+    * [Detaching a VPC load balancer from a cluster](/docs/containers?topic=containers-vpclb_manage#vpc_lb_move_detach)
+
+    * [Attaching a VPC load balancer to a cluster](/docs/containers?topic=containers-vpclb_manage#vpc_lb_move_attach)
+
+* [Health checks for load balancers](/docs/containers?topic=containers-vpclb_manage#vpc_lb_health)
+
+    * [Customizing health checks for VPC load balancers](/docs/containers?topic=containers-vpclb_manage#vpc_lb_health_custom)
+
+    * [Enabling TCP health checks for UDP load balancers](/docs/containers?topic=containers-vpclb_manage#vpc_lb_health_udp)
+
+* [Changing a load balancer's subnet or zone](/docs/containers?topic=containers-vpclb_manage#lbaas_change_subnets)
 
 
 ### Exposing apps with Ingress
