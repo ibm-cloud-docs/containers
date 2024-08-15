@@ -1,7 +1,7 @@
 ---
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-08-14"
+lastupdated: "2024-08-15"
 
 keywords: nlb, network load balancer, vpc nlb, dns, public lb, private lb
 subcollection: containers
@@ -15,10 +15,6 @@ subcollection: containers
 
 Expose your app to the public or to the private network by setting up a public or private Kubernetes `LoadBalancer` service in each zone of your VPC cluster. Then, you can optionally [register the VPC NLB with a DNS record and TLS certificate](#vpc_nlb_dns). VPC NLBs support both the TCP and UDP protocol types. 
 {: shortdesc}
-
-If you create a **public** Kubernetes `LoadBalancer` service, you expose your app to public network traffic. You can access your app from the internet through the external, public IP address that is assigned by the VPC NLB to the Kubernetes `LoadBalancer` service. No public gateway is required on your VPC subnet to allow public requests to your VPC NLB. However, if your app must access a public URL, you must attach public gateways to the VPC subnets that your worker nodes are connected to.
-
-If you create a **private** Kubernetes `LoadBalancer` service, you expose your app to private network traffic. Your app is accessible only to systems that are connected to your private subnets within the same region and VPC. If you are connected to your private VPC network, you can access your app through the external, private IP address that is assigned by the VPC NLB to the Kubernetes `LoadBalancer` service.
 
 ## Setting up a public or private VPC NLB
 {: #vpc_nlb_pub_priv}

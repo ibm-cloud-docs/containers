@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-14"
+lastupdated: "2024-08-15"
 
 
 keywords: kubernetes, containers, app protocol, application protocol
@@ -24,6 +24,10 @@ Learn how you can use VPC load balancers to expose your app on the public or pri
 {: shortdesc}
 
 To expose an app in a VPC cluster, you can create a layer 7 VPC Application Load Balancer(VPC ALB) or a layer 4 VPC Network Load Balancer (VPC NLB). 
+
+If you create a **public** Kubernetes `LoadBalancer` service, you expose your app to public network traffic. You can access your app from the internet through the external, public IP address that is assigned by the VPC NLB to the Kubernetes `LoadBalancer` service. No public gateway is required on your VPC subnet to allow public requests to your VPC NLB. However, if your app must access a public URL, you must attach public gateways to the VPC subnets that your worker nodes are connected to.
+
+If you create a **private** Kubernetes `LoadBalancer` service, you expose your app to private network traffic. Your app is accessible only to systems that are connected to your private subnets within the same region and VPC. If you are connected to your private VPC network, you can access your app through the external, private IP address that is assigned by the VPC NLB to the Kubernetes `LoadBalancer` service.
 
 ## Load balancer types
 {: #vpclb-types}

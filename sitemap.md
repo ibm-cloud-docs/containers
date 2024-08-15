@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-14"
+lastupdated: "2024-08-15"
 
 
 keywords: containers
@@ -10920,6 +10920,8 @@ subcollection: containers
 [Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block#readonly_block)
 
 [Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu#block_helm_cpu)
+
+[Why does my block storage PVC remain in a pending state?](/docs/containers?topic=containers-block_pvc_pending#block_pvc_pending)
 
 [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts#vpc-block-api-key-reset-ts)
 
