@@ -366,3 +366,4 @@ Review the required and optional VPC ALB annotations and specifications.
 `targetPort`
 :   The port to which the service directs traffic. The application running in the pod must be listening for incoming TCP traffic on this target port. The target port is often statically defined in the image that is running in the application pod. The target port configured in the pod is different than the node port for the service and might also be different than the external port that is configured on the VPC LB.
 
+
