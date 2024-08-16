@@ -1,7 +1,7 @@
 ---
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-08-15"
+lastupdated: "2024-08-16"
 
 keywords: nlb, network load balancer, vpc nlb, dns, public lb, private lb
 subcollection: containers
@@ -285,7 +285,7 @@ Review the required and optional VPC NLB annotations and specifications.
 
 
 `service.kubernetes.io/ibm-load-balancer-cloud-provider-dns-name: "example-ingress-domain.<region>.containers.appdomain.cloud"`
-:   Version 1.30</container> or later.
+:   Version 1.30 or later.
 :   Register the load balancer's IP address with the specified [Ingress domain](/docs/containers?topic=containers-ingress-domains). If the specified domain does not exist, a domain is created that uses the internal, IBM managed provider (`akamai`). To create a new domain, the name must be unique across all existing domains (not just those on your cluster). Deleting the load balancer service removes the IP address from the domain. However, removing the annotation does not remove the IP address from the domain. 
 
 
