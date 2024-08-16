@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-08-16"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -611,8 +611,7 @@ To publicly expose apps:
     ```
     {: screen}
 
-1. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
-    Example command for Classic clusters.
+1. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or information on registering a VPC load balancer hostname with a DNS subdomain for a [VPC ALB](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_lb_dns) or [VPC NLB](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_dns).
     ```sh
     ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
     ```
@@ -671,7 +670,7 @@ Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-a
 
 To publicly expose apps:
 
-1. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
+1. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_dns).
     * Classic clusters:
         ```sh
         ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]

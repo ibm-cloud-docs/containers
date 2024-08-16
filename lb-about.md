@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-08"
+lastupdated: "2024-08-16"
 
 
 keywords: kubernetes, lb2.0, nlb, app protocol, application protocol
@@ -21,7 +21,7 @@ subcollection: containers
 # Classic: About network load balancers (NLBs)
 {: #loadbalancer-about}
 
-Network load balancers can be created in classic clusters only. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
+Network load balancers can be created in classic clusters only. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpclb-about).
 {: note}
 
 When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet.

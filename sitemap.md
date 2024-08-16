@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-15"
+lastupdated: "2024-08-16"
 
 
 keywords: containers
@@ -4652,19 +4652,19 @@ subcollection: containers
 
 * [Limitations](/docs/containers?topic=containers-vpclb-about#vpclb_limit)
 
-[Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#setup_vpc_ks_vpc_lb)
+[Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_alb#setup_vpc_alb)
 
-* [Setting up a public or private VPC ALB](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#setup_vpc_alb_pub_priv)
+* [Setting up a public or private VPC ALB](/docs/containers?topic=containers-setup_vpc_alb#setup_vpc_alb_pub_priv)
 
-* [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_lb_dns)
+* [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-setup_vpc_alb#vpc_lb_dns)
 
-    * [Registering a private DNS record for a private VPC ALB](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_alb_private_dns)
+    * [Registering a private DNS record for a private VPC ALB](/docs/containers?topic=containers-setup_vpc_alb#vpc_alb_private_dns)
 
-* [Annotations and specifications](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_alb_annotations)
+* [Annotations and specifications](/docs/containers?topic=containers-setup_vpc_alb#vpc_alb_annotations)
 
-    * [Required annotations and specifications](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_nlb_annotations_req)
+    * [Required annotations and specifications](/docs/containers?topic=containers-setup_vpc_alb#vpc_nlb_annotations_req)
 
-    * [Optional annotations and specifications](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_nlb_annotations_opt)
+    * [Optional annotations and specifications](/docs/containers?topic=containers-setup_vpc_alb#vpc_nlb_annotations_opt)
 
 [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_nlb#setup_vpc_nlb)
 
@@ -4675,6 +4675,8 @@ subcollection: containers
     * [Configure the `LoadBalancer` service](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_config)
 
     * [Setting up a public NLB using a port range](/docs/containers?topic=containers-setup_vpc_nlb#nlb-setup-portrange)
+
+* [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_dns)
 
 * [Annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_annotations)
 
