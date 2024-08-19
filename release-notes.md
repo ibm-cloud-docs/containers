@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-08-16"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -2530,10 +2530,10 @@ Worker node fix pack
 
 
 Persistent VPC load balancers
-:   You can now create a [persistent VPC load balancer](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_persist) that remains available even after your cluster is deleted. 
+:   You can now create a [persistent VPC load balancer](/docs/containers?topic=containers-vpclb_manage#vpc_lb_persist) that remains available even after your cluster is deleted. 
 
 Customized VPC load balancer health checks
-:   For more control over your VPC load balancer health checks, you can use [optional annotations](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_health_custom) to customize your health checks with advanced configurations for test intervals, timeouts, and retries.
+:   For more control over your VPC load balancer health checks, you can use [optional annotations](/docs/containers?topic=containers-vpclb-about#vpc_lb_health_custom) to customize your health checks with advanced configurations for test intervals, timeouts, and retries.
 
 ## January 2023
 {: #containers-jan23}
@@ -4833,7 +4833,7 @@ ALB OAuth Proxy
 {: release-note}
 
 New! Private VPC NLB
-:   You can now create [private Network Load Balancers for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_priv) to expose apps in clusters that run version 1.19 and later.
+:   You can now create [private Network Load Balancers for VPC](/docs/containers?topic=containers-setup_vpc_nlb) to expose apps in clusters that run version 1.19 and later.
 
 ### 10 June 2021
 {: #containers-june1021}
@@ -5021,7 +5021,7 @@ CLI change log
 
 
 VPC NLB
-:   Adds steps for [registering a VPC network load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns).
+:   Adds steps for [registering a VPC network load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-vpclb-about#vpc_nlb_dns).
 
 Worker node versions
 :   Worker node fix pack update change log documentation is available for version [1.20.6_1537](/docs/containers?topic=containers-changelog_120#1206_1537), [1.19.10_1544](/docs/containers?topic=containers-changelog_119#11910_1544), [1.18.18_1550](/docs/containers?topic=containers-118_changelog#11818_1550), and [1.17.17_1561](/docs/containers?topic=containers-117_changelog#11717_1561).
@@ -5865,7 +5865,7 @@ Deprecated: Kubernetes version 1.16
 :   With the release of version 1.19, clusters that run version 1.16 are deprecated. Update your clusters to at least [version 1.17](/docs/containers?topic=containers-cs_versions#k8s_version_archive) today.
 
 New! Network load balancer for VPC
-:   In VPC Gen 2 clusters that run Kubernetes version 1.19, you can now create a layer 4 Network Load Balancer for VPC. VPC network load balancers offer source IP preservation and increased performance through direct server return (DSR). For more information, see [About VPC load balancing in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-lbaas).
+:   In VPC Gen 2 clusters that run Kubernetes version 1.19, you can now create a layer 4 Network Load Balancer for VPC. VPC network load balancers offer source IP preservation and increased performance through direct server return (DSR). For more information, see [About VPC load balancing in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpclb-about).
 
 
 

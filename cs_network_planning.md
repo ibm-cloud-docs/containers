@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-08-16"
 
 
 keywords: kubernetes, networking
@@ -359,7 +359,7 @@ NodePort
 VPC application load balancer
 :   **Load-balancing method**:Basic load balancing that exposes the app with a private hostname.
 :   **Use case**: Quickly expose one app to a private network with a VPC application load balancer-assigned private hostname.
-:   **Implementation**: [Create a private `LoadBalancer` service](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb) in your cluster. A multizonal VPC application load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.
+:   **Implementation**: [Create a private `LoadBalancer` service](/docs/containers?topic=containers-setup_vpc_alb) in your cluster. A multizonal VPC application load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.
 
 Ingress ALB
 :   **Load-balancing method**: HTTPS load balancing that exposes the app with a hostname and uses custom routing rules.
