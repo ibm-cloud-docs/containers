@@ -612,7 +612,7 @@ toc:
               - ts-storage-debug.md
               - ts-storage-debug-file.md
               - ts-storage-pvc-fail-permissions.md
-              - ts-storage-file-block-pvc-pending.md
+              - ts-storage-file-pvc-pending.md
               - ts-vpc-file-container-creating.md
               - ts-storage-file-app.md
               - ts-storage-file-group-id-fail.md

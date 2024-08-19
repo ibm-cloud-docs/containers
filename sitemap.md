@@ -10872,7 +10872,7 @@ subcollection: containers
 
 [What permissions do I need to manage storage and create PVCs?](/docs/containers?topic=containers-missing_permissions#missing_permissions)
 
-[File storage and block storage: Why does my PVC remain in a pending state?](/docs/containers?topic=containers-file_pvc_pending#file_pvc_pending)
+[Why does my file storage PVC remain in a pending state?](/docs/containers?topic=containers-file_pvc_pending#file_pvc_pending)
 
 [Why is my app pod stuck in `Container creating` when trying to mount {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-vpc-file-container-creating#ts-vpc-file-container-creating)
 
