@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-08-19"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, troubleshooting apps, app debugging, application troublshooting in clusters
@@ -56,9 +56,10 @@ The following steps help you troubleshoot application problems within your clust
     ```
     {: pre}
 
-1. Review the [common worker node issues](/docs/containers?topic=containers-common_worker_nodes_issues). 
-
-1. Review the [debugging guide for worker node issues](/docs/containers?topic=containers-debug_worker_nodes).
+1. Review the following information to debug or troubleshoot worker node issues. 
+    - [Common worker node issues](/docs/containers?topic=containers-common_worker_nodes_issues)
+    - [Debugging guide for worker node issues](/docs/containers?topic=containers-debug_worker_nodes)
+    - [Troubleshoot worker nodes in `Critical` or `NotReady` state](/docs/openshift?topic=openshift-ts-critical-notready)
 
 ## Gather details and document the problem
 {: #ts-3}
