@@ -2547,7 +2547,7 @@ Persistent VPC load balancers
 :   You can now create a [persistent VPC load balancer](/docs/containers?topic=containers-vpclb_manage#vpc_lb_persist) that remains available even after your cluster is deleted. 
 
 Customized VPC load balancer health checks
-:   For more control over your VPC load balancer health checks, you can use [optional annotations](/docs/containers?topic=containers-vpclb-about#vpc_lb_health_custom) to customize your health checks with advanced configurations for test intervals, timeouts, and retries.
+:   For more control over your VPC load balancer health checks, you can use [optional annotations](/docs/containers?topic=containers-setup_vpc_alb#vpc_nlb_annotations_opt) to customize your health checks with advanced configurations for test intervals, timeouts, and retries.
 
 ## January 2023
 {: #containers-jan23}
@@ -5035,7 +5035,7 @@ CLI change log
 
 
 VPC NLB
-:   Adds steps for [registering a VPC network load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-vpclb-about#vpc_nlb_dns).
+:   Adds steps for [registering a VPC network load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-setup_vpc_alb#vpc_lb_dns).
 
 Worker node versions
 :   Worker node fix pack update change log documentation is available for version [1.20.6_1537](/docs/containers?topic=containers-changelog_120#1206_1537), [1.19.10_1544](/docs/containers?topic=containers-changelog_119#11910_1544), [1.18.18_1550](/docs/containers?topic=containers-118_changelog#11818_1550), and [1.17.17_1561](/docs/containers?topic=containers-117_changelog#11717_1561).

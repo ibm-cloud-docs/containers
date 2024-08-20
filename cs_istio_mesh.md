@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-08-16"
+lastupdated: "2024-08-20"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -611,7 +611,7 @@ To publicly expose apps:
     ```
     {: screen}
 
-1. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or information on registering a VPC load balancer hostname with a DNS subdomain for a [VPC ALB](/docs/containers?topic=containers-setup_vpc_ks_vpc_lb#vpc_lb_dns) or [VPC NLB](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_dns).
+1. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or information on registering a VPC load balancer hostname with a DNS subdomain for a [VPC ALB](/docs/containers?topic=containers-setup_vpc_alb) or [VPC NLB](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_dns).
     ```sh
     ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
     ```

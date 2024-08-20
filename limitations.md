@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-16"
+lastupdated: "2024-08-20"
 
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
@@ -142,7 +142,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Pod network | VPC access control lists (ACLs) filter incoming and outgoing traffic for your cluster at the subnet level, and security groups filter incoming and outgoing traffic for your cluster at the worker nodes level. To control traffic within the cluster at the pod-to-pod level, you can't use VPC security groups or ACLs. Instead, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-kube-policies), which can control the pod-level network traffic that uses IP in IP encapsulation. |
 | strongSwan VPN service | The strongSwan service is not supported. To connect your cluster to resources in an on-premises network or another VPC, see [Using VPN with your VPC](/docs/vpc?topic=vpc-vpn-onprem-example). |
 | Subnets |  \n - See [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations). \n - Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.  |
-| VPC load balancer | See [VPC load balancer limitations](/docs/containers?topic=containers-vpclb-about#lbaas_limitations). |
+| VPC load balancer | See [VPC load balancer limitations](/docs/containers?topic=containers-vpclb-about#vpclb_limit). |
 {: caption="VPC cluster networking limitations"}
 
 ### Storage

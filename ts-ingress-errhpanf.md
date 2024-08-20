@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-08-20"
 
 connectivitykeywords: kubernetes, errhpanf, ingress, autoscaler, alb
 
@@ -29,7 +29,7 @@ The autoscaler resource is missing (ERRHPANF).
 ```
 {: screen}
 
-The horizontal pod autoscaler (HPA) resource is missing for the ALB, and the deployment does not scale dynamically with the load. The HPA resource might be configured incorrectly, which prevents the resource from being applyied to the cluster.
+The horizontal pod autoscaler (HPA) resource is missing for the ALB, and the deployment does not scale dynamically with the load. The HPA resource might be configured incorrectly, which prevents the resource from being applied to the cluster.
 {: tsCauses}
 
 
