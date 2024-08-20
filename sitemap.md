@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-19"
+lastupdated: "2024-08-20"
 
 
 keywords: containers
@@ -237,6 +237,14 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug24)
+
+    * [20 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2024)
+
+        * CLI version `1.0.651` is available.
+
+        * Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 
 * [July 2024](/docs/containers?topic=containers-containers-relnotes#containers-july24)
 
@@ -6229,6 +6237,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.651](/docs/containers?topic=containers-cs_cli_changelog#cli-010651)
+
 * [Version v1.0.640](/docs/containers?topic=containers-cs_cli_changelog#cli-010640)
 
 * [Version v1.0.638](/docs/containers?topic=containers-cs_cli_changelog#cli-010638)
@@ -7037,9 +7047,13 @@ subcollection: containers
 
 * [Version 1.22](/docs/containers?topic=containers-istio-changelog#v122)
 
+    * [Change log for 1.22.3, released 20 August 2024](/docs/containers?topic=containers-istio-changelog#1223)
+
     * [Change log for 1.22.1, released 21 June 2024](/docs/containers?topic=containers-istio-changelog#1221)
 
 * [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
+
+    * [Change log for 1.21.5, released 20 August 2024](/docs/containers?topic=containers-istio-changelog#1215)
 
     * [Change log for 1.21.3, released 19 June 2024](/docs/containers?topic=containers-istio-changelog#1213)
 
@@ -7048,6 +7062,8 @@ subcollection: containers
     * [Change log for 1.21.1, released 26 April 2024](/docs/containers?topic=containers-istio-changelog#1211)
 
 * [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
+
+    * [Change log for 1.20.8, released 20th August 2024](/docs/containers?topic=containers-istio-changelog#1208)
 
     * [Change log for 1.20.7, released 19 June 2024](/docs/containers?topic=containers-istio-changelog#1207)
 

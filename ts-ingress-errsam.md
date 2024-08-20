@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-08-16"
+lastupdated: "2024-08-20"
 
 
 keywords: kubernetes, help, network, connectivity, errsam, loadbalancer service missing
@@ -71,7 +71,7 @@ Complete the following steps to troubleshoot the issue.
     - **Classic**: If you see errors regarding your load balancer deployment, ensure your cluster has at least two healthy workers. For more information, see [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add-workers-classic).
     - **Classic**: If you see errors saying that the IP of the ALB is not available, disable the ALB using the **`ibmcloud ks ingress alb disable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable), then reenable it with the **`ibmcloud ks ingress alb enable classic`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure) and specify the `--ip` flag with a free IP address from the error message.
     - **Classic**: If you see errors saying that no IPs are available, add new portable subnets to the cluster with the **`ibmcloud ks cluster subnet create`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_create).
-    - **VPC**: If you see permission issues, review your IAM permissions. For more information, see [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpclb-about#setup_vpc_alb).
+    - **VPC**: If you see permission issues, review your IAM permissions. For more information, see [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_alb).
     - **VPC**: Ensure that you did not reach your LBaaS instance quota. For more information, see [Quotas and service limits](/docs/vpc?topic=vpc-quotas#alb-quotas) and **`ibmcloud is load-balancers`** [command](/docs/vpc?topic=vpc-vpc-reference#lb-anchor).
     
 1. Wait 10 to 15 minutes, then check if the load balancer got an address assigned. If not, check the events again.

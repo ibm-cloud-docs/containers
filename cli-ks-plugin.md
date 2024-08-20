@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-08-06"
+lastupdated: "2024-08-20"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -3915,7 +3915,7 @@ To add a zone to worker pools in a VPC cluster, use the [**`ibmcloud ks zone add
 {: note}
 
 ```sh
-ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER [--worker-pool WORKER_POOL] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--output json] [-q]
+ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_POOL [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--output json] [-q]
 ```
 {: pre}
 
@@ -4065,7 +4065,7 @@ ibmcloud ks zone ls -l ap
 {: shortdesc}
 
 ```sh
-ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER  --private-vlan PRIVATE_VLAN [--worker-pool WORKER_POOL] [--public-vlan PUBLIC_VLAN] [--private-only] [-f] [-q]
+ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER  --private-vlan PRIVATE_VLAN --worker-pool WORKER_POOL [--public-vlan PUBLIC_VLAN] [--private-only] [-f] [-q]
 ```
 {: pre}
 
@@ -4157,7 +4157,7 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
 {: tip}
 
 ```sh
-ibmcloud ks zone rm --cluster CLUSTER --zone ZONE [--worker-pool WORKER_POOL] [-f] [-q]
+ibmcloud ks zone rm --cluster CLUSTER --zone ZONE --worker-pool WORKER_POOL [-f] [-q]
 ```
 {: pre}
 
