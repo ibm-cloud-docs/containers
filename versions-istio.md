@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-08-20"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -34,6 +34,32 @@ ibmcloud ks cluster addon versions
 ## Version 1.22
 {: #v122}
 
+### Change log for 1.22.3, released 20 August 2024
+{: #1223}
+
+Review the changes that are included in version 1.22.3 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.22.1
+
+Current version
+:   1.22.3
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.22.2](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.2/){: external} and [Istio 1.22.3](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.3/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-33599](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33599){: external}
+    - [CVE-2024-33600](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33600){: external}
+    - [CVE-2024-33601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33601){: external}
+    - [CVE-2024-33602](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33602){: external}
+    - [CVE-2022-40735](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40735){: external}
+    - [CVE-2024-28182](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-28182){: external}
+    - [usn-6804-1](https://ubuntu.com/security/notices/USN-6804-1){: external}
+    - [usn-6854-1](https://ubuntu.com/security/notices/USN-6854-1){: external}
+    - [usn-6754-1](https://ubuntu.com/security/notices/USN-6754-1){: external}
+ :   For more information, see the [Istio security bulletin 2024-005](https://istio.io/latest/news/security/istio-security-2024-005/){: external}.
+
 ### Change log for 1.22.1, released 21 June 2024
 {: #1221}
 
@@ -47,11 +73,35 @@ Current version
 :   1.22.1
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.22.0](https://istio.io/latest/news/releases/1.22.x/announcing-1.22/){:external} and [Istio 1.22.1](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.1/.){:external}.
+:   See the Istio release notes for [Istio 1.22.0](https://istio.io/latest/news/releases/1.22.x/announcing-1.22/){: external} and [Istio 1.22.1](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.1/){: external}.
 
 
 ## Version 1.21
 {: #v121}
+
+### Change log for 1.21.5, released 20 August 2024
+{: #1215}
+
+Review the changes that are included in version 1.21.5 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.21.3
+
+Current version
+:   1.21.5
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.21.4](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.4/){: external} and [Istio 1.21.5](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.5/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-33599](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33599){: external}
+    - [CVE-2024-33600](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33600){: external}
+    - [CVE-2024-33601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33601){: external}
+    - [CVE-2024-33602](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33602){: external}
+    - [CVE-2022-40735](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40735){: external}
+    - [usn-6804-1](https://ubuntu.com/security/notices/USN-6804-1){: external}
+    - [usn-6854-1](https://ubuntu.com/security/notices/USN-6854-1){: external}
+ :   For more information, see the [Istio security bulletin 2024-005](https://istio.io/latest/news/security/istio-security-2024-005/){: external}.
 
 ### Change log for 1.21.3, released 19 June 2024
 {: #1213}
@@ -66,7 +116,7 @@ Current version
 :   1.21.3
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.21.3](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.3/.){:external}.
+:   See the Istio release notes for [Istio 1.21.3](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.3/.){: external}.
 :   Resolves the following CVEs:
     - [CVE-2024-2961](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2961){: external}
     - [CVE-2024-28182](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-28182){: external}
@@ -114,6 +164,28 @@ Updates in this version
 ## Version 1.20
 {: #v120}
 
+### Change log for 1.20.8, released 20th August 2024
+{: #1208}
+
+Review the changes that are included in version 1.20.8 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.20.7
+
+Current version
+:   1.20.8
+
+Updates in this version
+:   This is the final version of addon-istio 1.20. Addon-istio 1.20 is unsupported on 18 September 2024.
+:   See the Istio release notes for [Istio 1.20.8](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.8/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-33599](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33599){: external}
+    - [CVE-2024-33600](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33600){: external}
+    - [CVE-2024-33601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33601){: external}
+    - [CVE-2024-33602](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-33602){: external}
+    - [usn-6804-1](https://ubuntu.com/security/notices/USN-6804-1){: external}
+
 ### Change log for 1.20.7, released 19 June 2024
 {: #1207}
 
@@ -127,7 +199,7 @@ Current version
 :   1.20.7
 
 Updates in this version
-:   See the Istio release notes for [Istio 1.20.7](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.7/.){:external}.
+:   See the Istio release notes for [Istio 1.20.7](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.7/.){: external}.
 :   Resolves the following CVEs:
     - [CVE-2024-2961](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2961){: external}
     - [CVE-2024-28182](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-28182){: external}
