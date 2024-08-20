@@ -32,7 +32,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-aug2024}
 {: release-note}
 
-CLI version `1.0.647` is available.
+CLI version `1.0.648` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.

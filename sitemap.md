@@ -242,7 +242,7 @@ subcollection: containers
 
     * [20 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2024)
 
-        * CLI version `1.0.647` is available.
+        * CLI version `1.0.648` is available.
 
         * Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 
@@ -6237,7 +6237,7 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
-* [Version v1.0.647](/docs/containers?topic=containers-cs_cli_changelog#cli-010640)
+* [Version v1.0.648](/docs/containers?topic=containers-cs_cli_changelog#cli-010648)
 
 * [Version v1.0.640](/docs/containers?topic=containers-cs_cli_changelog#cli-010640)
 
