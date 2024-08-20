@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-16"
+lastupdated: "2024-08-20"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -24,6 +24,20 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## August 2024
+{: #containers-aug24}
+
+### 20 August 2024
+{: #containers-aug2024}
+{: release-note}
+
+CLI version `1.0.647` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
 
 ## July 2024
 {: #containers-july24}
