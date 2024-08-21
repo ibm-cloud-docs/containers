@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-19"
+lastupdated: "2024-08-21"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, clusters, worker nodes, worker pools, add, classic

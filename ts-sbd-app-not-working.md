@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-08-21"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, app not working, {{site.data.keyword.containerlong_notm}}, outbound traffic protection, 4.15, 1.30
@@ -21,6 +21,7 @@ content-type: troubleshoot
 {: support}
 
 [Virtual Private Cloud]{: tag-vpc}
+[1.30 and later]{: tag-blue}
 
 After creating a version 1.30 cluster, your app no longer works and you see an error message similar to the following.
 {: tsSymptoms}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-08-21"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, {{site.data.keyword.containerlong_notm}}, outbound traffic protection, cluster create, quotas, limitations, rules, security groups
@@ -21,6 +21,7 @@ content-type: troubleshoot
 {: support}
 
 [Virtual Private Cloud]{: tag-vpc}
+[1.30 and later]{: tag-blue}
 
 
 Cluster creation fails due to security group quota enforcement. You see an error message similar to one of the following.
