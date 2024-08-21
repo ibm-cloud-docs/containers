@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-08-21"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, {{site.data.keyword.containerlong_notm}}, outbound traffic protection, cluster create, quota, limitations
 
@@ -18,6 +18,7 @@ content-type: troubleshoot
 {: #ts-sbd-custom-dns}
 
 [Virtual Private Cloud]{: tag-vpc}
+[1.30 and later]{: tag-blue}
 
 You see DNS failures after creating a custom DNS resolver in your VPC where a 1.30 cluster already exists.
 {: tsSymptoms}

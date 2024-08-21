@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-08-21"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, outbound traffic protection, 1.30
 
@@ -16,6 +16,7 @@ subcollection: containers
 {: #sbd-allow-outbound}
 
 [Virtual Private Cloud]{: tag-vpc}
+[1.30 and later]{: tag-blue}
 
 Review the following options for managing outbound traffic protection in {{site.data.keyword.containerlong_notm}} VPC clusters. You can allow all outbound access or selectively allow outbound traffic to the components that your apps need.
 
@@ -26,6 +27,9 @@ In many of the following scenarios, you have the option to add custom rules to y
 
 ## Disabling outbound traffic protection when creating a cluster
 {: #new-cluster-sbd}
+
+[Virtual Private Cloud]{: tag-vpc}
+[1.30 and later]{: tag-blue}
 
 Review the following options for disabling outbound traffic protections for new clusters.
 
@@ -56,6 +60,9 @@ Before creating your cluster, create a [custom security group](/docs/vpc?topic=v
 ## Disabling outbound traffic protection for existing clusters
 {: #existing-cluster-sbd}
 
+[Virtual Private Cloud]{: tag-vpc}
+[1.30 and later]{: tag-blue}
+
 Review your options for disabling outbound traffic protection after you've provisioned a cluster.
 
 ### Option 1: Disabling outbound traffic protection from the CLI
@@ -81,6 +88,9 @@ ibmcloud is sg-rulec kube-<clusterID> outbound all --remote <IP-address-or-subne
 
 ## Enabling outbound traffic protection for existing clusters
 {: #sbd-enable-existing}
+
+[Virtual Private Cloud]{: tag-vpc}
+[1.30 and later]{: tag-blue}
 
 To enable outbound protection for your existing 1.30 clusters, run the following command. Note that enabling outbound traffic protection blocks all outbound traffic.
 

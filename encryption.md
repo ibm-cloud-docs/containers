@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-12"
+lastupdated: "2024-08-21"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, red hat, encrypt, security, kms, root key, crk
@@ -22,7 +22,7 @@ subcollection: containers
 Protect sensitive information in your {{site.data.keyword.containerlong}} cluster to ensure data integrity and to prevent your data from being exposed to unauthorized users by setting up a key management service (KMS) provider.
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}} offers encryption at several layers in your cluster. In some cases, encryption is managed by IBM and in other cases you have the option to bring your own KMS provider credentials to manage encryption yourself.
+{{site.data.keyword.containerlong_notm}} offers encryption at several layers in your cluster. Encryption for some components is managed by IBM while, for other components, you have the option to bring your own KMS provider credentials to manage encryption yourself.
 
 When you're done with this page, [try out the quiz](https://quizzes.12dekrh4l1b4.us-south.codeengine.appdomain.cloud/containers/strategy/quiz.php).
 {: tip}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-06-14"
+lastupdated: "2024-08-21"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, {{site.data.keyword.containerlong_notm}}, outbound traffic protection, cluster create, quota, limitations
 
@@ -20,6 +20,7 @@ content-type: troubleshoot
 
 
 [Virtual Private Cloud]{: tag-vpc}
+[1.30 and later]{: tag-blue}
 
 You use only custom security groups and you see worker creation failures and image pull errors in other clusters within your VPC after creating a version 1.30 cluster.
 {: tsSymtpoms}
