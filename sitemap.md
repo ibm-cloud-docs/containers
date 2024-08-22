@@ -240,6 +240,10 @@ subcollection: containers
 
 * [August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug24)
 
+    * [22 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2224)
+
+        * New audit events for cluster operations
+
     * [20 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2024)
 
         * CLI version `1.0.651` is available.
