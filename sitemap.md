@@ -240,6 +240,10 @@ subcollection: containers
 
 * [August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug24)
 
+    * [22 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2224)
+
+        * New audit events for cluster operations
+
     * [20 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2024)
 
         * CLI version `1.0.651` is available.
@@ -4670,9 +4674,9 @@ subcollection: containers
 
 * [Annotations and specifications](/docs/containers?topic=containers-setup_vpc_alb#vpc_alb_annotations)
 
-    * [Required annotations and specifications](/docs/containers?topic=containers-setup_vpc_alb#vpc_nlb_annotations_req)
+    * [Required annotations and specifications](/docs/containers?topic=containers-setup_vpc_alb#vpc_alb_annotations_req)
 
-    * [Optional annotations and specifications](/docs/containers?topic=containers-setup_vpc_alb#vpc_nlb_annotations_opt)
+    * [Optional annotations and specifications](/docs/containers?topic=containers-setup_vpc_alb#vpc_alb_annotations_opt)
 
 [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_nlb#setup_vpc_nlb)
 
