@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-08-16"
+lastupdated: "2024-08-22"
 
 
 keywords: kubernetes, networking
@@ -112,7 +112,7 @@ The LoadBalancer service type is implemented differently depending on your clust
 
 [Virtual Private Cloud]{: tag-vpc}
 
-[Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas). When you create a Kubernetes LoadBalancer service for an app in your cluster, a layer 7 VPC load balancer is automatically created in your VPC outside of your cluster. The VPC load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. By default, the load balancer is also created with a hostname that you can use to access your app.
+[Load Balancer for VPC](/docs/containers?topic=containers-vpclb-about). When you create a Kubernetes LoadBalancer service for an app in your cluster, a layer 7 VPC load balancer is automatically created in your VPC outside of your cluster. The VPC load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. By default, the load balancer is also created with a hostname that you can use to access your app.
 
 ![LoadBalancer service traffic in VPC clusters](images/vpc-nlb-sz.svg "LoadBalancer service traffic in VPC clusters"){: caption="How Kubernetes forwards network traffic through LoadBalancer services."}
 
@@ -205,7 +205,7 @@ To make an app publicly available to the internet in a VPC cluster, choose a loa
 
 - **Load-balancing method**: Basic load balancing that exposes the app with a hostname
 - **Use case**: Quickly expose one app to the public with a VPC load balancer-assigned hostname.
-- **Implementation**: [Create a public `LoadBalancer` service](/docs/containers?topic=containers-vpc-lbaas) in your cluster. A VPC load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.
+- **Implementation**: [Create a public `LoadBalancer` service](/docs/containers?topic=containers-vpclb-about) in your cluster. A VPC load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.
 
 ### Istio
 {: #vpc-istio-pattern}
