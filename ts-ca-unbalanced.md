@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-03"
+lastupdated: "2024-08-23"
 
 
 keywords: kubernetes, help, network, connectivity, autoscaler
@@ -26,6 +26,7 @@ Your pending workloads might not request enough capacity to make each zone balan
 
 In this case, if you want to manually balance the worker pools, [update your cluster autoscaler ConfigMap](/docs/containers?topic=containers-cluster-scaling-install-addon-enable) to remove the unbalanced worker pool. Then, run the `ibmcloud ks worker-pool rebalance` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_rebalance), and add the worker pool back to the cluster autoscaler ConfigMap.
 {: tsResolve} 
+
 
 
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-01-05"
+lastupdated: "2024-08-23"
 
 
 keywords: kubernetes, vlan
@@ -311,6 +311,8 @@ To change the VLANs that a worker pool uses to provision worker nodes.
         ibmcloud ks worker-pool rebalance --cluster <cluster_name_or_ID> --worker-pool <pool_name>
         ```
         {: pre}
+
+        
 
 8. Optional: You can repeat steps 2 - 7 for each worker pool in your cluster. After you complete these steps, all worker nodes in your cluster are set up with the new VLANs.
 
