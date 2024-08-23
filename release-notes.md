@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-22"
+lastupdated: "2024-08-23"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -28,6 +28,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2024
 {: #containers-aug24}
 
+### 23 August 2024
+{: #containers-aug2324}
+{: release-note}
+
+CLI version `1.0.652` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 ### 22 August 2024
 {: #containers-aug2224}
 {: release-note}
@@ -35,15 +42,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 New audit events for cluster operations
 :   The `containers-kubernetes.cluster-master.changed` and `containers-kubernetes.cluster-ssl-certificate.update` [audit events](/docs/containers?topic=containers-at_events_ref) are available. 
 
+
+
 ### 20 August 2024
 {: #containers-aug2024}
 {: release-note}
 
-CLI version `1.0.651` is available.
-:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
-
 Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 
 ## July 2024
