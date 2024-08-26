@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-08-26"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -43,12 +43,12 @@ If only one worker node exists in a zone in your cluster, and you set the number
 ### Scheduling maintenance windows for automatic updates
 {: #alb-scheduled-updates}
 
-You can control and manage automatic ALB updates by creating a customized ConfigMap that specifies the time you want the updates to occur and the percentage of ALBs you want to update.  
+You can control and manage automatic ALB updates by creating a customized ConfigMap that specifies the time you want the updates.
 {: shortdesc}
 
-To set a time for automatic updates, you set the `updateStartTime` and `updateEndTime` keys in the deployment ConfigMap. Each key represents an assigned time in a 24 hour format (HH:MM). Note that this time is specified in coordinated universal time (UTC) rather than your local time. To specify a percentage of ALBs to update, you set the `updatePercentage` key as a whole number between 0 and 100.
+To set a time for automatic updates, you set the `updateStartTime` and `updateEndTime` keys in the deployment ConfigMap. Each key represents an assigned time in a 24 hour format (HH:MM). Note that this time is specified in coordinated universal time (UTC) rather than your local time.
 
-1. Create a YAML file for your ConfigMap. Specify the `updatePercentage`, `updateStartTime`, and `updateEndTime` fields as key-value pairs in the `data` field.
+1. Create a YAML file for your ConfigMap. Specify the `updateStartTime`, and `updateEndTime` fields as key-value pairs in the `data` field.
 
     The following example ConfigMap sets the automatic update function to update 35% of ALB pods in your cluster between 20:34 and 23:59 UTC.
 
@@ -59,7 +59,6 @@ To set a time for automatic updates, you set the `updateStartTime` and `updateEn
         name: ibm-ingress-deploy-config
         namespace: kube-system
     data:
-        "updatePercentage": "35"
         "updateStartTime": "20:34"
         "updateEndTime": "23:59"
     ```
