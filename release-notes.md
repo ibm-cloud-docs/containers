@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-23"
+lastupdated: "2024-08-26"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -27,6 +27,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## August 2024
 {: #containers-aug24}
+
+### 26 August 2024
+{: #containers-aug2624}
+{: release-note}
+
+{{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+
+Storage Operator cluster add-on patch update.
+:   For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
 
 ### 23 August 2024
 {: #containers-aug2324}
