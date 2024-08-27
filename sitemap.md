@@ -10764,6 +10764,8 @@ subcollection: containers
 
 [Why are VPC load balancer health checks failing on my worker nodes?](/docs/containers?topic=containers-vpc-lb-healthcheck-fail#vpc-lb-healthcheck-fail)
 
+[VPC Clusters: My VPC NLB has a zone error and does not update](/docs/containers?topic=containers-ts-nlb-vpc-zone#ts-nlb-vpc-zone)
+
 
 ### Ingress
 {: #sitemap_ingress}
