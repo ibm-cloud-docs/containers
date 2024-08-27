@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2024
 
-lastupdated: "2024-07-11"
+lastupdated: "2024-08-27"
 
 
 keywords: change log, version history, Ingress ALB
@@ -25,10 +25,15 @@ Review the version history for Ingress ALB.
 {: #ingress-alb-1.9.6}
 
 
-### 1.9.6_6846_iks, released 11 July 24
-{: #ingress-alb-1.9.6_6846_iks}
+### 1.9.6_7029_iks, released 27 August 24
+{: #ingress-alb-1.9.6_7029_iks}
 
 [Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2024-2466](https://nvd.nist.gov/vuln/detail/CVE-2024-2466){: external}, [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}, [CVE-2024-2379](https://nvd.nist.gov/vuln/detail/CVE-2024-2379){: external}, [CVE-2024-2004](https://nvd.nist.gov/vuln/detail/CVE-2024-2004){: external}, [CVE-2024-0853](https://nvd.nist.gov/vuln/detail/CVE-2024-0853){: external}, [CVE-2024-6874](https://nvd.nist.gov/vuln/detail/CVE-2024-6874){: external}, and [CVE-2024-6197](https://nvd.nist.gov/vuln/detail/CVE-2024-6197){: external}.
+
+### 1.9.6_6846_iks, released 11 July 24
+{: #ingress-alb-1.9.6_6846_iks}
 
 - Resolves the following CVEs: [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}, and [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/CVE-2024-4741){: external}.
 
@@ -76,6 +81,11 @@ Review the version history for Ingress ALB.
 ## Version 1.9.4
 {: #ingress-alb-1.9.4}
 
+
+### 1.9.4_7028_iks, released 27 August 24
+{: #ingress-alb-1.9.4_7028_iks}
+
+- Resolves the following CVEs: [CVE-2024-6197](https://nvd.nist.gov/vuln/detail/CVE-2024-6197){: external}, [CVE-2024-2466](https://nvd.nist.gov/vuln/detail/CVE-2024-2466){: external}, [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}, [CVE-2024-2379](https://nvd.nist.gov/vuln/detail/CVE-2024-2379){: external}, [CVE-2024-2004](https://nvd.nist.gov/vuln/detail/CVE-2024-2004){: external}, [CVE-2024-0853](https://nvd.nist.gov/vuln/detail/CVE-2024-0853){: external}, and [CVE-2024-6874](https://nvd.nist.gov/vuln/detail/CVE-2024-6874){: external}.
 
 ### 1.9.4_6848_iks, released 11 July 24
 {: #ingress-alb-1.9.4_6848_iks}
@@ -135,6 +145,11 @@ Review the version history for Ingress ALB.
 ## Version 1.8.5
 {: #ingress-alb-1.8.5}
 
+
+### 1.8.5_7030_iks, released 27 August 24
+{: #ingress-alb-1.8.5_7030_iks}
+
+- Resolves the following CVEs: [CVE-2024-2466](https://nvd.nist.gov/vuln/detail/CVE-2024-2466){: external}, [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}, [CVE-2024-2379](https://nvd.nist.gov/vuln/detail/CVE-2024-2379){: external}, [CVE-2024-2004](https://nvd.nist.gov/vuln/detail/CVE-2024-2004){: external}, [CVE-2024-0853](https://nvd.nist.gov/vuln/detail/CVE-2024-0853){: external}, [CVE-2024-6874](https://nvd.nist.gov/vuln/detail/CVE-2024-6874){: external}, and [CVE-2024-6197](https://nvd.nist.gov/vuln/detail/CVE-2024-6197){: external}.
 
 ### 1.8.5_6847_iks, released 11 July 24
 {: #ingress-alb-1.8.5_6847_iks}
