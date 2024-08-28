@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-08-15"
+lastupdated: "2024-08-28"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -42,6 +42,29 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.29 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.29.8_1556, released 28 August 2024
+{: #1298_1556_M}
+
+The following table shows the changes that are in the master fix pack 1.29.8_1556. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.5.7 | v1.5.8 | New version contains updates and security fixes. |
+| CoreDNS | 1.11.1 | 1.11.3 | See the [CoreDNS release notes](https://github.com/coredns/coredns/releases/tag/v1.11.3){: external}. |
+| etcd | v3.5.14 | v3.5.15 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.15){: external}. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.12 | v2.5.13 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.7-1 | v1.29.8-1 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 312030f | 897f067 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.9.8 | v2.9.9 | New version contains updates and security fixes. |
+| Kubernetes | v1.29.7 | v1.29.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.8){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2967 | 3022 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.17 | v0.13.18 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.18){: external}. |
+| Tigera Operator | v1.32.10-109-iks | v1.32.10-124-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.10){: external}. |
+{: caption="Changes since version 1.29.7_1553" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.29.7_1555, released 12 August 2024
@@ -401,5 +424,3 @@ The following table shows the changes that are in the worker node fix pack 1.29.
 | Kubernetes configuration | N/A | N/A | See [Default service settings for Kubernetes components](https://cloud.ibm.com/docs/containers?topic=containers-service-settings). |
 | Kubernetes snapshot controller | v6.2.2 | v6.3.0 | See the [Kubernetes snapshot controller release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v6.3.0). |
 {: caption="Changes since version 1.28" caption-side="bottom"}
-
-

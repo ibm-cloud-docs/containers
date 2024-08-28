@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-08-15"
+lastupdated: "2024-08-28"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -52,6 +52,25 @@ Review the version 1.27 change log.
 
 
 
+
+
+### Change log for master fix pack 1.27.16_1590, released 28 August 2024
+{: #12716_1590_M}
+
+The following table shows the changes that are in the master fix pack 1.27.16_1590. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.5.7 | v1.5.8 | New version contains updates and security fixes. |
+| etcd | v3.5.14 | v3.5.15 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.15){: external}. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.23 | v2.4.24 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 312030f | 897f067 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.12 | v2.8.13 | New version contains updates and security fixes. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2967 | 3022 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.17 | v0.13.18 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.18){: external}. |
+{: caption="Changes since version 1.27.16_1587" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.27.16_1589, released 12 August 2024
@@ -839,5 +858,3 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 | Kubernetes Metrics Server | v0.6.2 | v0.6.3 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.6.3). |
 | Kubernetes NodeLocal DNS cache configuration | N/A | N/A | Increased Kubernetes NodeLocal DNS cache memory resource request to `20Mi`. |
 {: caption="Changes since version 1.26." caption-side="bottom"}
-
-
