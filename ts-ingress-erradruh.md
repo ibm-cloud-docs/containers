@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-03-04"
+lastupdated: "2024-08-28"
 
 
 keywords: containers, ingress status, troubleshoot ingress, erradruh
@@ -45,10 +45,17 @@ Complete the following steps to verify your cluster setup.
     kubectl get pods -n kube-system | grep -E "public-cr|private-cr"
     ```
     {: pre}
+
+    Example output
+    ```sh
+    public-crcn0hav5w07nccmt0iufg-alb1-7df65f554f-nkgzl   1/1     Running   0          30h
+public-crcn0hav5w07nccmt0iufg-alb1-7df65f554f-qk97w   0/1     Pending   0          30h
+    ```
+    {: screen}
     
 1. Describe the ALB pods that are not running and review the `Events` section.
     ```sh
-    kubectl describe pod POD
+    kubectl describe pod POD -n kube-system
     ```
     {: pre}
 
@@ -73,4 +80,3 @@ Complete the following steps to verify your cluster setup.
 1. Wait a few minutes and verify if the failing pods are now running.
 
 1. If the issue persists, contact support. Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
-

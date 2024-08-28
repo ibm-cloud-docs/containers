@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-27"
+lastupdated: "2024-08-28"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -28,6 +28,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2024
 {: #containers-aug24}
 
+### 28 August 2024
+{: #containers-aug2824}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
+:   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
+:   [Version 1.27 change log](/docs/containers?topic=containers-changelog_127)
+
+
+
+
+
+
 
 ### 27 August 2024
 {: #containers-27august24}
@@ -35,6 +53,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+
 
 ### 26 August 2024
 {: #containers-aug2624}
