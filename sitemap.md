@@ -240,6 +240,10 @@ subcollection: containers
 
 * [August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug24)
 
+    * [28 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2824)
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
+
     * [27 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-27august24)
 
         * Ingress ALB cluster add-on patch updates.
