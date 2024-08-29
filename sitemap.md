@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-28"
+lastupdated: "2024-08-29"
 
 
 keywords: containers
@@ -240,6 +240,10 @@ subcollection: containers
 
 * [August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug24)
 
+    * [29 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2924)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [28 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2824)
 
         * {{site.data.keyword.containerlong_notm}} master fix packs.
@@ -253,6 +257,8 @@ subcollection: containers
         * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
 
         * Storage Operator cluster add-on patch update.
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
 
     * [23 August 2024](/docs/containers?topic=containers-containers-relnotes#containers-aug2324)
 
@@ -6511,6 +6517,8 @@ subcollection: containers
 
     * [Change log for master fix pack 1.30.4_1534, released 28 August 2024](/docs/containers?topic=containers-changelog_130#1304_1534_M)
 
+    * [Change log for worker node fix pack 1.30.4_1535, released 26 August 2024](/docs/containers?topic=containers-changelog_130#1304_1535_W)
+
     * [Change log for worker node fix pack 1.30.3_1533, released 12 August 2024](/docs/containers?topic=containers-changelog_130#1303_1533_W)
 
     * [Change log for master fix pack 1.30.3_1531, released 31 July 2024](/docs/containers?topic=containers-changelog_130#1303_1531_M)
@@ -6595,6 +6603,8 @@ subcollection: containers
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
 
     * [Change log for master fix pack 1.29.8_1556, released 28 August 2024](/docs/containers?topic=containers-changelog_129#1298_1556_M)
+
+    * [Change log for worker node fix pack 1.29.8_1557, released 26 August 2024](/docs/containers?topic=containers-changelog_129#1298_1557_W)
 
     * [Change log for worker node fix pack 1.29.7_1555, released 12 August 2024](/docs/containers?topic=containers-changelog_129#1297_1555_W)
 
@@ -6710,6 +6720,8 @@ subcollection: containers
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
 
     * [Change log for master fix pack 1.28.13_1576, released 28 August 2024](/docs/containers?topic=containers-changelog_128#12813_1576_M)
+
+    * [Change log for worker node fix pack 1.28.13_1577, released 26 August 2024](/docs/containers?topic=containers-changelog_128#12813_1577_W)
 
     * [Change log for worker node fix pack 1.28.12_1575, released 12 August 2024](/docs/containers?topic=containers-changelog_128#12812_1575_W)
 
@@ -6843,6 +6855,8 @@ subcollection: containers
 * [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
 
     * [Change log for master fix pack 1.27.16_1590, released 28 August 2024](/docs/containers?topic=containers-changelog_127#12716_1590_M)
+
+    * [Change log for worker node fix pack 1.27.16.1591, released 26 August 2024](/docs/containers?topic=containers-changelog_127#127161591_W)
 
     * [Change log for worker node fix pack 1.27.16_1589, released 12 August 2024](/docs/containers?topic=containers-changelog_127#12716_1589_W)
 
@@ -7826,6 +7840,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.30, released 29 August 2024](/docs/containers?topic=containers-cos_plugin_changelog#02230_object_plugin)
 
 * [Change log for version 2.2.29, released 31 July 2024](/docs/containers?topic=containers-cos_plugin_changelog#02229_object_plugin)
 
