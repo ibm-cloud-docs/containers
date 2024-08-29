@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-08-28"
+lastupdated: "2024-08-29"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -65,6 +65,23 @@ The following table shows the changes that are in the master fix pack 1.29.8_155
 | Portieris admission controller | v0.13.17 | v0.13.18 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.18){: external}. |
 | Tigera Operator | v1.32.10-109-iks | v1.32.10-124-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.10){: external}. |
 {: caption="Changes since version 1.29.7_1553" caption-side="bottom"}
+
+
+### Change log for worker node fix pack 1.29.8_1557, released 26 August 2024
+{: #1298_1557_W}
+
+The following table shows the changes that are in the worker node fix pack 1.29.8_1557. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 Packages | 5.4.0-192-generic | 5.4.0-193-generic | Worker node kernel & package updates for [CVE-2021-46926](https://nvd.nist.gov/vuln/detail/CVE-2021-46926){: external}, [CVE-2022-48174](https://nvd.nist.gov/vuln/detail/CVE-2022-48174){: external}, [CVE-2023-52629](https://nvd.nist.gov/vuln/detail/CVE-2023-52629){: external}, [CVE-2023-52760](https://nvd.nist.gov/vuln/detail/CVE-2023-52760){: external}, [CVE-2024-2201](https://nvd.nist.gov/vuln/detail/CVE-2024-2201){: external}, [CVE-2024-24860](https://nvd.nist.gov/vuln/detail/CVE-2024-24860){: external}, [CVE-2024-26830](https://nvd.nist.gov/vuln/detail/CVE-2024-26830){: external}, [CVE-2024-26921](https://nvd.nist.gov/vuln/detail/CVE-2024-26921){: external}, [CVE-2024-26929](https://nvd.nist.gov/vuln/detail/CVE-2024-26929){: external}, [CVE-2024-36901](https://nvd.nist.gov/vuln/detail/CVE-2024-36901){: external}, [CVE-2024-39484](https://nvd.nist.gov/vuln/detail/CVE-2024-39484){: external}, CIS benchmark compliance: [1.1.10](https://workbench.cisecurity.org/sections/1985903/recommendations/3181697){: external}, [5.1.3](https://workbench.cisecurity.org/sections/1985916/recommendations/3181709){: external}. |
+| Ubuntu 24.04 Packages | 6.8.0-40-generic | 6.8.0-41-generic | Worker node kernel & package updates for [CVE-2022-48174](https://nvd.nist.gov/vuln/detail/CVE-2022-48174){: external}, [CVE-2022-4968](https://nvd.nist.gov/vuln/detail/CVE-2022-4968){: external}, [CVE-2023-42363](https://nvd.nist.gov/vuln/detail/CVE-2023-42363){: external}, [CVE-2023-42364](https://nvd.nist.gov/vuln/detail/CVE-2023-42364){: external}, [CVE-2023-42365](https://nvd.nist.gov/vuln/detail/CVE-2023-42365){: external}, [CVE-2024-39292](https://nvd.nist.gov/vuln/detail/CVE-2024-39292){: external}, [CVE-2024-39484](https://nvd.nist.gov/vuln/detail/CVE-2024-39484){: external}. | 
+| Containerd | N/A | N/A | N/A |
+| Kubernetes | 1.29.7 | 1.29.8 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.8){: external}. |
+| Haproxy | c91c765 | 546887a | Security fixes for [CVE-2024-2398](https://exchange.xforce.ibmcloud.com/vulnerabilities/286430){: external}, [CVE-2024-37370](https://exchange.xforce.ibmcloud.com/vulnerabilities/296012){: external}, [CVE-2024-37371](https://exchange.xforce.ibmcloud.com/vulnerabilities/296013){: external}, [CVE-2024-6345](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-6345){: external}. |
+| GPU Device Plug-in and Installer | 184b5e23 | c2e29569 | Security fixes for [CVE-2024-6345](https://exchange.xforce.ibmcloud.com/vulnerabilities/298014){: external}, [CVE-2024-2398](https://exchange.xforce.ibmcloud.com/vulnerabilities/286430){: external}. |
+{: caption="Changes since version 1.29.7_1555" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.29.7_1555, released 12 August 2024

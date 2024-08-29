@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-28"
+lastupdated: "2024-08-29"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -28,6 +28,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2024
 {: #containers-aug24}
 
+### 29 August 2024
+{: #containers-aug2924}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
 ### 28 August 2024
 {: #containers-aug2824}
 {: release-note}
@@ -40,6 +47,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 :   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
 :   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
 :   [Version 1.27 change log](/docs/containers?topic=containers-changelog_127)
+
 
 
 
@@ -64,6 +72,20 @@ Ingress ALB cluster add-on patch updates.
 
 Storage Operator cluster add-on patch update.
 :   For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
+
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
+:   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
+:   [Version 1.27 change log](/docs/containers?topic=containers-changelog_127)
+
+
+
+
+
 
 ### 23 August 2024
 {: #containers-aug2324}
