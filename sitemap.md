@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-08-29"
+lastupdated: "2024-09-03"
 
 
 keywords: containers
@@ -3366,6 +3366,8 @@ subcollection: containers
 [Setting the cluster credentials](/docs/containers?topic=containers-access-creds#access-creds)
 
 * [Resetting the cluster API key](/docs/containers?topic=containers-access-creds#admin-set-credentials)
+
+* [Removing user credentials and permissions](/docs/containers?topic=containers-access-creds#apikey-remove-user)
 
 [Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate#cert-rotate)
 
