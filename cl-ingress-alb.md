@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2024
 
-lastupdated: "2024-08-27"
+lastupdated: "2024-09-04"
 
 
 keywords: change log, version history, Ingress ALB
@@ -15,63 +15,72 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 # Ingress ALB version change log
-{: #ingress-alb-change-log}
+{: #cl-ingress-alb}
 
 Review the version history for Ingress ALB.
 {: shortdesc}
 
+## Version 1.11.2
+{: #cl-ingress-alb-1.11.2}
+
+
+### 1.11.2_7069_iks, released 04 September 2024
+{: #cl-ingress-alb-1112_7069_iks}
+
+- add v1.11.2 Ingress NGINX Controller
+
 
 ## Version 1.9.6
-{: #ingress-alb-1.9.6}
+{: #cl-ingress-alb-1.9.6}
 
 
-### 1.9.6_7029_iks, released 27 August 24
-{: #ingress-alb-1.9.6_7029_iks}
+### 1.9.6_7029_iks, released 27 August 2024
+{: #cl-ingress-alb-196_7029_iks}
 
 [Default version]{: tag-green}
 
 - Resolves the following CVEs: [CVE-2024-2466](https://nvd.nist.gov/vuln/detail/CVE-2024-2466){: external}, [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}, [CVE-2024-2379](https://nvd.nist.gov/vuln/detail/CVE-2024-2379){: external}, [CVE-2024-2004](https://nvd.nist.gov/vuln/detail/CVE-2024-2004){: external}, [CVE-2024-0853](https://nvd.nist.gov/vuln/detail/CVE-2024-0853){: external}, [CVE-2024-6874](https://nvd.nist.gov/vuln/detail/CVE-2024-6874){: external}, and [CVE-2024-6197](https://nvd.nist.gov/vuln/detail/CVE-2024-6197){: external}.
 
-### 1.9.6_6846_iks, released 11 July 24
-{: #ingress-alb-1.9.6_6846_iks}
+### 1.9.6_6846_iks, released 11 July 2024
+{: #cl-ingress-alb-196_6846_iks}
 
 - Resolves the following CVEs: [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}, and [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/CVE-2024-4741){: external}.
 
-### 1.9.6_6779_iks, released 20 June 24
-{: #ingress-alb-1.9.6_6779_iks}
+### 1.9.6_6779_iks, released 20 June 2024
+{: #cl-ingress-alb-196_6779_iks}
 
 - Resolves the following CVEs: [CVE-2023-42365](https://nvd.nist.gov/vuln/detail/CVE-2023-42365){: external}, [CVE-2023-42364](https://nvd.nist.gov/vuln/detail/CVE-2023-42364){: external}, and [CVE-2023-33460](https://nvd.nist.gov/vuln/detail/CVE-2023-33460){: external}.
 - Updates Go to version `1.22.4`.
 
-### 1.9.6_6650_iks, released 30 May 24
-{: #ingress-alb-1.9.6_6650_iks}
+### 1.9.6_6650_iks, released 30 May 2024
+{: #cl-ingress-alb-196_6650_iks}
 
 - Resolves the following CVEs: [CVE-2023-42363](https://nvd.nist.gov/vuln/detail/CVE-2023-42363){: external}, [CVE-2023-42364](https://nvd.nist.gov/vuln/detail/CVE-2023-42364){: external}, [CVE-2023-42365](https://nvd.nist.gov/vuln/detail/CVE-2023-42365){: external}, [CVE-2023-42366](https://nvd.nist.gov/vuln/detail/CVE-2023-42366){: external}, [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/CVE-2024-34459){: external}, and [CVE-2024-4603](https://nvd.nist.gov/vuln/detail/CVE-2024-4603){: external}.
 
-### 1.9.6_6634_iks, released 18 May 24
-{: #ingress-alb-1.9.6_6634_iks}
+### 1.9.6_6634_iks, released 18 May 2024
+{: #cl-ingress-alb-196_6634_iks}
 
 - Updates Go to version `1.22.3`.
 
-### 1.9.6_6587_iks, released 03 May 24
-{: #ingress-alb-1.9.6_6587_iks}
+### 1.9.6_6587_iks, released 03 May 2024
+{: #cl-ingress-alb-196_6587_iks}
 
 - Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288){: external}.
 
-### 1.9.6_6547_iks, released 17 April 24
-{: #ingress-alb-1.9.6_6547_iks}
+### 1.9.6_6547_iks, released 17 April 2024
+{: #cl-ingress-alb-196_6547_iks}
 
 - Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288){: external}, and [CVE-2024-25629](https://nvd.nist.gov/vuln/detail/CVE-2024-25629){: external}.
 - Updates Go to version `1.22.2`.
 
-### 1.9.6_6505_iks, released 08 April 24
-{: #ingress-alb-1.9.6_6505_iks}
+### 1.9.6_6505_iks, released 08 April 2024
+{: #cl-ingress-alb-196_6505_iks}
 
 - Resolves the following CVEs: [CVE-2024-25629](https://nvd.nist.gov/vuln/detail/CVE-2024-25629){: external}.
 - Updates Go to version `1.22.1`.
 
-### 1.9.6_6450_iks, released 18 March 24
-{: #ingress-alb-1.9.6_6450_iks}
+### 1.9.6_6450_iks, released 18 March 2024
+{: #cl-ingress-alb-196_6450_iks}
 
 - Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/CVE-2024-24786){: external}.
 - CVE-2024-24786 
@@ -79,117 +88,117 @@ Review the version history for Ingress ALB.
 
 
 ## Version 1.9.4
-{: #ingress-alb-1.9.4}
+{: #cl-ingress-alb-1.9.4}
 
 
-### 1.9.4_7028_iks, released 27 August 24
-{: #ingress-alb-1.9.4_7028_iks}
+### 1.9.4_7028_iks, released 27 August 2024
+{: #cl-ingress-alb-194_7028_iks}
 
 - Resolves the following CVEs: [CVE-2024-6197](https://nvd.nist.gov/vuln/detail/CVE-2024-6197){: external}, [CVE-2024-2466](https://nvd.nist.gov/vuln/detail/CVE-2024-2466){: external}, [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}, [CVE-2024-2379](https://nvd.nist.gov/vuln/detail/CVE-2024-2379){: external}, [CVE-2024-2004](https://nvd.nist.gov/vuln/detail/CVE-2024-2004){: external}, [CVE-2024-0853](https://nvd.nist.gov/vuln/detail/CVE-2024-0853){: external}, and [CVE-2024-6874](https://nvd.nist.gov/vuln/detail/CVE-2024-6874){: external}.
 
-### 1.9.4_6848_iks, released 11 July 24
-{: #ingress-alb-1.9.4_6848_iks}
+### 1.9.4_6848_iks, released 11 July 2024
+{: #cl-ingress-alb-194_6848_iks}
 
 - Resolves the following CVEs: [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/CVE-2024-4741){: external}, and [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}.
 
-### 1.9.4_6775_iks, released 20 June 24
-{: #ingress-alb-1.9.4_6775_iks}
+### 1.9.4_6775_iks, released 20 June 2024
+{: #cl-ingress-alb-194_6775_iks}
 
 - Resolves the following CVEs: [CVE-2023-42365](https://nvd.nist.gov/vuln/detail/CVE-2023-42365){: external}, [CVE-2023-42364](https://nvd.nist.gov/vuln/detail/CVE-2023-42364){: external}, and [CVE-2023-42363](https://nvd.nist.gov/vuln/detail/CVE-2023-42363){: external}.
 - Updates Go to version `1.22.4`.
 
-### 1.9.4_6675_iks, released 30 May 24
-{: #ingress-alb-1.9.4_6675_iks}
+### 1.9.4_6675_iks, released 30 May 2024
+{: #cl-ingress-alb-194_6675_iks}
 
 - Resolves the following CVEs: [CVE-2023-42366](https://nvd.nist.gov/vuln/detail/CVE-2023-42366){: external}, [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/CVE-2024-34459){: external}, and [CVE-2024-4603](https://nvd.nist.gov/vuln/detail/CVE-2024-4603){: external}.
 
-### 1.9.4_6633_iks, released 18 May 24
-{: #ingress-alb-1.9.4_6633_iks}
+### 1.9.4_6633_iks, released 18 May 2024
+{: #cl-ingress-alb-194_6633_iks}
 
 - Updates Go to version `1.22.3`.
 
-### 1.9.4_6586_iks, released 03 May 24
-{: #ingress-alb-1.9.4_6586_iks}
+### 1.9.4_6586_iks, released 03 May 2024
+{: #cl-ingress-alb-194_6586_iks}
 
 - Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288){: external}.
 
-### 1.9.4_6553_iks, released 17 April 24
-{: #ingress-alb-1.9.4_6553_iks}
+### 1.9.4_6553_iks, released 17 April 2024
+{: #cl-ingress-alb-194_6553_iks}
 
 - Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288){: external}.
 - Updates Go to version `1.22.2`.
 
-### 1.9.4_6489_iks, released 08 April 24
-{: #ingress-alb-1.9.4_6489_iks}
+### 1.9.4_6489_iks, released 08 April 2024
+{: #cl-ingress-alb-194_6489_iks}
 
 - Updates Go to version `1.22.1`.
 
-### 1.9.4_6447_iks, released 18 March 24
-{: #ingress-alb-1.9.4_6447_iks}
+### 1.9.4_6447_iks, released 18 March 2024
+{: #cl-ingress-alb-194_6447_iks}
 
 - Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/CVE-2024-24786){: external}.
 - CVE-2024-24786 
 
-### 1.9.4_6376_iks, released 26 February 24
-{: #ingress-alb-1.9.4_6376_iks}
+### 1.9.4_6376_iks, released 26 February 2024
+{: #cl-ingress-alb-194_6376_iks}
 
 - Updates Go to version `1.22.0`.
 
-### 1.9.4_6359_iks, released 22 February 24
-{: #ingress-alb-1.9.4_6359_iks}
+### 1.9.4_6359_iks, released 22 February 2024
+{: #cl-ingress-alb-194_6359_iks}
 
 - Resolves the following CVEs: [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external}, [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}, [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}, [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}, and [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}.
 - Updates Go to version `1.21.5`.
 
 
 ## Version 1.8.5
-{: #ingress-alb-1.8.5}
+{: #cl-ingress-alb-1.8.5}
 
 
-### 1.8.5_7030_iks, released 27 August 24
-{: #ingress-alb-1.8.5_7030_iks}
+### 1.8.5_7030_iks, released 27 August 2024
+{: #cl-ingress-alb-185_7030_iks}
 
 - Resolves the following CVEs: [CVE-2024-2466](https://nvd.nist.gov/vuln/detail/CVE-2024-2466){: external}, [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}, [CVE-2024-2379](https://nvd.nist.gov/vuln/detail/CVE-2024-2379){: external}, [CVE-2024-2004](https://nvd.nist.gov/vuln/detail/CVE-2024-2004){: external}, [CVE-2024-0853](https://nvd.nist.gov/vuln/detail/CVE-2024-0853){: external}, [CVE-2024-6874](https://nvd.nist.gov/vuln/detail/CVE-2024-6874){: external}, and [CVE-2024-6197](https://nvd.nist.gov/vuln/detail/CVE-2024-6197){: external}.
 
-### 1.8.5_6847_iks, released 11 July 24
-{: #ingress-alb-1.8.5_6847_iks}
+### 1.8.5_6847_iks, released 11 July 2024
+{: #cl-ingress-alb-185_6847_iks}
 
 - Resolves the following CVEs: [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/CVE-2024-4741){: external}, and [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}.
 
-### 1.8.5_6773_iks, released 20 June 24
-{: #ingress-alb-1.8.5_6773_iks}
+### 1.8.5_6773_iks, released 20 June 2024
+{: #cl-ingress-alb-185_6773_iks}
 
 - Resolves the following CVEs: [CVE-2023-42365](https://nvd.nist.gov/vuln/detail/CVE-2023-42365){: external}, [CVE-2023-42364](https://nvd.nist.gov/vuln/detail/CVE-2023-42364){: external}, and [CVE-2023-42363](https://nvd.nist.gov/vuln/detail/CVE-2023-42363){: external}.
 - Updates Go to version `1.22.4`.
 
-### 1.8.5_6676_iks, released 30 May 24
-{: #ingress-alb-1.8.5_6676_iks}
+### 1.8.5_6676_iks, released 30 May 2024
+{: #cl-ingress-alb-185_6676_iks}
 
 - Resolves the following CVEs: [CVE-2023-42366](https://nvd.nist.gov/vuln/detail/CVE-2023-42366){: external}, [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/CVE-2024-34459){: external}, and [CVE-2024-4603](https://nvd.nist.gov/vuln/detail/CVE-2024-4603){: external}.
 
-### 1.8.5_6632_iks, released 18 May 24
-{: #ingress-alb-1.8.5_6632_iks}
+### 1.8.5_6632_iks, released 18 May 2024
+{: #cl-ingress-alb-185_6632_iks}
 
 - Updates Go to version `1.22.3`.
 
-### 1.8.5_6585_iks, released 03 May 24
-{: #ingress-alb-1.8.5_6585_iks}
+### 1.8.5_6585_iks, released 03 May 2024
+{: #cl-ingress-alb-185_6585_iks}
 
 - Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288){: external}.
 
-### 1.8.5_6560_iks, released 17 April 24
-{: #ingress-alb-1.8.5_6560_iks}
+### 1.8.5_6560_iks, released 17 April 2024
+{: #cl-ingress-alb-185_6560_iks}
 
 - Resolves the following CVEs: [CVE-2024-2511](https://nvd.nist.gov/vuln/detail/CVE-2024-2511){: external}, and [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288){: external}.
 - Updates Go to version `1.22.2`.
 
-### 1.8.5_6488_iks, released 08 April 24
-{: #ingress-alb-1.8.5_6488_iks}
+### 1.8.5_6488_iks, released 08 April 2024
+{: #cl-ingress-alb-185_6488_iks}
 
 - Updates Go to version `1.22.1`.
 
-### 1.8.5_6449_iks, released 18 March 24
-{: #ingress-alb-1.8.5_6449_iks}
+### 1.8.5_6449_iks, released 18 March 2024
+{: #cl-ingress-alb-185_6449_iks}
 
 - Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/CVE-2024-24786){: external}.
 - CVE-2024-24786 
@@ -197,58 +206,58 @@ Review the version history for Ingress ALB.
 
 
 ## Version 1.8.4
-{: #ingress-alb-1.8.4}
+{: #cl-ingress-alb-1.8.4}
 
 
-### 1.8.4_6375_iks, released 26 February 24
-{: #ingress-alb-1.8.4_6375_iks}
+### 1.8.4_6375_iks, released 26 February 2024
+{: #cl-ingress-alb-184_6375_iks}
 
 - Updates Go to version `1.22.0`.
 
-### 1.8.4_6363_iks, released 22 February 24
-{: #ingress-alb-1.8.4_6363_iks}
+### 1.8.4_6363_iks, released 22 February 2024
+{: #cl-ingress-alb-184_6363_iks}
 
 - Resolves the following CVEs: [CVE-2024-25062](https://nvd.nist.gov/vuln/detail/CVE-2024-25062){: external}, [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external}, [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}, [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}, [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}, and [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}.
 
 
 ## Version 1.6.4
-{: #ingress-alb-1.6.4}
+{: #cl-ingress-alb-1.6.4}
 
 
-### 1.6.4_6631_iks, released 18 May 24
-{: #ingress-alb-1.6.4_6631_iks}
+### 1.6.4_6631_iks, released 18 May 2024
+{: #cl-ingress-alb-164_6631_iks}
 
 - Updates Go to version `1.22.3`.
 
-### 1.6.4_6582_iks, released 03 May 24
-{: #ingress-alb-1.6.4_6582_iks}
+### 1.6.4_6582_iks, released 03 May 2024
+{: #cl-ingress-alb-164_6582_iks}
 
 - Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288){: external}.
 
-### 1.6.4_6555_iks, released 17 April 24
-{: #ingress-alb-1.6.4_6555_iks}
+### 1.6.4_6555_iks, released 17 April 2024
+{: #cl-ingress-alb-164_6555_iks}
 
 - Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288){: external}.
 - Updates Go to version `1.22.2`.
 
-### 1.6.4_6487_iks, released 08 April 24
-{: #ingress-alb-1.6.4_6487_iks}
+### 1.6.4_6487_iks, released 08 April 2024
+{: #cl-ingress-alb-164_6487_iks}
 
 - Updates Go to version `1.22.1`.
 
-### 1.6.4_6448_iks, released 18 March 24
-{: #ingress-alb-1.6.4_6448_iks}
+### 1.6.4_6448_iks, released 18 March 2024
+{: #cl-ingress-alb-164_6448_iks}
 
 - Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/CVE-2024-24786){: external}.
 - CVE-2024-24786 
 
-### 1.6.4_6374_iks, released 26 February 24
-{: #ingress-alb-1.6.4_6374_iks}
+### 1.6.4_6374_iks, released 26 February 2024
+{: #cl-ingress-alb-164_6374_iks}
 
 - Updates Go to version `1.22.0`.
 
-### 1.6.4_6344_iks, released 22 February 24
-{: #ingress-alb-1.6.4_6344_iks}
+### 1.6.4_6344_iks, released 22 February 2024
+{: #cl-ingress-alb-164_6344_iks}
 
 - Resolves the following CVEs: [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}.
 
