@@ -348,7 +348,7 @@ toc:
           - versions-object.md
           - versions-static-route.md
           - versions-backup-restore.md
-          - cl-alb-oauth-proxy-add-on.md
+          - cl-add-ons-alb-oauth-proxy.md
           - cl-ibm-storage-operator.md
       - topicgroup:
           label: Ingress version history
