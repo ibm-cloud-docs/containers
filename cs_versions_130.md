@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-08-15"
+lastupdated: "2024-09-04"
 
 
 keywords: kubernetes, containers, 130, version 130, 130 update actions
@@ -50,9 +50,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 This information summarizes updates that are likely to have an impact on deployed apps when you update a cluster to version 1.30. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.30.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_130) for version 1.30. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
-
-[Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.30. If your apps use Portworx, do not upgrade your cluster to version 1.30.
-{: important}
 
 VPC workers nodes provisioned at version 1.30 have the VPC Instance Metadata Service enabled. For more information, see [About VPC Instance Metadata](/docs/vpc?topic=vpc-imd-about)
 {: note}
@@ -154,5 +151,3 @@ For more information, see [Managing outbound traffic protection in VPC clusters]
 - [When I update my cluster to secure by default, my nodeport app no longer works](/docs/containers?topic=containers-ts-sbd-nodeport-not-working).
 - [Why do I see DNS failures after adding a custom DNS resolver?](/docs/containers?topic=containers-ts-sbd-custom-dns).
 - [After creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters).
-
-
