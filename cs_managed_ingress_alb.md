@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-08-26"
+lastupdated: "2024-09-05"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -23,7 +23,7 @@ Manage the Ingress ALBs in your cluster to ensure that traffic flows uninterrupt
 ## Updating ALBs
 {: #alb-update}
 
-{{site.data.keyword.containerlong_notm}} regularly releases ALB versions to provide new functionality and to address security vulnerabilities. Use the [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions) command to list the available versions, or review the [Ingress ALB version change log](/docs/containers?topic=containers-ingress-alb-change-log) for the version history.
+{{site.data.keyword.containerlong_notm}} regularly releases ALB versions to provide new functionality and to address security vulnerabilities. Use the [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions) command to list the available versions, or review the [Ingress ALB version change log](/docs/containers?topic=containers-cl-ingress-alb) for the version history.
 
 The ALB version follows the `<ingress_nginx_version>_<ibm_build>_iks` format, where `<ingress_nginx_version>` denotes the version of the [Kubernetes Ingress NGINX Controller](https://github.com/kubernetes/ingress-nginx) and the `<ibm_build>` number indicates the {{site.data.keyword.containerlong_notm}} build version.
 
@@ -157,7 +157,7 @@ Kubernetes Ingress versions
 
 The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `1.1.2_2507_iks` indicates the most recent build of the `0.47.0` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
 
-For the changes that are in each version of the Ingress images, see the [Ingress version change log](/docs/containers?topic=containers-ingress-alb-change-log).
+For the changes that are in each version of the Ingress images, see the [Ingress version change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 ### Reverting to an earlier version
 {: #revert-alb-version}
@@ -494,6 +494,3 @@ Removing all workers from a VLAN removes the IP address of the ALB in the VLAN's
     {: screen}
 
 7. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
-
-
-

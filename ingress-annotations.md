@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-09-05"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -780,7 +780,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
         ```
         {: pre}
 
-For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-alb-oauth-proxy-add-on-change-log).
+For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 {: tip}
 
 ### Upgrading ALB OAuth Proxy add-on
