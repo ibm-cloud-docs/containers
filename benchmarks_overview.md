@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-05-29"
+lastupdated: "2024-09-06"
 
 
 keywords: kubernetes, containers, containers
@@ -35,9 +35,9 @@ Use the list to find CIS Kubernetes Benchmark results for available versions.
 - [Version 1.29](/docs/containers?topic=containers-cis-benchmark-129)
 - [Version 1.28](/docs/containers?topic=containers-cis-benchmark-128)
 - [Version 1.27](/docs/containers?topic=containers-cis-benchmark-127)
-- [Version 1.26](/docs/containers?topic=containers-cis-benchmark-126)
-- [Version 1.25](/docs/containers?topic=containers-cis-benchmark-125)
-- [Version 1.24](/docs/containers?topic=containers-cis-benchmark-124)
+
+
+
 
 ## Using the benchmark
 {: #cis-benchmark-use}
@@ -155,6 +155,3 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     kubectl delete ns ibm-kube-bench-test
     ```
     {: pre}
-
-
-
