@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-05"
+lastupdated: "2024-09-09"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -3202,7 +3202,7 @@ Istio add-on
 :   For more information, see [version 4.4.10_1578](/docs/containers?topic=containers-vpc_bs_changelog).
 
 New! vGPU worker node flavors are now available for VPC Gen 2.
-:   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`. {{site.data.keyword.vpc_short}} worker nodes with GPUs are available for allowlisted accounts only. To request that your account be allowlisted, see [Requesting access to allowlisted features](/docs/containers?topic=containers-get-help). Be sure to include the data centers, the VPC infrastructure profile, and the number of workers that you want use. For example `12 worker nodes in us-east-1 of VPC profile gx2-16x128xv100`.
+:   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`. {{site.data.keyword.vpc_short}} worker nodes with GPUs are available for allowlisted accounts only. To request that your account be allowlisted, see [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request). Be sure to include the data centers, the VPC infrastructure profile, and the number of workers that you want use. For example `12 worker nodes in us-east-1 of VPC profile gx2-16x128xv100`.
 
 
 ### 12 September 2022
