@@ -27,6 +27,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+## September 2024
+{: #containers-sep24}
+
+### 10 September 2024
+{: #containers-sep1024}
+{: release-note}
+
+CLI version `1.0.657` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
 
 ## August 2024
 {: #containers-aug24}
