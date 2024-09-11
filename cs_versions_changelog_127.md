@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-09-03"
+lastupdated: "2024-09-11"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -52,6 +52,20 @@ Review the version 1.27 change log.
 
 
 
+
+
+### Change log for worker node fix pack 1.27.16_1592, released 10 September 2024
+{: #12716_1592_W}
+
+The following table shows the changes that are in the worker node fix pack 1.27.16_1592. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 packages | N/A | N/A | Worker node package updates for [CVE-2016-1585](https://nvd.nist.gov/vuln/detail/CVE-2016-1585){: external}, [CVE-2024-41810](https://nvd.nist.gov/vuln/detail/CVE-2024-41810){: external}, [CVE-2024-41957](https://nvd.nist.gov/vuln/detail/CVE-2024-41957){: external}, [CVE-2024-43374](https://nvd.nist.gov/vuln/detail/CVE-2024-43374){: external}. |
+| Kubernetes | N/A | N/A | N/A |
+| Containerd | 1.7.20 | 1.7.21 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.21){: external}. |
+{: caption="Changes since version 1.27.16_1591" caption-side="bottom"}
 
 
 ### Change log for master fix pack 1.27.16_1590, released 28 August 2024
