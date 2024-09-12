@@ -240,10 +240,6 @@ subcollection: containers
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
 
-    * [12 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1224)
-
-        * New! NVIDIA H100 GPU support. You can now create VPC clusters with worker nodes that have NVIDIA H100 GPUs.
-
     * [10 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1024)
 
         * CLI version `1.0.657` is available.
