@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-09-11"
+lastupdated: "2024-09-12"
 
 
 keywords: containers
@@ -2947,6 +2947,12 @@ subcollection: containers
 * [Decide how many clusters to create](/docs/containers?topic=containers-strategy#env_multicluster)
 
 * [Determine how many locations are needed](/docs/containers?topic=containers-strategy#plan_locations)
+
+    * [Multizone clusters](/docs/containers?topic=containers-strategy#mz-strategy)
+
+    * [Multiple clusters linked with load balancers](/docs/containers?topic=containers-strategy#mz-cluster-strategy)
+
+    * [Single zone clusters](/docs/containers?topic=containers-strategy#sz-single-zone-strategy)
 
 * [Select a cluster type](/docs/containers?topic=containers-strategy#env_flavors)
 
@@ -10107,10 +10113,6 @@ subcollection: containers
 * [Toronto (`tor`)](/docs/containers?topic=containers-classic-flavors#toronto-tor)
 
 * [Washington DC (`wdc`)](/docs/containers?topic=containers-classic-flavors#washington-dc-wdc)
-
-[Bare metal flavors](/docs/containers?topic=containers-flavors-bm#flavors-bm)
-
-[SDS flavors](/docs/containers?topic=containers-flavors-sds#flavors-sds)
 
 
 ## Related links

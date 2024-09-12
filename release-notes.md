@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-11"
+lastupdated: "2024-09-12"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
