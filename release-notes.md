@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-11"
+lastupdated: "2024-09-12"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -30,7 +30,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## September 2024
 {: #containers-sep24}
 
+### 12 September 2024
+{: #containers-sep1224}
+{: release-note}
 
+New! NVIDIA H100 GPU support. You can now create VPC clusters with worker nodes that have NVIDIA H100 GPUs.
+:   H100 GPUs are available to allowlisted accounts only. To request access, see [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request).
+:   H100s are available for cluster version 1.30.
 
 ### 10 September 2024
 {: #containers-sep1024}
