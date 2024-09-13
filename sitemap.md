@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-09-12"
+lastupdated: "2024-09-13"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
+
+    * [12 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1224)
+
+        * Ingress ALB patch updates.
 
     * [10 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1024)
 
@@ -8026,9 +8030,13 @@ subcollection: containers
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
 
+    * [1.11.2_7133_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7133_iks)
+
     * [1.11.2_7069_iks, released 04 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7069_iks)
 
 * [Version 1.9.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.9.6)
+
+    * [1.9.6_7132_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-196_7132_iks)
 
     * [1.9.6_7029_iks, released 27 August 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-196_7029_iks)
 
@@ -8073,6 +8081,8 @@ subcollection: containers
     * [1.9.4_6359_iks, released 22 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-194_6359_iks)
 
 * [Version 1.8.5](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.8.5)
+
+    * [1.8.5_7131_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-185_7131_iks)
 
     * [1.8.5_7030_iks, released 27 August 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-185_7030_iks)
 
