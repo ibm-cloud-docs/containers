@@ -809,7 +809,7 @@ Create a cluster with worker nodes on classic infrastructure.
 {: shortdesc}
 
 ```sh
-ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FLAVOR --name NAME  [--operating-system SYSTEM] [--version MAJOR.MINOR.PATCH] [--no-subnet] [--sm-group GROUP] [--sm-instance INSTANCE] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--gateway-enabled] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--skip-advance-permissions-check] [-q]
+ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FLAVOR --name NAME  [--operating-system SYSTEM] [--version MAJOR.MINOR.PATCH] [--no-subnet] [--sm-group GROUP] [--sm-instance INSTANCE] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--skip-advance-permissions-check] [-q]
 ```
 {: pre}
 
