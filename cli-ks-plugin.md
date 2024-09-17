@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-08-23"
+lastupdated: "2024-09-17"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -8401,7 +8401,7 @@ Minimum required permissions
 :    Optional: The infrastructure provider for which you want to get flavor information for. Available options are `classic`, `vpc-classic` and `vpc-gen2`.
 
 `--show-storage`
-:    Optional: Show additional raw disks that are available for SDS worker node flavors. For more information, see [Software-defined storage (SDS) machines](/docs/containers?topic=containers-flavors-sds).
+:    Optional: Show additional raw disks that are available for SDS worker node flavors. For more information, see [Software-defined storage (SDS) machines](/docs/containers?topic=containers-classic-flavors). In the tables for each metro area section, SDS flavors are in the **Bare Metal** tabs and end with `.ssd`.
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -9054,5 +9054,3 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zo
 ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 ```
 {: pre}
-
-

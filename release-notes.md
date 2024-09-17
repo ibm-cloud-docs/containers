@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-16"
+lastupdated: "2024-09-17"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
@@ -44,7 +44,7 @@ New! The {{site.data.keyword.cloud}} and Compliance Center Workload Protection i
 
 
 Ingress ALB patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 
 
