@@ -1,7 +1,7 @@
 ---
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-08-27"
+lastupdated: "2024-09-17"
 
 keywords: nlb, network load balancer, vpc nlb, dns, public lb, private lb
 subcollection: containers
@@ -345,7 +345,6 @@ Review the required and optional VPC NLB annotations and specifications.
 
 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-health-check-retries`
 :   The maximum number of health check retries for the VPC load balancer. By default, this value is set to `2`, and has a minimum of `1` and a maximum of `10`.
-
 
 `service.kubernetes.io/ibm-load-balancer-cloud-provider-dns-name: "example-ingress-domain.<region>.containers.appdomain.cloud"`
 :   Version 1.30 or later.
