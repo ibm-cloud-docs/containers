@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-09-18"
 
 
 keywords: kubernetes, containers, 127, version 127, 127 update actions
@@ -24,8 +24,8 @@ Review information about version 1.27 of {{site.data.keyword.containerlong}}.
 
 
 
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 
 
@@ -77,9 +77,3 @@ The following table shows the actions that you must take before you update the K
 | `k8s.gcr.io` redirect to `registry.k8s.io` | Kubernetes version 1.27 release artifacts are not published to the `k8s.gcr.io` registry. Furthermore, `k8s.gcr.io` registry traffic are redirected to `registry.k8s.io`. For more information, see [k8s.gcr.io Redirect to registry.k8s.io - What You Need to Know](https://kubernetes.io/blog/2023/03/10/image-registry-redirect/){: external}. Note that IBM Cloud Kubernetes Service has already handled this migration action for all resources provided by IBM. |
 | `kubelet` legacy iptables rules | `kubelet` no longer creates certain legacy iptables rules by default. It is possible that this will cause problems with some third-party components that improperly depended on those rules. For more information, see [Kubernetes’s IPTables Chains Are Not API](https://kubernetes.io/blog/2022/09/07/iptables-chains-not-api/){: external}. |
 {: caption="Changes to make before you update the master to Kubernetes 1.27" caption-side="bottom"}
-
-
-
-
-
-

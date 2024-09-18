@@ -36,8 +36,21 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-sep1824}
 {: release-note}
 
+
+{{site.data.keyword.containerlong_notm}} CLI plug-in version `1.0.665` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
 New! {{site.data.keyword.containerlong_notm}} version 1.31.
 :   You can now create or [update clusters to Kubernetes version 1.31](/docs/containers?topic=containers-cs_versions_131). With Kubernetes 1.31, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
+{{site.data.keyword.containerlong_notm}} version 1.28 is deprecated.
+:   Support for 1.28 ends on {{site.data.keyword.kubernetes_128_unsupported_date}}. Update your cluster to at least [version 1.29](/docs/containers?topic=containers-cs_versions_129) as soon as possible.
+
+{{site.data.keyword.containerlong_notm}} version 1.27 is unsupported.
+:   Update your cluster to at least [version 1.28](/docs/containers?topic=containers-cs_versions_128) as soon as possible.
+
 
 Istio add-on version `1.22.4` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).

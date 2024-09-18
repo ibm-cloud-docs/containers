@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-09-11"
+lastupdated: "2024-09-18"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -22,8 +22,8 @@ View information about version changes for major, minor, and patch updates that 
 
 
 
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 
 
