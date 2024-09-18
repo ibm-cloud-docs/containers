@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-09-18"
 
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
@@ -571,6 +571,10 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 See [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding).
 
 
+If you are noticing errors when retrieving audit logs when they've been previously working, this might be due to the certificate authority used for audit logs expiring or rotated. Repeat the previous steps to setup a webhook and renew the certificate.
+{: tip}
+
+
 
 
 
@@ -579,5 +583,3 @@ See [Verifying, updating, and deleting log forwarding](/docs/containers?topic=co
 {: #audit-service}
 
 By default, {{site.data.keyword.containerlong_notm}} generates and sends events to {{site.data.keyword.at_full_notm}}. To see these events, you must create an {{site.data.keyword.at_full_notm}} instance. For more information, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events_ref).
-
-
