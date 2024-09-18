@@ -313,6 +313,12 @@ toc:
           - cs_versions_overview.md
           - benchmarks_overview.md
           - topicgroup:
+              label: Version 1.31
+              topics:
+              - cs_versions_131.md
+              - cs_versions_changelog_131.md
+              - cs_benchmarks_131.md
+          - topicgroup:
               label: Version 1.30
               topics:
               - cs_versions_130.md
@@ -330,12 +336,6 @@ toc:
               - cs_versions_128.md
               - cs_versions_changelog_128.md
               - cs_benchmarks_128.md
-          - topicgroup:
-              label: Version 1.27
-              topics:
-              - cs_versions_127.md
-              - cs_versions_changelog_127.md
-              - cs_benchmarks_127.md
       - topicgroup:
           label: Add-on version history
           topics:
@@ -358,6 +358,12 @@ toc:
       - topicgroup:
           label: Archived version history
           topics:
+          - topicgroup:
+              label: Version 1.27
+              topics:
+              - cs_versions_127.md
+              - cs_versions_changelog_127.md
+              - cs_benchmarks_127.md
           - topicgroup:
               label: Version 1.26
               topics:

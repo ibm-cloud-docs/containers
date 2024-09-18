@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-09-09"
+lastupdated: "2024-09-18"
 
 
 keywords: kubernetes, versions, update, upgrade
@@ -36,7 +36,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
-[Latest]{: tag-green} [Default]{: tag-purple} 1.30
+[Default]{: tag-purple} 1.30
 - Release date: 29 May 2024
 - End of support: 13 August 2025†
 - Operating systems: `UBUNTU_24_64`, `UBUNTU_20_64`

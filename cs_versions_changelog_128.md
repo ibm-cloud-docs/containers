@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-09-11"
+lastupdated: "2024-09-18"
 
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
@@ -16,6 +16,13 @@ subcollection: containers
 
 # Kubernetes version 1.28 change log
 {: #changelog_128}
+
+
+
+This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: deprecated}
+
+
 
 View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.28. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}

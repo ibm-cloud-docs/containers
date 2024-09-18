@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-09-18"
 
 
 keywords: kubernetes, containers, benchmarks, 1.27, CIS benchmarks
@@ -19,8 +19,8 @@ subcollection: containers
 
 
 
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 
 
@@ -329,4 +329,3 @@ Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark resu
 | 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a [pod or container `securityContext`](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | 5.6.4 | {{site.data.keyword.containerlong_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Explanation and remediation" caption-side="bottom"}
-

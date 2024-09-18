@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-03-18"
+lastupdated: "2024-09-18"
 
 
 keywords: kubernetes, deploy, pod security admission, pod security, security profiles
@@ -84,6 +84,7 @@ By default, {{site.data.keyword.containerlong_notm}} adds the `privileged` Pod S
 - `ibm-operators`
 - `calico-system` (Version 1.29 and later)
 - `tigera-operator` (Version 1.29 and later)
+- `calico-apiserver` (Version 1.31 and later)
 
 
 Do not remove or change the labels for these namespaces.
@@ -212,8 +213,3 @@ For Kubernetes 1.24 clusters the `apiVersion` must be `pod-security.admission.co
 
 When you run the `ibmcloud ks cluster master pod-security set` command, the  pod security admission is reset to the default configuration if you do not specify a configuration file.
 {: tip}
-
-
-
-
-

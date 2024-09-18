@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-06-26"
+lastupdated: "2024-09-18"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -18,19 +18,17 @@ subcollection: containers
 # Migrating to a new Ubuntu version
 {: #ubuntu-migrate}
 
-To migrate your worker nodes to a new Ubuntu version, you must provision a new worker pool, add worker nodes to the new pool, then remove the original worker pool. The default operating system for all supported {{site.data.keyword.containerlong_notm}} cluster versions is Ubuntu 20. Additionally, Ubuntu 24 is available for early access with limitations. 
+To migrate your worker nodes to a new Ubuntu version, you must provision a new worker pool, add worker nodes to the new pool, then remove the original worker pool. 
 {: shortdesc}
+
+## Default operating system by cluster version
+{: #ubuntu-default}
+
+Ubuntu 20 is the default operating system for all clusters that run version 1.30 and earlier. Ubuntu 24 is the default operating system for clusters that run version 1.31. Clusters upgraded to version 1.31 continue to support worker nodes that run either Ubuntu 20 or 24. A worker pool's operating system does not automatically change when you upgrade a cluster.
 
 ## Ubuntu 24 limitations
 {: #ubuntu-24-lim}
 
-Ubuntu 24 is available for early release and should not be used for production workloads. Make sure you understand the limitations for this version before you begin any migrations.
-{: important}
-
-Ubuntu 24 is available in Beta. The following limitations and disclaimers apply.
-{: beta}
-
-- Should not be used for production workloads.
 - Available for cluster versions 1.29 and later.
 - Supported for virtual servers only. Cannot be used with bare metal servers. 
 - Not available for GPU worker node flavors. 
@@ -63,6 +61,8 @@ Ubuntu 24 is available in Beta. The following limitations and disclaimers apply.
 Migrate your worker nodes to use Ubuntu 24. These steps apply to all supported cluster versions.
 {: shortdesc}
 
+For Ubuntu 24, the `/tmp` directory is a separate partition that has the `nosuid`, `noexec`, and `nodev` options set. If your apps install to and run scripts or binaries under the `/tmp` directory, they might fail. You can use the `/var/tmp` directory instead of the `/tmp` directory to run temporary scripts or binaries.
+{: important}
 
 1. In your cluster, create a new worker pool for the Ubuntu 24 worker nodes. Include the `--operating-system=UBUNTU_24_64` option. Make sure that the number of nodes specified with the `--size-per-zone` option matches the number of Ubuntu 20 worker nodes that you are replacing. Also, be sure to include the custom labels that you retrieved earlier.
 
@@ -136,6 +136,3 @@ Before you remove your Ubuntu 20 worker pools, consider scaling them down and ke
     ibmcloud ks worker-pool rm --worker-pool WORKER-POOL --cluster CLUSTER
     ```
     {: pre}
-
-
-

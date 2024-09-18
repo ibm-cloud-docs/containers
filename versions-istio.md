@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-08-20"
+lastupdated: "2024-09-18"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -33,6 +33,32 @@ ibmcloud ks cluster addon versions
 
 ## Version 1.22
 {: #v122}
+
+### Change log for 1.22.4, released 18 August 2024
+{: #1224}
+
+Review the changes that are included in version 1.22.4 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.22.3
+
+Current version
+:   1.22.4
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.22.4](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.4/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-4603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4603){: external}
+    - [CVE-2024-37371](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-37371){: external}
+    - [CVE-2024-2511](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2511){: external}
+    - [CVE-2024-4741](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4741){: external}
+    - [CVE-2022-37370](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37370){: external}
+    - [CVE-2024-5535](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-5535){: external}
+    - [CVE-2024-7264](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-7264){: external}
+    - [usn-6937-1](https://ubuntu.com/security/notices/USN-6937-1){: external}
+    - [usn-6947-1](https://ubuntu.com/security/notices/USN-6947-1){: external}
+    - [usn-6944-1](https://ubuntu.com/security/notices/USN-6944-1){: external}
 
 ### Change log for 1.22.3, released 20 August 2024
 {: #1223}
