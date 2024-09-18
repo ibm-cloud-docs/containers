@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-17"
+lastupdated: "2024-09-18"
 
 
-keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, release notes
+keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
 
 subcollection: containers
 
@@ -29,6 +29,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## September 2024
 {: #containers-sep24}
+
+
+
+### 18 September 2024
+{: #containers-sep1824}
+{: release-note}
+
+Istio add-on version `1.22.4` is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
 
 ### 16 September 2024
 {: #containers-sep1624}
