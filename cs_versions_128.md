@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-09-18"
 
 
 keywords: kubernetes, containers, 128, version 128, 128 update actions
@@ -20,11 +20,14 @@ subcollection: containers
 {: #cs_versions_128}
 
 
+
+This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: deprecated}
+
+
+
 Review information about version 1.28 of {{site.data.keyword.containerlong}}. For more information about Kubernetes project version 1.28, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.
 {: shortdesc}
-
-
-
 
 ![This badge indicates Kubernetes version 1.28 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.28 certification badge" caption-side="bottom"} 
 
@@ -166,6 +169,3 @@ spec:
   - Egress
 ```
 {: codeblock}
-
-
-

@@ -36,6 +36,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-sep1824}
 {: release-note}
 
+New! {{site.data.keyword.containerlong_notm}} version 1.31.
+:   You can now create or [update clusters to Kubernetes version 1.31](/docs/containers?topic=containers-cs_versions_131). With Kubernetes 1.31, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
 Istio add-on version `1.22.4` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 

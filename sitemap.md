@@ -242,6 +242,8 @@ subcollection: containers
 
     * [18 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1824)
 
+        * New! {{site.data.keyword.containerlong_notm}} version 1.31.
+
         * Istio add-on version `1.22.4` is available.
 
     * [16 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1624)
@@ -3399,6 +3401,8 @@ subcollection: containers
 
 [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
 
+* [Default operating system by cluster version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-default)
+
 * [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
 
 * [Before you begin](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
@@ -6511,6 +6515,71 @@ subcollection: containers
     * [What else can I do to increase the security and compliance of my cluster?](/docs/containers?topic=containers-cis-benchmark#benchmark-what-else)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
+
+
+### Version 1.31
+{: #sitemap_version_131}
+
+
+[1.31 version information and update actions](/docs/containers?topic=containers-cs_versions_131#cs_versions_131)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_131#release_timeline_131)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_131#prep-up-131)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_131#before_131)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_131#after_131)
+
+[Kubernetes version 1.31 change log](/docs/containers?topic=containers-changelog_131#changelog_131)
+
+* [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
+
+* [Version 1.31 change log](/docs/containers?topic=containers-changelog_131#131_changelog)
+
+    * [Change log for master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024](/docs/containers?topic=containers-changelog_131#1310_1520M_and_1310_1518W)
+
+[Kubernetes version 1.31 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
+
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-131#cis-section-1-131)
+
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-11-131)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-12-131)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-13-131)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-14-131)
+
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-131#cis-section-2-131)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-131#cis-section-3-131)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-31-131)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-32-131)
+
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-131#cis-section-4-131)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-41-131)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-42-131)
+
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-131#cis-section-5-131)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-51-131)
+
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-52-131)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-53-131)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-54-131)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-55-131)
+
+    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-56-131)
+
+* [{{site.data.keyword.{{site.data.keyword.IBM_notm}}_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-remediations-131)
 
 
 ### Version 1.30
