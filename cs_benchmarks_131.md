@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-09-18"
+lastupdated: "2024-09-19"
 
 keywords: kubernetes, containers, benchmarks, 1.31, CIS benchmarks
 
@@ -274,10 +274,10 @@ Review the Kubernetes Policies results of the version 1.5 CIS Kubernetes benchma
 | 5.7.4 | The default namespace should not be used. | Scored | 2 | [Fail](#cis-benchmark-remediations-131) | Shared |
 {: caption="Section 5.7 General policies benchmark results" caption-side="bottom"}
 
-## {{site.data.keyword.{{site.data.keyword.IBM_notm}}_notm}} remediations and explanations
+## {{site.data.keyword.IBM_notm}} remediations and explanations
 {: #cis-benchmark-remediations-131}
 
-Review information from {{site.data.keyword.{{site.data.keyword.IBM_notm}}_notm}} on the CIS Benchmark results.
+Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark results.
 {: shortdesc}
 
 | Section | Remediation and explanation |
@@ -320,4 +320,3 @@ Review information from {{site.data.keyword.{{site.data.keyword.IBM_notm}}_notm}
 | 5.7.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a [pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | 5.7.4 | {{site.data.keyword.containerlong_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Explanation and remediation" caption-side="bottom"}
-

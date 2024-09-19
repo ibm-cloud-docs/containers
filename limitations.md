@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-20"
+lastupdated: "2024-09-19"
 
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
@@ -120,7 +120,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Category | Description |
 | -------- | ----------- |
 | Encryption | The secondary disks of your worker nodes are encrypted at rest by default by the [underlying VPC infrastructure provider](/docs/vpc?topic=vpc-block-storage-about#vpc-storage-encryption). However, you can't [bring your own encryption to the underlying virtual server instances](/docs/vpc?topic=vpc-file-storage-vpc-encryption&interface=ui). |
-| Location | VPC clusters are available only in [select multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc). |
+| Location | VPC clusters are available only in [select multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc). |
 | Virtual Private Cloud | See [Limitations](/docs/vpc?topic=vpc-limitations) and [Quotas](/docs/vpc?topic=vpc-quotas). |
 | Worker node flavors | Only certain flavors are available for worker node virtual machines. Bare metal machines are not supported.|
 | Worker node host access | For security, you can't SSH into the worker node compute host. |
@@ -159,6 +159,3 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage_portworx_plan#portworx_limitations). |
 | {{site.data.keyword.block_storage_is_short}} | The default storage class in VPC clusters can not be changed. However, you can [create your own storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class). |
 {: caption="VPC cluster storage limitations"}
-
-
-

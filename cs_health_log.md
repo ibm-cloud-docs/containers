@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-07-31"
+lastupdated: "2024-09-19"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
@@ -155,7 +155,7 @@ When you create a logging configuration for a source in your cluster to forward 
 {: shortdesc}
 
 What are the sources that I can configure log forwarding for?
-:   In the following image, you can see the location of the sources that you can configure logging for.
+:   In the following image, you can see the region of the sources that you can configure logging for.
 
 ![Log sources in your cluster.](images/log_sources.png "Log sources in your cluster"){: caption="Figure 1. Log sources in your cluster" caption-side="bottom"}
 
@@ -377,7 +377,3 @@ You can stop forwarding logs by deleting one or all the logging configurations f
     ibmcloud ks logging config rm --cluster <my_cluster> --all
     ```
     {: pre}
-
-
-
-

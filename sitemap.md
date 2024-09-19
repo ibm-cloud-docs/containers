@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-09-18"
+lastupdated: "2024-09-19"
 
 
 keywords: containers
@@ -6589,7 +6589,7 @@ subcollection: containers
 
     * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-56-131)
 
-* [{{site.data.keyword.{{site.data.keyword.IBM_notm}}_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-remediations-131)
+* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-remediations-131)
 
 
 ### Version 1.30
@@ -10096,7 +10096,7 @@ subcollection: containers
 
     * [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
 
-    * [Classic single zone regions](/docs/containers?topic=containers-regions-and-zones#zones-sz)
+    * [Single zone Classic data centers](/docs/containers?topic=containers-regions-and-zones#zones-sz)
 
     * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 
