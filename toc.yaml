@@ -340,7 +340,6 @@ toc:
           label: Add-on version history
           topics:
           - add-on-versions.md
-          - versions-fluentd.md
           - versions-istio.md
           - versions-autoscaler.md
           - versions-vpc-block-addon.md

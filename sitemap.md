@@ -7001,42 +7001,6 @@ subcollection: containers
 
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
-[Fluentd add-on change log](/docs/containers?topic=containers-fluentd_changelog#fluentd_changelog)
-
-* [14 November 2019](/docs/containers?topic=containers-fluentd_changelog#14-nov-2019)
-
-* [06 November 2019](/docs/containers?topic=containers-fluentd_changelog#06-nov-2019)
-
-* [28 October 2019](/docs/containers?topic=containers-fluentd_changelog#28-oct-2019)
-
-* [24 September 2019](/docs/containers?topic=containers-fluentd_changelog#24-sept-2019)
-
-* [18 September 2019](/docs/containers?topic=containers-fluentd_changelog#18-sept-2019)
-
-* [15 August 2019](/docs/containers?topic=containers-fluentd_changelog#14-aug-2019)
-
-* [09 August 2019](/docs/containers?topic=containers-fluentd_changelog#09-aug-2019)
-
-* [22 July 2019](/docs/containers?topic=containers-fluentd_changelog#22-july-2019)
-
-* [30 June 2019](/docs/containers?topic=containers-fluentd_changelog#30-june-2019)
-
-* [21 May 2019](/docs/containers?topic=containers-fluentd_changelog#21-may-2019)
-
-* [10 May 2019](/docs/containers?topic=containers-fluentd_changelog#10-may-2019)
-
-* [08 May 2019](/docs/containers?topic=containers-fluentd_changelog#08-may-2019)
-
-* [11 April 2019](/docs/containers?topic=containers-fluentd_changelog#11-april-2019)
-
-* [01 April 2019](/docs/containers?topic=containers-fluentd_changelog#01-april-2019)
-
-* [18 March 2019](/docs/containers?topic=containers-fluentd_changelog#18-mar-2019)
-
-* [18 February 2019](/docs/containers?topic=containers-fluentd_changelog#18-feb-2019)
-
-* [01 January 2019](/docs/containers?topic=containers-fluentd_changelog#01-jan-2019)
-
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.22](/docs/containers?topic=containers-istio-changelog#v122)
