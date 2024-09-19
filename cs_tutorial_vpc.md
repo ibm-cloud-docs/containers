@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-09-17"
+lastupdated: "2024-09-19"
 
 
 keywords: kubernetes
@@ -89,7 +89,7 @@ Command-line tools
 Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.keyword.cloud_notm}} Virtual Private Cloud (VPC) environment. For more information about VPC, see [Getting Started with Virtual Private Cloud](/docs/vpc?topic=vpc-getting-started).
 {: shortdesc}
 
-1. Log in to the account, resource group, and {{site.data.keyword.cloud_notm}} region where you want to create your VPC environment. The VPC must be set up in the same multizone metro location where you want to create your cluster. In this tutorial you create a VPC in `us-south`. For other supported regions, see [Multizone metros for VPC clusters](/docs/containers?topic=containers-regions-and-zones#zones-vpc). If you have a federated ID, include the `--sso` option.
+1. Log in to the account, resource group, and {{site.data.keyword.cloud_notm}} region where you want to create your VPC environment. The VPC must be set up in the same multizone metro region where you want to create your cluster. In this tutorial you create a VPC in `us-south`. For other supported regions, see [Multizone metros for VPC clusters](/docs/containers?topic=containers-regions-and-zones#zones-vpc). If you have a federated ID, include the `--sso` option.
     ```sh
     ibmcloud login -r us-south [-g <resource_group>] [--sso]
     ```
@@ -103,7 +103,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         {: pre}
 
     2. Create a subnet for your VPC, and note its **ID**. Consider the following information when you create the VPC subnet:
-        - **Zones**: You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created the VPC in. To list available zones in the region, run `ibmcloud is zones`.
+        - **Zones**: You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro region that you created the VPC in. To list available zones in the region, run `ibmcloud is zones`.
         - **IP addresses**: VPC subnets provide private IP addresses for your worker nodes and load balancer services in your cluster, so make sure to [create a subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You can't change the number of IP addresses that a VPC subnet has later.
         - **Public gateways**: You don't need to attach a public gateway to complete this tutorial. Instead, you can keep your worker nodes isolated from public access by using VPC load balancers to expose workloads securely. You might attach a public gateway if your worker nodes need to access a public URL.
 

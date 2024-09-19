@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-09-18"
+lastupdated: "2024-09-19"
 
 
 keywords: kubernetes, containers, 131, version 131, 131 update actions
@@ -55,7 +55,7 @@ This information summarizes updates that are likely to have an impact on deploye
 {: important}
 
 [Istio](/docs/containers?topic=containers-istio) does not yet support version 1.31. Do not upgrade your cluster to version 1.31 if your cluster uses Istio.
-{: imporant}
+{: important}
 
 
 ### Update before master
@@ -84,5 +84,3 @@ The following table shows the actions that you must take after you update the Ku
 | **Deprecated:** Pod `container.apparmor.security.beta.kubernetes.io` annotations | Pod `container.apparmor.security.beta.kubernetes.io` annotations are now deprecated. These annotations are replaced by the `securityContext.appArmorProfile` field for pods and containers. If your pods rely on these deprecated annotations, update them to use the `securityContext.appArmorProfile` field instead. For more information, see [AppArmor support is now stable](https://kubernetes.io/blog/2024/08/13/kubernetes-v1-31-release/#apparmor-support-is-now-stable){: external}. |
 | **Deprecated:** Persistent volume `volume.beta.kubernetes.io/mount-options` annotation | The persistent volume `volume.beta.kubernetes.io/mount-options` annotation is now deprecated. This annotation is replaced by the `spec.mountOptions` field. If your pods rely on this deprecated annotation, update them to use the `spec.mountOptions` field instead. For more information, see [Mount Options](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options){: external}. |
 {: caption="Changes to make after you update the master to Kubernetes 1.31" caption-side="bottom"}
-
-

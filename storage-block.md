@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-09-19"
 
 
 keywords: kubernetes, containers
@@ -33,7 +33,7 @@ Keep in mind the following requirements when you use the {{site.data.keyword.clo
 If your cluster can't access the public network, such as a private cluster behind a firewall or a cluster with only the private cloud service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your {{site.data.keyword.blockstorageshort}} instance over the private network.
 
 
-{{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage-plan).
+{{site.data.keyword.blockstorageshort}} instances are specific to a single-campus multizone region. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage-plan).
 
 [Classic infrastructure]{: tag-classic-inf}
 
@@ -2442,8 +2442,3 @@ To monitor for instances where pod connectivity to {{site.data.keyword.blockstor
 1. Set the threshold to `>0` and set the severity you want to use for this alert.
 
 1. Select your notification channel and save the alert.
-
-
-
-
-

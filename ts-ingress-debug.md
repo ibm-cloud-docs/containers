@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-03-15"
+lastupdated: "2024-09-19"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -187,7 +187,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
 3. Check the health of your ALB IPs (classic) or hostname (VPC).
 
-    * For single zone cluster and multizone clusters: Ping the IP address (classic) or hostname (VPC) of each public ALB to ensure that each ALB is able to successfully receive packets. If you are using private ALBs, you can ping their IP addresses (classic) or hostname (VPC) only from the private network.
+    * Ping the IP address (classic) or hostname (VPC) of each public ALB to ensure that each ALB is able to successfully receive packets. If you are using private ALBs, you can ping their IP addresses (classic) or hostname (VPC) only from the private network.
         ```sh
         ping <ALB_IP>
         ```
@@ -440,9 +440,3 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.62.196.238
     ```
     {: screen}
-
-
-
-
-
-

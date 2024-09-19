@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-09-19"
 
 
 keywords: critical, not ready, notready, troubleshooting, worker node status, status
@@ -75,7 +75,7 @@ If only some, but not all, of the worker nodes in your cluster are in a `Critica
 ### If all worker nodes in a single zone, subnet, or VLAN are affected
 {: #ts-critical-notready-steps-zone}
 
-If all worker nodes in a single zone, subnet, or VLAN are in a `Critical` or `NotReady` state, but all other worker nodes in the cluster are functioning normally, there might be an issue with a networking component. Follow the steps in [If all worker nodes in a cluster are affected](#ts-critical-notready-steps-all), especially to the steps regarding any networking components that might affect the zone, subnet or VLAN, such as firewall or gateway rules, ACLs or custom routes, or Calico and Kubernetes network policies.
+If all worker nodes in one zone, subnet, or VLAN are in a `Critical` or `NotReady` state, but all other worker nodes in the cluster are functioning normally, there might be an issue with a networking component. Follow the steps in [If all worker nodes in a cluster are affected](#ts-critical-notready-steps-all), especially to the steps regarding any networking components that might affect the zone, subnet or VLAN, such as firewall or gateway rules, ACLs or custom routes, or Calico and Kubernetes network policies.
 
 If you checked your networking components and still cannot resolve the issue, [gather your worker node data](#ts-critical-notready-gather) and open a support ticket. 
 
@@ -122,7 +122,7 @@ If you are unable to resolve the issue with the troubleshooting steps, gather in
 Before you open a support ticket, review the information and follow any troubleshooting steps in [Debugging worker nodes](/docs/containers?topic=containers-debug_worker_nodes), [Worker node states](/docs/containers?topic=containers-worker-node-state-reference), and [Troubleshooting worker nodes in `Critical` or `NotReady` state](#ts-critical-notready).
 {: important}
 
-If all worker nodes in a cluster, or in a single zone, subnet, or VLAN are affected, you can open an initial support ticket without gathering data. However, you might later be asked to gather the relevant data. If only one or some of your worker nodes are affected, you must gather the relevant data to include in your support ticket. 
+If all worker nodes in a cluster, or in one region, subnet, or VLAN are affected, you can open an initial support ticket without gathering data. However, you might later be asked to gather the relevant data. If only one or some of your worker nodes are affected, you must gather the relevant data to include in your support ticket. 
 {: note}
 
 
@@ -194,6 +194,3 @@ Follow the steps to gather the relevant worker node data.
         - `mount | grep -i "(ro"`       # to rule out disk read-only issue.  NOTE: `tmpfs` being `ro` is fine
         - `touch /this`                 # to rule out disk read-only issue
 5. [Open a support ticket](https://cloud.ibm.com/unifiedsupport/cases/form){: external} and attach all the outputs saved in the previous steps.
-
-
-
