@@ -3411,11 +3411,7 @@ subcollection: containers
 
 * [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
 
-* [Before you begin](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-prereqs)
-
 * [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
-
-* [Removing your old worker pools](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-removal)
 
 [Adding tags and labels to clusters](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
 
