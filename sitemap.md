@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-09-19"
+lastupdated: "2024-09-20"
 
 
 keywords: containers
@@ -240,6 +240,10 @@ subcollection: containers
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
 
+    * [20 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2024)
+
+        * {{site.data.keyword.containerlong_notm}} version 1.31 Kubernetes certification
+
     * [18 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1824)
 
         * {{site.data.keyword.containerlong_notm}} CLI plug-in version `1.0.665` is available.
@@ -414,7 +418,7 @@ subcollection: containers
 
         * New! {{site.data.keyword.containerlong_notm}} version 1.30.
 
-        * {{site.data.keyword.containerlong_notm}} version version 1.30 Kubernetes certification
+        * {{site.data.keyword.containerlong_notm}} version 1.30 Kubernetes certification
 
         * Important networking changes for {{site.data.keyword.containerlong_notm}} VPC clusters created at version 1.30.
 
@@ -6973,11 +6977,11 @@ subcollection: containers
 
 * [`image-key-synchronizer` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
 
-* [`istio` 1.20](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.20)
-
 * [`istio` 1.21](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.21)
 
 * [`istio` 1.22](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.22)
+
+* [`istio` 1.23](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.23)
 
 * [`openshift-data-foundation` 4.12.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.12.0)
 
@@ -6986,6 +6990,8 @@ subcollection: containers
 * [`openshift-data-foundation` 4.14.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.14.0)
 
 * [`openshift-data-foundation` 4.15.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.15.0)
+
+* [`openshift-data-foundation` 4.16.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.16.0)
 
 * [`static-route` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#static-route-1.0.0)
 

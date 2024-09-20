@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-09-19"
+lastupdated: "2024-09-20"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -61,7 +61,7 @@ For Ubuntu 24, the `/tmp` directory is a separate partition that has the `nosuid
     ```
     {: pre}
 
-1. Update each worker node in the worker pool by running the [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) or [`ibmcloud ks worker replace`](h/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace) command. 
+1. Update each worker node in the worker pool by running the [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) or [`ibmcloud ks worker replace`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace) command. 
 
     Make sure you have enough worker nodes to support your workload while you update or replace the relevant worker nodes. For more information, see [Updating VPC worker nodes](/docs/containers?topic=containers-update&interface=ui#vpc_worker_node) or [Updating classic worker nodes](/docs/containers?topic=containers-update&interface=ui#worker_node).
     {: tip}

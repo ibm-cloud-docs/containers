@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-09-19"
+lastupdated: "2024-09-20"
 
 
 keywords: kubernetes, containers, 131, version 131, 131 update actions
@@ -23,6 +23,10 @@ subcollection: containers
 Review information about version 1.31 of {{site.data.keyword.containerlong}}. For more information about Kubernetes project version 1.31, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.
 {: shortdesc}
 
+
+![This badge indicates Kubernetes version 1.31 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.31 certification badge" caption-side="bottom"} 
+
+{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.31 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
 
 
