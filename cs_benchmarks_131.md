@@ -291,8 +291,8 @@ Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark resu
 | 1.2.23 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.24 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.25 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.33 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 1.2.34 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
+| 1.2.33 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#cluster-secret-encryption). |
+| 1.2.34 | {{site.data.keyword.containerlong_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#cluster-secret-encryption). |
 | 1.3.6 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update. |
 | 3.2.1 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 3.2.2 | {{site.data.keyword.containerlong_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
