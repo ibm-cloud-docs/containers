@@ -38,6 +38,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 :   {{site.data.keyword.containerlong_notm}} version [1.31](/docs/containers?topic=containers-cs_versions_131) is now Kubernetes certified.
 
 
+
+Istio add-on version `1.23.1` is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
+
 ### 18 September 2024
 {: #containers-sep1824}
 {: release-note}

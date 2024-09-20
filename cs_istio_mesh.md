@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-08-20"
+lastupdated: "2024-09-20"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -47,13 +47,13 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 
 1. Install BookInfo in your cluster. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```sh
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.22.1 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.23.1 sh -
     ```
     {: pre}
 
 1. Navigate to the Istio package directory.
     ```sh
-    cd istio-1.22.1
+    cd istio-1.23.1
     ```
     {: pre}
 
@@ -426,7 +426,7 @@ Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-ope
 
 1. Navigate to the Istio package directory.
     ```sh
-    cd istio-1.22.1
+    cd istio-1.23.1
     ```
     {: pre}
 
@@ -845,9 +845,3 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 Destination rules are also used for non-authentication reasons, such as routing traffic to different versions of a service. Any destination rule that you create for a service must also contain the same TLS block that is set to `mode: ISTIO_MUTUAL`. This block prevents the rule from overriding the mesh-wide mTLS settings that you configured in this section.
 {: note}
-
-
-
-
-
-

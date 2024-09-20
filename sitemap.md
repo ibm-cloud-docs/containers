@@ -244,6 +244,8 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} version 1.31 Kubernetes certification
 
+        * Istio add-on version `1.23.1` is available.
+
     * [18 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1824)
 
         * {{site.data.keyword.containerlong_notm}} CLI plug-in version `1.0.665` is available.
@@ -7004,6 +7006,10 @@ subcollection: containers
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.23](/docs/containers?topic=containers-istio-changelog#v123)
+
+    * [Change log for 1.23.1, released 20 September 2024](/docs/containers?topic=containers-istio-changelog#1231)
 
 * [Version 1.22](/docs/containers?topic=containers-istio-changelog#v122)
 
