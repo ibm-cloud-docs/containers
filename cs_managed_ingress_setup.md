@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-06-10"
+lastupdated: "2024-09-20"
 
 
 keywords: ingress, expose apps, ingress resource, ALB, domain
@@ -12,8 +12,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
 
 
 # Setting up Ingress
@@ -102,9 +100,6 @@ Create the Ingress resource to define the routing rules that the Ingress control
 {: shortdesc}
 
 1. Create the Ingress resource in a YAML file. 
-
-    The format of the Ingress resource definition varies based on your cluster's Kubernetes version, because API version `networking.k8s.io/v1beta1` is unsupported in Kubernetes cluster versions 1.22+.
-    {: note}
 
     ```yaml
     apiVersion: networking.k8s.io/v1
@@ -241,5 +236,3 @@ If you have a classic cluster with only a private VLAN, you must first configure
 1. Create a custom domain through your DNS service provider. Note that Ingress URLs must be 130 characters or fewer.
 
 2. Map your custom domain to the private ALBs by adding their IP addresses as A records (classic clusters) or their VPC hostname as a CNAME (VPC clusters). To find the ALB IP addresses (classic) or hostname (VPC), run `ibmcloud ks ingress alb ls -c <cluster_name_or_ID>`.
-
-

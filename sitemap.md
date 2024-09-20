@@ -244,6 +244,8 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} version 1.31 Kubernetes certification
 
+        * Istio add-on version `1.23.1` is available.
+
     * [18 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1824)
 
         * {{site.data.keyword.containerlong_notm}} CLI plug-in version `1.0.665` is available.
@@ -7005,6 +7007,10 @@ subcollection: containers
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
+* [Version 1.23](/docs/containers?topic=containers-istio-changelog#v123)
+
+    * [Change log for 1.23.1, released 20 September 2024](/docs/containers?topic=containers-istio-changelog#1231)
+
 * [Version 1.22](/docs/containers?topic=containers-istio-changelog#v122)
 
     * [Change log for 1.22.4, released 18 August 2024](/docs/containers?topic=containers-istio-changelog#1224)
@@ -10066,15 +10072,17 @@ subcollection: containers
 
     * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 
+* [Where are the resources?](/docs/containers?topic=containers-regions-and-zones#regions_resources)
+
     * [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
 
     * [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
-* [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
+* [Accessing resources](/docs/containers?topic=containers-regions-and-zones#endpoint)
 
-    * [Logging in to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
+    * [Accessing resources from the CLI](/docs/containers?topic=containers-regions-and-zones#endpoint_cli)
 
-    * [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
+    * [Accessing resources from the API](/docs/containers?topic=containers-regions-and-zones#endpoint_api)
 
 * [Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
