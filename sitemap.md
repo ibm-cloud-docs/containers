@@ -10066,15 +10066,17 @@ subcollection: containers
 
     * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 
+* [Where are the resources?](/docs/containers?topic=containers-regions-and-zones#regions_resources)
+
     * [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
 
     * [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
-* [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
+* [Accessing resources](/docs/containers?topic=containers-regions-and-zones#endpoint)
 
-    * [Logging in to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
+    * [Accessing resources from the CLI](/docs/containers?topic=containers-regions-and-zones#endpoint_cli)
 
-    * [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
+    * [Accessing resources from the API](/docs/containers?topic=containers-regions-and-zones#endpoint_api)
 
 * [Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
