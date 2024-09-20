@@ -240,6 +240,10 @@ subcollection: containers
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
 
+    * [20 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2024)
+
+        * {{site.data.keyword.containerlong_notm}} version 1.31 Kubernetes certification
+
     * [18 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1824)
 
         * {{site.data.keyword.containerlong_notm}} CLI plug-in version `1.0.665` is available.
@@ -414,7 +418,7 @@ subcollection: containers
 
         * New! {{site.data.keyword.containerlong_notm}} version 1.30.
 
-        * {{site.data.keyword.containerlong_notm}} version version 1.30 Kubernetes certification
+        * {{site.data.keyword.containerlong_notm}} version 1.30 Kubernetes certification
 
         * Important networking changes for {{site.data.keyword.containerlong_notm}} VPC clusters created at version 1.30.
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-18"
+lastupdated: "2024-09-20"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## September 2024
 {: #containers-sep24}
 
+### 20 September 2024
+{: #containers-sep2024}
+{: release-note}
+
+{{site.data.keyword.containerlong_notm}} version 1.31 Kubernetes certification
+:   {{site.data.keyword.containerlong_notm}} version [1.31](/docs/containers?topic=containers-cs_versions_131) is now Kubernetes certified.
 
 
 ### 18 September 2024
@@ -479,7 +485,7 @@ Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 New! {{site.data.keyword.containerlong_notm}} version 1.30.
 :   You can now create or [update clusters to Kubernetes version 1.30](/docs/containers?topic=containers-cs_versions_130). With Kubernetes 1.30, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
-{{site.data.keyword.containerlong_notm}} version version 1.30 Kubernetes certification
+{{site.data.keyword.containerlong_notm}} version 1.30 Kubernetes certification
 :   {{site.data.keyword.containerlong_notm}} version [1.30](/docs/containers?topic=containers-cs_versions_130) is now Kubernetes certified.
 
 Important networking changes for {{site.data.keyword.containerlong_notm}} VPC clusters created at version 1.30.
@@ -3609,7 +3615,7 @@ Worker node fix pack
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version version 4.3.2_1441](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.3.2_1441](/docs/containers?topic=containers-vpc_bs_changelog) is available.
 
 
 
@@ -3638,7 +3644,7 @@ Istio add-on
 :   Metrics and labels are now stored and displayed in a Prometheus compatible naming convention. Some metrics and labels are deprecated. For more information, see [Discontinued Metrics and Labels](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#discontinued-metrics-and-labels){: external} and [removed features](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#removed-featurees){: external}.
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version version 5.0.1-beta_1411](/docs/containers?topic=containers-vpc_bs_changelog) is available for allowlisted accounts.
+:   [Version 5.0.1-beta_1411](/docs/containers?topic=containers-vpc_bs_changelog) is available for allowlisted accounts.
 
 
 
