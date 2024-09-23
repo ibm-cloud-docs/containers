@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-09-20"
+lastupdated: "2024-09-23"
 
 
 keywords: containers
@@ -10066,9 +10066,9 @@ subcollection: containers
 
 * [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
 
-    * [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
+    * [Classic regions with multiple data centers](/docs/containers?topic=containers-regions-and-zones#zones-mz)
 
-    * [Single zone Classic data centers](/docs/containers?topic=containers-regions-and-zones#zones-sz)
+    * [Classic regions with one data center](/docs/containers?topic=containers-regions-and-zones#zones-sz)
 
     * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 
