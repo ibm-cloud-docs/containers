@@ -240,6 +240,10 @@ subcollection: containers
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
 
+    * [23 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-23september24)
+
+        * Ingress ALB cluster add-on patch updates.
+
     * [24 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2424)
 
         * Ubuntu 24 is now available for {{site.data.keyword.containerlong_notm}} clusters.
@@ -7939,6 +7943,8 @@ subcollection: containers
 [Ingress ALB version change log](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
+
+    * [1.11.2_7140_iks, released 23 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7140_iks)
 
     * [1.11.2_7133_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7133_iks)
 
