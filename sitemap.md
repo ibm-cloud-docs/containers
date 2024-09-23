@@ -240,6 +240,12 @@ subcollection: containers
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
 
+    * [24 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2424)
+
+        * Ubuntu 24 is now available for {{site.data.keyword.containerlong_notm}} clusters.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [20 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2024)
 
         * {{site.data.keyword.containerlong_notm}} version 1.31 Kubernetes certification
@@ -5349,6 +5355,8 @@ subcollection: containers
 
 * [Creating your own storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
 
+* [Setting the default storage class](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-set-default-sc)
+
 * [Deploying an app that runs as non-root](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-non-root-app)
 
 * [Setting up your KMS provider for encrypting {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-kms)
@@ -7770,6 +7778,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.31, released 24 September 2024](/docs/containers?topic=containers-cos_plugin_changelog#02231_object_plugin)
 
 * [Change log for version 2.2.30, released 29 August 2024](/docs/containers?topic=containers-cos_plugin_changelog#02230_object_plugin)
 

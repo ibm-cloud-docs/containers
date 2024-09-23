@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-09-19"
+lastupdated: "2024-09-23"
 
 
 keywords: kubernetes, versions, update, upgrade
@@ -68,7 +68,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
-Ubuntu 20 is the default operating system for all supported {{site.data.keyword.containerlong_notm}} cluster versions. Ubuntu 24 is now available in Beta. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin any migrations.
+Ubuntu 24 is the default operating system for all supported {{site.data.keyword.containerlong_notm}} cluster versions. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin any migrations.
 {: important}
 
 ## Update types

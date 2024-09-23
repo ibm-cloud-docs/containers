@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-24"
+lastupdated: "2024-09-23"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
@@ -25,6 +25,8 @@ Set up monitoring in {{site.data.keyword.containerlong}} to help you troubleshoo
 
 Continuous monitoring and logging is the key to detecting attacks on your cluster and troubleshooting issues as they arise. By continuously monitoring your cluster, you're able to better understand your cluster capacity and the availability of resources that are available to your app. With this insight, you can prepare to protect your apps against downtime.
 
+
+
 ## Choosing a monitoring solution
 {: #view_metrics}
 
@@ -45,6 +47,9 @@ Kubernetes dashboard
 
 ## Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}
 {: #monitoring}
+
+The following steps are deprecated. For the latest steps, see [Setting up the Monitoring agent](/docs/monitoring?topic=monitoring-agent_Kube).
+{: deprecated}
 
 Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster, and use this monitoring configuration to automatically collect and forward metrics to {{site.data.keyword.mon_full_notm}}.
 {: shortdesc}
@@ -533,6 +538,3 @@ Review the following table for information on the individual components of healt
 | `Enabled`| Enter `true` to enable the check or `false` to disable the check.|
 |`Namespace`| Optional: To restrict `checkpod.json` to checking only pods in one namespace, add the `Namespace` field and enter the namespace.|
 {: caption="Health check components"}
-
-
-
