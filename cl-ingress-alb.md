@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2024
 
-lastupdated: "2024-09-23"
+lastupdated: "2024-09-24"
 
 
 keywords: change log, version history, Ingress ALB
@@ -19,6 +19,7 @@ subcollection: containers
 
 Review the version history for Ingress ALB.
 {: shortdesc}
+
 
 ## Version 1.11.2
 {: #cl-ingress-alb-1.11.2}
@@ -39,6 +40,7 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1112_7069_iks}
 
 - add v1.11.2 Ingress NGINX Controller
+
 
 
 ## Version 1.9.6
@@ -102,6 +104,7 @@ Review the version history for Ingress ALB.
 - Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/CVE-2024-24786){: external}.
 - CVE-2024-24786 
 - Initial release of 1.9.6. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.9.6)
+
 
 
 ## Version 1.9.4
@@ -168,6 +171,7 @@ Review the version history for Ingress ALB.
 - Updates Go to version `1.21.5`.
 
 
+
 ## Version 1.8.5
 {: #cl-ingress-alb-1.8.5}
 
@@ -228,6 +232,7 @@ Review the version history for Ingress ALB.
 - Initial release of 1.8.5. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.8.5)
 
 
+
 ## Version 1.8.4
 {: #cl-ingress-alb-1.8.4}
 
@@ -241,6 +246,7 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-184_6363_iks}
 
 - Resolves the following CVEs: [CVE-2024-25062](https://nvd.nist.gov/vuln/detail/CVE-2024-25062){: external}, [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external}, [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}, [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}, [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}, and [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}.
+
 
 
 ## Version 1.6.4
@@ -283,6 +289,7 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-164_6344_iks}
 
 - Resolves the following CVEs: [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}.
+
 
 
 
