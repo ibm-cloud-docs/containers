@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-20"
+lastupdated: "2024-09-24"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,14 +30,39 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## September 2024
 {: #containers-sep24}
 
+### 24 September 2024
+{: #containers-sep2424}
+{: release-note}
+
+
+
+Ubuntu 24 is now available for {{site.data.keyword.containerlong_notm}} clusters.
+:   You can now create {{site.data.keyword.containerlong_notm}} clusters that have Ubuntu 24 worker nodes. To migrate existing Ubuntu 20 workers to Ubuntu 24, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate). To review operating system support by cluster version, see [{{site.data.keyword.containerlong_notm}} version information](/docs/containers?topic=containers-cs_versions). To review a list of worker node flavors with Ubuntu 24 support, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors) or [Classic flavors](/docs/containers?topic=containers-classic-flavors).
+
+
+
+{{site.data.keyword.cos_full_notm}} plug-in updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
+
+
+### 23 September 2024
+{: #containers-23september24}
+{: release-note}
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+
+
+
+
+
 ### 20 September 2024
 {: #containers-sep2024}
 {: release-note}
 
 {{site.data.keyword.containerlong_notm}} version 1.31 Kubernetes certification
 :   {{site.data.keyword.containerlong_notm}} version [1.31](/docs/containers?topic=containers-cs_versions_131) is now Kubernetes certified.
-
-
 
 Istio add-on version `1.23.1` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).

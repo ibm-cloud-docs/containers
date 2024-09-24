@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-09-20"
+lastupdated: "2024-09-23"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -29,14 +29,7 @@ Ubuntu 20 is the default operating system for all clusters that run version 1.30
 ## Ubuntu 24 limitations
 {: #ubuntu-24-lim}
 
-- Available for cluster versions 1.29 and later.
-- Supported for virtual servers only. Cannot be used with bare metal servers. 
-- Not available for GPU worker node flavors. 
-- NTP uses `timesyncd`. Related commands might be updated.  
-- The following add-ons and features are not supported. Do not migrate your worker nodes if you use these features:
-    
-    - Object storage plug-in
-    - Portworx
+Portworx does not currently support Ubuntu 24. Do not create or migrate to Ubuntu 24 worker pools if you need to use Portworx.
 
 
 ## Migration steps
@@ -66,11 +59,13 @@ For Ubuntu 24, the `/tmp` directory is a separate partition that has the `nosuid
     Make sure you have enough worker nodes to support your workload while you update or replace the relevant worker nodes. For more information, see [Updating VPC worker nodes](/docs/containers?topic=containers-update&interface=ui#vpc_worker_node) or [Updating classic worker nodes](/docs/containers?topic=containers-update&interface=ui#worker_node).
     {: tip}
 
+    **Example command to update Classic worker nodes.**
     ```sh
     ibmcloud ks worker update --cluster CLUSTER --worker WORKER1_ID [--worker WORKER2_ID] 
     ```
     {: pre}
 
+    **Example command to update VPC worker nodes.**
     ```sh
     ibmcloud ks worker replace --cluster CLUSTER --worker WORKER_ID
     ```

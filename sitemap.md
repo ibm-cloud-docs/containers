@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-09-20"
+lastupdated: "2024-09-24"
 
 
 keywords: containers
@@ -239,6 +239,16 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
+
+    * [24 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2424)
+
+        * Ubuntu 24 is now available for {{site.data.keyword.containerlong_notm}} clusters.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
+    * [23 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-23september24)
+
+        * Ingress ALB cluster add-on patch updates.
 
     * [20 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2024)
 
@@ -5349,6 +5359,8 @@ subcollection: containers
 
 * [Creating your own storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-custom-sc)
 
+* [Setting the default storage class](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-set-default-sc)
+
 * [Deploying an app that runs as non-root](/docs/containers?topic=containers-storage-file-vpc-apps#vpc-file-non-root-app)
 
 * [Setting up your KMS provider for encrypting {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-kms)
@@ -5412,7 +5424,7 @@ subcollection: containers
 
 * [Verifying your installation](/docs/containers?topic=containers-storage_cos_install#cos-plugin-verify)
 
-[Adding object storage to apps](/docs/containers?topic=containers-storage_cos_apps#storage_cos_apps)
+[Deploying an app that uses COS](/docs/containers?topic=containers-storage_cos_apps#storage_cos_apps)
 
 * [Creating a deployment](/docs/containers?topic=containers-storage_cos_apps#create-cos-deployment-steps)
 
@@ -5442,17 +5454,27 @@ subcollection: containers
 
 [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip#storage_cos_vpc_ip)
 
-[Migrating Cloud Object Storage (COS) resources between IBM Cloud accounts](/docs/containers?topic=containers-storage-rclone-migration#storage-rclone-migration)
+[Migrating Cloud Object Storage (COS) apps and data between IBM Cloud accounts](/docs/containers?topic=containers-storage-cos-app-migration#storage-cos-app-migration)
 
-* [Prerequisites](/docs/containers?topic=containers-storage-rclone-migration#rclone-migration-prereqs)
+* [Prerequisites](/docs/containers?topic=containers-storage-cos-app-migration#cos-migration-prereqs)
 
-* [Configuring `rclone`](/docs/containers?topic=containers-storage-rclone-migration#rclone-config)
+    * [Account 1](/docs/containers?topic=containers-storage-cos-app-migration#cos-mig-account-1-prereqs)
 
-* [Syncing between COS buckets](/docs/containers?topic=containers-storage-rclone-migration#rclone-inspect)
+    * [Account 2](/docs/containers?topic=containers-storage-cos-app-migration#cos-mig-account-2-prereqs)
 
-* [Syncing contents between buckets](/docs/containers?topic=containers-storage-rclone-migration#rclone-sync)
+* [Get the details of your apps](/docs/containers?topic=containers-storage-cos-app-migration#cos-mig-app-details)
 
-* [Next steps](/docs/containers?topic=containers-storage-rclone-migration#rclone-next-steps)
+* [Install `rclone`](/docs/containers?topic=containers-storage-cos-app-migration#rclone-install)
+
+* [Configure `rclone`](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config)
+
+* [Syncing between COS buckets](/docs/containers?topic=containers-storage-cos-app-migration#rclone-inspect)
+
+* [Syncing contents between buckets](/docs/containers?topic=containers-storage-cos-app-migration#rclone-sync)
+
+* [Create a PVC](/docs/containers?topic=containers-storage-cos-app-migration#cos-app-redploy)
+
+* [Redeploy your app](/docs/containers?topic=containers-storage-cos-app-migration#cos-mig-redeploy-app)
 
 [Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
 
@@ -7771,6 +7793,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.31, released 24 September 2024](/docs/containers?topic=containers-cos_plugin_changelog#02231_object_plugin)
+
 * [Change log for version 2.2.30, released 29 August 2024](/docs/containers?topic=containers-cos_plugin_changelog#02230_object_plugin)
 
 * [Change log for version 2.2.29, released 31 July 2024](/docs/containers?topic=containers-cos_plugin_changelog#02229_object_plugin)
@@ -7929,6 +7953,8 @@ subcollection: containers
 [Ingress ALB version change log](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
+
+    * [1.11.2_7140_iks, released 23 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7140_iks)
 
     * [1.11.2_7133_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7133_iks)
 
@@ -10066,9 +10092,9 @@ subcollection: containers
 
 * [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
 
-    * [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
+    * [Classic regions with multiple data centers](/docs/containers?topic=containers-regions-and-zones#zones-mz)
 
-    * [Single zone Classic data centers](/docs/containers?topic=containers-regions-and-zones#zones-sz)
+    * [Classic regions with one data center](/docs/containers?topic=containers-regions-and-zones#zones-sz)
 
     * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-09-04"
+lastupdated: "2024-09-23"
 
 
 keywords: kubernetes, containers, 130, version 130, 130 update actions
@@ -27,6 +27,7 @@ Review information about version 1.30 of {{site.data.keyword.containerlong}}. Fo
 ![This badge indicates Kubernetes version 1.30 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.30 certification badge" caption-side="bottom"} 
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.30 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
+
 
 
 

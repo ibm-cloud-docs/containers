@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-19"
+lastupdated: "2024-09-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, rbac, policy, providers, benefits
@@ -22,6 +22,7 @@ Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/produ
 {: shortdesc}
 
 {{site.data.keyword.containerlong_notm}} is a managed offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud.
+{: #overview-iks}
 
 
 Review frequently asked questions and key technologies that {{site.data.keyword.containerlong_notm}} uses.
@@ -47,6 +48,7 @@ Account
 
 Cluster, worker pool, and worker node
 :   A Kubernetes cluster consists of a master and one or more compute hosts that are called worker nodes. Worker nodes are organized into worker pools of the same flavor, or profile of CPU, memory, operating system, attached disks, and other properties. The worker nodes correspond to the Kubernetes `Node` resource, and are managed by a Kubernetes master that centrally controls and monitors all Kubernetes resources in the cluster. So when you deploy the resources for a containerized app, the Kubernetes master decides which worker node to deploy those resources on, accounting for the deployment requirements and available capacity in the cluster. Kubernetes resources include services, deployments, and pods.
+{: #overview-clusters}
 
 Namespace
 :   Kubernetes namespaces are a way to divide your cluster resources into separate areas that you can deploy apps and restrict access to, such as if you want to share the cluster with multiple teams. For example, system resources that are configured for you are kept in separate namespaces like `kube-system` or `ibm-system`. If you don't designate a namespace when you create a Kubernetes resource, the resource is automatically created in the `default` namespace.
@@ -74,7 +76,20 @@ To dive deeper into Kubernetes, see the [Kubernetes documentation](https://kuber
 ## What are containers?
 {: #what-are-containers-overview}
 
-Containers provide a standard way to package your application's code, configurations, and dependencies into a single unit that can run as a resource-isolated process on a compute server. To run your app in Kubernetes on {{site.data.keyword.containerlong_notm}}, you must first containerize your app by creating a container image that you store in a container registry.
+Containers provide a standard way to package your application's code, configurations, and dependencies into a single unit that can run as a resource-isolated process on a compute server. To run your app on {{site.data.keyword.cloud_notm}}, you must first containerize your app by creating a container image that you store in a container registry.
+
+
+Image
+:   A container image is the base for every container that you want to run. Container images are built from a Dockerfile, a text file that defines how to build the image and which build artifacts to include in it, such as the app, the app configuration, and its dependencies. Images are always built from other images, making them quick to configure. Let someone else do the bulk of the work on an image and then tweak it for your use.
+
+Registry
+:   An image registry is a place to store, retrieve, and share container images. Images that are stored in a registry can either be publicly available (public registry) or accessible by a small group of users (private registry). {{site.data.keyword.cloud_notm}} offers public images that you can use to create your first containerized app. When it comes to enterprise applications, use a private registry like the one that is provided in {{site.data.keyword.cloud_notm}} to protect your images from being used by unauthorized users.
+
+Container
+:   Every container is created from an image. A container is a packaged app with all its dependencies so that the app can be moved between environments and run without changes. Unlike virtual machines, containers don't virtualize a device, its operating system, and the underlying hardware. Only the app code, run time, system tools, libraries, and settings are packaged inside the container. Containers run as isolated processes on Ubuntu compute hosts and share the host operating system and its hardware resources. This approach makes a container more lightweight, portable, and efficient than a virtual machine.
+
+
+
 
 ## What compute host infrastructure does {{site.data.keyword.containerlong_notm}} offer?
 {: #what-compute-infra-is-offered}
@@ -171,48 +186,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster by using infr
 
 
 
-Choice of container platform provider
-:   Deploy clusters with **{{site.data.keyword.redhat_openshift_notm}}** or community **Kubernetes** installed as the container platform orchestrator.
-:   Choose the developer experience that fits your company, or run workloads across both {{site.data.keyword.redhat_openshift_notm}} or community Kubernetes clusters.
-:   Built-in integrations from the {{site.data.keyword.cloud_notm}} console to the Kubernetes dashboard or {{site.data.keyword.redhat_openshift_notm}} web console.
-:   Single view and management experience of all your {{site.data.keyword.redhat_openshift_notm}} or community Kubernetes clusters from {{site.data.keyword.cloud_notm}}. For more information, see Comparison between [{{site.data.keyword.redhat_openshift_notm}}](#openshift_kubernetes) and community Kubernetes clusters.
-
-
-Single-tenant Kubernetes clusters with compute, network, and storage infrastructure isolation
-:  Create your own customized infrastructure that meets the requirements of your organization.
-:  Choose between [infrastructure providers](/docs/containers?topic=containers-overview#what-compute-infra-is-offered).
-:   Provision a dedicated and secured Kubernetes master, worker nodes, virtual networks, and storage by using the resources provided by IBM Cloud infrastructure.
-:   Fully managed Kubernetes master that is continuously monitored and updated by {{site.data.keyword.IBM_notm}} to keep your cluster available.
-:   Option to provision worker nodes as bare metal servers for compute-intensive workloads such as data, GPU, and AI.
-:   Store persistent data, share data between Kubernetes pods, and restore data when needed with the integrated and secure volume service.
-:   Benefit from full support for all native Kubernetes APIs.
-
-Multizone clusters to increase high availability
-:   Easily manage worker nodes of the same flavor (CPU, memory, virtual or physical) with worker pools.
-:   Guard against zone failure by spreading nodes evenly across select multizones and by using anti-affinity pod deployments for your apps.
-:   Decrease your costs by using multizone clusters instead of duplicating the resources in a separate cluster.
-:   Benefit from automatic load balancing across apps with the multizone load balancer (MZLB) that is set up automatically for you in each zone of the cluster.
-
-
-Highly available masters
-:   Reduce cluster downtime such as during master updates with highly available masters that are provisioned automatically when you create a cluster.
-:   Spread your masters across zones in a multizone cluster to protect your cluster from zonal failures.
-
-Image security compliance with Vulnerability Advisor
-:   Set up your own repo in a secured Docker private image registry where images are stored and shared by all users in the organization.
-:   Benefit from automatic scanning of images in your private {{site.data.keyword.cloud_notm}} registry.
-:   Review recommendations specific to the operating system used in the image to fix potential vulnerabilities.
-
-Continuous monitoring of the cluster health
-:   Use the cluster dashboard to quickly see and manage the health of your cluster, worker nodes, and container deployments.
-:   Find detailed consumption metrics by using {{site.data.keyword.mon_full}} and quickly expand your cluster to meet work loads.
-:   Review logging information by using {{site.data.keyword.la_full}} to see detailed cluster activities.
-
-Secure exposure of apps to the public
-:   Choose between a public IP address, an {{site.data.keyword.IBM_notm}} provided route, or your own custom domain to access services in your cluster from the internet.
-
-{{site.data.keyword.cloud_notm}} service integration
-:   Add extra capabilities to your app through the integration of {{site.data.keyword.cloud_notm}} services, such as {{site.data.keyword.watson}} APIs, Blockchain, data services, or Internet of Things.
+{{_include-segments/service-benefits.md}}
 
 
 ## Comparison between {{site.data.keyword.redhat_openshift_notm}} and Kubernetes clusters
@@ -238,10 +212,11 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Integrated CI/CD with Jenkins| |Yes|
 |Stricter app security context set up by default| |Yes|
 |Simplified Kubernetes developer experience, with an app console that is suited for beginners| |Yes|
-|Supported operating system| [Kubernetes version information](/docs/containers?topic=containers-cs_versions). | [{{site.data.keyword.redhat_openshift_notm}} version information](/docs/openshift?topic=openshift-openshift_versions). |
+|Supported operating system| [Kubernetes version information](/docs/containers?topic=containers-cs_versions) | [{{site.data.keyword.redhat_openshift_notm}} version information](/docs/openshift?topic=openshift-openshift_versions) |
 |Preferred external traffic networking| Ingress | Router |
 |Secured routes encrypted with {{site.data.keyword.hscrypto}} | | Yes |
 {: caption="Characteristics of Kubernetes and {{site.data.keyword.redhat_openshift_notm}} clusters" caption-side="bottom"}
+{: #iks-os-table}
 
 
 

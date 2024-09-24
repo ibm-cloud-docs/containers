@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-19"
+lastupdated: "2024-09-23"
 
 keywords: kubernetes, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing, containers, {{site.data.keyword.containerlong_notm}}
 
@@ -125,20 +125,19 @@ Classic clusters
 The operating systems available to you depend on the cluster type you chose.
 
 
-Ubuntu 20.04
-:   For more information, see the [Ubuntu 20.04 release notes](https://wiki.ubuntu.com/FocalFossa/ReleaseNotes){: external}
 
-Ubuntu 24 (Beta)
-:   [Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate) is available in Beta. The following limitations and disclaimers apply.
-    - Should not be used for production workloads.
-    - Available for cluster versions 1.29 and later.
-    - Supported for virtual servers only. Cannot be used with bare metal servers. 
-    - Not available for GPU worker node flavors. 
-    - NTP uses `timesyncd`. Related commands might be updated.  
-    - The following add-ons and features are not supported. Do not migrate your worker nodes if you use these features:
-        - CSUtil add-on
-        - Object storage plug-in
-        - Portworx
+Ubuntu 20.04
+:   For more information, see the [Ubuntu 20.04 release notes](https://wiki.ubuntu.com/FocalFossa/ReleaseNotes){: external}.
+
+Ubuntu 24
+:   For more information, see the [Ubuntu 24.04 release notes](https://discourse.ubuntu.com/t/ubuntu-24-04-lts-noble-numbat-release-notes/39890){: external}.
+
+Migrating to a new OS? See [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
+{: tip}
+
+
+
+
 
 
 

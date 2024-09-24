@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-09-23"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, firewall, acl, acls, access control list, rules, security group
@@ -195,7 +195,7 @@ Follow the steps to view details about the VPC security groups.
 {: #vpc-sg-ui}
 {: ui}
 
-1. From the [Security groups for VPC dashboard](https://cloud.ibm.com/vpc-ext/network/securityGroups){: external}, find the security groups that are attached to the VPC that your cluster is in.
+1. From the [Security groups for VPC dashboard](https://cloud.ibm.com/infrastructure/network/securityGroups){: external}, find the security groups that are attached to the VPC that your cluster is in.
 1. Click on the security group.
 
     To sort the security groups by the VPC they are attached to, click the **Virtual Private Cloud** column heading in the table. 
@@ -208,7 +208,7 @@ Follow the steps to view details about the VPC security groups.
 {: #security-group-inbound-rules}
 {: ui}
 
-1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that your cluster is in.
+1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/infrastructure/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that your cluster is in.
 1. Click the **Rules** tab.
     *  To create new inbound rules to control inbound traffic to your worker nodes, in the **Inbound rules** section, click **Create**. 
     * To create new rules to control outbound traffic to your worker nodes, in the **Outbound rules** section, delete the default rule that allows all outbound traffic. Then, in the **Outbound rules** section, click **Create**. 
@@ -349,4 +349,3 @@ This scenario applies only to versions 1.29 and earlier.
     
 If the Ingress or console operators fail their health checks, you can repeat these steps to see if the LoadBalancer IP addresses changed. While rare, if the amount of traffic to your LoadBalancers varies widely, these IP addresses might change to handle the increased or decreased load.
 {: tip}
-
