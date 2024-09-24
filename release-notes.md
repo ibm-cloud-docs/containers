@@ -51,7 +51,7 @@ Ubuntu 24 is now available for {{site.data.keyword.containerlong_notm}} clusters
 {: release-note}
 
 Ingress ALB cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 
 
