@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2024
 
-lastupdated: "2024-09-04"
+lastupdated: "2024-09-24"
 
 
 keywords: change log, version history, ALB OAuth Proxy
@@ -19,6 +19,7 @@ subcollection: containers
 
 Review the version history for ALB OAuth Proxy.
 {: shortdesc}
+
 
 ## Version 2.0.0
 {: #cl-add-ons-alb-oauth-proxy-2.0.0}
@@ -61,4 +62,3 @@ Review the version history for ALB OAuth Proxy.
 - `oauth2-proxy v7.5.0-2295`
 - `oauth2-proxy v7.5.0-2291`
 - `oauth2-proxy v7.5.0-2281`
-
