@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-23"
+lastupdated: "2024-09-24"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,13 +30,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## September 2024
 {: #containers-sep24}
 
-### 23 September 2024
-{: #containers-23september24}
-{: release-note}
-
-Ingress ALB cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
-
 ### 24 September 2024
 {: #containers-sep2424}
 {: release-note}
@@ -50,6 +43,17 @@ Ubuntu 24 is now available for {{site.data.keyword.containerlong_notm}} clusters
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
+
+
+### 23 September 2024
+{: #containers-23september24}
+{: release-note}
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+
+
 
 ### 20 September 2024
 {: #containers-sep2024}

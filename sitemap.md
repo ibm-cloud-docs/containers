@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-09-23"
+lastupdated: "2024-09-24"
 
 
 keywords: containers
@@ -240,15 +240,15 @@ subcollection: containers
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
 
-    * [23 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-23september24)
-
-        * Ingress ALB cluster add-on patch updates.
-
     * [24 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2424)
 
         * Ubuntu 24 is now available for {{site.data.keyword.containerlong_notm}} clusters.
 
         * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
+    * [23 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-23september24)
+
+        * Ingress ALB cluster add-on patch updates.
 
     * [20 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2024)
 
