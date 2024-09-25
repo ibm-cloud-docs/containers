@@ -240,6 +240,10 @@ subcollection: containers
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
 
+    * [26 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2624)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [24 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep2424)
 
         * Ubuntu 24 is now available for {{site.data.keyword.containerlong_notm}} clusters.
@@ -7802,6 +7806,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.32, released 26 September 2024](/docs/containers?topic=containers-cos_plugin_changelog#02232_object_plugin)
 
 * [Change log for version 2.2.31, released 24 September 2024](/docs/containers?topic=containers-cos_plugin_changelog#02231_object_plugin)
 

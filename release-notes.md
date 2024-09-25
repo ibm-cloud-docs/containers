@@ -30,6 +30,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## September 2024
 {: #containers-sep24}
 
+### 26 September 2024
+{: #containers-sep2624}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ### 24 September 2024
 {: #containers-sep2424}
