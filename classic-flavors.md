@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-24"
+lastupdated: "2024-09-25"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, node scaling, ca, autoscaler
@@ -155,14 +155,16 @@ Review the classic worker node flavors by metro.
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- | -- |
-| mb4c.20x192 | 20, 192GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.20x384 | 20, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.20x64 | 20, 64GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.20x64.2x1.9tb.ssd | 20, 64GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.32x384.3.8tb.ssd | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 1920GB SSD | N/A|
-| mb4c.32x384.6x3.8tb.ssd | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 1920GB SSD | N/A|
-| mb4c.32x768.3.8tb.ssd | 32, 768GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.48x1536 | 48, 1536GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.20x192 | 20, 192GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.20x384 | 20, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.20x64 | 20, 64GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.20x64.2x1.9tb.ssd | 20, 64GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.32x384.3.8tb.ssd | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 1920GB SSD | N/A|
+| mb4c.32x384.6x3.8tb.ssd | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 1920GB SSD | N/A|
+| mb4c.32x768.3.8tb.ssd | 32, 768GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.48x1536 | 48, 1536GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.4x32 | 4, 32GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 2000GB HDD | N/A|
+| mb4c.4x32.1.9tb.ssd | 4, 32GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Bare Metal flavors in Chennai." caption-side="bottom"}
 {: #che-baremetal-table}
@@ -183,8 +185,8 @@ Review the classic worker node flavors by metro.
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- | -- |
-| mg4c.32x384.2xp100 | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD |2 P100 |
-| mg4c.48x384.2xv100 | 48, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD |2 V100 |
+| mg4c.32x384.2xp100 | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD |2 P100 |
+| mg4c.48x384.2xv100 | 48, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD |2 V100 |
 {: class="simple-tab-table"}
 {: caption="Table. Bare Metal GPUs flavors in Chennai." caption-side="bottom"}
 {: #che-baremetalgpu-table}
@@ -1111,14 +1113,16 @@ Review the classic worker node flavors by metro.
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- | -- |
-| mb4c.20x192 | 20, 192GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.20x384 | 20, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.20x64 | 20, 64GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.20x64.2x1.9tb.ssd | 20, 64GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.32x384.3.8tb.ssd | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 1920GB SSD | N/A|
-| mb4c.32x384.6x3.8tb.ssd | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 1920GB SSD | N/A|
-| mb4c.32x768.3.8tb.ssd | 32, 768GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
-| mb4c.48x1536 | 48, 1536GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.20x192 | 20, 192GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.20x384 | 20, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.20x64 | 20, 64GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.20x64.2x1.9tb.ssd | 20, 64GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.32x384.3.8tb.ssd | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 1920GB SSD | N/A|
+| mb4c.32x384.6x3.8tb.ssd | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 1920GB SSD | N/A|
+| mb4c.32x768.3.8tb.ssd | 32, 768GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.48x1536 | 48, 1536GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
+| mb4c.4x32 | 4, 32GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 2000GB HDD | N/A|
+| mb4c.4x32.1.9tb.ssd | 4, 32GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD | N/A|
 {: class="simple-tab-table"}
 {: caption="Table. Bare Metal flavors in Tokyo." caption-side="bottom"}
 {: #tok-baremetal-table}
@@ -1139,8 +1143,8 @@ Review the classic worker node flavors by metro.
 
 | Name | Cores, Memory, and Network speed | Type | OS | Primary storage | Secondary storage | GPUs |
 | ---- | -------------------------------- | ---- | -- | --------------- | ----------------- | -- |
-| mg4c.32x384.2xp100 | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD |2 P100 |
-| mg4c.48x384.2xv100 | 48, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**| 2000GB HDD | 960GB SSD |2 V100 |
+| mg4c.32x384.2xp100 | 32, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD |2 P100 |
+| mg4c.48x384.2xv100 | 48, 384GB, 10000Mbps | Physical | **UBUNTU_20_64 (default)**, UBUNTU_24_64| 2000GB HDD | 960GB SSD |2 V100 |
 {: class="simple-tab-table"}
 {: caption="Table. Bare Metal GPUs flavors in Tokyo." caption-side="bottom"}
 {: #tok-baremetalgpu-table}
