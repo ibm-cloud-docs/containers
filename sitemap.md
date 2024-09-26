@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-09-25"
+lastupdated: "2024-09-26"
 
 
 keywords: containers
@@ -10116,9 +10116,9 @@ subcollection: containers
 
 * [Where are the resources?](/docs/containers?topic=containers-regions-and-zones#regions_resources)
 
-    * [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
+    * [Resources in single zone clusters](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
 
-    * [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
+    * [Resources in multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
 * [Accessing resources](/docs/containers?topic=containers-regions-and-zones#endpoint)
 
