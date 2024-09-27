@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-09-25"
+lastupdated: "2024-09-27"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -42,6 +42,27 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.29 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.29.9_1559, released 25 September 2024
+{: #1299_1559_M}
+
+The following table shows the changes that are in the master fix pack 1.29.9_1559. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.13 | v2.5.15 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.8-1 | v1.29.9-1 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 445 | 446 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.4 | v1.1.5 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 897f067 | 5b17dab | New version contains updates and security fixes. |
+| Key Management Service provider | v2.9.9 | v2.9.10 | New version contains updates and security fixes. |
+| Konnectivity agent and server | v0.29.2 | v0.29.3 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.29.3){: external}. |
+| Kubernetes | v1.29.8 | v1.29.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.9){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3022 | 3051 | New version contains updates and security fixes. |
+{: caption="Changes since version 1.29.8_1556" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.29.9_1560, released 23 September 2024
