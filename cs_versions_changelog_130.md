@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-09-25"
+lastupdated: "2024-09-27"
 
 
 keywords: kubernetes, containers, change log, 130 change log, 130 updates
@@ -37,6 +37,28 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.30 change log
 {: #130_changelog}
+
+### Change log for master fix pack 1.30.5_1537, released 25 September 2024
+{: #1305_1537_M}
+
+The following table shows the changes that are in the master fix pack 1.30.5_1537. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.13 | v2.5.15 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.30.4-1 | v1.30.5-1 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 445 | 446 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.4 | v1.1.5 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 897f067 | 5b17dab | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.4 | v2.10.5 | New version contains updates and security fixes. |
+| Konnectivity agent and server | v0.30.2 | v0.30.3 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.30.3){: external}. |
+| Kubernetes | v1.30.4 | v1.30.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.5){: external}. |
+| Kubernetes Metrics Server | v0.7.1 | v0.7.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.7.2){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3022 | 3051 | New version contains updates and security fixes. |
+{: caption="Changes since version 1.30.4_1534" caption-side="bottom"}
+
 
 ### Change log for worker node fix pack 1.30.5_1538, released 23 September 2024
 {: #1305_1538_W}

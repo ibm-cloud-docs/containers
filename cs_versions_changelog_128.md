@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-09-25"
+lastupdated: "2024-09-27"
 
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
@@ -50,6 +50,29 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.28 change log.
 {: shortdesc}
 
+
+
+### Change log for master fix pack 1.28.14_1579, released 25 September 2024
+{: #12814_1579_M}
+
+The following table shows the changes that are in the master fix pack 1.28.14_1579. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| GPU device plug-in and installer | 184b5e2 | 91f881a | New version contains updates and security fixes. |
+| {{site.data.keyword.IBM_notm}} Calico extension | 1598 | 1607 | New version contains security fixes. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.24 | v2.4.26 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.28.13-1 | v1.28.14-1 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 445 | 446 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | 48787be | bc543b7 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 897f067 | 5b17dab | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.13 | v2.8.14 | New version contains updates and security fixes. |
+| Konnectivity agent and server | v0.1.9 | v0.1.10 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.10){: external}. |
+| Kubernetes | v1.28.13 | v1.28.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.14){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3022 | 3051 | New version contains updates and security fixes. |
+{: caption="Changes since version 1.28.13_1576" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.28.14_1580, released 23 September 2024
