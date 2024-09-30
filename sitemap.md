@@ -3016,8 +3016,6 @@ subcollection: containers
 
 * [Establish resource requests and limits for the namespaces](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
 
-    * [Learn how to manage worker nodes](/docs/containers?topic=containers-strategy#flavor-manage)
-
 * [Make your apps highly available too](/docs/containers?topic=containers-strategy#apps-ha)
 
 * [Next steps](/docs/containers?topic=containers-strategy#plan-network-next)
