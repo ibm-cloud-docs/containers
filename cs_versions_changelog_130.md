@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-09-27"
+lastupdated: "2024-09-30"
 
 
 keywords: kubernetes, containers, change log, 130 change log, 130 updates
@@ -55,7 +55,7 @@ The following table shows the changes that are in the master fix pack 1.30.5_153
 | Key Management Service provider | v2.10.4 | v2.10.5 | New version contains updates and security fixes. |
 | Konnectivity agent and server | v0.30.2 | v0.30.3 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.30.3){: external}. |
 | Kubernetes | v1.30.4 | v1.30.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.5){: external}. |
-| Kubernetes Metrics Server | v0.7.1 | v0.7.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.7.2){: external}. |
+| Kubernetes Metrics Server | v0.7.1 | v0.7.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.7.2){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3022 | 3051 | New version contains updates and security fixes. |
 {: caption="Changes since version 1.30.4_1534" caption-side="bottom"}
 
