@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-18"
+lastupdated: "2024-09-29"
 
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
@@ -571,7 +571,7 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 See [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding).
 
 
-If you are noticing errors when retrieving audit logs when they've been previously working, this might be due to the certificate authority used for audit logs expiring or rotated. Repeat the previous steps to setup a webhook and renew the certificate.
+If you are noticing errors when retrieving audit logs when they've been previously working, this might be due to the certificate authority used for audit logs expiring or rotated. Repeat the previous steps to setup a webhook and renew the certificate. Also, you can look for the Kubernetes metric called `apiserver_audit_error_total{plugin="webhook"}` which indicates whether your webhook certificate has expired.
 {: tip}
 
 
