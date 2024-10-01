@@ -4500,9 +4500,9 @@ subcollection: containers
 
 * [Load balancer types](/docs/containers?topic=containers-vpclb-about#vpclb-types)
 
-    * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-alb)
+    * [Application load balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-alb)
 
-    * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-nlb)
+    * [Network load balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-nlb)
 
 * [Limitations](/docs/containers?topic=containers-vpclb-about#vpclb_limit)
 
@@ -5238,13 +5238,11 @@ subcollection: containers
 
 * [Configure rclone for your bucket in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-2)
 
-* [Syncing between COS buckets](/docs/containers?topic=containers-storage-cos-app-migration#rclone-inspect)
+* [View the contents of your COS buckets](/docs/containers?topic=containers-storage-cos-app-migration#rclone-inspect)
 
 * [Syncing contents between buckets](/docs/containers?topic=containers-storage-cos-app-migration#rclone-sync)
 
-* [Create a PVC in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#cos-app-redploy)
-
-* [Redeploy your app](/docs/containers?topic=containers-storage-cos-app-migration#cos-mig-redeploy-app)
+* [Redeploy your app in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#cos-app-redploy)
 
 [Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
 
