@@ -4500,9 +4500,9 @@ subcollection: containers
 
 * [Load balancer types](/docs/containers?topic=containers-vpclb-about#vpclb-types)
 
-    * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-alb)
+    * [Application load balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-alb)
 
-    * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-nlb)
+    * [Network load balancer for VPC](/docs/containers?topic=containers-vpclb-about#vpc-nlb)
 
 * [Limitations](/docs/containers?topic=containers-vpclb-about#vpclb_limit)
 
