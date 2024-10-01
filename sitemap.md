@@ -4981,7 +4981,7 @@ subcollection: containers
 
 [Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} cluster add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
-* [Creating an app deployment](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
+* [Creating an app](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
 
 * [Creating a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-create-snapshot)
 
@@ -5232,11 +5232,11 @@ subcollection: containers
 
 * [Get the details of your app](/docs/containers?topic=containers-storage-cos-app-migration#cos-mig-app-details)
 
-* [Install `rclone`](/docs/containers?topic=containers-storage-cos-app-migration#rclone-install)
+* [Install rclone](/docs/containers?topic=containers-storage-cos-app-migration#rclone-install)
 
-* [Configure `rclone` for your bucket in Account 1](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config)
+* [Configure rclone for your bucket in Account 1](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-1)
 
-* [Configure `rclone` for your bucket in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config)
+* [Configure rclone for your bucket in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-2)
 
 * [Syncing between COS buckets](/docs/containers?topic=containers-storage-cos-app-migration#rclone-inspect)
 
