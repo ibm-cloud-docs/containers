@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-09-30"
+lastupdated: "2024-10-01"
 
 
 keywords: containers
@@ -237,6 +237,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
+
+    * [01 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0124)
+
+        * New! The {{site.data.keyword.cos_full_notm}} cluster add-on is available in Beta for allowlisted accounts.
 
 * [September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep24)
 
@@ -2709,250 +2715,6 @@ subcollection: containers
     * [6 January 2021](/docs/containers?topic=containers-containers-relnotes#containers-jan0621)
 
         * Master versions
-
-* [December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec20)
-
-    * [21 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec2120)
-
-        * Gateway firewalls and Calico policies
-
-        * Worker node versions
-
-    * [18 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1820)
-
-        * CLI change log
-
-        * {{site.data.keyword.cos_full_notm}} plug-in
-
-    * [17 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1720)
-
-        * Audit documentation
-
-        * Back up and restore
-
-        * Ingress ALB change log
-
-    * [16 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1620)
-
-        * Istio add-on
-
-    * [15 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1520)
-
-        * Cluster autoscaler
-
-    * [14 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1420)
-
-        * Ingress ALB change log
-
-        * Master versions
-
-    * [11 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec1120)
-
-        * Storage add-ons
-
-        * strongSwan versions
-
-        * Worker node versions
-
-    * [9 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec0920)
-
-        * Accessing clusters
-
-        * CLI change log
-
-        * Proxy protocol for Ingress
-
-        * Helm version 2 unsupported
-
-        * Istio add-on
-
-    * [7 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec0720)
-
-        * {{site.data.keyword.keymanagementserviceshort}} enhancements
-
-        * Worker node versions
-
-    * [3 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec0320)
-
-        * Cluster autoscaler add-on
-
-        * Istio add-on
-
-    * [1 December 2020](/docs/containers?topic=containers-containers-relnotes#containers-dec0120)
-
-        * Default Kubernetes Ingress image
-
-* [November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov20)
-
-    * [24 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2420)
-
-        * New! Reservations to reduce classic worker node costs
-
-    * [23 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2320)
-
-        * Worker node versions
-
-    * [20 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov2020)
-
-        * New! Portieris for image security enforcement
-
-    * [19 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1920)
-
-        * Ingress ALB change log
-
-    * [18 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1820)
-
-        * CLI change log
-
-        * Knative add-on deprecation
-
-        * New! {{site.data.keyword.block_storage_is_short}} change log
-
-    * [16 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1620)
-
-        * GPU worker nodes
-
-        * Master versions
-
-    * [13 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov1320)
-
-        * {{site.data.keyword.at_full_notm}} and IAM events
-
-    * [9 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov0920)
-
-        * Worker node versions
-
-    * [5 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov0520)
-
-        * {{site.data.keyword.block_storage_is_short}}
-
-        * Classic-enabled VPCs
-
-        * Gateway firewalls and Calico policies
-
-        * Istio add-on
-
-    * [2 November 2020](/docs/containers?topic=containers-containers-relnotes#containers-nov0220)
-
-        * General availability of Kubernetes Ingress support
-
-        * Persistent storage
-
-* [October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct20)
-
-    * [26 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct2620)
-
-        * Master versions
-
-        * Worker node versions
-
-    * [22 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct2220)
-
-        * API key
-
-        * Benchmark for Kubernetes 1.19
-
-        * Huge pages
-
-        * Istio add-on
-
-    * [16 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct1620)
-
-        * Gateway firewalls and Calico policies
-
-        * Ingress classes
-
-        * {{site.data.keyword.cos_short}}
-
-    * [13 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct1320)
-
-        * New! Certified Kubernetes version 1.19
-
-        * Deprecated: Kubernetes version 1.16
-
-        * New! Network load balancer for VPC
-
-        * Version change logs
-
-        * VPC load balancer
-
-        * VPC security groups
-
-        * {{site.data.keyword.cos_short}} in VPC Gen 2
-
-    * [12 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct1220)
-
-        * Versions
-
-    * [8 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct0820)
-
-        * Ingress ALB change log
-
-    * [6 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct0620)
-
-        * CLI change log
-
-        * Ingress secret expiration synchronization
-
-        * Istio add-on
-
-    * [1 October 2020](/docs/containers?topic=containers-containers-relnotes#containers-oct0120)
-
-        * Default version
-
-        * Ingress ALB change log
-
-* [September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sep20)
-
-    * [29 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2920)
-
-        * Gateway firewalls and Calico policies
-
-    * [26 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2620)
-
-        * Versions
-
-    * [24 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2420)
-
-        * CLI change log
-
-    * [23 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2320)
-
-        * Ingress ALB change log
-
-        * Istio add-on
-
-    * [22 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2220)
-
-        * Unsupported: Kubernetes version 1.15
-
-    * [21 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept2120)
-
-        * Versions
-
-        * Versions
-
-        * Istio add-on
-
-        * VPC load balancer
-
-    * [4 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept0420)
-
-        * New! CIS Kubernetes Benchmark
-
-    * [3 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept0320)
-
-        * CA certificate rotation
-
-    * [2 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept0220)
-
-        * Istio add-on
-
-    * [1 September 2020](/docs/containers?topic=containers-containers-relnotes#containers-sept120)
-
-        * Deprecation of VPC Gen 1 compute
-
-        * Istio add-on
 
 
 ## Tutorials library for Kubernetes Service
@@ -5487,6 +5249,26 @@ subcollection: containers
 [Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
 
 * [{{site.data.keyword.cos_full_notm}} Helm chart storage classes](/docs/containers?topic=containers-storage_cos_reference#cos-sc-ref-helm)
+
+[Installing the {{site.data.keyword.cos_full_notm}} cluster add-on](/docs/containers?topic=containers-storage-cos-install-addon#storage-cos-install-addon)
+
+* [Enabling the {{site.data.keyword.cos_full_notm}} add-on](/docs/containers?topic=containers-storage-cos-install-addon#enable-cos-addon)
+
+* [Deploying an app that uses {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-app)
+
+    * [Create a Kubernetes secret that contains your COS credentials.](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-app-secret)
+
+    * [Create a PVC](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-app-pvc)
+
+    * [Create a deployment](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-app-dep)
+
+* [Setting up autorecovery for stale volumes](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-autorecovery)
+
+    * [Verifying recovery by simulating an error](/docs/containers?topic=containers-storage-cos-install-addon#cos_transport_verify_recovery)
+
+* [Disabling the {{site.data.keyword.cos_full_notm}} add-on](/docs/containers?topic=containers-storage-cos-install-addon#disable-cos-addon)
+
+* [{{site.data.keyword.cos_full_notm}} cluster add-on storage classes](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon)
 
 
 ## Setting up Portworx
@@ -11150,6 +10932,10 @@ subcollection: containers
 [Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails#cos_secret_access_fails)
 
 [Why is the transport endpoint not connected?](/docs/containers?topic=containers-cos_transport_ts_connect#cos_transport_ts_connect)
+
+[Why do I see transport endpoint not connected errors when using the {{site.data.keyword.cos_full_notm}} cluster add-on?](/docs/containers?topic=containers-cos_transport_ts_connect_addon#cos_transport_ts_connect_addon)
+
+* [Verifying recovery by simulating an error](/docs/containers?topic=containers-cos_transport_ts_connect_addon#cos_transport_verify)
 
 
 ### Portworx Storage
