@@ -334,11 +334,11 @@ Review the required and optional VPC ALB annotations and specifications.
 
 
 `service.kubernetes.io/ibm-load-balancer-cloud-provider-dns-provider`
-:   Version 1.30</container> or later.
+:   Version 1.30 or later.
 :   If you create an Ingress domain with the `ibm-load-balancer-cloud-provider-dns-name` annotation, register it with the specified domain provider. If you do not include this annotation when creating an Ingress domain, the internal, IBM-managed `akamai` provider is applied by default. To create a domain that uses an external provider, you must have the [required credentials](/docs/containers?topic=containers-ingress-domains&interface=ui#ingress-domains-ui-credentials) added to your cluster. Note that you can only use one external provider per cluster; if you already have a domain with an external provider in your cluster, you must specify that external provider. For information on available providers, see [Setting up a domain for your cluster](/docs/containers?topic=containers-ingress-domains&interface=ui#ingress-domain-int).
 
 `service.kubernetes.io/ibm-load-balancer-cloud-provider-ingress-dns-monitor`
-:   Version 1.30</container> or later.
+:   Version 1.30 or later.
 :   Enable health monitoring for the Ingress domain you create with the `ibm-load-balancer-cloud-provider-dns-name` annotation. This annotation is only available if you specify the `akamai-ext` provider with the `ibm-load-balancer-cloud-provider-dns-provider`. Specify a provider-specific JSON configuration. See the following example. Note that if you are using Context Based Restrictions, you must make sure that you have a [configured rule](https://cloud.ibm.com/context-based-restrictions/rules){: external} that targets the **Kubernetes Service** and and protects **Management APIs**. 
 
     ```json
