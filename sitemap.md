@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-02"
+lastupdated: "2024-10-03"
 
 
 keywords: containers
@@ -247,6 +247,8 @@ subcollection: containers
         * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
 
         * Storage Operator cluster add-on patch update.
+
+        * Static route add-on version patch update.
 
     * [01 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0124)
 
