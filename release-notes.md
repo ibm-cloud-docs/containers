@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-10-01"
+lastupdated: "2024-10-03"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,25 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2024
 {: #containers-oct24}
+
+### 03 October 2024
+{: #containers-oct0324}
+{: release-note}
+
+{{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+
+{{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+
+Storage Operator cluster add-on patch update.
+:  For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
+
+
+Static route add-on version patch update.
+:   For more information, see [the change log](/docs/containers?topic=containers-versions-static-route).
+
 
 ### 01 October 2024
 {: #containers-oct0124}
@@ -236,7 +255,7 @@ Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
 
 Storage Operator cluster add-on patch update.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
+:  For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
 
 
 

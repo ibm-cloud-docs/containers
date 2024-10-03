@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-23"
+lastupdated: "2024-10-02"
 
 
 keywords: containers, block storage, deploy apps
@@ -1279,7 +1279,7 @@ kubectl cp <namespace>/<pod>:<pod_filepath>/<filename> <local_filepath>/<filenam
 Copy data from your local machine to a specific container that runs in a pod in your cluster.
 
 ```sh
-kubectl cp <local_filepath>/<filename> <namespace>/<pod>:<pod_filepath> -c <container>
+kubectl cp <local_filepath>/<filename> <namespace>/<pod>:<pod_filepath> -c CONTAINER
 ```
 {: pre}
 
