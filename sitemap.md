@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-03"
+lastupdated: "2024-10-04"
 
 
 keywords: containers
@@ -5259,6 +5259,8 @@ subcollection: containers
 * [{{site.data.keyword.cos_full_notm}} Helm chart storage classes](/docs/containers?topic=containers-storage_cos_reference#cos-sc-ref-helm)
 
 [Installing the {{site.data.keyword.cos_full_notm}} cluster add-on](/docs/containers?topic=containers-storage-cos-install-addon#storage-cos-install-addon)
+
+* [Understanding bucket creation and removal](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-bucket-cd)
 
 * [Enabling the {{site.data.keyword.cos_full_notm}} add-on](/docs/containers?topic=containers-storage-cos-install-addon#enable-cos-addon)
 
