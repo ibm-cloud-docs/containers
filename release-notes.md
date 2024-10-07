@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-10-03"
+lastupdated: "2024-10-07"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2024
 {: #containers-oct24}
+
+
+
+New! The `gx3d.160x1792.8h100` worker node flavor with H100 GPU support is available for VPC clusters.
+:   For a list of available flavors, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors).
 
 ### 03 October 2024
 {: #containers-oct0324}
