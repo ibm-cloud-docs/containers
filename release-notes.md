@@ -31,6 +31,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## October 2024
 {: #containers-oct24}
 
+### 07 October 2024
+{: #containers-oct0724}
+{: release-note}
+
 
 
 New! The `gx3d.160x1792.8h100` worker node flavor with H100 GPU support is available for VPC clusters.
