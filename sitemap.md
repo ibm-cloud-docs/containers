@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-04"
+lastupdated: "2024-10-07"
 
 
 keywords: containers
@@ -239,6 +239,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
+
+    * New! The `gx3d.160x1792.8h100` worker node flavor with H100 GPU support is available for VPC clusters.
 
     * [03 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0324)
 
