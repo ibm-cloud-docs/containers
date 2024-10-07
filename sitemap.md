@@ -240,7 +240,9 @@ subcollection: containers
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
 
-    * New! The `gx3d.160x1792.8h100` worker node flavor with H100 GPU support is available for VPC clusters.
+    * [07 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0724)
+
+        * New! The `gx3d.160x1792.8h100` worker node flavor with H100 GPU support is available for VPC clusters.
 
     * [03 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0324)
 
