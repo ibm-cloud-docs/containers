@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-07"
+lastupdated: "2024-10-08"
 
 
 keywords: containers
@@ -5044,6 +5044,26 @@ subcollection: containers
 [Removing {{site.data.keyword.block_storage_is_short}} from your cluster](/docs/containers?topic=containers-storage-block-vpc-remove#storage-block-vpc-remove)
 
 * [Cleaning up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-block-vpc-remove#cleaning-up-block-vpc)
+
+[Migrating {{site.data.keyword.block_storage_is_short}} apps and data between IBM Cloud accounts](/docs/containers?topic=containers-storage-block-vpc-migration#storage-block-vpc-migration)
+
+* [Prerequisites](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-migration-prereqs)
+
+* [Get your account IDs](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-account-IDs)
+
+* [Set up your permissions](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-s2s)
+
+* [Optional: Deploy an app](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-deploy)
+
+* [Create a snapshot](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot)
+
+* [Get the details of your snapshot](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-details)
+
+* [Restore the snapshot in Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-restore)
+
+* [Redploy your app](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-redeploy)
+
+* [Continue migrating your snapshots and apps to Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-next)
 
 [{{site.data.keyword.block_storage_is_short}} storage class reference](/docs/containers?topic=containers-storage-block-vpc-sc-ref#storage-block-vpc-sc-ref)
 
