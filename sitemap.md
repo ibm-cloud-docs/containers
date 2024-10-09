@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-08"
+lastupdated: "2024-10-09"
 
 
 keywords: containers
@@ -5301,6 +5301,8 @@ subcollection: containers
     * [Verifying recovery by simulating an error](/docs/containers?topic=containers-storage-cos-install-addon#cos_transport_verify_recovery)
 
 * [Disabling the {{site.data.keyword.cos_full_notm}} add-on](/docs/containers?topic=containers-storage-cos-install-addon#disable-cos-addon)
+
+* [Migrating from the Helm plug-in to the cluster add-on](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-migrate-helm)
 
 * [{{site.data.keyword.cos_full_notm}} cluster add-on storage classes](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon)
 
