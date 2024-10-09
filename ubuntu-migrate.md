@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-09-23"
+lastupdated: "2024-10-09"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -24,7 +24,7 @@ To migrate your worker nodes to a new Ubuntu version, run a command to specify t
 ## Default operating system by cluster version
 {: #ubuntu-default}
 
-Ubuntu 20 is the default operating system for all clusters that run version 1.30 and earlier. Ubuntu 24 is the default operating system for clusters that run version 1.31. Clusters upgraded to version 1.31 continue to support worker nodes that run either Ubuntu 20 or 24. A worker pool's operating system does not automatically change when you upgrade a cluster.
+Ubuntu 24 is the default operating system for all supported cluster versions. A worker pool's operating system does not automatically change when you upgrade a cluster.
 
 ## Ubuntu 24 limitations
 {: #ubuntu-24-lim}

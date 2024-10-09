@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-07"
+lastupdated: "2024-10-09"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
+
+    * [09 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0924)
+
+        * Ubuntu 20 for {{site.data.keyword.containerlong_notm}} clusters is deprecated and support ends on 1 April 2025.
 
     * [07 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0724)
 
@@ -5045,6 +5049,26 @@ subcollection: containers
 
 * [Cleaning up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-block-vpc-remove#cleaning-up-block-vpc)
 
+[Migrating {{site.data.keyword.block_storage_is_short}} apps and data between IBM Cloud accounts](/docs/containers?topic=containers-storage-block-vpc-migration#storage-block-vpc-migration)
+
+* [Prerequisites](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-migration-prereqs)
+
+* [Get your account IDs](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-account-IDs)
+
+* [Set up your permissions](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-s2s)
+
+* [Optional: Deploy an app](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-deploy)
+
+* [Create a snapshot](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot)
+
+* [Get the details of your snapshot](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-details)
+
+* [Restore the snapshot in Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-restore)
+
+* [Redploy your app](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-redeploy)
+
+* [Continue migrating your snapshots and apps to Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-next)
+
 [{{site.data.keyword.block_storage_is_short}} storage class reference](/docs/containers?topic=containers-storage-block-vpc-sc-ref#storage-block-vpc-sc-ref)
 
 
@@ -5281,6 +5305,8 @@ subcollection: containers
     * [Verifying recovery by simulating an error](/docs/containers?topic=containers-storage-cos-install-addon#cos_transport_verify_recovery)
 
 * [Disabling the {{site.data.keyword.cos_full_notm}} add-on](/docs/containers?topic=containers-storage-cos-install-addon#disable-cos-addon)
+
+* [Migrating from the Helm plug-in to the cluster add-on](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-migrate-helm)
 
 * [{{site.data.keyword.cos_full_notm}} cluster add-on storage classes](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon)
 

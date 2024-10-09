@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-10-07"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2024
 {: #containers-oct24}
+
+
+
+### 09 October 2024
+{: #containers-oct0924}
+{: release-note}
+
+Ubuntu 20 for {{site.data.keyword.containerlong_notm}} clusters is deprecated and support ends on 1 April 2025.
+:   Migrate your worker nodes to Ubuntu 24 before support ends. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin migration. For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
+
+
 
 ### 07 October 2024
 {: #containers-oct0724}
