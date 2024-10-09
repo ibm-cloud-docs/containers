@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-09-19"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
@@ -157,7 +157,7 @@ When you create a logging configuration for a source in your cluster to forward 
 What are the sources that I can configure log forwarding for?
 :   In the following image, you can see the region of the sources that you can configure logging for.
 
-![Log sources in your cluster.](images/log_sources.png "Log sources in your cluster"){: caption="Figure 1. Log sources in your cluster" caption-side="bottom"}
+![Log sources in your cluster.](images/log_sources.png "Log sources in your cluster"){: caption="Log sources in your cluster" caption-side="bottom"}
 
 1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.
     
@@ -229,7 +229,7 @@ The following table shows the different options that you have when you configure
 | `--ca-cert` | Required: When the logging type is `syslog` and the protocol is `tls`, the Kubernetes secret name that contains the certificate authority certificate. |
 | `--verify-mode` | When the logging type is `syslog` and the protocol is `tls`, the verification mode. Supported values are `verify-peer` and the default `verify-none`. |
 | `--skip-validation` | Optional: Skip the validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. |
-{: caption="Table 1. Understanding logging configuration options" caption-side="bottom"}
+{: caption="Understanding logging configuration options" caption-side="bottom"}
 
 
 ### Forwarding logs to your own server over the `udp` or `tcp` protocols
@@ -304,7 +304,7 @@ You can choose which logs to forward to your external server by filtering out sp
 | `<filter_ID>` | Optional: The ID of the log filter. |
 | `--show-matching-configs` | Optional: Show the logging configurations that each filter applies to. |
 | `--all` | Optional: Delete all your log forwarding filters. |
-{: caption="Table 2. Understanding the options for log filtering" caption-side="bottom"}
+{: caption="Understanding the options for log filtering" caption-side="bottom"}
 
 1. Create a logging filter.
     ```sh

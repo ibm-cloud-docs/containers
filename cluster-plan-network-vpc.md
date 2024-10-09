@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-09-23"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, containers network
@@ -188,7 +188,7 @@ In this scenario, you run workloads in a VPC cluster that are accessible to requ
 {: shortdesc}
 
 
-![Network setup for a VPC cluster that runs internet-facing app workloads.](images/vpc_no_pgw.png){: caption="Figure 1. Network setup for a VPC cluster that runs internet-facing app workloads" caption-side="bottom"}
+![Network setup for a VPC cluster that runs internet-facing app workloads.](images/vpc_no_pgw.png){: caption="Network setup for a VPC cluster that runs internet-facing app workloads" caption-side="bottom"}
 
 ### Worker-to-worker communication
 {: #vpc-no-pgw-worker}
@@ -222,7 +222,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 In this scenario, you run workloads in a VPC cluster that are accessible to requests from the Internet. Public access is controlled so that end users can access your apps while unwanted public requests to your apps are denied. However, you might need to also provide limited public egress from your worker nodes to a public endpoint, and want to ensure that this public egress is controlled and isolated in your cluster. For example, you might need your app pods to access an {{site.data.keyword.cloud_notm}} service that does not support private cloud service endpoints, and must be accessed over the public network.
 {: shortdesc}
 
-![Network setup for a cluster that allows limited, secure public access.](images/cs_org_ov_vpc.png){: caption="Figure 1. Network setup for a VPC cluster that allows limited, secure public access" caption-side="bottom"}
+![Network setup for a cluster that allows limited, secure public access.](images/cs_org_ov_vpc.png){: caption="Network setup for a VPC cluster that allows limited, secure public access" caption-side="bottom"}
 
 
 ### Worker-to-worker communication

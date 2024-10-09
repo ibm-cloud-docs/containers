@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, 1.22, versions, update, upgrade
@@ -30,7 +30,7 @@ This version is no longer supported. Update your cluster to a [supported version
 Review information about version 1.22 of {{site.data.keyword.containerlong}}, released 29 Sept 2021.
 {: shortdesc}
 
-![This badge indicates Kubernetes version 1.22 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.22 certification badge" caption-side="bottom"}
+![This badge indicates Kubernetes version 1.22 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.22 certification badge" caption-side="bottom"}
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.22 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
@@ -98,4 +98,3 @@ The following table shows the actions that you must take after you update the Ku
 | **Unsupported**: `kubectl create deployment` removes `--generator` option | The `kubectl create deployment` command no longer uses the deprecated `--generator` option. If your scripts rely on this option, update them. |
 | `system:aggregate-to-edit` write access for Endpoints API | The `system:aggregate-to-edit` role no longer includes write access to the Endpoints API. Existing clusters that are upgraded to Kubernetes 1.22 are not impacted. However, in new Kubernetes 1.22 clusters, the Editor and Administrator roles don't have write access to the Endpoints API. For more information on retaining this access in newly created 1.22 clusters, see [Write access for Endpoints](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#write-access-for-endpoints){: external}. This update is a mitigation for [CVE-2021-25740](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-25740){: external}. |
 {: caption="Changes to make after you update the master to Kubernetes 1.22" caption-side="bottom"}
-

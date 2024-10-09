@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-06"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, containers
@@ -43,7 +43,7 @@ If you don't specify a priority for your pod deployment, the default is set to t
 
 To understand how pod priority and Kubernetes scheduler work together, consider the scenarios in the following figure. You must place prioritized pods on worker nodes with available resources. Otherwise, high priority pods in your cluster can remain in pending at the same time that existing pods are removed, such as in Scenario 3.
 
-![Pod priority scenarios.](images/pod-priority.png "Pod priority scenarios"){: caption="Figure 1. Pod priority scenarios" caption-side="bottom"}
+![Pod priority scenarios.](images/pod-priority.png "Pod priority scenarios"){: caption="Pod priority scenarios" caption-side="bottom"}
 
 1. Three pods with high, medium, and low priority are pending scheduling. The Kubernetes scheduler finds an available worker node with room for all three pods, and schedules them in order of priority, with the highest priority pod scheduled first.
 2. Three pods with high, medium, and low priority are pending scheduling. The Kubernetes scheduler finds an available worker node, but the worker node has only enough resources to support the high and medium priority pods. The low-priority pod is not scheduled and it remains in pending.
@@ -213,7 +213,3 @@ Complete the following steps to check the importance of other deployed pods so t
     kubectl apply -f filepath/pod-deployment.yaml
     ```
     {: pre}
-
-
-
-

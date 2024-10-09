@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-21"
+lastupdated: "2024-10-09"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, red hat, encrypt, security, kms, root key, crk
@@ -37,7 +37,7 @@ The following table outlines the encryption options for {{site.data.keyword.cont
 | [Cluster secrets](#cluster-secret-encryption) | No | Yes | After cluster creation by using `kms enable`. | - {{site.data.keyword.hscrypto}}  \n - {{site.data.keyword.keymanagementserviceshort}} | Cross account supported for Classic and VPC clusters only. |
 | [Persistent storage](#persistent-encryption) | Depends on the storage provider. | Depends on provider | After cluster creation, when setting up storage. | - {{site.data.keyword.hscrypto}}  \n - {{site.data.keyword.keymanagementserviceshort}} | Depends on the storage provider. |
 | [Worker-to-worker traffic](#worker-to-worker-encryption) | No | No | After cluster creation. | N/A | No |
-{: caption="Table 1. Default and optional data encryption" caption-side="bottom"}
+{: caption="Default and optional data encryption" caption-side="bottom"}
 
 
 

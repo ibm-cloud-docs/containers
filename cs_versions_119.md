@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, 1.19, versions, update, upgrade
@@ -32,7 +32,7 @@ Review information about version 1.19 of {{site.data.keyword.containerlong}}, re
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
-![This badge indicates Kubernetes version 1.19 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.19 certification badge" caption-side="bottom"}
+![This badge indicates Kubernetes version 1.19 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.19 certification badge" caption-side="bottom"}
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.19 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
@@ -103,6 +103,3 @@ The following table shows the actions that you must take after you update your w
 | ---- | ---------- |
 | **Deprecated:** Beta worker node labels | The following beta worker node labels are deprecated and replaced. For now, both sets of labels are supported, but update your workloads to use the new labels, such as in affinity rules for deployments.  \n - From `beta.kubernetes.io/os` to `kubernetes.io/os`  \n - From `beta.kubernetes.io/arch` to `kubernetes.io/arch`  \n - From `failure-domain.beta.kubernetes.io/zone` to `topology.kubernetes.io/zone`  \n - From `failure-domain.beta.kubernetes.io/region` to `topology.kubernetes.io/region`  \n - From `beta.kubernetes.io/instance-type` to `node.kubernetes.io/instance-type` |
 {: caption="Changes to make after you update the worker nodes to Kubernetes 1.19" caption-side="bottom"}
-
-
-

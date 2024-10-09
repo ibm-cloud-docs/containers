@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-09-19"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes
@@ -253,7 +253,7 @@ Create a Kubernetes deployment to deploy a single app instance as a pod to your 
     | `--type=NodePort` | The service type to create. In this lesson, you create a `NodePort` service. In the following lesson, you create a `LoadBalancer` service. |
     | `--port=*<8080>*` | The port on which the service listens for external network traffic. |
     | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
-    {: caption="Table 1. Information about the command options." caption-side="bottom"}
+    {: caption="Information about the command options." caption-side="bottom"}
 
 1. Now that all the deployment work is done, you can test your app from within the cluster. Get the details to form the private IP address that you can use to access your app.
     1. Get information about the service to see which NodePort was assigned. The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the **NodePort** is 30872.
@@ -349,7 +349,7 @@ Set up a VPC load balancer to expose your app on the public network.
 
 When you create a Kubernetes `LoadBalancer` service in your cluster, a load balancer for VPC is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. The following diagram illustrates how a user accesses an app's service through the load balancer, even though your worker node is connected to only a private subnet.
 
-![VPC load balancing for a cluster.](/images/vpc-alb-mz.svg "VPC load balancing for a cluster"){: caption="Figure 1. VPC load balancing for a cluster" caption-side="bottom"}
+![VPC load balancing for a cluster.](/images/vpc-alb-mz.svg "VPC load balancing for a cluster"){: caption="VPC load balancing for a cluster" caption-side="bottom"}
 
 1. Create a Kubernetes `LoadBalancer` service in your cluster to publicly expose the hello world app.
     ```sh
@@ -372,7 +372,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     | `--type=LoadBalancer` | The Kubernetes service type to create. In this lesson, you create a `LoadBalancer` service. |
     | `--port=*<8080>*` | The port on which the service listens for external network traffic. |
     | `--target-port=*<8080>*` | The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port. |
-    {: caption="Table 2. Information about the command options." caption-side="bottom"}
+    {: caption="Information about the command options." caption-side="bottom"}
 
 2. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output. The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you can't access the Kubernetes `LoadBalancer` service through its hostname.
 

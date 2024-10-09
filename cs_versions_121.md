@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, 1.21, versions, update, upgrade
@@ -31,7 +31,7 @@ Review information about version 1.21 of {{site.data.keyword.containerlong}}, re
 Looking for general information on updating {{site.data.keyword.containerlong}} clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
-![This badge indicates Kubernetes version 1.21 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.21 certification badge" caption-side="bottom"}
+![This badge indicates Kubernetes version 1.21 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.21 certification badge" caption-side="bottom"}
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.21 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
@@ -94,4 +94,3 @@ The following table shows the actions that you must take after you update the Ku
 | **Unsupported**: Select `kubelet` metrics | The following cAdvisor `kubelet` metrics are removed: `/stats/container`, `/stats/<pod_name>/<container_name>`, and `/stats/<namespace>/<pod_name>/<pod_uid>/<container_name>`. Stop using these metrics. |
 | Ingress resource API version | The support for `networking.k8s.io/v1beta1` and `extensions/v1beta1` API versions in Ingress resources are deprecated and are planned for removal in Kubernetes version 1.22. The `networking.k8s.io/v1` API version is supported instead. Although not required in version 1.21, you can begin converting your existing resources in preparation for the removal of the API versions before version 1.22. |
 {: caption="Changes to make after you update the master to Kubernetes 1.21" caption-side="bottom"}
-

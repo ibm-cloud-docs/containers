@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-29"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, logmet, logs, metrics, audit, events
@@ -525,7 +525,7 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
     | `<CA_cert_path>` | The file path for the CA certificate that is used to verify the remote logging service. |
     | `<client_cert_path>` | The file path for the client certificate that is used to authenticate against the remote logging service. |
     | `<client_key_path>` | The file path for the corresponding client key that is used to connect to the remote logging service. |
-    {: caption="Table 1. Understanding this command's components" caption-side="bottom"}
+    {: caption="Understanding this command's components" caption-side="bottom"}
 
 2. Verify that log forwarding was enabled by viewing the URL for the remote logging service.
 

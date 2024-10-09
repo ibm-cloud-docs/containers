@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-24"
+lastupdated: "2024-10-09"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
@@ -56,7 +56,7 @@ Can I roll back the update?
 What process can I follow to update the master?
 :   The following diagram shows the process that you can take to update your master.
 
-![Master update process diagram](/images/updating-master2.svg){: caption="Figure 1. Updating Kubernetes master process diagram" caption-side="bottom"}
+![Master update process diagram](/images/updating-master2.svg){: caption="Updating Kubernetes master process diagram" caption-side="bottom"}
 {: #update_master}
 
 ### Steps to update the cluster master
@@ -579,12 +579,3 @@ Control when the Ingress application load balancer (ALB) component is updated. F
 {: #addons}
 
 Managed {{site.data.keyword.containerlong_notm}} cluster add-ons are an easy way to enhance your cluster with open-source capabilities, such as Istio. The version of the open-source tool that you add to your cluster is tested by IBM and approved for use in {{site.data.keyword.containerlong_notm}}. To update managed add-ons that you enabled in your cluster to the latest versions, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
-
-
-
-
-
-
-
-
-

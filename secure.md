@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-08-16"
+lastupdated: "2024-10-09"
 
 
 keywords: containers
@@ -90,7 +90,7 @@ Admission control
 
 The following image shows the default cluster security settings that address authentication, authorization, admission control, and secure connectivity between the Kubernetes master and worker nodes.
 
-![Describes the security stages when you access the Kubernetes API server.](images/cs_security_apiserver_access.png "Security stages when accessing the Kubernetes API server"){: caption="Figure 1. Security stages when accessing the Kubernetes API server" caption-side="bottom"}
+![Describes the security stages when you access the Kubernetes API server.](images/cs_security_apiserver_access.png "Security stages when accessing the Kubernetes API server"){: caption="Security stages when accessing the Kubernetes API server" caption-side="bottom"}
 
 
 
@@ -175,7 +175,7 @@ The following image shows the components that are set up for every worker node t
 The image does not include components that ensure secure end-to-end communication to and from the worker node. For more information, see [network security](#network).
 {: note}
 
-![Worker node setup in {{site.data.keyword.containerlong_notm}} excluding network security.](images/cs_worker_setup.png "Worker node setup in {{site.data.keyword.containerlong_notm}}"){: caption="Figure 2. Worker node setup in {{site.data.keyword.containerlong_notm}} excluding network security" caption-side="bottom"}
+![Worker node setup in {{site.data.keyword.containerlong_notm}} excluding network security.](images/cs_worker_setup.png "Worker node setup in {{site.data.keyword.containerlong_notm}}"){: caption="Worker node setup in {{site.data.keyword.containerlong_notm}} excluding network security" caption-side="bottom"}
 
 
 
@@ -396,7 +396,7 @@ How can I audit events that happen in my cluster?
 What are my options to enable trust in my cluster?
 :   By default, {{site.data.keyword.containerlong_notm}} provides many features for your cluster components so that you can deploy your containerized apps in a security-rich environment. Extend your level of trust in your cluster to better ensure that what happens within your cluster is what you intended to happen. You can implement trust in your cluster in various ways, as shown in the following diagram.
 
-![Deploying containers with trusted content.](images/trusted_story.svg "Deploying containers with trusted content"){: caption="Figure 1. Deploying containers with trusted content" caption-side="bottom"}
+![Deploying containers with trusted content.](images/trusted_story.svg "Deploying containers with trusted content"){: caption="Deploying containers with trusted content" caption-side="bottom"}
 
 1. **Content Trust for your images**: Ensure the integrity of your images by enabling content trust in your {{site.data.keyword.registrylong_notm}}. With trusted content, you can control who can sign images as trusted. After trusted signers push an image to your registry, users can pull the signed content so that they can verify the source of the image. For more information, see [Signing images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent).
 
@@ -466,7 +466,7 @@ For every namespace that you have in the cluster, make sure to set up proper [RB
 
 In a single-tenant cluster, you create one cluster for every group of people that must run workloads in a cluster. Usually, this team is responsible to manage the cluster and to properly configure and secure it. Multi-tenant clusters use multiple namespaces to isolate tenants and their workloads.
 
-![Deciding between a single tenant or a multi-tenant cluster.](images/cs_single_multitenant.png "Single tenant versus multi-tenant cluster"){: caption="Figure 1. Single tenant versus multi-tenant cluster" caption-side="bottom"}
+![Deciding between a single tenant or a multi-tenant cluster.](images/cs_single_multitenant.png "Single tenant versus multi-tenant cluster"){: caption="Single tenant versus multi-tenant cluster" caption-side="bottom"}
 
 Deciding between single-tenant and multi-tenant clusters depends on the number of teams that must run workloads in a cluster, their service requirements, the size of the service, and the level of isolation that you want to achieve for your workloads.
 
@@ -535,7 +535,3 @@ To set up encryption for your secrets, see [Encrypting Kubernetes secrets by usi
 If vulnerabilities are found in Kubernetes, Kubernetes releases CVEs in security bulletins to inform users and to describe the actions that users must take to remediate the vulnerability. Kubernetes security bulletins that affect {{site.data.keyword.containerlong_notm}} users or the {{site.data.keyword.cloud_notm}} platform are published in the [{{site.data.keyword.cloud_notm}} security bulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security).
 
 Some CVEs require the latest patch update for a Kubernetes version that you can install as part of the regular [cluster update process](/docs/containers?topic=containers-update#update) in {{site.data.keyword.containerlong_notm}}. Make sure to apply security patches in time to protect your cluster from malicious attacks. For more information about what is included in a security patch, refer to the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
-
-
-
-
