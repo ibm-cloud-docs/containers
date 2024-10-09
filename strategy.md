@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-30"
+lastupdated: "2024-10-09"
 
 keywords: kubernetes, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing, containers, {{site.data.keyword.containerlong_notm}}
 
@@ -127,8 +127,8 @@ The operating systems available to you depend on the cluster type you chose.
 
 
 
-Ubuntu 20.04
-:   For more information, see the [Ubuntu 20.04 release notes](https://wiki.ubuntu.com/FocalFossa/ReleaseNotes){: external}.
+Ubuntu 20.04 [Deprecated]{: tag-deprecated}
+:   Ubuntu 20 is deprecated and support ends on 1 April 2025. Migrate your worker nodes to Ubuntu 24 before support for Ubuntu 20 ends. Migrate your worker nodes to Ubuntu 24 before support ends. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin migration. For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
 
 Ubuntu 24
 :   For more information, see the [Ubuntu 24.04 release notes](https://discourse.ubuntu.com/t/ubuntu-24-04-lts-noble-numbat-release-notes/39890){: external}.

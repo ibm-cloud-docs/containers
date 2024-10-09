@@ -240,6 +240,10 @@ subcollection: containers
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
 
+    * [09 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0924)
+
+        * Ubuntu 20 for {{site.data.keyword.containerlong_notm}} clusters is deprecated and support ends on 1 April 2025.
+
     * [07 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0724)
 
         * New! The `gx3d.160x1792.8h100` worker node flavor with H100 GPU support is available for VPC clusters.
