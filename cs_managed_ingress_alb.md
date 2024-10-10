@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-09-05"
+lastupdated: "2024-10-09"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -366,7 +366,7 @@ The following image shows an example scenario for determining CPU usage when pla
 
 Assume that you have an idle cluster with two running ALB replicas that has no incoming traffic. The total CPU request in this case is `2*20m=40m`. One of the replicas might use `5m` CPU and the other `7m` CPU. We can calculate the CPU utilization by using the following formula.
 
-![Calculating average CPU utilization](images/ingress-autoscale.svg "Calculating average CPU utilization"){: caption="Figure 1. This image contains the formuala for calculating average CPU utilization" caption-side="bottom"}
+![Calculating average CPU utilization](images/ingress-autoscale.svg "Calculating average CPU utilization"){: caption="This image contains the formuala for calculating average CPU utilization" caption-side="bottom"}
 
 
 ### Disabling ALB autoscaling

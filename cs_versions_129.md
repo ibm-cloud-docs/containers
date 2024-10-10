@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-07-24"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, containers, 129, version 129, 129 update actions
@@ -24,7 +24,7 @@ Review information about version 1.29 of {{site.data.keyword.containerlong}}. Fo
 {: shortdesc}
 
 
-![This badge indicates Kubernetes version 1.29 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.29 certification badge" caption-side="bottom"} 
+![This badge indicates Kubernetes version 1.29 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.29 certification badge" caption-side="bottom"} 
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.29 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
@@ -124,6 +124,3 @@ Before performing a master update, if your cluster has any tainted nodes, make s
     - "kind": "ClusterRoleBinding", "name": "calico-kube-controllers-migration"
     ```
     {: codeblock}
-
-
-

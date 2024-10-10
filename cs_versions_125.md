@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, containers, 125, version 125, 125 update actions
@@ -34,7 +34,7 @@ This version is no longer supported. Update your cluster to a [supported version
 
 
 
-![This badge indicates Kubernetes version 1.25 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.25 certification badge" caption-side="bottom"} 
+![This badge indicates Kubernetes version 1.25 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.25 certification badge" caption-side="bottom"} 
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.25 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
@@ -101,5 +101,3 @@ The following table shows the actions that you must take after you update the Ku
 | --- | --- |
 | `kubectl diff` ignores managed fields by default | The `kubectl diff` command was changed to ignore managed fields by default. A new `--show-managed-fields` option has been added to allow you to include managed fields in the `**diff**` command. If your scripts rely on the previous behavior, update them. |
 {: caption="Changes to make after you update the master to Kubernetes 1.25"}
-
-

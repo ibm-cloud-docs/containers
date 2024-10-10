@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-08-22"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, docker, containers
@@ -35,7 +35,7 @@ The following architectural overviews are specific to the classic infrastructure
 The following image shows the components of your cluster and how they interact in a non-VRF or VRF-enabled account when only the [public cloud service endpoint is enabled](/docs/containers?topic=containers-plan_basics#workeruser-master).
 {: shortdesc}
 
-![{{site.data.keyword.containerlong_notm}} architecture when only the public cloud service endpoint is enabled](images/cs_org_ov_public_se.png){: caption="Figure 1. Cluster architecture when only the public cloud service endpoint is enabled" caption-side="bottom"}
+![{{site.data.keyword.containerlong_notm}} architecture when only the public cloud service endpoint is enabled](images/cs_org_ov_public_se.png){: caption="Cluster architecture when only the public cloud service endpoint is enabled" caption-side="bottom"}
 
 ### VRF-enabled account with private and public cloud service endpoints
 {: #vrf-both-endpoints}
@@ -43,7 +43,7 @@ The following image shows the components of your cluster and how they interact i
 The following image shows the components of your cluster and how they interact in a VRF-enabled account when the [public and private cloud service endpoints are enabled](/docs/containers?topic=containers-plan_basics#workeruser-master).
 {: shortdesc}
 
-![{{site.data.keyword.containerlong_notm}} architecture when public and private cloud service endpoints are enabled](images/cs_org_ov_both_ses.svg){: caption="Figure 1. Cluster architecture when public and private cloud service endpoints are enabled" caption-side="bottom"}
+![{{site.data.keyword.containerlong_notm}} architecture when public and private cloud service endpoints are enabled](images/cs_org_ov_both_ses.svg){: caption="Cluster architecture when public and private cloud service endpoints are enabled" caption-side="bottom"}
 
 ### Kubernetes master components
 {: #master-components}
@@ -150,7 +150,7 @@ The following diagram and table describe the default components that are set up 
 The following architectural overviews are specific to the VPC infrastructure provider. For an architectural overview for the classic infrastructure provider, see [Classic cluster architecture](#architecture_classic).
 {: note}
 
-![Kubernetes cluster in a VPC](images/cs_org_ov_vpc.png){: caption="Figure 1. Kubernetes cluster in a VPC" caption-side="bottom"}
+![Kubernetes cluster in a VPC](images/cs_org_ov_vpc.png){: caption="Kubernetes cluster in a VPC" caption-side="bottom"}
 
 | Component | Description |
 |:-----------------|:-----------------|
@@ -159,13 +159,4 @@ The following architectural overviews are specific to the VPC infrastructure pro
 | Cluster networking | Your worker nodes are created in a VPC subnet in the zone that you specify. By default, the public and private cloud service endpoints for your cluster are enabled. Communication between the master and worker nodes is over the private network. Authenticated external users can communicate with the master over the public network, such as to run `kubectl` commands. You can optionally set up your cluster to communicate with on-prem services by setting up a VPC VPN on the private network. |
 | App networking | You can create a Kubernetes `LoadBalancer` service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. For more information, see [Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpclb-about). Calico is used as the cluster networking policy fabric. |
 | Storage | You can set up only block persistent storage. Block storage is available as a cluster add-on. For more information, see [Setting up IBM Block Storage for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-block_storage). |
-{: caption="Table 1. Kubernetes cluster in a VPC" caption-side="bottom"}
-
-
-
-
-
-
-
-
-
+{: caption="Kubernetes cluster in a VPC" caption-side="bottom"}

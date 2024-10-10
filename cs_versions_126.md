@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-07"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, containers, 126, version 126, 126 update actions
@@ -35,7 +35,7 @@ Looking for general information on updating {{site.data.keyword.containerlong}} 
 
 
 
-![This badge indicates Kubernetes version 1.26 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.26 certification badge" caption-side="bottom"} 
+![This badge indicates Kubernetes version 1.26 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.26 certification badge" caption-side="bottom"} 
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.26 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
@@ -90,6 +90,3 @@ When you upgrade your cluster to version 1.26, a [BGP password](https://docs.tig
 | **Unsupported:** `localhost` `NodePort` services | To further reduce security risks related to CVE-2020-8558, `localhost` access to `NodePort` services has been disabled. If you apps rely on this behavior, update them to the node private IP address instead. |
 | **Unsupported:** Legacy `kubectl` options relating to logging | The following legacy `kubectl` logging options have been removed: `--log-dir`, `--log-file`, `--log-flush-frequency`, `--logtostderr`, `--alsologtostderr`, `--one-output`, `--stderrthreshold`, `--log-file-max-size`, `--skip-log-headers`, `--add-dir-header`, `--skip-header`, and `--log-backtrace-at`. If your scripts rely on these flags, update them accordingly. For more information, see [Removal of legacy command line arguments relating to logging](https://kubernetes.io/blog/2022/11/18/upcoming-changes-in-kubernetes-1-26/#removal-of-legacy-command-line-arguments-relating-to-logging){: external}. |
 {: caption="Changes to make after you update the master to Kubernetes 1.26" caption-side="bottom"}
-
-
-

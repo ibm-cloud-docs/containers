@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-08-22"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, networking
@@ -25,7 +25,7 @@ With {{site.data.keyword.containerlong}}, you can manage in-cluster and external
 
 To quickly get started with app networking, follow this decision tree and click an option to see its setup docs:
 
-![Choosing an app exposure service](images/choosing-app-exposure.svg "Choosing an app exposure service"){: caption="Figure 1. This image walks you through choosing the best networking option for your application caption-side="bottom"}
+![Choosing an app exposure service](images/choosing-app-exposure.svg "Choosing an app exposure service"){: caption="This image walks you through choosing the best networking option for your application caption-side="bottom"}
 
 ## Understanding load balancing for apps through Kubernetes service discovery
 {: #in-cluster}
@@ -367,9 +367,3 @@ Ingress ALB
 :   **Implementation**:
         1. [Enable the private ALB, create a subdomain to register the ALB with a DNS entry, and create an Ingress resource](/docs/containers?topic=containers-managed-ingress-setup).
         2. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
-
-
-
-
-
-

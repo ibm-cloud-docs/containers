@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-09-20"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -2741,7 +2741,7 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | `meshConfig.enablePrometheusMerge=true` and `values.telemetry.v2.enabled=true` | In the managed Istio add-on, support for telemetry with {{site.data.keyword.mon_full_notm}} is enabled by default. This support can be disabled by [customizing the Istio installation](/docs/containers?topic=containers-istio#customize). |
 | `istio-ingressgateway` and `istio-egressgateway` | In the managed Istio add-on, placement of gateways on edge worker nodes is preferred, but not required. |
 | Envoy sidecar proxy lifecycle pre-stop | In the managed Istio add-on, a sleep time of 25 seconds is added to allow traffic connections to close before an Envoy sidecar is removed from an app pod. |
-{: caption="Table 1. Differences between the managed {{site.data.keyword.containerlong_notm}} Istio and the community Istio" caption-side="bottom"}
+{: caption="Differences between the managed {{site.data.keyword.containerlong_notm}} Istio and the community Istio" caption-side="bottom"}
 
 ### Change log for 1.6.14, released 3 December 2020
 {: #1614}
@@ -2961,7 +2961,7 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | `istiod`, `istio-ingressgateway`, and `istio-egressgateway` | In the managed Istio add-on, `istiod` and all Istio ingress and egress gateways are set up for basic high availability support. High availability support on these components includes the following settings by default: node anti-affinity, `HorizontalPodAutoscaler`, `PodDisruptionBudget`, and automatic scaling of replicas. |
 | `prometheus.enabled: false` | In the managed Istio add-on, the Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that can't be adequately addressed for a production environment. |
 | `values.global.pilot.enableProtocolSniffingForInbound` and `values.global.pilot.enableProtocolSniffingForOutbound` | In the managed Istio add-on, protocol sniffing is disabled by default until the feature becomes more stable in the community Istio.
-{: caption="Table 1. Differences between the managed {{site.data.keyword.containerlong_notm}} Istio and the community Istio" caption-side="bottom"}
+{: caption="Differences between the managed {{site.data.keyword.containerlong_notm}} Istio and the community Istio" caption-side="bottom"}
 
 ### Change log for 1.5.10, released 1 September 2020
 {: #1510}

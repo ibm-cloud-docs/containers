@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-10-09"
 
 
 keywords: kubernetes, 1.23, versions, update, upgrade
@@ -29,7 +29,7 @@ This version is no longer supported. Update your cluster to a [supported version
 Review information about version 1.23.
 {: shortdesc}
 
-![This badge indicates Kubernetes version 1.23 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Figure 1. Kubernetes version 1.23 certification badge" caption-side="bottom"}
+![This badge indicates Kubernetes version 1.23 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.23 certification badge" caption-side="bottom"}
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.23 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
@@ -81,7 +81,3 @@ The following table shows the actions that you must take after you update the Ku
 | Operator Lifecycle Manager (OLM) install no longer managed | OLM is no longer installed nor managed by IBM. Existing installs are unchanged and no longer managed after the update. If you are using the OLM components then you must manage updates. If unused, you might [uninstall the OLM components](/docs/containers?topic=containers-ts-delete-olm). Refer to the [open source documentation](https://olm.operatorframework.io/){: external} for information on available resources including how to install a new instance of OLM on your cluster. |
 | Recreate volume snapshots | Volume snapshots must be recreated after the update. Run `kubectl get volumesnapshots -A` to get a list of volume snapshots. |
 {: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="bottom"}
-
-
-
-
