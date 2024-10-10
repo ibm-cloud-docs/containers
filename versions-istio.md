@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-10-09"
+lastupdated: "2024-10-10"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -34,6 +34,21 @@ ibmcloud ks cluster addon versions
 ## Version 1.23
 {: #v123}
 
+### Changelog for 1.23.2, released 9 Oct 2024
+{: #1232}
+
+Review the changes that are included in version 1.23.2 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.23.1
+
+Current version
+:   1.23.2
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.23.2](https://istio.io/latest/news/releases/1.23.x/announcing-1.23.2/){: external}.
+
 ### Change log for 1.23.1, released 20 September 2024
 {: #1231}
 
@@ -54,6 +69,24 @@ Updates in this version
 
 ## Version 1.22
 {: #v122}
+
+### Changelog for 1.22.5, released 9 Oct 2024
+{: #1225}
+
+Review the changes that are included in version 1.22.5 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.22.4
+
+Current version
+:   1.22.5
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.22.5](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.5/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-6119](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6119){: external}
+    - [usn-6986-1](https://ubuntu.com/security/notices/USN-6986-1){: external}
 
 ### Change log for 1.22.4, released 18 August 2024
 {: #1224}
@@ -125,6 +158,37 @@ Updates in this version
 
 ## Version 1.21
 {: #v121}
+
+### Changelog for 1.21.6, released 9 Oct 2024
+{: #1216}
+
+Review the changes that are included in version 1.21.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.21.5
+
+Current version
+:   1.21.6
+
+Updates in this version
+:   This is the final version of addon-istio 1.21 Addon-istio 1.21 is unsupported on 13 November 2024.
+:   See the Istio release notes for [Istio 1.21.6](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.6/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-4603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4603){: external}
+    - [CVE-2024-37371](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-37371){: external}
+    - [CVE-2024-2511](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-2511){: external}
+    - [CVE-2024-4741](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4741){: external}
+    - [CVE-2022-37370](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37370){: external}
+    - [CVE-2024-5535](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-5535){: external}
+    - [CVE-2024-7264](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-7264){: external}
+    - [CVE-2024-6119](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6119){: external}
+    - [CVE-2024-8096](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-8096){: external}
+    - [usn-6937-1](https://ubuntu.com/security/notices/USN-6937-1){: external}
+    - [usn-6947-1](https://ubuntu.com/security/notices/USN-6947-1){: external}
+    - [usn-6944-1](https://ubuntu.com/security/notices/USN-6944-1){: external}
+    - [usn-6986-1](https://ubuntu.com/security/notices/USN-6986-1){: external}
+    - [usn-7012-1](https://ubuntu.com/security/notices/USN-7012-1){: external}
 
 ### Change log for 1.21.5, released 20 August 2024
 {: #1215}
