@@ -31,12 +31,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## October 2024
 {: #containers-oct24}
 
+
+
 ### 10 October 2024
 {: #containers-oct1024}
 {: release-note}
 
 Istio add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 ### 09 October 2024
 {: #containers-oct0924}
