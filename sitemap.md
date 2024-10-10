@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-09"
+lastupdated: "2024-10-10"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
+
+    * [10 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct1024)
+
+        * Istio add-on patch updates.
 
     * [09 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0924)
 
@@ -6887,9 +6891,13 @@ subcollection: containers
 
 * [Version 1.23](/docs/containers?topic=containers-istio-changelog#v123)
 
+    * [Changelog for 1.23.2, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1232)
+
     * [Change log for 1.23.1, released 20 September 2024](/docs/containers?topic=containers-istio-changelog#1231)
 
 * [Version 1.22](/docs/containers?topic=containers-istio-changelog#v122)
+
+    * [Changelog for 1.22.5, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1225)
 
     * [Change log for 1.22.4, released 18 August 2024](/docs/containers?topic=containers-istio-changelog#1224)
 
@@ -6898,6 +6906,8 @@ subcollection: containers
     * [Change log for 1.22.1, released 21 June 2024](/docs/containers?topic=containers-istio-changelog#1221)
 
 * [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
+
+    * [Changelog for 1.21.6, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1216)
 
     * [Change log for 1.21.5, released 20 August 2024](/docs/containers?topic=containers-istio-changelog#1215)
 
