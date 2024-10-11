@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-10-10"
+lastupdated: "2024-10-11"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -70,23 +70,7 @@ Updates in this version
 ## Version 1.22
 {: #v122}
 
-### Changelog for 1.22.5, released 9 Oct 2024
-{: #1225}
 
-Review the changes that are included in version 1.22.5 of the managed Istio add-on.
-{: shortdesc}
-
-Previous version
-:   1.22.4
-
-Current version
-:   1.22.5
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.22.5](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.5/){: external}.
-:   Resolves the following CVEs:
-    - [CVE-2024-6119](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6119){: external}
-    - [usn-6986-1](https://ubuntu.com/security/notices/USN-6986-1){: external}
 
 ### Change log for 1.22.4, released 18 August 2024
 {: #1224}
