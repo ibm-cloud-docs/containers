@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-11"
+lastupdated: "2024-10-14"
 
 
 keywords: containers
@@ -7835,6 +7835,8 @@ subcollection: containers
 [Ingress ALB version change log](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
+
+    * [1.11.2_7174_iks, released 14 October 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7174_iks)
 
     * [1.11.2_7140_iks, released 23 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7140_iks)
 
