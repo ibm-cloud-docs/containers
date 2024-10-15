@@ -1,7 +1,7 @@
 ---
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-10-09"
+lastupdated: "2024-10-15"
 
 keywords: alb, application load balancer, vpc alb, dns, public lb, private lb
 
@@ -348,7 +348,7 @@ Review the required and optional VPC ALB annotations and specifications.
 
 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-security-group`
 :   Version 1.30 or later.
-:   A customer-managed security group to add to the VPC load balancer. If you do not want to use the [IBM-managed security group](/docs/containers?topic=containers-vpc-security-group-reference&interface=ui#vpc-sg-kube-lbaas-cluster-ID), specify a security group that you own and manage. This option removes the IBM-managed security group and replaces it with the security group you specify. Removing the annotation from an existing load balancer replaces the security group you added with the IBM-managed security group. You can add or remove this annotation at any time. You are responsible for managing your security group and keeping it up to date. 
+:   A customer-managed security group to add to the VPC load balancer. If you do not want to use the [IBM-managed security group](/docs/containers?topic=containers-vpc-security-group-reference&interface=ui#vpc-sg-kube-lbaas-cluster-ID), specify a security group that you own and manage. This option removes the IBM-managed security group and replaces it with the security group you specify. Removing the annotation from an existing load balancer replaces the security group you added with the IBM-managed security group. You can add or remove this annotation at any time. You are responsible for managing your security group and keeping it up to date.
 
 `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-allow-outbound-traffic`
 :   Available for clusters that run [Secure by Default](/docs/containers?topic=containers-vpc-security-group-reference). Annotation to create security groups for each IP address of an ALB associated with an external port that you specify. These rules are created in the cluster security group and automatically update if the VPC ALB IP address changes. Specify valid external ports in a comma-separated list, such as `80,443`. In this example, if each public ALB associated with each external port value has two IP addresses, one outbound rule is created per IP address for a total of 4 new rules. You can add or remove this annotation at any time.

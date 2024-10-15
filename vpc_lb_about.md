@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-10-09"
+lastupdated: "2024-10-15"
 
 
 keywords: kubernetes, containers, app protocol, application protocol
@@ -36,20 +36,21 @@ If you create a **private** Kubernetes `LoadBalancer` service, you expose your a
 
 The following table describes the basic characteristics of each load balancing option.
 
-| Characteristic | Application Load Balancer for VPC | Network Load Balancer for VPC |
-|--------------|---------------------|-----------------------------|
-| Supported Kubernetes version | All versions | All versions |
-| Transport layer | Layer 7 | Layer 4 |
-| Types of load balancers | Public and private | Public and private |
-| Supported protocols | TCP | TCP, UDP |
-| Application access | Hostname | Hostname and static IP address |
-| Source IP preservation | Configurable |Yes |
-| Improved performance with direct server return | No | Yes |
-| Multizone routing | Yes | Backend pool only |
-| Port ranges | No | Public only |
-| Security groups | Yes | Yes |
-{: caption="Load balancing options for VPC clusters"}
 
+
+| Characteristic | Application Load BalancerA (ALB) | Network Load Balancer (NLB) | Private Path NLB |
+|--------------|---------------------|-----------------------------|
+| Supported Kubernetes version | All versions | All versions |1.29 and later |
+| Transport layer | Layer 7 | Layer 4 | Layer 4 |
+| Types of load balancers | Public and private | Public and private | Private |
+| Supported protocols | TCP | TCP, UDP | TCP |
+| Application access | Hostname | Hostname and static IP address | Only via VPE gateway |
+| Source IP preservation | Configurable | Yes | No |
+| Improved performance with direct server return | No | Yes | Yes |
+| Multizone routing | Yes | Backend pool only | Yes |
+| Port ranges | No | Public only | Yes |
+| Security groups | Yes | Yes | No |
+{: caption="Load balancing options for VPC clusters"}
 
 
 
