@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-14"
+lastupdated: "2024-10-15"
 
 
 keywords: containers
@@ -4565,6 +4565,24 @@ subcollection: containers
     * [Required annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_annotations_req)
 
     * [Optional annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_annotations_opt)
+
+[Setting up a Private Path Network Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_nlb_pp#setup_vpc_nlb_pp)
+
+* [Prerequisites](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_pre)
+
+* [Configuring the `LoadBalancer` service](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_config)
+
+* [Creating a Private Path service](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_setup)
+
+* [Setting up a Virtual Private Endpoint Gateway](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_vpe)
+
+* [Connecting to your apps through your VPE](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_vpe)
+
+* [Annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_annotations)
+
+    * [Required annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_annotations_req)
+
+    * [Optional annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_annotations_opt)
 
 [Managing VPC load balancers](/docs/containers?topic=containers-vpclb_manage#vpclb_manage)
 
