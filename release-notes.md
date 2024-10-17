@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-10-11"
+lastupdated: "2024-10-17"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,22 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2024
 {: #containers-oct24}
+
+
+
+
+### 17 October 2024
+{: #containers-oct1724}
+{: release-note}
+
+
+
+
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
+
 
 
 
@@ -104,7 +120,6 @@ Static route add-on version patch update.
 ### 01 October 2024
 {: #containers-oct0124}
 {: release-note}
-
 
 
 New! The {{site.data.keyword.cos_full_notm}} cluster add-on is available in Beta for allowlisted accounts.

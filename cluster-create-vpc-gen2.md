@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-10-09"
+lastupdated: "2024-10-17"
 
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2, containers, {{site.data.keyword.containerlong_notm}}
@@ -271,7 +271,7 @@ ibmcloud ks cluster create vpc-gen2 --name my_cluster --version 1.30_openshift -
 
 
 
-Example command to [add a zone](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone) to a multizone VPC cluster.
+Example command to add worker nodes by [adding a zone](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone) to a multizone VPC cluster.
 
 ```sh
 ibmcloud ks zone add vpc-gen2 --zone ZONE --cluster <cluster_name_or_ID> --worker-pool WORKER-POOL --subnet-id SUBNET-ID
@@ -389,7 +389,8 @@ Terraform on {{site.data.keyword.cloud_notm}} enables predictable and consistent
 ## Next steps for VPC clusters
 {: #cluster-create-vpc-next-steps}
 
+* [Add worker nodes](/docs/containers?topic=containers-add-workers-vpc&interface=cli).{: cli}
 
-* Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access) or [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access). If you have multiple public clusters with exposed apps, consider connecting them with a [global load balancer](/docs/containers?topic=containers-strategy#plan_locations) for high availability. 
+* Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access) or [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access). If you have multiple public clusters with exposed apps, consider connecting them with a [global load balancer](/docs/containers?topic=containers-strategy) for high availability. 
 * Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account or with resources in other VPCs by [setting up the {{site.data.keyword.vpc_short}} VPN](/docs/containers?topic=containers-vpc-vpnaas).
 * [Add rules to the security group for your worker nodes](/docs/containers?topic=containers-vpc-security-group-manage) to control ingress and egress traffic to your VPC subnets.
