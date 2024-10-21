@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2024
 
-lastupdated: "2024-10-14"
+lastupdated: "2024-10-21"
 
 
 keywords: change log, version history, Ingress ALB
@@ -28,12 +28,12 @@ Review the version history for Ingress ALB.
 ### 1.11.2_7174_iks, released 14 October 2024
 {: #cl-ingress-alb-1112_7174_iks}
 
+[Default version]{: tag-green}
+
 - fix duplicate header nginx logs 
 
 ### 1.11.2_7140_iks, released 23 September 2024
 {: #cl-ingress-alb-1112_7140_iks}
-
-[Default version]{: tag-green}
 
 - Resolves the following CVEs: [CVE-2024-8096](https://nvd.nist.gov/vuln/detail/CVE-2024-8096){: external}, and [CVE-2024-45310](https://nvd.nist.gov/vuln/detail/CVE-2024-45310){: external}.
 
