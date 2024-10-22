@@ -850,6 +850,9 @@ The PROXY protocol enables load balancers to pass client connection information 
 Preserve the source IP address for client requests in a classic cluster.
 {: shortdesc}
 
+In Classic clusters, [increasing the ALB replica count to more than 2](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas) increases the number of replicas, but when the `externalTrafficPolicy` is configured as `Local`, then any replicas more than 2 are not used. Only 2 load balancer pods are present on the cluster (in an active-passive setup) and because of this traffic policy, only forward the incoming traffic to the ALB pod on the same node.
+{: important}
+
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs.
 
 To preserve the original source IP address of the client request, you can enable [source IP preservation](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer){: external}. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
