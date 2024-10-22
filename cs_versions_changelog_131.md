@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-10-14"
+lastupdated: "2024-10-22"
 
 
 keywords: kubernetes, containers, change log, 131 change log, 131 updates
@@ -36,6 +36,19 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.31 change log
 {: #131_changelog}
+
+### Change log for worker node fix pack 1.31.1_1524, released 21 October 2024
+{: #1311_1524_W}
+
+The following table shows the changes that are in the worker node fix pack 1.31.1_1524. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 Packages | 5.4.0-196-generic | 5.4.0-198-generic | Kernel and package updates for [CVE-2022-36227](https://nvd.nist.gov/vuln/detail/CVE-2022-36227){: external}, [CVE-2024-26960](https://nvd.nist.gov/vuln/detail/CVE-2024-26960){: external}, [CVE-2024-27397](https://nvd.nist.gov/vuln/detail/CVE-2024-27397){: external}, [CVE-2024-38630](https://nvd.nist.gov/vuln/detail/CVE-2024-38630){: external}, [CVE-2024-45016](https://nvd.nist.gov/vuln/detail/CVE-2024-45016){: external}, [CVE-2024-5742](https://nvd.nist.gov/vuln/detail/CVE-2024-5742){: external}. | 
+| Haproxy | 67d03375 | 88598691 | Security fixes for [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}. |
+{: caption="Changes since version 1.31.1_1523" caption-side="bottom"}
+
 
 ### Change log for worker node fix pack 1.31.1_1523, released 09 October 2024
 {: #1311_1523_W}

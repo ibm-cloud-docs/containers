@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-21"
+lastupdated: "2024-10-22"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
+
+    * [21 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct2124)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [17 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct1724)
 
@@ -3725,7 +3729,7 @@ subcollection: containers
 {: #sitemap_controlling_network_traffic_in_vpc_clusters}
 
 
-[Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference#vpc-security-group-reference)
+[Understanding secure by default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference#vpc-security-group-reference)
 
 * [Overview](/docs/containers?topic=containers-vpc-security-group-reference#sbd-overview)
 
@@ -3745,7 +3749,7 @@ subcollection: containers
 
 [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound#sbd-allow-outbound)
 
-* [Disabling outbound traffic protection when creating a cluster](/docs/containers?topic=containers-sbd-allow-outbound#new-cluster-sbd)
+* [Disabling outbound traffic protection](/docs/containers?topic=containers-sbd-allow-outbound#new-cluster-sbd)
 
     * [Option 1: Disabling outbound traffic protection when you create a cluster](/docs/containers?topic=containers-sbd-allow-outbound#sbd-disable-1)
 
@@ -3807,7 +3811,7 @@ subcollection: containers
 
     * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#no-worker-sgs)
 
-    * [If you want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
+    * [If you want to attach extra security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
 
 * [Viewing security groups](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#vpc-sg-cli)
 
@@ -6433,6 +6437,8 @@ subcollection: containers
 
 * [Version 1.31 change log](/docs/containers?topic=containers-changelog_131#131_changelog)
 
+    * [Change log for worker node fix pack 1.31.1_1524, released 21 October 2024](/docs/containers?topic=containers-changelog_131#1311_1524_W)
+
     * [Change log for worker node fix pack 1.31.1_1523, released 09 October 2024](/docs/containers?topic=containers-changelog_131#1311_1523_W)
 
     * [Change log for master fix pack 1.31.1_1521, released 25 September 2024](/docs/containers?topic=containers-changelog_131#1311_1521_M)
@@ -6515,6 +6521,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
+
+    * [Change log for worker node fix pack 1.30.5_1540, released 21 October 2024](/docs/containers?topic=containers-changelog_130#1305_1540_W)
 
     * [Change log for worker node fix pack 1.30.5_1539, released 09 October 2024](/docs/containers?topic=containers-changelog_130#1305_1539_W)
 
@@ -6610,6 +6618,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
+
+    * [Change log for worker node fix pack 1.29.9_1562, released 21 October 2024](/docs/containers?topic=containers-changelog_129#1299_1562_W)
 
     * [Change log for worker node fix pack 1.29.9_1561, released 09 October 2024](/docs/containers?topic=containers-changelog_129#1299_1561_W)
 
@@ -6735,6 +6745,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.14_1582, released 21 October 2024](/docs/containers?topic=containers-changelog_128#12814_1582_W)
 
     * [Change log for worker node fix pack 1.28.14_1581, released 09 October 2024](/docs/containers?topic=containers-changelog_128#12814_1581_W)
 
