@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-08-21"
+lastupdated: "2024-10-22"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, outbound traffic protection, 1.30
 
@@ -25,7 +25,7 @@ In many of the following scenarios, you have the option to add custom rules to y
 
 
 
-## Disabling outbound traffic protection when creating a cluster
+## Disabling outbound traffic protection
 {: #new-cluster-sbd}
 
 [Virtual Private Cloud]{: tag-vpc}

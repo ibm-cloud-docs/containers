@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-21"
+lastupdated: "2024-10-22"
 
 
 keywords: containers
@@ -3725,7 +3725,7 @@ subcollection: containers
 {: #sitemap_controlling_network_traffic_in_vpc_clusters}
 
 
-[Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference#vpc-security-group-reference)
+[Understanding secure by default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference#vpc-security-group-reference)
 
 * [Overview](/docs/containers?topic=containers-vpc-security-group-reference#sbd-overview)
 
@@ -3745,7 +3745,7 @@ subcollection: containers
 
 [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound#sbd-allow-outbound)
 
-* [Disabling outbound traffic protection when creating a cluster](/docs/containers?topic=containers-sbd-allow-outbound#new-cluster-sbd)
+* [Disabling outbound traffic protection](/docs/containers?topic=containers-sbd-allow-outbound#new-cluster-sbd)
 
     * [Option 1: Disabling outbound traffic protection when you create a cluster](/docs/containers?topic=containers-sbd-allow-outbound#sbd-disable-1)
 
@@ -3807,7 +3807,7 @@ subcollection: containers
 
     * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#no-worker-sgs)
 
-    * [If you want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
+    * [If you want to attach extra security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
 
 * [Viewing security groups](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#vpc-sg-cli)
 

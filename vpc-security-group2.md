@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-10-14"
+lastupdated: "2024-10-22"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, firewall, rules, security group, 1.30, networking, secure by default, outbound traffic protection
@@ -15,7 +15,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Understanding Secure by Default Cluster VPC Networking
+# Understanding secure by default Cluster VPC Networking
 {: #vpc-security-group-reference}
 {: help}
 {: support}
