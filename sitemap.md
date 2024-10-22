@@ -240,6 +240,10 @@ subcollection: containers
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
 
+    * [21 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct2124)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
     * [17 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct1724)
 
         * Ingress ALB cluster add-on patch updates.
@@ -6433,6 +6437,8 @@ subcollection: containers
 
 * [Version 1.31 change log](/docs/containers?topic=containers-changelog_131#131_changelog)
 
+    * [Change log for worker node fix pack 1.31.1_1524, released 21 October 2024](/docs/containers?topic=containers-changelog_131#1311_1524_W)
+
     * [Change log for worker node fix pack 1.31.1_1523, released 09 October 2024](/docs/containers?topic=containers-changelog_131#1311_1523_W)
 
     * [Change log for master fix pack 1.31.1_1521, released 25 September 2024](/docs/containers?topic=containers-changelog_131#1311_1521_M)
@@ -6515,6 +6521,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
+
+    * [Change log for worker node fix pack 1.30.5_1540, released 21 October 2024](/docs/containers?topic=containers-changelog_130#1305_1540_W)
 
     * [Change log for worker node fix pack 1.30.5_1539, released 09 October 2024](/docs/containers?topic=containers-changelog_130#1305_1539_W)
 
@@ -6610,6 +6618,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
+
+    * [Change log for worker node fix pack 1.29.9_1562, released 21 October 2024](/docs/containers?topic=containers-changelog_129#1299_1562_W)
 
     * [Change log for worker node fix pack 1.29.9_1561, released 09 October 2024](/docs/containers?topic=containers-changelog_129#1299_1561_W)
 
@@ -6735,6 +6745,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.14_1582, released 21 October 2024](/docs/containers?topic=containers-changelog_128#12814_1582_W)
 
     * [Change log for worker node fix pack 1.28.14_1581, released 09 October 2024](/docs/containers?topic=containers-changelog_128#12814_1581_W)
 
