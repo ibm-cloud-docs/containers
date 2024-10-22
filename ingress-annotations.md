@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-09-05"
+lastupdated: "2024-10-22"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -854,10 +854,7 @@ By default, the source IP address of the client request is not preserved. When a
 
 To preserve the original source IP address of the client request, you can enable [source IP preservation](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer){: external}. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
 
-When source IP preservation is enabled, load balancers shift from forwarding traffic to an app pod on a different worker node to an app pod on the same worker node. Your apps might experience downtime during this shift. If you [disable an ALB](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure), any source IP changes you make to the load balancer service that exposes the ALB are lost. When you re-enable the ALB, you must enable source IP again.
-
-If you configured edge nodes in your cluster, ALB pods are deployed to edge nodes and can only forward traffic to app pods that are also deployed to those edge nodes. Ensure that you have [at least three edge worker nodes per zone](/docs/containers?topic=containers-edge#edge).
-{: important}
+When source IP preservation is enabled, load balancers shift from forwarding traffic to an ALB pod on a different worker node to an ALB pod on the same worker node. Your apps might experience downtime during this shift. If you [disable an ALB](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure), any source IP changes you make to the load balancer service that exposes the ALB are lost. When you re-enable the ALB, you must enable source IP again.
 
 To enable source IP preservation, edit the load balancer service that exposes an Ingress ALB:
 
