@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-24"
+lastupdated: "2024-10-29"
 
 
 keywords: containers
@@ -6890,6 +6890,8 @@ subcollection: containers
 * [`cluster-autoscaler` 1.2.1](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.1)
 
 * [`cluster-autoscaler` 1.2.2](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.2)
+
+* [`cluster-autoscaler` 1.2.3](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.3)
 
 * [`csutil` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-1.0.0)
 
