@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-03-04"
+lastupdated: "2024-10-30"
 
 
 keywords: containers, ingress, troubleshoot ingress, deployment missing, erradnf
@@ -63,7 +63,4 @@ Each ALB that is in enabled state must have a corresponding deployment on the cl
     ```
     {: pre}
     
-1. If the issue persists, contact support. Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
-
-
-
+1. If the issue persists, contact support. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
