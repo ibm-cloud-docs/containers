@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-10-22"
+lastupdated: "2024-10-30"
 
 
 keywords: kubernetes, containers, change log, 130 change log, 130 updates
@@ -37,6 +37,28 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.30 change log
 {: #130_changelog}
+
+### Change log for master fix pack 1.30.5_1541, released 30 October 2024
+{: #1305_1541_M}
+
+The following table shows the changes that are in the master fix pack 1.30.5_1541. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.27.4 | v3.28.2 | See the [Calico release notes](https://docs.tigera.io/calico/3.28/release-notes/#v3.28.2){: external}. |
+| Cluster health image | v1.5.8 | v1.5.9 | New version contains updates and security fixes. |
+| etcd | v3.5.15 | v3.5.16 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.16){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.30.5-1 | v1.30.5-6 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 446 | 447 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 5b17dab | 77dac6b | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.5 | v2.10.7 | New version contains updates and security fixes. |
+| Kubernetes add-on resizer | 1.8.20 | 1.8.22 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.22){: external}. |
+| Portieris admission controller | v0.13.18 | v0.13.20 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.20){: external}. |
+| Tigera Operator | v1.32.10-124-iks | v1.34.5 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.34.5){: external}. |
+{: caption="Changes since version 1.30.5_1537" caption-side="bottom"}
+
 
 ### Change log for worker node fix pack 1.30.5_1540, released 21 October 2024
 {: #1305_1540_W}

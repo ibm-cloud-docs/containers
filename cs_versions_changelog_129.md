@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-10-22"
+lastupdated: "2024-10-30"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -42,6 +42,27 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 Review the version 1.29 change log.
 {: shortdesc}
+
+
+### Change log for master fix pack 1.29.9_1563, released 30 October 2024
+{: #1299_1563_M}
+
+The following table shows the changes that are in the master fix pack 1.29.9_1563. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.5.8 | v1.5.9 | New version contains updates and security fixes. |
+| etcd | v3.5.15 | v3.5.16 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.16){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.9-1 | v1.29.9-6 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 446 | 447 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 5b17dab | 77dac6b | New version contains updates and security fixes. |
+| Key Management Service provider | v2.9.10 | v2.9.12 | New version contains updates and security fixes. |
+| Kubernetes add-on resizer | 1.8.19 | 1.8.22 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.22){: external}. |
+| Kubernetes Metrics Server | v0.6.4 | v0.7.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.7.2){: external}. |
+| Portieris admission controller | v0.13.18 | v0.13.20 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.20){: external}. |
+{: caption="Changes since version 1.29.9_1559" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.29.9_1562, released 21 October 2024
