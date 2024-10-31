@@ -242,6 +242,8 @@ subcollection: containers
 
     * [31 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct3124)
 
+        * ALB OAuth Proxy cluster add-on patch updates.
+
         * Version 1.31 is now the default version for {{site.data.keyword.containerlong_notm}}.
 
     * [30 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct3024)
@@ -7858,6 +7860,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_2400, released 31 October 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2400)
 
     * [2.0.0_2340, released 03 September 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2340)
 
