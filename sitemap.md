@@ -240,6 +240,10 @@ subcollection: containers
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
 
+    * [31 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct3124)
+
+        * Version 1.31 is now the default version for {{site.data.keyword.containerlong_notm}}.
+
     * [30 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct3024)
 
         * {{site.data.keyword.containerlong_notm}} master fix packs.
@@ -7884,6 +7888,8 @@ subcollection: containers
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
 
+    * [1.11.2_7190_iks, released 30 October 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7190_iks)
+
     * [1.11.2_7174_iks, released 14 October 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7174_iks)
 
     * [1.11.2_7140_iks, released 23 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7140_iks)
@@ -7893,6 +7899,8 @@ subcollection: containers
     * [1.11.2_7069_iks, released 04 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7069_iks)
 
 * [Version 1.9.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.9.6)
+
+    * [1.9.6_7189_iks, released 30 October 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-196_7189_iks)
 
     * [1.9.6_7132_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-196_7132_iks)
 
@@ -7939,6 +7947,8 @@ subcollection: containers
     * [1.9.4_6359_iks, released 22 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-194_6359_iks)
 
 * [Version 1.8.5](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.8.5)
+
+    * [1.8.5_7191_iks, released 30 October 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-185_7191_iks)
 
     * [1.8.5_7131_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-185_7131_iks)
 
