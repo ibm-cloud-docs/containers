@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-24"
+lastupdated: "2024-10-31"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, allowlist, operating system, rhel, ubuntu
@@ -94,7 +94,7 @@ kubectl version  --short | grep -i server
 
 Example output
 ```sh
-Server Version: v1.30+IKS
+Server Version: v1.31+IKS
 ```
 {: screen}
 
@@ -141,4 +141,3 @@ You can also log in to your cluster to check the operating system of the worker 
         ...
     ```
     {: screen}
-

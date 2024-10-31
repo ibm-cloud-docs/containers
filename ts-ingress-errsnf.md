@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-03-04"
+lastupdated: "2024-10-30"
 
 
 keywords: containers, ingress, troubleshoot ingress, loadbalancer missing, errsnf
@@ -70,6 +70,4 @@ Disable and re-enable your Ingress ALB.
     1. Re-enable the ALB using the `ibmcloud ks ingress alb enable` command.
     1. Wait 10 to 15 minutes, then check that the LoadBalancer services are created.
     
-1. If the issue persists, contact support. Open a [support case](/docs/get-support?topic=get-support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
-
-
+1. If the issue persists, contact support. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-30"
+lastupdated: "2024-10-31"
 
 
 keywords: containers
@@ -5107,7 +5107,7 @@ subcollection: containers
 
 * [Restore the snapshot in Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-restore)
 
-* [Redploy your app](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-redeploy)
+* [Redeploy your app](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-redeploy)
 
 * [Continue migrating your snapshots and apps to Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-next)
 
@@ -6897,8 +6897,6 @@ subcollection: containers
 
 * [`cluster-autoscaler` 1.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.1.0)
 
-* [`cluster-autoscaler` 1.2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.0)
-
 * [`cluster-autoscaler` 1.2.1](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.1)
 
 * [`cluster-autoscaler` 1.2.2](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.2)
@@ -6945,7 +6943,7 @@ subcollection: containers
 
 * [Version 1.23](/docs/containers?topic=containers-istio-changelog#v123)
 
-    * [Changelog for 1.23.2, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1232)
+    * [Change log for 1.23.2, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1232)
 
     * [Change log for 1.23.1, released 20 September 2024](/docs/containers?topic=containers-istio-changelog#1231)
 
@@ -6959,7 +6957,7 @@ subcollection: containers
 
 * [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
 
-    * [Changelog for 1.21.6, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1216)
+    * [Change log for 1.21.6, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1216)
 
     * [Change log for 1.21.5, released 20 August 2024](/docs/containers?topic=containers-istio-changelog#1215)
 
@@ -10159,17 +10157,39 @@ subcollection: containers
 [IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
-## Viewing cloud status
-{: #sitemap_viewing_cloud_status}
+## Monitoring notifications and status
+{: #sitemap_monitoring_notifications_and_status}
 
 
-[Viewing cloud status](/docs/containers?topic=containers-viewing-cloud-status#viewing-cloud-status)
+[Monitoring notifications and status](/docs/containers?topic=containers-viewing-cloud-status#viewing-cloud-status)
+
+* [Viewing status](/docs/containers?topic=containers-viewing-cloud-status#view-status-page)
+
+* [Advanced status search](/docs/containers?topic=containers-viewing-cloud-status#adv-search)
+
+    * [URL query filters:](/docs/containers?topic=containers-viewing-cloud-status#url-query)
 
 * [Viewing the status of a dedicated multizone region (MZR)](/docs/containers?topic=containers-viewing-cloud-status#view-private-mzr)
 
 * [Subscribing to an RSS feed](/docs/containers?topic=containers-viewing-cloud-status#subscribing-rss-feed)
 
 * [Checking incident reports](/docs/containers?topic=containers-viewing-cloud-status#status-incident-report)
+
+* [Viewing notifications](/docs/containers?topic=containers-viewing-cloud-status#viewing-notifications)
+
+    * [Notification types](/docs/containers?topic=containers-viewing-cloud-status#notification-types)
+
+* [Subscribing to email notifications](/docs/containers?topic=containers-viewing-cloud-status#subscribe-email-notifications)
+
+* [Checking the delivery status of email notifications and viewing email history](/docs/containers?topic=containers-viewing-cloud-status#view-email-history)
+
+* [Getting advanced notice for disruptive maintenance](/docs/containers?topic=containers-viewing-cloud-status#disruptive-maintenance)
+
+    * [Iaas](/docs/containers?topic=containers-viewing-cloud-status#iaas)
+
+    * [PaaS](/docs/containers?topic=containers-viewing-cloud-status#paas)
+
+    * [SaaS](/docs/containers?topic=containers-viewing-cloud-status#saas)
 
 
 ## FAQs

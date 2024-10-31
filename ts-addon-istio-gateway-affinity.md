@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-06-24"
+lastupdated: "2024-10-31"
 
 
 keywords: kubernetes, help
@@ -71,10 +71,10 @@ To verify that the `ibm-cloud-provider-ip` and `istio-ingressgateway` pods don't
     Example output
 
     ```sh
-    10.176.48.106   Ready   <none>   529d    v1.30+IKS   dal10
-    10.176.48.107   Ready   <none>   196d    v1.30+IKS   dal10
-    10.184.58.23    Ready   <none>   2y38d   v1.30+IKS   dal12
-    10.184.58.42    Ready   <none>   529d    v1.30+IKS   dal12
+    10.176.48.106   Ready   <none>   529d    v1.31+IKS   dal10
+    10.176.48.107   Ready   <none>   196d    v1.31+IKS   dal10
+    10.184.58.23    Ready   <none>   2y38d   v1.31+IKS   dal12
+    10.184.58.42    Ready   <none>   529d    v1.31+IKS   dal12
     ```
     {: screen}
 
@@ -160,9 +160,3 @@ Move the `ibm-cloud-provider-ip` pod to the same zone as the `istio-ingressgatew
 8. Save and close the configuration file. A new load balancer service for the gateway (the `istio-ingressgateway` pod) is created, and a new `ibm-cloud-provider-ip` pod for that load balancer is deployed to a worker node in the same zone as the `istio-ingressgateway` pod.
 
 9. To verify that the pods now exist in the same zone, follow the steps in the **Why it’s happening** section.
-
-
-
-
-
-

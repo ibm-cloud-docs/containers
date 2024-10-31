@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-08-06"
+lastupdated: "2024-10-31"
 
 
 keywords: kubernetes, coredns, kubedns, dns
@@ -254,7 +254,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.30+IKS   true
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.31+IKS   true
         ```
         {: screen}
 
@@ -309,7 +309,7 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.30+IKS   
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.31+IKS   
         ```
         {: screen}
 
@@ -684,7 +684,3 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
     {: pre}
-
-
-
-

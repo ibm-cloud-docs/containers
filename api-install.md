@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-06-24"
+lastupdated: "2024-10-31"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, ic, ks, kubectl, api
@@ -400,8 +400,8 @@ The following instructions require public network access in your cluster to conn
     ```sh
     {
     "major": "1",
-    "minor": "1.30",
-    "gitVersion": "v1.30+IKS",
+    "minor": "1.31",
+    "gitVersion": "v1.31+IKS",
     "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
     "gitTreeState": "clean",
     "buildDate": "2019-03-21T10:08:03Z",

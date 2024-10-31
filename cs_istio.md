@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-10-24"
+lastupdated: "2024-10-30"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -755,7 +755,7 @@ Save any resources that you created or modified in the `istio-system` namespace 
         ```
         {: pre}
 
-    - For each IOP resource listed, remove the finializer. Example using the `managed-istio` IOP:
+    - For each IOP resource listed, remove the finalizer. Example using the `managed-istio` IOP:
         ```sh
         kubectl patch -n ibm-operators istiooperator/managed-istio --type json --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]'
         ```
