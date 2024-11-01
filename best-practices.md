@@ -40,4 +40,4 @@ Maintaining up-to-date documentation and diagrams can help when debugging issues
 ## Subscribe to RSS
 {: #bp-4}
 
-You can receive documentation release notes for {{site.data.keyword.containerlong_notm}} via RSS. For more information, see [Subscribing to an RSS feed](/docs/containers?topic=containers-viewing-cloud-status#subscribing-rss-feed).
+You can receive documentation release notes for {{site.data.keyword.containerlong_notm}} via RSS. For more information, see [Subscribing to an RSS feed](/docs/containers?topic=containers-best-practices-service#bp-4).

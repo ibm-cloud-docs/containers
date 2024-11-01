@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-06-20"
+lastupdated: "2024-11-01"
 
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
@@ -248,7 +248,7 @@ The following table shows the changes that are in the master fix pack 1.26.13_15
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.26.3 | v3.26.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.26/release-notes/#v3.26.4){: external}. |
+| Calico | v3.26.3 | v3.26.4 | See the [Calico release notes](https://archive-os-3-26.netlify.app/calico/3.26/release-notes/#v3.26.4){: external}. |
 | Cluster health image | v1.4.5 | v1.4.6 | New version contains security fixes. |
 | etcd | v3.5.10 | v3.5.11 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.11){: external}. |
 | GPU device plug-in and installer | 0e3950c | 6273cd0 | New version contains security fixes. |
@@ -916,5 +916,3 @@ The following table shows the changes that are in the worker node fix pack 1.26.
 | Kubernetes NodeLocal DNS cache | 1.22.13 | 1.22.15 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.22.15){: external}. |
 | Pause container image | 3.8 | 3.9 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. |
 {: caption="Changes since version 1.25." caption-side="bottom"}
-
-
