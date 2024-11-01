@@ -32,10 +32,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-oct24}
 
 
-
+  
+ 
 ### 31 October 2024
 {: #containers-oct3124}
 {: release-note}
+
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-alb-oauth-proxy-change-log).
 
 Version 1.31 is now the default version for {{site.data.keyword.containerlong_notm}}.
 :   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
