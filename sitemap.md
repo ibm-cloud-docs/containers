@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-10-31"
+lastupdated: "2024-11-01"
 
 
 keywords: containers
@@ -10171,39 +10171,29 @@ subcollection: containers
 [IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
-## Monitoring notifications and status
-{: #sitemap_monitoring_notifications_and_status}
+## Monitoring status
+{: #sitemap_monitoring_status}
 
 
-[Monitoring notifications and status](/docs/containers?topic=containers-viewing-cloud-status#viewing-cloud-status)
+[Monitoring status](/docs/containers?topic=containers-best-practices#best-practices)
 
-* [Viewing status](/docs/containers?topic=containers-viewing-cloud-status#view-status-page)
+* [Check for upcoming maintenance windows](/docs/containers?topic=containers-best-practices#monbp-checmaintwin)
 
-* [Advanced status search](/docs/containers?topic=containers-viewing-cloud-status#adv-search)
+* [Check for current maintenance windows or an incident in progress](/docs/containers?topic=containers-best-practices#monbp-checcurmaninprog)
 
-    * [URL query filters:](/docs/containers?topic=containers-viewing-cloud-status#url-query)
+* [Take advantage of multiple {{site.data.keyword.Bluemix_notm}} locations](/docs/containers?topic=containers-best-practices#monbp-multpreg)
 
-* [Viewing the status of a dedicated multizone region (MZR)](/docs/containers?topic=containers-viewing-cloud-status#view-private-mzr)
+* [Subscribing to email notifications](/docs/containers?topic=containers-best-practices#monbp-subscribing)
 
-* [Subscribing to an RSS feed](/docs/containers?topic=containers-viewing-cloud-status#subscribing-rss-feed)
+* [Viewing cloud status](/docs/containers?topic=containers-best-practices#viewing-cloud-status)
 
-* [Checking incident reports](/docs/containers?topic=containers-viewing-cloud-status#status-incident-report)
+    * [Viewing the status of a dedicated multizone region (MZR)](/docs/containers?topic=containers-best-practices#view-private-mzr)
 
-* [Viewing notifications](/docs/containers?topic=containers-viewing-cloud-status#viewing-notifications)
+    * [Subscribing to an RSS feed](/docs/containers?topic=containers-best-practices#subscribing-rss-feed)
 
-    * [Notification types](/docs/containers?topic=containers-viewing-cloud-status#notification-types)
+    * [Checking incident reports](/docs/containers?topic=containers-best-practices#status-incident-report)
 
-* [Subscribing to email notifications](/docs/containers?topic=containers-viewing-cloud-status#subscribe-email-notifications)
-
-* [Checking the delivery status of email notifications and viewing email history](/docs/containers?topic=containers-viewing-cloud-status#view-email-history)
-
-* [Getting advanced notice for disruptive maintenance](/docs/containers?topic=containers-viewing-cloud-status#disruptive-maintenance)
-
-    * [Iaas](/docs/containers?topic=containers-viewing-cloud-status#iaas)
-
-    * [PaaS](/docs/containers?topic=containers-viewing-cloud-status#paas)
-
-    * [SaaS](/docs/containers?topic=containers-viewing-cloud-status#saas)
+    * [Advanced status search](/docs/containers?topic=containers-best-practices#adv-search)
 
 
 ## FAQs
@@ -10311,15 +10301,15 @@ subcollection: containers
 {: #sitemap_best_practices_for_}
 
 
-[Best practices for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-best-practices#best-practices)
+[Best practices for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-best-practices-service#best-practices-service)
 
-* [Keep your cluster environment up to date](/docs/containers?topic=containers-best-practices#bp-1)
+* [Keep your cluster environment up to date](/docs/containers?topic=containers-best-practices-service#bp-1)
 
-* [Keep your command line tools up to date](/docs/containers?topic=containers-best-practices#bp-2)
+* [Keep your command line tools up to date](/docs/containers?topic=containers-best-practices-service#bp-2)
 
-* [Document your environment architecture](/docs/containers?topic=containers-best-practices#bp-3)
+* [Document your environment architecture](/docs/containers?topic=containers-best-practices-service#bp-3)
 
-* [Subscribe to RSS](/docs/containers?topic=containers-best-practices#bp-4)
+* [Subscribe to RSS](/docs/containers?topic=containers-best-practices-service#bp-4)
 
 
 ## Running tests with the Diagnostics and Debug Tool

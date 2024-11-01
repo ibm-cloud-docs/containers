@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-10-31"
+lastupdated: "2024-11-01"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -1362,7 +1362,7 @@ ALB OAuth Proxy add-on version `2.0.0_2063`.
 {: release-note}
 
 Subscribe to the {{site.data.keyword.cloud_notm}} documentation release notes via RSS.
-:   You can get notified via RSS about documentation updates for {{site.data.keyword.containerlong_notm}} such as worker node fix packs, new cluster versions, new cluster add-on versions, and more.  For more information, see [Subscribing to an RSS feed](/docs/containers?topic=containers-viewing-cloud-status#subscribing-rss-feed).
+:   You can get notified via RSS about documentation updates for {{site.data.keyword.containerlong_notm}} such as worker node fix packs, new cluster versions, new cluster add-on versions, and more.  For more information, see [Subscribing to an RSS feed](/docs/containers?topic=containers-best-practices-service#bp-4).
 
 
   
@@ -4121,7 +4121,7 @@ Worker node fix pack
 {: #containers-apr0722}
 
 {{site.data.keyword.containerlong_notm}} clusters in Mexico City (MEX01) are deprecated and become unsupported later this year. 
-:   To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your MEX01 clusters by 31 October 2022. Clusters remaining in these data centers after 31 October 2022 will be removed. You cannot create clusters in this location after 07 May 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
+:   To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your MEX01 clusters by 31 October 2022. Clusters remaining in these data centers after 31 October 2022 will be removed. You cannot create clusters in this location after 07 May 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/account?topic=account-dc-closure).
 
 
 Ingress ALB change log updates
@@ -4189,7 +4189,7 @@ ALB OAuth Proxy add-on
 {: release-note}
 
 Hong Kong (`HKG02`) and Seoul (`SEO01`) are deprecated and become unsupported later this year.
-:   To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG02`) and Seoul (`SEO01`) clusters by 28 September 2022. Clusters remaining in these data centers after 28 September 2022 will be removed. Cluster creation in these locations will be stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/get-support?topic=get-support-dc-closure).
+:   To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG02`) and Seoul (`SEO01`) clusters by 28 September 2022. Clusters remaining in these data centers after 28 September 2022 will be removed. Cluster creation in these locations will be stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/account?topic=account-dc-closure).
 
 Ingress ALB change log updates
 :   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cl-ingress-alb) for versions `1.1.2_2050_iks`, `1.1.1_1996_iks`, and `0.49.3_1994_iks`.
@@ -5489,7 +5489,7 @@ Ingress change logs
 {: release-note}
 
 Deprecated data centers for classic clusters
-:   Houston (`hou02`) and Oslo (`osl01`) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy all your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `osl01` or `hou02` clusters by **1 August 2021**. Before the unsupported date, you are blocked from adding new worker nodes and clusters starting on **1 July 2021**. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure).
+:   Houston (`hou02`) and Oslo (`osl01`) are deprecated and become unsupported later this year. To prevent any interruption of service, [redeploy all your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `osl01` or `hou02` clusters by **1 August 2021**. Before the unsupported date, you are blocked from adding new worker nodes and clusters starting on **1 July 2021**. For more information, see [Data center closures in 2021](/docs/account?topic=account-dc-closure).
 
 ### 2 April 2021
 {: #containers-april0221}

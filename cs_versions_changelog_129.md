@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-10-30"
+lastupdated: "2024-11-01"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -54,7 +54,7 @@ The following table shows the changes that are in the master fix pack 1.29.9_156
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.5.8 | v1.5.9 | New version contains updates and security fixes. |
-| etcd | v3.5.15 | v3.5.16 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.16){: external}. |
+| etcd | v3.5.15 | v3.5.16 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.16){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.9-1 | v1.29.9-6 | New version contains updates and security fixes. |
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 446 | 447 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 5b17dab | 77dac6b | New version contains updates and security fixes. |
