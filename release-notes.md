@@ -25,6 +25,24 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+## November 2024
+{: #containers-nov24}
+
+### 05 November 2024
+{: #containers-nov0524}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
+:   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
+
+
+
 
 
 
