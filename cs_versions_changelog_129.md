@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-11-01"
+lastupdated: "2024-11-05"
 
 
 keywords: kubernetes, containers, change log, 129 change log, 129 updates
@@ -60,7 +60,7 @@ The following table shows the changes that are in the master fix pack 1.29.9_156
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 5b17dab | 77dac6b | New version contains updates and security fixes. |
 | Key Management Service provider | v2.9.10 | v2.9.12 | New version contains updates and security fixes. |
 | Kubernetes add-on resizer | 1.8.19 | 1.8.22 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.22){: external}. |
-| Kubernetes Metrics Server | v0.6.4 | v0.7.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.7.2){: external}. |
+| Kubernetes Metrics Server | v0.6.4 | v0.7.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.7.2){: external}. |
 | Portieris admission controller | v0.13.18 | v0.13.20 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.20){: external}. |
 {: caption="Changes since version 1.29.9_1559" caption-side="bottom"}
 
