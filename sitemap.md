@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-01"
+lastupdated: "2024-11-05"
 
 
 keywords: containers
@@ -237,6 +237,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov24)
+
+    * [05 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov0524)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
 
@@ -6449,6 +6455,8 @@ subcollection: containers
 
 * [Version 1.31 change log](/docs/containers?topic=containers-changelog_131#131_changelog)
 
+    * [Change log for worker node fix pack 1.31.1_1527, released 04 November 2024](/docs/containers?topic=containers-changelog_131#1311_1527_W)
+
     * [Change log for master fix pack 1.31.1_1526, released 30 October 2024](/docs/containers?topic=containers-changelog_131#1311_1526_M)
 
     * [Change log for worker node fix pack 1.31.1_1524, released 21 October 2024](/docs/containers?topic=containers-changelog_131#1311_1524_W)
@@ -6535,6 +6543,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
+
+    * [Change log for worker node fix pack 1.30.5_1542, released 04 November 2024](/docs/containers?topic=containers-changelog_130#1305_1542_W)
 
     * [Change log for master fix pack 1.30.5_1541, released 30 October 2024](/docs/containers?topic=containers-changelog_130#1305_1541_M)
 
@@ -6634,6 +6644,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
+
+    * [Change log for worker node fix pack 1.29.9_1564, released 04 November 2024](/docs/containers?topic=containers-changelog_129#1299_1564_W)
 
     * [Change log for master fix pack 1.29.9_1563, released 30 October 2024](/docs/containers?topic=containers-changelog_129#1299_1563_M)
 
@@ -6763,6 +6775,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.14_1585, released 04 November 2024](/docs/containers?topic=containers-changelog_128#12814_1585_W)
 
     * [Change log for master fix pack 1.28.14_1584, released 30 October 2024](/docs/containers?topic=containers-changelog_128#12814_1584_M)
 
@@ -10171,29 +10185,39 @@ subcollection: containers
 [IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
-## Monitoring status
-{: #sitemap_monitoring_status}
+## Monitoring notifications and status
+{: #sitemap_monitoring_notifications_and_status}
 
 
-[Monitoring status](/docs/containers?topic=containers-best-practices#best-practices)
+[Monitoring notifications and status](/docs/containers?topic=containers-viewing-cloud-status#viewing-cloud-status)
 
-* [Check for upcoming maintenance windows](/docs/containers?topic=containers-best-practices#monbp-checmaintwin)
+* [Viewing status](/docs/containers?topic=containers-viewing-cloud-status#view-status-page)
 
-* [Check for current maintenance windows or an incident in progress](/docs/containers?topic=containers-best-practices#monbp-checcurmaninprog)
+* [Advanced status search](/docs/containers?topic=containers-viewing-cloud-status#adv-search)
 
-* [Take advantage of multiple {{site.data.keyword.Bluemix_notm}} locations](/docs/containers?topic=containers-best-practices#monbp-multpreg)
+    * [URL query filters:](/docs/containers?topic=containers-viewing-cloud-status#url-query)
 
-* [Subscribing to email notifications](/docs/containers?topic=containers-best-practices#monbp-subscribing)
+* [Viewing the status of a dedicated multizone region (MZR)](/docs/containers?topic=containers-viewing-cloud-status#view-private-mzr)
 
-* [Viewing cloud status](/docs/containers?topic=containers-best-practices#viewing-cloud-status)
+* [Subscribing to an RSS feed](/docs/containers?topic=containers-viewing-cloud-status#subscribing-rss-feed)
 
-    * [Viewing the status of a dedicated multizone region (MZR)](/docs/containers?topic=containers-best-practices#view-private-mzr)
+* [Checking incident reports](/docs/containers?topic=containers-viewing-cloud-status#status-incident-report)
 
-    * [Subscribing to an RSS feed](/docs/containers?topic=containers-best-practices#subscribing-rss-feed)
+* [Viewing notifications](/docs/containers?topic=containers-viewing-cloud-status#viewing-notifications)
 
-    * [Checking incident reports](/docs/containers?topic=containers-best-practices#status-incident-report)
+    * [Notification types](/docs/containers?topic=containers-viewing-cloud-status#notification-types)
 
-    * [Advanced status search](/docs/containers?topic=containers-best-practices#adv-search)
+* [Subscribing to email notifications](/docs/containers?topic=containers-viewing-cloud-status#subscribe-email-notifications)
+
+* [Checking the delivery status of email notifications and viewing email history](/docs/containers?topic=containers-viewing-cloud-status#view-email-history)
+
+* [Getting advanced notice for disruptive maintenance](/docs/containers?topic=containers-viewing-cloud-status#disruptive-maintenance)
+
+    * [Iaas](/docs/containers?topic=containers-viewing-cloud-status#iaas)
+
+    * [PaaS](/docs/containers?topic=containers-viewing-cloud-status#paas)
+
+    * [SaaS](/docs/containers?topic=containers-viewing-cloud-status#saas)
 
 
 ## FAQs
