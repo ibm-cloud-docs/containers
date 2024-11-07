@@ -240,6 +240,10 @@ subcollection: containers
 
 * [November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov24)
 
+    * [07 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov0724)
+
+        * New! A new tutorial is available for {{site.data.keyword.containerlong_notm}} that covers how to migrate from a private service endpoint allowlist (PSE) to context based restrictions (CBR).
+
     * [05 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov0524)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
