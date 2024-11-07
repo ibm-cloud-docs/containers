@@ -10214,6 +10214,27 @@ subcollection: containers
 * [Washington DC (`wdc`)](/docs/containers?topic=containers-classic-flavors#washington-dc-wdc)
 
 
+## Understanding data portability for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_understanding_data_portability_for_}
+
+
+[Understanding data portability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-data-portability#data-portability)
+
+* [Responsibilities](/docs/containers?topic=containers-data-portability#data-portability-responsibilities)
+
+* [Data export procedures](/docs/containers?topic=containers-data-portability#data-portability-procedures)
+
+    * [Exporting data by using the `kubectl` CLI](/docs/containers?topic=containers-data-portability#export-procedure-kubectl)
+
+    * [Exporting data by using Velero](/docs/containers?topic=containers-data-portability#export-velero)
+
+    * [Other options for exporting data](/docs/containers?topic=containers-data-portability#data-other)
+
+* [Exported data formats](/docs/containers?topic=containers-data-portability#data-portability-data-formats)
+
+* [Data ownership](/docs/containers?topic=containers-data-portability#data-ownership)
+
+
 ## Related links
 {: #sitemap_related_links}
 
