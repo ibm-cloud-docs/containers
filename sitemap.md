@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-05"
+lastupdated: "2024-11-07"
 
 
 keywords: containers
@@ -3428,6 +3428,42 @@ subcollection: containers
     * [Allowing different IPs to access the public and private service endpoints](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-scenarios-pub-priv-one-ip)
 
     * [Allowing different IPs to access different API types over the public and private service endpoints](/docs/containers?topic=containers-cbr-tutorial#cbr-tutorial-scenarios-pub-priv-api-types)
+
+[Migrating from a private service endpoint allowlist to context based restrictions (CBR)](/docs/containers?topic=containers-pse-to-cbr-migration#pse-to-cbr-migration)
+
+* [Before you begin](/docs/containers?topic=containers-pse-to-cbr-migration#pse-cbr-before)
+
+* [Step 1: Review the details of your allowlist](/docs/containers?topic=containers-pse-to-cbr-migration#pse-cbr-review)
+
+* [Step 2: Creating a network zone](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-create)
+
+    * [Creating a network zone in the console](/docs/containers?topic=containers-pse-to-cbr-migration&interface=ui#pse-cbr-create-ui)
+
+    * [Creating a network zone by using the CLI](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-create-cli)
+
+* [Step 3: Creating a CBR rule](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-rule)
+
+    * [Creating a CBR rule in the console](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-rule-ui)
+
+    * [Creating a CBR rule by using the CLI](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-rule-cli)
+
+* [Step 4: Disabling the private service endpoint allowlist](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-disable)
+
+* [Step 5: Testing the CBR rule](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-test)
+
+* [Step 6: Adding or removing subnets that can access the cluster](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-update)
+
+    * [Modifying your network zone from the console](/docs/containers?topic=containers-pse-to-cbr-migration&interface=ui#pse-zone-update-ui)
+
+    * [Modify your network zone from the CLI](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-zone-update-cli)
+
+* [Removing context based restrictions from the private service endpoint](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-remove)
+
+* [Deleting a rule from the console](/docs/containers?topic=containers-pse-to-cbr-migration&interface=ui#pse-cbr-remove-ui)
+
+* [Deleting a rule from the CLI](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-remove)
+
+* [Next steps](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-next)
 
 
 ## Managing access control
@@ -10185,39 +10221,19 @@ subcollection: containers
 [IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
-## Monitoring notifications and status
-{: #sitemap_monitoring_notifications_and_status}
+## Monitoring status best practices
+{: #sitemap_monitoring_status_best_practices}
 
 
-[Monitoring notifications and status](/docs/containers?topic=containers-viewing-cloud-status#viewing-cloud-status)
+[Monitoring status best practices](/docs/containers?topic=containers-best-practices#best-practices)
 
-* [Viewing status](/docs/containers?topic=containers-viewing-cloud-status#view-status-page)
+* [Check for upcoming maintenance windows](/docs/containers?topic=containers-best-practices#monbp-checmaintwin)
 
-* [Advanced status search](/docs/containers?topic=containers-viewing-cloud-status#adv-search)
+* [Check for current maintenance windows or an incident in progress](/docs/containers?topic=containers-best-practices#monbp-checcurmaninprog)
 
-    * [URL query filters:](/docs/containers?topic=containers-viewing-cloud-status#url-query)
+* [Take advantage of multiple {{site.data.keyword.Bluemix_notm}} locations](/docs/containers?topic=containers-best-practices#monbp-multpreg)
 
-* [Viewing the status of a dedicated multizone region (MZR)](/docs/containers?topic=containers-viewing-cloud-status#view-private-mzr)
-
-* [Subscribing to an RSS feed](/docs/containers?topic=containers-viewing-cloud-status#subscribing-rss-feed)
-
-* [Checking incident reports](/docs/containers?topic=containers-viewing-cloud-status#status-incident-report)
-
-* [Viewing notifications](/docs/containers?topic=containers-viewing-cloud-status#viewing-notifications)
-
-    * [Notification types](/docs/containers?topic=containers-viewing-cloud-status#notification-types)
-
-* [Subscribing to email notifications](/docs/containers?topic=containers-viewing-cloud-status#subscribe-email-notifications)
-
-* [Checking the delivery status of email notifications and viewing email history](/docs/containers?topic=containers-viewing-cloud-status#view-email-history)
-
-* [Getting advanced notice for disruptive maintenance](/docs/containers?topic=containers-viewing-cloud-status#disruptive-maintenance)
-
-    * [Iaas](/docs/containers?topic=containers-viewing-cloud-status#iaas)
-
-    * [PaaS](/docs/containers?topic=containers-viewing-cloud-status#paas)
-
-    * [SaaS](/docs/containers?topic=containers-viewing-cloud-status#saas)
+* [Subscribing to email notifications](/docs/containers?topic=containers-best-practices#monbp-subscribing)
 
 
 ## FAQs

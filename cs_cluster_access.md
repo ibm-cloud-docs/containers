@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-04-19"
+lastupdated: "2024-11-07"
 
 
 keywords: kubernetes, clusters
@@ -262,6 +262,9 @@ The Kubernetes master is accessible through the private cloud service endpoint i
 
 ### Creating an allowlist for the private cloud service endpoint
 {: #private-se-allowlist}
+
+Private service endpoint allowlists are deprecated and support ends on 10 February 2025. Migrate from allowlists to context based restrictions as soon as possible. For more information, see [Migrating from a private service endpoint allowlist to context based restrictions (CBR)](/docs/containers?topic=containers-pse-to-cbr-migration).
+{: deprecated}
 
 Control access to your private cloud service endpoint by creating a subnet allowlist.
 {: shortdesc}
