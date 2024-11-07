@@ -2,10 +2,10 @@
 
 copyright: 
   years: 2022, 2024
-lastupdated: "2024-09-18"
+lastupdated: "2024-11-07"
 
 
-keywords: kubernetes, deploy, pod security admission, pod security, security profiles
+keywords: kubernetes, deploy, containers, pod security admission, pod security, security profiles
 
 subcollection: containers
 
