@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2024
-lastupdated: "2024-11-07"
+lastupdated: "2024-11-08"
 
 keywords: data, portability
 
@@ -125,7 +125,7 @@ To see an example scenario that uses `velero` in IBM Cloud for migrating from a 
 
 | Title | Description |
 | --- | --- |
-| [Rclone](https://rclone.org/){: external} | Review the [Migrating Cloud Object Storage (COS) apps and data between IBM Cloud accounts](https://cloud.ibm.com/docs/containers?topic=containers-storage-cos-app-migration) tutorial to see how to move data that is one COS bucket to another COS bucket in IBM Cloud or in another cloud provider by using `rclone`. |
+| [`Rclone`](https://rclone.org/){: external} | Review the [Migrating Cloud Object Storage (COS) apps and data between IBM Cloud accounts](https://cloud.ibm.com/docs/containers?topic=containers-storage-cos-app-migration) tutorial to see how to move data that is one COS bucket to another COS bucket in IBM Cloud or in another cloud provider by using `rclone`. |
 | [Backing up and restoring apps and data with Portworx Backup](/docs/containers?topic=containers-storage_portworx_backup#px-backup-storage) | This document walks you through setting up PX Backup. You can configure clusters from other providers and restore data from IBM Cloud to the new provider. |
 | [Wanclouds](https://wanclouds.net/){: external} VPC+ DRaaS (VPC+ Disaster Recovery as a Service) | Review the Wanclouds Multi Cloud Backup, Disaster Recovery and Optimization as a Service. For more information, see the [Wanclouds documentation](https://docs.wanclouds.net/ibm/About-VPC-DRaas/){: external}. |
 | Understanding data portability for {{site.data.keyword.cos_full_notm}} | Many backup and restore tools for Kubernetes or OpenShift clusters use {{site.data.keyword.cos_full_notm}} as the backup and restore location. Review the {{site.data.keyword.cos_full_notm}} documentation for more data portability options. |
@@ -148,7 +148,3 @@ To see an example scenario that uses `velero` in IBM Cloud for migrating from a 
 {: #data-ownership}
 
 All exported data is classified as customer content and is therefore applied to them full customer ownership and licensing rights, as stated in [IBM Cloud Service Agreement](https://www.ibm.com/support/customer/csol/terms/?id=Z126-6304_WS).
-
-
-
-
