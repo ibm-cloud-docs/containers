@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-07"
+lastupdated: "2024-11-11"
 
 
 keywords: containers
@@ -5364,11 +5364,11 @@ subcollection: containers
 
 * [Get the details of your app](/docs/containers?topic=containers-storage-cos-app-migration#cos-mig-app-details)
 
-* [Install rclone](/docs/containers?topic=containers-storage-cos-app-migration#rclone-install)
+* [Install `rclone`](/docs/containers?topic=containers-storage-cos-app-migration#rclone-install)
 
-* [Configure rclone for your bucket in Account 1](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-1)
+* [Configure `rclone` for your bucket in Account 1](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-1)
 
-* [Configure rclone for your bucket in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-2)
+* [Configure `rclone` for your bucket in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-2)
 
 * [View the contents of your COS buckets](/docs/containers?topic=containers-storage-cos-app-migration#rclone-inspect)
 
@@ -5707,10 +5707,6 @@ subcollection: containers
 * [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
 
 * [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
-
-    * [Updating the Calico ConfigMap in Kubernetes version 1.28 and earlier](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
-
-    * [Updating the Calico installation in Kubernetes version 1.29 and later](/docs/containers?topic=containers-kernel#calico-mtu-43)
 
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
 

@@ -2,10 +2,10 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-10-31"
+lastupdated: "2024-11-08"
 
 
-keywords: kubernetes, logmet, logs, metrics, recovery, auto-recovery
+keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
 
 subcollection: containers
 

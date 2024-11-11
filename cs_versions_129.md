@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-10-09"
+lastupdated: "2024-11-08"
 
 
 keywords: kubernetes, containers, 129, version 129, 129 update actions
@@ -87,7 +87,7 @@ The following table shows the actions that you must take after you update the Ku
 
 In version 1.29, Tigera Operator was introduced to manage Calico resources. All the Calico components are migrated from the `kube-system` to the `calico-system` namespace. During the master upgrade process, a new deployment appears called Tigera Operator, which manages the migration process and the lifecycle of Calico components, such as `calico-node`, `calico-typha`, and `calico-kube-controllers`.
 
-Before performing a master update, if your cluster has any tainted nodes, make sure that you have at least 6 untainted nodes so that the `calico-typha` pods can be migrated effectively. If 6 untainted nodes is not possible, then alternatively you can complete the following steps.
+Before performing a master update, if your cluster has any tainted nodes, make sure that you have at least 6 untainted nodes so that the `calico-typha` pods can be migrated effectively. If you do not have 6 untainted nodes, then alternatively you can complete the following steps.
 {: note}
 
 
