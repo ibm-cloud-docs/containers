@@ -5708,10 +5708,6 @@ subcollection: containers
 
 * [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
 
-    * [Updating the Calico ConfigMap in Kubernetes version 1.28 and earlier](/docs/containers?topic=containers-kernel#calico-cm-mtu-update)
-
-    * [Updating the Calico installation in Kubernetes version 1.29 and later](/docs/containers?topic=containers-kernel#calico-mtu-43)
-
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
 
     * [Disabling the port map plug-in in Kubernetes version 1.29 and later](/docs/containers?topic=containers-kernel#calico-portmap-129)
