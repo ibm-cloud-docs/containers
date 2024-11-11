@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-08"
+lastupdated: "2024-11-11"
 
 
 keywords: containers
@@ -5368,7 +5368,7 @@ subcollection: containers
 
 * [Configure `rclone` for your bucket in Account 1](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-1)
 
-* [Configure rclone for your bucket in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-2)
+* [Configure `rclone` for your bucket in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#rclone-config-2)
 
 * [View the contents of your COS buckets](/docs/containers?topic=containers-storage-cos-app-migration#rclone-inspect)
 

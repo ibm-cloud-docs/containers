@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-11-08"
+lastupdated: "2024-11-11"
 
 keywords: kubernetes, containers, benchmarks, 1.31, CIS benchmarks
 
@@ -269,7 +269,7 @@ Review the Kubernetes Policies results of the version 1.5 CIS Kubernetes benchma
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.7.1 | Create administrative boundaries between resources using namespaces. | Not Scored | 1 | Pass | Shared |
-| 5.7.2 | Ensure that the seccomp profile is set to docker/default in your pod definitions. | Not Scored | 2 | [Fail](#cis-benchmark-remediations-131) | Shared |
+| 5.7.2 | Ensure that the `seccomp` profile is set to docker/default in your pod definitions. | Not Scored | 2 | [Fail](#cis-benchmark-remediations-131) | Shared |
 | 5.7.3 | Apply Security Context to Your Pods and Containers. | Not Scored | 2 | [Fail](#cis-benchmark-remediations-131) | Shared |
 | 5.7.4 | The default namespace should not be used. | Scored | 2 | [Fail](#cis-benchmark-remediations-131) | Shared |
 {: caption="Section 5.7 General policies benchmark results" caption-side="bottom"}
