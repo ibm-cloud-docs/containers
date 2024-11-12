@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-11"
+lastupdated: "2024-11-12"
 
 
 keywords: containers
@@ -7316,6 +7316,10 @@ subcollection: containers
 * [Change log for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
+
+* [Version 1.2.3](/docs/containers?topic=containers-ca_changelog#0123_ca_addon)
+
+    * [Change log for patch update 1.2.3_512, released 31 October 2024](/docs/containers?topic=containers-ca_changelog#123_512_ca)
 
 * [Version 1.2.2](/docs/containers?topic=containers-ca_changelog#0122_ca_addon)
 
