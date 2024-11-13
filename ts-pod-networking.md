@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2024
-lastupdated: "2024-11-01"
+lastupdated: "2024-11-13"
 
 
 keywords: pods, pod connectvity, networking, pod networking, pod trouble shooting, pod debug
@@ -56,7 +56,7 @@ Follow these steps to check the health of your components. Networking issues mig
         
         Example output 
         
-        ```
+        ```txt
         NAMESPACE        NAME                               READY   STATUS     RESTARTS    AGE    IP              NODE           NOMINATED     READINESS GATES
         calico-system     calico-kube-controllers-1a1a1a1   1/1     Running   0             16h   172.17.87.11    192.168.0.28   <none>         <none>
         calico-system     calico-node-1a1a1a1               1/1     Running   0             16h   192.168.0.28   192.168.0.28    <none>         <none>
