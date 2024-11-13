@@ -313,7 +313,7 @@ Review the version history for Ingress ALB.
 
 
 
-## Version 1.9.4 archive
+## Version 1.9.4 February 2024 and earlier
 {: #1_9_4}
 
 If your Ingress resources use configuration snippets or redirects, their behavior might change with v1.9.4. Validate your configuration before updating. For more information about version 1.9.4, see the [1.9.4 community change log](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.9.4){: external}.
@@ -376,7 +376,7 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 
 - Fixes [CVE-2023-5044](https://nvd.nist.gov/vuln/detail/CVE-2023-5044){: external}.
 
-## Version 1.8.4
+## Version 1.8.4 February 2024 and earlier
 {: #1_8_4}
 
 ### 1.8.4_6375_iks, released 26 February 2024
@@ -439,7 +439,7 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 - Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
 - Updates `golang` version to `1.21.1`.
 
-## Version 1.6.4
+## Version 1.6.4 February 2024 and earlier
 {: #1_6_4}
 
 ### 1.6.4_6374_iks, released 26 February 2024
