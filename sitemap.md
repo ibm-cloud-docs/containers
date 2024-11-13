@@ -4569,7 +4569,7 @@ subcollection: containers
 
     * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
 
-[ Isolating Classic NLBs to edge worker nodes](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic)
+[Isolating Classic NLBs to edge worker nodes](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic)
 
 [Isolating network workloads to edge nodes in VPC clusters](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads)
 
