@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-11-12"
+lastupdated: "2024-11-13"
 
 
 keywords: kubernetes, containers, change log, 131 change log, 131 updates
@@ -36,6 +36,22 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.31 change log
 {: #131_changelog}
+
+### Change log for master fix pack 1.31.2_1528, released 13 November 2024
+{: #1312_1528_M}
+
+The following table shows the changes that are in the master fix pack 1.31.2_1528. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.15 | v2.5.16 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.31.1-6 | v1.31.2-2 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 77dac6b | c4a05b0 | New version contains updates and security fixes. |
+| Kubernetes | v1.31.1 | v1.31.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.2){: external}. |
+{: caption="Changes since version 1.31.1_1526" caption-side="bottom"}
+
 
 ### Change log for worker node fix pack 1.31.1_1527, released 04 November 2024
 {: #1311_1527_W}
