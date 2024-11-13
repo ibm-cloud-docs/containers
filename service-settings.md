@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-09-30"
+lastupdated: "2024-11-13"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}
@@ -179,7 +179,9 @@ Kubernetes and system reserves
 :   `kubeReserved calculated based on worker node flavor`
 :   `systemReserved calculated based on worker node flavor`
 
-**Pod eviction**
+### Pod eviction
+{: #pod-eviction}
+
 ```sh
 evictionSoft:
   memory.available:  "100Mi"

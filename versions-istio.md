@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-10-30"
+lastupdated: "2024-11-13"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -122,7 +122,8 @@ Updates in this version
     - [usn-6804-1](https://ubuntu.com/security/notices/USN-6804-1){: external}
     - [usn-6854-1](https://ubuntu.com/security/notices/USN-6854-1){: external}
     - [usn-6754-1](https://ubuntu.com/security/notices/USN-6754-1){: external}
- :   For more information, see the [Istio security bulletin 2024-005](https://istio.io/latest/news/security/istio-security-2024-005/){: external}.
+
+:   For more information, see the [Istio security bulletin 2024-005](https://istio.io/latest/news/security/istio-security-2024-005/){: external}.
 
 ### Change log for 1.22.1, released 21 June 2024
 {: #1221}
@@ -196,7 +197,8 @@ Updates in this version
     - [CVE-2022-40735](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40735){: external}
     - [usn-6804-1](https://ubuntu.com/security/notices/USN-6804-1){: external}
     - [usn-6854-1](https://ubuntu.com/security/notices/USN-6854-1){: external}
- :   For more information, see the [Istio security bulletin 2024-005](https://istio.io/latest/news/security/istio-security-2024-005/){: external}.
+
+:   For more information, see the [Istio security bulletin 2024-005](https://istio.io/latest/news/security/istio-security-2024-005/){: external}.
 
 ### Change log for 1.21.3, released 19 June 2024
 {: #1213}
@@ -217,7 +219,8 @@ Updates in this version
     - [CVE-2024-28182](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-28182){: external}
     - [usn- 6737-1](https://ubuntu.com/security/notices/USN-6737-1){: external}
     - [usn-6754-1](https://ubuntu.com/security/notices/USN-6754-1){: external}
- :   For more information, see the [Istio security bulletin 2024-004](https://istio.io/latest/news/security/istio-security-2024-004/){: external}
+
+:   For more information, see the [Istio security bulletin 2024-004](https://istio.io/latest/news/security/istio-security-2024-004/){: external}
 
 ### Change log for 1.21.2, released 8 May 2024
 {: #1212}
@@ -300,6 +303,7 @@ Updates in this version
     - [CVE-2024-28182](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-28182){: external}
     - [usn- 6737-1](https://ubuntu.com/security/notices/USN-6737-1){: external}
     - [usn-6754-1](https://ubuntu.com/security/notices/USN-6754-1){: external}
+
 :   For more information, see the [Istio security bulletin 2024-004](https://istio.io/latest/news/security/istio-security-2024-004/){: external}   
 
 

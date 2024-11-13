@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-11-12"
+lastupdated: "2024-11-13"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
@@ -673,6 +673,7 @@ Before you begin
         kubectl get nodes -o wide
         ```
         {: pre}
+
     1. Log into one of the nodes. Specify the name of the node.
 
         

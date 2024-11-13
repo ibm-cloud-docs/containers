@@ -8062,7 +8062,7 @@ subcollection: containers
 
     * [1.6.4_6344_iks, released 22 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-164_6344_iks)
 
-* [Version 1.9.4](/docs/containers?topic=containers-cl-ingress-alb#1_9_4)
+* [Version 1.9.4 archive](/docs/containers?topic=containers-cl-ingress-alb#1_9_4)
 
     * [1.9.4_6376_iks, released 26 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_6376_iks)
 
@@ -10157,6 +10157,8 @@ subcollection: containers
 * [`kube-controller-manager`](/docs/containers?topic=containers-service-settings#kube-controller-manager)
 
 * [`kubelet`](/docs/containers?topic=containers-service-settings#kubelet)
+
+    * [Pod eviction](/docs/containers?topic=containers-service-settings#pod-eviction)
 
 * [`kube-scheduler`](/docs/containers?topic=containers-service-settings#kube-scheduler)
 

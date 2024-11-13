@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2024
 
-lastupdated: "2024-10-31"
+lastupdated: "2024-11-13"
 
 
 keywords: change log, version history, Ingress ALB
@@ -313,7 +313,7 @@ Review the version history for Ingress ALB.
 
 
 
-## Version 1.9.4
+## Version 1.9.4 archive
 {: #1_9_4}
 
 If your Ingress resources use configuration snippets or redirects, their behavior might change with v1.9.4. Validate your configuration before updating. For more information about version 1.9.4, see the [1.9.4 community change log](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.9.4){: external}.
