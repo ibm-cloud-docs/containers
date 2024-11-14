@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-11-07"
+lastupdated: "2024-11-14"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -7618,7 +7618,32 @@ ibmcloud ks nlb-dns secret rm --cluster mycluster --nlb-subdomain mycluster-a1b2
 {: pre}
 
 
+## `ibmcloud ks vpc secure-by-default enable`
+{: #vpc-secure-by-default-enable-cli}
 
+Enable Secure By Default VPC Networking for a VPC cluster using legacy Security Groups.
+
+```txt
+ibmcloud ks vpc secure-by-default enable --cluster CLUSTER [--disable-outbound-traffic-protection] [-f] [-q]
+```
+{: pre}
+{: #vpc-secure-by-default-enable-usage}
+
+### Command options
+{: #vpc-secure-by-default-enable-options}
+
+`--cluster CLUSTER`, `-c CLUSTER`
+:    Specify the cluster name or ID.
+
+`--disable-outbound-traffic-protection`
+:    Include this option to allow public outbound access from the cluster workers. By default, public outbound access is blocked.
+
+`-f`
+:    Force the command to run without user prompts.
+
+`-q`
+:    Do not show the message of the day or update reminders.
+{: #vpc-secure-by-default-enable-options-dl}
 
 ## `webhook-create` command
 {: #cs_webhook_create}
