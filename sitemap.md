@@ -3475,7 +3475,7 @@ subcollection: containers
 
 * [Deleting a rule from the console](/docs/containers?topic=containers-pse-to-cbr-migration&interface=ui#pse-cbr-remove-ui)
 
-* [Deleting a rule from the CLI](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-remove)
+* [Deleting a rule from the CLI](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-remove-cli)
 
 * [Next steps](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-next)
 
@@ -4662,7 +4662,7 @@ subcollection: containers
 
 * [Setting up a Virtual Private Endpoint Gateway](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_vpe)
 
-* [Connecting to your apps through your VPE](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_vpe)
+* [Connecting to your apps through your VPE](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_vpe_con)
 
 * [Annotations and specifications](/docs/containers?topic=containers-setup_vpc_nlb_pp#vpc_nlb_pp_annotations)
 
