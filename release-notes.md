@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-11-13"
+lastupdated: "2024-11-14"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## November 2024
 {: #containers-nov24}
+
+### 14 November 2024
+{: #containers-nov1424}
+{: release-note}
+
+Secure by default networking can now be enabled on VPC clusters that were created before 1.30.
+:   Secure by default networking introduced new security group configurations and behaviors for new VPC clusters beginning with 1.30. Clusters created at versions 1.29 and earlier did not get the secure by default security group configurations when updating to 1.30. However, you can now update your cluster's security group configurations for clusters that were created at versions 1.29 and earlier. For more information, see [Enabling secure by default for clusters created at 1.29 and earlier](/docs/containers?topic=containers-vpc-sbd-enable-existing).
+
+CLI version `1.0.673` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 13 November 2024
 {: #containers-nov1324}

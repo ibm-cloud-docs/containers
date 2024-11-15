@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-13"
+lastupdated: "2024-11-15"
 
 
 keywords: containers
@@ -239,6 +239,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov24)
+
+    * [14 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov1424)
+
+        * Secure by default networking can now be enabled on VPC clusters that were created before 1.30.
+
+        * CLI version `1.0.673` is available.
 
     * [13 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov1324)
 
@@ -3837,6 +3843,16 @@ subcollection: containers
 
     * [Allowing temporary traffic to the cluster API server over the public network](/docs/containers?topic=containers-sbd-allow-outbound#sbd-example-api-server-backup)
 
+[Enabling secure by default for clusters created at 1.29 and earlier](/docs/containers?topic=containers-vpc-sbd-enable-existing#vpc-sbd-enable-existing)
+
+* [Preparing to enable secure by default](/docs/containers?topic=containers-vpc-sbd-enable-existing#existing-cluster-sbd-prepare)
+
+* [What happens when I enable secure by default?](/docs/containers?topic=containers-vpc-sbd-enable-existing#existing-cluster-what)
+
+* [In what order are the changes applied?](/docs/containers?topic=containers-vpc-sbd-enable-existing#sbd-existing-update-order)
+
+* [Enabling secure by default](/docs/containers?topic=containers-vpc-sbd-enable-existing#existing-cluster-sbd-enable)
+
 [Understanding VPC security groups in version 1.29 and earlier](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
 
 * [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group#managed-vpe-gateways)
@@ -6145,6 +6161,10 @@ subcollection: containers
 
     * [Experimental: `ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm)
 
+* [`ibmcloud ks vpc secure-by-default enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-options)
+
 * [`webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_webhook_create)
 
     * [Example `webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-example)
@@ -6246,6 +6266,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.673](/docs/containers?topic=containers-cs_cli_changelog#cli-010673)
 
 * [Version v1.0.665](/docs/containers?topic=containers-cs_cli_changelog#cli-010665)
 
@@ -6980,8 +7002,6 @@ subcollection: containers
 * [`ibm-storage-operator` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-storage-operator-1.0)
 
 * [`image-key-synchronizer` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
-
-* [`istio` 1.21](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.21)
 
 * [`istio` 1.22](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.22)
 
