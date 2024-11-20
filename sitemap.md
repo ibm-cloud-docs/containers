@@ -242,6 +242,8 @@ subcollection: containers
 
     * [20 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov2024)
 
+        * Ubuntu 24 is now the default operating system for {{site.data.keyword.containerlong_notm}} versions 1.29 and 1.30.
+
         * {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
 
     * [19 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov1924)
