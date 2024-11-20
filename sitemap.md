@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-19"
+lastupdated: "2024-11-20"
 
 
 keywords: containers
@@ -239,6 +239,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov24)
+
+    * [20 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov2024)
+
+        * Ubuntu 24 is now the default operating system for {{site.data.keyword.containerlong_notm}} versions 1.29 and 1.30.
+
+        * {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
 
     * [19 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov1924)
 
@@ -7591,6 +7597,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
+    * [Change log for version 5.2.24_641, released 20 November 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.24_641_is_block_relnote)
+
     * [Change log for version 5.2.21_602, released 3 October 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.21_602_is_block_relnote)
 
     * [Change log for version 5.2.20_579, released 15 July 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.20_579_is_block_relnote)
@@ -7612,6 +7620,8 @@ subcollection: containers
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+    * [Change log for version 5.1.29_642, released 20 November 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.29_642_is_block_relnote)
 
     * [Change log for version 5.1.26_601, released 3 October 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.26_601_is_block_relnote)
 

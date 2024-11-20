@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-10-02"
+lastupdated: "2024-11-20"
 
 
 keywords: containers, block storage, deploy apps
@@ -27,7 +27,6 @@ You can choose between predefined storage tiers with GB sizes and IOPS that meet
 
 
 The {{site.data.keyword.block_storage_is_short}} cluster add-on is enabled by default on VPC clusters.
-{: important}
 
 
 ## Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}
@@ -481,6 +480,9 @@ You can update the {{site.data.keyword.block_storage_is_short}} cluster add-on b
 
 Before updating the add-on review the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
 {: tip}
+
+Before you update to a `5.x` release from a previous release, you must not have any volume snapshots in `failure` state. For more information, see [Why can't I delete my Block Storage for VPC volume snapshot resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete).
+{: important}
 
 1. Check to see if an update is available. If an update is available, the plug-in version is flagged with an asterisk and the latest version is shown. Note the latest version as this value is used later.
 

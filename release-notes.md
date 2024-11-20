@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-11-19"
+lastupdated: "2024-11-20"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## November 2024
 {: #containers-nov24}
+
+### 20 November 2024
+{: #containers-nov2024}
+{: release-note}
+
+
+
+Ubuntu 24 is now the default operating system for {{site.data.keyword.containerlong_notm}} versions 1.29 and 1.30.
+:   New clusters and worker pools created at version 1.29 and 1.30 now use Ubuntu 24. The operating system for existing worker pools is not impacted. Ubuntu 20 was deprecated on [09 October 2024](#containers-oct0924) and support ends on 01 April 2025. If you are using Ubuntu 20 worker nodes, migrate your worker nodes to Ubuntu 24 before support ends. For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
+
+
+
+{{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
 ### 19 November 2024
 {: #containers-nov1924}
