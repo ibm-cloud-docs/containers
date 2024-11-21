@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-20"
+lastupdated: "2024-11-21"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov24)
+
+    * [21 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov2124)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
 
     * [20 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov2024)
 
@@ -6618,6 +6622,12 @@ subcollection: containers
 
 * [Allowing outbound traffic after creating a 1.30 cluster](/docs/containers?topic=containers-cs_versions_130#sbd-allow-outbound-after)
 
+* [VPE gateway creation information](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130)
+
+    * [VPE gateways created when upgrading to version 1.30](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-upgrade)
+
+    * [New VPE Gateway Configuration When Creating a New Cluster at 1.30](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-new)
+
 * [Common issues and troubleshooting](/docs/containers?topic=containers-cs_versions_130#sbd-common-ts)
 
 [Kubernetes version 1.30 change log](/docs/containers?topic=containers-changelog_130#changelog_130)
@@ -7836,6 +7846,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-versions-vpc-file-addon#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.33, released 21 November 2024](/docs/containers?topic=containers-cos_plugin_changelog#02233_object_plugin)
 
 * [Change log for version 2.2.32, released 26 September 2024](/docs/containers?topic=containers-cos_plugin_changelog#02232_object_plugin)
 

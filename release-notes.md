@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-11-20"
+lastupdated: "2024-11-21"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## November 2024
 {: #containers-nov24}
 
+### 21 November 2024
+{: #containers-nov2124}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
 ### 20 November 2024
 {: #containers-nov2024}
 {: release-note}
@@ -41,6 +48,8 @@ Ubuntu 24 is now the default operating system for {{site.data.keyword.containerl
 
 {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+
+
 
 ### 19 November 2024
 {: #containers-nov1924}

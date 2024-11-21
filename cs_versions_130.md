@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-10-09"
+lastupdated: "2024-11-21"
 
 
 keywords: kubernetes, containers, 130, version 130, 130 update actions
@@ -64,6 +64,7 @@ The following table shows the actions that you must take before you update the K
 | Type | Description |
 | --- | --- |
 | Calico operator namespace migration | If your cluster was upgraded to version 1.29, it will have had a Calico operator namespace migration started. This migration must be completed before your cluster will be allowed to upgrade to version 1.30. If the following commands do not return any data then the migration is complete: `kubectl get nodes -l projectcalico.org/operator-node-migration --no-headers --ignore-not-found ; kubectl get deployment calico-typha -n kube-system -o name --ignore-not-found`. |
+| VPE gateways changes when creating or updating a VPC cluster to version 1.30 | There are important changes to the VPE gateways used for VPC clusters when creating a 1.30 cluster or updating to 1.30. These changes might require action. To review the changes and determine your required actions, see [VPE gateway creation information](#vpe-gateway-130). |
 {: caption="Changes to make before you update the master to Kubernetes 1.30" caption-side="bottom"}
 
 
@@ -95,7 +96,7 @@ Some key notes for Secure by Default Networking are:
 
 - Applies to VPC clusters only. Classic clusters are not impacted.
 
-- Does not affect existing clusters. Existing clusters in your VPC will continue to function as they do today.
+- Does not affect existing clusters. Existing clusters in your VPC continue to function as they do today.
 
 - Applies only to {{site.data.keyword.containerlong_notm}} clusters newly provisioned at version 1.30. The security group configurations for existing {{site.data.keyword.containerlong_notm}} clusters that are upgraded to version 1.30, including any customizations you've made, are not changed.
 
@@ -142,6 +143,53 @@ In clusters with Secure by Default outbound traffic protection, falling back to 
 If you created a version 1.30 cluster with outbound traffic protection enabled, your apps or services might experience downtime due to dependencies that require external network connections. Review the following options for enabling outbound traffic selectively or allowing all outbound traffic.
 
 For more information, see [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound).
+
+
+## VPE gateway creation information
+{: #vpe-gateway-130}
+
+When a VPC cluster is created at or updated to version 1.30, the following VPE gateways are created if they do not exist.
+
+| VPE | Service | Versions |
+| --- | --- | --- | 
+| `s3.direct.<region>.cloud-object-storage.appdomain.cloud`, `*.s3.direct.<region>.cloud-object-storage.appdomain.cloud`, and `config.direct.cloud-object-storage.cloud.ibm.com` | Cloud Object Storage | Version 1.30 and later |
+| `<region>.private.iaas.cloud.ibm.com` | VPC infrastructure | Version 1.30 and later |
+| `icr.io` and `*.icr.io`* | Container Registry | Version 1.28 and later |
+| `api.<region>.containers.cloud.ibm.com`* | {{site.data.keyword.containerlong_notm}} | Version 1.28 and later |
+{: caption="Changes to VPE gateways in version 1.30" caption-side="bottom"}
+
+
+* For clusters updated to 1.30, these VPE Gateways should already exist since they would have been created when the cluster was at 1.28 or 1.29. These VPE Gateways are shared by all resources in the VPC, and when they are first created, they change the IP addresses associated with these services as well as restrict access to them.
+
+If any resources in the VPC are using any of these services where the VPE Gateway does not yet exist, you must the actions described below both before and possibly during the update to ensure the resources still have access.
+
+The steps you take are different depending on if you are creating a new 1.30 cluster, or upgrading the master of an existing 1.29 cluster.
+- New 1.30 clusters get the Secure by Default configurations described above.
+- Upgraded existing 1.29 clusters continue to use the old security group model.
+
+### VPE gateways created when upgrading to version 1.30
+{: #vpe-gateway-130-upgrade}
+
+Three new VPE Gateways for 1.30 are created if they don't already exist in the VPC. Also, one IP address per zone is added to each VPE gateway for each zone that has cluster workers in.  
+These IP addresses are taken from one of the existing VPC subnets in that zone.
+
+The VPE gateways are put into the existing `kube-<vpcID>` security group, which by default allows all traffic. Unless you have modified this security group, you don't need to add any rules to allow inbound access to these new VPE Gateways.
+
+If you have modified the `kube-<vpcID>` security group, you must make sure all resources in the VPC that use these services are allowed inbound access to this security group. Also, ensure there are no network ACLs on the subnets, security groups on the resources themselves, or custom VPC routes that block access to these new VPE gateways.
+
+### New VPE Gateway Configuration When Creating a New Cluster at 1.30
+{: #vpe-gateway-130-new}
+
+Five new VPE gateways are created if they don't already exist in the VPC. Also, one IP addresses per zone is added to each VPE Gateway for each zone that has cluster workers in.  
+These IP addresses are taken from one of the existing VPC subnets in that zone.
+
+The VPE gateways are put into a new `kube-vpegw-<vpcID>` security group, which only allows inbound traffic to these new VPE gateways from the cluster worker security group `kube-<clusterID>`.
+
+Before you create your cluster, for any resources in your VPC that access any of these endpoints, ensure there are no network ACLs on the subnets, security groups on the resources themselves, or custom VPC routes that block access to these new VPE gateways.
+
+As your cluster is being updated, watch for the creation of the `kube-vpegw-<vpcID>` security group. After it is created, add the necessary inbound rules to allow all your resources that are not cluster workers to access the new VPE gateways that are being created. Note that all cluster workers in the VPC can already access these VPE gateways via security group rules that are added automatically as the cluster is created.
+
+For more information about a similar use case, see [VPC application troubleshooting](/docs/containers?topic=containers-ts-sbd-other-clusters).
 
 
 ## Common issues and troubleshooting 
