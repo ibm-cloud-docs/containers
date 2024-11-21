@@ -96,7 +96,7 @@ Some key notes for Secure by Default Networking are:
 
 - Applies to VPC clusters only. Classic clusters are not impacted.
 
-- Does not affect existing clusters. Existing clusters in your VPC will continue to function as they do today.
+- Does not affect existing clusters. Existing clusters in your VPC continue to function as they do today.
 
 - Applies only to {{site.data.keyword.containerlong_notm}} clusters newly provisioned at version 1.30. The security group configurations for existing {{site.data.keyword.containerlong_notm}} clusters that are upgraded to version 1.30, including any customizations you've made, are not changed.
 
@@ -146,7 +146,7 @@ For more information, see [Managing outbound traffic protection in VPC clusters]
 
 
 ## VPE gateway creation information
-{: #vpe-gateway-130)
+{: #vpe-gateway-130}
 
 When a VPC cluster is created at or updated to version 1.30, the following VPE gateways are created if they do not exist.
 
@@ -159,7 +159,7 @@ When a VPC cluster is created at or updated to version 1.30, the following VPE g
 {: caption="Changes to VPE gateways in version 1.30" caption-side="bottom"}
 
 
-* For clusters updated to 1.30, these VPE Gateways should already exist since they would have been created when the cluster was at 1.28 or 1.29. These VPE Gateways are shared by all resources in the VPC, and when they are first created will change the IP addresses associated with these services as well as restrict access to them.
+* For clusters updated to 1.30, these VPE Gateways should already exist since they would have been created when the cluster was at 1.28 or 1.29. These VPE Gateways are shared by all resources in the VPC, and when they are first created, they change the IP addresses associated with these services as well as restrict access to them.
 
 If any resources in the VPC are using any of these services where the VPE Gateway does not yet exist, you must the actions described below both before and possibly during the update to ensure the resources still have access.
 
@@ -173,7 +173,7 @@ The steps you take are different depending on if you are creating a new 1.30 clu
 Three new VPE Gateways for 1.30 are created if they don't already exist in the VPC. Also, one IP address per zone is added to each VPE gateway for each zone that has cluster workers in.  
 These IP addresses are taken from one of the existing VPC subnets in that zone.
 
-The VPE gateways are put into the existing `kube-<vpcID>` security group, which by default allows all traffic. Unless you have modified this security group you will not need to add any rules to allow inbound access to these new VPE Gateways.
+The VPE gateways are put into the existing `kube-<vpcID>` security group, which by default allows all traffic. Unless you have modified this security group, you don't need to add any rules to allow inbound access to these new VPE Gateways.
 
 If you have modified the `kube-<vpcID>` security group, you must make sure all resources in the VPC that use these services are allowed inbound access to this security group. Also, ensure there are no network ACLs on the subnets, security groups on the resources themselves, or custom VPC routes that block access to these new VPE gateways.
 
@@ -185,7 +185,7 @@ These IP addresses are taken from one of the existing VPC subnets in that zone.
 
 The VPE gateways are put into a new `kube-vpegw-<vpcID>` security group, which only allows inbound traffic to these new VPE gateways from the cluster worker security group `kube-<clusterID>`.
 
-Before you create your cluster, for any resources in your VPC that access any of these endpoints, ensure there are no network ACLs on the subnets, security groups on the resources themselves, orcustom VPC routes that block access to these new VPE gateways.
+Before you create your cluster, for any resources in your VPC that access any of these endpoints, ensure there are no network ACLs on the subnets, security groups on the resources themselves, or custom VPC routes that block access to these new VPE gateways.
 
 As your cluster is being updated, watch for the creation of the `kube-vpegw-<vpcID>` security group. After it is created, add the necessary inbound rules to allow all your resources that are not cluster workers to access the new VPE gateways that are being created. Note that all cluster workers in the VPC can already access these VPE gateways via security group rules that are added automatically as the cluster is created.
 
