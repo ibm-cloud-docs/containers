@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-20"
+lastupdated: "2024-11-21"
 
 
 keywords: containers
@@ -6617,6 +6617,12 @@ subcollection: containers
     * [Changes to worker-to-master backup communication](/docs/containers?topic=containers-cs_versions_130#backup-considerations)
 
 * [Allowing outbound traffic after creating a 1.30 cluster](/docs/containers?topic=containers-cs_versions_130#sbd-allow-outbound-after)
+
+* [VPE gateway creation information](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130))
+
+    * [VPE gateways created when upgrading to version 1.30](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-upgrade)
+
+    * [New VPE Gateway Configuration When Creating a New Cluster at 1.30](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-new)
 
 * [Common issues and troubleshooting](/docs/containers?topic=containers-cs_versions_130#sbd-common-ts)
 
