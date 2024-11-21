@@ -49,6 +49,8 @@ Ubuntu 24 is now the default operating system for {{site.data.keyword.containerl
 {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
 
+
+
 ### 19 November 2024
 {: #containers-nov1924}
 {: release-note}
