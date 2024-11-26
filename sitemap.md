@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-21"
+lastupdated: "2024-11-26"
 
 
 keywords: containers
@@ -10596,6 +10596,10 @@ subcollection: containers
 
 [Deleting webhooks from a cluster](/docs/containers?topic=containers-ts-delete-webhooks#ts-delete-webhooks)
 
+* [Checking webhooks that are rejecting requests](/docs/containers?topic=containers-ts-delete-webhooks#webhook-reject)
+
+* [Deleting webhooks](/docs/containers?topic=containers-ts-delete-webhooks#deleting-webhooks)
+
 [Why is my Portieris cluster image security enforcement installation canceled?](/docs/containers?topic=containers-portieris_enable#portieris_enable)
 
 [Why does my cluster stay in a pending state?](/docs/containers?topic=containers-cs_cluster_pending#cs_cluster_pending)
@@ -10622,11 +10626,11 @@ subcollection: containers
 
 [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
 
-[When I try to create a version 1.30 cluster, I see a VPC quota error](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#ts-sbd-cluster-create-quota)
+[When I create a VPC cluster, my worker nodes are stuck in `Pending security group creation`](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#ts-sbd-cluster-create-quota)
 
-* [If you exceeded the number of security groups allowed per VPC](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-rules-per-vpc)
+* [If you have reached the number of clusters allowed per VPC](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-cluster-max)
 
-* [If you exceeded the number of remote rules per security group](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-remote-rules)
+* [If you have reached the number of security groups allowed per VPC](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-rules-per-vpc)
 
 [After creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters#ts-sbd-other-clusters)
 
