@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2024
-lastupdated: "2024-11-13"
+lastupdated: "2024-12-03"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -33,6 +33,23 @@ ibmcloud ks cluster addon versions
 
 ## Version 1.23
 {: #v123}
+
+### Change log for 1.23.3, released 3 Dec 2024
+{: #1233}
+
+Review the changes that are included in version 1.23.3 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.23.2
+
+Current version
+:   1.23.3
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.23.3](https://istio.io/latest/news/releases/1.23.x/announcing-1.23.3/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-8096](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-8096){: external}
 
 ### Change log for 1.23.2, released 9 Oct 2024
 {: #1232}
@@ -69,6 +86,26 @@ Updates in this version
 
 ## Version 1.22
 {: #v122}
+
+
+### Change log for 1.22.6, released 3 Dec 2024
+{: #1226}
+
+Review the changes that are included in version 1.22.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.22.4
+
+Current version
+:   1.22.6
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.22.5](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.5/){: external} and [Istio 1.22.6](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.6/){: external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-6119](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6119){: external}
+    - [CVE-2024-8096](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-8096){: external}
+
 
 
 

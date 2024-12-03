@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-11-26"
+lastupdated: "2024-12-03"
 
 
 keywords: containers
@@ -237,6 +237,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [December 2024](/docs/containers?topic=containers-containers-relnotes#containers-dec24)
+
+    * [03 December 2024](/docs/containers?topic=containers-containers-relnotes#containers-dec0324)
+
+        * Istio add-on patch updates.
 
 * [November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov24)
 
@@ -7065,11 +7071,15 @@ subcollection: containers
 
 * [Version 1.23](/docs/containers?topic=containers-istio-changelog#v123)
 
+    * [Change log for 1.23.3, released 3 Dec 2024](/docs/containers?topic=containers-istio-changelog#1233)
+
     * [Change log for 1.23.2, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1232)
 
     * [Change log for 1.23.1, released 20 September 2024](/docs/containers?topic=containers-istio-changelog#1231)
 
 * [Version 1.22](/docs/containers?topic=containers-istio-changelog#v122)
+
+    * [Change log for 1.22.6, released 3 Dec 2024](/docs/containers?topic=containers-istio-changelog#1226)
 
     * [Change log for 1.22.4, released 18 August 2024](/docs/containers?topic=containers-istio-changelog#1224)
 
