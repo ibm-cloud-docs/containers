@@ -6632,7 +6632,7 @@ subcollection: containers
 
     * [VPE gateways created when upgrading to version 1.30](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-upgrade)
 
-    * [New VPE Gateway Configuration When Creating a New Cluster at 1.30](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-new)
+    * [New VPE gateway configuration when creating a new 1.30 cluster](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-new)
 
 * [Common issues and troubleshooting](/docs/containers?topic=containers-cs_versions_130#sbd-common-ts)
 
