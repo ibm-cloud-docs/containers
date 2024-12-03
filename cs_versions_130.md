@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-11-21"
+lastupdated: "2024-12-03"
 
 
 keywords: kubernetes, containers, 130, version 130, 130 update actions
@@ -150,9 +150,10 @@ For more information, see [Managing outbound traffic protection in VPC clusters]
 
 When a VPC cluster is created at or updated to version 1.30, the following VPE gateways are created if they do not exist.
 
-| VPE | Service | Versions |
-| --- | --- | --- | 
-| `s3.direct.<region>.cloud-object-storage.appdomain.cloud`, `*.s3.direct.<region>.cloud-object-storage.appdomain.cloud`, and `config.direct.cloud-object-storage.cloud.ibm.com` | Cloud Object Storage | Version 1.30 and later |
+| VPE DNS Name(s) | Service | Versions |
+| --- | --- | --- |
+| `s3.direct.<region>.cloud-object-storage.appdomain.cloud` and `*.s3.direct.<region>.cloud-object-storage.appdomain.cloud` | Cloud Object Storage | Version 1.30 and later |
+| `config.direct.cloud-object-storage.cloud.ibm.com` | Cloud Object Storage Configuration | Version 1.30 and later |
 | `<region>.private.iaas.cloud.ibm.com` | VPC infrastructure | Version 1.30 and later |
 | `icr.io` and `*.icr.io`* | Container Registry | Version 1.28 and later |
 | `api.<region>.containers.cloud.ibm.com`* | {{site.data.keyword.containerlong_notm}} | Version 1.28 and later |
@@ -161,7 +162,7 @@ When a VPC cluster is created at or updated to version 1.30, the following VPE g
 
 * For clusters updated to 1.30, these VPE Gateways should already exist since they would have been created when the cluster was at 1.28 or 1.29. These VPE Gateways are shared by all resources in the VPC, and when they are first created, they change the IP addresses associated with these services as well as restrict access to them.
 
-If any resources in the VPC are using any of these services where the VPE Gateway does not yet exist, you must the actions described below both before and possibly during the update to ensure the resources still have access.
+If any resources in the VPC are using any of these services where the VPE Gateway does not yet exist, you must take the actions described below both before and possibly during the update to ensure the resources still have access.
 
 The steps you take are different depending on if you are creating a new 1.30 cluster, or upgrading the master of an existing 1.29 cluster.
 - New 1.30 clusters get the Secure by Default configurations described above.
@@ -170,17 +171,17 @@ The steps you take are different depending on if you are creating a new 1.30 clu
 ### VPE gateways created when upgrading to version 1.30
 {: #vpe-gateway-130-upgrade}
 
-Three new VPE Gateways for 1.30 are created if they don't already exist in the VPC. Also, one IP address per zone is added to each VPE gateway for each zone that has cluster workers in.  
+Three new VPE Gateways for 1.30 are created if they don't already exist in the VPC. Also, one IP address per zone is added to each VPE gateway for each zone that has cluster workers in.
 These IP addresses are taken from one of the existing VPC subnets in that zone.
 
 The VPE gateways are put into the existing `kube-<vpcID>` security group, which by default allows all traffic. Unless you have modified this security group, you don't need to add any rules to allow inbound access to these new VPE Gateways.
 
 If you have modified the `kube-<vpcID>` security group, you must make sure all resources in the VPC that use these services are allowed inbound access to this security group. Also, ensure there are no network ACLs on the subnets, security groups on the resources themselves, or custom VPC routes that block access to these new VPE gateways.
 
-### New VPE Gateway Configuration When Creating a New Cluster at 1.30
+### New VPE gateway configuration when creating a new 1.30 cluster
 {: #vpe-gateway-130-new}
 
-Five new VPE gateways are created if they don't already exist in the VPC. Also, one IP addresses per zone is added to each VPE Gateway for each zone that has cluster workers in.  
+Five new VPE gateways are created if they don't already exist in the VPC. Also, one IP addresses per zone is added to each VPE Gateway for each zone that has cluster workers in.
 These IP addresses are taken from one of the existing VPC subnets in that zone.
 
 The VPE gateways are put into a new `kube-vpegw-<vpcID>` security group, which only allows inbound traffic to these new VPE gateways from the cluster worker security group `kube-<clusterID>`.

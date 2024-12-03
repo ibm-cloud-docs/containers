@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-11-22"
+lastupdated: "2024-12-03"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -24,6 +24,20 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+
+
+## December 2024
+{: #containers-dec24}
+
+### 03 December 2024
+{: #containers-dec0324}
+{: release-note}
+
+Istio add-on patch updates.
+:   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 ## November 2024
 {: #containers-nov24}
