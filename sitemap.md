@@ -248,6 +248,8 @@ subcollection: containers
 
         * Istio add-on patch updates.
 
+        * Ingress ALB cluster add-on patch updates.
+
 * [November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov24)
 
     * [21 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov2124)
@@ -285,12 +287,6 @@ subcollection: containers
     * [05 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov0524)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
-
-* [December 2024](/docs/containers?topic=containers-containers-relnotes#containers-december24)
-
-    * [03 December 2024](/docs/containers?topic=containers-containers-relnotes#containers-03december24)
-
-        * Ingress ALB cluster add-on patch updates.
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
 
