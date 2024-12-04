@@ -10626,7 +10626,7 @@ subcollection: containers
 
 * [Checking webhooks that are rejecting requests](/docs/containers?topic=containers-ts-delete-webhooks#webhook-reject)
 
-* [Deleting webhooks](/docs/containers?topic=containers-ts-delete-webhooks#deleting-webhooks)
+* [Deleting webhooks](/docs/containers?topic=containers-ts-delete-webhooks#webhook-delete)
 
 [Why is my Portieris cluster image security enforcement installation canceled?](/docs/containers?topic=containers-portieris_enable#portieris_enable)
 
