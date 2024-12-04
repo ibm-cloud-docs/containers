@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-12-03"
+lastupdated: "2024-12-04"
 
 
 keywords: containers
@@ -281,6 +281,12 @@ subcollection: containers
     * [05 November 2024](/docs/containers?topic=containers-containers-relnotes#containers-nov0524)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+* [December 2024](/docs/containers?topic=containers-containers-relnotes#containers-december24)
+
+    * [03 December 2024](/docs/containers?topic=containers-containers-relnotes#containers-03december24)
+
+        * Ingress ALB cluster add-on patch updates.
 
 * [October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct24)
 
@@ -7979,15 +7985,17 @@ subcollection: containers
 
 * [Change log for version 2.0.5, released 25 November 2020](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
-[Static route add-on change log](/docs/containers?topic=containers-versions-static-route#versions-static-route)
+[Static Route add-on change log](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route)
 
-* [Version 1.0.0](/docs/containers?topic=containers-versions-static-route#v100)
+* [Version 1.0.0](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-1.0.0)
 
-    * [Change log for 1.0.0_1415, released 3 October 2024](/docs/containers?topic=containers-versions-static-route#100_1415)
+    * [1.0.0_1581, released 14 November 2024](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1581)
 
-    * [Change log for 1.0.0_1122, released 17 July 2023](/docs/containers?topic=containers-versions-static-route#100_1122)
+    * [Change log for 1.0.0_1415, released 3 October 2024](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1415)
 
-    * [Change log for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-versions-static-route#100_649)
+    * [Change log for 1.0.0_1122, released 17 July 2023](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1122)
+
+    * [Change log for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_649)
 
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog#backup_restore_changelog)
 
@@ -8027,6 +8035,8 @@ subcollection: containers
 [Ingress ALB version change log](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
+
+    * [1.11.2_7213_iks, released 03 December 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7213_iks)
 
     * [1.11.2_7190_iks, released 30 October 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7190_iks)
 
