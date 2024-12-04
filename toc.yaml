@@ -350,7 +350,7 @@ toc:
           - versions-vpc-block-addon.md
           - versions-vpc-file-addon.md
           - versions-object.md
-          - versions-static-route.md
+          - cl-add-ons-static-route.md
           - versions-backup-restore.md
           - cl-add-ons-alb-oauth-proxy.md
           - cl-ibm-storage-operator.md

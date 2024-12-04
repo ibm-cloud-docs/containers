@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-11-19"
+lastupdated: "2024-12-04"
 
 
 keywords: kubernetes, containers, change log, 130 change log, 130 updates
@@ -37,6 +37,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.30 change log
 {: #130_changelog}
+
+### Change log for master fix pack 1.30.7_1545, released 04 December 2024
+{: #1307_1545_M}
+
+The following table shows the changes that are in the master fix pack 1.30.7_1545. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.30.6-2 | v1.30.6-4 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | c4a05b0 | 743ed58 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.7 | v2.10.8 | New version contains updates and security fixes. |
+| Kubernetes | v1.30.6 | v1.30.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.7){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3051 | 3079 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.20 | v0.13.21 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.21){: external}. |
+{: caption="Changes since version 1.30.6_1543" caption-side="bottom"}
+
 
 ### Change log for worker node fix pack 1.30.6_1544, released 18 November 2024
 {: #1306_1544_W}

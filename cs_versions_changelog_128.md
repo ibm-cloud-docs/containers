@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-11-19"
+lastupdated: "2024-12-04"
 
 
 keywords: kubernetes, containers, change log, 128 change log, 128 updates
@@ -50,6 +50,22 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 Review the version 1.28 change log.
 {: shortdesc}
 
+
+
+### Change log for master fix pack 1.28.15_1588, released 04 December 2024
+{: #12815_1588_M}
+
+The following table shows the changes that are in the master fix pack 1.28.15_1588. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | c4a05b0 | 743ed58 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.8.16 | v2.8.17 | New version contains updates and security fixes. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3051 | 3079 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.20 | v0.13.21 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.21){: external}. |
+{: caption="Changes since version 1.28.15_1586" caption-side="bottom"}
 
 
 ### Change log for worker node fix pack 1.28.15_1587, released 18 November 2024
