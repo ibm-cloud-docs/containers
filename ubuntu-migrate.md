@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-10-09"
+lastupdated: "2024-12-04"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -67,7 +67,7 @@ For Ubuntu 24, the `/tmp` directory is a separate partition that has the `nosuid
 
     **Example command to update VPC worker nodes.**
     ```sh
-    ibmcloud ks worker replace --cluster CLUSTER --worker WORKER_ID
+    ibmcloud ks worker replace --cluster CLUSTER --worker WORKER_ID --update
     ```
     {: pre}
 
