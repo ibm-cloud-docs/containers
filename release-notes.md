@@ -55,7 +55,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Istio add-on patch updates.
 :   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
-
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 
 ## November 2024
@@ -165,16 +166,6 @@ New! A new tutorial is available for {{site.data.keyword.containerlong_notm}} th
 
 
 
-
-## December 2024
-{: #containers-december24}
-
-### 03 December 2024
-{: #containers-03december24}
-{: release-note}
-
-Ingress ALB cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
 
 ## October 2024
 {: #containers-oct24}
