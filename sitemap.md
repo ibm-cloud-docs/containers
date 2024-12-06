@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-12-04"
+lastupdated: "2024-12-06"
 
 
 keywords: containers
@@ -10621,12 +10621,6 @@ subcollection: containers
 [How do I rotate the cluster API key in the event of a leak?](/docs/containers?topic=containers-ts-troubleshoot-api-key-leak#ts-troubleshoot-api-key-leak)
 
 [Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
-
-[Deleting webhooks from a cluster](/docs/containers?topic=containers-ts-delete-webhooks#ts-delete-webhooks)
-
-* [Checking webhooks that are rejecting requests](/docs/containers?topic=containers-ts-delete-webhooks#webhook-reject)
-
-* [Deleting webhooks](/docs/containers?topic=containers-ts-delete-webhooks#webhook-delete)
 
 [Why is my Portieris cluster image security enforcement installation canceled?](/docs/containers?topic=containers-portieris_enable#portieris_enable)
 
