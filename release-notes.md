@@ -73,7 +73,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Istio add-on patch updates.
 :   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 Ingress ALB cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 
 ## November 2024
@@ -320,7 +320,7 @@ Storage Operator cluster add-on patch update.
 
 
 Static route add-on version patch update.
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-static-route).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-static-route).
 
 
 ### 01 October 2024
@@ -2349,7 +2349,7 @@ Cluster autoscaler add-on version `1.0.9_70`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
   
 Static route add-on version `1.0.0_1122`.
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-static-route).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-static-route).
 
 
 
