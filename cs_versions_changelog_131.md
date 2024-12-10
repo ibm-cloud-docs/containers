@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2024
-lastupdated: "2024-12-04"
+lastupdated: "2024-12-10"
 
 
 keywords: kubernetes, containers, change log, 131 change log, 131 updates
@@ -36,6 +36,23 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.31 change log
 {: #131_changelog}
+
+### Change log for worker node fix pack 1.31.3_1531, released 05 December 2024
+{: #1313_1531_W}
+
+The following table shows the changes that are in the worker node fix pack 1.31.3_1531. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 Packages | 5.4.0-200-generic | 5.4.0-200-generic| Worker node kernel & package updates for [CVE-2024-41671](https://nvd.nist.gov/vuln/detail/CVE-2024-41671){: external}, [CVE-2024-52530](https://nvd.nist.gov/vuln/detail/CVE-2024-52530){: external}, [CVE-2024-52531](https://nvd.nist.gov/vuln/detail/CVE-2024-52531){: external}, [CVE-2024-52532](https://nvd.nist.gov/vuln/detail/CVE-2024-52532){: external}, [CVE-2024-52533](https://nvd.nist.gov/vuln/detail/CVE-2024-52533){: external}, [CVE-2024-9287](https://nvd.nist.gov/vuln/detail/CVE-2024-9287){: external}. |
+| Ubuntu 24.04 Packages | 6.8.0-48-generic | 6.8.0-48-generic | Worker node kernel & package updates for [CVE-2024-10224](https://nvd.nist.gov/vuln/detail/CVE-2024-10224){: external}, [CVE-2024-11003](https://nvd.nist.gov/vuln/detail/CVE-2024-11003){: external}, [CVE-2024-43882](https://nvd.nist.gov/vuln/detail/CVE-2024-43882){: external}, [CVE-2024-46800](https://nvd.nist.gov/vuln/detail/CVE-2024-46800){: external}, [CVE-2024-48990](https://nvd.nist.gov/vuln/detail/CVE-2024-48990){: external}, [CVE-2024-48991](https://nvd.nist.gov/vuln/detail/CVE-2024-48991){: external}, [CVE-2024-48992](https://nvd.nist.gov/vuln/detail/CVE-2024-48992){: external}, [CVE-2024-52533](https://nvd.nist.gov/vuln/detail/CVE-2024-52533){: external}, [CVE-2024-9287](https://nvd.nist.gov/vuln/detail/CVE-2024-9287){: external}, [CVE-2024-9681](https://nvd.nist.gov/vuln/detail/CVE-2024-9681){: external}. |
+| HAProxy | N/A | N/A | N/A |
+| Containerd | N/A| N/A| N/A |
+| Kubernetes | 1.31.2 | 1.31.3 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.3){: external}. |
+| GPU Device Plug-in and Installer | 96f9b63 | 995bd7 | Security fixes for [CVE-2024-10041](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-10041){: external}, [CVE-2024-10963](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-10963){: external}, [CVE-2024-27043](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-27043){: external}, [CVE-2024-27399](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-27399){: external}, [CVE-2024-38564](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-38564){: external}, [CVE-2024-46858](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-46858){: external}. |
+{: caption="Changes since version 1.31.2_1529" caption-side="bottom"}
+
 
 ### Change log for master fix pack 1.31.3_1530, released 04 December 2024
 {: #1313_1530_M}
