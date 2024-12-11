@@ -240,6 +240,14 @@ subcollection: containers
 
 * [December 2024](/docs/containers?topic=containers-containers-relnotes#containers-dec24)
 
+    * [11 December 2024](/docs/containers?topic=containers-containers-relnotes#containers-dec1124)
+
+        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.1.31_656` and `5.2.26_657`.
+
+        * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
+
+        * Storage Operator cluster add-on patch update.
+
     * [05 December 2024](/docs/containers?topic=containers-containers-relnotes#containers-dec0524)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
@@ -7645,6 +7653,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-vpc_bs_changelog#052_is_block)
 
+    * [Change log for version 5.2.26_657, released 11 December 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.26_657_is_block_relnote)
+
     * [Change log for version 5.2.24_641, released 20 November 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.24_641_is_block_relnote)
 
     * [Change log for version 5.2.21_602, released 3 October 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.2.21_602_is_block_relnote)
@@ -7668,6 +7678,8 @@ subcollection: containers
     * [Change log for version 5.2, released 25 September 2023](/docs/containers?topic=containers-vpc_bs_changelog#5.2_is_block_relnote)
 
 * [Version 5.1](/docs/containers?topic=containers-vpc_bs_changelog#051_is_block)
+
+    * [Change log for version 5.1.31_656, released 11 December 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.31_656_is_block_relnote)
 
     * [Change log for version 5.1.29_642, released 20 November 2024](/docs/containers?topic=containers-vpc_bs_changelog#5.1.29_642_is_block_relnote)
 
