@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-11-13"
+lastupdated: "2024-12-11"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
@@ -264,31 +264,31 @@ Memory use is driven by the number of pods in the cluster. CPU use is driven by 
 
 The following symptoms might indicate a need to adjust the `metrics-server` resources:
 
-    - The `metrics-server` is restarting frequently.
+- The `metrics-server` is restarting frequently.
 
-    - Deleting a namespace results in the namespace that is stuck in a `Terminating` state and `kubectl describe namespace` includes a condition reporting a metrics API discovery error.
+- Deleting a namespace results in the namespace that is stuck in a `Terminating` state and `kubectl describe namespace` includes a condition reporting a metrics API discovery error.
 
-    - `kubectl top pods`, `kubectl top nodes`, other `kubectl` commands, or applications that use the Kubernetes API to log Kubernetes errors such as:
+- `kubectl top pods`, `kubectl top nodes`, other `kubectl` commands, or applications that use the Kubernetes API to log Kubernetes errors such as:
 
-        ```sh
-        The server is currently unable to handle the request (get pods.metrics.k8s.io)
-        ```
-        {: screen}
-        
-        ```sh
-        Discovery failed for some groups, 1 failing: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: the server is currently unable to handle the request
-        ```
-        {: screen}
+```sh
+The server is currently unable to handle the request (get pods.metrics.k8s.io)
+```
+{: screen}
 
-    - HorizontalPodAutoscalers (HPAs) do not scale deployments.
+```sh
+Discovery failed for some groups, 1 failing: unable to retrieve the complete list of server APIs: metrics.k8s.io/v1beta1: the server is currently unable to handle the request
+```
+{: screen}
 
-    - Running `kubectl get apiservices v1beta1.metrics.k8s.io` results in a status like:
+- HorizontalPodAutoscalers (HPAs) do not scale deployments.
 
-        ```sh
-        NAME                     SERVICE                      AVAILABLE                      AGE
-        v1beta1.metrics.k8s.io   kube-system/metrics-server   False (FailedDiscoveryCheck)   139d
-        ```
-        {: screen}
+- Running `kubectl get apiservices v1beta1.metrics.k8s.io` results in a status like:
+
+```sh
+NAME                     SERVICE                      AVAILABLE                      AGE
+v1beta1.metrics.k8s.io   kube-system/metrics-server   False (FailedDiscoveryCheck)   139d
+```
+{: screen}
     
 ### Modify the `metrics-server-config` config map
 {: #metrics-server-config}
@@ -296,17 +296,17 @@ The following symptoms might indicate a need to adjust the `metrics-server` reso
 Both CPU and memory have tunable "base" and "per node" settings used to compute a total request.
 {: shortdesc}
 
-    - `baseCPU`
-    - `cpuPerNode`
-    - `baseMemory`
-    - `memoryPerNode`
-    
-    Where:
-    ```sh
-    cpuRequest = baseCPU + cpuPerNode * number_of_nodes
-    memoryRequest = baseMemory + memoryPerNode * number_of_nodes
-    ```    
-    {: pre}
+- `baseCPU`
+- `cpuPerNode`
+- `baseMemory`
+- `memoryPerNode`
+
+Where:
+```sh
+cpuRequest = baseCPU + cpuPerNode * number_of_nodes
+memoryRequest = baseMemory + memoryPerNode * number_of_nodes
+```    
+{: pre}
 
 The number of nodes in these calculations comes from a set of "bucket sizes" and has a minimum size of 16 nodes.
 {: note}
@@ -314,14 +314,15 @@ The number of nodes in these calculations comes from a set of "bucket sizes" and
 CPU is requested in cores, with value such as `1` or fractional values such as `100m` (100 millicores).
 
 Memory is requested in bytes with an optional suffix of:
-    - base 2 (1Ki = 1024): `Ki` (kilobytes), `Mi` (megabytes), `Gi` (gigabytes).
-    - metric (1k = 1000): `k`, `M`, `G`.
+- base 2 (1Ki = 1024): `Ki` (kilobytes), `Mi` (megabytes), `Gi` (gigabytes).
+- metric (1k = 1000): `k`, `M`, `G`.
 
 If the number of nodes in a cluster is expected to grow (or just change) over time, you might want to adjust the "per node" setting. If the number of nodes is static, adjust the "base" setting. In the end, the total CPU and memory values are set in the `metrics-server` deployment resource requests.
 
 You can change the default resources by editing the metrics provider's configmap. Do not modify the resource requests or limits directly in the `metrics-server` deployment, the values are overwritten by the `metrics-server-nanny` container.
 
 The default `metrics-server-config` configmap is:
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -339,6 +340,7 @@ data:
 {: screen}
 
 This example shows a ConfigMap with all values defined.
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -352,7 +354,7 @@ data:
   NannyConfiguration: |-
     apiVersion: nannyconfig/v1alpha1
     kind: NannyConfiguration
-    baseCPU: 100m
+    baseCPU: 200m
     cpuPerNode: 1m
     baseMemory: 40Mi
     memoryPerNode: 6Mi
@@ -360,8 +362,9 @@ data:
 {: screen}
 
 The default values are:
+
 ```yaml
-baseCPU: 100m
+baseCPU: 200m
 cpuPerNode: 1m
 baseMemory: 40Mi
 memoryPerNode: 6Mi
@@ -398,7 +401,6 @@ Use the `kubectl describe pod` command to get the pod definition, state informat
 kubectl get pod -n kube-system -l k8s-app=metrics-server
 NAME                             READY   STATUS    RESTARTS   AGE
 metrics-server-9fb4947d6-s6sgl   3/3     Running   0          2d4h
-
 kubectl describe pod -n kube-system metrics-server-9fb4947d6-s6sgl
 ```
 {: pre}
@@ -448,10 +450,10 @@ Last State:     Terminated
 
 ```sh
 Events:
-  Warning Unhealthy 46m (x5 over 80m) kubelet Liveness probe failed: Get "https://198.18.68.236:4443/livez": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
-  Warning Unhealthy 26m (x65 over 89m) kubelet Liveness probe failed: Get "https://198.18.68.236:4443/livez": net/http: TLS handshake timeout
-  Warning Unhealthy 21m (x10 over 76m) kubelet Readiness probe failed: Get "https://198.18.68.236:4443/readyz": net/http: request canceled (Client.Timeout exceeded while awaiting headers)
-  Warning Unhealthy 115s (x93 over 90m) kubelet Readiness probe failed: Get "https://198.18.68.236:4443/readyz": net/http: TLS handshake timeout
+Warning Unhealthy 46m (x5 over 80m) kubelet Liveness probe failed: Get "https://198.18.68.236:4443/livez": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+Warning Unhealthy 26m (x65 over 89m) kubelet Liveness probe failed: Get "https://198.18.68.236:4443/livez": net/http: TLS handshake timeout
+Warning Unhealthy 21m (x10 over 76m) kubelet Readiness probe failed: Get "https://198.18.68.236:4443/readyz": net/http: request canceled (Client.Timeout exceeded while awaiting headers)
+Warning Unhealthy 115s (x93 over 90m) kubelet Readiness probe failed: Get "https://198.18.68.236:4443/readyz": net/http: TLS handshake timeout
 ```
 {: screen}
 
@@ -472,7 +474,7 @@ Huge pages scheduling is a beta feature in {{site.data.keyword.containerlong_not
 
 By default, the CPU of your worker nodes allocates RAM in chunks, or pages, of 4 KB. When your app requires more RAM, the system must continue to look up more pages, which can slow down processing. With huge pages, you can increase the page size to 2 MB to increase performance for your RAM-intensive apps like databases for artificial intelligence (AI), internet of things (IoT), or machine learning workloads. For more information about huge pages, see [the Linux kernel documentation](https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt){: external}.
 
-You can reboot the worker node and the huge pages configuration persists. However, the huge pages configuration does **not** persist across any other worker node life cycle operations. You must repeat the enablement steps each time that you update, reload, replace, or add worker nodes.
+You can reboot the worker node and the huge pages configuration persists. However, the huge pages configuration doesn't persist across any other worker node life cycle operations. You must repeat the enablement steps each time that you update, reload, replace, or add worker nodes.
 {: important}
 
 
