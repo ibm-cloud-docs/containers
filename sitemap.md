@@ -8017,11 +8017,11 @@ subcollection: containers
 
     * [1.0.0_1581, released 14 November 2024](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1581)
 
-    * [Change log for 1.0.0_1415, released 3 October 2024](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1415)
+    * [1.0.0_1415, released 3 October 2024](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1415)
 
-    * [Change log for 1.0.0_1122, released 17 July 2023](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1122)
+    * [1.0.0_1122, released 17 July 2023](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1122)
 
-    * [Change log for 1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_649)
+    * [1.0.0_649, released 8 September 2021](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_649)
 
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog#backup_restore_changelog)
 
