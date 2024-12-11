@@ -14,7 +14,7 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Static Route add-on change log
+# Static Route add-on version change log
 {: #cl-add-ons-static-route}
 
 Review the version history for Static Route.
@@ -30,6 +30,7 @@ Review the version history for Static Route.
 
 - Updates to the latest `ubi-minimal` base image for the operator build. 
 - `addon-static-route v1.0.0_1581`
+
 
 
 ### 1.0.0_1415, released 3 October 2024

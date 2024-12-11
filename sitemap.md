@@ -8023,7 +8023,7 @@ subcollection: containers
 
 * [Change log for version 2.0.5, released 25 November 2020](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
-[Static Route add-on change log](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route)
+[Static Route add-on version change log](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route)
 
 * [Version 1.0.0](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-1.0.0)
 
