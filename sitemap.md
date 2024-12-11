@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-12-10"
+lastupdated: "2024-12-11"
 
 
 keywords: containers
@@ -7837,6 +7837,8 @@ subcollection: containers
 
 * [Version 2.0](/docs/containers?topic=containers-versions-vpc-file-addon#020_is_file)
 
+    * [Change log for version 2.0.9_322, released 11 December 2024](/docs/containers?topic=containers-versions-vpc-file-addon#2.0.9_322_is_file_relnote)
+
     * [Change log for version 2.0.8_311, released 3 October 2024](/docs/containers?topic=containers-versions-vpc-file-addon#2.0.8_311_is_file_relnote)
 
     * [Change log for version 2.0.6_259, released 26 August 2024](/docs/containers?topic=containers-versions-vpc-file-addon#2.0.6_259_is_file_relnote)
@@ -7846,6 +7848,8 @@ subcollection: containers
     * [Change log for version 2.0.4_232, released 3 July 2024](/docs/containers?topic=containers-versions-vpc-file-addon#2.0.4_232_is_file_relnote)
 
 * [Version 1.2](/docs/containers?topic=containers-versions-vpc-file-addon#012_is_file)
+
+    * [Change log for version 1.2.13_326, released 11 December 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.13_326_is_file_relnote)
 
     * [Change log for version 1.2.12_312, released 3 October 2024](/docs/containers?topic=containers-versions-vpc-file-addon#1.2.12_312_is_file_relnote)
 
@@ -8040,6 +8044,8 @@ subcollection: containers
 [IBM storage operator add-on change log](/docs/containers?topic=containers-versions-ibm-storage-operator#versions-ibm-storage-operator)
 
 * [Version 1.0.0](/docs/containers?topic=containers-versions-ibm-storage-operator#ibm-storage-operator-1.0.0)
+
+    * [Change log for version 1.0.16_169, released 11 December 2024](/docs/containers?topic=containers-versions-ibm-storage-operator#ibm-storage-operator-1.0.16_169)
 
     * [Change log for version 1.0.15_163, released 3 October 2024](/docs/containers?topic=containers-versions-ibm-storage-operator#ibm-storage-operator-1.0.15_163)
 
