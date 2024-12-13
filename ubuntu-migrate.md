@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2024
-lastupdated: "2024-12-10"
+lastupdated: "2024-12-13"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -29,7 +29,9 @@ Ubuntu 24 is the default operating system for all supported cluster versions. A 
 ## Ubuntu 24 limitations
 {: #ubuntu-24-lim}
 
-Portworx does not currently support Ubuntu 24. Do not create or migrate to Ubuntu 24 worker pools if you need to use Portworx.
+- For Ubuntu 24, the `/tmp` directory is a separate partition that has the `nosuid`, `noexec`, and `nodev` options set. If your apps install to and run scripts or binaries under the `/tmp` directory, they might fail. You can use the `/var/tmp` directory instead of the `/tmp` directory to run temporary scripts or binaries.
+
+- The default `cgroup` implementation is `cgroup` v2. Review the [Kubernetes migration documentation for `cgroup` v2](https://kubernetes.io/docs/concepts/architecture/cgroups/#migrating-to-cgroup-v2){: external} and verify that your applications fully support `cgroup` v2. There are known issues with older versions of Java that might cause out of memory (OOM) issues for workloads.
 
 
 ## Migration steps
@@ -38,10 +40,6 @@ Portworx does not currently support Ubuntu 24. Do not create or migrate to Ubunt
 Migrate your worker nodes to use Ubuntu 24. These steps apply to all supported cluster versions.
 {: shortdesc}
 
-For Ubuntu 24, the `/tmp` directory is a separate partition that has the `nosuid`, `noexec`, and `nodev` options set. If your apps install to and run scripts or binaries under the `/tmp` directory, they might fail. You can use the `/var/tmp` directory instead of the `/tmp` directory to run temporary scripts or binaries.
-
-The default `cgroup` implementation is `cgroup` v2. Please review the [Kubernetes migration documentation for `cgroup` v2](https://kubernetes.io/docs/concepts/architecture/cgroups/#migrating-to-cgroup-v2){: external} and verify that your applications fully support `cgroup` v2. There are known issues with older versions of Java that may cause out of memory (OOM) issues for workloads.
-{: important}
 
 1. Review your worker pool operating systems to determine which pools you need to migrate.
     ```sh
