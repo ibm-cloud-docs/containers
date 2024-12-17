@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2024
-lastupdated: "2024-12-11"
+lastupdated: "2024-12-17"
 
 
 keywords: containers
@@ -8072,7 +8072,7 @@ subcollection: containers
 {: #sitemap_ingress_version_history}
 
 
-[Ingress ALB version change log](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
+[Ingress ALB](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
 
