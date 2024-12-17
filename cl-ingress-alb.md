@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2024
 
-lastupdated: "2024-12-04"
+lastupdated: "2024-12-17"
 
 
 keywords: change log, version history, Ingress ALB
@@ -14,11 +14,14 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Ingress ALB version change log
+<!-- The content in this topic is auto-generated except for reuse-snippets indicated with {[ ]}. -->
+
+# Ingress ALB
 {: #cl-ingress-alb}
 
 Review the version history for Ingress ALB.
 {: shortdesc}
+
 
 
 ## Version 1.11.2

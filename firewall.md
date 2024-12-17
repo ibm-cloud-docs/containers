@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2024
-lastupdated: "2024-10-31"
+lastupdated: "2024-12-17"
 
 
 keywords: kubernetes, allowlist, firewall, vyatta, ips
@@ -316,8 +316,8 @@ Before you begin
 
 1. Allow the IBM Cloud infrastructure private IP ranges so that you can create worker nodes in your cluster.
 
-    1. Allow the appropriate IBM Cloud infrastructure private IP ranges. See [Backend (private) Network](/docs/cloud-infrastructure?topic=cloud-infrastructure-ibm-cloud-ip-ranges#back-end-network).
-    2. Allow the IBM Cloud infrastructure private IP ranges for all the [zones](/docs/containers?topic=containers-regions-and-zones#locations) that you are using. **Note**: You must add the `166.8.0.0/14` and `161.26.0.0/16` IP ranges, the IP ranges for the `dal10` and `wdc04` zones. See [Service Network (on backend/private network)](/docs/cloud-infrastructure?topic=cloud-infrastructure-ibm-cloud-ip-ranges#back-end-network).
+    1. Allow the appropriate IBM Cloud infrastructure private IP ranges. See [Backend (private) Network](/docs/infrastructure-hub?topic=infrastructure-hub-ibm-cloud-ip-ranges#back-end-network).
+    2. Allow the IBM Cloud infrastructure private IP ranges for all the [zones](/docs/containers?topic=containers-regions-and-zones#locations) that you are using. **Note**: You must add the `166.8.0.0/14` and `161.26.0.0/16` IP ranges, the IP ranges for the `dal10` and `wdc04` zones. See [Service Network (on backend/private network)](//docs/infrastructure-hub?topic=infrastructure-hub-ibm-cloud-ip-ranges#back-end-network).
 
 2. Note the private IP address for each worker node in the cluster.
 
@@ -405,7 +405,7 @@ To create persistent volume claims in a cluster where worker nodes are connected
 If you must use a Kubernetes version or {{site.data.keyword.cloud_notm}} storage plug-in version that does not support network communication over the private network, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your allowlist to IBM Cloud infrastructure and {{site.data.keyword.cloud_notm}} Identity and Access Management:
 
 - Allow all egress network traffic on TCP port 443.
-- Allow access to the IBM Cloud infrastructure IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/cloud-infrastructure?topic=cloud-infrastructure-ibm-cloud-ip-ranges) and [**Back-end (private) Network**](/docs/cloud-infrastructure?topic=cloud-infrastructure-ibm-cloud-ip-ranges). To find the zone of your cluster, run `ibmcloud ks cluster ls`.
+- Allow access to the IBM Cloud infrastructure IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure-hub?topic=infrastructure-hub-ibm-cloud-ip-ranges#front-end-network) and [**Back-end (private) Network**](/docs/infrastructure-hub?topic=infrastructure-hub-ibm-cloud-ip-ranges#back-end-network). To find the zone of your cluster, run `ibmcloud ks cluster ls`.
 
 #### Optional: Set up allowlist rules for {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}} services
 {: #firewall_private_mon_la}
