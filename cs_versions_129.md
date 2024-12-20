@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2024
-lastupdated: "2024-12-16"
+lastupdated: "2024-12-20"
 
 
 keywords: kubernetes, containers, 129, version 129, 129 update actions
@@ -52,7 +52,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 This information summarizes updates that are likely to have an impact on deployed apps when you update a cluster to version 1.29. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.29.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_129) for version 1.29. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
 
-The default `cgroup` for Ubuntu 24 is `cgroup` v2. Review the [Kubernetes migration documentation for `cgroup` v2](https://kubernetes.io/docs/concepts/architecture/cgroups/#migrating-to-cgroup-v2){: external} and verify that your applications fully support `cgroup` v2. There are known issues with older versions of Java that might cause out of memory (OOM) issues for workloads.
+The default `cgroup` for Ubuntu 24 is `cgroup` v2. In Ubuntu 24, `cgroup` v1 is not supported. Review the [Kubernetes migration documentation for `cgroup` v2](https://kubernetes.io/docs/concepts/architecture/cgroups/#migrating-to-cgroup-v2){: external} and verify that your applications fully support `cgroup` v2. There are known issues with older versions of Java that might cause out of memory (OOM) issues for workloads.
 {: important}
 
 
