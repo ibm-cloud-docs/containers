@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2024
-lastupdated: "2024-03-19"
+  years: 2022, 2025
+lastupdated: "2025-01-03"
 
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
@@ -46,7 +46,7 @@ If you do not want to use the IBM-provided components, you can [create custom co
 The default Ingress domain is used to form a unique URL for each app in your cluster, and is the domain that is referenced by the IP addresses of any ALBs in your cluster. When you create a cluster, a unique Ingress subdomain is automatically created and registered as the default domain. You can [change the default domain](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-default) to any domain that exists in your cluster. 
 {: shortdesc}
 
-You can also [create or add your own domain](/docs/containers?topic=containers-ingress-domains) registered with IBM Cloud's internal domain provider, or a domain registered with an external provider. Currently, {{site.data.keyword.cloud_notm}} supports external domains registered with {{site.data.keyword.cis_full_notm}}, Akamai, or Cloudflare.
+You can also [create or add your own domain](/docs/containers?topic=containers-ingress-domains) registered with {{site.data.keyword.cloud_notm}}'s internal domain provider or with an {{site.data.keyword.cis_full_notm}} external provider.
 {: tip}
 
 Private ALBs do not reference the IBM-provided Ingress subdomain and instead require a [custom domain](/docs/containers?topic=containers-managed-ingress-setup#ingress-custom-domain).
@@ -141,4 +141,3 @@ Setting up Ingress with TLS certificates involves creating or importing secrets.
 
 When you are ready to use Ingress in your cluster, [create an Ingress resource](/docs/containers?topic=containers-managed-ingress-setup) to configure your Ingress components, define rules for routing requests, and specify the path to app services. A separate Ingress resource is required for each namespace that contains an app or service that you want to expose.
 {: shortdesc}
-
