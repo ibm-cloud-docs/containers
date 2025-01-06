@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-01-03"
+lastupdated: "2025-01-06"
 
 
 keywords: containers
@@ -237,6 +237,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan25)
+
+    * [06 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan0625)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
 * [December 2024](/docs/containers?topic=containers-containers-relnotes#containers-dec24)
 
@@ -6539,6 +6545,8 @@ subcollection: containers
 
 * [Version 1.31 change log](/docs/containers?topic=containers-changelog_131#131_changelog)
 
+    * [Change log for worker node fix pack 1.31.3_1534, released 30 December 2024](/docs/containers?topic=containers-changelog_131#1313_1534_W)
+
     * [Change log for worker node fix pack 1.31.3_1533, released 16 December 2024](/docs/containers?topic=containers-changelog_131#1313_1533_W)
 
     * [Change log for worker node fix pack 1.31.3_1532, released 05 December 2024](/docs/containers?topic=containers-changelog_131#1313_1532_W)
@@ -6643,6 +6651,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30 change log](/docs/containers?topic=containers-changelog_130#130_changelog)
+
+    * [Change log for worker node fix pack 1.30.7_1549, released 30 December 2024](/docs/containers?topic=containers-changelog_130#1307_1549_W)
 
     * [Change log for worker node fix pack 1.30.7_1548, released 16 December 2024](/docs/containers?topic=containers-changelog_130#1307_1548_W)
 
@@ -6754,6 +6764,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29 change log](/docs/containers?topic=containers-changelog_129#129_changelog)
+
+    * [Change log for worker node fix pack 1.29.11_1571, released 30 December 2024](/docs/containers?topic=containers-changelog_129#12911_1571_W)
 
     * [Change log for worker node fix pack 1.29.11_1570, released 16 December 2024](/docs/containers?topic=containers-changelog_129#12911_1570_W)
 
@@ -6895,6 +6907,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28 change log](/docs/containers?topic=containers-changelog_128#128_changelog)
+
+    * [Change log for worker node fix pack 1.28.15_1592, released 30 December 2024](/docs/containers?topic=containers-changelog_128#12815_1592_W)
 
     * [Change log for worker node fix pack 1.28.15_1591, released 16 December 2024](/docs/containers?topic=containers-changelog_128#12815_1591_W)
 
