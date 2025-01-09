@@ -3481,15 +3481,17 @@ subcollection: containers
 
 [Migrating your {{site.data.keyword.containerlong_notm}} clusters to Cloud Logs](/docs/containers?topic=containers-cloud-logs-migration#cloud-logs-migration)
 
-* [Migrating to Cloud Logs](/docs/containers?topic=containers-cloud-logs-migration#migration-cloud-logs)
+* [Determining if you need to migrate](/docs/containers?topic=containers-cloud-logs-migration#migrate-check)
 
-    * [Determining if you need to migrate](/docs/containers?topic=containers-cloud-logs-migration#migrate-check)
+* [Enabling your clusters to use your Cloud Logs instance](/docs/containers?topic=containers-cloud-logs-migration#migrate-cloud-logs-clusters)
 
-    * [Enabling your clusters to use your Cloud Logs instance](/docs/containers?topic=containers-cloud-logs-migration#migrate-cloud-logs-clusters)
+    * [Enabling Cloud Logs in the console](/docs/containers?topic=containers-cloud-logs-migration&interface=ui#cloud-logs-console-enable)
 
-* [Migrating to the new monitoring agent](/docs/containers?topic=containers-cloud-logs-migration#monitoring)
+    * [Enabling Cloud Logs in the CLI](/docs/containers?topic=containers-cloud-logs-migration&interface=cli#cloud-logs-cli-enable)
 
-* [What else do I need to know?](/docs/containers?topic=containers-cloud-logs-migration#ob-plugin-dep)
+* [Migrating to the new monitoring agent](/docs/containers?topic=containers-cloud-logs-migration&interface=cli#monitoring)
+
+* [What else do I need to know?](/docs/containers?topic=containers-cloud-logs-migration&interface=cli#ob-plugin-dep)
 
 [Logging for clusters](/docs/containers?topic=containers-health#health)
 
