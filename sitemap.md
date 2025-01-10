@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-01-09"
+lastupdated: "2025-01-10"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan25)
+
+    * [08 January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan0825)
+
+        * Ingress ALB cluster add-on patch updates.
 
     * [06 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan0625)
 
