@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-11-08"
+  years: 2014, 2025
+lastupdated: "2025-01-10"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -258,8 +258,8 @@ The following table shows the different options that you have when you configure
 ### Forwarding logs to your own server over the `tls` protocol
 {: #enable-forwarding-tls}
 
-The following steps are general instructions. Before you use the container in a production environment, be sure that any security requirements are met.
-{: tip}
+The following steps are deprecated. The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are deprecated and support ends on 28 March 2025. You can now manage your logging and monitoring integrations from the console or through the Helm charts. For the latest steps, see [Managing the Logging agent for Red Hat OpenShift on IBM Cloud clusters](/docs/cloud-logs?topic=cloud-logs-agent-openshift) or [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster)
+{: deprecated}
 
 1. Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-iam-platform-access-roles):
     - **Editor** or **Administrator** platform access role for the cluster

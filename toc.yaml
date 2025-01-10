@@ -158,6 +158,7 @@ toc:
       - topicgroup:
           label: Logging and monitoring
           topics:
+          - cloud-logs-migration.md
           - cs_health_log.md
           - cs_health_monitor.md
           - health-audit.md
@@ -398,27 +399,6 @@ toc:
               - cs_versions_122.md
               - cs_versions_changelog_122.md
               - cs_benchmarks_122.md
-          - topicgroup:
-              label: Version 1.21 
-              topics:
-              - cs_versions_121.md
-              - cs_versions_changelog_121.md
-              - cs_benchmarks_121.md 
-          - topicgroup:
-              label: Version 1.20 
-              topics:
-              - cs_versions_120.md
-              - cs_versions_changelog_120.md
-              - cs_benchmarks_120.md
-          - topicgroup:
-              label: Version 1.19
-              topics:
-              - cs_versions_119.md
-              - cs_versions_changelog_119.md
-              - cs_benchmarks_119.md
-          - cs_versions_changelog_118.md
-          - cs_versions_changelog_117.md
-          - cs_versions_changelog_116.md
       - topicgroup:
           label: Activity Tracker events
           topics:
@@ -459,11 +439,11 @@ toc:
           - topicgroup:
               label: Clusters and masters
               topics:
+              - states-cluster.md
               - ts-webhook-debug.md
               - ts-cluster-master.md
               - ts-cluster-master-upgrade.md
               - ts-resource-migration.md
-              - states-cluster.md
               - ts-cluster-cli.md
               - ts-cluster-create-delete.md
               - ts-cluster-no-vpc.md
@@ -489,9 +469,9 @@ toc:
           - topicgroup:
               label: Worker nodes
               topics:
+              - states-workers.md
               - ts-worker-debug.md
               - ts-worker-debug-kube-api.md
-              - states-workers.md
               - ts-worker-common-issues.md
               - ts-critical-notready.md
               - ts-worker-dedicated.md
