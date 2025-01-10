@@ -3489,13 +3489,11 @@ subcollection: containers
 
 * [Enabling your clusters to use your Cloud Logs instance](/docs/containers?topic=containers-cloud-logs-migration#migrate-cloud-logs-clusters)
 
-    * [Enabling Cloud Logs in the console](/docs/containers?topic=containers-cloud-logs-migration&interface=ui#cloud-logs-console-enable)
+    * [Enabling Cloud Logs in the console](/docs/containers?topic=containers-cloud-logs-migration#cloud-logs-console-enable)
 
-    * [Enabling Cloud Logs in the CLI](/docs/containers?topic=containers-cloud-logs-migration&interface=cli#cloud-logs-cli-enable)
+    * [Enabling Cloud Logs in the CLI](/docs/containers?topic=containers-cloud-logs-migration#cloud-logs-cli-enable)
 
-* [Migrating to the new monitoring agent](/docs/containers?topic=containers-cloud-logs-migration&interface=cli#monitoring)
-
-* [What else do I need to know?](/docs/containers?topic=containers-cloud-logs-migration&interface=cli#ob-plugin-dep)
+* [Migrating to the new monitoring agent](/docs/containers?topic=containers-cloud-logs-migration#monitoring)
 
 [Logging for clusters](/docs/containers?topic=containers-health#health)
 

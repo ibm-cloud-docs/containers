@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-01-09"
+lastupdated: "2025-01-10"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -48,7 +48,7 @@ Kubernetes dashboard
 ## Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}
 {: #monitoring}
 
-The following steps are deprecated. For the latest steps, see [Setting up the Monitoring agent](/docs/monitoring?topic=monitoring-agent_Kube).
+The following steps are deprecated. The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are deprecated and support ends on 28 March 2025. You can now manage your logging and monitoring integrations from the console or through the Helm charts. For the latest steps, see [Working with the Kubernetes agent](/docs/monitoring?topic=monitoring-agent_Kube) or [Working with the Red Hat OpenShift agent](/docs/monitoring?topic=monitoring-agent_openshift).
 {: deprecated}
 
 Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster, and use this monitoring configuration to automatically collect and forward metrics to {{site.data.keyword.mon_full_notm}}.
