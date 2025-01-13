@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-01-10"
+lastupdated: "2025-01-13"
 
 
 keywords: containers
@@ -3483,6 +3483,58 @@ subcollection: containers
 {: #sitemap_logging_and_monitoring}
 
 
+[Logging for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-logging#logging)
+
+* [Locations where logs are generated](/docs/containers?topic=containers-logging#log-locations)
+
+* [Locations where logs are sent to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-logging#la-legacy-locations)
+
+* [Locations where logs are sent by {{site.data.keyword.logs_routing_full_notm}}](/docs/containers?topic=containers-logging#lr-locations)
+
+* [Logs that are generated](/docs/containers?topic=containers-logging#log-platform)
+
+* [Enabling logging](/docs/containers?topic=containers-logging#log-enable)
+
+* [Enable logging in an existing cluster](/docs/containers?topic=containers-logging#log-enable-existing)
+
+* [Enable logging while creating a cluster](/docs/containers?topic=containers-logging#log-enable-create)
+
+* [Viewing logs](/docs/containers?topic=containers-logging#log-viewing)
+
+* [Launching {{site.data.keyword.logs_full_notm}} from the Observability page](/docs/containers?topic=containers-logging#log-launch-standalone-ob)
+
+* [Fields by log type](/docs/containers?topic=containers-logging#log-fields)
+
+* [Line identifiers by type](/docs/containers?topic=containers-logging#line-indentifiers)
+
+* [Analyzing {{site.data.keyword.containerlong_notm}} logs](/docs/containers?topic=containers-logging#cloud-logs)
+
+* [Migrating from Log Analysis and Activity Tracker to Cloud Logs](/docs/containers?topic=containers-logging#cloud-logs-migration)
+
+* [Enabling your clusters to use your Cloud Logs instance](/docs/containers?topic=containers-logging#migrate-cloud-logs-clusters)
+
+    * [Enabling Cloud Logs in the console](/docs/containers?topic=containers-logging#cloud-logs-console-enable)
+
+    * [Enabling Cloud Logs in the CLI](/docs/containers?topic=containers-logging#cloud-logs-cli-enable)
+
+[Monitoring metrics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring)
+
+* [Locations where metrics are generated](/docs/containers?topic=containers-monitoring#mon-locations)
+
+* [Enabling metrics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring-enable)
+
+* [Enable monitoring in an existing cluster](/docs/containers?topic=containers-monitoring#monintoring-enable-existing)
+
+* [Enable monitoring while creating a cluster](/docs/containers?topic=containers-monitoring#monintoring-enable-create)
+
+* [Viewing metrics](/docs/containers?topic=containers-monitoring#monitoring-view)
+
+    * [Launching {{site.data.keyword.mon_full}} from the Observability page](/docs/containers?topic=containers-monitoring#monitoring-view-ob)
+
+* [Monitoring {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring-monitor)
+
+* [Migrating to the new monitoring agent](/docs/containers?topic=containers-monitoring#migrating-new-agent)
+
 [Migrating your {{site.data.keyword.containerlong_notm}} clusters to Cloud Logs](/docs/containers?topic=containers-cloud-logs-migration#cloud-logs-migration)
 
 * [Determining if you need to migrate](/docs/containers?topic=containers-cloud-logs-migration#migrate-check)
@@ -3499,7 +3551,7 @@ subcollection: containers
 
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
-* [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logging)
+* [Forwarding cluster and app logs to Cloud Logs](/docs/containers?topic=containers-health#logging)
 
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
 
