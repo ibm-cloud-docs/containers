@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-09-19"
+  years: 2014, 2025
+lastupdated: "2025-01-13"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -50,7 +50,7 @@ Ingress issues are often caused by underlying issues in your app deployment or i
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug tool, you can enable the add-on in your cluster.
 {: shortdesc}
 
-1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
+1. In your [cluster dashboard](https://cloud.ibm.com/containers/cluster-management/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
 
 1. On the Diagnostics and Debug Tool card, click **Install**.
 
