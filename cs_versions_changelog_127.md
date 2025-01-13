@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2023, 2024
-lastupdated: "2024-11-01"
+  years: 2023, 2025
+lastupdated: "2025-01-13"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -54,7 +54,7 @@ Review the version 1.27 change log.
 
 
 
-### Change log for worker node fix pack 1.27.16_1592, released 10 September 2024
+### Worker node fix pack 1.27.16_1592, released 10 September 2024
 {: #12716_1592_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.16_1592. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -87,7 +87,7 @@ The following table shows the changes that are in the master fix pack 1.27.16_15
 {: caption="Changes since version 1.27.16_1587" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.16.1591, released 26 August 2024
+### Worker node fix pack 1.27.16.1591, released 26 August 2024
 {: #127161591_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.16.1591. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -102,7 +102,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.16_1589" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.16_1589, released 12 August 2024
+### Worker node fix pack 1.27.16_1589, released 12 August 2024
 {: #12716_1589_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.16_1589. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -139,7 +139,7 @@ The following table shows the changes that are in the master fix pack 1.27.16_15
 {: caption="Changes since version 1.27.15_1581" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.15_1588, released 29 July 2024
+### Worker node fix pack 1.27.15_1588, released 29 July 2024
 {: #12715_1588_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.15_1588. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -155,7 +155,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.15_1584" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.15_1584, released 15 July 2024
+### Worker node fix pack 1.27.15_1584, released 15 July 2024
 {: #12715_1584_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.15_1584. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -169,7 +169,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.15_1583" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.15_1583, released 09 July 2024
+### Worker node fix pack 1.27.15_1583, released 09 July 2024
 {: #12715_1583_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.15_1583. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -204,7 +204,7 @@ The following table shows the changes that are in the master fix pack 1.27.15_15
 {: caption="Changes since version 1.27.14_1577" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.15_1582, released 18 June 2024
+### Worker node fix pack 1.27.15_1582, released 18 June 2024
 {: #12715_1582_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.15_1582. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -219,7 +219,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.14_1578" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.14_1578, released 03 June 2024
+### Worker node fix pack 1.27.14_1578, released 03 June 2024
 {: #12714_1578_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.14_1578. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -259,7 +259,7 @@ The following table shows the changes that are in the master fix pack 1.27.14_15
 {: caption="Changes since version 1.27.13_1572" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.13_1575, released 23 May 2024
+### Worker node fix pack 1.27.13_1575, released 23 May 2024
 {: #12713_1575_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.13_1575. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -274,7 +274,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.13_1574" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.13_1574, released 06 May 2024
+### Worker node fix pack 1.27.13_1574, released 06 May 2024
 {: #12713_1574_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.13_1574. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -312,7 +312,7 @@ The following table shows the changes that are in the master fix pack 1.27.13_15
 {: caption="Changes since version 1.27.12_1569" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.13_1573, released 22 April 2024
+### Worker node fix pack 1.27.13_1573, released 22 April 2024
 {: #12713_1573_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.13_1573. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -328,7 +328,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.12_1571" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.12_1571, released 8 April 2024
+### Worker node fix pack 1.27.12_1571, released 8 April 2024
 {: #12712_1571_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.12_1571. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -368,7 +368,7 @@ The following table shows the changes that are in the master fix pack 1.27.12_15
 {: caption="Changes since version 1.27.11_1566" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.12_1570, released 25 March 2024
+### Worker node fix pack 1.27.12_1570, released 25 March 2024
 {: #12712_1570_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.12_1570. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -383,7 +383,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.11_1568" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.11_1568, released 13 March 2024
+### Worker node fix pack 1.27.11_1568, released 13 March 2024
 {: #12711_1568_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.11_1568. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -422,7 +422,7 @@ The following table shows the changes that are in the master fix pack 1.27.11_15
 {: caption="Changes since version 1.27.10_1561" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.11_1567, released 26 February 2024
+### Worker node fix pack 1.27.11_1567, released 26 February 2024
 {: #12711_1567_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.11_1567. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -435,7 +435,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.10_1563" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.10_1563, released 12 February 2024
+### Worker node fix pack 1.27.10_1563, released 12 February 2024
 {: #12710_1563_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.10_1563. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -475,7 +475,7 @@ The following table shows the changes that are in the master fix pack 1.27.10_15
 {: caption="Changes since version 1.27.8_1556" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.10_1562, released 29 January 2024
+### Worker node fix pack 1.27.10_1562, released 29 January 2024
 {: #12710_1562_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.10_1562. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -490,7 +490,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.8_1560" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.8_1560, released 16 January 2024
+### Worker node fix pack 1.27.8_1560, released 16 January 2024
 {: #1278_1560_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.8_1560. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -505,7 +505,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.8_1559" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.8_1559, released 02 January 2024
+### Worker node fix pack 1.27.8_1559, released 02 January 2024
 {: #1278_1559_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.8_1559. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -519,7 +519,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.8_1558" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.8_1558, released 18 December 2023
+### Worker node fix pack 1.27.8_1558, released 18 December 2023
 {: #1278_1558_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.8_1558. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -554,7 +554,7 @@ The following table shows the changes that are in the master fix pack 1.27.8_155
 {: caption="Changes since version 1.27.7_1547" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.8_1557, released 04 December 2023
+### Worker node fix pack 1.27.8_1557, released 04 December 2023
 {: #1278_1557_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.8_1557. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -567,7 +567,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.7_1548" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.7_1548, released 29 November 2023
+### Worker node fix pack 1.27.7_1548, released 29 November 2023
 {: #1277_1548_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.7_1548. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -605,7 +605,7 @@ The following table shows the changes that are in the master fix pack 1.27.7_154
 {: caption="Changes since version 1.27.6_1544" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.6_1546, released 08 November 2023
+### Worker node fix pack 1.27.6_1546, released 08 November 2023
 {: #1276_1546_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.6_1546. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -640,7 +640,7 @@ The following table shows the changes that are in the master fix pack 1.27.6_154
 {: caption="Changes since version 1.27.5_1540" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.6_1545, released 23 October 2023
+### Worker node fix pack 1.27.6_1545, released 23 October 2023
 {: #1276_1545_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.6_1545. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -654,7 +654,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.5_1542" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.5_1542, released 9 October 2023
+### Worker node fix pack 1.27.5_1542, released 9 October 2023
 {: #1275_1542_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.5_1542. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -668,7 +668,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.5_1541" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.5_1541, released 27 September 2023
+### Worker node fix pack 1.27.5_1541, released 27 September 2023
 {: #1275_1541_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.5_1541. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -701,7 +701,7 @@ The following table shows the changes that are in the master fix pack 1.27.5_154
 {: caption="Changes since version 1.27.4_1536" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.4_1538, released 12 September 2023
+### Worker node fix pack 1.27.4_1538, released 12 September 2023
 {: #1274_1538_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.4_1538. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -733,7 +733,7 @@ The following table shows the changes that are in the master fix pack 1.27.4_153
 {: caption="Changes since version 1.27.4_1533" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.4_1537, released 28th August 2023
+### Worker node fix pack 1.27.4_1537, released 28th August 2023
 {: #1274_1537_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.4_1537. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -745,7 +745,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.4_1535" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.4_1535, released 15th August 2023
+### Worker node fix pack 1.27.4_1535, released 15th August 2023
 {: #1274_1535_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.4_1535. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -759,7 +759,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.4_1534" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.4_1534, released 1 August 2023
+### Worker node fix pack 1.27.4_1534, released 1 August 2023
 {: #1274_1534_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.4_1534. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -795,7 +795,7 @@ The following table shows the changes that are in the master fix pack 1.27.4_153
 {: caption="Changes since version 1.27.3_1529" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.3_1532, released 17 July 2023
+### Worker node fix pack 1.27.3_1532, released 17 July 2023
 {: #1273_1532_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.3_1532. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -809,7 +809,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.3_1530" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.3_1530, released 03 July 2023
+### Worker node fix pack 1.27.3_1530, released 03 July 2023
 {: #1273_1530_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.3_1530. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -845,7 +845,7 @@ The following table shows the changes that are in the master fix pack 1.27.3_152
 {: caption="Changes since version 1.27.2_1524" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.2_1528, released 19 June 2023
+### Worker node fix pack 1.27.2_1528, released 19 June 2023
 {: #1272_1528_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.2_1528. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -859,7 +859,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.2_1527" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.27.2_1527, released 5 June 2023
+### Worker node fix pack 1.27.2_1527, released 5 June 2023
 {: #1272_1527_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.2_1527. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
