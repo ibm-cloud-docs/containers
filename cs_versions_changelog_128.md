@@ -1,36 +1,31 @@
 ---
 
-copyright: 
-  years: 2023, 2025
-lastupdated: "2025-01-06"
+copyright:
+  years: 2024, 2025
+
+lastupdated: "2025-01-13"
 
 
-keywords: kubernetes, containers, change log, 128 change log, 128 updates
+keywords: change log, version history, 1.28
 
 subcollection: containers
-
 
 ---
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Kubernetes version 1.28 change log
+<!-- The content in this topic is auto-generated except for reuse-snippets indicated with {[ ]}. -->
+
+# Version 1.28 change log
 {: #changelog_128}
 
-
-
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
-
-
-
-View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.28. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
+View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run this version. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
 
 ## Overview
-{: #changelog_overview_128}
+{: #changelog_overview}
 
-In clusters that run version 1.23 or earlier, the {{site.data.keyword.cloud_notm}} provider version enables Kubernetes APIs and features that are at beta. Most new beta features are disabled by default. Kubernetes alpha features, which are subject to change, are disabled in all versions. For more information, see the [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings) and the [feature gates](/docs/containers?topic=containers-service-settings#feature-gates) for each version.
+In Kubernetes, most new beta features are disabled by default. Alpha features, which are subject to change, are disabled in all versions. For more information, see the [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings) and the [feature gates](/docs/containers?topic=containers-service-settings#feature-gates) for each version.
 
 For more information about major, minor, and patch versions and preparation actions between minor versions, see [Kubernetes versions](/docs/containers?topic=containers-cs_versions).
 {: tip}
@@ -42,17 +37,72 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 
+## Version 1.28
+{: #128_components}
 
-## Version 1.28 change log
-{: #128_changelog}
 
 
-Review the version 1.28 change log.
+### Worker node fix pack 1.28.15_1593, released 13 January 2025
+{: #cl-boms-12815_1593_W}
+
+The following table shows the components included in the worker node fix pack 1.28.15_1593. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_20_04|5.4.0-204-generic|Resolves the following CVEs: [](https://nvd.nist.gov/vuln/detail/){: external}.|
+|RHEL_8|4.18.0-553.34.1.el8_10|Resolves the following CVEs: [RHSA-2025:0065](https://access.redhat.com/errata/RHSA-2025:0065){: external}, [CVE-2024-53088](https://nvd.nist.gov/vuln/detail/CVE-2024-53088){: external}, [CVE-2024-53122](https://nvd.nist.gov/vuln/detail/CVE-2024-53122){: external}, [RHSA-2024:3043](https://access.redhat.com/errata/RHSA-2024:3043){: external}, [CVE-2024-0690](https://nvd.nist.gov/vuln/detail/CVE-2024-0690){: external}, [RHSA-2025:0012](https://access.redhat.com/errata/RHSA-2025:0012){: external}, [CVE-2024-35195](https://nvd.nist.gov/vuln/detail/CVE-2024-35195){: external}, [RHSA-2024:11161](https://access.redhat.com/errata/RHSA-2024:11161){: external}, and [CVE-2024-52337](https://nvd.nist.gov/vuln/detail/CVE-2024-52337){: external}.|
+|Kubernetes|1.28.15|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.15).|
+|containerd|1.7.23|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.23).|
+|HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5||
+|GPU Device Plug-in and Installer|dc0ff3ad7a22a45390d050aa7d3ab23968870a14|Resolves the following CVEs: [CVE-2024-35195](https://nvd.nist.gov/vuln/detail/CVE-2024-35195){: external}, [CVE-2024-53088](https://nvd.nist.gov/vuln/detail/CVE-2024-53088){: external}, and [CVE-2024-53122](https://nvd.nist.gov/vuln/detail/CVE-2024-53122){: external}.|
+{: caption="Components in version 1.28.15_1593." caption-side="bottom"}
+{: #cl-boms-12815_1593_W-component-table}
 
 
-### Change log for worker node fix pack 1.28.15_1592, released 30 December 2024
+
+
+### Worker node fix pack 1.28.15_1592, released 30 December 2024
+{: #cl-boms-12815_1592_W}
+
+The following table shows the components included in the worker node fix pack 1.28.15_1592. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_20_04|5.4.0-204-generic|Resolves the following CVEs: [CVE-2021-47001](https://nvd.nist.gov/vuln/detail/CVE-2021-47001){: external}, [CVE-2021-47101](https://nvd.nist.gov/vuln/detail/CVE-2021-47101){: external}, [CVE-2022-38096](https://nvd.nist.gov/vuln/detail/CVE-2022-38096){: external}, [CVE-2023-52821](https://nvd.nist.gov/vuln/detail/CVE-2023-52821){: external}, [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-35963](https://nvd.nist.gov/vuln/detail/CVE-2024-35963){: external}, [CVE-2024-35965](https://nvd.nist.gov/vuln/detail/CVE-2024-35965){: external}, [CVE-2024-35966](https://nvd.nist.gov/vuln/detail/CVE-2024-35966){: external}, [CVE-2024-35967](https://nvd.nist.gov/vuln/detail/CVE-2024-35967){: external}, [CVE-2024-36952](https://nvd.nist.gov/vuln/detail/CVE-2024-36952){: external}, [CVE-2024-38553](https://nvd.nist.gov/vuln/detail/CVE-2024-38553){: external}, [CVE-2024-38597](https://nvd.nist.gov/vuln/detail/CVE-2024-38597){: external}, [CVE-2024-40910](https://nvd.nist.gov/vuln/detail/CVE-2024-40910){: external}, [CVE-2024-43892](https://nvd.nist.gov/vuln/detail/CVE-2024-43892){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, and [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}.|
+|RHEL_8|4.18.0-553.32.1.el8_10|Resolves the following CVEs: [RHSA-2024:3043](https://access.redhat.com/errata/RHSA-2024:3043){: external}, and [CVE-2024-0690](https://nvd.nist.gov/vuln/detail/CVE-2024-0690){: external}.|
+|Kubernetes|1.28.15|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.15).|
+|containerd|1.7.23|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.23).|
+|HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5||
+|GPU Device Plug-in and Installer|||
+{: caption="Components in version 1.28.15_1592." caption-side="bottom"}
+{: #cl-boms-12815_1592_W-component-table}
+
+
+
+
+### Worker node fix pack 1.28.15_1592, released 30 December 2024
+{: #cl-boms-12815_1592_W}
+
+The following table shows the components included in the worker node fix pack 1.28.15_1592. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_20_04|5.4.0-204-generic|Resolves the following CVEs: [CVE-2021-47001](https://nvd.nist.gov/vuln/detail/CVE-2021-47001){: external}, [CVE-2021-47101](https://nvd.nist.gov/vuln/detail/CVE-2021-47101){: external}, [CVE-2022-38096](https://nvd.nist.gov/vuln/detail/CVE-2022-38096){: external}, [CVE-2023-52821](https://nvd.nist.gov/vuln/detail/CVE-2023-52821){: external}, [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-35963](https://nvd.nist.gov/vuln/detail/CVE-2024-35963){: external}, [CVE-2024-35965](https://nvd.nist.gov/vuln/detail/CVE-2024-35965){: external}, [CVE-2024-35966](https://nvd.nist.gov/vuln/detail/CVE-2024-35966){: external}, [CVE-2024-35967](https://nvd.nist.gov/vuln/detail/CVE-2024-35967){: external}, [CVE-2024-36952](https://nvd.nist.gov/vuln/detail/CVE-2024-36952){: external}, [CVE-2024-38553](https://nvd.nist.gov/vuln/detail/CVE-2024-38553){: external}, [CVE-2024-38597](https://nvd.nist.gov/vuln/detail/CVE-2024-38597){: external}, [CVE-2024-40910](https://nvd.nist.gov/vuln/detail/CVE-2024-40910){: external}, [CVE-2024-43892](https://nvd.nist.gov/vuln/detail/CVE-2024-43892){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, and [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}.|
+|RHEL_8|4.18.0-553.32.1.el8_10|Resolves the following CVEs: [RHSA-2024:3043](https://access.redhat.com/errata/RHSA-2024:3043){: external}, and [CVE-2024-0690](https://nvd.nist.gov/vuln/detail/CVE-2024-0690){: external}.|
+|Kubernetes|1.28.15|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.15).|
+|containerd|1.7.23|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.23).|
+|HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5||
+|GPU Device Plug-in and Installer|||
+{: caption="Components in version 1.28.15_1592." caption-side="bottom"}
+{: #cl-boms-12815_1592_W-component-table}
+
+
+
+
+### Worker node fix pack 1.28.15_1592, released 30 December 2024
 {: #12815_1592_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.15_1592. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -64,7 +114,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.15_1591" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.15_1591, released 16 December 2024
+### Worker node fix pack 1.28.15_1591, released 16 December 2024
 {: #12815_1591_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.15_1591. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -78,7 +128,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.15_1590" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.15_1590, released 05 December 2024
+### Worker node fix pack 1.28.15_1590, released 05 December 2024
 {: #12815_1590_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.15_1589. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -110,7 +160,7 @@ The following table shows the changes that are in the master fix pack 1.28.15_15
 {: caption="Changes since version 1.28.15_1586" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.15_1587, released 18 November 2024
+### Worker node fix pack 1.28.15_1587, released 18 November 2024
 {: #12815_1587_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.15_1587. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -141,7 +191,7 @@ The following table shows the changes that are in the master fix pack 1.28.15_15
 {: caption="Changes since version 1.28.14_1584" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.14_1585, released 04 November 2024
+### Worker node fix pack 1.28.14_1585, released 04 November 2024
 {: #12814_1585_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.14_1585. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -172,7 +222,7 @@ The following table shows the changes that are in the master fix pack 1.28.14_15
 {: caption="Changes since version 1.28.14_1579" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.14_1582, released 21 October 2024
+### Worker node fix pack 1.28.14_1582, released 21 October 2024
 {: #12814_1582_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.14_1582. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -186,7 +236,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.14_1581" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.14_1581, released 09 October 2024
+### Worker node fix pack 1.28.14_1581, released 09 October 2024
 {: #12814_1581_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.14_1581. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -225,7 +275,7 @@ The following table shows the changes that are in the master fix pack 1.28.14_15
 {: caption="Changes since version 1.28.13_1576" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.14_1580, released 23 September 2024
+### Worker node fix pack 1.28.14_1580, released 23 September 2024
 {: #12814_1580_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.14_1580. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -241,7 +291,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.13_1578" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.13_1578, released 10 September 2024
+### Worker node fix pack 1.28.13_1578, released 10 September 2024
 {: #12813_1578_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.13_1578. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -278,7 +328,7 @@ The following table shows the changes that are in the master fix pack 1.28.13_15
 {: caption="Changes since version 1.28.12_1573" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.13_1577, released 26 August 2024
+### Worker node fix pack 1.28.13_1577, released 26 August 2024
 {: #12813_1577_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.13_1577. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -294,7 +344,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.12_1575" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.12_1575, released 12 August 2024
+### Worker node fix pack 1.28.12_1575, released 12 August 2024
 {: #12812_1575_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.12_1575. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -332,7 +382,7 @@ The following table shows the changes that are in the master fix pack 1.28.12_15
 {: caption="Changes since version 1.28.11_1564" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.12_1574, released 29 July 2024
+### Worker node fix pack 1.28.12_1574, released 29 July 2024
 {: #12812_1574_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.12_1574. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -348,7 +398,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.11_1567" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.11_1567, released 15 July 2024
+### Worker node fix pack 1.28.11_1567, released 15 July 2024
 {: #12811_1567_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.11_1567. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -363,7 +413,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.11_1566" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.11_1566, released 09 July 2024
+### Worker node fix pack 1.28.11_1566, released 09 July 2024
 {: #12811_1566_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.11_1566. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -399,7 +449,7 @@ The following table shows the changes that are in the master fix pack 1.28.11_15
 {: caption="Changes since version 1.28.10_1560" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.11_1565, released 18 June 2024
+### Worker node fix pack 1.28.11_1565, released 18 June 2024
 {: #12811_1565_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.11_1565. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -415,7 +465,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.10_1561" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.10_1561, released 03 June 2024
+### Worker node fix pack 1.28.10_1561, released 03 June 2024
 {: #12810_1561_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.10_1561. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -456,7 +506,7 @@ The following table shows the changes that are in the master fix pack 1.28.10_15
 {: caption="Changes since version 1.28.9_1554" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.9_1557, released 23 May 2024
+### Worker node fix pack 1.28.9_1557, released 23 May 2024
 {: #1289_1557_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.9_1557. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -472,7 +522,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.9_1556" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.9_1556, released 06 May 2024
+### Worker node fix pack 1.28.9_1556, released 06 May 2024
 {: #1289_1556_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.9_1556. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -511,7 +561,7 @@ The following table shows the changes that are in the master fix pack 1.28.9_155
 {: caption="Changes since version 1.28.8_1550" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.9_1555, released 22 April 2024
+### Worker node fix pack 1.28.9_1555, released 22 April 2024
 {: #1289_1555_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.9_1555. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -527,7 +577,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.8_1552" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.8_1552, released 8 April 2024
+### Worker node fix pack 1.28.8_1552, released 8 April 2024
 {: #1288_1552_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.8_1552. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -566,7 +616,7 @@ The following table shows the changes that are in the master fix pack 1.28.8_155
 {: caption="Changes since version 1.28.7_1547" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.8_1551, released 25 March 2024
+### Worker node fix pack 1.28.8_1551, released 25 March 2024
 {: #1288_1551_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.8_1551. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -581,7 +631,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.7_1549" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.7_1549, released 13 March 2024
+### Worker node fix pack 1.28.7_1549, released 13 March 2024
 {: #1287_1549_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.7_1549. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -619,7 +669,7 @@ The following table shows the changes that are in the master fix pack 1.28.7_154
 {: caption="Changes since version 1.28.6_1542" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.7_1547, released 26 February 2024
+### Worker node fix pack 1.28.7_1547, released 26 February 2024
 {: #1287_1547_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.7_1547. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -633,7 +683,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.6_1544" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.6_1544, released 12 February 2024
+### Worker node fix pack 1.28.6_1544, released 12 February 2024
 {: #1286_1544_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.6_1544. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -673,7 +723,7 @@ The following table shows the changes that are in the master fix pack 1.28.6_154
 {: caption="Changes since version 1.28.4_1537" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.6_1543, released 29 January 2024
+### Worker node fix pack 1.28.6_1543, released 29 January 2024
 {: #1286_1543_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.6_1543. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -689,7 +739,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.4_1541" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.4_1541, released 16 January 2024
+### Worker node fix pack 1.28.4_1541, released 16 January 2024
 {: #1284_1541_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.4_1541. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -705,7 +755,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.4_1540" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.4_1540, released 02 January 2024
+### Worker node fix pack 1.28.4_1540, released 02 January 2024
 {: #1284_1540_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.4_1540. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -720,7 +770,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.4_1539" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.4_1539, released 18 December 2023
+### Worker node fix pack 1.28.4_1539, released 18 December 2023
 {: #1284_1539_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.4_1539. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -755,7 +805,7 @@ The following table shows the changes that are in the master fix pack 1.28.4_153
 {: caption="Changes since version 1.28.3_1534" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.4_1538, released 04 December 2023
+### Worker node fix pack 1.28.4_1538, released 04 December 2023
 {: #1284_1538_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.4_1538. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -770,7 +820,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.3_1535" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.3_1535, released 29 November 2023
+### Worker node fix pack 1.28.3_1535, released 29 November 2023
 {: #1283_1535_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.3_1535. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -808,7 +858,7 @@ The following table shows the changes that are in the master fix pack 1.28.3_153
 {: caption="Changes since version 1.28.2_1531" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.2_1533, released 08 November 2023
+### Worker node fix pack 1.28.2_1533, released 08 November 2023
 {: #1282_1533_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.2_1533. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -843,7 +893,7 @@ The following table shows the changes that are in the master fix pack 1.28.2_153
 {: caption="Changes since version 1.28.2_1527" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.2_1532, released 23 October 2023
+### Worker node fix pack 1.28.2_1532, released 23 October 2023
 {: #1282_1532_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.2_1532. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -859,7 +909,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.2_1529" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.2_1529, released 9 October 2023
+### Worker node fix pack 1.28.2_1529, released 9 October 2023
 {: #1282_1529_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.2_1529. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -874,7 +924,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 {: caption="Changes since version 1.28.2_1528" caption-side="bottom"}
 
 
-### Change log for worker node fix pack 1.28.2_1528, released 27 September 2023
+### Worker node fix pack 1.28.2_1528, released 27 September 2023
 {: #1282_1528_W}
 
 The following table shows the changes that are in the worker node fix pack 1.28.2_1528. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -894,7 +944,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | CoreDNS | 1.10.1 | 1.11.1 | See the [CoreDNS release notes](https://coredns.io/2023/08/15/coredns-1.11.1-release/). CoreDNS now runs as a non-root user and has an updated role-based access control (RBAC) configuration. |
-| Containerd |  1.7.4| 1.7.5 | NA |
+| Containerd |  1.7.4| 1.7.5 |N/A|
 | HAProxy configuration | N/A | N/A | Updated master health probes to use the `/livez/ping` endpoint. |
 | IBM Cloud Controller Manager | v1.27.5-3 | v1.28.1-3 | Updated to support the Kubernetes `1.28.1` release. Updated `Go` dependencies and to `Go` version `1.20.7`. New nodes are now registered with the `node.kubernetes.io/network-unavailable` taint which is cleared when Calico is initialized on the node. |
 | Kubernetes add-on resizer | 1.8.18 | 1.8.19 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.19). |
@@ -902,7 +952,7 @@ The following table shows the changes that are in the worker node fix pack 1.28.
 | Kubernetes (worker node) | v1.27.4 | v1.28.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.1). |
 | Ubuntu 20.04 packages | 5.4.0-156-generic | 5.4.0-162-generic | Worker node kernel & package updates for [CVE-2020-21047](https://nvd.nist.gov/vuln/detail/CVE-2020-21047){: external} , [CVE-2021-33294](https://nvd.nist.gov/vuln/detail/CVE-2021-33294){: external} , [CVE-2022-40982](https://nvd.nist.gov/vuln/detail/CVE-2022-40982){: external} , [CVE-2023-20593](https://nvd.nist.gov/vuln/detail/CVE-2023-20593){: external} , [CVE-2023-2269](https://nvd.nist.gov/vuln/detail/CVE-2023-2269){: external} , [CVE-2023-31084](https://nvd.nist.gov/vuln/detail/CVE-2023-31084){: external} , [CVE-2023-3268](https://nvd.nist.gov/vuln/detail/CVE-2023-3268){: external} , [CVE-2023-3609](https://nvd.nist.gov/vuln/detail/CVE-2023-3609){: external} , [CVE-2023-3611](https://nvd.nist.gov/vuln/detail/CVE-2023-3611){: external} , [CVE-2023-3776](https://nvd.nist.gov/vuln/detail/CVE-2023-3776){: external} |
 | Kubernetes configuration | N/A | N/A | See [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings). In addition, both `default` and `verbose` [Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server) records now contain extra user claim information. |
-| GPU device plug-in and installer | NA | 61afd3d | Driver version: [535.54.03](http://docs.nvidia.com/datacenter/tesla/tesla-release-notes-535-54-03/index.html). |
+| GPU device plug-in and installer |N/A| 61afd3d | Driver version: [535.54.03](http://docs.nvidia.com/datacenter/tesla/tesla-release-notes-535-54-03/index.html). |
 | Kubernetes Dashboard metrics scraper | N/A |	N/A | Increased Kubernetes Dashboard metrics scraper CPU resource request to `20m`. |
 | Kubernetes DNS autoscaler | v1.8.8 | v1.8.9 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.8.9). |
 | Kubernetes Metrics Server | v0.6.3 | v0.6.4 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.6.4). In addition, the Kubernetes Metrics Server has an updated role-based access control (RBAC) configuration. |
