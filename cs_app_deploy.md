@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-10-31"
+  years: 2014, 2025
+lastupdated: "2025-01-13"
 
 
 keywords: kubernetes
@@ -49,7 +49,7 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 
 1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
 2. From the menu bar, select the account that you want to use.
-3. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
+3. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Containers** > **Clusters**.
 4. On the **Clusters** page, click the cluster that you want to access.
 5. From the cluster detail page, click the **Kubernetes Dashboard** button.
 

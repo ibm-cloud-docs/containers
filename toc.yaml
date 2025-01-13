@@ -158,6 +158,9 @@ toc:
       - topicgroup:
           label: Logging and monitoring
           topics:
+          - logging.md
+          - monitoring.md
+          - at-events.md
           - cloud-logs-migration.md
           - cs_health_log.md
           - cs_health_monitor.md

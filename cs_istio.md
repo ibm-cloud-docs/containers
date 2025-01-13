@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-10-30"
+  years: 2014, 2025
+lastupdated: "2025-01-13"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -46,7 +46,7 @@ Before you begin
 {: #istio_install_console}
 {: ui}
 
-1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the Istio add-on.
+1. In your [cluster dashboard](https://cloud.ibm.com/containers/cluster-management/clusters){: external}, click the name of the cluster where you want to install the Istio add-on.
 
 2. Navigate to the **Add-ons** section.
 
@@ -504,7 +504,7 @@ Uninstall the add-on from the console or CLI. For Istio 1.20 and earlier, any cu
 {: #istio_uninstall_ui}
 {: ui}
 
-1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to remove the Istio add-on.
+1. In your [cluster dashboard](https://cloud.ibm.com/containers/cluster-management/clusters){: external}, click the name of the cluster where you want to remove the Istio add-on.
 
 2. Navigate to the **Add-ons** section.
 

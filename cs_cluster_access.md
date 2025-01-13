@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-11-11"
+  years: 2014, 2025
+lastupdated: "2025-01-13"
 
 
 keywords: kubernetes, clusters
@@ -184,7 +184,7 @@ The Kubernetes master is accessible through the private cloud service endpoint i
     * If you enabled the private cloud service endpoint only, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private cloud service endpoint of the master.
         1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
         2. From the menu bar, select the account that you want to use.
-        3. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
+        3. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Containers** > **Clusters**.
         4. On the **Clusters** page, click the cluster that you want to access.
         5. From the cluster detail page, click the **Kubernetes Dashboard**.
         6. Click **+ Create**.
