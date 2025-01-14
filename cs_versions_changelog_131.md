@@ -51,8 +51,8 @@ The following table shows the components included in the worker node fix pack 1.
 
 | Component | Version | Description |
 | ---- | ---- | ---- |
-|UBUNTU_20_04|5.4.0-204-generic|Resolves the following CVEs: [](https://nvd.nist.gov/vuln/detail/){: external}.|
-|UBUNTU_24_04|6.8.0-51-generic|Resolves the following CVEs: [](https://nvd.nist.gov/vuln/detail/){: external}.|
+|UBUNTU_20_04|5.4.0-204-generic|N/A|
+|UBUNTU_24_04|6.8.0-51-generic|N/A|
 |Kubernetes|1.31.3|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.3).|
 |containerd|1.7.23|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.23).|
 |HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5|N/A|
@@ -64,21 +64,17 @@ The following table shows the components included in the worker node fix pack 1.
 
 
 ### Worker node fix pack 1.31.3_1534, released 30 December 2024
-{: #cl-boms-1313_1534_W}
+{: #1313_1534_W}
 
-The following table shows the components included in the worker node fix pack 1.31.3_1534. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+The following table shows the changes that are in the worker node fix pack 1.31.3_1534. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
-| Component | Version | Description |
-| ---- | ---- | ---- |
-|UBUNTU_20_04|5.4.0-204-generic|Resolves the following CVEs: [CVE-2021-47001](https://nvd.nist.gov/vuln/detail/CVE-2021-47001){: external}, [CVE-2021-47101](https://nvd.nist.gov/vuln/detail/CVE-2021-47101){: external}, [CVE-2022-38096](https://nvd.nist.gov/vuln/detail/CVE-2022-38096){: external}, [CVE-2023-52821](https://nvd.nist.gov/vuln/detail/CVE-2023-52821){: external}, [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-35963](https://nvd.nist.gov/vuln/detail/CVE-2024-35963){: external}, [CVE-2024-35965](https://nvd.nist.gov/vuln/detail/CVE-2024-35965){: external}, [CVE-2024-35966](https://nvd.nist.gov/vuln/detail/CVE-2024-35966){: external}, [CVE-2024-35967](https://nvd.nist.gov/vuln/detail/CVE-2024-35967){: external}, [CVE-2024-36952](https://nvd.nist.gov/vuln/detail/CVE-2024-36952){: external}, [CVE-2024-38553](https://nvd.nist.gov/vuln/detail/CVE-2024-38553){: external}, [CVE-2024-38597](https://nvd.nist.gov/vuln/detail/CVE-2024-38597){: external}, [CVE-2024-40910](https://nvd.nist.gov/vuln/detail/CVE-2024-40910){: external}, [CVE-2024-43892](https://nvd.nist.gov/vuln/detail/CVE-2024-43892){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, and [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}.|
-|UBUNTU_24_04|6.8.0-51-generic|Resolves the following CVEs: [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, and [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}.|
-|Kubernetes|1.31.3|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.3).|
-|containerd|1.7.23|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.23).|
-|HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5|N/A|
-|GPU Device Plug-in and Installer|N/A||
-{: caption="Components in version 1.31.3_1534." caption-side="bottom"}
-{: #cl-boms-1313_1534_W-component-table}
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Ubuntu 20.04 Packages | 5.4.0-202-generic | 5.4.0-204-generic | Worker node kernel & package updates for [CVE-2021-47001](https://nvd.nist.gov/vuln/detail/CVE-2021-47001){: external}, [CVE-2021-47101](https://nvd.nist.gov/vuln/detail/CVE-2021-47101){: external}, [CVE-2022-38096](https://nvd.nist.gov/vuln/detail/CVE-2022-38096){: external}, [CVE-2023-52821](https://nvd.nist.gov/vuln/detail/CVE-2023-52821){: external}, [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-35963](https://nvd.nist.gov/vuln/detail/CVE-2024-35963){: external}, [CVE-2024-35965](https://nvd.nist.gov/vuln/detail/CVE-2024-35965){: external}, [CVE-2024-35966](https://nvd.nist.gov/vuln/detail/CVE-2024-35966){: external}, [CVE-2024-35967](https://nvd.nist.gov/vuln/detail/CVE-2024-35967){: external}, [CVE-2024-36952](https://nvd.nist.gov/vuln/detail/CVE-2024-36952){: external}, [CVE-2024-38553](https://nvd.nist.gov/vuln/detail/CVE-2024-38553){: external}, [CVE-2024-38597](https://nvd.nist.gov/vuln/detail/CVE-2024-38597){: external}, [CVE-2024-40910](https://nvd.nist.gov/vuln/detail/CVE-2024-40910){: external}, [CVE-2024-43892](https://nvd.nist.gov/vuln/detail/CVE-2024-43892){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}. |
+| Ubuntu 24.04 Packages | 6.8.0-50-generic | 6.8.0-51-generic | Worker node kernel & package updates for [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}. |
+{: caption="Changes since version 1.31.3_1533" caption-side="bottom"}
+
 
 
 
@@ -114,7 +110,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 {: caption="Changes since version 1.31.2_1529" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.31.3_1530, released 04 December 2024
+### Master fix pack 1.31.3_1530, released 04 December 2024
 {: #1313_1530_M}
 
 The following table shows the changes that are in the master fix pack 1.31.3_1530. Master patch updates are applied automatically. 
@@ -149,7 +145,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 {: caption="Changes since version 1.31.1_1527" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.31.2_1528, released 13 November 2024
+### Master fix pack 1.31.2_1528, released 13 November 2024
 {: #1312_1528_M}
 
 The following table shows the changes that are in the master fix pack 1.31.2_1528. Master patch updates are applied automatically. 
@@ -179,7 +175,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 {: caption="Changes since version 1.31.1_1524" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.31.1_1526, released 30 October 2024
+### Master fix pack 1.31.1_1526, released 30 October 2024
 {: #1311_1526_M}
 
 The following table shows the changes that are in the master fix pack 1.31.1_1526. Master patch updates are applied automatically. 
@@ -228,7 +224,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 {: caption="Changes since version 1.31.1_1522" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.31.1_1521, released 25 September 2024
+### Master fix pack 1.31.1_1521, released 25 September 2024
 {: #1311_1521_M}
 
 The following table shows the changes that are in the master fix pack 1.31.1_1521. Master patch updates are applied automatically. 
@@ -261,7 +257,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 {: caption="Changes since version 1.31.0_1517" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024
+### Master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024
 {: #1310_1520M_and_1310_1518W}
 
 | Component | Previous | Current | Description |
