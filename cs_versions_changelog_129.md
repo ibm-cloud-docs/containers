@@ -53,8 +53,6 @@ The following table shows the components included in the worker node fix pack 1.
 | ---- | ---- | ---- |
 |UBUNTU_20_04|5.4.0-204-generic|N/A|
 |UBUNTU_24_04|6.8.0-51-generic|N/A|
-|RHEL_8|4.18.0-553.34.1.el8_10|Resolves the following CVEs: [RHSA-2025:0065](https://access.redhat.com/errata/RHSA-2025:0065){: external}, [CVE-2024-53088](https://nvd.nist.gov/vuln/detail/CVE-2024-53088){: external}, [CVE-2024-53122](https://nvd.nist.gov/vuln/detail/CVE-2024-53122){: external}, [RHSA-2024:3043](https://access.redhat.com/errata/RHSA-2024:3043){: external}, [CVE-2024-0690](https://nvd.nist.gov/vuln/detail/CVE-2024-0690){: external}, [RHSA-2025:0012](https://access.redhat.com/errata/RHSA-2025:0012){: external}, [CVE-2024-35195](https://nvd.nist.gov/vuln/detail/CVE-2024-35195){: external}, [RHSA-2024:11161](https://access.redhat.com/errata/RHSA-2024:11161){: external}, and [CVE-2024-52337](https://nvd.nist.gov/vuln/detail/CVE-2024-52337){: external}.|
-|RHEL_9|5.14.0-503.16.1.el9_5|N/A|
 |Kubernetes|1.29.11|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.11).|
 |containerd|1.7.23|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.23).|
 |HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5|N/A|
