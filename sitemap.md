@@ -5941,7 +5941,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions_131#after_131)
 
-[Version 1.31 change log](/docs/containers?topic=containers-changelog_131#changelog_131)
+[1.31 version change log](/docs/containers?topic=containers-changelog_131#changelog_131)
 
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview)
 
@@ -6050,7 +6050,7 @@ subcollection: containers
 
 * [Common issues and troubleshooting](/docs/containers?topic=containers-cs_versions_130#sbd-common-ts)
 
-[Version 1.30 change log](/docs/containers?topic=containers-changelog_130#changelog_130)
+[1.30 version change log](/docs/containers?topic=containers-changelog_130#changelog_130)
 
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview)
 
@@ -6165,7 +6165,7 @@ subcollection: containers
 
     * [Understanding the Tigera Operator namespace migration](/docs/containers?topic=containers-cs_versions_129#129-tigera-migration)
 
-[Version 1.29 change log](/docs/containers?topic=containers-changelog_129#changelog_129)
+[1.29 version change log](/docs/containers?topic=containers-changelog_129#changelog_129)
 
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview)
 
@@ -6310,7 +6310,7 @@ subcollection: containers
 
     * [I have custom network policies. What do I change?](/docs/containers?topic=containers-cs_versions_128#networking_steps_policy)
 
-[Version 1.28 change log](/docs/containers?topic=containers-changelog_128#changelog_128)
+[1.28 version change log](/docs/containers?topic=containers-changelog_128#changelog_128)
 
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview)
 
