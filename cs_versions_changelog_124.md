@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-01-13"
+lastupdated: "2025-01-14"
 
 
 keywords: kubernetes, containers
@@ -131,7 +131,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.16_1583" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.17_1586, released 20 September 2023
+### Master fix pack 1.24.17_1586, released 20 September 2023
 {: #12417_1586_M}
 
 The following table shows the changes that are in the master fix pack 1.24.17_1586. Master patch updates are applied automatically. 
@@ -161,7 +161,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.16_1582" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.16_1581, released 30 August 2023
+### Master fix pack 1.24.16_1581, released 30 August 2023
 {: #12416_1581_M}
 
 The following table shows the changes that are in the master fix pack 1.24.16_1581. Master patch updates are applied automatically. 
@@ -221,7 +221,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.15_1576" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.16_1578, released 27 July 2023
+### Master fix pack 1.24.16_1578, released 27 July 2023
 {: #12416_1578_M}
 
 The following table shows the changes that are in the master fix pack 1.24.16_1578. Master patch updates are applied automatically. 
@@ -269,7 +269,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.14_1572" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.15_1573, released 27 June 2023
+### Master fix pack 1.24.15_1573, released 27 June 2023
 {: #12415_1573_M}
 
 The following table shows the changes that are in the master fix pack 1.24.15_1573. Master patch updates are applied automatically. 
@@ -319,7 +319,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.14_1570" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.14_1568, released 23 May 2023
+### Master fix pack 1.24.14_1568, released 23 May 2023
 {: #12414_1568_M}
 
 The following table shows the changes that are in the master fix pack 1.24.14_1568. Master patch updates are applied automatically. 
@@ -370,7 +370,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.13_1566" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.13_1566, released 27 April 2023
+### Master fix pack 1.24.13_1566, released 27 April 2023
 {: #12413_1566M}
 
 The following table shows the changes that are in the master fix pack 1.24.13_1566. Master patch updates are applied automatically. 
@@ -440,7 +440,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.12_1560" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.12_1559, released 28 March 2023
+### Master fix pack 1.24.12_1559, released 28 March 2023
 {: #12412_1559}
 
 The following table shows the changes that are in the master fix pack 1.24.12_1559. Master patch updates are applied automatically. 
@@ -493,7 +493,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.10_1554" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.10_1557, released 2 March 2023
+### Master fix pack 1.24.10_1557, released 2 March 2023
 {: #12410_1557}
 
 The following table shows the changes that are in the master fix pack 1.24.10_1557. Master patch updates are applied automatically. 
@@ -549,7 +549,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.10_1552" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.10_1551, released 30 January 2023
+### Master fix pack 1.24.10_1551, released 30 January 2023
 {: #12410_1551}
 
 The following table shows the changes that are in the master fix pack 1.24.10_1551. Master patch updates are applied automatically. 
@@ -628,7 +628,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.8_1546" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.9_1547, released 14 December 2022
+### Master fix pack 1.24.9_1547, released 14 December 2022
 {: #1249_1547}
 
 The following table shows the changes that are in the master fix pack 1.24.9_1547. Master patch updates are applied automatically. 
@@ -680,7 +680,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.7_1543" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.8_1544, released 16 November 2022
+### Master fix pack 1.24.8_1544, released 16 November 2022
 {: #1248_1544}
 
 The following table shows the changes that are in the master fix pack 1.24.8_1544. Master patch updates are applied automatically. 
@@ -718,7 +718,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.6_1541" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.7_1542, released 27 October 2022
+### Master fix pack 1.24.7_1542, released 27 October 2022
 {: #1247_1542}
 
 The following table shows the changes that are in the master fix pack 1.24.7_1542. Master patch updates are applied automatically. 
@@ -762,7 +762,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.6_1539" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.6_1538, released 26 September 2022
+### Master fix pack 1.24.6_1538, released 26 September 2022
 {: #1246_1538}
 
 The following table shows the changes that are in the master fix pack 1.24.6_1538. Master patch updates are applied automatically. 
@@ -809,7 +809,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.4_1535" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.4_1536, released 1 September 2022
+### Master fix pack 1.24.4_1536, released 1 September 2022
 {: #1244_1536}
 
 The following table shows the changes that are in the master fix pack 1.24.4_1536. Master patch updates are applied automatically. 
@@ -878,7 +878,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.2_1529" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.3_1531, released 26 July 2022
+### Master fix pack 1.24.3_1531, released 26 July 2022
 {: #1243_1531}
 
 The following table shows the changes that are in the master fix pack 1.24.3_1531. Master patch updates are applied automatically. 
@@ -930,7 +930,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.2_1526" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.2_1526, released 22 June 2022
+### Master fix pack 1.24.2_1526, released 22 June 2022
 {: #master_1242_1526}
 
 The following table shows the changes that are in the master fix pack 1.24.2_1526. Master patch updates are applied automatically. 
@@ -960,7 +960,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.1_1522" caption-side="bottom"}
 
 
-### Change log for master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022
+### Master fix pack 1.24.1_1523 and worker node fix pack 1.24.1_1522, released 9 June 2022
 {: #1241_1522}
 
 | Component | Previous | Current | Description |

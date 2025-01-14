@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-01-03"
+lastupdated: "2025-01-14"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -279,7 +279,6 @@ Minimum required permissions
 
 `-f`
 :    Optional: Force the command to run with no user prompts.
-
 
 
 
