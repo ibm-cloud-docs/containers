@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-01-13"
+lastupdated: "2025-01-14"
 
 
 keywords: change log, version history, 1.30
@@ -15,6 +15,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 <!-- The content in this topic is auto-generated except for reuse-snippets indicated with {[ ]}. -->
+
 
 # Version 1.30 change log
 {: #changelog_130}
@@ -83,42 +84,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: caption="Components in version 1.30.7_1549." caption-side="bottom"}
 {: #cl-boms-1307_1549_W-component-table}
 
-
-
-
-### Worker node fix pack 1.30.7_1549, released 30 December 2024
-{: #cl-boms-1307_1549_W}
-
-The following table shows the components included in the worker node fix pack 1.30.7_1549. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
-{: shortdesc}
-
-| Component | Version | Description |
-| ---- | ---- | ---- |
-|UBUNTU_20_04|5.4.0-204-generic|Resolves the following CVEs: [CVE-2021-47001](https://nvd.nist.gov/vuln/detail/CVE-2021-47001){: external}, [CVE-2021-47101](https://nvd.nist.gov/vuln/detail/CVE-2021-47101){: external}, [CVE-2022-38096](https://nvd.nist.gov/vuln/detail/CVE-2022-38096){: external}, [CVE-2023-52821](https://nvd.nist.gov/vuln/detail/CVE-2023-52821){: external}, [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-35963](https://nvd.nist.gov/vuln/detail/CVE-2024-35963){: external}, [CVE-2024-35965](https://nvd.nist.gov/vuln/detail/CVE-2024-35965){: external}, [CVE-2024-35966](https://nvd.nist.gov/vuln/detail/CVE-2024-35966){: external}, [CVE-2024-35967](https://nvd.nist.gov/vuln/detail/CVE-2024-35967){: external}, [CVE-2024-36952](https://nvd.nist.gov/vuln/detail/CVE-2024-36952){: external}, [CVE-2024-38553](https://nvd.nist.gov/vuln/detail/CVE-2024-38553){: external}, [CVE-2024-38597](https://nvd.nist.gov/vuln/detail/CVE-2024-38597){: external}, [CVE-2024-40910](https://nvd.nist.gov/vuln/detail/CVE-2024-40910){: external}, [CVE-2024-43892](https://nvd.nist.gov/vuln/detail/CVE-2024-43892){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, and [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}.|
-|UBUNTU_24_04|6.8.0-51-generic|Resolves the following CVEs: [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, and [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}.|
-|RHEL_8|4.18.0-553.32.1.el8_10|Resolves the following CVEs: [RHSA-2024:3043](https://access.redhat.com/errata/RHSA-2024:3043){: external}, and [CVE-2024-0690](https://nvd.nist.gov/vuln/detail/CVE-2024-0690){: external}.|
-|RHEL_9|5.14.0-503.16.1.el9_5|Resolves the following CVEs: [RHSA-2024:10759](https://access.redhat.com/errata/RHSA-2024:10759){: external}, [CVE-2022-3064](https://nvd.nist.gov/vuln/detail/CVE-2022-3064){: external}, [RHSA-2024:10939](https://access.redhat.com/errata/RHSA-2024:10939){: external}, [CVE-2024-26615](https://nvd.nist.gov/vuln/detail/CVE-2024-26615){: external}, [CVE-2024-43854](https://nvd.nist.gov/vuln/detail/CVE-2024-43854){: external}, [CVE-2024-44994](https://nvd.nist.gov/vuln/detail/CVE-2024-44994){: external}, [CVE-2024-45018](https://nvd.nist.gov/vuln/detail/CVE-2024-45018){: external}, [CVE-2024-46695](https://nvd.nist.gov/vuln/detail/CVE-2024-46695){: external}, [CVE-2024-49949](https://nvd.nist.gov/vuln/detail/CVE-2024-49949){: external}, [CVE-2024-50251](https://nvd.nist.gov/vuln/detail/CVE-2024-50251){: external}, [RHSA-2024:11486](https://access.redhat.com/errata/RHSA-2024:11486){: external}, [CVE-2024-27399](https://nvd.nist.gov/vuln/detail/CVE-2024-27399){: external}, [CVE-2024-38564](https://nvd.nist.gov/vuln/detail/CVE-2024-38564){: external}, [CVE-2024-45020](https://nvd.nist.gov/vuln/detail/CVE-2024-45020){: external}, [CVE-2024-46697](https://nvd.nist.gov/vuln/detail/CVE-2024-46697){: external}, [CVE-2024-47675](https://nvd.nist.gov/vuln/detail/CVE-2024-47675){: external}, [CVE-2024-49888](https://nvd.nist.gov/vuln/detail/CVE-2024-49888){: external}, [CVE-2024-50099](https://nvd.nist.gov/vuln/detail/CVE-2024-50099){: external}, [CVE-2024-50110](https://nvd.nist.gov/vuln/detail/CVE-2024-50110){: external}, [CVE-2024-50115](https://nvd.nist.gov/vuln/detail/CVE-2024-50115){: external}, [CVE-2024-50124](https://nvd.nist.gov/vuln/detail/CVE-2024-50124){: external}, [CVE-2024-50125](https://nvd.nist.gov/vuln/detail/CVE-2024-50125){: external}, [CVE-2024-50142](https://nvd.nist.gov/vuln/detail/CVE-2024-50142){: external}, [CVE-2024-50148](https://nvd.nist.gov/vuln/detail/CVE-2024-50148){: external}, [CVE-2024-50192](https://nvd.nist.gov/vuln/detail/CVE-2024-50192){: external}, [CVE-2024-50223](https://nvd.nist.gov/vuln/detail/CVE-2024-50223){: external}, [CVE-2024-50255](https://nvd.nist.gov/vuln/detail/CVE-2024-50255){: external}, [CVE-2024-50262](https://nvd.nist.gov/vuln/detail/CVE-2024-50262){: external}, [RHSA-2024:10983](https://access.redhat.com/errata/RHSA-2024:10983){: external}, [CVE-2024-11168](https://nvd.nist.gov/vuln/detail/CVE-2024-11168){: external}, and [CVE-2024-9287](https://nvd.nist.gov/vuln/detail/CVE-2024-9287){: external}.|
-|Kubernetes|1.30.7|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.7).|
-|containerd|1.7.23|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.23).|
-|HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5||
-|GPU Device Plug-in and Installer|||
-{: caption="Components in version 1.30.7_1549." caption-side="bottom"}
-{: #cl-boms-1307_1549_W-component-table}
-
-
-
-
-### Worker node fix pack 1.30.7_1549, released 30 December 2024
-{: #1307_1549_W}
-
-The following table shows the changes that are in the worker node fix pack 1.30.7_1549. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
-{: shortdesc}
-
-| Component | Previous | Current | Description |
-| --- | --- | --- | --- |
-| Ubuntu 20.04 Packages | 5.4.0-202-generic | 5.4.0-204-generic | Worker node kernel & package updates for [CVE-2021-47001](https://nvd.nist.gov/vuln/detail/CVE-2021-47001){: external}, [CVE-2021-47101](https://nvd.nist.gov/vuln/detail/CVE-2021-47101){: external}, [CVE-2022-38096](https://nvd.nist.gov/vuln/detail/CVE-2022-38096){: external}, [CVE-2023-52821](https://nvd.nist.gov/vuln/detail/CVE-2023-52821){: external}, [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-35963](https://nvd.nist.gov/vuln/detail/CVE-2024-35963){: external}, [CVE-2024-35965](https://nvd.nist.gov/vuln/detail/CVE-2024-35965){: external}, [CVE-2024-35966](https://nvd.nist.gov/vuln/detail/CVE-2024-35966){: external}, [CVE-2024-35967](https://nvd.nist.gov/vuln/detail/CVE-2024-35967){: external}, [CVE-2024-36952](https://nvd.nist.gov/vuln/detail/CVE-2024-36952){: external}, [CVE-2024-38553](https://nvd.nist.gov/vuln/detail/CVE-2024-38553){: external}, [CVE-2024-38597](https://nvd.nist.gov/vuln/detail/CVE-2024-38597){: external}, [CVE-2024-40910](https://nvd.nist.gov/vuln/detail/CVE-2024-40910){: external}, [CVE-2024-43892](https://nvd.nist.gov/vuln/detail/CVE-2024-43892){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}. |
-| Ubuntu 24.04 Packages | 6.8.0-50-generic | 6.8.0-51-generic | Worker node kernel & package updates for [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}. |
-{: caption="Changes since version 1.30.7_1548" caption-side="bottom"}
 
 
 ### Worker node fix pack 1.30.7_1548, released 16 December 2024
