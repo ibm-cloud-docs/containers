@@ -643,6 +643,7 @@ toc:
               - ts-storage-object-op-not-permitted.md
               - ts-storage-object-ownership-mountpath.md
               - ts-storage-object-plugin-fails.md
+              - ts-storage-cos-csi-addon.md
               - ts-storage-object-pvc-fails.md
               - ts-storage-object-pvc-fails-s3fs-iam-ep.md
               - ts-storage-object-pvc-pending.md
