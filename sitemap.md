@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-01-14"
+lastupdated: "2025-01-15"
 
 
 keywords: containers
@@ -9866,6 +9866,8 @@ subcollection: containers
 [Why can't the ownership of the mount path be changed?](/docs/containers?topic=containers-cos_mountpath_error#cos_mountpath_error)
 
 [Why does installing the {{site.data.keyword.cos_full_notm}} plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails#cos_plugin_fails)
+
+[Debugging the Cloud Object Storage add-on](/docs/containers?topic=containers-cos_csi_addon#cos_csi_addon)
 
 [Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure#cred_failure)
 
