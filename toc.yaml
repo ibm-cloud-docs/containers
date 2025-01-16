@@ -410,6 +410,7 @@ toc:
       - locations.md
       - cs_integrations_overview.md
       - service-settings.md
+      - service-dependency.md
       - topicgroup:
           label: Worker node flavors
           topics:
