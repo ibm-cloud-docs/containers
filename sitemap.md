@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-01-15"
+lastupdated: "2025-01-16"
 
 
 keywords: containers
@@ -8870,6 +8870,13 @@ subcollection: containers
 * [`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
 
 * [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
+
+
+## Service dependency map for IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud
+{: #sitemap_service_dependency_map_for_ibm_cloud_kubernetes_service_and_red_hat_openshift_on_ibm_cloud}
+
+
+[Service dependency map for IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-service-dependencies#service-dependencies)
 
 
 ## Worker node flavors
