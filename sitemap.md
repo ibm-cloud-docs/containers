@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-01-16"
+lastupdated: "2025-01-17"
 
 
 keywords: containers
@@ -9889,6 +9889,8 @@ subcollection: containers
 [Why do I see transport endpoint not connected errors when using the {{site.data.keyword.cos_full_notm}} cluster add-on?](/docs/containers?topic=containers-cos_transport_ts_connect_addon#cos_transport_ts_connect_addon)
 
 * [Verifying recovery by simulating an error](/docs/containers?topic=containers-cos_transport_ts_connect_addon#cos_transport_verify)
+
+[Why do I see a volume mounting error when using the {{site.data.keyword.filestorage_full_notm}} plug-in?](/docs/containers?topic=containers-ts-cos-storage-dep#ts-cos-storage-dep)
 
 
 ### Portworx Storage
