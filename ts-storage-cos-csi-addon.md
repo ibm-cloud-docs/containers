@@ -21,7 +21,7 @@ content-type: troubleshoot
 
 
 # Debugging the Cloud Object Storage add-on
-{: #cos_csi_addon}
+{: #ts-storage-cos-csi-addon}
 {: support}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
@@ -50,64 +50,64 @@ Follow these steps to gather gather details about the issue.
     ```
     {: pre}
 
-1. Make sure that all csi driver pods are in `running` state.
+1. Make sure that all CSI driver pods are in `running` state.
     ```sh
     kubectl get pods -n ibm-object-csi-operator | grep ibm-object-csi
     ```
     {: pre}
   
-  * If any csi driver pod is in `ImagePullBackOff` state, that means the image used for pods creation is not avaialble in the registry or there might be permission issues. Gather the output from the previous steps and, contact support. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+If any CSI driver pod is in `ImagePullBackOff` state, that means the image used for pods creation is not avaialble in the registry or there might be permission issues. Gather the output from the previous steps and, contact support. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
   
-  * If any csi driver pod is in `CrashLoopBackOff` state, you can try the following steps:
+If any CSI driver pod is in `CrashLoopBackOff` state, you can try the following steps:
 
-    1. Describe that pod.
-        ```sh
-        kubectl describe pod ibm-ibm-object-csi-xxx -n ibm-object-csi-operator
-        ```
-        {: pre}
+1. Describe that pod.
+    ```sh
+    kubectl describe pod ibm-ibm-object-csi-xxx -n ibm-object-csi-operator
+    ```
+    {: pre}
 
-    1. Look for the container that is continuously restarting.
+1. Look for the container that is continuously restarting.
 
-    1. Collect logs for more details.
-        ```sh
-        kubectl logs ibm-ibm-object-csi-xxx -n ibm-object-csi-operator
-        ```
-        {: pre}
+1. Collect logs for more details.
+    ```sh
+    kubectl logs ibm-ibm-object-csi-xxx -n ibm-object-csi-operator
+    ```
+    {: pre}
 
-    1. Upgrade the add-on to the latest version for a possible fix.
+1. Upgrade the add-on to the latest version for a possible fix.
 
-    1. If the issue persists, contact support. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+1. If the issue persists, contact support. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
 
-If you need to contact support for further assistance, make sure you gather the following details for the support ticket.
+If you need to contact support for further help, make sure you gather the following details for the support ticket.
 
 * Add-on health status and add-on version mentioned above.
 
 * PVC describe
-  ```sh
-  kubectl describe pvc <PVC-NAME> -n <PVC-NAMESPACE>
-  ```
-  {: pre}  
+    ```sh
+    kubectl describe pvc <PVC-NAME> -n <PVC-NAMESPACE>
+    ```
+    {: pre}
 
 * PV describe
-  ```sh
-  kubectl describe pv <pv-name>
-  ```
-  {: pre}  
+    ```sh
+    kubectl describe pv <pv-name>
+    ```
+    {: pre}
 
 * Pod describe
-  ```sh
-  kubectl describe pod <POD-NAME> -n <POD-NAMESPACE> 
-  ```
-  {: pre}
+    ```sh
+    kubectl describe pod <POD-NAME> -n <POD-NAMESPACE> 
+    ```
+    {: pre}
 
 * Logs of `controller-manager` pod
-  ```sh
-  kubectl logs ibm-ibm-object-csi-operator-controller-manager-xxx -n ibm-object-csi-operator 
-  ```
-  {: pre}
+    ```sh
+    kubectl logs ibm-ibm-object-csi-operator-controller-manager-xxx -n ibm-object-csi-operator 
+    ```
+    {: pre}
 
 * Logs of `csi-node` pod
-  ```sh
-  kubectl logs ibm-object-csi-node-xxx -n ibm-object-csi-operator 
-  ```
-  {: pre}
+    ```sh
+    kubectl logs ibm-object-csi-node-xxx -n ibm-object-csi-operator 
+    ```
+    {: pre}
