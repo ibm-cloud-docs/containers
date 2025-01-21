@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-01-15"
+lastupdated: "2025-01-21"
 
 
 keywords: kubernetes, help, cos, csi
@@ -44,7 +44,7 @@ Follow these steps to gather gather details about the issue.
     ```
     {: pre}
 
-1. Check the version of the installed add-on. It is recommeneded to use the latest version for better support.
+1. Check the version of the installed add-on. It is recommended to use the latest version for better support.
     ```sh
     ibmcloud ks cluster addon ls --cluster <cluster_name/cluster_id> | grep ibm-object-csi-driver
     ```
@@ -111,4 +111,3 @@ If you need to contact support for further assistance, make sure you gather the 
   kubectl logs ibm-object-csi-node-xxx -n ibm-object-csi-operator 
   ```
   {: pre}
-
