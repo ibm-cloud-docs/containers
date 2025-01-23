@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-05-29"
+  years: 2014, 2025
+lastupdated: "2025-01-23"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, clusters, worker nodes, worker pools
@@ -36,7 +36,7 @@ After the account administrator makes these preparations, you might not need to 
 {: #prepare-verify-permissions}
 {: step}
 
-Confirm that you [have the required permissions to create clusters](/docs/containers?topic=containers-iam-platform-access-roles). Make sure that your account administrator does not assign you the **Administrator** platform access role at the same time as scoping the access policy to a namespace.
+Confirm that you [have the required permissions to create clusters](/docs/containers?topic=containers-iam-platform-access-roles). Make sure that your account administrator does not assign you the **Administrator** platform access role at the same time as scoping the access policy to a namespace. Otherwise, the permissions might not be set properly.
 
 
 
@@ -78,6 +78,3 @@ If you know what kind of cluster you need already, you can start thinking about 
 {: step}
 
 [Set up an API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-access-creds) in the region and resource groups where you want to create clusters. 
-
-
-

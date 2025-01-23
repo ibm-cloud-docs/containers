@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-01-17"
+lastupdated: "2025-01-23"
 
 
 keywords: containers
@@ -240,7 +240,11 @@ subcollection: containers
 
 * [January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan25)
 
-    * [13 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1325)
+    * [23 January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan2325)
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
+
+    * [13 January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan1325)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
@@ -248,7 +252,7 @@ subcollection: containers
 
         * Ingress ALB cluster add-on patch updates.
 
-    * [06 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan0625)
+    * [06 January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan0625)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
@@ -5947,6 +5951,8 @@ subcollection: containers
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
 
+    * [Change log for master fix pack 1.31.5_1537, released 22 January 2025](/docs/containers?topic=containers-changelog_131#1315_1537_M)
+
     * [Worker node fix pack 1.31.3_1535, released 13 January 2025](/docs/containers?topic=containers-changelog_131#cl-boms-1313_1535_W)
 
     * [Worker node fix pack 1.31.3_1534, released 30 December 2024](/docs/containers?topic=containers-changelog_131#1313_1534_W)
@@ -6055,6 +6061,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Change log for master fix pack 1.30.9_1552, released 22 January 2025](/docs/containers?topic=containers-changelog_130#1309_1552_M)
 
     * [Worker node fix pack 1.30.7_1550, released 13 January 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1307_1550_W)
 
@@ -6170,6 +6178,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview)
 
 * [Version 1.29](/docs/containers?topic=containers-changelog_129#129_components)
+
+    * [Change log for master fix pack 1.29.13_1574, released 22 January 2025](/docs/containers?topic=containers-changelog_129#12913_1574_M)
 
     * [Worker node fix pack 1.29.11_1572, released 13 January 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12911_1572_W)
 
@@ -6315,6 +6325,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview)
 
 * [Version 1.28](/docs/containers?topic=containers-changelog_128#128_components)
+
+    * [Change log for master fix pack 1.28.15_1594, released 22 January 2025](/docs/containers?topic=containers-changelog_128#12815_1594_M)
 
     * [Worker node fix pack 1.28.15_1593, released 13 January 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1593_W)
 
@@ -6502,6 +6514,8 @@ subcollection: containers
 * [`openshift-data-foundation` 4.15.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.15.0)
 
 * [`openshift-data-foundation` 4.16.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.16.0)
+
+* [`openshift-data-foundation` 4.17.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.17.0)
 
 * [`static-route` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#static-route-1.0.0)
 
@@ -7452,6 +7466,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_2473, released 15 January 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2473)
 
     * [2.0.0_2400, released 31 October 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2400)
 
@@ -9874,7 +9890,7 @@ subcollection: containers
 
 [Why does installing the {{site.data.keyword.cos_full_notm}} plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails#cos_plugin_fails)
 
-[Debugging the Cloud Object Storage add-on](/docs/containers?topic=containers-cos_csi_addon#cos_csi_addon)
+[Debugging the Cloud Object Storage add-on](/docs/containers?topic=containers-ts-storage-cos-csi-addon#ts-storage-cos-csi-addon)
 
 [Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure#cred_failure)
 
