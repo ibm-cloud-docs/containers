@@ -29,8 +29,27 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-jan25}
 
 
+### 23 January 2025
+{: #containers-jan2325}
+{: release-note}
 
-### 13 January 2024
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
+:   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
+
+
+
+
+
+
+
+
+### 13 January 2025
 {: #containers-jan1325}
 {: release-note}
 
@@ -59,7 +78,7 @@ Ingress ALB cluster add-on patch updates.
 
 
 
-### 06 January 2024
+### 06 January 2025
 {: #containers-jan0625}
 {: release-note}
 
