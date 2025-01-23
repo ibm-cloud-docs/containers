@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-22"
+lastupdated: "2025-01-23"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -4083,7 +4083,7 @@ Certified Kubernetes
 :   Version [1.24](/docs/containers?topic=containers-cs_versions_124) release is now certified.
 
 Version 1.20 is unsupported as of 19 June 2022
-:   Update your cluster to a supported as soon as possible. For more information, see the 1.20 [release information](/docs/containers?topic=containers-cs_versions_120) and change log. For more information about the supported releases, see the [version information](/docs/containers?topic=containers-cs_versions).
+:   Update your cluster to a supported as soon as possible. For more information, see the 1.20 release information and change log. For more information about the supported releases, see the [version information](/docs/containers?topic=containers-cs_versions).
 
 Istio add-on
 :   Version [`1.14.1`](/docs/containers?topic=containers-istio-changelog#1141) is available.
@@ -4464,7 +4464,7 @@ Cluster autoscaler add-on
 {: release-note}
 
 Version 1.19 unsupported 
-:   Clusters that run version 1.19 are unsupported. Update your clusters to at least [version 1.20](/docs/containers?topic=containers-cs_versions_120) as soon as possible.
+:   Clusters that run version 1.19 are unsupported. Update your clusters to at least version 1.20 as soon as possible.
 
 
 ### 14 March 2022
@@ -4657,7 +4657,7 @@ New! Kubernetes 1.23
 :   You can create or [update clusters to Kubernetes version 1.23](/docs/containers?topic=containers-cs_versions_123). With Kubernetes 1.23, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
 Deprecated and unsupported Kubernetes versions
-:   With the release of Kubernetes 1.23, clusters that run version 1.20 remain deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least [version 1.21](/docs/containers?topic=containers-cs_versions_121) as soon as possible.
+:   With the release of Kubernetes 1.23, clusters that run version 1.20 remain deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least version 1.21 as soon as possible.
 
 
 
