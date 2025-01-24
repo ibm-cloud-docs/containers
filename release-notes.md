@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-23"
+lastupdated: "2025-01-24"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2025
 {: #containers-jan25}
 
+### 24 January 2025
+{: #containers-jan2425}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ### 23 January 2025
 {: #containers-jan2325}
