@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2022, 2024
-lastupdated: "2024-03-27"
+  years: 2022, 2025
+lastupdated: "2025-01-27"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, rbac, policy
@@ -85,9 +85,15 @@ To avoid this issue for future users, consider using a functional ID user for th
 {: #remove_iam_rbac}
 
 1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){: external}. From the menu bar, select **Manage > Access (IAM)**.
-2. Click the **Users** page, and then click the name of the user that you want to remove permissions from.
-3. In the table entry for the user, click the **Actions menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Remove user**.
-4. When {{site.data.keyword.cloud_notm}} IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. To update the RBAC roles with the changes, run `ibmcloud ks cluster config`. However, if you created [custom RBAC roles or cluster roles](#rbac), you must remove the user from the `.yaml` files for those RBAC role bindings or cluster role bindings. See steps to remove custom RBAC permissions in the next section.
+1. Click the **Users** page, and then click the name of the user that you want to remove permissions from.
+1. In the table entry for the user, click the **Actions menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Remove user**.
+1. When {{site.data.keyword.cloud_notm}} IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. To update the RBAC roles with the changes, run `ibmcloud ks cluster config`.
+
+
+
+1. **Optional** If you created custom RBAC roles or cluster roles, you must remove the user from the `.yaml` files for those RBAC role bindings or cluster role bindings. See steps to [remove custom RBAC permissions](#remove_custom_rbac) in the next section.
+
+
 
 ### Removing custom RBAC permissions
 {: #remove_custom_rbac}
@@ -102,4 +108,3 @@ If you don't need custom RBAC permissions anymore, you can remove them.
     kubectl apply -f my_role_binding.yaml
     ```
     {: pre}
-
