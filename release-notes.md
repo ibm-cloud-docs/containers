@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-24"
+lastupdated: "2025-01-28"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2025
 {: #containers-jan25}
+
+
+
+### 28 January 2025
+{: #containers-jan2825}
+{: release-note}
+
+Istio add-on patch updates.
+:   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 ### 24 January 2025
 {: #containers-jan2425}

@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-01-23"
+lastupdated: "2025-01-28"
 
 
 keywords: change log, version history, 1.31
@@ -54,7 +54,7 @@ The following table shows the changes that are in the master fix pack 1.31.5_153
 | --- | --- | --- | --- |
 | Cluster health image | v1.6.3 | v1.6.4 | New version contains updates and security fixes. |
 | CoreDNS | 1.11.3 | v1.11.4 | See the [CoreDNS release notes](https://coredns.io/tags/notes/){: external}. |
-| etcd | v3.5.16 | v3.5.17 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.17){: external}. |
+| etcd | v3.5.16 | v3.5.17 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.17){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.16 | v2.5.17 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.31.2-4 | v1.31.4-3 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 743ed58 | cb4f333 | New version contains updates and security fixes. |
