@@ -240,6 +240,10 @@ subcollection: containers
 
 * [January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan25)
 
+    * [29 January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan2925)
+
+        * New! {{site.data.keyword.containerlong_notm}} version 1.32.
+
     * [28 January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan2825)
 
         * Istio add-on patch updates.
@@ -5937,6 +5941,71 @@ subcollection: containers
     * [What else can I do to increase the security and compliance of my cluster?](/docs/containers?topic=containers-cis-benchmark#benchmark-what-else)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
+
+
+### Version 1.32
+{: #sitemap_version_132}
+
+
+[1.32 version information and update actions](/docs/containers?topic=containers-cs_versions_132#cs_versions_132)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_132#release_timeline_132)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_132#prep-up-132)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_132#before_132)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_132#after_132)
+
+[Kubernetes version 1.32 change log](/docs/containers?topic=containers-changelog_132#changelog_132)
+
+* [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
+
+* [Version 1.32 change log](/docs/containers?topic=containers-changelog_132#132_changelog)
+
+    * [Change log for master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025](/docs/containers?topic=containers-changelog_132#1321_1527M_and_13201524W)
+
+[Kubernetes version 1.32 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-132)
+
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-132#cis-section-1-132)
+
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-11-132)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-12-132)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-13-132)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-14-132)
+
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-132#cis-section-2-132)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-132#cis-section-3-132)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-31-132)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-32-132)
+
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-132#cis-section-4-132)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-41-132)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-42-132)
+
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-132#cis-section-5-132)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-51-132)
+
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-52-132)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-53-132)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-54-132)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-55-132)
+
+    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-57-132)
+
+    * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-remediations-132)
 
 
 ### Version 1.31

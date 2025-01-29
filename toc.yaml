@@ -320,6 +320,12 @@ toc:
           - cs_versions_overview.md
           - benchmarks_overview.md
           - topicgroup:
+              label: Version 1.32
+              topics:
+              - cs_versions_132.md
+              - cs_versions_changelog_132.md
+              - cs_benchmarks_132.md
+          - topicgroup:
               label: Version 1.31
               topics:
               - cs_versions_131.md

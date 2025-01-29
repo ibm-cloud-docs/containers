@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2022, 2024
-lastupdated: "2024-11-07"
+  years: 2022, 2025
+lastupdated: "2025-01-29"
 
 
 keywords: kubernetes, deploy, containers, pod security admission, pod security, security profiles
@@ -84,7 +84,7 @@ By default, {{site.data.keyword.containerlong_notm}} adds the `privileged` Pod S
 - `ibm-operators`
 - `calico-system` (Version 1.29 and later)
 - `tigera-operator` (Version 1.29 and later)
-- `calico-apiserver` (Version 1.31 and later)
+- `calico-apiserver` (Version 1.31)
 
 
 Do not remove or change the labels for these namespaces.

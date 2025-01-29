@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-10-31"
+  years: 2014, 2025
+lastupdated: "2025-01-29"
 
 
 keywords: kubernetes, coredns, kubedns, dns
@@ -126,8 +126,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
                  ttl 30
               }
               prometheus :9153
-              forward . /etc/resolv.conf
-              cache 30
+              forward . /etc/resolv.conf {
+                  max_concurrent 1000
+              }
+              cache 30 {
+                  disable success cluster.local
+                  disable denial cluster.local
+              }
               loop
               reload
               loadbalance
@@ -171,8 +176,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
                fallthrough in-addr.arpa ip6.arpa
             }
             prometheus :9153
-            forward . /etc/resolv.conf
-            cache 30
+            forward . /etc/resolv.conf {
+                max_concurrent 1000
+            }
+            cache 30 {
+                disable success cluster.local
+                disable denial cluster.local
+            }
             loop
             reload
             loadbalance
@@ -428,7 +438,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             }
         .:53 {
             errors
-            cache 30
+            cache 30 {
+                  disable success cluster.local
+                  disable denial cluster.local
+            }
             reload
             loop
             bind 169.254.20.10 172.21.0.10

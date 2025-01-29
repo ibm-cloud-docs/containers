@@ -23,6 +23,13 @@ subcollection: containers
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run this version. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
 
+
+
+This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: deprecated}
+
+
+
 ## Overview
 {: #changelog_overview}
 
