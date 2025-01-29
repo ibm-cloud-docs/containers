@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-06-19"
+  years: 2014, 2025
+lastupdated: "2025-01-29"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, registry, pull secret, secrets
@@ -73,7 +73,7 @@ However, by default, your cluster is set up to pull images from only your accoun
 ### Default image pull secret setup
 {: #cluster_registry_auth_default}
 
-Generally, your {{site.data.keyword.containerlong_notm}} cluster is set up to pull images from all {{site.data.keyword.registrylong_notm}} `icr.io` domains from the `default` Kubernetes namespace only. Review the following FAQs to learn more about how to pull images in other Kubernetes namespaces or accounts, restrict pull access, or why your cluster might not have the default image pull secrets.
+Generally, your {{site.data.keyword.containerlong_notm}} cluster is set up to pull images from all {{site.data.keyword.registrylong_notm}} `icr.io` domains from the `default` Kubernetes namespace only. Review the following FAQ to learn more about how to pull images in other Kubernetes namespaces or accounts, restrict pull access, or why your cluster might not have the default image pull secrets.
 {: shortdesc}
 
 How is my cluster set up to pull images from the `default` Kubernetes namespace?

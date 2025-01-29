@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-12-10"
+  years: 2014, 2025
+lastupdated: "2025-01-29"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -20,11 +20,11 @@ content-type: faq
 
 
 
-# FAQs
+# FAQ for {{site.data.keyword.containerlong}}
 {: #faqs}
 
 
-Review frequently asked questions (FAQs) for using {{site.data.keyword.containerlong}}.
+Review frequently asked questions (FAQ) for using {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
 

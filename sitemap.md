@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-01-28"
+lastupdated: "2025-01-29"
 
 
 keywords: containers
@@ -2967,7 +2967,7 @@ subcollection: containers
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 
-* [FAQs](/docs/containers?topic=containers-psp#psp-faqs)
+* [FAQ](/docs/containers?topic=containers-psp#psp-faqs)
 
     * [Why do I set pod security policies?](/docs/containers?topic=containers-psp#why-set-psps)
 
@@ -8900,11 +8900,11 @@ subcollection: containers
 * [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
 
 
-## Service dependency map for IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud
-{: #sitemap_service_dependency_map_for_ibm_cloud_kubernetes_service_and_red_hat_openshift_on_ibm_cloud}
+## Service dependencies
+{: #sitemap_service_dependencies}
 
 
-[Service dependency map for IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-service-dependencies#service-dependencies)
+[Service dependencies](/docs/containers?topic=containers-service-dependencies#service-dependencies)
 
 
 ## Worker node flavors
@@ -9015,11 +9015,11 @@ subcollection: containers
 * [Subscribing to email notifications](/docs/containers?topic=containers-best-practices#monbp-subscribing)
 
 
-## FAQs
-{: #sitemap_faqs}
+## FAQ for {{site.data.keyword.containerlong}}
+{: #sitemap_faq_for_}
 
 
-[FAQs](/docs/containers?topic=containers-faqs#faqs)
+[FAQ for {{site.data.keyword.containerlong}}](/docs/containers?topic=containers-faqs#faqs)
 
 * [What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
 

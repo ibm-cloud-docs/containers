@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-03-27"
+  years: 2014, 2025
+lastupdated: "2025-01-29"
 
 
 keywords: kubernetes
@@ -26,10 +26,10 @@ configure policies to authorize who can create and update pods in {{site.data.ke
 Pod security policies are not available in clusters that run version 1.25 or later. In clusters that run version 1.25 or later, use [Pod Security admission](/docs/containers?topic=containers-pod-security-admission) instead. To upgrade a cluster with pod security policies from version 1.24 to version 1.25, follow the steps in [Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration). 
 {: note}
 
-## FAQs
+## FAQ
 {: #psp-faqs}
 
-Learn about some common FAQs for configuring your pod security policies.
+Learn about some common FAQ for configuring your pod security policies.
 
 ### Why do I set pod security policies?
 {: #why-set-psps}
@@ -245,9 +245,3 @@ You must not delete or modify these resources.
 | `ibm-restricted-psp` | All | `PodSecurityPolicy` | Policy for unprivileged, or restricted, pod creation. |
 | `ibm-restricted-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-restricted-psp` pod security policy. |
 {: caption="IBM pod security policies resources that you must not modify" caption-side="bottom"}
-
-
-
-
-
-
