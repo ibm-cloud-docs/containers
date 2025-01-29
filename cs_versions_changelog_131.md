@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-01-28"
+lastupdated: "2025-01-29"
 
 
 keywords: change log, version history, 1.31
@@ -59,7 +59,7 @@ The following table shows the changes that are in the master fix pack 1.31.5_153
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.31.2-4 | v1.31.4-3 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 743ed58 | cb4f333 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.8 | v2.10.9 | New version contains updates and security fixes. |
-| Konnectivity agent and server | v0.30.3 | v0.31.1 | See the [Konnectivity release notes](https://github.ibm.com/alchemy-containers/armada-konnectivity-community-build/releases/tag/v0.31.1){: external}. |
+| Konnectivity agent and server | v0.30.3 | v0.31.1 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.31.1){: external}. |
 | Kubernetes | v1.31.3 | v1.31.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.5){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3079 | 3178 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.21 | v0.13.23 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.23){: external}. |

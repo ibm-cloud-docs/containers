@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-28"
+lastupdated: "2025-01-29"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -29,6 +29,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-jan25}
 
 
+
+### 29 January 2025
+{: #containers-jan2925}
+{: release-note}
+
+New! {{site.data.keyword.containerlong_notm}} version 1.32.
+:   You can now create or [update clusters to Kubernetes version 1.32](/docs/containers?topic=containers-cs_versions_132). With Kubernetes 1.32, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
 ### 28 January 2025
 {: #containers-jan2825}
