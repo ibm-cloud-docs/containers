@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-01-29"
+lastupdated: "2025-01-30"
 
 
 keywords: change log, version history, 1.31
@@ -40,6 +40,26 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.31
 {: #131_components}
+
+
+
+### Worker node fix pack 1.31.5_1538, released 29 January 2025
+{: #cl-boms-1315_1538_W}
+
+The following table shows the components included in the worker node fix pack 1.31.5_1538. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_20_04|5.4.0-204-generic|Resolves the following CVEs: [CVE-2024-11168](https://nvd.nist.gov/vuln/detail/CVE-2024-11168){: external}, and [CVE-2025-22134](https://nvd.nist.gov/vuln/detail/CVE-2025-22134){: external}.|
+|UBUNTU_24_04|6.8.0-51-generic|Resolves the following CVEs: [CVE-2024-12254](https://nvd.nist.gov/vuln/detail/CVE-2024-12254){: external}, [CVE-2024-50349](https://nvd.nist.gov/vuln/detail/CVE-2024-50349){: external}, [CVE-2024-52006](https://nvd.nist.gov/vuln/detail/CVE-2024-52006){: external}, and [CVE-2025-22134](https://nvd.nist.gov/vuln/detail/CVE-2025-22134){: external}.|
+|Kubernetes|1.31.5|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.5).|
+|containerd|1.7.25|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.25).|
+|HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5|N/A|
+|GPU Device Plug-in and Installer|6563a84c30f22dd511f6e2d80227040a12c3af9a|Resolves the following CVEs: [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}.|
+{: caption="1.31.5_1538 fix pack." caption-side="bottom"}
+{: #cl-boms-1315_1538_W-component-table}
+
 
 
 
