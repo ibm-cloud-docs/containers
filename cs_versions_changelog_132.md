@@ -1,27 +1,30 @@
 ---
 
-copyright: 
+copyright:
   years: 2024, 2025
-lastupdated: "2025-01-29"
+
+lastupdated: "2025-01-30"
 
 
-keywords: kubernetes, containers, change log, 132 change log, 132 updates
+keywords: change log, version history, 1.32
 
 subcollection: containers
-
 
 ---
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Kubernetes version 1.32 change log
+<!-- The content in this topic is auto-generated except for reuse-snippets indicated with {[ ]}. -->
+
+
+# 1.32 version change log
 {: #changelog_132}
 
-View information about version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run version 1.32. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
+View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run this version. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
 
 ## Overview
-{: #changelog_overview_132}
+{: #changelog_overview}
 
 In Kubernetes, most new beta features are disabled by default. Alpha features, which are subject to change, are disabled in all versions. For more information, see the [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings) and the [feature gates](/docs/containers?topic=containers-service-settings#feature-gates) for each version.
 
@@ -34,8 +37,30 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: note}
 
 
-## Version 1.32 change log
-{: #132_changelog}
+
+## Version 1.32
+{: #132_components}
+
+
+
+### Worker node fix pack 1.32.1_1528, released 29 January 2025
+{: #cl-boms-1321_1528_W}
+
+The following table shows the components included in the worker node fix pack 1.32.1_1528. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_20_04|5.4.0-204-generic|Resolves the following CVEs: [CVE-2024-11168](https://nvd.nist.gov/vuln/detail/CVE-2024-11168){: external}, and [CVE-2025-22134](https://nvd.nist.gov/vuln/detail/CVE-2025-22134){: external}.|
+|UBUNTU_24_04|6.8.0-51-generic|Resolves the following CVEs: [CVE-2024-12254](https://nvd.nist.gov/vuln/detail/CVE-2024-12254){: external}, [CVE-2024-50349](https://nvd.nist.gov/vuln/detail/CVE-2024-50349){: external}, [CVE-2024-52006](https://nvd.nist.gov/vuln/detail/CVE-2024-52006){: external}, and [CVE-2025-22134](https://nvd.nist.gov/vuln/detail/CVE-2025-22134){: external}.|
+|Kubernetes|1.32.1|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.1).|
+|containerd|1.7.25|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.25).|
+|HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5|N/A|
+|GPU Device Plug-in and Installer|6563a84c30f22dd511f6e2d80227040a12c3af9a|Resolves the following CVEs: [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}.|
+{: caption="1.32.1_1528 fix pack." caption-side="bottom"}
+{: #cl-boms-1321_1528_W-component-table}
+
+
 
 
 ### Change log for master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025
@@ -54,9 +79,3 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 | Kubernetes NodeLocal DNS cache | 1.23.1 | 1.24.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.24.0){: external}. |
 | Tigera Operator | v1.34.5 | v1.36.3 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.3){: external}. |
 {: caption="Changes since version 1.31." caption-side="bottom"}
-
-
-
-
-
-

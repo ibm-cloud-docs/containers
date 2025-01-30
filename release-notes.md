@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-29"
+lastupdated: "2025-01-30"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,23 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2025
 {: #containers-jan25}
 
+### 30 January 2025
+{: #containers-jan3025}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
+:   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
+
+
+
+
 
 
 ### 29 January 2025
@@ -36,6 +53,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 New! {{site.data.keyword.containerlong_notm}} version 1.32.
 :   You can now create or [update clusters to Kubernetes version 1.32](/docs/containers?topic=containers-cs_versions_132). With Kubernetes 1.32, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
 
 ### 28 January 2025
 {: #containers-jan2825}
@@ -93,12 +111,14 @@ Istio add-on patch updates.
 
 
 
+
 ### 08 January 2025
 {: #containers-jan0825}
 {: release-note}
 
 Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
 
 
 
