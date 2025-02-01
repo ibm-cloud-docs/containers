@@ -38,7 +38,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 [Latest]{: tag-green} 1.32
 - Release date: 29 January 2025
-- End of support: None†
+- End of support: 22 April 2026†
 - Operating systems: `UBUNTU_24_64`
 - [Version information and update actions](/docs/containers?topic=containers-cs_versions_132)
 - [Change log](/docs/containers?topic=containers-changelog_132)
