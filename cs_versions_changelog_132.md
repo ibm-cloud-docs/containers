@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-01-30"
+lastupdated: "2025-02-03"
 
 
 keywords: change log, version history, 1.32
@@ -75,7 +75,7 @@ The following table shows the components included in the worker node fix pack 1.
 | Kubernetes (master) | v1.31.5 | v1.32.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.1){: external}. |
 | Kubernetes (worker node) | v1.31.3 | v1.32.0 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.0){: external}. |
 | Kubernetes configuration | N/A | N/A | See [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings). |
-| Kubernetes DNS autoscaler | v1.8.9 | v1.9.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.9.0){: external}. |
+| Kubernetes DNS autoscaler | v1.8.9 | v1.9.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.9.0){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.23.1 | 1.24.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.24.0){: external}. |
 | Tigera Operator | v1.34.5 | v1.36.3 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.3){: external}. |
 {: caption="Changes since version 1.31." caption-side="bottom"}

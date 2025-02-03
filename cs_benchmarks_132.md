@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2025
-lastupdated: "2025-01-29"
+lastupdated: "2025-02-03"
 
 keywords: kubernetes, containers, benchmarks, 1.32, CIS benchmarks
 
@@ -171,8 +171,8 @@ Review the Worker Node Security Configuration results of the version 1.5 CIS Kub
 | --- | --- | --- | --- | --- | --- |
 | 4.1.1 | Ensure that the kubelet service file permissions are set to 644 or more restrictive.| Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.1.2 | Ensure that the kubelet service file ownership is set to root:root.| Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
-| 4.1.3 | Ensure that the proxy kubeconfig file permissions are set to 644 or more restrictive.| Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
-| 4.1.4 | Ensure that the proxy kubeconfig file ownership is set to root:root.| Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
+| 4.1.3 | Ensure that the proxy `kubeconfig` file permissions are set to 644 or more restrictive.| Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
+| 4.1.4 | Ensure that the proxy `kubeconfig` file ownership is set to root:root.| Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.1.5 | Ensure that the kubelet.conf file permissions are set to 644 or more restrictive.| Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.1.6 | Ensure that the kubelet.conf file ownership is set to root:root.| Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 4.1.7 | Ensure that the certificate authorities file permissions are set to 644 or more restrictive.| Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
@@ -268,7 +268,7 @@ Review the Kubernetes Policies results of the version 1.5 CIS Kubernetes benchma
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 5.7.1 | Create administrative boundaries between resources using namespaces.| Not Scored | 1 | Pass | Shared |
-| 5.7.2 | Ensure that the seccomp profile is set to docker/default in your pod definitions.| Not Scored | 2 | [Fail](#cis-benchmark-remediations-132) | Shared |
+| 5.7.2 | Ensure that the `seccomp` profile is set to docker/default in your pod definitions.| Not Scored | 2 | [Fail](#cis-benchmark-remediations-132) | Shared |
 | 5.7.3 | Apply Security Context to Your Pods and Containers.| Not Scored | 2 | [Fail](#cis-benchmark-remediations-132) | Shared |
 | 5.7.4 | The default namespace should not be used.| Scored | 2 | [Fail](#cis-benchmark-remediations-132) | Shared |
 {: caption="Section 5.7 General policies benchmark results" caption-side="bottom"}
@@ -290,12 +290,12 @@ Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark resu
 | 1.2.23 | {{site.data.keyword.IBM_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.24 | {{site.data.keyword.IBM_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 1.2.25 | {{site.data.keyword.IBM_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 1.2.33 | {{site.data.keyword.IBM_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 1.2.34 | {{site.data.keyword.IBM_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
+| 1.2.33 | {{site.data.keyword.IBM_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption-setup). |
+| 1.2.34 | {{site.data.keyword.IBM_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption-setup). |
 | 1.3.6 | {{site.data.keyword.IBM_notm}} rotates certificates on every worker node reload or update. |
 | 3.2.1 | {{site.data.keyword.IBM_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 3.2.2 | {{site.data.keyword.IBM_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 4.2.6 | {{site.data.keyword.IBM_notm}} does not protect kernel defaults in order to allow customers to [tune kernel parameters](/docs/containers?topic=containers-kernel). |
+| 4.2.6 | {{site.data.keyword.IBM_notm}} does not protect kernel defaults to allow customers to [tune kernel parameters](/docs/containers?topic=containers-kernel). |
 | 4.2.8 | {{site.data.keyword.IBM_notm}} ensures that the hostname matches the name issued by the infrastructure. |
 | 4.2.11 | {{site.data.keyword.IBM_notm}} rotates certificates on every worker node reload or update. |
 | 4.2.12 | {{site.data.keyword.IBM_notm}} rotates certificates on every worker node reload or update. |
@@ -315,9 +315,7 @@ Review information from {{site.data.keyword.IBM_notm}} on the CIS Benchmark resu
 | 5.3.2 | {{site.data.keyword.IBM_notm}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy) and [additional network policies can optionally be added](/docs/containers?topic=containers-network_policies#adding_network_policies). |
 | 5.4.2 | {{site.data.keyword.IBM_notm}} can optionally [enable Secrets Manager service](/docs/containers?topic=containers-secrets-mgr). |
 | 5.5.1 | {{site.data.keyword.IBM_notm}} can optionally [enable image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). |
-| 5.7.2 | {{site.data.keyword.IBM_notm}} does not annotate all pods with [seccomp profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp){: external}. |
-| 5.7.3 | {{site.data.keyword.IBM_notm}} deploys some system components that do not set a [pod or container *securityContext*](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
+| 5.7.2 | {{site.data.keyword.IBM_notm}} does not annotate all pods with [`seccomp` profiles](https://kubernetes.io/docs/concepts/security/pod-security-policy/#seccomp){: external}. |
+| 5.7.3 | {{site.data.keyword.IBM_notm}} deploys some system components that do not set a [pod or container `securityContext`](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | 5.7.4 | {{site.data.keyword.IBM_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Explanation and remediation" caption-side="bottom"}
-
-

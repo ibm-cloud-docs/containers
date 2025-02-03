@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-01-13"
+lastupdated: "2025-02-03"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -402,7 +402,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
 
     `istio-components-pilot-hpa-maxReplicas`
     :   Default value: `"5"`
-    :   By default, Istio sets the default horizontal pod autoscaler (HPA) max pods for istiod to 5. Do not increase this value unless you have a large service mesh where istiod needs increased resources to update the configurations.
+    :   By default, Istio sets the default horizontal pod autoscaler (HPA) max pods for `istiod` to 5. Do not increase this value unless you have a large service mesh where `istiod` needs increased resources to update the configurations.
 
     For example, your ConfigMap might look like the following example.
     ```yaml
@@ -775,7 +775,7 @@ Save any resources that you created or modified in the `istio-system` namespace 
 Delete all Istio operator (IOP) resources, such as for a custom ingress gateway.
 {: shortdesc}
 
-1. Make sure your istioctl cli tool is at the desired patch version
+1. Make sure your `istioctl` cli tool is at the desired patch version
     ```sh
     istioctl version
     ```
