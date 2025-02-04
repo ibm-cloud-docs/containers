@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-03"
+lastupdated: "2025-02-04"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -109,7 +109,6 @@ Istio add-on patch updates.
 :   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
 :   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
 :   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
-
 
 
 
@@ -2547,7 +2546,7 @@ ALB OAuth Proxy add-on version `2.0.0_1669`.
 {: release-note}
 
 New! OpenShift Data Foundation add-on version `4.13.0`.
-:   For more information, see the [change log](/docs/openshift?topic=openshift-odf_addon_changelog).
+:   For more information, see the [change log](/docs/openshift?topic=openshift-cl-add-ons-openshift-data-foundation).
 
 
 
