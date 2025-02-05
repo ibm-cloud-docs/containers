@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-01-30"
+lastupdated: "2025-02-05"
 
 
 keywords: containers
@@ -6574,8 +6574,6 @@ subcollection: containers
 
 * [`cluster-autoscaler` 1.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.1.0)
 
-* [`cluster-autoscaler` 1.2.1](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.1)
-
 * [`cluster-autoscaler` 1.2.2](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.2)
 
 * [`cluster-autoscaler` 1.2.3](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.3)
@@ -6589,8 +6587,6 @@ subcollection: containers
 * [`ibm-storage-operator` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-storage-operator-1.0)
 
 * [`image-key-synchronizer` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
-
-* [`istio` 1.22](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.22)
 
 * [`istio` 1.23](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.23)
 
