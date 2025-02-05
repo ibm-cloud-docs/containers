@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-03"
+lastupdated: "2025-02-05"
 
 
 keywords: change log, version history, 1.32
@@ -63,7 +63,7 @@ The following table shows the components included in the worker node fix pack 1.
 
 
 
-### Change log for master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025
+### Master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025
 {: #1321_1527M_and_13201524W}
 
 | Component | Previous | Current | Description |
