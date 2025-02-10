@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-02-06"
+lastupdated: "2025-02-10"
 
 
 keywords: containers
@@ -5963,8 +5963,6 @@ subcollection: containers
 
 [1.32 version change log](/docs/containers?topic=containers-changelog_132#changelog_132)
 
-* [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview)
-
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
     * [Worker node fix pack 1.32.1_1528, released 29 January 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1321_1528_W)
@@ -6029,8 +6027,6 @@ subcollection: containers
     * [Update after master](/docs/containers?topic=containers-cs_versions_131#after_131)
 
 [1.31 version change log](/docs/containers?topic=containers-changelog_131#changelog_131)
-
-* [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
 
@@ -6142,8 +6138,6 @@ subcollection: containers
 * [Common issues and troubleshooting](/docs/containers?topic=containers-cs_versions_130#sbd-common-ts)
 
 [1.30 version change log](/docs/containers?topic=containers-changelog_130#changelog_130)
-
-* [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
 
@@ -6261,8 +6255,6 @@ subcollection: containers
     * [Understanding the Tigera Operator namespace migration](/docs/containers?topic=containers-cs_versions_129#129-tigera-migration)
 
 [1.29 version change log](/docs/containers?topic=containers-changelog_129#changelog_129)
-
-* [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview)
 
 * [Version 1.29](/docs/containers?topic=containers-changelog_129#129_components)
 
@@ -6410,8 +6402,6 @@ subcollection: containers
     * [I have custom network policies. What do I change?](/docs/containers?topic=containers-cs_versions_128#networking_steps_policy)
 
 [1.28 version change log](/docs/containers?topic=containers-changelog_128#changelog_128)
-
-* [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview)
 
 * [Version 1.28](/docs/containers?topic=containers-changelog_128#128_components)
 

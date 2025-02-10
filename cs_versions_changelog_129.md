@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-06"
+lastupdated: "2025-02-10"
 
 
 keywords: change log, version history, 1.29
@@ -29,9 +29,6 @@ View information of version changes for major, minor, and patch updates that are
 This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: deprecated}
 
-
-## Overview
-{: #changelog_overview}
 
 In Kubernetes, most new beta features are disabled by default. Alpha features, which are subject to change, are disabled in all versions. For more information, see the [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings) and the [feature gates](/docs/containers?topic=containers-service-settings#feature-gates) for each version.
 
