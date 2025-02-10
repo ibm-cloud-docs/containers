@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-01-13"
+lastupdated: "2025-02-10"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -263,9 +263,7 @@ If your {{site.data.keyword.block_storage_is_short}} volumes are reaching capaci
 {: tip}
 
 
-
-
-## Monitoring worker node health in with Autorecovery
+## Monitoring worker node health with Autorecovery
 {: #autorecovery}
 
 The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like rebooting a VPC worker node or reloading the operating system in a classic worker node. Only one worker node undergoes a corrective action at a time. The worker node must complete the corrective action before any other worker node undergoes a corrective action.
