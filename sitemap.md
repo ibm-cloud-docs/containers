@@ -238,6 +238,16 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb25)
+
+    * [10 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb1025)
+
+        * New! Worker node flavors with H200 GPU support are available on an allowlist basis for VPC clusters.
+
+    * [06 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-06february25)
+
+        * Static Route cluster add-on patch updates.
+
 * [January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan25)
 
     * [30 January 2025](/docs/containers?topic=containers-containers-relnotes#containers-jan3025)

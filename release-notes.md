@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-04"
+lastupdated: "2025-02-10"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -24,6 +24,27 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+
+## February 2025
+{: #containers-feb25}
+
+
+### 10 February 2025
+{: #containers-feb1025}
+{: release-note}
+
+New! Worker node flavors with H200 GPU support are available on an allowlist basis for VPC clusters.
+:   To request access to the allowlist, see see [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request).
+:   For a list of available worker node flavors for VPC clusters, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors).
+
+
+### 06 February 2025
+{: #containers-06february25}
+{: release-note}
+
+Static Route cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-static-route-change-log).
 
 
 
