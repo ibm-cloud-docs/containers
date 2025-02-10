@@ -7542,6 +7542,8 @@ subcollection: containers
 
 * [Version 1.0.0](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-1.0.0)
 
+    * [v1.0.0-1661, released 06 February 2025](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-v100-1661)
+
     * [1.0.0_1581, released 14 November 2024](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1581)
 
     * [1.0.0_1415, released 3 October 2024](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-100_1415)
