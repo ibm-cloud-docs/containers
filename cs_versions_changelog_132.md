@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-05"
+lastupdated: "2025-02-10"
 
 
 keywords: change log, version history, 1.32
@@ -24,7 +24,7 @@ View information of version changes for major, minor, and patch updates that are
 {: shortdesc}
 
 ## Overview
-{: #changelog_overview}
+{: #changelog_overview_132}
 
 In Kubernetes, most new beta features are disabled by default. Alpha features, which are subject to change, are disabled in all versions. For more information, see the [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings) and the [feature gates](/docs/containers?topic=containers-service-settings#feature-gates) for each version.
 
