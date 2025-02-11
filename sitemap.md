@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-02-10"
+lastupdated: "2025-02-11"
 
 
 keywords: containers
@@ -3573,7 +3573,7 @@ subcollection: containers
 
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
-* [Forwarding cluster and app logs to Cloud Logs](/docs/containers?topic=containers-health#logging)
+* [Forwarding cluster and app logs to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
 
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
 
@@ -3593,7 +3593,7 @@ subcollection: containers
 
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
 
-* [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#monitoring)
+* [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
 
 * [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
 

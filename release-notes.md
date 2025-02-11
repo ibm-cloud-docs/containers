@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-10"
+lastupdated: "2025-02-11"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -44,7 +44,7 @@ New! Worker node flavors with H200 GPU support are available on an allowlist bas
 {: release-note}
 
 Static Route cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-static-route-change-log).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-static-route).
 
 
 
