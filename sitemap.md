@@ -240,6 +240,10 @@ subcollection: containers
 
 * [February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb25)
 
+    * [11 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb1125)
+
+        * CLI version `1.0.677` is available.
+
     * [10 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb1025)
 
         * New! Worker node flavors with H200 GPU support are available on an allowlist basis for VPC clusters.
@@ -5724,6 +5728,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.677](/docs/containers?topic=containers-cs_cli_changelog#cli-010677)
 
 * [Version v1.0.674](/docs/containers?topic=containers-cs_cli_changelog#cli-010674)
 

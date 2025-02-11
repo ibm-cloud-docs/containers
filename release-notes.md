@@ -29,6 +29,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2025
 {: #containers-feb25}
 
+### 11 February 2025
+{: #containers-feb1125}
+{: release-note}
+
+CLI version `1.0.677` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 10 February 2025
 {: #containers-feb1025}
