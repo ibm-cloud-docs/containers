@@ -414,6 +414,7 @@ toc:
       - locations.md
       - cs_integrations_overview.md
       - service-settings.md
+      - ha-dr.md
       - topic: service-dependency.md
         navtitle: Service dependencies
       - topicgroup:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-01-28"
+lastupdated: "2025-02-11"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -8295,7 +8295,7 @@ List available flavors for a zone.
 {: shortdesc}
 
 ```sh
-ibmcloud ks flavor ls --zone ZONE [--output OUTPUT] [--provider PROVIDER] [-q] [--show-storage]
+ibmcloud ks flavor ls --zone ZONE [--output OUTPUT] [--provider PROVIDER] [-q] [--show-os] [--show-storage]
 ```
 {: pre}
 
@@ -8310,6 +8310,9 @@ Minimum required permissions
 `--provider PROVIDER`
 :    Optional: The infrastructure provider for which you want to get flavor information for. Available options are `classic`, `vpc-classic` and `vpc-gen2`.
 
+`--show-os`
+:    Optional: List supported operating systems.
+
 `--show-storage`
 :    Optional: Show additional raw disks that are available for SDS worker node flavors. For more information, see [Software-defined storage (SDS) machines](/docs/containers?topic=containers-classic-flavors). In the tables for each metro area section, SDS flavors are in the **Bare Metal** tabs and end with `.ssd`.
 
@@ -8323,7 +8326,7 @@ Minimum required permissions
 {: #flavor-ls-example}
 
 ```sh
-ibmcloud ks flavor ls --zone us-south-1 --provider vpc-gen2 --show-storage
+ibmcloud ks flavor ls --zone us-south-1 --provider vpc-gen2 --show-os --show-storage
 ```
 {: pre}
 

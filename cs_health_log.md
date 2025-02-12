@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-02-03"
+lastupdated: "2025-02-11"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -38,7 +38,7 @@ Fluentd with an external server
 
 
 ## Forwarding cluster and app logs to Cloud Logs
-{: #logging}
+{: #logging_forwarding}
 
 The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are deprecated and support ends on 28 March 2025. You can now manage your logging and monitoring integrations from the console or through the Helm charts. For the latest steps, see [Managing the Logging agent for Red Hat OpenShift on IBM Cloud clusters](/docs/cloud-logs?topic=cloud-logs-agent-openshift) or [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster)
 {: deprecated}

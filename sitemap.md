@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-02-10"
+lastupdated: "2025-02-11"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb25)
+
+    * [11 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb1125)
+
+        * CLI version `1.0.677` is available.
 
     * [10 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb1025)
 
@@ -3573,7 +3577,7 @@ subcollection: containers
 
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
-* [Forwarding cluster and app logs to Cloud Logs](/docs/containers?topic=containers-health#logging)
+* [Forwarding cluster and app logs to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
 
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
 
@@ -3593,7 +3597,7 @@ subcollection: containers
 
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
 
-* [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#monitoring)
+* [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
 
 * [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
 
@@ -3609,7 +3613,7 @@ subcollection: containers
 
     * [{{site.data.keyword.block_storage_is_short}} alerts](/docs/containers?topic=containers-health-monitor#vpc-block-storage-alerts)
 
-* [Monitoring worker node health in with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
+* [Monitoring worker node health with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
 
     * [Understanding the configmap components](/docs/containers?topic=containers-health-monitor#configmap-components)
 
@@ -5724,6 +5728,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.677](/docs/containers?topic=containers-cs_cli_changelog#cli-010677)
 
 * [Version v1.0.674](/docs/containers?topic=containers-cs_cli_changelog#cli-010674)
 
@@ -8989,6 +8995,35 @@ subcollection: containers
 * [`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
 
 * [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
+
+
+## Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_understanding_high_availability_and_disaster_recovery_for_}
+
+
+[Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-iks-ha-dr#iks-ha-dr)
+
+* [High availability architecture](/docs/containers?topic=containers-iks-ha-dr#ha-architecture)
+
+    * [Resource distribution for high availability.](/docs/containers?topic=containers-iks-ha-dr#ha-architecture-dist)
+
+* [High availability features](/docs/containers?topic=containers-iks-ha-dr#ha-features)
+
+* [Disaster recovery features](/docs/containers?topic=containers-iks-ha-dr#dr-features)
+
+* [Recovery time objective (RTO) and recovery point objective (RPO)](/docs/containers?topic=containers-iks-ha-dr#rto-rpo-features)
+
+* [How {{site.data.keyword.IBM}} helps ensure disaster recovery](/docs/containers?topic=containers-iks-ha-dr#ibm-disaster-recovery)
+
+    * [How {{site.data.keyword.IBM_notm}} recovers from failures](/docs/containers?topic=containers-iks-ha-dr#ibm-zone-failure)
+
+* [How {{site.data.keyword.IBM_notm}} maintains services](/docs/containers?topic=containers-iks-ha-dr#ibm-service-maintenance)
+
+* [Your responsibilities for high availability and disaster recovery](/docs/containers?topic=containers-iks-ha-dr#your-responsibilities-for-high-availability-and-disaster-recovery)
+
+* [Change management](/docs/containers?topic=containers-iks-ha-dr#change-management)
+
+* [Considerations for app and service deployment](/docs/containers?topic=containers-iks-ha-dr#app-considerations)
 
 
 ## Service dependencies
