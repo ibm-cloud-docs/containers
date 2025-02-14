@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-28"
+lastupdated: "2025-02-14"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, clusters, worker nodes, worker pools, add
@@ -137,7 +137,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     `--vpc-id VPC`
     :   Specify this  option if the worker pool is the first in the cluster.
 
-    `--operating-system UBUNTU_20_64`
+    `--operating-system UBUNTU_20_64|UBUNTU_24_64`
 :   Optional. The operating system of the worker nodes in your cluster. For a list of available operating systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). If no option is specified, the default operating system that corresponds to the cluster version is used.
 
     `--kms-account-id ACCOUNT`
