@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-02-11"
+lastupdated: "2025-02-14"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -839,7 +839,7 @@ Minimum required permissions
 :    Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 
 
-`--operating-system UBUNTU_20_64`
+`--operating-system UBUNTU_20_64|UBUNTU_24_64`
 :   Optional. The operating system of the worker nodes in your cluster. For a list of available operating systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). If no option is specified, the default operating system that corresponds to the cluster version is used.
 
 `--version MAJOR.MINOR.PATCH`
@@ -991,7 +991,7 @@ Minimum required permissions
     The security groups applied to a cluster cannot be changed once the cluster is created. You can change the rules of the security groups that are applied to the cluster, but you cannot add or remove security groups at the cluster level. If you apply the incorrect security groups at cluster create time, you must delete the cluster and create a new one. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group-manage).
     {: important}
 
-`--operating-system UBUNTU_20_64`
+`--operating-system UBUNTU_20_64|UBUNTU_24_64`
 :   Optional. The operating system of the worker nodes in your cluster. For a list of available operating systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). If no option is specified, the default operating system that corresponds to the cluster version is used.
 
 
@@ -2916,7 +2916,7 @@ Minimum required permissions
 :    Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option.
 
 
-`--operating-system UBUNTU_20_64`
+`--operating-system UBUNTU_20_64|UBUNTU_24_64`
 :   Optional. The operating system of the worker nodes in your cluster. For a list of available operating systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). If no option is specified, the default operating system that corresponds to the cluster version is used.
 
 `-q`
@@ -3391,7 +3391,7 @@ Minimum required permissions
 `-l, --label KEY1=VALUE1`
 :    Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple options, such as `-l key1=value1 -l key2=value2`.
 
-`--operating-system UBUNTU_20_64`
+`--operating-system UBUNTU_20_64|UBUNTU_24_64`
 :   Optional. The operating system of the worker nodes in your cluster. For a list of available operating systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). If no option is specified, the default operating system that corresponds to the cluster version is used.
 
 
@@ -3441,7 +3441,7 @@ Minimum required permissions
 `--size-per-zone NUMBER_WORKERS_PER_ZONE`
 :    Specify the number of worker nodes to create per zone in this worker pool. No worker nodes are created until you [add zones](#cli_zone-add-vpc-gen2) to the worker pool.
 
-`--operating-system UBUNTU_20_64`
+`--operating-system UBUNTU_20_64|UBUNTU_24_64`
 :   Optional. The operating system of the worker nodes in your cluster. For a list of available operating systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). If no option is specified, the default operating system that corresponds to the cluster version is used.
 
 `--flavor FLAVOR`
