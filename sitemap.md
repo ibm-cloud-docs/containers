@@ -248,8 +248,6 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
-        * >>>>>>> f37c588cad40b5897b63101fd6767ba2cd9ce531
-
     * [11 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb1125)
 
         * CLI version `1.0.677` is available.
