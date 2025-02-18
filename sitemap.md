@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-02-14"
+lastupdated: "2025-02-17"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb25)
+
+    * [17 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb1725)
+
+        * CLI version `1.0.679` is available.
 
     * [12 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb1225)
 
@@ -5733,6 +5737,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.679](/docs/containers?topic=containers-cs_cli_changelog#cli-010679)
+
 * [Version v1.0.677](/docs/containers?topic=containers-cs_cli_changelog#cli-010677)
 
 * [Version v1.0.674](/docs/containers?topic=containers-cs_cli_changelog#cli-010674)
@@ -9031,7 +9037,7 @@ subcollection: containers
 
 * [How {{site.data.keyword.IBM_notm}} maintains services](/docs/containers?topic=containers-iks-ha-dr#ibm-service-maintenance)
 
-* [Your responsibilities for high availability and disaster recovery](/docs/containers?topic=containers-iks-ha-dr#your-responsibilities-for-high-availability-and-disaster-recovery)
+* [Your responsibilities for high availability and disaster recovery](/docs/containers?topic=containers-iks-ha-dr#feature-responsibilities)
 
 * [Change management](/docs/containers?topic=containers-iks-ha-dr#change-management)
 
