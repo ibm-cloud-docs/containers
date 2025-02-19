@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-01-14"
+lastupdated: "2025-02-19"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -130,7 +130,7 @@ The following table shows the changes that are in the master fix pack 1.27.16_15
 | GPU device plug-in and installer | 10ea2b1 | 184b5e2 | New version contains updates and security fixes. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1595 | 1598 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.20 | v2.4.23 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 443 | 445 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 443 | 445 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 14d0ab5 | 312030f | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.11 | v2.8.12 | New version contains updates and security fixes. |
 | Kubernetes | v1.27.15 | v1.27.16 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.16){: external}. |
@@ -249,7 +249,7 @@ The following table shows the changes that are in the master fix pack 1.27.14_15
 | {{site.data.keyword.IBM_notm}} Calico extension | 1537 | 1589 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.19 | v2.4.20 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.27.12-10 | v1.27.14-1 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 442 | 443 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 442 | 443 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | 50808cc | 0281c94 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.9 | v2.8.10 | New version contains updates and security fixes. |
 | Konnectivity agent and server | v0.1.5_47_iks | v0.1.9_105_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.1.9){: external}. |

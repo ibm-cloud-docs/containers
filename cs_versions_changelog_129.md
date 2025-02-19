@@ -255,7 +255,7 @@ The following table shows the changes that are in the master fix pack 1.29.9_156
 | Cluster health image | v1.5.8 | v1.5.9 | New version contains updates and security fixes. |
 | etcd | v3.5.15 | v3.5.16 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.16){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.9-1 | v1.29.9-6 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 446 | 447 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 446 | 447 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 5b17dab | 77dac6b | New version contains updates and security fixes. |
 | Key Management Service provider | v2.9.10 | v2.9.12 | New version contains updates and security fixes. |
 | Kubernetes add-on resizer | 1.8.19 | 1.8.22 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.22){: external}. |
@@ -306,7 +306,7 @@ The following table shows the changes that are in the master fix pack 1.29.9_155
 | --- | --- | --- | --- |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.13 | v2.5.15 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.8-1 | v1.29.9-1 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 445 | 446 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 445 | 446 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.4 | v1.1.5 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 897f067 | 5b17dab | New version contains updates and security fixes. |
 | Key Management Service provider | v2.9.9 | v2.9.10 | New version contains updates and security fixes. |
@@ -416,7 +416,7 @@ The following table shows the changes that are in the master fix pack 1.29.7_155
 | etcd | v3.5.13 | v3.5.14 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.14){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.9 | v2.5.12 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.5-5 | v1.29.7-1 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 443 | 445 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 443 | 445 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 14d0ab5 | 312030f | New version contains updates and security fixes. |
 | Key Management Service provider | v2.9.7 | v2.9.8 | New version contains updates and security fixes. |
 | Kubernetes | v1.29.6 | v1.29.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.7){: external}. |
@@ -539,7 +539,7 @@ The following table shows the changes that are in the master fix pack 1.29.5_154
 | Cluster health image | v1.4.9 | v1.4.10 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.8 | v2.5.9 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.4-1 | v1.29.5-1 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 442 | 443 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 442 | 443 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.2 | v1.1.3 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.9.5 | v2.9.6 | New version contains updates and security fixes. |
 | Konnectivity server and agent | v0.29.0 | v0.29.2_105_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.29.2){: external}. |

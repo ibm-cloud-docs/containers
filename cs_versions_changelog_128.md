@@ -218,7 +218,7 @@ The following table shows the changes that are in the master fix pack 1.28.14_15
 | --- | --- | --- | --- |
 | Cluster health image | v1.5.8 | v1.5.9 | New version contains updates and security fixes. |
 | etcd | v3.5.15 | v3.5.16 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.16){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 446 | 447 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 446 | 447 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 5b17dab | 77dac6b | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.14 | v2.8.16 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.18 | v0.13.20 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.20){: external}. |
@@ -268,7 +268,7 @@ The following table shows the changes that are in the master fix pack 1.28.14_15
 | {{site.data.keyword.IBM_notm}} Calico extension | 1598 | 1607 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.24 | v2.4.26 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.28.13-1 | v1.28.14-1 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 445 | 446 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 445 | 446 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | 48787be | bc543b7 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 897f067 | 5b17dab | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.13 | v2.8.14 | New version contains updates and security fixes. |
@@ -376,7 +376,7 @@ The following table shows the changes that are in the master fix pack 1.28.12_15
 | {{site.data.keyword.IBM_notm}} Calico extension | 1595 | 1598 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.20 | v2.4.23 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.28.10-5 | v1.28.12-1 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 443 | 445 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 443 | 445 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 14d0ab5 | 312030f | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.11 | v2.8.12 | New version contains updates and security fixes. |
 | Kubernetes | v1.28.11 | v1.28.12 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.12){: external}. |
@@ -498,7 +498,7 @@ The following table shows the changes that are in the master fix pack 1.28.10_15
 | {{site.data.keyword.IBM_notm}} Calico extension | 1537 | 1589 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.19 | v2.4.20 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.28.9-1 | v1.28.10-1 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 442 | 443 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 442 | 443 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | 50808cc | 0281c94 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.8.9 | v2.8.10 | New version contains updates and security fixes. |
 | Kubernetes | v1.28.9 | v1.28.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.10){: external}. |

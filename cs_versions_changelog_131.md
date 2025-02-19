@@ -247,7 +247,7 @@ The following table shows the changes that are in the master fix pack 1.31.1_152
 | Cluster health image | v1.6.2 | v1.6.3 | New version contains updates and security fixes. |
 | etcd | v3.5.15 | v3.5.16 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.16){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.31.1-1 | v1.31.1-6 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 446 | 447 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 446 | 447 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 5b17dab | 77dac6b | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.5 | v2.10.7 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.18 | v0.13.20 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.20){: external}. |
