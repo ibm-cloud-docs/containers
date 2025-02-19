@@ -43,6 +43,22 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 
+### Master fix pack 1.30.9_1556, released 19 February 2025
+{: #1309_1556_M}
+
+The following table shows the changes that are in the master fix pack 1.30.9_1556. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.30.8-3 | v1.30.9-2 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 447 | 449 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.9 | v2.10.10 | New version contains updates and security fixes. |
+| Kubernetes NodeLocal DNS cache | 1.23.1 | 1.24.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.24.0){: external}. |
+{: caption="Changes since version 1.30.9_1552" caption-side="bottom"}
+
+
 ### Worker node fix pack 1.30.9_1555, released 11 February 2025
 {: #cl-boms-1309_1555_W}
 
@@ -61,8 +77,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1309_1555_W-component-table}
 
 
-
-
 ### Worker node fix pack 1.30.9_1553, released 29 January 2025
 {: #cl-boms-1309_1553_W}
 
@@ -79,8 +93,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|6563a84c30f22dd511f6e2d80227040a12c3af9a|Resolves the following CVEs: [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}.|
 {: caption="1.30.9_1553 fix pack." caption-side="bottom"}
 {: #cl-boms-1309_1553_W-component-table}
-
-
 
 
 ### Master fix pack 1.30.9_1552, released 22 January 2025
