@@ -3639,7 +3639,7 @@ subcollection: containers
 
     * [Considerations and prerequisites](/docs/containers?topic=containers-health-audit#prereqs-apiserver-logs)
 
-    * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
+    * [Forwarding Kubernetes API audit logs to Cloud Logs](/docs/containers?topic=containers-health-audit#audit-api-server-la)
 
     * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
 
@@ -9134,12 +9134,6 @@ subcollection: containers
 
     * [Resources in multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
-* [Accessing resources](/docs/containers?topic=containers-regions-and-zones#endpoint)
-
-    * [Accessing resources from the CLI](/docs/containers?topic=containers-regions-and-zones#endpoint_cli)
-
-    * [Accessing resources from the API](/docs/containers?topic=containers-regions-and-zones#endpoint_api)
-
 * [Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 
@@ -9633,6 +9627,8 @@ subcollection: containers
 * [If you have reached the number of security groups allowed per VPC](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-rules-per-vpc)
 
 [After creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters#ts-sbd-other-clusters)
+
+[Why can't I connect Cloud Logs to my cluster?](/docs/containers?topic=containers-ts-cloud-logs-refresh#ts-cloud-logs-refresh)
 
 
 ### Worker nodes

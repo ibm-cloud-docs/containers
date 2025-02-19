@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-11-12"
+  years: 2014, 2025
+lastupdated: "2025-02-19"
 
 
 keywords: containers
@@ -90,9 +90,7 @@ Admission control
 
 The following image shows the default cluster security settings that address authentication, authorization, admission control, and secure connectivity between the Kubernetes master and worker nodes.
 
-![Describes the security stages when you access the Kubernetes API server.](images/cs_security_apiserver_access.png "Security stages when accessing the Kubernetes API server"){: caption="Security stages when accessing the Kubernetes API server" caption-side="bottom"}
-
-
+![Describes the security stages when you access the API server.](images/apiserver_access.svg "Security stages when accessing the Kubernetes API server"){: caption="Security stages when accessing the API server" caption-side="bottom"}
 
 Review the following security features for Kubernetes API server and etcd.
 

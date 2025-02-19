@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-18"
+lastupdated: "2025-02-19"
 
 
 keywords: containers, reservations, worker node
@@ -40,7 +40,7 @@ A reservation is a type of {{site.data.keyword.cloud_notm}} resource that you se
 
 Review the following diagram for an example scenario of how you might set up your reservation and contracts to use across clusters.
 
-![Overview of reservations for {{site.data.keyword.containerlong_notm}}.](images/reservations-ov.png "Overview of reservations for {{site.data.keyword.containerlong_notm}}"){: caption="An example scenario of using a reservation for worker nodes in your clusters." caption-side="bottom"}
+![Overview of reservations for {{site.data.keyword.containerlong_notm}}.](images/reservations-ov.svg "Overview of reservations for {{site.data.keyword.containerlong_notm}}"){: caption="An example scenario of using a reservation for worker nodes in your clusters." caption-side="bottom"}
 
 **Reservation**: The reservation contains details such as the container platform, worker node flavor, location, and infrastructure provider.
 

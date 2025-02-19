@@ -476,6 +476,7 @@ toc:
               - ts-vpc-byok-encrypted-storage.md
               - ts-sbd-cluster-create-quota.md
               - ts-sbd-non-sbd-clusters.md
+              - ts-cloud-logs-tags.md
           - topicgroup:
               label: Worker nodes
               topics:
