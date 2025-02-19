@@ -244,6 +244,8 @@ subcollection: containers
 
         * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
 
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
+
     * [17 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb1725)
 
         * CLI version `1.0.679` is available.
