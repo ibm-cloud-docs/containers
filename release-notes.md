@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-17"
+lastupdated: "2025-02-19"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -29,12 +29,22 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2025
 {: #containers-feb25}
 
+### 19 February 2025
+{: #containers-feb1925}
+{: release-note}
+
+{{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
 ### 17 February 2025
 {: #containers-feb1725}
 {: release-note}
 
 CLI version `1.0.679` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+{{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
+:   For more information, see the [add-on change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 ### 12 February 2025
 {: #containers-feb1225}
@@ -221,10 +231,10 @@ Ingress ALB cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.1.31_656` and `5.2.26_657`.
-:   For more information, see the [add-on change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [add-on change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 Storage Operator cluster add-on patch update.
 :  For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
@@ -301,7 +311,7 @@ Ubuntu 24 is now the default operating system for {{site.data.keyword.containerl
 
 
 {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -510,11 +520,11 @@ New! The `gx3d.160x1792.8h100` worker node flavor with H100 GPU support is avail
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 Storage Operator cluster add-on patch update.
 :  For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
@@ -725,7 +735,7 @@ Ingress ALB cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 Storage Operator cluster add-on patch update.
 :  For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
@@ -839,10 +849,10 @@ Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 
 
 {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 Storage Operator cluster add-on patch update.
 :   For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
@@ -905,7 +915,7 @@ Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 {: release-note}
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on version 2.0 is available in Beta.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 ## June 2024
 {: #containers-june24}
@@ -939,10 +949,10 @@ Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_no
 :   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 ### 20 June 2024
 {: #containers-june2024}
@@ -1120,10 +1130,10 @@ Managing outbound traffic protection in new version 1.30 VPC clusters.
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on patch update.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch update.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
 
@@ -1382,10 +1392,10 @@ Version 1.29 is the default version for {{site.data.keyword.containerlong_notm}}
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch update.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
 
@@ -1576,10 +1586,10 @@ CLI version `1.0.595` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.2.15_501` and `5.1.21_506` are available.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2.6_130` is available.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
 
@@ -1735,10 +1745,10 @@ Istio add-on version 1.18 will no longer be supported on 21 February 2024
 
 
 {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch update `1.2.5_107`.
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates `5.2.14_485` and `5.1.19_486`.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -1911,10 +1921,10 @@ Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, a
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.23_437` and `5.1.16_446`, and `5.2.11_447`.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.10_93` and `1.2.3_97`.
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
 
@@ -1972,13 +1982,13 @@ Master fix packs are available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.21_401` and `5.1.15_419`, and `5.2.10_428`.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 Cluster autoscaler add-on patch updates `1.0.9_195`, `1.0.8_233`, and `1.0.7_185`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.9_87`.
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
 
@@ -2047,7 +2057,7 @@ VNI functionality for limiting access to {{site.data.keyword.filestorage_vpc_sho
 :   You now have more granular control over how pods access your {{site.data.keyword.filestorage_vpc_short}}. For more information, see [Limiting file share access by worker node, zone, or worker pool](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-setup).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2`.
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
 ### 30 October 2023
@@ -2244,7 +2254,7 @@ ALB OAuth Proxy add-on version `2.0.0_1843`.
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version `5.2`.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -2314,10 +2324,10 @@ Cluster autoscaler add-on versions `1.0.9_103`,`1.0.8_104`, and `1.0.7_102`.
 
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.7_49`
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.19_358` and `5.1.13_345`.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 ### 12 September 2023
@@ -2459,7 +2469,7 @@ Worker node fix packs are available.
 
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.17_266` and `5.1.12_285`.
-:   For more information, see the [change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -2507,7 +2517,7 @@ Master fix packs are available
 
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.6`
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
 
@@ -2640,7 +2650,7 @@ Ingress ALB versions `1.6.4_5161_iks`, `1.5.1_5160_iks`, and `1.4.0_5159_iks`
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1`
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon). 
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver). 
 
 
 Worker node fix packs `1.24.15_1574`, `1.25.11_1550`, `1.26.6_1542`, and `1.27.3_1530`.
@@ -2706,7 +2716,7 @@ Istio add-on version `1.17.3`.
 {: release-note} 
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.16_127` and `5.1.11_126`.
-:   This patch introduces two new variables to the `addon-vpc-block-csi-driver-configmap`. To get the latest snapshot configmap values users must add the new values to the existing configmap and apply the changes. For more information, see [Customizing snapshots](/docs/containers?topic=containers-vpc-volume-snapshot) and [the add-on change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   This patch introduces two new variables to the `addon-vpc-block-csi-driver-configmap`. To get the latest snapshot configmap values users must add the new values to the existing configmap and apply the changes. For more information, see [Customizing snapshots](/docs/containers?topic=containers-vpc-volume-snapshot) and [the add-on change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -2819,7 +2829,7 @@ Ingress ALB versions `1.6.4_4170_iks`, `1.5.1_4168_iks`, and `1.4.0_4169_iks`
 {: release-note}
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.0`.
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 ### 15 May 2023
 {: #containers-may1523}
@@ -2829,10 +2839,10 @@ Cluster autoscaler add-on versions `1.0.6_1077`, `1.0.7_1076`, `1.0.8_1078`, and
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1-beta`
-:   For more information, see [the change log](/docs/containers?topic=containers-versions-vpc-file-addon). 
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver). 
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.12_1963` and `5.1.8_1970`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 ### 10 May 2023
@@ -2959,7 +2969,7 @@ Cluster autoscaler add-on versions `1.0.6_1010`, `1.0.7_1021`, and `1.0.8_1016`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.10_1869` and `5.1.6_1872`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -2996,7 +3006,7 @@ Worker node fix packs `1.23.17_1572`, `1.24.12_1562`, `1.25.8_1539`, and `1.26.3
 
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.9_1862` and `5.1.5_1857`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 Cluster autoscaler add-on versions `1.0.7_988` and `1.0.8_987`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
@@ -3107,7 +3117,7 @@ Istio add-on version `1.17.1`.
 
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.17_1829`, `5.0.7_1836`, and `5.1.2_1828`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 ### 3 March 2023
@@ -3175,7 +3185,7 @@ ALB OAuth Proxy add-on version `2.0.0_1469`.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.17_1829`, `5.0.7_1836`, and `5.1.2_1828`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -3238,7 +3248,7 @@ Ingress ALB version `1.3.1_3754_iks` and `1.4.0_3755_iks`
 
 
 {{site.data.keyword.block_storage_is_short}} add-on version `5.1`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 ### 8 February 2023
@@ -3323,7 +3333,7 @@ CLI version 1.0.487 change log update
 :   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.487.
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.16_1779` and `5.0.5_1784`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 Cluster autoscaler add-on version `1.0.7_940`.
 :   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
@@ -3356,7 +3366,7 @@ Worker node fix packs `1.23.15_1558`, `1.24.9_1550`, and `1.25.5_1528`.
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.15_1764` and `5.0.4_1773`
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 Istio add-on versions `1.14.6`, `1.15.4`, and `1.16.1`
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog#1161).
@@ -3539,7 +3549,7 @@ Worker node fix pack 1.22.16_1579, 1.23.14_1553, 1.24.8_1545, and 1.25.4_1523
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.13_1712` and `5.0.2_1713`
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -3577,7 +3587,7 @@ New Ingress status messages
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version `4.3.8_1705`
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -3594,7 +3604,7 @@ Istio add-on version `1.15.3`
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version `4.4.12_1700` and `5.0.1_1695`
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -3698,7 +3708,7 @@ Istio add-on
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version `5.0`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -3798,7 +3808,7 @@ Worker node fix pack
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version `4.4.11_1614`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -3811,7 +3821,7 @@ Cluster autoscaler add-on versions `1.1.0_798`, `1.0.6_800`, and `1.0.5_779`.
 :   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on version `4.3.7_1613`.
-:   For more information, see [the change log](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 ### 21 September 2022
@@ -3853,7 +3863,7 @@ Istio add-on
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version 4.4.10_1578 is available.
-:   For more information, see [version 4.4.10_1578](/docs/containers?topic=containers-vpc_bs_changelog).
+:   For more information, see [version 4.4.10_1578](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 New! vGPU worker node flavors are now available for VPC Gen 2.
 :   For more information about the available worker node flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-flavors). Worker node flavors with vGPU support are the `gx2` flavor class, for example: `gx2.16x128.2v100`. {{site.data.keyword.vpc_short}} worker nodes with GPUs are available for allowlisted accounts only. To request that your account be allowlisted, see [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request). Be sure to include the data centers, the VPC infrastructure profile, and the number of workers that you want use. For example `12 worker nodes in us-east-1 of VPC profile gx2-16x128xv100`.
@@ -3864,7 +3874,7 @@ New! vGPU worker node flavors are now available for VPC Gen 2.
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version 4.3.6_1579 is available.
-:   For more information, see [version 4.3.6_1579](/docs/containers?topic=containers-vpc_bs_changelog)
+:   For more information, see [version 4.3.6_1579](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver)
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.0` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
@@ -3922,7 +3932,7 @@ CLI change log update
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on version 4.4.9_1566 is available.
-:   For more information, see [version 4.4.9_1566](/docs/containers?topic=containers-vpc_bs_changelog)
+:   For more information, see [version 4.4.9_1566](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver)
 
 
 
@@ -3937,7 +3947,7 @@ Ingress ALB change log updates
 
 {{site.data.keyword.block_storage_is_short}} add-on version 4.3.5_1563 is available.
 
-:   For more information, see [version 4.3.5_1563](/docs/containers?topic=containers-vpc_bs_changelog)
+:   For more information, see [version 4.3.5_1563](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver)
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.1.21` is available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
@@ -4062,7 +4072,7 @@ Cluster autoscaler add-on
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.3.4_1551](/docs/containers?topic=containers-vpc_bs_changelog) and [Version 4.4.8_1550](/docs/containers?topic=containers-vpc_bs_changelog) are available.
+:   [Version 4.3.4_1551](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) and [Version 4.4.8_1550](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) are available.
 
 Worker node fix pack
 :   Kubernetes 1.21.14_1572, [1.22.11_1562](/docs/containers?topic=containers-changelog_122), [1.23.8_1537](/docs/containers?topic=containers-changelog_123) and [1.24.2_1529](/docs/containers?topic=containers-changelog_124).
@@ -4087,7 +4097,7 @@ Cross-account encryption
 :   Version `2.1.18` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   Version [5.0.1-beta_1411](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   Version [5.0.1-beta_1411](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 
 
@@ -4154,7 +4164,7 @@ Cluster autoscaler add-on
 :   You can now [create snapshots of your PVCs](/docs/containers?topic=containers-vpc-volume-snapshot) by using version `5.0.0-beta` of the {{site.data.keyword.block_storage_is_short}} add-on.
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.4.6_1446](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.4.6_1446](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 ### 22 June 2022
 {: #containers-jun2222}
@@ -4189,7 +4199,7 @@ Worker node fix pack
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.3.2_1441](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.3.2_1441](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 
 
@@ -4218,7 +4228,7 @@ Istio add-on
 :   Metrics and labels are now stored and displayed in a Prometheus compatible naming convention. Some metrics and labels are deprecated. For more information, see [Discontinued Metrics and Labels](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#discontinued-metrics-and-labels){: external} and [removed features](https://docs.sysdig.com/en/docs/release-notes/enhanced-metric-store/#removed-featurees){: external}.
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 5.0.1-beta_1411](/docs/containers?topic=containers-vpc_bs_changelog) is available for allowlisted accounts.
+:   [Version 5.0.1-beta_1411](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available for allowlisted accounts.
 
 
 
@@ -4229,7 +4239,7 @@ Istio add-on
 
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.4.5_1371](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.4.5_1371](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 
 
@@ -4244,7 +4254,7 @@ Ingress ALB change log updates
 :   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cl-ingress-alb) for version `1.2.1_2337_iks`.
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 5.0.0-beta_1125](/docs/containers?topic=containers-vpc_bs_changelog) is available for allowlisted accounts.
+:   [Version 5.0.0-beta_1125](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available for allowlisted accounts.
 
 ### 9 June 2022
 {: #containers-jun922}
@@ -4307,10 +4317,10 @@ CLI change log update
 :   Version `2.1.16` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.3.0_1163](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.3.0_1163](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.2.6_1161](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.2.6_1161](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 ### 20 May 2022
 {: #containers-may2022}
@@ -4346,7 +4356,7 @@ ALB OAuth Proxy add-on
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.2.5_1106](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.2.5_1106](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 ### 9 May 2022
 {: #containers-may0922}
@@ -4465,7 +4475,7 @@ New! {{site.data.keyword.secrets-manager_full}}
 
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.2.3_983](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.2.3_983](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 Worker node fix pack
 :   Kubernetes [1.23.5_1526](/docs/containers?topic=containers-changelog_123), [1.22.8_1548](/docs/containers?topic=containers-changelog_122), 1.21.11_1556, 1.20.15_1577.
@@ -4533,7 +4543,7 @@ Worker node fix pack update.
 :   Version `2.1.13` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.2.2_900](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.2.2_900](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
   
 ALB OAuth Proxy add-on
@@ -4567,7 +4577,7 @@ CLI change log update
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.2.1_895](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.2.1_895](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 
   
@@ -4655,7 +4665,7 @@ Maintenance Windows for {{site.data.keyword.containershort}} ALBs
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.2](/docs/containers?topic=containers-vpc_bs_changelog) is available.
+:   [Version 4.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
 
 Cluster autoscaler
 :   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
@@ -4746,7 +4756,7 @@ Worker node fix pack
 
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.1.3_846](/docs/containers?topic=containers-vpc_bs_changelog) is released.
+:   [Version 4.1.3_846](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is released.
 
 
 ### 10 February 2022
@@ -4817,7 +4827,7 @@ Version change log
 {: release-note}
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.1.2_834](/docs/containers?topic=containers-vpc_bs_changelog) is released.
+:   [Version 4.1.2_834](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is released.
 
 **New!** Gathering Ingress logs
 :   When troubleshooting Ingress, follow the steps in [gathering Ingress logs](/docs/containers?topic=containers-ingress-must-gather) to retrieve useful debugging information.
@@ -4864,7 +4874,7 @@ Cluster autoscaler add-on.
 :   [Version 1.0.4_403](/docs/containers?topic=containers-ca_changelog) is released.
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.1.1_827](/docs/containers?topic=containers-vpc_bs_changelog) is released.
+:   [Version 4.1.1_827](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is released.
 
 OpenShift Data Foundation
 :   New and updated parameters for OpenShift Data Foundation.
@@ -4918,7 +4928,7 @@ Istio add-on
 
 
 {{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.1.0_807](/docs/containers?topic=containers-vpc_bs_changelog) is released.
+:   [Version 4.1.0_807](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is released.
 
 
 {{site.data.keyword.containershort}} 1.20 end of support date change
