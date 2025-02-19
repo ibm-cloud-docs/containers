@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-02-11"
+lastupdated: "2025-02-19"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -61,7 +61,7 @@ When you create a logging configuration for a source in your cluster to forward 
 What are the sources that I can configure log forwarding for?
 :   In the following image, you can see the region of the sources that you can configure logging for.
 
-![Log sources in your cluster.](images/log_sources.png "Log sources in your cluster"){: caption="Log sources in your cluster" caption-side="bottom"}
+![Log sources in your cluster.](images/log_sources.svg "Log sources in your cluster"){: caption="Log sources in your cluster" caption-side="bottom"}
 
 1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.
     
