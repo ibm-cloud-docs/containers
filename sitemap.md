@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-02-17"
+lastupdated: "2025-02-18"
 
 
 keywords: containers
@@ -5176,6 +5176,8 @@ subcollection: containers
 * [Using a reservation in a cluster](/docs/containers?topic=containers-reservations#ri-use)
 
 * [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
+
+* [Renewing expiring reservation](/docs/containers?topic=containers-reservations#renew-reservation)
 
 
 ## Tuning performance
