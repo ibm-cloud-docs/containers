@@ -74,7 +74,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
-Ubuntu 20 is deprecated and support ends on 1 April 2025. Migrate your worker nodes to Ubuntu 24 before support ends. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin migration. For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
+Ubuntu 20 is deprecated and support ends on 31 May 2025. Migrate your worker nodes to Ubuntu 24 before support ends. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin migration. For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
 {: deprecated}
 
 
