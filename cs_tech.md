@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-10-09"
+  years: 2014, 2025
+lastupdated: "2025-02-21"
 
 
 keywords: kubernetes, docker, containers
@@ -35,7 +35,7 @@ The following architectural overviews are specific to the classic infrastructure
 The following image shows the components of your cluster and how they interact in a non-VRF or VRF-enabled account when only the [public cloud service endpoint is enabled](/docs/containers?topic=containers-plan_basics#workeruser-master).
 {: shortdesc}
 
-![{{site.data.keyword.containerlong_notm}} architecture when only the public cloud service endpoint is enabled](images/cs_org_ov_public_se.png){: caption="Cluster architecture when only the public cloud service endpoint is enabled" caption-side="bottom"}
+![{{site.data.keyword.containerlong_notm}} architecture when only the public cloud service endpoint is enabled](images/cs_org_ov_public_se.svg){: caption="Cluster architecture when only the public cloud service endpoint is enabled" caption-side="bottom"}
 
 ### VRF-enabled account with private and public cloud service endpoints
 {: #vrf-both-endpoints}
@@ -150,7 +150,7 @@ The following diagram and table describe the default components that are set up 
 The following architectural overviews are specific to the VPC infrastructure provider. For an architectural overview for the classic infrastructure provider, see [Classic cluster architecture](#architecture_classic).
 {: note}
 
-![Kubernetes cluster in a VPC](images/cs_org_ov_vpc.png){: caption="Kubernetes cluster in a VPC" caption-side="bottom"}
+![Kubernetes cluster in a VPC](images/cs_org_ov_vpc.svg){: caption="Kubernetes cluster in a VPC" caption-side="bottom"}
 
 | Component | Description |
 |:-----------------|:-----------------|
