@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-19"
+lastupdated: "2025-02-21"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -320,7 +320,7 @@ Ingress ALB cluster add-on patch updates.
 
 
 Ubuntu 24 is now the default operating system for {{site.data.keyword.containerlong_notm}} versions 1.29 and 1.30.
-:   New clusters and worker pools created at version 1.29 and 1.30 now use Ubuntu 24. The operating system for existing worker pools is not impacted. Ubuntu 20 was deprecated on [09 October 2024](#containers-oct0924) and support ends on 01 April 2025. If you are using Ubuntu 20 worker nodes, migrate your worker nodes to Ubuntu 24 before support ends. For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
+:   New clusters and worker pools created at version 1.29 and 1.30 now use Ubuntu 24. The operating system for existing worker pools is not impacted. Ubuntu 20 was deprecated on [09 October 2024](#containers-oct0924) and support ends on 31 May 2025. If you are using Ubuntu 20 worker nodes, migrate your worker nodes to Ubuntu 24 before support ends. For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
 
 
 
@@ -506,7 +506,7 @@ Istio add-on patch updates.
 
 
 
-Ubuntu 20 for {{site.data.keyword.containerlong_notm}} clusters is deprecated and support ends on 1 April 2025.
+Ubuntu 20 for {{site.data.keyword.containerlong_notm}} clusters is deprecated and support ends on 31 May 2025.
 :   Migrate your worker nodes to Ubuntu 24 before support ends. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin migration. For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs.

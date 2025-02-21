@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-02-19"
+lastupdated: "2025-02-21"
 
 
 keywords: containers
@@ -398,7 +398,7 @@ subcollection: containers
 
     * [09 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct0924)
 
-        * Ubuntu 20 for {{site.data.keyword.containerlong_notm}} clusters is deprecated and support ends on 1 April 2025.
+        * Ubuntu 20 for {{site.data.keyword.containerlong_notm}} clusters is deprecated and support ends on 31 May 2025.
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs.
 
