@@ -6632,6 +6632,13 @@ subcollection: containers
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-remediations-128)
 
 
+## Addons for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_addons_for_}
+
+
+[Addons for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-addons#addons)
+
+
 ## Add-on version history
 {: #sitemap_add-on_version_history}
 
