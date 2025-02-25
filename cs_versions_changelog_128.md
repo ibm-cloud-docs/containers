@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-24"
+lastupdated: "2025-02-25"
 
 
 keywords: change log, version history, 1.28
@@ -47,6 +47,25 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.28
 {: #128_components}
+
+
+
+### Worker node fix pack 1.28.15_1598, released 24 February 2025
+{: #cl-boms-12815_1598_W}
+
+The following table shows the components included in the worker node fix pack 1.28.15_1598. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_20_04|5.4.0-205-generic|Resolves the following CVEs: [CVE-2024-12133](https://nvd.nist.gov/vuln/detail/CVE-2024-12133){: external}, [CVE-2024-12243](https://nvd.nist.gov/vuln/detail/CVE-2024-12243){: external}, [CVE-2024-13176](https://nvd.nist.gov/vuln/detail/CVE-2024-13176){: external}, [CVE-2024-9143](https://nvd.nist.gov/vuln/detail/CVE-2024-9143){: external}, [CVE-2025-0938](https://nvd.nist.gov/vuln/detail/CVE-2025-0938){: external}, [CVE-2025-24014](https://nvd.nist.gov/vuln/detail/CVE-2025-24014){: external}, and [CVE-2025-26465](https://nvd.nist.gov/vuln/detail/CVE-2025-26465){: external}.|
+|Kubernetes|1.28.15|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.15).|
+|containerd|1.7.25|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.25).|
+|HAProxy|1d72cc8c7d02da6ba0340191fa8d9a86550e5090|Resolves the following CVEs: [CVE-2020-11023](https://nvd.nist.gov/vuln/detail/CVE-2020-11023){: external}, and [CVE-2022-49043](https://nvd.nist.gov/vuln/detail/CVE-2022-49043){: external}.|
+|GPU Device Plug-in and Installer|e41a0d57a0f7696dfa3698c6af3bcc8765e76cfd|Resolves the following CVEs: [CVE-2024-8508](https://nvd.nist.gov/vuln/detail/CVE-2024-8508){: external}, [CVE-2022-49043](https://nvd.nist.gov/vuln/detail/CVE-2022-49043){: external}, [CVE-2024-1488](https://nvd.nist.gov/vuln/detail/CVE-2024-1488){: external}, and [CVE-2020-11023](https://nvd.nist.gov/vuln/detail/CVE-2020-11023){: external}.|
+{: caption="1.28.15_1598 fix pack." caption-side="bottom"}
+{: #cl-boms-12815_1598_W-component-table}
+
 
 
 
