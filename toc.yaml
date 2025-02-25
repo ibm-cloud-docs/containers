@@ -350,6 +350,7 @@ toc:
               - cs_versions_128.md
               - cs_versions_changelog_128.md
               - cs_benchmarks_128.md
+      - addon_landing.md
       - topicgroup:
           label: Add-on version history
           topics:
