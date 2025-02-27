@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-02-25"
+lastupdated: "2025-02-27"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2025](/docs/containers?topic=containers-containers-relnotes#containers-feb25)
+
+    * [27 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-27february25)
+
+        * OpenShift AI deployment during cluster creation
 
     * [24 February 2025](/docs/containers?topic=containers-containers-relnotes#containers-24february25)
 
