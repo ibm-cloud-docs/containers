@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-25"
+lastupdated: "2025-02-28"
 
 
 keywords: change log, version history, 1.28
@@ -50,6 +50,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 
+
 ### Worker node fix pack 1.28.15_1598, released 24 February 2025
 {: #cl-boms-12815_1598_W}
 
@@ -87,7 +88,6 @@ The following table shows the components included in the worker node fix pack 1.
 
 
 
-
 ### Master fix pack 1.28.15_1594, released 22 January 2025
 {: #12815_1594_M}
 
@@ -107,6 +107,7 @@ The following table shows the changes that are in the master fix pack 1.28.15_15
 {: caption="Changes since version 1.28.15_1588" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.28.15_1593, released 13 January 2025
 {: #cl-boms-12815_1593_W}
 
@@ -120,8 +121,9 @@ The following table shows the components included in the worker node fix pack 1.
 |containerd|1.7.23|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.23).|
 |HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5|N/A|
 |GPU Device Plug-in and Installer|dc0ff3ad7a22a45390d050aa7d3ab23968870a14|Resolves the following CVEs: [CVE-2024-35195](https://nvd.nist.gov/vuln/detail/CVE-2024-35195){: external}, [CVE-2024-53088](https://nvd.nist.gov/vuln/detail/CVE-2024-53088){: external}, and [CVE-2024-53122](https://nvd.nist.gov/vuln/detail/CVE-2024-53122){: external}.|
-{: caption="Components in version 1.28.15_1593." caption-side="bottom"}
+{: caption="1.28.15_1593 fix pack." caption-side="bottom"}
 {: #cl-boms-12815_1593_W-component-table}
+
 
 
 ### Worker node fix pack 1.28.15_1592, released 30 December 2024
