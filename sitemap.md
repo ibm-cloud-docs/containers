@@ -6414,14 +6414,6 @@ subcollection: containers
 
     * [Worker node fix pack 1.29.3_1532, released 25 March 2024](/docs/containers?topic=containers-changelog_129#1293_1532_W)
 
-    * [Worker node fix pack 1.29.2_1529, released 13 March 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W)
-
-    * [Master fix pack 1.29.2_1528, released 28 February 2024](/docs/containers?topic=containers-changelog_129#1292_1528_M)
-
-    * [Worker node fix pack 1.29.2_1529, released 26 February 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W_feb)
-
-    * [Master fix pack 1.29.1_1524 and worker node fix pack 1.29.1_1525, released 14 February 2024](/docs/containers?topic=containers-changelog_129#1291_1524M_and_1291_1525W)
-
 [Kubernetes version 1.29 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-129)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-1-129)
