@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-02-27"
+lastupdated: "2025-02-28"
 
 
 keywords: containers
@@ -8206,7 +8206,7 @@ subcollection: containers
 
     * [Master fix pack 1.27.4_1536, released 30 August 2023](/docs/containers?topic=containers-changelog_127#1274_1536_M)
 
-    * [Worker node fix pack 1.27.4_1537, released 28th August 2023](/docs/containers?topic=containers-changelog_127#1274_1537_W)
+    * [Worker node fix pack 1.27.4_1537, released 28 August 2023](/docs/containers?topic=containers-changelog_127#1274_1537_W)
 
     * [Worker node fix pack 1.27.4_1535, released 15th August 2023](/docs/containers?topic=containers-changelog_127#1274_1535_W)
 
@@ -8345,7 +8345,7 @@ subcollection: containers
 
     * [Master fix pack 1.26.7_1550, released 30 August 2023](/docs/containers?topic=containers-changelog_126#1267_1550_M)
 
-    * [Worker node fix pack 1.26.7_1551, released 28th August 2023](/docs/containers?topic=containers-changelog_126#1267_1551_W)
+    * [Worker node fix pack 1.26.7_1551, released 28 August 2023](/docs/containers?topic=containers-changelog_126#1267_1551_W)
 
     * [Worker node fix pack 1.26.7_1547, released 15th August 2023](/docs/containers?topic=containers-changelog_126#1267_1547_W)
 
@@ -8484,7 +8484,7 @@ subcollection: containers
 
     * [Master fix pack 1.25.12_1556, released 30 August 2023](/docs/containers?topic=containers-changelog_125#12512_1556_M)
 
-    * [Worker node fix pack 1.25.12_1557, released 28th August 2023](/docs/containers?topic=containers-changelog_125#12512_1557_W)
+    * [Worker node fix pack 1.25.12_1557, released 28 August 2023](/docs/containers?topic=containers-changelog_125#12512_1557_W)
 
     * [Worker node fix pack 1.25.12_1555, released 15th August 2023](/docs/containers?topic=containers-changelog_125#12512_1555_W)
 
@@ -8635,7 +8635,7 @@ subcollection: containers
 
     * [Master fix pack 1.24.16_1581, released 30 August 2023](/docs/containers?topic=containers-changelog_124#12416_1581_M)
 
-    * [Worker node fix pack 1.24.16_1582, released 28th August 2023](/docs/containers?topic=containers-changelog_124#12416_1582_W)
+    * [Worker node fix pack 1.24.16_1582, released 28 August 2023](/docs/containers?topic=containers-changelog_124#12416_1582_W)
 
     * [Worker node fix pack 1.24.16_1580, released 15th August 2023](/docs/containers?topic=containers-changelog_124#12416_1580_W)
 

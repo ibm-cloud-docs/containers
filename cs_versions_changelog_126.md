@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-01-14"
+lastupdated: "2025-02-28"
 
 
 keywords: kubernetes, containers, change log, 126 change log, 126 updates
@@ -524,7 +524,7 @@ The following table shows the changes that are in the master fix pack 1.26.7_155
 {: caption="Changes since version 1.26.7_1545" caption-side="bottom"}
 
 
-### Worker node fix pack 1.26.7_1551, released 28th August 2023
+### Worker node fix pack 1.26.7_1551, released 28 August 2023
 {: #1267_1551_W}
 
 The following table shows the changes that are in the worker node fix pack 1.26.7_1551. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
