@@ -745,7 +745,7 @@ The following table shows the changes that are in the worker node fix pack 1.27.
 {: caption="Changes since version 1.27.4_1535" caption-side="bottom"}
 
 
-### Worker node fix pack 1.27.4_1535, released 15th August 2023
+### Worker node fix pack 1.27.4_1535, released 15 August 2023
 {: #1274_1535_W}
 
 The following table shows the changes that are in the worker node fix pack 1.27.4_1535. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.

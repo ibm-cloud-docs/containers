@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-01-28"
+lastupdated: "2025-02-28"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -316,7 +316,7 @@ Updates in this version
 ## Version 1.20
 {: #v120}
 
-### Change log for 1.20.8, released 20th August 2024
+### Change log for 1.20.8, released 20 August 2024
 {: #1208}
 
 Review the changes that are included in version 1.20.8 of the managed Istio add-on.
