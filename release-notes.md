@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-25"
+lastupdated: "2025-02-28"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -29,8 +29,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2025
 {: #containers-feb25}
 
+
+
+
+
 ### 24 February 2025
-{: #containers-24february25}
+{: #containers-feb2425}
 {: release-note}
 
 

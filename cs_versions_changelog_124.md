@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-01-14"
+lastupdated: "2025-02-28"
 
 
 keywords: kubernetes, containers
@@ -180,7 +180,7 @@ The following table shows the changes that are in the master fix pack 1.24.16_15
 {: caption="Changes since version 1.24.16_1578" caption-side="bottom"}
 
 
-### Worker node fix pack 1.24.16_1582, released 28th August 2023
+### Worker node fix pack 1.24.16_1582, released 28 August 2023
 {: #12416_1582_W}
 
 The following table shows the changes that are in the worker node fix pack 1.24.16_1582. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -192,7 +192,7 @@ The following table shows the changes that are in the worker node fix pack 1.24.
 {: caption="Changes since version 1.24.16_1580" caption-side="bottom"}
 
 
-### Worker node fix pack 1.24.16_1580, released 15th August 2023
+### Worker node fix pack 1.24.16_1580, released 15 August 2023
 {: #12416_1580_W}
 
 The following table shows the changes that are in the worker node fix pack 1.24.16_1580. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
