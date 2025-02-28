@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-02-11"
+lastupdated: "2025-02-28"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -39,7 +39,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 {: tip}
 
 {{site.data.keyword.mon_full}}
-:   Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/monitoring?topic=monitoring-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#monitoring).
+:   Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/monitoring?topic=monitoring-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-monitoring#monitoring).
 
 Kubernetes dashboard
 :   The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).
@@ -237,7 +237,7 @@ The following metrics are available for {{site.data.keyword.block_storage_is_sho
 - `kubelet_volume_stats_inodes_free`
 - `kubelet_volume_stats_inodes_used`
 
-1. Create a monitoring instance for {{site.data.keyword.block_storage_is_short}} alerts. See instructions in [Forwarding cluster and app metrics to IBM Cloud Monitoring](/docs/containers?topic=containers-health-monitor#monitoring).
+1. Create a monitoring instance for {{site.data.keyword.block_storage_is_short}} alerts. See instructions in [Forwarding cluster and app metrics to IBM Cloud Monitoring](/docs/containers?topic=containers-health-monitor).
 
 2. Install the `syslog` agent.
     1. [In the {{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com){: external}, select **Observability** from the menu.

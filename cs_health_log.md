@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-02-19"
+lastupdated: "2025-02-28"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -34,7 +34,7 @@ By default, logs are generated and written locally for all the following {{site.
 To deploy a logging agent to your cluster, see [Managing the Logging agent for Red Hat OpenShift on IBM Cloud clusters](/docs/cloud-logs?topic=cloud-logs-agent-openshift) or [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster).
 
 Fluentd with an external server
-: To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd](https://www.fluentd.org/){: external} cluster component collects logs from the paths for a specified source. Fluentd can then forward these logs to an external server that accepts a syslog protocol. To get started, see [Understanding cluster and app log forwarding to syslog](#logging).
+: To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd](https://www.fluentd.org/){: external} cluster component collects logs from the paths for a specified source. Fluentd can then forward these logs to an external server that accepts a `syslog` protocol. To get started, see [Understanding log forwarding to an external server](#logging-external).
 
 
 ## Forwarding cluster and app logs to Cloud Logs
@@ -63,7 +63,7 @@ What are the sources that I can configure log forwarding for?
 
 ![Log sources in your cluster.](images/log_sources.svg "Log sources in your cluster"){: caption="Log sources in your cluster" caption-side="bottom"}
 
-1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in syslog and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.
+1. `worker`: Information that is specific to the infrastructure configuration that you have for your worker node. Worker logs are captured in `syslog` and contain operating system events. In `auth.log` you can find information on the authentication requests that are made to the OS.
     
     Paths
     - `/var/log/syslog`
@@ -143,12 +143,12 @@ The following table shows the different options that you have when you configure
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
-3. Set up a server that accepts a syslog protocol in 1 of 2 ways:
+3. Set up a server that accepts a `syslog` protocol in 1 of 2 ways:
     :  Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
-    :  Run syslog from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
+    :  Run `syslog` from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
-    You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the beginning your `etc/rsyslog.conf` file where your `rsyslog` server runs: `$template customFormat,"%msg%\n"$ActionFileDefaultTemplate customFormat`
+    You can see your logs as valid JSON by removing `syslog` prefixes. To do so, add the following code to the beginning your `etc/rsyslog.conf` file where your `rsyslog` server runs: `$template customFormat,"%msg%\n"$ActionFileDefaultTemplate customFormat`
     {: tip}
 
 4. Create a log forwarding configuration. For more information about the parameters, see the [Understanding logging configuration options table](#enable-forwarding).
@@ -168,10 +168,10 @@ The following table shows the different options that you have when you configure
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
-3. Set up a server that accepts a syslog protocol in 1 of 2 ways:
+3. Set up a server that accepts a `syslog` protocol in 1 of 2 ways:
     - Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
-    - Run syslog from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You need to inject the relevant certificate authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
+    - Run `syslog` from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the `syslog` host. You need to inject the relevant certificate authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
 
 4. Save your certificate authority certificate to a file named `ca-cert`. It must be that exact name.
 

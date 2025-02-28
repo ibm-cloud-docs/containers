@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-12-13"
+  years: 2014, 2025
+lastupdated: "2025-02-28"
 
 
 keywords: kubernetes, calico, egress, rules
@@ -499,4 +499,4 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: screen}
 
-6. Optional: Forward the logs from `/var/log/syslog` to [{{site.data.keyword.la_full}}](/docs/containers?topic=containers-health#logging) or to [an external syslog server](/docs/containers?topic=containers-health#configuring).
+6. Optional: Forward the logs from `/var/log/syslog` to [{{site.data.keyword.la_full}}](/docs/containers?topic=containers-health) or to [an external syslog server](/docs/containers?topic=containers-health#configuring).

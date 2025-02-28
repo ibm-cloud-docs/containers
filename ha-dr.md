@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-02-21"
+lastupdated: "2025-02-28"
 
 
 keywords: high availability, disaster recover, HA, DR, responsibilities
@@ -70,7 +70,7 @@ Review the features available to you to provide high availability for your apps 
 | [Replica sets](/docs/containers?topic=containers-app#replicaset) | To increase the availability of your app, you can specify a replica set in your deployment. If one app instance goes down, Kubernetes automatically spins up a new instance of your app to maintain the specified number of app instances. |
 | Multizone load balancing (Classic) | When you create a multizone classic cluster, a multizone load balancer is automatically created in each zone that your cluster resides in to handle all incoming requests to your apps and load balance requests among application load balancers (ALBs) in your cluster's zones. It also enables health checks for the public Ingress IP addresses. |
 | VPC load balancing (VPC)| When you create a VPC cluster, a VPC load balancer is automatically created for you to handle all incoming requests to your apps and load balance requests among application load balancers (ALBs) in your cluster's zones. It also enables health checks for the public Ingress IP addresses.
-| [Cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc&interface=ui) | The cluster autoscaler addon automatically scales the worker pools in your cluster to increase or decrease the number of worker nodes in the worker pool based on the sizing needs of your scheduled workloads. |
+| [Cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc&interface=ui) | The cluster autoscaler add-on automatically scales the worker pools in your cluster to increase or decrease the number of worker nodes in the worker pool based on the sizing needs of your scheduled workloads. |
 {: caption="HA features for IBM Cloud Kubernetes Service" caption-side="bottom"}
 
 ## Disaster recovery features
@@ -78,7 +78,7 @@ Review the features available to you to provide high availability for your apps 
 
 The general strategy for disaster recovery is to configure storage and backups of your data with solutions such as Portworx.
 
-Kubernetes Serivce supports the following disaster recovery features:
+Kubernetes Service supports the following disaster recovery features:
 
 | Feature | Description |
 |---------| ----------- |
@@ -88,7 +88,7 @@ Kubernetes Serivce supports the following disaster recovery features:
 | [Data portability using the `kubectl` CLI](/docs/containers?topic=containers-data-portability&q=velero&tags=containers#export-procedure-kubectl) | Export data by using the `kubectl` CLI. |
 {: caption="DR features for IBM Cloud Kubernetes Service" caption-side="bottom"}
 
-Review [additional options for exporting data](/docs/openshift?topic=openshift-data-portability#data-other), such as rclone or OADP.
+Review [additional options for exporting data](/docs/openshift?topic=openshift-data-portability#data-other), such as `rclone` or OADP.
 {: note}
 
 
