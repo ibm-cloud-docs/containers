@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-25"
+lastupdated: "2025-02-28"
 
 
 keywords: change log, version history, 1.29
@@ -50,6 +50,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 
+
 ### Worker node fix pack 1.29.13_1579, released 24 February 2025
 {: #cl-boms-12913_1579_W}
 
@@ -69,7 +70,6 @@ The following table shows the components included in the worker node fix pack 1.
 
 
 
-
 ### Master fix pack 1.29.13_1578, released 19 February 2025
 {: #12913_1578_M}
 
@@ -85,6 +85,7 @@ The following table shows the changes that are in the master fix pack 1.29.13_15
 {: caption="Changes since version 1.29.13_1574" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.29.13_1577, released 11 February 2025
 {: #cl-boms-12913_1577_W}
 
@@ -97,10 +98,12 @@ The following table shows the components included in the worker node fix pack 1.
 |UBUNTU_20_04|5.4.0-205-generic|Resolves the following CVEs: [CVE-2022-49043](https://nvd.nist.gov/vuln/detail/CVE-2022-49043){: external}, [CVE-2023-21400](https://nvd.nist.gov/vuln/detail/CVE-2023-21400){: external}, [CVE-2024-11187](https://nvd.nist.gov/vuln/detail/CVE-2024-11187){: external}, [CVE-2024-12705](https://nvd.nist.gov/vuln/detail/CVE-2024-12705){: external}, [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/CVE-2024-34459){: external}, [CVE-2024-3596](https://nvd.nist.gov/vuln/detail/CVE-2024-3596){: external}, [CVE-2024-40967](https://nvd.nist.gov/vuln/detail/CVE-2024-40967){: external}, [CVE-2024-53103](https://nvd.nist.gov/vuln/detail/CVE-2024-53103){: external}, [CVE-2024-53141](https://nvd.nist.gov/vuln/detail/CVE-2024-53141){: external}, [CVE-2024-53164](https://nvd.nist.gov/vuln/detail/CVE-2024-53164){: external}, [CVE-2024-56201](https://nvd.nist.gov/vuln/detail/CVE-2024-56201){: external}, [CVE-2024-56201](https://nvd.nist.gov/vuln/detail/CVE-2024-56201){: external}, [CVE-2024-56326](https://nvd.nist.gov/vuln/detail/CVE-2024-56326){: external}, [CVE-2024-56326](https://nvd.nist.gov/vuln/detail/CVE-2024-56326){: external}, and [CVE-2025-0395](https://nvd.nist.gov/vuln/detail/CVE-2025-0395){: external}.|
 |Kubernetes|1.29.13|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.13).|
 |containerd|1.7.25|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.25).|
-|HAProxy|03d1ee01e9241d0e5ec93b9eb8986feb2771a01a| [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external} |
+|HAProxy|03d1ee01e9241d0e5ec93b9eb8986feb2771a01a|Resolves the following CVEs: [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}.|
 |GPU Device Plug-in and Installer|639e505cf0c0f21d6a0a09d157ac7be7f16a77c8|Resolves the following CVEs: [CVE-2024-1488](https://nvd.nist.gov/vuln/detail/CVE-2024-1488){: external}, and [CVE-2024-8508](https://nvd.nist.gov/vuln/detail/CVE-2024-8508){: external}.|
 {: caption="1.29.13_1577 fix pack." caption-side="bottom"}
 {: #cl-boms-12913_1577_W-component-table}
+
+
 
 
 ### Worker node fix pack 1.29.13_1575, released 29 January 2025
@@ -119,6 +122,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|6563a84c30f22dd511f6e2d80227040a12c3af9a|Resolves the following CVEs: [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}.|
 {: caption="1.29.13_1575 fix pack." caption-side="bottom"}
 {: #cl-boms-12913_1575_W-component-table}
+
 
 
 ### Master fix pack 1.29.13_1574, released 22 January 2025
@@ -145,6 +149,7 @@ The following table shows the changes that are in the master fix pack 1.29.13_15
 {: caption="Changes since version 1.29.11_1567" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.29.11_1572, released 13 January 2025
 {: #cl-boms-12911_1572_W}
 
@@ -159,8 +164,9 @@ The following table shows the components included in the worker node fix pack 1.
 |containerd|1.7.23|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.23).|
 |HAProxy|14daa781a66ca5ed5754656ce53c3cca4af580b5|N/A|
 |GPU Device Plug-in and Installer|dc0ff3ad7a22a45390d050aa7d3ab23968870a14|Resolves the following CVEs: [CVE-2024-35195](https://nvd.nist.gov/vuln/detail/CVE-2024-35195){: external}, [CVE-2024-53088](https://nvd.nist.gov/vuln/detail/CVE-2024-53088){: external}, and [CVE-2024-53122](https://nvd.nist.gov/vuln/detail/CVE-2024-53122){: external}.|
-{: caption="Components in version 1.29.11_1572." caption-side="bottom"}
+{: caption="1.29.11_1572 fix pack." caption-side="bottom"}
 {: #cl-boms-12911_1572_W-component-table}
+
 
 
 ### Worker node fix pack 1.29.11_1571, released 30 December 2024
@@ -706,72 +712,4 @@ The following table shows the changes that are in the worker node fix pack 1.29.
 {: caption="Changes since version 1.29.2_1529" caption-side="bottom"}
 
 
-### Worker node fix pack 1.29.2_1529, released 13 March 2024
-{: #1292_1529_W}
-
-The following table shows the changes that are in the worker node fix pack 1.29.2_1529. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
-{: shortdesc}
-
-| Component | Previous | Current | Description |
-| --- | --- | --- | --- |
-| Ubuntu 20.04 packages | 5.4.0-172-generic | 5.4.0-173-generic | Worker node kernel and package updates for [CVE-2022-47695](https://nvd.nist.gov/vuln/detail/CVE-2022-47695){: external}, [CVE-2022-48063](https://nvd.nist.gov/vuln/detail/CVE-2022-48063){: external}, [CVE-2022-48065](https://nvd.nist.gov/vuln/detail/CVE-2022-48065){: external}, [CVE-2022-48624](https://nvd.nist.gov/vuln/detail/CVE-2022-48624){: external}, [CVE-2023-0340](https://nvd.nist.gov/vuln/detail/CVE-2023-0340){: external}, [CVE-2023-22995](https://nvd.nist.gov/vuln/detail/CVE-2023-22995){: external}, [CVE-2023-50782](https://nvd.nist.gov/vuln/detail/CVE-2023-50782){: external}, [CVE-2023-51779](https://nvd.nist.gov/vuln/detail/CVE-2023-51779){: external}, [CVE-2023-51781](https://nvd.nist.gov/vuln/detail/CVE-2023-51781){: external}, [CVE-2023-51782](https://nvd.nist.gov/vuln/detail/CVE-2023-51782){: external}, [CVE-2023-6915](https://nvd.nist.gov/vuln/detail/CVE-2023-6915){: external}, [CVE-2024-0565](https://nvd.nist.gov/vuln/detail/CVE-2024-0565){: external}, [CVE-2024-0646](https://nvd.nist.gov/vuln/detail/CVE-2024-0646){: external}, [CVE-2024-24806](https://nvd.nist.gov/vuln/detail/CVE-2024-24806){: external}, [CVE-2024-25062](https://nvd.nist.gov/vuln/detail/CVE-2024-25062){: external}. |
-| Kubernetes | 1.29.2 | 1.29.2 | N/A |
-| GPU device plug-in and installer | 71cb7f | 5b6934 | N/A |
-| HAProxy | 9b0400 | 512b32 | N/A |
-| Containerd | 1.7.13 | 1.7.14 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.14){: external}. |
-{: caption="Changes since version 1.29.2_1530" caption-side="bottom"}
-
-
-### Master fix pack 1.29.2_1528, released 28 February 2024
-{: #1292_1528_M}
-
-The following table shows the changes that are in the master fix pack 1.29.2_1528. Master patch updates are applied automatically. 
-
-
-
-| Component | Previous | Current | Description |
-| --- | --- | --- | --- |
-| Cluster health image | v1.4.6 | v1.4.7 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.4 | v2.5.7 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.1-7 | v1.29.2-2 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} RBAC Operator | 7185ea1 | bd30030 | New version contains updates and security fixes. |
-| Key Management Service provider | v2.9.0 | v2.9.2 | New version contains updates and security fixes. |
-| Kubernetes | v1.29.1 | v1.29.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.2){: external}. |
-| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 2789 | 2807 | New version contains updates and security fixes. |
-| Tigera Operator | v1.32.4-74-iks | v1.32.4-82-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.4){: external}. |
-{: caption="Changes since version 1.29.1_1524" caption-side="bottom"}
-
-
-### Worker node fix pack 1.29.2_1529, released 26 February 2024
-{: #1292_1529_W_feb}
-
-The following table shows the changes that are in the worker node fix pack 1.29.2_1529. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
-{: shortdesc}
-
-| Component | Previous | Current | Description |
-| --- | --- | --- | --- |
-| Ubuntu 20.04 packages | N/A| 5.4.0-172-generic | Worker node kernel & package updates for [CVE-2023-4408](https://nvd.nist.gov/vuln/detail/CVE-2023-4408){: external}, [CVE-2023-4641](https://nvd.nist.gov/vuln/detail/CVE-2023-4641){: external}, [CVE-2023-50387](https://nvd.nist.gov/vuln/detail/CVE-2023-50387){: external}, [CVE-2023-50868](https://nvd.nist.gov/vuln/detail/CVE-2023-50868){: external}, [CVE-2023-51781](https://nvd.nist.gov/vuln/detail/CVE-2023-51781){: external}, [CVE-2023-5517](https://nvd.nist.gov/vuln/detail/CVE-2023-5517){: external}, [CVE-2023-6516](https://nvd.nist.gov/vuln/detail/CVE-2023-6516){: external}, [CVE-2023-6915](https://nvd.nist.gov/vuln/detail/CVE-2023-6915){: external}, [CVE-2024-0565](https://nvd.nist.gov/vuln/detail/CVE-2024-0565){: external}, [CVE-2024-0646](https://nvd.nist.gov/vuln/detail/CVE-2024-0646){: external}. |
-| GPU device plug-in and installer | d992fea | 71cb7f7 | Security fixes for [CVE-2023-50387](https://nvd.nist.gov/vuln/detail/CVE-2023-50387){: external}, [CVE-2023-50868](https://nvd.nist.gov/vuln/detail/CVE-2023-50868){: external}. |
-| Containerd | N/A | 1.7.13 | N/A |
-{: caption="Changes since version N/A" caption-side="bottom"}
-
-
-### Master fix pack 1.29.1_1524 and worker node fix pack 1.29.1_1525, released 14 February 2024
-{: #1291_1524M_and_1291_1525W}
-
-| Component | Previous | Current | Description |
-| --- | --- | --- | --- |
-| Calico | v3.26.4 | v3.27.0 | See the [Calico release notes](https://docs.tigera.io/calico/latest/release-notes/#v3.27.0). |
-| Tigera Operator | N/A | v1.32.4-74-iks | **New:** See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.4). |
-| etcd | v3.5.11 | v3.5.12 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.12). |
-| IBM Calico extension | 1525 | N/A | Component has been removed. |
-| IBM Cloud Block Storage driver and plug-in | v2.4.14 | v2.5.4 | New version contains updates and security fixes. |
-| IBM Cloud Controller Manager | v1.28.6-3 | v1.29.1-7 | New version contains updates and security fixes. |
-| IBM Cloud File Storage plug-in and monitor | 439 | 441 | New version contains updates and security fixes. |
-| IBM Cloud Metrics Server Config Watcher | 90a78ef | v1.1.0 | New version contains updates and security fixes. |
-| Key Management Service provider | v2.8.6 | v2.9.0 | New version contains updates and security fixes. In addition, both [KMS v1 and v2](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) are now supported. KMS v1 instances are migrated to KMS v2 on upgrade and KMS v2 is now the default. |
-| Konnectivity agent and server | v0.1.5_47_iks | v0.29.0 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.29.0). |
-| Kubernetes | v1.28.6 | v1.29.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.1). |
-| Kubernetes configuration | N/A | N/A | See [Default service settings for Kubernetes components](https://cloud.ibm.com/docs/containers?topic=containers-service-settings). |
-| Kubernetes snapshot controller | v6.2.2 | v6.3.0 | See the [Kubernetes snapshot controller release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v6.3.0). |
-{: caption="Changes since version 1.28" caption-side="bottom"}
+{[cl-archive-1.30.md]}

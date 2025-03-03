@@ -2026,7 +2026,7 @@ Updates in this version
 
 :   Updates the affinity rules in the `k8s.overlay` to `k8s.affinity`. If you are using custom gateways, review the updated configuration for the default gateways to see if you want to use the change in your custom gateways. 
 
-:   Users can now increase the max horizontal pod autoscaler (HPA) pods for istiod. Do not change this value to less than the default of `5`. You can increase this value, but only in situations where you have a large service mesh.
+:   Users can now increase the max horizontal pod autoscaler (HPA) pods for `istiod`. Do not change this value to less than the default of `5`. You can increase this value, but only in situations where you have a large service mesh.
 
 :   Resolves the following CVEs
     - [usn-5089-1](https://ubuntu.com/security/notices/USN-5089-1){: external}

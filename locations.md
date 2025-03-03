@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-25"
+lastupdated: "2025-02-28"
 
 
 keywords: containers, kubernetes, mzr, szr, multizone, multi az
@@ -159,7 +159,7 @@ When you initiate cluster management actions, such as running [`ibmcloud ks` com
 Previously, your {{site.data.keyword.cloud_notm}} resources were organized into regions. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries and geographies. The following table maps the previous {{site.data.keyword.cloud_notm}} regions, {{site.data.keyword.containerlong_notm}} regions, and {{site.data.keyword.containerlong_notm}} zones. Multizone-capable zones are in bold.
 {: shortdesc}
 
-Region-specific endpoints for {{site.data.keyword.containerlong_notm}} are deprecated. Use the [global endpoint](#endpoint) instead. If you must use regional endpoints, [use the `ibmcloud ks api` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api).
+Region-specific endpoints for {{site.data.keyword.containerlong_notm}} are deprecated. Use the global endpoint instead. If you must use regional endpoints, use the `ibmcloud ks api` command. For more information, see [`ibmcloud ks api`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api).
 {: deprecated}
 
 By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.cloud_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.cloud_notm}} as a whole.

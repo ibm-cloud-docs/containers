@@ -32,6 +32,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+### 26 February 2025
+{: #containers-26february25}
+{: release-note}
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+
+
 
 ### 24 February 2025
 {: #containers-feb2425}
@@ -273,7 +281,7 @@ Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 Storage Operator cluster add-on patch update.
-:  For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
+:  For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
 
 
 ### 05 December 2024
@@ -563,7 +571,7 @@ New! The `gx3d.160x1792.8h100` worker node flavor with H100 GPU support is avail
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 Storage Operator cluster add-on patch update.
-:  For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
+:  For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
 
 
 Static route add-on version patch update.
@@ -774,7 +782,7 @@ Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 Storage Operator cluster add-on patch update.
-:  For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
+:  For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
 
 
 
@@ -891,7 +899,7 @@ Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 Storage Operator cluster add-on patch update.
-:   For more information, see the [change log](/docs/containers?topic=containers-versions-ibm-storage-operator).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
 
 Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
 :   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).

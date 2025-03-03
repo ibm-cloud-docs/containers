@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-09"
+lastupdated: "2025-02-28"
 
 
 keywords: containers, observability commands, observability cli, observability plug-in, logging commands, monitoring commands, logging cli, monitoring cli, logging config, monitoring config
@@ -68,7 +68,7 @@ ibmcloud ob logging agent discover --cluster CLUSTER [--instance LOGGING_INSTANC
 Create a logging configuration for your cluster to automatically collect pod logs and send them to {{site.data.keyword.la_full_notm}}.
 {: shortdesc}
 
-This command deploys a {{site.data.keyword.la_short}} agent as a Kubernetes daemon set in your cluster. The agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. For more information, see [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logging). For more information about {{site.data.keyword.la_full_notm}}, see [Securing your data](/docs/log-analysis?topic=log-analysis-mng-data).   
+This command deploys a {{site.data.keyword.la_short}} agent as a Kubernetes daemon set in your cluster. The agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. For more information, see [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health). For more information about {{site.data.keyword.la_full_notm}}, see [Securing your data](/docs/log-analysis?topic=log-analysis-mng-data).   
 
 ```sh
 ibmcloud ob logging config create --cluster CLUSTER --instance LOGGING_INSTANCE [--logdna-ingestion-key INGESTION_KEY] [--private-endpoint]  
@@ -319,7 +319,7 @@ ibmcloud ob monitoring agent discover --cluster CLUSTER [--instance MONITORING_I
 Create a monitoring configuration for your cluster to automatically collect cluster and pod metrics, and send them to {{site.data.keyword.mon_full_notm}}.
 {: shortdesc}
 
-This command deploys a {{site.data.keyword.mon_short}} agent as a Kubernetes daemon set in your cluster. The agent collects cluster and pod metrics, such as the worker node CPU and memory usage, and the amount of incoming and outgoing network traffic for your pods. For more information, see [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#monitoring).
+This command deploys a {{site.data.keyword.mon_short}} agent as a Kubernetes daemon set in your cluster. The agent collects cluster and pod metrics, such as the worker node CPU and memory usage, and the amount of incoming and outgoing network traffic for your pods. For more information, see [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor).
 
 ```sh
 ibmcloud ob monitoring config create --cluster CLUSTER --instance MONITORING_INSTANCE [--sysdig-access-key ACCESS_KEY] [--private-endpoint]
