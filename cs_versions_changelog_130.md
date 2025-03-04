@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-28"
+lastupdated: "2025-03-04"
 
 
 keywords: change log, version history, 1.30
@@ -42,8 +42,6 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: #130_components}
 
 
-
-
 ### Worker node fix pack 1.30.9_1557, released 24 February 2025
 {: #cl-boms-1309_1557_W}
 
@@ -61,8 +59,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: caption="1.30.9_1557 fix pack." caption-side="bottom"}
 {: #cl-boms-1309_1557_W-component-table}
 
-
-
 ### Master fix pack 1.30.9_1556, released 19 February 2025
 {: #1309_1556_M}
 
@@ -77,8 +73,6 @@ The following table shows the changes that are in the master fix pack 1.30.9_155
 | Key Management Service provider | v2.10.9 | v2.10.10 | New version contains updates and security fixes. |
 | Kubernetes NodeLocal DNS cache | 1.23.1 | 1.24.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.24.0){: external}. |
 {: caption="Changes since version 1.30.9_1552" caption-side="bottom"}
-
-
 
 ### Worker node fix pack 1.30.9_1555, released 11 February 2025
 {: #cl-boms-1309_1555_W}
@@ -97,9 +91,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: caption="1.30.9_1555 fix pack." caption-side="bottom"}
 {: #cl-boms-1309_1555_W-component-table}
 
-
-
-
 ### Worker node fix pack 1.30.9_1553, released 29 January 2025
 {: #cl-boms-1309_1553_W}
 
@@ -116,8 +107,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|6563a84c30f22dd511f6e2d80227040a12c3af9a|Resolves the following CVEs: [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}.|
 {: caption="1.30.9_1553 fix pack." caption-side="bottom"}
 {: #cl-boms-1309_1553_W-component-table}
-
-
 
 ### Master fix pack 1.30.9_1552, released 22 January 2025
 {: #1309_1552_M}
@@ -159,7 +148,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|dc0ff3ad7a22a45390d050aa7d3ab23968870a14|Resolves the following CVEs: [CVE-2024-35195](https://nvd.nist.gov/vuln/detail/CVE-2024-35195){: external}, [CVE-2024-53088](https://nvd.nist.gov/vuln/detail/CVE-2024-53088){: external}, and [CVE-2024-53122](https://nvd.nist.gov/vuln/detail/CVE-2024-53122){: external}.|
 {: caption="1.30.7_1550 fix pack." caption-side="bottom"}
 {: #cl-boms-1307_1550_W-component-table}
-
 
 
 ### Worker node fix pack 1.30.7_1549, released 30 December 2024
