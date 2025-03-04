@@ -5162,6 +5162,8 @@ subcollection: containers
 
 * [Adding IBM Cloud services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
 
+* [Manually adding service credentials to your cluster](/docs/containers?topic=containers-service-binding#add_services_manual)
+
 * [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
 
     * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
