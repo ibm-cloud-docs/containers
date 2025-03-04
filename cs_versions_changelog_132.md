@@ -43,8 +43,6 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 
-
-
 ### Worker node fix pack 1.32.1_1531, released 24 February 2025
 {: #cl-boms-1321_1531_W}
 
@@ -62,7 +60,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1321_1531_W-component-table}
 
 
-
 ### Master fix pack 1.32.1_1530, released 19 February 2025
 {: #1321_1530_M}
 
@@ -76,8 +73,6 @@ The following table shows the changes that are in the master fix pack 1.32.1_153
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 447 | 449 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.9 | v2.10.10 | New version contains updates and security fixes. |
 {: caption="Changes since version 1.32.1_1527" caption-side="bottom"}
-
-
 
 
 ### Worker node fix pack 1.32.1_1529, released 11 February 2025
@@ -97,8 +92,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1321_1529_W-component-table}
 
 
-
-
 ### Worker node fix pack 1.32.1_1528, released 29 January 2025
 {: #cl-boms-1321_1528_W}
 
@@ -115,7 +108,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|6563a84c30f22dd511f6e2d80227040a12c3af9a|Resolves the following CVEs: [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}.|
 {: caption="1.32.1_1528 fix pack." caption-side="bottom"}
 {: #cl-boms-1321_1528_W-component-table}
-
 
 
 ### Master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025
