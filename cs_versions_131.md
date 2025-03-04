@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-12-13"
+  years: 2024, 2025
+lastupdated: "2025-03-04"
 
 
 keywords: kubernetes, containers, 131, version 131, 131 update actions
@@ -53,9 +53,6 @@ This information summarizes updates that are likely to have an impact on deploye
 {: shortdesc}
 
 [Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.31. Do not upgrade your cluster to version 1.31 if your apps use Portworx.
-{: important}
-
-[Istio](/docs/containers?topic=containers-istio) does not yet support version 1.31. Do not upgrade your cluster to version 1.31 if your cluster uses Istio.
 {: important}
 
 
