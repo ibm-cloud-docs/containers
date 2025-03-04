@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-28"
+lastupdated: "2025-03-04"
 
 
 keywords: change log, version history, 1.32
@@ -44,6 +44,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 
+
 ### Worker node fix pack 1.32.1_1531, released 24 February 2025
 {: #cl-boms-1321_1531_W}
 
@@ -75,6 +76,7 @@ The following table shows the changes that are in the master fix pack 1.32.1_153
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 447 | 449 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.9 | v2.10.10 | New version contains updates and security fixes. |
 {: caption="Changes since version 1.32.1_1527" caption-side="bottom"}
+
 
 
 

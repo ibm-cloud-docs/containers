@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-28"
+lastupdated: "2025-03-04"
 
 
 keywords: change log, version history, 1.29
@@ -51,6 +51,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 
+
 ### Worker node fix pack 1.29.13_1579, released 24 February 2025
 {: #cl-boms-12913_1579_W}
 
@@ -83,6 +84,7 @@ The following table shows the changes that are in the master fix pack 1.29.13_15
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 447 | 449 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.9.15 | v2.9.16 | New version contains updates and security fixes. |
 {: caption="Changes since version 1.29.13_1574" caption-side="bottom"}
+
 
 
 
@@ -147,6 +149,7 @@ The following table shows the changes that are in the master fix pack 1.29.13_15
 | Portieris admission controller | v0.13.21 | v0.13.23 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.23){: external}. |
 | Tigera Operator | v1.32.10-124-iks | v1.32.13-191-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.13){: external}. |
 {: caption="Changes since version 1.29.11_1567" caption-side="bottom"}
+
 
 
 

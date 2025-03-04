@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-28"
+lastupdated: "2025-03-04"
 
 
 keywords: change log, version history, 1.28
@@ -47,6 +47,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.28
 {: #128_components}
+
 
 
 
@@ -105,6 +106,7 @@ The following table shows the changes that are in the master fix pack 1.28.15_15
 | Key Management Service provider | v2.8.17 | v2.8.18 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.21 | v0.13.23 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.23){: external}. |
 {: caption="Changes since version 1.28.15_1588" caption-side="bottom"}
+
 
 
 

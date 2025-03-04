@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-02-28"
+lastupdated: "2025-03-04"
 
 
 keywords: change log, version history, 1.30
@@ -44,6 +44,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 
 
+
 ### Worker node fix pack 1.30.9_1557, released 24 February 2025
 {: #cl-boms-1309_1557_W}
 
@@ -77,6 +78,7 @@ The following table shows the changes that are in the master fix pack 1.30.9_155
 | Key Management Service provider | v2.10.9 | v2.10.10 | New version contains updates and security fixes. |
 | Kubernetes NodeLocal DNS cache | 1.23.1 | 1.24.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.24.0){: external}. |
 {: caption="Changes since version 1.30.9_1552" caption-side="bottom"}
+
 
 
 
@@ -140,6 +142,7 @@ The following table shows the changes that are in the master fix pack 1.30.9_155
 | Portieris admission controller | v0.13.21 | v0.13.23 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.23){: external}. |
 | Tigera Operator | v1.34.5 | v1.34.5-200-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.34.5){: external}. |
 {: caption="Changes since version 1.30.7_1545" caption-side="bottom"}
+
 
 
 
