@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-09-20"
+  years: 2014, 2025
+lastupdated: "2025-03-04"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -88,13 +88,13 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 1. Install BookInfo in your cluster.
     1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
         ```sh
-        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.23.1 sh -
+        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.23.5 sh -
         ```
         {: pre}
 
     2. Navigate to the Istio package directory.
         ```sh
-        cd istio-1.23.1
+        cd istio-1.23.5
         ```
         {: pre}
 
