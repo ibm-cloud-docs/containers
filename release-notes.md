@@ -34,10 +34,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-
-
 Version 1.32 is now the default version for {{site.data.keyword.containerlong_notm}}.
 :   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
+
+
+
+Migrating from the Observability plug-in to {{site.data.keyword.logs_full_notm}}
+
+[Migrating from the observability plug-in to Cloud Logs](/docs/containers?topic=containers-health).
+
 
 
 

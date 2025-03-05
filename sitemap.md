@@ -244,6 +244,10 @@ subcollection: containers
 
         * Version 1.32 is now the default version for {{site.data.keyword.containerlong_notm}}.
 
+        * Migrating from the Observability plug-in to {{site.data.keyword.logs_full_notm}}
+
+        * [Migrating from the observability plug-in to Cloud Logs](/docs/containers?topic=containers-health).
+
     * [04 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar0425)
 
         * Istio add-on patch updates.
@@ -3627,7 +3631,11 @@ subcollection: containers
 
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
-* [Forwarding cluster and app logs to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
+* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
+
+    * [Reviewing your observability agents](/docs/containers?topic=containers-health#ob-review)
+
+    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health#ob-remove)
 
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
 
@@ -3647,7 +3655,11 @@ subcollection: containers
 
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
 
-* [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
+* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
+
+    * [Reviewing your observability agents](/docs/containers?topic=containers-health-monitor#ob-review-mon)
+
+    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health-monitor#ob-remove-mon)
 
 * [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
 

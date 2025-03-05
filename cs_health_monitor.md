@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-02-28"
+lastupdated: "2025-03-05"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -45,12 +45,103 @@ Kubernetes dashboard
 :   The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
 
-## Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}
+## Migrating logging and monitoring agents to Cloud Logs
 {: #monitoring_forwarding}
 
-The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are deprecated and support ends on 28 March 2025. You can now manage your logging and monitoring integrations from the console or through the Helm charts. For the latest steps, see [Working with the Kubernetes agent](/docs/monitoring?topic=monitoring-agent_Kube) or [Working with the Red Hat OpenShift agent](/docs/monitoring?topic=monitoring-agent_openshift).
+The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are deprecated and support ends on 28 March 2025. There is no direct replacement, but you can now manage your logging and monitoring integrations from the console or through the Helm charts. For the latest steps, see [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster) and [Working with the Kubernetes monitoring agent](/docs/monitoring?topic=monitoring-agent_Kube).
 {: deprecated}
 
+
+What happens after 28 March 2025?
+:   You can no longer use the `ob` plugin, Terraform, or API to install observability agents on a cluster or to modify your existing configuration. Sysdig agents continue to send metrics to the specified IBM Cloud Monitoring instance. LogDNA agents can no longer send logs since IBM Cloud Log Analysis is replaced by IBM Cloud Logs. 
+
+What needs to be done before 28 March 2025?
+:   If you are still using {{site.data.keyword.at_short}}, migrate to [Cloud Logs](/docs/log-analysis?topic=log-analysis-deprecation_migration).
+:   If you use observability (`ob`) plugin to install LogDNA or Sysdig agents on your cluster, uninstall the agents and reinstall using the Container dashboard, using Terraform, or manually
+
+### Reviewing your observability agents
+{: #ob-review-mon}
+
+The observability plugin installs Sysdig and LogDNA agents in the `ibm-observe` namespace.
+
+Before March 28, 2025:
+
+1)  If needed, install the `ob` plugin and list your logging configs.
+
+1. List your logging configs.
+    ```sh
+    ibmcloud ob logging config list --cluster CLUSTER
+    ```
+    {: pre}
+
+1. List your monitoring configs.    
+    ```sh
+    ibmcloud ob monitoring config list --cluster CLUSTER
+    ```
+    {: pre}
+
+If there is no logging or monitoring config, then any observability agents in the cluster were not installed with the IKS observability (ob) plugin.
+{: note}
+
+After March 28, 2025:
+
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
+
+2) Review the configmaps in the `ibm-observe` namespace.
+    ```sh
+    kubectl get cm -n ibm-observe
+    ```
+    {: pre}
+
+    ```sh
+    Example output
+
+    NAME                                   DATA   AGE
+
+    e405f1fc-feba-4350-9337-e7e249af871c   6      25m
+
+    f59851a6-ede6-4719-afa0-eee7ce65eeb5   6      20m
+    ```
+    {: pre}
+
+1. Observability agents installed by the observability plug-in use a configmap with the GUID of the IBM Cloud Monitoring instance or the IBM Cloud Log Analysis instance that logs or metrics are being sent to. If your cluster has agents in a namespace other than `ibm-observe` or the configmaps in `ibm-observe` are not named with the instance GUIDs, then these agents were not installed with the IKS observability (ob) plugin.
+
+### Removing the observability plug-in agents
+{: #ob-remove-mon}
+
+* Before 28 March 2025, you can still use the `ob` plug-in to delete your observability configs.
+    ```sh
+    ibmcloud ob logging config delete --cluster <cluster> --instance <logging instance guid>
+    ```
+    {: pre}
+    
+    ```sh
+    ibmcloud ob monitoring config delete --cluster <cluster> --instance <monitoring instance guid>
+    ```
+    {: pre}
+
+* After March 28, 2025, when support for the `ob plugin` ends, you must delete each component individually.
+
+    1. Clean up the daemonsets and configmaps.
+        ```sh
+        kubectl delete daemonset logdna-agent -n ibm-observe
+        kubectl delete daemonset sysdig-agent -n ibm-observe
+        kubectl delete configmap <logdna-configmap> -n ibm-observe
+        kubectl delete configmap <sysdig-configmap> -n ibm-observe
+        ```
+        {: pre}
+
+    1. Optional: Delete the namespace. After no other resources are running in the namespace.
+        ```sh
+        kubectl delete namespace ibm-observe
+        ```
+        {: pre}
+
+After removing the plug-in has been removed, reinstall Logging and Monitoring agents in your cluster using the Cluster dashboard, Terraform, or manually. 
+
+For more information, see the following links:
+- [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster).
+- [Working with the Kubernetes monitoring agent](/docs/monitoring?topic=monitoring-agent_Kube).
 
 
 
