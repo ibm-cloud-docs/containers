@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-04"
+lastupdated: "2025-03-05"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -51,7 +51,7 @@ Istio add-on patch updates.
 {: release-note}
 
 Ingress ALB cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 
 
