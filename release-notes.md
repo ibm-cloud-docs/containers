@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-04"
+lastupdated: "2025-03-05"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,23 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2025
 {: #containers-mar25}
 
+### 05 March 2025
+{: #containers-05march25}
+{: release-note}
+
+
+
+Version 1.32 is now the default version for {{site.data.keyword.containerlong_notm}}.
+:   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
+
+
+
+Migrating from the Observability plug-in to {{site.data.keyword.logs_full_notm}}
+:   Support for the Observability plug-in ends on 28 March 2025. Review and complete the migration steps before support ends. For more information, see [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding).
+
+
+
+
 
 
 ### 04 March 2025
@@ -51,7 +68,7 @@ Istio add-on patch updates.
 {: release-note}
 
 Ingress ALB cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-ingress-alb-change-log).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 
 

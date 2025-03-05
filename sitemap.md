@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-04"
+lastupdated: "2025-03-05"
 
 
 keywords: containers
@@ -239,6 +239,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar25)
+
+    * [05 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-05march25)
+
+        * Version 1.32 is now the default version for {{site.data.keyword.containerlong_notm}}.
+
+        * Migrating from the Observability plug-in to {{site.data.keyword.logs_full_notm}}
 
     * [04 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar0425)
 
@@ -3623,7 +3629,11 @@ subcollection: containers
 
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
-* [Forwarding cluster and app logs to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
+* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
+
+    * [Reviewing your observability agents](/docs/containers?topic=containers-health#ob-review)
+
+    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health#ob-remove)
 
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
 
@@ -3643,7 +3653,11 @@ subcollection: containers
 
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
 
-* [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
+* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
+
+    * [Reviewing your observability agents](/docs/containers?topic=containers-health-monitor#ob-review-mon)
+
+    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health-monitor#ob-remove-mon)
 
 * [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
 
@@ -6426,6 +6440,14 @@ subcollection: containers
 
     * [Worker node fix pack 1.29.3_1532, released 25 March 2024](/docs/containers?topic=containers-changelog_129#1293_1532_W)
 
+    * [Worker node fix pack 1.29.2_1529, released 13 March 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W)
+
+    * [Master fix pack 1.29.2_1528, released 28 February 2024](/docs/containers?topic=containers-changelog_129#1292_1528_M)
+
+    * [Worker node fix pack 1.29.2_1529, released 26 February 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W_feb)
+
+    * [Master fix pack 1.29.1_1524 and worker node fix pack 1.29.1_1525, released 14 February 2024](/docs/containers?topic=containers-changelog_129#1291_1524M_and_1291_1525W)
+
 [Kubernetes version 1.29 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-129)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-1-129)
@@ -6650,11 +6672,11 @@ subcollection: containers
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-remediations-128)
 
 
-## Addons for {{site.data.keyword.containerlong_notm}}
-{: #sitemap_addons_for_}
+## Add-ons for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_add-ons_for_}
 
 
-[Addons for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-addons#addons)
+[Add-ons for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-addons#addons)
 
 
 ## Add-on version history
