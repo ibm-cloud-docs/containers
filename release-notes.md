@@ -28,6 +28,19 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2025
 {: #containers-mar25}
 
+### 05 March 2025
+{: #containers-05march25}
+{: release-note}
+
+
+
+
+
+Version 1.32 is now the default version for {{site.data.keyword.containerlong_notm}}.
+:   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
+
+
+
 
 
 ### 04 March 2025

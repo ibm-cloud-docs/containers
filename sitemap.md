@@ -240,6 +240,10 @@ subcollection: containers
 
 * [March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar25)
 
+    * [05 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-05march25)
+
+        * Version 1.32 is now the default version for {{site.data.keyword.containerlong_notm}}.
+
     * [04 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar0425)
 
         * Istio add-on patch updates.
