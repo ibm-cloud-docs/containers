@@ -246,8 +246,6 @@ subcollection: containers
 
         * Migrating from the Observability plug-in to {{site.data.keyword.logs_full_notm}}
 
-        * [Migrating from the observability plug-in to Cloud Logs](/docs/containers?topic=containers-health).
-
     * [04 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar0425)
 
         * Istio add-on patch updates.
