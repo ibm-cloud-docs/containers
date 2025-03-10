@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2023, 2024
-lastupdated: "2024-10-31"
+  years: 2023, 2025
+lastupdated: "2025-03-10"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, allowlist, operating system, rhel, ubuntu
@@ -94,7 +94,7 @@ kubectl version  --short | grep -i server
 
 Example output
 ```sh
-Server Version: v1.31+IKS
+Server Version: v1.32+IKS
 ```
 {: screen}
 
