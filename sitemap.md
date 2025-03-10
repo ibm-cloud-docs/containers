@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-05"
+lastupdated: "2025-03-10"
 
 
 keywords: containers
@@ -7564,6 +7564,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.36, released 10 March 2025](/docs/containers?topic=containers-cos_plugin_changelog#02236_object_plugin)
 
 * [Change log for version 2.2.35, released 27 January 2025](/docs/containers?topic=containers-cos_plugin_changelog#02235_object_plugin)
 
