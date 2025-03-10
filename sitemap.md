@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-05"
+lastupdated: "2025-03-10"
 
 
 keywords: containers
@@ -239,6 +239,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar25)
+
+    * [10 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-10mar25)
+
+        * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
 
     * [05 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-05march25)
 
@@ -7061,6 +7067,8 @@ subcollection: containers
 
 * [Version 1.2.3](/docs/containers?topic=containers-ca_changelog#0123_ca_addon)
 
+    * [Change log for patch update 1.2.3_540, released 10 March 2025](/docs/containers?topic=containers-ca_changelog#123_540_ca)
+
     * [Change log for patch update 1.2.3_512, released 31 October 2024](/docs/containers?topic=containers-ca_changelog#123_512_ca)
 
 * [Version 1.2.2](/docs/containers?topic=containers-ca_changelog#0122_ca_addon)
@@ -7564,6 +7572,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.36, released 10 March 2025](/docs/containers?topic=containers-cos_plugin_changelog#02236_object_plugin)
 
 * [Change log for version 2.2.35, released 27 January 2025](/docs/containers?topic=containers-cos_plugin_changelog#02235_object_plugin)
 
