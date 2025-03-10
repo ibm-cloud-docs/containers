@@ -240,6 +240,12 @@ subcollection: containers
 
 * [March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar25)
 
+    * [10 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-10mar25)
+
+        * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [05 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-05march25)
 
         * Version 1.32 is now the default version for {{site.data.keyword.containerlong_notm}}.
@@ -7060,6 +7066,8 @@ subcollection: containers
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.2.3](/docs/containers?topic=containers-ca_changelog#0123_ca_addon)
+
+    * [Change log for patch update 1.2.3_540, released 10 March 2025](/docs/containers?topic=containers-ca_changelog#123_540_ca)
 
     * [Change log for patch update 1.2.3_512, released 31 October 2024](/docs/containers?topic=containers-ca_changelog#123_512_ca)
 
