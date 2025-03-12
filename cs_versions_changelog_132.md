@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-03-05"
+lastupdated: "2025-03-12"
 
 
 keywords: change log, version history, 1.32
@@ -40,6 +40,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.32
 {: #132_components}
+
+
+### Worker node fix pack 1.32.1_1532, released 11 March 2025
+{: #cl-boms-1321_1532_W}
+
+The following table shows the components included in the worker node fix pack 1.32.1_1532. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-52-generic|N/A|
+|Kubernetes|1.32.1|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.1).|
+|containerd|1.7.26|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.26).|
+|HAProxy|1d72cc8c7d02da6ba0340191fa8d9a86550e5090|N/A|
+|GPU Device Plug-in and Installer|57c31795f069cb17cd235792f3ac21ac0e086360|Resolves the following CVEs: [CVE-2024-1488](https://nvd.nist.gov/vuln/detail/CVE-2024-1488){: external}, [CVE-2020-11023](https://nvd.nist.gov/vuln/detail/CVE-2020-11023){: external}, [CVE-2024-8508](https://nvd.nist.gov/vuln/detail/CVE-2024-8508){: external}, and [CVE-2022-49043](https://nvd.nist.gov/vuln/detail/CVE-2022-49043){: external}.|
+{: caption="1.32.1_1532 fix pack." caption-side="bottom"}
+{: #cl-boms-1321_1532_W-component-table}
+
 
 
 ### Worker node fix pack 1.32.1_1531, released 24 February 2025
