@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-03-05"
+lastupdated: "2025-03-13"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -129,7 +129,7 @@ After March 28, 2025:
         ```
         {: pre}
 
-After removing the plug-in has been removed, reinstall Logging and Monitoring agents in your clyster using the Cluster dashboard, Terraform, or manually. 
+After removing the plug-in has been removed, reinstall Logging and Monitoring agents in your cluster using the Cluster dashboard, Terraform, or manually. 
 
 For more information, see the following links:
 - [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster).
