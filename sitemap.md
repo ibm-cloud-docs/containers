@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-12"
+lastupdated: "2025-03-13"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar25)
+
+    * [13 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-13march25)
+
+        * CLI version `1.0.687` is available.
 
     * [11 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-11march25)
 
@@ -5805,6 +5809,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.687](/docs/containers?topic=containers-cs_cli_changelog#cli-010687)
+
 * [Version v1.0.679](/docs/containers?topic=containers-cs_cli_changelog#cli-010679)
 
 * [Version v1.0.677](/docs/containers?topic=containers-cs_cli_changelog#cli-010677)
@@ -9483,7 +9489,7 @@ subcollection: containers
 
 * [Updating](/docs/containers?topic=containers-cluster-states-reference#cluster-state-updating)
 
-* [Update cancelled](/docs/containers?topic=containers-cluster-states-reference#cluster-state-cancelled)
+* [Update canceled](/docs/containers?topic=containers-cluster-states-reference#cluster-state-cancelled)
 
 * [Unavailable](/docs/containers?topic=containers-cluster-states-reference#cluster-state-unavailable)
 

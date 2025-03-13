@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-10-22"
+  years: 2014, 2025
+lastupdated: "2025-03-13"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -590,7 +590,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
     
     * To use an existing instance, ensure that the service instance name contains only **lowercase** alphanumeric characters and its length does not exceed 25 characters. To change the name, select **Rename service** from the more options menu on your service instance details page.
     * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
-        1. Replace the **Service name** with your own unique name for the service instance. The service instance name must contain only lowercase alphanumeric characters and can not be longer than 25 characters.
+        1. Replace the **Service name** with your own unique name for the service instance. The service instance name must contain only lowercase alphanumeric characters and cannot be longer than 25 characters.
         2. Choose the same region that your cluster is deployed in.
         3. Click **Create**.
 
@@ -736,13 +736,13 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
           auth_logging_format:
           # Format for authentication logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview#logging-configuration
           cookie_csrf_expire: "15m"
-          # Expiration timeframe for CSRF cookie. Default is "15m".
+          # Expiration time frame for CSRF cookie. Default is "15m".
           cookie_csrf_per_request: <true|false>
           # Enable multiple CSRF cookies per request, making it possible to have parallel requests. Default is "false".
           cookie_domains:
           # A list of optional domains to force cookies to. The longest domain that matches the request’s host is used. If there is no match for the request’s host, the shortest domain is used. Example: sub.domain.com,example.com
           cookie_expire: "168h0m0s"
-          # Expiration timeframe for cookies. Default: "168h0m0s".
+          # Expiration time frame for cookies. Default: "168h0m0s".
           cookie_samesite: ""
           # SameSite attribute for cookies. Supported values: "lax", "strict", "none", or "".
           email_domains: ""

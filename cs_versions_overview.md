@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-03-11"
+lastupdated: "2025-03-13"
 
 
 keywords: kubernetes, versions, update, upgrade
@@ -84,7 +84,7 @@ Ubuntu 20 is deprecated and support ends on 31 May 2025. Migrate your worker nod
 Your Kubernetes cluster has three types of updates: major, minor, and patch. As updates become available, you are notified when you view information about the cluster master or worker nodes, such as with the `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get` commands.
 {: shortdesc}
 
-IBM provides bi-weekly worker node fix packs. IBM's goal is to remediate detected, legitimate vulnerabilities within a timeframe appropriate for the risks they represent. To ensure the quality and stability of the release, fix packs might be delayed.
+IBM provides bi-weekly worker node fix packs. IBM's goal is to remediate detected, legitimate vulnerabilities within a time frame appropriate for the risks they represent. To ensure the quality and stability of the release, fix packs might be delayed.
 
 Fix packs are applied to the latest upstream stable kernel version that is provided by Canonical.
 

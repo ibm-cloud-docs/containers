@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2022, 2024
-lastupdated: "2024-05-29"
+  years: 2022, 2025
+lastupdated: "2025-03-13"
 
 
 keywords: kubernetes, containers
@@ -19,7 +19,7 @@ subcollection: containers
 # {{site.data.keyword.containerlong_notm}} CLI Map
 {: #icks_map}
 
-This page lists all `ibmcloud ks` commands as they are structured in the CLI. For more details on a specific command, click on the command or see the [{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli).
+This page lists all `ibmcloud ks` commands as they are structured in the CLI. For more details on a specific command, click the command or see the [{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli).
 
 
 
