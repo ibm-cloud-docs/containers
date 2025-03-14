@@ -244,6 +244,8 @@ subcollection: containers
 
         * CLI version `1.0.687` is available.
 
+        * ALB OAuth Proxy cluster add-on patch updates.
+
     * [11 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-11march25)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
@@ -7742,6 +7744,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_2557, released 13 March 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2557)
 
     * [2.0.0_2473, released 15 January 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2473)
 

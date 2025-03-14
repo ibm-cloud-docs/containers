@@ -39,6 +39,8 @@ CLI version `1.0.687` is available.
 
 
 
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 
 ### 11 March 2025
 {: #containers-11march25}
