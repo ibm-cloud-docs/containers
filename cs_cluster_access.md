@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-01-13"
+lastupdated: "2025-03-18"
 
 
 keywords: kubernetes, clusters
@@ -182,14 +182,11 @@ The Kubernetes master is accessible through the private cloud service endpoint i
 
 3. To create the private NLB, you must be connected to the cluster master. Because you can't yet connect through the private cloud service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public cloud service endpoint or Kubernetes dashboard.
     * If you enabled the private cloud service endpoint only, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private cloud service endpoint of the master.
-        1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
-        2. From the menu bar, select the account that you want to use.
-        3. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Containers** > **Clusters**.
-        4. On the **Clusters** page, click the cluster that you want to access.
-        5. From the cluster detail page, click the **Kubernetes Dashboard**.
-        6. Click **+ Create**.
-        7. Select **Create from file**, upload the `kube-api-via-nlb.yaml` file, and click **Upload**.
-        8. In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, note the `10.x.x.x` address. This IP address exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+        1. On the **Clusters** [page](https://cloud.ibm.com/containers/cluster-management/clusters){: external}, click the cluster that you want to access.
+        1. From the cluster detail page, click the **Kubernetes Dashboard**.
+        1. Click **+ Create**.
+        1. Select **Create from file**, upload the `kube-api-via-nlb.yaml` file, and click **Upload**.
+        1. In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, note the `10.x.x.x` address. This IP address exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
 
     * If you also enabled the public cloud service endpoint, you already have access to the master.
         1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.

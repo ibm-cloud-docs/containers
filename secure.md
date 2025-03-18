@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-21"
+lastupdated: "2025-03-18"
 
 
 keywords: containers
@@ -380,11 +380,11 @@ What information is logged?
     - **Containers**: Logs that are written to `STDOUT` or `STDERR`.
     - **Apps**: Logs that are written to a specific path inside your app.
     - **Workers**: Logs from the Ubuntu operating system that are sent to `/var/log/syslog` and `/var/log/auth.log`.
-    - **Kubernetes API server**: Every cluster-related action that is sent to the Kubernetes API server is logged for auditing reasons, including the time, the user, and the affected resource. For more information, see [Kubernetes audit logs](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/){: external}. You can access these logs by using {{site.data.keyword.at_full_notm}}. For more information, see the [getting started tutorial](/docs/activity-tracker?topic=activity-tracker-getting-started). 
+    - **Kubernetes API server**: Every cluster-related action that is sent to the Kubernetes API server is logged for auditing reasons, including the time, the user, and the affected resource. For more information, see [Kubernetes audit logs](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/){: external}. You can access these logs by using {{site.data.keyword.logs_full_notm}}. For more information, see the [getting started tutorial](/docs/activity-tracker?topic=activity-tracker-getting-started). 
     - **Ingress**: Logs for an Ingress application load balancer (ALB) that manages inbound network traffic.
     - **Kubernetes system components**: Logs from the `kubelet`, the `kube-proxy`, and other components that run in the `kube-system` namespace.
 
-To access cluster component logs, you can choose to forward your logs to {{site.data.keyword.la_full_notm}}, an external server, or a third-party logging solution. For more information, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview).
+To access cluster component logs, you can choose to forward your logs to {{site.data.keyword.logs_full_notm}}}}, an external server, or a third-party logging solution. For more information, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview).
 
 How can I monitor the health and performance of my cluster?
 :   You can verify the health, capacity, and performance of your apps, services, and worker nodes by monitoring your cluster components and compute resources from the {{site.data.keyword.containerlong_notm}} console or CLI, such as the CPU and memory usage. To view more in-depth metrics for a standard cluster or your apps, you can configure a monitoring agent in your cluster to send metrics to {{site.data.keyword.mon_full_notm}}. You can also install third-party monitoring solutions, such as Prometheus, or use the metrics that are provided in the Kubernetes dashboard. For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics).

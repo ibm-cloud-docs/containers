@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-13"
+lastupdated: "2025-03-18"
 
 
 keywords: containers, reservations, worker node
@@ -154,7 +154,7 @@ Before you begin:
 * [Create](/docs/containers?topic=containers-cluster-create-classic) or have an existing a classic cluster in the **same metro** as the reservation that you want to use. If you want to use worker nodes only from a reservation, you can create a cluster with zero worker nodes, or remove existing, on demand worker pools from a cluster.
 
 To use the reservation:
-1. Log in to the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}.
+1. Log in to the [console](https://cloud.ibm.com/containers/cluster-management/clusters){: external}.
 2. Select the cluster that you want to use.
 3. From the cluster menu, select **Worker pools**.
 4. Click **Add+**.

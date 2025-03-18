@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-10-09"
+  years: 2024, 2025
+lastupdated: "2025-03-18"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, rbac, policy, role-based access control
@@ -280,7 +280,7 @@ Verify your custom RBAC or synchronized IAM service access to RBAC roles in your
 ### Checking RBAC roles from the UI
 {: #checking-rbac-ui}
 
-1. Log in to the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}.
+1. Log in to the [console](https://cloud.ibm.com/containers/cluster-management/clusters){: external}.
 1. Click the cluster with the RBAC roles that you want to check.
 1. Click the **Kubernetes Dashboard**. 
 

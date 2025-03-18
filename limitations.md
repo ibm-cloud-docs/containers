@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-13"
+lastupdated: "2025-03-18"
 
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
@@ -52,7 +52,7 @@ To view quota limits on cluster-related resources in your {{site.data.keyword.cl
 | Worker pool size | You must always have a minimum of 1 node in your cluster. Because of the worker node quota, you are limited in the number of worker pools per cluster and number of worker nodes per worker pool. For example, with the default worker node quota of 500 per region, you might have up to 500 worker pools of 1 worker node each in a region with only 1 cluster. Or, you might have 1 worker pool with up to 500 worker nodes in a region with only 1 cluster. |
 | Red Hat Enterprise Linux CoreOS worker nodes | The maximum amount of zones added to a cluster is 15. For example, 4 RHCOS worker pools with 3 zones each will account for 12/15 of the quota for that cluster. |
 | Cluster naming | To ensure that the Ingress subdomain and certificate are correctly registered, the first 24 characters of the clusters' names must be different. If you create and delete clusters with the same name or names that have the same first 24 characters 5 times or more within 7 days, such as for automation or testing purposes, you might reach the [Let's Encrypt Duplicate Certificate rate limit](/docs/containers?topic=containers-cs_rate_limit). |
-| Resource groups | A cluster can be created in only one resource group that you can't change afterward. If you create a cluster in the wrong resource group, you must delete the cluster and re-create it in the correct resource group. Furthermore, if you need to use the `ibmcloud ks cluster service bind` command to [integrate with an {{site.data.keyword.cloud_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that don't use resource groups like {{site.data.keyword.registrylong_notm}} or that don't need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group. |
+| Resource groups | A cluster can be created in only one resource group that you can't change afterward. If you create a cluster in the wrong resource group, you must delete the cluster and re-create it in the correct resource group. Furthermore, if you need to use the `ibmcloud ks cluster service bind` command to [integrate with an {{site.data.keyword.cloud_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that don't use resource groups like {{site.data.keyword.registrylong_notm}} or that don't need service binding like {{site.data.keyword.logs_full_notm}} work even if the cluster is in a different resource group. |
 {: caption="{{site.data.keyword.containerlong_notm}} limitations"}
 
 
@@ -103,6 +103,16 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Volume instances | You can have a total of 250 IBM Cloud infrastructure file and block storage volumes per account. If you mount more than this amount, you might see an `out of capacity` message when you provision persistent volumes. For more FAQ, see the [file](/docs/FileStorage?topic=FileStorage-file-storage-faqs#provision) and [block](/docs/BlockStorage?topic=BlockStorage-block-storage-faqs#authlimit) storage docs. If you want to mount more volumes, [contact IBM Support](/docs/account?topic=account-using-avatar). In your support ticket, include your account ID and the new file or block storage volume quota that you want.  |
 | Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage_portworx_plan#portworx_limitations). |
 {: caption="Classic cluster storage limitations"}
+
+## User access
+{:#classic_access_limit}
+
+Keep in mind that the [service](#tech_limits) limitations also apply.
+
+| Category | Description |
+| -------- | ----------- |
+| IP address access | Restricting access for specific users by enabling IP address access is not supported by {{site.data.keyword.containerlong_notm}}. If you want to restrict user access or restrict which services and VPCs a user can access, consider [context-based restriction](/docs/containers?topic=containers-cbr-tutorial).  |
+{: caption="Classic cluster user access limitations"}
 
 
 
@@ -159,3 +169,13 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage_portworx_plan#portworx_limitations). |
 | {{site.data.keyword.block_storage_is_short}} | The default storage class in VPC clusters cannot be changed. However, you can [create your own storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class). |
 {: caption="VPC cluster storage limitations"}
+
+## User access
+{:#vpc_access_limit}
+
+Keep in mind that the [service](#tech_limits) limitations also apply.
+
+| Category | Description |
+| -------- | ----------- |
+| IP address access | Restricting access for specific users by enabling IP address access is not supported by {{site.data.keyword.containerlong_notm}}. If you want to restrict user access or restrict which services and VPCs a user can access, consider [context-based restriction](/docs/containers?topic=containers-cbr-tutorial).  |
+{: caption="VPC cluster user access limitations"}

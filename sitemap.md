@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-17"
+lastupdated: "2025-03-18"
 
 
 keywords: containers
@@ -3583,7 +3583,7 @@ subcollection: containers
 
 * [Locations where logs are generated](/docs/containers?topic=containers-logging#log-locations)
 
-* [Locations where logs are sent to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-logging#la-legacy-locations)
+* [Locations where logs are sent to {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-logging#la-legacy-locations)
 
 * [Locations where logs are sent by {{site.data.keyword.logs_routing_full_notm}}](/docs/containers?topic=containers-logging#lr-locations)
 
@@ -4053,7 +4053,7 @@ subcollection: containers
 
 * [Enabling access logs for individual containers](/docs/containers?topic=containers-istio-health#enable_logs_individual)
 
-* [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_la)
+* [Setting up logging with {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_la)
 
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_mon)
 
@@ -9042,7 +9042,7 @@ subcollection: containers
 {: #sitemap_activity_tracker_events}
 
 
-[{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events_ref#at_events_ref)
+[{{site.data.keyword.logs_full_notm}} events](/docs/containers?topic=containers-at_events_ref#at_events_ref)
 
 * [Cluster events](/docs/containers?topic=containers-at_events_ref#clusters-events)
 
@@ -9078,6 +9078,8 @@ subcollection: containers
 
 * [Cluster](/docs/containers?topic=containers-api-at-iam#ks-cluster)
 
+* [Dedicated hosts](/docs/containers?topic=containers-api-at-iam#dedicated-hosts-api)
+
 * [Image security](/docs/containers?topic=containers-api-at-iam#image-security)
 
 * [Ingress](/docs/containers?topic=containers-api-at-iam#ks-ingress)
@@ -9092,7 +9094,7 @@ subcollection: containers
 
 * [NLB DNS](/docs/containers?topic=containers-api-at-iam#ks-nlb-dns)
 
-* [Observability: {{site.data.keyword.la_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-logging)
+* [Observability](/docs/containers?topic=containers-api-at-iam#ks-observability-logging)
 
 * [Observability: {{site.data.keyword.mon_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-monitoring)
 
@@ -10272,6 +10274,8 @@ subcollection: containers
 
     * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
 
+* [User access](/docs/containers?topic=containers-limitations#user-access)
+
 * [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 
     * [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
@@ -10279,6 +10283,8 @@ subcollection: containers
     * [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
 
     * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
+
+* [User access](/docs/containers?topic=containers-limitations#user-access)
 
 
 ## Requesting access to allowlisted features

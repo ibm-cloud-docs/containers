@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-02-21"
+lastupdated: "2025-03-18"
 
 
 keywords: kubernetes, docker, containers
@@ -129,7 +129,7 @@ Storage provider
 {: #ibm-system-ns-resources}
 
 Logging and metrics
-:   You can use the {{site.data.keyword.la_full}} and {{site.data.keyword.mon_full}} services to expand your collection and retention capabilities when working with logs and metrics.
+:   You can use the {{site.data.keyword.logs_full_notm}} and {{site.data.keyword.mon_full}} services to expand your collection and retention capabilities when working with logs and metrics.
 Load balancer
 
 :   A load balancer is a Kubernetes service that can be used to balance network traffic workloads in your cluster by forwarding public or private requests to an app.
