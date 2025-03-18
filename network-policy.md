@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-28"
+lastupdated: "2025-03-18"
 
 
 keywords: kubernetes, calico, egress, rules
@@ -299,7 +299,7 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: pre}
 
-1. Optional: To allow your worker nodes to access other {{site.data.keyword.cloud_notm}} services over the public network, apply the `allow-public-services.yaml` policy. This policy allows access to the IP addresses for {{site.data.keyword.registrylong_notm}}, and if the services are available in the region, {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}}. To access other {{site.data.keyword.cloud_notm}} services, you must manually add the subnets for those services to this policy.
+1. Optional: To allow your worker nodes to access other {{site.data.keyword.cloud_notm}} services over the public network, apply the `allow-public-services.yaml` policy. This policy allows access to the IP addresses for {{site.data.keyword.registrylong_notm}}, and if the services are available in the region, {{site.data.keyword.logs_full_notm}} and {{site.data.keyword.mon_full_notm}}. To access other {{site.data.keyword.cloud_notm}} services, you must manually add the subnets for those services to this policy.
 
     ```sh
     calicoctl apply -f allow-public-services.yaml
@@ -499,4 +499,4 @@ Before you begin, [install and configure the Calico CLI, and set the context for
     ```
     {: screen}
 
-6. Optional: Forward the logs from `/var/log/syslog` to [{{site.data.keyword.la_full}}](/docs/containers?topic=containers-health) or to [an external syslog server](/docs/containers?topic=containers-health#configuring).
+6. Optional: Forward the logs from `/var/log/syslog` to [{{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-health) or to [an external syslog server](/docs/containers?topic=containers-health#configuring).

@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-08-06"
+  years: 2014, 2025
+lastupdated: "2025-03-18"
 
 
 keywords: kubernetes, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
@@ -53,15 +53,15 @@ spec:
 
 Modify the previous example definition to contain your Pod's namespace and label. After the telemetry definition is applied, you can see Envoy access logs through the `istio-proxy` container.
 
-## Setting up logging with {{site.data.keyword.la_full_notm}}
+## Setting up logging with {{site.data.keyword.logs_full_notm}}
 {: #istio_health_la}
 
-Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying {{site.data.keyword.la_short}} agents to your worker nodes to forward logs to {{site.data.keyword.la_full}}.
+Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying logging agents to your worker nodes to forward logs to {{site.data.keyword.logs_full_notm}}.
 {: shortdesc}
 
-To use [{{site.data.keyword.la_full_notm}}](/docs/log-analysis?topic=log-analysis-getting-started), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
+To use {{site.data.keyword.logs_full_notm}}, you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.logs_full_notm}} service.
 
-To get started, set up logging for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/log-analysis?topic=log-analysis-tutorial-use-logdna).
+To get started, set up logging for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.logs_full_notm}}](/docs/cloud-logs?topic=cloud-logs-agent-helm-kube-deploy).
 
 
 ## Setting up monitoring with {{site.data.keyword.mon_full_notm}}
@@ -141,9 +141,3 @@ Before you begin
     istioctl dashboard envoy <pod-name>.<namespace>
     ```
     {: pre}
-
-
-
-
-
-

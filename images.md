@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-04-29"
+  years: 2014, 2025
+lastupdated: "2025-03-18"
 
 
 keywords: kubernetes, registry, pull secret, secrets, containers
@@ -216,8 +216,8 @@ See the following commands.
 #### Enabling or disabling image security enforcement from the console
 {: #portieris-enable-ui}
 
-1. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, select your cluster.
-2. From the **Overview** tab, in the **Summary** pane, find the **Image security enforcement** field and click **Enable** or **Disable**.
+1. From the [console](https://cloud.ibm.com/containers/cluster-management/clusters){: external}, select your cluster.
+2. Find the **Image security enforcement** field and click **Enable** or **Disable**.
 
 ### Default image policies
 {: #portieris-default-policies}
@@ -247,7 +247,3 @@ Before you begin
     kubectl get ImagePolicy --all-namespaces
     ```
     {: pre}
-
-
-
-

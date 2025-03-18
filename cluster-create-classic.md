@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-10"
+lastupdated: "2025-03-18"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, clusters, worker nodes, worker pools, classic, create
@@ -33,7 +33,7 @@ Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_no
 {: #clusters_ui}
 {: ui}
 
-To begin creating your cluster, navigate to the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external} and click **Create cluster**.
+To begin creating your cluster, navigate to the [console](https://cloud.ibm.com/containers/cluster-management/clusters){: external} and click **Create cluster**.
 {: shortdesc}
 
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-13"
+lastupdated: "2025-03-18"
 
 
 keywords: kubernetes, containers
@@ -82,7 +82,7 @@ Consider the following example scenario to understand how clusters might become 
 Follow the steps to review your infrastructure credentials and determine why you are seeing the credentials error.
 {: tsResolve}
 
-1. Log in to the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}.
+1. Log in to the [console](https://cloud.ibm.com/containers/cluster-management/clusters){: external}.
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster).
 1. Check which infrastructure account the region that your cluster is in currently uses to provision clusters. Replace `REGION` with the {{site.data.keyword.cloud_notm}} region that the cluster is in.
     ```sh
