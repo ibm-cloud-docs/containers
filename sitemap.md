@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-18"
+lastupdated: "2025-03-21"
 
 
 keywords: containers
@@ -3399,11 +3399,7 @@ subcollection: containers
 
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 
-* [Creating ACLs from the console](/docs/containers?topic=containers-vpc-acls#acls_ui)
-
-    * [Creating ACLs with the CLI](/docs/containers?topic=containers-vpc-acls#acls_cli)
-
-    * [Required rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-acls#acls-128)
+* [Overview of ACLs](/docs/containers?topic=containers-vpc-acls#acls-overview)
 
 [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-kube-policies#vpc-kube-policies)
 
