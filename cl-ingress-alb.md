@@ -32,12 +32,12 @@ Review the version history for Ingress ALB.
 ### 1.11.2_7469_iks, released 25 March 2025
 {: #cl-ingress-alb-1112_7469_iks}
 
+[Default version]{: tag-green}
+
 - Resolves the following CVEs: [CVE-2025-22870](https://nvd.nist.gov/vuln/detail/CVE-2025-22870){: external}.
 
 ### 1.11.2_7452_iks, released 17 March 2025
 {: #cl-ingress-alb-1112_7452_iks}
-
-[Default version]{: tag-green}
 
 - Resolves the following CVEs: [CVE-2025-27113](https://nvd.nist.gov/vuln/detail/CVE-2025-27113){: external}, [CVE-2024-56171](https://nvd.nist.gov/vuln/detail/CVE-2024-56171){: external}, and [CVE-2025-24928](https://nvd.nist.gov/vuln/detail/CVE-2025-24928){: external}.
 
