@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-24"
+lastupdated: "2025-03-26"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar25)
+
+    * [25 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-25march25)
+
+        * Ingress ALB cluster add-on patch updates.
 
     * [24 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-24march25)
 
@@ -7782,6 +7786,8 @@ subcollection: containers
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
 
+    * [1.11.2_7469_iks, released 25 March 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7469_iks)
+
     * [1.11.2_7452_iks, released 17 March 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7452_iks)
 
     * [1.11.2_7418_iks, released 07 March 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7418_iks)
@@ -7803,6 +7809,8 @@ subcollection: containers
     * [1.11.2_7069_iks, released 04 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7069_iks)
 
 * [Version 1.9.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.9.6)
+
+    * [1.9.6_7468_iks, released 25 March 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-196_7468_iks)
 
     * [1.9.6_7453_iks, released 17 March 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-196_7453_iks)
 
@@ -7861,6 +7869,8 @@ subcollection: containers
     * [1.9.4_6359_iks, released 22 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-194_6359_iks)
 
 * [Version 1.8.5](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.8.5)
+
+    * [1.8.5_7467_iks, released 25 March 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-185_7467_iks)
 
     * [1.8.5_7454_iks, released 17 March 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-185_7454_iks)
 
