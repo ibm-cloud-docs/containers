@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-24"
+lastupdated: "2025-03-27"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,38 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2025
 {: #containers-mar25}
+
+
+  
+### 27 March 2025
+{: #containers-27march25}
+{: release-note}
+
+
+
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
+:   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
+
+
+
+
+
+
+
+### 25 March 2025
+{: #containers-25march25}
+{: release-note}
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
 
 
 ### 24 March 2025
@@ -4657,439 +4689,3 @@ CLI change log update
 
 Master fix pack update
 :   Kubernetes [1.23.5_1525](/docs/containers?topic=containers-changelog_123), [1.22.8_1547](/docs/containers?topic=containers-changelog_122), 1.21.11_1555, and 1.20.15_1576.
-
-
-
-
-
-
-## March 2022
-{: #containers-mar22}
-
-### 30 March 2022
-{: #containers-mar3022}
-{: release-note}
-
-Cluster autoscaler add-on
-:   Version [1.1.0_475](/docs/containers?topic=containers-ca_changelog) is available.
-
-{{site.data.keyword.containershort}} 1.20 end of support date change
-:   The end of support date of {{site.data.keyword.containershort}} 1.20 is now 15 June 2022. The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions_available) page has been updated with the new date. 
-
-Master fix pack update
-:   Kubernetes [1.23.5_1523](/docs/containers?topic=containers-changelog_123#1235_1523), [1.22.8_1545](/docs/containers?topic=containers-changelog_122#1228_1545), 1.21.11_1553, and 1.20.15_1574.
-
-### 28 March 2022
-{: #containers-mar2822}
-{: release-note}
-
-Worker node fix pack update.
-:   Kubernetes [1.23.5_1524](/docs/containers?topic=containers-changelog_123), [1.22.8_1546](/docs/containers?topic=containers-changelog_122), 1.21.11_1552, 1.20.15_1575, and 1.19.16_1579.
-
-
-### 24 March 2022
-{: #containers-mar2422}
-{: release-note}
-
-{{site.data.keyword.cos_full_notm}} plug-in
-:   Version `2.1.13` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
-
-{{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.2.2_900](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
-
-  
-ALB OAuth Proxy add-on
-:   Versions 1.0.0_1024 and 2.0.0_1023 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy) are released.
-
-
-
-### 22 March 2022
-{: #containers-mar2222}
-{: release-note}
-
-Hong Kong (`HKG02`) and Seoul (`SEO01`) are deprecated and become unsupported later this year.
-:   To prevent any interruption of service, [redeploy your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your Hong Kong (`HKG02`) and Seoul (`SEO01`) clusters by 28 September 2022. Clusters remaining in these data centers after 28 September 2022 will be removed. Cluster creation in these locations will be stopped on 29 April 2022. For more information about data center closures and recommended data centers, see [Data center consolidations](/docs/account?topic=account-dc-closure).
-
-Ingress ALB change log updates
-:   Updated the [Ingress ALB change log](/docs/containers?topic=containers-cl-ingress-alb) for versions `1.1.2_2050_iks`, `1.1.1_1996_iks`, and `0.49.3_1994_iks`.
-
-Istio add-on
-:   Versions [`1.13.2`](/docs/containers?topic=containers-istio-changelog#1132), [`1.12.5`](/docs/containers?topic=containers-istio-changelog#1125), and [`1.11.8`](/docs/containers?topic=containers-istio-changelog#1118) are available. Note that this is the final update for version 1.11. 
-
-
-### 21 March 2022
-{: #containers-mar2122}
-{: release-note}
-
-CLI change log update
-:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.384.
-
-### 17 March 2022
-{: #containers-mar1722}
-{: release-note}
-
-{{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.2.1_895](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
-
-
-  
-### 16 March 2022
-{: #containers-mar1622}
-{: release-note}
-
-Cluster autoscaler add-on
-:   Version [1.1.0_429](/docs/containers?topic=containers-ca_changelog) is available.
-
-### 15 March 2022
-{: #containers-mar1522}
-{: release-note}
-
-Version 1.19 unsupported 
-:   Clusters that run version 1.19 are unsupported. Update your clusters to at least version 1.20 as soon as possible.
-
-
-### 14 March 2022
-{: #containers-mar1422}
-{: release-note}
-
-
-Worker node fix pack update.
-:   Kubernetes [1.23.4_1522](/docs/containers?topic=containers-changelog_123), [1.22.7_1543](/docs/containers?topic=containers-changelog_122), 1.21.10_1552, 1.20.15_1573, and 1.19.16_1579.
-
-
-
-
-### 11 March 2022
-{: #containers-mar1122}
-{: release-note}
-
-{{site.data.keyword.cos_full_notm}} plug-in
-:   Version `2.1.12` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
-
-
-
-### 9 March 2022
-{: #containers-mar922}
-{: release-note}
-
-Istio add-on
-:   [Version `1.13.1`](/docs/containers?topic=containers-istio-changelog#1131) is available.
-
-
-
-
-
-### 8 March 2022
-{: #containers-mar822}
-{: release-note}
-
-Master fix pack update.
-:   Kubernetes [1.23.4_1520](/docs/containers?topic=containers-changelog_123#1234_1520), [1.22.7_1541](/docs/containers?topic=containers-changelog_122#1227_1541), 1.21.10_1550, 1.20.15_1571, and 1.19.16_1578.
-
-
-
-
-Istio add-on
-:   [Version `1.12.4`](/docs/containers?topic=containers-istio-changelog#1124) and [Version `1.11.7`](/docs/containers?topic=containers-istio-changelog#1117) of the managed Istio add-on are available. 
-
-
-
-
-
-### 3 March 2022
-{: #containers-mar322}
-{: release-note}
-
-
-{{site.data.keyword.containershort}} default version update.
-:   [1.22](/docs/containers?topic=containers-cs_versions#cs_versions_available) is now the default version.
-
-Maintenance Windows for {{site.data.keyword.containershort}} ALBs
-:   You can now further control and manage your ALB updates by [creating a customized ConfigMap](/docs/containers?topic=containers-ingress-alb-manage#alb-scheduled-updates) that specifies the time you want the updates to occur and the percentage of ALBs you want to update.
-
-
-
-## February 2022
-{: #containers-feb22}
-
-### 28 February 2022
-{: #containers-feb2822}
-{: release-note}
-
-{{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is available.
-
-Cluster autoscaler
-:   Version [1.0.5_415](/docs/containers?topic=containers-ca_changelog) is available.
-:   New pages for [Preparing your cluster for autoscaling](/docs/containers?topic=containers-cluster-scaling-install-addon), [Installing the cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon), and [Enabling autoscaling](/docs/containers?topic=containers-cluster-scaling-install-addon-enable).
-:   New troubleshooting pages for [resizing worker pools](/docs/containers?topic=containers-ts-ca-resize) and updating [unbalanced worker pools](/docs/containers?topic=containers-ts-ca-unbalanced) in autoscaled clusters. 
-
-
-  
-ALB OAuth Proxy add-on
-:   Versions 1.0.0_1001 and 2.0.0_999 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy) are released.
-
-
-Worker node fix pack
-:   Kubernetes [1.23.4_1521](/docs/containers?topic=containers-changelog_123#1234_1521), [1.22.7_1542](/docs/containers?topic=containers-changelog_122#1227_1542), 1.21.10_1551, 1.20.15_1572, and 1.19.16_1579.
-
-
-### 24 February 2022
-{: #containers-feb2422}
-{: release-note}
-
-
-Container service CLI 
-:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.374.
-
-
-
-Kubernetes Ingress image
-:   Versions 1.1.1_1996_iks, 1.0.3_1995_iks, and 0.49.3_1994_iks of the [Kubernetes Ingress image](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) are released.
-
-
-
-
-
-
-### 23 February 2022
-{: #containers-feb2322}
-{: release-note}
-
-Cluster autoscaler
-:   Version [1.0.4_410](/docs/containers?topic=containers-ca_changelog) is available.
-
-
-
-Istio add-on
-:   [Version `1.12.3`](/docs/containers?topic=containers-istio-changelog#1116) of the managed Istio add-on is available. 
-
-
-
-
-### 18 February 2022
-{: #containers-feb1822}
-{: release-note}
-
-Container service CLI 
-:   The [CLI change log](/docs/containers?topic=containers-cs_cli_changelog) is updated for version 1.0.372.
-
-
-### 17 February 2022
-{: #containers-feb1722}
-{: release-note}
-
-{{site.data.keyword.cos_full_notm}} plug-in
-:   Version `2.1.10` of the {{site.data.keyword.cos_full_notm}} plug-in [is available](/docs/containers?topic=containers-cos_plugin_changelog).
-
-
-
-
-  
-### 15 February 2022
-{: #containers-feb1522}
-{: release-note}
-
-Istio add-on
-:   [Version `1.11.6`](/docs/containers?topic=containers-istio-changelog#1116) of the managed Istio add-on is available. 
-
-
-
-### 14 February 2022
-{: #containers-feb1422}
-{: release-note}
-
-Worker node fix pack
-:   Kubernetes [1.23.3_1519](/docs/containers?topic=containers-changelog_123#1233_1519), [1.22.6_1539](/docs/containers?topic=containers-changelog_122#1226_1539), 1.21.9_1549, 1.20.15_1570, and 1.19.16_1577.
-
-
-{{site.data.keyword.cos_full_notm}} doc restructuring. 
-:   For more information, see [Setting up {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-understand), [Installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-storage_cos_install), [Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_vpc_ip), [Adding {{site.data.keyword.cos_full_notm}} storage to apps](/docs/containers?topic=containers-storage_cos_apps), and [Storage class reference](/docs/containers?topic=containers-storage_cos_reference).
-
-
-{{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.1.3_846](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is released.
-
-
-### 10 February 2022
-{: #containers-feb1022}
-{: release-note}
-
-
-Certified Kubernetes
-:   Version [1.23](/docs/containers?topic=containers-cs_versions_123) release is now certified.
-
-
-  
-ALB OAuth Proxy add-on
-:   Version 2.0.0_981 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy) is released.
-
-
-
-
-### 9 February 2022
-{: #containers-feb922}
-{: release-note}
-
-
-
-
-New! Kubernetes 1.23
-:   You can create or [update clusters to Kubernetes version 1.23](/docs/containers?topic=containers-cs_versions_123). With Kubernetes 1.23, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
-
-Deprecated and unsupported Kubernetes versions
-:   With the release of Kubernetes 1.23, clusters that run version 1.20 remain deprecated, with a tentative unsupported date of May 2022. Update your cluster to at least version 1.21 as soon as possible.
-
-
-
-
-  
-
-
-### 3 February 2022
-{: #containers-feb322}
-{: release-note}
-
-Istio add-on
-:   [Version `1.12.2`](/docs/containers?topic=containers-istio-changelog#1122) of the managed Istio add-on is available. 
-
-
-
-
-
-## January 2022
-{: #containers-jan22}
-
-### 31 January 2022
-{: #containers-jan3122}
-
-Version change log
-:   Fix pack update.
-:   Kubernetes [1.22.6_1538](/docs/containers?topic=containers-changelog_122#1226_1538), 1.21.9_1548, 1.20.15_1569, 1.19.16_1576.
-
-
-
-**New!** Worker node flavor reference
-:   View a list of all available worker node flavors by zone. For more information, see [VPC Gen 2 flavors](/docs/containers?topic=containers-classic-flavors) or [Classic flavors](/docs/containers?topic=containers-vpc-flavors).
-
-
-
-### 27 January 2022
-{: #containers-jan2722}
-{: release-note}
-
-{{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.1.2_834](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is released.
-
-**New!** Gathering Ingress logs
-:   When troubleshooting Ingress, follow the steps in [gathering Ingress logs](/docs/containers?topic=containers-ingress-must-gather) to retrieve useful debugging information.
-
-
-
-
-
-### 26 January 2022
-{: #containers-jan2622}
-{: release-note}
-
-ALB OAuth Proxy add-on
-:   Versions 1.0.0_924 and 2.0.0_923 of the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy) are released.
-
-
-
-### 25 January 2022
-{: #containers-jan2522}
-{: release-note}
-
-
-Kubernetes Ingress image
-:   Versions 1.1.1_1949_iks, 1.0.3_1933_iks, and 0.49.3_1941_iks of the [Kubernetes Ingress image](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list) are released.
-  
-Kubernetes Ingress annotations
-:   Clusters created on or after 31 January 2022 by default no longer support server-snippet annotations in Ingress resources for the managed Kubernetes Ingress Controller (ALB). All new clusters are deployed with the `allow-server-snippets` configuration set to `false`, which prevents the ALB from correctly processing Ingress resources with the offending annotations. You must edit the ConfigMap manually to change this setting in order for the add-on to work.
-
-
-
-### 24 January 2022
-{: #containers-jan2422}
-{: release-note}
-
-{{site.data.keyword.cos_full_notm}} plug-in
-:   Version `2.1.9` of the {{site.data.keyword.cos_full_notm}} plug-in is released. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in change log](/docs/containers?topic=containers-cos_plugin_changelog).
-
-
-### 20 January 2022
-{: #containers-jan2022}
-{: release-note}
-
-Cluster autoscaler add-on.
-:   [Version 1.0.4_403](/docs/containers?topic=containers-ca_changelog) is released.
-
-{{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.1.1_827](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is released.
-
-OpenShift Data Foundation
-:   New and updated parameters for OpenShift Data Foundation.
-:   Automatic disk discovery is now available for Classic clusters version 4.8 and later. Enable this feature by setting the `autoDiscoverDevices` parameter to `true` parameter. For more information, see [ODF using local disks](/docs/openshift?topic=openshift-deploy-odf-classic).
-:   The `monDevicePaths` and `monSize` parameters are no longer required for add-on version 4.8 and later.
-
-
-
-### 18 January 2022
-{: #containers-jan1822}
-{: release-note}
-
-Review the release notes for January 2022.
-{: shortdesc}
-
-**New!** {{site.data.keyword.containerlong_notm}} CLI Map
-:   The [{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map) lists all `ibmcloud ks` commands as they are structured in the CLI. Use this page as a visual reference for how ibmcloud ks commands are organized, or to quickly find a specific command. 
-
-{{site.data.keyword.containershort}} 1.19, 1.20, 1.21, and 1.22 unsupported date change
-:   The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions_available) page has been updated with the new unsupported dates. 
-
-Worker node fix pack update.
-:   Kubernetes [1.22.4_1536](/docs/containers?topic=containers-changelog_122#1224_1536), 1.21.7_1546, 1.20.13_1567, and 1.19.16_1574.
-
-
-
-### 17 January 2022
-{: #containers-jan1722}
-{: release-note}
-
-{{site.data.keyword.cos_full_notm}} plug-in
-:   Version `2.1.8` of the {{site.data.keyword.cos_full_notm}} plug-in is released. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in change log](/docs/containers?topic=containers-cos_plugin_changelog).
-
-
-
-### 13 January 2022
-{: #containers-jan1321}
-{: release-note}
-
-Istio add-on
-:   [Version `1.12.1`](/docs/containers?topic=containers-istio-changelog#1121) and [Version `1.10.6`](/docs/containers?topic=containers-istio-changelog#1106) of the Istio managed add-on are released.
-
-
-
-
-
-
-### 06 January 2022
-{: #containers-jan0622}
-{: release-note}
-
-
-{{site.data.keyword.block_storage_is_short}} add-on.
-:   [Version 4.1.0_807](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) is released.
-
-
-{{site.data.keyword.containershort}} 1.20 end of support date change
-:   The end of support date of {{site.data.keyword.containershort}} 1.20 is now March 2022. The [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions_available) page has been updated with the new date. 
-
-
-### 4 January 2022
-{: #containers-jan422}
-{: release-note}
-
-Worker node fix pack update
-:   Change log documentation is available for worker node versions [`1.22.4_1534`](/docs/containers?topic=containers-changelog_122#1224_1534), `1.21.7_1544`, `1.20.13_1566`, and `1.19.16_1573`.
