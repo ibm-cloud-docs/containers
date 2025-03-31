@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-03-13"
+lastupdated: "2025-03-31"
 
 
 keywords: change log, version history, ALB OAuth Proxy
