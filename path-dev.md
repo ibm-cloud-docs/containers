@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-18"
+lastupdated: "2025-03-31"
 
 
 keywords: kubernetes, containers
@@ -100,7 +100,7 @@ In a test environment, deliberately create various non-ideal scenarios, such as 
 2. **Monitoring**:
     1. Open a [Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard) on your local system to view information about your app resources.
     2. [Choose a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics), such as {{site.data.keyword.mon_full}}, to gain operational visibility into the performance and health of your apps.
-3. **Logging**: [Choose a logging solution](/docs/containers?topic=containers-health#logging_overview), such as {{site.data.keyword, to monitor container logs.
+3. **Logging**: [Choose a logging solution](/docs/containers?topic=containers-health#logging_overview), such as {{site.data.keyword.logs_full_notm}}, to monitor container logs.
 
 Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_dashboard_graphs).
 {: tip}
@@ -175,12 +175,15 @@ Enhance app capabilities by integrating various external services and catalog se
 {: shortdesc}
 
 1. **Review supported integrations**:
+
     - [All supported integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
 
     - [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-supported_integrations)
 
     - [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations)
+
 2. **Add services to your cluster**: Ask your cluster administrator to [add the integration to your cluster](/docs/containers?topic=containers-learning-path-admin#admin_integrate).
+
 3. **Access services from your app**: Ensure that your app can access the service. For example, to access an IBM Cloud service instance from your app, you must [make the service credentials that are stored in the Kubernetes secret available to your app](/docs/containers?topic=containers-service-binding#adding_app).
 
 Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_worker_nodes).

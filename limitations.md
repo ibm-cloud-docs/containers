@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-25"
+lastupdated: "2025-03-31"
 
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
@@ -107,7 +107,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 {: caption="Classic cluster storage limitations"}
 
 ## User access
-{:#classic_access_limit}
+{: #classic_access_limit}
 
 Keep in mind that the [service](#tech_limits) limitations also apply.
 
@@ -173,7 +173,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 {: caption="VPC cluster storage limitations"}
 
 ## User access
-{:#vpc_access_limit}
+{: #vpc_access_limit}
 
 Keep in mind that the [service](#tech_limits) limitations also apply.
 

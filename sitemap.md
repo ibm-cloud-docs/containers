@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-28"
+lastupdated: "2025-03-31"
 
 
 keywords: containers
@@ -10114,7 +10114,7 @@ subcollection: containers
 
     * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
 
-* [User access](/docs/containers?topic=containers-limitations#user-access)
+* [User access](/docs/containers?topic=containers-limitations#classic_access_limit)
 
 * [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 
@@ -10124,7 +10124,7 @@ subcollection: containers
 
     * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
 
-* [User access](/docs/containers?topic=containers-limitations#user-access)
+* [User access](/docs/containers?topic=containers-limitations#vpc_access_limit)
 
 
 ## Requesting access to allowlisted features
