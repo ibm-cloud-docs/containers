@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-03-27"
+lastupdated: "2025-03-28"
 
 
 keywords: change log, version history, 1.28
@@ -60,7 +60,7 @@ The following table shows the changes that are in the master fix pack 1.28.15_16
 | --- | --- | --- | --- |
 | Calico | v3.27.4 | v3.27.5 | See the [Calico release notes](https://docs.tigera.io/calico/3.27/release-notes/#v3.27.5){: external}. |
 | Cluster health image | v1.5.10 | v1.5.13 | New version contains updates and security fixes. |
-| etcd | v3.5.17 | v3.5.18 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.18){: external}. |
+| etcd | v3.5.17 | v3.5.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.18){: external}. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1619 | 1647 | New version contains security fixes. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.4.27 | v2.4.28 | New version contains updates and security fixes. |
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 447 | 449 | New version contains updates and security fixes. |

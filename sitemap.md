@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-27"
+lastupdated: "2025-03-28"
 
 
 keywords: containers
@@ -2543,7 +2543,7 @@ subcollection: containers
 
     * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update&interface=ui#alb)
 
-* [Updating managed add-ons](/docs/containers?topic=containers-update&interface=ui#addons)
+* [Updating managed add-ons](/docs/containers?topic=containers-update&interface=ui#addons-update)
 
 [Creating and managing dedicated hosts on VPC Gen 2 infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
 
@@ -9036,7 +9036,7 @@ subcollection: containers
 
 * [Your responsibilities for high availability and disaster recovery](/docs/containers?topic=containers-iks-ha-dr#feature-responsibilities)
 
-* [Change management](/docs/containers?topic=containers-iks-ha-dr#change-management)
+* [Change management](/docs/containers?topic=containers-iks-ha-dr#change-management-hadr)
 
 * [Considerations for app and service deployment](/docs/containers?topic=containers-iks-ha-dr#app-considerations)
 

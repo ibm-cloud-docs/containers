@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-03-27"
+lastupdated: "2025-03-28"
 
 
 keywords: change log, version history, 1.29
@@ -59,7 +59,7 @@ The following table shows the changes that are in the master fix pack 1.29.15_15
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.5.10 | v1.5.13 | New version contains updates and security fixes. |
-| etcd | v3.5.17 | v3.5.18 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.18){: external}. |
+| etcd | v3.5.17 | v3.5.18 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.18){: external}. |
 | Key Management Service provider | v2.9.16 | v2.9.17 | New version contains updates and security fixes. |
 | Kubernetes | v1.29.13 | v1.29.15 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.15){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.23.1 | 1.25.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.25.0){: external}. |
