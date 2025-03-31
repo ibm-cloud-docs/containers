@@ -238,6 +238,12 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [April 2025](/docs/containers?topic=containers-containers-relnotes#containers-apr25)
+
+    * [01 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-01april25)
+
+        * Creating Ubuntu 20 clusters or worker pools in cluster versions 1.29 - 1.31 is no longer supported.
+
 * [March 2025](/docs/containers?topic=containers-containers-relnotes#containers-mar25)
 
     * [27 March 2025](/docs/containers?topic=containers-containers-relnotes#containers-27march25)
