@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-03-31"
+lastupdated: "2025-04-01"
 
 
 keywords: containers
@@ -2370,11 +2370,11 @@ subcollection: containers
 
 * [Understanding the CLI tools](/docs/containers?topic=containers-cli-install#cli-understand)
 
-* [Run the installation command](/docs/containers?topic=containers-cli-install#cli-install-include-step1-install-idt)
+* [Running the installation command](/docs/containers?topic=containers-cli-install#cli-install-include-step1-install-idt)
 
-* [Verify the installation](/docs/containers?topic=containers-cli-install#cli-install-include-step2-verify-idt)
+* [Verifying the installation](/docs/containers?topic=containers-cli-install#cli-install-include-step2-verify-idt)
 
-* [Install CLI plug-ins and tools](/docs/containers?topic=containers-cli-install#cli-install-include-step3-install-idt-manually)
+* [Installing CLI plug-ins and tools](/docs/containers?topic=containers-cli-install#cli-install-include-step3-install-idt-manually)
 
 * [Install the Kubernetes CLI](/docs/containers?topic=containers-cli-install#install-kubectl-cli)
 
