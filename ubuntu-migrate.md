@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2024
-lastupdated: "2024-12-20"
+  years: 2022, 2025
+lastupdated: "2025-03-31"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -20,6 +20,9 @@ subcollection: containers
 
 To migrate your worker nodes to a new Ubuntu version, run a command to specify the new version for a worker pool. Then, update the individual worker nodes in the pool.
 {: shortdesc}
+
+Ubuntu 20 is deprecated and support ends on 31 May 2025. Migrate your worker nodes to Ubuntu 24 before support ends. Make sure you understand the [limitations for Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim) before you begin migration. For more information, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate).
+{: deprecated}
 
 ## Default operating system by cluster version
 {: #ubuntu-default}
