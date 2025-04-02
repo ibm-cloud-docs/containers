@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-31"
+lastupdated: "2025-04-02"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 ## April 2025
+{: #containers-april25}
+
+### 02 April 2025
+{: #containers-02april25}
+{: release-note}
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
+## April 2025
 {: #containers-apr25}
 
 ### 01 April 2025
@@ -36,6 +46,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 Creating Ubuntu 20 clusters or worker pools in cluster versions 1.29 - 1.31 is no longer supported.
 :   For cluster verions 1.29 - 1.31, you can no longer provision new clusters or worker pools with Ubuntu 20 worker nodes. Ubuntu 20 is deprecated and support ends soon. If you have existing worker pools that use Ubuntu 20, migrate those worker pools to Ubuntu 24 as soon as possible. For more information, see [Migrating to a new Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate)
+
 
 
 

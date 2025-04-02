@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-04-01"
+lastupdated: "2025-04-02"
 
 
 keywords: change log, version history, Ingress ALB
@@ -22,6 +22,19 @@ subcollection: containers
 
 Review the version history for Ingress ALB.
 {: shortdesc}
+
+
+
+## Version 1.12.1
+{: #cl-ingress-alb-1.12.1}
+
+
+### 1.12.1_7490_iks, released 02 April 2025
+{: #cl-ingress-alb-1121_7490_iks}
+
+- Resolves the following CVEs: [CVE-2025-1097](https://nvd.nist.gov/vuln/detail/CVE-2025-1097){: external}, [CVE-2025-1098](https://nvd.nist.gov/vuln/detail/CVE-2025-1098){: external}, [CVE-2025-1974](https://nvd.nist.gov/vuln/detail/CVE-2025-1974){: external}, [CVE-2025-24513](https://nvd.nist.gov/vuln/detail/CVE-2025-24513){: external}, and [CVE-2025-24514](https://nvd.nist.gov/vuln/detail/CVE-2025-24514){: external}.
+- Global rate-limiting is no longer available. The `nginx.ingress.kubernetes.io/global-rate-limit-memcached-host`, `nginx.ingress.kubernetes.io/global-rate-limit-memcached-port`, `nginx.ingress.kubernetes.io/global-rate-limit-memcached-connect-timeout`, `nginx.ingress.kubernetes.io/global-rate-limit-memcached-max-idle-timeout`, `nginx.ingress.kubernetes.io/global-rate-limit-memcached-pool-size`, `nginx.ingress.kubernetes.io/global-rate-limit-status-code`, `nginx.ingress.kubernetes.io/global-rate-limit`, `nginx.ingress.kubernetes.io/global-rate-limit-window`, `nginx.ingress.kubernetes.io/global-rate-limit-key` and `nginx.ingress.kubernetes.io/global-rate-limit-ignored-cidrs` annotations will be ignored by the Ingress Controller. For rate-limiting, use the `nginx.ingress.kubernetes.io/limit-connections`, `nginx.ingress.kubernetes.io/limit-rps`, `nginx.ingress.kubernetes.io/limit-rpm`, `nginx.ingress.kubernetes.io/limit-burst-multiplier`, `nginx.ingress.kubernetes.io/limit-rate-after`, `nginx.ingress.kubernetes.io/limit-whitelist` and `nginx.ingress.kubernetes.io/limit-rate` annotations.
+- The `nginx_ingress_controller_ingress_upstream_latency_seconds` metric has been removed, use `nginx_ingress_controller_connect_duration_seconds` instead.
 
 
 
