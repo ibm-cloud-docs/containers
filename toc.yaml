@@ -165,6 +165,7 @@ toc:
           - cs_health_monitor.md
           - health-audit.md
           - vpc-flow-logs.md
+          - at-events-ref.md
       - registry.md
       - cicd.md
       - topicgroup:
@@ -408,11 +409,6 @@ toc:
               - cs_versions_122.md
               - cs_versions_changelog_122.md
               - cs_benchmarks_122.md
-      - topicgroup:
-          label: Activity Tracker events
-          topics:
-          - at-events-ref.md
-          - api-at-iam.md
       - locations.md
       - cs_integrations_overview.md
       - service-settings.md

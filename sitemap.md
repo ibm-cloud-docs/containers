@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-04-02"
+lastupdated: "2025-04-03"
 
 
 keywords: containers
@@ -3548,6 +3548,34 @@ subcollection: containers
 * [Configuring a flow log collector](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_create)
 
 * [Viewing worker node flow logs](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_view)
+
+[{{site.data.keyword.logs_full_notm}} events](/docs/containers?topic=containers-at_events_ref#at_events_ref)
+
+* [Cluster events](/docs/containers?topic=containers-at_events_ref#clusters-events)
+
+* [Cluster account events](/docs/containers?topic=containers-at_events_ref#cluster-account-events)
+
+* [Cluster add-on events](/docs/containers?topic=containers-at_events_ref#cluster-addons)
+
+* [Fluentd logging events](/docs/containers?topic=containers-at_events_ref#at-fluentd)
+
+* [Ingress ALB events](/docs/containers?topic=containers-at_events_ref#ingress-alb-events)
+
+* [Ingress secret events](/docs/containers?topic=containers-at_events_ref#ingress-secret-events)
+
+* [Observability events for logging and monitoring](/docs/containers?topic=containers-at_events_ref#at-lm)
+
+* [NLB DNS events](/docs/containers?topic=containers-at_events_ref#ingress-nlb-dns-events)
+
+* [Private service endpoint allowlist events](/docs/containers?topic=containers-at_events_ref#acl-events)
+
+* [{{site.data.keyword.satelliteshort}} events](/docs/containers?topic=containers-at_events_ref#satellite-events)
+
+* [Storage events](/docs/containers?topic=containers-at_events_ref#storage-events)
+
+* [Worker node and worker pool events](/docs/containers?topic=containers-at_events_ref#worker-events)
+
+* [Viewing your cluster events](/docs/containers?topic=containers-at_events_ref#at-ui)
 
 
 ## Setting up an image registry
@@ -8892,75 +8920,6 @@ subcollection: containers
     * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-56-122)
 
     * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-remediations-122)
-
-
-## Activity Tracker events
-{: #sitemap_activity_tracker_events}
-
-
-[{{site.data.keyword.logs_full_notm}} events](/docs/containers?topic=containers-at_events_ref#at_events_ref)
-
-* [Cluster events](/docs/containers?topic=containers-at_events_ref#clusters-events)
-
-* [Cluster account events](/docs/containers?topic=containers-at_events_ref#cluster-account-events)
-
-* [Cluster add-on events](/docs/containers?topic=containers-at_events_ref#cluster-addons)
-
-* [Fluentd logging events](/docs/containers?topic=containers-at_events_ref#at-fluentd)
-
-* [Ingress ALB events](/docs/containers?topic=containers-at_events_ref#ingress-alb-events)
-
-* [Ingress secret events](/docs/containers?topic=containers-at_events_ref#ingress-secret-events)
-
-* [Observability events for logging and monitoring](/docs/containers?topic=containers-at_events_ref#at-lm)
-
-* [NLB DNS events](/docs/containers?topic=containers-at_events_ref#ingress-nlb-dns-events)
-
-* [Private service endpoint allowlist events](/docs/containers?topic=containers-at_events_ref#acl-events)
-
-* [{{site.data.keyword.satelliteshort}} events](/docs/containers?topic=containers-at_events_ref#satellite-events)
-
-* [Storage events](/docs/containers?topic=containers-at_events_ref#storage-events)
-
-* [Worker node and worker pool events](/docs/containers?topic=containers-at_events_ref#worker-events)
-
-* [Viewing your cluster events](/docs/containers?topic=containers-at_events_ref#at-ui)
-
-[IAM and {{site.data.keyword.cloudaccesstrailshort}} action by API method](/docs/containers?topic=containers-api-at-iam#api-at-iam)
-
-* [Account](/docs/containers?topic=containers-api-at-iam#ks-account)
-
-* [Certificate authority](/docs/containers?topic=containers-api-at-iam#ks-ca-api)
-
-* [Cluster](/docs/containers?topic=containers-api-at-iam#ks-cluster)
-
-* [Dedicated hosts](/docs/containers?topic=containers-api-at-iam#dedicated-hosts-api)
-
-* [Image security](/docs/containers?topic=containers-api-at-iam#image-security)
-
-* [Ingress](/docs/containers?topic=containers-api-at-iam#ks-ingress)
-
-* [Ingress ALB](/docs/containers?topic=containers-api-at-iam#ks-alb)
-
-* [Ingress load balancer](/docs/containers?topic=containers-api-at-iam#api-ingress-loadbalancer)
-
-* [Ingress status](/docs/containers?topic=containers-api-at-iam#api-ingress-status)
-
-* [Fluentd logging](/docs/containers?topic=containers-api-at-iam#ks-logging)
-
-* [NLB DNS](/docs/containers?topic=containers-api-at-iam#ks-nlb-dns)
-
-* [Observability](/docs/containers?topic=containers-api-at-iam#ks-observability-logging)
-
-* [Observability: {{site.data.keyword.mon_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-monitoring)
-
-* [Private service endpoint allowlist](/docs/containers?topic=containers-api-at-iam#ks-acl)
-
-* [Satellite](/docs/containers?topic=containers-api-at-iam#sat-api)
-
-* [Storage](/docs/containers?topic=containers-api-at-iam#ks-storage)
-
-* [Worker nodes and worker pools](/docs/containers?topic=containers-api-at-iam#ks-workers)
 
 
 ## Locations
