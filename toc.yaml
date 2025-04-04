@@ -292,31 +292,6 @@ toc:
       id: reference
       topics:
       - topicgroup:
-          label: API reference
-          topics:
-          - link:
-              label: IBM Cloud Kubernetes Service API
-              href: https://containers.cloud.ibm.com/global/swagger-global-api/#/
-          - link:
-              label: IBM Cloud Kubernetes Service API JSON
-              href: https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json
-          - link:
-              label: IBM Cloud Container Registry API
-              href: https://cloud.ibm.com/apidocs/container-registry
-          - link: 
-              label: IBM Cloud Vulnerability Advisor API
-              href: https://cloud.ibm.com/apidocs/container-registry/va
-          - link: 
-              label: Community Kubernetes API
-              href: https://kubernetes.io/docs/reference/
-      - topicgroup:
-          label: CLI plug-in reference
-          topics:
-          - cli-map.md
-          - cli-ks-plugin.md
-          - cli-changelog.md
-          - observability-reference.md
-      - topicgroup:
           label: Version history
           topics:
           - cs_versions_overview.md
@@ -351,6 +326,30 @@ toc:
               - cs_versions_128.md
               - cs_versions_changelog_128.md
               - cs_benchmarks_128.md
+      - topicgroup:
+          label: CLI plug-in reference
+          topics:
+          - cli-map.md
+          - cli-ks-plugin.md
+          - cli-changelog.md
+      - topicgroup:
+          label: API reference
+          topics:
+          - link:
+              label: IBM Cloud Kubernetes Service API
+              href: https://containers.cloud.ibm.com/global/swagger-global-api/#/
+          - link:
+              label: IBM Cloud Kubernetes Service API JSON
+              href: https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json
+          - link:
+              label: IBM Cloud Container Registry API
+              href: https://cloud.ibm.com/apidocs/container-registry
+          - link: 
+              label: IBM Cloud Vulnerability Advisor API
+              href: https://cloud.ibm.com/apidocs/container-registry/va
+          - link: 
+              label: Community Kubernetes API
+              href: https://kubernetes.io/docs/reference/
       - addon_landing.md
       - topicgroup:
           label: Add-on version history
@@ -529,7 +528,6 @@ toc:
               - ts-network-strongswan-network-nodes.md
               - ts-network-classic121.md
               - ts-network-mangle-table.md
-              - ts-letsencrypt.md
               - ts-calico-log-level.md
               - ts-keepalive-sysctl.md
               - ts-slow-dns-lookup.md

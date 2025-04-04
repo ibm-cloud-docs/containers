@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-04-03"
+lastupdated: "2025-04-04"
 
 
 keywords: containers
@@ -5156,722 +5156,6 @@ subcollection: containers
 * [Next steps](/docs/containers?topic=containers-remove#cluster-remove-next-steps)
 
 
-## API reference
-{: #sitemap_api_reference}
-
-
-[IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external}
-
-[IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json){: external}
-
-[IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry){: external}
-
-[IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va){: external}
-
-[Community Kubernetes API](https://kubernetes.io/docs/reference/){: external}
-
-
-## CLI plug-in reference
-{: #sitemap_cli_plug-in_reference}
-
-
-[{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map#icks_map)
-
-* [ibmcloud ks cluster](/docs/containers?topic=containers-icks_map#icks_map_cluster)
-
-* [ibmcloud ks worker](/docs/containers?topic=containers-icks_map#icks_map_worker)
-
-* [ibmcloud ks worker-pool](/docs/containers?topic=containers-icks_map#icks_map_worker-pool)
-
-* [ibmcloud ks zone](/docs/containers?topic=containers-icks_map#icks_map_zone)
-
-* [ibmcloud ks ingress](/docs/containers?topic=containers-icks_map#icks_map_ingress)
-
-* [ibmcloud ks logging](/docs/containers?topic=containers-icks_map#icks_map_logging)
-
-* [ibmcloud ks nlb-dns](/docs/containers?topic=containers-icks_map#icks_map_nlb-dns)
-
-* [ibmcloud ks webhook-create](/docs/containers?topic=containers-icks_map#icks_map_webhook-create)
-
-* [ibmcloud ks api-key](/docs/containers?topic=containers-icks_map#icks_map_api-key)
-
-* [ibmcloud ks credential](/docs/containers?topic=containers-icks_map#icks_map_credential)
-
-* [ibmcloud ks infra-permissions](/docs/containers?topic=containers-icks_map#icks_map_infra-permissions)
-
-* [ibmcloud ks kms](/docs/containers?topic=containers-icks_map#icks_map_kms)
-
-* [ibmcloud ks quota](/docs/containers?topic=containers-icks_map#icks_map_quota)
-
-* [ibmcloud ks subnets](/docs/containers?topic=containers-icks_map#icks_map_subnets)
-
-* [ibmcloud ks vlan](/docs/containers?topic=containers-icks_map#icks_map_vlan)
-
-* [ibmcloud ks vpcs](/docs/containers?topic=containers-icks_map#icks_map_vpcs)
-
-* [ibmcloud ks flavors](/docs/containers?topic=containers-icks_map#icks_map_flavors)
-
-* [ibmcloud ks locations](/docs/containers?topic=containers-icks_map#icks_map_locations)
-
-* [ibmcloud ks messages](/docs/containers?topic=containers-icks_map#icks_map_messages)
-
-* [ibmcloud ks versions](/docs/containers?topic=containers-icks_map#icks_map_versions)
-
-* [ibmcloud ks api](/docs/containers?topic=containers-icks_map#icks_map_api)
-
-* [ibmcloud ks `init`](/docs/containers?topic=containers-icks_map#icks_map_init)
-
-* [ibmcloud ks script](/docs/containers?topic=containers-icks_map#icks_map_script)
-
-* [ibmcloud ks security-group](/docs/containers?topic=containers-icks_map#icks_map_security_group)
-
-* [ibmcloud ks storage](/docs/containers?topic=containers-icks_map#icks_map_storage)
-
-[{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
-
-* [{{site.data.keyword.containerlong_notm}} commands](/docs/containers?topic=containers-kubernetes-service-cli#cli_commands)
-
-* [`cluster` commands](/docs/containers?topic=containers-kubernetes-service-cli#cluster)
-
-    * [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable)
-
-    * [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
-
-    * [`ibmcloud ks cluster addon get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
-
-    * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addons)
-
-    * [`ibmcloud ks cluster addon options`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_options)
-
-    * [`ibmcloud ks cluster addon update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_update)
-
-    * [`ibmcloud ks cluster addon versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_addon_versions)
-
-    * [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_create)
-
-    * [`ibmcloud ks cluster ca get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_get)
-
-    * [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_rotate)
-
-    * [`ibmcloud ks cluster ca status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_status)
-
-    * [`ibmcloud ks cluster config`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config)
-
-    * [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create)
-
-    * [`ibmcloud ks cluster create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_cluster-create-vpc-gen2)
-
-    * [`ibmcloud ks cluster get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get)
-
-    * [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-disable)
-
-    * [`ibmcloud ks cluster image-security enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-enable)
-
-    * [`ibmcloud ks cluster ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_clusters)
-
-    * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-kubernetes-service-cli#cluster_master_audit_webhook)
-
-* [`ibmcloud ks cluster master console-oauth-access get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-options)
-
-* [`ibmcloud ks cluster master console-oauth-access set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-options)
-
-    * [`ibmcloud ks cluster master pod-security get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-get)
-
-    * [`ibmcloud ks cluster master pod-security policy disable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-disable)
-
-    * [`ibmcloud ks cluster master pod-security policy enable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-enable)
-
-    * [`ibmcloud ks cluster master pod-security policy get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-get)
-
-    * [`ibmcloud ks cluster master pod-security set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-set)
-
-    * [`ibmcloud ks cluster master pod-security unset`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-unset)
-
-    * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist)
-
-    * [`ibmcloud ks cluster master private-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_disable)
-
-    * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable)
-
-    * [`ibmcloud ks cluster master public-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_disable)
-
-    * [`ibmcloud ks cluster master public-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_enable)
-
-    * [`ibmcloud ks cluster master refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh)
-
-    * [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update)
-
-    * [`ibmcloud ks cluster pull-secret apply`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_pull_secret_apply)
-
-    * [`ibmcloud ks cluster rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_rm)
-
-    * [`ibmcloud ks cluster service bind`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_service_bind)
-
-    * [`ibmcloud ks cluster service ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_services)
-
-    * [`ibmcloud ks cluster service unbind`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_service_unbind)
-
-    * [`ibmcloud ks cluster subnet add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_add)
-
-    * [`ibmcloud ks cluster subnet create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_create)
-
-    * [`ibmcloud ks cluster subnet detach`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_detach)
-
-    * [Deprecated: `ibmcloud ks cluster user-subnet add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_add)
-
-    * [Deprecated: `ibmcloud ks cluster user-subnet rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_rm)
-
-* [Beta: `dedicated` commands](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_commands)
-
-    * [Beta: `ibmcloud ks dedicated flavors`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_flavors)
-
-    * [Beta: `ibmcloud ks dedicated host create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_create)
-
-    * [Beta: `ibmcloud ks dedicated host get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_get)
-
-    * [Beta: `ibmcloud ks dedicated host ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_ls)
-
-    * [Beta: `ibmcloud ks dedicated host placement disable`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_placement_disable)
-
-    * [Beta: `ibmcloud ks dedicated host placement enable`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_placement_enable)
-
-    * [Beta: `ibmcloud ks dedicated host rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_rm)
-
-    * [Beta: `ibmcloud ks dedicated pool create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_create)
-
-    * [Beta: `ibmcloud ks dedicated pool get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_get)
-
-    * [Beta: `ibmcloud ks dedicated pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicate_pool_ls)
-
-    * [Beta: `ibmcloud ks dedicated pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_rm)
-
-* [`worker` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker_node_commands)
-
-    * [Deprecated: `ibmcloud ks worker add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add)
-
-    * [`ibmcloud ks worker get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_get)
-
-    * [`ibmcloud ks worker ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_workers)
-
-    * [`ibmcloud ks worker reboot`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot)
-
-    * [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload)
-
-    * [`ibmcloud ks worker replace`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace)
-
-    * [`ibmcloud ks worker rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_rm)
-
-    * [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update)
-
-* [`worker-pool` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool)
-
-    * [`ibmcloud ks worker-pool create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create)
-
-    * [`ibmcloud ks worker-pool create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
-
-    * [`ibmcloud ks worker-pool get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
-
-    * [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_rm)
-
-    * [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set)
-
-    * [`ibmcloud ks worker-pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pools)
-
-    * [`ibmcloud ks worker-pool operating-system set`](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-operating-system-set-cli)
-
-    * [`ibmcloud ks worker-pool rebalance`](/docs/containers?topic=containers-kubernetes-service-cli#cs_rebalance)
-
-    * [`ibmcloud ks worker-pool resize`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_resize)
-
-    * [`ibmcloud ks worker-pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_rm)
-
-    * [`ibmcloud ks worker-pool taint`](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint)
-
-    * [`ibmcloud ks worker-pool zones`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_zones)
-
-* [`zone` commands](/docs/containers?topic=containers-kubernetes-service-cli#zone)
-
-    * [`ibmcloud ks zone add classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_add)
-
-    * [`ibmcloud ks zone add vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_zone-add-vpc-gen2)
-
-    * [`ibmcloud ks zone ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_datacenters)
-
-    * [`ibmcloud ks zone network-set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_network_set)
-
-    * [`ibmcloud ks zone rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_rm)
-
-* [`ingress` commands](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands)
-
-    * [`ibmcloud ks ingress alb autoscale get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_get)
-
-    * [`ibmcloud ks ingress alb autoscale set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_set)
-
-    * [`ibmcloud ks ingress alb autoscale unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_unset)
-
-    * [`ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable)
-
-    * [`ibmcloud ks ingress alb autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable)
-
-    * [`ibmcloud ks ingress alb autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_get)
-
-    * [`ibmcloud ks ingress alb create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create)
-
-    * [`ibmcloud ks ingress alb create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2)
-
-    * [`ibmcloud ks ingress alb disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable)
-
-    * [`ibmcloud ks ingress alb enable classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure)
-
-    * [`ibmcloud ks ingress alb enable vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb_configure_vpc_gen2)
-
-    * [`ibmcloud ks ingress alb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_get)
-
-    * [`ibmcloud ks ingress alb health-checker disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_disable)
-
-    * [`ibmcloud ks ingress alb health-checker enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_enable)
-
-    * [`ibmcloud ks ingress alb health-checker get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_get)
-
-    * [`ibmcloud ks ingress alb ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs)
-
-    * [`ibmcloud ks ingress alb update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update)
-
-    * [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions)
-
-    * [`ibmcloud ks ingress domain create`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-create)
-
-    * [`ibmcloud ks ingress domain default replace`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-default-replace)
-
-    * [`ibmcloud ks ingress domain get`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-get)
-
-    * [`ibmcloud ks ingress domain ls`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-ls)
-
-    * [`ibmcloud ks ingress domain rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-rm)
-
-    * [`ibmcloud ks ingress domain secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-regenerate)
-
-    * [`ibmcloud ks ingress domain secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-rm)
-
-    * [`ibmcloud ks ingress domain update`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-update)
-
-    * [`ibmcloud ks ingress instance default set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_set)
-
-    * [`ibmcloud ks ingress instance default unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_unset)
-
-    * [`ibmcloud ks ingress instance get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_get)
-
-    * [`ibmcloud ks ingress instance ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_ls)
-
-    * [`ibmcloud ks ingress instance register`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_register)
-
-    * [`ibmcloud ks ingress instance unregister`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_unregister)
-
-    * [`ibmcloud ks ingress lb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_get)
-
-    * [`ibmcloud ks ingress lb proxy-protocol disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_disable)
-
-    * [`ibmcloud ks ingress lb proxy-protocol enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable)
-
-    * [`ibmcloud ks ingress secret create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create)
-
-    * [`ibmcloud ks ingress secret field add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add)
-
-    * [`ibmcloud ks ingress secret field ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_ls)
-
-    * [`ibmcloud ks ingress secret field rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_rm)
-
-    * [`ibmcloud ks ingress secret get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_get)
-
-    * [`ibmcloud ks ingress secret ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_ls)
-
-    * [`ibmcloud ks ingress secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_rm)
-
-    * [`ibmcloud ks ingress secret update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update)
-
-    * [`ibmcloud ks ingress status-report disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_disable)
-
-    * [`ibmcloud ks ingress status-report enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_enable)
-
-    * [`ibmcloud ks ingress status-report get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_get)
-
-    * [`ibmcloud ks ingress status-report ignored-errors add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_add)
-
-    * [`ibmcloud ks ingress status-report ignored-errors ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_ls)
-
-    * [`ibmcloud ks ingress status-report ignored-errors rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_rm)
-
-* [`logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging_commands)
-
-    * [`ibmcloud ks logging autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_disable)
-
-    * [`ibmcloud ks logging autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_enable)
-
-    * [`ibmcloud ks logging autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_get)
-
-    * [`ibmcloud ks logging config create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_create)
-
-    * [`ibmcloud ks logging config get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_get)
-
-    * [`ibmcloud ks logging config rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_rm)
-
-    * [`ibmcloud ks logging config update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_update)
-
-    * [`ibmcloud ks logging filter create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_create)
-
-    * [`ibmcloud ks logging filter get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_view)
-
-    * [`ibmcloud ks logging filter rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_delete)
-
-    * [`ibmcloud ks logging filter update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_update)
-
-    * [`ibmcloud ks logging refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_refresh)
-
-* [`nlb-dns` commands](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns)
-
-    * [`ibmcloud ks nlb-dns add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-add)
-
-    * [`ibmcloud ks nlb-dns create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create)
-
-    * [`ibmcloud ks nlb-dns create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create-vpc-gen2)
-
-    * [`ibmcloud ks nlb-dns get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-get)
-
-    * [`ibmcloud ks nlb-dns ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-ls)
-
-    * [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-configure)
-
-    * [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-disable)
-
-    * [`ibmcloud ks nlb-dns monitor enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-enable)
-
-    * [`ibmcloud ks nlb-dns monitor get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-get)
-
-    * [`ibmcloud ks nlb-dns monitor ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-ls)
-
-    * [`ibmcloud ks nlb-dns replace`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-replace)
-
-    * [`ibmcloud ks nlb-dns rm classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm)
-
-    * [`ibmcloud ks nlb-dns rm vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm-vpc-gen2)
-
-    * [Experimental: `ibmcloud ks nlb-dns secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-regenerate)
-
-    * [Experimental: `ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm)
-
-* [`ibmcloud ks vpc secure-by-default enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-options)
-
-* [`webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_webhook_create)
-
-    * [Example `webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-example)
-
-* [`api-key` commands](/docs/containers?topic=containers-kubernetes-service-cli#api_key-commands)
-
-    * [`ibmcloud ks api-key info`](/docs/containers?topic=containers-kubernetes-service-cli#cs_api_key_info)
-
-    * [`ibmcloud ks api-key reset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_api_key_reset)
-
-* [`credential` commands](/docs/containers?topic=containers-kubernetes-service-cli#credential)
-
-    * [`ibmcloud ks credential get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credential_get)
-
-    * [`ibmcloud ks credential set classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_set)
-
-    * [`ibmcloud ks credential unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_unset)
-
-* [`infra-permissions` commands](/docs/containers?topic=containers-kubernetes-service-cli#infra-commands)
-
-    * [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get)
-
-* [`kms` commands](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms)
-
-    * [`ibmcloud ks kms crk ls`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_crk_ls)
-
-    * [`ibmcloud ks kms enable`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_enable)
-
-    * [`ibmcloud ks kms instance ls`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_instance_ls)
-
-* [`quota` commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_quota)
-
-    * [`ibmcloud ks quota ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_quota_ls)
-
-* [`subnets` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_subnets)
-
-* [`vlan` commands](/docs/containers?topic=containers-kubernetes-service-cli#vlan)
-
-    * [`ibmcloud ks vlan ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlans)
-
-    * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get)
-
-* [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-options)
-
-* [`ibmcloud ks vpc outbound-traffic-protection disable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-options)
-
-* [`ibmcloud ks vpc outbound-traffic-protection enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-options)
-
-* [`flavor` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types)
-
-    * [`flavor get` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_flavor_get)
-
-    * [`flavor ls` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_flavor_ls)
-
-* [`messages` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_messages)
-
-* [locations command](/docs/containers?topic=containers-kubernetes-service-cli#cs_supported-locations)
-
-* [`versions` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_versions_command)
-
-* [`api` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api)
-
-* [`init` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_init)
-
-* [`script` commands](/docs/containers?topic=containers-kubernetes-service-cli#script)
-
-    * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update)
-
-* [`security-group` commands](/docs/containers?topic=containers-kubernetes-service-cli#security_group)
-
-* [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-options)
-
-    * [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_reset)
-
-    * [`ibmcloud ks security-group sync`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_sync)
-
-* [Beta: `storage` commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage)
-
-    * [`ibmcloud ks storage attachment create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_cr)
-
-    * [`ibmcloud ks storage attachment get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_get)
-
-    * [`ibmcloud ks storage attachment ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls)
-
-    * [`ibmcloud ks storage attachment rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_rm)
-
-    * [`ibmcloud ks storage volume get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_c)
-
-    * [`ibmcloud ks storage volume ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_2)
-
-[CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
-
-* [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
-
-* [Version v1.0.687](/docs/containers?topic=containers-cs_cli_changelog#cli-010687)
-
-* [Version v1.0.679](/docs/containers?topic=containers-cs_cli_changelog#cli-010679)
-
-* [Version v1.0.677](/docs/containers?topic=containers-cs_cli_changelog#cli-010677)
-
-* [Version v1.0.674](/docs/containers?topic=containers-cs_cli_changelog#cli-010674)
-
-* [Version v1.0.673](/docs/containers?topic=containers-cs_cli_changelog#cli-010673)
-
-* [Version v1.0.665](/docs/containers?topic=containers-cs_cli_changelog#cli-010665)
-
-* [Version v1.0.657](/docs/containers?topic=containers-cs_cli_changelog#cli-010657)
-
-* [Version v1.0.652](/docs/containers?topic=containers-cs_cli_changelog#cli-010652)
-
-* [Version v1.0.640](/docs/containers?topic=containers-cs_cli_changelog#cli-010640)
-
-* [Version v1.0.638](/docs/containers?topic=containers-cs_cli_changelog#cli-010638)
-
-* [Version v1.0.635](/docs/containers?topic=containers-cs_cli_changelog#cli-010635)
-
-* [Version v1.0.632](/docs/containers?topic=containers-cs_cli_changelog#cli-010632)
-
-* [Version v1.0.630](/docs/containers?topic=containers-cs_cli_changelog#cli-010630)
-
-* [Version v1.0.628](/docs/containers?topic=containers-cs_cli_changelog#cli-010628)
-
-* [Version v1.0.618](/docs/containers?topic=containers-cs_cli_changelog#cli-010618)
-
-* [Version v1.0.617](/docs/containers?topic=containers-cs_cli_changelog#cli-010617)
-
-* [Version v1.0.613](/docs/containers?topic=containers-cs_cli_changelog#cli-010613)
-
-* [Version v1.0.601](/docs/containers?topic=containers-cs_cli_changelog#cli-010601)
-
-* [Version v1.0.597](/docs/containers?topic=containers-cs_cli_changelog#cli-01597)
-
-* [Version v1.0.595](/docs/containers?topic=containers-cs_cli_changelog#cli-01959)
-
-* [Version v1.0.589](/docs/containers?topic=containers-cs_cli_changelog#cli-01589)
-
-* [Version v1.0.579](/docs/containers?topic=containers-cs_cli_changelog#cli-01579)
-
-* [Version 0.1.573](/docs/containers?topic=containers-cs_cli_changelog#cli-01573)
-
-* [Version v1.0.566](/docs/containers?topic=containers-cs_cli_changelog#cli-10566)
-
-* [Version v1.0.540](/docs/containers?topic=containers-cs_cli_changelog#cli-10549)
-
-* [Version v1.0.528](/docs/containers?topic=containers-cs_cli_changelog#cli-10528)
-
-* [Version v1.0.523](/docs/containers?topic=containers-cs_cli_changelog#cli-10523)
-
-* [Version v1.0.516](/docs/containers?topic=containers-cs_cli_changelog#cli-10516)
-
-* [Version v1.0.510](/docs/containers?topic=containers-cs_cli_changelog#cli-10510)
-
-* [Version v1.0.498](/docs/containers?topic=containers-cs_cli_changelog#cli-10498)
-
-* [Version 1.0.489](/docs/containers?topic=containers-cs_cli_changelog#cli-10489)
-
-* [Version 1.0.487](/docs/containers?topic=containers-cs_cli_changelog#cli-10487)
-
-* [Version 1.0.480](/docs/containers?topic=containers-cs_cli_changelog#cli-10480)
-
-* [Version 1.0.471](/docs/containers?topic=containers-cs_cli_changelog#cli-10471)
-
-* [Version 1.0.459](/docs/containers?topic=containers-cs_cli_changelog#cli-10459)
-
-* [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10454)
-
-* [Version 1.0.452](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
-
-* [Version 1.0.446](/docs/containers?topic=containers-cs_cli_changelog#cli-10446)
-
-* [Version 1.0.444](/docs/containers?topic=containers-cs_cli_changelog#cli-10444)
-
-* [Version 1.0.439](/docs/containers?topic=containers-cs_cli_changelog#cli-10439)
-
-* [Version 1.0.433](/docs/containers?topic=containers-cs_cli_changelog#cli-10433)
-
-* [Version 1.0.431](/docs/containers?topic=containers-cs_cli_changelog#cli-10431)
-
-* [Version 1.0.430](/docs/containers?topic=containers-cs_cli_changelog#cli-10430)
-
-* [Version 1.0.426](/docs/containers?topic=containers-cs_cli_changelog#cli-10426)
-
-* [Version 1.0.422](/docs/containers?topic=containers-cs_cli_changelog#cli-10422)
-
-* [Version 1.0.420](/docs/containers?topic=containers-cs_cli_changelog#cli-10420)
-
-* [Version 1.0.419](/docs/containers?topic=containers-cs_cli_changelog#cli-10419)
-
-* [Version 1.0.415](/docs/containers?topic=containers-cs_cli_changelog#cli-10415)
-
-* [Version 1.0.408](/docs/containers?topic=containers-cs_cli_changelog#cli-10408)
-
-* [Version 1.0.404](/docs/containers?topic=containers-cs_cli_changelog#cli-10404)
-
-* [Version 1.0.403](/docs/containers?topic=containers-cs_cli_changelog#cli-10403)
-
-* [Version 1.0.394](/docs/containers?topic=containers-cs_cli_changelog#cli-10394)
-
-* [Version 1.0.384](/docs/containers?topic=containers-cs_cli_changelog#cli-10384)
-
-* [Version 1.0.374](/docs/containers?topic=containers-cs_cli_changelog#cli-10374)
-
-* [Version 1.0.372](/docs/containers?topic=containers-cs_cli_changelog#cli-10372)
-
-* [Version 1.0.353](/docs/containers?topic=containers-cs_cli_changelog#cli-10353)
-
-* [Version 1.0.347](/docs/containers?topic=containers-cs_cli_changelog#cli-10347)
-
-* [Version 1.0.344](/docs/containers?topic=containers-cs_cli_changelog#cli-10344)
-
-* [Version 1.0.334](/docs/containers?topic=containers-cs_cli_changelog#cli-10334)
-
-* [Version 1.0.331](/docs/containers?topic=containers-cs_cli_changelog#cli-10331)
-
-* [Version 1.0.327](/docs/containers?topic=containers-cs_cli_changelog#cli-10327)
-
-* [Version 1.0.312](/docs/containers?topic=containers-cs_cli_changelog#cli-10312)
-
-* [Version 1.0.300](/docs/containers?topic=containers-cs_cli_changelog#cli-10300)
-
-* [Version 1.0.295](/docs/containers?topic=containers-cs_cli_changelog#cli-10295)
-
-* [Version 1.0.275](/docs/containers?topic=containers-cs_cli_changelog#cli-10275)
-
-* [Version 1.0.258](/docs/containers?topic=containers-cs_cli_changelog#cli-10258)
-
-* [Version 1.0.233](/docs/containers?topic=containers-cs_cli_changelog#cli-10233)
-
-* [Version 1.0.231](/docs/containers?topic=containers-cs_cli_changelog#cli-10231)
-
-* [Version 1.0.223](/docs/containers?topic=containers-cs_cli_changelog#cli-102238)
-
-* [Version 1.0.208](/docs/containers?topic=containers-cs_cli_changelog#cli-10208)
-
-* [Version 1.0.206](/docs/containers?topic=containers-cs_cli_changelog#cli-10206)
-
-* [Version 1.0.197](/docs/containers?topic=containers-cs_cli_changelog#cli-10197)
-
-* [Version 1.0.178](/docs/containers?topic=containers-cs_cli_changelog#cli-10178)
-
-* [Version 1.0.171](/docs/containers?topic=containers-cs_cli_changelog#cli-10171)
-
-* [Version 1.0.157](/docs/containers?topic=containers-cs_cli_changelog#cli-10157)
-
-* [Version 1.0.143](/docs/containers?topic=containers-cs_cli_changelog#cli-10143)
-
-* [Version 1.0.118](/docs/containers?topic=containers-cs_cli_changelog#cli-10118)
-
-* [Version 1.0.99](/docs/containers?topic=containers-cs_cli_changelog#cli-1099)
-
-* [Version 1.0.94](/docs/containers?topic=containers-cs_cli_changelog#cli-1094)
-
-* [Version 1.0.84](/docs/containers?topic=containers-cs_cli_changelog#cli-1084)
-
-* [Version 1.0.57](/docs/containers?topic=containers-cs_cli_changelog#cli-1057)
-
-* [Version 1.0.28](/docs/containers?topic=containers-cs_cli_changelog#cli-1028)
-
-* [Version 1.0.15](/docs/containers?topic=containers-cs_cli_changelog#cli-1015)
-
-* [Version 1.0.0](/docs/containers?topic=containers-cs_cli_changelog#cli-100)
-
-[Observability CLI plug-in](/docs/containers?topic=containers-observability_cli#observability_cli)
-
-* [Logging commands](/docs/containers?topic=containers-observability_cli#logging-commands)
-
-    * [`ibmcloud ob logging agent discover`](/docs/containers?topic=containers-observability_cli#logging_agent_discover)
-
-    * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
-
-    * [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
-
-    * [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
-
-    * [`ibmcloud ob logging config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#logging_config_enable)
-
-    * [`ibmcloud ob logging config replace`](/docs/containers?topic=containers-observability_cli#logging_config_replace)
-
-    * [`ibmcloud ob logging config show`](/docs/containers?topic=containers-observability_cli#logging_config_show)
-
-* [Monitoring commands](/docs/containers?topic=containers-observability_cli#monitoring_commands_top)
-
-    * [`ibmcloud ob monitoring agent discover`](/docs/containers?topic=containers-observability_cli#monitoring_agent_discover)
-
-    * [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
-
-    * [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
-
-    * [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
-
-    * [`ibmcloud ob monitoring config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#monitoring_config_enable)
-
-    * [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace)
-
-    * [`ibmcloud ob monitoring config show`](/docs/containers?topic=containers-observability_cli#monitoring_config_show)
-
-
 ## Version history
 {: #sitemap_version_history}
 
@@ -6580,6 +5864,618 @@ subcollection: containers
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-remediations-128)
 
 
+## CLI plug-in reference
+{: #sitemap_cli_plug-in_reference}
+
+
+[{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map#icks_map)
+
+* [ibmcloud ks cluster](/docs/containers?topic=containers-icks_map#icks_map_cluster)
+
+* [ibmcloud ks worker](/docs/containers?topic=containers-icks_map#icks_map_worker)
+
+* [ibmcloud ks worker-pool](/docs/containers?topic=containers-icks_map#icks_map_worker-pool)
+
+* [ibmcloud ks zone](/docs/containers?topic=containers-icks_map#icks_map_zone)
+
+* [ibmcloud ks ingress](/docs/containers?topic=containers-icks_map#icks_map_ingress)
+
+* [ibmcloud ks logging](/docs/containers?topic=containers-icks_map#icks_map_logging)
+
+* [ibmcloud ks nlb-dns](/docs/containers?topic=containers-icks_map#icks_map_nlb-dns)
+
+* [ibmcloud ks webhook-create](/docs/containers?topic=containers-icks_map#icks_map_webhook-create)
+
+* [ibmcloud ks api-key](/docs/containers?topic=containers-icks_map#icks_map_api-key)
+
+* [ibmcloud ks credential](/docs/containers?topic=containers-icks_map#icks_map_credential)
+
+* [ibmcloud ks infra-permissions](/docs/containers?topic=containers-icks_map#icks_map_infra-permissions)
+
+* [ibmcloud ks kms](/docs/containers?topic=containers-icks_map#icks_map_kms)
+
+* [ibmcloud ks quota](/docs/containers?topic=containers-icks_map#icks_map_quota)
+
+* [ibmcloud ks subnets](/docs/containers?topic=containers-icks_map#icks_map_subnets)
+
+* [ibmcloud ks vlan](/docs/containers?topic=containers-icks_map#icks_map_vlan)
+
+* [ibmcloud ks vpcs](/docs/containers?topic=containers-icks_map#icks_map_vpcs)
+
+* [ibmcloud ks flavors](/docs/containers?topic=containers-icks_map#icks_map_flavors)
+
+* [ibmcloud ks locations](/docs/containers?topic=containers-icks_map#icks_map_locations)
+
+* [ibmcloud ks messages](/docs/containers?topic=containers-icks_map#icks_map_messages)
+
+* [ibmcloud ks versions](/docs/containers?topic=containers-icks_map#icks_map_versions)
+
+* [ibmcloud ks api](/docs/containers?topic=containers-icks_map#icks_map_api)
+
+* [ibmcloud ks `init`](/docs/containers?topic=containers-icks_map#icks_map_init)
+
+* [ibmcloud ks script](/docs/containers?topic=containers-icks_map#icks_map_script)
+
+* [ibmcloud ks security-group](/docs/containers?topic=containers-icks_map#icks_map_security_group)
+
+* [ibmcloud ks storage](/docs/containers?topic=containers-icks_map#icks_map_storage)
+
+[{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
+
+* [{{site.data.keyword.containerlong_notm}} commands](/docs/containers?topic=containers-kubernetes-service-cli#cli_commands)
+
+* [`cluster` commands](/docs/containers?topic=containers-kubernetes-service-cli#cluster)
+
+    * [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable)
+
+    * [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
+
+    * [`ibmcloud ks cluster addon get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
+
+    * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addons)
+
+    * [`ibmcloud ks cluster addon options`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_options)
+
+    * [`ibmcloud ks cluster addon update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_update)
+
+    * [`ibmcloud ks cluster addon versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_addon_versions)
+
+    * [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_create)
+
+    * [`ibmcloud ks cluster ca get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_get)
+
+    * [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_rotate)
+
+    * [`ibmcloud ks cluster ca status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_ca_status)
+
+    * [`ibmcloud ks cluster config`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_config)
+
+    * [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create)
+
+    * [`ibmcloud ks cluster create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_cluster-create-vpc-gen2)
+
+    * [`ibmcloud ks cluster get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get)
+
+    * [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-disable)
+
+    * [`ibmcloud ks cluster image-security enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-enable)
+
+    * [`ibmcloud ks cluster ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_clusters)
+
+    * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-kubernetes-service-cli#cluster_master_audit_webhook)
+
+* [`ibmcloud ks cluster master console-oauth-access get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-options)
+
+* [`ibmcloud ks cluster master console-oauth-access set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-options)
+
+    * [`ibmcloud ks cluster master pod-security get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-get)
+
+    * [`ibmcloud ks cluster master pod-security policy disable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-disable)
+
+    * [`ibmcloud ks cluster master pod-security policy enable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-enable)
+
+    * [`ibmcloud ks cluster master pod-security policy get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-policy-get)
+
+    * [`ibmcloud ks cluster master pod-security set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-set)
+
+    * [`ibmcloud ks cluster master pod-security unset`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-unset)
+
+    * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-kubernetes-service-cli#cs_master_pse_allowlist)
+
+    * [`ibmcloud ks cluster master private-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_disable)
+
+    * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pse_enable)
+
+    * [`ibmcloud ks cluster master public-service-endpoint disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_disable)
+
+    * [`ibmcloud ks cluster master public-service-endpoint enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_master_pub_se_enable)
+
+    * [`ibmcloud ks cluster master refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh)
+
+    * [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update)
+
+    * [`ibmcloud ks cluster pull-secret apply`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_pull_secret_apply)
+
+    * [`ibmcloud ks cluster rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_rm)
+
+    * [`ibmcloud ks cluster service bind`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_service_bind)
+
+    * [`ibmcloud ks cluster service ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_services)
+
+    * [`ibmcloud ks cluster service unbind`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_service_unbind)
+
+    * [`ibmcloud ks cluster subnet add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_add)
+
+    * [`ibmcloud ks cluster subnet create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_create)
+
+    * [`ibmcloud ks cluster subnet detach`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_subnet_detach)
+
+    * [Deprecated: `ibmcloud ks cluster user-subnet add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_add)
+
+    * [Deprecated: `ibmcloud ks cluster user-subnet rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_user_subnet_rm)
+
+* [Beta: `dedicated` commands](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_commands)
+
+    * [Beta: `ibmcloud ks dedicated flavors`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_flavors)
+
+    * [Beta: `ibmcloud ks dedicated host create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_create)
+
+    * [Beta: `ibmcloud ks dedicated host get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_get)
+
+    * [Beta: `ibmcloud ks dedicated host ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_ls)
+
+    * [Beta: `ibmcloud ks dedicated host placement disable`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_placement_disable)
+
+    * [Beta: `ibmcloud ks dedicated host placement enable`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_placement_enable)
+
+    * [Beta: `ibmcloud ks dedicated host rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_host_rm)
+
+    * [Beta: `ibmcloud ks dedicated pool create`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_create)
+
+    * [Beta: `ibmcloud ks dedicated pool get`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_get)
+
+    * [Beta: `ibmcloud ks dedicated pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#dedicate_pool_ls)
+
+    * [Beta: `ibmcloud ks dedicated pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#dedicated_pool_rm)
+
+* [`worker` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker_node_commands)
+
+    * [Deprecated: `ibmcloud ks worker add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add)
+
+    * [`ibmcloud ks worker get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_get)
+
+    * [`ibmcloud ks worker ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_workers)
+
+    * [`ibmcloud ks worker reboot`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot)
+
+    * [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload)
+
+    * [`ibmcloud ks worker replace`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace)
+
+    * [`ibmcloud ks worker rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_rm)
+
+    * [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update)
+
+* [`worker-pool` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool)
+
+    * [`ibmcloud ks worker-pool create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create)
+
+    * [`ibmcloud ks worker-pool create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
+
+    * [`ibmcloud ks worker-pool get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
+
+    * [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_rm)
+
+    * [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set)
+
+    * [`ibmcloud ks worker-pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pools)
+
+    * [`ibmcloud ks worker-pool operating-system set`](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-operating-system-set-cli)
+
+    * [`ibmcloud ks worker-pool rebalance`](/docs/containers?topic=containers-kubernetes-service-cli#cs_rebalance)
+
+    * [`ibmcloud ks worker-pool resize`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_resize)
+
+    * [`ibmcloud ks worker-pool rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_rm)
+
+    * [`ibmcloud ks worker-pool taint`](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint)
+
+    * [`ibmcloud ks worker-pool zones`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_zones)
+
+* [`zone` commands](/docs/containers?topic=containers-kubernetes-service-cli#zone)
+
+    * [`ibmcloud ks zone add classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_add)
+
+    * [`ibmcloud ks zone add vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_zone-add-vpc-gen2)
+
+    * [`ibmcloud ks zone ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_datacenters)
+
+    * [`ibmcloud ks zone network-set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_network_set)
+
+    * [`ibmcloud ks zone rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_zone_rm)
+
+* [`ingress` commands](/docs/containers?topic=containers-kubernetes-service-cli#alb-commands)
+
+    * [`ibmcloud ks ingress alb autoscale get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_get)
+
+    * [`ibmcloud ks ingress alb autoscale set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_set)
+
+    * [`ibmcloud ks ingress alb autoscale unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoscale_unset)
+
+    * [`ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable)
+
+    * [`ibmcloud ks ingress alb autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable)
+
+    * [`ibmcloud ks ingress alb autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_get)
+
+    * [`ibmcloud ks ingress alb create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_create)
+
+    * [`ibmcloud ks ingress alb create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb-create-vpc-gen2)
+
+    * [`ibmcloud ks ingress alb disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable)
+
+    * [`ibmcloud ks ingress alb enable classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure)
+
+    * [`ibmcloud ks ingress alb enable vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb_configure_vpc_gen2)
+
+    * [`ibmcloud ks ingress alb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_get)
+
+    * [`ibmcloud ks ingress alb health-checker disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_disable)
+
+    * [`ibmcloud ks ingress alb health-checker enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_enable)
+
+    * [`ibmcloud ks ingress alb health-checker get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_get)
+
+    * [`ibmcloud ks ingress alb ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs)
+
+    * [`ibmcloud ks ingress alb update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_update)
+
+    * [`ibmcloud ks ingress alb versions`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_versions)
+
+    * [`ibmcloud ks ingress domain create`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-create)
+
+    * [`ibmcloud ks ingress domain default replace`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-default-replace)
+
+    * [`ibmcloud ks ingress domain get`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-get)
+
+    * [`ibmcloud ks ingress domain ls`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-ls)
+
+    * [`ibmcloud ks ingress domain rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-rm)
+
+    * [`ibmcloud ks ingress domain secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-regenerate)
+
+    * [`ibmcloud ks ingress domain secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-rm)
+
+    * [`ibmcloud ks ingress domain update`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-update)
+
+    * [`ibmcloud ks ingress instance default set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_set)
+
+    * [`ibmcloud ks ingress instance default unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_default_unset)
+
+    * [`ibmcloud ks ingress instance get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_get)
+
+    * [`ibmcloud ks ingress instance ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_ls)
+
+    * [`ibmcloud ks ingress instance register`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_register)
+
+    * [`ibmcloud ks ingress instance unregister`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_unregister)
+
+    * [`ibmcloud ks ingress lb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_get)
+
+    * [`ibmcloud ks ingress lb proxy-protocol disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_disable)
+
+    * [`ibmcloud ks ingress lb proxy-protocol enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable)
+
+    * [`ibmcloud ks ingress secret create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create)
+
+    * [`ibmcloud ks ingress secret field add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add)
+
+    * [`ibmcloud ks ingress secret field ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_ls)
+
+    * [`ibmcloud ks ingress secret field rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_rm)
+
+    * [`ibmcloud ks ingress secret get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_get)
+
+    * [`ibmcloud ks ingress secret ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_ls)
+
+    * [`ibmcloud ks ingress secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_rm)
+
+    * [`ibmcloud ks ingress secret update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update)
+
+    * [`ibmcloud ks ingress status-report disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_disable)
+
+    * [`ibmcloud ks ingress status-report enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_enable)
+
+    * [`ibmcloud ks ingress status-report get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_get)
+
+    * [`ibmcloud ks ingress status-report ignored-errors add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_add)
+
+    * [`ibmcloud ks ingress status-report ignored-errors ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_ls)
+
+    * [`ibmcloud ks ingress status-report ignored-errors rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_ignore_rm)
+
+* [`logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging_commands)
+
+    * [`ibmcloud ks logging autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_disable)
+
+    * [`ibmcloud ks logging autoupdate enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_enable)
+
+    * [`ibmcloud ks logging autoupdate get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_autoupdate_get)
+
+    * [`ibmcloud ks logging config create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_create)
+
+    * [`ibmcloud ks logging config get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_get)
+
+    * [`ibmcloud ks logging config rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_rm)
+
+    * [`ibmcloud ks logging config update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_update)
+
+    * [`ibmcloud ks logging filter create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_create)
+
+    * [`ibmcloud ks logging filter get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_view)
+
+    * [`ibmcloud ks logging filter rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_delete)
+
+    * [`ibmcloud ks logging filter update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_update)
+
+    * [`ibmcloud ks logging refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_refresh)
+
+* [`nlb-dns` commands](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns)
+
+    * [`ibmcloud ks nlb-dns add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-add)
+
+    * [`ibmcloud ks nlb-dns create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create)
+
+    * [`ibmcloud ks nlb-dns create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-create-vpc-gen2)
+
+    * [`ibmcloud ks nlb-dns get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-get)
+
+    * [`ibmcloud ks nlb-dns ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-ls)
+
+    * [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-configure)
+
+    * [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-disable)
+
+    * [`ibmcloud ks nlb-dns monitor enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-enable)
+
+    * [`ibmcloud ks nlb-dns monitor get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-get)
+
+    * [`ibmcloud ks nlb-dns monitor ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-ls)
+
+    * [`ibmcloud ks nlb-dns replace`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-replace)
+
+    * [`ibmcloud ks nlb-dns rm classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm)
+
+    * [`ibmcloud ks nlb-dns rm vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm-vpc-gen2)
+
+    * [Experimental: `ibmcloud ks nlb-dns secret regenerate`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-regenerate)
+
+    * [Experimental: `ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm)
+
+* [`ibmcloud ks vpc secure-by-default enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-options)
+
+* [`webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_webhook_create)
+
+    * [Example `webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-example)
+
+* [`api-key` commands](/docs/containers?topic=containers-kubernetes-service-cli#api_key-commands)
+
+    * [`ibmcloud ks api-key info`](/docs/containers?topic=containers-kubernetes-service-cli#cs_api_key_info)
+
+    * [`ibmcloud ks api-key reset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_api_key_reset)
+
+* [`credential` commands](/docs/containers?topic=containers-kubernetes-service-cli#credential)
+
+    * [`ibmcloud ks credential get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credential_get)
+
+    * [`ibmcloud ks credential set classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_set)
+
+    * [`ibmcloud ks credential unset`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_unset)
+
+* [`infra-permissions` commands](/docs/containers?topic=containers-kubernetes-service-cli#infra-commands)
+
+    * [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get)
+
+* [`kms` commands](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms)
+
+    * [`ibmcloud ks kms crk ls`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_crk_ls)
+
+    * [`ibmcloud ks kms enable`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_enable)
+
+    * [`ibmcloud ks kms instance ls`](/docs/containers?topic=containers-kubernetes-service-cli#ks_kms_instance_ls)
+
+* [`quota` commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_quota)
+
+    * [`ibmcloud ks quota ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_quota_ls)
+
+* [`subnets` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_subnets)
+
+* [`vlan` commands](/docs/containers?topic=containers-kubernetes-service-cli#vlan)
+
+    * [`ibmcloud ks vlan ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlans)
+
+    * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get)
+
+* [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-options)
+
+* [`ibmcloud ks vpc outbound-traffic-protection disable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-options)
+
+* [`ibmcloud ks vpc outbound-traffic-protection enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-options)
+
+* [`flavor` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types)
+
+    * [`flavor get` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_flavor_get)
+
+    * [`flavor ls` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_flavor_ls)
+
+* [`messages` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_messages)
+
+* [locations command](/docs/containers?topic=containers-kubernetes-service-cli#cs_supported-locations)
+
+* [`versions` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_versions_command)
+
+* [`api` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api)
+
+* [`init` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_init)
+
+* [`script` commands](/docs/containers?topic=containers-kubernetes-service-cli#script)
+
+    * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script_update)
+
+* [`security-group` commands](/docs/containers?topic=containers-kubernetes-service-cli#security_group)
+
+* [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-options)
+
+    * [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_reset)
+
+    * [`ibmcloud ks security-group sync`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_sync)
+
+* [Beta: `storage` commands](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage)
+
+    * [`ibmcloud ks storage attachment create`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_cr)
+
+    * [`ibmcloud ks storage attachment get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_get)
+
+    * [`ibmcloud ks storage attachment ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls)
+
+    * [`ibmcloud ks storage attachment rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_rm)
+
+    * [`ibmcloud ks storage volume get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_c)
+
+    * [`ibmcloud ks storage volume ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_2)
+
+[CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
+
+* [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.687](/docs/containers?topic=containers-cs_cli_changelog#cli-010687)
+
+* [Version v1.0.679](/docs/containers?topic=containers-cs_cli_changelog#cli-010679)
+
+* [Version v1.0.677](/docs/containers?topic=containers-cs_cli_changelog#cli-010677)
+
+* [Version v1.0.674](/docs/containers?topic=containers-cs_cli_changelog#cli-010674)
+
+* [Version v1.0.673](/docs/containers?topic=containers-cs_cli_changelog#cli-010673)
+
+* [Version v1.0.665](/docs/containers?topic=containers-cs_cli_changelog#cli-010665)
+
+* [Version v1.0.657](/docs/containers?topic=containers-cs_cli_changelog#cli-010657)
+
+* [Version v1.0.652](/docs/containers?topic=containers-cs_cli_changelog#cli-010652)
+
+* [Version v1.0.640](/docs/containers?topic=containers-cs_cli_changelog#cli-010640)
+
+* [Version v1.0.638](/docs/containers?topic=containers-cs_cli_changelog#cli-010638)
+
+* [Version v1.0.635](/docs/containers?topic=containers-cs_cli_changelog#cli-010635)
+
+* [Version v1.0.632](/docs/containers?topic=containers-cs_cli_changelog#cli-010632)
+
+* [Version v1.0.630](/docs/containers?topic=containers-cs_cli_changelog#cli-010630)
+
+* [Version v1.0.628](/docs/containers?topic=containers-cs_cli_changelog#cli-010628)
+
+* [Version v1.0.618](/docs/containers?topic=containers-cs_cli_changelog#cli-010618)
+
+* [Version v1.0.617](/docs/containers?topic=containers-cs_cli_changelog#cli-010617)
+
+* [Version v1.0.613](/docs/containers?topic=containers-cs_cli_changelog#cli-010613)
+
+* [Version v1.0.601](/docs/containers?topic=containers-cs_cli_changelog#cli-010601)
+
+* [Version v1.0.597](/docs/containers?topic=containers-cs_cli_changelog#cli-01597)
+
+* [Version v1.0.595](/docs/containers?topic=containers-cs_cli_changelog#cli-01959)
+
+* [Version v1.0.589](/docs/containers?topic=containers-cs_cli_changelog#cli-01589)
+
+* [Version v1.0.579](/docs/containers?topic=containers-cs_cli_changelog#cli-01579)
+
+* [Version 0.1.573](/docs/containers?topic=containers-cs_cli_changelog#cli-01573)
+
+* [Version v1.0.566](/docs/containers?topic=containers-cs_cli_changelog#cli-10566)
+
+* [Version v1.0.540](/docs/containers?topic=containers-cs_cli_changelog#cli-10549)
+
+* [Version v1.0.528](/docs/containers?topic=containers-cs_cli_changelog#cli-10528)
+
+* [Version v1.0.523](/docs/containers?topic=containers-cs_cli_changelog#cli-10523)
+
+* [Version v1.0.516](/docs/containers?topic=containers-cs_cli_changelog#cli-10516)
+
+* [Version v1.0.510](/docs/containers?topic=containers-cs_cli_changelog#cli-10510)
+
+* [Version v1.0.498](/docs/containers?topic=containers-cs_cli_changelog#cli-10498)
+
+* [Version 1.0.489](/docs/containers?topic=containers-cs_cli_changelog#cli-10489)
+
+* [Version 1.0.487](/docs/containers?topic=containers-cs_cli_changelog#cli-10487)
+
+* [Version 1.0.480](/docs/containers?topic=containers-cs_cli_changelog#cli-10480)
+
+* [Version 1.0.471](/docs/containers?topic=containers-cs_cli_changelog#cli-10471)
+
+* [Version 1.0.459](/docs/containers?topic=containers-cs_cli_changelog#cli-10459)
+
+* [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10454)
+
+* [Version 1.0.452](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
+
+* [Version 1.0.446](/docs/containers?topic=containers-cs_cli_changelog#cli-10446)
+
+* [Version 1.0.444](/docs/containers?topic=containers-cs_cli_changelog#cli-10444)
+
+* [Version 1.0.439](/docs/containers?topic=containers-cs_cli_changelog#cli-10439)
+
+* [Version 1.0.433](/docs/containers?topic=containers-cs_cli_changelog#cli-10433)
+
+* [Version 1.0.431](/docs/containers?topic=containers-cs_cli_changelog#cli-10431)
+
+* [Version 1.0.430](/docs/containers?topic=containers-cs_cli_changelog#cli-10430)
+
+* [Version 1.0.426](/docs/containers?topic=containers-cs_cli_changelog#cli-10426)
+
+* [Version 1.0.422](/docs/containers?topic=containers-cs_cli_changelog#cli-10422)
+
+* [Version 1.0.420](/docs/containers?topic=containers-cs_cli_changelog#cli-10420)
+
+* [Version 1.0.419](/docs/containers?topic=containers-cs_cli_changelog#cli-10419)
+
+* [Version 1.0.415](/docs/containers?topic=containers-cs_cli_changelog#cli-10415)
+
+* [Version 1.0.408](/docs/containers?topic=containers-cs_cli_changelog#cli-10408)
+
+
+## API reference
+{: #sitemap_api_reference}
+
+
+[IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external}
+
+[IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json){: external}
+
+[IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry){: external}
+
+[IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va){: external}
+
+[Community Kubernetes API](https://kubernetes.io/docs/reference/){: external}
+
+
 ## Add-ons for {{site.data.keyword.containerlong_notm}}
 {: #sitemap_add-ons_for_}
 
@@ -6812,158 +6708,6 @@ subcollection: containers
     * [Change log for 1.12.8, released 21 June 2022](/docs/containers?topic=containers-istio-changelog#1128)
 
     * [Change log for 1.12.7, released 19 May 2022](/docs/containers?topic=containers-istio-changelog#1127)
-
-    * [Change log for 1.12.6, released 19 April 2022](/docs/containers?topic=containers-istio-changelog#1126)
-
-    * [Change log for 1.12.5, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1125)
-
-    * [Change log for 1.12.4, released 8 March 2022](/docs/containers?topic=containers-istio-changelog#1124)
-
-    * [Change log for 1.12.3, released 22 February 2021](/docs/containers?topic=containers-istio-changelog#1123)
-
-    * [Change log for 1.12.2, released 03 February 2022](/docs/containers?topic=containers-istio-changelog#1122)
-
-    * [Change log for 1.12.1, released 13 January 2022](/docs/containers?topic=containers-istio-changelog#1121)
-
-    * [Change log for 1.12.0, released 08 December 2021](/docs/containers?topic=containers-istio-changelog#1120)
-
-* [Version 1.11 (unsupported)](/docs/containers?topic=containers-istio-changelog#v111)
-
-    * [Change log for 1.11.8, released 22 March 2022](/docs/containers?topic=containers-istio-changelog#1118)
-
-    * [Change log for 1.11.7, released 8 March 2022](/docs/containers?topic=containers-istio-changelog#1117)
-
-    * [Change log for 1.11.6, released 15 February 2022](/docs/containers?topic=containers-istio-changelog#1116)
-
-    * [Change log for 1.11.5, released 14 December 2021](/docs/containers?topic=containers-istio-changelog#1115)
-
-    * [Change log for 1.11.4, released 2 November 2021](/docs/containers?topic=containers-istio-changelog#1114)
-
-    * [Change log for 1.11.3, released 7 October 2021](/docs/containers?topic=containers-istio-changelog#1113)
-
-    * [Change log for 1.11.2, released 23 September 2021](/docs/containers?topic=containers-istio-changelog#1112)
-
-    * [Change log for 1.11.1, released 31 August 2021](/docs/containers?topic=containers-istio-changelog#1111)
-
-* [Version 1.10 (unsupported)](/docs/containers?topic=containers-istio-changelog#v110)
-
-    * [Change log for 1.10.6, released 13 January 2022](/docs/containers?topic=containers-istio-changelog#1106)
-
-    * [Change log for 1.10.5, released 28 October 2021](/docs/containers?topic=containers-istio-changelog#1105)
-
-    * [Change log for 1.10.4, released 14 September 2021](/docs/containers?topic=containers-istio-changelog#1104)
-
-    * [Change log for 1.10.3, released 5 August 2021](/docs/containers?topic=containers-istio-changelog#1103)
-
-    * [Change log for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
-
-* [Version 1.9 (unsupported)](/docs/containers?topic=containers-istio-changelog#v19)
-
-    * [Change log for 1.9.8, released 14 September 2021](/docs/containers?topic=containers-istio-changelog#198)
-
-    * [Change log for 1.9.7, released 12 August 2021](/docs/containers?topic=containers-istio-changelog#197)
-
-    * [Change log for 1.9.6, released 22 July 2021](/docs/containers?topic=containers-istio-changelog#196)
-
-    * [Change log for 1.9.5, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#195)
-
-    * [Change log for 1.9.4, released 17 May 2021](/docs/containers?topic=containers-istio-changelog#194)
-
-    * [Change log for 1.9.3, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#193)
-
-    * [Change log for 1.9.2, released 1 April 2021](/docs/containers?topic=containers-istio-changelog#192)
-
-* [Version 1.8 (unsupported)](/docs/containers?topic=containers-istio-changelog#v18)
-
-    * [Change log for 1.8.6, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#186)
-
-    * [Change log for 1.8.5, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#185)
-
-    * [Change log for 1.8.4, released 23 March 2021](/docs/containers?topic=containers-istio-changelog#184)
-
-    * [Change log for 1.8.3, released 1 March 2021](/docs/containers?topic=containers-istio-changelog#183)
-
-    * [Change log for 1.8.2, released 25 January 2021](/docs/containers?topic=containers-istio-changelog#182)
-
-    * [Change log for 1.8.1, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#181)
-
-    * [Change log for 1.8.0, released 9 December 2020](/docs/containers?topic=containers-istio-changelog#180)
-
-* [Version 1.7 (unsupported)](/docs/containers?topic=containers-istio-changelog#v17)
-
-    * [Change log for 1.7.8, released 10 March 2021](/docs/containers?topic=containers-istio-changelog#178)
-
-    * [Change log for 1.7.7, released 8 February 2021](/docs/containers?topic=containers-istio-changelog#177)
-
-    * [Change log for 1.7.6, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#176)
-
-    * [Change log for 1.7.5, released 3 December 2020](/docs/containers?topic=containers-istio-changelog#175)
-
-    * [Change log for 1.7.4, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#174)
-
-    * [Change log for 1.7.3, released 06 October 2020](/docs/containers?topic=containers-istio-changelog#173)
-
-    * [Change log for 1.7.2, released 23 September 2020](/docs/containers?topic=containers-istio-changelog#172)
-
-    * [Change log for 1.7.1, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#171)
-
-    * [Change log for 1.7.0, released 02 September 2020](/docs/containers?topic=containers-istio-changelog#170)
-
-* [Version 1.6 (unsupported)](/docs/containers?topic=containers-istio-changelog#v16)
-
-    * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
-
-    * [Change log for 1.6.14, released 3 December 2020](/docs/containers?topic=containers-istio-changelog#1614)
-
-    * [Change log for 1.6.13, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#1613)
-
-    * [Change log for 1.6.12, released 22 October 2020](/docs/containers?topic=containers-istio-changelog#1612)
-
-    * [Change log for 1.6.11, released 06 October 2020](/docs/containers?topic=containers-istio-changelog#1611)
-
-    * [Change log for 1.6.9, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#169)
-
-    * [Change log for 1.6.8, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#168)
-
-    * [Change log for 1.6.7, released 04 August 2020](/docs/containers?topic=containers-istio-changelog#167)
-
-    * [Change log for 1.6.5, released 17 July 2020](/docs/containers?topic=containers-istio-changelog#165)
-
-    * [Change log for 1.6, released 08 July 2020](/docs/containers?topic=containers-istio-changelog#16)
-
-* [Version 1.5 (unsupported)](/docs/containers?topic=containers-istio-changelog#v15)
-
-    * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
-
-    * [Change log for 1.5.10, released 1 September 2020](/docs/containers?topic=containers-istio-changelog#1510)
-
-    * [Change log for 1.5.9, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#159)
-
-    * [Change log for 1.5.8, released 16 July 2020](/docs/containers?topic=containers-istio-changelog#158)
-
-    * [Change log for 1.5.7, released 8 July 2020](/docs/containers?topic=containers-istio-changelog#157)
-
-    * [Change log for 1.5.6, released 23 June 2020](/docs/containers?topic=containers-istio-changelog#156)
-
-    * [Change log for 1.5, released 19 May 2020](/docs/containers?topic=containers-istio-changelog#15)
-
-* [Version 1.4 (unsupported)](/docs/containers?topic=containers-istio-changelog#v14)
-
-* [Change log for 1.4.9, released 18 May 2020](/docs/containers?topic=containers-istio-changelog#149)
-
-* [Change log for 1.4.8, released 30 April 2020](/docs/containers?topic=containers-istio-changelog#148)
-
-* [Change log for 1.4.7, released 01 April 2020](/docs/containers?topic=containers-istio-changelog#147)
-
-* [Change log for 1.4.6, released 09 March 2020](/docs/containers?topic=containers-istio-changelog#146)
-
-* [Change log for 1.4.5, released 21 February 2020](/docs/containers?topic=containers-istio-changelog#145)
-
-* [Change log for 1.4.4, released 14 February 2020](/docs/containers?topic=containers-istio-changelog#144)
-
-* [Change log for 1.4.3, released 16 January 2020](/docs/containers?topic=containers-istio-changelog#143)
-
-* [Change log for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
@@ -7369,48 +7113,6 @@ subcollection: containers
 
     * [Change log for version 4.2.5_1106, released 12 May 2022](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#425_1106_is_block_relnote)
 
-    * [Change log for version 4.2.3_983, released 11 April 2022](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#423_983_is_block_relnote)
-
-    * [Change log for version 4.2.2_900, released 24 March 2022](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#422_900_is_block_relnote)
-
-    * [Change log for version 4.2.1_895, released 17 March 2022](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#421_895_is_block_relnote)
-
-    * [Change log for version 4.2.0_890, released 28 February 2022](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#420_890_is_block_relnote)
-
-* [Version 4.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#041_is_block)
-
-    * [Change log for version 4.1.3_846, released 14 February 2022](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#413_846_is_block_relnote)
-
-    * [Change log for version 4.1.2_834, released 27 January 2022](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#412_834_is_block_relnote)
-
-    * [Change log for version 4.1.1_827, released 20 January 2022](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#0411837_is_block_relnote)
-
-    * [Change log for version 4.1.0_807, released 06 January 2022](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#41_is_block_relnote)
-
-* [Version 4.0](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#0400_is_block)
-
-    * [Change log for version 4.0.3_793, released 22 November 2021](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#403793_is_block_relnote)
-
-    * [Change log for version 4.0.1_780, released 06 October 2021](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#0400780_is_block_relnote)
-
-    * [Change log for version 4.0.0_769, released 16 September 2021](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#0400769_is_block_relnote)
-
-    * [Change log for version 4.0, released 1 September 2021](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#0400_is_block_relnote)
-
-* [Version 3.0.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#0301_is_block)
-
-    * [Change log for version 3.0.1, released 15 July 2021](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#301_init)
-
-* [Version 3.0.0](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#0300_is_block)
-
-    * [Change log for patch update 3.0.0_521, released 01 April 2021](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#3.0.0_521)
-
-    * [Change log for version 3.0.0, released 26 February 2021](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#0300_is_block_relnote)
-
-* [Archive](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#unsupported_versions)
-
-    * [Version 2.0.3](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#0203_is_block)
-
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
@@ -7560,46 +7262,6 @@ subcollection: containers
 * [Change log for version 2.1.16, released 25 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02116_object_plugin)
 
 * [Change log for version 2.1.15, released 6 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02115_object_plugin)
-
-* [Change log for version 2.1.14, released 13 April 2022](/docs/containers?topic=containers-cos_plugin_changelog#02114_object_plugin)
-
-* [Change log for version 2.1.13, released 24 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02113_object_plugin)
-
-* [Change log for version 2.1.12, released 11 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02112_object_plugin)
-
-* [Change log for version 2.1.11, released 1 March 2022](/docs/containers?topic=containers-cos_plugin_changelog#02111_object_plugin)
-
-* [Change log for version 2.1.10, released 17 February 2022](/docs/containers?topic=containers-cos_plugin_changelog#02110_object_plugin)
-
-* [Change log for version 2.1.9, released 24 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0219_object_plugin)
-
-* [Change log for version 2.1.8, released 17 January 2022](/docs/containers?topic=containers-cos_plugin_changelog#0218_object_plugin)
-
-* [Change log for version 2.1.7, released 18 November 2021](/docs/containers?topic=containers-cos_plugin_changelog#0217_object_plugin)
-
-* [Change log for version 2.1.6, released 22 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0216_object_plugin)
-
-* [Change log for version 2.1.5, released 5 October 2021](/docs/containers?topic=containers-cos_plugin_changelog#0215_object_plugin)
-
-* [Change log for version 2.1.4, released 1 September 2021](/docs/containers?topic=containers-cos_plugin_changelog#0214_object_plugin)
-
-* [Change log for version 2.1.3, released 25 August 2021](/docs/containers?topic=containers-cos_plugin_changelog#0213_object_plugin)
-
-* [Change log for version 2.1.2, released 22 June 2021](/docs/containers?topic=containers-cos_plugin_changelog#0212_object_plugin)
-
-* [Change log for version 2.1.1, released 03 June 2021](/docs/containers?topic=containers-cos_plugin_changelog#0211_object_plugin)
-
-* [Change log for version 2.1.0, released 26 May 2021](/docs/containers?topic=containers-cos_plugin_changelog#0210_object_plugin)
-
-* [Change log for version 2.0.9, 10 May 2021](/docs/containers?topic=containers-cos_plugin_changelog#0209_object_plugin)
-
-* [Change log for version 2.0.8, 19 April 2021](/docs/containers?topic=containers-cos_plugin_changelog#0208_object_plugin)
-
-* [Change log for version 2.0.7, 26 March 2021](/docs/containers?topic=containers-cos_plugin_changelog#0207_object_plugin)
-
-* [Change log for version 2.0.6, 18 December 2020](/docs/containers?topic=containers-cos_plugin_changelog#0206_object_plugin)
-
-* [Change log for version 2.0.5, released 25 November 2020](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
 [Static Route add-on version change log](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route)
 
@@ -7893,30 +7555,6 @@ subcollection: containers
     * [Version 1.2.1 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#1_2_1)
 
     * [Version 1.2.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#1_2_0)
-
-    * [Version 1.1.2 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#1_1_2)
-
-    * [Version 1.1.1 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#1_1_1)
-
-    * [Version 1.0.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#1_0_0)
-
-    * [Version 0.49.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#0_49_0)
-
-    * [Version 0.48.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#0_48_0)
-
-    * [Version 0.47.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#0_47_0)
-
-    * [Version 0.45.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#0_45_0)
-
-    * [Version 0.43.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#0_43_0)
-
-    * [Version 0.35.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#0_35_0)
-
-    * [Version 0.34.1 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#0_34_1)
-
-    * [Version 0.33.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#0_33_0)
-
-    * [Version 0.32.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#0_32_0)
 
 [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ibm-k8s-controller-config-change-log)
 
@@ -8696,28 +8334,6 @@ subcollection: containers
 
     * [Worker node fix pack 1.23.6_1529, released 09 May 2022](/docs/containers?topic=containers-changelog_123#1236_1529)
 
-    * [Master fix pack 1.23.6_1527, released 26 April 2022](/docs/containers?topic=containers-changelog_123#1236_1527)
-
-    * [Worker node fix pack 1.23.6_1528, released 25 April 2022](/docs/containers?topic=containers-changelog_123#1236_1528)
-
-    * [Worker node fix pack 1.23.5_1526, released 11 April 2022](/docs/containers?topic=containers-changelog_123#1235_1526)
-
-    * [Master fix pack 1.23.5_1525, released 6 April 2022](/docs/containers?topic=containers-changelog_123#1223_1525)
-
-    * [Master fix pack 1.23.5_1523, released 30 March 2022](/docs/containers?topic=containers-changelog_123#1235_1523)
-
-    * [Worker node fix pack 1.23.5_1524, released 28 March 2022](/docs/containers?topic=containers-changelog_123#1235_1524)
-
-    * [Worker node fix pack 1.23.4_1522, released 14 March 2022](/docs/containers?topic=containers-changelog_123#1234_1522)
-
-    * [Master fix pack 1.23.4_1520, released 3 March 2022](/docs/containers?topic=containers-changelog_123#1234_1520)
-
-    * [Worker node fix pack 1.23.4_1521, released 28 February 2022](/docs/containers?topic=containers-changelog_123#1234_1521)
-
-    * [Worker node fix pack 1.23.3_1519, released 14 February 2022](/docs/containers?topic=containers-changelog_123#1233_1519)
-
-    * [Master fix pack 1.23.3_1518 and worker node fix pack 1.23.2_1517, released 9 February 2022](/docs/containers?topic=containers-changelog_123#1233_1518_and_1232_1517)
-
 [Version 1.23 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-123)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-123#cis-section-1-123)
@@ -8832,52 +8448,6 @@ subcollection: containers
     * [Worker node fix pack 1.22.9_1552, released 23 May 2022](/docs/containers?topic=containers-changelog_122#1229_1552)
 
     * [Worker node fix pack 1.22.9_1551, released 09 May 2022](/docs/containers?topic=containers-changelog_122#1229_1551)
-
-    * [Master fix pack 1.22.9_1549, released 26 April 2022](/docs/containers?topic=containers-changelog_122#1229_1549)
-
-    * [Worker node fix pack 1.22.9_1550, released 25 April 2022](/docs/containers?topic=containers-changelog_122#1229_1550)
-
-    * [Worker node fix pack 1.22.8_1548, released 11 April 2022](/docs/containers?topic=containers-changelog_122#1228_1548)
-
-    * [Master fix pack 1.22.8_1547, released 6 April 2022](/docs/containers?topic=containers-changelog_122#1228_1547)
-
-    * [Master fix pack 1.22.8_1545, released 30 March 2022](/docs/containers?topic=containers-changelog_122#1228_1545)
-
-    * [Worker node fix pack 1.22.8_1546, released 28 March 2022](/docs/containers?topic=containers-changelog_122#1227_1546)
-
-    * [Worker node fix pack 1.22.7_1543, released 14 March 2022](/docs/containers?topic=containers-changelog_122#1227_1543)
-
-    * [Master fix pack 1.22.7_1541, released 3 March 2022](/docs/containers?topic=containers-changelog_122#1227_1541)
-
-    * [Worker node fix pack 1.22.7_1542, released 28 February 2022](/docs/containers?topic=containers-changelog_122#1227_1542)
-
-    * [Worker node fix pack 1.22.6_1539, released 14 February 2022](/docs/containers?topic=containers-changelog_122#1226_1539)
-
-    * [Worker node fix pack 1.22.6_1538, released 31 January 2022](/docs/containers?topic=containers-changelog_122#1226_1538)
-
-    * [Master fix pack 1.22.6_1537, released 26 January 2022](/docs/containers?topic=containers-changelog_122#1226_1537)
-
-    * [Worker node fix pack 1.22.4_1536, released 18 January 2022](/docs/containers?topic=containers-changelog_122#1224_1536)
-
-    * [Worker node fix pack 1.22.4_1534, released 4 January 2022](/docs/containers?topic=containers-changelog_122#1224_1534)
-
-    * [Master fix pack 1.22.4_1531, released 7 December 2021](/docs/containers?topic=containers-changelog_122#1224_1531)
-
-    * [Worker node fix pack 1.22.4_1532, released 6 December 2021](/docs/containers?topic=containers-changelog_122#1224_1532)
-
-    * [Worker node fix pack 1.22.3_1530, released 22 November 2021](/docs/containers?topic=containers-changelog_122#1223_1530)
-
-    * [Master fix pack 1.22.3_1529, released 17 November 2021](/docs/containers?topic=containers-changelog_122#1223_1529)
-
-    * [Worker node fix pack 1.22.2_1528, released 10 November 2021](/docs/containers?topic=containers-changelog_122#1222_1528)
-
-    * [Master fix pack 1.22.2_1526, released 29 October 2021](/docs/containers?topic=containers-changelog_122#1222_1526)
-
-    * [Worker node fix pack 1.22.2_1527, released 25 October 2021](/docs/containers?topic=containers-changelog_122#1222_1527)
-
-    * [Worker node fix pack 1.22.2_1524, released 11 October 2021](/docs/containers?topic=containers-changelog_122#1222_1524)
-
-    * [Master fix pack 1.22.2_1522 and worker node fix pack 1.22.2_1523, released 29 September 2021](/docs/containers?topic=containers-changelog_122#1222_1522_and_1222_1523)
 
 [Version 1.22 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-122)
 
@@ -9680,8 +9250,6 @@ subcollection: containers
 [After upgrading my classic cluster to version 1.21, I'm finding connectivity issues](/docs/containers?topic=containers-ts-network-classic121#ts-network-classic121)
 
 [Why are certain packets dropped on the public VLAN?](/docs/containers?topic=containers-mangle-table#mangle-table)
-
-[Why do OpenSSL connections to Let's Encrypt fail after 30 September 2021?](/docs/containers?topic=containers-ts-letsencrypt#ts-letsencrypt)
 
 [Debugging Calico components](/docs/containers?topic=containers-calico_log_level#calico_log_level)
 
