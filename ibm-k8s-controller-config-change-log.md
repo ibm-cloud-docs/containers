@@ -1,8 +1,8 @@
 ---
 
 copyright:
- years: 2022, 2024
-lastupdated: "2024-04-29"
+ years: 2022, 2025
+lastupdated: "2025-04-07"
 
 
 keywords: kubernetes, ingress, change log, configmap
@@ -23,6 +23,15 @@ The {{site.data.keyword.containerlong_notm}} `ibm-k8s-controller-config` ConfigM
 
 For more information about ALBs, see [Application Load Balancers](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-albs). For more information about the possible configuration values, see the [nginx-ingress documentation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/){: external}.
 
+## 07 April 2025
+{: #ingress-cm-07-apr-2025}
+
+- Adds two new options to the current default behavior.
+    - `allow-cross-namespace-resources: "true"`
+    - `annotations-risk-level: Critical`
+- For more information, see the ConfigMap in the `IBM-Cloud/kube-samples` [repo](https://github.com/IBM-Cloud/kube-samples/blob/01287e388dee312561b3ab7d25facd6b63244793/ingress-config/ibm-k8s-controller-config.yaml){: external}.
+
+
 ## 29 April 2024
 {: #ingress-cm-29-apr-2024}
 
@@ -37,4 +46,3 @@ Removed managed contents from the `http-snippet` field. See the ConfigMap in the
 {: #ingress-cm-17-aug-2022}
 
 Added the ConfigMap to the `IBM-Cloud/kube-samples` [repo](https://github.com/IBM-Cloud/kube-samples/blob/8f765f825552449746dc2ab1ee7d62ca718119c0/ingress-config/ibm-k8s-controller-config.yaml){: external}.
-
