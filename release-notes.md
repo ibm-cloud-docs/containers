@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-04-07"
+lastupdated: "2025-04-09"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -4670,7 +4670,7 @@ Ingress ALB change log updates
 {: #containers-apr1922}
 
 Istio add-on
-:   Version [`1.12.6`](/docs/containers?topic=containers-istio-changelog#1126) is available. 
+:   Version [`1.12.6`](/docs/containers?topic=containers-istio-changelog) is available. 
 
 ### 13 April 2022
 {: #containers-apr1322}
