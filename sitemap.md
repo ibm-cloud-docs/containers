@@ -240,10 +240,6 @@ subcollection: containers
 
 * [April 2025](/docs/containers?topic=containers-containers-relnotes#containers-april25)
 
-    * [09 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-09april25)
-
-        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
-
     * [08 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-08april25)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
