@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-04-07"
+lastupdated: "2025-04-10"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -35,6 +35,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-08april25}
 {: release-note}
 
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
+:   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
+
+
+
+
+
+
+
+
 {{site.data.keyword.cos_full_notm}} plug-in updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
@@ -55,6 +73,8 @@ Ingress ConfigMap change log updates
 
 Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
+
 
 ### 01 April 2025
 {: #containers-01april25}
@@ -4670,7 +4690,7 @@ Ingress ALB change log updates
 {: #containers-apr1922}
 
 Istio add-on
-:   Version [`1.12.6`](/docs/containers?topic=containers-istio-changelog#1126) is available. 
+:   Version [`1.12.6`](/docs/containers?topic=containers-istio-changelog) is available. 
 
 ### 13 April 2022
 {: #containers-apr1322}

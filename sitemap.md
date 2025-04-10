@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-04-07"
+lastupdated: "2025-04-10"
 
 
 keywords: containers
@@ -241,6 +241,8 @@ subcollection: containers
 * [April 2025](/docs/containers?topic=containers-containers-relnotes#containers-april25)
 
     * [08 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-08april25)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
         * {{site.data.keyword.cos_full_notm}} plug-in updates.
 
@@ -5217,6 +5219,8 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
+    * [Worker node fix pack 1.32.3_1535, released 08 April 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1323_1535_W)
+
     * [Master fix pack 1.32.3_1533, released 26 March 2025](/docs/containers?topic=containers-changelog_132#1323_1533_M)
 
     * [Worker node fix pack 1.32.3_1534, released 24 March 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1323_1534_W)
@@ -5295,6 +5299,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.7_1545, released 08 April 2025](/docs/containers?topic=containers-changelog_131#cl-boms-1317_1545_W)
 
     * [Master fix pack 1.31.7_1543, released 26 March 2025](/docs/containers?topic=containers-changelog_131#1317_1543_M)
 
@@ -5420,6 +5426,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Worker node fix pack 1.30.11_1561, released 08 April 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1561_W)
 
     * [Master fix pack 1.30.11_1559, released 26 March 2025](/docs/containers?topic=containers-changelog_130#13011_1559_M)
 
@@ -5551,6 +5559,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29](/docs/containers?topic=containers-changelog_129#129_components)
+
+    * [Worker node fix pack 1.29.15_1583, released 08 April 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1583_W)
 
     * [Master fix pack 1.29.15_1581, released 26 March 2025](/docs/containers?topic=containers-changelog_129#12915_1581_M)
 
@@ -5712,6 +5722,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28](/docs/containers?topic=containers-changelog_128#128_components)
+
+    * [Worker node fix pack 1.28.15_1602, released 08 April 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1602_W)
 
     * [Master fix pack 1.28.15_1600, released 26 March 2025](/docs/containers?topic=containers-changelog_128#12815_1600_M)
 
