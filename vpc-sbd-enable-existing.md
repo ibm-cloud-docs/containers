@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-11-14"
+  years: 2024, 2025
+lastupdated: "2025-04-14"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, outbound traffic protection, 1.30
 
@@ -133,19 +133,3 @@ Complete the following steps to apply the secure by default security group confi
     ibmcloud ks worker replace --cluster CLUSTER --worker WORKER -f
     ```
     {: pre}
-
-
-1. **Important**: If the current worker nodes and the new replacement worker nodes have the node label `node.kubernetes.io/exclude-from-external-load-balancers`, you must perform a master refresh to update the load balancer security group after the workers have been replaced.
-    1. Review your worker node labels.
-        ```sh
-        kubectl get nodes --show-labels
-        ```
-        {: pre}
-
-    1. Run the the following command to refresh your cluster master.
-        ```sh
-        ibmcloud ks cluster master refresh -c CLUSTER
-        ```
-        {: pre}
-
-
