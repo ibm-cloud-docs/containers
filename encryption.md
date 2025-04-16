@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-10-09"
+  years: 2014, 2025
+lastupdated: "2025-04-16"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, red hat, encrypt, security, kms, root key, crk
@@ -80,7 +80,6 @@ Review the following notes about cluster secret encryption.
 - Clusters automatically respond if you disable, enable, or restore root keys.
 - Disabling a root key restricts cluster functionality until you reenable the key.
 - Deleting a root key makes the cluster unusable and unrecoverable.
-- Root keys can't be deleted if the key is used by a cluster.
 - You can have only one KMS provider and key enabled in the cluster at a time. 
 - You can switch the KMS provider and key.
 - You can't disable KMS provider encryption.
