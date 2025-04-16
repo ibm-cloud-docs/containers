@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2025
-lastupdated: "2025-03-31"
+lastupdated: "2025-04-15"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -35,6 +35,8 @@ Ubuntu 24 is the default operating system for all supported cluster versions. A 
 - For Ubuntu 24, the `/tmp` directory is a separate partition that has the `nosuid`, `noexec`, and `nodev` options set. If your apps install to and run scripts or binaries under the `/tmp` directory, they might fail. You can use the `/var/tmp` directory instead of the `/tmp` directory to run temporary scripts or binaries.
 
 - The default `cgroup` implementation is `cgroup` v2. In Ubuntu 24, `cgroup` v1 is not supported. Review the [Kubernetes migration documentation for `cgroup` v2](https://kubernetes.io/docs/concepts/architecture/cgroups/#migrating-to-cgroup-v2){: external} and verify that your applications fully support `cgroup` v2. There are known issues with older versions of Java that might cause out of memory (OOM) issues for workloads.
+
+- Note that with Ubuntu 24, NTP uses `timesyncd` and related commands might be updated.
 
 
 ## Migration steps
