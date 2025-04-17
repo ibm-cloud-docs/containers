@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2025
-lastupdated: "2025-03-28"
+lastupdated: "2025-04-17"
 
 
 keywords: pods, pod connectvity, networking, pod networking, pod trouble shooting, pod debug
@@ -137,7 +137,7 @@ kubectl apply --namespace pod-network-test -f <daemonset-file>
 ```
 {: pre}
 
-1. Verify that the pods start up successfully by listing all pods in the namespace. 
+1. Verify that the pods start successfully by listing all pods in the namespace. 
     ```sh
     kubectl get pods --namespace pod-network-test -o wide
     ```

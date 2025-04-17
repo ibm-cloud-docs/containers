@@ -1,11 +1,11 @@
 ---
 
 copyright: 
-  years: 2022, 2024
-lastupdated: "2024-10-30"
+  years: 2022, 2025
+lastupdated: "2025-04-17"
 
 
-keywords: kubernetes, help, network, connectivity, errsam, loadbalancer service missing
+keywords: kubernetes, help, network, connectivity, errsam, load balancer service missing
 
 subcollection: containers
 

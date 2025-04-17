@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-01-29"
+lastupdated: "2025-04-17"
 
 
 keywords: kubernetes, containers, 129, version 129, 129 update actions
@@ -70,7 +70,7 @@ The following table shows the actions that you must take before you update the K
 | Type | Description |
 | --- | --- |
 | **Unsupported:** `v1beta2` version of the `FlowSchema` and `PriorityLevelConfiguration` API | Migrate manifests and API clients to use the `flowcontrol.apiserver.k8s.io/v1beta3` API version, which is available since Kubernetes version 1.26. For more information, see [Deprecated API Migration Guide - v1.29](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-29). |
-| **Unsupported:** `CronJob` timezone specifications | When creating a `CronJob` resource, setting the `CRON_TZ` or `TZ` timezone specifications by using `.spec.schedule` is no longer allowed. Migrate your `CronJob` resources to use `.spec.timeZone` instead. See [Unsupported TimeZone specification](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#unsupported-timezone-specification) for details. |
+| **Unsupported:** `CronJob` time zone specifications | When creating a `CronJob` resource, setting the `CRON_TZ` or `TZ` time zone specifications by using `.spec.schedule` is no longer allowed. Migrate your `CronJob` resources to use `.spec.timeZone` instead. See [Unsupported TimeZone specification](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#unsupported-timezone-specification) for details. |
 | Updated extra user claim prefix | In the [Kubernetes API server auditing records](/docs/containers?topic=containers-health-audit#audit-api-server), extra user claim information is prefixed with `cloud.ibm.com/authn_` instead of `authn_`. If your apps parsed this information, update them accordingly. |
 | Tigera operator namespace migration | Tigera operator component is added and manages the Calico installation. As a result, Calico resources run in the `calico-system` and `tigera-operator` namespaces instead of `kube-system`. These namespaces are configured to be privileged like the `kube-system` namespace. During an upgrade, the Tigera operator migrates Calico resources and customizations from the `kube-system` namespace to the `calico-system` namespace. You can continue normal cluster operations during the migration because the migration might be in progress after the cluster master upgrade is completed. If your apps or operations tooling rely on Calico running in the `kube-system` namespace, update them accordingly. Before updating your cluster master, review the steps in the [Understanding the Tigera migration](#129-tigera-migration) section. |
 | Calico custom resource short names | For new clusters, Calico custom resource short names `gnp` and `heps` are removed from the `globalnetworkpolicies.crd.projectcalico.org` and `hostendpoints.crd.projectcalico.org` custom resource definitions. Upgraded clusters retain the short names. Either way, if your `kubectl` commands rely on the short names, update them to use the standard names of `globalnetworkpolicies` and  `hostendpoints` instead. |

@@ -1,11 +1,11 @@
 ---
 
 copyright:
-  years: 2022, 2024
-lastupdated: "2024-10-30"
+  years: 2022, 2025
+lastupdated: "2025-04-17"
 
 
-keywords: containers, ingress, troubleshoot ingress, loadbalancer missing, errsnf
+keywords: containers, ingress, troubleshoot ingress, load balancer missing, errsnf
 
 subcollection: containers
 content-type: troubleshoot
