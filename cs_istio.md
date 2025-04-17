@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-03-04"
+lastupdated: "2025-04-17"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -341,7 +341,7 @@ For example, the patch version of your add-on might be updated automatically by 
 You can customize a set of Istio configuration options by editing the `managed-istio-custom` ConfigMap resource. These settings include extra control over monitoring, logging, and networking in your control plane and service mesh.
 {: shortdesc}
 
-1. Describe the `managed-istio-custom` ConfigMap resource to review its contents and the in-line documentation.
+1. Describe the `managed-istio-custom` ConfigMap resource to review its contents and the inline documentation.
     ```sh
     kubectl describe cm managed-istio-custom -n ibm-operators
     ```
@@ -775,7 +775,7 @@ Save any resources that you created or modified in the `istio-system` namespace 
 Delete all Istio operator (IOP) resources, such as for a custom ingress gateway.
 {: shortdesc}
 
-1. Make sure your `istioctl` cli tool is at the desired patch version
+1. Make sure your `istioctl` cli tool is at the necessary patch version.
     ```sh
     istioctl version
     ```
