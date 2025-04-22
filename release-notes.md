@@ -30,21 +30,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## April 2025
 {: #containers-april25}
 
-
-
 ### 22 April 2025
 {: #containers-22april25}
 {: release-note}
-
-Ingress ALB cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
-
-
-
-### 08 April 2025
-{: #containers-08april25}
-{: release-note}
-
 
 
 
@@ -58,6 +46,22 @@ Ingress ALB cluster add-on patch updates.
 
 
 
+
+
+
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
+
+
+
+
+
+
+### 08 April 2025
+{: #containers-08april25}
+{: release-note}
 
 
 

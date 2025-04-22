@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-04-17"
+lastupdated: "2025-04-22"
 
 
 keywords: change log, version history, 1.29
@@ -47,6 +47,25 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.29
 {: #129_components}
+
+
+### Worker node fix pack 1.29.15_1584, released 21 April 2025
+{: #cl-boms-12915_1584_W}
+
+The following table shows the components included in the worker node fix pack 1.29.15_1584. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-55-generic|Resolves the following CVEs: [CVE-2024-56406](https://nvd.nist.gov/vuln/detail/CVE-2024-56406){: external}, [CVE-2024-8176](https://nvd.nist.gov/vuln/detail/CVE-2024-8176){: external}, [CVE-2025-1153](https://nvd.nist.gov/vuln/detail/CVE-2025-1153){: external}, [CVE-2025-1176](https://nvd.nist.gov/vuln/detail/CVE-2025-1176){: external}, [CVE-2025-1178](https://nvd.nist.gov/vuln/detail/CVE-2025-1178){: external}, [CVE-2025-1181](https://nvd.nist.gov/vuln/detail/CVE-2025-1181){: external}, [CVE-2025-1182](https://nvd.nist.gov/vuln/detail/CVE-2025-1182){: external}, [CVE-2025-1215](https://nvd.nist.gov/vuln/detail/CVE-2025-1215){: external}, [CVE-2025-26603](https://nvd.nist.gov/vuln/detail/CVE-2025-26603){: external}, and [CVE-2025-32464](https://nvd.nist.gov/vuln/detail/CVE-2025-32464){: external}.|
+|UBUNTU_20_04|5.4.0-212-generic|Resolves the following CVEs: [CVE-2021-47119](https://nvd.nist.gov/vuln/detail/CVE-2021-47119){: external}, [CVE-2024-26915](https://nvd.nist.gov/vuln/detail/CVE-2024-26915){: external}, [CVE-2024-26928](https://nvd.nist.gov/vuln/detail/CVE-2024-26928){: external}, [CVE-2024-35864](https://nvd.nist.gov/vuln/detail/CVE-2024-35864){: external}, [CVE-2024-35958](https://nvd.nist.gov/vuln/detail/CVE-2024-35958){: external}, [CVE-2024-46826](https://nvd.nist.gov/vuln/detail/CVE-2024-46826){: external}, [CVE-2024-49974](https://nvd.nist.gov/vuln/detail/CVE-2024-49974){: external}, [CVE-2024-50256](https://nvd.nist.gov/vuln/detail/CVE-2024-50256){: external}, [CVE-2024-53237](https://nvd.nist.gov/vuln/detail/CVE-2024-53237){: external}, [CVE-2024-56651](https://nvd.nist.gov/vuln/detail/CVE-2024-56651){: external}, [CVE-2024-56658](https://nvd.nist.gov/vuln/detail/CVE-2024-56658){: external}, [CVE-2025-1153](https://nvd.nist.gov/vuln/detail/CVE-2025-1153){: external}, [CVE-2025-1176](https://nvd.nist.gov/vuln/detail/CVE-2025-1176){: external}, [CVE-2025-1182](https://nvd.nist.gov/vuln/detail/CVE-2025-1182){: external}, [CVE-2025-21700](https://nvd.nist.gov/vuln/detail/CVE-2025-21700){: external}, [CVE-2025-21702](https://nvd.nist.gov/vuln/detail/CVE-2025-21702){: external}, [CVE-2025-21703](https://nvd.nist.gov/vuln/detail/CVE-2025-21703){: external}, [CVE-2025-26603](https://nvd.nist.gov/vuln/detail/CVE-2025-26603){: external}, [CVE-2025-2784](https://nvd.nist.gov/vuln/detail/CVE-2025-2784){: external}, [CVE-2025-32050](https://nvd.nist.gov/vuln/detail/CVE-2025-32050){: external}, [CVE-2025-32052](https://nvd.nist.gov/vuln/detail/CVE-2025-32052){: external}, and [CVE-2025-32053](https://nvd.nist.gov/vuln/detail/CVE-2025-32053){: external}.|
+|Kubernetes|1.29.15|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.15).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|HAProxy|bb0015364d95e0a2e7ab83d4a659d1541cee183e|Resolves the following CVEs: [CVE-2025-0395](https://nvd.nist.gov/vuln/detail/CVE-2025-0395){: external}, and [CVE-2024-8176](https://nvd.nist.gov/vuln/detail/CVE-2024-8176){: external}.|
+|GPU Device Plug-in and Installer|b7d507fd50989efa6ba8a9595d2a5681fc2380bf|Resolves the following CVEs: [CVE-2024-8176](https://nvd.nist.gov/vuln/detail/CVE-2024-8176){: external}, and [CVE-2025-0395](https://nvd.nist.gov/vuln/detail/CVE-2025-0395){: external}.|
+{: caption="1.29.15_1584 fix pack." caption-side="bottom"}
+{: #cl-boms-12915_1584_W-component-table}
+
 
 
 ### Worker node fix pack 1.29.15_1583, released 08 April 2025
