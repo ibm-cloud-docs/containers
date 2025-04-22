@@ -244,9 +244,11 @@ subcollection: containers
 
         * Ingress ALB cluster add-on patch updates.
 
-    * [08 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-08april25)
+    * [21 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-21april25)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+    * [08 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-08april25)
 
         * {{site.data.keyword.cos_full_notm}} plug-in updates.
 
@@ -5223,6 +5225,8 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
+    * [Worker node fix pack 1.32.3_1536, released 21 April 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1323_1536_W)
+
     * [Worker node fix pack 1.32.3_1535, released 08 April 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1323_1535_W)
 
     * [Master fix pack 1.32.3_1533, released 26 March 2025](/docs/containers?topic=containers-changelog_132#1323_1533_M)
@@ -5303,6 +5307,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.7_1546, released 21 April 2025](/docs/containers?topic=containers-changelog_131#cl-boms-1317_1546_W)
 
     * [Worker node fix pack 1.31.7_1545, released 08 April 2025](/docs/containers?topic=containers-changelog_131#cl-boms-1317_1545_W)
 
@@ -5430,6 +5436,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Worker node fix pack 1.30.11_1562, released 21 April 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1562_W)
 
     * [Worker node fix pack 1.30.11_1561, released 08 April 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1561_W)
 
@@ -5563,6 +5571,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29](/docs/containers?topic=containers-changelog_129#129_components)
+
+    * [Worker node fix pack 1.29.15_1584, released 21 April 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1584_W)
 
     * [Worker node fix pack 1.29.15_1583, released 08 April 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1583_W)
 
@@ -5726,6 +5736,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28](/docs/containers?topic=containers-changelog_128#128_components)
+
+    * [Worker node fix pack 1.28.15_1603, released 21 April 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1603_W)
 
     * [Worker node fix pack 1.28.15_1602, released 08 April 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1602_W)
 
