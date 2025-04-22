@@ -242,11 +242,9 @@ subcollection: containers
 
     * [22 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-22april25)
 
-        * Ingress ALB cluster add-on patch updates.
-
-    * [21 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-21april25)
-
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+        * Ingress ALB cluster add-on patch updates.
 
     * [08 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-08april25)
 
