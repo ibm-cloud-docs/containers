@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-03-13"
+lastupdated: "2025-04-22"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -823,7 +823,12 @@ By default, the source IP addresses of client requests are not preserved by the 
 To preserve the source IP address of the client request in a VPC cluster, you can enable the [NGINX PROXY protocol](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/){: external} for all load balancers that expose Ingress ALBs in your cluster.
 {: shortdesc}
 
-The PROXY protocol enables load balancers to pass client connection information that is contained in headers on the client request, including the client IP address, the proxy server IP address, and both port numbers, to ALBs.
+1. **Optional** Complete the following steps if you are using {{site.data.keyword.cis_short}}. 
+
+    1. Enable the **True client IP header** setting in the CIS console, by clicking **Security** > **Advanced** > **True client IP header**.
+    2. Edit the `kube-system/ibm-k8s-controller-config configmap` and set  `allow-snippet-annotations: "true"`.
+    3. Add the annotation `nginx.ingress.kubernetes.io/server-snippet: real_ip_header CF-Connecting-IP;`.
+
 
 1. Enable the PROXY protocol. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable). After you run this command, new load balancers are created with the updated PROXY protocol configuration. Two unused IP addresses for each load balancer must be available in each subnet during the load balancer recreation. After these load balancers are created, the existing ALB load balancers are deleted. This load balancer recreation process might cause service disruptions.
 
