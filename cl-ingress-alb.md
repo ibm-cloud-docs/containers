@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-04-17"
+lastupdated: "2025-04-22"
 
 
 keywords: change log, version history, Ingress ALB
@@ -29,6 +29,11 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1.12.1}
 
 
+### 1.12.1_7518_iks, released 22 April 2025
+{: #cl-ingress-alb-1121_7518_iks}
+
+- Resolves the following CVEs: [CVE-2025-31498](https://nvd.nist.gov/vuln/detail/CVE-2025-31498){: external}, and [CVE-2025-31115](https://nvd.nist.gov/vuln/detail/CVE-2025-31115){: external}.
+
 ### 1.12.1_7490_iks, released 02 April 2025
 {: #cl-ingress-alb-1121_7490_iks}
 
@@ -41,6 +46,11 @@ Review the version history for Ingress ALB.
 ## Version 1.11.2
 {: #cl-ingress-alb-1.11.2}
 
+
+### 1.11.2_7500_iks, released 22 April 2025
+{: #cl-ingress-alb-1112_7500_iks}
+
+- Resolves the following CVEs: [CVE-2025-31115](https://nvd.nist.gov/vuln/detail/CVE-2025-31115){: external}.
 
 ### 1.11.2_7469_iks, released 25 March 2025
 {: #cl-ingress-alb-1112_7469_iks}
@@ -106,6 +116,11 @@ Review the version history for Ingress ALB.
 ## Version 1.9.6
 {: #cl-ingress-alb-1.9.6}
 
+
+### 1.9.6_7513_iks, released 22 April 2025
+{: #cl-ingress-alb-196_7513_iks}
+
+- Resolves the following CVEs: [CVE-2025-31115](https://nvd.nist.gov/vuln/detail/CVE-2025-31115){: external}.
 
 ### 1.9.6_7468_iks, released 25 March 2025
 {: #cl-ingress-alb-196_7468_iks}
@@ -268,6 +283,11 @@ Review the version history for Ingress ALB.
 ## Version 1.8.5
 {: #cl-ingress-alb-1.8.5}
 
+
+### 1.8.5_7509_iks, released 22 April 2025
+{: #cl-ingress-alb-185_7509_iks}
+
+- Resolves the following CVEs: [CVE-2025-31115](https://nvd.nist.gov/vuln/detail/CVE-2025-31115){: external}.
 
 ### 1.8.5_7467_iks, released 25 March 2025
 {: #cl-ingress-alb-185_7467_iks}
