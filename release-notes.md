@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-04-17"
+lastupdated: "2025-04-22"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -29,6 +29,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## April 2025
 {: #containers-april25}
+
+
+
+### 22 April 2025
+{: #containers-22april25}
+{: release-note}
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 
 
