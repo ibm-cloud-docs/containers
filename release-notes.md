@@ -34,6 +34,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-22april25}
 {: release-note}
 
+Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
+
 
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.

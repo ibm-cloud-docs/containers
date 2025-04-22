@@ -242,6 +242,8 @@ subcollection: containers
 
     * [22 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-22april25)
 
+        * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [21 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-21april25)
@@ -6744,6 +6746,10 @@ subcollection: containers
     * [Change log for 1.12.7, released 19 May 2022](/docs/containers?topic=containers-istio-changelog#1127)
 
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
+
+* [Version 1.2.4](/docs/containers?topic=containers-ca_changelog#0124_ca_addon)
+
+    * [Change log for patch update 1.2.4_629, released 22 April 2025.](/docs/containers?topic=containers-ca_changelog#124_629_ca)
 
 * [Version 1.2.3](/docs/containers?topic=containers-ca_changelog#0123_ca_addon)
 
