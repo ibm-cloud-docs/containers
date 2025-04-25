@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-04-24"
+lastupdated: "2025-04-25"
 
 
 keywords: containers
@@ -4896,8 +4896,6 @@ subcollection: containers
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-storage_portworx_kv_store#portworx_database)
 
 * [Using the Portworx key-value database](/docs/containers?topic=containers-storage_portworx_kv_store#portworx-kvdb)
-
-    * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-storage_portworx_kv_store#portworx-kv-db)
 
 [Understanding encryption for Portworx](/docs/containers?topic=containers-storage_portworx_encryption#storage_portworx_encryption)
 
