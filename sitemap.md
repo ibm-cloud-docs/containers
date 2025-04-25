@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-04-24"
+lastupdated: "2025-04-25"
 
 
 keywords: containers
@@ -2891,28 +2891,6 @@ subcollection: containers
 {: #sitemap_securing_cluster_workloads}
 
 
-[Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
-
-* [FAQ](/docs/containers?topic=containers-psp#psp-faqs)
-
-    * [Why do I set pod security policies?](/docs/containers?topic=containers-psp#why-set-psps)
-
-    * [Are any policies set by default? What can I add?](/docs/containers?topic=containers-psp#psp-defaults)
-
-    * [How does policy authorization work?](/docs/containers?topic=containers-psp#psp-auth)
-
-    * [Why can I still create privileged pods when I am not part of the `privileged-psp-user` cluster role binding?](/docs/containers?topic=containers-psp#psp-role-binding)
-
-* [Customizing pod security policies](/docs/containers?topic=containers-psp#customize_psp)
-
-    * [Modifying the RBAC resources](/docs/containers?topic=containers-psp#modify_rbac)
-
-    * [Deleting RBAC resources](/docs/containers?topic=containers-psp#delete_rbac)
-
-    * [Creating your own pod security policy](/docs/containers?topic=containers-psp#creating_security_policy)
-
-* [Understanding default resources for {{site.data.keyword.IBM_notm}} cluster management](/docs/containers?topic=containers-psp#ibm_psp)
-
 [Setting pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)
 
 * [How does priority scheduling and preemption work?](/docs/containers?topic=containers-pod_priority#priority_scheduling)
@@ -4896,8 +4874,6 @@ subcollection: containers
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-storage_portworx_kv_store#portworx_database)
 
 * [Using the Portworx key-value database](/docs/containers?topic=containers-storage_portworx_kv_store#portworx-kvdb)
-
-    * [Optional: Setting up a Databases for etcd service instance](/docs/containers?topic=containers-storage_portworx_kv_store#portworx-kv-db)
 
 [Understanding encryption for Portworx](/docs/containers?topic=containers-storage_portworx_encryption#storage_portworx_encryption)
 

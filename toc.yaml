@@ -119,7 +119,6 @@ toc:
       - topicgroup:
           label: Securing cluster workloads
           topics:
-          - cs_psp.md
           - pod-priority.md
           - kubeapi-priority.md
           - pod-security-admission.md
