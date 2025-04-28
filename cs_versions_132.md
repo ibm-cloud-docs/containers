@@ -56,7 +56,7 @@ This information summarizes updates that are likely to have an impact on deploye
 [Portworx](https://cloud.ibm.com/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.32. Do not upgrade your cluster to version 1.32 if your apps use Portworx.
 {: important}
 
-The Istio add-on version 1.23 is not supported for version 1.32. The Istio addon-on has not yet supported Istio 1.25. Do not update to IKS version 1.32 if you use these add-ons in your cluster. There are docs for [migrating off of addon-istio]([https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-32](https://cloud.ibm.com/docs/containers?topic=containers-istio&interface=ui#migrate)) as an alternative.
+The Istio add-on version 1.23 is not supported for {{site.data.keyword.containerlong_notm}} version 1.32 because the Istio add-on does not support Istio 1.25. Do not update to {{site.data.keyword.containerlong_notm}} version 1.32 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=ui#migrate).
 {: important}
 
 ### Update before master
