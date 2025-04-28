@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-04-04"
+lastupdated: "2025-04-28"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -33,6 +33,46 @@ ibmcloud ks cluster addon versions
 
 ## Version 1.23
 {: #v123}
+
+### Changelog for 1.23.6, released 29 April 2025
+{: #1236}
+
+Review the changes that are included in version 1.23.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.23.5
+
+Current version
+:   1.23.6
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.23.6](https://istio.io/latest/news/releases/1.23.x/announcing-1.23.6/.){:external}.
+:   Resolves the following CVEs:
+    - [CVE-2024-25260](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-25260){: external}
+    - [CVE-2025-1365](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-1365){: external}
+    - [CVE-2025-1371](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-1371){: external}
+    - [CVE-2025-1372](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-1372){: external}
+    - [CVE-2025-1377](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-1377){: external}
+    - [CVE-2024-12243](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-12243){: external}
+    - [CVE-2024-26458](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-26458){: external}
+    - [CVE-2024-26461](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-26461){: external}
+    - [CVE-2024-26462](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-26462){: external}
+    - [CVE-2025-24528](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24528){: external}
+    - [CVE-2024-12133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-12133){: external}
+    - [CVE-2025-0395](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-0395){: external}
+    - [CVE-2024-13176](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-13176){: external}
+    - [CVE-2024-9143](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9143){: external}
+    - [CVE-2024-3596](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-3596){: external}
+    - [CVE-2025-1390](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-1390){: external}
+    - [usn-7369-1](https://ubuntu.com/security/notices/USN-7369-1){: external}
+    - [usn-7281-1](https://ubuntu.com/security/notices/USN-7281-1){: external}
+    - [usn-7314-1](https://ubuntu.com/security/notices/USN-7314-1){: external}
+    - [usn-7275-1](https://ubuntu.com/security/notices/USN-7275-1){: external}
+    - [usn-7259-1](https://ubuntu.com/security/notices/USN-7259-1){: external}
+    - [usn-7264-1](https://ubuntu.com/security/notices/USN-7264-1){: external}
+    - [usn-7055-1](https://ubuntu.com/security/notices/USN-7055-1){: external}
+    - [usn-7287-1](https://ubuntu.com/security/notices/USN-7287-1){: external}
 
 ### Change log for 1.23.5, released 4 March 2025
 {: #1235}
