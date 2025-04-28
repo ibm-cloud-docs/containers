@@ -244,6 +244,14 @@ subcollection: containers
 
         * Istio add-on patch updates.
 
+    * [27 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-27april25)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
+
+    * [24 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-24april25)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [22 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-22april25)
 
         * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
@@ -6979,9 +6987,13 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [5.2.33_735, released 09 May 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5233_735)
+
     * [5.2.31_687, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [5.1.34_740, released 09 May 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5134_740)
 
     * [5.1.33_685, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5133_685)
 
@@ -7201,6 +7213,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.38, released 24 April 2025](/docs/containers?topic=containers-cos_plugin_changelog#02238_object_plugin)
+
 * [Change log for version 2.2.37, released 07 April 2025](/docs/containers?topic=containers-cos_plugin_changelog#02237_object_plugin)
 
 * [Change log for version 2.2.36, released 10 March 2025](/docs/containers?topic=containers-cos_plugin_changelog#02236_object_plugin)
@@ -7310,6 +7324,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_2629, released 27 April 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2629)
 
     * [2.0.0_2557, released 13 March 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2557)
 

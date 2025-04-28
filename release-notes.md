@@ -41,7 +41,24 @@ Istio add-on patch updates.
 
 
 
+### 27 April 2025
+{: #containers-27april25}
+{: release-note}
 
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
+
+
+
+
+### 24 April 2025
+{: #containers-24april25}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 ### 22 April 2025
 {: #containers-22april25}

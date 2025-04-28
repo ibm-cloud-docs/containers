@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2025
-lastupdated: "2025-01-29"
+lastupdated: "2025-04-28"
 
 
 keywords: kubernetes, containers, 132, version 132, 132 update actions
@@ -56,6 +56,8 @@ This information summarizes updates that are likely to have an impact on deploye
 [Portworx](https://cloud.ibm.com/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.32. Do not upgrade your cluster to version 1.32 if your apps use Portworx.
 {: important}
 
+The Istio add-on version 1.23 is not supported for version 1.32. The Istio addon-on has not yet supported Istio 1.25. Do not update to IKS version 1.32 if you use these add-ons in your cluster. There are docs for [migrating off of addon-istio]([https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-32](https://cloud.ibm.com/docs/containers?topic=containers-istio&interface=ui#migrate)) as an alternative.
+{: important}
 
 ### Update before master
 {: #before_132}
@@ -78,5 +80,3 @@ The following table shows the actions that you must take after you update the Ku
 | --- | --- |
 | Ubuntu 24 is the only supported operating system | Ubuntu 24 is now the only operating system supported for IBM Cloud Kubernetes version 1.32 clusters. Clusters  upgraded to version 1.32 with Ubuntu 20 worker nodes must migrate to Ubuntu 24 worker nodes after the master update. For more information and possible migration actions related to Ubuntu 24, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate). |
 {: caption="Changes to make after you update the master to Kubernetes 1.32" caption-side="bottom"}
-
-
