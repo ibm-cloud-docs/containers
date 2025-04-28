@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-04-25"
+lastupdated: "2025-04-28"
 
 
 keywords: containers
@@ -239,6 +239,18 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2025](/docs/containers?topic=containers-containers-relnotes#containers-april25)
+
+    * [29 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-apr2925)
+
+        * Istio add-on patch updates.
+
+    * [27 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-27april25)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
+
+    * [24 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-24april25)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
 
     * [22 April 2025](/docs/containers?topic=containers-containers-relnotes#containers-22april25)
 
@@ -6551,6 +6563,8 @@ subcollection: containers
 
 * [Version 1.23](/docs/containers?topic=containers-istio-changelog#v123)
 
+    * [Changelog for 1.23.6, released 29 April 2025](/docs/containers?topic=containers-istio-changelog#1236)
+
     * [Change log for 1.23.5, released 4 March 2025](/docs/containers?topic=containers-istio-changelog#1235)
 
     * [Change log for 1.23.4, released 28 Jan 2025](/docs/containers?topic=containers-istio-changelog#1234)
@@ -7195,6 +7209,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.38, released 24 April 2025](/docs/containers?topic=containers-cos_plugin_changelog#02238_object_plugin)
+
 * [Change log for version 2.2.37, released 07 April 2025](/docs/containers?topic=containers-cos_plugin_changelog#02237_object_plugin)
 
 * [Change log for version 2.2.36, released 10 March 2025](/docs/containers?topic=containers-cos_plugin_changelog#02236_object_plugin)
@@ -7304,6 +7320,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_2629, released 27 April 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2629)
 
     * [2.0.0_2557, released 13 March 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2557)
 

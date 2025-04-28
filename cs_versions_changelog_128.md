@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-04-25"
+lastupdated: "2025-04-28"
 
 
 keywords: change log, version history, 1.28
@@ -59,7 +59,7 @@ The following table shows the components included in the worker node fix pack 1.
 | ---- | ---- | ---- |
 |UBUNTU_20_04|5.4.0-212-generic|Resolves the following CVEs: [CVE-2021-47119](https://nvd.nist.gov/vuln/detail/CVE-2021-47119){: external}, [CVE-2024-26915](https://nvd.nist.gov/vuln/detail/CVE-2024-26915){: external}, [CVE-2024-26928](https://nvd.nist.gov/vuln/detail/CVE-2024-26928){: external}, [CVE-2024-35864](https://nvd.nist.gov/vuln/detail/CVE-2024-35864){: external}, [CVE-2024-35958](https://nvd.nist.gov/vuln/detail/CVE-2024-35958){: external}, [CVE-2024-46826](https://nvd.nist.gov/vuln/detail/CVE-2024-46826){: external}, [CVE-2024-49974](https://nvd.nist.gov/vuln/detail/CVE-2024-49974){: external}, [CVE-2024-50256](https://nvd.nist.gov/vuln/detail/CVE-2024-50256){: external}, [CVE-2024-53237](https://nvd.nist.gov/vuln/detail/CVE-2024-53237){: external}, [CVE-2024-56651](https://nvd.nist.gov/vuln/detail/CVE-2024-56651){: external}, [CVE-2024-56658](https://nvd.nist.gov/vuln/detail/CVE-2024-56658){: external}, [CVE-2025-1153](https://nvd.nist.gov/vuln/detail/CVE-2025-1153){: external}, [CVE-2025-1176](https://nvd.nist.gov/vuln/detail/CVE-2025-1176){: external}, [CVE-2025-1182](https://nvd.nist.gov/vuln/detail/CVE-2025-1182){: external}, [CVE-2025-21700](https://nvd.nist.gov/vuln/detail/CVE-2025-21700){: external}, [CVE-2025-21702](https://nvd.nist.gov/vuln/detail/CVE-2025-21702){: external}, [CVE-2025-21703](https://nvd.nist.gov/vuln/detail/CVE-2025-21703){: external}, [CVE-2025-26603](https://nvd.nist.gov/vuln/detail/CVE-2025-26603){: external}, [CVE-2025-2784](https://nvd.nist.gov/vuln/detail/CVE-2025-2784){: external}, [CVE-2025-32050](https://nvd.nist.gov/vuln/detail/CVE-2025-32050){: external}, [CVE-2025-32052](https://nvd.nist.gov/vuln/detail/CVE-2025-32052){: external}, and [CVE-2025-32053](https://nvd.nist.gov/vuln/detail/CVE-2025-32053){: external}.|
 |Kubernetes|1.28.15|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.15).|
-|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27) and the [security bulletin for CVE-2024-40635](https://www.ibm.com/support/pages/node/7229615).|
 |HAProxy|bb0015364d95e0a2e7ab83d4a659d1541cee183e|Resolves the following CVEs: [CVE-2025-0395](https://nvd.nist.gov/vuln/detail/CVE-2025-0395){: external}, and [CVE-2024-8176](https://nvd.nist.gov/vuln/detail/CVE-2024-8176){: external}.|
 |GPU Device Plug-in and Installer|b7d507fd50989efa6ba8a9595d2a5681fc2380bf|Resolves the following CVEs: [CVE-2024-8176](https://nvd.nist.gov/vuln/detail/CVE-2024-8176){: external}, and [CVE-2025-0395](https://nvd.nist.gov/vuln/detail/CVE-2025-0395){: external}.|
 {: caption="1.28.15_1603 fix pack." caption-side="bottom"}
@@ -77,7 +77,7 @@ The following table shows the components included in the worker node fix pack 1.
 | ---- | ---- | ---- |
 |UBUNTU_20_04|5.4.0-212-generic|Resolves the following CVEs: [cve-2018-5803](https://nvd.nist.gov/vuln/detail/cve-2018-5803){: external}, [CVE-2021-47219](https://nvd.nist.gov/vuln/detail/CVE-2021-47219){: external}, [CVE-2024-23848](https://nvd.nist.gov/vuln/detail/CVE-2024-23848){: external}, [CVE-2024-26928](https://nvd.nist.gov/vuln/detail/CVE-2024-26928){: external}, [CVE-2024-35864](https://nvd.nist.gov/vuln/detail/CVE-2024-35864){: external}, [CVE-2024-38588](https://nvd.nist.gov/vuln/detail/CVE-2024-38588){: external}, [CVE-2024-43900](https://nvd.nist.gov/vuln/detail/CVE-2024-43900){: external}, [CVE-2024-44938](https://nvd.nist.gov/vuln/detail/CVE-2024-44938){: external}, [CVE-2024-49925](https://nvd.nist.gov/vuln/detail/CVE-2024-49925){: external}, [CVE-2024-56614](https://nvd.nist.gov/vuln/detail/CVE-2024-56614){: external}, [CVE-2024-56658](https://nvd.nist.gov/vuln/detail/CVE-2024-56658){: external}, [CVE-2025-0938](https://nvd.nist.gov/vuln/detail/CVE-2025-0938){: external}, and [CVE-2025-30258](https://nvd.nist.gov/vuln/detail/CVE-2025-30258){: external}.|
 |Kubernetes|1.28.15|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.15).|
-|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27) and the [security bulletin for CVE-2024-40635](https://www.ibm.com/support/pages/node/7229615).|
 |HAProxy|997a4ab1e89a5c8ccf3a6823785d7ab5e34b0c83|N/A|
 |GPU Device Plug-in and Installer|c9d9c47b1404651b3a3c022f288a6d90bb5a44b2|N/A|
 {: caption="1.28.15_1602 fix pack." caption-side="bottom"}
@@ -118,7 +118,7 @@ The following table shows the components included in the worker node fix pack 1.
 | ---- | ---- | ---- |
 |UBUNTU_20_04|5.4.0-208-generic|Resolves the following CVEs: [CVE-2024-55549](https://nvd.nist.gov/vuln/detail/CVE-2024-55549){: external}, [CVE-2024-9287](https://nvd.nist.gov/vuln/detail/CVE-2024-9287){: external}, [CVE-2025-0938](https://nvd.nist.gov/vuln/detail/CVE-2025-0938){: external}, [CVE-2025-24855](https://nvd.nist.gov/vuln/detail/CVE-2025-24855){: external}, [CVE-2025-27363](https://nvd.nist.gov/vuln/detail/CVE-2025-27363){: external}, and [CVE-2025-27516](https://nvd.nist.gov/vuln/detail/CVE-2025-27516){: external}.|
 |Kubernetes|1.28.15|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.15).|
-|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27) and the [security bulletin for CVE-2024-40635](https://www.ibm.com/support/pages/node/7229615).|
 |HAProxy|997a4ab1e89a5c8ccf3a6823785d7ab5e34b0c83|Resolves the following CVEs: [CVE-2024-56171](https://nvd.nist.gov/vuln/detail/CVE-2024-56171){: external}, [CVE-2025-24528](https://nvd.nist.gov/vuln/detail/CVE-2025-24528){: external}, and [CVE-2025-24928](https://nvd.nist.gov/vuln/detail/CVE-2025-24928){: external}.|
 |GPU Device Plug-in and Installer|c9d9c47b1404651b3a3c022f288a6d90bb5a44b2|Resolves the following CVEs: [CVE-2024-56171](https://nvd.nist.gov/vuln/detail/CVE-2024-56171){: external}, [CVE-2025-24928](https://nvd.nist.gov/vuln/detail/CVE-2025-24928){: external}, and [CVE-2025-24528](https://nvd.nist.gov/vuln/detail/CVE-2025-24528){: external}.|
 {: caption="1.28.15_1601 fix pack." caption-side="bottom"}
