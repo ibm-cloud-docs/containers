@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2025
+lastupdated: "2025-04-28"
 
 
 keywords: kubernetes
@@ -33,15 +33,15 @@ unable to validate against any pod security policy
 {: screen}
 
 
-[The `PodSecurityPolicy` admission controller](/docs/containers?topic=containers-psp) checks the authorization of the user or service account that tried to create the pod.
+The `PodSecurityPolicy` admission controller checks the authorization of the user or service account that tried to create the pod.
 {: tsCauses}
 
 If no pod security policy supports the user or service account, then the `PodSecurityPolicy` admission controller prevents the pods from being created.
 
-If you deleted one of the pod security policy resources for [{{site.data.keyword.IBM_notm}} cluster management](/docs/containers?topic=containers-psp#ibm_psp), you might experience similar issues.
+If you deleted one of the pod security policy resources for {{site.data.keyword.IBM_notm}} cluster management, you might experience similar issues.
 
 
-Make sure that the user or service account is authorized by a pod security policy. You might need to [modify an existing policy](/docs/containers?topic=containers-psp#customize_psp).
+Make sure that the user or service account is authorized by a pod security policy. You might need to modify an existing policy.
 {: tsResolve}
 
 If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it.
@@ -53,10 +53,3 @@ If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, re
     ibmcloud ks cluster master refresh
     ```
     {: pre}
-
-
-
-
-
-
-

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-02-21"
+lastupdated: "2025-04-28"
 
 
 keywords: kubernetes, deploy, app, containers
@@ -425,7 +425,7 @@ The account and cluster administrators can control access on many different leve
 
 With {{site.data.keyword.cloud_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level. You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers?topic=containers-iam-platform-access-roles).
 
-To control access at the pod level, you can configure [pod security policies (PSPs)](/docs/containers?topic=containers-psp).
+To control access at the pod level, you can configure pod security policies (PSPs).
 
 Within the app deployment YAML, you can set the security context for a pod or container. For more information, review the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}.
 
