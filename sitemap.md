@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-04-28"
+lastupdated: "2025-04-30"
 
 
 keywords: containers
@@ -3437,7 +3437,7 @@ subcollection: containers
 
 * [Analyzing {{site.data.keyword.containerlong_notm}} logs](/docs/containers?topic=containers-logging#cloud-logs)
 
-* [Migrating from Log Analysis and Activity Tracker to Cloud Logs](/docs/containers?topic=containers-logging#cloud-logs-migration)
+* [Migrating to Cloud Logs](/docs/containers?topic=containers-logging#cloud-logs-migration)
 
 * [Enabling your clusters to use your Cloud Logs instance](/docs/containers?topic=containers-logging#migrate-cloud-logs-clusters)
 
@@ -3484,8 +3484,6 @@ subcollection: containers
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
 * [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
-
-    * [Reviewing your observability agents](/docs/containers?topic=containers-health#ob-review)
 
     * [Removing the observability plug-in agents](/docs/containers?topic=containers-health#ob-remove)
 
