@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-02"
+lastupdated: "2025-05-06"
 
 
 keywords: containers
@@ -6999,9 +6999,13 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [5.2.33_735, released 09 May 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5233_735)
+
     * [5.2.31_687, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [5.1.34_740, released 09 May 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5134_740)
 
     * [5.1.33_685, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5133_685)
 
