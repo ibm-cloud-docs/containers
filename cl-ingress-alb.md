@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-05-06"
+lastupdated: "2025-05-08"
 
 
 keywords: change log, version history, Ingress ALB
@@ -29,6 +29,11 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1.12.1}
 
 
+### 1.12.1_7545_iks, released 08 May 2025
+{: #cl-ingress-alb-1121_7545_iks}
+
+- Resolves the following CVEs: [CVE-2025-32414](https://nvd.nist.gov/vuln/detail/CVE-2025-32414){: external}, and [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}.
+
 ### 1.12.1_7518_iks, released 22 April 2025
 {: #cl-ingress-alb-1121_7518_iks}
 
@@ -46,6 +51,11 @@ Review the version history for Ingress ALB.
 ## Version 1.11.2
 {: #cl-ingress-alb-1.11.2}
 
+
+### 1.11.2_7546_iks, released 08 May 2025
+{: #cl-ingress-alb-1112_7546_iks}
+
+- Resolves the following CVEs: [CVE-2025-32414](https://nvd.nist.gov/vuln/detail/CVE-2025-32414){: external}, and [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}.
 
 ### 1.11.2_7500_iks, released 22 April 2025
 {: #cl-ingress-alb-1112_7500_iks}
@@ -116,6 +126,11 @@ Review the version history for Ingress ALB.
 ## Version 1.9.6
 {: #cl-ingress-alb-1.9.6}
 
+
+### 1.9.6_7544_iks, released 08 May 2025
+{: #cl-ingress-alb-196_7544_iks}
+
+- Resolves the following CVEs: [CVE-2025-32414](https://nvd.nist.gov/vuln/detail/CVE-2025-32414){: external}, and [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}.
 
 ### 1.9.6_7513_iks, released 22 April 2025
 {: #cl-ingress-alb-196_7513_iks}
