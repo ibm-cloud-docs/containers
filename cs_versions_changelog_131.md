@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-05-06"
+lastupdated: "2025-05-08"
 
 
 keywords: change log, version history, 1.31
@@ -40,6 +40,25 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.31
 {: #131_components}
+
+
+### Worker node fix pack 1.31.7_1548, released 07 May 2025
+{: #cl-boms-1317_1548_W}
+
+The following table shows the components included in the worker node fix pack 1.31.7_1548. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-58-generic|Resolves the following CVEs: [CVE-2024-56653](https://nvd.nist.gov/vuln/detail/CVE-2024-56653){: external}, [CVE-2025-1632](https://nvd.nist.gov/vuln/detail/CVE-2025-1632){: external}, [CVE-2025-25724](https://nvd.nist.gov/vuln/detail/CVE-2025-25724){: external}, [CVE-2025-32414](https://nvd.nist.gov/vuln/detail/CVE-2025-32414){: external}, [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}, and [CVE-2025-32728](https://nvd.nist.gov/vuln/detail/CVE-2025-32728){: external}.|
+|UBUNTU_20_04|5.4.0-212-generic|Resolves the following CVEs: [CVE-2023-52664](https://nvd.nist.gov/vuln/detail/CVE-2023-52664){: external}, [CVE-2023-52927](https://nvd.nist.gov/vuln/detail/CVE-2023-52927){: external}, [CVE-2024-26689](https://nvd.nist.gov/vuln/detail/CVE-2024-26689){: external}, [CVE-2025-25724](https://nvd.nist.gov/vuln/detail/CVE-2025-25724){: external}, [CVE-2025-32414](https://nvd.nist.gov/vuln/detail/CVE-2025-32414){: external}, [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}, and [CVE-2025-32728](https://nvd.nist.gov/vuln/detail/CVE-2025-32728){: external}.|
+|Kubernetes|1.31.7|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.7).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|HAProxy|978e3c26ee7634e39a940696aaf57d9e374db5ce|Resolves the following CVEs: [CVE-2024-12243](https://nvd.nist.gov/vuln/detail/CVE-2024-12243){: external}, and [CVE-2024-12133](https://nvd.nist.gov/vuln/detail/CVE-2024-12133){: external}.|
+|GPU Device Plug-in and Installer|9c52a5f3c684d3da2808c70936332fd18493d0c7|Resolves the following CVEs: [CVE-2024-12243](https://nvd.nist.gov/vuln/detail/CVE-2024-12243){: external}, and [CVE-2024-12133](https://nvd.nist.gov/vuln/detail/CVE-2024-12133){: external}.|
+{: caption="1.31.7_1548 fix pack." caption-side="bottom"}
+{: #cl-boms-1317_1548_W-component-table}
+
 
 
 ### Master fix pack 1.31.7_1547, released 30 April 2025

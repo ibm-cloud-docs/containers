@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-06"
+lastupdated: "2025-05-08"
 
 
 keywords: containers
@@ -237,6 +237,14 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [May 2025](/docs/containers?topic=containers-containers-relnotes#containers-may25)
+
+    * [07 May 2025](/docs/containers?topic=containers-containers-relnotes#containers-07may25)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+        * Ingress ALB cluster add-on patch updates.
 
 * [April 2025](/docs/containers?topic=containers-containers-relnotes#containers-april25)
 
@@ -5217,6 +5225,8 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
+    * [Worker node fix pack 1.32.4_1539, released 07 May 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1324_1539_W)
+
     * [Master fix pack 1.32.4_1538, released 30 April 2025](/docs/containers?topic=containers-changelog_132#1324_1538_M)
 
     * [Worker node fix pack 1.32.3_1536, released 21 April 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1323_1536_W)
@@ -5301,6 +5311,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.7_1548, released 07 May 2025](/docs/containers?topic=containers-changelog_131#cl-boms-1317_1548_W)
 
     * [Master fix pack 1.31.7_1547, released 30 April 2025](/docs/containers?topic=containers-changelog_131#1317_1547_M)
 
@@ -5432,6 +5444,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Worker node fix pack 1.30.11_1564, released 07 May 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1564_W)
 
     * [Master fix pack 1.30.11_1563, released 30 April 2025](/docs/containers?topic=containers-changelog_130#13011_1563_M)
 
@@ -5569,6 +5583,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29](/docs/containers?topic=containers-changelog_129#129_components)
+
+    * [Worker node fix pack 1.29.15_1586, released 07 May 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1586_W)
 
     * [Master fix pack 1.29.15_1585, released 30 April 2025](/docs/containers?topic=containers-changelog_129#12915_1585_M)
 
@@ -5736,6 +5752,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
 
 * [Version 1.28](/docs/containers?topic=containers-changelog_128#128_components)
+
+    * [Worker node fix pack 1.28.15_1605, released 07 May 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1605_W)
 
     * [Master fix pack 1.28.15_1604, released 30 April 2025](/docs/containers?topic=containers-changelog_128#12815_1604_M)
 
@@ -7362,11 +7380,15 @@ subcollection: containers
 
 * [Version 1.12.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.12.1)
 
+    * [1.12.1_7545_iks, released 08 May 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7545_iks)
+
     * [1.12.1_7518_iks, released 22 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7518_iks)
 
     * [1.12.1_7490_iks, released 02 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7490_iks)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
+
+    * [1.11.2_7546_iks, released 08 May 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7546_iks)
 
     * [1.11.2_7500_iks, released 22 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7500_iks)
 
@@ -7393,6 +7415,8 @@ subcollection: containers
     * [1.11.2_7069_iks, released 04 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7069_iks)
 
 * [Version 1.9.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.9.6)
+
+    * [1.9.6_7544_iks, released 08 May 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-196_7544_iks)
 
     * [1.9.6_7513_iks, released 22 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-196_7513_iks)
 
