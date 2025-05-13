@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-08"
+lastupdated: "2025-05-13"
 
 
 keywords: containers
@@ -9192,6 +9192,8 @@ subcollection: containers
     * [Before you begin](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-gather-before)
 
     * [Gathering data](/docs/containers?topic=containers-ts-critical-notready#ts-critical-notready-gather-steps)
+
+    * [Collecting worker node logs](/docs/containers?topic=containers-ts-critical-notready#collect-worker-logs)
 
 [VPC: Why can't I create worker nodes on dedicated hosts?](/docs/containers?topic=containers-ts-worker-dedicated#ts-worker-dedicated)
 
