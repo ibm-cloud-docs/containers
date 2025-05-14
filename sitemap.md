@@ -8699,6 +8699,8 @@ subcollection: containers
 
 * [Sao Paulo (`br-sao`)](/docs/containers?topic=containers-vpc-flavors#sao-paulo-br-sao)
 
+* [Montreal (`ca-mon`)](/docs/containers?topic=containers-vpc-flavors#montreal-ca-mon)
+
 * [Toronto (`ca-tor`)](/docs/containers?topic=containers-vpc-flavors#toronto-ca-tor)
 
 * [Frankfurt (`eu-de`)](/docs/containers?topic=containers-vpc-flavors#frankfurt-eu-de)
