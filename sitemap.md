@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-13"
+lastupdated: "2025-05-14"
 
 
 keywords: containers
@@ -239,6 +239,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2025](/docs/containers?topic=containers-containers-relnotes#containers-may25)
+
+    * [15 May 2025](/docs/containers?topic=containers-containers-relnotes#containers-may1525)
+
+        * New! Montreal multizone region
+
+    * [09 May 2025](/docs/containers?topic=containers-containers-relnotes#containers-09may25)
+
+        * VPC Block CSI Driver cluster add-on patch updates.
 
     * [07 May 2025](/docs/containers?topic=containers-containers-relnotes#containers-07may25)
 
