@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-14"
+lastupdated: "2025-05-20"
 
 
 keywords: containers
@@ -4336,6 +4336,10 @@ subcollection: containers
 * [Configuring SSL protocols and SSL ciphers at the HTTP level](/docs/containers?topic=containers-comm-ingress-annotations#ssl_protocols_ciphers)
 
 * [Sending your custom certificate to legacy clients](/docs/containers?topic=containers-comm-ingress-annotations#default_server_cert)
+
+* [Fine-tuning connection handling](/docs/containers?topic=containers-comm-ingress-annotations#ingress-configure-connection-handling)
+
+    * [Adjusting timeouts](/docs/containers?topic=containers-comm-ingress-annotations#adjusting-timeouts)
 
 * [Tuning ALB performance](/docs/containers?topic=containers-comm-ingress-annotations#perf_tuning)
 
@@ -9443,13 +9447,11 @@ subcollection: containers
 
 * [Step 1: Check your app deployment](/docs/containers?topic=containers-ingress-debug#app-debug-ingress)
 
-* [Step 2: Run Ingress tests in the Diagnostics and Debug Tool](/docs/containers?topic=containers-ingress-debug#debug-tool-ingress)
+* [Step 2: Check for error messages in your Ingress deployment and the ALB pod logs](/docs/containers?topic=containers-ingress-debug#errors)
 
-* [Step 3: Check for error messages in your Ingress deployment and the ALB pod logs](/docs/containers?topic=containers-ingress-debug#errors)
+* [Step 3: Ping the ALB subdomain and public IP addresses](/docs/containers?topic=containers-ingress-debug#ping)
 
-* [Step 4: Ping the ALB subdomain and public IP addresses](/docs/containers?topic=containers-ingress-debug#ping)
-
-* [Step 5: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-ingress-debug#ts_ingress_config)
+* [Step 4: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-ingress-debug#ts_ingress_config)
 
 * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-ingress-debug#one_alb)
 
