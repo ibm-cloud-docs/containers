@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-14"
+lastupdated: "2025-05-20"
 
 
 keywords: containers
@@ -9443,13 +9443,11 @@ subcollection: containers
 
 * [Step 1: Check your app deployment](/docs/containers?topic=containers-ingress-debug#app-debug-ingress)
 
-* [Step 2: Run Ingress tests in the Diagnostics and Debug Tool](/docs/containers?topic=containers-ingress-debug#debug-tool-ingress)
+* [Step 2: Check for error messages in your Ingress deployment and the ALB pod logs](/docs/containers?topic=containers-ingress-debug#errors)
 
-* [Step 3: Check for error messages in your Ingress deployment and the ALB pod logs](/docs/containers?topic=containers-ingress-debug#errors)
+* [Step 3: Ping the ALB subdomain and public IP addresses](/docs/containers?topic=containers-ingress-debug#ping)
 
-* [Step 4: Ping the ALB subdomain and public IP addresses](/docs/containers?topic=containers-ingress-debug#ping)
-
-* [Step 5: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-ingress-debug#ts_ingress_config)
+* [Step 4: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-ingress-debug#ts_ingress_config)
 
 * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-ingress-debug#one_alb)
 

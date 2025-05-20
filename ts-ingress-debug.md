@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-01-13"
+lastupdated: "2025-05-20"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -44,29 +44,7 @@ Before you debug Ingress, first check out [Debugging app deployments](/docs/cont
 
 Ingress issues are often caused by underlying issues in your app deployment or in the `ClusterIP` service that exposes your app. For example, your app label and service selector might not match, or your app and service target ports might not match.
 
-## Step 2: Run Ingress tests in the Diagnostics and Debug Tool
-{: #debug-tool-ingress}
-
-While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug tool, you can enable the add-on in your cluster.
-{: shortdesc}
-
-1. In your [cluster dashboard](https://cloud.ibm.com/containers/cluster-management/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
-
-1. On the Diagnostics and Debug Tool card, click **Install**.
-
-1. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed. To resolve some common issues that you might encounter during the add-on deployment, see [Reviewing add-on state and statuses](/docs/containers?topic=containers-debug_addons).</p>
-
-1. On the Diagnostics and Debug Tool card, click **Dashboard**.
-
-1. In the debug tool dashboard, select the **ingress** group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
-
-1. Click **Run**.
-
-1. Check the results of each test.
-    * If any test fails, click the information icon next to the test's name for information about how to resolve the issue.
-    * You can also use the results of tests that only gather information while you debug your Ingress service in the following sections.
-
-## Step 3: Check for error messages in your Ingress deployment and the ALB pod logs
+## Step 2: Check for error messages in your Ingress deployment and the ALB pod logs
 {: #errors}
 
 Start by checking for error messages in the Ingress resource deployment events and ALB pod logs. These error messages can help you find the root causes for failures and further debug your Ingress setup in the next sections.
@@ -154,7 +132,7 @@ Start by checking for error messages in the Ingress resource deployment events a
 
     1. Look for error messages in the ALB logs.
 
-## Step 4: Ping the ALB subdomain and public IP addresses
+## Step 3: Ping the ALB subdomain and public IP addresses
 {: #ping}
 
 Check the availability of your Ingress subdomain and ALBs' public IP addresses. Additionally, ensure that the Akamai multizone load balancer can access your ALBs to health check them.
@@ -245,7 +223,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
     ```
     {: screen}
 
-## Step 5: Check your domain mappings and Ingress resource configuration
+## Step 4: Check your domain mappings and Ingress resource configuration
 {: #ts_ingress_config}
 
 1. If you use a custom domain, verify that you used your DNS provider to map the custom domain to the IBM-provided subdomain or the ALB's public IP address. Note that using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
