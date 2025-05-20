@@ -4337,6 +4337,10 @@ subcollection: containers
 
 * [Sending your custom certificate to legacy clients](/docs/containers?topic=containers-comm-ingress-annotations#default_server_cert)
 
+* [Fine-tuning connection handling](/docs/containers?topic=containers-comm-ingress-annotations#ingress-configure-connection-handling)
+
+    * [Adjusting timeouts](/docs/containers?topic=containers-comm-ingress-annotations#adjusting-timeouts)
+
 * [Tuning ALB performance](/docs/containers?topic=containers-comm-ingress-annotations#perf_tuning)
 
     * [Enabling log buffering and flush timeout](/docs/containers?topic=containers-comm-ingress-annotations#access-log)
