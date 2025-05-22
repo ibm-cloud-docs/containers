@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-21"
+lastupdated: "2025-05-22"
 
 
 keywords: containers
@@ -2521,9 +2521,9 @@ subcollection: containers
 
     * [Accessing classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
 
-    * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
-
 * [Accessing VPC clusters through the Virtual Private Endpoint Gateway](/docs/containers?topic=containers-access_cluster#vpc_vpe)
+
+    * [Protecting clusters using context based restrictions](/docs/containers?topic=containers-access_cluster#protect-service-endpoints-with-cbr)
 
 [Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
 

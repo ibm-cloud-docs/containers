@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-04-09"
+lastupdated: "2025-05-22"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -1610,8 +1610,8 @@ ibmcloud ks cluster master pod-security unset --cluster mycluster
 ### `ibmcloud ks cluster master private-service-endpoint allowlist`
 {: #cs_master_pse_allowlist}
 
-Private service endpoint allowlists are deprecated and support ends on 10 February 2025. Migrate from allowlists to context based restrictions as soon as possible. For more information, see [Migrating from a private service endpoint allowlist to context based restrictions (CBR)](/docs/containers?topic=containers-pse-to-cbr-migration).
-{: deprecated}
+Private service endpoint allowlists are no longer supported. Migrate from allowlists to context based restrictions as soon as possible. For more information, see [Migrating from a private service endpoint allowlist to context based restrictions (CBR)](/docs/containers?topic=containers-pse-to-cbr-migration).
+{: unsupported}
 
 Manage a private cloud service endpoint allowlist so that authorized users can access your private cloud service endpoint from only the subnets that are specified in the allowlist.
 {: shortdesc}
