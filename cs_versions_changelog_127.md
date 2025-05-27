@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-02-28"
+lastupdated: "2025-05-27"
 
 
 keywords: kubernetes, containers, change log, 127 change log, 127 updates
@@ -243,7 +243,7 @@ The following table shows the changes that are in the master fix pack 1.27.14_15
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.26.4 | v3.27.2 | See the [Calico release notes](https://docs.tigera.io/calico/3.27/release-notes/#v3.27.2){: external}. |
+| Calico | v3.26.4 | v3.27.2 | See the [Calico release notes](https://archive-os-3-27.netlify.app/calico/3.27/release-notes/#v3.27.2){: external}. |
 | Cluster health image | v1.4.9 | v1.4.10 | New version contains updates and security fixes. |
 | GPU device plug-in and installer | 206b5a6 | 9fad43c | New version contains updates and security fixes. |
 | {{site.data.keyword.IBM_notm}} Calico extension | 1537 | 1589 | New version contains security fixes. |

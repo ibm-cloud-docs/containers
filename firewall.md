@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-18"
+lastupdated: "2025-05-27"
 
 
 keywords: kubernetes, allowlist, firewall, vyatta, ips
@@ -285,10 +285,10 @@ Allow outgoing network traffic from your worker node to {{site.data.keyword.clou
     - `TCP port 443, port 6443 FROM <each_worker_node_public_IP> TO <monitoring_public_IP>`
     - Replace *<monitoring_public_IP>* with the [{{site.data.keyword.mon_short}} IP addresses](/docs/monitoring?topic=monitoring-endpoints).
 
-- **{{site.data.keyword.la_full_notm}}**:
+- **{{site.data.keyword.logs_full_notm}}**:
 
     - `TCP port 443, port 80 FROM <each_worker_node_public_IP> TO <logging_public_IP>`
-    - Replace *<logging_public_IP>* with the [{{site.data.keyword.la_short}} IP addresses](/docs/log-analysis?topic=log-analysis-endpoints#endpoints_api_public).
+    - Replace *<logging_public_IP>* with the [{{site.data.keyword.logs_full_notm}} IP addresses](/docs/cloud-logs?topic=cloud-logs-ips2open).
 
 #### Optional: Allow incoming and outgoing network traffic for the managed Istio add-on
 {: #firewall-istio}
@@ -405,12 +405,12 @@ If you must use a Kubernetes version or {{site.data.keyword.cloud_notm}} storage
 - Allow all egress network traffic on TCP port 443.
 - Allow access to the IBM Cloud infrastructure IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure-hub?topic=infrastructure-hub-ibm-cloud-ip-ranges#front-end-network) and [**Back-end (private) Network**](/docs/infrastructure-hub?topic=infrastructure-hub-ibm-cloud-ip-ranges#back-end-network). To find the zone of your cluster, run `ibmcloud ks cluster ls`.
 
-#### Optional: Set up allowlist rules for {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}} services
+#### Optional: Set up allowlist rules for {{site.data.keyword.logs_full_notm}} and {{site.data.keyword.mon_full_notm}} services
 {: #firewall_private_mon_la}
 
-To send logging and metric data, set up allowlist rules for your {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}} services.
+To send logging and metric data, set up allowlist rules for your {{site.data.keyword.logs_full_notm}} and {{site.data.keyword.mon_full_notm}} services.
 
-- [{{site.data.keyword.la_short}} private endpoints](/docs/log-analysis?topic=log-analysis-endpoints#endpoints_api_private)
+- [{{site.data.keyword.logs_full_notm}} private endpoints](/docs/cloud-logs?topic=cloud-logs-endpoints_api#private-endpoints)
 - [{{site.data.keyword.mon_short}} private endpoints](/docs/monitoring?topic=monitoring-endpoints#endpoints_monitoring)
 
 ### Opening ports in a public or private allowlist for inbound traffic

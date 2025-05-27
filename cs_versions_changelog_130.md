@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-05-20"
+lastupdated: "2025-05-27"
 
 
 keywords: change log, version history, 1.30
@@ -91,12 +91,12 @@ The following table shows the changes that are in the master fix pack 1.30.11_15
 | --- | --- | --- | --- |
 | Calico | v3.28.2 | v3.28.3 | See the [Calico release notes](https://docs.tigera.io/calico/3.28/release-notes/#v3.28.3){: external}. |
 | Cluster health image | v1.5.13 | v1.5.14 | New version contains updates and security fixes. |
-| etcd | v3.5.18 | v3.5.21 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.21){: external}. |
+| etcd | v3.5.18 | v3.5.21 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.21){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.30.11-1 | v1.30.11-6 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | cb4f333 | d1545bd | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.11 | v2.10.12 | New version contains updates and security fixes. |
-| Konnectivity agent and server | v0.30.3 | v0.30.4 | See the [Konnectivity release notes](https://github.ibm.com/alchemy-containers/armada-konnectivity-community-build/releases/tag/v0.30.4){: external}. |
-| Kubernetes DNS autoscaler | v1.8.9 | v1.9.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.9.0){: external}. |
+| Konnectivity agent and server | v0.30.3 | v0.30.4 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.30.4){: external}. |
+| Kubernetes DNS autoscaler | v1.8.9 | v1.9.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.9.0){: external}. |
 | Portieris admission controller | v0.13.25 | v0.13.26 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.26){: external}. |
 | Tigera Operator | v1.34.5-200-iks | v1.34.8 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.34.8){: external}. |
 {: caption="Changes since version 1.30.11_1559" caption-side="bottom"}
@@ -610,7 +610,7 @@ The following table shows the changes that are in the master fix pack 1.30.3_153
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.27.2 | v3.27.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.27/release-notes/#v3.27.4){: external}. |
+| Calico | v3.27.2 | v3.27.4 | See the [Calico release notes](https://archive-os-3-27.netlify.app/calico/3.27/release-notes/#v3.27.4){: external}. |
 | Cluster health image | v1.5.6 | v1.5.7 | New version contains updates and security fixes. |
 | etcd | v3.5.13 | v3.5.14 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.14){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.9 | v2.5.12 | New version contains updates and security fixes. |

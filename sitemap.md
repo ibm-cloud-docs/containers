@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-22"
+lastupdated: "2025-05-27"
 
 
 keywords: containers
@@ -3465,14 +3465,6 @@ subcollection: containers
 
 * [Analyzing {{site.data.keyword.containerlong_notm}} logs](/docs/containers?topic=containers-logging#cloud-logs)
 
-* [Migrating to Cloud Logs](/docs/containers?topic=containers-logging#cloud-logs-migration)
-
-* [Enabling your clusters to use your Cloud Logs instance](/docs/containers?topic=containers-logging#migrate-cloud-logs-clusters)
-
-    * [Enabling Cloud Logs in the console](/docs/containers?topic=containers-logging#cloud-logs-console-enable)
-
-    * [Enabling Cloud Logs in the CLI](/docs/containers?topic=containers-logging#cloud-logs-cli-enable)
-
 [Monitoring metrics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring)
 
 * [Locations where metrics are generated](/docs/containers?topic=containers-monitoring#mon-locations)
@@ -3490,22 +3482,6 @@ subcollection: containers
 * [Monitoring {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring-monitor)
 
 * [Migrating to the new monitoring agent](/docs/containers?topic=containers-monitoring#migrating-new-agent)
-
-[Activity tracking events for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-at_events#at_events)
-
-* [Locations where activity tracking events are generated](/docs/containers?topic=containers-at_events#at-locations)
-
-* [Locations where activity tracking events are sent to {{site.data.keyword.at_full_notm}} hosted event search](/docs/containers?topic=containers-at_events#at-legacy-locations)
-
-* [Locations where activity tracking events are sent by {{site.data.keyword.atracker_full_notm}}](/docs/containers?topic=containers-at_events#atracker-locations)
-
-* [Enabling activity tracking events for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-at_events#at-enable)
-
-* [Viewing activity tracking events for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-at_events#at-viewing)
-
-    * [Launching {{site.data.keyword.logs_full_notm}} from the Observability page](/docs/containers?topic=containers-at_events#log-launch-standalone)
-
-* [List of platform events](/docs/containers?topic=containers-at_events#at_actions_platform)
 
 [Logging for clusters](/docs/containers?topic=containers-health#health)
 

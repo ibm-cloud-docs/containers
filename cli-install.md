@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2025
+lastupdated: "2025-05-27"
 
 
 keywords: containers,kubernetes, ic, ks, kubectl
@@ -46,7 +46,7 @@ You can use the following tools to manage your {{site.data.keyword.containerlong
 
 {{../cli/index.md#step3-install-idt-manually}}
 
-To install the `container-service` or `ks` plugin, run the following command.
+To install the `container-service` or `ks` plug-in, run the following command.
 
 ```sh
 ibmcloud plugin install ks
@@ -65,11 +65,3 @@ You can use the `kubectl` CLI to deploy and manage resources in your {{site.data
 To install the `kubectl` CLI, see [Install tools](https://kubernetes.io/docs/tasks/tools/){: external}.
 
 For a full list of `kubectl` commands, see the [Command line tool (`kubectl`) reference](https://kubernetes.io/docs/reference/kubectl/){: external}.
-
-
-
-
-
-
-
-

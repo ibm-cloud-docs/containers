@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-05-20"
+lastupdated: "2025-05-27"
 
 
 keywords: change log, version history, 1.29
@@ -97,12 +97,12 @@ The following table shows the changes that are in the master fix pack 1.29.15_15
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.5.13 | v1.5.14 | New version contains updates and security fixes. |
-| etcd | v3.5.18 | v3.5.21 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.21){: external}. |
+| etcd | v3.5.18 | v3.5.21 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.21){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.13-1 | v1.29.15-6 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | cb4f333 | d1545bd | New version contains updates and security fixes. |
 | Key Management Service provider | v2.9.17 | v2.9.18 | New version contains updates and security fixes. |
-| Konnectivity agent and server | v0.29.3_108_iks | v0.29.5_128_iks | See the [Konnectivity release notes](https://github.ibm.com/alchemy-containers/armada-konnectivity-community-build/releases/tag/v0.29.5_128_iks){: external}. |
-| Kubernetes DNS autoscaler | v1.8.9 | v1.9.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.9.0){: external}. |
+| Konnectivity agent and server | v0.29.3_108_iks | v0.29.5_128_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.29.5_128_iks){: external}. |
+| Kubernetes DNS autoscaler | v1.8.9 | v1.9.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.9.0){: external}. |
 | Portieris admission controller | v0.13.25 | v0.13.26 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.26){: external}. |
 {: caption="Changes since version 1.29.15_1581" caption-side="bottom"}
 
@@ -286,7 +286,7 @@ The following table shows the changes that are in the master fix pack 1.29.13_15
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.27.4 | v3.27.5 | See the [Calico release notes](https://docs.tigera.io/calico/3.27/release-notes/#v3.27.5){: external}. |
+| Calico | v3.27.4 | v3.27.5 | See the [Calico release notes](https://archive-os-3-27.netlify.app/calico/3.27/release-notes/#v3.27.5){: external}. |
 | Cluster health image | v1.5.9 | v1.5.10 | New version contains updates and security fixes. |
 | CoreDNS | 1.11.3 | v1.11.4 | See the [CoreDNS release notes](https://coredns.io/tags/notes/){: external}. |
 | etcd | v3.5.16 | v3.5.17 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.17){: external}. |
@@ -616,7 +616,7 @@ The following table shows the changes that are in the master fix pack 1.29.7_155
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.27.2 | v3.27.4 | See the [Calico release notes](https://docs.tigera.io/calico/3.27/release-notes/#v3.27.4){: external}. |
+| Calico | v3.27.2 | v3.27.4 | See the [Calico release notes](https://archive-os-3-27.netlify.app/calico/3.27/release-notes/#v3.27.4){: external}. |
 | Cluster health image | v1.4.11 | v1.5.7 | New version contains updates and security fixes. |
 | etcd | v3.5.13 | v3.5.14 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.14){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.9 | v2.5.12 | New version contains updates and security fixes. |
@@ -805,7 +805,7 @@ The following table shows the changes that are in the master fix pack 1.29.4_153
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.27.3 | v3.27.2 | See the [Calico release notes](https://docs.tigera.io/calico/3.27/release-notes/#v3.27.2){: external}. |
+| Calico | v3.27.3 | v3.27.2 | See the [Calico release notes](https://archive-os-3-27.netlify.app/calico/3.27/release-notes/#v3.27.2){: external}. |
 | Cluster health image | v1.4.8 | v1.4.9 | New version contains updates and security fixes. |
 | etcd | v3.5.12 | v3.5.13 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.13){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.3-1 | v1.29.4-1 | New version contains updates and security fixes. |
