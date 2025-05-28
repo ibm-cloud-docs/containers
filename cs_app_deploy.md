@@ -480,7 +480,7 @@ Before you begin
 Now that you deployed a test GPU workload, you might want to set up your cluster to run a tool that relies on GPU processing, such as [IBM Maximo Visual Inspection](https://www.ibm.com/products/maximo/asset-performance-management){: external}.
 
     
-## Deploying an app on an Intel AI Accelerator machine
+## Deploying an app on an Intel AI Accelerator (Gaudi 3) machine
 {: #intel-gpu-app}
 
 Complete the following example to deploy Intel Gaudi’s PyTorch container image that a retreives a Gaudi device by using the `resource.limits` field. Before you begin, make sure your cluster meets the following requirements.
