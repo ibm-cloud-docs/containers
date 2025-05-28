@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-05-27"
+lastupdated: "2025-05-28"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -722,7 +722,9 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
     * If your apps supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy): Access your app's URL in a web browser. If {{site.data.keyword.appid_short_notm}} is correctly applied, you are redirected to an {{site.data.keyword.appid_short_notm}} authentication log-in page.
     * If your apps supports the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy): Specify your `Bearer` access token in the Authorization header of requests to the apps. To get your access token, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-obtain-tokens). If {{site.data.keyword.appid_short_notm}} is correctly applied, the request is successfully authenticated and is routed to your app. If you send requests to your apps without an access token in the Authorization header, or if the access token is not accepted by {{site.data.keyword.appid_short_notm}}, then the request is rejected.
 
-8. Optional: You can customize the default behavior of the OAuth2-Proxy by creating a Kubernetes ConfigMap.
+8. Optional: **If you use network policies, or another firewall solution on your cluster to limit outgoing traffic**, you must make sure, to allow access to AppID's public service from your cluster. To obtain the IP address range for this service, submit a request through [customer support](/docs/account?topic=account-using-avatar).
+
+9. Optional: You can customize the default behavior of the OAuth2-Proxy by creating a Kubernetes ConfigMap.
     1. Create a ConfigMap YAML file that specifies values for the OAuth2-Proxy settings that you want to change.
         ```yaml
         apiVersion: v1
