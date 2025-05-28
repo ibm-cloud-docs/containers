@@ -3766,8 +3766,6 @@ subcollection: containers
 
     * [Deploying a workload](/docs/containers?topic=containers-deploy_app#gpu-workload)
 
-* [Deploying an app on an Intel AI Accelerator (Gaudi 3) machine](/docs/containers?topic=containers-deploy_app#intel-gpu-app)
-
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 
 * [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
