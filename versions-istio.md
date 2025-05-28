@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-04-28"
+lastupdated: "2025-05-27"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -796,7 +796,7 @@ Updates in this version
     - [USN-6435-1](https://ubuntu.com/security/notices/USN-6435-1){: external}
     - [CVE-2023-3446](https://nvd.nist.gov/vuln/detail/CVE-2023-3446){: external}
     - [CVE-2023-3817](https://nvd.nist.gov/vuln/detail/CVE-2023-3817){: external}
-    - [USN-6467-1](https://ubuntu.com/security/notices/USN-6467-1){: external}
+    - USN-6467-1
     - [CVE-2023-36054](https://nvd.nist.gov/vuln/detail/CVE-2023-36054){: external}
     - [USN-6429-1](https://ubuntu.com/security/notices/USN-6429-1){: external}
     - [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/CVE-2023-38545){: external}
@@ -1032,7 +1032,7 @@ Updates in this version
     - [CVE-2023-0466](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0466){: external}
     - [CVE-2023-28486](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28486){: external}
     - [CVE-2023-28487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28487){: external}
-    - [usn-6105-1](https://ubuntu.com/security/notices/USN-6105-1){: external}
+    - usn-6105-1
     - [usn-6099-1](https://ubuntu.com/security/notices/USN-6099-1){: external}
     - [usn-6119-1](https://ubuntu.com/security/notices/USN-6119-1){: external}
     - [usn-6039-1](https://ubuntu.com/security/notices/USN-6039-1){: external}
@@ -1154,7 +1154,7 @@ Updates in this version
     - [CVE-2023-2283](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2283){: external}
     - [CVE-2023-1255](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1255){: external}
     - [CVE-2023-2650](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650){: external}
-    - [usn-6105-1](https://ubuntu.com/security/notices/USN-6105-1){: external}
+    - usn-6105-1
     - [usn-6166-1](https://ubuntu.com/security/notices/USN-6166-1){: external}
     - [usn-6099-1](https://ubuntu.com/security/notices/USN-6099-1){: external}
     - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1){: external}

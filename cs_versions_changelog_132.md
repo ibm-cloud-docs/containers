@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-05-20"
+lastupdated: "2025-05-27"
 
 
 keywords: change log, version history, 1.32
@@ -89,12 +89,12 @@ The following table shows the changes that are in the master fix pack 1.32.4_153
 | --- | --- | --- | --- |
 | Calico | v3.29.1 | v3.29.2 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#v3.29.2){: external}. |
 | Cluster health image | v1.6.7 | v1.6.8 | New version contains updates and security fixes. |
-| etcd | v3.5.18 | v3.5.21 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.21){: external}. |
+| etcd | v3.5.18 | v3.5.21 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.21){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.32.3-1 | v1.32.3-6 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.5 | v1.1.6 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | cb4f333 | d1545bd | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.11 | v2.10.12 | New version contains updates and security fixes. |
-| Konnectivity agent and server | v0.31.1 | v0.32.0 | See the [Konnectivity release notes](https://github.ibm.com/alchemy-containers/armada-konnectivity-community-build/releases/tag/v0.32.0){: external}. |
+| Konnectivity agent and server | v0.31.1 | v0.32.0 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.32.0){: external}. |
 | Kubernetes | v1.32.3 | v1.32.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.4){: external}. |
 | Portieris admission controller | v0.13.25 | v0.13.26 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.26){: external}. |
 | Tigera Operator | v1.36.3 | v1.36.5 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.5){: external}. |

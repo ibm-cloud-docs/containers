@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-05-20"
+lastupdated: "2025-05-27"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -1039,7 +1039,7 @@ The `client-header-timeout`, `client-body-timeout`, and `keep-alive` settings ar
 
 The `client-header-timeout` defines the maximum time the server waits for a complete client header. Similarly, the `client-body-timeout` indicates the duration the server waits for the client to send the body of the request. Both of these timeouts must align with the `keep-alive` parameter, which regulates how long the server keeps a connection open while waiting for further requests. If these timeouts do not match with the keep-alive setting, NGINX will terminate the connection, which could lead to unexpected client behavior or request failures.
 
-You can set the above paramters in the `ibm-k8s-controller-config` ConfigMap in the `kube-system` namespace.
+You can set the above parameters in the `ibm-k8s-controller-config` ConfigMap in the `kube-system` namespace.
 
 ```yaml
 apiVersion: v1

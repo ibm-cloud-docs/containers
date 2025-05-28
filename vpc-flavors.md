@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-05-14"
+lastupdated: "2025-05-28"
 
 
 keywords: kubernetes, node scaling, ca, autoscaler
@@ -300,6 +300,15 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
+| Name | Family | Cores, Memory, and Network speed | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
+| ---- | ---- | -------------------------------- | ---- | --------------- | ----------------- |  -------------- |-- |
+{: class="simple-tab-table"}
+{: caption="Bare metal flavors in Frankfurt." caption-side="bottom"}
+{: #eu-de-physical-table}
+{: tab-title="physical"}
+{: tab-group="eu-de-tables"}
+
+
 
 | Name | Family | Cores, Memory, and Network speed | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | ---- | -------------------------------- | ---- | --------------- | ----------------- |  -------------- |-- |
@@ -377,6 +386,15 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
+| Name | Family | Cores, Memory, and Network speed | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
+| ---- | ---- | -------------------------------- | ---- | --------------- | ----------------- |  -------------- |-- |
+{: class="simple-tab-table"}
+{: caption="Bare metal flavors in Madrid." caption-side="bottom"}
+{: #eu-es-physical-table}
+{: tab-title="physical"}
+{: tab-group="eu-es-tables"}
+
+
 
 | Name | Family | Cores, Memory, and Network speed | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | ---- | -------------------------------- | ---- | --------------- | ----------------- |  -------------- |-- |
@@ -450,6 +468,15 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 ## London (`eu-gb`)
 {: #london-eu-gb}
 
+
+
+| Name | Family | Cores, Memory, and Network speed | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
+| ---- | ---- | -------------------------------- | ---- | --------------- | ----------------- |  -------------- |-- |
+{: class="simple-tab-table"}
+{: caption="Bare metal flavors in London." caption-side="bottom"}
+{: #eu-gb-physical-table}
+{: tab-title="physical"}
+{: tab-group="eu-gb-tables"}
 
 
 
@@ -674,6 +701,15 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 
 
 
+| Name | Family | Cores, Memory, and Network speed | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
+| ---- | ---- | -------------------------------- | ---- | --------------- | ----------------- |  -------------- |-- |
+{: class="simple-tab-table"}
+{: caption="Bare metal flavors in Washington DC." caption-side="bottom"}
+{: #us-east-physical-table}
+{: tab-title="physical"}
+{: tab-group="us-east-tables"}
+
+
 
 | Name | Family | Cores, Memory, and Network speed | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
 | ---- | ---- | -------------------------------- | ---- | --------------- | ----------------- |  -------------- |-- |
@@ -749,6 +785,15 @@ If your account is allowlisted for flavors that are not listed below, you can fi
 ## Dallas (`us-south`)
 {: #dallas-us-south}
 
+
+
+| Name | Family | Cores, Memory, and Network speed | OS | Primary storage | Secondary storage | Secondary storage options | GPUs |
+| ---- | ---- | -------------------------------- | ---- | --------------- | ----------------- |  -------------- |-- |
+{: class="simple-tab-table"}
+{: caption="Bare metal flavors in Dallas." caption-side="bottom"}
+{: #us-south-physical-table}
+{: tab-title="physical"}
+{: tab-group="us-south-tables"}
 
 
 
