@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-04-17"
+  years: 2014, 2025
+lastupdated: "2025-05-28"
 
 
 keywords: containers, kubernetes, help, network, connectivity, {{site.data.keyword.containerlong_notm}}
@@ -89,5 +89,5 @@ Review the infrastructure environment to check for other reasons that might caus
 3. If you have access to the underlying infrastructure, such as classic **Virtual Servers**, review the details of the corresponding machines for the worker nodes.
 
 
-
-
+### Step 5: Gather the logs and other details about your worker nodes
+{: #worker-debug-must-gather}

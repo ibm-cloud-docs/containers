@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-27"
+lastupdated: "2025-05-28"
 
 
 keywords: containers
@@ -3760,11 +3760,13 @@ subcollection: containers
 
 * [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity)
 
-* [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
+* [Deploying an app on an NVIDIA GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
 
     * [Prerequisites](/docs/containers?topic=containers-deploy_app#gpu-prereqs)
 
     * [Deploying a workload](/docs/containers?topic=containers-deploy_app#gpu-workload)
+
+* [Deploying an app on an Intel GPU machine](/docs/containers?topic=containers-deploy_app#intel-gpu-app)
 
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 
@@ -9166,6 +9168,8 @@ subcollection: containers
     * [Step 3: Get the details for each worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-details)
 
     * [Step 4: Review the infrastructure provider for the worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-infra)
+
+    * [Step 5: Gather the logs and other details about your worker nodes](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-must-gather)
 
 [Debugging worker nodes with Kubernetes API](/docs/containers?topic=containers-debug-kube-nodes#debug-kube-nodes)
 
