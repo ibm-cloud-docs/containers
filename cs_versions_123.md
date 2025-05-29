@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-10-09"
+  years: 2014, 2025
+lastupdated: "2025-05-29"
 
 
 keywords: kubernetes, 1.23, versions, update, upgrade
@@ -64,7 +64,7 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | --- | --- |
-| **Unsupported:** CoreDNS wildcard queries via Kubernetes plugin | CoreDNS no longer supports wildcard DNS queries via the Kubernetes plugin. Applications using such queries must be updated to use an alternative DNS query method.|
+| **Unsupported:** CoreDNS wildcard queries via Kubernetes plug-in | CoreDNS no longer supports wildcard DNS queries via the Kubernetes plug-in. Applications using such queries must be updated to use an alternative DNS query method.|
 | Kubernetes service IP advertisement over BGP | If you are using Calico's [Kubernetes Service IP Advertisement over BGP feature](https://www.tigera.io/blog/advertising-kubernetes-service-ips-with-calico-and-bgp/){: external}, you need to [add the service IP CIDRs that you want to advertise to the default BGP configuration resource](https://docs.tigera.io/archive/v3.21/reference/resources/bgpconfig){: external}. In previous releases, the entire service IP range was advertised by setting an environment variable in the `calico-node` daemonset. |
 {: caption="Changes to make after you update the master to Kubernetes 1.23" caption-side="bottom"}
 

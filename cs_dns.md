@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-03-10"
+lastupdated: "2025-05-29"
 
 
 keywords: kubernetes, coredns, kubedns, dns
@@ -147,7 +147,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-3. Optional: Add custom Corefiles to the CoreDNS ConfigMap. In the following example, include the `import <MyCoreFile>` in the `data.Corefile` section, and fill out the `data.<MyCorefile>` section with your custom Corefile information. For more information, see [the Corefile import documentation](https://coredns.io/plugins/import/){: external}.
+3. Optional: Add custom Corefiles to the CoreDNS ConfigMap. In the following example, include the `import <MyCoreFile>` in the `data.Corefile` section, and complete the `data.<MyCorefile>` section with your custom Corefile information. For more information, see [the Corefile import documentation](https://coredns.io/plugins/import/){: external}.
 
     The CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS ConfigMap, make sure to replace all `proxy` instances with `forward`.
     {: note}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-05-28"
+lastupdated: "2025-05-29"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -738,13 +738,13 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
           auth_logging_format:
           # Format for authentication logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview#logging-configuration
           cookie_csrf_expire: "15m"
-          # Expiration time frame for CSRF cookie. Default is "15m".
+          # Expiration time for CSRF cookie. Default is "15m".
           cookie_csrf_per_request: <true|false>
           # Enable multiple CSRF cookies per request, making it possible to have parallel requests. Default is "false".
           cookie_domains:
           # A list of optional domains to force cookies to. The longest domain that matches the request’s host is used. If there is no match for the request’s host, the shortest domain is used. Example: sub.domain.com,example.com
           cookie_expire: "168h0m0s"
-          # Expiration time frame for cookies. Default: "168h0m0s".
+          # Expiration time for cookies. Default: "168h0m0s".
           cookie_samesite: ""
           # SameSite attribute for cookies. Supported values: "lax", "strict", "none", or "".
           email_domains: ""
@@ -788,7 +788,7 @@ For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site
 ### Upgrading ALB OAuth Proxy add-on
 {: #upgrading-alb-oauth-proxy-add-on}
 
-To upgrade the ALB OAuth Proxy add-on, you must first disable the add-on, then re-enable the add-on and specify the desired version.
+To upgrade the ALB OAuth Proxy add-on, you must first disable the add-on, then re-enable the add-on and specify the version.
 {: shortdesc}
 
 The upgrade process is non-interruptive as the supervised OAuth2 Proxy instances remain on the cluster even when the add-on is disabled.

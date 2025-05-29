@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-04-30"
+lastupdated: "2025-05-29"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -57,7 +57,7 @@ You can no longer use the `ob` plugin, Terraform, or API to install observabilit
 ### Reviewing your observability agents
 {: #ob-review-mon}
 
-The observability plugin installs Sysdig and LogDNA agents in the `ibm-observe` namespace.
+The observability plug-in installs Sysdig and LogDNA agents in the `ibm-observe` namespace.
 
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
