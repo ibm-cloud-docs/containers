@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-05-27"
+lastupdated: "2025-05-29"
 
 
 keywords: change log, version history, 1.29
@@ -101,7 +101,7 @@ The following table shows the changes that are in the master fix pack 1.29.15_15
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.29.13-1 | v1.29.15-6 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | cb4f333 | d1545bd | New version contains updates and security fixes. |
 | Key Management Service provider | v2.9.17 | v2.9.18 | New version contains updates and security fixes. |
-| Konnectivity agent and server | v0.29.3_108_iks | v0.29.5_128_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.29.5_128_iks){: external}. |
+| Konnectivity agent and server | v0.29.3_108_iks | v0.29.5_128_iks | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.29.5){: external}. |
 | Kubernetes DNS autoscaler | v1.8.9 | v1.9.0 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.9.0){: external}. |
 | Portieris admission controller | v0.13.25 | v0.13.26 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.26){: external}. |
 {: caption="Changes since version 1.29.15_1581" caption-side="bottom"}
