@@ -8841,7 +8841,7 @@ subcollection: containers
 
     * [How can I lock down my cluster if my API key becomes compromised?](/docs/containers?topic=containers-faqs#apikey-lockdown)
 
-* [How do I rotate the cluster API key in the event of a leak?](/docs/containers?topic=containers-faqs#faq_api_key_leak)
+* [How do I rotate the cluster API key if there is a leak?](/docs/containers?topic=containers-faqs#faq_api_key_leak)
 
 * [Where can I find a list of security bulletins that affect my cluster?](/docs/containers?topic=containers-faqs#faq_security_bulletins)
 
@@ -8992,7 +8992,7 @@ subcollection: containers
 
 * [Updating](/docs/containers?topic=containers-cluster-states-reference#cluster-state-updating)
 
-* [Update canceled](/docs/containers?topic=containers-cluster-states-reference#cluster-state-cancelled)
+* [Update canceled](/docs/containers?topic=containers-cluster-states-reference#cluster-state-canceled)
 
 * [Unavailable](/docs/containers?topic=containers-cluster-states-reference#cluster-state-unavailable)
 
@@ -9070,7 +9070,7 @@ subcollection: containers
 
 [Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?](/docs/containers?topic=containers-ts_image_pull_create#ts_image_pull_create)
 
-[How do I rotate the cluster API key in the event of a leak?](/docs/containers?topic=containers-ts-troubleshoot-api-key-leak#ts-troubleshoot-api-key-leak)
+[How do I rotate the cluster API key if there is a leak?](/docs/containers?topic=containers-ts-troubleshoot-api-key-leak#ts-troubleshoot-api-key-leak)
 
 [Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update#webhooks_update)
 

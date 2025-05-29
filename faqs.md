@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-04-09"
+lastupdated: "2025-05-29"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -214,12 +214,12 @@ If the user is leaving your organization, the {{site.data.keyword.cloud_notm}} a
 
 If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/account?topic=account-userapikey&interface=ui#delete_user_key) so that no further calls can be made by using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver) security topic.
 
-## How do I rotate the cluster API key in the event of a leak?
+## How do I rotate the cluster API key if there is a leak?
 {: #faq_api_key_leak}
 {: faq}
 {: support}
 
-For instructions on how to rotate your API key, see [How do I rotate the cluster API key in the event of a leak?](/docs/containers?topic=containers-ts-troubleshoot-api-key-leak).
+For instructions on how to rotate your API key, see [How do I rotate the cluster API key if there is a leak?](/docs/containers?topic=containers-ts-troubleshoot-api-key-leak).
 
 
 ## Where can I find a list of security bulletins that affect my cluster?

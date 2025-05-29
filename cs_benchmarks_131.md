@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-11-11"
+  years: 2024, 2025
+lastupdated: "2025-05-29"
 
 keywords: kubernetes, containers, benchmarks, 1.31, CIS benchmarks
 
@@ -67,14 +67,14 @@ Review the Master node security configuration results of the version 1.5 CIS Kub
 | 1.2.7 | Ensure that the `--authorization-mode` argument is not set to AlwaysAllow. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.8 | Ensure that the `--authorization-mode` argument includes Node. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.9 | Ensure that the `--authorization-mode` argument includes RBAC. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.2.10 | Ensure that the admission control plugin EventRateLimit is set. | Not Scored | 1 | [Fail](#cis-benchmark-remediations-131) | {{site.data.keyword.IBM_notm}}|
-| 1.2.11 | Ensure that the admission control plugin AlwaysAdmit is not set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.2.12 | Ensure that the admission control plugin AlwaysPullImages is set. | Not Scored | 1 | [Fail](#cis-benchmark-remediations-131) | {{site.data.keyword.IBM_notm}}|
-| 1.2.13 | Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used. | Not Scored | 1 | [Pass](#cis-benchmark-remediations-131) | {{site.data.keyword.IBM_notm}}|
-| 1.2.14 | Ensure that the admission control plugin ServiceAccount is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.2.15 | Ensure that the admission control plugin NamespaceLifecycle is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
-| 1.2.16 | Ensure that the admission control plugin PodSecurityPolicy is set. | Scored | 1 | [Pass](#cis-benchmark-remediations-131) | {{site.data.keyword.IBM_notm}}|
-| 1.2.17 | Ensure that the admission control plugin NodeRestriction is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
+| 1.2.10 | Ensure that the admission control plug-in EventRateLimit is set. | Not Scored | 1 | [Fail](#cis-benchmark-remediations-131) | {{site.data.keyword.IBM_notm}}|
+| 1.2.11 | Ensure that the admission control plug-in AlwaysAdmit is not set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
+| 1.2.12 | Ensure that the admission control plug-in AlwaysPullImages is set. | Not Scored | 1 | [Fail](#cis-benchmark-remediations-131) | {{site.data.keyword.IBM_notm}}|
+| 1.2.13 | Ensure that the admission control plug-in SecurityContextDeny is set if PodSecurityPolicy is not used. | Not Scored | 1 | [Pass](#cis-benchmark-remediations-131) | {{site.data.keyword.IBM_notm}}|
+| 1.2.14 | Ensure that the admission control plug-in ServiceAccount is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
+| 1.2.15 | Ensure that the admission control plug-in NamespaceLifecycle is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
+| 1.2.16 | Ensure that the admission control plug-in PodSecurityPolicy is set. | Scored | 1 | [Pass](#cis-benchmark-remediations-131) | {{site.data.keyword.IBM_notm}}|
+| 1.2.17 | Ensure that the admission control plug-in NodeRestriction is set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.18 | Ensure that the `--insecure-bind-address` argument is not set. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.19 | Ensure that the `--insecure-port` argument is set to 0. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|
 | 1.2.20 | Ensure that the `--secure-port` argument is not set to 0. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}}|

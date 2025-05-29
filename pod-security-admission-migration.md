@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-04-28"
+lastupdated: "2025-05-29"
 
 
 keywords: kubernetes, deploy, migrating psps to pod security, pod security admission, migrate to pod security admission
@@ -56,7 +56,7 @@ Complete the following steps ensure that all pods run under the `ibm-privileged-
 
 One difference between Pod Security Admission and `PodSecurityPolicies` is that Pod Security Admission is validating while the `PodSecurityPolicies` can be mutating.  This makes it important that pods use the `ibm-privileged-psp`, which is not a mutating PSP, before you upgrade. Because both Pod Security Admission and the `ibm-privileged-psp` are validating, pods work the same under either one.
 
-For example, if a pod is currently running under `ibm-restricted-psp`, it might set the `fsGroup` and `supplementalGroups` to `1` in the pod `securityContext` section, based on the `MustRunAs` range in the PSP. In other words, the `ibm-restricted-psp` can change the pod `securityContext`. Such changes are visible as a difference between the `securityContext` of the running pod and the `securityContext` in the pod template of the deployment or similar resource that creates the pod. The `ibm-privileged-psp` is not mutating, so a pod running under it might run with different groups and might not be able to access data stored in an existing PVC.
+For example, if a pod is currently running under `ibm-restricted-psp`, it might set the `fsGroup` and `supplementalGroups` to `1` in the pod `securityContext` section, based on the `MustRunAs` range in the PSP. The `ibm-restricted-psp` can change the pod `securityContext`. Such changes are visible as a difference between the `securityContext` of the running pod and the `securityContext` in the pod template of the deployment or similar resource that creates the pod. The `ibm-privileged-psp` is not mutating, so a pod running under it might run with different groups and might not be able to access data stored in an existing PVC.
 
 1. Get the details of all pods and check their PSPs.
 
