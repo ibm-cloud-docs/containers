@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-29"
+lastupdated: "2025-05-30"
 
 
 keywords: kubernetes, containers, containers
@@ -26,15 +26,14 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 
 When a new [Kubernetes version](/docs/containers?topic=containers-cs_versions) is released, IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in this documentation. You can review how specific versions of your {{site.data.keyword.containerlong}} clusters meet the CIS Kubernetes Benchmark.
 
-## Available benchmark versions
+## Supported benchmark versions
 {: #cis-benchmark-versions}
 
-Use the list to find CIS Kubernetes Benchmark results for available versions.
+Use the list to find CIS Kubernetes Benchmark results for supported versions.
 - [Version 1.32](/docs/containers?topic=containers-cis-benchmark-132)
 - [Version 1.31](/docs/containers?topic=containers-cis-benchmark-131)
 - [Version 1.30](/docs/containers?topic=containers-cis-benchmark-130)
 - [Version 1.29](/docs/containers?topic=containers-cis-benchmark-129)
-- [Version 1.28](/docs/containers?topic=containers-cis-benchmark-128)
 
 
 

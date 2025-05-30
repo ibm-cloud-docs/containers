@@ -318,12 +318,6 @@ toc:
               - cs_versions_129.md
               - cs_versions_changelog_129.md
               - cs_benchmarks_129.md
-          - topicgroup:
-              label: Version 1.28
-              topics:
-              - cs_versions_128.md
-              - cs_versions_changelog_128.md
-              - cs_benchmarks_128.md
       - topicgroup:
           label: CLI plug-in reference
           topics:
@@ -370,6 +364,12 @@ toc:
       - topicgroup:
           label: Archived version history
           topics:
+          - topicgroup:
+              label: Version 1.28
+              topics:
+              - cs_versions_128.md
+              - cs_versions_changelog_128.md
+              - cs_benchmarks_128.md
           - topicgroup:
               label: Version 1.27
               topics:

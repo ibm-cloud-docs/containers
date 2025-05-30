@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-03-18"
+lastupdated: "2025-05-30"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, allowlist, operating system, rhel, ubuntu
@@ -46,9 +46,9 @@ Log in to your cluster to check your cluster version.
 
     Example output
     ```sh
-    cluster-us-south              cn6thtsd0ghdc110k9jg   normal        2 months ago   3         Dallas               4.14.10_1546_openshift    Default               vpc-gen2
+    cluster-us-south              cn6thtsd0ghdc110k9jg   normal        2 months ago   3         Dallas               1.32.5    Default               vpc-gen2
     ```
-    {: screen}
+    
 
 ## Checking your worker node version in the CLI
 {: #worker-version-cli}
@@ -72,11 +72,11 @@ Log in to your cluster to check your cluster version.
     Example output
     ```sh
     ID                                                      Primary IP     Flavor     State    Status   Zone       Version
-    kube-cn5gdcio0lv9l8m831ig-bharoksvpc-default-00000197   10.248.128.5   bx2.4x16   normal   Ready    jp-osa-3   4.14.10_1546_openshift*
-    kube-cn5gdcio0lv9l8m831ig-bharoksvpc-default-000002a3   10.248.64.5    bx2.4x16   normal   Ready    jp-osa-2   4.14.10_1546_openshift*
-    kube-cn5gdcio0lv9l8m831ig-bharoksvpc-default-00000371   10.248.0.5     bx2.4x16   normal   Ready    jp-osa-1   4.14.10_1546_openshift*
+    kube-cn5gdcio0lv9l8m831ig-bharoksvpc-default-00000197   10.248.128.5   bx2.4x16   normal   Ready    jp-osa-3   1.32.5*
+    kube-cn5gdcio0lv9l8m831ig-bharoksvpc-default-000002a3   10.248.64.5    bx2.4x16   normal   Ready    jp-osa-2   1.32.5*
+    kube-cn5gdcio0lv9l8m831ig-bharoksvpc-default-00000371   10.248.0.5     bx2.4x16   normal   Ready    jp-osa-1   1.32.5*
     ```
-    {: screen}
+    
 
 ## Checking a cluster's Kubernetes server version in the CLI
 {: #kube-version-check}
@@ -135,7 +135,7 @@ You can also log in to your cluster to check the operating system of the worker 
                         kubernetes.io/os=linux
     ...
     System Info:
-        OS Image:                   Ubuntu 20.04.5 LTS
+        OS Image:                   Ubuntu 24.04.5 LTS
         Operating System:           linux
         Architecture:               amd64
         ...
