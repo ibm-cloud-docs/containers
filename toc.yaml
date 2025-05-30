@@ -399,13 +399,7 @@ toc:
               topics:
               - cs_versions_123.md
               - cs_versions_changelog_123.md
-              - cs_benchmarks_123.md 
-          - topicgroup:
-              label: Version 1.22
-              topics:
-              - cs_versions_122.md
-              - cs_versions_changelog_122.md
-              - cs_benchmarks_122.md
+              - cs_benchmarks_123.md
       - locations.md
       - cs_integrations_overview.md
       - service-settings.md

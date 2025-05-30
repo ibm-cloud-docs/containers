@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-05-29"
+lastupdated: "2025-05-30"
 
 
 keywords: containers
@@ -8428,12 +8428,6 @@ subcollection: containers
 
     * [Worker node fix pack 1.23.7_1532, released 7 June 2022](/docs/containers?topic=containers-changelog_123#1237_1532)
 
-    * [Master fix pack 1.23.7_1531, released 3 June 2022](/docs/containers?topic=containers-changelog_123#1237_1531)
-
-    * [Worker node fix pack 1.23.6_1530, released 23 May 2022](/docs/containers?topic=containers-changelog_123#1236_1530)
-
-    * [Worker node fix pack 1.23.6_1529, released 09 May 2022](/docs/containers?topic=containers-changelog_123#1236_1529)
-
 [Version 1.23 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-123)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-123#cis-section-1-123)
@@ -8475,121 +8469,6 @@ subcollection: containers
     * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-56-123)
 
 * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-123#cis-benchmark-remediations-123)
-
-
-### Version 1.22
-{: #sitemap_version_122}
-
-
-[1.22 version information and update actions](/docs/containers?topic=containers-cs_versions_122#cs_versions_122)
-
-* [Release timeline](/docs/containers?topic=containers-cs_versions_122#release_timeline_122)
-
-* [Preparing to update](/docs/containers?topic=containers-cs_versions_122#prep-up-122)
-
-    * [Update before master](/docs/containers?topic=containers-cs_versions_122#122_before)
-
-    * [Update after master](/docs/containers?topic=containers-cs_versions_122#122_after)
-
-[Kubernetes version 1.22 change log](/docs/containers?topic=containers-changelog_122#changelog_122)
-
-* [Overview](/docs/containers?topic=containers-changelog_122#changelog_overview_122)
-
-* [Version 1.22 change log](/docs/containers?topic=containers-changelog_122#122_changelog)
-
-    * [Worker node fix pack 1.22.17_1584, released 02 January 2023](/docs/containers?topic=containers-changelog_122#12217_1584)
-
-    * [Worker node fix pack 1.22.17_1583, released 19 December 2022](/docs/containers?topic=containers-changelog_122#12217_1583)
-
-    * [Master fix pack 1.22.17_1582, released 14 December 2022](/docs/containers?topic=containers-changelog_122#12217_1582)
-
-    * [Worker node fix pack 1.22.16_1580, released 05 December 2022](/docs/containers?topic=containers-changelog_122#12216_1580)
-
-    * [Worker node fix pack 1.22.16_1579, released 21 November 2022](/docs/containers?topic=containers-changelog_122#12216_1579)
-
-    * [Master fix pack 1.22.16_1578, released 16 November 2022](/docs/containers?topic=containers-changelog_122#12216_1578)
-
-    * [Worker node fix pack 1.22.15_1577, released 07 November 2022](/docs/containers?topic=containers-changelog_122#12215_1577)
-
-    * [Master fix pack 1.22.15_1576, released 27 October 2022](/docs/containers?topic=containers-changelog_122#12215_1576)
-
-    * [Worker node fix pack 1.22.15_1575, released 25 October 2022](/docs/containers?topic=containers-changelog_122#12215_1575)
-
-    * [Worker node fix pack 1.22.15_1574, released 10 October 2022](/docs/containers?topic=containers-changelog_122#12215_1574)
-
-    * [Master fix pack 1.22.15_1572, released 26 September 2022](/docs/containers?topic=containers-changelog_122#12215_1572)
-
-    * [Worker node fix pack 1.22.15_1573, released 26 September 2022](/docs/containers?topic=containers-changelog_122#12215_1573)
-
-    * [Worker node fix pack 1.22.13_1571, released 12 September 2022](/docs/containers?topic=containers-changelog_122#12213_1571)
-
-    * [Master fix pack 1.22.13_1570, released 1 September 2022](/docs/containers?topic=containers-changelog_122#12213_1570)
-
-    * [Worker node fix pack 1.22.13_1568, released 29 August 2022](/docs/containers?topic=containers-changelog_122#12213_1568)
-
-    * [Worker node fix pack 1.22.12_1566, released 16 August 2022](/docs/containers?topic=containers-changelog_122#12212_1566)
-
-    * [Worker node fix pack 1.22.12_1565, released 01 August 2022](/docs/containers?topic=containers-changelog_122#12212_1565)
-
-    * [Master fix pack 1.22.12_1564, released 26 July 2022](/docs/containers?topic=containers-changelog_122#12212_1564)
-
-    * [Worker node fix pack 1.22.11_1562, released 18 July 2022](/docs/containers?topic=containers-changelog_122#12211_1562)
-
-    * [Worker node fix pack 1.22.11_1557, released 05 July 2022](/docs/containers?topic=containers-changelog_122#12211_1557)
-
-    * [Master fix pack 1.22.11_1556, released 22 June 2022](/docs/containers?topic=containers-changelog_122#master_12211_1556)
-
-    * [Worker node fix pack 1.22.11_1556, released 20 June 2022](/docs/containers?topic=containers-changelog_122#12211_1556)
-
-    * [Worker node fix pack 1.22.10_1554, released 7 June 2022](/docs/containers?topic=containers-changelog_122#12210_1554)
-
-    * [Master fix pack 1.22.10_1553, released 3 June 2022](/docs/containers?topic=containers-changelog_122#12210_1553)
-
-    * [Worker node fix pack 1.22.9_1552, released 23 May 2022](/docs/containers?topic=containers-changelog_122#1229_1552)
-
-    * [Worker node fix pack 1.22.9_1551, released 09 May 2022](/docs/containers?topic=containers-changelog_122#1229_1551)
-
-[Version 1.22 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-122)
-
-* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-122#cis-section-1-122)
-
-    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-11-122)
-
-    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-12-122)
-
-    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-13-122)
-
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-14-122)
-
-* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-122#cis-section-2-122)
-
-* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-122#cis-section-3-122)
-
-    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-31-122)
-
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-32-122)
-
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-122#cis-section-4-122)
-
-    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-41-122)
-
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-42-122)
-
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-122#cis-section-5-122)
-
-    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-51-122)
-
-    * [5.2 Pod Security Policies](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-52-122)
-
-    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-53-122)
-
-    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-54-122)
-
-    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-55-122)
-
-    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-56-122)
-
-    * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-122#cis-benchmark-remediations-122)
 
 
 ## Locations
@@ -9741,6 +9620,10 @@ subcollection: containers
 
 
 [Contacting support](/docs/containers?topic=containers-get-help#get-help)
+
+* [Get your cluster details](/docs/containers?topic=containers-get-help#cluster-details)
+
+* [Open a support case](/docs/containers?topic=containers-get-help#support-case)
 
 
 ## Service limitations

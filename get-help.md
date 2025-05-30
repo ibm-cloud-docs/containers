@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-04-04"
+  years: 2014, 2025
+lastupdated: "2025-05-30"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, support, get help
@@ -24,6 +24,9 @@ Still having issues with your cluster? Review different ways to get help and sup
 
 Before you open a support case, gather relevant information about your cluster environment.
 {: tip}
+
+## Get your cluster details
+{: #cluster-details}
 
 1. Get your cluster details.
 
@@ -53,15 +56,15 @@ Before you open a support case, gather relevant information about your cluster e
     You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool) to gather and export pertinent information to share with IBM Support.
     {: tip}
 
-4. Contact IBM Support by [opening a case](https://cloud.ibm.com/unifiedsupport/cases/form){: external}.
-
-5. For the **Problem type**, search for or select {{site.data.keyword.containerlong_notm}}.
-
-6. For the **Case details**, provide a descriptive title and include the details that you previously gathered. From the **Resources**, you can also select the cluster that the issue is related to.
-
-7. Be as specific as possible and include and architecture diagrams or supplemental materials that you think you could help IBM Support troubleshoot the issue.
 
 
+## Open a support case
+{: #support-case}
 
+1. Contact IBM Support by [opening a case](https://cloud.ibm.com/unifiedsupport/cases/form){: external}.
 
+1. For the **Problem type**, search for or select {{site.data.keyword.containerlong_notm}}.
 
+1. For the **Case details**, provide a descriptive title and include the details that you previously gathered. From the **Resources**, you can also select the cluster that the issue is related to.
+
+1. Be as specific as possible and include and architecture diagrams or supplemental materials that you think you could help IBM Support troubleshoot the issue.
