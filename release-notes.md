@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-05-28"
+lastupdated: "2025-05-30"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -29,6 +29,22 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## May 2025
 {: #containers-may25}
+
+### 30 May 2025
+{: #containers-30may25}
+{: release-note}
+
+
+
+
+
+{{site.data.keyword.containerlong_notm}} version 1.28 is unsupported.
+:   Update your cluster to at least [version 1.29](/docs/containers?topic=containers-cs_versions_129) as soon as possible.
+
+Ubuntu 20 is unsupported.
+:   The Ubuntu 20 operating system is no longer supported. [Migrate your worker nodes to Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate) as soon as possible. 
+
+
 
 
 

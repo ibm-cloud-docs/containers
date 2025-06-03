@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2025
-lastupdated: "2025-03-04"
+lastupdated: "2025-05-30"
 
 
 keywords: kubernetes, containers, 131, version 131, 131 update actions
@@ -65,7 +65,7 @@ The following table shows the actions that you must take before you update the K
 | --- | --- |
 | Calico API server is a managed resource | {{site.data.keyword.containerfull_notm}} now manages the installation of and updates to the Calico API server component. If your cluster contains the `calico-apiserver` namespace, then you must uninstall the Calico API server before upgrading. Also, if you have any network policies blocking egress out of the kube-system/konnectivity-agent pods, including something based on an example policy like [allow-egress-pods-public](https://github.com/IBM-Cloud/kube-samples/blob/master/calico-policies/public-network-isolation/us-south/allow-egress-pods-public.yaml){: external} that applies to all pods, you need to also allow egress from the kube-system/konnectivity-agent pods to port 5443 on the calico-apiserver/calico-apiserver pods. |
 | Prevent volume mode conversion | Kubernetes snapshot controller now rejects volume mode changes when creating a persistent volume claim from a volume snapshot unless the `snapshot.storage.kubernetes.io/allow-volume-mode-change: "true"` annotation has been added to the `VolumeSnapshotContent` that corresponds to the `VolumeSnapshot`. For more information, see [Converting the volume mode of a Snapshot](https://kubernetes.io/docs/concepts/storage/volume-snapshots/#convert-volume-mode){: external}. |
-| Ubuntu 24 is the default operating system | Ubuntu 24 is now the default operating system for {{site.data.keyword.containerfull_notm}} version 1.31 clusters. Clusters upgraded to version 1.31 continue to support either Ubuntu 20 or 24 worker nodes and the current operating system for an existing worker pool remains unchanged. For more information and possible migration actions related to Ubuntu 24, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate). |
+| Ubuntu 24 is the default operating system | Ubuntu 24 is now the default operating system for {{site.data.keyword.containerfull_notm}} version 1.31 clusters. For more information and possible migration actions related to Ubuntu 24, see [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate). |
 {: caption="Changes to make before you update the master to Kubernetes 1.31" caption-side="bottom"}
 
 

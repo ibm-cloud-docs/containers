@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-05-29"
+lastupdated: "2025-05-30"
 
 
 keywords: kubernetes, containers, benchmarks, 1.28, CIS benchmarks
@@ -19,8 +19,8 @@ subcollection: containers
 
 
 
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 
 
