@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-06-04"
+lastupdated: "2025-06-05"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -550,7 +550,7 @@ Updates in this version
     - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
     - [USN-6477-1](https://ubuntu.com/security/notices/USN-6477-1){: external}
     - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
-    - [USN-6427-1](https://ubuntu.com/security/notices/USN-6427-1){: external}
+    - USN-6427-1
     - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
     - [USN-6535-1](https://ubuntu.com/security/notices/USN-6535-1){: external}
     - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}
@@ -690,7 +690,7 @@ Updates in this version
     - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
     - [USN-6477-1](https://ubuntu.com/security/notices/USN-6477-1){: external}
     - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
-    - [USN-6427-1](https://ubuntu.com/security/notices/USN-6427-1){: external}
+    - USN-6427-1
     - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
     - [USN-6535-1](https://ubuntu.com/security/notices/USN-6535-1){: external}
     - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}
@@ -805,7 +805,7 @@ Updates in this version
     - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
     - [USN-6477-1](https://ubuntu.com/security/notices/USN-6477-1){: external}
     - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
-    - [USN-6427-1](https://ubuntu.com/security/notices/USN-6427-1){: external}
+    - USN-6427-1
     - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
     - [USN-6535-1](https://ubuntu.com/security/notices/USN-6535-1){: external}
     - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}
