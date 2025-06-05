@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-06-03"
+lastupdated: "2025-06-04"
 
 
 keywords: containers
@@ -1579,72 +1579,6 @@ subcollection: containers
     * [8 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0823)
 
         * ALB OAuth Proxy add-on version `2.0.0_1420`.
-
-    * [2 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0223)
-
-        * Istio add-on `1.14` 
-
-    * [1 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0123)
-
-        * New! Kubernetes 1.26
-
-        * Master fix pack
-
-        * Worker node fix pack
-
-        * Persistent VPC load balancers
-
-        * Customized VPC load balancer health checks
-
-* [January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan23)
-
-    * [30 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan3023)
-
-        * Master fix packs `1.23.16_1560`, `1.24.10_1551`, and `1.25.6_1529`.
-
-        * Worker node fix packs `1.23.16_1561`, `1.24.10_1552`, and `1.25.6_1530`.
-
-        * New! Optional secondary disks for worker nodes in VPC clusters.
-
-        * CLI version `1.0.489`.
-
-        * Ingress ALB version `1.5.1_3705_iks`, `1.4.0_3703_iks`, and `1.3.1_3704_iks`.
-
-    * [24 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2423)
-
-        * CLI version 1.0.487 change log update
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.16_1779` and `5.0.5_1784`.
-
-        * Cluster autoscaler add-on version `1.0.7_940`.
-
-        * Ingress ALB version `1.3.1_3685_iks`, `1.4.0_3684_iks`, and `1.5.1_3683_iks`
-
-    * [23 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan2323)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.8` is available.
-
-    * [16 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan1723)
-
-        * Worker node fix packs `1.23.15_1558`, `1.24.9_1550`, and `1.25.5_1528`.
-
-    * [10 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan1023)
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.15_1764` and `5.0.4_1773`
-
-        * Istio add-on versions `1.14.6`, `1.15.4`, and `1.16.1`
-
-    * [9 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0923)
-
-        * Cluster autoscaler add-on versions `1.0.5_898`, `1.0.6_899`, `1.0.7_900`, and `1.1.0_897`.
-
-    * [5 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0523)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.7` is available.
-
-    * [3 January 2023](/docs/containers?topic=containers-containers-relnotes#containers-jan0323)
-
-        * Ingress ALB version `1.3.1_3538_iks`, and `1.4.0_3537_iks`
 
 
 ## Tutorials library for Kubernetes Service

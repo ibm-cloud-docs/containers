@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-06-03"
+lastupdated: "2025-06-04"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -1293,7 +1293,7 @@ Updates in this version
 :   Adds support for [Gateway API resource](https://istio.io/latest/news/releases/1.16.x/announcing-1.16/upgrade-notes/#gateway-api-resources).
 :   Resolves the following CVEs:
     - [CVE-2013-4235](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4235){: external}
-    - [usn-5761-1](https://ubuntu.com/security/notices/USN-5761-1){: external}
+    - usn-5761-1
     - [usn-5745-1](https://ubuntu.com/security/notices/USN-5745-1){: external}
     
 
