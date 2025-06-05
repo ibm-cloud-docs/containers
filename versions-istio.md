@@ -559,7 +559,7 @@ Updates in this version
     - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/CVE-2023-4806){: external}
     - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/CVE-2023-4813){: external}
     - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/CVE-2023-5156){: external}
-    - [USN-6499-1](https://ubuntu.com/security/notices/USN-6499-1){: external}
+    - USN-6499-1
     - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}
 
 ### Change log for 1.20.0, released 7 December 2023
@@ -699,7 +699,7 @@ Updates in this version
     - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/CVE-2023-4806){: external}
     - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/CVE-2023-4813){: external}
     - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/CVE-2023-5156){: external}
-    - [USN-6499-1](https://ubuntu.com/security/notices/USN-6499-1){: external}
+    - USN-6499-1
     - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}
 
 
@@ -814,7 +814,7 @@ Updates in this version
     - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/CVE-2023-4806){: external}
     - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/CVE-2023-4813){: external}
     - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/CVE-2023-5156){: external}
-    - [USN-6499-1](https://ubuntu.com/security/notices/USN-6499-1){: external}
+    - USN-6499-1
     - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}
 
 
@@ -862,7 +862,7 @@ Updates in this version
     - [CVE-2023-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28321){: external}
     - [CVE-2023-28322](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28322){: external}
     - [CVE-2023-32001](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32001){: external}
-    - [usn-6237-2](https://ubuntu.com/security/notices/USN-5328-1){: external}
+    - usn-6237-2
 
 ### Change log for 1.18.2, released 8 August 2023
 {: #1182}
@@ -964,7 +964,7 @@ Updates in this version
     - [CVE-2023-28321](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28321){: external}
     - [CVE-2023-28322](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28322){: external}
     - [CVE-2023-32001](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32001){: external}
-    - [usn-6237-2](https://ubuntu.com/security/notices/USN-5328-1){: external}
+    - usn-6237-2
 
 ### Change log for 1.17.5, released 8 August 2023
 {: #1175}
