@@ -29,7 +29,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 ## June 2025
-{: #containers-may25}
+{: #containers-june25}
 
 ### 02 June 2025
 {: #containers-02jun25}
@@ -46,7 +46,6 @@ Ingress ALB cluster add-on patch updates.
 
 
 
-
 ## May 2025
 {: #containers-may25}
 
@@ -58,15 +57,31 @@ Ingress ALB cluster add-on patch updates.
 
 
 
-### 30 May 2025
-{: #containers-30may25}
-{: release-note}
-
 {{site.data.keyword.containerlong_notm}} version 1.28 is unsupported.
 :   Update your cluster to at least [version 1.29](/docs/containers?topic=containers-cs_versions_129) as soon as possible.
 
 Ubuntu 20 is unsupported.
 :   The Ubuntu 20 operating system is no longer supported. [Migrate your worker nodes to Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate) as soon as possible. 
+
+
+
+### 28 May 2025
+{: #containers-28may25}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
+:   [Version 1.28 change log](/docs/containers?topic=containers-changelog_128)
+
+
+
+
 
 
 
