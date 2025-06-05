@@ -240,6 +240,10 @@ subcollection: containers
 
 * [June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june25)
 
+    * [04 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-04jun25)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
     * [02 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-02jun25)
 
         * VPC Block CSI Driver cluster add-on patch updates.
@@ -4637,6 +4641,8 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
+    * [Worker node fix pack 1.32.5_1542, released 04 June 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1325_1542_W)
+
     * [Master fix pack 1.32.5_1541, released 28 May 2025](/docs/containers?topic=containers-changelog_132#1325_1541_M)
 
     * [Worker node fix pack 1.32.4_1540, released 19 May 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1324_1540_W)
@@ -4727,6 +4733,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.9_1551, released 04 June 2025](/docs/containers?topic=containers-changelog_131#cl-boms-1319_1551_W)
 
     * [Master fix pack 1.31.9_1550, released 28 May 2025](/docs/containers?topic=containers-changelog_131#1319_1550_M)
 
@@ -4864,6 +4872,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Worker node fix pack 1.30.13_1567, released 04 June 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1567_W)
 
     * [Master fix pack 1.30.13_1566, released 28 May 2025](/docs/containers?topic=containers-changelog_130#13013_1566_M)
 
@@ -5007,6 +5017,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29](/docs/containers?topic=containers-changelog_129#129_components)
+
+    * [Worker node fix pack 1.29.15_1589, released 04 June 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1589_W)
 
     * [Master fix pack 1.29.15_1588, released 28 May 2025](/docs/containers?topic=containers-changelog_129#12915_1588_M)
 

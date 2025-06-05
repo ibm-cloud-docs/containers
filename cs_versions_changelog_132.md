@@ -42,6 +42,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: #132_components}
 
 
+### Worker node fix pack 1.32.5_1542, released 04 June 2025
+{: #cl-boms-1325_1542_W}
+
+The following table shows the components included in the worker node fix pack 1.32.5_1542. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-60-generic|Resolves the following CVEs: [CVE-2024-45774](https://nvd.nist.gov/vuln/detail/CVE-2024-45774){: external}, [CVE-2024-45775](https://nvd.nist.gov/vuln/detail/CVE-2024-45775){: external}, [CVE-2024-45776](https://nvd.nist.gov/vuln/detail/CVE-2024-45776){: external}, [CVE-2024-45777](https://nvd.nist.gov/vuln/detail/CVE-2024-45777){: external}, [CVE-2024-45778](https://nvd.nist.gov/vuln/detail/CVE-2024-45778){: external}, [CVE-2024-45779](https://nvd.nist.gov/vuln/detail/CVE-2024-45779){: external}, [CVE-2024-45780](https://nvd.nist.gov/vuln/detail/CVE-2024-45780){: external}, [CVE-2024-45781](https://nvd.nist.gov/vuln/detail/CVE-2024-45781){: external}, [CVE-2024-45782](https://nvd.nist.gov/vuln/detail/CVE-2024-45782){: external}, [CVE-2024-45783](https://nvd.nist.gov/vuln/detail/CVE-2024-45783){: external}, [CVE-2025-0622](https://nvd.nist.gov/vuln/detail/CVE-2025-0622){: external}, [CVE-2025-0624](https://nvd.nist.gov/vuln/detail/CVE-2025-0624){: external}, [CVE-2025-0677](https://nvd.nist.gov/vuln/detail/CVE-2025-0677){: external}, [CVE-2025-0678](https://nvd.nist.gov/vuln/detail/CVE-2025-0678){: external}, [CVE-2025-0684](https://nvd.nist.gov/vuln/detail/CVE-2025-0684){: external}, [CVE-2025-0685](https://nvd.nist.gov/vuln/detail/CVE-2025-0685){: external}, [CVE-2025-0686](https://nvd.nist.gov/vuln/detail/CVE-2025-0686){: external}, [CVE-2025-0689](https://nvd.nist.gov/vuln/detail/CVE-2025-0689){: external}, [CVE-2025-0690](https://nvd.nist.gov/vuln/detail/CVE-2025-0690){: external}, [CVE-2025-1118](https://nvd.nist.gov/vuln/detail/CVE-2025-1118){: external}, [CVE-2025-1125](https://nvd.nist.gov/vuln/detail/CVE-2025-1125){: external}, [CVE-2025-29087](https://nvd.nist.gov/vuln/detail/CVE-2025-29087){: external}, [CVE-2025-29088](https://nvd.nist.gov/vuln/detail/CVE-2025-29088){: external}, [CVE-2025-3277](https://nvd.nist.gov/vuln/detail/CVE-2025-3277){: external}, [CVE-2025-3576](https://nvd.nist.gov/vuln/detail/CVE-2025-3576){: external}, [CVE-2025-4373](https://nvd.nist.gov/vuln/detail/CVE-2025-4373){: external}, [CVE-2025-46836](https://nvd.nist.gov/vuln/detail/CVE-2025-46836){: external}, and [CVE-2025-47273](https://nvd.nist.gov/vuln/detail/CVE-2025-47273){: external}.|
+|Kubernetes|1.32.5|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.5).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|HAProxy|978e3c26ee7634e39a940696aaf57d9e374db5ce|N/A|
+|GPU Device Plug-in and Installer|9c52a5f3c684d3da2808c70936332fd18493d0c7|N/A|
+{: caption="1.32.5_1542 fix pack." caption-side="bottom"}
+{: #cl-boms-1325_1542_W-component-table}
+
+
+
 ### Master fix pack 1.32.5_1541, released 28 May 2025
 {: #1325_1541_M}
 
@@ -61,6 +79,7 @@ The following table shows the changes that are in the master fix pack 1.32.5_154
 {: caption="Changes since version 1.32.4_1538" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.32.4_1540, released 19 May 2025
 {: #cl-boms-1324_1540_W}
 
@@ -78,6 +97,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1324_1540_W-component-table}
 
 
+
 ### Worker node fix pack 1.32.4_1539, released 07 May 2025
 {: #cl-boms-1324_1539_W}
 
@@ -93,6 +113,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|9c52a5f3c684d3da2808c70936332fd18493d0c7|Resolves the following CVEs: [CVE-2024-12243](https://nvd.nist.gov/vuln/detail/CVE-2024-12243){: external}, and [CVE-2024-12133](https://nvd.nist.gov/vuln/detail/CVE-2024-12133){: external}.|
 {: caption="1.32.4_1539 fix pack." caption-side="bottom"}
 {: #cl-boms-1324_1539_W-component-table}
+
 
 
 ### Master fix pack 1.32.4_1538, released 30 April 2025
@@ -118,6 +139,7 @@ The following table shows the changes that are in the master fix pack 1.32.4_153
 {: caption="Changes since version 1.32.3_1533" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.32.3_1536, released 21 April 2025
 {: #cl-boms-1323_1536_W}
 
@@ -135,6 +157,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1323_1536_W-component-table}
 
 
+
 ### Worker node fix pack 1.32.3_1535, released 08 April 2025
 {: #cl-boms-1323_1535_W}
 
@@ -150,6 +173,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|c9d9c47b1404651b3a3c022f288a6d90bb5a44b2|N/A|
 {: caption="1.32.3_1535 fix pack." caption-side="bottom"}
 {: #cl-boms-1323_1535_W-component-table}
+
 
 
 ### Master fix pack 1.32.3_1533, released 26 March 2025
@@ -172,6 +196,7 @@ The following table shows the changes that are in the master fix pack 1.32.3_153
 {: caption="Changes since version 1.32.1_1530" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.32.3_1534, released 24 March 2025
 {: #cl-boms-1323_1534_W}
 
@@ -187,6 +212,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|c9d9c47b1404651b3a3c022f288a6d90bb5a44b2|Resolves the following CVEs: [CVE-2024-56171](https://nvd.nist.gov/vuln/detail/CVE-2024-56171){: external}, [CVE-2025-24928](https://nvd.nist.gov/vuln/detail/CVE-2025-24928){: external}, and [CVE-2025-24528](https://nvd.nist.gov/vuln/detail/CVE-2025-24528){: external}.|
 {: caption="1.32.3_1534 fix pack." caption-side="bottom"}
 {: #cl-boms-1323_1534_W-component-table}
+
 
 
 ### Worker node fix pack 1.32.1_1532, released 11 March 2025
@@ -206,6 +232,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1321_1532_W-component-table}
 
 
+
 ### Worker node fix pack 1.32.1_1531, released 24 February 2025
 {: #cl-boms-1321_1531_W}
 
@@ -223,6 +250,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1321_1531_W-component-table}
 
 
+
 ### Master fix pack 1.32.1_1530, released 19 February 2025
 {: #1321_1530_M}
 
@@ -236,6 +264,7 @@ The following table shows the changes that are in the master fix pack 1.32.1_153
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 447 | 449 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.9 | v2.10.10 | New version contains updates and security fixes. |
 {: caption="Changes since version 1.32.1_1527" caption-side="bottom"}
+
 
 
 ### Worker node fix pack 1.32.1_1529, released 11 February 2025
@@ -255,6 +284,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1321_1529_W-component-table}
 
 
+
 ### Worker node fix pack 1.32.1_1528, released 29 January 2025
 {: #cl-boms-1321_1528_W}
 
@@ -271,6 +301,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|6563a84c30f22dd511f6e2d80227040a12c3af9a|Resolves the following CVEs: [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}.|
 {: caption="1.32.1_1528 fix pack." caption-side="bottom"}
 {: #cl-boms-1321_1528_W-component-table}
+
 
 
 ### Master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025
