@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-06-05"
+lastupdated: "2025-06-13"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june25)
+
+    * [13 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-13june25)
+
+        * CLI version `1.0.706` is available.
 
     * [04 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-04jun25)
 
@@ -5661,6 +5665,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.706](/docs/containers?topic=containers-cs_cli_changelog#cli-010706)
+
 * [Version v1.0.687](/docs/containers?topic=containers-cs_cli_changelog#cli-010687)
 
 * [Version v1.0.679](/docs/containers?topic=containers-cs_cli_changelog#cli-010679)
@@ -8652,6 +8658,8 @@ subcollection: containers
 [Why doesn't the Kubernetes dashboard display utilization graphs?](/docs/containers?topic=containers-cs_dashboard_graphs#cs_dashboard_graphs)
 
 [Why are my log lines so long?](/docs/containers?topic=containers-long_lines#long_lines)
+
+[Why am I seeing duplicate metrics or logs being sent from my clusters?](/docs/containers?topic=containers-ts-dupe-logs#ts-dupe-logs)
 
 
 ### Managed add-ons

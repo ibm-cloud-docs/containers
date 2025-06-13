@@ -529,6 +529,7 @@ toc:
               topics:
               - ts-health-iks-kube-db-graphs.md
               - ts-health-loglines.md
+              - ts-dupe-logs.md
           - topicgroup:
               label: Managed add-ons
               topics:
