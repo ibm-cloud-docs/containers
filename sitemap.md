@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-06-13"
+lastupdated: "2025-06-16"
 
 
 keywords: containers
@@ -5539,7 +5539,9 @@ subcollection: containers
 
     * [`ibmcloud ks nlb-dns ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-ls)
 
-    * [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-configure)
+    * [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-monitor-configure-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-monitor-configure-options)
 
     * [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-disable)
 
