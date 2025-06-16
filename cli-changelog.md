@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-06-13"
+lastupdated: "2025-06-16"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, oc, ks
@@ -37,6 +37,7 @@ Review the following changes for 1.0 versions of the CLI plug-in.
 
 Version 1.0.706 of the CLI was released on 10 June 2025.
 - Adds the `--show-crn` option to the `ibmcloud ks ingress secret field ls` command.
+- Deprecates the `--description`, `--expected-body`, `--expected-codes`, `--follows-redirects`, `--header`, `--method`, and `--retries` options in the `nlb-dns monitor` configure command. For more information, see the [ibmcloud ks nlb-dns monitor configure](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-configure) reference.
 - Includes general refactoring and improvements.
 
 ## Version v1.0.687
