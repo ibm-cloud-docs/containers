@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-05-29"
+lastupdated: "2025-06-13"
 
 
 keywords: planning, storage, cluster, container storage, cloud storage, kubernetes service, containers
@@ -25,9 +25,6 @@ subcollection: containers
 
 Review the following sections for an overview of the available storage options for your cluster.
 {: shortdesc}
-
-When you're done with this page, [try out the quiz](https://quizzes.12dekrh4l1b4.us-south.codeengine.appdomain.cloud/containers/storage/quiz.php).
-{: tip}
 
 Before you can decide what type of storage is the correct solution for your {{site.data.keyword.containerlong}} clusters, you must understand the {{site.data.keyword.cloud_notm}} infrastructure provider, your app requirements, the type of data that you want to store, and how often you want to access this data.
 
@@ -296,8 +293,5 @@ The following sections show the options that you have in {{site.data.keyword.con
 
 ## Next steps
 {: #plan-document-next}
-
-[Test your knowledge with a quiz](https://quizzes.12dekrh4l1b4.us-south.codeengine.appdomain.cloud/containers/storage/quiz.php).
-{: tip}
 
 To continue the planning process, [document your environment architecture](/docs/containers?topic=containers-document-environment). 
