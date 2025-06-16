@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-06-13"
+lastupdated: "2025-06-16"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -31,8 +31,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## June 2025
 {: #containers-june25}
 
-### 13 June 2025
-{: #containers-13june25}
+### 16 June 2025
+{: #containers-16june25}
 {: release-note}
 
 CLI version `1.0.706` is available.

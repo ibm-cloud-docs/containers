@@ -240,7 +240,7 @@ subcollection: containers
 
 * [June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june25)
 
-    * [13 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-13june25)
+    * [16 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-16june25)
 
         * CLI version `1.0.706` is available.
 
