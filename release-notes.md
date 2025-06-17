@@ -31,8 +31,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## June 2025
 {: #containers-june25}
 
-
-
 ### 17 June 2025
 {: #17june25}
 {: release-note}
@@ -46,6 +44,19 @@ Ingress ALB cluster add-on patch updates.
 
 CLI version `1.0.706` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
+
+
+
+
 
 ### 04 June 2025
 {: #containers-04jun25}

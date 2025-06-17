@@ -248,6 +248,8 @@ subcollection: containers
 
         * CLI version `1.0.706` is available.
 
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
     * [04 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-04jun25)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
@@ -4679,6 +4681,8 @@ subcollection: containers
 
     * [Master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025](/docs/containers?topic=containers-changelog_132#1321_1527M_and_13201524W)
 
+    * [Worker node fix pack 1.32.5_1545, released 16 June 2024](/docs/containers?topic=containers-changelog_132#cl-boms-1325_1545_W)
+
 [Kubernetes version 1.32 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-132)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-132#cis-section-1-132)
@@ -4799,6 +4803,8 @@ subcollection: containers
     * [Worker node fix pack 1.31.1_1522, released 23 September 2024](/docs/containers?topic=containers-changelog_131#1311_1522_W)
 
     * [Master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024](/docs/containers?topic=containers-changelog_131#1310_1520M_and_1310_1518W)
+
+    * [Worker node fix pack 1.31.9_1554, released 16 June 2024](/docs/containers?topic=containers-changelog_131#cl-boms-1319_1554_W)
 
 [Kubernetes version 1.31 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
 
@@ -4957,6 +4963,8 @@ subcollection: containers
 
     * [Worker node fix pack 1.30.2_1526, released 18 June 2024](/docs/containers?topic=containers-changelog_130#1302_1526_W)
 
+    * [Worker node fix pack 1.30.13_1570, released 16 June 2024](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1570_W)
+
     * [Worker node fix pack 1.30.1_1521, released 03 June 2024](/docs/containers?topic=containers-changelog_130#1301_1521_W)
 
     * [Master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024](/docs/containers?topic=containers-changelog_130#1301_1520M_and_1300_1518W)
@@ -5101,6 +5109,8 @@ subcollection: containers
     * [Master fix pack 1.29.6_1545, released 19 June 2024](/docs/containers?topic=containers-changelog_129#1296_1545_M)
 
     * [Worker node fix pack 1.29.6_1546, released 18 June 2024](/docs/containers?topic=containers-changelog_129#1296_1546_W)
+
+    * [Worker node fix pack 1.29.15_1592, released 16 June 2024](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1592_W)
 
     * [Worker node fix pack 1.29.5_1541, released 03 June 2024](/docs/containers?topic=containers-changelog_129#1295_1541_W)
 
