@@ -240,23 +240,21 @@ subcollection: containers
 
 * [June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june25)
 
-    * [18 June 2025](/docs/containers?topic=containers-containers-relnotes#18june25)
+    * [18 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june1825)
 
-        * {{site.data.keyword.containerlong_notm}} master fix packs.
+        * IBM Storage Operator cluster add-on patch updates.
 
-    * [17 June 2025](/docs/containers?topic=containers-containers-relnotes#17june25)
+        * VPC File CSI Driver cluster add-on patch updates.
+
+    * [17 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june1725)
 
         * Ingress ALB cluster add-on patch updates.
 
     * [16 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-16june25)
 
-        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
-
         * CLI version `1.0.706` is available.
 
-        * IBM Storage Operator cluster add-on patch updates.
-
-        * VPC File CSI Driver cluster add-on patch updates.
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [04 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-04jun25)
 
