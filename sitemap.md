@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-06-17"
+lastupdated: "2025-06-18"
 
 
 keywords: containers
@@ -239,6 +239,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june25)
+
+    * [18 June 2025](/docs/containers?topic=containers-containers-relnotes#18june25)
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
 
     * [17 June 2025](/docs/containers?topic=containers-containers-relnotes#17june25)
 
@@ -6212,6 +6218,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [1.0.23_230, released 16 June 2025](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1023_230)
+
     * [1.0.17_173, released 19 February 2025](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1017_173)
 
 * [Version 1.0.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#ibm-storage-operator-1.0.0)
@@ -6399,6 +6407,8 @@ subcollection: containers
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [2.0.13_370, released 16 June 2025](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2013_370)
 
     * [2.0.10_334, released 19 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2010_334)
 
