@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-18"
+lastupdated: "2025-06-19"
 
 
 keywords: kubernetes, helm
@@ -43,8 +43,10 @@ To enable a managed add-on in your cluster from the CLI, use the [`ibmcloud ks c
 For more information about the prerequisites for each add-on, see:
 - [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth)
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
+- [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-install-addon)
 - [Cluster Autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon)
 - [Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool)
+- [{{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-install)
 - [Istio](/docs/containers?topic=containers-istio)
 - [Static routes](/docs/containers?topic=containers-static-routes)
 
@@ -58,6 +60,7 @@ Review the following links for specific update steps for each add-on.
 - [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#upgrading-alb-oauth-proxy-add-on)
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
 - [Cluster Autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon-update-addon)
+- [{{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing)
 - [Istio](/docs/containers?topic=containers-istio#istio_update)
    
 
