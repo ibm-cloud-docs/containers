@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-06-18"
+lastupdated: "2025-06-19"
 
 
 keywords: containers
@@ -2925,10 +2925,6 @@ subcollection: containers
 
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
-* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
-
-    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health#ob-remove)
-
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
 
     * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging-external)
@@ -2946,12 +2942,6 @@ subcollection: containers
 [Monitoring cluster health](/docs/containers?topic=containers-health-monitor#health-monitor)
 
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
-
-* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
-
-    * [Reviewing your observability agents](/docs/containers?topic=containers-health-monitor#ob-review-mon)
-
-    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health-monitor#ob-remove-mon)
 
 * [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
 
@@ -5862,6 +5852,8 @@ subcollection: containers
 
 * [`openshift-data-foundation` 4.17.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.17.0)
 
+* [`openshift-data-foundation` 4.18.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.18.0)
+
 * [`static-route` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#static-route-1.0.0)
 
 * [`vpc-block-csi-driver` 5.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.1)
@@ -8014,27 +8006,27 @@ subcollection: containers
 
 [VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
-* [Sydney (`au-syd`)](/docs/containers?topic=containers-vpc-flavors#sydney-au-syd)
-
-* [Sao Paulo (`br-sao`)](/docs/containers?topic=containers-vpc-flavors#sao-paulo-br-sao)
-
-* [Montreal (`ca-mon`)](/docs/containers?topic=containers-vpc-flavors#montreal-ca-mon)
-
-* [Toronto (`ca-tor`)](/docs/containers?topic=containers-vpc-flavors#toronto-ca-tor)
+* [Dallas (`us-south`)](/docs/containers?topic=containers-vpc-flavors#dallas-us-south)
 
 * [Frankfurt (`eu-de`)](/docs/containers?topic=containers-vpc-flavors#frankfurt-eu-de)
 
+* [London (`eu-gb`)](/docs/containers?topic=containers-vpc-flavors#london-eu-gb)
+
 * [Madrid (`eu-es`)](/docs/containers?topic=containers-vpc-flavors#madrid-eu-es)
 
-* [London (`eu-gb`)](/docs/containers?topic=containers-vpc-flavors#london-eu-gb)
+* [Montreal (`ca-mon`)](/docs/containers?topic=containers-vpc-flavors#montreal-ca-mon)
 
 * [Osaka (`jp-osa`)](/docs/containers?topic=containers-vpc-flavors#osaka-jp-osa)
 
+* [Sao Paulo (`br-sao`)](/docs/containers?topic=containers-vpc-flavors#sao-paulo-br-sao)
+
+* [Sydney (`au-syd`)](/docs/containers?topic=containers-vpc-flavors#sydney-au-syd)
+
 * [Tokyo (`jp-tok`)](/docs/containers?topic=containers-vpc-flavors#tokyo-jp-tok)
 
-* [Washington DC (`us-east`)](/docs/containers?topic=containers-vpc-flavors#washington-dc-us-east)
+* [Toronto (`ca-tor`)](/docs/containers?topic=containers-vpc-flavors#toronto-ca-tor)
 
-* [Dallas (`us-south`)](/docs/containers?topic=containers-vpc-flavors#dallas-us-south)
+* [Washington DC (`us-east`)](/docs/containers?topic=containers-vpc-flavors#washington-dc-us-east)
 
 [Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
 
@@ -8054,11 +8046,9 @@ subcollection: containers
 
 * [Osaka (`osa`)](/docs/containers?topic=containers-classic-flavors#osaka-osa)
 
-* [Paris (`par`)](/docs/containers?topic=containers-classic-flavors#paris-par)
+* [San Jose (`sjc`)](/docs/containers?topic=containers-classic-flavors#san-jose-sjc)
 
 * [Sao Paulo (`sao`)](/docs/containers?topic=containers-classic-flavors#sao-paulo-sao)
-
-* [San Jose (`sjc`)](/docs/containers?topic=containers-classic-flavors#san-jose-sjc)
 
 * [Singapore (`sng`)](/docs/containers?topic=containers-classic-flavors#singapore-sng)
 
