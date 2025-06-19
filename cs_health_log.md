@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-04-30"
+lastupdated: "2025-06-19"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -37,39 +37,6 @@ Fluentd with an external server
 : To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd](https://www.fluentd.org/){: external} cluster component collects logs from the paths for a specified source. Fluentd can then forward these logs to an external server that accepts a `syslog` protocol. To get started, see [Understanding log forwarding to an external server](#logging-external).
 
 
-## Migrating logging and monitoring agents to Cloud Logs
-{: #logging_forwarding}
-
-The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are no longer supported. There is no direct replacement, but you can now manage your logging and monitoring integrations from the console or through the Helm charts. For the latest steps, see [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster) and [Working with the Kubernetes monitoring agent](/docs/monitoring?topic=monitoring-agent_Kube).
-{: deprecated}
-
-You can no longer use the `ob` plugin, Terraform, or API to install observability agents on a cluster or to modify your existing configuration. Sysdig agents continue to send metrics to the specified IBM Cloud Monitoring instance. LogDNA agents can no longer send logs since IBM Cloud Log Analysis is replaced by IBM Cloud Logs.
-
-### Removing the observability plug-in agents
-{: #ob-remove}
-
-* After support for the `ob plugin` ends, you must delete each component individually.
-
-    1. Clean up the daemonsets and configmaps.
-        ```sh
-        kubectl delete daemonset logdna-agent -n ibm-observe
-        kubectl delete daemonset sysdig-agent -n ibm-observe
-        kubectl delete configmap <logdna-configmap> -n ibm-observe
-        kubectl delete configmap <sysdig-configmap> -n ibm-observe
-        ```
-        {: pre}
-
-    1. Optional: Delete the namespace. After no other resources are running in the namespace.
-        ```sh
-        kubectl delete namespace ibm-observe
-        ```
-        {: pre}
-
-After removing the plug-in has been removed, reinstall Logging and Monitoring agents in your cluster using the Cluster dashboard, Terraform, or manually. 
-
-For more information, see the following links:
-- [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster).
-- [Working with the Kubernetes monitoring agent](/docs/monitoring?topic=monitoring-agent_Kube).
 
 
 
