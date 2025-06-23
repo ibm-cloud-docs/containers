@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-06-19"
+lastupdated: "2025-06-23"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june25)
+
+    * [23 June 2025](/docs/containers?topic=containers-containers-relnotes#23june25)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
 
     * [18 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june1825)
 
@@ -6583,6 +6587,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_2765, released 23 June 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2765)
 
     * [2.0.0_2629, released 27 April 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2629)
 
