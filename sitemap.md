@@ -240,7 +240,7 @@ subcollection: containers
 
 * [June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june25)
 
-    * [23 June 2025](/docs/containers?topic=containers-containers-relnotes#23june25)
+    * [23 June 2025](/docs/containers?topic=containers-containers-relnotes#containersjune2325)
 
         * ALB OAuth Proxy cluster add-on patch updates.
 
