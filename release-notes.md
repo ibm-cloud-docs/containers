@@ -34,7 +34,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 ### 23 June 2025
-{: #containersjune2325}
+{: #containers-june2325}
 {: release-note}
 
 ALB OAuth Proxy cluster add-on patch updates.
