@@ -8546,6 +8546,8 @@ subcollection: containers
 
     * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
 
+[Why do I see a `Registration failed` error when I try to provision or reload worker nodes?](/docs/containers?topic=containers-ts-worker-plan-not-avail#ts-worker-plan-not-avail)
+
 
 ### Permissions and credentials
 {: #sitemap_permissions_and_credentials}
