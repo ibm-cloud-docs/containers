@@ -7999,11 +7999,11 @@ subcollection: containers
 * [Considerations for app and service deployment](/docs/containers?topic=containers-iks-ha-dr#app-considerations)
 
 
-## Service dependencies
+## Service Dependencies
 {: #sitemap_service_dependencies}
 
 
-[Service dependencies](/docs/containers?topic=containers-service-dependencies#service-dependencies)
+[Service dependency map for IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-service-dependencies#service-dependencies)
 
 
 ## Worker node flavors
