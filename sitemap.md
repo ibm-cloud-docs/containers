@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-06-23"
+lastupdated: "2025-06-24"
 
 
 keywords: containers
@@ -8045,8 +8045,6 @@ subcollection: containers
 * [Frankfurt (`fra`)](/docs/containers?topic=containers-classic-flavors#frankfurt-fra)
 
 * [London (`lon`)](/docs/containers?topic=containers-classic-flavors#london-lon)
-
-* [Milan (`mil`)](/docs/containers?topic=containers-classic-flavors#milan-mil)
 
 * [Montreal (`mon`)](/docs/containers?topic=containers-classic-flavors#montreal-mon)
 
