@@ -240,7 +240,7 @@ subcollection: containers
 
 * [June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june25)
 
-    * [23 June 2025](/docs/containers?topic=containers-containers-relnotes#23june25)
+    * [23 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-june2325)
 
         * ALB OAuth Proxy cluster add-on patch updates.
 
@@ -8545,6 +8545,8 @@ subcollection: containers
     * [SSH into the worker node on the public network](/docs/containers?topic=containers-cs_ssh_worker#public-network-only-classic-debug)
 
     * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
+
+[Why do I see a `Registration failed` error when I try to provision or reload worker nodes?](/docs/containers?topic=containers-ts-worker-plan-not-avail#ts-worker-plan-not-avail)
 
 
 ### Permissions and credentials

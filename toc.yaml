@@ -482,6 +482,7 @@ toc:
               - ts-worker-invalid-vlan.md
               - ts-worker-pod-timeout.md
               - ts-worker-ssh-fail.md
+              - ts-worker-plan-not-avail.md
           - topicgroup:
               label: Permissions and credentials
               topics:

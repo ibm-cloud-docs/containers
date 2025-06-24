@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-06-23"
+lastupdated: "2025-06-24"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -31,8 +31,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## June 2025
 {: #containers-june25}
 
+
+
 ### 23 June 2025
-{: #23june25}
+{: #containers-june2325}
 {: release-note}
 
 ALB OAuth Proxy cluster add-on patch updates.
