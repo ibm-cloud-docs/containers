@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-06-16"
+lastupdated: "2025-07-01"
 
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
@@ -106,7 +106,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage_portworx_plan#portworx_limitations). |
 {: caption="Classic cluster storage limitations"}
 
-## User access
+## Classic user access
 {: #classic_access_limit}
 
 Keep in mind that the [service](#tech_limits) limitations also apply.
@@ -172,7 +172,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | {{site.data.keyword.block_storage_is_short}} | The default storage class in VPC clusters cannot be changed. However, you can [create your own storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class). |
 {: caption="VPC cluster storage limitations"}
 
-## User access
+## VPC user access
 {: #vpc_access_limit}
 
 Keep in mind that the [service](#tech_limits) limitations also apply.

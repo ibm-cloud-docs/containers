@@ -6256,8 +6256,6 @@ subcollection: containers
 
     * [5.1.33_685, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5133_685)
 
-* [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#052_is_block)
-
     * [Change log for version 5.2.26_657, released 11 December 2024](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#5.2.26_657_is_block_relnote)
 
     * [Change log for version 5.2.24_641, released 20 November 2024](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#5.2.24_641_is_block_relnote)
@@ -6419,8 +6417,6 @@ subcollection: containers
 * [Version 1.2](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-1.2)
 
     * [1.2.14_332, released 19 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-1214_332)
-
-* [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#020_is_file)
 
     * [Change log for version 2.0.9_322, released 11 December 2024](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#2.0.9_322_is_file_relnote)
 
@@ -9074,7 +9070,7 @@ subcollection: containers
 
     * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
 
-* [User access](/docs/containers?topic=containers-limitations#classic_access_limit)
+* [Classic user access](/docs/containers?topic=containers-limitations#classic_access_limit)
 
 * [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 
@@ -9084,7 +9080,7 @@ subcollection: containers
 
     * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
 
-* [User access](/docs/containers?topic=containers-limitations#vpc_access_limit)
+* [VPC user access](/docs/containers?topic=containers-limitations#vpc_access_limit)
 
 
 ## Requesting access to allowlisted features
