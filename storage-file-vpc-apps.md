@@ -971,7 +971,7 @@ Complete the following steps to set up encryption-in-transit (EIT) for file shar
       resourceVersion: "1251777"
       uid: 5c9d6679-4135-458b-800d-217b34d27c75
       ```
-      {: codeblock}
+    {: codeblock}
 
 1. After enabling EIT, save and close the config map.
 
