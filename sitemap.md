@@ -4113,6 +4113,10 @@ subcollection: containers
 
 [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
 
+* [Considerations](/docs/containers?topic=containers-storage-file-vpc-install#file-vpc-addon-considerations)
+
+* [Enabling the add-on](/docs/containers?topic=containers-storage-file-vpc-install#file-vpc-addon-enable)
+
 * [Next steps](/docs/containers?topic=containers-storage-file-vpc-install#vpc-enable-next-steps)
 
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
@@ -4155,7 +4159,7 @@ subcollection: containers
 
 * [Updating the {{site.data.keyword.filestorage_vpc_short}} cluster add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
 
-* [Updating encryption in-transit (EIT) packages](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-eit-packages)
+* [Setting resource and request limits in the configmap](/docs/containers?topic=containers-storage-file-vpc-managing#edit-vpc-file-configmap)
 
 * [Disabling the add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-disable)
 
