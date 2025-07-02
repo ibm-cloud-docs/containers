@@ -61,6 +61,24 @@ The following table shows the changes that are in the master fix pack 1.31.9_155
 
 
 
+### Worker node fix pack 1.31.9_1554, released 16 June 2025
+{: #cl-boms-1319_1554_W}
+
+The following table shows the components included in the worker node fix pack 1.31.9_1554. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-60-generic|Resolves the following CVEs: [CVE-2025-4598](https://nvd.nist.gov/vuln/detail/CVE-2025-4598){: external}.|
+|Kubernetes|1.31.9|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.9).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|HAProxy|951efd90b46e95a54751966c644ac37c4c901f92|Resolves the following CVEs: [CVE-2025-4802](https://nvd.nist.gov/vuln/detail/CVE-2025-4802){: external}, [CVE-2025-32414](https://nvd.nist.gov/vuln/detail/CVE-2025-32414){: external}, and [CVE-2025-3576](https://nvd.nist.gov/vuln/detail/CVE-2025-3576){: external}.|
+|GPU Device Plug-in and Installer|cbca3eaad7d585c0d1181e478f39bab25579fb9a|Resolves the following CVEs: [CVE-2025-32414](https://nvd.nist.gov/vuln/detail/CVE-2025-32414){: external}, [CVE-2025-4802](https://nvd.nist.gov/vuln/detail/CVE-2025-4802){: external}, and [CVE-2025-3576](https://nvd.nist.gov/vuln/detail/CVE-2025-3576){: external}.|
+{: caption="1.31.9_1554 fix pack." caption-side="bottom"}
+{: #cl-boms-1319_1554_W-component-table}
+
+
+
 ### Worker node fix pack 1.31.9_1551, released 04 June 2025
 {: #cl-boms-1319_1551_W}
 
@@ -601,25 +619,3 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 | Pause container image | 3.9 | 3.10 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. |
 | Tigera Operator | v1.32.10-124-iks | v1.34.3 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.34.3){: external}. |
 {: caption="Changes since version 1.30." caption-side="bottom"}
-
-
-
-
-
-
-
-### Worker node fix pack 1.31.9_1554, released 16 June 2025
-{: #cl-boms-1319_1554_W}
-
-The following table shows the components included in the worker node fix pack 1.31.9_1554. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
-{: shortdesc}
-
-| Component | Version | Description |
-| ---- | ---- | ---- |
-|UBUNTU_24_04|6.8.0-60-generic|Resolves the following CVEs: [CVE-2025-4598](https://nvd.nist.gov/vuln/detail/CVE-2025-4598){: external}.|
-|Kubernetes|1.31.9|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.9).|
-|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
-|HAProxy|951efd90b46e95a54751966c644ac37c4c901f92|Resolves the following CVEs: [CVE-2025-4802](https://nvd.nist.gov/vuln/detail/CVE-2025-4802){: external}, [CVE-2025-32414](https://nvd.nist.gov/vuln/detail/CVE-2025-32414){: external}, and [CVE-2025-3576](https://nvd.nist.gov/vuln/detail/CVE-2025-3576){: external}.|
-|GPU Device Plug-in and Installer|cbca3eaad7d585c0d1181e478f39bab25579fb9a|Resolves the following CVEs: [CVE-2025-32414](https://nvd.nist.gov/vuln/detail/CVE-2025-32414){: external}, [CVE-2025-4802](https://nvd.nist.gov/vuln/detail/CVE-2025-4802){: external}, and [CVE-2025-3576](https://nvd.nist.gov/vuln/detail/CVE-2025-3576){: external}.|
-{: caption="1.31.9_1554 fix pack." caption-side="bottom"}
-{: #cl-boms-1319_1554_W-component-table}
