@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-07-01"
+lastupdated: "2025-07-02"
 
 
 keywords: containers
@@ -4810,7 +4810,7 @@ subcollection: containers
 
     * [Master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024](/docs/containers?topic=containers-changelog_131#1310_1520M_and_1310_1518W)
 
-    * [Worker node fix pack 1.31.9_1554, released 16 June 2024](/docs/containers?topic=containers-changelog_131#cl-boms-1319_1554_W)
+    * [Worker node fix pack 1.31.9_1554, released 16 June 2025](/docs/containers?topic=containers-changelog_131#cl-boms-1319_1554_W)
 
 [Kubernetes version 1.31 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
 

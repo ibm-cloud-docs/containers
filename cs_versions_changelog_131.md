@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-07-01"
+lastupdated: "2025-07-02"
 
 
 keywords: change log, version history, 1.31
@@ -608,7 +608,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 
 
 
-### Worker node fix pack 1.31.9_1554, released 16 June 2024
+### Worker node fix pack 1.31.9_1554, released 16 June 2025
 {: #cl-boms-1319_1554_W}
 
 The following table shows the components included in the worker node fix pack 1.31.9_1554. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
