@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-03-13"
+lastupdated: "2025-07-07"
 
 
 keywords: kubernetes, containers
@@ -225,7 +225,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 * [`ibmcloud ks nlb-dns ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-ls)
 * [`ibmcloud ks nlb-dns get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-get)
 * **`nlb-dns monitor`**: Create and manage health check monitors for network load balancer (NLB) IP addresses and host names in a cluster.
-    * [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-configure)
+    * [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-monitor-configure-cli)
     * [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-disable)
     * [`ibmcloud ks nlb-dns monitor enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-enable)
     * [`ibmcloud ks nlb-dns monitor get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-get)
