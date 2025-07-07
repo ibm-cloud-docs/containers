@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-07-03"
+lastupdated: "2025-07-07"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -505,7 +505,7 @@ Version 1.32 is now the default version for {{site.data.keyword.containerlong_no
 
 
 Migrating from the Observability plug-in to {{site.data.keyword.logs_full_notm}}
-:   Support for the Observability plug-in ends on 28 March 2025. Review and complete the migration steps before support ends. For more information, see [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding).
+:   Support for the Observability plug-in ends on 28 March 2025. Review and complete the migration steps before support ends.
 
 
 
