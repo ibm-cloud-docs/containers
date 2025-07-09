@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-07-08"
+lastupdated: "2025-07-09"
 
 
 keywords: containers
@@ -8011,11 +8011,11 @@ subcollection: containers
 * [Considerations for app and service deployment](/docs/containers?topic=containers-iks-ha-dr#app-considerations)
 
 
-## Service Dependencies
+## Service dependencies
 {: #sitemap_service_dependencies}
 
 
-[Service dependency map for IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-service-dependencies#service-dependencies)
+[Service dependencies](/docs/containers?topic=containers-service-dependencies#service-dependencies)
 
 
 ## Worker node flavors
@@ -8640,6 +8640,25 @@ subcollection: containers
 [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ts-ca-resize#ts-ca-resize)
 
 [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ts-ca-unbalanced#ts-ca-unbalanced)
+
+
+### Cluster health
+{: #sitemap_cluster_health}
+
+
+[Checking the status of Network components](/docs/containers?topic=containers-network-status#network-status)
+
+* [Getting the status and message](/docs/containers?topic=containers-network-status#check_status)
+
+* [Network statuses](/docs/containers?topic=containers-network-status#network_status)
+
+* [Network messages](/docs/containers?topic=containers-network-status#network_message)
+
+[Why does the Network status show an `NHC009` error?](/docs/containers?topic=containers-ts-network-nhc009#ts-network-nhc009)
+
+[Why does the Network status show an `NHC010` error?](/docs/containers?topic=containers-ts-network-nhc010#ts-network-nhc010)
+
+[Why does the Network status show an `NHC011` error?](/docs/containers?topic=containers-ts-network-nhc011#ts-network-nhc011)
 
 
 ### Cluster network
