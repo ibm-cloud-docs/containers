@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-07-01"
+lastupdated: "2025-07-14"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -548,7 +548,7 @@ Updates in this version
     - [USN-6517-1](https://ubuntu.com/security/notices/USN-6517-1){: external}
     - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/CVE-2022-48522){: external}
     - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
-    - [USN-6477-1](https://ubuntu.com/security/notices/USN-6477-1){: external}
+    - USN-6477-1
     - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
     - USN-6427-1
     - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
@@ -688,7 +688,7 @@ Updates in this version
     - [USN-6517-1](https://ubuntu.com/security/notices/USN-6517-1){: external}
     - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/CVE-2022-48522){: external}
     - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
-    - [USN-6477-1](https://ubuntu.com/security/notices/USN-6477-1){: external}
+    - USN-6477-1
     - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
     - USN-6427-1
     - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
@@ -803,7 +803,7 @@ Updates in this version
     - [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/CVE-2023-38546){: external}
     - [USN-6543-1](https://ubuntu.com/security/notices/USN-6543-1){: external}
     - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
-    - [USN-6477-1](https://ubuntu.com/security/notices/USN-6477-1){: external}
+    - USN-6477-1
     - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
     - USN-6427-1
     - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
