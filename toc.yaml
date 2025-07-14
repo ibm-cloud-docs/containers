@@ -10,8 +10,8 @@ toc:
     version: 2
     console-page: /kubernetes/overview
     product-page: https://www.ibm.com/cloud/containers
-  entries: 
-  - navgroup: 
+  entries:
+  - navgroup:
       id: learn
       topics:
       - getting-started.md
@@ -35,11 +35,11 @@ toc:
   - navgroup:
       id: tutorial
       topics:
-      - link: 
+      - link:
           label: Tutorials library for Kubernetes Service
           href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
       - cs_tutorial_vpc.md
-  - navgroup: 
+  - navgroup:
       id: howto
       topics:
       - topicgroup:
@@ -123,7 +123,7 @@ toc:
           - kubeapi-priority.md
           - pod-security-admission.md
           - pod-security-admission-migration.md
-      - topicgroup: 
+      - topicgroup:
           label: Controlling network traffic in Classic clusters
           topics:
           - cs_tutorials_policies.md
@@ -147,7 +147,7 @@ toc:
           - vpc-vpn.md
       - static-routes.md
       - cs_dns.md
-      - topicgroup: 
+      - topicgroup:
           label: Setting up the cluster autoscaler
           topics:
           - cluster-scaling-classic-vpc.md
@@ -225,7 +225,7 @@ toc:
       - edge-sysdig.md
       - storage-operator.md
       - storage-block.md
-      - topicgroup:   
+      - topicgroup:
           label: Setting up Block Storage for VPC
           topics:
           - storage-block-vpc.md
@@ -239,8 +239,8 @@ toc:
       - storage-file.md
       - topicgroup:
           label: Setting up File Storage for VPC
-          topics: 
-          - storage-file-vpc-install.md 
+          topics:
+          - storage-file-vpc-install.md
           - storage-file-vpc-apps.md
           - storage-file-vpc-managing.md
           - storage-file-vpc-sc-ref.md
@@ -248,7 +248,7 @@ toc:
           label: Setting up Object Storage
           topics:
           - storage-cos-understand.md
-          - storage-cos-install.md 
+          - storage-cos-install.md
           - storage-cos-apps.md
           - storage-cos-tutorial-quota.md
           - storage-cos-vpc-ip.md
@@ -257,7 +257,7 @@ toc:
           - storage-cos-install-addon.md
       - topicgroup:
           label: Setting up Portworx
-          topics: 
+          topics:
           - storage-portworx-about.md
           - storage-portworx-plan.md
           - storage-portworx-preparing.md
@@ -336,10 +336,10 @@ toc:
           - link:
               label: IBM Cloud Container Registry API
               href: https://cloud.ibm.com/apidocs/container-registry
-          - link: 
+          - link:
               label: IBM Cloud Vulnerability Advisor API
               href: https://cloud.ibm.com/apidocs/container-registry/va
-          - link: 
+          - link:
               label: Community Kubernetes API
               href: https://kubernetes.io/docs/reference/
       - addon_landing.md
@@ -389,7 +389,7 @@ toc:
               - cs_versions_changelog_125.md
               - cs_benchmarks_125.md
           - topicgroup:
-              label: Version 1.24 
+              label: Version 1.24
               topics:
               - cs_versions_124.md
               - cs_versions_changelog_124.md
@@ -415,16 +415,16 @@ toc:
       - topicgroup:
           label: Related links
           topics:
-          - link: 
+          - link:
               label: Community Kubernetes documentation
               href: https://kubernetes.io/docs/home/
-          - link: 
+          - link:
               label: IBM Developer - Containers
               href: https://developer.ibm.com/technologies/containers/
-          - link: 
+          - link:
               label: IBM Developer - Kubernetes
               href: https://developer.ibm.com/components/kubernetes/
-  - navgroup: 
+  - navgroup:
       id: help
       topics:
       - include: ../account/status-bps.md
@@ -486,7 +486,7 @@ toc:
           - topicgroup:
               label: Permissions and credentials
               topics:
-              - ts-perms-creds.md            
+              - ts-perms-creds.md
           - topicgroup:
               label: Apps and services
               topics:
