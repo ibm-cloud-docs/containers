@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-07-15"
+lastupdated: "2025-07-16"
 
 
 keywords: containers
@@ -8456,6 +8456,8 @@ subcollection: containers
 * [If you have reached the number of security groups allowed per VPC](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#quota-num-of-rules-per-vpc)
 
 [After creating a version 1.30 cluster, applications running in other clusters in my VPC are failing](/docs/containers?topic=containers-ts-sbd-other-clusters#ts-sbd-other-clusters)
+
+[Why can't my VSIs access VPE gateway?](/docs/containers?topic=containers-ts-sbd-vsi-vpe#ts-sbd-vsi-vpe)
 
 [Why can't I connect Cloud Logs to my cluster?](/docs/containers?topic=containers-ts-cloud-logs-refresh#ts-cloud-logs-refresh)
 
