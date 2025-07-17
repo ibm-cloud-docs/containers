@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-10"
+lastupdated: "2025-07-17"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, clusters, worker nodes, worker pools, add
@@ -29,8 +29,10 @@ When you create a cluster, the worker nodes are provisioned in a worker pool. Af
 
 If you have a multizone cluster, keep its worker node resources balanced. Make sure that all the worker pools are spread across the same zones, and add or remove workers by resizing the pools instead of adding individual nodes. After you set up your worker pool, you can [set up the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 
+Secondary local storage must be added at the time of worker pool creation. Manually adding storage from the VPC infrastructure level after creating a worker pool is not supported and does not result in additional ephemeral storage in the cluster.
+{: note}
+
 Looking to add workers to Classic clusters? See [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic).
-{: tip}
 
 ## Resizing a worker pool
 {: #resize-pool-vpc}
