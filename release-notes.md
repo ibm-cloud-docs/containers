@@ -31,6 +31,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## July 2025
 {: #containers-july25}
 
+### 18 July 2025
+{: #containers-18july25}
+{: release-note}
+
+IBM Storage Operator cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
+
+VPC File CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
 ### 17 July 2025
 {: #containers-17july25}
 {: release-note}

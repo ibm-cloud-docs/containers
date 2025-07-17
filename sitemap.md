@@ -240,6 +240,12 @@ subcollection: containers
 
 * [July 2025](/docs/containers?topic=containers-containers-relnotes#containers-july25)
 
+    * [18 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-18july25)
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
     * [17 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-17july25)
 
         * Ingress ALB cluster add-on patch updates.
@@ -6260,6 +6266,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [1.0.25_248, released 18 July 2025](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1025_248)
+
     * [1.0.23_230, released 16 June 2025](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1023_230)
 
     * [1.0.17_173, released 19 February 2025](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1017_173)
@@ -6454,11 +6462,15 @@ subcollection: containers
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
+    * [2.0.14_403, released 18 July 2025](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2014_403)
+
     * [2.0.13_370, released 16 June 2025](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2013_370)
 
     * [2.0.10_334, released 19 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2010_334)
 
 * [Version 1.2](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-1.2)
+
+    * [1.2.16_399, released 18 July 2025](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-1216_399)
 
     * [1.2.14_332, released 19 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-1214_332)
 
