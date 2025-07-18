@@ -242,8 +242,6 @@ subcollection: containers
 
     * [18 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-18july25)
 
-        * Baremetal worker nodes for VPC are available for allowlisted accounts
-
         * IBM Storage Operator cluster add-on patch updates.
 
         * VPC File CSI Driver cluster add-on patch updates.
