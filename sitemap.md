@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-07-17"
+lastupdated: "2025-07-18"
 
 
 keywords: containers
@@ -245,6 +245,8 @@ subcollection: containers
         * IBM Storage Operator cluster add-on patch updates.
 
         * VPC File CSI Driver cluster add-on patch updates.
+
+        * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
 
     * [17 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-17july25)
 
@@ -6037,6 +6039,8 @@ subcollection: containers
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.2.4](/docs/containers?topic=containers-ca_changelog#0124_ca_addon)
+
+    * [Change log for patch update 1.2.4_680, released 18 July 2025.](/docs/containers?topic=containers-ca_changelog#124_680_ca)
 
     * [Change log for patch update 1.2.4_629, released 22 April 2025.](/docs/containers?topic=containers-ca_changelog#124_629_ca)
 
