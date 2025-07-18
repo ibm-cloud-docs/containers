@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-07-17"
+lastupdated: "2025-07-18"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, add-on, file
@@ -24,9 +24,6 @@ subcollection: containers
 {{site.data.keyword.filestorage_vpc_full_notm}} is persistent, fast, and flexible network-attached, NFS-based {{site.data.keyword.filestorage_vpc_short}} that you can add to your apps by using Kubernetes persistent volumes claims (PVCs).
 {: shortdesc}
 
-The {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on is available in Beta
-{: beta}
-
 
 You can choose between predefined storage classes that meet the GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.filestorage_vpc_short}} is the correct storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage-plan). For pricing information, see [Pricing](https://cloud.ibm.com/infrastructure/provision/fileShare){: external}.
 
@@ -41,6 +38,7 @@ You can choose between predefined storage classes that meet the GB sizes and IOP
 - New storage classes were added with version 2.0 of the add-on. You can no longer provision new file shares that use the older storage classes. Existing volumes that use the older storage classes continue to function, however you cannot expand the volumes that were created using the older classes. For more information, see the [Migrating to a new storage class](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-expansion-migration).
 - {{site.data.keyword.containerlong_notm}} does not support {{site.data.keyword.filestorage_vpc_short}} snapshots.
 - The add-on is managed by the `addon-vpc-file-csi-driver-configmap` configmap in the `kube-system` namespace. File storage events are published in the `file-csi-driver-status` configmap in the `kube-system` namespace. For {{site.data.keyword.containerlong_notm}} 1.30, these two conifgmaps are retained even when the add-on is disabled. Which means, whenever the add-on is enabled again, the values set by the user in add-on configmap are reapplied.
+- Encryption in-transit is enabled by default. You can optionally enable encryption in-transit when you enable the add-on.
 
 
 Need to update the add-on to a newer version? See [Updating the {{site.data.keyword.filestorage_vpc_short}} add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
