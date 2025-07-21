@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-07-18"
+lastupdated: "2025-07-21"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, add-on, file
@@ -28,6 +28,9 @@ subcollection: containers
 You can choose between predefined storage classes that meet the GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.filestorage_vpc_short}} is the correct storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage-plan). For pricing information, see [Pricing](https://cloud.ibm.com/infrastructure/provision/fileShare){: external}.
 
 
+File Storage for VPC is considered to be a Financial Services Validated service only when encryption-in-transit is enabled. For more information, see [what is a Financial Services Validated service](/docs/framework-financial-services?topic=framework-financial-services-faqs-framework#financial-services-validated).
+{: important}
+
 
 
 ## Considerations
@@ -39,6 +42,7 @@ You can choose between predefined storage classes that meet the GB sizes and IOP
 - {{site.data.keyword.containerlong_notm}} does not support {{site.data.keyword.filestorage_vpc_short}} snapshots.
 - The add-on is managed by the `addon-vpc-file-csi-driver-configmap` configmap in the `kube-system` namespace. File storage events are published in the `file-csi-driver-status` configmap in the `kube-system` namespace. For {{site.data.keyword.containerlong_notm}} 1.30, these two conifgmaps are retained even when the add-on is disabled. Which means, whenever the add-on is enabled again, the values set by the user in add-on configmap are reapplied.
 - Encryption in-transit is enabled by default. You can optionally enable encryption in-transit when you enable the add-on.
+
 
 
 Need to update the add-on to a newer version? See [Updating the {{site.data.keyword.filestorage_vpc_short}} add-on](/docs/containers?topic=containers-storage-file-vpc-managing#storage-file-vpc-update)
