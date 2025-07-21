@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-07-18"
+lastupdated: "2025-07-21"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2025](/docs/containers?topic=containers-containers-relnotes#containers-july25)
+
+    * [21 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-21july25)
+
+        * Ingress ALB cluster add-on patch updates.
 
     * [18 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-18july25)
 
@@ -6636,6 +6640,8 @@ subcollection: containers
 
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog#backup_restore_changelog)
 
+* [Change log for 1.0.12, released 21 July 2025](/docs/containers?topic=containers-backup_restore_changelog#01012_br_chart)
+
 * [Change log for 1.0.5, released 17 December 2020](/docs/containers?topic=containers-backup_restore_changelog#0105_br_chart)
 
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
@@ -6684,6 +6690,8 @@ subcollection: containers
     * [1.12.1_7490_iks, released 02 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7490_iks)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
+
+    * [1.11.2_7740_iks, released 21 July 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7740_iks)
 
     * [1.11.2_7732_iks, released 16 July 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7732_iks)
 
