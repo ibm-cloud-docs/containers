@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-05-20"
+lastupdated: "2025-07-21"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -136,6 +136,7 @@ Start by checking for error messages in the Ingress resource deployment events a
 {: #ping}
 
 Check the availability of your Ingress subdomain and ALBs' public IP addresses. Additionally, ensure that the Akamai multizone load balancer can access your ALBs to health check them.
+
 {: shortdesc}
 
 1. Get the IP addresses (classic) or hostname (VPC) that your public ALBs are listening on.
@@ -158,6 +159,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
     * If a public ALB has no IP address (classic) or hostname (VPC), see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_subnet_limit).
 
 2. Verify that your ALB IP addresses are reachable by the ALB health check.
+    
     
     * **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 or 443 from the Kubernetes control plane and Akamai's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Akamai's source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} on port 80 and the [control plane subnets for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}.
     
@@ -365,6 +367,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     ```
     {: screen}
 
+
 5. Verify that the ALB IP address is removed from the DNS registration for your domain by checking the Akamai server. Note that the DNS registration might take a few minutes to update.
     ```sh
     host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.Akamai.com
@@ -404,6 +407,8 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
     ```
     {: pre}
+
+
 
 9. Verify that the ALB IP address has been restored in the DNS registration for your domain by checking the Akamai server. Note that the DNS registration might take a few minutes to update.
     ```sh
