@@ -6640,6 +6640,8 @@ subcollection: containers
 
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog#backup_restore_changelog)
 
+* [Change log for 1.0.12, released 21 July 2025](/docs/containers?topic=containers-backup_restore_changelog#01012_br_chart)
+
 * [Change log for 1.0.5, released 17 December 2020](/docs/containers?topic=containers-backup_restore_changelog#0105_br_chart)
 
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
