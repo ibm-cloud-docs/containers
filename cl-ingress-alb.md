@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-07-17"
+lastupdated: "2025-07-21"
 
 
 keywords: change log, version history, Ingress ALB
@@ -72,6 +72,11 @@ Review the version history for Ingress ALB.
 ## Version 1.11.2
 {: #cl-ingress-alb-1.11.2}
 
+
+### 1.11.2_7740_iks, released 21 July 2025
+{: #cl-ingress-alb-1112_7740_iks}
+
+- Resolves the following CVEs: [CVE-2025-5222](https://nvd.nist.gov/vuln/detail/CVE-2025-5222){: external}.
 
 ### 1.11.2_7732_iks, released 16 July 2025
 {: #cl-ingress-alb-1112_7732_iks}

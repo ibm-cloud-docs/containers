@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-07-18"
+lastupdated: "2025-07-21"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2025](/docs/containers?topic=containers-containers-relnotes#containers-july25)
+
+    * [21 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-21july25)
+
+        * Ingress ALB cluster add-on patch updates.
 
     * [18 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-18july25)
 
@@ -6684,6 +6688,8 @@ subcollection: containers
     * [1.12.1_7490_iks, released 02 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7490_iks)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
+
+    * [1.11.2_7740_iks, released 21 July 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7740_iks)
 
     * [1.11.2_7732_iks, released 16 July 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7732_iks)
 
