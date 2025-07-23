@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2024
-lastupdated: "2024-10-09"
+  years: 2022, 2025
+lastupdated: "2025-07-23"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -50,7 +50,7 @@ To set a time for automatic updates, you set the `updateStartTime` and `updateEn
 
 1. Create a YAML file for your ConfigMap. Specify the `updateStartTime`, and `updateEndTime` fields as key-value pairs in the `data` field.
 
-    The following example ConfigMap sets the automatic update function to update 35% of ALB pods in your cluster between 20:34 and 23:59 UTC.
+    The following example ConfigMap sets the automatic update function to update ALB pods in your cluster between 20:34 and 23:59 UTC.
 
     ```yaml
     apiVersion: v1
