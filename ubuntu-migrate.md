@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2025
-lastupdated: "2025-05-30"
+lastupdated: "2025-07-24"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -56,18 +56,18 @@ Migrate your worker nodes to use Ubuntu 24. These steps apply to all supported c
     ```
     {: pre}
 
-1. Update each worker node in the worker pool by running the [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) or [`ibmcloud ks worker replace`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace) command. 
+1. Update each worker node in the worker pool.
 
     Make sure you have enough worker nodes to support your workload while you update or replace the relevant worker nodes. For more information, see [Updating VPC worker nodes](/docs/containers?topic=containers-update&interface=ui#vpc_worker_node) or [Updating classic worker nodes](/docs/containers?topic=containers-update&interface=ui#worker_node).
     {: tip}
 
-    **Example command to update Classic worker nodes.**
+    **Classic worker nodes.**
     ```sh
     ibmcloud ks worker update --cluster CLUSTER --worker WORKER1_ID [--worker WORKER2_ID] 
     ```
     {: pre}
 
-    **Example command to update VPC worker nodes.**
+    **VPC worker nodes.**
     ```sh
     ibmcloud ks worker replace --cluster CLUSTER --worker WORKER_ID --update
     ```
@@ -86,3 +86,13 @@ Migrate your worker nodes to use Ubuntu 24. These steps apply to all supported c
     ibmcloud ks worker get --cluster CLUSTER --worker WORKER_NODE_ID 
     ```
     {: pre}
+
+1. If you use the Object Storage plug-in, you must uninstall and reinstall it in your cluster after migrating to a new Ubuntu version. If you don't complete this step, then the Object Storage driver pods can't run in the cluster which leads to not being able to provision or mount volumes.
+
+    1. [Follow the steps to uninstall the Object Storage plug-in](/docs/openshift?topic=openshift-storage_cos_install#remove_cos_plugin).
+
+    1. [Resintall the plug-in](/docs/openshift?topic=openshift-storage_cos_install#remove_cos_plugin).
+
+
+
+    
