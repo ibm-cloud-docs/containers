@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-07-22"
+lastupdated: "2025-07-25"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2025
 {: #containers-july25}
+
+### 25 July 2025
+{: #containers-25july25}
+{: release-note}
+
+Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
 
 
 
