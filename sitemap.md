@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-07-22"
+lastupdated: "2025-07-25"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2025](/docs/containers?topic=containers-containers-relnotes#containers-july25)
+
+    * [25 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-25july25)
+
+        * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
 
     * [22 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-22july25)
 
@@ -6053,6 +6057,8 @@ subcollection: containers
     * [Change log for patch update 1.2.4_629, released 22 April 2025.](/docs/containers?topic=containers-ca_changelog#124_629_ca)
 
 * [Version 1.2.3](/docs/containers?topic=containers-ca_changelog#0123_ca_addon)
+
+    * [Change log for patch update 1.2.3_716, released 25 July 2025.](/docs/containers?topic=containers-ca_changelog#123_716_ca)
 
     * [Change log for patch update 1.2.3_540, released 10 March 2025](/docs/containers?topic=containers-ca_changelog#123_540_ca)
 
