@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2025
-lastupdated: "2025-05-30"
+lastupdated: "2025-07-28"
 
 
 keywords: kubernetes, containers, 131, version 131, 131 update actions
@@ -51,9 +51,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 This information summarizes updates that are likely to have an impact on deployed apps when you update a cluster to version 1.31. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.31.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_131) for version 1.31. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
-
-[Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.31. Do not upgrade your cluster to version 1.31 if your apps use Portworx.
-{: important}
 
 
 ### Update before master
