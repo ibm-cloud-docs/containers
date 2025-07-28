@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2025
-lastupdated: "2025-04-28"
+lastupdated: "2025-07-28"
 
 
 keywords: kubernetes, containers, 132, version 132, 132 update actions
@@ -53,8 +53,6 @@ This information summarizes updates that are likely to have an impact on deploye
 [Cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) does not yet support version 1.32. Do not upgrade your cluster to version 1.32 if your cluster uses cluster autoscaler.
 {: important}
 
-[Portworx](https://cloud.ibm.com/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.32. Do not upgrade your cluster to version 1.32 if your apps use Portworx.
-{: important}
 
 The Istio add-on version 1.23 is not supported for {{site.data.keyword.containerlong_notm}} version 1.32 because the Istio add-on does not support Istio 1.25. Do not update to {{site.data.keyword.containerlong_notm}} version 1.32 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=ui#migrate).
 {: important}
