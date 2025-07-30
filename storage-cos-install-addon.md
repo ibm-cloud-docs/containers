@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2025
-lastupdated: "2025-07-28"
+lastupdated: "2025-07-30"
 
 
 keywords: kubernetes, containers, object storage add-in, cos
@@ -18,12 +18,14 @@ subcollection: containers
 # Installing the {{site.data.keyword.cos_full_notm}} cluster add-on
 {: #storage-cos-install-addon}
 
-The {{site.data.keyword.cos_full_notm}} cluster add-on is available in Beta for allowlisted accounts only. To get added to the allowlist, contact support. For more information, see [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request).
+Version 1.0 of {{site.data.keyword.cos_full_notm}} cluster add-on is available in Beta for allowlisted accounts only. To get added to the allowlist, contact support. For more information, see [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request). The add-on is available only for Kubernetes clusters.
 {: beta}
 
 Prerequisites
 - The {{site.data.keyword.cos_full_notm}} add-on requires at least 0.2 vCPU and 128 MB of memory.
 - Set up a [{{site.data.keyword.cos_full_notm}} instance](/docs/containers?topic=containers-storage-cos-understand#create_cos_service).
+
+
 
 ## Understanding bucket creation and removal
 {: #cos-addon-bucket-cd}
@@ -54,7 +56,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     OK
     Name                        Version            Supported Kubernetes Range   Supported OpenShift Range   Kubernetes Default   OpenShift Default
     ibm-object-csi-driver       1.0 (default)      >=1.30.0 <1.33.0             unsupported                 -                    -
-    ibm-object-csi-driver       0.1                >=1.30.0 <1.33.0             >=4.15.0 <4.16.0            -                    -                  -                                    -
     ```
     {: screen}
 
@@ -70,10 +71,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-    ```sh
+    ```sh                                             
     OK
     Name                    Version   Health State   Health Status
-    ibm-object-csi-driver   0.1       normal         Addon Ready. For more info: http://ibm.biz/addon-state (H1500)
+    ibm-object-csi-driver   1.0       normal         Addon Ready. For more info: http://ibm.biz/addon-state (H1500)
     ```
     {: screen}
 
@@ -104,7 +105,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
-1. Save the following configuration as a file called `secret.yaml`.
+1. Save the following configuration as a file called `secret.yaml`. Provide either IAM credentials or HMAC, but not both.
 
     - For **IAM credentials**, use a combination of `apiKey` and `serviceId` from Object Storage.
     - For **HMAC credentials**, use `accessKey` and `secretKey` from Object Storage.
