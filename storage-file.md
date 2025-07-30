@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-10-02"
+  years: 2014, 2025
+lastupdated: "2025-07-30"
 
 
 keywords: kubernetes, containers
@@ -1891,6 +1891,4 @@ To clean up persistent data:
 
 The deletion process might take up to 72 hours to complete.
 {: important}
-    
-    
     
