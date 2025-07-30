@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-07-17"
+lastupdated: "2025-07-30"
 
 
 keywords: change log, version history, 1.28

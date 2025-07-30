@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-07-28"
+lastupdated: "2025-07-30"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2025](/docs/containers?topic=containers-containers-relnotes#containers-july25)
+
+    * [30 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-30july25)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [25 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-25july25)
 
@@ -1881,7 +1885,7 @@ subcollection: containers
 
 * [Create or upgrade your account](/docs/containers?topic=containers-clusters#prepare-create-account)
 
-* [Setting user permissions](/docs/containers?topic=containers-clusters#prepare-verify-permissions)
+* [Set user permissions](/docs/containers?topic=containers-clusters#prepare-verify-permissions)
 
 * [Plan your resource groups](/docs/containers?topic=containers-clusters#prepare-resource-groups)
 
@@ -2382,15 +2386,11 @@ subcollection: containers
 
     * [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-understand-rbac#iam-issuer-users)
 
-[Authorizing pods in your cluster to {{site.data.keyword.cloud_notm}} services with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity#pod-iam-identity)
+[Authorizing resources with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity#pod-iam-identity)
 
-* [Prerequisites](/docs/containers?topic=containers-pod-iam-identity#iam-identity-prereqs)
+* [Creating an IAM trusted profile](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-create)
 
-* [Creating an IAM trusted profile for your cluster in the API](/docs/containers?topic=containers-pod-iam-identity&interface=api#iam-identity-create-api)
-
-* [Creating an IAM trusted profile for your cluster in the UI](/docs/containers?topic=containers-pod-iam-identity&interface=ui#iam-identity-create-ui)
-
-* [Configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-pod-iam-identity&interface=ui#iam-identity-pod)
+* [Configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-pod-iam-identity#iam-identity-pod)
 
 [Assigning cluster access by using Terraform for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-terraform-setup#terraform-setup)
 
@@ -4695,6 +4695,8 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
+    * [Worker node fix pack 1.32.7_1550, released 28 July 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1327_1550_W)
+
     * [Worker node fix pack 1.32.5_1548, released 14 July 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1325_1548_W)
 
     * [Worker node fix pack 1.32.5_1547, released 01 July 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1325_1547_W)
@@ -4795,6 +4797,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.11_1559, released 28 July 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13111_1559_W)
 
     * [Worker node fix pack 1.31.9_1557, released 14 July 2025](/docs/containers?topic=containers-changelog_131#cl-boms-1319_1557_W)
 
@@ -4942,6 +4946,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Worker node fix pack 1.30.14_1575, released 28 July 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1575_W)
 
     * [Worker node fix pack 1.30.13_1573, released 14 July 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1573_W)
 
@@ -5095,6 +5101,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
 
 * [Version 1.29](/docs/containers?topic=containers-changelog_129#129_components)
+
+    * [Worker node fix pack 1.29.15_1596, released 28 July 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1596_W)
 
     * [Worker node fix pack 1.29.15_1595, released 14 July 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1595_W)
 
