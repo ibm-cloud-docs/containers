@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-07-30"
+lastupdated: "2025-07-31"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2025](/docs/containers?topic=containers-containers-relnotes#containers-july25)
+
+    * [31 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-31july25)
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
 
     * [30 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-30july25)
 
@@ -4695,6 +4699,8 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
+    * [Master fix pack 1.32.7_1549, released 30 July 2025](/docs/containers?topic=containers-changelog_132#1327_1549_M)
+
     * [Worker node fix pack 1.32.7_1550, released 28 July 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1327_1550_W)
 
     * [Worker node fix pack 1.32.5_1548, released 14 July 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1325_1548_W)
@@ -4797,6 +4803,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Master fix pack 1.31.11_1558, released 30 July 2025](/docs/containers?topic=containers-changelog_131#13111_1558_M)
 
     * [Worker node fix pack 1.31.11_1559, released 28 July 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13111_1559_W)
 
@@ -4946,6 +4954,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Master fix pack 1.30.14_1574, released 30 July 2025](/docs/containers?topic=containers-changelog_130#13014_1574_M)
 
     * [Worker node fix pack 1.30.14_1575, released 28 July 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1575_W)
 
