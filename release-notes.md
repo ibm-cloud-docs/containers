@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-07-31"
+lastupdated: "2025-08-01"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,7 +27,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-
 ## July 2025
 {: #containers-july25}
 
@@ -44,7 +43,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 :   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
 :   [Version 1.29 change log](/docs/containers?topic=containers-changelog_129)
 
+New! {{site.data.keyword.containerlong_notm}} version 1.33.
+:   You can now create or [update clusters to Kubernetes version 1.33](/docs/containers?topic=containers-cs_versions_133). With Kubernetes 1.33, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
+{{site.data.keyword.containerlong_notm}} version 1.30 is deprecated.
+:   Support for 1.30 ends on {{site.data.keyword.kubernetes_130_unsupported_date}}. Update your cluster to [version 1.31](/docs/containers?topic=containers-cs_versions_131) as soon as possible.
+
+{{site.data.keyword.containerlong_notm}} version 1.29 is unsupported.
+:   Update your cluster to at least [version 1.30](/docs/containers?topic=containers-cs_versions_130) as soon as possible.
 
 
 
