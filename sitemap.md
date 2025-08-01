@@ -244,6 +244,12 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} master fix packs.
 
+        * New! {{site.data.keyword.containerlong_notm}} version 1.33.
+
+        * {{site.data.keyword.containerlong_notm}} version 1.30 is deprecated.
+
+        * {{site.data.keyword.containerlong_notm}} version 1.29 is unsupported.
+
     * [30 July 2025](/docs/containers?topic=containers-containers-relnotes#containers-30july25)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
