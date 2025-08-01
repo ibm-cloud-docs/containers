@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2022, 2024
-lastupdated: "2024-06-03"
+  years: 2022, 2025
+lastupdated: "2025-08-01"
 
 
 keywords: kubernetes, tigera, master
@@ -35,7 +35,7 @@ Cannot complete cluster master upgrade because there is a migration in progress
 You are upgrading the cluster master, but some resources were still being migrated from a previous update.
 {: tsCauses}
 
-For example, if this was a master update from {{site.data.keyword.containerlong_notm}} version 1.29 to 1.30, the Tigera Operator didn't yet complete its migration from the previous {{site.data.keyword.containerlong_notm}} version 1.28 to 1.29 update.
+For example, if this was a master update from {{site.data.keyword.containerlong_notm}} version 1.31 to 1.32, the Tigera Operator didn't yet complete its migration from the previous {{site.data.keyword.containerlong_notm}} version 1.30 to 1.31 update.
 
 To resolve the issue, first wait longer. Larger clusters take longer to complete the migration. It takes approximately 100 seconds per node after the master is successfully updated for the migration to complete. The Tigera Operator is required to perform several actions and can involve spinning up and down pods across nodes.
 {: tsResolve}
@@ -106,5 +106,3 @@ To confirm the migration is complete:
 1. If the migration is still stuck, [replace](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace) or [remove](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_rm) the problematic nodes. For more information, see [Debugging worker nodes](/docs/containers?topic=containers-debug_worker_nodes).
 
 When you have confirmed that the migration is complete, proceed with the master update to {{site.data.keyword.containerlong_notm}} version 1.30.
-
-
