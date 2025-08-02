@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-01-29"
+lastupdated: "2025-08-02"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}
@@ -292,6 +292,10 @@ Review the feature gates that are applied to all master and worker node componen
 
 You can use the **`kubectl get --raw /metrics | grep kubernetes_feature_enabled`** command to determine if a feature gate is enabled or disabled.
 {: tip}
+
+1.33
+:    `CustomCPUCFSQuotaPeriod=true`
+:    `DisableNodeKubeProxyVersion=false`
 
 1.32
 :    `CustomCPUCFSQuotaPeriod=true`
