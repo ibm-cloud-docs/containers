@@ -20,15 +20,14 @@ subcollection: containers
 {: #cs_versions_129}
 
 
-Review information about version 1.29 of {{site.data.keyword.containerlong}}. For more information about Kubernetes project version 1.29, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.
-{: shortdesc}
-
-
 
 This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
 {: important}
 
 
+
+Review information about version 1.29 of {{site.data.keyword.containerlong}}. For more information about Kubernetes project version 1.29, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.
+{: shortdesc}
 
 ![This badge indicates Kubernetes version 1.29 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.29 certification badge" caption-side="bottom"} 
 
