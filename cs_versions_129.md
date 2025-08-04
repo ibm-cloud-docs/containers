@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-04-17"
+lastupdated: "2025-08-04"
 
 
 keywords: kubernetes, containers, 129, version 129, 129 update actions
@@ -20,15 +20,14 @@ subcollection: containers
 {: #cs_versions_129}
 
 
+
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
+
+
+
 Review information about version 1.29 of {{site.data.keyword.containerlong}}. For more information about Kubernetes project version 1.29, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.
 {: shortdesc}
-
-
-
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
-
-
 
 ![This badge indicates Kubernetes version 1.29 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.29 certification badge" caption-side="bottom"} 
 
