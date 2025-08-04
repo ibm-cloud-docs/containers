@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-04-17"
+lastupdated: "2025-08-04"
 
 
 keywords: kubernetes, containers, 129, version 129, 129 update actions
@@ -25,8 +25,8 @@ Review information about version 1.29 of {{site.data.keyword.containerlong}}. Fo
 
 
 
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 
 
