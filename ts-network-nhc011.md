@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-07-09"
+lastupdated: "2025-08-05"
 
 keywords: kubernetes, help, network, security groups, nhc011, exceeded security group quota
 
@@ -21,7 +21,7 @@ content-type: troubleshoot
 
 [Virtual Private Cloud]{: tag-vpc}
 
-When you check the status of your cluster's network components by running the `ibmcloud ksks cluster health issues --cluster <CLUSTER_ID>`, you see an error similar to the following example.
+When you check the status of your cluster's network components by running the `ibmcloud ks cluster health issues --cluster <CLUSTER_ID>`, you see an error similar to the following example.
 {: tsSymptoms}
 
 ```sh
