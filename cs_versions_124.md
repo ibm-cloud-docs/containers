@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-02-03"
+lastupdated: "2025-08-05"
 
 
 keywords: kubernetes, containers, 1.24 update actions
@@ -52,7 +52,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |  Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
-| 1.24 | Yes | 09 Jun 2022 | {{site.data.keyword.kubernetes_124_unsupported_date}} |
+| 1.24 | No | 09 Jun 2022 | {{site.data.keyword.kubernetes_124_unsupported_date}} |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.24" caption-side="bottom"}
 
 ## Preparing to update

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-08-04"
+lastupdated: "2025-08-05"
 
 
 keywords: kubernetes, containers, 129, version 129, 129 update actions
@@ -47,7 +47,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 | Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
-| 1.29 | Yes | {{site.data.keyword.kubernetes_129_release_date}} | {{site.data.keyword.kubernetes_129_unsupported_date}} `†` |
+| 1.29 | No | {{site.data.keyword.kubernetes_129_release_date}} | {{site.data.keyword.kubernetes_129_unsupported_date}} `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.29" caption-side="bottom"}
 
 
