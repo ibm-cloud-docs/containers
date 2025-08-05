@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-05-30"
+lastupdated: "2025-08-05"
 
 
 keywords: kubernetes, containers, 128, version 128, 128 update actions
@@ -47,7 +47,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 | Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
-| 1.28 | Yes | {{site.data.keyword.kubernetes_128_release_date}} | {{site.data.keyword.kubernetes_128_unsupported_date}} `†` |
+| 1.28 | No | {{site.data.keyword.kubernetes_128_release_date}} | {{site.data.keyword.kubernetes_128_unsupported_date}} `†` |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.28" caption-side="bottom"}
 
 
