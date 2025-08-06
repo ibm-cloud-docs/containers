@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-05"
+lastupdated: "2025-08-06"
 
 
 keywords: containers
@@ -243,6 +243,8 @@ subcollection: containers
     * [05 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-05aug25)
 
         * CLI version `1.0.714` is available.
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
 
 * [July 2025](/docs/containers?topic=containers-containers-relnotes#containers-july25)
 
@@ -6461,6 +6463,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.40, released 05 August 2025](/docs/containers?topic=containers-cos_plugin_changelog#02240_object_plugin)
 
 * [Change log for version 2.2.39, released 20 June 2025](/docs/containers?topic=containers-cos_plugin_changelog#02239_object_plugin)
 
