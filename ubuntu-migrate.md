@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2025
-lastupdated: "2025-07-24"
+lastupdated: "2025-08-11"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -91,7 +91,7 @@ Migrate your worker nodes to use Ubuntu 24. These steps apply to all supported c
 
     1. [Follow the steps to uninstall the Object Storage plug-in](/docs/openshift?topic=openshift-storage_cos_install#remove_cos_plugin).
 
-    1. [Resintall the plug-in](/docs/openshift?topic=openshift-storage_cos_install#remove_cos_plugin).
+    1. [Reinstall the plug-in](/docs/openshift?topic=openshift-storage_cos_install#remove_cos_plugin).
 
 
 
