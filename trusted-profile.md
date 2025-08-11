@@ -310,7 +310,7 @@ Once you add a trusted profile to a cluster, it cannot be removed and you cannot
     {: pre}
 
 2. Attach a rule to scope usage to the `kube‑system` namespace.
-	```sh
+    ```sh
     curl --request POST \
     --url https://iam.test.cloud.ibm.com/v1/profiles/<PROFILE_NAME>/rules \
     --header 'Content-Type: application/json' \
@@ -580,4 +580,3 @@ Irreversible transition to trusted profile
 
 Verfication scope is limited to the `kube-system` namespace. 
 :   Trusted profile trust validation is currently limited to the `kube-system` namespace for Kubernetes and Red Hat OpenShift clusters. Users experimenting with other trusted profile features or configurations outside this scope may encounter issues. 
-
