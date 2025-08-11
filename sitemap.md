@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-06"
+lastupdated: "2025-08-11"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug25)
+
+    * [08 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug0825)
+
+        * Trusted profiles
 
     * [05 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-05aug25)
 
@@ -1905,6 +1909,8 @@ subcollection: containers
 
 * [Set user permissions](/docs/containers?topic=containers-clusters#prepare-verify-permissions)
 
+* [Optional: Create a trusted profile](/docs/containers?topic=containers-clusters#prepare-trusted-profile)
+
 * [Plan your resource groups](/docs/containers?topic=containers-clusters#prepare-resource-groups)
 
 * [Cluster-specific account setup](/docs/containers?topic=containers-clusters#prepare-cluster-account)
@@ -2370,6 +2376,40 @@ subcollection: containers
 {: #sitemap_managing_access_control}
 
 
+[Configuring a trusted profile for cluster components](/docs/containers?topic=containers-configure-trusted-profile#configure-trusted-profile)
+
+* [About trusted profiles](/docs/containers?topic=containers-configure-trusted-profile#tp-about)
+
+* [Minimum access requirements](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs)
+
+    * [Minimum requirements for all storage components](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-all)
+
+    * [Minimum requirements for individual storage components](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-component)
+
+    * [VPC block storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-block)
+
+    * [Classic block storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-classic-block)
+
+    * [VPC file storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-file)
+
+    * [Classic file storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-classic-file)
+
+    * [Cluster autoscaler](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-autoscaler)
+
+    * [Object Storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-cos)
+
+    * [ODF billing agent](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-odf-billing)
+
+* [Set up a trusted profile in the CLI](/docs/containers?topic=containers-configure-trusted-profile&interface=cli#tp-setup-cli)
+
+* [Set up a trusted profile with the UI](/docs/containers?topic=containers-configure-trusted-profile&interface=ui#tp-setup-ui)
+
+* [Set up a trusted profile with the API](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-setup-api)
+
+* [Setting the trusted profile for a cluster or resource group](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-set-cluster-rg)
+
+* [Limitations and considerations](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-limitations)
+
 [Understanding Classic infrastructure credentials](/docs/containers?topic=containers-classic-credentials#classic-credentials)
 
 * [Accessing a different classic infrastructure account](/docs/containers?topic=containers-classic-credentials#credentials)
@@ -2407,6 +2447,10 @@ subcollection: containers
 [Authorizing resources with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity#pod-iam-identity)
 
 * [Creating an IAM trusted profile](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-create)
+
+* [Set the default trusted profile for the cluster](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-set)
+
+* [Get the details of your trusted profile](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-get)
 
 * [Configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-pod-iam-identity#iam-identity-pod)
 
@@ -3978,6 +4022,8 @@ subcollection: containers
 
 * [Setting up monitoring for `limited` connectivity PVs](/docs/containers?topic=containers-block_storage#storage-block-vpc-limited-monitoring)
 
+* [Assigning trusted profiles to block storage](/docs/containers?topic=containers-block_storage#block-classic-trusted-profile)
+
 
 ## Setting up Block Storage for VPC
 {: #sitemap_setting_up_block_storage_for_vpc}
@@ -4021,6 +4067,8 @@ subcollection: containers
 
 * [Understanding volume request capacity](/docs/containers?topic=containers-vpc-block#vpc-block-volume-capacity)
 
+* [Assigning trusted profiles to block storage](/docs/containers?topic=containers-vpc-block#block-vpc-trusted-profile)
+
 [Setting up snapshots with the {{site.data.keyword.block_storage_is_short}} cluster add-on](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-volume-snapshot)
 
 * [Creating an app](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-deployment)
@@ -4038,14 +4086,6 @@ subcollection: containers
 [Customizing the {{site.data.keyword.block_storage_is_short}} configmap](/docs/containers?topic=containers-storage-block-vpc-configmap#storage-block-vpc-configmap)
 
 * [{{site.data.keyword.block_storage_is_short}} configmap reference](/docs/containers?topic=containers-storage-block-vpc-configmap#storage-block-vpc-configmap-reference)
-
-[Setting up trusted profiles for the {{site.data.keyword.block_storage_is_short}} cluster add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#storage-block-vpc-trusted-profiles)
-
-* [Enabling the {{site.data.keyword.block_storage_is_short}} cluster add-on](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-addon-enable-trusted)
-
-* [Setting up trusted profiles](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#vpc-block-setup-trusted)
-
-    * [Automatically creating a secret by using a Shell script](/docs/containers?topic=containers-storage-block-vpc-trusted-profiles#secret-create-truted-profile)
 
 [Setting up {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-storage-driver-unmanaged)
 
@@ -4166,6 +4206,8 @@ subcollection: containers
 
     * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
 
+* [Assigning trusted profiles to file storage](/docs/containers?topic=containers-file_storage#file-classic-trusted-profile)
+
 
 ## Setting up File Storage for VPC
 {: #sitemap_setting_up_file_storage_for_vpc}
@@ -4178,6 +4220,8 @@ subcollection: containers
 * [Enabling the add-on](/docs/containers?topic=containers-storage-file-vpc-install#file-vpc-addon-enable)
 
 * [Next steps](/docs/containers?topic=containers-storage-file-vpc-install#vpc-enable-next-steps)
+
+* [Assigning trusted profiles to file storage](/docs/containers?topic=containers-storage-file-vpc-install#file-vpc-trustedprofile)
 
 [Adding {{site.data.keyword.filestorage_vpc_short}} to apps](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps)
 
@@ -4245,6 +4289,8 @@ subcollection: containers
     * [Prerequisites](/docs/containers?topic=containers-storage-cos-understand#cos-secret-prereqs)
 
     * [Creating an object storage secret in your cluster](/docs/containers?topic=containers-storage-cos-understand#cos-secret-create)
+
+* [Assigning trusted profiles to COS storage](/docs/containers?topic=containers-storage-cos-understand#cos-trusted-profile)
 
 * [Limitations](/docs/containers?topic=containers-storage-cos-understand#cos_limitations)
 
@@ -5664,6 +5710,22 @@ subcollection: containers
     * [`ibmcloud ks storage volume get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_c)
 
     * [`ibmcloud ks storage volume ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_2)
+
+* [`ibmcloud ks experimental trusted-profile default get`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-get-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-get-options)
+
+* [`ibmcloud ks experimental trusted-profile default set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-set-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-set-options)
+
+* [`ibmcloud ks experimental trusted-profile get`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-get-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-get-options)
+
+* [`ibmcloud ks experimental trusted-profile set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-options)
 
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
