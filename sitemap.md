@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-11"
+lastupdated: "2025-08-12"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug25)
+
+    * [12 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug1225)
+
+        * {{site.data.keyword.containerlong_notm}} version 1.33 Kubernetes certification
 
     * [08 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug0825)
 

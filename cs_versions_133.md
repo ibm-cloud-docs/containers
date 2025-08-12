@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-08-01"
+lastupdated: "2025-08-12"
 
 
 keywords: kubernetes, containers, 133, version 133, 133 update actions
@@ -23,6 +23,10 @@ subcollection: containers
 Review information about version 1.33 of {{site.data.keyword.containerlong}}. For more information about Kubernetes project version 1.33, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.
 {: shortdesc}
 
+
+![This badge indicates Kubernetes version 1.33 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.33 certification badge" caption-side="bottom"} 
+
+{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.33 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
 
 
@@ -78,4 +82,3 @@ The following table shows the actions that you must take after you update the Ku
 | **Deprecated:** Service annotation `service.kubernetes.io/topology-mode` |  The service annotation `service.kubernetes.io/topology-mode` is deprecated and is not graduating from beta to GA. Migrate to the [service `.spec.trafficDistribution` field](https://kubernetes.io/docs/concepts/services-networking/service/#traffic-distribution) instead. This field is closely related to the `service.kubernetes.io/topology-mode` annotation and provides flexible options for traffic routing within Kubernetes. |
 | **Deprecated:** `v1` version of the `Endpoints` API | The `v1` `Endpoints` API is deprecated. Migrate to the `discovery.k8s.io/v1` `EndpointSlice` API instead. For more information, see [Kubernetes v1.33: Continuing the transition from Endpoints to EndpointSlices](https://kubernetes.io/blog/2025/04/24/endpoints-deprecation/). |
 {: caption="Changes to make after you update the master to Kubernetes 1.33" caption-side="bottom"}
-
