@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-03-04"
+lastupdated: "2025-08-12"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -267,7 +267,7 @@ To deploy monitoring agents to your cluster, complete the following steps.
 
 5. Search for `Istio` and select one of the {{site.data.keyword.mon_short}} predefined Istio dashboards.
 
-For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out the [How to monitor Istio, the Kubernetes service mesh](https://sysdig.com/blog/monitor-istio/){: external} blog post.
+For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out the [How to monitor Istio, the Kubernetes service mesh](https://www.sysdig.com/blog/monitor-istio){: external} blog post.
 
 ## Step 5: Secure in-cluster traffic by enabling mTLS
 {: #mtls-qs}
