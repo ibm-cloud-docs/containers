@@ -2410,8 +2410,6 @@ subcollection: containers
 
 * [Set up a trusted profile with the API](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-setup-api)
 
-* [Setting the trusted profile for a cluster or resource group](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-set-cluster-rg)
-
 * [Limitations and considerations](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-limitations)
 
 [Understanding Classic infrastructure credentials](/docs/containers?topic=containers-classic-credentials#classic-credentials)
