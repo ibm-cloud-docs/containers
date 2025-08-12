@@ -28,12 +28,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2025
 {: #containers-aug25}
 
+
+
 ### 12 August 2025
 {: #containers-aug1225}
 {: release-note}
 
 {{site.data.keyword.containerlong_notm}} version 1.33 Kubernetes certification
 :   {{site.data.keyword.containerlong_notm}} version [1.33](/docs/containers?topic=containers-cs_versions_133) is now Kubernetes certified.
+
+
 
 ### 08 August 2025
 {: #containers-aug0825}
