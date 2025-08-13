@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-08-11"
+lastupdated: "2025-08-13"
 
 
 keywords: change log, version history, 1.31
@@ -67,6 +67,7 @@ The following table shows the changes that are in the master fix pack 1.31.11_15
 {: caption="Changes since version 1.31.9_1553" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.11_1559, released 28 July 2025
 {: #cl-boms-13111_1559_W}
 
@@ -84,6 +85,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13111_1559_W-component-table}
 
 
+
 ### Worker node fix pack 1.31.9_1557, released 14 July 2025
 {: #cl-boms-1319_1557_W}
 
@@ -92,13 +94,14 @@ The following table shows the components included in the worker node fix pack 1.
 
 | Component | Version | Description |
 | ---- | ---- | ---- |
-|UBUNTU_24_04|6.8.0-63-generic|Resolves the following CVEs: [CVE-2025-](https://nvd.nist.gov/vuln/detail/CVE-2025-){: external}, [CVE-2025-22088](https://nvd.nist.gov/vuln/detail/CVE-2025-22088){: external}, [CVE-2025-27613](https://nvd.nist.gov/vuln/detail/CVE-2025-27613){: external}, [CVE-2025-27614](https://nvd.nist.gov/vuln/detail/CVE-2025-27614){: external}, [CVE-2025-30258](https://nvd.nist.gov/vuln/detail/CVE-2025-30258){: external}, [CVE-2025-32462](https://nvd.nist.gov/vuln/detail/CVE-2025-32462){: external}, [CVE-2025-32463](https://nvd.nist.gov/vuln/detail/CVE-2025-32463){: external}, [CVE-2025-37798](https://nvd.nist.gov/vuln/detail/CVE-2025-37798){: external}, [CVE-2025-37890](https://nvd.nist.gov/vuln/detail/CVE-2025-37890){: external}, [CVE-2025-37997](https://nvd.nist.gov/vuln/detail/CVE-2025-37997){: external}, [CVE-2025-46835](https://nvd.nist.gov/vuln/detail/CVE-2025-46835){: external}, [CVE-2025-48384](https://nvd.nist.gov/vuln/detail/CVE-2025-48384){: external}, [CVE-2025-48385](https://nvd.nist.gov/vuln/detail/CVE-2025-48385){: external}, [CVE-2025-48386](https://nvd.nist.gov/vuln/detail/CVE-2025-48386){: external}, [CVE-2025-4877](https://nvd.nist.gov/vuln/detail/CVE-2025-4877){: external}, [CVE-2025-4878](https://nvd.nist.gov/vuln/detail/CVE-2025-4878){: external}, [CVE-2025-5318](https://nvd.nist.gov/vuln/detail/CVE-2025-5318){: external}, [CVE-2025-5351](https://nvd.nist.gov/vuln/detail/CVE-2025-5351){: external}, [CVE-2025-5372](https://nvd.nist.gov/vuln/detail/CVE-2025-5372){: external}, and [CVE-2025-5987](https://nvd.nist.gov/vuln/detail/CVE-2025-5987){: external}.|
+|UBUNTU_24_04|6.8.0-63-generic|Resolves the following CVEs: [CVE-2025-22088](https://nvd.nist.gov/vuln/detail/CVE-2025-22088){: external}, [CVE-2025-27613](https://nvd.nist.gov/vuln/detail/CVE-2025-27613){: external}, [CVE-2025-27614](https://nvd.nist.gov/vuln/detail/CVE-2025-27614){: external}, [CVE-2025-30258](https://nvd.nist.gov/vuln/detail/CVE-2025-30258){: external}, [CVE-2025-32462](https://nvd.nist.gov/vuln/detail/CVE-2025-32462){: external}, [CVE-2025-32463](https://nvd.nist.gov/vuln/detail/CVE-2025-32463){: external}, [CVE-2025-37798](https://nvd.nist.gov/vuln/detail/CVE-2025-37798){: external}, [CVE-2025-37890](https://nvd.nist.gov/vuln/detail/CVE-2025-37890){: external}, [CVE-2025-37997](https://nvd.nist.gov/vuln/detail/CVE-2025-37997){: external}, [CVE-2025-46835](https://nvd.nist.gov/vuln/detail/CVE-2025-46835){: external}, [CVE-2025-48384](https://nvd.nist.gov/vuln/detail/CVE-2025-48384){: external}, [CVE-2025-48385](https://nvd.nist.gov/vuln/detail/CVE-2025-48385){: external}, [CVE-2025-48386](https://nvd.nist.gov/vuln/detail/CVE-2025-48386){: external}, [CVE-2025-4877](https://nvd.nist.gov/vuln/detail/CVE-2025-4877){: external}, [CVE-2025-4878](https://nvd.nist.gov/vuln/detail/CVE-2025-4878){: external}, [CVE-2025-5318](https://nvd.nist.gov/vuln/detail/CVE-2025-5318){: external}, [CVE-2025-5351](https://nvd.nist.gov/vuln/detail/CVE-2025-5351){: external}, [CVE-2025-5372](https://nvd.nist.gov/vuln/detail/CVE-2025-5372){: external}, and [CVE-2025-5987](https://nvd.nist.gov/vuln/detail/CVE-2025-5987){: external}.|
 |Kubernetes|1.31.9|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.9).|
 |containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
 |HAProxy|3bb13ac682885a0885eacb7edd1ee7a36d54e2a8|Resolves the following CVEs: [CVE-2025-6021](https://nvd.nist.gov/vuln/detail/CVE-2025-6021){: external}, [CVE-2025-49796](https://nvd.nist.gov/vuln/detail/CVE-2025-49796){: external}, [CVE-2025-49794](https://nvd.nist.gov/vuln/detail/CVE-2025-49794){: external}, and [CVE-2025-6020](https://nvd.nist.gov/vuln/detail/CVE-2025-6020){: external}.|
 |GPU Device Plug-in and Installer|0c5c1f69809faf55f9375dd7eedde342c56cc63e|Resolves the following CVEs: [CVE-2025-6020](https://nvd.nist.gov/vuln/detail/CVE-2025-6020){: external}, [CVE-2025-4330](https://nvd.nist.gov/vuln/detail/CVE-2025-4330){: external}, [CVE-2025-4138](https://nvd.nist.gov/vuln/detail/CVE-2025-4138){: external}, [CVE-2025-4435](https://nvd.nist.gov/vuln/detail/CVE-2025-4435){: external}, [CVE-2025-6021](https://nvd.nist.gov/vuln/detail/CVE-2025-6021){: external}, [CVE-2025-4517](https://nvd.nist.gov/vuln/detail/CVE-2025-4517){: external}, [CVE-2024-12718](https://nvd.nist.gov/vuln/detail/CVE-2024-12718){: external}, [CVE-2025-49796](https://nvd.nist.gov/vuln/detail/CVE-2025-49796){: external}, and [CVE-2025-49794](https://nvd.nist.gov/vuln/detail/CVE-2025-49794){: external}.|
 {: caption="1.31.9_1557 fix pack." caption-side="bottom"}
 {: #cl-boms-1319_1557_W-component-table}
+
 
 
 ### Worker node fix pack 1.31.9_1556, released 01 July 2025
@@ -116,6 +119,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|cbca3eaad7d585c0d1181e478f39bab25579fb9a|N/A|
 {: caption="1.31.9_1556 fix pack." caption-side="bottom"}
 {: #cl-boms-1319_1556_W-component-table}
+
 
 
 ### Master fix pack 1.31.9_1553, released 18 June 2025
@@ -136,6 +140,7 @@ The following table shows the changes that are in the master fix pack 1.31.9_155
 {: caption="Changes since version 1.31.9_1550" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.9_1554, released 16 June 2025
 {: #cl-boms-1319_1554_W}
 
@@ -153,6 +158,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1319_1554_W-component-table}
 
 
+
 ### Worker node fix pack 1.31.9_1551, released 04 June 2025
 {: #cl-boms-1319_1551_W}
 
@@ -168,6 +174,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|9c52a5f3c684d3da2808c70936332fd18493d0c7|N/A|
 {: caption="1.31.9_1551 fix pack." caption-side="bottom"}
 {: #cl-boms-1319_1551_W-component-table}
+
 
 
 ### Master fix pack 1.31.9_1550, released 28 May 2025
@@ -190,6 +197,7 @@ The following table shows the changes that are in the master fix pack 1.31.9_155
 {: caption="Changes since version 1.31.7_1547" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.7_1549, released 19 May 2025
 {: #cl-boms-1317_1549_W}
 
@@ -208,6 +216,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1317_1549_W-component-table}
 
 
+
 ### Worker node fix pack 1.31.7_1548, released 07 May 2025
 {: #cl-boms-1317_1548_W}
 
@@ -224,6 +233,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|9c52a5f3c684d3da2808c70936332fd18493d0c7|Resolves the following CVEs: [CVE-2024-12243](https://nvd.nist.gov/vuln/detail/CVE-2024-12243){: external}, and [CVE-2024-12133](https://nvd.nist.gov/vuln/detail/CVE-2024-12133){: external}.|
 {: caption="1.31.7_1548 fix pack." caption-side="bottom"}
 {: #cl-boms-1317_1548_W-component-table}
+
 
 
 ### Master fix pack 1.31.7_1547, released 30 April 2025
@@ -248,6 +258,7 @@ The following table shows the changes that are in the master fix pack 1.31.7_154
 {: caption="Changes since version 1.31.7_1543" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.7_1546, released 21 April 2025
 {: #cl-boms-1317_1546_W}
 
@@ -266,6 +277,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1317_1546_W-component-table}
 
 
+
 ### Worker node fix pack 1.31.7_1545, released 08 April 2025
 {: #cl-boms-1317_1545_W}
 
@@ -282,6 +294,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|c9d9c47b1404651b3a3c022f288a6d90bb5a44b2|N/A|
 {: caption="1.31.7_1545 fix pack." caption-side="bottom"}
 {: #cl-boms-1317_1545_W-component-table}
+
 
 
 ### Master fix pack 1.31.7_1543, released 26 March 2025
@@ -304,6 +317,7 @@ The following table shows the changes that are in the master fix pack 1.31.7_154
 {: caption="Changes since version 1.31.5_1540" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.7_1544, released 24 March 2025
 {: #cl-boms-1317_1544_W}
 
@@ -320,6 +334,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|c9d9c47b1404651b3a3c022f288a6d90bb5a44b2|Resolves the following CVEs: [CVE-2024-56171](https://nvd.nist.gov/vuln/detail/CVE-2024-56171){: external}, [CVE-2025-24928](https://nvd.nist.gov/vuln/detail/CVE-2025-24928){: external}, and [CVE-2025-24528](https://nvd.nist.gov/vuln/detail/CVE-2025-24528){: external}.|
 {: caption="1.31.7_1544 fix pack." caption-side="bottom"}
 {: #cl-boms-1317_1544_W-component-table}
+
 
 
 ### Worker node fix pack 1.31.5_1542, released 11 March 2025
@@ -340,6 +355,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1315_1542_W-component-table}
 
 
+
 ### Worker node fix pack 1.31.5_1541, released 24 February 2025
 {: #cl-boms-1315_1541_W}
 
@@ -358,6 +374,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1315_1541_W-component-table}
 
 
+
 ### Master fix pack 1.31.5_1540, released 19 February 2025
 {: #1315_1540_M}
 
@@ -372,6 +389,7 @@ The following table shows the changes that are in the master fix pack 1.31.5_154
 | Key Management Service provider | v2.10.9 | v2.10.10 | New version contains updates and security fixes. |
 | Kubernetes NodeLocal DNS cache | 1.23.1 | 1.24.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.24.0){: external}. |
 {: caption="Changes since version 1.31.5_1537" caption-side="bottom"}
+
 
 
 ### Worker node fix pack 1.31.5_1539, released 11 February 2025
@@ -392,6 +410,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1315_1539_W-component-table}
 
 
+
 ### Worker node fix pack 1.31.5_1538, released 29 January 2025
 {: #cl-boms-1315_1538_W}
 
@@ -408,6 +427,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|6563a84c30f22dd511f6e2d80227040a12c3af9a|Resolves the following CVEs: [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}.|
 {: caption="1.31.5_1538 fix pack." caption-side="bottom"}
 {: #cl-boms-1315_1538_W-component-table}
+
 
 
 ### Master fix pack 1.31.5_1537, released 22 January 2025
@@ -433,6 +453,7 @@ The following table shows the changes that are in the master fix pack 1.31.5_153
 {: caption="Changes since version 1.31.3_1530" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.3_1535, released 13 January 2025
 {: #cl-boms-1313_1535_W}
 
@@ -451,6 +472,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1313_1535_W-component-table}
 
 
+
 ### Worker node fix pack 1.31.3_1534, released 30 December 2024
 {: #1313_1534_W}
 
@@ -462,6 +484,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 | Ubuntu 20.04 Packages | 5.4.0-202-generic | 5.4.0-204-generic | Worker node kernel & package updates for [CVE-2021-47001](https://nvd.nist.gov/vuln/detail/CVE-2021-47001){: external}, [CVE-2021-47101](https://nvd.nist.gov/vuln/detail/CVE-2021-47101){: external}, [CVE-2022-38096](https://nvd.nist.gov/vuln/detail/CVE-2022-38096){: external}, [CVE-2023-52821](https://nvd.nist.gov/vuln/detail/CVE-2023-52821){: external}, [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-35963](https://nvd.nist.gov/vuln/detail/CVE-2024-35963){: external}, [CVE-2024-35965](https://nvd.nist.gov/vuln/detail/CVE-2024-35965){: external}, [CVE-2024-35966](https://nvd.nist.gov/vuln/detail/CVE-2024-35966){: external}, [CVE-2024-35967](https://nvd.nist.gov/vuln/detail/CVE-2024-35967){: external}, [CVE-2024-36952](https://nvd.nist.gov/vuln/detail/CVE-2024-36952){: external}, [CVE-2024-38553](https://nvd.nist.gov/vuln/detail/CVE-2024-38553){: external}, [CVE-2024-38597](https://nvd.nist.gov/vuln/detail/CVE-2024-38597){: external}, [CVE-2024-40910](https://nvd.nist.gov/vuln/detail/CVE-2024-40910){: external}, [CVE-2024-43892](https://nvd.nist.gov/vuln/detail/CVE-2024-43892){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}. |
 | Ubuntu 24.04 Packages | 6.8.0-50-generic | 6.8.0-51-generic | Worker node kernel & package updates for [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}. |
 {: caption="Changes since version 1.31.3_1533" caption-side="bottom"}
+
 
 
 ### Worker node fix pack 1.31.3_1533, released 16 December 2024
@@ -479,6 +502,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 {: caption="Changes since version 1.31.3_1532" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.3_1532, released 05 December 2024
 {: #1313_1532_W}
 
@@ -494,6 +518,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 | Kubernetes | 1.31.2 | 1.31.3 | For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.3){: external}. |
 | GPU Device Plug-in and Installer | 96f9b63 | 995bd7 | Security fixes for [CVE-2024-10041](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-10041){: external}, [CVE-2024-10963](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-10963){: external}, [CVE-2024-27043](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-27043){: external}, [CVE-2024-27399](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-27399){: external}, [CVE-2024-38564](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-38564){: external}, [CVE-2024-46858](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-46858){: external}. |
 {: caption="Changes since version 1.31.2_1529" caption-side="bottom"}
+
 
 
 ### Master fix pack 1.31.3_1530, released 04 December 2024
@@ -514,6 +539,7 @@ The following table shows the changes that are in the master fix pack 1.31.3_153
 {: caption="Changes since version 1.31.2_1528" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.2_1529, released 18 November 2024
 {: #1312_1529_W}
 
@@ -529,6 +555,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 | HAProxy | 885986 | 55c148 | Security fixes for [CVE-2023-45539](https://nvd.nist.gov/vuln/detail/CVE-2023-45539){: external}, [CVE-2024-3596](https://nvd.nist.gov/vuln/detail/CVE-2024-3596){: external}, [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}, [CVE-2024-50602](https://nvd.nist.gov/vuln/detail/CVE-2024-50602){: external}. |
 | GPU Device Plug-in and Installer | 33c70dd | 96f9b63 | Security fixes for [CVE-2022-48773](https://nvd.nist.gov/vuln/detail/CVE-2022-48773){: external}, [CVE-2022-48936](https://nvd.nist.gov/vuln/detail/CVE-2022-48936){: external}, [CVE-2023-52492](https://nvd.nist.gov/vuln/detail/CVE-2023-52492){: external}, [CVE-2024-24857](https://nvd.nist.gov/vuln/detail/CVE-2024-24857){: external}, [CVE-2024-26851](https://nvd.nist.gov/vuln/detail/CVE-2024-26851){: external}, [CVE-2024-26924](https://nvd.nist.gov/vuln/detail/CVE-2024-26924){: external}, [CVE-2024-26976](https://nvd.nist.gov/vuln/detail/CVE-2024-26976){: external}, [CVE-2024-27017](https://nvd.nist.gov/vuln/detail/CVE-2024-27017){: external}, [CVE-2024-27062](https://nvd.nist.gov/vuln/detail/CVE-2024-27062){: external}, [CVE-2024-35839](https://nvd.nist.gov/vuln/detail/CVE-2024-35839){: external}, [CVE-2024-35898](https://nvd.nist.gov/vuln/detail/CVE-2024-35898){: external}, [CVE-2024-35939](https://nvd.nist.gov/vuln/detail/CVE-2024-35939){: external}, [CVE-2024-38540](https://nvd.nist.gov/vuln/detail/CVE-2024-38540){: external}, [CVE-2024-38541](https://nvd.nist.gov/vuln/detail/CVE-2024-38541){: external}, [CVE-2024-38586](https://nvd.nist.gov/vuln/detail/CVE-2024-38586){: external}, [CVE-2024-38608](https://nvd.nist.gov/vuln/detail/CVE-2024-38608){: external}, [CVE-2024-39503](https://nvd.nist.gov/vuln/detail/CVE-2024-39503){: external}, [CVE-2024-40924](https://nvd.nist.gov/vuln/detail/CVE-2024-40924){: external}, [CVE-2024-40961](https://nvd.nist.gov/vuln/detail/CVE-2024-40961){: external}, [CVE-2024-40983](https://nvd.nist.gov/vuln/detail/CVE-2024-40983){: external}, [CVE-2024-40984](https://nvd.nist.gov/vuln/detail/CVE-2024-40984){: external}, [CVE-2024-41009](https://nvd.nist.gov/vuln/detail/CVE-2024-41009){: external}, [CVE-2024-41042](https://nvd.nist.gov/vuln/detail/CVE-2024-41042){: external}, [CVE-2024-41066](https://nvd.nist.gov/vuln/detail/CVE-2024-41066){: external}, [CVE-2024-41092](https://nvd.nist.gov/vuln/detail/CVE-2024-41092){: external}, [CVE-2024-41093](https://nvd.nist.gov/vuln/detail/CVE-2024-41093){: external}, [CVE-2024-42070](https://nvd.nist.gov/vuln/detail/CVE-2024-42070){: external}, [CVE-2024-42079](https://nvd.nist.gov/vuln/detail/CVE-2024-42079){: external}, [CVE-2024-42244](https://nvd.nist.gov/vuln/detail/CVE-2024-42244){: external}, [CVE-2024-42284](https://nvd.nist.gov/vuln/detail/CVE-2024-42284){: external}, [CVE-2024-42292](https://nvd.nist.gov/vuln/detail/CVE-2024-42292){: external}, [CVE-2024-42301](https://nvd.nist.gov/vuln/detail/CVE-2024-42301){: external}, [CVE-2024-43854](https://nvd.nist.gov/vuln/detail/CVE-2024-43854){: external}, [CVE-2024-43880](https://nvd.nist.gov/vuln/detail/CVE-2024-43880){: external}, [CVE-2024-43889](https://nvd.nist.gov/vuln/detail/CVE-2024-43889){: external}, [CVE-2024-43892](https://nvd.nist.gov/vuln/detail/CVE-2024-43892){: external}, [CVE-2024-44935](https://nvd.nist.gov/vuln/detail/CVE-2024-44935){: external}, [CVE-2024-44989](https://nvd.nist.gov/vuln/detail/CVE-2024-44989){: external}, [CVE-2024-44990](https://nvd.nist.gov/vuln/detail/CVE-2024-44990){: external}, [CVE-2024-45018](https://nvd.nist.gov/vuln/detail/CVE-2024-45018){: external}, [CVE-2024-46826](https://nvd.nist.gov/vuln/detail/CVE-2024-46826){: external}, [CVE-2024-47668](https://nvd.nist.gov/vuln/detail/CVE-2024-47668){: external}, [CVE-2024-3596](https://nvd.nist.gov/vuln/detail/CVE-2024-3596){: external}, [CVE-2019-12900](https://nvd.nist.gov/vuln/detail/CVE-2019-12900){: external}, [CVE-2024-50602](https://nvd.nist.gov/vuln/detail/CVE-2024-50602){: external}. |
 {: caption="Changes since version 1.31.1_1527" caption-side="bottom"}
+
 
 
 ### Master fix pack 1.31.2_1528, released 13 November 2024
@@ -547,6 +574,7 @@ The following table shows the changes that are in the master fix pack 1.31.2_152
 {: caption="Changes since version 1.31.1_1526" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.1_1527, released 04 November 2024
 {: #1311_1527_W}
 
@@ -559,6 +587,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 | Ubuntu 24.04 Packages	| 6.8.0-47-generic	| 6.8.0-48-generic	| Kernel and package updates for [CVE-2024-20696](https://nvd.nist.gov/vuln/detail/CVE-2024-20696){: external}, [CVE-2024-27022](https://nvd.nist.gov/vuln/detail/CVE-2024-27022){: external}, [CVE-2024-37891](https://nvd.nist.gov/vuln/detail/CVE-2024-37891){: external}, [CVE-2024-41022](https://nvd.nist.gov/vuln/detail/CVE-2024-41022){: external}, [CVE-2024-41311](https://nvd.nist.gov/vuln/detail/CVE-2024-41311){: external}, [CVE-2024-42271](https://nvd.nist.gov/vuln/detail/CVE-2024-42271){: external}, [CVE-2024-42280](https://nvd.nist.gov/vuln/detail/CVE-2024-42280){: external}, [CVE-2024-43858](https://nvd.nist.gov/vuln/detail/CVE-2024-43858){: external}, [CVE-2024-45016](https://nvd.nist.gov/vuln/detail/CVE-2024-45016){: external}	|
 | GPU Device Plug-in and Installer	| 68e8137	| 33c70dd	| Driver update and security fixes for [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}, [CVE-2024-6232](https://nvd.nist.gov/vuln/detail/CVE-2024-6232){: external}	|
 {: caption="Changes since version 1.31.1_1524" caption-side="bottom"}
+
 
 
 ### Master fix pack 1.31.1_1526, released 30 October 2024
@@ -582,6 +611,7 @@ The following table shows the changes that are in the master fix pack 1.31.1_152
 {: caption="Changes since version 1.31.1_1521" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.1_1524, released 21 October 2024
 {: #1311_1524_W}
 
@@ -593,6 +623,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 | Ubuntu 20.04 Packages | 5.4.0-196-generic | 5.4.0-198-generic | Kernel and package updates for [CVE-2022-36227](https://nvd.nist.gov/vuln/detail/CVE-2022-36227){: external}, [CVE-2024-26960](https://nvd.nist.gov/vuln/detail/CVE-2024-26960){: external}, [CVE-2024-27397](https://nvd.nist.gov/vuln/detail/CVE-2024-27397){: external}, [CVE-2024-38630](https://nvd.nist.gov/vuln/detail/CVE-2024-38630){: external}, [CVE-2024-45016](https://nvd.nist.gov/vuln/detail/CVE-2024-45016){: external}, [CVE-2024-5742](https://nvd.nist.gov/vuln/detail/CVE-2024-5742){: external}. | 
 | Haproxy | 67d03375 | 88598691 | Security fixes for [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}. |
 {: caption="Changes since version 1.31.1_1523" caption-side="bottom"}
+
 
 
 ### Worker node fix pack 1.31.1_1523, released 09 October 2024
@@ -608,6 +639,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 | Haproxy | 546887ab | 67d03375 | Security fixes for [CVE-2024-4032](https://nvd.nist.gov/vuln/detail/CVE-2024-4032){: external}, [CVE-2024-6232](https://nvd.nist.gov/vuln/detail/CVE-2024-6232){: external}, [CVE-2024-6923](https://nvd.nist.gov/vuln/detail/CVE-2024-6923){: external}, [CVE-2024-45490](https://nvd.nist.gov/vuln/detail/CVE-2024-45490){: external}, [CVE-2024-45491](https://nvd.nist.gov/vuln/detail/CVE-2024-45491){: external}, [CVE-2024-45492](https://nvd.nist.gov/vuln/detail/CVE-2024-45492){: external}. |
 | GPU Device Plug-in and Installer | a248cf6b | 68e8137 | Driver update and security fixes for [CVE-2024-26880](https://nvd.nist.gov/vuln/detail/CVE-2024-26880){: external}, [CVE-2024-26894](https://nvd.nist.gov/vuln/detail/CVE-2024-26894){: external}, [CVE-2024-39506](https://nvd.nist.gov/vuln/detail/CVE-2024-39506){: external}, [CVE-2024-41040](https://nvd.nist.gov/vuln/detail/CVE-2024-41040){: external}, [CVE-2023-52800](https://nvd.nist.gov/vuln/detail/CVE-2023-52800){: external}, [CVE-2024-40989](https://nvd.nist.gov/vuln/detail/CVE-2024-40989){: external}, [CVE-2024-42090](https://nvd.nist.gov/vuln/detail/CVE-2024-42090){: external}, [CVE-2021-47385](https://nvd.nist.gov/vuln/detail/CVE-2021-47385){: external}, [CVE-2023-52470](https://nvd.nist.gov/vuln/detail/CVE-2023-52470){: external}, [CVE-2023-52683](https://nvd.nist.gov/vuln/detail/CVE-2023-52683){: external}, [CVE-2024-42238](https://nvd.nist.gov/vuln/detail/CVE-2024-42238){: external}, [CVE-2024-42265](https://nvd.nist.gov/vuln/detail/CVE-2024-42265){: external}, [CVE-2021-47384](https://nvd.nist.gov/vuln/detail/CVE-2021-47384){: external}, [CVE-2024-36922](https://nvd.nist.gov/vuln/detail/CVE-2024-36922){: external}, [CVE-2024-42114](https://nvd.nist.gov/vuln/detail/CVE-2024-42114){: external}, [CVE-2024-42228](https://nvd.nist.gov/vuln/detail/CVE-2024-42228){: external}, [CVE-2024-40912](https://nvd.nist.gov/vuln/detail/CVE-2024-40912){: external}, [CVE-2024-40931](https://nvd.nist.gov/vuln/detail/CVE-2024-40931){: external}, [CVE-2024-42124](https://nvd.nist.gov/vuln/detail/CVE-2024-42124){: external}, [CVE-2021-47289](https://nvd.nist.gov/vuln/detail/CVE-2021-47289){: external}, [CVE-2023-52840](https://nvd.nist.gov/vuln/detail/CVE-2023-52840){: external}, [CVE-2024-26595](https://nvd.nist.gov/vuln/detail/CVE-2024-26595){: external}, [CVE-2024-36901](https://nvd.nist.gov/vuln/detail/CVE-2024-36901){: external}, [CVE-2024-6923](https://nvd.nist.gov/vuln/detail/CVE-2024-6923){: external}, [CVE-2024-38558](https://nvd.nist.gov/vuln/detail/CVE-2024-38558){: external}, [CVE-2024-41008](https://nvd.nist.gov/vuln/detail/CVE-2024-41008){: external}, [CVE-2024-41012](https://nvd.nist.gov/vuln/detail/CVE-2024-41012){: external}, [CVE-2024-4032](https://nvd.nist.gov/vuln/detail/CVE-2024-4032){: external}, [CVE-2024-41007](https://nvd.nist.gov/vuln/detail/CVE-2024-41007){: external}, [CVE-2024-41035](https://nvd.nist.gov/vuln/detail/CVE-2024-41035){: external}, [CVE-2021-47527](https://nvd.nist.gov/vuln/detail/CVE-2021-47527){: external}, [CVE-2022-48754](https://nvd.nist.gov/vuln/detail/CVE-2022-48754){: external}, [CVE-2023-6040](https://nvd.nist.gov/vuln/detail/CVE-2023-6040){: external}, [CVE-2024-40978](https://nvd.nist.gov/vuln/detail/CVE-2024-40978){: external}, [CVE-2021-47582](https://nvd.nist.gov/vuln/detail/CVE-2021-47582){: external}, [CVE-2024-38581](https://nvd.nist.gov/vuln/detail/CVE-2024-38581){: external}, [CVE-2024-41090](https://nvd.nist.gov/vuln/detail/CVE-2024-41090){: external}, [CVE-2024-45492](https://nvd.nist.gov/vuln/detail/CVE-2024-45492){: external}, [CVE-2021-47321](https://nvd.nist.gov/vuln/detail/CVE-2021-47321){: external}, [CVE-2024-36920](https://nvd.nist.gov/vuln/detail/CVE-2024-36920){: external}, [CVE-2024-40954](https://nvd.nist.gov/vuln/detail/CVE-2024-40954){: external}, [CVE-2024-40995](https://nvd.nist.gov/vuln/detail/CVE-2024-40995){: external}, [CVE-2024-40998](https://nvd.nist.gov/vuln/detail/CVE-2024-40998){: external}, [CVE-2024-42152](https://nvd.nist.gov/vuln/detail/CVE-2024-42152){: external}, [CVE-2021-46984](https://nvd.nist.gov/vuln/detail/CVE-2021-46984){: external}, [CVE-2023-52817](https://nvd.nist.gov/vuln/detail/CVE-2023-52817){: external}, [CVE-2024-35809](https://nvd.nist.gov/vuln/detail/CVE-2024-35809){: external}, [CVE-2024-35944](https://nvd.nist.gov/vuln/detail/CVE-2024-35944){: external}, [CVE-2024-23848](https://nvd.nist.gov/vuln/detail/CVE-2024-23848){: external}, [CVE-2024-42226](https://nvd.nist.gov/vuln/detail/CVE-2024-42226){: external}, [CVE-2024-42094](https://nvd.nist.gov/vuln/detail/CVE-2024-42094){: external}, [CVE-2021-47101](https://nvd.nist.gov/vuln/detail/CVE-2021-47101){: external}, [CVE-2024-26720](https://nvd.nist.gov/vuln/detail/CVE-2024-26720){: external}, [CVE-2024-26923](https://nvd.nist.gov/vuln/detail/CVE-2024-26923){: external}, [CVE-2024-41005](https://nvd.nist.gov/vuln/detail/CVE-2024-41005){: external}, [CVE-2023-52798](https://nvd.nist.gov/vuln/detail/CVE-2023-52798){: external}, [CVE-2024-42096](https://nvd.nist.gov/vuln/detail/CVE-2024-42096){: external}, [CVE-2024-40988](https://nvd.nist.gov/vuln/detail/CVE-2024-40988){: external}, [CVE-2024-42084](https://nvd.nist.gov/vuln/detail/CVE-2024-42084){: external}, [CVE-2024-42240](https://nvd.nist.gov/vuln/detail/CVE-2024-42240){: external}, [CVE-2024-41014](https://nvd.nist.gov/vuln/detail/CVE-2024-41014){: external}, [CVE-2024-41041](https://nvd.nist.gov/vuln/detail/CVE-2024-41041){: external}, [CVE-2024-41065](https://nvd.nist.gov/vuln/detail/CVE-2024-41065){: external}, [CVE-2024-42322](https://nvd.nist.gov/vuln/detail/CVE-2024-42322){: external}, [CVE-2022-48760](https://nvd.nist.gov/vuln/detail/CVE-2022-48760){: external}, [CVE-2024-26600](https://nvd.nist.gov/vuln/detail/CVE-2024-26600){: external}, [CVE-2024-26939](https://nvd.nist.gov/vuln/detail/CVE-2024-26939){: external}, [CVE-2024-40972](https://nvd.nist.gov/vuln/detail/CVE-2024-40972){: external}, [CVE-2024-40997](https://nvd.nist.gov/vuln/detail/CVE-2024-40997){: external}, [CVE-2024-43830](https://nvd.nist.gov/vuln/detail/CVE-2024-43830){: external}, [CVE-2024-38559](https://nvd.nist.gov/vuln/detail/CVE-2024-38559){: external}, [CVE-2024-38619](https://nvd.nist.gov/vuln/detail/CVE-2024-38619){: external}, [CVE-2024-39501](https://nvd.nist.gov/vuln/detail/CVE-2024-39501){: external}, [CVE-2024-42131](https://nvd.nist.gov/vuln/detail/CVE-2024-42131){: external}, [CVE-2021-47393](https://nvd.nist.gov/vuln/detail/CVE-2021-47393){: external}, [CVE-2022-48836](https://nvd.nist.gov/vuln/detail/CVE-2022-48836){: external}, [CVE-2023-52809](https://nvd.nist.gov/vuln/detail/CVE-2023-52809){: external}, [CVE-2024-26638](https://nvd.nist.gov/vuln/detail/CVE-2024-26638){: external}, [CVE-2021-47609](https://nvd.nist.gov/vuln/detail/CVE-2021-47609){: external}, [CVE-2024-26855](https://nvd.nist.gov/vuln/detail/CVE-2024-26855){: external}, [CVE-2024-36902](https://nvd.nist.gov/vuln/detail/CVE-2024-36902){: external}, [CVE-2021-47287](https://nvd.nist.gov/vuln/detail/CVE-2021-47287){: external}, [CVE-2024-40960](https://nvd.nist.gov/vuln/detail/CVE-2024-40960){: external}, [CVE-2024-41064](https://nvd.nist.gov/vuln/detail/CVE-2024-41064){: external}, [CVE-2024-41071](https://nvd.nist.gov/vuln/detail/CVE-2024-41071){: external}, [CVE-2024-42225](https://nvd.nist.gov/vuln/detail/CVE-2024-42225){: external}, [CVE-2024-45490](https://nvd.nist.gov/vuln/detail/CVE-2024-45490){: external}, [CVE-2021-47352](https://nvd.nist.gov/vuln/detail/CVE-2021-47352){: external}, [CVE-2024-26769](https://nvd.nist.gov/vuln/detail/CVE-2024-26769){: external}, [CVE-2024-36939](https://nvd.nist.gov/vuln/detail/CVE-2024-36939){: external}, [CVE-2024-40977](https://nvd.nist.gov/vuln/detail/CVE-2024-40977){: external}, [CVE-2024-42154](https://nvd.nist.gov/vuln/detail/CVE-2024-42154){: external}, [CVE-2024-35989](https://nvd.nist.gov/vuln/detail/CVE-2024-35989){: external}, [CVE-2024-36919](https://nvd.nist.gov/vuln/detail/CVE-2024-36919){: external}, [CVE-2024-38579](https://nvd.nist.gov/vuln/detail/CVE-2024-38579){: external}, [CVE-2024-41076](https://nvd.nist.gov/vuln/detail/CVE-2024-41076){: external}, [CVE-2024-26645](https://nvd.nist.gov/vuln/detail/CVE-2024-26645){: external}, [CVE-2024-40958](https://nvd.nist.gov/vuln/detail/CVE-2024-40958){: external}, [CVE-2024-41023](https://nvd.nist.gov/vuln/detail/CVE-2024-41023){: external}, [CVE-2024-43871](https://nvd.nist.gov/vuln/detail/CVE-2024-43871){: external}, [CVE-2021-47441](https://nvd.nist.gov/vuln/detail/CVE-2021-47441){: external}, [CVE-2022-48804](https://nvd.nist.gov/vuln/detail/CVE-2022-48804){: external}, [CVE-2023-52478](https://nvd.nist.gov/vuln/detail/CVE-2023-52478){: external}, [CVE-2023-52605](https://nvd.nist.gov/vuln/detail/CVE-2023-52605){: external}, [CVE-2024-26665](https://nvd.nist.gov/vuln/detail/CVE-2024-26665){: external}, [CVE-2024-40904](https://nvd.nist.gov/vuln/detail/CVE-2024-40904){: external}, [CVE-2024-40911](https://nvd.nist.gov/vuln/detail/CVE-2024-40911){: external}, [CVE-2024-41044](https://nvd.nist.gov/vuln/detail/CVE-2024-41044){: external}, [CVE-2024-41039](https://nvd.nist.gov/vuln/detail/CVE-2024-41039){: external}, [CVE-2024-41060](https://nvd.nist.gov/vuln/detail/CVE-2024-41060){: external}, [CVE-2024-42246](https://nvd.nist.gov/vuln/detail/CVE-2024-42246){: external}, [CVE-2024-45491](https://nvd.nist.gov/vuln/detail/CVE-2024-45491){: external}, [CVE-2021-47338](https://nvd.nist.gov/vuln/detail/CVE-2021-47338){: external}, [CVE-2021-47432](https://nvd.nist.gov/vuln/detail/CVE-2021-47432){: external}, [CVE-2021-47560](https://nvd.nist.gov/vuln/detail/CVE-2021-47560){: external}, [CVE-2024-27042](https://nvd.nist.gov/vuln/detail/CVE-2024-27042){: external}, [CVE-2021-47383](https://nvd.nist.gov/vuln/detail/CVE-2021-47383){: external}, [CVE-2024-36953](https://nvd.nist.gov/vuln/detail/CVE-2024-36953){: external}, [CVE-2024-40959](https://nvd.nist.gov/vuln/detail/CVE-2024-40959){: external}, [CVE-2021-47097](https://nvd.nist.gov/vuln/detail/CVE-2021-47097){: external}, [CVE-2024-26717](https://nvd.nist.gov/vuln/detail/CVE-2024-26717){: external}, [CVE-2024-37356](https://nvd.nist.gov/vuln/detail/CVE-2024-37356){: external}, [CVE-2024-41038](https://nvd.nist.gov/vuln/detail/CVE-2024-41038){: external}, [CVE-2024-39471](https://nvd.nist.gov/vuln/detail/CVE-2024-39471){: external}, [CVE-2021-47497](https://nvd.nist.gov/vuln/detail/CVE-2021-47497){: external}, [CVE-2022-48619](https://nvd.nist.gov/vuln/detail/CVE-2022-48619){: external}, [CVE-2022-48866](https://nvd.nist.gov/vuln/detail/CVE-2022-48866){: external}, [CVE-2023-52476](https://nvd.nist.gov/vuln/detail/CVE-2023-52476){: external}, [CVE-2021-47466](https://nvd.nist.gov/vuln/detail/CVE-2021-47466){: external}, [CVE-2023-52522](https://nvd.nist.gov/vuln/detail/CVE-2023-52522){: external}, [CVE-2024-41097](https://nvd.nist.gov/vuln/detail/CVE-2024-41097){: external}, [CVE-2024-42237](https://nvd.nist.gov/vuln/detail/CVE-2024-42237){: external}, [CVE-2021-47412](https://nvd.nist.gov/vuln/detail/CVE-2021-47412){: external}, [CVE-2024-26649](https://nvd.nist.gov/vuln/detail/CVE-2024-26649){: external}, [CVE-2024-41056](https://nvd.nist.gov/vuln/detail/CVE-2024-41056){: external}, [CVE-2024-41013](https://nvd.nist.gov/vuln/detail/CVE-2024-41013){: external}, [CVE-2024-41055](https://nvd.nist.gov/vuln/detail/CVE-2024-41055){: external}, [CVE-2024-26846](https://nvd.nist.gov/vuln/detail/CVE-2024-26846){: external}, [CVE-2024-35884](https://nvd.nist.gov/vuln/detail/CVE-2024-35884){: external}, [CVE-2024-36883](https://nvd.nist.gov/vuln/detail/CVE-2024-36883){: external}, [CVE-2024-40929](https://nvd.nist.gov/vuln/detail/CVE-2024-40929){: external}, [CVE-2024-40901](https://nvd.nist.gov/vuln/detail/CVE-2024-40901){: external}, [CVE-2024-40941](https://nvd.nist.gov/vuln/detail/CVE-2024-40941){: external}, [CVE-2024-41091](https://nvd.nist.gov/vuln/detail/CVE-2024-41091){: external}, [CVE-2021-47386](https://nvd.nist.gov/vuln/detail/CVE-2021-47386){: external}, [CVE-2024-27013](https://nvd.nist.gov/vuln/detail/CVE-2024-27013){: external}, [CVE-2024-35877](https://nvd.nist.gov/vuln/detail/CVE-2024-35877){: external}, [CVE-2024-39499](https://nvd.nist.gov/vuln/detail/CVE-2024-39499){: external}, [CVE-2021-47455](https://nvd.nist.gov/vuln/detail/CVE-2021-47455){: external}, [CVE-2024-38570](https://nvd.nist.gov/vuln/detail/CVE-2024-38570){: external}, [CVE-2024-6232](https://nvd.nist.gov/vuln/detail/CVE-2024-6232){: external}. |
 {: caption="Changes since version 1.31.1_1522" caption-side="bottom"}
+
 
 
 ### Master fix pack 1.31.1_1521, released 25 September 2024
@@ -626,6 +658,7 @@ The following table shows the changes that are in the master fix pack 1.31.1_152
 {: caption="Changes since version 1.31.0_1520" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.31.1_1522, released 23 September 2024
 {: #1311_1522_W}
 
@@ -641,6 +674,7 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 | Haproxy | N/A | N/A | N/A |
 | GPU Device Plug-in and Installer | 91f881a3 | a248cf6b | Security fixes for [CVE-2024-6119](https://exchange.xforce.ibmcloud.com/vulnerabilities/352483){: external}, [CVE-2024-45490](https://exchange.xforce.ibmcloud.com/vulnerabilities/352411){: external}, [CVE-2024-45491](https://exchange.xforce.ibmcloud.com/vulnerabilities/352412){: external}, [CVE-2024-45492](https://exchange.xforce.ibmcloud.com/vulnerabilities/352413){: external}, [CVE-2024-34397](https://exchange.xforce.ibmcloud.com/vulnerabilities/290032){: external}. |
 {: caption="Changes since version 1.31.0_1517" caption-side="bottom"}
+
 
 
 ### Master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-12"
+lastupdated: "2025-08-13"
 
 
 keywords: containers
@@ -5886,6 +5886,8 @@ subcollection: containers
 
 * [`openshift-ai` 416](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-416)
 
+* [`openshift-ai` 417](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-417)
+
 * [`openshift-data-foundation` 4.12.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.12.0)
 
 * [`openshift-data-foundation` 4.13.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.13.0)
@@ -5914,7 +5916,7 @@ subcollection: containers
 
 * [Version 1.23](/docs/containers?topic=containers-istio-changelog#v123)
 
-    * [Changelog for 1.23.6, released 29 April 2025](/docs/containers?topic=containers-istio-changelog#1236)
+    * [Change log for 1.23.6, released 29 April 2025](/docs/containers?topic=containers-istio-changelog#1236)
 
     * [Change log for 1.23.5, released 4 March 2025](/docs/containers?topic=containers-istio-changelog#1235)
 
