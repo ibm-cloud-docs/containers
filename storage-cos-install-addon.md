@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2025
-lastupdated: "2025-07-30"
+lastupdated: "2025-08-13"
 
 
 keywords: kubernetes, containers, object storage add-in, cos
@@ -23,7 +23,7 @@ Version 1.0 of {{site.data.keyword.cos_full_notm}} cluster add-on is available i
 
 Prerequisites
 - The {{site.data.keyword.cos_full_notm}} add-on requires at least 0.2 vCPU and 128 MB of memory.
-- Set up a [{{site.data.keyword.cos_full_notm}} instance](/docs/containers?topic=containers-storage-cos-understand#create_cos_service).
+- Set up an [{{site.data.keyword.cos_full_notm}} instance](/docs/containers?topic=containers-storage-cos-understand#create_cos_service).
 
 
 
