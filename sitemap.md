@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-13"
+lastupdated: "2025-08-14"
 
 
 keywords: containers
@@ -239,6 +239,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug25)
+
+    * [14 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug1425)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+        * CLI version `1.0.715` is available.
 
     * [12 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug1225)
 
@@ -4761,7 +4767,9 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
-    * [Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released {{site.data.keyword.kubernetes_133_release_date}}](/docs/containers?topic=containers-changelog_133#1333_1532M_and_1333_1533W)
+    * [Worker node fix pack 1.33.3_1534, released 12 August 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1333_1534_W)
+
+    * [Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025](/docs/containers?topic=containers-changelog_133#1333_1532M_and_1333_1533W)
 
 [Kubernetes version 1.33 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-133#cis-benchmark-133)
 
@@ -4825,6 +4833,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Worker node fix pack 1.32.7_1551, released 12 August 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1327_1551_W)
 
     * [Master fix pack 1.32.7_1549, released 30 July 2025](/docs/containers?topic=containers-changelog_132#1327_1549_M)
 
@@ -4930,6 +4940,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.11_1560, released 12 August 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13111_1560_W)
 
     * [Master fix pack 1.31.11_1558, released 30 July 2025](/docs/containers?topic=containers-changelog_131#13111_1558_M)
 
@@ -5081,6 +5093,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Worker node fix pack 1.30.14_1576, released 12 August 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1576_W)
 
     * [Master fix pack 1.30.14_1574, released 30 July 2025](/docs/containers?topic=containers-changelog_130#13014_1574_M)
 
@@ -5733,6 +5747,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.715](/docs/containers?topic=containers-cs_cli_changelog#cli-010715)
+
 * [Version v1.0.714](/docs/containers?topic=containers-cs_cli_changelog#cli-010714)
 
 * [Version v1.0.706](/docs/containers?topic=containers-cs_cli_changelog#cli-010706)
@@ -5885,6 +5901,8 @@ subcollection: containers
 * [`istio` 1.23](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.23)
 
 * [`openshift-ai` 416](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-416)
+
+* [`openshift-ai` 417](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-417)
 
 * [`openshift-data-foundation` 4.12.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.12.0)
 
