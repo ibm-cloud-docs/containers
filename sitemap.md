@@ -242,6 +242,10 @@ subcollection: containers
 
     * [12 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug1225)
 
+        * CLI version `1.0.715` is available.
+
+    * [12 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug1225)
+
         * {{site.data.keyword.containerlong_notm}} version 1.33 Kubernetes certification
 
     * [08 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug0825)
@@ -5732,6 +5736,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.715](/docs/containers?topic=containers-cs_cli_changelog#cli-010715)
 
 * [Version v1.0.714](/docs/containers?topic=containers-cs_cli_changelog#cli-010714)
 
