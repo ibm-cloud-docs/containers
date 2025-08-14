@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-08-12"
+lastupdated: "2025-08-14"
 
 
 keywords: change log, version history, 1.33
@@ -42,7 +42,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: #133_components}
 
 
-### Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released {{site.data.keyword.kubernetes_133_release_date}}
+### Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025
 {: #1333_1532M_and_1333_1533W}
 
 | Component | Previous | Current | Description |

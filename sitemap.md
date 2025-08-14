@@ -4765,7 +4765,7 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
-    * [Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released {{site.data.keyword.kubernetes_133_release_date}}](/docs/containers?topic=containers-changelog_133#1333_1532M_and_1333_1533W)
+    * [Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025](/docs/containers?topic=containers-changelog_133#1333_1532M_and_1333_1533W)
 
 [Kubernetes version 1.33 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-133#cis-benchmark-133)
 
