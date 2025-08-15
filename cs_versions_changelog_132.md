@@ -50,7 +50,7 @@ The following table shows the components included in the worker node fix pack 1.
 
 | Component | Version | Description |
 | ---- | ---- | ---- |
-|UBUNTU_24_04|6.8.0-64-generic|N/A|
+|UBUNTU_24_04|6.8.0-64-generic|Resolves the following CVEs: [CVE-2024-11584](https://nvd.nist.gov/vuln/detail/CVE-2024-11584){: external}, [CVE-2024-6174](https://nvd.nist.gov/vuln/detail/CVE-2024-6174){: external}, [CVE-2025-37797](https://nvd.nist.gov/vuln/detail/CVE-2025-37797){: external}, [CVE-2025-38083](https://nvd.nist.gov/vuln/detail/CVE-2025-38083){: external}, [CVE-2025-40909](https://nvd.nist.gov/vuln/detail/CVE-2025-40909){: external}, and [CVE-2025-6965](https://nvd.nist.gov/vuln/detail/CVE-2025-6965){: external}.|
 |Kubernetes|1.32.7|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.7).|
 |containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
 |HAProxy|3a9451f4782fa8e8e9ed60b060dc4393c7e1e31a|Resolves the following CVEs: [CVE-2025-6965](https://nvd.nist.gov/vuln/detail/CVE-2025-6965){: external}, [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}, and [CVE-2025-7425](https://nvd.nist.gov/vuln/detail/CVE-2025-7425){: external}.|
