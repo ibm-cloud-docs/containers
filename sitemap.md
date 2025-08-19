@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-18"
+lastupdated: "2025-08-19"
 
 
 keywords: containers
@@ -239,6 +239,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug25)
+
+    * [19 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug1925)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
+
+        * Ingress ALB cluster add-on patch updates.
 
     * [14 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug1425)
 
