@@ -6672,6 +6672,8 @@ subcollection: containers
 
     * [2.0.0_2943, released 18 August 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2943)
 
+    * [2.0.0_2897, released 16 August 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2897)
+
     * [2.0.0_2817, released 22 July 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2817)
 
     * [2.0.0_2765, released 23 June 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2765)
