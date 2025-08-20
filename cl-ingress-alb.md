@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-08-18"
+lastupdated: "2025-08-20"
 
 
 keywords: change log, version history, Ingress ALB
@@ -1082,7 +1082,7 @@ Introduces support for multiple platform architectures such as AMD64 and s390x.
 #### 1.4.0_3297_iks, released 15 December 2022
 {: #1.4.0_3297_iks}
 
-[CVE-2022-41717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41717){: external}
+[CVE-2022-41717](https://www.cve.org/CVERecord?id=CVE-2022-41717){: external}
 
 #### 1.4.0_3212_iks, released 12 December 2022
 {: #1.4.0_3212_iks}
@@ -1134,7 +1134,7 @@ Introduces support for multiple platform architectures such as AMD64 and s390x.
 #### 1.3.1_3298_iks, released 15 December 2022
 {: #1.3.1_3298_iks}
 
-[CVE-2022-41717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41717){: external}
+[CVE-2022-41717](https://www.cve.org/CVERecord?id=CVE-2022-41717){: external}
 
 #### 1.3.1_3192_iks, released 8 December 2022
 {: #1.3.1_3192_iks}
@@ -1155,9 +1155,9 @@ Version 1.3.0 is no longer supported.
 #### 1.3.0_2907_iks, released 31 October 2022
 {: #1.3.0_2907_iks}
 
-- [CVE-2022-32221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32221){: external}
-- [CVE-2022-42915](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42915){: external}
-- [CVE-2022-42916](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42916){: external} 
+- [CVE-2022-32221](https://www.cve.org/CVERecord?id=CVE-2022-32221){: external}
+- [CVE-2022-42915](https://www.cve.org/CVERecord?id=CVE-2022-42915){: external}
+- [CVE-2022-42916](https://www.cve.org/CVERecord?id=CVE-2022-42916){: external} 
 
 #### 1.3.0_2847_iks, released 25 October 2022
 {: #1.3.0_2847_iks}
@@ -1172,7 +1172,7 @@ Version 1.2.1 is no longer supported.
 #### 1.2.1_3299_iks, released 15 December 2022
 {: #1.2.1_3299_iks}
 
-[CVE-2022-41717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41717){: external}
+[CVE-2022-41717](https://www.cve.org/CVERecord?id=CVE-2022-41717){: external}
 
 #### 1.2.1_3186_iks, released 5 December 2022
 {: #1.2.1_3186_iks}
@@ -1187,9 +1187,9 @@ Metadata changes.
 #### 1.2.1_2809_iks, released 25 October 2022
 {: #1.2.1_2809_iks}
 
-- [CVE-2022-32149](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32149){: external}
-- [CVE-2022-40303](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40303){: external}
-- [CVE-2022-40304](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40304){: external} 
+- [CVE-2022-32149](https://www.cve.org/CVERecord?id=CVE-2022-32149){: external}
+- [CVE-2022-40303](https://www.cve.org/CVERecord?id=CVE-2022-40303){: external}
+- [CVE-2022-40304](https://www.cve.org/CVERecord?id=CVE-2022-40304){: external} 
 
 #### 1.2.1_2714_iks, released 13 October 2022
 {: #1.2.1_2714_iks}
@@ -1204,49 +1204,49 @@ Updated the NGINX base image.
 #### Version 1.2.1_2558_iks, released 21 September 2022
 {: #1.2.1_2558_iks}
 
-- [CVE-2022-35252](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35252){: external}
-- [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664){: external}
+- [CVE-2022-35252](https://www.cve.org/CVERecord?id=CVE-2022-35252){: external}
+- [CVE-2022-27664](https://www.cve.org/CVERecord?id=CVE-2022-27664){: external}
 
 #### Version 1.2.1_2506_iks, released 25 August 2022
 {: #1.2.1_2506_iks}
 
-- [CVE-2022-3209](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3209){: external}
+- [CVE-2022-3209](https://www.cve.org/CVERecord?id=CVE-2022-3209){: external}
 
 #### Version 1.2.1_2488_iks, released 11 August 2022
 {: #1.2.1_2488_iks}
 
-- [CVE-2022-37434](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37434){: external}
+- [CVE-2022-37434](https://www.cve.org/CVERecord?id=CVE-2022-37434){: external}
 
 #### Version 1.2.1_2487_iks, released 11 August 2022
 {: #1.2.1_2487_iks}
 
-- [CVE-2022-37434](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37434){: external}
+- [CVE-2022-37434](https://www.cve.org/CVERecord?id=CVE-2022-37434){: external}
 
 #### Version 1.2.1_2426_iks, released 2 August 2022
 {: #1.2.1_2426_iks}
 
-- [CVE-2022-30065](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-30065){: external}
-- [CVE-2022-21221](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21221){: external}
+- [CVE-2022-30065](https://www.cve.org/CVERecord?id=CVE-2022-30065){: external}
+- [CVE-2022-21221](https://www.cve.org/CVERecord?id=CVE-2022-21221){: external}
 
 
 
 #### Version 1.2.1_2415_iks, released 19 July 2022
 {: #1.2.1_2415_iks}
 
-- [CVE-2022-29458](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29458){: external}
-- [CVE-2022-2097](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2097){: external}
-- [CVE-2022-27781](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27781){: external}
-- [CVE-2022-27782](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27782){: external}
-- [CVE-2022-32205](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32205){: external}
-- [CVE-2022-32206](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32206){: external}
-- [CVE-2022-32207](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32207){: external}
-- [CVE-2022-32208](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32208){: external} 
+- [CVE-2022-29458](https://www.cve.org/CVERecord?id=CVE-2022-29458){: external}
+- [CVE-2022-2097](https://www.cve.org/CVERecord?id=CVE-2022-2097){: external}
+- [CVE-2022-27781](https://www.cve.org/CVERecord?id=CVE-2022-27781){: external}
+- [CVE-2022-27782](https://www.cve.org/CVERecord?id=CVE-2022-27782){: external}
+- [CVE-2022-32205](https://www.cve.org/CVERecord?id=CVE-2022-32205){: external}
+- [CVE-2022-32206](https://www.cve.org/CVERecord?id=CVE-2022-32206){: external}
+- [CVE-2022-32207](https://www.cve.org/CVERecord?id=CVE-2022-32207){: external}
+- [CVE-2022-32208](https://www.cve.org/CVERecord?id=CVE-2022-32208){: external} 
 
 #### Version 1.2.1_2337_iks, released 10 Jun 2022
 {: #1.2.1_2337_iks}
 
 - Initial release of `1.2.1`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.2.1){: external}.
-- Resolves [CVE-2021-25748](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-25748){: external}
+- Resolves [CVE-2021-25748](https://www.cve.org/CVERecord?id=CVE-2021-25748){: external}
 
 ### Version 1.2.0 (unsupported)
 {: #1_2_0}
@@ -1254,15 +1254,15 @@ Updated the NGINX base image.
 #### Version 1.2.0_2251_iks, released 19 May 2022
 {: #1.2.0_2251_iks}
 
-Resolves [CVE-2022-29824](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-29824){: external}
+Resolves [CVE-2022-29824](https://www.cve.org/CVERecord?id=CVE-2022-29824){: external}
 
 #### Version 1.2.0_2147_iks, released 4 May 2022
 {: #1.2.0_2147_iks}
 
-- [CVE-2022-22576](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-22576){: external}
-- [CVE-2022-27774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27774){: external}
-- [CVE-2022-27775](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27775){: external}
-- [CVE-2022-27776](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27776){: external}
-- [CVE-2022-28327](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-28327){: external}
-- [CVE-2022-24675](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24675){: external}
-- [CVE-2022-27536](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27536){: external}
+- [CVE-2022-22576](https://www.cve.org/CVERecord?id=CVE-2022-22576){: external}
+- [CVE-2022-27774](https://www.cve.org/CVERecord?id=CVE-2022-27774){: external}
+- [CVE-2022-27775](https://www.cve.org/CVERecord?id=CVE-2022-27775){: external}
+- [CVE-2022-27776](https://www.cve.org/CVERecord?id=CVE-2022-27776){: external}
+- [CVE-2022-28327](https://www.cve.org/CVERecord?id=CVE-2022-28327){: external}
+- [CVE-2022-24675](https://www.cve.org/CVERecord?id=CVE-2022-24675){: external}
+- [CVE-2022-27536](https://www.cve.org/CVERecord?id=CVE-2022-27536){: external}
