@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-06-19"
+lastupdated: "2025-08-20"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -31,7 +31,7 @@ By default, logs are generated and written locally for all the following {{site.
 
 {{site.data.keyword.logs_full_notm}}
 :   Manage pod container logs by deploying an instance of {{site.data.keyword.logs_full_notm}} and configuring this instance for your cluster in {{site.data.keyword.containershort_notm}}. A logging agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to your service instance. You can also track user-initiated administrative activity made in your cluster.{{site.data.keyword.containershort_notm}} automatically generates cluster management events and forwards these event logs to {{site.data.keyword.logs_full_notm}}. For more information, see [Getting started with {{site.data.keyword.logs_full_notm}}](/docs/cloud-logs?topic=cloud-logs-getting-started).
-To deploy a logging agent to your cluster, see [Managing the Logging agent for Red Hat OpenShift on IBM Cloud clusters](/docs/cloud-logs?topic=cloud-logs-agent-openshift) or [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster).
+To deploy a logging agent to your cluster, see [Managing the Logging agent for Red Hat OpenShift on IBM Cloud clusters](/docs/cloud-logs?topic=cloud-logs-agent-helm-os-deploy) or [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-helm-kube-deploy).
 
 Fluentd with an external server
 : To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd](https://www.fluentd.org/){: external} cluster component collects logs from the paths for a specified source. Fluentd can then forward these logs to an external server that accepts a `syslog` protocol. To get started, see [Understanding log forwarding to an external server](#logging-external).
