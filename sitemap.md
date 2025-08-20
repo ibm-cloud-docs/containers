@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-19"
+lastupdated: "2025-08-20"
 
 
 keywords: containers
@@ -4596,25 +4596,11 @@ subcollection: containers
 
 * [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
 
-[Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding#service-binding)
+[Binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#service-binding)
 
-* [About service binding](/docs/containers?topic=containers-service-binding#svc-bind-about)
+* [Manually binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#add_services_manual)
 
-    * [What types of services can I bind to my cluster?](/docs/containers?topic=containers-service-binding#svc-bind-types)
-
-    * [What is {{site.data.keyword.cloud_notm}} service binding?](/docs/containers?topic=containers-service-binding#svc-bind-what)
-
-    * [I already have an {{site.data.keyword.cloud_notm}} service. Can I still use {{site.data.keyword.cloud_notm}} service binding?](/docs/containers?topic=containers-service-binding#svc-bind-existing)
-
-    * [What if I want to use service credentials that use the private cloud service endpoint?](/docs/containers?topic=containers-service-binding#svc-bind-private-cse)
-
-    * [Can I use all {{site.data.keyword.cloud_notm}} services in my cluster?](/docs/containers?topic=containers-service-binding#svc-bind-which)
-
-    * [Can I bind multiple {{site.data.keyword.cloud_notm}} services to multiple clusters at once?](/docs/containers?topic=containers-service-binding#svc-bind-trusted-profile)
-
-* [Adding IBM Cloud services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
-
-* [Manually adding service credentials to your cluster](/docs/containers?topic=containers-service-binding#add_services_manual)
+* [Adding services to clusters by using the `service bind` CLI](/docs/containers?topic=containers-service-binding#bind-services)
 
 * [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
 
