@@ -240,6 +240,10 @@ subcollection: containers
 
 * [August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug25)
 
+    * [20 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug2025)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [19 August 2025](/docs/containers?topic=containers-containers-relnotes#containers-aug1925)
 
         * ALB OAuth Proxy cluster add-on patch updates.
@@ -6491,6 +6495,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.41, released 18 August 2025](/docs/containers?topic=containers-cos_plugin_changelog#02241_object_plugin)
 
 * [Change log for version 2.2.40, released 05 August 2025](/docs/containers?topic=containers-cos_plugin_changelog#02240_object_plugin)
 
