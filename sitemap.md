@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-20"
+lastupdated: "2025-08-21"
 
 
 keywords: containers
@@ -2425,6 +2425,8 @@ subcollection: containers
 * [Set up a trusted profile with the UI](/docs/containers?topic=containers-configure-trusted-profile&interface=ui#tp-setup-ui)
 
 * [Set up a trusted profile with the API](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-setup-api)
+
+* [Setting the trusted profile for a cluster or resource group](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-set-cluster-rg)
 
 * [Limitations and considerations](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-limitations)
 
@@ -6648,6 +6650,8 @@ subcollection: containers
 [Ingress ALB](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
 * [Version 1.12.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.12.1)
+
+    * [1.12.1_7792_iks, released 21 August 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7792_iks)
 
     * [1.12.1_7742_iks, released 16 July 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7742_iks)
 
