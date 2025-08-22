@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-08-20"
+lastupdated: "2025-08-22"
 
 
 keywords: change log, version history, 1.33
@@ -42,6 +42,23 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: #133_components}
 
 
+### Master fix pack 1.33.4_1537, released 20 August 2025
+{: #1334_1537_M}
+
+The following table shows the changes that are in the master fix pack 1.33.4_1537. Master patch updates are applied automatically. 
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| etcd | v3.5.21 | v3.5.22 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.22){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.33.2-4 | v1.33.3-2 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.7 | v1.1.9 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 38dc95c | 8a12251 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.15 | v2.10.16 | New version contains updates and security fixes. |
+| Kubernetes | v1.33.3 | v1.33.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.4){: external}. |
+{: caption="Changes since version 1.33.3_1532" caption-side="bottom"}
+
+
 ### Worker node fix pack 1.33.3_1534, released 12 August 2025
 {: #cl-boms-1333_1534_W}
 
@@ -57,7 +74,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|51c51a011ee21f6dcb8c8143b688c34412f58405|Resolves the following CVEs: [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}, [CVE-2025-7425](https://nvd.nist.gov/vuln/detail/CVE-2025-7425){: external}, [CVE-2024-47081](https://nvd.nist.gov/vuln/detail/CVE-2024-47081){: external}, [CVE-2025-5994](https://nvd.nist.gov/vuln/detail/CVE-2025-5994){: external}, [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}, and [CVE-2025-6965](https://nvd.nist.gov/vuln/detail/CVE-2025-6965){: external}.|
 {: caption="1.33.3_1534 fix pack." caption-side="bottom"}
 {: #cl-boms-1333_1534_W-component-table}
-
 
 
 ### Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025
