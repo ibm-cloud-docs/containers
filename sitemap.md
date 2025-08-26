@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-22"
+lastupdated: "2025-08-26"
 
 
 keywords: containers
@@ -3061,6 +3061,10 @@ subcollection: containers
 
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
+* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
+
+    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health#ob-remove)
+
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
 
     * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging-external)
@@ -3078,6 +3082,12 @@ subcollection: containers
 [Monitoring cluster health](/docs/containers?topic=containers-health-monitor#health-monitor)
 
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
+
+* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
+
+    * [Reviewing your observability agents](/docs/containers?topic=containers-health-monitor#ob-review-mon)
+
+    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health-monitor#ob-remove-mon)
 
 * [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
 
