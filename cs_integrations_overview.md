@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-08-12"
+lastupdated: "2025-08-27"
 
 
 keywords: kubernetes, helm
@@ -52,7 +52,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 
 |Service|Description|Classic|VPC|
 |----|------------|----|----|
-|Codeship|You can use [Codeship](https://www.cloudbees.com/products/codeship){: external} for the continuous integration and delivery of containers.|Yes|Yes|
+|CloudBees Unify |You can use [CloudBees Unify](https://www.cloudbees.com/capabilities/ci-cd-workflows){: external} for the continuous integration and delivery of containers.|Yes|Yes|
 |Grafeas|[Grafeas](https://grafeas.io){: external} is an open source CI/CD service that provides a common way for how to retrieve, store, and exchange metadata during the software supply chain process. For example, if you integrate Grafeas into your app build process, Grafeas can store information about the initiator of the build request, vulnerability scan results, and quality assurance sign-off so that you can make an informed decision if an app can be deployed to production. You can use this metadata in audits or to prove compliance for your software supply chain.|Yes|Yes|
 |Helm|[Helm](https://helm.sh){: external} is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm).|Yes|Yes|
 |{{site.data.keyword.cloud_notm}} {{site.data.keyword.contdelivery_short}}|Automate your app builds and container deployments to Kubernetes clusters by using a toolchain. For more information about the setup, see [working with Tekton pipelines](/docs/ContinuousDelivery?topic=ContinuousDelivery-tekton-pipelines).|Yes|Yes|
