@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-08-26"
+lastupdated: "2025-08-29"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -48,10 +48,10 @@ Kubernetes dashboard
 ## Migrating logging and monitoring agents to Cloud Logs
 {: #monitoring_forwarding}
 
-The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are no longer supported. There is no direct replacement, but you can now manage your logging and monitoring integrations from the console or through the Helm charts. For the latest steps, see [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster) and [Working with the Kubernetes monitoring agent](/docs/monitoring?topic=monitoring-agent_Kube).
+The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are no longer supported. There is no direct replacement, but you can now manage your logging and monitoring integrations through the [IBM Cloud Kubernetes Service extension](https://cloud.ibm.com/docs/cloud-logs?topic=cloud-logs-extensions-kubernetes) or by [Sending IBM Cloud Kubernetes Service log data to IBM Cloud Logs](/docs/cloud-logs?topic=cloud-logs-kube2logs).
 {: unsupported}
 
-You can no longer use the `ob` plugin, Terraform, or API to install observability agents on a cluster or to modify your existing configuration. Sysdig agents continue to send metrics to the specified IBM Cloud Monitoring instance. LogDNA agents can no longer send logs since IBM Cloud Log Analysis is replaced by IBM Cloud Logs. 
+You can no longer use the `ob` plug-in, Terraform, or API to install observability agents on a cluster or to modify your existing configuration. Sysdig agents continue to send metrics to the specified IBM Cloud Monitoring instance. LogDNA agents can no longer send logs since IBM Cloud Log Analysis is replaced by IBM Cloud Logs. 
 
 
 ### Reviewing your observability agents
@@ -103,8 +103,8 @@ The observability plug-in installs Sysdig and LogDNA agents in the `ibm-observe`
 After removing the plug-in has been removed, reinstall Logging and Monitoring agents in your cluster using the Cluster dashboard, Terraform, or manually. 
 
 For more information, see the following links:
-- [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-std-cluster).
-- [Working with the Kubernetes monitoring agent](/docs/monitoring?topic=monitoring-agent_Kube).
+- [Sending IBM Cloud Kubernetes Service log data to IBM Cloud Logs](/docs/cloud-logs?topic=cloud-logs-kube2logs)
+- [Monitoring a Kubernetes cluster](/docs/monitoring?topic=monitoring-kubernetes_cluster)
 
 
 
