@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2024
-lastupdated: "2024-06-20"
+  years: 2022, 2025
+lastupdated: "2025-09-02"
 
 
 keywords: kubernetes, help
@@ -45,7 +45,7 @@ Error [IST0139] (MutatingWebhookConfiguration istio-sidecar-injector) Webhook ov
 If the Istio add-on instance you are upgrading was provisioned at version 1.10 or earlier, there are webhook issues that must be resolved before you can upgrade to version 1.12.
 {: tsCauses}
 
-To resolve the webhook errors and continue the version upgrade, follow the instructions in step 4 of [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor).
+To resolve the webhook errors and continue the version upgrade, follow the instructions in step 4 of [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor).
 {: tsResolve}
 
 Wait for the upgrade to proceed. Then, [check the Istio health status](/docs/containers?topic=containers-debug_addons) to verify that the add-on is functioning normally.
@@ -55,4 +55,3 @@ Name    Version   Health State   Health Status
 istio   1.12      normal         Addon Ready   
 ```
 {: screen}
-

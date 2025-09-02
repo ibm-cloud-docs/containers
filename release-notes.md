@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-08-29"
+lastupdated: "2025-09-02"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -2515,7 +2515,7 @@ Istio cluster add-on versions `1.20.0`, `1.19.5`, and `1.18.6`.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 
 Istio add-on version 1.18 will no longer be supported on 21 February 2024
-:   Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version of Istio 1.18 that is supported by {{site.data.keyword.containerlong_notm}}.
+:   Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio-update#istio_minor) to the latest patch version of Istio 1.18 that is supported by {{site.data.keyword.containerlong_notm}}.
 
 
 
