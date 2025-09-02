@@ -3421,6 +3421,30 @@ subcollection: containers
 
 * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_other)
 
+[Updating Istio](/docs/containers?topic=containers-istio-update#istio-update)
+
+* [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
+
+    * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
+
+* [Updating from an unsupported version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_update)
+
+* [Migrating from Istio add-on 1.21 to community Istio 1.21](/docs/containers?topic=containers-istio-update#migrate)
+
+    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio-update&interface=ui#migrate_disable_ui)
+
+    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio-update&interface=cli#migrate_disable_cli)
+
+    * [Step 2: Scale down the Istio operator](/docs/containers?topic=containers-istio-update&interface=cli#migrate_scale_operator)
+
+    * [Step 3: Saving resources](/docs/containers?topic=containers-istio-update&interface=cli#migrate_resources)
+
+    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio-update&interface=cli#migrate_installer)
+
+    * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio-update&interface=cli#migrate_uninstall_operator)
+
+    * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio-update&interface=cli#migrate_configmap)
+
 [Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh#istio-mesh)
 
 * [Understanding the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#istio_bookinfo)
