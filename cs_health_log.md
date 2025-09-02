@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-08-29"
+lastupdated: "2025-09-02"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -40,7 +40,7 @@ Fluentd with an external server
 ## Migrating logging and monitoring agents to Cloud Logs
 {: #logging_forwarding}
 
-The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are no longer supported. There is no direct replacement, but you can now manage your logging and monitoring integrations through the [IBM Cloud Kubernetes Service extension](https://cloud.ibm.com/docs/cloud-logs?topic=cloud-logs-extensions-kubernetes) or by [Sending IBM Cloud Kubernetes Service log data to IBM Cloud Logs](/docs/cloud-logs?topic=cloud-logs-kube2logs).
+The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are no longer supported. There is no direct replacement, but you can now manage your logging and monitoring integrations through the [IBM Cloud Kubernetes Service extension](/docs/cloud-logs?topic=cloud-logs-extensions-kubernetes) or by [Sending IBM Cloud Kubernetes Service log data to IBM Cloud Logs](/docs/cloud-logs?topic=cloud-logs-kube2logs).
 {: deprecated}
 
 You can no longer use the `ob` plug-in, Terraform, or API to install observability agents on a cluster or to modify your existing configuration. Sysdig agents continue to send metrics to the specified IBM Cloud Monitoring instance. LogDNA agents can no longer send logs since IBM Cloud Log Analysis is replaced by IBM Cloud Logs.
