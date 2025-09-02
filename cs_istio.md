@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-04-17"
+lastupdated: "2025-09-02"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -18,18 +18,15 @@ subcollection: containers
 
 
 
-# Setting up Istio
+# Setting up the Istio managed add-on
 {: #istio}
 
-
-## Setting up the Istio managed add-on
-{: #addon}
 
 Istio on {{site.data.keyword.containerlong}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools.
 {: shortdesc}
 
 
-### Installing the Istio add-on
+## Installing the Istio add-on
 {: #istio_install}
 
 Instead of the community Istio, you can install the managed Istio add-on.
@@ -42,7 +39,7 @@ Before you begin
 * You can't run community Istio concurrently with the managed Istio add-on in your cluster. If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 * Classic multizone clusters: Ensure that you enable a [Virtual Routing and Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Manage Network VLAN Spanning** infrastructure permission, or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 
-#### Installing the Istio add-on from the console
+### Installing the Istio add-on from the console
 {: #istio_install_console}
 {: ui}
 
@@ -56,7 +53,7 @@ Before you begin
 
 5. On the Managed Istio card, verify that the add-on is listed.
 
-#### Installing the Istio add-on with the CLI
+### Installing the Istio add-on with the CLI
 {: #istio_install_cli}
 {: cli}
 
@@ -103,239 +100,39 @@ Before you begin
 
 
 
-### Updating the Istio add-on
-{: #istio_update}
+### Installing the `istioctl` CLI
+{: #istioctl}
+{: cli}
 
-Update your Istio add-on, which is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}.
-{: shortdesc}
+Install the `istioctl` CLI client on your computer. For more information, see the [`istioctl` command reference](https://istio.io/latest/docs/reference/commands/istioctl/){: external}.
 
-Do not use `istioctl` to update the version of Istio that is installed by the managed add-on. Only use the following steps to update your managed Istio add-on, which includes an update of the Istio version.
-{: important}
-
-To update from unsupported versions of the Istio add-on, update your [Istio components](/docs/containers?topic=containers-istio#istio_minor) to the latest patch version that is supported by {{site.data.keyword.containerlong_notm}}.
-{: important}
-
-
-#### Updating the minor version of the Istio add-on
-{: #istio_minor}
-
-{{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. To update your Istio components to the next minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.9 to 1.10, you must manually update your add-on. You can only manually update Istio one version at a time.
-{: shortdesc}
-
-You can only manually update the Istio add-on one version at a time. If you want to update the Istio add-on by two or more versions, you can repeat the manual update process or you can [uninstall and remove](#istio_uninstall_addon) the add-on and then [reinstall](#istio_install) it with a later version.
-{: note}
-
-When you update the Istio control components in the `istio-system` namespace to the latest minor version, you might experience disruptive changes. Review the following changes that occur during a minor version update.
-* As updates are rolled out to control plane pods, the pods are re-created. The Istio control plane is not fully available until after the update completes.
-* The Istio data plane continues to function during the update. However, some traffic to apps in the service mesh might be interrupted for a short period of time.
-* The external IP address for the `istio-ingressgateway` load balancer does not change during or after the update.
-
-You can't revert your managed Istio add-on to a previous version. If you want to revert to an earlier minor version, you must uninstall your add-on and then reinstall the add-on by specifying the earlier version.
-{: important}
-
-1. Review the current version of your Istio add-on.
+1. Check the version of Istio that you installed in your cluster.
     ```sh
-    kubectl get iop managed-istio -n ibm-operators -o jsonpath='{.metadata.annotations.version}'
+    istioctl version
     ```
     {: pre}
 
-1. Review the available Istio add-on versions.
+2. Download the version of `istioctl` that matches your cluster's Istio version to your computer.
     ```sh
-    ibmcloud ks addon-versions
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.23.5 sh -
     ```
     {: pre}
 
-1. Review the changes that are in each version in the [Istio add-on change log](/docs/containers?topic=containers-istio-changelog).
-
-1. If you are upgrading from version 1.11 to version 1.12 and your Istio components were provisioned at version 1.10 or earlier:
-
-    1. Run the command to get the details of your mutating webhook configurations.
-        ```sh
-        kubectl get mutatingwebhookconfigurations
-        ```
-        {: pre}
-
-        Example output
-
-        ```sh
-        NAME                     WEBHOOKS   AGE
-        istio-sidecar-injector   5          32m
-        ```
-        {: screen}
-
-    1. In the output, find the `istio-sidecar-injector` and review the **WEBHOOKS** column. If there are 5 or more webhooks, run the following command to delete the additional webhooks.
-    
-        ```sh
-        kubectl delete mutatingwebhookconfigurations istio-sidecar-injector && kubectl rollout restart deploy addon-istio-operator -n ibm-operators
-        ```
-        {: pre}
-
-        Example output
-
-        ```sh
-        mutatingwebhookconfiguration.admissionregistration.k8s.io "istio-sidecar-injector" deleted
-        ```
-        {: screen}
-
-    1. Check that the additional webhooks were deleted. Get the details of your mutating webhook configurations and verify that there are 4 `istio-sidecar-injector` webhooks.
-
-        ```sh
-        kubectl get mutatingwebhookconfigurations
-        ```
-        {: pre}
-
-        Example output
-
-        ```sh
-        NAME                     WEBHOOKS   AGE
-        istio-sidecar-injector   4          60s
-        ```
-        {: screen}
-    
-    1. Run the command to get the details of your validating webhook configuration.
-
-        ```sh
-        kubectl get validatingwebhookconfigurations
-        ```
-        {: pre}
-
-        Example output
-
-        ```txt
-        NAME                           WEBHOOKS   AGE
-        istio-validator-istio-system   2          66s
-        istiod-istio-system            1          31m
-        ```
-        {: screen}
-    
-    1. Review the output. If the `istiod-istio-system` webhook is listed, run the following command to delete it.
-
-        ```sh
-        kubectl delete ValidatingWebhookConfiguration istiod-istio-system
-        ```
-        {: pre}
-
-        Example output
-
-        ```sh
-        validatingwebhookconfiguration.admissionregistration.k8s.io "istiod-istio-system" deleted
-        ```
-        {: screen}
-
-    1. Verify that the `istiod-istio-system` webhook is no longer listed.
-
-        ```sh
-        kubectl get validatingwebhookconfigurations
-        ```
-        {: pre}
-
-        Example output
-
-        ```sh
-        NAME                           WEBHOOKS   AGE
-        istio-validator-istio-system   2          2m
-        ```
-        {: screen}
-
-1. Update the Istio add-on.
+3. Navigate to the Istio package directory.
     ```sh
-    ibmcloud ks cluster addon update istio --version <version> -c <cluster_name_or_ID>
+    cd istio-1.23.5
     ```
     {: pre}
 
-1. Before you proceed, verify that the update is complete.
-
-    The update process can take up to 20 minutes to complete.
-    {: note}
-
-    1. Ensure that the Istio add-on's **Health State** is `normal` and the **Health Status** is `Addon Ready`. If the state is `updating`, the update is not yet complete.
-    
-        ```sh
-        ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
-
-    2. Ensure that the control plane component pods in the `istio-system` namespace have a **STATUS** of `Running`.
-        ```sh
-        kubectl get pods -n istio-system
-        ```
-        {: pre}
-
-        ```sh
-        NAME                                                     READY   STATUS    RESTARTS   AGE
-        istio-system    istio-egressgateway-6d4667f999-gjh94     1/1     Running     0          61m
-        istio-system    istio-egressgateway-6d4667f999-txh56     1/1     Running     0          61m
-        istio-system    istio-ingressgateway-7bbf8d885-b9xgp     1/1     Running     0          61m
-        istio-system    istio-ingressgateway-7bbf8d885-xhkv6     1/1     Running     0          61m
-        istio-system    istiod-5b9b5bfbb7-jvcjz                  1/1     Running     0          60m
-        istio-system    istiod-5b9b5bfbb7-khcht                  1/1     Running     0          60m
-        ```
-        {: screen}
-
-1. [Update your `istioctl` client and sidecars](#update_client_sidecar).
-
-#### Updating the `istioctl` client and sidecars
-{: #update_client_sidecar}
-
-Whenever the Istio managed add-on is updated, update your `istioctl` client and the Istio sidecars for your app.
-{: shortdesc}
-
-For example, the patch version of your add-on might be updated automatically by {{site.data.keyword.containerlong_notm}}, or you might [update the minor version of your add-on](#istio_minor). In either case, update your `istioctl` client and your app's existing Istio sidecars to match the Istio version of the add-on.
-
-1. Get the version of your `istioctl` client and the Istio add-on control plane components.
+4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
     ```sh
-    istioctl version --short=false
-    ```
-    {: pre}
-
-    Example output
-
-    ```sh
-    client version: version.BuildInfo{Version:"1.11.2"}
-    pilot version: version.BuildInfo{Version:1.23.5}
-    pilot version: version.BuildInfo{Version:1.23.5}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-vp97p.istio-system", IstioVersion:1.23.5}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-qkhgm.istio-system", IstioVersion:1.23.5}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-dffhq.istio-system", IstioVersion:1.23.5}
-    data plane version: version.ProxyInfo{ID:"httpbin-74fb669cc6-svc8x.default", IstioVersion:1.23.5}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-cs9r9.istio-system", IstioVersion:1.23.5}
-    ...
-    ```
-    {: screen}
-
-2. In the output, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `pilot version`. If the `client version` and control plane component versions don't match:
-    1. Download the `istioctl` client of the same version as the control plane components.
-    
-        ```sh
-        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.23.5 sh -
-        ```
-        {: pre}
-
-    2. Navigate to the Istio package directory.
-    
-        ```sh
-        cd istio-1.23.5
-        ```
-        {: pre}
-
-    3. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
-    
-        ```sh
-        export PATH=$PWD/bin:$PATH
-        ```
-        {: pre}
-
-3. In the output of step 1, compare the `pilot version` to the `data plane version` for each data plane pod.
-    * If the `pilot version` and the `data plane version` match, no further updates are required.
-    * If the `pilot version` and the `data plane version` don't match, restart your deployments for the data plane pods that run the old version. The pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.8.4"}`.
-
-    ```sh
-    kubectl rollout restart deployment <deployment> -n <namespace>
+    export PATH=$PWD/bin:$PATH
     ```
     {: pre}
 
 
-### Customizing the Istio installation
+
+## Customizing the Istio installation
 {: #customize}
 
 You can customize a set of Istio configuration options by editing the `managed-istio-custom` ConfigMap resource. These settings include extra control over monitoring, logging, and networking in your control plane and service mesh.
@@ -459,13 +256,22 @@ Need to debug your customization setup?
 If you disable the Istio add-on, the `managed-istio-custom` ConfigMap is not removed during uninstallation. When you re-enable the Istio add-on, your customized ConfigMap is applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default ConfigMap is applied during installation.
 {: note}
 
-### Uninstalling the Istio add-on
+
+
+## Troubleshooting the Istio add-on
+{: #istio-ts}
+
+To resolve some common issues that you might encounter when you use the managed Istio add-on, see [Troubleshooting managed add-ons](/docs/containers?topic=containers-debug_addons).
+{: shortdesc}
+
+
+## Uninstalling the Istio add-on
 {: #istio_uninstall}
 
 If you're finished working with Istio, you can clean up the Istio resources in your cluster and uninstall the Istio add-ons.
 {: shortdesc}
 
-#### Step 1: Saving resources before uninstallation
+### Step 1: Saving resources before uninstallation
 {: #uninstall_resources}
 
 Any resources that you created or modified in the `istio-system` namespace are removed. To keep these resources, save them before you uninstall the Istio add-on.
@@ -494,13 +300,13 @@ Any resources that you created or modified in the `istio-system` namespace are r
 
 
 
-#### Step 2: Uninstalling the Istio add-on
+### Step 2: Uninstalling the Istio add-on
 {: #istio_uninstall_addon}
 
 Uninstall the add-on from the console or CLI. For Istio 1.20 and earlier, any custom Istio operator (IOP) resources are automatically deleted.
 {: shortdesc}
 
-##### Uninstalling the Istio add-on from the console
+#### Uninstalling the Istio add-on from the console
 {: #istio_uninstall_ui}
 {: ui}
 
@@ -514,7 +320,7 @@ Uninstall the add-on from the console or CLI. For Istio 1.20 and earlier, any cu
 
 5. On the Managed Istio card, verify that the add-on you uninstalled is no longer listed.
 
-##### Uninstalling the Istio add-ons from the CLI
+#### Uninstalling the Istio add-on from the CLI
 {: #istio_uninstall_cli}
 {: cli}
 
@@ -545,7 +351,7 @@ If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras`
     ```
     {: pre}
 
-#### Step 3: Removing resources
+### Step 3: Removing resources
 {: #istio_remove_resources}
 
 After the resources are saved and the add-on is disabled, the resources can be removed.
@@ -575,7 +381,7 @@ After the resources are saved and the add-on is disabled, the resources can be r
 4. Wait 10 minutes before continuing to the next step.
 
 
-#### Step 4: Remove the Istio operator
+### Step 4: Remove the Istio operator
 {: #istio_uninstall_operator}
 
 After the add-on is completely uninstalled, you can remove the Istio operator.
@@ -591,7 +397,7 @@ kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
 {: pre}
 
 
-### Uninstalling other Istio installations in your cluster
+## Uninstalling other Istio installations in your cluster
 {: #istio_uninstall_other}
 
 If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, clean up that Istio installation before you enable the managed Istio add-on in the cluster. To check whether Istio is already in a cluster, run `kubectl get namespaces` and look for the `istio-system` namespace in the output.
@@ -627,209 +433,3 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
         {: pre}
 
     3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
-
-
-
-### Troubleshooting the Istio add-on
-{: #istio-ts}
-
-To resolve some common issues that you might encounter when you use the managed Istio add-on, see [Troubleshooting managed add-ons](/docs/containers?topic=containers-debug_addons).
-{: shortdesc}
-
-
-
-## Installing the `istioctl` CLI
-{: #istioctl}
-{: cli}
-
-Install the `istioctl` CLI client on your computer. For more information, see the [`istioctl` command reference](https://istio.io/latest/docs/reference/commands/istioctl/){: external}.
-
-1. Check the version of Istio that you installed in your cluster.
-    ```sh
-    istioctl version
-    ```
-    {: pre}
-
-2. Download the version of `istioctl` that matches your cluster's Istio version to your computer.
-    ```sh
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.23.5 sh -
-    ```
-    {: pre}
-
-3. Navigate to the Istio package directory.
-    ```sh
-    cd istio-1.23.5
-    ```
-    {: pre}
-
-4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
-    ```sh
-    export PATH=$PWD/bin:$PATH
-    ```
-    {: pre}
-
-
-
-
-
-## Migrating from Istio add-on 1.21 to community Istio 1.21
-{: #migrate}
-
-You can migrate to using the community Istio instead of the managed Istio add-on.
-{: shortdesc}
-
-Before you begin
-- If you are using a version earlier than 1.21, [update the Istio add-on to version 1.21](#istio_update). This upgrade is important because with this version, the disabling of the add-on does not remove custom resources as happens with earlier versions.
-- If you no longer need Istio, you can [uninstall the add-on without installing the community Istio](#istio_uninstall_addon) instead of completing these step.
-
-
-
-### Step 1: Disabling the Istio add-on from the console
-{: #migrate_disable_ui}
-{: ui}
-
-Disable the add-on from the console or CLI.
-{: shortdesc}
-
-1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to remove the Istio add-on.
-
-2. Navigate to the **Add-ons** section.
-
-3. On the Managed Istio card, click the Action menu icon.
-
-4. Click **Uninstall**. The managed Istio add-on is disabled in this cluster.
-
-5. On the Managed Istio card, verify that the add-on you uninstalled is no longer listed.
-
-### Step 1: Disabling the Istio add-ons from the CLI
-{: #migrate_disable_cli}
-{: cli}
-
-Disable the add-on and verify that no additional Istio add-ons remain.
-{: tip}
-
-1. Disable the `istio` add-on.
-    ```sh
-    ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
-    ```
-    {: pre}
-
-2. Verify that all managed Istio add-ons are disabled in this cluster. No Istio add-ons are returned in the output.
-    ```sh
-    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-3. Wait 10 minutes before continuing to the next step. This gives us time to unmanaged the istio operator.
-
-### Step 2: Scale down the Istio operator
-{: #migrate_scale_operator}
-
-Scale down the Istio operator deployment.
-{: shortdesc}
-
-Run the following command:
-```sh
-kubectl scale deployment -n ibm-operators addon-istio-operator --replicas=0
-```
-{: pre}
-
-### Step 3: Saving resources
-{: #migrate_resources}
-
-Save any resources that you created or modified in the `istio-system` namespace and all Kubernetes resources that were automatically generated by custom resource definitions (CRDs).
-{: shortdesc}
-
-1. Save the `managed-istio-custom` ConfigMap to troubleshoot a problem or to reinstall the add-on later.
-
-    ```sh
-    kubectl get cm -n ibm-operators managed-istio-custom -o yaml > Customizations.yaml
-    ```
-    {: pre}
-
-1. Save all IstioOperator CRs (IOPs).
-
-    - List the IOP resources:
-        ```sh
-        kubectl get iop -A
-        ```
-        {: pre}
-
-    - For each IOP resource listed, remove the finalizer. Example using the `managed-istio` IOP:
-        ```sh
-        kubectl patch -n ibm-operators istiooperator/managed-istio --type json --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]'
-        ```
-        {: pre}
-
-    - For each IOP resource listed, save each to a file:
-        ```sh
-        kubectl get iop -n <IOP_namespace> <IOP_name> -o yaml > <IOP_name>.yaml
-        ```
-        {: pre}
-
-1. Wait 10 minutes before continuing to the next step.
-
-### Step 4: Changing the installer of the IOPs 
-{: #migrate_installer}
-
-Delete all Istio operator (IOP) resources, such as for a custom ingress gateway.
-{: shortdesc}
-
-1. Make sure your `istioctl` cli tool is at the necessary patch version.
-    ```sh
-    istioctl version
-    ```
-    {: pre}
-
-1. For each IOP file that you saved in the previous step, run the `upgrade` command.
-
-    ```sh
-    istioctl upgrade -f <filename>.yaml
-    ```
-    {: pre}
-
-
-### Step 5: Removing the Istio operator and IOPs
-{: #migrate_uninstall_operator}
-
-Delete the Istio operator deployment, service account, cluster role binding, cluster role, and all IOPs.
-{: shortdesc}
-
-1. Run the following commands to delete the istio operator deployment:
-
-    ```sh
-    kubectl delete deployment -n ibm-operators addon-istio-operator --ignore-not-found=true
-    kubectl delete serviceaccount -n ibm-operators addon-istio-operator --ignore-not-found=true
-    kubectl delete clusterrolebinding addon-istio-operator --ignore-not-found=true
-    kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
-    ```
-    {: pre}
-
-1. Delete the IOPs.
-
-    - List the IOP resources:
-        ```sh
-        kubectl get iop -A
-        ```
-        {: pre}
-
-    - For each IOP resource listed, delete it:
-        ```sh
-        kubectl delete IstioOperator <resource_name> -n <namespace>
-        ```
-        {: pre}
-
-### Step 6: Removing the ConfigMap
-{: #migrate_configmap}
-
-Because the ConfigMap was saved earlier, it can be removed.
-{: shortdesc}
-
-Remove the `managed-istio-custom` ConfigMap.
-
-```sh
-kubectl delete cm -n ibm-operators managed-istio-custom
-```
-{: pre}
-
-The removal of the add-on is complete and you can continue to use and upgrade the community Istio as needed.

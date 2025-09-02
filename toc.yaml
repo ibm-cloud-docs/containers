@@ -183,6 +183,7 @@ toc:
           - cs_istio_qs.md
           - cs_istio_about.md
           - cs_istio.md
+          - cs_istio_update.md
           - cs_istio_mesh.md
           - cs_istio_custom_gateway.md
           - cs_istio_health.md

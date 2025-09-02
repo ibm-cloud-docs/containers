@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-08-12"
+lastupdated: "2025-09-02"
 
 
 keywords: kubernetes, containers, 133, version 133, 133 update actions
@@ -57,7 +57,7 @@ This information summarizes updates that are likely to have an impact on deploye
 [Portworx](https://cloud.ibm.com/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.33. Do not upgrade your cluster to version 1.33 if your apps use Portworx.
 {: important}
 
-The Istio add-on version 1.23 is not supported for {{site.data.keyword.containerlong_notm}} version 1.33 because the Istio add-on does not support Istio 1.25. Do not update to {{site.data.keyword.containerlong_notm}} version 1.33 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=ui#migrate).
+The Istio add-on version 1.23 is not supported for {{site.data.keyword.containerlong_notm}} version 1.33 because the Istio add-on does not support Istio 1.25. Do not update to {{site.data.keyword.containerlong_notm}} version 1.33 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](/docs/containers?topic=containers-istio-update&interface=ui#migrate).
 {: important}
 
 ### Update before master

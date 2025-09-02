@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-08-29"
+lastupdated: "2025-09-02"
 
 
 keywords: containers
@@ -3395,39 +3395,55 @@ subcollection: containers
 
 * [Limitations](/docs/containers?topic=containers-istio-about#istio_limitations)
 
-[Setting up Istio](/docs/containers?topic=containers-istio#istio)
+[Setting up the Istio managed add-on](/docs/containers?topic=containers-istio#istio)
 
-* [Setting up the Istio managed add-on](/docs/containers?topic=containers-istio#addon)
+* [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
 
-    * [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
+    * [Installing the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#istio_install_console)
 
-    * [Updating the Istio add-on](/docs/containers?topic=containers-istio#istio_update)
+    * [Installing the Istio add-on with the CLI](/docs/containers?topic=containers-istio&interface=cli#istio_install_cli)
 
-    * [Customizing the Istio installation](/docs/containers?topic=containers-istio#customize)
+    * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl)
 
-    * [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio#istio_uninstall)
+* [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=cli#customize)
 
-    * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
+* [Troubleshooting the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio-ts)
 
-    * [Troubleshooting the Istio add-on](/docs/containers?topic=containers-istio#istio-ts)
+* [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
 
-* [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl)
+    * [Step 1: Saving resources before uninstallation](/docs/containers?topic=containers-istio&interface=cli#uninstall_resources)
 
-* [Migrating from Istio add-on 1.21 to community Istio 1.21](/docs/containers?topic=containers-istio&interface=cli#migrate)
+    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_addon)
 
-    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#migrate_disable_ui)
+    * [Step 3: Removing resources](/docs/containers?topic=containers-istio&interface=cli#istio_remove_resources)
 
-    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio&interface=cli#migrate_disable_cli)
+    * [Step 4: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
 
-    * [Step 2: Scale down the Istio operator](/docs/containers?topic=containers-istio&interface=cli#migrate_scale_operator)
+* [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_other)
 
-    * [Step 3: Saving resources](/docs/containers?topic=containers-istio&interface=cli#migrate_resources)
+[Updating Istio](/docs/containers?topic=containers-istio-update#istio-update)
 
-    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_installer)
+* [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
 
-    * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_uninstall_operator)
+    * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
 
-    * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio&interface=cli#migrate_configmap)
+* [Updating from an unsupported version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_update)
+
+* [Migrating from Istio add-on 1.21 to community Istio 1.21](/docs/containers?topic=containers-istio-update#migrate)
+
+    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio-update&interface=ui#migrate_disable_ui)
+
+    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio-update&interface=cli#migrate_disable_cli)
+
+    * [Step 2: Scale down the Istio operator](/docs/containers?topic=containers-istio-update&interface=cli#migrate_scale_operator)
+
+    * [Step 3: Saving resources](/docs/containers?topic=containers-istio-update&interface=cli#migrate_resources)
+
+    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio-update&interface=cli#migrate_installer)
+
+    * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio-update&interface=cli#migrate_uninstall_operator)
+
+    * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio-update&interface=cli#migrate_configmap)
 
 [Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh#istio-mesh)
 
