@@ -8935,6 +8935,24 @@ subcollection: containers
 
 * [Network messages](/docs/containers?topic=containers-network-status#network_message)
 
+[Why does the Network status show an `NHC001` error?](/docs/containers?topic=containers-ts-network-nhc001#ts-network-nhc001)
+
+[Why does the Network status show an `NHC003` error?](/docs/containers?topic=containers-ts-network-nhc003#ts-network-nhc003)
+
+[Why does the Network status show an `NHC004` error?](/docs/containers?topic=containers-ts-network-nhc004#ts-network-nhc004)
+
+* [How to find the VPE gateways for a VPC cluster](/docs/containers?topic=containers-ts-network-nhc004#find-vpe-gateways)
+
+    * [1. Use the IBM Cloud CLI to list endpoint gateways](/docs/containers?topic=containers-ts-network-nhc004#list-gateways-from-cli)
+
+    * [2. Use the IBM Cloud console to list endpoint gateways](/docs/containers?topic=containers-ts-network-nhc004#list-gateways-in-cloud-console)
+
+[Why does the Network status show an `NHC005` error?](/docs/containers?topic=containers-ts-network-nhc005#ts-network-nhc005)
+
+[Why does the Network status show an `NHC006` error?](/docs/containers?topic=containers-ts-network-nhc006#ts-network-nhc006)
+
+[Why does the Network status show an `NHC007` error?](/docs/containers?topic=containers-ts-network-nhc007#ts-network-nhc007)
+
 [Why does the Network status show an `NHC009` error?](/docs/containers?topic=containers-ts-network-nhc009#ts-network-nhc009)
 
 [Why does the Network status show an `NHC010` error?](/docs/containers?topic=containers-ts-network-nhc010#ts-network-nhc010)
