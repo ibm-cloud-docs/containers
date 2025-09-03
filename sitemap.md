@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-02"
+lastupdated: "2025-09-03"
 
 
 keywords: containers
@@ -8946,6 +8946,8 @@ subcollection: containers
     * [1. Use the IBM Cloud CLI to list endpoint gateways](/docs/containers?topic=containers-ts-network-nhc004#list-gateways-from-cli)
 
     * [2. Use the IBM Cloud console to list endpoint gateways](/docs/containers?topic=containers-ts-network-nhc004#list-gateways-in-cloud-console)
+
+    * [3. After finding the VPE gateway hostname complete the following steps.](/docs/containers?topic=containers-ts-network-nhc004#error-checking)
 
 [Why does the Network status show an `NHC005` error?](/docs/containers?topic=containers-ts-network-nhc005#ts-network-nhc005)
 
