@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-09-02"
+lastupdated: "2025-09-05"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -24,6 +24,17 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## September 2025
+{: #containers-sep25}
+
+### 04 September 2025
+{: #containers-sep0425}
+{: release-note}
+
+
+CLI version `1.0.717` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ## August 2025
 {: #containers-aug25}
@@ -1915,7 +1926,7 @@ Managing outbound traffic protection in new version 1.30 VPC clusters.
 
 
 Istio add-on version `1.19` is no longer supported.
-:   Update the add-on in your clusters to a supported version. For more information, see the [Updating the Istio add-on](/docs/containers?topic=containers-istio&interface=ui#istio_update) and the [change log](/docs/containers?topic=containers-istio-changelog).
+:   Update the add-on in your clusters to a supported version. For more information, see the [Updating the Istio add-on](/docs/containers?topic=containers-istio-update) and the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
 
