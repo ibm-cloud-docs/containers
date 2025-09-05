@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-04"
+lastupdated: "2025-09-05"
 
 
 keywords: containers
@@ -3435,7 +3435,7 @@ subcollection: containers
 
 * [Updating from an unsupported version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_update)
 
-* [Migrating from Istio add-on 1.21 to community Istio 1.21](/docs/containers?topic=containers-istio-update#migrate)
+* [Migrating from the Istio add-on to community Istio](/docs/containers?topic=containers-istio-update#migrate)
 
     * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio-update&interface=ui#migrate_disable_ui)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-02"
+lastupdated: "2025-09-05"
 
 
 keywords: istio migration, istio updates, istio upgrades
@@ -256,14 +256,14 @@ Update your [Istio components](/docs/containers?topic=containers-istio-update#is
 
 
 
-## Migrating from Istio add-on 1.21 to community Istio 1.21
+## Migrating from the Istio add-on to community Istio
 {: #migrate}
 
 You can migrate to the community Istio instead of using the managed Istio add-on.
 {: shortdesc}
 
 Before you begin
-- If you are using a version earlier than 1.21, [update the Istio add-on to version 1.21](#istio_update). This upgrade is important because with this version, the disabling of the add-on does not remove custom resources as happens with earlier versions.
+- If you are using a version earlier than 1.21, [update the Istio add-on to version 1.21 or later](#istio_update). This update is important because with this version, the disabling of the add-on does not remove custom resources as happens with earlier versions.
 - If you no longer need Istio, you can [uninstall the add-on without installing the community Istio](#istio_uninstall_addon) instead of completing these step.
 
 
@@ -417,7 +417,3 @@ kubectl delete cm -n ibm-operators managed-istio-custom
 {: pre}
 
 The removal of the add-on is complete and you can continue to use and upgrade the community Istio as needed.
-
-
-
-
