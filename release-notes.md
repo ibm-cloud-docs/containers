@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-09-04"
+lastupdated: "2025-09-05"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -1926,7 +1926,7 @@ Managing outbound traffic protection in new version 1.30 VPC clusters.
 
 
 Istio add-on version `1.19` is no longer supported.
-:   Update the add-on in your clusters to a supported version. For more information, see the [Updating the Istio add-on](/docs/containers?topic=containers-istio&interface=ui#istio_update) and the [change log](/docs/containers?topic=containers-istio-changelog).
+:   Update the add-on in your clusters to a supported version. For more information, see the [Updating the Istio add-on](/docs/containers?topic=containers-istio-update) and the [change log](/docs/containers?topic=containers-istio-changelog).
 
 
 

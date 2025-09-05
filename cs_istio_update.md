@@ -264,7 +264,7 @@ You can migrate to the community Istio instead of using the managed Istio add-on
 
 Before you begin
 - If you are using a version earlier than 1.21, [update the Istio add-on to version 1.21 or later](#istio_update). This update is important because with this version, the disabling of the add-on does not remove custom resources as happens with earlier versions.
-- If you no longer need Istio, you can [uninstall the add-on without installing the community Istio](#istio_uninstall_addon) instead of completing these step.
+- If you no longer need Istio, you can [uninstall the add-on without installing the community Istio](/docs/containers?topic=containers-istio#istio_uninstall_addon) instead of completing these step.
 
 
 
