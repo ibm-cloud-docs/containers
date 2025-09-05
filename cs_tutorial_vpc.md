@@ -25,7 +25,7 @@ completion-time: 60m
 # Setting up your first cluster in your Virtual Private Cloud (VPC)
 {: #vpc_ks_tutorial}
 {: toc-content-type="tutorial"}
-{: toc-services="containers, vpc"}
+{: toc-services="containers, vpc, Registry"}
 {: toc-completion-time="60m"}
 
 Create an {{site.data.keyword.containerlong}} cluster in your Virtual Private Cloud (VPC).
