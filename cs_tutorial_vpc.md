@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-03-10"
+lastupdated: "2025-09-05"
 
 
 keywords: kubernetes
@@ -10,7 +10,7 @@ keywords: kubernetes
 subcollection: containers
 
 content-type: tutorial
-services: containers, vpc
+services: containers, vpc, Registry
 account-plan: paid
 completion-time: 60m
 
