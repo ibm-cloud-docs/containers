@@ -242,7 +242,7 @@ subcollection: containers
 
     * [08 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep0825)
 
-        * New! {{site.data.keyword.containerlong_notm}} 4.19 is available.
+        * New! Version support timelines
 
     * [04 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep0425)
 
