@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2025
-lastupdated: "2025-07-23"
+lastupdated: "2025-09-09"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -95,7 +95,7 @@ To update your ALB image to a specific version with the `--version` option, you 
 * To list the available ALB versions, run the following command.
 
     ```sh
-    ibmcloud ks ingress alb version ls --region <region>
+    ibmcloud ks ingress alb versions --region <region>
     ```
     {: pre}
     
