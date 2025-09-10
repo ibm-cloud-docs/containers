@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-04"
+lastupdated: "2025-09-10"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -3992,7 +3992,7 @@ Minimum required permissions
 {: #zone-add-classic-example}
 
 ```sh
-ibmcloud ks zone add classic --zone dal10 --cluster my_cluster -p pool1 -w pool2 --private-vlan 2294021
+ibmcloud ks zone add classic --zone dal10 --cluster my_cluster -p pool1 -p pool2 --private-vlan 2294021
 ```
 {: pre}
 
@@ -4038,7 +4038,7 @@ Minimum required permissions
 {: #zone-add-vpc-gen2-example}
 
 ```sh
-ibmcloud ks zone add vpc-gen2 --zone us-south-3 --cluster my_cluster -p pool1 -w pool2
+ibmcloud ks zone add vpc-gen2 --zone us-south-3 --cluster my_cluster -p pool1 -p pool2
 ```
 {: pre}
 
