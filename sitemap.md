@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-08"
+lastupdated: "2025-09-10"
 
 
 keywords: containers
@@ -4432,7 +4432,7 @@ subcollection: containers
 
 * [Understanding bucket creation and removal](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-bucket-cd)
 
-* [Enabling the {{site.data.keyword.cos_full_notm}} add-on](/docs/containers?topic=containers-storage-cos-install-addon#enable-cos-addon)
+* [Enabling the {{site.data.keyword.cos_full_notm}} add-on from the CLI](/docs/containers?topic=containers-storage-cos-install-addon#enable-cos-addon)
 
 * [Deploying an app that uses {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-app)
 
