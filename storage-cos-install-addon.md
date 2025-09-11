@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2025
-lastupdated: "2025-09-10"
+lastupdated: "2025-09-11"
 
 
 keywords: kubernetes, containers, object storage add-in, cos
@@ -17,6 +17,9 @@ subcollection: containers
 
 # Installing the {{site.data.keyword.cos_full_notm}} cluster add-on
 {: #storage-cos-install-addon}
+
+The {{site.data.keyword.cos_full_notm}} cluster add-on is available in Beta for allowlisted accounts only. To get added to the allowlist, contact support. For more information, see [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request). The add-on is available only for Kubernetes clusters.
+{: beta}
 
 Prerequisites
 - The {{site.data.keyword.cos_full_notm}} add-on requires at least 0.4 vCPU and 256 MB of memory.
