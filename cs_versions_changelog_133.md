@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-09-04"
+lastupdated: "2025-09-12"
 
 
 keywords: change log, version history, 1.33
@@ -109,3 +109,21 @@ The following table shows the components included in the worker node fix pack 1.
 | Kubernetes Metrics Server | v0.7.2 | v0.8.0 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.0). |
 | Kubernetes snapshot controller | v8.0.1 | v8.2.1 | See the [Kubernetes snapshot controller release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v8.2.1). |
 {: caption="Changes since version 1.32." caption-side="bottom"}
+
+
+
+### Worker node fix pack 1.33.4_1539, released 09 September 2024
+{: #cl-boms-1334_1539_W}
+
+The following table shows the components included in the worker node fix pack 1.33.4_1539. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-79-generic|Resolves the following CVEs: [CVE-2024-57996](https://nvd.nist.gov/vuln/detail/CVE-2024-57996){: external}, [CVE-2025-21887](https://nvd.nist.gov/vuln/detail/CVE-2025-21887){: external}, [CVE-2025-37752](https://nvd.nist.gov/vuln/detail/CVE-2025-37752){: external}, [CVE-2025-38350](https://nvd.nist.gov/vuln/detail/CVE-2025-38350){: external}, and [CVE-2025-8067](https://nvd.nist.gov/vuln/detail/CVE-2025-8067){: external}.|
+|Kubernetes|1.33.4|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.4).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|HAProxy|e0a48fcf355d98dc769ea048d2fd02044b11ed62|Resolves the following CVEs: [CVE-2025-6020](https://nvd.nist.gov/vuln/detail/CVE-2025-6020){: external}, and [CVE-2025-8941](https://nvd.nist.gov/vuln/detail/CVE-2025-8941){: external}.|
+|GPU Device Plug-in and Installer|95e0dbe6a9d2a09a11080e4bf18bc1e33e196ae0|Resolves the following CVEs: [CVE-2025-8941](https://nvd.nist.gov/vuln/detail/CVE-2025-8941){: external}, [CVE-2025-8194](https://nvd.nist.gov/vuln/detail/CVE-2025-8194){: external}, and [CVE-2025-6020](https://nvd.nist.gov/vuln/detail/CVE-2025-6020){: external}.|
+{: caption="1.33.4_1539 fix pack." caption-side="bottom"}
+{: #cl-boms-1334_1539_W-component-table}

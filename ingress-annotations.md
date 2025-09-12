@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-05-29"
+lastupdated: "2025-09-12"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -473,8 +473,8 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
       name: ibm-ingress-deploy-config
       namespace: kube-system
     data:
-      <alb1-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "defaultConfig":"<namespace>/<configmap-name>","enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>", "enableIngressValidation":"<true|false>"}'
-      <alb2-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>", "enableIngressValidation":"<true|false>"}'
+      <alb1-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "defaultConfig":"<namespace>/<configmap-name>","enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>", "enableIngressValidation":"<true|false>", "tolerations":[{"key":"<key>","operator":"<Exists|Equal>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>", "tolerationSeconds": <number_of_seconds>},{"key":"<key>","operator":"<Exists|Equal>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
+      <alb2-id>: '{"deepInspect":"<true|false>", "defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>","logLevel":<log_level>, "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>", "enableIngressValidation":"<true|false>", "tolerations":[{"key":"<key>","operator":"<Exists|Equal>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>", "tolerationSeconds": <number_of_seconds>},{"key":"<key>","operator":"<Exists|Equal>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
     ```
     {: screen}
 
@@ -520,6 +520,9 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 
     `enableIngressValidation`
     :   Enable the deployment of Ingress validating webhook for this ALB. The webhook validates Ingress resources before being applied on the cluster to prevent invalid configurations. (The ALB will only process Ingress resources that belong to the Ingress class it exposes.) Default: `"false"`.
+
+    `tolerations`
+    :   Specify additional custom tolerations for the ALB pods. For more information, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.
 
 
 2. Create the `ibm-ingress-deploy-config` ConfigMap in your cluster.

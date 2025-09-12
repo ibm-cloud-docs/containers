@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2025
-lastupdated: "2025-08-13"
+lastupdated: "2025-09-11"
 
 
 keywords: kubernetes, containers, object storage add-in, cos
@@ -18,12 +18,14 @@ subcollection: containers
 # Installing the {{site.data.keyword.cos_full_notm}} cluster add-on
 {: #storage-cos-install-addon}
 
-Version 1.0 of {{site.data.keyword.cos_full_notm}} cluster add-on is available in Beta for allowlisted accounts only. To get added to the allowlist, contact support. For more information, see [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request). The add-on is available only for Kubernetes clusters.
+The {{site.data.keyword.cos_full_notm}} cluster add-on is available in Beta for allowlisted accounts only. To get added to the allowlist, contact support. For more information, see [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request). The add-on is available only for Kubernetes clusters.
 {: beta}
 
 Prerequisites
-- The {{site.data.keyword.cos_full_notm}} add-on requires at least 0.2 vCPU and 128 MB of memory.
+- The {{site.data.keyword.cos_full_notm}} add-on requires at least 0.4 vCPU and 256 MB of memory.
+- The add-on is available only for Red Hat CoreOS (RHCOS) worker nodes. If your cluster has both RHEL and RHCOS nodes, then the add-on is deployed only on the RHCOS nodes.
 - Set up an [{{site.data.keyword.cos_full_notm}} instance](/docs/containers?topic=containers-storage-cos-understand#create_cos_service).
+- **Optional** If you plan to use bucket versioning, your service credentials must have **Manager** or **Writer** permissions to enable or disable bucket versioning on the bucket. For more information, see [Getting started with versioning](https://test.cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-versioning#versioning-getting-started).
 
 
 
@@ -39,7 +41,7 @@ Prerequisites
     - If `reclaimPolicy: Retain` is set, the bucket is retained even after the PVC is deleted.
 
 
-## Enabling the {{site.data.keyword.cos_full_notm}} add-on
+## Enabling the {{site.data.keyword.cos_full_notm}} add-on from the CLI
 {: #enable-cos-addon}
 
 
@@ -51,13 +53,11 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-    Example output
-    ```sh                                                         
-    OK
-    Name                        Version            Supported Kubernetes Range   Supported OpenShift Range   Kubernetes Default   OpenShift Default
-    ibm-object-csi-driver       1.0 (default)      >=1.30.0 <1.33.0             unsupported                 -                    -
+1. Review the add-on options.
+    ```sh
+    ibmcloud ks cluster addon options --addon ibm-object-csi-driver [--version VERSION]
     ```
-    {: screen}
+    {: pre}
 
 1. Install the add-on.
     ```sh
@@ -123,6 +123,8 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         serviceID: <base64-encoded-COS-service-ID>
         accessKey: <base64-encoded-HMAC-access-key>
         secretKey: <base64-encoded-HMAC-secret-key>
+        kp-root-key-crn: <CRN> # Key Protect or HPCS root key crn in base64 encoded format
+        bucketVersioning: false # Bucket versioning is set to false by default. Set to true to enable bucket versioning. Set to false to disable versioning for a bucket where versioning is enabled.
     stringData:
     # uid: "3000" # Optional: Provide a uid to run as non root user. This must match runAsUser in SecurityContext of pod spec.
     mountOptions: |
@@ -163,13 +165,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 
 
-1. Encode the credentials that you retrieved in the previous section to base64. Repeat this command for each parameter.
+1. Encode all the secret data parameters to base64.
     ```sh
     echo -n "<value>" | base64
     ```
     {: pre}
 
-1. Update the configuration file with the base64 encoded values.
+1. Update the `secret.yaml` with the base64 encoded values.
 
 1. Create the secret.
     ```sh
@@ -187,7 +189,6 @@ You can manage this behavior by using the following annotations in the PVC yaml.
 
 ```yaml
 cos.csi.driver/secret: "<custom-secret>"
-cos.csi.driver/secret-namespace: "<namespace>"
 ```
 {: codeblock}
 
@@ -221,8 +222,7 @@ metadata:
   name: cos-csi-pvc1
   namespace: <namespace> # The namespace where you want to create the PVC.
   annotations:
-    cos.csi.driver/secret: "<custom-secret>" 
-    cos.csi.driver/secret-namespace: "<namespace>"
+    cos.csi.driver/secret: "<custom-secret>"
 spec:
   accessModes:
   - ReadWriteOnce
@@ -256,24 +256,24 @@ spec:
     spec:
     replicas: 1
     selector:
-        matchLabels:
-        app: <name>
+    matchLabels:
+    app: <name>
     template:
-        metadata:
+    metadata:
         labels:
-            app: <name>
+        app: <name>
         spec:
-        containers:
-        - name: app-frontend
-            image: <image> # Enter your app image. 
-            imagePullPolicy: IfNotPresent
-            volumeMounts:
+    containers:
+    - name: app-frontend
+        image: <image> # Enter your app image. 
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
             - mountPath: <path_you_want_to_mount_the_volume_on> # For example `/dev`
-            name: cos-csi-volume
-        volumes:
+    name: cos-csi-volume
+    volumes:
         - name: cos-csi-volume
-            persistentVolumeClaim:
-            claimName: <pvc_name> # Enter the name of the PVC you created earlier.
+        persistentVolumeClaim:
+        claimName: <pvc_name> # Enter the name of the PVC you created earlier.
     ```
     {: codeblock}
 

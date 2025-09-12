@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-09-04"
+lastupdated: "2025-09-12"
 
 
 keywords: change log, version history, 1.30
@@ -750,6 +750,24 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 | Containerd | 1.7.20 | 1.7.21 | For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.21){: external}. |
 | GPU device plug-in and installer | c2e2956 | 91f881a | Security fixes for [CVE-2019-11236](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2019-11236){: external}, [CVE-2019-20916](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2019-20916){: external}, [CVE-2020-26137](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2020-26137){: external}, [CVE-2021-3572](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2021-3572){: external}, [CVE-2022-40897](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2022-40897){: external}, [CVE-2023-32681](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2023-32681){: external}, [CVE-2023-43804](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2023-43804){: external}, [CVE-2023-45803](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2023-45803){: external}, [CVE-2023-5752](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2023-5752){: external}, [CVE-2024-35195](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-35195){: external}, [CVE-2024-3651](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-3651){: external}, [CVE-2024-37891](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-37891){: external}, [CVE-2024-6345](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2024-6345){: external}, [CVE-2023-44487](https://exchange.xforce.ibmcloud.com/vulnerabilities/CVE-2023-44487){: external}, [GO-2023-2153](https://exchange.xforce.ibmcloud.com/vulnerabilities/GO-2023-2153){: external}. |
 {: caption="Changes since version 1.30.4_1535" caption-side="bottom"}
+
+
+
+### Worker node fix pack 1.30.14_1582, released 09 September 2024
+{: #cl-boms-13014_1582_W}
+
+The following table shows the components included in the worker node fix pack 1.30.14_1582. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-79-generic|Resolves the following CVEs: [CVE-2024-57996](https://nvd.nist.gov/vuln/detail/CVE-2024-57996){: external}, [CVE-2025-21887](https://nvd.nist.gov/vuln/detail/CVE-2025-21887){: external}, [CVE-2025-37752](https://nvd.nist.gov/vuln/detail/CVE-2025-37752){: external}, [CVE-2025-38350](https://nvd.nist.gov/vuln/detail/CVE-2025-38350){: external}, and [CVE-2025-8067](https://nvd.nist.gov/vuln/detail/CVE-2025-8067){: external}.|
+|Kubernetes|1.30.14|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.14).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|HAProxy|e0a48fcf355d98dc769ea048d2fd02044b11ed62|Resolves the following CVEs: [CVE-2025-6020](https://nvd.nist.gov/vuln/detail/CVE-2025-6020){: external}, and [CVE-2025-8941](https://nvd.nist.gov/vuln/detail/CVE-2025-8941){: external}.|
+|GPU Device Plug-in and Installer|95e0dbe6a9d2a09a11080e4bf18bc1e33e196ae0|Resolves the following CVEs: [CVE-2025-8941](https://nvd.nist.gov/vuln/detail/CVE-2025-8941){: external}, [CVE-2025-8194](https://nvd.nist.gov/vuln/detail/CVE-2025-8194){: external}, and [CVE-2025-6020](https://nvd.nist.gov/vuln/detail/CVE-2025-6020){: external}.|
+{: caption="1.30.14_1582 fix pack." caption-side="bottom"}
+{: #cl-boms-13014_1582_W-component-table}
 
 
 
