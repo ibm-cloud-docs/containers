@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-12"
+lastupdated: "2025-09-15"
 
 
 keywords: containers
@@ -3411,6 +3411,8 @@ subcollection: containers
 
 [Setting up the Istio managed add-on](/docs/containers?topic=containers-istio#istio)
 
+* [Removing other Istio installations from a cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
+
 * [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
 
     * [Installing the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#istio_install_console)
@@ -3420,8 +3422,6 @@ subcollection: containers
     * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl)
 
 * [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=cli#customize)
-
-* [Troubleshooting the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio-ts)
 
 * [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
 
@@ -3433,31 +3433,31 @@ subcollection: containers
 
     * [Step 4: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
 
-* [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_other)
+* [Migrating from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=cli#migrate)
+
+    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#migrate_disable_ui)
+
+    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio&interface=cli#migrate_disable_cli)
+
+    * [Step 2: Scale down the Istio operator](/docs/containers?topic=containers-istio&interface=cli#migrate_scale_operator)
+
+    * [Step 3: Saving resources](/docs/containers?topic=containers-istio&interface=cli#migrate_resources)
+
+    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_installer)
+
+    * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_uninstall_operator)
+
+    * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio&interface=cli#migrate_configmap)
 
 [Updating Istio](/docs/containers?topic=containers-istio-update#istio-update)
 
+* [Before you begin](/docs/containers?topic=containers-istio-update#istio-update-prereq)
+
 * [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
 
-    * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
+* [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
 
 * [Updating from an unsupported version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_update)
-
-* [Migrating from the Istio add-on to community Istio](/docs/containers?topic=containers-istio-update#migrate)
-
-    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio-update&interface=ui#migrate_disable_ui)
-
-    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio-update&interface=cli#migrate_disable_cli)
-
-    * [Step 2: Scale down the Istio operator](/docs/containers?topic=containers-istio-update&interface=cli#migrate_scale_operator)
-
-    * [Step 3: Saving resources](/docs/containers?topic=containers-istio-update&interface=cli#migrate_resources)
-
-    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio-update&interface=cli#migrate_installer)
-
-    * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio-update&interface=cli#migrate_uninstall_operator)
-
-    * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio-update&interface=cli#migrate_configmap)
 
 [Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh#istio-mesh)
 
@@ -3497,7 +3497,7 @@ subcollection: containers
 
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
-[Deploying custom Istio gateways](/docs/containers?topic=containers-istio-custom-gateway#istio-custom-gateway)
+[Deploying custom Istio gateways in an `IstioOperator`](/docs/containers?topic=containers-istio-custom-gateway#istio-custom-gateway)
 
 * [Considerations](/docs/containers?topic=containers-istio-custom-gateway#considerations)
 
@@ -6030,7 +6030,7 @@ subcollection: containers
 
     * [Change log for 1.22.1, released 21 June 2024](/docs/containers?topic=containers-istio-changelog#1221)
 
-* [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
+* [Unsupported: Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
 
     * [Change log for 1.21.6, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1216)
 
@@ -6042,7 +6042,7 @@ subcollection: containers
 
     * [Change log for 1.21.1, released 26 April 2024](/docs/containers?topic=containers-istio-changelog#1211)
 
-* [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
+* [Unsupported: Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
     * [Change log for 1.20.8, released 20 August 2024](/docs/containers?topic=containers-istio-changelog#1208)
 

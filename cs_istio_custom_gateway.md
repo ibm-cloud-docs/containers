@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-03-04"
+lastupdated: "2025-09-15"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -17,10 +17,10 @@ subcollection: containers
 
 
 
-# Deploying custom Istio gateways
+# Deploying custom Istio gateways in an `IstioOperator`
 {: #istio-custom-gateway}
 
-Create an `IstioOperator` (IOP) custom resource that defines your own ingress and egress gateways for Istio-managed app traffic.
+In add-on version 1.23 and earlier, create an `IstioOperator` (IOP) custom resource that defines your own ingress and egress gateways for Istio-managed app traffic.
 {: shortdesc}
 
 By default, one `istio-ingressgateway` deployment is created in the `istio-system` namespace of your cluster. This deployment is exposed as a public load balancer service with an externally accessible IP address. You can then define ports for your Istio-managed apps in a `Gateway` resource, which configures the `istio-ingressgateway` load balancer to listen for inbound HTTP/TCP traffic to those ports. Additionally, one `istio-egressgateway` is created by default and is exposed as a load balancer service to managing outbound traffic from your Istio-managed apps.
@@ -65,7 +65,7 @@ Use an `IstioOperator` (IOP) to create a custom ingress gateway deployment and p
     spec:
       profile: empty
       hub: icr.io/ext/istio
-      # tag: 1.23.5
+      # tag: 1.24.6
       components:
         ingressGateways:
           - name: custom-ingressgateway
@@ -323,7 +323,7 @@ Note the following considerations:
 Manually update and control the managed Istio version of custom ingress gateways.
 {: shortdesc}
 
-{{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. For example, when patch version 1.23.5 is released, all ingress gateway pods are automatically updated to this latest patch version. Patch versions are completed by using the rolling update strategy to avoid downtime for your apps. However, you might want to prevent automatic updates of custom gateway pods, such as if you want to test for any potential regressions with the latest patch version.
+{{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. For example, when patch version 1.24.6 is released, all ingress gateway pods are automatically updated to this latest patch version. Patch versions are completed by using the rolling update strategy to avoid downtime for your apps. However, you might want to prevent automatic updates of custom gateway pods, such as if you want to test for any potential regressions with the latest patch version.
 
 To manage updates for your custom ingress gateways, you might use the following rollout strategy:
 1. [Create a custom ingress gateway IOPs](#custom-ingress-gateway-public). In the `tag` field, specify a patch version that is the same or earlier than the control plane version. You can find the control plane version by running `istioctl version`.
@@ -354,7 +354,7 @@ metadata:
 spec:
   profile: empty
   hub: icr.io/ext/istio
-  # tag: 1.23.5 # Force the gateway to a specific managed Istio version
+  # tag: 1.24.6 # Force the gateway to a specific managed Istio version
   components:
     ingressGateways:
       - name: custom-ingressgateway
@@ -423,7 +423,7 @@ metadata:
 spec:
   profile: empty
   hub: icr.io/ext/istio
-  # tag: 1.23.5 # Force the Gateway to a specific version
+  # tag: 1.24.6 # Force the Gateway to a specific version
   components:
     egressGateways:
       - name: custom-egressgateway
