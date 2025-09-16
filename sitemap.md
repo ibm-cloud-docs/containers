@@ -240,6 +240,10 @@ subcollection: containers
 
 * [September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep25)
 
+    * [16 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep1625)
+
+        * Ingress ALB cluster add-on patch updates.
+
     * [09 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep0925)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.

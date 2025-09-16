@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-09-12"
+lastupdated: "2025-09-16"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## September 2025
 {: #containers-sep25}
+
+
+
+### 16 September 2025
+{: #containers-sep1625}
+{: release-note}
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 
 
@@ -58,7 +67,6 @@ New! Version support timelines
 :   Version support timeline images are now available to help you plan your cluster update schedule. To view the timelines and end of support dates for cluster versions, see [{{site.data.keyword.containerlong_notm}} version information](/docs/containers?topic=containers-cs_versions)..
 
 
-
 ### 04 September 2025
 {: #containers-sep0425}
 {: release-note}
@@ -66,6 +74,8 @@ New! Version support timelines
 
 CLI version `1.0.717` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
 
 ## August 2025
 {: #containers-aug25}
