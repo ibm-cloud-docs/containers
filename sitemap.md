@@ -6110,24 +6110,6 @@ subcollection: containers
 
     * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
 
-* [Unsupported: Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
-
-    * [Change log for 1.16.7, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1167)
-
-    * [Change log for 1.16.6, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1166)
-
-    * [Change log for 1.16.5, released 8 June 2022](/docs/containers?topic=containers-istio-changelog#1165)
-
-    * [Change log for 1.16.4, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1164)
-
-    * [Change log for 1.16.3, released 9 March 2023](/docs/containers?topic=containers-istio-changelog#1163)
-
-    * [Change log for 1.16.2, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1162)
-
-    * [Change log for 1.16.1, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1161)
-
-    * [Change log for 1.16.0, released November 30th, 2022](/docs/containers?topic=containers-istio-changelog#1160)
-
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.2.4](/docs/containers?topic=containers-ca_changelog#0124_ca_addon)
