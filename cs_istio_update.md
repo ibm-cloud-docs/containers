@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-15"
+lastupdated: "2025-09-16"
 
 
 keywords: istio migration, istio updates, istio upgrades
@@ -206,13 +206,13 @@ For example, the patch version of your add-on might be updated automatically by 
 
     ```sh
     client version: version.BuildInfo{Version:"1.11.2"}
-    pilot version: version.BuildInfo{Version:1.24.6}
-    pilot version: version.BuildInfo{Version:1.24.6}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-vp97p.istio-system", IstioVersion:1.24.6}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-qkhgm.istio-system", IstioVersion:1.24.6}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-dffhq.istio-system", IstioVersion:1.24.6}
-    data plane version: version.ProxyInfo{ID:"httpbin-74fb669cc6-svc8x.default", IstioVersion:1.24.6}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-cs9r9.istio-system", IstioVersion:1.24.6}
+    pilot version: version.BuildInfo{Version:1.23.5}
+    pilot version: version.BuildInfo{Version:1.23.5}
+    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-vp97p.istio-system", IstioVersion:1.23.5}
+    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-qkhgm.istio-system", IstioVersion:1.23.5}
+    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-dffhq.istio-system", IstioVersion:1.23.5}
+    data plane version: version.ProxyInfo{ID:"httpbin-74fb669cc6-svc8x.default", IstioVersion:1.23.5}
+    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-cs9r9.istio-system", IstioVersion:1.23.5}
     ...
     ```
     {: screen}
@@ -221,14 +221,14 @@ For example, the patch version of your add-on might be updated automatically by 
     1. Download the `istioctl` client of the same version as the control plane components.
     
         ```sh
-        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.24.6 sh -
+        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.23.5 sh -
         ```
         {: pre}
 
     2. Navigate to the Istio package directory.
     
         ```sh
-        cd istio-1.24.6
+        cd istio-1.23.5
         ```
         {: pre}
 
