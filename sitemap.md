@@ -5409,13 +5409,9 @@ subcollection: containers
 
     * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-kubernetes-service-cli#cluster_master_audit_webhook)
 
-* [`ibmcloud ks cluster master console-oauth-access get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-cli)
+    * [`ibmcloud ks cluster master console-oauth-access get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-cli)
 
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-options)
-
-* [`ibmcloud ks cluster master console-oauth-access set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-options)
+    * [`ibmcloud ks cluster master console-oauth-access set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-cli)
 
     * [`ibmcloud ks cluster master pod-security get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-get)
 
