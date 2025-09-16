@@ -2,7 +2,7 @@
 
 copyright:
   years: 2025, 2025
-lastupdated: "2025-09-15"
+lastupdated: "2025-09-16"
 keywords:  
 
 subcollection: containers
@@ -27,5 +27,5 @@ Review the managed add-ons available for {{site.data.keyword.containerlong_notm}
 | Istio | An open service mesh platform to connect, secure, control, and observe microservices on cloud platforms. The Istio add-on is offered as a managed service that integrates Istio directly with your cluster. | - [Setting up the Istio managed add-on](/docs/containers?topic=containers-istio)  \n - [Istio add-on change log](/docs/containers?topic=containers-istio) | 
 | Static Route |  Create static routes that allow worker nodes to re-route response packets through a VPN or gateway to an IP address in an on-premises data center. | - [Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes)  \n - [Static Route add-on version change log](/docs/containers?topic=containers-cl-add-ons-static-route) |
 | VPC Block CSI Driver | Copy a storage volume's contents at a particular point in time without creating an entirely new volume. | - [Setting up snapshots with the Block Storage for VPC cluster add-on](/docs/containers?topic=containers-vpc-volume-snapshot)  \n - [VPC Block CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver) | 
-| VPC File CSI Driver | Create persistent volume claims for fast and flexible network-attached, NFS-based File Storage for VPC. | -[Enabling the IBM Cloud File Storage for VPC cluster add-on](/docs/containers?topic=containers-storage-file-vpc-install)  \n - [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver) |
+| VPC File CSI Driver | Create persistent volume claims for fast and flexible network-attached, NFS-based File Storage for VPC. | - [Enabling the IBM Cloud File Storage for VPC cluster add-on](/docs/containers?topic=containers-storage-file-vpc-install)  \n - [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver) |
 {: caption="Cluster add-ons" caption-side="bottom"}
