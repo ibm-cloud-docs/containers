@@ -445,8 +445,8 @@ kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
 If you are using the managed Istio add-on versions 1.21 to 1.23, you can migrate to a later version of the community Istio instead.
 {: shortdesc}
 
-Before you begin
-- If you no longer need Istio, you can [uninstall the add-on without installing the community Istio](/docs/containers?topic=containers-istio#istio_uninstall_addon) instead of completing these step.
+Before you begin:
+If you no longer need Istio, you can [uninstall the add-on without installing the community Istio](/docs/containers?topic=containers-istio#istio_uninstall_addon) instead of completing these step.
 
 
 
@@ -547,7 +547,7 @@ Delete all Istio operator (IOP) resources, such as for a custom ingress gateway.
     ```
     {: pre}
 
-1. For each IOP file that you saved in the previous step, run the `upgrade` command.
+1. For each IOP file that you saved in the previous step, run the `istioctl upgrade` command.
 
     ```sh
     istioctl upgrade -f <filename>.yaml

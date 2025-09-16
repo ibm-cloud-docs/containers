@@ -41,6 +41,7 @@ Do not use `istioctl` to update the version of Istio that is installed by the ma
 
 
 Before you begin:
+
 Review the [prerequisites](#istio-update-prereq) that apply to all version updates.
 
 
