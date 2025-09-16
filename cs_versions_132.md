@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2025
-lastupdated: "2025-09-02"
+lastupdated: "2025-09-15"
 
 
 keywords: kubernetes, containers, 132, version 132, 132 update actions
@@ -51,7 +51,7 @@ This information summarizes updates that are likely to have an impact on deploye
 {: shortdesc}
 
 
-The Istio add-on version 1.23 is not supported for {{site.data.keyword.containerlong_notm}} version 1.32 because the Istio add-on does not support Istio 1.25. Do not update to {{site.data.keyword.containerlong_notm}} version 1.32 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](/docs/containers?topic=containers-istio-update&interface=ui#migrate).
+The Istio add-on version 1.23 is not supported for {{site.data.keyword.containerlong_notm}} version 1.32 because the Istio add-on does not support Istio 1.25. Do not update to {{site.data.keyword.containerlong_notm}} version 1.32 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=ui#migrate).
 {: important}
 
 ### Update before master

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-02"
+lastupdated: "2025-09-16"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -26,6 +26,49 @@ Istio on {{site.data.keyword.containerlong}} provides a seamless installation of
 {: shortdesc}
 
 
+## Removing other Istio installations from a cluster
+{: #istio_uninstall_other}
+
+If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, clean up that Istio installation before you enable the managed Istio add-on. 
+{: shortdesc}
+
+Before you begin:
+Verify that Istio is already installed in the cluster. Run `kubectl get namespaces` and look for the `istio-system` namespace in the output.
+
+To remove other Istio installations:
+- If you installed Istio by using the {{site.data.keyword.cloud_notm}} Istio Helm chart,
+    1. Uninstall the Istio Helm deployment.
+        ```sh
+        helm del istio --purge
+        ```
+        {: pre}
+
+    2. If you used Helm 2.9 or earlier, delete the extra job resource.
+        ```sh
+        kubectl -n istio-system delete job --all
+        ```
+        {: pre}
+
+    3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
+
+- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation](https://istio.io/latest/docs/setup/getting-started/#uninstall){: external}.
+- If you previously installed BookInfo in the cluster, clean up those resources.
+    1. Change the directory to the Istio file location.
+        ```sh
+        cd <filepath>/istio-1.23.5
+        ```
+        {: pre}
+
+    2. Delete all BookInfo services, pods, and deployments in the cluster.
+        ```sh
+        samples/bookinfo/platform/kube/cleanup.sh
+        ```
+        {: pre}
+
+    3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
+
+
+
 ## Installing the Istio add-on
 {: #istio_install}
 
@@ -35,8 +78,11 @@ Instead of the community Istio, you can install the managed Istio add-on.
 Before you begin
 
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-iam-platform-access-roles) for {{site.data.keyword.containerlong_notm}}.
+
 * [Create a standard Kubernetes cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters).
+
 * You can't run community Istio concurrently with the managed Istio add-on in your cluster. If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
+
 * Classic multizone clusters: Ensure that you enable a [Virtual Routing and Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Manage Network VLAN Spanning** infrastructure permission, or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 
 ### Installing the Istio add-on from the console
@@ -250,19 +296,12 @@ Want to change a ConfigMap setting?
 :   If you want to change a setting that you added to the ConfigMap, you can use a patch script. For example, if you added the `istio-global-proxy-accessLogFile: "/dev/stdout"` setting and later want to change it back to `""`, you can run `kubectl patch cm managed-istio-custom -n ibm-operators --type='json' -p='[{"op": "add", "path": "/data/istio-global-proxy-accessLogFile", "value":""}]'`. 
 
 Need to debug your customization setup?
-:   Check the logs for the `addon-istio-operator` (Istio version 1.10 or later) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio changes that you make.
+:   Check the logs for the `addon-istio-operator` (Istio version 1.10 to 1.23) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio changes that you make.
 {: tip}
 
 If you disable the Istio add-on, the `managed-istio-custom` ConfigMap is not removed during uninstallation. When you re-enable the Istio add-on, your customized ConfigMap is applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default ConfigMap is applied during installation.
 {: note}
 
-
-
-## Troubleshooting the Istio add-on
-{: #istio-ts}
-
-To resolve some common issues that you might encounter when you use the managed Istio add-on, see [Troubleshooting managed add-ons](/docs/containers?topic=containers-debug_addons).
-{: shortdesc}
 
 
 ## Uninstalling the Istio add-on
@@ -284,7 +323,7 @@ Any resources that you created or modified in the `istio-system` namespace are r
     ```
     {: pre}
 
-2. Save all IstioOperator CRs (IOPs).
+2. For version 1.23 and earlier, save all IstioOperator CRs (IOPs).
 
     a. List the IOP resources:
     ```sh
@@ -364,14 +403,14 @@ After the resources are saved and the add-on is disabled, the resources can be r
     ```
     {: pre}
 
-2. Delete any custom Istio operator (IOP) resources that you created, such as for a custom ingress gateway. When you run this command, the Istio operator automatically removes any resources that the IOP resource created, such as deployments or services.
+2. For version 1.23 and earlier, delete any custom Istio operator (IOP) resources that you created, such as for a custom ingress gateway. When you run this command, the Istio operator automatically removes any resources that the IOP resource created, such as deployments or services.
 
     ```sh
     kubectl delete IstioOperator <resource_name> -n <namespace>
     ```
     {: pre}
 
-3. For Istio 1.21 and later, delete the `managed-istio` IOP.
+3. Delete the `managed-istio` IOP.
 
     ```sh
     kubectl delete iop -n ibm-operators managed-istio
@@ -384,7 +423,7 @@ After the resources are saved and the add-on is disabled, the resources can be r
 ### Step 4: Remove the Istio operator
 {: #istio_uninstall_operator}
 
-After the add-on is completely uninstalled, you can remove the Istio operator.
+For version 1.23 and earlier, after the add-on is completely uninstalled, you can remove the Istio operator.
 {: shortdesc}
 
 Delete the Istio operator deployment, service account, cluster role binding, and cluster role.
@@ -397,39 +436,166 @@ kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
 {: pre}
 
 
-## Uninstalling other Istio installations in your cluster
-{: #istio_uninstall_other}
 
-If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, clean up that Istio installation before you enable the managed Istio add-on in the cluster. To check whether Istio is already in a cluster, run `kubectl get namespaces` and look for the `istio-system` namespace in the output.
+
+
+## Migrating from the Istio add-on to community Istio
+{: #migrate}
+
+If you are using the managed Istio add-on versions 1.21 to 1.23, you can migrate to a later version of the community Istio instead.
 {: shortdesc}
 
-- If you installed Istio by using the {{site.data.keyword.cloud_notm}} Istio Helm chart,
-    1. Uninstall the Istio Helm deployment.
+Before you begin:
+If you no longer need Istio, you can [uninstall the add-on without installing the community Istio](/docs/containers?topic=containers-istio#istio_uninstall_addon) instead of completing these step.
+
+
+
+### Step 1: Disabling the Istio add-on from the console
+{: #migrate_disable_ui}
+{: ui}
+
+Disable the add-on from the console or CLI.
+{: shortdesc}
+
+1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to remove the Istio add-on.
+
+2. Navigate to the **Add-ons** section.
+
+3. On the Managed Istio card, click the Action menu icon.
+
+4. Click **Uninstall**. The managed Istio add-on is disabled in this cluster.
+
+5. On the Managed Istio card, verify that the add-on you uninstalled is no longer listed.
+
+### Step 1: Disabling the Istio add-ons from the CLI
+{: #migrate_disable_cli}
+{: cli}
+
+Disable the add-on and verify that no additional Istio add-ons remain.
+{: tip}
+
+1. Disable the `istio` add-on.
+    ```sh
+    ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
+    ```
+    {: pre}
+
+2. Verify that all managed Istio add-ons are disabled in this cluster. No Istio add-ons are returned in the output.
+    ```sh
+    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+3. Wait 10 minutes before continuing to the next step. This gives us time to unmanaged the istio operator.
+
+### Step 2: Scale down the Istio operator
+{: #migrate_scale_operator}
+
+Scale down the Istio operator deployment.
+{: shortdesc}
+
+Run the following command:
+```sh
+kubectl scale deployment -n ibm-operators addon-istio-operator --replicas=0
+```
+{: pre}
+
+### Step 3: Saving resources
+{: #migrate_resources}
+
+Save any resources that you created or modified in the `istio-system` namespace and all Kubernetes resources that were automatically generated by custom resource definitions (CRDs).
+{: shortdesc}
+
+1. Save the `managed-istio-custom` ConfigMap to troubleshoot a problem or to reinstall the add-on later.
+
+    ```sh
+    kubectl get cm -n ibm-operators managed-istio-custom -o yaml > Customizations.yaml
+    ```
+    {: pre}
+
+1. Save all IstioOperator CRs (IOPs).
+
+    - List the IOP resources:
         ```sh
-        helm del istio --purge
+        kubectl get iop -A
         ```
         {: pre}
 
-    2. If you used Helm 2.9 or earlier, delete the extra job resource.
+    - For each IOP resource listed, remove the finalizer. Example using the `managed-istio` IOP:
         ```sh
-        kubectl -n istio-system delete job --all
+        kubectl patch -n ibm-operators istiooperator/managed-istio --type json --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]'
         ```
         {: pre}
 
-    3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
-
-- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation](https://istio.io/latest/docs/setup/getting-started/#uninstall){: external}.
-- If you previously installed BookInfo in the cluster, clean up those resources.
-    1. Change the directory to the Istio file location.
+    - For each IOP resource listed, save each to a file:
         ```sh
-        cd <filepath>/istio-1.23.5
+        kubectl get iop -n <IOP_namespace> <IOP_name> -o yaml > <IOP_name>.yaml
         ```
         {: pre}
 
-    2. Delete all BookInfo services, pods, and deployments in the cluster.
+1. Wait 10 minutes before continuing to the next step.
+
+### Step 4: Changing the installer of the IOPs 
+{: #migrate_installer}
+
+Delete all Istio operator (IOP) resources, such as for a custom ingress gateway.
+{: shortdesc}
+
+1. Make sure your `istioctl` cli tool is at the necessary patch version.
+    ```sh
+    istioctl version
+    ```
+    {: pre}
+
+1. For each IOP file that you saved in the previous step, run the `istioctl upgrade` command.
+
+    ```sh
+    istioctl upgrade -f <filename>.yaml
+    ```
+    {: pre}
+
+
+### Step 5: Removing the Istio operator and IOPs
+{: #migrate_uninstall_operator}
+
+Delete the Istio operator deployment, service account, cluster role binding, cluster role, and all IOPs.
+{: shortdesc}
+
+1. Run the following commands to delete the istio operator deployment:
+
+    ```sh
+    kubectl delete deployment -n ibm-operators addon-istio-operator --ignore-not-found=true
+    kubectl delete serviceaccount -n ibm-operators addon-istio-operator --ignore-not-found=true
+    kubectl delete clusterrolebinding addon-istio-operator --ignore-not-found=true
+    kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
+    ```
+    {: pre}
+
+1. Delete the IOPs.
+
+    - List the IOP resources:
         ```sh
-        samples/bookinfo/platform/kube/cleanup.sh
+        kubectl get iop -A
         ```
         {: pre}
 
-    3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
+    - For each IOP resource listed, delete it:
+        ```sh
+        kubectl delete IstioOperator <resource_name> -n <namespace>
+        ```
+        {: pre}
+
+### Step 6: Removing the ConfigMap
+{: #migrate_configmap}
+
+Because the ConfigMap was saved earlier, it can be removed.
+{: shortdesc}
+
+Remove the `managed-istio-custom` ConfigMap.
+
+```sh
+kubectl delete cm -n ibm-operators managed-istio-custom
+```
+{: pre}
+
+The removal of the add-on is complete and you can continue to use and upgrade the community Istio as needed.

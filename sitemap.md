@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-12"
+lastupdated: "2025-09-16"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep25)
+
+    * [16 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep1625)
+
+        * Ingress ALB cluster add-on patch updates.
 
     * [09 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep0925)
 
@@ -3411,6 +3415,8 @@ subcollection: containers
 
 [Setting up the Istio managed add-on](/docs/containers?topic=containers-istio#istio)
 
+* [Removing other Istio installations from a cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
+
 * [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
 
     * [Installing the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#istio_install_console)
@@ -3420,8 +3426,6 @@ subcollection: containers
     * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl)
 
 * [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=cli#customize)
-
-* [Troubleshooting the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio-ts)
 
 * [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
 
@@ -3433,31 +3437,31 @@ subcollection: containers
 
     * [Step 4: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
 
-* [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_other)
+* [Migrating from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=cli#migrate)
+
+    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#migrate_disable_ui)
+
+    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio&interface=cli#migrate_disable_cli)
+
+    * [Step 2: Scale down the Istio operator](/docs/containers?topic=containers-istio&interface=cli#migrate_scale_operator)
+
+    * [Step 3: Saving resources](/docs/containers?topic=containers-istio&interface=cli#migrate_resources)
+
+    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_installer)
+
+    * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_uninstall_operator)
+
+    * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio&interface=cli#migrate_configmap)
 
 [Updating Istio](/docs/containers?topic=containers-istio-update#istio-update)
 
+* [Before you begin](/docs/containers?topic=containers-istio-update#istio-update-prereq)
+
 * [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
 
-    * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
+* [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
 
 * [Updating from an unsupported version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_update)
-
-* [Migrating from the Istio add-on to community Istio](/docs/containers?topic=containers-istio-update#migrate)
-
-    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio-update&interface=ui#migrate_disable_ui)
-
-    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio-update&interface=cli#migrate_disable_cli)
-
-    * [Step 2: Scale down the Istio operator](/docs/containers?topic=containers-istio-update&interface=cli#migrate_scale_operator)
-
-    * [Step 3: Saving resources](/docs/containers?topic=containers-istio-update&interface=cli#migrate_resources)
-
-    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio-update&interface=cli#migrate_installer)
-
-    * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio-update&interface=cli#migrate_uninstall_operator)
-
-    * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio-update&interface=cli#migrate_configmap)
 
 [Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh#istio-mesh)
 
@@ -3497,7 +3501,7 @@ subcollection: containers
 
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
-[Deploying custom Istio gateways](/docs/containers?topic=containers-istio-custom-gateway#istio-custom-gateway)
+[Deploying custom Istio gateways in an `IstioOperator`](/docs/containers?topic=containers-istio-custom-gateway#istio-custom-gateway)
 
 * [Considerations](/docs/containers?topic=containers-istio-custom-gateway#considerations)
 
@@ -4817,6 +4821,8 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
+    * [Worker node fix pack 1.33.4_1539, released 09 September 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1539_W)
+
     * [Worker node fix pack 1.33.4_1538, released 26 August 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1538_W)
 
     * [Master fix pack 1.33.4_1537, released 20 August 2025](/docs/containers?topic=containers-changelog_133#1334_1537_M)
@@ -4824,8 +4830,6 @@ subcollection: containers
     * [Worker node fix pack 1.33.3_1534, released 12 August 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1333_1534_W)
 
     * [Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025](/docs/containers?topic=containers-changelog_133#1333_1532M_and_1333_1533W)
-
-    * [Worker node fix pack 1.33.4_1539, released 09 September 2024](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1539_W)
 
 [Kubernetes version 1.33 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-133#cis-benchmark-133)
 
@@ -4890,6 +4894,8 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
+    * [Worker node fix pack 1.32.8_1557, released 09 September 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1328_1557_W)
+
     * [Worker node fix pack 1.32.8_1556, released 26 August 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1328_1556_W)
 
     * [Master fix pack 1.32.8_1555, released 20 August 2025](/docs/containers?topic=containers-changelog_132#1328_1555_M)
@@ -4937,8 +4943,6 @@ subcollection: containers
     * [Worker node fix pack 1.32.1_1528, released 29 January 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1321_1528_W)
 
     * [Master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025](/docs/containers?topic=containers-changelog_132#1321_1527M_and_13201524W)
-
-    * [Worker node fix pack 1.32.8_1557, released 09 September 2024](/docs/containers?topic=containers-changelog_132#cl-boms-1328_1557_W)
 
 [Kubernetes version 1.32 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-132)
 
@@ -5002,6 +5006,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.12_1566, released 09 September 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13112_1566_W)
 
     * [Worker node fix pack 1.31.12_1565, released 26 August 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13112_1565_W)
 
@@ -5078,8 +5084,6 @@ subcollection: containers
     * [Worker node fix pack 1.31.1_1522, released 23 September 2024](/docs/containers?topic=containers-changelog_131#1311_1522_W)
 
     * [Master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024](/docs/containers?topic=containers-changelog_131#1310_1520M_and_1310_1518W)
-
-    * [Worker node fix pack 1.31.12_1566, released 09 September 2024](/docs/containers?topic=containers-changelog_131#cl-boms-13112_1566_W)
 
 [Kubernetes version 1.31 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
 
@@ -5162,6 +5166,8 @@ subcollection: containers
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
 
+    * [Worker node fix pack 1.30.14_1582, released 09 September 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1582_W)
+
     * [Worker node fix pack 1.30.14_1581, released 26 August 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1581_W)
 
     * [Master fix pack 1.30.14_1580, released 20 August 2025](/docs/containers?topic=containers-changelog_130#13014_1580_M)
@@ -5237,8 +5243,6 @@ subcollection: containers
     * [Worker node fix pack 1.30.5_1538, released 23 September 2024](/docs/containers?topic=containers-changelog_130#1305_1538_W)
 
     * [Worker node fix pack 1.30.4_1536, released 10 September 2024](/docs/containers?topic=containers-changelog_130#1304_1536_W)
-
-    * [Worker node fix pack 1.30.14_1582, released 09 September 2024](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1582_W)
 
     * [Master fix pack 1.30.4_1534, released 28 August 2024](/docs/containers?topic=containers-changelog_130#1304_1534_M)
 
@@ -5405,13 +5409,9 @@ subcollection: containers
 
     * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-kubernetes-service-cli#cluster_master_audit_webhook)
 
-* [`ibmcloud ks cluster master console-oauth-access get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-cli)
+    * [`ibmcloud ks cluster master console-oauth-access get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-cli)
 
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-options)
-
-* [`ibmcloud ks cluster master console-oauth-access set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-options)
+    * [`ibmcloud ks cluster master console-oauth-access set`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-set-cli)
 
     * [`ibmcloud ks cluster master pod-security get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-pod-security-get)
 
@@ -6030,7 +6030,7 @@ subcollection: containers
 
     * [Change log for 1.22.1, released 21 June 2024](/docs/containers?topic=containers-istio-changelog#1221)
 
-* [Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
+* [Unsupported: Version 1.21](/docs/containers?topic=containers-istio-changelog#v121)
 
     * [Change log for 1.21.6, released 9 Oct 2024](/docs/containers?topic=containers-istio-changelog#1216)
 
@@ -6042,7 +6042,7 @@ subcollection: containers
 
     * [Change log for 1.21.1, released 26 April 2024](/docs/containers?topic=containers-istio-changelog#1211)
 
-* [Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
+* [Unsupported: Version 1.20](/docs/containers?topic=containers-istio-changelog#v120)
 
     * [Change log for 1.20.8, released 20 August 2024](/docs/containers?topic=containers-istio-changelog#1208)
 
@@ -6062,7 +6062,7 @@ subcollection: containers
 
     * [Change log for 1.20.0, released 7 December 2023](/docs/containers?topic=containers-istio-changelog#1200)
 
-* [Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
+* [Unsupported: Version 1.19](/docs/containers?topic=containers-istio-changelog#v119)
 
     * [Change log for 1.19.9, released 24 April 2024](/docs/containers?topic=containers-istio-changelog#1199)
 
@@ -6109,24 +6109,6 @@ subcollection: containers
     * [Change log for 1.17.2, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1172)
 
     * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
-
-* [Unsupported: Version 1.16](/docs/containers?topic=containers-istio-changelog#v116)
-
-    * [Change log for 1.16.7, released 8 August 2023](/docs/containers?topic=containers-istio-changelog#1167)
-
-    * [Change log for 1.16.6, released 27 July 2023](/docs/containers?topic=containers-istio-changelog#1166)
-
-    * [Change log for 1.16.5, released 8 June 2022](/docs/containers?topic=containers-istio-changelog#1165)
-
-    * [Change log for 1.16.4, released 20 April 2023](/docs/containers?topic=containers-istio-changelog#1164)
-
-    * [Change log for 1.16.3, released 9 March 2023](/docs/containers?topic=containers-istio-changelog#1163)
-
-    * [Change log for 1.16.2, released 14 February 2023](/docs/containers?topic=containers-istio-changelog#1162)
-
-    * [Change log for 1.16.1, released 10 January 2023](/docs/containers?topic=containers-istio-changelog#1161)
-
-    * [Change log for 1.16.0, released November 30th, 2022](/docs/containers?topic=containers-istio-changelog#1160)
 
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
@@ -6730,6 +6712,10 @@ subcollection: containers
 
 
 [Ingress ALB](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
+
+* [Version 1.13.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.13.2)
+
+    * [1.13.2_7820_iks, released 16 September 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_7820_iks)
 
 * [Version 1.12.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.12.1)
 

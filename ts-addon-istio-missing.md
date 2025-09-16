@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2025
+lastupdated: "2025-09-16"
 
 
 keywords: kubernetes, help
@@ -31,7 +31,7 @@ Review the following possible causes:
 {: tsCauses}
 
 * You deleted one of the Istio deployments that is installed in your cluster Istio managed add-on.
-* You changed the default `IstioOperator` (IOP) resource. When you enable the managed Istio add-on, you can't use `IstioOperator` (`iop`) resources to customize the Istio control plane installation. Only the `IstioOperator` resources that are managed by IBM for the Istio control plane are supported. Changing the control plane settings might result in an unsupported control plane state. If you create an `IstioOperator` resource for custom gateways in your Istio data plane, you are responsible for managing those resources.
+* You changed the default `IstioOperator` (IOP) resource. When you enable the managed Istio add-on, you can't use `IstioOperator` (`iop`) resources to customize the Istio control plane installation. Only the `IstioOperator` resources that are managed by IBM for the Istio control plane are supported. Changing the control plane settings might result in an unsupported control plane state. If you create an `IstioOperator` resource for custom gateways in your data plane in Istio version 1.23 and earlier, you are responsible for managing those resources.
 
 
 To verify the control plane components installation:
@@ -60,9 +60,3 @@ To verify the control plane components installation:
     ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
     ```
     {: pre}
-
-
-
-
-
-

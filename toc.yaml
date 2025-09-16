@@ -348,7 +348,7 @@ toc:
           label: Add-on version history
           topics:
           - add-on-versions.md
-          - versions-istio.md
+          - cs_istio_changelog.md
           - versions-autoscaler.md
           - cl-add-ons-ibm-storage-operator.md
           - cl-add-ons-vpc-block-csi-driver.md

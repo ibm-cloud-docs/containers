@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-08-22"
+lastupdated: "2025-09-16"
 
 
 keywords: change log, version history, Ingress ALB
@@ -22,6 +22,16 @@ subcollection: "containers"
 
 Review the version history for Ingress ALB.
 {: shortdesc}
+
+
+
+## Version 1.13.2
+{: #cl-ingress-alb-1.13.2}
+
+
+### 1.13.2_7820_iks, released 16 September 2025
+{: #cl-ingress-alb-1132_7820_iks}
+
 
 
 

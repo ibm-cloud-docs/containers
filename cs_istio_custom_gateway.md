@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-03-04"
+lastupdated: "2025-09-16"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -17,10 +17,10 @@ subcollection: containers
 
 
 
-# Deploying custom Istio gateways
+# Deploying custom Istio gateways in an `IstioOperator`
 {: #istio-custom-gateway}
 
-Create an `IstioOperator` (IOP) custom resource that defines your own ingress and egress gateways for Istio-managed app traffic.
+In add-on version 1.23 and earlier, create an `IstioOperator` (IOP) custom resource that defines your own ingress and egress gateways for Istio-managed app traffic.
 {: shortdesc}
 
 By default, one `istio-ingressgateway` deployment is created in the `istio-system` namespace of your cluster. This deployment is exposed as a public load balancer service with an externally accessible IP address. You can then define ports for your Istio-managed apps in a `Gateway` resource, which configures the `istio-ingressgateway` load balancer to listen for inbound HTTP/TCP traffic to those ports. Additionally, one `istio-egressgateway` is created by default and is exposed as a load balancer service to managing outbound traffic from your Istio-managed apps.
