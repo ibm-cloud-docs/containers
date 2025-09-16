@@ -6731,6 +6731,10 @@ subcollection: containers
 
 [Ingress ALB](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
+* [Version 1.13.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.13.2)
+
+    * [1.13.2_7820_iks, released 16 September 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_7820_iks)
+
 * [Version 1.12.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.12.1)
 
     * [1.12.1_7792_iks, released 21 August 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7792_iks)
