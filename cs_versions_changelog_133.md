@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-09-16"
+lastupdated: "2025-09-17"
 
 
 keywords: change log, version history, 1.33
@@ -123,7 +123,7 @@ The following table shows the components included in the worker node fix pack 1.
 | IBM Cloud Cluster Health Operator | N/A | v0.1.11 | **New:** Cluster health operator offers more detailed status reports for your cluster’s managed components. |
 | Kubernetes | v1.32.7 | v1.33.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.3). |
 | Kubernetes add-on resizer | 1.8.22 | 1.8.23 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.23). |
-| Kubernetes configuration | N/A | N/A | See [Default service settings for Kubernetes components](https://cloud.ibm.com/docs/containers?topic=containers-service-settings). |
+| Kubernetes configuration | N/A | N/A | See [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings). |
 | Kubernetes Metrics Server | v0.7.2 | v0.8.0 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.0). |
 | Kubernetes snapshot controller | v8.0.1 | v8.2.1 | See the [Kubernetes snapshot controller release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v8.2.1). |
 {: caption="Changes since version 1.32." caption-side="bottom"}

@@ -2041,7 +2041,7 @@ ALB OAuth Proxy add-on patch updates.
 {: release-note}
 
 Ingress ConfigMap update
-:   For more information, see the [change log](https://cloud.ibm.com/docs/containers?topic=containers-ibm-k8s-controller-config-change-log).
+:   For more information, see the [change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log).
 
 
 

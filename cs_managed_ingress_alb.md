@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2025
-lastupdated: "2025-09-09"
+lastupdated: "2025-09-17"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -80,7 +80,7 @@ To receive bug fixes and security updates, keep automatic updates enabled. When 
 
 You can disable automatic updates for your ALBs by running [`ibmcloud ks ingress alb autoupdate disable -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_enable).
 
-To check if automatic updates are enabled for your cluster, use the [`ibmcloud ks ingress alb autoupdate get -c <cluster_name_or_ID>`](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_get) command. If you decide to enable automatic updates again, you can run [`ibmcloud ks ingress alb autoupdate enable -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable).
+To check if automatic updates are enabled for your cluster, use the [`ibmcloud ks ingress alb autoupdate get -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_get) command. If you decide to enable automatic updates again, you can run [`ibmcloud ks ingress alb autoupdate enable -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_autoupdate_disable).
 
 
 ### Applying manual updates
