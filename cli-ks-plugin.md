@@ -2766,7 +2766,7 @@ Minimum required permissions
 **Example**:
 
 ```sh
-ibmcloud ks dedicated pool --flavor-class mb4c.20x64 --metro dal --name mypool
+ibmcloud ks dedicated pool create --flavor-class mb4c.20x64 --metro dal --name mypool
 ```
 {: pre}
 
