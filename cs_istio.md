@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-16"
+lastupdated: "2025-09-17"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -403,21 +403,68 @@ After the resources are saved and the add-on is disabled, the resources can be r
     ```
     {: pre}
 
-2. For version 1.23 and earlier, delete any custom Istio operator (IOP) resources that you created, such as for a custom ingress gateway. When you run this command, the Istio operator automatically removes any resources that the IOP resource created, such as deployments or services.
+1. For version 1.23 and earlier, delete the custom Istio operator (IOP) resources and the IOP.
+
+    a. Delete any custom Istio operator (IOP) resources that you created, such as for a custom ingress gateway. When you run this command, the Istio operator automatically removes any resources that the IOP resource created, such as deployments or services.
 
     ```sh
     kubectl delete IstioOperator <resource_name> -n <namespace>
     ```
     {: pre}
 
-3. Delete the `managed-istio` IOP.
+    b. Delete the `managed-istio` IOP.
 
     ```sh
     kubectl delete iop -n ibm-operators managed-istio
     ```
     {: pre}
 
-4. Wait 10 minutes before continuing to the next step.
+1. For version 1.24 and later, save and then delete the `addon-istio` gateway ConfigMaps, remove the gateways, and delete the Istio control plane.
+
+    a. Save the `addon-istio` gateway ConfigMaps.
+
+    ```sh
+    kubectl get cm -n ibm-operators managed-istio-ingressgateway-values -o json | jq -r .data.\"values.yaml\" > ingress-gateway.values
+    kubectl get cm -n ibm-operators managed-istio-egressgateway-values -o json | jq -r .data.\"values.yaml\" > egress-gateway.values 
+    ```
+    {: pre}
+
+    b. Delete the `addon-istio` gateway ConfigMaps.
+
+    ```sh
+    kubectl delete cm -n ibm-operators managed-istio-egressgateway-values 
+    kubectl delete cm -n ibm-operators managed-istio-ingressgateway-values
+    ```
+    {: pre}
+
+    b. Remove the [custom gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep).
+
+    c. Delete the Istio control plane.
+
+    ```sh
+    istioctl uninstall -y --purge
+    ```
+    {: pre}
+
+    Output:
+
+    ```sh
+    All Istio resources will be pruned from the cluster
+
+    Removed apps/v1, Kind=Deployment/istiod.istio-system.
+    Removed /v1, Kind=Service/istiod.istio-system.
+    Removed /v1, Kind=ConfigMap/istio.istio-system.
+    Removed /v1, Kind=ConfigMap/istio-sidecar-injector.istio-system.
+    Removed /v1, Kind=Pod/istiod-7f59b54bfd-p5f4d.istio-system.
+    Removed /v1, Kind=Pod/istiod-7f59b54bfd-zckw6.istio-system.
+    Removed policy/v1, Kind=PodDisruptionBudget/istiod.istio-system.
+    Removed autoscaling/v2, Kind=HorizontalPodAutoscaler/istiod.istio-system.
+    Removed admissionregistration.k8s.io/v1, Kind=MutatingWebhookConfiguration/istio-sidecar-injector..
+    ✔ Uninstall complete
+    ```
+    {: pre}
+
+1. Wait 10 minutes before continuing to the next step.
 
 
 ### Step 4: Remove the Istio operator
@@ -491,7 +538,7 @@ Disable the add-on and verify that no additional Istio add-ons remain.
 ### Step 2: Scale down the Istio operator
 {: #migrate_scale_operator}
 
-Scale down the Istio operator deployment.
+Scale down the Istio operator deployment. When migrating from the Istio add-on's use of the in-cluster Istio operator to community Istio's use of `istioctl`, you must avoid having both installation methods fighting for control of Istio. The steps of scaling down the operator, deleting the IOPs, and then deleting the operator removes the in-cluster operator without uninstalling Istio.
 {: shortdesc}
 
 Run the following command:
@@ -513,7 +560,7 @@ Save any resources that you created or modified in the `istio-system` namespace 
     ```
     {: pre}
 
-1. Save all IstioOperator CRs (IOPs).
+1. Save all IstioOperator CRs (IOPs). The in-cluster Istio operator has a finalizer on the IOPs to prevent their deletion until the in-cluster operator deletes the resources that are defined in the IOPs. As part of removing the Istio operator without deleting Istio, you must remove the finalizers.
 
     - List the IOP resources:
         ```sh
@@ -521,7 +568,9 @@ Save any resources that you created or modified in the `istio-system` namespace 
         ```
         {: pre}
 
-    - For each IOP resource listed, remove the finalizer. Example using the `managed-istio` IOP:
+    - For each IOP resource listed, remove the finalizer. 
+    
+        Example using the `managed-istio` IOP:
         ```sh
         kubectl patch -n ibm-operators istiooperator/managed-istio --type json --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]'
         ```
@@ -547,7 +596,7 @@ Delete all Istio operator (IOP) resources, such as for a custom ingress gateway.
     ```
     {: pre}
 
-1. For each IOP file that you saved in the previous step, run the `istioctl upgrade` command.
+1. For each IOP file that you saved in the previous step, run the `istioctl upgrade` command to upgrade Istio to the version that matches the `istioctl` version. This command also changes the installation and upgrade mechanism from using the in-cluster operator to `istioctl`.
 
     ```sh
     istioctl upgrade -f <filename>.yaml
@@ -558,7 +607,7 @@ Delete all Istio operator (IOP) resources, such as for a custom ingress gateway.
 ### Step 5: Removing the Istio operator and IOPs
 {: #migrate_uninstall_operator}
 
-Delete the Istio operator deployment, service account, cluster role binding, cluster role, and all IOPs.
+Delete the Istio operator deployment, service account, cluster role binding, cluster role, and all IOPs. Istio was transfered from the in-cluster Istio operator to the `istioctl` based installation. Now you can clean up the remains of the in-cluster Istio operator installation while it is scaled down.
 {: shortdesc}
 
 1. Run the following commands to delete the istio operator deployment:
