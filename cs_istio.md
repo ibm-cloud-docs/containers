@@ -304,187 +304,6 @@ If you disable the Istio add-on, the `managed-istio-custom` ConfigMap is not rem
 
 
 
-## Uninstalling the Istio add-on
-{: #istio_uninstall}
-
-If you're finished working with Istio, you can clean up the Istio resources in your cluster and uninstall the Istio add-ons.
-{: shortdesc}
-
-### Step 1: Saving resources before uninstallation
-{: #uninstall_resources}
-
-Any resources that you created or modified in the `istio-system` namespace are removed. To keep these resources, save them before you uninstall the Istio add-on.
-{: shortdesc}
-
-1. Save the `managed-istio-custom` ConfigMap to troubleshoot a problem or to reinstall the add-on later.
-
-    ```sh
-    kubectl get cm -n ibm-operators managed-istio-custom -o yaml > Customizations.yaml
-    ```
-    {: pre}
-
-2. For version 1.23 and earlier, save all IstioOperator CRs (IOPs).
-
-    a. List the IOP resources:
-    ```sh
-    kubectl get iop -A
-    ```
-    {: pre}
-
-    b. For each IOP resource listed, save each to a file:
-    ```sh
-    kubectl get iop -n <IOP_namespace> <IOP_name> -o yaml > <IOP_name>.yaml
-    ```
-    {: pre}
-
-
-
-### Step 2: Uninstalling the Istio add-on
-{: #istio_uninstall_addon}
-
-Uninstall the add-on from the console or CLI. For Istio 1.20 and earlier, any custom Istio operator (IOP) resources are automatically deleted.
-{: shortdesc}
-
-#### Uninstalling the Istio add-on from the console
-{: #istio_uninstall_ui}
-{: ui}
-
-1. In your [cluster dashboard](https://cloud.ibm.com/containers/cluster-management/clusters){: external}, click the name of the cluster where you want to remove the Istio add-on.
-
-2. Navigate to the **Add-ons** section.
-
-3. On the Managed Istio card, click the Action menu icon.
-
-4. Click **Uninstall**. The managed Istio add-on is disabled in this cluster and all Istio resources in this cluster are removed.
-
-5. On the Managed Istio card, verify that the add-on you uninstalled is no longer listed.
-
-#### Uninstalling the Istio add-on from the CLI
-{: #istio_uninstall_cli}
-{: cli}
-
-If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras` add-ons, skip steps 1 and 2. 
-{: tip}
-
-1. Disable the `istio-sample-bookinfo` add-on.
-    ```sh
-    ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-2. Disable the `istio-extras` add-on.
-    ```sh
-    ibmcloud ks cluster addon disable istio-extras --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-3. Disable the `istio` add-on.
-    ```sh
-    ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
-    ```
-    {: pre}
-
-4. Verify that all managed Istio add-ons are disabled in this cluster. No Istio add-ons are returned in the output.
-    ```sh
-    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-### Step 3: Removing resources
-{: #istio_remove_resources}
-
-After the resources are saved and the add-on is disabled, the resources can be removed.
-{: shortdesc}
-
-1. The `managed-istio-custom` ConfigMap is not removed during uninstallation. If you later re-enable the Istio add-on, any [customized settings that you made to the ConfigMap](#customize) are applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap.
-
-    ```sh
-    kubectl delete cm -n ibm-operators managed-istio-custom
-    ```
-    {: pre}
-
-1. For version 1.23 and earlier, delete the custom Istio operator (IOP) resources and the IOP.
-
-    a. Delete any custom Istio operator (IOP) resources that you created, such as for a custom ingress gateway. When you run this command, the Istio operator automatically removes any resources that the IOP resource created, such as deployments or services.
-
-    ```sh
-    kubectl delete IstioOperator <resource_name> -n <namespace>
-    ```
-    {: pre}
-
-    b. Delete the `managed-istio` IOP.
-
-    ```sh
-    kubectl delete iop -n ibm-operators managed-istio
-    ```
-    {: pre}
-
-1. For version 1.24 and later, save and then delete the `addon-istio` gateway ConfigMaps, remove the gateways, and delete the Istio control plane.
-
-    a. Save the `addon-istio` gateway ConfigMaps.
-
-    ```sh
-    kubectl get cm -n ibm-operators managed-istio-ingressgateway-values -o json | jq -r .data.\"values.yaml\" > ingress-gateway.values
-    kubectl get cm -n ibm-operators managed-istio-egressgateway-values -o json | jq -r .data.\"values.yaml\" > egress-gateway.values 
-    ```
-    {: pre}
-
-    b. Delete the `addon-istio` gateway ConfigMaps.
-
-    ```sh
-    kubectl delete cm -n ibm-operators managed-istio-egressgateway-values 
-    kubectl delete cm -n ibm-operators managed-istio-ingressgateway-values
-    ```
-    {: pre}
-
-    b. Remove the [custom gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep).
-
-    c. Delete the Istio control plane.
-
-    ```sh
-    istioctl uninstall -y --purge
-    ```
-    {: pre}
-
-    Output:
-
-    ```sh
-    All Istio resources will be pruned from the cluster
-
-    Removed apps/v1, Kind=Deployment/istiod.istio-system.
-    Removed /v1, Kind=Service/istiod.istio-system.
-    Removed /v1, Kind=ConfigMap/istio.istio-system.
-    Removed /v1, Kind=ConfigMap/istio-sidecar-injector.istio-system.
-    Removed /v1, Kind=Pod/istiod-7f59b54bfd-p5f4d.istio-system.
-    Removed /v1, Kind=Pod/istiod-7f59b54bfd-zckw6.istio-system.
-    Removed policy/v1, Kind=PodDisruptionBudget/istiod.istio-system.
-    Removed autoscaling/v2, Kind=HorizontalPodAutoscaler/istiod.istio-system.
-    Removed admissionregistration.k8s.io/v1, Kind=MutatingWebhookConfiguration/istio-sidecar-injector..
-    ✔ Uninstall complete
-    ```
-    {: pre}
-
-1. Wait 10 minutes before continuing to the next step.
-
-
-### Step 4: Remove the Istio operator
-{: #istio_uninstall_operator}
-
-For version 1.23 and earlier, after the add-on is completely uninstalled, you can remove the Istio operator.
-{: shortdesc}
-
-Delete the Istio operator deployment, service account, cluster role binding, and cluster role.
-```sh
-kubectl delete deployment -n ibm-operators addon-istio-operator --ignore-not-found=true
-kubectl delete serviceaccount -n ibm-operators addon-istio-operator --ignore-not-found=true
-kubectl delete clusterrolebinding addon-istio-operator --ignore-not-found=true
-kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
-```
-{: pre}
-
-
-
-
 
 ## Migrating from the Istio add-on to community Istio
 {: #migrate}
@@ -648,3 +467,183 @@ kubectl delete cm -n ibm-operators managed-istio-custom
 {: pre}
 
 The removal of the add-on is complete and you can continue to use and upgrade the community Istio as needed.
+
+
+
+## Uninstalling the Istio add-on
+{: #istio_uninstall}
+
+If you're finished working with Istio, you can clean up the Istio resources in your cluster and uninstall the Istio add-ons.
+{: shortdesc}
+
+### Step 1: Saving resources before uninstallation
+{: #uninstall_resources}
+
+Any resources that you created or modified in the `istio-system` namespace are removed. To keep these resources, save them before you uninstall the Istio add-on.
+{: shortdesc}
+
+1. Save the `managed-istio-custom` ConfigMap to troubleshoot a problem or to reinstall the add-on later.
+
+    ```sh
+    kubectl get cm -n ibm-operators managed-istio-custom -o yaml > Customizations.yaml
+    ```
+    {: pre}
+
+2. For version 1.23 and earlier, save all IstioOperator CRs (IOPs).
+
+    a. List the IOP resources:
+    ```sh
+    kubectl get iop -A
+    ```
+    {: pre}
+
+    b. For each IOP resource listed, save each to a file:
+    ```sh
+    kubectl get iop -n <IOP_namespace> <IOP_name> -o yaml > <IOP_name>.yaml
+    ```
+    {: pre}
+
+
+
+### Step 2: Uninstalling the Istio add-on
+{: #istio_uninstall_addon}
+
+Uninstall the add-on from the console or CLI. For Istio 1.20 and earlier, any custom Istio operator (IOP) resources are automatically deleted.
+{: shortdesc}
+
+#### Uninstalling the Istio add-on from the console
+{: #istio_uninstall_ui}
+{: ui}
+
+1. In your [cluster dashboard](https://cloud.ibm.com/containers/cluster-management/clusters){: external}, click the name of the cluster where you want to remove the Istio add-on.
+
+2. Navigate to the **Add-ons** section.
+
+3. On the Managed Istio card, click the Action menu icon.
+
+4. Click **Uninstall**. The managed Istio add-on is disabled in this cluster and all Istio resources in this cluster are removed.
+
+5. On the Managed Istio card, verify that the add-on you uninstalled is no longer listed.
+
+#### Uninstalling the Istio add-on from the CLI
+{: #istio_uninstall_cli}
+{: cli}
+
+If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras` add-ons, skip steps 1 and 2. 
+{: tip}
+
+1. Disable the `istio-sample-bookinfo` add-on.
+    ```sh
+    ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+2. Disable the `istio-extras` add-on.
+    ```sh
+    ibmcloud ks cluster addon disable istio-extras --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+3. Disable the `istio` add-on.
+    ```sh
+    ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
+    ```
+    {: pre}
+
+4. Verify that all managed Istio add-ons are disabled in this cluster. No Istio add-ons are returned in the output.
+    ```sh
+    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+### Step 3: Removing resources
+{: #istio_remove_resources}
+
+After the resources are saved and the add-on is disabled, the resources can be removed.
+{: shortdesc}
+
+1. The `managed-istio-custom` ConfigMap is not removed during uninstallation. If you later re-enable the Istio add-on, any [customized settings that you made to the ConfigMap](#customize) are applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap.
+
+    ```sh
+    kubectl delete cm -n ibm-operators managed-istio-custom
+    ```
+    {: pre}
+
+1. For version 1.23 and earlier, delete the custom Istio operator (IOP) resources and the IOP.
+
+    a. Delete any custom Istio operator (IOP) resources that you created, such as for a custom ingress gateway. When you run this command, the Istio operator automatically removes any resources that the IOP resource created, such as deployments or services.
+
+    ```sh
+    kubectl delete IstioOperator <resource_name> -n <namespace>
+    ```
+    {: pre}
+
+    b. Delete the `managed-istio` IOP.
+
+    ```sh
+    kubectl delete iop -n ibm-operators managed-istio
+    ```
+    {: pre}
+
+1. For version 1.24 and later, save and then delete the `addon-istio` gateway ConfigMaps, remove the custom gateways, and delete the Istio control plane.
+
+    a. Save the `addon-istio` gateway ConfigMaps.
+
+    ```sh
+    kubectl get cm -n ibm-operators managed-istio-ingressgateway-values -o json | jq -r .data.\"values.yaml\" > ingress-gateway.values
+    kubectl get cm -n ibm-operators managed-istio-egressgateway-values -o json | jq -r .data.\"values.yaml\" > egress-gateway.values 
+    ```
+    {: pre}
+
+    b. Delete the `addon-istio` gateway ConfigMaps.
+
+    ```sh
+    kubectl delete cm -n ibm-operators managed-istio-egressgateway-values 
+    kubectl delete cm -n ibm-operators managed-istio-ingressgateway-values
+    ```
+    {: pre}
+
+    b. Remove the [custom gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep).
+
+    c. Delete the Istio control plane.
+
+    ```sh
+    istioctl uninstall -y --purge
+    ```
+    {: pre}
+
+    Output:
+
+    ```sh
+    All Istio resources will be pruned from the cluster
+
+    Removed apps/v1, Kind=Deployment/istiod.istio-system.
+    Removed /v1, Kind=Service/istiod.istio-system.
+    Removed /v1, Kind=ConfigMap/istio.istio-system.
+    Removed /v1, Kind=ConfigMap/istio-sidecar-injector.istio-system.
+    Removed /v1, Kind=Pod/istiod-7f59b54bfd-p5f4d.istio-system.
+    Removed /v1, Kind=Pod/istiod-7f59b54bfd-zckw6.istio-system.
+    Removed policy/v1, Kind=PodDisruptionBudget/istiod.istio-system.
+    Removed autoscaling/v2, Kind=HorizontalPodAutoscaler/istiod.istio-system.
+    Removed admissionregistration.k8s.io/v1, Kind=MutatingWebhookConfiguration/istio-sidecar-injector..
+    ✔ Uninstall complete
+    ```
+    {: pre}
+
+1. Wait 10 minutes before continuing to the next step.
+
+
+### Step 4: Remove the Istio operator
+{: #istio_uninstall_operator}
+
+For version 1.23 and earlier, after the add-on is completely uninstalled, you can remove the Istio operator.
+{: shortdesc}
+
+Delete the Istio operator deployment, service account, cluster role binding, and cluster role.
+```sh
+kubectl delete deployment -n ibm-operators addon-istio-operator --ignore-not-found=true
+kubectl delete serviceaccount -n ibm-operators addon-istio-operator --ignore-not-found=true
+kubectl delete clusterrolebinding addon-istio-operator --ignore-not-found=true
+kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
+```
+{: pre}

@@ -3309,16 +3309,6 @@ subcollection: containers
 
 * [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=cli#customize)
 
-* [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
-
-    * [Step 1: Saving resources before uninstallation](/docs/containers?topic=containers-istio&interface=cli#uninstall_resources)
-
-    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_addon)
-
-    * [Step 3: Removing resources](/docs/containers?topic=containers-istio&interface=cli#istio_remove_resources)
-
-    * [Step 4: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
-
 * [Migrating from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=cli#migrate)
 
     * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#migrate_disable_ui)
@@ -3334,6 +3324,16 @@ subcollection: containers
     * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_uninstall_operator)
 
     * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio&interface=cli#migrate_configmap)
+
+* [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
+
+    * [Step 1: Saving resources before uninstallation](/docs/containers?topic=containers-istio&interface=cli#uninstall_resources)
+
+    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_addon)
+
+    * [Step 3: Removing resources](/docs/containers?topic=containers-istio&interface=cli#istio_remove_resources)
+
+    * [Step 4: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
 
 [Updating Istio](/docs/containers?topic=containers-istio-update#istio-update)
 
