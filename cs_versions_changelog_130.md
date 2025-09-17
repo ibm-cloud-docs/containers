@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-09-16"
+lastupdated: "2025-09-17"
 
 
 keywords: change log, version history, 1.30
@@ -970,7 +970,7 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 | Konnectivity agent and server | v0.29.2_105_iks | v0.30.2 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.30.2). |
 | Kubernetes | v1.29.5 | v1.30.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.1). |
 | Kubernetes add-on resizer | 1.8.19 | 1.8.20 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.20). |
-| Kubernetes configurations | N/A | N/A | See [Default service settings for Kubernetes components](https://cloud.ibm.com/docs/containers?topic=containers-service-settings). |
+| Kubernetes configurations | N/A | N/A | See [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings). |
 | Kubernetes Metrics Server | v0.6.4 | v0.7.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.7.1). |
 | Kubernetes snapshot controller | v6.3.0 | v6.3.3 | See the [Kubernetes snapshot controller release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v6.3.3). |
 {: caption="Changes since version 1.29" caption-side="bottom"}

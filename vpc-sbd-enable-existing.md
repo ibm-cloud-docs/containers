@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2025
-lastupdated: "2025-07-01"
+lastupdated: "2025-09-17"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, outbound traffic protection, 1.30
 
@@ -23,7 +23,7 @@ subcollection: containers
 The following steps walk you through enabling the security group configurations that were introduced with secure by default on clusters that were created before 1.30. Secure by default networking introduced new security group configurations and behaviors for newly provisioned VPC clusters created at 1.30 and later. Clusters created at versions 1.29 and earlier did not get the secure by default security group configurations when updating to 1.30.
 {: shortdesc}
 
-Enabling secure by default on your cluster is permanent and irreversible. The enablement process requires you to replace all the workers nodes in your cluster. Only enable secure by default when it's beneficial to do so. Note that load balancers might not be accessible until after you replace all your workers. For more information, see [Understanding secure by default](https://cloud.ibm.com/docs/containers?topic=containers-vpc-security-group-reference).
+Enabling secure by default on your cluster is permanent and irreversible. The enablement process requires you to replace all the workers nodes in your cluster. Only enable secure by default when it's beneficial to do so. Note that load balancers might not be accessible until after you replace all your workers. For more information, see [Understanding secure by default](/docs/containers?topic=containers-vpc-security-group-reference).
 {: important}
 
 

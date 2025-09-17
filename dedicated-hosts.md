@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2025
+lastupdated: "2025-09-17"
 
 
 keywords: kubernetes, dedicated hosts
@@ -159,7 +159,7 @@ Minimum required permissions
 
 1. List your dedicated host pools and make a note of the pool that you want to remove.
     ```sh
-    ibmcloud ks dedicated host pool ls
+    ibmcloud ks dedicated pool ls
     ```
     {: pre}
     
@@ -190,5 +190,3 @@ Minimum required permissions
     {: pre}
     
     
-
-

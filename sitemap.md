@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-16"
+lastupdated: "2025-09-17"
 
 
 keywords: containers
@@ -888,8 +888,6 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} version 1.26 is no longer supported.
 
-* [May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may24)
-
     * [30 May 2024](/docs/containers?topic=containers-containers-relnotes#containers-may3024)
 
         * Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
@@ -1503,224 +1501,6 @@ subcollection: containers
     * [5 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun523)
 
         * Worker node fix packs `1.24.14_1571`, `1.25.10_1547`, `1.26.5_1539`, and `1.27.2_1527`.
-
-* [May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may23)
-
-    * [31 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may3123)
-
-        * Master fix packs `1.24.14_1568`, `1.25.10_1545`, and `1.26.5_1537`.
-
-    * [25 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2523)
-
-        * CLI version `1.0.523`.
-
-        * Kubernetes version 1.27 certification
-
-    * [24 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2423)
-
-        * New! {{site.data.keyword.containerlong_notm}} version 1.27.
-
-        * Master fix pack `1.27.2_1524` and worker node fix pack `1.27.2_1526`.
-
-        * Worker node fix packs `1.24.14_1570`, `1.25.10_1546`, and `1.26.5_1538`.
-
-    * [23 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may2323)
-
-        * Ingress ALB versions `1.6.4_4170_iks`, `1.5.1_4168_iks`, and `1.4.0_4169_iks`
-
-    * [16 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1623)
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.0`.
-
-    * [15 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1523)
-
-        * Cluster autoscaler add-on versions `1.0.6_1077`, `1.0.7_1076`, `1.0.8_1078`, and `1.1.0_1066`.
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1-beta`
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.12_1963` and `5.1.8_1970`.
-
-    * [10 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may1023)
-
-        * Create Classic and VPC clusters with Terraform
-
-    * [9 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0923)
-
-        * Worker node fix packs `1.24.13_1567`, `1.25.9_1544`, and `1.26.4_1536`.
-
-    * [4 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0423)
-
-        * Ingress ALB version `1.6.4_4117_iks`, `1.5.1_4113_iks`, and `1.4.0_4114_iks`
-
-    * [2 May 2023](/docs/containers?topic=containers-containers-relnotes#containers-may0223)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.14`
-
-* [April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr23)
-
-    * [27 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2723)
-
-        * Ingress ALB version `1.6.4_4073_iks`, `1.5.1_4064_iks`, and `1.4.0_4062_iks`
-
-        * Master fix packs `1.23.17_1576`, `1.24.13_1566`, `1.25.9_1543`, and `1.26.4_1535`.
-
-    * [26 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2623)
-
-        * Cluster autoscaler add-on version `1.1.0_1060`.
-
-    * [24 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2423)
-
-        * Worker node fix packs `1.23.17_1576`, `1.24.13_1566`, `1.25.9_1543`, and `1.26.4_1535`.
-
-    * [20 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr2023)
-
-        * Istio add-on version `1.16.4` and `1.17.2`.
-
-    * [13 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr1323)
-
-        * ALB OAuth Proxy add-on version `2.0.0_1528`.
-
-    * [12 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr1223)
-
-        * Ingress ALB version `1.6.4_3976_iks`, `1.5.1_3977_iks`, and `1.4.0_3978_iks`
-
-    * [11 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr1123)
-
-        * CLI version `1.0.510`.
-
-        * Worker node fix packs `1.23.17_1574`, `1.24.12_1564`, `1.25.8_1541`, and `1.26.3_1533`.
-
-    * [5 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0523)
-
-        * Cluster autoscaler add-on versions `1.0.6_1010`, `1.0.7_1021`, and `1.0.8_1016`.
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.10_1869` and `5.1.6_1872`.
-
-    * [4 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0423)
-
-        * Ingress ALB version `1.4.0_3953_iks`, `1.5.1_3951_iks`, and `1.6.4_3947_iks`
-
-    * [3 April 2023](/docs/containers?topic=containers-containers-relnotes#containers-apr0323)
-
-        * Pod Security admission 
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.13`
-
-* [March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar23)
-
-    * [29 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2923)
-
-        * Worker node fix packs `1.23.17_1572`, `1.24.12_1562`, `1.25.8_1539`, and `1.26.3_1531`.
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.9_1862` and `5.1.5_1857`.
-
-        * Cluster autoscaler add-on versions `1.0.7_988` and `1.0.8_987`.
-
-    * [28 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2823)
-
-        * Master fix packs `1.23.17_1569`, `1.24.12_1559`, `1.25.8_1536`, and `1.26.3_1528`.
-
-        * Worker node fix packs `1.23.17_1570`, `1.24.12_1560`, `1.25.8_1537`, and `1.26.3_1529`.
-
-    * [24 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2423)
-
-        * Ingress ALB version `1.4.0_3896_iks`, `1.5.1_3897_iks`, and `1.6.4_3898_iks`
-
-    * [21 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2123)
-
-        * New troubleshooting steps for workers in `Critical` or `NotReady` state. 
-
-    * [20 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar2023)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.12`.
-
-    * [16 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar1623)
-
-        * Cluster autoscaler add-on version `1.1.0_978`.
-
-    * [14 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar1423)
-
-        * Ingress ALB version `1.4.0_3862_iks`, `1.5.1_3863_iks`, and `1.6.4_3864_iks`
-
-        * Worker node fix packs `1.23.16_1568`, `1.24.10_1558`, `1.25.6_1535`, and `1.26.1_1525`.
-
-    * [9 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0923)
-
-        * Cluster autoscaler add-on version `1.0.8_968`
-
-        * Istio add-on version `1.15.6` and `1.16.3`.
-
-    * [7 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0723)
-
-        * Worker node fix packs `1.23.16_1567`, `1.24.10_1557`, `1.25.6_1534`, and `1.26.1_1524`.
-
-        * Cluster autoscaler add-on version `1.0.6_955` and `1.0.7_956`.
-
-        * Istio add-on version `1.17.1`.
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.17_1829`, `5.0.7_1836`, and `5.1.2_1828`.
-
-    * [3 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0323)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.10`.
-
-    * [1 March 2023](/docs/containers?topic=containers-containers-relnotes#containers-mar0123)
-
-        * CLI version `1.0.498`.
-
-        * ALB OAuth Proxy add-on version `2.0.0_1487`.
-
-* [February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb23)
-
-    * [27 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb2723)
-
-        * Worker node fix packs `1.23.16_1563`, `1.24.10_1554`, `1.25.6_1532`, and `1.26.1_1522`.
-
-    * [23 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb2323)
-
-        * Ingress ALB version `1.3.1_3807_iks`, `1.4.0_3808_iks`, and `1.5.1_3809_iks`
-
-    * [22 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb2223)
-
-        * ALB OAuth Proxy add-on version `2.0.0_1469`.
-
-    * [21 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb2123)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.10`.
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `4.4.17_1829`, `5.0.7_1836`, and `5.1.2_1828`.
-
-    * [20 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb2023)
-
-        * Ingress ALB version `1.3.1_3777_iks`, `1.4.0_3783_iks`, and `1.5.1_3779_iks`
-
-    * [17 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1723)
-
-        * Cluster autoscaler add-on version `1.0.7_944`.
-
-    * [14 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1423)
-
-        * Istio add-on `1.15.5` and `1.16.2`
-
-    * [13 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1323)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.9` is available.
-
-        * Worker node fix packs `1.23.16_1562`, `1.24.10_1553`, `1.25.6_1531`, and `1.26.1_1521`.
-
-    * [10 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb1023)
-
-        * New troubleshooting doc for how to recover after deleting a portable subnet in Classic clusters.
-
-        * Ingress ALB version `1.3.1_3754_iks` and `1.4.0_3755_iks`
-
-    * [9 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0923)
-
-        * {{site.data.keyword.block_storage_is_short}} add-on version `5.1`.
-
-    * [8 February 2023](/docs/containers?topic=containers-containers-relnotes#containers-feb0823)
-
-        * ALB OAuth Proxy add-on version `2.0.0_1420`.
 
 
 ## Tutorials library for Kubernetes Service
@@ -3427,16 +3207,6 @@ subcollection: containers
 
 * [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=cli#customize)
 
-* [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
-
-    * [Step 1: Saving resources before uninstallation](/docs/containers?topic=containers-istio&interface=cli#uninstall_resources)
-
-    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_addon)
-
-    * [Step 3: Removing resources](/docs/containers?topic=containers-istio&interface=cli#istio_remove_resources)
-
-    * [Step 4: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
-
 * [Migrating from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=cli#migrate)
 
     * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#migrate_disable_ui)
@@ -3452,6 +3222,16 @@ subcollection: containers
     * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_uninstall_operator)
 
     * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio&interface=cli#migrate_configmap)
+
+* [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
+
+    * [Step 1: Saving resources before uninstallation](/docs/containers?topic=containers-istio&interface=cli#uninstall_resources)
+
+    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_addon)
+
+    * [Step 3: Removing resources](/docs/containers?topic=containers-istio&interface=cli#istio_remove_resources)
+
+    * [Step 4: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
 
 [Updating Istio](/docs/containers?topic=containers-istio-update#istio-update)
 
