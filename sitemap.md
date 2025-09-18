@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-17"
+lastupdated: "2025-09-18"
 
 
 keywords: containers
@@ -5779,8 +5779,6 @@ subcollection: containers
 * [`vpc-block-csi-driver` 5.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.1)
 
 * [`vpc-block-csi-driver` 5.2](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.2)
-
-* [`vpc-file-csi-driver` 1.2](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-1.2)
 
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
