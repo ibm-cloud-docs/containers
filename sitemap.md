@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-17"
+lastupdated: "2025-09-19"
 
 
 keywords: containers
@@ -2127,7 +2127,7 @@ subcollection: containers
 
     * [Protecting specific APIs](/docs/containers?topic=containers-cbr#protect-api-types-cbr)
 
-    * [Allowing {{site.data.keyword.containerlong_notm}} to access other {{site.data.keyword.cloud_notm}} resources by using CBR](/docs/containers?topic=containers-cbr#cbr-integrations)
+    * [Ensure {{site.data.keyword.containerlong_notm}} can maintain access to other {{site.data.keyword.cloud_notm}} resources when CBR is enabled for them](/docs/containers?topic=containers-cbr#cbr-integrations)
 
 * [Creating network zones](/docs/containers?topic=containers-cbr#create-cbr-network-zone-containers)
 
@@ -5779,8 +5779,6 @@ subcollection: containers
 * [`vpc-block-csi-driver` 5.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.1)
 
 * [`vpc-block-csi-driver` 5.2](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.2)
-
-* [`vpc-file-csi-driver` 1.2](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-1.2)
 
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
