@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-07-21"
+lastupdated: "2025-09-19"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -136,7 +136,6 @@ Start by checking for error messages in the Ingress resource deployment events a
 {: #ping}
 
 Check the availability of your Ingress subdomain and ALBs' public IP addresses. Additionally, ensure that the Akamai multizone load balancer can access your ALBs to health check them.
-
 {: shortdesc}
 
 1. Get the IP addresses (classic) or hostname (VPC) that your public ALBs are listening on.
@@ -366,6 +365,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     </html>
     ```
     {: screen}
+
 
 
 5. Verify that the ALB IP address is removed from the DNS registration for your domain by checking the Akamai server. Note that the DNS registration might take a few minutes to update.
