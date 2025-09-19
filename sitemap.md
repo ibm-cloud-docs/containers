@@ -6298,7 +6298,7 @@ subcollection: containers
 
     * [Change log for version 2.0.4_232, released 3 July 2024](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#2.0.4_232_is_file_relnote)
 
-* [Version 1.2](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#012_is_file)
+* [Version 1.2 archive](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#012_is_file)
 
     * [Change log for version 1.2.13_326, released 11 December 2024](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.2.13_326_is_file_relnote)
 
