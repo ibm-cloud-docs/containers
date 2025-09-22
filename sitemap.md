@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-19"
+lastupdated: "2025-09-22"
 
 
 keywords: containers
@@ -8698,11 +8698,11 @@ subcollection: containers
 
 * [Step 5: Search the pod logs](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod-logs)
 
-* [Step 5: Restart the pod](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod-restart)
+* [Step 6: Restart the pod](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod-restart)
 
 * [Step 6: Disable and reenable](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-disable)
 
-* [Step 8: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
+* [Step 7: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
 
 [Autoscaling fails after API key reset](/docs/containers?topic=containers-ts-storage-ca-apikey-reset#ts-storage-ca-apikey-reset)
 
