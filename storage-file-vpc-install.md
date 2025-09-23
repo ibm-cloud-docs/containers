@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-08-11"
+lastupdated: "2025-09-23"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, add-on, file
@@ -42,6 +42,9 @@ File Storage for VPC is considered to be a Financial Services Validated service 
 - {{site.data.keyword.containerlong_notm}} does not support {{site.data.keyword.filestorage_vpc_short}} snapshots.
 - The add-on is managed by the `addon-vpc-file-csi-driver-configmap` configmap in the `kube-system` namespace. File storage events are published in the `file-csi-driver-status` configmap in the `kube-system` namespace. For {{site.data.keyword.containerlong_notm}} 1.30, these two configmaps are retained even when the add-on is disabled. Which means, whenever the add-on is enabled again, the values set by the user in add-on configmap are reapplied.
 - Encryption in-transit is enabled by default. You can optionally enable encryption in-transit when you enable the add-on.
+- Regional file share storage classes are available in Beta for allowlisted account only. For more information, see [Regional file shares overview](/docs/vpc?topic=vpc-file-storage-vpc-about#regional-file-storage-overview).
+- Encryption in transit for regional file share is not supported by the VPC FILE CSI Driver add-on.
+
 
 
 
