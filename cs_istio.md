@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-17"
+lastupdated: "2025-09-23"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -585,50 +585,6 @@ After the resources are saved and the add-on is disabled, the resources can be r
     ```
     {: pre}
 
-1. For version 1.24 and later, save and then delete the `addon-istio` gateway ConfigMaps, remove the custom gateways, and delete the Istio control plane.
-
-    a. Save the `addon-istio` gateway ConfigMaps.
-
-    ```sh
-    kubectl get cm -n ibm-operators managed-istio-ingressgateway-values -o json | jq -r .data.\"values.yaml\" > ingress-gateway.values
-    kubectl get cm -n ibm-operators managed-istio-egressgateway-values -o json | jq -r .data.\"values.yaml\" > egress-gateway.values 
-    ```
-    {: pre}
-
-    b. Delete the `addon-istio` gateway ConfigMaps.
-
-    ```sh
-    kubectl delete cm -n ibm-operators managed-istio-egressgateway-values 
-    kubectl delete cm -n ibm-operators managed-istio-ingressgateway-values
-    ```
-    {: pre}
-
-    b. Remove the [custom gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep).
-
-    c. Delete the Istio control plane.
-
-    ```sh
-    istioctl uninstall -y --purge
-    ```
-    {: pre}
-
-    Output:
-
-    ```sh
-    All Istio resources will be pruned from the cluster
-
-    Removed apps/v1, Kind=Deployment/istiod.istio-system.
-    Removed /v1, Kind=Service/istiod.istio-system.
-    Removed /v1, Kind=ConfigMap/istio.istio-system.
-    Removed /v1, Kind=ConfigMap/istio-sidecar-injector.istio-system.
-    Removed /v1, Kind=Pod/istiod-7f59b54bfd-p5f4d.istio-system.
-    Removed /v1, Kind=Pod/istiod-7f59b54bfd-zckw6.istio-system.
-    Removed policy/v1, Kind=PodDisruptionBudget/istiod.istio-system.
-    Removed autoscaling/v2, Kind=HorizontalPodAutoscaler/istiod.istio-system.
-    Removed admissionregistration.k8s.io/v1, Kind=MutatingWebhookConfiguration/istio-sidecar-injector..
-    ✔ Uninstall complete
-    ```
-    {: pre}
 
 1. Wait 10 minutes before continuing to the next step.
 
