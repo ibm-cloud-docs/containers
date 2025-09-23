@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-16"
+lastupdated: "2025-09-23"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -273,7 +273,7 @@ Current version
 :   1.21.6
 
 Updates in this version
-:   This is the final version of addon-istio 1.21 Addon-istio 1.21 is unsupported on 13 November 2024.
+:   This is the final version of `addon-istio` 1.21. `addon-istio` 1.21 is unsupported on 13 November 2024.
 :   See the Istio release notes for [Istio 1.21.6](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.6/){: external}.
 :   Resolves the following CVEs:
     - [CVE-2024-4603](https://www.cve.org/CVERecord?id=CVE-2024-4603){: external}
@@ -394,7 +394,7 @@ Current version
 :   1.20.8
 
 Updates in this version
-:   This is the final version of addon-istio 1.20. Addon-istio 1.20 is unsupported on 18 September 2024.
+:   This is the final version of `addon-istio` 1.20. `addon-istio` 1.20 is unsupported on 18 September 2024.
 :   See the Istio release notes for [Istio 1.20.8](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.8/){: external}.
 :   Resolves the following CVEs:
     - [CVE-2024-33599](https://www.cve.org/CVERecord?id=CVE-2024-33599){: external}
@@ -602,7 +602,7 @@ Current version
 :   1.19.9
 
 Updates in this version
-:   This is the final version of addon-istio 1.19. Addon-istio 1.19 is unsupported on 08 May 2024.
+:   This is the final version of `addon-istio` 1.19. `addon-istio` 1.19 is unsupported on 08 May 2024.
 :   For more information, see the [Istio security bulletin 2024-002](https://istio.io/latest/news/security/istio-security-2024-002){: external}.
 :   See the Istio release notes for [Istio 1.19.9](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.9/){: external}.
 :   Resolves the following CVEs:
@@ -1116,6 +1116,3 @@ Updates in this version
     - [CVE-2023-0401](https://www.cve.org/CVERecord?id=CVE-2023-0401){: external}
     - usn-5825-2
     - [usn-5844-1](https://ubuntu.com/security/notices/USN-5844-1){: external}
-
-
-

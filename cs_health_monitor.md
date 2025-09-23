@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-02"
+lastupdated: "2025-09-23"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -79,7 +79,7 @@ The observability plug-in installs Sysdig and LogDNA agents in the `ibm-observe`
     ```
     {: pre}
 
-1. Observability agents installed by the observability plug-in use a configmap with the GUID of the IBM Cloud Monitoring instance or the IBM Cloud Log Analysis instance that logs or metrics are being sent to. If your cluster has agents in a namespace other than `ibm-observe` or the configmaps in `ibm-observe` are not named with the instance GUIDs, then these agents were not installed with the IKS observability (ob) plugin.
+1. Observability agents installed by the observability plug-in use a configmap with the GUID of the IBM Cloud Monitoring instance or the IBM Cloud Log Analysis instance that logs or metrics are being sent to. If your cluster has agents in a namespace other than `ibm-observe` or the configmaps in `ibm-observe` are not named with the instance GUIDs, then these agents were not installed with the IKS observability (ob) plug-in.
 
 ### Removing the observability plug-in agents
 {: #ob-remove-mon}
