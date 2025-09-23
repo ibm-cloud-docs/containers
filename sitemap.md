@@ -240,6 +240,14 @@ subcollection: containers
 
 * [September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep25)
 
+    * [22 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep2225)
+
+        * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
+
     * [16 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep1625)
 
         * Ingress ALB cluster add-on patch updates.
@@ -5891,6 +5899,8 @@ subcollection: containers
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
 
 * [Version 1.2.4](/docs/containers?topic=containers-ca_changelog#0124_ca_addon)
+
+    * [Change log for patch update 1.2.4_793, released 18th September 2025](/docs/containers?topic=containers-ca_changelog#124_793_ca)
 
     * [Change log for patch update 1.2.4_680, released 18 July 2025.](/docs/containers?topic=containers-ca_changelog#124_680_ca)
 
