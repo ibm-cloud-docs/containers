@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-23"
+lastupdated: "2025-09-25"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -8945,7 +8945,7 @@ ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 ## `ibmcloud ks experimental trusted-profile default get`
 {: #experimental-trusted-profile-default-get-cli}
 
-[Expires on 2025-10-03] Get the default trusted profile for clusters created in a resource-group.
+[Expires on 2025-12-17] Get the default trusted profile for clusters created in a resource-group.
 
 ```txt
 ibmcloud ks experimental trusted-profile default get --region REGION --resource-group GROUP [--output OUTPUT] [-q]
@@ -8973,7 +8973,7 @@ ibmcloud ks experimental trusted-profile default get --region REGION --resource-
 ## `ibmcloud ks experimental trusted-profile default set`
 {: #experimental-trusted-profile-default-set-cli}
 
-[Expires on 2025-10-03] Set the default trusted profile for clusters created in a resource-group.
+[Expires on 2025-12-17] Set the default trusted profile for clusters created in a resource-group.
 
 ```txt
 ibmcloud ks experimental trusted-profile default set --region REGION --resource-group GROUP --trusted-profile PROFILE [--output OUTPUT] [-q]
@@ -9004,7 +9004,7 @@ ibmcloud ks experimental trusted-profile default set --region REGION --resource-
 ## `ibmcloud ks experimental trusted-profile get`
 {: #experimental-trusted-profile-get-cli}
 
-[Expires on 2025-10-03] Get trusted profile for a cluster.
+[Expires on 2025-12-17] Get trusted profile for a cluster.
 
 ```txt
 ibmcloud ks experimental trusted-profile get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -9029,7 +9029,7 @@ ibmcloud ks experimental trusted-profile get --cluster CLUSTER [--output OUTPUT]
 ## `ibmcloud ks experimental trusted-profile set`
 {: #experimental-trusted-profile-set-cli}
 
-[Expires on 2025-10-03] Set trusted profile on a cluster.
+[Expires on 2025-12-17] Set trusted profile on a cluster.
 
 ```txt
 ibmcloud ks experimental trusted-profile set --cluster CLUSTER --trusted-profile PROFILE [--output OUTPUT] [-q]
