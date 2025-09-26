@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-23"
+lastupdated: "2025-09-26"
 
 
 keywords: containers
@@ -239,6 +239,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep25)
+
+    * [25 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep2525)
+
+        * CLI version `1.0.718` is available.
+
+    * [23 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep2325)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [22 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep2225)
 
@@ -4609,6 +4617,8 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
+    * [Worker node fix pack 1.33.4_1541, released 23 September 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1541_W)
+
     * [Worker node fix pack 1.33.4_1539, released 09 September 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1539_W)
 
     * [Worker node fix pack 1.33.4_1538, released 26 August 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1538_W)
@@ -4681,6 +4691,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Worker node fix pack 1.32.8_1559, released 23 September 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1328_1559_W)
 
     * [Worker node fix pack 1.32.8_1557, released 09 September 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1328_1557_W)
 
@@ -4794,6 +4806,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.12_1568, released 23 September 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13112_1568_W)
 
     * [Worker node fix pack 1.31.12_1566, released 09 September 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13112_1566_W)
 
@@ -4953,6 +4967,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Worker node fix pack 1.30.14_1585, released 23 September 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1585_W)
 
     * [Worker node fix pack 1.30.14_1582, released 09 September 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1582_W)
 
@@ -5608,6 +5624,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.718](/docs/containers?topic=containers-cs_cli_changelog#cli-01078)
 
 * [Version v1.0.717](/docs/containers?topic=containers-cs_cli_changelog#cli-010717)
 
