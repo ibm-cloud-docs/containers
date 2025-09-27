@@ -2,7 +2,7 @@
     "version": 2,
     "title": "IBM Cloud Kubernetes Service",
     "introduction": "Explore the capabilities of IBM Cloud Kubernetes Service and discover the tools to automate, isolate, secure, manage, and monitor your workloads.",
-    "product_page": "https://www.ibm.com/cloud/containers",
+    "product_page": "https://www.ibm.com/products/cloud/containers",
     "console_page": "/kubernetes/overview",
     "section_topics": {
       "links": [

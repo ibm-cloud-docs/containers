@@ -9,7 +9,7 @@ toc:
     label: Kubernetes service
     version: 2
     console-page: /kubernetes/overview
-    product-page: https://www.ibm.com/cloud/containers
+    product-page: https://www.ibm.com/products/cloud/containers
   entries: 
   - navgroup:
       id: learn
