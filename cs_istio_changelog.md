@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-23"
+lastupdated: "2025-09-29"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -30,6 +30,36 @@ To view a list of add-ons and the supported cluster versions, run the following 
 ibmcloud ks cluster addon versions
 ```
 {: pre}
+
+## Version 1.24
+{: #v124}
+
+### Change log for 1.24.6, released 26 September 2025
+{: #1246}
+
+Review the changes that are included in version 1.24.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.23.6
+
+Current version
+:   1.24.6
+
+Updates in this version
+:   The Istio managed add-on is migrating from the in-cluster operator in 1.23.x to a cyclic Helm upgrade installation in 1.24. This upgrade requires a different process than earlier versions, so  review the [migration documentation](/docs/containers?topic=containers-istio-update#istio_minor_124) before getting started.
+
+:   With the move to a Helm-based installation, the gateways are switching from the `istio/gateways` chart that the in-cluster operator used to the `istio/gateway` chart that Istio recommends for Helm-based Istio. The main change is that the Istio gateways are set to `image: auto` to have the sidecar injector automatically select the image to use.
+
+:   With the move away from the `IstioOperator` `CustomResource` to use the Helm `value.yaml` charts, `addon-istio` is no longer supporting more than 1 default gateway (`istio-ingressgateway-public-2` and `istio-ingressgateway-public-3`). However, the default gateway's `value.yaml` can be customized by the user and the user can install the previous gateways as additional custom gateways by using Helm.
+
+:   See the Istio release notes for [Istio 1.24.0](https://istio.io/latest/news/releases/1.24.x/announcing-1.24/){: external}, [Istio 1.24.1](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.1/){: external}, [Istio 1.24.2](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.2/){: external}, [Istio 1.24.3](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.3/){: external}, [Istio 1.24.4](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.4/){: external}, [Istio 1.24.5](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.5/){: external}, and [Istio 1.24.6](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.6/){: external}.
+
+:   Resolves the following CVEs:
+    - [CVE-2024-56406](https://www.cve.org/CVERecord?id=CVE-2024-56406){: external}
+    - [CVE-2025-30258](https://www.cve.org/CVERecord?id=CVE-2025-30258){: external}
+    - [CVE-2025-31115](https://www.cve.org/CVERecord?id=CVE-2025-31115){: external}
+
 
 ## Version 1.23
 {: #v123}

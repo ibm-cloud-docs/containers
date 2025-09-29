@@ -185,6 +185,7 @@ toc:
           - cs_istio.md
           - cs_istio_update.md
           - cs_istio_mesh.md
+          - cs_istio_custom_gateway_helm.md
           - cs_istio_custom_gateway.md
           - cs_istio_health.md
       - topicgroup:

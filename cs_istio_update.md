@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-16"
+lastupdated: "2025-09-29"
 
 
 keywords: istio migration, istio updates, istio upgrades
@@ -35,7 +35,291 @@ Do not use `istioctl` to update the version of Istio that is installed by the ma
 
 
 
-## Updating to a minor version of the Istio add-on
+## Updating from version 1.23 to 1.24 of the Istio add-on
+{: #istio_minor_124}
+
+The update process is different for updating to version 1.24 of the add-on than for other versions because of the changes included in Istio 1.24. Istio ended support for the in-cluster operator, which versions 1.4 through 1.23 of the add-on use to to reconcile and manage the Istio configuration. For 1.24 and later, the add-on uses a cyclical invocation of Helm to manage the Istio installation.
+{: shortdesc}
+
+
+Before you begin:
+
+- Review the [prerequisites](#istio-update-prereq) that apply to all version updates.
+
+- Complete testing before migrating production clusters.
+
+    - Test these migration steps in a test cluster.
+    - Test any existing [custom gateways](/docs/containers?topic=containers-istio-custom-gateway-helm) with a new test cluster that starts at `addon-istio` 1.24.
+    - Test any additional [custom gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#custom_gateways_helm_add) you want to create with a new test cluster that starts at `addon-istio` 1.24.
+
+- Keep in mind that custom gateways are not migrated by completing this task. The gateways are not impacted if they don't have the same names as the default gateways. When the new default gateways exist, you can edit their `value.yaml` files with similar freedom to what a single custom gateway allowed. In cases where you need more than one ingress or egress gateway deployment, you can install and manage additional gateways with Helm.
+
+- In contrast to the data plane's gateway `value.yaml` files, the limited customization of the control plane `value.yaml` files are made available by adding new key-values to the `managed-istio-custom` ConfigMap in the `ibm-operators` namespace as before. The cluster updater reconciles the control plane `value.yaml` files and updates them to match the configuration specified by the add-on or by the `managed-istio-custom` ConfigMap.
+
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+    annotations:
+        version: xxxCU_VERSIONxxx
+        razee.io/source-url: xxxSOURCE_URLxxx
+        razee.io/build-url: xxxBUILD_URLxxx
+    labels:
+        addonmanager.kubernetes.io/mode: EnsureExists
+    name: managed-istio-custom
+    namespace: ibm-operators
+    data:
+    _example: |
+        ...
+        # Global Envoy proxy access logging
+        # ---------------------------------
+        #   To allow Envoy proxy access logging use: "/dev/stdout".
+        #
+        # Add the following key below this _example section.
+        #   Key:    istio-global-proxy-accessLogFile
+        #   Values: (quotes are required)
+        #           ""            is used to disable proxy access logging (Default)
+        #           "/dev/stdout" is used to enable proxy access logging
+        ...
+    istio-global-proxy-accessLogFile: "/dev/stdout"
+    ```
+    {: codeblock}
+
+
+To update the add-on:
+
+1. Disable the in-cluster operator to stop any reconciling of the `IstioOperator` CRs, but leaves the current installation of Istio intact.
+
+    a. Run the `disable` command.
+
+    ```sh
+    ibmcloud ks cluster addon disable istio -c $CLUSTER_ID
+    ```
+    {: pre}
+
+    b. Wait 10 minutes.
+
+    c. Get the administrator `kubeconfig` file, or a `kubeconfig` file with enough authority to run the rest of these commands. 
+    
+    Example: 
+    
+    One method for getting the administrator `kubeconfig` file is to run the following command, which sets the default `kubeconfig` for this shell to be the administrator `kubeconfig` for the cluster.
+
+    ```sh
+    ibmcloud ks cluster config -c $CLUSTER_ID --admin
+    ```
+    {: pre}
+
+
+1. Remove the in-cluster operator by running the following commands.
+
+    a. Remove the deployment.
+    ```sh
+    kubectl delete deployment -n ibm-operators addon-istio-operator --ignore-not-found=true
+    ```
+    {: pre}
+
+    a. Remove the service account.
+    ```sh
+    kubectl delete serviceaccount -n ibm-operators addon-istio-operator --ignore-not-found=true
+    ```
+    {: pre}
+
+    c. Remove the role binding.
+    ```sh
+    kubectl delete clusterrolebinding addon-istio-operator --ignore-not-found=true
+    ```
+    {: pre}
+
+    d. Remove the role.
+    ```sh
+    kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
+    ```
+    {: pre}
+
+
+1. Label and annotate the resources being migrated for Helm to own those resources. Update the following shell script and remove the sections for resources that do not exist in the cluster, then run the script.
+
+    ```sh
+    helm_ownership_of_resource() {
+    release_name="${1}"
+    kind="${2}"
+    name="${3}"
+    namespace="${4}"
+
+    if [ -n "${namespace}" ]; then
+        kubectl label "${kind}" "${name}" -n "${namespace}" app.kubernetes.io/managed-by=Helm || true
+        kubectl annotate "${kind}" "${name}" -n "${namespace}" meta.helm.sh/release-name="${release_name}" || true
+        kubectl annotate "${kind}" "${name}" -n "${namespace}" meta.helm.sh/release-namespace=istio-system || true
+    else
+        kubectl label "${kind}" "${name}" app.kubernetes.io/managed-by=Helm || true
+        kubectl annotate "${kind}" "${name}" meta.helm.sh/release-name="${release_name}" || true
+        kubectl annotate "${kind}" "${name}" meta.helm.sh/release-namespace=istio-system || true
+    fi
+    }
+
+    echo "Each resource migrating to helm needs to be labled with app.kubernetes.io/managed-by=Helm,
+    and annotationed with both meta.helm.sh/release-name=\$RELASE_NAME and meta.helm.sh/release-namespace=istio-system."
+    echo
+    echo "A resource that already has the app.kubernetes.io/managed-by=Helm, for example if this script previously executed,
+    will log as not labeled when this script is run because the label already exists."
+    echo
+
+    echo "Start of istio-base chart objects"
+
+    helm_ownership_of_resource istio-base ServiceAccount istio-reader-service-account istio-system
+
+    helm_ownership_of_resource istio-base CustomResourceDefinition wasmplugins.extensions.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition destinationrules.networking.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition envoyfilters.networking.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition gateways.networking.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition proxyconfigs.networking.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition serviceentries.networking.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition sidecars.networking.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition virtualservices.networking.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition workloadentries.networking.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition workloadgroups.networking.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition authorizationpolicies.security.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition peerauthentications.security.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition requestauthentications.security.istio.io
+    helm_ownership_of_resource istio-base CustomResourceDefinition telemetries.telemetry.istio.io
+
+    helm_ownership_of_resource istio-base ValidatingWebhookConfiguration istiod-default-validator istio-system
+
+    echo "Start of istiod chart objects"
+
+    helm_ownership_of_resource istiod PodDisruptionBudget istiod istio-system
+    helm_ownership_of_resource istiod ServiceAccount istiod istio-system
+    helm_ownership_of_resource istiod ConfigMap istio istio-system
+    helm_ownership_of_resource istiod ConfigMap istio-sidecar-injector istio-system
+
+    helm_ownership_of_resource istiod ClusterRole istiod-clusterrole-istio-system
+    helm_ownership_of_resource istiod ClusterRole istiod-gateway-controller-istio-system
+    helm_ownership_of_resource istiod ClusterRole istio-reader-clusterrole-istio-system
+    helm_ownership_of_resource istiod ClusterRoleBinding istiod-clusterrole-istio-system
+    helm_ownership_of_resource istiod ClusterRoleBinding istiod-gateway-controller-istio-system
+    helm_ownership_of_resource istiod ClusterRoleBinding istio-reader-clusterrole-istio-system
+
+    helm_ownership_of_resource istiod Role istiod istio-system
+    helm_ownership_of_resource istiod RoleBinding istiod istio-system
+    helm_ownership_of_resource istiod Service istiod istio-system
+    helm_ownership_of_resource istiod Deployment istiod istio-system
+    helm_ownership_of_resource istiod HorizontalPodAutoscaler istiod  istio-system
+
+    helm_ownership_of_resource istiod MutatingWebhookConfiguration istio-sidecar-injector
+    helm_ownership_of_resource istiod ValidatingWebhookConfiguration istio-validator-istio-system
+
+    echo "Start of istio-ingressgateway chart objects"
+
+    helm_ownership_of_resource istio-ingressgateway PodDisruptionBudget istio-ingressgateway istio-system
+    helm_ownership_of_resource istio-ingressgateway ServiceAccount istio-ingressgateway-service-account istio-system
+    helm_ownership_of_resource istio-ingressgateway Service istio-ingressgateway istio-system
+    helm_ownership_of_resource istio-ingressgateway Deployment istio-ingressgateway istio-system
+    helm_ownership_of_resource istio-ingressgateway HorizontalPodAutoscaler istio-ingressgateway istio-system
+
+    echo "Start of istio-egressgateway chart objects"
+
+    helm_ownership_of_resource istio-egressgateway PodDisruptionBudget istio-egressgateway istio-system
+    helm_ownership_of_resource istio-egressgateway ServiceAccount istio-egressgateway-service-account istio-system
+    helm_ownership_of_resource istio-egressgateway Service istio-egressgateway istio-system
+    helm_ownership_of_resource istio-egressgateway Deployment istio-egressgateway istio-system
+    helm_ownership_of_resource istio-egressgateway HorizontalPodAutoscaler istio-egressgateway istio-system
+    ```
+    {: pre}
+
+1. Verify that the Helm update was successful. 
+
+     ```sh
+    kubectl get cm -n ibm-operators
+    ```
+    {: pre}
+    
+    Example output:
+    ```text
+    NAME                                        DATA   AGE
+    istio-ca-root-cert                          1      2d
+    kube-root-ca.crt                            1      2d
+    managed-istio-base-control-plane-values     2      2d
+    managed-istio-custom                        2      2d
+    managed-istio-egressgateway-values          2      2d
+    managed-istio-ingressgateway-values         2      2d
+    managed-istio-istiod-control-plane-values   2      2d
+    ```
+    {: pre}
+
+    The cluster updater created four ConfigMaps in the `ibm-operators` namespace and Helm's upgrade commands were run on the four `value.yaml` files in those ConfigMaps. The Helm response is stored in the `values.yaml.helm.result` key in each ConfigMap.
+    
+    If the labels and annotations were all applied, then Helm accepts ownership of those resources and upgrades `addon-istio` to Istio 1.24 with a default `istio-ingressgateway` and `istio-egressgateway`. 
+
+    Run the following command to view the Helm responses.
+
+    ```sh
+    kubectl get cm -n ibm-operators managed-istio-ingressgateway-values -o json | jq -r .data.\"values.yaml.helm.result\"
+    ```
+    {: pre}
+
+    Successful result:
+
+    This success message includes a timestamp of the most recent Helm upgrade cycle. This timestamp can be used to confirm whether a Helm upgrade cycle completed after a config change was made.
+
+    ```text
+    Tue, 26 Aug 2025 19:13:03 GMT HELM_SUCCESS: Release "istio-ingressgateway" has been upgraded. Happy Helming!
+    NAME: istio-ingressgateway
+    LAST DEPLOYED: Tue Aug 26 19:12:57 2025
+    NAMESPACE: istio-system
+    STATUS: deployed
+    REVISION: 2840
+    TEST SUITE: None
+    NOTES:
+    "istio-ingressgateway" successfully installed!
+
+    To learn more about the release, try:
+    $ helm status istio-ingressgateway -n istio-system
+    $ helm get all istio-ingressgateway -n istio-system
+
+    Next steps:
+    * Deploy an HTTP Gateway: https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/
+    * Deploy an HTTPS Gateway: https://istio.io/latest/docs/tasks/traffic-management/ingress/secure-ingress/
+    ```
+    {: screen}
+
+    Unsuccessful result:
+
+    This unsuccessful message can display when one of the resources is not properly labeled and annotated. In this example, the label is missing and both annotations are missing. The error can be fixed by applying the missing label and annotations.
+
+    ```text
+    HELM_ERROR: Pulled: icr.io/ext/istio/helm-charts/gateway:1.24.0
+    Digest: sha256:d34b44d25c4d809fc9bb99bc83f38b213ff29aed9abf4b7fbf362f254d9a8168
+    Error: Unable to continue with install: PodDisruptionBudget "istio-ingressgateway"
+    in namespace "istio-system" exists and cannot be imported into the current release:
+    invalid ownership metadata; label validation error: missing key
+    "app.kubernetes.io/managed-by": must be set to "Helm"; annotation validation error:
+    missing key "meta.helm.sh/release-name": must be set to "istio-ingressgateway";
+    annotation validation error: missing key "meta.helm.sh/release-namespace": must
+    be set to "istio-system"
+    ```
+    {: screen}
+
+1. Test the data plane configuration and verify that the traffic is working. Use the following command to debug errors.
+
+    ```sh
+    istioctl analyze -A
+    ```
+    {: pre}
+
+1. [Update the Istio sidecars](#update_client_sidecar) for the app to match the Istio version of the add-on. This step might already be completed as part of the data plane testing above.
+
+1. For any [custom gateways](/docs/containers?topic=containers-istio-custom-gateway-helm), amend the `values.yaml` in the new default gateways as needed.
+
+1. Decide what to do with the `istio-ingressgateway-public-2` or `istio-ingressgateway-public-3` resources. Because only one default gateway is supported in version 1.24, these deployments are not migrated for you.
+
+    - To keep these deployments, you can set them up as an [additional gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#custom_gateways_helm_add).
+
+    - To remove these deployments, see [Removing gateway deployments](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep).
+
+
+
+## Updating to 1.23 and earlier minor versions of the Istio add-on
 {: #istio_minor}
 
 
@@ -207,13 +491,13 @@ For example, the patch version of your add-on might be updated automatically by 
 
     ```sh
     client version: version.BuildInfo{Version:"1.11.2"}
-    pilot version: version.BuildInfo{Version:1.23.5}
-    pilot version: version.BuildInfo{Version:1.23.5}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-vp97p.istio-system", IstioVersion:1.23.5}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-qkhgm.istio-system", IstioVersion:1.23.5}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-dffhq.istio-system", IstioVersion:1.23.5}
-    data plane version: version.ProxyInfo{ID:"httpbin-74fb669cc6-svc8x.default", IstioVersion:1.23.5}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-cs9r9.istio-system", IstioVersion:1.23.5}
+    pilot version: version.BuildInfo{Version:1.24.6}
+    pilot version: version.BuildInfo{Version:1.24.6}
+    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-vp97p.istio-system", IstioVersion:1.24.6}
+    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-qkhgm.istio-system", IstioVersion:1.24.6}
+    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-dffhq.istio-system", IstioVersion:1.24.6}
+    data plane version: version.ProxyInfo{ID:"httpbin-74fb669cc6-svc8x.default", IstioVersion:1.24.6}
+    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-cs9r9.istio-system", IstioVersion:1.24.6}
     ...
     ```
     {: screen}
@@ -222,14 +506,14 @@ For example, the patch version of your add-on might be updated automatically by 
     1. Download the `istioctl` client of the same version as the control plane components.
     
         ```sh
-        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.23.5 sh -
+        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.24.6 sh -
         ```
         {: pre}
 
     2. Navigate to the Istio package directory.
     
         ```sh
-        cd istio-1.23.5
+        cd istio-1.24.6
         ```
         {: pre}
 
