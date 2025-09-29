@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-05-29"
+lastupdated: "2025-09-27"
 
 
 keywords: kubernetes, deploy, migrating psps to pod security, pod security admission, migrate to pod security admission
@@ -215,7 +215,7 @@ ibmcloud ks cluster master pod-security set --cluster <CLUSTER>
 ### Step 2: Review namespace permissions
 {: #psa-migration-namespace-perm}
 
-Review the namespace permissions in the external Kubernetes documentation. If your Kubernetes permissions are managed by IAM service roles, the `Manager` service role is required to create or edit namespaces and to set pod security labels.
+Review the namespace permissions in the external Kubernetes documentation. If your Kubernetes permissions are managed by IAM service roles, the **Manager** service role is required to create or edit namespaces and to set pod security labels.
 
 - [Review namespace permissions](https://kubernetes.io/docs/tasks/configure-pod-container/migrate-from-psp/#review-namespace-permissions){: external}
   

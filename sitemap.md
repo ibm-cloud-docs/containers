@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-26"
+lastupdated: "2025-09-29"
 
 
 keywords: containers
@@ -3253,7 +3253,9 @@ subcollection: containers
 
 * [Before you begin](/docs/containers?topic=containers-istio-update#istio-update-prereq)
 
-* [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
+* [Updating from version 1.23 to 1.24 of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor_124)
+
+* [Updating to 1.23 and earlier minor versions of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
 
 * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
 
@@ -3296,6 +3298,16 @@ subcollection: containers
     * [Exposing the Istio ingress gateway with DNS with TLS termination](/docs/containers?topic=containers-istio-mesh#istio_tls)
 
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
+
+[Deploying custom Istio gateways in Helm](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-custom-gateway-helm)
+
+* [Setting up Helm](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-helm-install)
+
+* [Modifying existing default gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-custom-gateway)
+
+* [Creating additional gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#custom_gateways_helm_add)
+
+    * [Removing gateway deployments](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep)
 
 [Deploying custom Istio gateways in an `IstioOperator`](/docs/containers?topic=containers-istio-custom-gateway#istio-custom-gateway)
 
@@ -5809,6 +5821,10 @@ subcollection: containers
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.24](/docs/containers?topic=containers-istio-changelog#v124)
+
+    * [Change log for 1.24.6, released 26 September 2025](/docs/containers?topic=containers-istio-changelog#1246)
 
 * [Version 1.23](/docs/containers?topic=containers-istio-changelog#v123)
 
