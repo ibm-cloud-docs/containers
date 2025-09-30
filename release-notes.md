@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-09-26"
+lastupdated: "2025-09-30"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## September 2025
 {: #containers-sep25}
+
+### 30 September 2025
+{: #containers-sep3025}
+{: release-note}
+
+Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities
+:   For more information, see the [Security Bulletin](https://www.ibm.com/support/pages/node/7091444){: external}. 
 
 ### 25 September 2025
 {: #containers-sep2525}
