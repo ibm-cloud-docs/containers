@@ -109,7 +109,7 @@ The following table shows the changes that are in the master fix pack 1.33.4_153
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.7 | v1.1.9 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 38dc95c | 8a12251 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.15 | v2.10.16 | New version contains updates and security fixes. |
-| Kubernetes | v1.33.3 | v1.33.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.4){: external} and the [Security Bulletin](https://www.ibm.com/support/pages/node/7245968){: external}. |
+| Kubernetes | v1.33.3 | v1.33.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.4){: external} and the [Security Bulletin for CVE-2025-5187](https://www.ibm.com/support/pages/node/7245968){: external}. |
 {: caption="Changes since version 1.33.3_1532" caption-side="bottom"}
 
 

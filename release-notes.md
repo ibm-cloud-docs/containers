@@ -33,7 +33,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: release-note}
 
 Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities
-:   For more information, see the [Security Bulletin](https://www.ibm.com/support/pages/node/7091444){: external}. 
+:   For more information, see the [Security Bulletin for CVE-2025-5187](https://www.ibm.com/support/pages/node/7245968){: external}. 
 
 ### 25 September 2025
 {: #containers-sep2525}
