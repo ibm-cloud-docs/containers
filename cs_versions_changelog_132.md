@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-09-29"
+lastupdated: "2025-09-30"
 
 
 keywords: change log, version history, 1.32
@@ -110,7 +110,7 @@ The following table shows the changes that are in the master fix pack 1.32.8_155
 | {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.7 | v1.1.9 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 38dc95c | 8a12251 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.15 | v2.10.16 | New version contains updates and security fixes. |
-| Kubernetes | v1.32.7 | v1.32.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.8){: external}. |
+| Kubernetes | v1.32.7 | v1.32.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.8){: external} and the [Security Bulletin for CVE-2025-5187](https://www.ibm.com/support/pages/node/7245968){: external}. |
 {: caption="Changes since version 1.32.7_1549" caption-side="bottom"}
 
 

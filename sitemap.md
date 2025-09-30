@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-29"
+lastupdated: "2025-09-30"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep25)
+
+    * [30 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep3025)
+
+        * Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities
 
     * [25 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep2525)
 
