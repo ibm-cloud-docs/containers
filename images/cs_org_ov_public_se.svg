@@ -2229,7 +2229,7 @@
           <text class="cls-27" transform="translate(500 636.8)"><tspan x="0" y="0">to the master are forwarded by the ibm-master-proxy</tspan></text>
         </g>
         <g class="cls-23">
-          <text class="cls-27" transform="translate(500 657.8)"><tspan x="0" y="0" xml:space="preserve">to the kube-apiserver endpoint.  </tspan></text>
+          <text class="cls-27" transform="translate(500 657.8)"><tspan x="0" y="0" xml:space="preserve">to the exposed Kubernetes API server port.  </tspan></text>
         </g>
       </g>
     </g>
