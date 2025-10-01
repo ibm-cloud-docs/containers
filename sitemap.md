@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-09-30"
+lastupdated: "2025-10-01"
 
 
 keywords: containers
@@ -9021,8 +9021,6 @@ subcollection: containers
 [Why does the Ingress status show an ESSWS error?](/docs/containers?topic=containers-ts-ingress-essws#ts-ingress-essws)
 
 [Why does the Ingress status show an ESSDNE error?](/docs/containers?topic=containers-ts-ingress-essdne#ts-ingress-essdne)
-
-[Ingress health checks fail on Akamai Global Load Balancer (GLB) configurations](/docs/containers?topic=containers-cs_ingress_health_check_ctm#cs_ingress_health_check_ctm)
 
 [Why are my default `istio-ingressgateway` pods stuck in `pending`?](/docs/containers?topic=containers-ts-istio-ingressgateway-pending#ts-istio-ingressgateway-pending)
 
