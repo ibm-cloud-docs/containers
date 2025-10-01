@@ -615,7 +615,6 @@ toc:
               - ts-ingress-essef.md
               - ts-ingress-essws.md
               - ts-ingress-essdne.md
-              - nested-ctm.md
               - ts-addon-istio-ingressgateway-pending.md
           - topicgroup:
               label: File Storage
