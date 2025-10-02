@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-01"
+lastupdated: "2025-10-02"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -409,20 +409,6 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 9. Verify that the ALB IP address has been restored in the DNS registration for your domain by checking the IBM NS1 server. Note that the DNS registration might take a few minutes to update.
     ```sh
     host mycluster-<hash>-0000.us-south.containers.appdomain.cloud dns1.p02.nsone.net
-    ```
-    {: pre}
-
-    Example output
-
-    ```sh
-    mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.46.52.222
-    mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.62.196.238
-    ```
-    {: screen}
-
-9. Verify that the ALB IP address has been restored in the DNS registration for your domain by checking the Akamai server. Note that the DNS registration might take a few minutes to update.
-    ```sh
-    host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.Akamai.com
     ```
     {: pre}
 
