@@ -238,6 +238,12 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
+
+    * [02 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0225)
+
+        * CLI version `1.0.724` is available.
+
 * [September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep25)
 
     * [30 September 2025](/docs/containers?topic=containers-containers-relnotes#containers-sep3025)
@@ -5640,6 +5646,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.724](/docs/containers?topic=containers-cs_cli_changelog#cli-01724)
 
 * [Version v1.0.718](/docs/containers?topic=containers-cs_cli_changelog#cli-01078)
 
