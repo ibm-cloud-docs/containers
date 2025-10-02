@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-29"
+lastupdated: "2025-10-02"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -784,7 +784,7 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}
 :   See the Istio release notes for [Istio 1.19.3](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.3/.){: external}.
 :   Upstream announcement for [Istio 1.19.0](https://istio.io/latest/news/releases/1.19.x/announcing-1.19/.){: external}.   
-:   Addon-Istio does not support ambient mesh at this time
+:   `Addon-Istio` does not support ambient mesh at this time
 
 
 ## Unsupported: Version 1.18
@@ -957,8 +957,8 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.18.0](https://istio.io/latest/news/releases/1.18.x/announcing-1.18/){: external}.
 :   Adds an `enable-targeted-envoy-access-log` Envoy extension provider to the mesh config. You can use Telemetry CRs to enable Envoy access logs on specific workloads rather than enabling it for the entire mesh. For more information, see [Observing Istio traffic](/docs/containers?topic=containers-istio-health).
-:   Protocol sniffing is now enabled for Addon-Istio.
-:   Addon-Istio pods now have a `nodeAffinity` for amd64 architecture nodes.
+:   Protocol sniffing is now enabled for `Addon-Istio`.
+:   `Addon-Istio` pods now have a `nodeAffinity` for amd64 architecture nodes.
 :   Adjusts how `meshConfig` sets `enableAutoMtls`, `enableTracing`, and `protocolDetectionTimeout` to their current values. This results in a no operation change because the values are not changing. The only change is whether they are set implicitly or explicitly.
 :   Sets the security context explicitly in the Istio Operator CR. This results in a no operation change because the values are not changing. The only change is whether they are set implicitly or explicitly.
 :   Resolves the following CVEs:
