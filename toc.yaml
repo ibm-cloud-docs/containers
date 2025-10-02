@@ -574,7 +574,6 @@ toc:
               - ts-lb-sync-failed.md
               - ts-lb-vpc-healthcheck.md
               - ts-nlb-vpc-zone.md
-              - ts-ppnlb-hostname.md
           - topicgroup:
               label: Ingress
               topics:

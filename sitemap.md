@@ -8917,8 +8917,6 @@ subcollection: containers
 
 [VPC Clusters: My VPC NLB has a zone error and does not update](/docs/containers?topic=containers-ts-nlb-vpc-zone#ts-nlb-vpc-zone)
 
-[Why does my Private Path NLB contain a `hostname.invalid` error?](/docs/containers?topic=containers-ts-ppnlb-hostname#ts-ppnlb-hostname)
-
 
 ### Ingress
 {: #sitemap_ingress}
