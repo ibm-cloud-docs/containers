@@ -10,7 +10,7 @@ toc:
     version: 2
     console-page: /kubernetes/overview
     product-page: https://www.ibm.com/products/cloud/containers
-  entries: 
+  entries:
   - navgroup:
       id: learn
       topics:
@@ -241,8 +241,8 @@ toc:
       - storage-file.md
       - topicgroup:
           label: Setting up File Storage for VPC
-          topics: 
-          - storage-file-vpc-install.md 
+          topics:
+          - storage-file-vpc-install.md
           - storage-file-vpc-apps.md
           - storage-file-vpc-managing.md
           - storage-file-vpc-sc-ref.md
@@ -250,7 +250,7 @@ toc:
           label: Setting up Object Storage
           topics:
           - storage-cos-understand.md
-          - storage-cos-install.md 
+          - storage-cos-install.md
           - storage-cos-apps.md
           - storage-cos-tutorial-quota.md
           - storage-cos-vpc-ip.md
@@ -259,7 +259,7 @@ toc:
           - storage-cos-install-addon.md
       - topicgroup:
           label: Setting up Portworx
-          topics: 
+          topics:
           - storage-portworx-about.md
           - storage-portworx-plan.md
           - storage-portworx-preparing.md
@@ -397,7 +397,7 @@ toc:
               - cs_versions_changelog_125.md
               - cs_benchmarks_125.md
           - topicgroup:
-              label: Version 1.24 
+              label: Version 1.24
               topics:
               - cs_versions_124.md
               - cs_versions_changelog_124.md
@@ -574,6 +574,7 @@ toc:
               - ts-lb-sync-failed.md
               - ts-lb-vpc-healthcheck.md
               - ts-nlb-vpc-zone.md
+              - ts-ppnlb-hostname.md
           - topicgroup:
               label: Ingress
               topics:

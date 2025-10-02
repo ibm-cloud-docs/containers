@@ -1,59 +1,57 @@
 {
-    "version": 2,
-    "title": "IBM Cloud Kubernetes Service",
-    "introduction": "Explore the capabilities of IBM Cloud Kubernetes Service and discover the tools to automate, isolate, secure, manage, and monitor your workloads.",
-    "product_page": "https://www.ibm.com/products/cloud/containers",
-    "console_page": "/kubernetes/overview",
-    "section_topics": {
-      "links": [
-        {
-            "title": "See what's new",
-            "href": "/docs/containers?topic=containers-containers-relnotes"
-          },  
-          {
-            "title": "Understand IBM Cloud Kubernetes Service",
-            "href": "/docs/containers?topic=containers-overview"
-          },
-          {
-            "title": "Get started with Kubernetes",
-            "href": "/docs/containers?topic=containers-getting-started"
-          },
-          {
-            "title": "Plan your environment",
-            "href": "/docs/containers?topic=containers-learning-path-admin#admin_plan"
-          },
-          {
-            "title": "Create a cluster",
-            "href": "/docs/containers?topic=containers-learning-path-admin#admin_cluster"
-          },
-          {
-            "title": "Add storage",
-            "href": "/docs/containers?topic=containers-learning-path-admin#admin_plan"
-          }
-      ]
-    },
-    "section_highlights": [
+  "version": 2,
+  "title": "IBM Cloud Kubernetes Service",
+  "introduction": "Explore the capabilities of IBM Cloud Kubernetes Service and discover the tools to automate, isolate, secure, manage, and monitor your workloads.",
+  "product_page": "https://www.ibm.com/products/cloud/containers",
+  "console_page": "/kubernetes/overview",
+  "section_topics": {
+    "links": [
       {
-        "title": "What is Kubernetes?",
-        "description": "Learn why you might use Kubernetes for scheduling and automating deployments, and for managing and scaling containerized applications.",
-        "href": "https://www.ibm.com/think/topics/kubernetes",
-        "type": "training"
+        "title": "See what's new",
+        "href": "/docs/containers?topic=containers-containers-relnotes"
       },
       {
-        "title": "Training",
-        "description": "Find courses to guide you through using IBM Cloud Kubernetes Service.",
-        "href": "https://www.ibm.com/training/search?query=Kubernetes",
-        "type": "training"
+        "title": "Understand IBM Cloud Kubernetes Service",
+        "href": "/docs/containers?topic=containers-overview"
+      },
+      {
+        "title": "Get started with Kubernetes",
+        "href": "/docs/containers?topic=containers-getting-started"
+      },
+      {
+        "title": "Plan your environment",
+        "href": "/docs/containers?topic=containers-learning-path-admin#admin_plan"
+      },
+      {
+        "title": "Create a cluster",
+        "href": "/docs/containers?topic=containers-learning-path-admin#admin_cluster"
+      },
+      {
+        "title": "Add storage",
+        "href": "/docs/containers?topic=containers-learning-path-admin#admin_plan"
       }
-    ],
-    "section_devtools": {
-      "api": "/apidocs/kubernetes", 
-      "cli": "/docs/containers?topic=containers-kubernetes-service-cli", 
-      "terraform": "https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs"
+    ]
+  },
+  "section_highlights": [
+    {
+      "title": "What is Kubernetes?",
+      "description": "Learn why you might use Kubernetes for scheduling and automating deployments, and for managing and scaling containerized applications.",
+      "href": "https://www.ibm.com/think/topics/kubernetes",
+      "type": "training"
     },
-    "section_updates": {
-        "view_more": "/docs/containers?topic=containers-containers-relnotes"
+    {
+      "title": "Training",
+      "description": "Find courses to guide you through using IBM Cloud Kubernetes Service.",
+      "href": "https://www.ibm.com/training/search?query=Kubernetes",
+      "type": "training"
     }
-
+  ],
+  "section_devtools": {
+    "api": "/apidocs/kubernetes",
+    "cli": "/docs/containers?topic=containers-kubernetes-service-cli",
+    "terraform": "https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs"
+  },
+  "section_updates": {
+    "view_more": "/docs/containers?topic=containers-containers-relnotes"
   }
- 
+}
