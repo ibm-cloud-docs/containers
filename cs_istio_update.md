@@ -216,6 +216,8 @@ To update the add-on:
     helm_ownership_of_resource istio-ingressgateway Service istio-ingressgateway istio-system
     helm_ownership_of_resource istio-ingressgateway Deployment istio-ingressgateway istio-system
     helm_ownership_of_resource istio-ingressgateway HorizontalPodAutoscaler istio-ingressgateway istio-system
+    helm_ownership_of_resource istio-ingressgateway Role istio-ingressgateway-sds istio-system
+    helm_ownership_of_resource istio-ingressgateway RoleBinding istio-ingressgateway-sds istio-system
 
     echo "Start of istio-egressgateway chart objects"
 
@@ -224,6 +226,8 @@ To update the add-on:
     helm_ownership_of_resource istio-egressgateway Service istio-egressgateway istio-system
     helm_ownership_of_resource istio-egressgateway Deployment istio-egressgateway istio-system
     helm_ownership_of_resource istio-egressgateway HorizontalPodAutoscaler istio-egressgateway istio-system
+    helm_ownership_of_resource istio-egressgateway Role istio-egressgateway-sds istio-system
+    helm_ownership_of_resource istio-egressgateway RoleBinding istio-egressgateway-sds istio-system
     ```
     {: pre}
 
