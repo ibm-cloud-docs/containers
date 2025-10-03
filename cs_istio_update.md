@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-29"
+lastupdated: "2025-10-03"
 
 
 keywords: istio migration, istio updates, istio upgrades
@@ -224,6 +224,13 @@ To update the add-on:
     helm_ownership_of_resource istio-egressgateway Service istio-egressgateway istio-system
     helm_ownership_of_resource istio-egressgateway Deployment istio-egressgateway istio-system
     helm_ownership_of_resource istio-egressgateway HorizontalPodAutoscaler istio-egressgateway istio-system
+    ```
+    {: pre}
+
+1. Install `addon-istio` 1.24 by running the `enable` command.
+
+    ```sh
+    ibmcloud ks cluster addon enable istio -c $CLUSTER_ID --version 1.24
     ```
     {: pre}
 
