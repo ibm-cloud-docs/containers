@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-02"
+lastupdated: "2025-10-06"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
+
+    * [06 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0625)
+
+        * Version 1.33 is now the default version for {{site.data.keyword.containerlong_notm}}.
 
     * [02 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0225)
 
