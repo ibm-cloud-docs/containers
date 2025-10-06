@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-10-02"
+lastupdated: "2025-10-06"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2025
 {: #containers-oct25}
+
+
+
+### 06 October 2025
+{: #containers-oct0625}
+{: release-note}
+
+Version 1.33 is now the default version for {{site.data.keyword.containerlong_notm}}.
+:   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
+
+
+
 
 ### 02 October 2025
 {: #containers-oct0225}
