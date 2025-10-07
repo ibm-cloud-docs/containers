@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-06"
+lastupdated: "2025-10-07"
 
 
 keywords: containers
@@ -2002,6 +2002,8 @@ subcollection: containers
     * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
 
 [Setting the cluster credentials](/docs/containers?topic=containers-access-creds#access-creds)
+
+* [Considerations](/docs/containers?topic=containers-access-creds#creds-considerations)
 
 * [Resetting the cluster API key](/docs/containers?topic=containers-access-creds#admin-set-credentials)
 
