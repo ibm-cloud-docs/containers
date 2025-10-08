@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2025
-lastupdated: "2025-09-15"
+lastupdated: "2025-10-08"
 
 
 keywords: kubernetes, containers, 132, version 132, 132 update actions
@@ -49,10 +49,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 This information summarizes updates that are likely to have an impact on deployed apps when you update a cluster to version 1.32. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.32.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_132) for version 1.32. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
-
-
-The Istio add-on version 1.23 is not supported for {{site.data.keyword.containerlong_notm}} version 1.32 because the Istio add-on does not support Istio 1.25. Do not update to {{site.data.keyword.containerlong_notm}} version 1.32 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=ui#migrate).
-{: important}
 
 ### Update before master
 {: #before_132}
