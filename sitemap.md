@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-07"
+lastupdated: "2025-10-08"
 
 
 keywords: containers
@@ -5831,6 +5831,8 @@ subcollection: containers
 * [`openshift-data-foundation` 4.17.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.17.0)
 
 * [`openshift-data-foundation` 4.18.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.18.0)
+
+* [`openshift-data-foundation` 4.19.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.19.0)
 
 * [`static-route` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#static-route-1.0.0)
 
