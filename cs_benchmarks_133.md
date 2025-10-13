@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-08-01"
+lastupdated: "2025-10-13"
 
 keywords: containers, benchmarks, 1.33, containers benchmarks, containers 1.33
 
@@ -103,7 +103,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 | 1.3.4 | Ensure that the `--service-account-private-key-file` argument is set as appropriate. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.3.5 | Ensure that the `--root-ca-file` argument is set as appropriate. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
 | 1.3.6 | Ensure that the `RotateKubeletServerCertificate` argument is set to `true`. | Scored | 2 | [Fail](#ibm-remediations-and-explanations-133) | {{site.data.keyword.IBM_notm}} |
-| 1.3.7 | Ensure that the `--bind-address` argument is set to `127.0.0.1`. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
+| 1.3.7 | Ensure that the `--bind-address` argument is set to `127.0.0.1`. | Scored | 1 | [Fail](#ibm-remediations-and-explanations-133) | {{site.data.keyword.IBM_notm}} |
 {: caption="Section 1.3 Controller manager benchmark results" caption-side="bottom"}
 
 ### 1.4 Scheduler
@@ -112,7 +112,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 | Section | Recommendation | Scored? | Level | Result | Responsibility |
 | --- | --- | --- | --- | --- | --- |
 | 1.4.1 | Ensure that the `--profiling` argument is set to `false`. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
-| 1.4.2 | Ensure that the `--bind-address` argument is set to `127.0.0.1`. | Scored | 1 | Pass | {{site.data.keyword.IBM_notm}} |
+| 1.4.2 | Ensure that the `--bind-address` argument is set to `127.0.0.1`. | Scored | 1 | [Fail](#ibm-remediations-and-explanations-133) | {{site.data.keyword.IBM_notm}} |
 {: caption="Section 1.4 Scheduler benchmark results" caption-side="bottom"}
 
 ## 2 Etcd node configuration
@@ -275,6 +275,8 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 | 1.2.33 | {{site.data.keyword.IBM_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#cluster-secret-encryption). |
 | 1.2.34 | {{site.data.keyword.IBM_notm}} can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#cluster-secret-encryption). |
 | 1.3.6 | {{site.data.keyword.IBM_notm}} rotates certificates on every worker node reload or update. |
+| 1.3.7 | The Controller Manager IP address cannot be restricted to `127.0.0.1`. The {{site.data.keyword.IBM_notm}} configuration is required so health checks can be performed against it. It is not exposed publicly or privately to customers. |
+| 1.4.2 | The Scheduler IP address cannot be restricted to `127.0.0.1`. The {{site.data.keyword.IBM_notm}} configuration is required so health checks can be performed against it. It is not exposed publicly or privately to customers. |
 | 3.2.1 | {{site.data.keyword.IBM_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 3.2.2 | {{site.data.keyword.IBM_notm}} can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 4.2.6 | {{site.data.keyword.IBM_notm}} does not protect kernel defaults to allow customers to [tune kernel parameters](/docs/containers?topic=containers-kernel). |
@@ -301,5 +303,3 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 | 5.7.3 | {{site.data.keyword.IBM_notm}} deploys some system components that do not set a [pod or container `securityContext`](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | 5.7.4 | {{site.data.keyword.IBM_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Section {{site.data.keyword.IBM_notm}} remediations and explanations benchmark results" caption-side="bottom"}
-
-

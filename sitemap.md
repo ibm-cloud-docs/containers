@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-08"
+lastupdated: "2025-10-13"
 
 
 keywords: containers
@@ -239,6 +239,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
+
+    * [13 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct1325)
+
+        * New! General availability of the {{site.data.keyword.cos_full_notm}} cluster add-on
+
+    * [08 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0825)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [06 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0625)
 
@@ -4645,6 +4653,8 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
+    * [Worker node fix pack 1.33.5_1545, released 08 October 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1335_1545_W)
+
     * [Worker node fix pack 1.33.4_1541, released 23 September 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1541_W)
 
     * [Worker node fix pack 1.33.4_1539, released 09 September 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1539_W)
@@ -4720,6 +4730,8 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
+    * [Worker node fix pack 1.32.9_1563, released 08 October 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1329_1563_W)
+
     * [Worker node fix pack 1.32.8_1559, released 23 September 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1328_1559_W)
 
     * [Worker node fix pack 1.32.8_1557, released 09 September 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1328_1557_W)
@@ -4772,47 +4784,47 @@ subcollection: containers
 
     * [Master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025](/docs/containers?topic=containers-changelog_132#1321_1527M_and_13201524W)
 
-[Kubernetes version 1.32 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-132)
+[Kubernetes version 1.32 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-132)
 
-* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-132#cis-section-1-132)
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-132#1-master-node-security-configuration-132)
 
-    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-11-132)
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-132#11-master-node-configuration-files-132)
 
-    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-12-132)
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-132#12-api-server-132)
 
-    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-13-132)
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-132#13-controller-manager-132)
 
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-14-132)
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-132#14-scheduler-132)
 
-* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-132#cis-section-2-132)
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-132#2-etcd-node-configuration-132)
 
-* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-132#cis-section-3-132)
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-132#3-control-plane-configuration-132)
 
-    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-31-132)
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-132#31-authentication-and-authorization-132)
 
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-32-132)
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-132#32-logging-132)
 
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-132#cis-section-4-132)
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-132#4-worker-node-security-configuration-132)
 
-    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-41-132)
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-132#41-worker-node-configuration-files-132)
 
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-42-132)
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-132#42-kubelet-132)
 
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-132#cis-section-5-132)
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-132#5-kubernetes-policies-132)
 
-    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-51-132)
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-132#51-rbac-and-service-accounts-132)
 
-    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-52-132)
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-132#52-pod-security-policies-132)
 
-    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-53-132)
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-132#53-network-policies-and-cni-132)
 
-    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-54-132)
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-132#54-secrets-management-132)
 
-    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-55-132)
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-132#55-extensible-admission-control-132)
 
-    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-57-132)
+    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-132#57-general-policies-132)
 
-    * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-remediations-132)
+    * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-132#ibm-remediations-and-explanations-132)
 
 
 ### Version 1.31
@@ -4834,6 +4846,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.13_1575, released 08 October 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13113_1575_W)
 
     * [Worker node fix pack 1.31.12_1568, released 23 September 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13112_1568_W)
 
@@ -4915,47 +4929,47 @@ subcollection: containers
 
     * [Master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024](/docs/containers?topic=containers-changelog_131#1310_1520M_and_1310_1518W)
 
-[Kubernetes version 1.31 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
+[Kubernetes version 1.31 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
 
-* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-131#cis-section-1-131)
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-131#1-master-node-security-configuration-131)
 
-    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-11-131)
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-131#11-master-node-configuration-files-131)
 
-    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-12-131)
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-131#12-api-server-131)
 
-    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-13-131)
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-131#13-controller-manager-131)
 
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-14-131)
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-131#14-scheduler-131)
 
-* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-131#cis-section-2-131)
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-131#2-etcd-node-configuration-131)
 
-* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-131#cis-section-3-131)
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-131#3-control-plane-configuration-131)
 
-    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-31-131)
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-131#31-authentication-and-authorization-131)
 
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-32-131)
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-131#32-logging-131)
 
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-131#cis-section-4-131)
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-131#4-worker-node-security-configuration-131)
 
-    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-41-131)
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-131#41-worker-node-configuration-files-131)
 
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-42-131)
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-131#42-kubelet-131)
 
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-131#cis-section-5-131)
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-131#5-kubernetes-policies-131)
 
-    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-51-131)
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-131#51-rbac-and-service-accounts-131)
 
-    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-52-131)
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-131#52-pod-security-policies-131)
 
-    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-53-131)
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-131#53-network-policies-and-cni-131)
 
-    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-54-131)
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-131#54-secrets-management-131)
 
-    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-55-131)
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-131#55-extensible-admission-control-131)
 
-    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-56-131)
+    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-131#57-general-policies-131)
 
-* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-remediations-131)
+    * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-131#ibm-remediations-and-explanations-131)
 
 
 ### Version 1.30
@@ -4995,6 +5009,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
 
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Worker node fix pack 1.30.14_1590, released 08 October 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1590_W)
 
     * [Worker node fix pack 1.30.14_1585, released 23 September 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1585_W)
 
@@ -5098,47 +5114,47 @@ subcollection: containers
 
     * [Master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024](/docs/containers?topic=containers-changelog_130#1301_1520M_and_1300_1518W)
 
-[Kubernetes version 1.30 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-130)
+[Kubernetes version 1.30 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-130)
 
-* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-130#cis-section-1-130)
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-130#1-master-node-security-configuration-130)
 
-    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-11-130)
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-130#11-master-node-configuration-files-130)
 
-    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-12-130)
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-130#12-api-server-130)
 
-    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-13-130)
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-130#13-controller-manager-130)
 
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-14-130)
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-130#14-scheduler-130)
 
-* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-130#cis-section-2-130)
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-130#2-etcd-node-configuration-130)
 
-* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-130#cis-section-3-130)
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-130#3-control-plane-configuration-130)
 
-    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-31-130)
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-130#31-authentication-and-authorization-130)
 
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-32-130)
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-130#32-logging-130)
 
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-130#cis-section-4-130)
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-130#4-worker-node-security-configuration-130)
 
-    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-41-130)
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-130#41-worker-node-configuration-files-130)
 
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-42-130)
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-130#42-kubelet-130)
 
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-130#cis-section-5-130)
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-130#5-kubernetes-policies-130)
 
-    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-51-130)
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-130#51-rbac-and-service-accounts-130)
 
-    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-52-130)
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-130#52-pod-security-policies-130)
 
-    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-53-130)
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-130#53-network-policies-and-cni-130)
 
-    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-54-130)
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-130#54-secrets-management-130)
 
-    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-55-130)
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-130#55-extensible-admission-control-130)
 
-    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-56-130)
+    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-130#57-general-policies-130)
 
-* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-remediations-130)
+    * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-130#ibm-remediations-and-explanations-130)
 
 
 ## CLI plug-in reference

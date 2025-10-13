@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-10-10"
+lastupdated: "2025-10-13"
 
 
 keywords: change log, version history, 1.33
@@ -40,6 +40,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.33
 {: #133_components}
+
+
+### Worker node fix pack 1.33.5_1545, released 08 October 2025
+{: #cl-boms-1335_1545_W}
+
+The following table shows the components included in the worker node fix pack 1.33.5_1545. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-83-generic|N/A|
+|Kubernetes|1.33.5|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.5).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|HAProxy|e0a48fcf355d98dc769ea048d2fd02044b11ed62|N/A|
+|GPU Device Plug-in and Installer|45bd1f84378a5eb92041b5102ef21a5cfe8b36d5|N/A|
+{: caption="1.33.5_1545 fix pack." caption-side="bottom"}
+{: #cl-boms-1335_1545_W-component-table}
+
 
 
 ### Worker node fix pack 1.33.4_1541, released 23 September 2025
