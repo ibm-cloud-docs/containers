@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-10-07"
+lastupdated: "2025-10-13"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,31 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2025
 {: #containers-oct25}
+
+
+### 13 October 2025
+{: #containers-oct1325}
+{: release-note}
+
+New! General availability of the {{site.data.keyword.cos_full_notm}} cluster add-on
+:   For more information, see the [Installing the {{site.data.keyword.cos_full_notm}} cluster add-on](/docs/containers?topic=containers-storage-cos-install-addon).
+
+### 08 October 2025
+{: #containers-oct0825}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+
+
+
+
 
 
 
