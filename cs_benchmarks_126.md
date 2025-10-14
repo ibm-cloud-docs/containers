@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-05-29"
+lastupdated: "2025-10-14"
 
 
 keywords: kubernetes, containers, benchmarks, 1.26, CIS benchmarks
@@ -15,7 +15,7 @@ subcollection: containers
 
 
 
-# Version 1.26 CIS Kubernetes benchmark 
+# 1.26 CIS Kubernetes benchmark 
 {: #cis-benchmark-126}
 
 
