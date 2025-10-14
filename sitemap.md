@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-13"
+lastupdated: "2025-10-14"
 
 
 keywords: containers
@@ -240,6 +240,10 @@ subcollection: containers
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
 
+    * [14 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct1425)
+
+        * Ingress ALB cluster add-on patch updates.
+
     * [13 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct1325)
 
         * New! General availability of the {{site.data.keyword.cos_full_notm}} cluster add-on
@@ -251,6 +255,10 @@ subcollection: containers
     * [06 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0625)
 
         * Version 1.33 is now the default version for {{site.data.keyword.containerlong_notm}}.
+
+    * [03 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0325)
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
 
     * [02 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0225)
 
@@ -4655,6 +4663,8 @@ subcollection: containers
 
     * [Worker node fix pack 1.33.5_1545, released 08 October 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1335_1545_W)
 
+    * [Master fix pack 1.33.5_1544, released 03 October 2025](/docs/containers?topic=containers-changelog_133#1335_1544_M)
+
     * [Worker node fix pack 1.33.4_1541, released 23 September 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1541_W)
 
     * [Worker node fix pack 1.33.4_1539, released 09 September 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1334_1539_W)
@@ -4667,7 +4677,7 @@ subcollection: containers
 
     * [Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025](/docs/containers?topic=containers-changelog_133#1333_1532M_and_1333_1533W)
 
-[Kubernetes version 1.33 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-133#cis-benchmark-133)
+[1.33 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-133#cis-benchmark-133)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-133#1-master-node-security-configuration-133)
 
@@ -4732,6 +4742,8 @@ subcollection: containers
 
     * [Worker node fix pack 1.32.9_1563, released 08 October 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1329_1563_W)
 
+    * [Master fix pack 1.32.9_1562, released 03 October 2025](/docs/containers?topic=containers-changelog_132#1329_1562_M)
+
     * [Worker node fix pack 1.32.8_1559, released 23 September 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1328_1559_W)
 
     * [Worker node fix pack 1.32.8_1557, released 09 September 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1328_1557_W)
@@ -4784,7 +4796,7 @@ subcollection: containers
 
     * [Master fix pack 1.32.1_1527 and worker node fix pack 1.32.0_1524, released 29 January 2025](/docs/containers?topic=containers-changelog_132#1321_1527M_and_13201524W)
 
-[Kubernetes version 1.32 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-132)
+[1.32 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-132#cis-benchmark-132)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-132#1-master-node-security-configuration-132)
 
@@ -4848,6 +4860,8 @@ subcollection: containers
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
 
     * [Worker node fix pack 1.31.13_1575, released 08 October 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13113_1575_W)
+
+    * [Change log for fix pack 1.31.13_1574, released 03 October 2025](/docs/containers?topic=containers-changelog_131#13113_1574_M)
 
     * [Worker node fix pack 1.31.12_1568, released 23 September 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13112_1568_W)
 
@@ -4929,7 +4943,7 @@ subcollection: containers
 
     * [Master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024](/docs/containers?topic=containers-changelog_131#1310_1520M_and_1310_1518W)
 
-[Kubernetes version 1.31 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
+[1.31 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-131#1-master-node-security-configuration-131)
 
@@ -5011,6 +5025,8 @@ subcollection: containers
 * [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
 
     * [Worker node fix pack 1.30.14_1590, released 08 October 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1590_W)
+
+    * [Master fix pack 1.30.14_1589, released 03 October 2025](/docs/containers?topic=containers-changelog_130#13014_1589_M)
 
     * [Worker node fix pack 1.30.14_1585, released 23 September 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1585_W)
 
@@ -5114,7 +5130,7 @@ subcollection: containers
 
     * [Master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024](/docs/containers?topic=containers-changelog_130#1301_1520M_and_1300_1518W)
 
-[Kubernetes version 1.30 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-130)
+[1.30 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-130)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-130#1-master-node-security-configuration-130)
 
@@ -6581,6 +6597,8 @@ subcollection: containers
 
     * [1.13.2_7820_iks, released 16 September 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_7820_iks)
 
+    * [1.13.2_288662581_iks, released 14 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_288662581_iks)
+
 * [Version 1.12.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.12.1)
 
     * [1.12.1_7792_iks, released 21 August 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7792_iks)
@@ -6598,6 +6616,8 @@ subcollection: containers
     * [1.12.1_7518_iks, released 22 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7518_iks)
 
     * [1.12.1_7490_iks, released 02 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7490_iks)
+
+    * [1.12.1_288662251_iks, released 14 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_288662251_iks)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
 
@@ -6638,6 +6658,8 @@ subcollection: containers
     * [1.11.2_7133_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7133_iks)
 
     * [1.11.2_7069_iks, released 04 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7069_iks)
+
+    * [1.11.2_288648329_iks, released 14 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_288648329_iks)
 
 * [Version 1.9.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.9.6)
 
@@ -7027,7 +7049,7 @@ subcollection: containers
 
     * [Master fix pack 1.29.1_1524 and worker node fix pack 1.29.1_1525, released 14 February 2024](/docs/containers?topic=containers-changelog_129#1291_1524M_and_1291_1525W)
 
-[Kubernetes version 1.29 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-129)
+[1.29 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-129)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-1-129)
 
@@ -7226,7 +7248,7 @@ subcollection: containers
 
     * [Master fix pack 1.28.2_1527 and worker node fix pack 1.28.1_1523, released 20 September 2023](/docs/containers?topic=containers-changelog_128#1.28.2_1527M-and-1.28.1_1523W)
 
-[Kubernetes version 1.28 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-128)
+[1.28 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-128)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-128#cis-section-1-128)
 
@@ -7387,7 +7409,7 @@ subcollection: containers
 
     * [Master fix pack 1.27.2_1524 and worker node fix pack 1.27.2_1526, released 24 May 2023](/docs/containers?topic=containers-changelog_127#1.27.2_1524M_and_1.27.2_1526W)
 
-[Kubernetes version 1.27 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-127)
+[1.27 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-127)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-127#cis-section-1-127)
 
@@ -7552,7 +7574,7 @@ subcollection: containers
 
     * [Master fix pack 1.26.1_1519 and worker node fix pack 1.26.1_1520, released 1 February 2023](/docs/containers?topic=containers-changelog_126#1261_1519_and_1261_1520)
 
-[Version 1.26 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-126)
+[1.26 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-126)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-126#cis-section-1-126)
 

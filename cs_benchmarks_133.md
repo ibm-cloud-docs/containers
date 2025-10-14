@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-10-13"
+lastupdated: "2025-10-14"
 
 keywords: containers, benchmarks, 1.33, containers benchmarks, containers 1.33
 
@@ -12,7 +12,7 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Kubernetes version 1.33 CIS Kubernetes benchmark
+# 1.33 CIS Kubernetes benchmark
 {: #cis-benchmark-133}
 
 The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external} as a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations. This document contains the results of the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes version 1.33. For more information or help understanding the benchmark, see [Using the benchmark](/docs/containers?topic=containers-cis-benchmark).

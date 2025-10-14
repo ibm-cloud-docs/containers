@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-08-04"
+lastupdated: "2025-10-14"
 
 
 keywords: kubernetes, containers, benchmarks, 1.29, CIS benchmarks
@@ -15,7 +15,7 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Kubernetes version 1.29 CIS Kubernetes Benchmark
+# 1.29 CIS Kubernetes Benchmark
 {: #cis-benchmark-129}
 
 

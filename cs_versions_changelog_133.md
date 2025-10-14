@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-10-13"
+lastupdated: "2025-10-14"
 
 
 keywords: change log, version history, 1.33
@@ -57,6 +57,28 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|45bd1f84378a5eb92041b5102ef21a5cfe8b36d5|N/A|
 {: caption="1.33.5_1545 fix pack." caption-side="bottom"}
 {: #cl-boms-1335_1545_W-component-table}
+
+
+
+### Master fix pack 1.33.5_1544, released 03 October 2025
+{: #1335_1544_M}
+
+The following table shows the changes that are in the master fix pack 1.33.5_1544. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.29.4 | v3.29.5 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#v3.29.5){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.33.3-2 | v1.33.5-1 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 451 | 452 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.16 | v2.10.17 | New version contains updates and security fixes. |
+| Konnectivity agent and server | v0.32.0 | v0.33.0 | See the [Konnectivity release notes](https://github.ibm.com/alchemy-containers/armada-konnectivity-community-build/releases/tag/v0.33.0){: external}. |
+| Kubernetes | v1.33.4 | v1.33.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.5){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.26.4 | 1.26.5 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.26.5){: external}. |
+| Portieris admission controller | v0.13.29 | v0.13.30 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.30){: external}. |
+| Tigera Operator | v1.36.11 | v1.36.13 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.13){: external}. |
+{: caption="Changes since version 1.33.4_1537" caption-side="bottom"}
 
 
 

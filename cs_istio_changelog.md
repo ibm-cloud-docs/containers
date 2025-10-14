@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-02"
+lastupdated: "2025-10-14"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -53,7 +53,7 @@ Updates in this version
 
 :   With the move away from the `IstioOperator` `CustomResource` to use the Helm `value.yaml` charts, `addon-istio` is no longer supporting more than 1 default gateway (`istio-ingressgateway-public-2` and `istio-ingressgateway-public-3`). However, the default gateway's `value.yaml` can be customized by the user and the user can install the previous gateways as additional custom gateways by using Helm.
 
-:   See the Istio release notes for [Istio 1.24.0](https://istio.io/latest/news/releases/1.24.x/announcing-1.24/){: external}, [Istio 1.24.1](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.1/){: external}, [Istio 1.24.2](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.2/){: external}, [Istio 1.24.3](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.3/){: external}, [Istio 1.24.4](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.4/){: external}, [Istio 1.24.5](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.5/){: external}, and [Istio 1.24.6](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.6/){: external}.
+:   See the Istio release notes for [Istio 1.24.0](https://istio.io/latest/news/releases/1.24.x/announcing-1.24/){: external}, Istio 1.24.1, [Istio 1.24.2](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.2/){: external}, [Istio 1.24.3](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.3/){: external}, [Istio 1.24.4](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.4/){: external}, [Istio 1.24.5](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.5/){: external}, and [Istio 1.24.6](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.6/){: external}.
 
 :   Resolves the following CVEs:
     - [CVE-2024-56406](https://www.cve.org/CVERecord?id=CVE-2024-56406){: external}

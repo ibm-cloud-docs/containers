@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-10-13"
+lastupdated: "2025-10-14"
 
 
 keywords: change log, version history, 1.30
@@ -57,6 +57,24 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|45bd1f84378a5eb92041b5102ef21a5cfe8b36d5|N/A|
 {: caption="1.30.14_1590 fix pack." caption-side="bottom"}
 {: #cl-boms-13014_1590_W-component-table}
+
+
+
+### Master fix pack 1.30.14_1589, released 03 October 2025
+{: #13014_1589_M}
+
+The following table shows the changes that are in the master fix pack 1.30.14_1589. Master patch updates are applied automatically. 
+
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.30.14-7 | v1.30.14-11 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 451 | 452 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.16 | v2.10.17 | New version contains updates and security fixes. |
+| Kubernetes NodeLocal DNS cache | 1.26.4 | 1.26.5 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.26.5){: external}. |
+| Portieris admission controller | v0.13.29 | v0.13.30 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.30){: external}. |
+{: caption="Changes since version 1.30.14_1580" caption-side="bottom"}
 
 
 
