@@ -252,6 +252,10 @@ subcollection: containers
 
         * Version 1.33 is now the default version for {{site.data.keyword.containerlong_notm}}.
 
+    * [03 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0325)
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
+
     * [02 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0225)
 
         * CLI version `1.0.724` is available.
