@@ -240,6 +240,10 @@ subcollection: containers
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
 
+    * [14 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct1425)
+
+        * Ingress ALB cluster add-on patch updates.
+
     * [13 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct1325)
 
         * New! General availability of the {{site.data.keyword.cos_full_notm}} cluster add-on
@@ -6593,6 +6597,8 @@ subcollection: containers
 
     * [1.13.2_7820_iks, released 16 September 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_7820_iks)
 
+    * [1.13.2_288662581_iks, released 14 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_288662581_iks)
+
 * [Version 1.12.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.12.1)
 
     * [1.12.1_7792_iks, released 21 August 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7792_iks)
@@ -6610,6 +6616,8 @@ subcollection: containers
     * [1.12.1_7518_iks, released 22 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7518_iks)
 
     * [1.12.1_7490_iks, released 02 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7490_iks)
+
+    * [1.12.1_288662251_iks, released 14 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_288662251_iks)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
 
@@ -6650,6 +6658,8 @@ subcollection: containers
     * [1.11.2_7133_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7133_iks)
 
     * [1.11.2_7069_iks, released 04 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7069_iks)
+
+    * [1.11.2_288648329_iks, released 14 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_288648329_iks)
 
 * [Version 1.9.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.9.6)
 
