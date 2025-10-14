@@ -59,6 +59,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1335_1545_W-component-table}
 
 
+
 ### Master fix pack 1.33.5_1544, released 03 October 2025
 {: #1335_1544_M}
 
@@ -80,6 +81,7 @@ The following table shows the changes that are in the master fix pack 1.33.5_154
 {: caption="Changes since version 1.33.4_1537" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.33.4_1541, released 23 September 2025
 {: #cl-boms-1334_1541_W}
 
@@ -95,6 +97,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|45bd1f84378a5eb92041b5102ef21a5cfe8b36d5|N/A|
 {: caption="1.33.4_1541 fix pack." caption-side="bottom"}
 {: #cl-boms-1334_1541_W-component-table}
+
 
 
 ### Worker node fix pack 1.33.4_1539, released 09 September 2025
@@ -114,6 +117,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1334_1539_W-component-table}
 
 
+
 ### Worker node fix pack 1.33.4_1538, released 26 August 2025
 {: #cl-boms-1334_1538_W}
 
@@ -129,6 +133,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|dc91132711527b5b44d0e89e563354769d3a4a0f|Resolves the following CVEs: [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}, [CVE-2025-5914](https://nvd.nist.gov/vuln/detail/CVE-2025-5914){: external}, [CVE-2024-47081](https://nvd.nist.gov/vuln/detail/CVE-2024-47081){: external}, and [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}.|
 {: caption="1.33.4_1538 fix pack." caption-side="bottom"}
 {: #cl-boms-1334_1538_W-component-table}
+
 
 
 ### Master fix pack 1.33.4_1537, released 20 August 2025
@@ -148,6 +153,7 @@ The following table shows the changes that are in the master fix pack 1.33.4_153
 {: caption="Changes since version 1.33.3_1532" caption-side="bottom"}
 
 
+
 ### Worker node fix pack 1.33.3_1534, released 12 August 2025
 {: #cl-boms-1333_1534_W}
 
@@ -163,6 +169,7 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|51c51a011ee21f6dcb8c8143b688c34412f58405|Resolves the following CVEs: [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}, [CVE-2025-7425](https://nvd.nist.gov/vuln/detail/CVE-2025-7425){: external}, [CVE-2024-47081](https://nvd.nist.gov/vuln/detail/CVE-2024-47081){: external}, [CVE-2025-5994](https://nvd.nist.gov/vuln/detail/CVE-2025-5994){: external}, [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}, and [CVE-2025-6965](https://nvd.nist.gov/vuln/detail/CVE-2025-6965){: external}.|
 {: caption="1.33.3_1534 fix pack." caption-side="bottom"}
 {: #cl-boms-1333_1534_W-component-table}
+
 
 
 ### Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025
