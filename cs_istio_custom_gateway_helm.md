@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-15"
+lastupdated: "2025-09-29"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
