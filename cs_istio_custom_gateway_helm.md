@@ -272,7 +272,7 @@ To edit the `istio-ingressgateway` and `istio-egressgateway` `value.yaml` conten
     {: important}
 
     ```sh
-    helm upgrade istio-ingressgateway istio/gateway --create-namespace --install -n istio-system -f gateway-values.yaml --dry-run
+    helm upgrade istio-ingressgateway istio/gateway --version 1.24.0 --install -n istio-system -f gateway-values.yaml --dry-run
     ```
     {: pre}
 
@@ -384,7 +384,7 @@ After customizing the default gateway that has one gateway deployment, you might
 1. Do a dry run to see the manifest of the YAML resources for the gateway.
 
     ```sh
-    helm upgrade $RELEASE_NAME istio/gateway --create-namespace --install -n $NAMESPACE -f values.yaml --dry-run
+    helm upgrade --dry-run $RELEASE_NAME istio/gateway --version 1.24.0 --install -n $NAMESPACE -f values.yaml
     ```
     {: pre}
 
