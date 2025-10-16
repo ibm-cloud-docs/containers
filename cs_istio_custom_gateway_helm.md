@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-29"
+lastupdated: "2025-10-16"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -25,9 +25,21 @@ With the move to Helm for the Istio add-on version 1.24 and later, the `IstioOpe
 ## Setting up Helm
 {: #istio-helm-install}
 
-Before you begin deploying and managing custom gateways, set up Helm.
+Before you begin deploying and managing custom gateways, set up Helm 3.18.4 or earlier.
 
-1. [Install Helm](/docs/containers?topic=containers-helm#install_v3).
+
+1. Install Helm 3.18.4 or earlier.
+
+    ```sh 
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    chmod 700 get_helm.sh
+    helm_version_pin="v3.18.4"
+    DESIRED_VERSION="${helm_version_pin}" ./get_helm.sh
+    which helm
+    helm version
+    rm get_helm.sh
+    ```
+    {: pre}
 
 1. Add Istio's Helm repo.
 
