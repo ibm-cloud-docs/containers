@@ -331,19 +331,7 @@ toc:
           topics:
           - link:
               label: IBM Cloud Kubernetes Service API
-              href: https://containers.cloud.ibm.com/global/swagger-global-api/#/
-          - link:
-              label: IBM Cloud Kubernetes Service API JSON
-              href: https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json
-          - link:
-              label: IBM Cloud Container Registry API
-              href: https://cloud.ibm.com/apidocs/container-registry
-          - link:
-              label: IBM Cloud Vulnerability Advisor API
-              href: https://cloud.ibm.com/apidocs/container-registry/va
-          - link:
-              label: Community Kubernetes API
-              href: https://kubernetes.io/docs/reference/
+              href: https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2
       - addon_landing.md
       - topicgroup:
           label: Add-on version history

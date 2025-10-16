@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-14"
+lastupdated: "2025-10-16"
 
 
 keywords: containers
@@ -5800,15 +5800,7 @@ subcollection: containers
 {: #sitemap_api_reference}
 
 
-[IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external}
-
-[IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json){: external}
-
-[IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry){: external}
-
-[IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va){: external}
-
-[Community Kubernetes API](https://kubernetes.io/docs/reference/){: external}
+[IBM Cloud Kubernetes Service API](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external}
 
 
 ## Add-ons for {{site.data.keyword.containerlong_notm}}
