@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-04-28"
+lastupdated: "2025-10-16"
 
 
 keywords: kubernetes, containers
@@ -56,7 +56,7 @@ Create a cluster with infrastructure, network, and availability setups that are 
 1. **Firewall**: If you have corporate firewalls, make sure that you [open the required ports and IP addresses](/docs/containers?topic=containers-firewall#corporate) to work with {{site.data.keyword.containerlong_notm}}.
 2. **CLI and API**:
     1. [Set up the CLIs](/docs/containers?topic=containers-cli-install) that are necessary to create and work with clusters. As you work with your cluster, refer to the [command reference](/docs/containers?topic=containers-kubernetes-service-cli) and keep track of CLI version updates with the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
-    2. Optionally set up [automated deployments with the API](/docs/containers?topic=containers-cs_api_install). As you work with your cluster, refer to the [IBM Cloud Kubernetes Service API reference](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external} and [Community Kubernetes API reference](https://kubernetes.io/docs/reference/){: external}.
+    2. Optionally set up [automated deployments with the API](/docs/containers?topic=containers-cs_api_install). As you work with your cluster, refer to the [IBM Cloud Kubernetes Service API reference](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external} and [Community Kubernetes API reference](https://kubernetes.io/docs/reference/){: external}.
 3. **Cluster deployment**:
     1. [Create the cluster](/docs/containers?topic=containers-clusters).
     2. After the cluster is ready, [access your cluster](/docs/containers?topic=containers-access_cluster).
