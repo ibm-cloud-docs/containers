@@ -1857,9 +1857,7 @@ subcollection: containers
 
 * [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_api_install#kube_api)
 
-* [Refreshing IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
-
-* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
+* [Refreshing IAM access tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 
 ## Creating clusters

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-10-16"
+lastupdated: "2025-10-23"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, ic, ks, kubectl, api
@@ -83,12 +83,20 @@ The {{site.data.keyword.containerlong_notm}} API requires header information tha
 To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.cloud_notm}} credentials and that includes the {{site.data.keyword.cloud_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.cloud_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.cloud_notm}} IAM token.
 
 Unfederated ID
-:    - **Generate an {{site.data.keyword.cloud_notm}} API key:** As an alternative to using the {{site.data.keyword.cloud_notm}} username and password, you can [use {{site.data.keyword.cloud_notm}} API keys](/docs/account?topic=account-userapikey&interface=ui#create_user_key). {{site.data.keyword.cloud_notm}} API keys are dependent on the {{site.data.keyword.cloud_notm}} account they are generated for. You can't combine your {{site.data.keyword.cloud_notm}} API key with a different account ID in the same {{site.data.keyword.cloud_notm}} IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.cloud_notm}} API key is based on, you must log in to the account to generate a new API key.
+:    - **Generate an {{site.data.keyword.cloud_notm}} API key:** As an alternative to using the {{site.data.keyword.cloud_notm}} username and password, you can use [{{site.data.keyword.cloud_notm}} API keys](/docs/account?topic=account-userapikey&interface=ui#create_user_key). {{site.data.keyword.cloud_notm}} API keys are dependent on the {{site.data.keyword.cloud_notm}} account they are generated for. You can't combine your {{site.data.keyword.cloud_notm}} API key with a different account ID in the same {{site.data.keyword.cloud_notm}} IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.cloud_notm}} API key is based on, you must log in to the account to generate a new API key.
      - **{{site.data.keyword.cloud_notm}} username and password:** You can follow the steps in this topic to fully automate the creation of your {{site.data.keyword.cloud_notm}} IAM access token.
      
 Federated ID
 :    - **Generate an {{site.data.keyword.cloud_notm}} API key:** [{{site.data.keyword.cloud_notm}} API keys](/docs/account?topic=account-userapikey&interface=ui#create_user_key) are dependent on the {{site.data.keyword.cloud_notm}} account they are generated for. You can't combine your {{site.data.keyword.cloud_notm}} API key with a different account ID in the same {{site.data.keyword.cloud_notm}} IAM token. To access clusters that were created with an account other than the one your {{site.data.keyword.cloud_notm}} API key is based on, you must log in to the account to generate a new API key.
      - **Use a one-time passcode:** If you authenticate with {{site.data.keyword.cloud_notm}} by using a one-time passcode, you can't fully automate the creation of your {{site.data.keyword.cloud_notm}} IAM token because the retrieval of your one-time passcode requires a manual interaction with your web browser. To fully automate the creation of your {{site.data.keyword.cloud_notm}} IAM token, you must create an {{site.data.keyword.cloud_notm}} API key instead.
+
+- **API key:** To generate your [{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/) API key do as follows.
+    1. From the menu bar, click **Manage** > **Access (IAM)**.
+    2. Click the **Users** page and then select yourself.
+    3. In the **API keys** pane, click **Create an IBM Cloud API key**.
+    4. Enter a **Name** and **Description** for your API key and click **Create**.
+    5. Click **Show** to see the API key that was generated for you.
+    6. Copy the API key so that you can use it to retrieve your new {{site.data.keyword.cloud_notm}} IAM access token.
 
 
 1. Create your {{site.data.keyword.cloud_notm}} IAM access token. The body information that is included in your request varies based on the {{site.data.keyword.cloud_notm}} authentication method that you use.
@@ -248,38 +256,9 @@ You can use the [Kubernetes API](https://kubernetes.io/docs/reference/using-api/
 The following instructions require public network access in your cluster to connect to the public cloud service endpoint of your Kubernetes master.
 {: note}
 
-1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.cloud_notm}} IAM access token, refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located.
+1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.cloud_notm}} IAM access token, your {{site.data.keyword.cloud_notm}} API key, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located.
 
-1. Retrieve an IBM Cloud IAM refresh token and IAM access token.
-
-    ```sh
-    POST https://iam.cloud.ibm.com/identity/token
-    ```
-    {: codeblock}
-
-    Header
-    :    - `Content-Type: application/x-www-form-urlencoded`
-         - `Authorization: Basic Yng6Yng=` where `Yng6Yng=` equals the URL-encoded authorization for the username **bx** and the password **bx**. 
-         - `cache-control: no-cache`
-
-    Body
-    :    - `delegated_refresh_token_expiry: 600`
-         - `receiver_client_ids: kube`
-         - `response_type: delegated_refresh_token`
-         - `refresh_token`: Your {{site.data.keyword.cloud_notm}} IAM refresh token.
-         - `grant_type: refresh_token`
-
-    The following example shows output from the previous API request.
-
-    ```sh
-    {
-    "access_token": <access_token>
-    "refresh_token": <delegated_refresh_token>
-    }
-    ```
-    {: screen}
-
-1. Retrieve an {{site.data.keyword.cloud_notm}} IAM ID, IAM access, and IAM refresh token by using the delegated refresh token from the previous step. In your API output, you can find the IAM ID token in the `id_token` field, the IAM access token in the `access_token` field, and the IAM refresh token in the `refresh_token` field.
+1. Retrieve an {{site.data.keyword.cloud_notm}} IAM ID, IAM access, and IAM refresh token using the {{site.data.keyword.cloud_notm}} API key. In your API output, you can find the IAM ID token in the `id_token` field, the IAM access token in the `access_token` field, and the IAM refresh token in the `refresh_token` field.
     ```sh
     POST https://iam.cloud.ibm.com/identity/token
     ```
@@ -289,11 +268,10 @@ The following instructions require public network access in your cluster to conn
     :    - `Content-Type: application/x-www-form-urlencoded` 
          - `Authorization: Basic a3ViZTprdWJl`
               `a3ViZTprdWJl` equals the URL-encoded authorization for the username `kube` and the password `kube`.
-         - `cache-control: no-cache`
 
     Body
-    :    - `refresh_token`: Your {{site.data.keyword.cloud_notm}} IAM delegated refresh token.
-         - `grant_type: urn:ibm:params:oauth:grant-type:delegated-refresh-token`
+    :    - `grant_type: urn:ibm:params:oauth:grant-type:apikey`
+         - `apikey:` Your {{site.data.keyword.cloud_notm}} API key.
 
     The following example shows output from the previous API request.
 
@@ -305,14 +283,17 @@ The following instructions require public network access in your cluster to conn
     "token_type": "Bearer",
     "expires_in": 3600,
     "expiration": 1553629664,
+    "refresh_token_expiration": 1761334993,
     "scope": "ibm openid containers-kubernetes"
     }
     ```
     {: screen}
 
+    Alternatively, using the`ibmcloud ks cluster config --cluster <cluster_name> --output json` CLI command will display the `id_token` and the `refresh_token`.
+
 1. Before you can access your cluster with your current identity, you must run the following request.
     ```curl
-    POST https://containers.test.cloud.ibm.com/global/v2/applyRBAC
+    POST https://containers.cloud.ibm.com/global/v2/applyRBAC
     ```
     {: pre}
 
@@ -324,7 +305,7 @@ The following instructions require public network access in your cluster to conn
 
 1. Note that RBAC sync is asynchronous, so run the following request until it has synced.
     ```curl
-    GET https://containers.test.cloud.ibm.com/global/v2/getRBACStatus?cluster=<cluster_name_or_ID>
+    GET https://containers.cloud.ibm.com/global/v2/getRBACStatus?cluster=<cluster_name_or_ID>
   -H "Authorization: ${BEARER2}"
     ```
     {: pre}
@@ -387,7 +368,7 @@ The following instructions require public network access in your cluster to conn
     {: tip}
 
     ```sh
-    GET <masterURL>/version
+    GET <masterURL>/api
     ```
     {: codeblock}
 
@@ -401,16 +382,17 @@ The following instructions require public network access in your cluster to conn
 
     ```sh
     {
-    "major": "1",
-    "minor": "1.33",
-    "gitVersion": "v1.33+IKS",
-    "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
-    "gitTreeState": "clean",
-    "buildDate": "2019-03-21T10:08:03Z",
-    "goVersion": "go1.11.5",
-    "compiler": "gc",
-    "platform": "linux/amd64"
-    }
+	"kind": "APIVersions",
+	"versions": [
+		"v1"
+	],
+	"serverAddressByClientCIDRs": [
+		{
+			"clientCIDR": "0.0.0.0/0",
+			"serverAddress": "xxx.xx.x.x:xxxx"
+		}
+	]
+     }
     ```
     {: screen}
 
@@ -418,25 +400,17 @@ The following instructions require public network access in your cluster to conn
 
 
 
-## Refreshing IAM access tokens and obtaining new refresh tokens with the API
+## Refreshing IAM access tokens with the API
 {: #cs_api_refresh}
 
-Every {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) access token that is issued via the API expires after one hour. You must refresh your access token regularly to assure access to the {{site.data.keyword.cloud_notm}} API. You can use the same steps to obtain a new refresh token.
+Every {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) access token that is issued via the API expires after one hour. You must refresh your access token regularly to assure access to the {{site.data.keyword.cloud_notm}} API.
 {: shortdesc}
 
-Before you begin, make sure that you have an {{site.data.keyword.cloud_notm}} IAM refresh token or an {{site.data.keyword.cloud_notm}} API key that you can use to request a new access token.
-- **Refresh token:** Follow the instructions in [Automating the cluster creation and management process with the {{site.data.keyword.cloud_notm}} API](#cs_api).
-- **API key:** Retrieve your [{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/) API key as follows.
-    1. From the menu bar, click **Manage** > **Access (IAM)**.
-    2. Click the **Users** page and then select yourself.
-    3. In the **API keys** pane, click **Create an IBM Cloud API key**.
-    4. Enter a **Name** and **Description** for your API key and click **Create**.
-    5. Click **Show** to see the API key that was generated for you.
-    6. Copy the API key so that you can use it to retrieve your new {{site.data.keyword.cloud_notm}} IAM access token.
+Before you begin, make sure that you have an [{{site.data.keyword.cloud_notm}} API key](/docs/account?topic=account-userapikey&interface=ui#create_user_key) that you can use to request a new access token.
 
-Use the following steps if you want to create an {{site.data.keyword.cloud_notm}} IAM token or if you want to obtain a new refresh token.
+Use the following steps if you want to obtain a new {{site.data.keyword.cloud_notm}} IAM token.
 
-1. Generate a new {{site.data.keyword.cloud_notm}} IAM access token by using the refresh token or the {{site.data.keyword.cloud_notm}} API key.
+1. Generate a new {{site.data.keyword.cloud_notm}} IAM access token by using the {{site.data.keyword.cloud_notm}} API key.
     ```sh
     POST https://iam.cloud.ibm.com/identity/token
     ```
@@ -444,15 +418,8 @@ Use the following steps if you want to create an {{site.data.keyword.cloud_notm}
 
     Header
     :    - `Content-Type: application/x-www-form-urlencoded`
-         - `Authorization: Basic Yng6Yng=`: Where `Yng6Yng=` equals the URL-encoded authorization for the username **bx** and the password **bx**.
-
-    
-    Body when using the refresh token
-    :    - `grant_type: refresh_token`
-         - `refresh_token:` Your {{site.data.keyword.cloud_notm}} IAM refresh token.
-         - `bss_account:` Your {{site.data.keyword.cloud_notm}} account ID.
           
-    Body when using the {{site.data.keyword.cloud_notm}} API key
+    Body
     :    - `grant_type: urn:ibm:params:oauth:grant-type:apikey`
          - `apikey:` Your {{site.data.keyword.cloud_notm}} API key.
 
@@ -465,32 +432,13 @@ Use the following steps if you want to create an {{site.data.keyword.cloud_notm}
         "refresh_token": "<iam_refresh_token>",
         "token_type": "Bearer",
         "expires_in": 3600,
-        "expiration": 1493747503
+        "expiration": 1493747503,
+        "scope": "ibm openid"
     }
 
     ```
     {: screen}
 
-    You can find your new {{site.data.keyword.cloud_notm}} IAM token in the `access_token`, and the refresh token in the `refresh_token` field of your API output.
+    You can find your new {{site.data.keyword.cloud_notm}} IAM token in the `access_token` field of your API output.
 
 2. Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external} by using the token from the previous step.
-
-
-
-## Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI
-{: #cs_cli_refresh}
-
-You can use the command line to [set the cluster context](/docs/containers?topic=containers-access_cluster), download the `kubeconfig` file for your Kubernetes cluster, and generate an {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) ID token and a refresh token to provide authentication.
-{: shortdesc}
-
-You can use [{{site.data.keyword.cloud_notm}} IAM](https://cloud.ibm.com/iam/overview){: external} to change the default expiration times for your tokens and sessions.
-{: tip}
-
-`Kubeconfig` session
-:    When you start a new CLI session or after the session expires such as after the default of 24 hours, you must reset the cluster context.
-
-ID token
-:    Every IAM ID token that is issued via the CLI expires after a set period of time, such as 20 minutes. When the ID token expires, the refresh token is sent to the token provider to refresh the ID token. Your authentication is refreshed, and you can continue to run commands against your cluster.
-
-Refresh token
-:    Refresh tokens expire after a set period of time, such as 30 days, or if the administrator revokes the token. If the refresh token is expired, the ID token can't be refreshed, and you are not able to continue running commands in the CLI. You can get a new refresh token by running `ibmcloud ks cluster config --cluster <cluster_name>`. This command also refreshes your ID token.
