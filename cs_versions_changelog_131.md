@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-10-14"
+lastupdated: "2025-10-23"
 
 
 keywords: change log, version history, 1.31
@@ -40,6 +40,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.31
 {: #131_components}
+
+
+### Worker node fix pack 1.31.13_1576, released 21 October 2025
+{: #cl-boms-13113_1576_W}
+
+The following table shows the components included in the worker node fix pack 1.31.13_1576. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-85-generic|Resolves the following CVEs: [CVE-2023-45803](https://nvd.nist.gov/vuln/detail/CVE-2023-45803){: external}, [CVE-2024-10963](https://nvd.nist.gov/vuln/detail/CVE-2024-10963){: external}, [CVE-2024-3651](https://nvd.nist.gov/vuln/detail/CVE-2024-3651){: external}, [CVE-2024-47081](https://nvd.nist.gov/vuln/detail/CVE-2024-47081){: external}, [CVE-2025-11230](https://nvd.nist.gov/vuln/detail/CVE-2025-11230){: external}, [CVE-2025-22247](https://nvd.nist.gov/vuln/detail/CVE-2025-22247){: external}, [CVE-2025-37756](https://nvd.nist.gov/vuln/detail/CVE-2025-37756){: external}, [CVE-2025-37785](https://nvd.nist.gov/vuln/detail/CVE-2025-37785){: external}, [CVE-2025-38477](https://nvd.nist.gov/vuln/detail/CVE-2025-38477){: external}, [CVE-2025-38500](https://nvd.nist.gov/vuln/detail/CVE-2025-38500){: external}, [CVE-2025-38617](https://nvd.nist.gov/vuln/detail/CVE-2025-38617){: external}, [CVE-2025-38618](https://nvd.nist.gov/vuln/detail/CVE-2025-38618){: external}, [CVE-2025-41244](https://nvd.nist.gov/vuln/detail/CVE-2025-41244){: external}, [CVE-2025-6297](https://nvd.nist.gov/vuln/detail/CVE-2025-6297){: external}, [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}, [CVE-2025-8961](https://nvd.nist.gov/vuln/detail/CVE-2025-8961){: external}, [CVE-2025-9165](https://nvd.nist.gov/vuln/detail/CVE-2025-9165){: external}, [CVE-2025-9230](https://nvd.nist.gov/vuln/detail/CVE-2025-9230){: external}, and [CVE-2025-9900](https://nvd.nist.gov/vuln/detail/CVE-2025-9900){: external}.|
+|Kubernetes|1.31.13|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.13).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|HAProxy|c01cd5322cd5c284286c07fe9ad0cc0ef3ab5360|Resolves the following CVEs: [CVE-2025-32988](https://nvd.nist.gov/vuln/detail/CVE-2025-32988){: external}, [CVE-2025-6395](https://nvd.nist.gov/vuln/detail/CVE-2025-6395){: external}, and [CVE-2025-32990](https://nvd.nist.gov/vuln/detail/CVE-2025-32990){: external}.|
+|GPU Device Plug-in and Installer|e15a40cb6d9e0ac0b9c345d302c629faad596b30|Resolves the following CVEs: [CVE-2025-53906](https://nvd.nist.gov/vuln/detail/CVE-2025-53906){: external}, [CVE-2025-53905](https://nvd.nist.gov/vuln/detail/CVE-2025-53905){: external}, [CVE-2025-32990](https://nvd.nist.gov/vuln/detail/CVE-2025-32990){: external}, [CVE-2025-32988](https://nvd.nist.gov/vuln/detail/CVE-2025-32988){: external}, [CVE-2025-6395](https://nvd.nist.gov/vuln/detail/CVE-2025-6395){: external}, and [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}.|
+{: caption="1.31.13_1576 fix pack." caption-side="bottom"}
+{: #cl-boms-13113_1576_W-component-table}
+
 
 
 ### Worker node fix pack 1.31.13_1575, released 08 October 2025
