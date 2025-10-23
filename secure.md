@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-09-18"
+lastupdated: "2025-10-22"
 
 
 keywords: containers
@@ -121,7 +121,7 @@ Fine-grained access control
     - **Classic infrastructure:** Enables access to your classic infrastructure resources. Example actions that are permitted by classic infrastructure roles are viewing the details of cluster worker node machines or editing networking and storage resources.
     - **VPC infrastructure:** Enables access to VPC infrastructure resources. Example actions that are permitted by VPC infrastructure roles are creating a VPC, adding subnets, changing floating IP addresses, and creating VPC Block Storage instances.
 
-    For more information about access control in a cluster, see [Assigning cluster access](/docs/containers?topic=containers-iam-platform-access-roles.
+    For more information about access control in a cluster, see [Assigning cluster access](/docs/containers?topic=containers-iam-platform-access-roles).
 
 Pod access via service account token
 :   For clusters that run Kubernetes 1.21 and later, the service account tokens that pods use to communicate with the Kubernetes API server are time-limited, automatically refreshed, scoped to a particular audience of users (the pod), and invalidated after the pod is deleted. To continue communicating with the API server, you must design your apps to read the refreshed token value on a regular basis, such as every minute. For more information, see [Bound Service Account Tokens](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md){: external}.

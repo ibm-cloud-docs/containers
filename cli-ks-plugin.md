@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-16"
+lastupdated: "2025-10-22"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -953,7 +953,7 @@ VPC Gen 2 cluster flavors with instance storage are available for allowlisted ac
 
 
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--cluster-security-group GROUP_ID] [--operating-system SYSTEM] [--version VERSION] [--workers NUMBER_WORKERS_PER_ZONE] [--dedicated-host-pool POOL] [--disable-outbound-traffic-protection] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID][--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [-q] [--secondary-storage STORAGE]
+ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--cluster-security-group GROUP_ID] [--cni CNI] [--operating-system SYSTEM] [--version VERSION] [--workers NUMBER_WORKERS_PER_ZONE] [--dedicated-host-pool POOL] [--disable-outbound-traffic-protection] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--kms-account-id ID] [--kms-instance KMS_INSTANCE_ID] [--crk ROOT_KEY_ID][--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [-q] [--secondary-storage STORAGE]
 ```
 {: pre}
 
@@ -985,6 +985,9 @@ Minimum required permissions
 
 `--flavor FLAVOR`
 :    Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.
+
+`--cni CNI`
+:    Set the network plugin for the cluster. Calico is set by default. Accepted values: `Calico`, `OVNKubernetes`
 
 `--cluster-security-group GROUP_ID`
 :    Optional. Specify additional security group IDs to apply to all workers on the cluster. You must include a separate `--cluster-security-group` option for each individual security group you want to add. To apply the IBM-created `kube-clusterID`, use `--cluster-security-group cluster`. If no value is specified, only the `kube-clusterID` and the default VPC security group are applied. A maximum of five security groups can be applied to workers, including the default security groups. Note that the VPC security group is only applied if no other security groups are specified. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group-manage).
