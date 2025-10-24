@@ -61,7 +61,8 @@ New security group rules were introduced in versions 1.25 and later. These rule 
 
 Create a persistent volume claim (PVC) to dynamically provision {{site.data.keyword.filestorage_vpc_short}} for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the file share in your account.
 
-Now available, you can choose a [second-generation storage classes](/docs/containers?topic=containers-storage-file-vpc-sc-ref).
+Now available, you can choose a [second-generation storage class](/docs/containers?topic=containers-storage-file-vpc-sc-ref).
+{: tip}
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
