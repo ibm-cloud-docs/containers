@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-23"
+lastupdated: "2025-10-27"
 
 
 keywords: containers
@@ -1704,7 +1704,7 @@ subcollection: containers
 
     * [{{site.data.keyword.BluDirectLink}} for communication over the private network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-direct-link)
 
-    * [strongSwan IPSec VPN connection for communication over the public network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-strongswan)
+    * [VPN connection for communication over the public network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-vpn)
 
 * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#external-workers)
 
@@ -2538,7 +2538,7 @@ subcollection: containers
 
 [Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
 
-* [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)
+* [(Deprecated) Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)
 
 * [strongSwan VPN service considerations](/docs/containers?topic=containers-vpn#strongswan_limitations)
 
