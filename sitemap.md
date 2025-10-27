@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-23"
+lastupdated: "2025-10-27"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
+
+    * [23 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct2325)
+
+        * The Diagnostics and Debug Tool is deprecated and support ends on 20 December 2025.
 
     * [22 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct2225)
 
@@ -1704,7 +1708,7 @@ subcollection: containers
 
     * [{{site.data.keyword.BluDirectLink}} for communication over the private network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-direct-link)
 
-    * [strongSwan IPSec VPN connection for communication over the public network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-strongswan)
+    * [VPN connection for communication over the public network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-vpn)
 
 * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#external-workers)
 
@@ -2538,7 +2542,7 @@ subcollection: containers
 
 [Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
 
-* [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)
+* [(Deprecated) Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)
 
 * [strongSwan VPN service considerations](/docs/containers?topic=containers-vpn#strongswan_limitations)
 
@@ -3327,7 +3331,7 @@ subcollection: containers
 
     * [Manually injecting sidecars](/docs/containers?topic=containers-istio-mesh#istio_sidecar_manual)
 
-* [Enabling or disabling public Istio load balancers](/docs/containers?topic=containers-istio-mesh#config-gateways)
+* [Enabling or disabling public Istio load balancers in addon-istio 1.23](/docs/containers?topic=containers-istio-mesh#config-gateways)
 
 * [Exposing the Istio ingress gateway with DNS](/docs/containers?topic=containers-istio-mesh#istio_expose)
 
@@ -8430,6 +8434,8 @@ subcollection: containers
 [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
 
 * [Enable and run the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
+
+* [Removing the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-remove)
 
 
 ## Troubleshooting apps in {{site.data.keyword.containerlong_notm}}

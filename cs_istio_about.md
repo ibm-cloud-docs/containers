@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-29"
+lastupdated: "2025-10-27"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -44,7 +44,7 @@ Data plane
 :   The data plane consists of your applications, the sidecars that are injected into your application pods, the gateways, and data plane configuration resources like `ServiceEntries`, `VirtualServices`, `Gateways`, `DestinationRules`, `EnvoyFilters`, and more. You are responsible for configuring your service mesh, updating your sidecars and custom gateways on a patch update, and upgrading the add-on as newer versions are released.
 
 Control plane
-:   The control plane consists of the Istio operator, the managed Istio Operator, and `Istiod` which contains Pilot, Mixer telemetry and policy, and Citadel components. For more information about each of these components, see the [`istio` add-on description](#istio_ov_components). {{site.data.keyword.cloud_notm}} manages the control plane by providing patch updates, resolving vulnerabilities, and reconciling the managed resources.
+:   The control plane consists of `Istiod` which contains Pilot, Mixer telemetry and policy, and Citadel components. For more information about each of these components, see the [`istio` add-on description](#istio_ov_components). {{site.data.keyword.cloud_notm}} manages the control plane by providing patch updates, resolving vulnerabilities, and reconciling the managed resources.
 
 
 ## What is Istio on {{site.data.keyword.containerlong_notm}}?
@@ -79,7 +79,7 @@ The Istio add-on installs the core components of Istio. For more information abo
 * `Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.
 * `istiod` unifies functionality that Pilot, Galley, Citadel, and the sidecar injector previously performed into a single control plane package.
 * The `istio-ingressgateway` and `istio-egressgateway` control incoming traffic to and outgoing traffic from your Istio-managed apps.
-* The Istio operator (`addon-istio-operator` in Istio version 1.10 or later, or `managed-istio-operator` in Istio version 1.9 or earlier) in the `ibm-operators` namespace validates and reconciles any custom Istio operator (IOP) changes that you make.
+
 
 
 ## Limitations
@@ -88,7 +88,8 @@ The Istio add-on installs the core components of Istio. For more information abo
 Review the following limitations for the managed Istio add-on.
 {: shortdesc}
 
-* When you enable the managed Istio add-on, you can't use `IstioOperator` (IOP) resources to customize the Istio control plane installation. Only the `IstioOperator` resources that are managed by IBM for the Istio control plane are supported. If you create an `IstioOperator` resource for custom gateways in your data plane in Istio version 1.23 and earlier, you are responsible for managing those resources.
-* You can't modify any Istio resources that are created for you in the `istio-system` namespace. If you need to customize the Istio installation, you can [edit the `managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize).
+* When you enable the managed Istio add-on, you can't use `IstioOperator` (IOP) resources to customize the Istio control plane installation. Only the resources that are managed by IBM for the Istio control plane are supported.
+* If you create additional custom Istio gateways in your data plane, you are responsible for managing those resources.
+* You can't modify any Istio resources that are created for you in the `istio-system` namespace. If you need to customize the Istio installation, you can [edit the `managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize) or [modify the default istio gateway's value.yaml](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-custom-gateway).
 * The following features are not supported in the managed Istio add-on:
     * [Any features by the community that are in alpha release stages](https://istio.io/latest/docs/releases/feature-stages/){: external}
