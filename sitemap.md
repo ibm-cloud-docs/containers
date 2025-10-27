@@ -3331,7 +3331,7 @@ subcollection: containers
 
     * [Manually injecting sidecars](/docs/containers?topic=containers-istio-mesh#istio_sidecar_manual)
 
-* [Enabling or disabling public Istio load balancers](/docs/containers?topic=containers-istio-mesh#config-gateways)
+* [Enabling or disabling public Istio load balancers in addon-istio 1.23](/docs/containers?topic=containers-istio-mesh#config-gateways)
 
 * [Exposing the Istio ingress gateway with DNS](/docs/containers?topic=containers-istio-mesh#istio_expose)
 

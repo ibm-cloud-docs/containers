@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-16"
+lastupdated: "2025-10-27"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -414,21 +414,19 @@ If you enabled `istio-ingressgateway-public-2`, `istio-ingressgateway-public-3`,
 
 1. Locate the gateways.
     ```sh
-    gateway_name=$GATEWAY_NAME
-    namespace=$NAMESPACE
-    kubectl get PodDisruptionBudget -n $NAMESPACE $GATEWAY_NAME --ignore-not-found
-    kubectl get Service -n $NAMESPACE $GATEWAY_NAME --ignore-not-found
-    kubectl get Deployment -n $NAMESPACE $GATEWAY_NAME --ignore-not-found
-    kubectl get HorizontalPodAutoscaler -n $NAMESPACE $GATEWAY_NAME --ignore-not-found
-    kubectl get ServiceAccount -n $NAMESPACE --ignore-not-found | grep $GATEWAY_NAME
-    kubectl get Role -n $NAMESPACE --ignore-not-found | grep $GATEWAY_NAME
-    kubectl get RoleBinding -n $NAMESPACE --ignore-not-found | grep $GATEWAY_NAME
+    kubectl get PodDisruptionBudget -n NAMESPACE GATEWAY_NAME --ignore-not-found
+    kubectl get Service -n NAMESPACE GATEWAY_NAME --ignore-not-found
+    kubectl get Deployment -n NAMESPACE GATEWAY_NAME --ignore-not-found
+    kubectl get HorizontalPodAutoscaler -n NAMESPACE GATEWAY_NAME --ignore-not-found
+    kubectl get ServiceAccount -n NAMESPACE --ignore-not-found | grep GATEWAY_NAME
+    kubectl get Role -n NAMESPACE --ignore-not-found | grep GATEWAY_NAME
+    kubectl get RoleBinding -n NAMESPACE --ignore-not-found | grep GATEWAY_NAME
     ```
     {: codeblock}
 
 2. Remove the gateways.
 
-    Example for removing `custom-ingressgateway` in the `custom-gateways` namespace:
+    Example for removing `istio-ingressgateway-public-2` in the `istio-system` namespace:
     ```sh
     kubectl delete PodDisruptionBudget -n istio-system istio-ingressgateway-public-2 --ignore-not-found
     kubectl delete Service -n istio-system istio-ingressgateway-public-2 --ignore-not-found

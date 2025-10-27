@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-09-29"
+lastupdated: "2025-10-27"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -215,22 +215,10 @@ You can customize a set of Istio configuration options by editing the `managed-i
     :   Default value: `"ALLOW_ANY"`
     :   By default, all outbound traffic from the service mesh is permitted. To block outbound traffic from the service mesh to any host that is not defined in the service registry or that does not have a `ServiceEntry` within the service mesh, set to `REGISTRY_ONLY`.
     
-    `istio-egressgateway-public-1-enabled`
-    :   Default value: `"true"`
-    :   To disable the default Istio egress gateway, set to `"false"`. For example, you might [create a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead.
-
     `istio-global-proxy-accessLogFile`
     :   Default value: `""`
     :   Envoy proxies print access information to their standard output. These logs are helpful when you debug ingress or egress issues. To view this access information when running `kubectl logs` commands for the Envoy containers, set to `"/dev/stdout"`.
-    
-    `istio-ingressgateway-public-1|2|3-enabled`
-    :   Default value: `"true"` in zone 1 only.
-    :   To make your apps more highly available, set to `"true"` for each zone where you want a public `istio-ingressgateway` load balancer to be created. To use [custom ingress gateways](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead of the default ingress gateway, you can set to `"false"`.
-    
-    `istio-ingressgateway-zone-1|2|3`
-    :   Default value: `"<zone>"`
-    :   The zones where your worker nodes are deployed, which are automatically populated when you install the add-on and whenever you apply an Istio patch update. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields. Note that if the zones that are listed in this setting are out of sync with your cluster zones, you can restart the auto population job by running `kubectl delete pod -n ibm-system -l addon.cleanup=istio` and `kubectl delete job -n ibm-system -l addon.cleanup=istio`.
-    
+        
     `istio-monitoring-telemetry`
     :   Default value: `"true"`
     :   By default, telemetry metrics and Prometheus support is enabled. To remove any performance issues associated with telemetry metrics and disable all monitoring, set to `"false"`.
@@ -295,8 +283,29 @@ You can customize a set of Istio configuration options by editing the `managed-i
 Want to change a ConfigMap setting?
 :   If you want to change a setting that you added to the ConfigMap, you can use a patch script. For example, if you added the `istio-global-proxy-accessLogFile: "/dev/stdout"` setting and later want to change it back to `""`, you can run `kubectl patch cm managed-istio-custom -n ibm-operators --type='json' -p='[{"op": "add", "path": "/data/istio-global-proxy-accessLogFile", "value":""}]'`. 
 
-Need to debug your customization setup?
-:   Check the logs for the `addon-istio-operator` (Istio version 1.10 to 1.23) or `managed-istio-operator` (Istio version 1.9 or earlier) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio changes that you make.
+Need to debug your customization setup in 1.24 or later?
+:   Check the helm value.yaml and the helm results logs in the managed-istio-istiod-control-plane-values configmap in the ibm-operators namespace. The value.yaml will show you whether your change was added. The helm results will show you if there were any syntax errors.
+    ```sh
+    kubectl get cm -n ibm-operators managed-istio-istiod-control-plane-values -o json | jq -r .data.\"values.yaml\"
+    kubectl get cm -n ibm-operators managed-istio-istiod-control-plane-values -o json | jq -r .data.\"values.yaml.helm.result\"
+    ```
+    {: pre}
+
+    ```screen
+    Thu, 23 Oct 2025 19:58:48 GMT HELM_SUCCESS: Release "istiod" has been upgraded. Happy Helming!
+    NAME: istiod
+    LAST DEPLOYED: Thu Oct 23 19:58:42 2025
+    NAMESPACE: istio-system
+    STATUS: deployed
+    REVISION: 275
+    TEST SUITE: None
+    NOTES:
+    "istiod" successfully installed!
+    ```
+    {: pre}
+
+Need to debug your customization setup in 1.23?
+:   Check the logs for the `addon-istio-operator` (Istio version 1.10 to 1.23) pod by running `kubectl logs -n ibm-operators -l name=managed-istio-operator`. The Istio operator validates and reconciles any custom Istio changes that you make.
 {: tip}
 
 If you disable the Istio add-on, the `managed-istio-custom` ConfigMap is not removed during uninstallation. When you re-enable the Istio add-on, your customized ConfigMap is applied during installation. If you don't want to re-use your custom settings in a later installation of Istio, you must delete the ConfigMap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default ConfigMap is applied during installation.
