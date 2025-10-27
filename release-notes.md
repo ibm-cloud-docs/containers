@@ -28,6 +28,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## October 2025
 {: #containers-oct25}
 
+### 27 October 2025
+{: #containers-oct2725}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} version 1.31 is deprecated.
+:   Support for 1.31 ends on {{site.data.keyword.kubernetes_131_unsupported_date}}. Update your cluster to [version 1.32](/docs/containers?topic=containers-cs_versions_132) as soon as possible.
+
+{{site.data.keyword.containerlong_notm}} version 1.30 is deprecated.
+:   Support for 1.30 ends on {{site.data.keyword.kubernetes_130_unsupported_date}}. Update your cluster to [version 1.31](/docs/containers?topic=containers-cs_versions_131) as soon as possible.
+
+
+
 ### 23 October 2025
 {: #containers-oct2325}
 {: release-note}

@@ -240,6 +240,12 @@ subcollection: containers
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
 
+    * [27 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct2725)
+
+        * {{site.data.keyword.containerlong_notm}} version 1.31 is deprecated.
+
+        * {{site.data.keyword.containerlong_notm}} version 1.30 is deprecated.
+
     * [23 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct2325)
 
         * The Diagnostics and Debug Tool is deprecated and support ends on 20 December 2025.
