@@ -28,10 +28,10 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## October 2025
 {: #containers-oct25}
 
+
 ### 27 October 2025
 {: #containers-oct2725}
 {: release-note}
-
 
 
 {{site.data.keyword.containerlong_notm}} version 1.31 is deprecated.
