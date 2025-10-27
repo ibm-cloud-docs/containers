@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-10-23"
+lastupdated: "2025-10-27"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2025
 {: #containers-oct25}
+
+### 23 October 2025
+{: #containers-oct2325}
+{: release-note}
+
+The Diagnostics and Debug Tool is deprecated and support ends on 20 December 2025.
+:   Uninstall the Diagnostics and Debug Tool from your clusters before support ends. For more information, see [Running the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool).
 
 
 ### 22 October 2025
