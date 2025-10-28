@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-27"
+lastupdated: "2025-10-28"
 
 
 keywords: containers
@@ -8209,6 +8209,26 @@ subcollection: containers
 
 
 [Service dependencies](/docs/containers?topic=containers-service-dependencies#service-dependencies)
+
+* [Data and Control plane deployment for an MZR](/docs/containers?topic=containers-service-dependencies#data-and-control-plane-deployment-for-an-mzr)
+
+* [Data and Control plane deployment for an NGDC MZR](/docs/containers?topic=containers-service-dependencies#data-and-control-plane-deployment-for-an-ngdc-mzr)
+
+* [Understanding service dependency data](/docs/containers?topic=containers-service-dependencies#understand-dependency-data)
+
+    * [What is the expected impact to the functions described?](/docs/containers?topic=containers-service-dependencies#expected-impact)
+
+    * [What services does my service depend on?](/docs/containers?topic=containers-service-dependencies#dependent-services)
+
+    * [What function does the dependency impact?](/docs/containers?topic=containers-service-dependencies#function-impact)
+
+    * [What does customer provided mean for dependencies?](/docs/containers?topic=containers-service-dependencies#customer-provided-dep)
+
+    * [Where do dependency services need to be deployed regarding my service?](/docs/containers?topic=containers-service-dependencies#deploy-dependencies)
+
+    * [Where are the separate control plane and data plane located, if applicable?](/docs/containers?topic=containers-service-dependencies#separate-plans)
+
+* [Additional resources](/docs/containers?topic=containers-service-dependencies#additional-resources)
 
 
 ## Worker node flavors
