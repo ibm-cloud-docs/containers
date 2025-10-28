@@ -240,6 +240,10 @@ subcollection: containers
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
 
+    * [28 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct2825)
+
+        * The strongSwan IPSec VPN Service is deprecated
+
     * [27 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct2725)
 
         * {{site.data.keyword.containerlong_notm}} version 1.31 is deprecated.
