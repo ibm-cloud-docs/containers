@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-27"
+lastupdated: "2025-10-29"
 
 
 keywords: kubernetes, versions, update, upgrade
@@ -39,34 +39,17 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
-
-[Latest]{: tag-green} [Default]{: tag-purple} 1.33
-- Release date: 31 July 2025
-- End of support: 14 October 2026†
-- Operating systems: `UBUNTU_24_64`
-- [Version information and update actions](/docs/containers?topic=containers-cs_versions_133)
-- [Change log](/docs/containers?topic=containers-changelog_133)
-
-1.32
-- Release date: 29 January 2025
-- End of support: 22 April 2026†
-- Operating systems: `UBUNTU_24_64`
-- [Version information and update actions](/docs/containers?topic=containers-cs_versions_132)
-- [Change log](/docs/containers?topic=containers-changelog_132)
-
-[Deprecated]{: tag-deprecated} 1.31
-- Release date: 18 September 2024
-- End of support: 18 March 2026
-- Operating systems: `UBUNTU_24_64`
-- [Version information and update actions](/docs/containers?topic=containers-cs_versions_131)
-- [Change log](/docs/containers?topic=containers-changelog_131)
-
-[Deprecated]{: tag-deprecated} 1.30
-- Release date: 29 May 2024
-- End of support: 16 November 2025
-- Operating systems: `UBUNTU_24_64`
-- [Version information and update actions](/docs/containers?topic=containers-cs_versions_130)
-- [Change log](/docs/containers?topic=containers-changelog_130)
+|Version|Release date|End of support|Operating systems|Related links|
+|---|---|---|---|---|
+|[Latest]{: tag-green} [Default]{: tag-purple} 1.33|31 July 2025|14 October 2026†|`UBUNTU_24_64`|- [1.33 details and update actions](/docs/containers?topic=containers-cs_versions_133)  
+- [Red Hat change log](/docs/containers?topic=containers-changelog_133)|
+|1.32|29 January 2025|22 April 2026†|`UBUNTU_24_64`|- [1.32 details and update actions](/docs/containers?topic=containers-cs_versions_132)  
+- [Red Hat change log](/docs/containers?topic=containers-changelog_132)|
+|[Deprecated]{: tag-deprecated} 1.31|18 September 2024|18 March 2026|`UBUNTU_24_64`|- [1.31 details and update actions](/docs/containers?topic=containers-cs_versions_131)  
+- [Red Hat change log](/docs/containers?topic=containers-changelog_131)|
+|[Deprecated]{: tag-deprecated} 1.30|29 May 2024|16 November 2025|`UBUNTU_24_64`|- [1.30 details and update actions](/docs/containers?topic=containers-cs_versions_130)  
+- [Red Hat change log](/docs/containers?topic=containers-changelog_130)|
+{: caption="Available versions for Kubernetes" caption-side="bottom"}
 
 
 
