@@ -32,7 +32,7 @@ For more information about the Kubernetes project versions, see the [Kubernetes 
 ![Kubernetes version support timeline](images/iks.svg "Version support timeline"){: caption="Kubernetes version support timeline" caption-side="bottom"}
 
 
-Dates that are marked with a dagger (`†`) are tentative and subject to change. Operating systems that are marked with an asterisk (`*`) are deprecated; [migrate any worker nodes](/docs/containers?topic=containers-ubuntu-migrate) that use a deprecated operating system to run on a newer operating system version. 
+Dates that are marked with a dagger (`†`) are tentative and subject to change. Operating systems that are marked with an asterisk (`*`) are deprecated. [Migrate any worker nodes](/docs/containers?topic=containers-ubuntu-migrate) that use a deprecated operating system to a newer operating system version. 
 {: note}
 
 
