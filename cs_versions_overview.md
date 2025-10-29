@@ -41,10 +41,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |Version|Release date|End of support|Operating systems|Related links|
 |---|---|---|---|---|
-|[Latest]{: tag-green} [Default]{: tag-purple} 1.33|31 July 2025|14 October 2026†|`UBUNTU_24_64`| - [1.33 details and update actions](/docs/containers?topic=containers-cs_versions_133)  \n - [Red Hat change log](/docs/containers?topic=containers-changelog_133) |
-|1.32|29 January 2025|22 April 2026†|`UBUNTU_24_64`| - [1.32 details and update actions](/docs/containers?topic=containers-cs_versions_132)  \n - [Red Hat change log](/docs/containers?topic=containers-changelog_132) |
-|[Deprecated]{: tag-deprecated} 1.31|18 September 2024|18 March 2026|`UBUNTU_24_64`| - [1.31 details and update actions](/docs/containers?topic=containers-cs_versions_131)  \n - [Red Hat change log](/docs/containers?topic=containers-changelog_131) |
-|[Deprecated]{: tag-deprecated} 1.30|29 May 2024|16 November 2025|`UBUNTU_24_64`| - [1.30 details and update actions](/docs/containers?topic=containers-cs_versions_130)  \n - [Red Hat change log](/docs/containers?topic=containers-changelog_130) |
+|[Latest]{: tag-green} [Default]{: tag-purple} 1.33|31 July 2025|14 October 2026†|`UBUNTU_24_64`| - [1.33 details and update actions](/docs/containers?topic=containers-cs_versions_133)  \n - [Change log](/docs/containers?topic=containers-changelog_133)|
+|1.32|29 January 2025|22 April 2026†|`UBUNTU_24_64`| - [1.32 details and update actions](/docs/containers?topic=containers-cs_versions_132)  \n - [Change log](/docs/containers?topic=containers-changelog_132)|
+|[Deprecated]{: tag-deprecated} 1.31|18 September 2024|18 March 2026|`UBUNTU_24_64`| - [1.31 details and update actions](/docs/containers?topic=containers-cs_versions_131)  \n - [Change log](/docs/containers?topic=containers-changelog_131)|
+|[Deprecated]{: tag-deprecated} 1.30|29 May 2024|16 November 2025|`UBUNTU_24_64`| - [1.30 details and update actions](/docs/containers?topic=containers-cs_versions_130)  \n - [Change log](/docs/containers?topic=containers-changelog_130)|
 {: caption="Available versions for Kubernetes clusters" caption-side="bottom"}
 
 
