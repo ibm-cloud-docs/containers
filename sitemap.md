@@ -3667,6 +3667,8 @@ subcollection: containers
 
 * [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
 
+* [Managing port 80 on the ALBs](/docs/containers?topic=containers-ingress-alb-manage#managing-port-80-on-the-albs)
+
 [Setting up a domain for your cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains)
 
 * [Accessing domains in the console](/docs/containers?topic=containers-ingress-domains&interface=ui#ingress-domains-ui-access)

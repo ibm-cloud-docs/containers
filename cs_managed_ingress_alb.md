@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2025
-lastupdated: "2025-09-17"
+lastupdated: "2025-10-29"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -494,3 +494,32 @@ Removing all workers from a VLAN removes the IP address of the ALB in the VLAN's
     {: screen}
 
 7. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
+
+
+## Managing port 80 on the ALBs
+
+In clusters created on or after 01 December 2025, port 80 is blocked by default for all ALBs. Custers created before this date are not affected.
+{: note}
+
+You can manage port 80 on your ALBs by using the following commands. Note that any changes you make are applied to all ALBs in your cluster. 
+
+* To get the status of port 80 on your ALBs, run the following command.
+
+    ```sh
+    ibmcloud ks ingress security port80 get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+* To enable port 80 on your ALBs, run the following command.
+
+    ```sh
+    ibmcloud ks ingress security port80 enable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+* To disable port 80 on your ALBs, run the following command.
+
+    ```sh
+    ibmcloud ks ingress security port80 disable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
