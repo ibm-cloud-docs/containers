@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-28"
+lastupdated: "2025-10-29"
 
 
 keywords: containers
@@ -4632,7 +4632,7 @@ subcollection: containers
 
 [Kubernetes version information](/docs/containers?topic=containers-cs_versions#cs_versions)
 
-* [Available {{site.data.keyword.containerlong}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
+* [Available {{site.data.keyword.containerlong_notm}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
 
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
 
