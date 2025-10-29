@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-27"
+lastupdated: "2025-10-29"
 
 
 keywords: kubernetes, versions, update, upgrade
@@ -23,7 +23,7 @@ Review this page for general information about {{site.data.keyword.containerlong
 
 For more information about the Kubernetes project versions, see the [Kubernetes change logs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}.
 
-## Available {{site.data.keyword.containerlong}} versions
+## Available {{site.data.keyword.containerlong_notm}} versions
 {: #cs_versions_available}
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (`n`) is released, versions up to 2 behind (`n-2`) are supported. Versions more than 2 behind the latest (`n-3`) are first deprecated and then unsupported. To continue receiving important security patch updates, make sure that your clusters always run a supported Kubernetes version. Deprecated clusters might not receive security updates. For more information, see [Release lifecycle](#release_lifecycle).
@@ -32,41 +32,20 @@ For more information about the Kubernetes project versions, see the [Kubernetes 
 ![Kubernetes version support timeline](images/iks.svg "Version support timeline"){: caption="Kubernetes version support timeline" caption-side="bottom"}
 
 
-Dates that are marked with a dagger (`†`) are tentative and subject to change. Operating systems that are marked with an asterisk (`*`) are deprecated; [migrate any worker nodes](/docs/containers?topic=containers-ubuntu-migrate) that use a deprecated operating system to run on a newer operating system version. 
+Dates that are marked with a dagger (`†`) are tentative and subject to change. Operating systems that are marked with an asterisk (`*`) are deprecated. [Migrate any worker nodes](/docs/containers?topic=containers-ubuntu-migrate) that use a deprecated operating system to a newer operating system version. 
 {: note}
 
 
 
 
 
-
-[Latest]{: tag-green} [Default]{: tag-purple} 1.33
-- Release date: 31 July 2025
-- End of support: 14 October 2026†
-- Operating systems: `UBUNTU_24_64`
-- [Version information and update actions](/docs/containers?topic=containers-cs_versions_133)
-- [Change log](/docs/containers?topic=containers-changelog_133)
-
-1.32
-- Release date: 29 January 2025
-- End of support: 22 April 2026†
-- Operating systems: `UBUNTU_24_64`
-- [Version information and update actions](/docs/containers?topic=containers-cs_versions_132)
-- [Change log](/docs/containers?topic=containers-changelog_132)
-
-[Deprecated]{: tag-deprecated} 1.31
-- Release date: 18 September 2024
-- End of support: 18 March 2026
-- Operating systems: `UBUNTU_24_64`
-- [Version information and update actions](/docs/containers?topic=containers-cs_versions_131)
-- [Change log](/docs/containers?topic=containers-changelog_131)
-
-[Deprecated]{: tag-deprecated} 1.30
-- Release date: 29 May 2024
-- End of support: 16 November 2025
-- Operating systems: `UBUNTU_24_64`
-- [Version information and update actions](/docs/containers?topic=containers-cs_versions_130)
-- [Change log](/docs/containers?topic=containers-changelog_130)
+|Version|Release date|End of support|Operating systems|Related links|
+|---|---|---|---|---|
+|[Latest]{: tag-green} [Default]{: tag-purple} 1.33|31 July 2025|14 October 2026†|`UBUNTU_24_64`| - [1.33 details and update actions](/docs/containers?topic=containers-cs_versions_133)  \n - [Change log](/docs/containers?topic=containers-changelog_133)|
+|1.32|29 January 2025|22 April 2026†|`UBUNTU_24_64`| - [1.32 details and update actions](/docs/containers?topic=containers-cs_versions_132)  \n - [Change log](/docs/containers?topic=containers-changelog_132)|
+|[Deprecated]{: tag-deprecated} 1.31|18 September 2024|18 March 2026|`UBUNTU_24_64`| - [1.31 details and update actions](/docs/containers?topic=containers-cs_versions_131)  \n - [Change log](/docs/containers?topic=containers-changelog_131)|
+|[Deprecated]{: tag-deprecated} 1.30|29 May 2024|16 November 2025|`UBUNTU_24_64`| - [1.30 details and update actions](/docs/containers?topic=containers-cs_versions_130)  \n - [Change log](/docs/containers?topic=containers-changelog_130)|
+{: caption="Available versions for Kubernetes clusters" caption-side="bottom"}
 
 
 
