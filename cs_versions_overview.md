@@ -45,7 +45,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 |1.32|29 January 2025|22 April 2026†|`UBUNTU_24_64`| - [1.32 details and update actions](/docs/containers?topic=containers-cs_versions_132)  \n - [Red Hat change log](/docs/containers?topic=containers-changelog_132) |
 |[Deprecated]{: tag-deprecated} 1.31|18 September 2024|18 March 2026|`UBUNTU_24_64`| - [1.31 details and update actions](/docs/containers?topic=containers-cs_versions_131)  \n - [Red Hat change log](/docs/containers?topic=containers-changelog_131) |
 |[Deprecated]{: tag-deprecated} 1.30|29 May 2024|16 November 2025|`UBUNTU_24_64`| - [1.30 details and update actions](/docs/containers?topic=containers-cs_versions_130)  \n - [Red Hat change log](/docs/containers?topic=containers-changelog_130) |
-{: caption="Available versions for Kubernetes" caption-side="bottom"}
+{: caption="Available versions for Kubernetes clusters" caption-side="bottom"}
 
 
 
