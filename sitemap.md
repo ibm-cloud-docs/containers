@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-29"
+lastupdated: "2025-10-31"
 
 
 keywords: containers
@@ -3667,7 +3667,7 @@ subcollection: containers
 
 * [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
 
-* [Managing port 80 on the ALBs](/docs/containers?topic=containers-ingress-alb-manage#managing-port-80-on-the-albs)
+* [Managing port 80 on the ALBs](/docs/containers?topic=containers-ingress-alb-manage#port80)
 
 [Setting up a domain for your cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains)
 
