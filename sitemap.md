@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-10-31"
+lastupdated: "2025-11-03"
 
 
 keywords: containers
@@ -2046,6 +2046,10 @@ subcollection: containers
 * [Removing user credentials and permissions](/docs/containers?topic=containers-access-creds#apikey-remove-user)
 
 [Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate#cert-rotate)
+
+* [Certificate rotation states](/docs/containers?topic=containers-cert-rotate#cert-rotate-states)
+
+* [FAQ about certificate rotation](/docs/containers?topic=containers-cert-rotate#cert-rotate-faq)
 
 [Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
 
