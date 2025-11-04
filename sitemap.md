@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-11-03"
+lastupdated: "2025-11-04"
 
 
 keywords: containers
@@ -3311,7 +3311,7 @@ subcollection: containers
 
 * [Updating from version 1.23 to 1.24 of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor_124)
 
-* [Updating to 1.23 and earlier minor versions of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
+* [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
 
 * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
 
@@ -3363,7 +3363,23 @@ subcollection: containers
 
 * [Creating additional gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#custom_gateways_helm_add)
 
-    * [Removing gateway deployments](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep)
+* [Example customizations](/docs/containers?topic=containers-istio-custom-gateway-helm#example-customizations)
+
+    * [Egressgateway](/docs/containers?topic=containers-istio-custom-gateway-helm#egressgateway)
+
+    * [Resource requests and limits](/docs/containers?topic=containers-istio-custom-gateway-helm#resource-requests-and-limits)
+
+    * [Autoscaling](/docs/containers?topic=containers-istio-custom-gateway-helm#autoscaling)
+
+    * [Graceful termination](/docs/containers?topic=containers-istio-custom-gateway-helm#graceful-termination)
+
+    * [Zone affinity](/docs/containers?topic=containers-istio-custom-gateway-helm#zone-affinity)
+
+    * [Pinning the Istio version](/docs/containers?topic=containers-istio-custom-gateway-helm#pinning-the-istio-version)
+
+    * [Disabling the gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#disabling-the-gateway)
+
+* [Removing gateway deployments](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep)
 
 [Deploying custom Istio gateways in an `IstioOperator`](/docs/containers?topic=containers-istio-custom-gateway#istio-custom-gateway)
 
