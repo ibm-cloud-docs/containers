@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-14"
+lastupdated: "2025-11-04"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -30,6 +30,9 @@ To view a list of add-ons and the supported cluster versions, run the following 
 ibmcloud ks cluster addon versions
 ```
 {: pre}
+
+
+
 
 ## Version 1.24
 {: #v124}

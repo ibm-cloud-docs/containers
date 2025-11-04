@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-27"
+lastupdated: "2025-11-04"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -381,22 +381,108 @@ After customizing the default gateway that has one gateway deployment, you might
     ```
     {: pre}
 
-1. Create a `values.yaml` file for the gateway. Because the gateway is already customized, you can use its `values.yaml` as a starting point. 
+1. Create a `values.yaml` file for the gateway. The following example is a minimalist `values.yaml` for an Istio `ingressgateway` based on the options that are available in Istio 1.24.6.
+    ```yaml
+    rbac:
+    # If enabled, roles will be created to enable accessing certificates from Gateways. This is not needed
+    # when using http://gateway-api.org/.
+    enabled: true
 
+    serviceAccount:
+    # If set, a service account will be created. Otherwise, the default is used
+    create: true
+
+    # Define the security context for the pod.
+    # If unset, this will be automatically set to the minimum privileges required to bind to port 80 and 443.
+    # On Kubernetes 1.22+, this only requires the `net.ipv4.ip_unprivileged_port_start` sysctl.
+    securityContext:
+    runAsGroup: 1337
+    runAsNonRoot: true
+    runAsUser: 1337
+    seccompProfile:
+        type: RuntimeDefault
+
+    service:
+    # Egress gateways do not need an external LoadBalancer IP so they set "service.type: ClusterIP".
+    # Type of service. Set to "None" to disable the service entirely
+    type: LoadBalancer
+    ports:
+    - name: http2
+        port: 80
+        protocol: TCP
+        targetPort: 8080
+    - name: https
+        port: 443
+        protocol: TCP
+        targetPort: 8443
+
+    autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+
+    # Deployment Update strategy
+    strategy:
+    rollingUpdate:
+        maxSurge: 100%
+        maxUnavailable: 25%
+
+    tolerations:
+    - key: dedicated
+    value: edge
+
+    affinity:
+    podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+            matchExpressions:
+            - key: app
+                operator: In
+                values:
+                - istio-ingressgateway
+            topologyKey: kubernetes.io/hostname
+        weight: 100
+    nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - preference:
+            matchExpressions:
+            - key: dedicated
+            operator: In
+            values:
+            - edge
+        weight: 100
+
+    podDisruptionBudget:
+    minAvailable: 1
+
+    # Sets the per-pod terminationGracePeriodSeconds setting.
+    terminationGracePeriodSeconds: 30
+
+    # Configure this to a higher priority class in order to make sure your Istio gateway pods
+    # will not be killed because of low priority class.
+    # Refer to https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
+    # for more detail.
+    priorityClassName: ibm-app-cluster-critical
+    ```
+    {: codeblock}
+
+    Alternatively you can use the default gateway's `values.yaml` as a starting point. 
     ```sh
     kubectl get cm -n ibm-operators  managed-istio-ingressgateway-values -o json | jq -r .data.\"values.yaml\"
     ```
     {: pre}
 
-1. Make sure that the gateway's `name` and `serviceAccount.name` don't match any other gateways in the cluster. When picking a Helm release name, consider the following conditions.
+1. When choosing a Helm release name and namespace, consider the following conditions.
 
+    - The Helm release name and namespace should match the gateway's deployment name and namespace. 
     - Avoid `istio-base`, `istiod`, `istio-ingressgateway`, and `istio-egressgateway` because the Istio managed add-on uses those release names.
     - Avoid using the release name of another of the additional gateways.
 
-1. Do a dry run to see the manifest of the YAML resources for the gateway.
+1. Do a dry run to see the manifest of the YAML resources for the gateway. For Istio 1.25.4 and earlier, you must use Helm v3.18.4.
 
     ```sh
-    helm upgrade --dry-run $RELEASE_NAME istio/gateway --version 1.24.0 --install -n $NAMESPACE -f values.yaml
+    helm upgrade --dry-run RELEASE_NAME istio/gateway --version ISTIO_VERSION --install -n NAMESPACE -f values.yaml
     ```
     {: pre}
 
@@ -404,15 +490,112 @@ After customizing the default gateway that has one gateway deployment, you might
     - Use the Helm `upgrade` command without the `--dry-run` option.
     - Take the manifest of the YAML resources and apply it as you would other Istio data plane YAML, depending on your cluster's CI/CD use case.
 
+## Example customizations
 
+### Egressgateway
+Egressgateways must have a service type of `ClusterIP` since they don't need a LoadBalancer IP.
+```yaml
+service:
+  type: ClusterIP
+```
+{: codeblock}
 
+### Resource requests and limits
+If a field is not specified, the Istio default values are used.
+```yaml
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 2000m
+    memory: 1024Mi
+```
+{: codeblock}
 
-### Removing gateway deployments 
+### Autoscaling
+If `autoscaling.enabled=true` is set, then you can set the minimum and maximum replicas for the horizontal pod autoscaler. 
+```yaml
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+```
+{: codeblock}
+
+### Graceful termination
+Graceful termination gives the gateway extra time to handle existing connections while it is terminating. This feature replaces specifying the `TERMINATION_DRAIN_DURATION` environment variable. You can increase the value for this setting, if needed.
+```yaml
+# Sets the per-pod terminationGracePeriodSeconds setting.
+terminationGracePeriodSeconds: 30
+```
+{: codeblock}
+
+### Zone affinity
+[Topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) can be set with the `topologySpreadConstraints` field. Depending on the use case, this solution can be a better alternative to the previous zone affinity solution.
+```yaml
+topologySpreadConstraints: []
+```
+{: codeblock}
+
+Zone affinities can be specified by adding a service annotation and a node affinity.
+```yaml
+service:
+  annotations:
+    service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "dal10"
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: ibm-cloud.kubernetes.io/zone
+          operator: In
+          values:
+          - "dal10"
+```
+{: codeblock}
+
+You can specify the `loadBalancerIP`.
+
+Service.spec.loadBalancerIP was [deprecated by Kubernetes in version 1.24](https://kubernetes.io/docs/concepts/services-networking/service/). This option stops working when Kubernetes finishes removing the field. If you specify an IP that is already in use elsewhere on the cluster, then the service will have its external IP stay in pending.
+{: important}
+
+```yaml
+service:
+  type: LoadBalancer
+  loadBalancerIP: ""
+```
+{: codeblock}
+
+### Pinning the Istio version
+The Istio gateways have `image: auto` so that they will pick up the expected sidecar `proxyv2` image on pod creation. This setting can be overridden by a pod annotation. If you use this override to pin the image tag, you are responsible for updating that pin on each Istio patch and minor update.
+
+```yaml
+podAnnotations:
+  "sidecar.istio.io/proxyImage": "icr.io/ext/istio/proxyv2:1.24.0"
+```
+{: codeblock}
+
+### Disabling the gateway
+You can disable the service by changing its type to `None`. You can also scale down the gateway deployment. In Istio 1.24 and 1.25, there is an issue where `replicaCount` has a minimum of `1`. In Istio 1.26.0 and later, you can set the `replicaCount` to `0`. When the service type for `ingressgateway` is changed from `LoadBalancer` to `None`, its LoadBalancer IP is eventually relinquished. If the service type was changed back to `LoadBalancer`, a new IP is assigned.
+```yaml
+replicaCount: 0
+
+service:
+  type: None
+
+autoscaling:
+  enabled: false
+```
+{: codeblock}
+
+## Removing gateway deployments 
 {: #remove-gateway-dep}
 
 If you enabled `istio-ingressgateway-public-2`, `istio-ingressgateway-public-3`, or have any other custom gateway that you want to remove, locate and delete these resources.
 
-1. Locate the gateways.
+1. Locate the gateways. If the gateway was installed with Helm, you can use `helm get all RELEASE_NAME -n NAMESPACE` as a shortcut.
     ```sh
     kubectl get PodDisruptionBudget -n NAMESPACE GATEWAY_NAME --ignore-not-found
     kubectl get Service -n NAMESPACE GATEWAY_NAME --ignore-not-found
@@ -422,9 +605,9 @@ If you enabled `istio-ingressgateway-public-2`, `istio-ingressgateway-public-3`,
     kubectl get Role -n NAMESPACE --ignore-not-found | grep GATEWAY_NAME
     kubectl get RoleBinding -n NAMESPACE --ignore-not-found | grep GATEWAY_NAME
     ```
-    {: codeblock}
+    {: pre}
 
-2. Remove the gateways.
+2. Remove the gateways. If the gateway was installed with Helm, you can use `helm uninstall RELEASE_NAME -n NAMESPACE` as a shortcut.
 
     Example for removing `istio-ingressgateway-public-2` in the `istio-system` namespace:
     ```sh
