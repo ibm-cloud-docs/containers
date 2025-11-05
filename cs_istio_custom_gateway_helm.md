@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-11-04"
+lastupdated: "2025-11-05"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -386,75 +386,75 @@ After customizing the default gateway that has one gateway deployment, you might
     rbac:
     # If enabled, roles will be created to enable accessing certificates from Gateways. This is not needed
     # when using http://gateway-api.org/.
-    enabled: true
+      enabled: true
 
     serviceAccount:
     # If set, a service account will be created. Otherwise, the default is used
-    create: true
+      create: true
 
     # Define the security context for the pod.
     # If unset, this will be automatically set to the minimum privileges required to bind to port 80 and 443.
     # On Kubernetes 1.22+, this only requires the `net.ipv4.ip_unprivileged_port_start` sysctl.
     securityContext:
-    runAsGroup: 1337
-    runAsNonRoot: true
-    runAsUser: 1337
-    seccompProfile:
+      runAsGroup: 1337
+      runAsNonRoot: true
+      runAsUser: 1337
+      seccompProfile:
         type: RuntimeDefault
 
     service:
     # Egress gateways do not need an external LoadBalancer IP so they set "service.type: ClusterIP".
     # Type of service. Set to "None" to disable the service entirely
-    type: LoadBalancer
-    ports:
-    - name: http2
+      type: LoadBalancer
+      ports:
+      - name: http2
         port: 80
         protocol: TCP
         targetPort: 8080
-    - name: https
+      - name: https
         port: 443
         protocol: TCP
         targetPort: 8443
 
     autoscaling:
-    enabled: true
-    minReplicas: 2
-    maxReplicas: 5
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 5
 
     # Deployment Update strategy
     strategy:
-    rollingUpdate:
+      rollingUpdate:
         maxSurge: 100%
         maxUnavailable: 25%
 
     tolerations:
     - key: dedicated
-    value: edge
+      value: edge
 
     affinity:
-    podAntiAffinity:
+      podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
         - podAffinityTerm:
             labelSelector:
             matchExpressions:
             - key: app
-                operator: In
-                values:
-                - istio-ingressgateway
+              operator: In
+              values:
+              - istio-ingressgateway
             topologyKey: kubernetes.io/hostname
         weight: 100
-    nodeAffinity:
+      nodeAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
         - preference:
             matchExpressions:
             - key: dedicated
-            operator: In
-            values:
-            - edge
+              operator: In
+              values:
+              - edge
         weight: 100
 
     podDisruptionBudget:
-    minAvailable: 1
+      minAvailable: 1
 
     # Sets the per-pod terminationGracePeriodSeconds setting.
     terminationGracePeriodSeconds: 30
