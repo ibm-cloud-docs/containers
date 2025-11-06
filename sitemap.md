@@ -5892,6 +5892,8 @@ subcollection: containers
 
 * [`istio` 1.24](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.24)
 
+* [`istio` 1.25](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.25)
+
 * [`openshift-ai` 416](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-416)
 
 * [`openshift-ai` 417](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-417)
