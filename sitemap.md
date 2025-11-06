@@ -2884,6 +2884,10 @@ subcollection: containers
 
 [Setting up horizontal pod autoscaling on GPU worker nodes](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#cluster-scaling-hpa-gpu)
 
+* [Prerequisites](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#hpa-gpu-prereqs)
+
+* [Setting up HPA](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#hpa-gpu-setup)
+
 
 ## Logging and monitoring
 {: #sitemap_logging_and_monitoring}
@@ -5891,6 +5895,8 @@ subcollection: containers
 * [`istio` 1.23](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.23)
 
 * [`istio` 1.24](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.24)
+
+* [`istio` 1.25](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.25)
 
 * [`openshift-ai` 416](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-416)
 
