@@ -2884,6 +2884,10 @@ subcollection: containers
 
 [Setting up horizontal pod autoscaling on GPU worker nodes](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#cluster-scaling-hpa-gpu)
 
+* [Prerequisites](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#hpa-gpu-prereqs)
+
+* [Setting up HPA](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#hpa-gpu-setup)
+
 
 ## Logging and monitoring
 {: #sitemap_logging_and_monitoring}
