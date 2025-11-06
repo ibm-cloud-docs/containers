@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-11-05"
+lastupdated: "2025-11-06"
 
 
 keywords: containers
@@ -2881,6 +2881,8 @@ subcollection: containers
 * [Pause pods](/docs/containers?topic=containers-cluster-scaling-install-addon-deploy-apps#pause-pods-ca)
 
 * [Horizontal pod autoscaling (HPA)](/docs/containers?topic=containers-cluster-scaling-install-addon-deploy-apps#hpca)
+
+[Setting up horizontal pod autoscaling on GPU worker nodes](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#cluster-scaling-hpa-gpu)
 
 
 ## Logging and monitoring
