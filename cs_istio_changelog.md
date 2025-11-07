@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-11-04"
+lastupdated: "2025-11-07"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -31,6 +31,30 @@ ibmcloud ks cluster addon versions
 ```
 {: pre}
 
+
+## Version 1.25
+{: #v125}
+
+### Change log for 1.25.5, released 05 November 2025
+{: #1255}
+
+Review the changes that are included in version 1.25.5 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.24.6
+
+Current version
+:   1.25.5
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.25.0](https://istio.io/latest/news/releases/1.25.x/announcing-1.25/){: external}, [Istio 1.25.1](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.1/){: external}, [Istio 1.25.2](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.2/){: external}, [Istio 1.25.3](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.3/){: external}, [Istio 1.25.4](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.4/){: external}, and [Istio 1.25.5](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.5/){: external}.
+
+:   Resolves the following CVEs:
+    - [CVE-2025-3576](https://www.cve.org/CVERecord?id=CVE-2025-3576){: external}
+    - [CVE-2025-4598](https://www.cve.org/CVERecord?id=CVE-2025-4598){: external}
+    - [CVE-2025-46836](https://www.cve.org/CVERecord?id=CVE-2025-46836){: external}
+    - [CVE-2025-6020](https://www.cve.org/CVERecord?id=CVE-2025-6020){: external}
 
 
 
