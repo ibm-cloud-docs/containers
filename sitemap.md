@@ -8612,8 +8612,6 @@ subcollection: containers
 
 * [Understanding the impact of a master outage](/docs/containers?topic=containers-debug_master#review-master-outage)
 
-[Why do I see a `Cannot complete cluster master upgrade` message?](/docs/containers?topic=containers-ts-cluster-master-upgrade#ts-cluster-master-upgrade)
-
 [Why do I see the error `Cannot complete cluster master upgrade because there is a migration in progress`?](/docs/containers?topic=containers-ts-resource-migration#ts-resource-migration)
 
 [Debugging common CLI issues with clusters](/docs/containers?topic=containers-ts_clis#ts_clis)
