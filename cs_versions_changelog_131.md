@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-10-23"
+lastupdated: "2025-11-10"
 
 
 keywords: change log, version history, 1.31
@@ -40,6 +40,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.31
 {: #131_components}
+
+
+### Worker node fix pack 1.31.13_1577, released 06 November 2025
+{: #cl-boms-13113_1577_W}
+
+The following table shows the components included in the worker node fix pack 1.31.13_1577. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-85-generic|Resolves the following CVEs: [CVE-2025-11082](https://nvd.nist.gov/vuln/detail/CVE-2025-11082){: external}, [CVE-2025-11083](https://nvd.nist.gov/vuln/detail/CVE-2025-11083){: external}, [CVE-2025-1147](https://nvd.nist.gov/vuln/detail/CVE-2025-1147){: external}, [CVE-2025-1148](https://nvd.nist.gov/vuln/detail/CVE-2025-1148){: external}, [CVE-2025-3198](https://nvd.nist.gov/vuln/detail/CVE-2025-3198){: external}, [CVE-2025-40778](https://nvd.nist.gov/vuln/detail/CVE-2025-40778){: external}, [CVE-2025-40780](https://nvd.nist.gov/vuln/detail/CVE-2025-40780){: external}, [CVE-2025-5244](https://nvd.nist.gov/vuln/detail/CVE-2025-5244){: external}, [CVE-2025-5245](https://nvd.nist.gov/vuln/detail/CVE-2025-5245){: external}, [CVE-2025-7425](https://nvd.nist.gov/vuln/detail/CVE-2025-7425){: external}, [CVE-2025-7545](https://nvd.nist.gov/vuln/detail/CVE-2025-7545){: external}, [CVE-2025-7546](https://nvd.nist.gov/vuln/detail/CVE-2025-7546){: external}, [CVE-2025-8114](https://nvd.nist.gov/vuln/detail/CVE-2025-8114){: external}, [CVE-2025-8225](https://nvd.nist.gov/vuln/detail/CVE-2025-8225){: external}, and [CVE-2025-8677](https://nvd.nist.gov/vuln/detail/CVE-2025-8677){: external}.|
+|Kubernetes|1.31.13|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.13).|
+|containerd|1.7.27|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.27).|
+|HAProxy|fbe9b8146f23bbd12b2566a79fa897d5981e7273|Resolves the following CVEs: [CVE-2025-5318](https://nvd.nist.gov/vuln/detail/CVE-2025-5318){: external}.|
+|GPU Device Plug-in and Installer|e15a40cb6d9e0ac0b9c345d302c629faad596b30|N/A|
+{: caption="1.31.13_1577 fix pack." caption-side="bottom"}
+{: #cl-boms-13113_1577_W-component-table}
+
 
 
 ### Worker node fix pack 1.31.13_1576, released 21 October 2025
