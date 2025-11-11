@@ -3367,7 +3367,7 @@ subcollection: containers
 
     * [Manually injecting sidecars](/docs/containers?topic=containers-istio-mesh#istio_sidecar_manual)
 
-* [Enabling or disabling public Istio load balancers in addon-istio 1.23](/docs/containers?topic=containers-istio-mesh#config-gateways)
+* [Enabling or disabling public Istio load balancers in `addon-istio` 1.23](/docs/containers?topic=containers-istio-mesh#config-gateways)
 
 * [Exposing the Istio ingress gateway with DNS](/docs/containers?topic=containers-istio-mesh#istio_expose)
 
@@ -3387,7 +3387,7 @@ subcollection: containers
 
 * [Example customizations](/docs/containers?topic=containers-istio-custom-gateway-helm#example-customizations)
 
-    * [Egressgateway](/docs/containers?topic=containers-istio-custom-gateway-helm#egressgateway)
+    * [Egress gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#egress-gateway)
 
     * [Resource requests and limits](/docs/containers?topic=containers-istio-custom-gateway-helm#resource-requests-and-limits)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-11-05"
+lastupdated: "2025-11-11"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -345,16 +345,14 @@ To edit the `istio-ingressgateway` and `istio-egressgateway` `value.yaml` conten
 
 1. View the configuration options.
 
-    
-
-    c. Show the values.
+    a. Show the values.
 
     ```sh
     helm show values istio/gateway --version 1.24.6
     ```
     {: pre}
 
-    d. Review the possible keys that could display.
+    b. Review the possible keys that could display.
 
     ```yaml
         name: # The gateway deployment's and service's name
@@ -491,9 +489,12 @@ After customizing the default gateway that has one gateway deployment, you might
     - Take the manifest of the YAML resources and apply it as you would other Istio data plane YAML, depending on your cluster's CI/CD use case.
 
 ## Example customizations
+{: example-cust}
 
-### Egressgateway
-Egressgateways must have a service type of `ClusterIP` since they don't need a LoadBalancer IP.
+### Egress gateway
+{: example-egress}
+
+Egress gateways must have a service type of `ClusterIP` since they don't need a LoadBalancer IP.
 ```yaml
 service:
   type: ClusterIP
@@ -501,6 +502,8 @@ service:
 {: codeblock}
 
 ### Resource requests and limits
+{: example-limits}
+
 If a field is not specified, the Istio default values are used.
 ```yaml
 resources:
@@ -514,6 +517,8 @@ resources:
 {: codeblock}
 
 ### Autoscaling
+{: example-autoscaling}
+
 If `autoscaling.enabled=true` is set, then you can set the minimum and maximum replicas for the horizontal pod autoscaler. 
 ```yaml
 autoscaling:
@@ -524,6 +529,8 @@ autoscaling:
 {: codeblock}
 
 ### Graceful termination
+{: example-term}
+
 Graceful termination gives the gateway extra time to handle existing connections while it is terminating. This feature replaces specifying the `TERMINATION_DRAIN_DURATION` environment variable. You can increase the value for this setting, if needed.
 ```yaml
 # Sets the per-pod terminationGracePeriodSeconds setting.
@@ -532,6 +539,8 @@ terminationGracePeriodSeconds: 30
 {: codeblock}
 
 ### Zone affinity
+{: example-zone}
+
 [Topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) can be set with the `topologySpreadConstraints` field. Depending on the use case, this solution can be a better alternative to the previous zone affinity solution.
 ```yaml
 topologySpreadConstraints: []
@@ -569,6 +578,8 @@ service:
 {: codeblock}
 
 ### Pinning the Istio version
+{: example-version}
+
 The Istio gateways have `image: auto` so that they will pick up the expected sidecar `proxyv2` image on pod creation. This setting can be overridden by a pod annotation. If you use this override to pin the image tag, you are responsible for updating that pin on each Istio patch and minor update.
 
 ```yaml
@@ -578,6 +589,8 @@ podAnnotations:
 {: codeblock}
 
 ### Disabling the gateway
+{: example-disable}
+
 You can disable the service by changing its type to `None`. You can also scale down the gateway deployment. In Istio 1.24 and 1.25, there is an issue where `replicaCount` has a minimum of `1`. In Istio 1.26.0 and later, you can set the `replicaCount` to `0`. When the service type for `ingressgateway` is changed from `LoadBalancer` to `None`, its LoadBalancer IP is eventually relinquished. If the service type was changed back to `LoadBalancer`, a new IP is assigned.
 ```yaml
 replicaCount: 0

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-27"
+lastupdated: "2025-11-11"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -471,7 +471,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 
 
 
-## Enabling or disabling public Istio load balancers in addon-istio 1.23
+## Enabling or disabling public Istio load balancers in `addon-istio` 1.23
 {: #config-gateways}
 
 By default, one public Istio load balancer, `istio-ingressgateway`, is enabled in your cluster to load balance incoming requests from the internet to your Istio-managed apps. You can achieve higher availability by enabling an Istio load balancer in each zone of your cluster.
