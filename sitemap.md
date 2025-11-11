@@ -240,6 +240,16 @@ subcollection: containers
 
 * [November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov25)
 
+    * [11 November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov1125)
+
+        * CLI version `1.0.732` is available.
+
+        * {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * OpenShift AI cluster add-on patch updates.
+
     * [07 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov0725)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
@@ -5754,6 +5764,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.732](/docs/containers?topic=containers-cs_cli_changelog#cli-01732)
 
 * [Version v1.0.727](/docs/containers?topic=containers-cs_cli_changelog#cli-01727)
 
