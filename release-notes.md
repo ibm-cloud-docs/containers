@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-11-11"
+lastupdated: "2025-11-12"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -49,8 +49,6 @@ CLI version `1.0.732` is available.
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
-OpenShift AI cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-openshift-ai).
 
 
 ### 07 October 2025
