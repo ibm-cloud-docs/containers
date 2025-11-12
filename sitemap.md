@@ -240,6 +240,10 @@ subcollection: containers
 
 * [November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov25)
 
+    * [12 November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov1225)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [11 November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov1125)
 
         * CLI version `1.0.732` is available.
@@ -6535,6 +6539,8 @@ subcollection: containers
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.0_is_file_relnote)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.42, released 12 November 2025](/docs/containers?topic=containers-cos_plugin_changelog#02242_object_plugin)
 
 * [Change log for version 2.2.41, released 18 August 2025](/docs/containers?topic=containers-cos_plugin_changelog#02241_object_plugin)
 
