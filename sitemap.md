@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-11-11"
+lastupdated: "2025-11-12"
 
 
 keywords: containers
@@ -3389,21 +3389,21 @@ subcollection: containers
 
 * [Creating additional gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#custom_gateways_helm_add)
 
-* [Example customizations](/docs/containers?topic=containers-istio-custom-gateway-helm#example-customizations)
+* [Example customizations](/docs/containers?topic=containers-istio-custom-gateway-helm#example-cust)
 
-    * [Egress gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#egress-gateway)
+    * [Egress gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#example-egress)
 
-    * [Resource requests and limits](/docs/containers?topic=containers-istio-custom-gateway-helm#resource-requests-and-limits)
+    * [Resource requests and limits](/docs/containers?topic=containers-istio-custom-gateway-helm#example-limits)
 
-    * [Autoscaling](/docs/containers?topic=containers-istio-custom-gateway-helm#autoscaling)
+    * [Autoscaling](/docs/containers?topic=containers-istio-custom-gateway-helm#example-autoscaling)
 
-    * [Graceful termination](/docs/containers?topic=containers-istio-custom-gateway-helm#graceful-termination)
+    * [Graceful termination](/docs/containers?topic=containers-istio-custom-gateway-helm#example-term)
 
-    * [Zone affinity](/docs/containers?topic=containers-istio-custom-gateway-helm#zone-affinity)
+    * [Zone affinity](/docs/containers?topic=containers-istio-custom-gateway-helm#example-zone)
 
-    * [Pinning the Istio version](/docs/containers?topic=containers-istio-custom-gateway-helm#pinning-the-istio-version)
+    * [Pinning the Istio version](/docs/containers?topic=containers-istio-custom-gateway-helm#example-version)
 
-    * [Disabling the gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#disabling-the-gateway)
+    * [Disabling the gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#example-disable)
 
 * [Removing gateway deployments](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep)
 
