@@ -252,8 +252,6 @@ subcollection: containers
 
         * VPC File CSI Driver cluster add-on patch updates.
 
-        * OpenShift AI cluster add-on patch updates.
-
     * [07 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov0725)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
