@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2025
-lastupdated: "2025-07-28"
+lastupdated: "2025-11-17"
 
 
 keywords: kubernetes, containers, 131, version 131, 131 update actions
@@ -18,6 +18,12 @@ subcollection: containers
 
 # 1.31 version information and update actions
 {: #cs_versions_131}
+
+
+
+This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: deprecated}
+
 
 
 Review information about version 1.31 of {{site.data.keyword.containerlong}}. For more information about Kubernetes project version 1.31, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.

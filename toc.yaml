@@ -315,12 +315,6 @@ toc:
               - cs_versions_131.md
               - cs_versions_changelog_131.md
               - cs_benchmarks_131.md
-          - topicgroup:
-              label: Version 1.30
-              topics:
-              - cs_versions_130.md
-              - cs_versions_changelog_130.md
-              - cs_benchmarks_130.md
       - topicgroup:
           label: CLI plug-in reference
           topics:
@@ -355,6 +349,12 @@ toc:
       - topicgroup:
           label: Archived version history
           topics:
+          - topicgroup:
+              label: Version 1.30
+              topics:
+              - cs_versions_130.md
+              - cs_versions_changelog_130.md
+              - cs_benchmarks_130.md
           - topicgroup:
               label: Version 1.29
               topics:
@@ -391,12 +391,6 @@ toc:
               - cs_versions_124.md
               - cs_versions_changelog_124.md
               - cs_benchmarks_124.md
-          - topicgroup:
-              label: Version 1.23
-              topics:
-              - cs_versions_123.md
-              - cs_versions_changelog_123.md
-              - cs_benchmarks_123.md
       - locations.md
       - cs_integrations_overview.md
       - service-settings.md

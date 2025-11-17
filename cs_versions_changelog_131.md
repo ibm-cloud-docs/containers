@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-11-10"
+lastupdated: "2025-11-17"
 
 
 keywords: change log, version history, 1.31
@@ -19,6 +19,13 @@ subcollection: containers
 
 # 1.31 version change log
 {: #changelog_131}
+
+
+
+This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: deprecated}
+
+
 
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} clusters that run this version. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
 {: shortdesc}
