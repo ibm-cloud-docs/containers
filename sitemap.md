@@ -240,6 +240,12 @@ subcollection: containers
 
 * [November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov25)
 
+    * [17 November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov1725)
+
+        * {{site.data.keyword.cos_full_notm}} add-on patch updates.
+
+        * Ingress ALB cluster add-on patch updates.
+
     * [16 November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov1625)
 
         * {{site.data.keyword.containerlong_notm}} version 1.30 is unsupported.
@@ -6351,6 +6357,12 @@ subcollection: containers
 
     * [Change log for version 1.0, released 16 May 2023](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.0_is_file_relnote)
 
+[IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
+
+* [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [v1.0.13_297764008, released 14 November 2025](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1013_297764008)
+
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
 * [Change log for version 2.2.42, released 12 November 2025](/docs/containers?topic=containers-cos_plugin_changelog#02242_object_plugin)
@@ -6510,6 +6522,8 @@ subcollection: containers
 
     * [1.13.2_7820_iks, released 16 September 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_7820_iks)
 
+    * [1.13.2_297386853_iks, released 17 November 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_297386853_iks)
+
     * [1.13.2_291202775_iks, released 28 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_291202775_iks)
 
     * [1.13.2_288662581_iks, released 14 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_288662581_iks)
@@ -6531,6 +6545,8 @@ subcollection: containers
     * [1.12.1_7518_iks, released 22 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7518_iks)
 
     * [1.12.1_7490_iks, released 02 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7490_iks)
+
+    * [1.12.1_297379442_iks, released 17 November 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_297379442_iks)
 
     * [1.12.1_291242242_iks, released 28 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_291242242_iks)
 
@@ -6575,6 +6591,8 @@ subcollection: containers
     * [1.11.2_7133_iks, released 12 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7133_iks)
 
     * [1.11.2_7069_iks, released 04 September 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_7069_iks)
+
+    * [1.11.2_297368181_iks, released 17 November 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_297368181_iks)
 
     * [1.11.2_291246358_iks, released 28 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_291246358_iks)
 
