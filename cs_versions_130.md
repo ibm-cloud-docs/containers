@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-12-03"
+  years: 2024, 2025
+lastupdated: "2025-11-17"
 
 
 keywords: kubernetes, containers, 130, version 130, 130 update actions
@@ -18,6 +18,13 @@ subcollection: containers
 
 # 1.30 version information and update actions
 {: #cs_versions_130}
+
+
+
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
+
+
 
 
 Review information about version 1.30 of {{site.data.keyword.containerlong}}. For more information about Kubernetes project version 1.30, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.

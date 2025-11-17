@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-11-12"
+lastupdated: "2025-11-17"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## November 2025
 {: #containers-nov25}
+
+
+
+### 16 November 2025
+{: #containers-nov1625}
+{: release-note}
+
+{{site.data.keyword.containerlong_notm}} version 1.30 is unsupported.
+:   Update your cluster to at least [version 1.31](/docs/containers?topic=containers-cs_versions_131) as soon as possible.
+
+
 
 ### 12 November 2025
 {: #containers-nov1225}
