@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-11-17"
+lastupdated: "2025-11-18"
 
 
 keywords: containers
@@ -1262,342 +1262,6 @@ subcollection: containers
 
         * Worker node fix packs are available. 
 
-* [November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov23)
-
-    * [29 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2923)
-
-        * Worker node fix packs are available. 
-
-    * [27 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2723)
-
-        * The Beta {{site.data.keyword.filestorage_vpc_short}} cluster add-on is now available to all accounts.
-
-        * Cluster autoscaler add-on patch updates `1.2.0_290`, `1.0.9_290`, `1.0.8_292`, and `1.0.7_291`.
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.23_437` and `5.1.16_446`, and `5.2.11_447`.
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.10_93` and `1.2.3_97`.
-
-    * [21 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2123)
-
-        * Ingress ALB updates
-
-    * [20 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov2023)
-
-        * You can now specify a custom pod subnet size when creating a VPC cluster.
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.22`.
-
-    * [15 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1523)
-
-        * The cluster autoscaler add-on now supports version 1.28 clusters.
-
-        * Master fix packs are available. 
-
-    * [13 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1323)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.21`.
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.21_401` and `5.1.15_419`, and `5.2.10_428`.
-
-        * Cluster autoscaler add-on patch updates `1.0.9_195`, `1.0.8_233`, and `1.0.7_185`.
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch `1.1.9_87`.
-
-    * [10 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov1023)
-
-        * Updated sorting and formatting for the Classic and VPC cluster flavor pages.
-
-    * [9 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0923)
-
-        * Worker node fix packs are available.
-
-    * [7 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0723)
-
-        * CLI version `1.0.579` is available.
-
-        * Ingress ALB updates
-
-    * [06 November 2023](/docs/containers?topic=containers-containers-relnotes#containers-nov0623)
-
-        * Kubernetes version 1.28 is now the default version for new {{site.data.keyword.containerlong_notm}} clusters.
-
-* [October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct23)
-
-    * [31 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct3123)
-
-        * VNI functionality for limiting access to {{site.data.keyword.filestorage_vpc_short}} by node, zone, worker pool and more.
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2`.
-
-    * [30 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct3023)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.20`
-
-        * Setting up alerts for {{site.data.keyword.blockstorageshort}} PVs with limited network connectivity.
-
-    * [25 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2523)
-
-        * Master fix packs are available.
-
-        * ALB OAuth Proxy add-on version `2.0.0_1901`.
-
-    * [23 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct2323)
-
-        * Worker node fix packs are available. 
-
-        * Ingress ALB version `1.8.4_5586_ikss`
-
-    * [18 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1823)
-
-        * Istio add-on version `1.18.5` and `1.17.8`.
-
-        * ALB OAuth Proxy add-on version `2.0.0_1889`.
-
-    * [17 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1723)
-
-        * Ingress ALB versions `1.8.1_5543_iks`, `1.6.4_5544_iks`, and `1.5.1_5542_iks`
-
-    * [11 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1123)
-
-        * Ingress ALB versions `1.5.1_5436_iks`, `1.6.4_5435_iks`, and `1.8.1_5434_iks`
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.19`
-
-    * [10 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct1023)
-
-        * CLI version `1.0.573` is available.
-
-        * Istio add-on version `1.19.3`.
-
-    * [9 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct923)
-
-        * Worker node fix packs are available.
-
-    * [5 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct523)
-
-        * Ingress ALB versions `1.8.1_5384_iks`, `1.6.4_5406_iks`, and `1.5.1_5407_iks`
-
-    * [4 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct423)
-
-        * Cluster autoscaler add-on version `1.0.9_134`.
-
-    * [3 October 2023](/docs/containers?topic=containers-containers-relnotes#containers-oct323)
-
-        * Istio add-on versions `1.17.6` and `1.18.3`.
-
-* [September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep23)
-
-    * [27 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2723)
-
-        * Worker node fix packs are available.
-
-    * [26 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2623)
-
-        * ALB OAuth Proxy add-on version `2.0.0_1843`.
-
-    * [25 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2523)
-
-        * {{site.data.keyword.block_storage_is_short}} add-on version `5.2`.
-
-    * [22 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2223)
-
-        * Kubernetes version 1.28 certification
-
-    * [20 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep2023)
-
-        * New! {{site.data.keyword.containerlong_notm}} version 1.28.
-
-        * Master fix pack `1.28.2_1527` and worker node fix pack `1.28.1_1523`.
-
-        * Networking changes for VPC clusters 1.28 and later
-
-        * Trusted profile updates for Kubernetes clusters version 1.28 and later.
-
-        * New! Updated GPU drivers with version 1.28 clusters.
-
-        * Master fix packs are available.
-
-    * [18 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1823)
-
-        * CLI version `1.0.566` is available.
-
-    * [15 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1523)
-
-        * Cluster autoscaler add-on versions `1.0.9_103`,`1.0.8_104`, and `1.0.7_102`.
-
-    * [14 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1423)
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.7_49`
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.19_358` and `5.1.13_345`.
-
-    * [12 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep1223)
-
-        * Worker node fix packs are available.
-
-    * [7 September 2023](/docs/containers?topic=containers-containers-relnotes#containers-sep723)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.18`
-
-* [August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug23)
-
-    * [31 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug3123)
-
-        * Ingress ALB versions `1.8.1_5317_iks`, `1.6.4_5270_iks`, and `1.5.1_5318_iks`
-
-    * [30 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug2023)
-
-        * Master fix packs are available.
-
-    * [29 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug2923)
-
-        * New! Madrid multizone region
-
-        * Worker node fix packs are available.
-
-    * [15 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug1523)
-
-        * Worker node fix packs are available.
-
-    * [9 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0923)
-
-        * ALB OAuth Proxy add-on version `2.0.0_1715`.
-
-    * [8 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0823)
-
-        * Istio add-on versions `1.16.7`, `1.17.5`, and `1.18.2`.
-
-    * [7 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0723)
-
-        * Cluster autoscaler add-on versions `1.0.9_81`,`1.0.8_82`, and `1.0.7_83`.
-
-    * [3 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0323)
-
-        * CIS benchmarks for {{site.data.keyword.redhat_openshift_notm}} version 4.13.
-
-    * [1 August 2023](/docs/containers?topic=containers-containers-relnotes#containers-aug0123)
-
-        * Worker node fix packs are available.
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.17_266` and `5.1.12_285`.
-
-* [July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july23)
-
-    * [31 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july3123)
-
-        * Ubuntu 18 is no longer supported.
-
-    * [28 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2823)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.17`.
-
-    * [27 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2723)
-
-        * Master fix packs are available
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1.6`
-
-        * Istio add-on version `1.16.6`, `1.17.4`, and `1.18.1`.
-
-    * [26 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2623)
-
-        * Ingress ALB versions `1.6.4_5219_iks`, `1.5.1_5217_iks`, and `1.4.0_5218_iks`
-
-    * [25 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2523)
-
-        * End of support for the free cluster tier 
-
-    * [24 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2423)
-
-        * Cluster autoscaler add-on version `1.0.9_70`.
-
-        * Static route add-on version `1.0.0_1122`.
-
-    * [21 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july2123)
-
-        * Cluster autoscaler add-on update command.
-
-    * [19 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1923)
-
-        * CLI version `1.0.540` is available.
-
-    * [17 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1723)
-
-        * Worker node fix packs `1.24.15_1576`, `1.25.11_1552`, `1.26.6_1544`, and `1.27.3_1532`.
-
-    * [12 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1223)
-
-        * ALB OAuth Proxy add-on version `2.0.0_1669`.
-
-    * [11 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july1123)
-
-        * New! OpenShift Data Foundation add-on version `4.13.0`.
-
-    * [6 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july623)
-
-        * Cluster autoscaler add-on version `1.0.8_56` and `1.0.7_57`.
-
-        * Istio add-on version `1.18.0`.
-
-        * Pod security admission updates
-
-    * [5 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july523)
-
-        * Ingress ALB versions `1.6.4_5161_iks`, `1.5.1_5160_iks`, and `1.4.0_5159_iks`
-
-    * [3 July 2023](/docs/containers?topic=containers-containers-relnotes#containers-july323)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.16`
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.1`
-
-        * Worker node fix packs `1.24.15_1574`, `1.25.11_1550`, `1.26.6_1542`, and `1.27.3_1530`.
-
-* [June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun23)
-
-    * [27 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2723)
-
-        * Master fix packs `1.24.15_1573`, `1.25.11_1549`, `1.26.6_1541`, and `1.27.3_1529`.
-
-    * [26 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2623)
-
-        * CLI version `1.0.528`.
-
-    * [23 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2323)
-
-        * Free cluster tier deprecation
-
-    * [22 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2223)
-
-        * Cluster autoscaler add-on version `1.0.9_44`.
-
-        * Istio add-on version `1.17.3`.
-
-    * [21 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2123)
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.0.16_127` and `5.1.11_126`.
-
-    * [20 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun2023)
-
-        * Worker node fix pack updates
-
-    * [19 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun1923)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.15`
-
-    * [8 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun823)
-
-        * Istio add-on version `1.16.5`.
-
-    * [6 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun623)
-
-        * Ingress ALB versions `1.6.4_5067_iks`, `1.5.1_5074_iks`, and `1.4.0_5068_iks`
-
-    * [5 June 2023](/docs/containers?topic=containers-containers-relnotes#containers-jun523)
-
-        * Worker node fix packs `1.24.14_1571`, `1.25.10_1547`, `1.26.5_1539`, and `1.27.2_1527`.
-
 
 ## Tutorials library for Kubernetes Service
 {: #sitemap_tutorials-library-for-kubernetes-service}
@@ -2645,6 +2309,8 @@ subcollection: containers
 
     * [Load balancer services security group](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-kube-lbaas-cluster-ID)
 
+* [User-provided {{site.data.keyword.security-groups}}](/docs/containers?topic=containers-vpc-security-group-reference#user-provided-sgs)
+
 * [Limitations](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-limitations)
 
 [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound#sbd-allow-outbound)
@@ -2687,41 +2353,11 @@ subcollection: containers
 
 * [Enabling secure by default](/docs/containers?topic=containers-vpc-sbd-enable-existing#existing-cluster-sbd-enable)
 
-[Understanding VPC security groups in version 1.29 and earlier](/docs/containers?topic=containers-vpc-security-group#vpc-security-group)
-
-* [Virtual private endpoint (VPE) gateways](/docs/containers?topic=containers-vpc-security-group#managed-vpe-gateways)
-
-* [Managed security groups](/docs/containers?topic=containers-vpc-security-group#managed-sgs)
-
-    * [Security groups applied to cluster workers](/docs/containers?topic=containers-vpc-security-group#vpc-sg-cluster-workers)
-
-    * [Security groups applied to VPE gateways and VPC ALBs](/docs/containers?topic=containers-vpc-security-group#vpc-sg-vpe-alb)
-
-* [Minimum inbound and outbound requirements](/docs/containers?topic=containers-vpc-security-group#vpc-sg-inbound-outbound)
-
-    * [Required inbound and outbound rules for cluster workers](/docs/containers?topic=containers-vpc-security-group#required-group-rules-workers)
-
-    * [Required rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-security-group#rules-sg-128)
-
-    * [Required inbound and outbound rules for VPC ALBs](/docs/containers?topic=containers-vpc-security-group#required-group-rules-alb)
-
-* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group#vpc-security-group-loadbalancer-outbound-vr)
-
 [Creating and managing VPC security groups](/docs/containers?topic=containers-vpc-security-group-manage#vpc-security-group-manage)
 
 * [Adding security groups during cluster creation](/docs/containers?topic=containers-vpc-security-group-manage#vpc-sg-cluster)
 
     * [If you only want the default security groups](/docs/containers?topic=containers-vpc-security-group-manage#default-sgs-only)
-
-    * [If you want the cluster security group and your own additional security groups](/docs/containers?topic=containers-vpc-security-group-manage#cluster-customer-sgs)
-
-    * [If you only want your own security groups](/docs/containers?topic=containers-vpc-security-group-manage#customer-sgs-only)
-
-* [Adding security groups to worker pools during creation](/docs/containers?topic=containers-vpc-security-group-manage#vpc-sg-worker-pool)
-
-    * [If you do not want to attach additional security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#no-worker-sgs)
-
-    * [If you want to attach extra security groups to the worker pool](/docs/containers?topic=containers-vpc-security-group-manage#worker-sgs)
 
 * [Viewing security groups](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#vpc-sg-cli)
 
@@ -2730,8 +2366,6 @@ subcollection: containers
 * [Creating security group rules in the console](/docs/containers?topic=containers-vpc-security-group-manage&interface=ui#security-group-inbound-rules)
 
 * [Creating security group rules in the command line](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#security_groups_cli)
-
-* [Allow worker nodes to connect to the Ingress LoadBalancer](/docs/containers?topic=containers-vpc-security-group-manage&interface=cli#vpc-security-group-loadbalancer-outbound)
 
 [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-acls#vpc-acls)
 

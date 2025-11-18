@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2024
-lastupdated: "2024-09-20"
+  years: 2022, 2025
+lastupdated: "2025-11-18"
 
 
 keywords: ingress, expose apps, ingress resource, ALB, domain
@@ -54,7 +54,7 @@ Follow these preparation steps before you begin.
 
 1. If you are using a classic cluster, enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the ALB can route packets to various subnets in the account.
 
-1. If you are using a VPC cluster, ensure that traffic requests that are routed by Ingress to node ports on your worker nodes are permitted in [VPC security groups](/docs/containers?topic=containers-vpc-security-group).
+1. If you are using a VPC cluster, ensure that traffic requests that are routed by Ingress to node ports on your worker nodes are permitted in VPC security groups. For more information, see [Understanding Secure by Default cluster VPC networking](/docs/containers?topic=containers-vpc-security-group-reference).
 
 1. Note that if you create and delete a cluster with the same or similar name 5 times or more within 7 days, such as for automation or testing purposes, you might reach the [Let's Encrypt Duplicate Certificate rate limit](/docs/containers?topic=containers-cs_rate_limit). To ensure that the Ingress subdomain and certificate are correctly registered, the first 24 characters of the clusters' names must be different.
 

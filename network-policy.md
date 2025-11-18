@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-03-18"
+lastupdated: "2025-11-18"
 
 
 keywords: kubernetes, calico, egress, rules
@@ -23,7 +23,7 @@ subcollection: containers
 
 [Classic clusters]{: tag-classic-inf}
 
-This network policy information is specific to classic clusters. For network policy information for VPC clusters, see [Controlling traffic with security groups](/docs/containers?topic=containers-vpc-security-group).
+This network policy information is specific to classic clusters. For VPC clusters, see see [Understanding Secure by Default cluster VPC networking](/docs/containers?topic=containers-vpc-security-group-reference).
 {: note}
 
 Every {{site.data.keyword.containerlong}} cluster comes with a network plug-in called Calico. Default network policies secure the public network interface of every worker node in the cluster.

@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2024
-lastupdated: "2024-10-30"
+  years: 2022, 2025
+lastupdated: "2025-11-18"
 
 
 keywords: containers, ingress, troubleshoot ingress, errahcf
@@ -68,7 +68,7 @@ Review your access control lists to make sure that health traffic is allowed.
     - **VPC clusters**:
         - Health check traffic originates from one of the worker nodes of your cluster. In the case of public ALBs, the traffic is directed to the public floating IP address of the VPC Load Balancer instance, therefore it is required to have a Public Gateway attached to all the worker subnets. In the case of private ALBs, the traffic is directed to the VPC subnet IP address of the VPC Load Balancer, therefore a Public Gateway is not required.
         - If your VPC Load Balancers are located on a subnet other than the worker nodes of your cluster, you must update the Security Group attached to the VPC Load Balancer subnet to allow incoming traffic from the worker subnets.
-        - For more information, see [Controlling traffic with VPC security groups](/docs/containers?topic=containers-vpc-security-group).
+        - For more information, see [Understanding secure by default cluster VPC networking](/docs/containers?topic=containers-vpc-security-group-reference) and [Creating and managing VPC security groups](/docs/containers?topic=containers-vpc-security-group-manage).
     - **Classic clusters**:
         - Make sure you enabled [Virtual Router Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) in your account. Health check traffic does not leave the cluster but might be sent from one node to another. Ensure your network policies do not block this traffic.
         - For more information, see [Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies). 
@@ -79,3 +79,5 @@ Review your access control lists to make sure that health traffic is allowed.
 
 If you don't want to use the ALB health check, you can remove the health checker application using running the **`ibmcloud ks ingress alb health-checker disable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_disable).
 {: tip}
+
+Understanding secure by default Cluster VPC Networking
