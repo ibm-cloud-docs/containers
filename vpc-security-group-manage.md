@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2025
-lastupdated: "2025-03-13"
+lastupdated: "2025-11-18"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, firewall, acl, acls, access control list, rules, security group
@@ -22,14 +22,14 @@ subcollection: containers
 {: support}
 
 [Virtual Private Cloud]{: tag-vpc}
-
+[1.30 and later]{: tag-blue}
 
 
 
 ## Adding security groups during cluster creation
 {: #vpc-sg-cluster}
 
-When you create a VPC cluster, the default worker security group, which is named `kube-<clusterID>`, is automatically created and applied to all workers in the cluster. You can also attach additional security groups alongside the default worker security group. The security groups applied to the workers in the cluster are a combination of the security groups applied when you create the cluster and when you create the worker pool. A total of five security groups can be applied to workers, including the default security groups and any security groups applied to the worker pool. Note that the option to add custom security groups to workers is only available in the CLI. 
+When you create a VPC cluster, the default worker security group, which is named `kube-<clusterID>`, is automatically created and applied to all workers in the cluster. You can also attach additional security groups alongside the default worker security group. The security groups applied to the workers in the cluster are a combination of the security groups applied when you create the cluster and when you create the worker pool. A total of five security groups can be applied to your cluster.
 {: shortdesc}
 
 The security groups applied to a cluster cannot be changed once the cluster is created. You can change the rules of the security groups that are applied to the cluster, but you cannot add or remove security groups at the cluster level. If you apply the incorrect security groups at cluster create time, you must delete the cluster and create a new one. 
@@ -38,103 +38,12 @@ The security groups applied to a cluster cannot be changed once the cluster is c
 ### If you only want the default security groups
 {: #default-sgs-only}
 
-[VPC security group]{: tag-blue} [Worker security group]{: tag-red}
-
-Note that this is the default behavior at cluster create time.
-{: note}
-
-When you create your cluster, do not specify any additional security groups. 
-
-Example command to create a VPC cluster with only the default VPC and `kube-<clusterID>` cluster security groups:
+When you create your cluster, do not specify any additional security groups.
 
 ```sh
  ibmcloud ks cluster create vpc-gen2 --name <cluster-name> --zone <zone> --vpc-id <vpc-id> --subnet-id <subnet-id>
 ```
 {: pre}
-
-The following security groups are applied:
-- The default VPC security group (randomly generated name)
-- The `kube-<clusterID>` worker security group.
-
- 
-### If you want the cluster security group and your own additional security groups
-{: #cluster-customer-sgs} 
-
-[VPC security group]{: tag-blue} [Worker security group]{: tag-red} [Your own security groups]{: tag-warm-gray}
-
-When you create the cluster, specify `--cluster-security-group cluster` and up to four additional security groups that you own. You must include a separate `--cluster-security-group` option for each individual security group you want to add. Note that at maximum of five security groups can be applied to workers, including the security groups that are applied by default. 
-
-Example command to create a VPC cluster with the `kube-<clusterID>` cluster security group and your own additional security groups:
-```sh
- ibmcloud ks cluster create vpc-gen2 --name <cluster-name> --zone <zone> --vpc-id <vpc-id> --subnet-id <subnet-id> --cluster-security-group cluster --cluster-security-group <group-id-1> --cluster-security-group <group-id-2> --cluster-security-group <group-id-3>
-```
-{: pre}
-
-The following security groups are applied:
-- The default VPC security group (randomly generated name).
-- `kube-<clusterID>` worker security group
-- Up to four of your own additional security groups, for a maximum of five total security groups. 
-
-### If you only want your own security groups 
-{: #customer-sgs-only}
-
-[VPC security group]{: tag-blue} [Your own security groups]{: tag-warm-gray}
-
-This option is only available in clusters created at versions 1.29 and earlier. Beginning with 1.30, all clusters get the worker node security group as well.
-{: note}
-
-When you create the cluster, specify up to five security groups that you own. You must include a separate `--cluster-security-group` option for each individual security group you want to add. 
-
-Example command to create a VPC cluster with only your own security groups:
-```sh
- ibmcloud ks cluster create vpc-gen2 --name <cluster-name> --zone <zone> --vpc-id <vpc-id> --subnet-id <subnet-id> --cluster-security-group <group-id-1> --cluster-security-group <group-id-2> --cluster-security-group <group-id-3>
-```
-{: pre}
-
-The following security groups are applied:
-- The default VPC security group (randomly generated name)
-- Up to four of your own additional security groups, for a maximum of five total security groups. 
-
-
-## Adding security groups to worker pools during creation
-{: #vpc-sg-worker-pool}
-
-By default, the security groups applied to a worker pool are the same security groups that are indicated at cluster create time. However, you can specify additional security groups to apply to a worker pool. If you apply additional security groups to the worker pool, then the security group applied to the workers on the cluster is a combination of the [security groups applied at cluster create](#vpc-sg-cluster) and the security groups applied to the worker pool. 
-
-A maximum of five security groups can be applied to a worker, including the security groups applied by default.
-{: note} 
-
-The security groups applied to a worker pool cannot be changed once the worker pool is created. You can change the rules of the security groups that are applied to the worker pool, but you cannot add or remove security groups at the worker pool level. If you apply the incorrect security groups at worker pool create time, you must delete the worker pool and create a new one. 
-{: important}
-
-### If you do not want to attach additional security groups to the worker pool
-{: #no-worker-sgs}
-
-When you create the worker pool, do not specify any additional security groups.
-
-This scenario only applies to versions 1.29 and earlier.
-{: note}
-
-Example command to create a worker pool with no security groups applied:
-```sh
-ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> 
-```
-{: pre}
-
-Only the security groups applied to the cluster are applied to the workers.
-
-### If you want to attach extra security groups to the worker pool
-{: #worker-sgs}
-
-When you create the worker pool specify extra security groups at worker pool create time. You must include a separate `--security-group` option for each individual security group you want to add.
-
-Example command to create a worker pool with your own security groups applied:
-```sh
-ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --security-group <group-id-1> --security-group <group-id-2> --security-group <group-id-3>
-```
-{: pre}
-
-The security groups applied to the workers in the worker pool are a combination of those applied to the cluster that the worker pool is attached to and those applied to the worker pool at create time.
 
 
 ## Viewing security groups
@@ -153,7 +62,7 @@ Follow the steps to view details about the VPC security groups.
     ```
     {: screen}
 
-1. List the security groups attached to the VPC that your cluster is in. The VPC security group is assigned a randomly generated name, such as `trench-hexagon-matriarch-flower`. The cluster security group is named in the format of `kube-<cluster-ID>`. The VPC security group is named in the format of `kube-<vpc-ID>`. 
+1. List the security groups attached to the VPC that your cluster is in. The VPC security group is assigned a randomly generated name, such as `trench-hexagon-matriarch-flower`. The cluster security group is named in the format of `kube-<cluster-ID>`.
 
     ```sh
     ibmcloud is sgs | grep <vpc_name>
@@ -211,10 +120,10 @@ Follow the steps to view details about the VPC security groups.
 1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/infrastructure/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that your cluster is in.
 1. Click the **Rules** tab.
     *  To create new inbound rules to control inbound traffic to your worker nodes, in the **Inbound rules** section, click **Create**. 
-    * To create new rules to control outbound traffic to your worker nodes, in the **Outbound rules** section, delete the default rule that allows all outbound traffic. Then, in the **Outbound rules** section, click **Create**. 
+    * To create new rules to control outbound traffic to your worker nodes, in the **Outbound rules** section, click **Create**.
 
-Keep in mind that in addition to any rules you create, you must also create the required [inbound and outbound rules](/docs/containers?topic=containers-vpc-security-group).
-{: note}
+	After adding rules, do not delete the default that allows all outbound traffic from the console. Instead, run the `ibmcloud is security-group-rule-delete` command from the CLI to remove the rule.
+	{: note}
 
 
 ## Creating security group rules in the command line
@@ -242,7 +151,7 @@ Use the {{site.data.keyword.cloud_notm}} CLI to add inbound and outbound rules t
     ```
     {: pre}
 
-1. List your security groups and note the **ID** of the default security group for your **VPC**. Note that the default security group uses a randomly generated name and **not** the format `kube-<cluster_ID>`.
+1. List your security groups and note the **ID**.
     ```sh
     ibmcloud is sgs
     ```
@@ -262,7 +171,7 @@ Use the {{site.data.keyword.cloud_notm}} CLI to add inbound and outbound rules t
     ```
     {: pre}
 
-1. Review the default rules for the security group. Keep in mind that in addition to any rules you create, you must also create the required [inbound and outbound rules](/docs/containers?topic=containers-vpc-security-group).
+1. Review the default rules for the security group.
     ```sh
     ibmcloud is sg $sg
     ```
@@ -305,47 +214,3 @@ Use the {{site.data.keyword.cloud_notm}} CLI to add inbound and outbound rules t
             ibmcloud is security-group-rule-delete $sg <rule_ID>
             ```
             {: pre}
-    
-
-Keep in mind that you can create your own security groups as well as add or remove rules  addition to any rules you create, you must also create the required [inbound and outbound rules](/docs/containers?topic=containers-vpc-security-group).
-{: note}
-
-
-
-## Allow worker nodes to connect to the Ingress LoadBalancer
-{: #vpc-security-group-loadbalancer-outbound}
-
-Follow the steps to allow worker nodes to connect to the Ingress LoadBalancer.
-{: shortdesc}
-
-This scenario applies only to versions 1.29 and earlier.
-{: note}
-
-1. Get the `EXTERNAL-IP` of the LoadBalancer service.
-
-    ```sh
-    kubectl get svc -o wide -n openshift-ingress router-default
-    ```
-    {: pre}
-
-1. Run `dig` on the `EXTERNAL-IP` to get the IP addresses associated with the LoadBalancer.
-    ```sh
-    dig <EXTERNAL-IP> +short
-    ```
-    {: pre}
-    
-    Example output
-    ```sh
-    150.XXX.XXX.XXX
-    169.XX.XXX.XXX
-    ```
-    {: screen}
-    
-1. Create outbound security rules to each of the IP address that you retrieved earlier and port 443.
-    ```sh
-    ibmcloud is sg-rulec <sg> outbound tcp --port-min 443 --port-max 443 --remote 150.XXX.XXX.XXX
-    ```
-    {: pre}
-    
-If the Ingress or console operators fail their health checks, you can repeat these steps to see if the LoadBalancer IP addresses changed. While rare, if the amount of traffic to your LoadBalancers varies widely, these IP addresses might change to handle the increased or decreased load.
-{: tip}
