@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-11-18"
+lastupdated: "2025-11-19"
 
 
 keywords: containers
@@ -1935,7 +1935,7 @@ subcollection: containers
 
 * [Step 1: Review the details of your allowlist](/docs/containers?topic=containers-pse-to-cbr-migration#pse-cbr-review)
 
-* [Step 2: Creating a network zone](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-create)
+* [Step 2: Creating a network zone](/docs/containers?topic=containers-pse-to-cbr-migration#pse-cbr-create)
 
     * [Creating a network zone in the console](/docs/containers?topic=containers-pse-to-cbr-migration&interface=ui#pse-cbr-create-ui)
 
@@ -1959,9 +1959,9 @@ subcollection: containers
 
 * [Removing context based restrictions from the private service endpoint](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-remove)
 
-* [Deleting a rule from the console](/docs/containers?topic=containers-pse-to-cbr-migration&interface=ui#pse-cbr-remove-ui)
+    * [Deleting a rule from the console](/docs/containers?topic=containers-pse-to-cbr-migration&interface=ui#pse-cbr-remove-ui)
 
-* [Deleting a rule from the CLI](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-remove-cli)
+    * [Deleting a rule from the CLI](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-remove-cli)
 
 * [Next steps](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-next)
 
