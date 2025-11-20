@@ -240,6 +240,10 @@ subcollection: containers
 
 * [November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov25)
 
+    * [18 November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov1825)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
     * [17 November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov1725)
 
         * {{site.data.keyword.cos_full_notm}} add-on patch updates.
