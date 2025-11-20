@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-11-17"
+lastupdated: "2025-11-20"
 
 
 keywords: change log, version history, 1.30
@@ -47,6 +47,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.30
 {: #130_components}
+
+
+### Worker node fix pack 1.30.14_1593, released 17 November 2025
+{: #cl-boms-13014_1593_W}
+
+The following table shows the components included in the worker node fix pack 1.30.14_1593. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU_24_04|6.8.0-86-generic|CIS benchmark compliance [2.2.4](https://workbench.cisecurity.org/sections/2891131/recommendations/4685418), [2.3.2.1](https://workbench.cisecurity.org/sections/2891135/recommendations/4685426), [5.1.1](https://workbench.cisecurity.org/sections/2891075/recommendations/4685147)Resolves the following CVEs: [CVE-2024-53008](https://nvd.nist.gov/vuln/detail/CVE-2024-53008){: external}, and [CVE-2025-32464](https://nvd.nist.gov/vuln/detail/CVE-2025-32464){: external}.|
+|Kubernetes|1.30.14|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.14).|
+|containerd|1.7.29|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.29).|
+|HAProxy|fbe9b8146f23bbd12b2566a79fa897d5981e7273|N/A|
+|GPU Device Plug-in and Installer|1e3d028d8b22980ae70339db3b7f41575fe5ee5f|Resolves the following CVEs: [CVE-2025-5318](https://nvd.nist.gov/vuln/detail/CVE-2025-5318){: external}.|
+{: caption="1.30.14_1593 fix pack." caption-side="bottom"}
+{: #cl-boms-13014_1593_W-component-table}
+
 
 
 ### Worker node fix pack 1.30.14_1592, released 06 November 2025
