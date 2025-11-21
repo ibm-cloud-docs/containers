@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-11-04"
+lastupdated: "2025-11-21"
 
 
 keywords: istio migration, istio updates, istio upgrades
@@ -446,7 +446,7 @@ For example, the patch version of your add-on might be updated automatically by 
     ```
 
     In `addon-istio` 1.24 and later, if you have custom gateway deployments, you are also responsible for updating them to pick up the newer `istio/proxyv2` image. The custom gateways show in the list of data plane pods and can be updated with a rollout restart.
-    {: pre}
+    {: note}
 
 
 
