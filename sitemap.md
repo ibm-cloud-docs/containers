@@ -1755,13 +1755,15 @@ subcollection: containers
 
 * [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
 
-[Adding tags and labels to clusters](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
+[Tagging and labeling clusters and services](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
 
-* [Adding tags to clusters with the console](/docs/containers?topic=containers-worker-tag-label&interface=ui#add-tags-console)
+* [Finding {{site.data.keyword.BluSoftlayer_notm}} resources with service tags from a specific cluster](/docs/containers?topic=containers-worker-tag-label#finding-services-tags)
 
-* [Adding tags to clusters with the CLI](/docs/containers?topic=containers-worker-tag-label&interface=cli#add-tags-cli)
+* [Manually adding user tags to clusters in the console](/docs/containers?topic=containers-worker-tag-label&interface=ui#add-tags-console)
 
-* [Adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label&interface=cli#worker_pool_labels)
+* [Manually adding user tags to clusters by using the CLI](/docs/containers?topic=containers-worker-tag-label&interface=cli#add-tags-cli)
+
+* [Manually adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label&interface=cli#worker_pool_labels)
 
 [Checking worker node resource reserves](/docs/containers?topic=containers-resource-limit-node#resource-limit-node)
 
