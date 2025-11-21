@@ -29,11 +29,6 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1.13.2}
 
 
-### 1.13.2_7820_iks, released 16 September 2025
-{: #cl-ingress-alb-1132_7820_iks}
-
-
-
 ### 1.13.2_297386853_iks, released 17 November 2025
 {: #cl-ingress-alb-1132_297386853_iks}
 
@@ -49,10 +44,33 @@ Review the version history for Ingress ALB.
 
 
 
+### 1.13.2_7820_iks, released 16 September 2025
+{: #cl-ingress-alb-1132_7820_iks}
+
+
+
 
 
 ## Version 1.12.1
 {: #cl-ingress-alb-1.12.1}
+
+
+### 1.12.1_297379442_iks, released 17 November 2025
+{: #cl-ingress-alb-1121_297379442_iks}
+
+[Default version]{: tag-green}
+
+
+
+### 1.12.1_291242242_iks, released 28 October 2025
+{: #cl-ingress-alb-1121_291242242_iks}
+
+
+
+### 1.12.1_288662251_iks, released 14 October 2025
+{: #cl-ingress-alb-1121_288662251_iks}
+
+- Resolves the following CVEs: [CVE-2025-49794](https://nvd.nist.gov/vuln/detail/CVE-2025-49794){: external}, [CVE-2025-49795](https://nvd.nist.gov/vuln/detail/CVE-2025-49795){: external}, [CVE-2025-49796](https://nvd.nist.gov/vuln/detail/CVE-2025-49796){: external}, [CVE-2025-6021](https://nvd.nist.gov/vuln/detail/CVE-2025-6021){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/CVE-2025-6170){: external}, [CVE-2025-10148](https://nvd.nist.gov/vuln/detail/CVE-2025-10148){: external}, [CVE-2025-4947](https://nvd.nist.gov/vuln/detail/CVE-2025-4947){: external}, [CVE-2025-5025](https://nvd.nist.gov/vuln/detail/CVE-2025-5025){: external}, [CVE-2025-5399](https://nvd.nist.gov/vuln/detail/CVE-2025-5399){: external}, and [CVE-2025-9086](https://nvd.nist.gov/vuln/detail/CVE-2025-9086){: external}.
 
 
 ### 1.12.1_7792_iks, released 21 August 2025
@@ -103,28 +121,26 @@ Review the version history for Ingress ALB.
 - The `nginx_ingress_controller_ingress_upstream_latency_seconds` metric has been removed, use `nginx_ingress_controller_connect_duration_seconds` instead.
 
 
-### 1.12.1_297379442_iks, released 17 November 2025
-{: #cl-ingress-alb-1121_297379442_iks}
-
-[Default version]{: tag-green}
-
-
-
-### 1.12.1_291242242_iks, released 28 October 2025
-{: #cl-ingress-alb-1121_291242242_iks}
-
-
-
-### 1.12.1_288662251_iks, released 14 October 2025
-{: #cl-ingress-alb-1121_288662251_iks}
-
-- Resolves the following CVEs: [CVE-2025-49794](https://nvd.nist.gov/vuln/detail/CVE-2025-49794){: external}, [CVE-2025-49795](https://nvd.nist.gov/vuln/detail/CVE-2025-49795){: external}, [CVE-2025-49796](https://nvd.nist.gov/vuln/detail/CVE-2025-49796){: external}, [CVE-2025-6021](https://nvd.nist.gov/vuln/detail/CVE-2025-6021){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/CVE-2025-6170){: external}, [CVE-2025-10148](https://nvd.nist.gov/vuln/detail/CVE-2025-10148){: external}, [CVE-2025-4947](https://nvd.nist.gov/vuln/detail/CVE-2025-4947){: external}, [CVE-2025-5025](https://nvd.nist.gov/vuln/detail/CVE-2025-5025){: external}, [CVE-2025-5399](https://nvd.nist.gov/vuln/detail/CVE-2025-5399){: external}, and [CVE-2025-9086](https://nvd.nist.gov/vuln/detail/CVE-2025-9086){: external}.
-
-
 
 
 ## Version 1.11.2
 {: #cl-ingress-alb-1.11.2}
+
+
+### 1.11.2_297368181_iks, released 17 November 2025
+{: #cl-ingress-alb-1112_297368181_iks}
+
+
+
+### 1.11.2_291246358_iks, released 28 October 2025
+{: #cl-ingress-alb-1112_291246358_iks}
+
+
+
+### 1.11.2_288648329_iks, released 14 October 2025
+{: #cl-ingress-alb-1112_288648329_iks}
+
+- Resolves the following CVEs: [CVE-2025-49794](https://nvd.nist.gov/vuln/detail/CVE-2025-49794){: external}, [CVE-2025-49795](https://nvd.nist.gov/vuln/detail/CVE-2025-49795){: external}, [CVE-2025-49796](https://nvd.nist.gov/vuln/detail/CVE-2025-49796){: external}, [CVE-2025-6021](https://nvd.nist.gov/vuln/detail/CVE-2025-6021){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/CVE-2025-6170){: external}, [CVE-2025-10148](https://nvd.nist.gov/vuln/detail/CVE-2025-10148){: external}, [CVE-2025-4947](https://nvd.nist.gov/vuln/detail/CVE-2025-4947){: external}, [CVE-2025-5025](https://nvd.nist.gov/vuln/detail/CVE-2025-5025){: external}, [CVE-2025-5399](https://nvd.nist.gov/vuln/detail/CVE-2025-5399){: external}, and [CVE-2025-9086](https://nvd.nist.gov/vuln/detail/CVE-2025-9086){: external}.
 
 
 ### 1.11.2_7782_iks, released 18 August 2025
@@ -239,22 +255,6 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1112_7069_iks}
 
 - add v1.11.2 Ingress NGINX Controller
-
-
-### 1.11.2_297368181_iks, released 17 November 2025
-{: #cl-ingress-alb-1112_297368181_iks}
-
-
-
-### 1.11.2_291246358_iks, released 28 October 2025
-{: #cl-ingress-alb-1112_291246358_iks}
-
-
-
-### 1.11.2_288648329_iks, released 14 October 2025
-{: #cl-ingress-alb-1112_288648329_iks}
-
-- Resolves the following CVEs: [CVE-2025-49794](https://nvd.nist.gov/vuln/detail/CVE-2025-49794){: external}, [CVE-2025-49795](https://nvd.nist.gov/vuln/detail/CVE-2025-49795){: external}, [CVE-2025-49796](https://nvd.nist.gov/vuln/detail/CVE-2025-49796){: external}, [CVE-2025-6021](https://nvd.nist.gov/vuln/detail/CVE-2025-6021){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/CVE-2025-6170){: external}, [CVE-2025-10148](https://nvd.nist.gov/vuln/detail/CVE-2025-10148){: external}, [CVE-2025-4947](https://nvd.nist.gov/vuln/detail/CVE-2025-4947){: external}, [CVE-2025-5025](https://nvd.nist.gov/vuln/detail/CVE-2025-5025){: external}, [CVE-2025-5399](https://nvd.nist.gov/vuln/detail/CVE-2025-5399){: external}, and [CVE-2025-9086](https://nvd.nist.gov/vuln/detail/CVE-2025-9086){: external}.
 
 
 
