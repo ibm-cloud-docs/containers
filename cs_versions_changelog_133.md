@@ -59,7 +59,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1335_1550_W-component-table}
 
 ### Master fix pack 1.33.5_1549, released 15 November 2025
-{: #cl-boms-1335_1549_M}
+{: #1335_1549_M}
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
