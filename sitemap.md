@@ -3917,18 +3917,6 @@ subcollection: containers
 
 * [Cleaning up persistent storage](/docs/containers?topic=containers-storage-file-vpc-managing#vpc-storage-remove-file)
 
-[Setting up snapshots with the {{site.data.keyword.filestorage_vpc_short}} cluster add-on](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-volume-snapshot-file)
-
-* [Creating an app](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-snapshot-deployment-file)
-
-* [Creating a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-create-snapshot)
-
-* [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-restore-from-snapshot)
-
-* [Restoring static snapshots](/docs/containers?topic=containers-vpc-volume-snapshot-file#file-static-snapshot-restore)
-
-* [Turning off snapshots](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-turn-off-snapshots)
-
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
 
 
