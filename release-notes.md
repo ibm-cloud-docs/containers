@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-11-20"
+lastupdated: "2025-11-24"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,23 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## November 2025
 {: #containers-nov25}
+
+### 24 November 2025
+{: #containers-nov2425}
+{: release-note}
+
+
+
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+
+
+
 
 ### 18 November 2025
 {: #containers-nov1825}
@@ -69,6 +86,23 @@ Ingress ALB cluster add-on patch updates.
 
 {{site.data.keyword.containerlong_notm}} version 1.30 is unsupported.
 :   Update your cluster to at least [version 1.31](/docs/containers?topic=containers-cs_versions_131) as soon as possible.
+
+
+
+### 15 November 2025
+{: #containers-nov1525}
+{: release-note}
+
+
+
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+
 
 
 
