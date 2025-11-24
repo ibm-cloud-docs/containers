@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-06-13"
+lastupdated: "2025-11-24"
 
 
 keywords: containers, block storage, snapshot
@@ -173,6 +173,7 @@ After you create a deployment and a PVC, you can create the volume snapshot reso
 You can creating snapshots only when a volume is attached to a pod.
 {: note}
 
+1. Make sure you have **Share Snapshot Operator** permissions in IAM.
 
 1. Create a volume snapshot resource in your cluster by using the `ibmc-vpcblock-snapshot` snapshot class that is deployed when you enabled the add-on. Save the following VolumeSnapshot configuration to a file called `snapvol.yaml`. 
 
@@ -238,8 +239,7 @@ After you deploy the snapshot resources, you can restore data to a new volume by
     kubectl get pvc
     ```
     {: pre}
-    
-    
+
     ```sh
     NAME                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                AGE
     restore-pvc            Bound    pvc-4ede7630-5a49-4bae-b34d-dc528acfb884   10Gi       RWO            ibmc-vpc-block-5iops-tier   18h
@@ -312,6 +312,7 @@ After you deploy the snapshot resources, you can restore data to a new volume by
     hi
     ```
     {: screen}
+
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-11-21"
+lastupdated: "2025-11-24"
 
 
 keywords: containers
@@ -2508,11 +2508,19 @@ subcollection: containers
 {: #sitemap_setting_up_the_cluster_autoscaler}
 
 
-[Preparing classic and VPC clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
+[Preparing your cluster for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
 
-* [Understanding scale-up and scale-down](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_about)
+* [Understanding autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_about)
 
-* [Following scalable deployment practices](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices)
+    * [What are the best practices for autoscaling?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices)
+
+    * [Can I change how scale-up and scale-down work?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#customize-scale-up-down)
+
+    * [Can I increase the minimum size per zone to trigger a scale up my cluster to that size?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#trigger-scale-up)
+
+    * [How is this behavior different from worker pools that are not managed by the cluster autoscaler?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scaling-pools-differences)
+
+    * [How does GPU autoscaling work?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scaling-gpus)
 
     * [Can I autoscale multiple worker pools at once?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-multiple)
 
@@ -2524,9 +2532,9 @@ subcollection: containers
 
     * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-cluster-scaling-classic-vpc#scalable-practices-taints)
 
-* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-cluster-scaling-classic-vpc#ca_update_worker_node_pool)
+* [Preparing clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#prepare-autoscale-classic-vpc)
 
-* [Preparing classic or VPC Gen 2 clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#prepare-autoscale-classic-vpc)
+* [Next steps](/docs/containers?topic=containers-cluster-scaling-classic-vpc#autoscaling-next-steps)
 
 [Enabling the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon)
 
@@ -2559,6 +2567,8 @@ subcollection: containers
 * [Prerequisites](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#hpa-gpu-prereqs)
 
 * [Setting up HPA](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#hpa-gpu-setup)
+
+[Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-ca_update_worker_node_pool#ca_update_worker_node_pool)
 
 
 ## Logging and monitoring
@@ -5540,6 +5550,10 @@ subcollection: containers
     * [Change log for 1.17.1, released 7 March 2023](/docs/containers?topic=containers-istio-changelog#1171)
 
 [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog#ca_changelog)
+
+* [Version 2.0.0](/docs/containers?topic=containers-ca_changelog#0124_ca_addon)
+
+    * [Change log for patch update 2.0.0-1_300225698, released 24 November 2025](/docs/containers?topic=containers-ca_changelog#2.0.0-1-300225698_ca)
 
 * [Version 1.2.4](/docs/containers?topic=containers-ca_changelog#0124_ca_addon)
 
