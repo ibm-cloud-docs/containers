@@ -28,23 +28,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## November 2025
 {: #containers-nov25}
 
-### 24 November 2025
-{: #containers-nov2425}
-{: release-note}
-
-
-
-
-
-{{site.data.keyword.containerlong_notm}} master fix packs.
-:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
-:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
-:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
-
-
-
-
 ### 18 November 2025
 {: #containers-nov1825}
 {: release-note}
