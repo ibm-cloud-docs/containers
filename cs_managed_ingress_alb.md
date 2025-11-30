@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2025
-lastupdated: "2025-10-31"
+lastupdated: "2025-11-30"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -499,7 +499,7 @@ Removing all workers from a VLAN removes the IP address of the ALB in the VLAN's
 ## Managing port 80 on the ALBs
 {: #port80}
 
-In clusters created on or after 01 December 2025, port 80 is blocked by default for all ALBs. Clusters created before this date are not affected.
+In VPC clusters created on or after 12 January 2026, port 80 is blocked by default for all ALBs. Clusters created before this date are not affected.
 {: note}
 
 You can manage port 80 on your ALBs by using the following commands. Note that any changes you make are applied to all ALBs in your cluster. 
