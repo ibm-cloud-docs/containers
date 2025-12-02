@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-11-24"
+lastupdated: "2025-12-02"
 
 
 keywords: containers
@@ -6196,6 +6196,8 @@ subcollection: containers
 
 * [Version 1.13.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.13.2)
 
+    * [1.13.2_301309576_iks, released 02 December 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_301309576_iks)
+
     * [1.13.2_297386853_iks, released 17 November 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_297386853_iks)
 
     * [1.13.2_291202775_iks, released 28 October 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_291202775_iks)
@@ -6205,6 +6207,8 @@ subcollection: containers
     * [1.13.2_7820_iks, released 16 September 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_7820_iks)
 
 * [Version 1.12.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.12.1)
+
+    * [1.12.1_301902064_iks, released 02 December 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_301902064_iks)
 
     * [1.12.1_297379442_iks, released 17 November 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_297379442_iks)
 
@@ -6229,6 +6233,8 @@ subcollection: containers
     * [1.12.1_7490_iks, released 02 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7490_iks)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
+
+    * [1.11.2_301599557_iks, released 02 December 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_301599557_iks)
 
     * [1.11.2_297368181_iks, released 17 November 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_297368181_iks)
 

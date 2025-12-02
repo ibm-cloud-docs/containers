@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-11-21"
+lastupdated: "2025-12-02"
 
 
 keywords: change log, version history, Ingress ALB
@@ -27,6 +27,12 @@ Review the version history for Ingress ALB.
 
 ## Version 1.13.2
 {: #cl-ingress-alb-1.13.2}
+
+
+### 1.13.2_301309576_iks, released 02 December 2025
+{: #cl-ingress-alb-1132_301309576_iks}
+
+- Resolves the following CVEs: [CVE-2024-58251](https://nvd.nist.gov/vuln/detail/CVE-2024-58251){: external}, [CVE-2025-46394](https://nvd.nist.gov/vuln/detail/CVE-2025-46394){: external}, [CVE-2025-31133](https://nvd.nist.gov/vuln/detail/CVE-2025-31133){: external}, [CVE-2025-52565](https://nvd.nist.gov/vuln/detail/CVE-2025-52565){: external}, and [CVE-2025-52881](https://nvd.nist.gov/vuln/detail/CVE-2025-52881){: external}.
 
 
 ### 1.13.2_297386853_iks, released 17 November 2025
@@ -53,6 +59,12 @@ Review the version history for Ingress ALB.
 
 ## Version 1.12.1
 {: #cl-ingress-alb-1.12.1}
+
+
+### 1.12.1_301902064_iks, released 02 December 2025
+{: #cl-ingress-alb-1121_301902064_iks}
+
+- Resolves the following CVEs: [CVE-2024-58251](https://nvd.nist.gov/vuln/detail/CVE-2024-58251){: external}, [CVE-2025-46394](https://nvd.nist.gov/vuln/detail/CVE-2025-46394){: external}, [CVE-2025-31133](https://nvd.nist.gov/vuln/detail/CVE-2025-31133){: external}, [CVE-2025-52565](https://nvd.nist.gov/vuln/detail/CVE-2025-52565){: external}, and [CVE-2025-52881](https://nvd.nist.gov/vuln/detail/CVE-2025-52881){: external}.
 
 
 ### 1.12.1_297379442_iks, released 17 November 2025
@@ -125,6 +137,12 @@ Review the version history for Ingress ALB.
 
 ## Version 1.11.2
 {: #cl-ingress-alb-1.11.2}
+
+
+### 1.11.2_301599557_iks, released 02 December 2025
+{: #cl-ingress-alb-1112_301599557_iks}
+
+- Resolves the following CVEs: [CVE-2024-58251](https://nvd.nist.gov/vuln/detail/CVE-2024-58251){: external}, [CVE-2025-46394](https://nvd.nist.gov/vuln/detail/CVE-2025-46394){: external}, [CVE-2025-31133](https://nvd.nist.gov/vuln/detail/CVE-2025-31133){: external}, [CVE-2025-52565](https://nvd.nist.gov/vuln/detail/CVE-2025-52565){: external}, and [CVE-2025-52881](https://nvd.nist.gov/vuln/detail/CVE-2025-52881){: external}.
 
 
 ### 1.11.2_297368181_iks, released 17 November 2025
