@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-11-24"
+lastupdated: "2025-12-02"
 
 
 keywords: change log, version history, 1.33
@@ -58,6 +58,8 @@ The following table shows the components included in the worker node fix pack 1.
 {: caption="1.33.5_1550 fix pack." caption-side="bottom"}
 {: #cl-boms-1335_1550_W-component-table}
 
+
+
 ### Master fix pack 1.33.5_1549, released 15 November 2025
 {: #1335_1549_M}
 
@@ -71,6 +73,8 @@ The following table shows the components included in the worker node fix pack 1.
 | Portieris admission controller | v0.13.30 | v0.13.31 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.13.31) |
 | Tigera Operator | v1.36.13 | v1.36.14 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.14). |
 {: caption="Changes since version 1.33.5_1544" caption-side="bottom"}
+
+
 
 ### Worker node fix pack 1.33.5_1548, released 06 November 2025
 {: #cl-boms-1335_1548_W}
