@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2022, 2024
-lastupdated: "2024-08-15"
+  years: 2022, 2025
+lastupdated: "2025-12-03"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, webhooks, admission control, 
@@ -38,12 +38,18 @@ As noted in the Kubernetes documentation, you can use admission controllers for 
 ## What are the best practices for using webhooks?
 {: #webhook-best-practice}
 
-Keep in mind the following best practices and considerations when you configure a webhook.
+Avoid using webhooks whenever possible. Use the [`ValidatingAdmissionPolicy`](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/) and [`MutatingAdmissionPolicy`](https://kubernetes.io/docs/reference/access-authn-authz/mutating-admission-policy/) (when enabled by default) as alternatives instead.
+
+If you must use webhooks, keep in mind the following best practices and considerations when you configure a webhook.
 
 - Do not use mutating webhooks to mutate resources owned by another controller or operator. Doing so might cause an infinite reconciliation loop between the resource owner and the webhook. Webhooks can determine resource ownership by checking if `metadata.ownerReferences` is set in the resource data. For example, a Kubernetes replicaset resource is owned by a Kubernetes deployment resource and must never be mutated by a webhook. 
 - Create [replica pods](/docs/containers?topic=containers-app#replicaset) for the webhook so that if one pod goes down, the webhook can still process requests from your resources. Spread the replica pods across zones, if possible.
 - Set an appropriate `failurePolicy` option, such as whether your webhook fails or ignores connection failures or timeouts. You might set the `failurePolicy` to `Ignore` if you want your webhook to ignore connection errors an timeouts. Note that this does not change how the `apiserver` behaves if the webhook rejects a request.
 - Review the `timeoutSeconds` interval. Older webhooks that use the `v1beta1.admissionregistration.k8s.io` API have a default timeout of 30 seconds. The `v1` API uses a default of 10 seconds. If the webhook failure policy is Ignore and the current `timeoutSeconds` is 30, consider reducing the timeout to 10 seconds. 
+
+    Avoid allowing multiple mutating webhooks to operate on the same resources. Mutating webhooks run sequentially. A single mutating webhook might work as expected from a timeout and failure policy perspective, but when combined with additional mutating webhooks that operate on the same resource, the mutating webhooks might exceed the total context timeout given to run all of the webhooks.
+    {: important}
+
 - Set appropriate CPU and memory [resource requests and limits](/docs/containers?topic=containers-app#resourcereq) for your webhook.
 - Add [liveness and readiness probes](/docs/containers?topic=containers-app#probe) to help make sure your webhook container is running and ready to serve requests.
 - Set pod [anti-affinity scheduling rules](/docs/containers?topic=containers-app#affinity) to prefer that your webhook pods run on different worker nodes and zones when possible. You might use [pod topology](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/){: external} instead. However, avoid [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} or forced affinity that might restrict where the webhook pods can be scheduled.
@@ -107,8 +113,3 @@ Note the following limitations for referencing the webhook app as an IP address 
 {: #access_webhooks-help}
 
 For help troubleshooting webhooks, see [Debugging webhooks](/docs/containers?topic=containers-ts-webhook-debug) or [Cluster can't update because of broken webhook](/docs/containers?topic=containers-webhooks_update).
-
-
-
-
-

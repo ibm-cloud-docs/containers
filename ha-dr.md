@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-07-07"
+lastupdated: "2025-12-03"
 
 
 keywords: high availability, disaster recover, HA, DR, responsibilities
@@ -82,13 +82,13 @@ The general strategy for disaster recovery is to configure storage and backups o
 
 | Feature | Description |
 |---------| ----------- |
-| [Cloud Object Storage (COS)](/docs/cloud-object-storage) | A persistent, highly available storage option that mounts to your apps, available as a plug-in. Review the [limitations](/docs/openshift?topic=openshift-storage-cos-understand#cos_limitations).|
+| [Cloud Object Storage (COS)](/docs/cloud-object-storage) | A persistent, highly available storage option that mounts to your apps, available as a plug-in. Review the [limitations](/docs/containers?topic=containers-storage-cos-understand#cos_limitations).|
 | [Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery) | The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like rebooting a VPC worker node or reloading the operating system in a classic worker node.|
 | [Data portability with Velero](/docs/containers?topic=containers-data-portability&q=velero&tags=containers#export-velero) | A third-party option for exporting data from your cluster to an IBM COS instance or another s3 provider. | Requires an IBM COS instance and bucket. |
 | [Data portability using the `kubectl` CLI](/docs/containers?topic=containers-data-portability&q=velero&tags=containers#export-procedure-kubectl) | Export data by using the `kubectl` CLI. |
 {: caption="DR features for {{site.data.keyword.containerlong_notm}}" caption-side="bottom"}
 
-Review [additional options for exporting data](/docs/openshift?topic=openshift-data-portability#data-other), such as `rclone` or OADP.
+Review [additional options for exporting data](/docs/containers?topic=containers-data-portability#data-other), such as `rclone` or OADP.
 {: note}
 
 

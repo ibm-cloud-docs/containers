@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-11-11"
+  years: 2024, 2025
+lastupdated: "2025-12-03"
 
 
 keywords: containers, rclone, migrate
@@ -51,7 +51,7 @@ In Account 2, the destination account to migrate to, you must have the following
 
 * A {{site.data.keyword.openshiftlong_notm}} cluster.
 
-* The [COS plug-in installed in your cluster](/docs/openshift?topic=openshift-storage_cos_install).
+* The [COS plug-in installed in your cluster](/docs/containers?topic=containers-storage_cos_install).
 
 * A COS instance and a set of HMAC credentials. For more information, see [Service credentials](/docs/cloud-object-storage?topic=cloud-object-storage-service-credentials).
 
