@@ -1,16 +1,13 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2025
+lastupdated: "2025-12-03"
 
 
-keywords: containers,kubernetes, ic, ks, kubectl, update
-
+keywords: containers, kubernetes, ic, ks, kubectl, oc, containers cli, update
 
 subcollection: containers
-
- 
 
 
 ---
@@ -31,5 +28,3 @@ Review the following sections to update the `ibmcloud` CLI and any plug-ins that
 
 
 {{../cli/reference/ibmcloud/extend_cli.md#cli-update-plugin}}
-
-

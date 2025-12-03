@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2025
+lastupdated: "2025-12-03"
 
 
 keywords: kubernetes
@@ -20,12 +20,15 @@ subcollection: containers
 # Overview of use cases
 {: #cs_uc_intro}
 
-Various use cases show the strengths of {{site.data.keyword.containerlong_notm}} and  {{site.data.keyword.cloud_notm}} services when used together. These stories highlight several industries as well as types of workloads. Even though each use case is presented through the lens of a particular industry, these workloads are typical across various industries. You see workload themes, such as:
+Various use cases show the strengths of {{site.data.keyword.containerlong_notm}} and  {{site.data.keyword.cloud_notm}} services when used together. These stories highlight several industries as well as types of workloads.
+{: shortdesc}
+
+Even though each use case is presented through the lens of a particular industry, these workloads are typical across various industries. You see workload themes, such as:
 * AI and machine learning
 * Data and storage
 * DevOps
 * Identity management
-{: shortdesc}
+
 
 Financial services
 :   Trim IT costs and [accelerate regulatory compliance](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)
@@ -46,6 +49,3 @@ Retail
 Transportation
 Build and deploy HR site with AI [in less than 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline).
 :   Increase availability of worldwide systems for [business partners](/docs/containers?topic=containers-cs_uc_transport#uc_shipping).
-
-
-

@@ -380,18 +380,6 @@ toc:
               - cs_versions_126.md
               - cs_versions_changelog_126.md
               - cs_benchmarks_126.md
-          - topicgroup:
-              label: Version 1.25
-              topics:
-              - cs_versions_125.md
-              - cs_versions_changelog_125.md
-              - cs_benchmarks_125.md
-          - topicgroup:
-              label: Version 1.24
-              topics:
-              - cs_versions_124.md
-              - cs_versions_changelog_124.md
-              - cs_benchmarks_124.md
       - locations.md
       - cs_integrations_overview.md
       - service-settings.md
@@ -521,7 +509,6 @@ toc:
               - ts-network-strongswan-vpn.md
               - ts-network-calico-node.md
               - ts-network-subnet-recover.md
-              - ts-network-snat-125.md
               - ts-network-strongswan-install-new.md
               - ts-network-strongswan-network-nodes.md
               - ts-network-classic121.md
@@ -544,7 +531,6 @@ toc:
               - ts-addon-istio-gateway-affinity.md
               - ts-addon-istio-missing.md
               - ts-addon-istio-webhooks.md
-              - ts-addon-istio-iop.md
               - ts-delete-olm.md
           - topicgroup:
               label: Load balancers
