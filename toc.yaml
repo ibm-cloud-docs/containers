@@ -531,7 +531,6 @@ toc:
               - ts-addon-istio-gateway-affinity.md
               - ts-addon-istio-missing.md
               - ts-addon-istio-webhooks.md
-              - iop.md
               - ts-delete-olm.md
           - topicgroup:
               label: Load balancers
