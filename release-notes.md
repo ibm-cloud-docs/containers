@@ -50,6 +50,8 @@ Ingress ALB cluster add-on patch updates.
 ## November 2025
 {: #containers-nov25}
 
+
+
 ### 18 November 2025
 {: #containers-nov1825}
 {: release-note}
