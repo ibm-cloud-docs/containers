@@ -238,6 +238,16 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec25)
+
+    * [02 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec0225)
+
+        * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+
+        * {{site.data.keyword.cos_full_notm}} add-on patch updates.
+
+        * Ingress ALB cluster add-on patch updates.
+
 * [November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov25)
 
     * [18 November 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov1825)

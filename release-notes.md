@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-11-24"
+lastupdated: "2025-12-03"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -24,6 +24,28 @@ Use the release notes to learn about the latest changes to the documentation tha
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
+
+## December 2025
+{: #containers-dec25}
+
+### 02 December 2025
+{: #containers-dec0225}
+{: release-note}
+
+Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
+:   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog).
+
+{{site.data.keyword.cos_full_notm}} add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
+
+
+
+Ingress ALB cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
+
+
+
 
 ## November 2025
 {: #containers-nov25}
