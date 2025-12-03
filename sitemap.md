@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-12-02"
+lastupdated: "2025-12-03"
 
 
 keywords: containers
@@ -5563,7 +5563,7 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-ca_changelog#0124_ca_addon)
 
-    * [Change log for patch update 2.0.0-1_300225698, released 24 November 2025](/docs/containers?topic=containers-ca_changelog#2.0.0-1-300225698_ca)
+    * [Change log for patch update 2.0.0-2_302959219, released 2 December 2025](/docs/containers?topic=containers-ca_changelog#2.0.0-2_302959219_ca)
 
 * [Version 1.2.4](/docs/containers?topic=containers-ca_changelog#0124_ca_addon)
 
@@ -6038,6 +6038,8 @@ subcollection: containers
     * [v1.0.13_297764008, released 14 November 2025](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1013_297764008)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.45, released 28 November 2025](/docs/containers?topic=containers-cos_plugin_changelog#02245_object_plugin)
 
 * [Change log for version 2.2.44, released 13 November 2025](/docs/containers?topic=containers-cos_plugin_changelog#02244_object_plugin)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-06"
+lastupdated: "2025-12-03"
 
 
 keywords: kubernetes
@@ -23,7 +23,7 @@ subcollection: containers
 You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running. For example, you can perform rolling updates and rollbacks without downtime for your users.
 {: shortdesc}
 
-For more information about creating a configuration file for your application, see [Configuration Best Practices](https://kubernetes.io/docs/concepts/configuration/overview/){: external}.
+For more information about creating a configuration file for your application, see [Configuration Best Practices](https://kubernetes.io/blog/2025/11/25/configuration-good-practices/){: external}.
 
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}
@@ -144,7 +144,7 @@ Before you begin
 
 To deploy your app,
 
-1. Create a configuration file based on [Kubernetes best practices](https://kubernetes.io/docs/concepts/configuration/overview/){: external}. Generally, a configuration file contains configuration details for each of the resources you are creating in Kubernetes. Your script might include one or more of the following sections:
+1. Create a configuration file based on [Kubernetes best practices](https://kubernetes.io/blog/2025/11/25/configuration-good-practices/){: external}. Generally, a configuration file contains configuration details for each of the resources you are creating in Kubernetes. Your script might include one or more of the following sections:
 
     - [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external}: Defines the creation of pods and replica sets. A pod includes an individual containerized app and replica sets control multiple instances of pods.
 
