@@ -8655,8 +8655,6 @@ subcollection: containers
 
 [Why can't I upgrade to version 1.12 of the managed Istio add-on?](/docs/containers?topic=containers-ts-addon-istio-webhooks#ts-addon-istio-webhooks)
 
-[Why does my custom gateway Istio operator have a reconcile loop error?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
-
 [How do I delete Operator Lifecycle Manager components?](/docs/containers?topic=containers-ts-delete-olm#ts-delete-olm)
 
 
