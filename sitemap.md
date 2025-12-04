@@ -240,6 +240,10 @@ subcollection: containers
 
 * [December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec25)
 
+    * [04 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec0425)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
+
     * [02 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec0225)
 
         * Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_notm}}.
