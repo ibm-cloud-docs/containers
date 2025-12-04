@@ -6228,6 +6228,8 @@ subcollection: containers
 
 * [Version 1.13.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.13.2)
 
+    * [1.13.2_303823545_iks, released 04 December 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_303823545_iks)
+
     * [1.13.2_301309576_iks, released 02 December 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_301309576_iks)
 
     * [1.13.2_297386853_iks, released 17 November 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_297386853_iks)
