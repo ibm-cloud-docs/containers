@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-09-27"
+lastupdated: "2025-12-04"
 
 
 keywords: kubernetes, deploy, migrating psps to pod security, pod security admission, migrate to pod security admission
@@ -265,7 +265,7 @@ If you need to re-enable PSPs in your 1.24 cluster, run `ibmcloud ks cluster mas
 ### Step 7: Optional. Upgrade your cluster
 {: #psa-migration-cluster-upgrade}
 
-[Upgrade your cluster to version 1.25](/docs/containers?topic=containers-cs_versions_125&interface=ui) to use Pod Security admission. Or, keep your cluster at version 1.24 with Pod Security admission enabled until you are ready to upgrade. 
+Upgrade your cluster to at least version 1.25 to use Pod Security admission. Or, keep your cluster at version 1.24 with Pod Security admission enabled until you are ready to upgrade. 
 
 
 ## References

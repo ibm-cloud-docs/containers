@@ -2944,7 +2944,7 @@ Information on worker node removal priority.
 
 
 Kubernetes version 1.24 is unsupported.
-:   Update your cluster to at least [version 1.25](/docs/containers?topic=containers-cs_versions_125) as soon as possible.
+:   Update your cluster to at least version 1.25 as soon as possible.
 
 
 
@@ -3021,5 +3021,5 @@ Worker node fix packs are available.
     - [1.28.4_1538](/docs/containers?topic=containers-changelog_128)
     - [1.27.8_1557](/docs/containers?topic=containers-changelog_127)
     - [1.26.11_1565](/docs/containers?topic=containers-changelog_126)
-    - [1.25.16_1570](/docs/containers?topic=containers-changelog_125)
-    - [1.24.17_1592](/docs/containers?topic=containers-changelog_124)
+    - 1.25.16_1570
+    - 1.24.17_1592

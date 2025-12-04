@@ -1,14 +1,13 @@
 ---
 
-copyright: 
+copyright:
   years: 2014, 2025
-lastupdated: "2025-08-12"
 
+lastupdated: "2025-12-04"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, iro, openshift, red hat, red hat openshift
 
 subcollection: containers
-
 
 ---
 

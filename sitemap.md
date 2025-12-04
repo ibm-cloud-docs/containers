@@ -7931,28 +7931,6 @@ subcollection: containers
 
 [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset#ts-pod-security-reset)
 
-[Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security#ts-app-pod-security)
-
-* [Could not get `PodSecurityPolicies`](/docs/containers?topic=containers-ts-app-pod-security#could-not-get-psps)
-
-* [Found non-IBM `PodSecurityPolicy`](/docs/containers?topic=containers-ts-app-pod-security#non-ibm-psp)
-
-* [Could not get ClusterRoleBinding privileged-psp-user](/docs/containers?topic=containers-ts-app-pod-security#psp-user-not-get)
-
-* [ClusterRoleBinding `privileged-psp-user` does not have expected `roleRef`](/docs/containers?topic=containers-ts-app-pod-security#unexpected-role-ref)
-
-* [ClusterRoleBinding privileged-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-privilieged-unexpected-subjects)
-
-* [Could not get ClusterRoleBinding `restricted-psp-user`](/docs/containers?topic=containers-ts-app-pod-security#psp-restrictred-user-missing)
-
-* [ClusterRoleBinding `restricted-psp-user` does not have expected `roleRef`](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-role-ref)
-
-* [ClusterRoleBinding restricted-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-subjects)
-
-* [Creating or updating the `privileged-psp-user` ClusterRoleBinding](/docs/containers?topic=containers-ts-app-pod-security#create-privileged-psp-user)
-
-* [Creating the `restricted-psp-user` cluster role binding](/docs/containers?topic=containers-ts-app-pod-security#create-restricted-psp-user)
-
 [Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?](/docs/containers?topic=containers-ts_image_pull_create#ts_image_pull_create)
 
 [How do I rotate the cluster API key if there is a leak?](/docs/containers?topic=containers-ts-troubleshoot-api-key-leak#ts-troubleshoot-api-key-leak)
