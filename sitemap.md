@@ -3931,6 +3931,20 @@ subcollection: containers
 
 * [Cleaning up persistent storage](/docs/containers?topic=containers-storage-file-vpc-managing#vpc-storage-remove-file)
 
+[Setting up snapshots with the {{site.data.keyword.filestorage_vpc_short}} cluster add-on](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-volume-snapshot-file)
+
+* [Prerequisites](/docs/containers?topic=containers-vpc-volume-snapshot-file#snapshot-file-pre)
+
+* [Creating an app](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-snapshot-deployment-file)
+
+* [Creating a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-create-snapshot)
+
+* [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-restore-from-snapshot)
+
+* [Restoring static snapshots](/docs/containers?topic=containers-vpc-volume-snapshot-file#file-static-snapshot-restore)
+
+* [Turning off snapshots](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-turn-off-snapshots)
+
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
 
 
@@ -8501,6 +8515,10 @@ subcollection: containers
 * [Verifying the read and write permissions for the non-root user](/docs/containers?topic=containers-cs_storage_nonroot#verify-rw-permissions)
 
 [Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes#readonly_nodes)
+
+[Why can't I restore my {{site.data.keyword.filestorage_vpc_short}} snapshot to a PVC?](/docs/containers?topic=containers-ts-storage-vpc-file-snapshot-restore#ts-storage-vpc-file-snapshot-restore)
+
+[Why can't I restore my {{site.data.keyword.filestorage_vpc_short}} snapshot to a PVC?](/docs/containers?topic=containers-ts-storage-vpc-file-snapshot-delete#ts-storage-vpc-file-snapshot-delete)
 
 [Why do I see a `MountingTargetFailed` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-mount-failed#ts-storage-vpc-file-eit-mount-failed)
 
