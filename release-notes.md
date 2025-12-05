@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-12-04"
+lastupdated: "2025-12-05"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -2839,7 +2839,7 @@ Worker node fix packs are available.
     - [1.28.4_1541](/docs/containers?topic=containers-changelog_128)
     - [1.27.8_1560](/docs/containers?topic=containers-changelog_127)
     - [1.26.11_1568](/docs/containers?topic=containers-changelog_126)
-    - [1.25.16_1573](/docs/containers?topic=containers-changelog_125)
+    - 1.25.16_1573
 
 
 
@@ -2907,7 +2907,7 @@ Worker node fix packs are available.
     - [1.28.4_1540](/docs/containers?topic=containers-changelog_128)
     - [1.27.8_1559](/docs/containers?topic=containers-changelog_127)
     - [1.26.11_1567](/docs/containers?topic=containers-changelog_126)
-    - [1.25.16_1572](/docs/containers?topic=containers-changelog_125)
+    - 1.25.16_1572
 
 
 
@@ -2929,7 +2929,7 @@ Worker node fix packs are available.
     - [1.28.4_1539](/docs/containers?topic=containers-changelog_128)
     - [1.27.8_1558](/docs/containers?topic=containers-changelog_127)
     - [1.26.11_1566](/docs/containers?topic=containers-changelog_126)
-    - [1.25.16_1571](/docs/containers?topic=containers-changelog_125)
+    - 1.25.16_1571
 
 
 
@@ -2985,7 +2985,7 @@ Master fix packs are available.
 :   [1.28.4_1537](/docs/containers?topic=containers-changelog_128)
 :   [1.27.8_1556](/docs/containers?topic=containers-changelog_127)
 :   [1.26.11_1564](/docs/containers?topic=containers-changelog_126)
-:   [1.25.16_1569](/docs/containers?topic=containers-changelog_125)
+:   1.25.16_1569
 
 
 

@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2025
 
-lastupdated: "2025-12-04"
+lastupdated: "2025-12-05"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, clusters, worker nodes, worker pools, classic, create
 
@@ -61,7 +61,7 @@ Worker pool
 
 
 Master service endpoint
-:    Service endpoints provide communication to the master. You can choose to configure your cluster with a private, public, or both a public and a private cloud service endpoint. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw).
+:    Service endpoints provide communication to the master. You can choose to configure your cluster with a private, public, or both a public and a private cloud service endpoint. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_vpc_basics).
 
 Ingress secrets management
 :   [{{site.data.keyword.secrets-manager_full_notm}}](/docs/containers?topic=containers-secrets-mgr) centrally manages Ingress subdomain certificates and other secrets in your cluster. You can choose to register a {{site.data.keyword.secrets-manager_short}} instance to your cluster during the cluster create process. You can also specify a secret group that you can use to control access to the secrets in your cluster. Both of these options can be configured or changed after you have created the cluster. 

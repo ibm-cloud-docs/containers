@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-07-07"
+lastupdated: "2025-12-05"
 
 
 keywords: kubernetes, containers
@@ -211,6 +211,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
     * [`ibmcloud ks logging filter rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_delete)
     * [`ibmcloud ks logging filter update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_log_filter_update)
 * [`ibmcloud ks logging refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cs_logging_refresh)
+
 
 ## ibmcloud ks nlb-dns
 {: #icks_map_nlb-dns}
