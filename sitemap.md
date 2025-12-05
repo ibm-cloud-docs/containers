@@ -3935,7 +3935,7 @@ subcollection: containers
 
 * [Cleaning up persistent storage](/docs/containers?topic=containers-storage-file-vpc-managing#vpc-storage-remove-file)
 
-[Setting up snapshots with the {{site.data.keyword.filestorage_vpc_short}} cluster add-on](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-volume-snapshot-file)
+[Setting up snapshots for {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-volume-snapshot-file)
 
 * [Prerequisites](/docs/containers?topic=containers-vpc-volume-snapshot-file#snapshot-file-pre)
 
