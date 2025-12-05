@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2025
-lastupdated: "2025-12-04"
+lastupdated: "2025-12-05"
 
 
 keywords: kubernetes, deploy, migrating psps to pod security, pod security admission, migrate to pod security admission
@@ -276,5 +276,3 @@ Review the following information before you migrate from Pod Security Policies t
 - [Pod Security Admission](/docs/containers?topic=containers-pod-security-admission)
 
 - [Migrate from `PodSecurityPolicy` to the Built-In PodSecurity Admission Controller](https://kubernetes.io/docs/tasks/configure-pod-container/migrate-from-psp/){: external}
-
-- [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security).

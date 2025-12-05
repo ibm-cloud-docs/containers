@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-10-06"
+lastupdated: "2025-12-05"
 
 
 keywords: block, debug, help
@@ -276,4 +276,4 @@ If you use a `kubectl` CLI version that does not match at least the major.minor 
         ```
         {: pre}
 
-    4. If a more recent version is available, install this version. For instructions, see [Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#update_block).
+    4. If a more recent version is available, install this version. For instructions, see [Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-utilities#update_block.
