@@ -28,6 +28,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## December 2025
 {: #containers-dec25}
 
+### 08 December 2025
+{: #containers-dec0825}
+{: release-note}
+
+New! Chennai multizone region for VPC
+:   You can now create clusters on VPC infrastructure in the Chennai, India (`in-che`) [location](/docs/containers?topic=containers-regions-and-zones).
+
+
 ### 04 December 2025
 {: #containers-dec0425}
 {: release-note}
