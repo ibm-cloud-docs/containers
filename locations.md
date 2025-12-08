@@ -30,6 +30,7 @@ Chennai (`in-che`) MZR limiations
 
 :   **Operating systems**: You can only create clusters at version 1.31 and later in Chennai and can only use Ubuntu 24 work nodes.
 :   **Baremetal workers**: Baremetal VPC worker nodes are not available in Chennai.
+:   **Portworx**: Portworx is not yet supported in Chennai.
 
 
 
