@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-12-05"
+lastupdated: "2025-12-08"
 
 
 keywords: containers
@@ -243,6 +243,10 @@ subcollection: containers
     * [04 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec0425)
 
         * ALB OAuth Proxy cluster add-on patch updates.
+
+    * [03 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec0325)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [02 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec0225)
 
@@ -4423,6 +4427,8 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
+    * [Worker node fix pack 1.33.5_1551, released 03 December 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1335_1551_W)
+
     * [Worker node fix pack 1.33.5_1550, released 17 November 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1335_1550_W)
 
     * [Master fix pack 1.33.5_1549, released 15 November 2025](/docs/containers?topic=containers-changelog_133#1335_1549_M)
@@ -4509,6 +4515,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Worker node fix pack 1.32.9_1568, released 03 December 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1329_1568_W)
 
     * [Worker node fix pack 1.32.9_1567, released 17 November 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1329_1567_W)
 
@@ -4636,6 +4644,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.13_1580, released 03 December 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13113_1580_W)
 
     * [Worker node fix pack 1.31.13_1579, released 17 November 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13113_1579_W)
 

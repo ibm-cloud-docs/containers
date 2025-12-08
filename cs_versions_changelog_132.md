@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-12-05"
+lastupdated: "2025-12-08"
 
 
 keywords: change log, version history, 1.32
@@ -40,6 +40,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.32
 {: #132_components}
+
+
+### Worker node fix pack 1.32.9_1568, released 03 December 2025
+{: #cl-boms-1329_1568_W}
+
+The following table shows the components included in the worker node fix pack 1.32.9_1568. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU 24|6.8.0-87-generic|Resolves the following CVEs: [CVE-2025-37838](https://nvd.nist.gov/vuln/detail/CVE-2025-37838){: external}, [CVE-2025-38118](https://nvd.nist.gov/vuln/detail/CVE-2025-38118){: external}, [CVE-2025-38352](https://nvd.nist.gov/vuln/detail/CVE-2025-38352){: external}, [CVE-2025-40300](https://nvd.nist.gov/vuln/detail/CVE-2025-40300){: external}, [CVE-2025-6075](https://nvd.nist.gov/vuln/detail/CVE-2025-6075){: external}, and [CVE-2025-8291](https://nvd.nist.gov/vuln/detail/CVE-2025-8291){: external}.|
+|Kubernetes|1.32.9|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.9).|
+|containerd|1.7.29|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.29).|
+|HAProxy|03b74b82b63cd53403b6b587b84233c93edef18d|Resolves the following CVEs: [CVE-2025-59375](https://nvd.nist.gov/vuln/detail/CVE-2025-59375){: external}, [CVE-2025-5372](https://nvd.nist.gov/vuln/detail/CVE-2025-5372){: external}, [CVE-2024-28757](https://nvd.nist.gov/vuln/detail/CVE-2024-28757){: external}, and [CVE-2022-23990](https://nvd.nist.gov/vuln/detail/CVE-2022-23990){: external}.|
+|GPU Device Plug-in and Installer|184bbc2d05e029bb5b0c3c18798c10697e950967|Resolves the following CVEs: [CVE-2025-59375](https://nvd.nist.gov/vuln/detail/CVE-2025-59375){: external}.|
+{: caption="1.32.9_1568 fix pack." caption-side="bottom"}
+{: #cl-boms-1329_1568_W-component-table}
+
 
 
 ### Worker node fix pack 1.32.9_1567, released 17 November 2025
