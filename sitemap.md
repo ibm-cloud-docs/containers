@@ -7606,6 +7606,8 @@ subcollection: containers
 
 [VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
+* [Chennai (`in-che`)](/docs/containers?topic=containers-vpc-flavors#chennai-in-che)
+
 * [Dallas (`us-south`)](/docs/containers?topic=containers-vpc-flavors#dallas-us-south)
 
 * [Frankfurt (`eu-de`)](/docs/containers?topic=containers-vpc-flavors#frankfurt-eu-de)
