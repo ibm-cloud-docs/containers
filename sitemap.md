@@ -240,6 +240,10 @@ subcollection: containers
 
 * [December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec25)
 
+    * [08 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec0825)
+
+        * New! Chennai multizone region for VPC
+
     * [04 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec0425)
 
         * ALB OAuth Proxy cluster add-on patch updates.
@@ -8268,8 +8272,6 @@ subcollection: containers
 [Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release#cs_strongswan_release)
 
 [Why does strongSwan VPN connectivity fail after I add or delete worker nodes?](/docs/containers?topic=containers-cs_vpn_fails_worker_add#cs_vpn_fails_worker_add)
-
-[After upgrading my classic cluster to version 1.21, I'm finding connectivity issues](/docs/containers?topic=containers-ts-network-classic121#ts-network-classic121)
 
 [Why are certain packets dropped on the public VLAN?](/docs/containers?topic=containers-mangle-table#mangle-table)
 
