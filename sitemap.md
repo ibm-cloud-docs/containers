@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-12-08"
+lastupdated: "2025-12-09"
 
 
 keywords: containers
@@ -8516,9 +8516,11 @@ subcollection: containers
 
 [Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes#readonly_nodes)
 
+[Why can't I create {{site.data.keyword.filestorage_vpc_short}} snapshots?](/docs/containers?topic=containers-ts-storage-vpc-file-snapshot-create#ts-storage-vpc-file-snapshot-create)
+
 [Why can't I restore my {{site.data.keyword.filestorage_vpc_short}} snapshot to a PVC?](/docs/containers?topic=containers-ts-storage-vpc-file-snapshot-restore#ts-storage-vpc-file-snapshot-restore)
 
-[Why can't I restore my {{site.data.keyword.filestorage_vpc_short}} snapshot to a PVC?](/docs/containers?topic=containers-ts-storage-vpc-file-snapshot-delete#ts-storage-vpc-file-snapshot-delete)
+[Why can't I delete my {{site.data.keyword.filestorage_vpc_short}} snapshot to a PVC?](/docs/containers?topic=containers-ts-storage-vpc-file-snapshot-delete#ts-storage-vpc-file-snapshot-delete)
 
 [Why do I see a `MountingTargetFailed` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-mount-failed#ts-storage-vpc-file-eit-mount-failed)
 
