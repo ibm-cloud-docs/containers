@@ -316,6 +316,12 @@ toc:
               - cs_versions_131.md
               - cs_versions_changelog_131.md
               - cs_benchmarks_131.md
+          - topicgroup:
+              label: Version 1.30
+              topics:
+              - cs_versions_130.md
+              - cs_versions_changelog_130.md
+              - cs_benchmarks_130.md
       - topicgroup:
           label: CLI plug-in reference
           topics:
@@ -348,39 +354,6 @@ toc:
           topics:
           - cl-ingress-alb.md
           - ibm-k8s-controller-config-change-log.md
-      - topicgroup:
-          label: Archived version history
-          topics:
-          - topicgroup:
-              label: Version 1.30
-              topics:
-              - cs_versions_130.md
-              - cs_versions_changelog_130.md
-              - cs_benchmarks_130.md
-          - topicgroup:
-              label: Version 1.29
-              topics:
-              - cs_versions_129.md
-              - cs_versions_changelog_129.md
-              - cs_benchmarks_129.md
-          - topicgroup:
-              label: Version 1.28
-              topics:
-              - cs_versions_128.md
-              - cs_versions_changelog_128.md
-              - cs_benchmarks_128.md
-          - topicgroup:
-              label: Version 1.27
-              topics:
-              - cs_versions_127.md
-              - cs_versions_changelog_127.md
-              - cs_benchmarks_127.md
-          - topicgroup:
-              label: Version 1.26
-              topics:
-              - cs_versions_126.md
-              - cs_versions_changelog_126.md
-              - cs_benchmarks_126.md
       - locations.md
       - cs_integrations_overview.md
       - service-settings.md
