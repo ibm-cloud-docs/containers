@@ -29,6 +29,10 @@
       {
         "title": "Add storage",
         "href": "/docs/containers?topic=containers-learning-path-admin#admin_plan"
+      },
+      {
+        "title": "Version history",
+        "href": "/docs/containers?topic=containers-cs_versions"
       }
     ]
   },

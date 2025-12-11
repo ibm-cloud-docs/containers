@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-10-06"
+lastupdated: "2025-12-11"
 
 
 keywords: kubernetes, coredns, kubedns, dns
@@ -24,6 +24,9 @@ Each service in your {{site.data.keyword.containerlong}} cluster is assigned a D
 {: shortdesc}
 
 The cluster DNS provider is [CoreDNS](https://coredns.io/){: external}, which is a general-purpose, authoritative DNS server that provides a backwards-compatible, but extensible, integration with Kubernetes. Because CoreDNS is a single executable and single process, it has fewer dependencies and moving parts that could experience issues than other cluster DNS providers. The project is also written in the same language as the Kubernetes project, `Go`, which helps protect memory. Finally, CoreDNS supports more flexible use cases than other cluster DNS providers because you can create custom DNS entries such as the common setups in [the CoreDNS docs](https://coredns.io/manual/toc/#setups){: external}.
+
+CoreDNS and NodeLocal DNS cache configuration changes in version 1.34 and later
+:   The default DNS cache time in both CoreDNS and NodeLocal DNS configurations has been increased from 30 seconds to 120 seconds. This change applies to the ConfigMap settings for DNS caching. Some users were hitting pDNS (or UDP) traffic limits due to frequent DNS lookups caused by short cache durations. A 30-second cache interval is rarely necessary except for DNS records that change very frequently, for example health-check endpoints. For most workloads, a 120-second default cache provides better performance and reduces unnecessary DNS traffic. Users who require shorter cache times for specific use cases can override this setting.
 
 ## Autoscaling the cluster DNS provider
 {: #dns_autoscale}
