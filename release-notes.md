@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-12-10"
+lastupdated: "2025-12-11"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## December 2025
 {: #containers-dec25}
+
+
+
+### 10 December 2025
+{: #containers-dec1025}
+{: release-note}
+
+New! {{site.data.keyword.containerlong_notm}} version 1.34.
+:   You can now create or [update clusters to Kubernetes version 1.34](/docs/containers?topic=containers-cs_versions_134). With Kubernetes 1.34, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
+{{site.data.keyword.containerlong_notm}} version 1.34 Kubernetes certification
+:   {{site.data.keyword.containerlong_notm}} version [1.34](/docs/containers?topic=containers-cs_versions_134) is now Kubernetes certified.
+
+CoreDNS and NodeLocal DNS cache configuration changes in version 1.34 and later
+:   The default DNS cache time in both CoreDNS and NodeLocal DNS configurations has been increased from 30 seconds to 120 seconds. This change applies to the ConfigMap settings for DNS caching. Some users were hitting pDNS (or UDP) traffic limits due to frequent DNS lookups caused by short cache durations. A 30-second cache interval is rarely necessary except for DNS records that change very frequently, for example health-check endpoints. For most workloads, a 120-second default cache provides better performance and reduces unnecessary DNS traffic. Users who require shorter cache times for specific use cases can override this setting. For more information, see [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns).
+
+
+
 
 ### 08 December 2025
 {: #containers-dec0825}
@@ -53,6 +71,7 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
 :   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 :   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
 :   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
