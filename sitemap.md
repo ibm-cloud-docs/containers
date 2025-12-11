@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-12-09"
+lastupdated: "2025-12-11"
 
 
 keywords: containers
@@ -4786,6 +4786,199 @@ subcollection: containers
     * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-131#ibm-remediations-and-explanations-131)
 
 
+### Version 1.30
+{: #sitemap_version_130}
+
+
+[1.30 version information and update actions](/docs/containers?topic=containers-cs_versions_130#cs_versions_130)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_130#release_timeline_130)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_130#prep-up-130)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_130#before_130)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_130#after_130)
+
+* [Important networking changes for VPC clusters created at version 1.30](/docs/containers?topic=containers-cs_versions_130#understand-sbd)
+
+    * [Which connections are allowed?](/docs/containers?topic=containers-cs_versions_130#sbd-allowed-connections)
+
+    * [Which connections are blocked?](/docs/containers?topic=containers-cs_versions_130#sbd-blocked-connections)
+
+    * [Changes to worker-to-master backup communication](/docs/containers?topic=containers-cs_versions_130#backup-considerations)
+
+* [Allowing outbound traffic after creating a 1.30 cluster](/docs/containers?topic=containers-cs_versions_130#sbd-allow-outbound-after)
+
+* [VPE gateway creation information](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130)
+
+    * [VPE gateways created when upgrading to version 1.30](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-upgrade)
+
+    * [New VPE gateway configuration when creating a new 1.30 cluster](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-new)
+
+* [Common issues and troubleshooting](/docs/containers?topic=containers-cs_versions_130#sbd-common-ts)
+
+[1.30 version change log](/docs/containers?topic=containers-changelog_130#changelog_130)
+
+* [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
+
+* [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
+
+    * [Worker node fix pack 1.30.14_1593, released 17 November 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1593_W)
+
+    * [Worker node fix pack 1.30.14_1592, released 06 November 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1592_W)
+
+    * [Worker node fix pack 1.30.14_1591, released 21 October 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1591_W)
+
+    * [Worker node fix pack 1.30.14_1590, released 08 October 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1590_W)
+
+    * [Master fix pack 1.30.14_1589, released 03 October 2025](/docs/containers?topic=containers-changelog_130#13014_1589_M)
+
+    * [Worker node fix pack 1.30.14_1585, released 23 September 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1585_W)
+
+    * [Worker node fix pack 1.30.14_1582, released 09 September 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1582_W)
+
+    * [Worker node fix pack 1.30.14_1581, released 26 August 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1581_W)
+
+    * [Master fix pack 1.30.14_1580, released 20 August 2025](/docs/containers?topic=containers-changelog_130#13014_1580_M)
+
+    * [Worker node fix pack 1.30.14_1576, released 12 August 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1576_W)
+
+    * [Master fix pack 1.30.14_1574, released 30 July 2025](/docs/containers?topic=containers-changelog_130#13014_1574_M)
+
+    * [Worker node fix pack 1.30.14_1575, released 28 July 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1575_W)
+
+    * [Worker node fix pack 1.30.13_1573, released 14 July 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1573_W)
+
+    * [Worker node fix pack 1.30.13_1572, released 01 July 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1572_W)
+
+    * [Master fix pack 1.30.13_1569, released 18 June 2025](/docs/containers?topic=containers-changelog_130#13013_1569_M)
+
+    * [Worker node fix pack 1.30.13_1570, released 16 June 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1570_W)
+
+    * [Worker node fix pack 1.30.13_1567, released 04 June 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1567_W)
+
+    * [Master fix pack 1.30.13_1566, released 28 May 2025](/docs/containers?topic=containers-changelog_130#13013_1566_M)
+
+    * [Worker node fix pack 1.30.11_1565, released 19 May 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1565_W)
+
+    * [Worker node fix pack 1.30.11_1564, released 07 May 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1564_W)
+
+    * [Master fix pack 1.30.11_1563, released 30 April 2025](/docs/containers?topic=containers-changelog_130#13011_1563_M)
+
+    * [Worker node fix pack 1.30.11_1562, released 21 April 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1562_W)
+
+    * [Worker node fix pack 1.30.11_1561, released 08 April 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1561_W)
+
+    * [Master fix pack 1.30.11_1559, released 26 March 2025](/docs/containers?topic=containers-changelog_130#13011_1559_M)
+
+    * [Worker node fix pack 1.30.11_1560, released 24 March 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1560_W)
+
+    * [Worker node fix pack 1.30.9_1558, released 11 March 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1309_1558_W)
+
+    * [Worker node fix pack 1.30.9_1557, released 24 February 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1309_1557_W)
+
+    * [Master fix pack 1.30.9_1556, released 19 February 2025](/docs/containers?topic=containers-changelog_130#1309_1556_M)
+
+    * [Worker node fix pack 1.30.9_1555, released 11 February 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1309_1555_W)
+
+    * [Worker node fix pack 1.30.9_1553, released 29 January 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1309_1553_W)
+
+    * [Master fix pack 1.30.9_1552, released 22 January 2025](/docs/containers?topic=containers-changelog_130#1309_1552_M)
+
+    * [Worker node fix pack 1.30.7_1550, released 13 January 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1307_1550_W)
+
+    * [Worker node fix pack 1.30.7_1549, released 30 December 2024](/docs/containers?topic=containers-changelog_130#1307_1549_W)
+
+    * [Worker node fix pack 1.30.7_1548, released 16 December 2024](/docs/containers?topic=containers-changelog_130#1307_1548_W)
+
+    * [Worker node fix pack 1.30.7_1547, released 05 December 2024](/docs/containers?topic=containers-changelog_130#1307_1547_W)
+
+    * [Master fix pack 1.30.7_1545, released 04 December 2024](/docs/containers?topic=containers-changelog_130#1307_1545_M)
+
+    * [Worker node fix pack 1.30.6_1544, released 18 November 2024](/docs/containers?topic=containers-changelog_130#1306_1544_W)
+
+    * [Master fix pack 1.30.6_1543, released 13 November 2024](/docs/containers?topic=containers-changelog_130#1306_1543_M)
+
+    * [Worker node fix pack 1.30.5_1542, released 04 November 2024](/docs/containers?topic=containers-changelog_130#1305_1542_W)
+
+    * [Master fix pack 1.30.5_1541, released 30 October 2024](/docs/containers?topic=containers-changelog_130#1305_1541_M)
+
+    * [Worker node fix pack 1.30.5_1540, released 21 October 2024](/docs/containers?topic=containers-changelog_130#1305_1540_W)
+
+    * [Worker node fix pack 1.30.5_1539, released 09 October 2024](/docs/containers?topic=containers-changelog_130#1305_1539_W)
+
+    * [Master fix pack 1.30.5_1537, released 25 September 2024](/docs/containers?topic=containers-changelog_130#1305_1537_M)
+
+    * [Worker node fix pack 1.30.5_1538, released 23 September 2024](/docs/containers?topic=containers-changelog_130#1305_1538_W)
+
+    * [Worker node fix pack 1.30.4_1536, released 10 September 2024](/docs/containers?topic=containers-changelog_130#1304_1536_W)
+
+    * [Master fix pack 1.30.4_1534, released 28 August 2024](/docs/containers?topic=containers-changelog_130#1304_1534_M)
+
+    * [Worker node fix pack 1.30.4_1535, released 26 August 2024](/docs/containers?topic=containers-changelog_130#1304_1535_W)
+
+    * [Worker node fix pack 1.30.3_1533, released 12 August 2024](/docs/containers?topic=containers-changelog_130#1303_1533_W)
+
+    * [Master fix pack 1.30.3_1531, released 31 July 2024](/docs/containers?topic=containers-changelog_130#1303_1531_M)
+
+    * [Worker node fix pack 1.30.3_1532, released 29 July 2024](/docs/containers?topic=containers-changelog_130#1303_1532_W)
+
+    * [Worker node fix pack 1.30.2_1528, released 15 July 2024](/docs/containers?topic=containers-changelog_130#1302_1528_W)
+
+    * [Worker node fix pack 1.30.2_1527, released 09 July 2024](/docs/containers?topic=containers-changelog_130#1302_1527_W)
+
+    * [Master fix pack 1.30.2_1525, released 19 June 2024](/docs/containers?topic=containers-changelog_130#1302_1525_M)
+
+    * [Worker node fix pack 1.30.2_1526, released 18 June 2024](/docs/containers?topic=containers-changelog_130#1302_1526_W)
+
+    * [Worker node fix pack 1.30.1_1521, released 03 June 2024](/docs/containers?topic=containers-changelog_130#1301_1521_W)
+
+    * [Master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024](/docs/containers?topic=containers-changelog_130#1301_1520M_and_1300_1518W)
+
+[1.30 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-130)
+
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-130#1-master-node-security-configuration-130)
+
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-130#11-master-node-configuration-files-130)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-130#12-api-server-130)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-130#13-controller-manager-130)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-130#14-scheduler-130)
+
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-130#2-etcd-node-configuration-130)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-130#3-control-plane-configuration-130)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-130#31-authentication-and-authorization-130)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-130#32-logging-130)
+
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-130#4-worker-node-security-configuration-130)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-130#41-worker-node-configuration-files-130)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-130#42-kubelet-130)
+
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-130#5-kubernetes-policies-130)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-130#51-rbac-and-service-accounts-130)
+
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-130#52-pod-security-policies-130)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-130#53-network-policies-and-cni-130)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-130#54-secrets-management-130)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-130#55-extensible-admission-control-130)
+
+    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-130#57-general-policies-130)
+
+    * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-130#ibm-remediations-and-explanations-130)
+
+
 ## CLI plug-in reference
 {: #sitemap_cli_plug-in_reference}
 
@@ -6577,906 +6770,6 @@ subcollection: containers
 * [3 October 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-3-oct-2022)
 
 * [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
-
-
-## Archived version history
-{: #sitemap_archived_version_history}
-
-
-
-### Version 1.30
-{: #sitemap_version_130}
-
-
-[1.30 version information and update actions](/docs/containers?topic=containers-cs_versions_130#cs_versions_130)
-
-* [Release timeline](/docs/containers?topic=containers-cs_versions_130#release_timeline_130)
-
-* [Preparing to update](/docs/containers?topic=containers-cs_versions_130#prep-up-130)
-
-    * [Update before master](/docs/containers?topic=containers-cs_versions_130#before_130)
-
-    * [Update after master](/docs/containers?topic=containers-cs_versions_130#after_130)
-
-* [Important networking changes for VPC clusters created at version 1.30](/docs/containers?topic=containers-cs_versions_130#understand-sbd)
-
-    * [Which connections are allowed?](/docs/containers?topic=containers-cs_versions_130#sbd-allowed-connections)
-
-    * [Which connections are blocked?](/docs/containers?topic=containers-cs_versions_130#sbd-blocked-connections)
-
-    * [Changes to worker-to-master backup communication](/docs/containers?topic=containers-cs_versions_130#backup-considerations)
-
-* [Allowing outbound traffic after creating a 1.30 cluster](/docs/containers?topic=containers-cs_versions_130#sbd-allow-outbound-after)
-
-* [VPE gateway creation information](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130)
-
-    * [VPE gateways created when upgrading to version 1.30](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-upgrade)
-
-    * [New VPE gateway configuration when creating a new 1.30 cluster](/docs/containers?topic=containers-cs_versions_130#vpe-gateway-130-new)
-
-* [Common issues and troubleshooting](/docs/containers?topic=containers-cs_versions_130#sbd-common-ts)
-
-[1.30 version change log](/docs/containers?topic=containers-changelog_130#changelog_130)
-
-* [Overview](/docs/containers?topic=containers-changelog_130#changelog_overview_130)
-
-* [Version 1.30](/docs/containers?topic=containers-changelog_130#130_components)
-
-    * [Worker node fix pack 1.30.14_1593, released 17 November 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1593_W)
-
-    * [Worker node fix pack 1.30.14_1592, released 06 November 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1592_W)
-
-    * [Worker node fix pack 1.30.14_1591, released 21 October 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1591_W)
-
-    * [Worker node fix pack 1.30.14_1590, released 08 October 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1590_W)
-
-    * [Master fix pack 1.30.14_1589, released 03 October 2025](/docs/containers?topic=containers-changelog_130#13014_1589_M)
-
-    * [Worker node fix pack 1.30.14_1585, released 23 September 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1585_W)
-
-    * [Worker node fix pack 1.30.14_1582, released 09 September 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1582_W)
-
-    * [Worker node fix pack 1.30.14_1581, released 26 August 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1581_W)
-
-    * [Master fix pack 1.30.14_1580, released 20 August 2025](/docs/containers?topic=containers-changelog_130#13014_1580_M)
-
-    * [Worker node fix pack 1.30.14_1576, released 12 August 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1576_W)
-
-    * [Master fix pack 1.30.14_1574, released 30 July 2025](/docs/containers?topic=containers-changelog_130#13014_1574_M)
-
-    * [Worker node fix pack 1.30.14_1575, released 28 July 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13014_1575_W)
-
-    * [Worker node fix pack 1.30.13_1573, released 14 July 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1573_W)
-
-    * [Worker node fix pack 1.30.13_1572, released 01 July 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1572_W)
-
-    * [Master fix pack 1.30.13_1569, released 18 June 2025](/docs/containers?topic=containers-changelog_130#13013_1569_M)
-
-    * [Worker node fix pack 1.30.13_1570, released 16 June 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1570_W)
-
-    * [Worker node fix pack 1.30.13_1567, released 04 June 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13013_1567_W)
-
-    * [Master fix pack 1.30.13_1566, released 28 May 2025](/docs/containers?topic=containers-changelog_130#13013_1566_M)
-
-    * [Worker node fix pack 1.30.11_1565, released 19 May 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1565_W)
-
-    * [Worker node fix pack 1.30.11_1564, released 07 May 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1564_W)
-
-    * [Master fix pack 1.30.11_1563, released 30 April 2025](/docs/containers?topic=containers-changelog_130#13011_1563_M)
-
-    * [Worker node fix pack 1.30.11_1562, released 21 April 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1562_W)
-
-    * [Worker node fix pack 1.30.11_1561, released 08 April 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1561_W)
-
-    * [Master fix pack 1.30.11_1559, released 26 March 2025](/docs/containers?topic=containers-changelog_130#13011_1559_M)
-
-    * [Worker node fix pack 1.30.11_1560, released 24 March 2025](/docs/containers?topic=containers-changelog_130#cl-boms-13011_1560_W)
-
-    * [Worker node fix pack 1.30.9_1558, released 11 March 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1309_1558_W)
-
-    * [Worker node fix pack 1.30.9_1557, released 24 February 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1309_1557_W)
-
-    * [Master fix pack 1.30.9_1556, released 19 February 2025](/docs/containers?topic=containers-changelog_130#1309_1556_M)
-
-    * [Worker node fix pack 1.30.9_1555, released 11 February 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1309_1555_W)
-
-    * [Worker node fix pack 1.30.9_1553, released 29 January 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1309_1553_W)
-
-    * [Master fix pack 1.30.9_1552, released 22 January 2025](/docs/containers?topic=containers-changelog_130#1309_1552_M)
-
-    * [Worker node fix pack 1.30.7_1550, released 13 January 2025](/docs/containers?topic=containers-changelog_130#cl-boms-1307_1550_W)
-
-    * [Worker node fix pack 1.30.7_1549, released 30 December 2024](/docs/containers?topic=containers-changelog_130#1307_1549_W)
-
-    * [Worker node fix pack 1.30.7_1548, released 16 December 2024](/docs/containers?topic=containers-changelog_130#1307_1548_W)
-
-    * [Worker node fix pack 1.30.7_1547, released 05 December 2024](/docs/containers?topic=containers-changelog_130#1307_1547_W)
-
-    * [Master fix pack 1.30.7_1545, released 04 December 2024](/docs/containers?topic=containers-changelog_130#1307_1545_M)
-
-    * [Worker node fix pack 1.30.6_1544, released 18 November 2024](/docs/containers?topic=containers-changelog_130#1306_1544_W)
-
-    * [Master fix pack 1.30.6_1543, released 13 November 2024](/docs/containers?topic=containers-changelog_130#1306_1543_M)
-
-    * [Worker node fix pack 1.30.5_1542, released 04 November 2024](/docs/containers?topic=containers-changelog_130#1305_1542_W)
-
-    * [Master fix pack 1.30.5_1541, released 30 October 2024](/docs/containers?topic=containers-changelog_130#1305_1541_M)
-
-    * [Worker node fix pack 1.30.5_1540, released 21 October 2024](/docs/containers?topic=containers-changelog_130#1305_1540_W)
-
-    * [Worker node fix pack 1.30.5_1539, released 09 October 2024](/docs/containers?topic=containers-changelog_130#1305_1539_W)
-
-    * [Master fix pack 1.30.5_1537, released 25 September 2024](/docs/containers?topic=containers-changelog_130#1305_1537_M)
-
-    * [Worker node fix pack 1.30.5_1538, released 23 September 2024](/docs/containers?topic=containers-changelog_130#1305_1538_W)
-
-    * [Worker node fix pack 1.30.4_1536, released 10 September 2024](/docs/containers?topic=containers-changelog_130#1304_1536_W)
-
-    * [Master fix pack 1.30.4_1534, released 28 August 2024](/docs/containers?topic=containers-changelog_130#1304_1534_M)
-
-    * [Worker node fix pack 1.30.4_1535, released 26 August 2024](/docs/containers?topic=containers-changelog_130#1304_1535_W)
-
-    * [Worker node fix pack 1.30.3_1533, released 12 August 2024](/docs/containers?topic=containers-changelog_130#1303_1533_W)
-
-    * [Master fix pack 1.30.3_1531, released 31 July 2024](/docs/containers?topic=containers-changelog_130#1303_1531_M)
-
-    * [Worker node fix pack 1.30.3_1532, released 29 July 2024](/docs/containers?topic=containers-changelog_130#1303_1532_W)
-
-    * [Worker node fix pack 1.30.2_1528, released 15 July 2024](/docs/containers?topic=containers-changelog_130#1302_1528_W)
-
-    * [Worker node fix pack 1.30.2_1527, released 09 July 2024](/docs/containers?topic=containers-changelog_130#1302_1527_W)
-
-    * [Master fix pack 1.30.2_1525, released 19 June 2024](/docs/containers?topic=containers-changelog_130#1302_1525_M)
-
-    * [Worker node fix pack 1.30.2_1526, released 18 June 2024](/docs/containers?topic=containers-changelog_130#1302_1526_W)
-
-    * [Worker node fix pack 1.30.1_1521, released 03 June 2024](/docs/containers?topic=containers-changelog_130#1301_1521_W)
-
-    * [Master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024](/docs/containers?topic=containers-changelog_130#1301_1520M_and_1300_1518W)
-
-[1.30 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-130#cis-benchmark-130)
-
-* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-130#1-master-node-security-configuration-130)
-
-    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-130#11-master-node-configuration-files-130)
-
-    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-130#12-api-server-130)
-
-    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-130#13-controller-manager-130)
-
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-130#14-scheduler-130)
-
-* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-130#2-etcd-node-configuration-130)
-
-* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-130#3-control-plane-configuration-130)
-
-    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-130#31-authentication-and-authorization-130)
-
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-130#32-logging-130)
-
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-130#4-worker-node-security-configuration-130)
-
-    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-130#41-worker-node-configuration-files-130)
-
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-130#42-kubelet-130)
-
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-130#5-kubernetes-policies-130)
-
-    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-130#51-rbac-and-service-accounts-130)
-
-    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-130#52-pod-security-policies-130)
-
-    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-130#53-network-policies-and-cni-130)
-
-    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-130#54-secrets-management-130)
-
-    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-130#55-extensible-admission-control-130)
-
-    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-130#57-general-policies-130)
-
-    * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-130#ibm-remediations-and-explanations-130)
-
-
-### Version 1.29
-{: #sitemap_version_129}
-
-
-[1.29 version information and update actions](/docs/containers?topic=containers-cs_versions_129#cs_versions_129)
-
-* [Release timeline](/docs/containers?topic=containers-cs_versions_129#release_timeline_129)
-
-* [Preparing to update](/docs/containers?topic=containers-cs_versions_129#prep-up-129)
-
-    * [Update before master](/docs/containers?topic=containers-cs_versions_129#before_129)
-
-    * [Update after master](/docs/containers?topic=containers-cs_versions_129#after_129)
-
-    * [Understanding the Tigera Operator namespace migration](/docs/containers?topic=containers-cs_versions_129#129-tigera-migration)
-
-[1.29 version change log](/docs/containers?topic=containers-changelog_129#changelog_129)
-
-* [Overview](/docs/containers?topic=containers-changelog_129#changelog_overview_129)
-
-* [Version 1.29](/docs/containers?topic=containers-changelog_129#129_components)
-
-    * [Worker node fix pack 1.29.15_1596, released 28 July 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1596_W)
-
-    * [Worker node fix pack 1.29.15_1595, released 14 July 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1595_W)
-
-    * [Worker node fix pack 1.29.15_1594, released 01 July 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1594_W)
-
-    * [Master fix pack 1.29.15_1591, released 18 June 2025](/docs/containers?topic=containers-changelog_129#12915_1591_M)
-
-    * [Worker node fix pack 1.29.15_1592, released 16 June 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1592_W)
-
-    * [Worker node fix pack 1.29.15_1589, released 04 June 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1589_W)
-
-    * [Master fix pack 1.29.15_1588, released 28 May 2025](/docs/containers?topic=containers-changelog_129#12915_1588_M)
-
-    * [Worker node fix pack 1.29.15_1587, released 19 May 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1587_W)
-
-    * [Worker node fix pack 1.29.15_1586, released 07 May 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1586_W)
-
-    * [Master fix pack 1.29.15_1585, released 30 April 2025](/docs/containers?topic=containers-changelog_129#12915_1585_M)
-
-    * [Worker node fix pack 1.29.15_1584, released 21 April 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1584_W)
-
-    * [Worker node fix pack 1.29.15_1583, released 08 April 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1583_W)
-
-    * [Master fix pack 1.29.15_1581, released 26 March 2025](/docs/containers?topic=containers-changelog_129#12915_1581_M)
-
-    * [Worker node fix pack 1.29.15_1582, released 24 March 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12915_1582_W)
-
-    * [Worker node fix pack 1.29.13_1580, released 11 March 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12913_1580_W)
-
-    * [Worker node fix pack 1.29.13_1579, released 24 February 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12913_1579_W)
-
-    * [Master fix pack 1.29.13_1578, released 19 February 2025](/docs/containers?topic=containers-changelog_129#12913_1578_M)
-
-    * [Worker node fix pack 1.29.13_1577, released 11 February 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12913_1577_W)
-
-    * [Worker node fix pack 1.29.13_1575, released 29 January 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12913_1575_W)
-
-    * [Master fix pack 1.29.13_1574, released 22 January 2025](/docs/containers?topic=containers-changelog_129#12913_1574_M)
-
-    * [Worker node fix pack 1.29.11_1572, released 13 January 2025](/docs/containers?topic=containers-changelog_129#cl-boms-12911_1572_W)
-
-    * [Worker node fix pack 1.29.11_1571, released 30 December 2024](/docs/containers?topic=containers-changelog_129#12911_1571_W)
-
-    * [Worker node fix pack 1.29.11_1570, released 16 December 2024](/docs/containers?topic=containers-changelog_129#12911_1570_W)
-
-    * [Worker node fix pack 1.29.11_1569, released 05 December 2024](/docs/containers?topic=containers-changelog_129#12911_1569_W)
-
-    * [Master fix pack 1.29.11_1567, released 04 December 2024](/docs/containers?topic=containers-changelog_129#12911_1567_M)
-
-    * [Worker node fix pack 1.29.10_1566, released 18 November 2024](/docs/containers?topic=containers-changelog_129#12910_1566_W)
-
-    * [Master fix pack 1.29.10_1565, released 13 November 2024](/docs/containers?topic=containers-changelog_129#12910_1565_M)
-
-    * [Worker node fix pack 1.29.9_1564, released 04 November 2024](/docs/containers?topic=containers-changelog_129#1299_1564_W)
-
-    * [Master fix pack 1.29.9_1563, released 30 October 2024](/docs/containers?topic=containers-changelog_129#1299_1563_M)
-
-    * [Worker node fix pack 1.29.9_1562, released 21 October 2024](/docs/containers?topic=containers-changelog_129#1299_1562_W)
-
-    * [Worker node fix pack 1.29.9_1561, released 09 October 2024](/docs/containers?topic=containers-changelog_129#1299_1561_W)
-
-    * [Master fix pack 1.29.9_1559, released 25 September 2024](/docs/containers?topic=containers-changelog_129#1299_1559_M)
-
-    * [Worker node fix pack 1.29.9_1560, released 23 September 2024](/docs/containers?topic=containers-changelog_129#1299_1560_W)
-
-    * [Worker node fix pack 1.29.8_1558, released 10 September 2024](/docs/containers?topic=containers-changelog_129#1298_1558_W)
-
-    * [Master fix pack 1.29.8_1556, released 28 August 2024](/docs/containers?topic=containers-changelog_129#1298_1556_M)
-
-    * [Worker node fix pack 1.29.8_1557, released 26 August 2024](/docs/containers?topic=containers-changelog_129#1298_1557_W)
-
-    * [Worker node fix pack 1.29.7_1555, released 12 August 2024](/docs/containers?topic=containers-changelog_129#1297_1555_W)
-
-    * [Master fix pack 1.29.7_1553, released 31 July 2024](/docs/containers?topic=containers-changelog_129#1297_1553_M)
-
-    * [Worker node fix pack 1.29.7_1554, released 29 July 2024](/docs/containers?topic=containers-changelog_129#1297_1554_W)
-
-    * [Worker node fix pack 1.29.6_1548, released 15 July 2024](/docs/containers?topic=containers-changelog_129#1296_1548_W)
-
-    * [Worker node fix pack 1.29.6_1547, released 09 July 2024](/docs/containers?topic=containers-changelog_129#1296_1547_W)
-
-    * [Master fix pack 1.29.6_1545, released 19 June 2024](/docs/containers?topic=containers-changelog_129#1296_1545_M)
-
-    * [Worker node fix pack 1.29.6_1546, released 18 June 2024](/docs/containers?topic=containers-changelog_129#1296_1546_W)
-
-    * [Worker node fix pack 1.29.5_1541, released 03 June 2024](/docs/containers?topic=containers-changelog_129#1295_1541_W)
-
-    * [Master fix pack 1.29.5_1540, released 29 May 2024](/docs/containers?topic=containers-changelog_129#1295_1540_M)
-
-    * [Worker node fix pack 1.29.4_1538, released 23 May 2024](/docs/containers?topic=containers-changelog_129#1294_1538_W)
-
-    * [Worker node fix pack 1.29.4_1537, released 06 May 2024](/docs/containers?topic=containers-changelog_129#1294_1537_W)
-
-    * [Master fix pack 1.29.4_1535, released 24 April 2024](/docs/containers?topic=containers-changelog_129#1294_1535_M)
-
-    * [Worker node fix pack 1.29.4_1536, released 22 April 2024](/docs/containers?topic=containers-changelog_129#1294_1536_W)
-
-    * [Worker node fix pack 1.29.3_1533, released 8 April 2024](/docs/containers?topic=containers-changelog_129#1293_1533_W)
-
-    * [Master fix pack 1.29.3_1531, released 27 March 2024](/docs/containers?topic=containers-changelog_129#1293_1531_M)
-
-    * [Worker node fix pack 1.29.3_1532, released 25 March 2024](/docs/containers?topic=containers-changelog_129#1293_1532_W)
-
-    * [Worker node fix pack 1.29.2_1529, released 13 March 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W)
-
-    * [Master fix pack 1.29.2_1528, released 28 February 2024](/docs/containers?topic=containers-changelog_129#1292_1528_M)
-
-    * [Worker node fix pack 1.29.2_1529, released 26 February 2024](/docs/containers?topic=containers-changelog_129#1292_1529_W_feb)
-
-    * [Master fix pack 1.29.1_1524 and worker node fix pack 1.29.1_1525, released 14 February 2024](/docs/containers?topic=containers-changelog_129#1291_1524M_and_1291_1525W)
-
-[1.29 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-129)
-
-* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-1-129)
-
-    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-11-129)
-
-    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-12-129)
-
-    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-13-129)
-
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-14-129)
-
-* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-2-129)
-
-* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-3-129)
-
-    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-31-129)
-
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-32-129)
-
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-129#cis-section-4-129)
-
-    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-41-129)
-
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-42-129)
-
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-129#cis-section-5-129)
-
-    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-51-129)
-
-    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-52-129)
-
-    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-53-129)
-
-    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-54-129)
-
-    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-55-129)
-
-    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-56-129)
-
-* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-129#cis-benchmark-remediations-129)
-
-
-### Version 1.28
-{: #sitemap_version_128}
-
-
-[1.28 version information and update actions](/docs/containers?topic=containers-cs_versions_128#cs_versions_128)
-
-* [Release timeline](/docs/containers?topic=containers-cs_versions_128#release_timeline_128)
-
-* [Preparing to update](/docs/containers?topic=containers-cs_versions_128#prep-up-128)
-
-    * [Update before master](/docs/containers?topic=containers-cs_versions_128#before_128)
-
-    * [Update after master](/docs/containers?topic=containers-cs_versions_128#after_128)
-
-* [Networking changes for VPC clusters](/docs/containers?topic=containers-cs_versions_128#networking_128)
-
-    * [What do I need to do?](/docs/containers?topic=containers-cs_versions_128#networking_steps)
-
-    * [I have custom security groups. What do I change?](/docs/containers?topic=containers-cs_versions_128#networking_steps_sg)
-
-    * [I have custom ACLs. What do I change?](/docs/containers?topic=containers-cs_versions_128#networking_steps_acl)
-
-    * [I have custom network policies. What do I change?](/docs/containers?topic=containers-cs_versions_128#networking_steps_policy)
-
-[1.28 version change log](/docs/containers?topic=containers-changelog_128#changelog_128)
-
-* [Overview](/docs/containers?topic=containers-changelog_128#changelog_overview_128)
-
-* [Version 1.28](/docs/containers?topic=containers-changelog_128#128_components)
-
-    * [Master fix pack 1.28.15_1607, released 28 May 2025](/docs/containers?topic=containers-changelog_128#12815_1607_M)
-
-    * [Worker node fix pack 1.28.15_1606, released 19 May 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1606_W)
-
-    * [Worker node fix pack 1.28.15_1605, released 07 May 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1605_W)
-
-    * [Master fix pack 1.28.15_1604, released 30 April 2025](/docs/containers?topic=containers-changelog_128#12815_1604_M)
-
-    * [Worker node fix pack 1.28.15_1603, released 21 April 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1603_W)
-
-    * [Worker node fix pack 1.28.15_1602, released 08 April 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1602_W)
-
-    * [Master fix pack 1.28.15_1600, released 26 March 2025](/docs/containers?topic=containers-changelog_128#12815_1600_M)
-
-    * [Worker node fix pack 1.28.15_1601, released 24 March 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1601_W)
-
-    * [Worker node fix pack 1.28.15_1599, released 11 March 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1599_W)
-
-    * [Worker node fix pack 1.28.15_1598, released 24 February 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1598_W)
-
-    * [Worker node fix pack 1.28.15_1595, released 29 January 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1595_W)
-
-    * [Master fix pack 1.28.15_1594, released 22 January 2025](/docs/containers?topic=containers-changelog_128#12815_1594_M)
-
-    * [Worker node fix pack 1.28.15_1593, released 13 January 2025](/docs/containers?topic=containers-changelog_128#cl-boms-12815_1593_W)
-
-    * [Worker node fix pack 1.28.15_1592, released 30 December 2024](/docs/containers?topic=containers-changelog_128#12815_1592_W)
-
-    * [Worker node fix pack 1.28.15_1591, released 16 December 2024](/docs/containers?topic=containers-changelog_128#12815_1591_W)
-
-    * [Worker node fix pack 1.28.15_1590, released 05 December 2024](/docs/containers?topic=containers-changelog_128#12815_1590_W)
-
-    * [Master fix pack 1.28.15_1588, released 04 December 2024](/docs/containers?topic=containers-changelog_128#12815_1588_M)
-
-    * [Worker node fix pack 1.28.15_1587, released 18 November 2024](/docs/containers?topic=containers-changelog_128#12815_1587_W)
-
-    * [Master fix pack 1.28.15_1586, released 13 November 2024](/docs/containers?topic=containers-changelog_128#12815_1586_M)
-
-    * [Worker node fix pack 1.28.14_1585, released 04 November 2024](/docs/containers?topic=containers-changelog_128#12814_1585_W)
-
-    * [Master fix pack 1.28.14_1584, released 30 October 2024](/docs/containers?topic=containers-changelog_128#12814_1584_M)
-
-    * [Worker node fix pack 1.28.14_1582, released 21 October 2024](/docs/containers?topic=containers-changelog_128#12814_1582_W)
-
-    * [Worker node fix pack 1.28.14_1581, released 09 October 2024](/docs/containers?topic=containers-changelog_128#12814_1581_W)
-
-    * [Master fix pack 1.28.14_1579, released 25 September 2024](/docs/containers?topic=containers-changelog_128#12814_1579_M)
-
-    * [Worker node fix pack 1.28.14_1580, released 23 September 2024](/docs/containers?topic=containers-changelog_128#12814_1580_W)
-
-    * [Worker node fix pack 1.28.13_1578, released 10 September 2024](/docs/containers?topic=containers-changelog_128#12813_1578_W)
-
-    * [Master fix pack 1.28.13_1576, released 28 August 2024](/docs/containers?topic=containers-changelog_128#12813_1576_M)
-
-    * [Worker node fix pack 1.28.13_1577, released 26 August 2024](/docs/containers?topic=containers-changelog_128#12813_1577_W)
-
-    * [Worker node fix pack 1.28.12_1575, released 12 August 2024](/docs/containers?topic=containers-changelog_128#12812_1575_W)
-
-    * [Master fix pack 1.28.12_1573, released 31 July 2024](/docs/containers?topic=containers-changelog_128#12812_1573_M)
-
-    * [Worker node fix pack 1.28.12_1574, released 29 July 2024](/docs/containers?topic=containers-changelog_128#12812_1574_W)
-
-    * [Worker node fix pack 1.28.11_1567, released 15 July 2024](/docs/containers?topic=containers-changelog_128#12811_1567_W)
-
-    * [Worker node fix pack 1.28.11_1566, released 09 July 2024](/docs/containers?topic=containers-changelog_128#12811_1566_W)
-
-    * [Master fix pack 1.28.11_1564, released 19 June 2024](/docs/containers?topic=containers-changelog_128#12811_1564_M)
-
-    * [Worker node fix pack 1.28.11_1565, released 18 June 2024](/docs/containers?topic=containers-changelog_128#12811_1565_W)
-
-    * [Worker node fix pack 1.28.10_1561, released 03 June 2024](/docs/containers?topic=containers-changelog_128#12810_1561_W)
-
-    * [Master fix pack 1.28.10_1560, released 29 May 2024](/docs/containers?topic=containers-changelog_128#12810_1560_M)
-
-    * [Worker node fix pack 1.28.9_1557, released 23 May 2024](/docs/containers?topic=containers-changelog_128#1289_1557_W)
-
-    * [Worker node fix pack 1.28.9_1556, released 06 May 2024](/docs/containers?topic=containers-changelog_128#1289_1556_W)
-
-    * [Master fix pack 1.28.9_1554, released 24 April 2024](/docs/containers?topic=containers-changelog_128#1289_1554_M)
-
-    * [Worker node fix pack 1.28.9_1555, released 22 April 2024](/docs/containers?topic=containers-changelog_128#1289_1555_W)
-
-    * [Worker node fix pack 1.28.8_1552, released 8 April 2024](/docs/containers?topic=containers-changelog_128#1288_1552_W)
-
-    * [Master fix pack 1.28.8_1550, released 27 March 2024](/docs/containers?topic=containers-changelog_128#1288_1550_M)
-
-    * [Worker node fix pack 1.28.8_1551, released 25 March 2024](/docs/containers?topic=containers-changelog_128#1288_1551_W)
-
-    * [Worker node fix pack 1.28.7_1549, released 13 March 2024](/docs/containers?topic=containers-changelog_128#1287_1549_W)
-
-    * [Master fix pack 1.28.7_1547, released 28 February 2024](/docs/containers?topic=containers-changelog_128#1287_1547_M)
-
-    * [Worker node fix pack 1.28.7_1547, released 26 February 2024](/docs/containers?topic=containers-changelog_128#1287_1547_W)
-
-    * [Worker node fix pack 1.28.6_1544, released 12 February 2024](/docs/containers?topic=containers-changelog_128#1286_1544_W)
-
-    * [Master fix pack 1.28.6_1542, released 31 January 2024](/docs/containers?topic=containers-changelog_128#1286_1542_M)
-
-    * [Worker node fix pack 1.28.6_1543, released 29 January 2024](/docs/containers?topic=containers-changelog_128#1286_1543_W)
-
-    * [Worker node fix pack 1.28.4_1541, released 16 January 2024](/docs/containers?topic=containers-changelog_128#1284_1541_W)
-
-    * [Worker node fix pack 1.28.4_1540, released 02 January 2024](/docs/containers?topic=containers-changelog_128#1284_1540_W)
-
-    * [Worker node fix pack 1.28.4_1539, released 18 December 2023](/docs/containers?topic=containers-changelog_128#1284_1539_W)
-
-    * [Master fix pack 1.28.4_1537, released 06 December 2023](/docs/containers?topic=containers-changelog_128#1284_1537_M)
-
-    * [Worker node fix pack 1.28.4_1538, released 04 December 2023](/docs/containers?topic=containers-changelog_128#1284_1538_W)
-
-    * [Worker node fix pack 1.28.3_1535, released 29 November 2023](/docs/containers?topic=containers-changelog_128#1283_1535_W)
-
-    * [Master fix pack 1.28.3_1534, released 15 November 2023](/docs/containers?topic=containers-changelog_128#1283_1534_M)
-
-    * [Worker node fix pack 1.28.2_1533, released 08 November 2023](/docs/containers?topic=containers-changelog_128#1282_1533_W)
-
-    * [Master fix pack 1.28.2_1531, released 25 October 2023](/docs/containers?topic=containers-changelog_128#1282_1531_M)
-
-    * [Worker node fix pack 1.28.2_1532, released 23 October 2023](/docs/containers?topic=containers-changelog_128#1282_1532_W)
-
-    * [Worker node fix pack 1.28.2_1529, released 9 October 2023](/docs/containers?topic=containers-changelog_128#1282_1529_W)
-
-    * [Worker node fix pack 1.28.2_1528, released 27 September 2023](/docs/containers?topic=containers-changelog_128#1282_1528_W)
-
-    * [Master fix pack 1.28.2_1527 and worker node fix pack 1.28.1_1523, released 20 September 2023](/docs/containers?topic=containers-changelog_128#1.28.2_1527M-and-1.28.1_1523W)
-
-[1.28 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-128)
-
-* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-128#cis-section-1-128)
-
-    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-11-128)
-
-    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-12-128)
-
-    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-13-128)
-
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-14-128)
-
-* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-128#cis-section-2-128)
-
-* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-128#cis-section-3-128)
-
-    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-31-128)
-
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-32-128)
-
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-128#cis-section-4-128)
-
-    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-41-128)
-
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-42-128)
-
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-128#cis-section-5-128)
-
-    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-51-128)
-
-    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-52-128)
-
-    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-53-128)
-
-    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-54-128)
-
-    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-55-128)
-
-    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-56-128)
-
-* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-128#cis-benchmark-remediations-128)
-
-
-### Version 1.27
-{: #sitemap_version_127}
-
-
-[1.27 version information and update actions](/docs/containers?topic=containers-cs_versions_127#cs_versions_127)
-
-* [Release timeline](/docs/containers?topic=containers-cs_versions_127#release_timeline_127)
-
-* [Preparing to update](/docs/containers?topic=containers-cs_versions_127#prep-up-127)
-
-    * [Update before master](/docs/containers?topic=containers-cs_versions_127#before_127)
-
-[Kubernetes version 1.27 change log](/docs/containers?topic=containers-changelog_127#changelog_127)
-
-* [Overview](/docs/containers?topic=containers-changelog_127#changelog_overview_127)
-
-* [Version 1.27 change log](/docs/containers?topic=containers-changelog_127#127_changelog)
-
-    * [Worker node fix pack 1.27.16_1592, released 10 September 2024](/docs/containers?topic=containers-changelog_127#12716_1592_W)
-
-    * [Master fix pack 1.27.16_1590, released 28 August 2024](/docs/containers?topic=containers-changelog_127#12716_1590_M)
-
-    * [Worker node fix pack 1.27.16.1591, released 26 August 2024](/docs/containers?topic=containers-changelog_127#127161591_W)
-
-    * [Worker node fix pack 1.27.16_1589, released 12 August 2024](/docs/containers?topic=containers-changelog_127#12716_1589_W)
-
-    * [Master fix pack 1.27.16_1587, released 31 July 2024](/docs/containers?topic=containers-changelog_127#12716_1587_M)
-
-    * [Worker node fix pack 1.27.15_1588, released 29 July 2024](/docs/containers?topic=containers-changelog_127#12715_1588_W)
-
-    * [Worker node fix pack 1.27.15_1584, released 15 July 2024](/docs/containers?topic=containers-changelog_127#12715_1584_W)
-
-    * [Worker node fix pack 1.27.15_1583, released 09 July 2024](/docs/containers?topic=containers-changelog_127#12715_1583_W)
-
-    * [Master fix pack 1.27.15_1581, released 19 June 2024](/docs/containers?topic=containers-changelog_127#12715_1581_M)
-
-    * [Worker node fix pack 1.27.15_1582, released 18 June 2024](/docs/containers?topic=containers-changelog_127#12715_1582_W)
-
-    * [Worker node fix pack 1.27.14_1578, released 03 June 2024](/docs/containers?topic=containers-changelog_127#12714_1578_W)
-
-    * [Master fix pack 1.27.14_1577, released 29 May 2024](/docs/containers?topic=containers-changelog_127#12714_1577_M)
-
-    * [Worker node fix pack 1.27.13_1575, released 23 May 2024](/docs/containers?topic=containers-changelog_127#12713_1575_W)
-
-    * [Worker node fix pack 1.27.13_1574, released 06 May 2024](/docs/containers?topic=containers-changelog_127#12713_1574_W)
-
-    * [Master fix pack 1.27.13_1572, released 24 April 2024](/docs/containers?topic=containers-changelog_127#12713_1572_M)
-
-    * [Worker node fix pack 1.27.13_1573, released 22 April 2024](/docs/containers?topic=containers-changelog_127#12713_1573_W)
-
-    * [Worker node fix pack 1.27.12_1571, released 8 April 2024](/docs/containers?topic=containers-changelog_127#12712_1571_W)
-
-    * [Master fix pack 1.27.12_1569, released 27 March 2024](/docs/containers?topic=containers-changelog_127#12712_1569_M)
-
-    * [Worker node fix pack 1.27.12_1570, released 25 March 2024](/docs/containers?topic=containers-changelog_127#12712_1570_W)
-
-    * [Worker node fix pack 1.27.11_1568, released 13 March 2024](/docs/containers?topic=containers-changelog_127#12711_1568_W)
-
-    * [Master fix pack 1.27.11_1566, released 28 February 2024](/docs/containers?topic=containers-changelog_127#12711_1566_M)
-
-    * [Worker node fix pack 1.27.11_1567, released 26 February 2024](/docs/containers?topic=containers-changelog_127#12711_1567_W)
-
-    * [Worker node fix pack 1.27.10_1563, released 12 February 2024](/docs/containers?topic=containers-changelog_127#12710_1563_W)
-
-    * [Master fix pack 1.27.10_1561, released 31 January 2024](/docs/containers?topic=containers-changelog_127#12710_1561_M)
-
-    * [Worker node fix pack 1.27.10_1562, released 29 January 2024](/docs/containers?topic=containers-changelog_127#12710_1562_W)
-
-    * [Worker node fix pack 1.27.8_1560, released 16 January 2024](/docs/containers?topic=containers-changelog_127#1278_1560_W)
-
-    * [Worker node fix pack 1.27.8_1559, released 02 January 2024](/docs/containers?topic=containers-changelog_127#1278_1559_W)
-
-    * [Worker node fix pack 1.27.8_1558, released 18 December 2023](/docs/containers?topic=containers-changelog_127#1278_1558_W)
-
-    * [Master fix pack 1.27.8_1556, released 06 December 2023](/docs/containers?topic=containers-changelog_127#1278_1556_M)
-
-    * [Worker node fix pack 1.27.8_1557, released 04 December 2023](/docs/containers?topic=containers-changelog_127#1278_1557_W)
-
-    * [Worker node fix pack 1.27.7_1548, released 29 November 2023](/docs/containers?topic=containers-changelog_127#1277_1548_W)
-
-    * [Master fix pack 1.27.7_1547, released 15 November 2023](/docs/containers?topic=containers-changelog_127#1277_1547_M)
-
-    * [Worker node fix pack 1.27.6_1546, released 08 November 2023](/docs/containers?topic=containers-changelog_127#1276_1546_W)
-
-    * [Master fix pack 1.27.6_1544, released 25 October 2023](/docs/containers?topic=containers-changelog_127#1276_1544_M)
-
-    * [Worker node fix pack 1.27.6_1545, released 23 October 2023](/docs/containers?topic=containers-changelog_127#1276_1545_W)
-
-    * [Worker node fix pack 1.27.5_1542, released 9 October 2023](/docs/containers?topic=containers-changelog_127#1275_1542_W)
-
-    * [Worker node fix pack 1.27.5_1541, released 27 September 2023](/docs/containers?topic=containers-changelog_127#1275_1541_W)
-
-    * [Master fix pack 1.27.5_1540, released 20 September 2023](/docs/containers?topic=containers-changelog_127#1275_1540_M)
-
-    * [Worker node fix pack 1.27.4_1538, released 12 September 2023](/docs/containers?topic=containers-changelog_127#1274_1538_W)
-
-    * [Master fix pack 1.27.4_1536, released 30 August 2023](/docs/containers?topic=containers-changelog_127#1274_1536_M)
-
-    * [Worker node fix pack 1.27.4_1537, released 28 August 2023](/docs/containers?topic=containers-changelog_127#1274_1537_W)
-
-    * [Worker node fix pack 1.27.4_1535, released 15 August 2023](/docs/containers?topic=containers-changelog_127#1274_1535_W)
-
-    * [Worker node fix pack 1.27.4_1534, released 1 August 2023](/docs/containers?topic=containers-changelog_127#1274_1534_W)
-
-    * [Master fix pack 1.27.4_1533, released 27 July 2023](/docs/containers?topic=containers-changelog_127#1274_1533_M)
-
-    * [Worker node fix pack 1.27.3_1532, released 17 July 2023](/docs/containers?topic=containers-changelog_127#1273_1532_W)
-
-    * [Worker node fix pack 1.27.3_1530, released 03 July 2023](/docs/containers?topic=containers-changelog_127#1273_1530_W)
-
-    * [Master fix pack 1.27.3_1529, released 27 June 2023](/docs/containers?topic=containers-changelog_127#1273_1529_M)
-
-    * [Worker node fix pack 1.27.2_1528, released 19 June 2023](/docs/containers?topic=containers-changelog_127#1272_1528_W)
-
-    * [Worker node fix pack 1.27.2_1527, released 5 June 2023](/docs/containers?topic=containers-changelog_127#1272_1527_W)
-
-    * [Master fix pack 1.27.2_1524 and worker node fix pack 1.27.2_1526, released 24 May 2023](/docs/containers?topic=containers-changelog_127#1.27.2_1524M_and_1.27.2_1526W)
-
-[1.27 CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-127)
-
-* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-127#cis-section-1-127)
-
-    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-11-127)
-
-    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-12-127)
-
-    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-13-127)
-
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-14-127)
-
-* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-127#cis-section-2-127)
-
-* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-127#cis-section-3-127)
-
-    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-31-127)
-
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-32-127)
-
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-127#cis-section-4-127)
-
-    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-41-127)
-
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-42-127)
-
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-127#cis-section-5-127)
-
-    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-51-127)
-
-    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-52-127)
-
-    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-53-127)
-
-    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-54-127)
-
-    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-55-127)
-
-    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-56-127)
-
-* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-127#cis-benchmark-remediations-127)
-
-
-### Version 1.26
-{: #sitemap_version_126}
-
-
-[1.26 version information and update actions](/docs/containers?topic=containers-cs_versions_126#cs_versions_126)
-
-* [Release timeline](/docs/containers?topic=containers-cs_versions_126#release_timeline_126)
-
-* [Preparing to update](/docs/containers?topic=containers-cs_versions_126#prep-up-126)
-
-    * [Update before master](/docs/containers?topic=containers-cs_versions_126#before_126)
-
-    * [Update after master](/docs/containers?topic=containers-cs_versions_126#anchor)
-
-[Kubernetes version 1.26 change log](/docs/containers?topic=containers-changelog_126#changelog_126)
-
-* [Overview](/docs/containers?topic=containers-changelog_126#changelog_overview_126)
-
-* [Version 1.26 change log](/docs/containers?topic=containers-changelog_126#126_changelog)
-
-    * [Worker node fix pack 1.26.15_1584, released 23 May 2024](/docs/containers?topic=containers-changelog_126#12615_1584_W)
-
-    * [Worker node fix pack 1.26.15_1583, released 06 May 2024](/docs/containers?topic=containers-changelog_126#12615_1583_W)
-
-    * [Master fix pack 1.26.15_1581, released 24 April 2024](/docs/containers?topic=containers-changelog_126#12615_1581_M)
-
-    * [Worker node fix pack 1.26.15_1582, released 22 April 2024](/docs/containers?topic=containers-changelog_126#12615_1582_W)
-
-    * [Worker node fix pack 1.26.15_1580, released 8 April 2024](/docs/containers?topic=containers-changelog_126#12615_1580_W)
-
-    * [Master fix pack 1.26.15_1578, released 27 March 2024](/docs/containers?topic=containers-changelog_126#12615_1578_M)
-
-    * [Worker node fix pack 1.26.15_1579, released 25 March 2024](/docs/containers?topic=containers-changelog_126#12615_1579_W)
-
-    * [Worker node fix pack 1.26.14_1577, released 13 March 2024](/docs/containers?topic=containers-changelog_126#12614_1577_W)
-
-    * [Master fix pack 1.26.14_1575, released 28 February 2024](/docs/containers?topic=containers-changelog_126#12614_1575_M)
-
-    * [Worker node fix pack 1.26.14_1576, released 26 February 2024](/docs/containers?topic=containers-changelog_126#12614_1576_W)
-
-    * [Worker node fix pack 1.26.13_1571, released 12 February 2024](/docs/containers?topic=containers-changelog_126#12613_1571_W)
-
-    * [Master fix pack 1.26.13_1569, released 31 January 2024](/docs/containers?topic=containers-changelog_126#12613_1569_M)
-
-    * [Worker node fix pack 1.26.13_1570, released 29 January 2024](/docs/containers?topic=containers-changelog_126#12613_1570_W)
-
-    * [Worker node fix pack 1.26.11_1568, released 16 January 2024](/docs/containers?topic=containers-changelog_126#12611_1568_W)
-
-    * [Worker node fix pack 1.26.11_1567, released 02 January 2024](/docs/containers?topic=containers-changelog_126#12611_1567_W)
-
-    * [Worker node fix pack 1.26.11_1566, released 18 December 2023](/docs/containers?topic=containers-changelog_126#12611_1566_W)
-
-    * [Master fix pack 1.26.11_1564, released 06 December 2023](/docs/containers?topic=containers-changelog_126#12611_1564_M)
-
-    * [Worker node fix pack 1.26.11_1565, released 04 December 2023](/docs/containers?topic=containers-changelog_126#12611_1565_W)
-
-    * [Worker node fix pack 1.26.10_1561, released 29 November 2023](/docs/containers?topic=containers-changelog_126#12610_1561_W)
-
-    * [Master fix pack 1.26.10_1560, released 15 November 2023](/docs/containers?topic=containers-changelog_126#12610_1560_M)
-
-    * [Worker node fix pack 1.26.9_1559, released 08 November 2023](/docs/containers?topic=containers-changelog_126#1269_1559_W)
-
-    * [Master fix pack 1.26.9_1557, released 25 October 2023](/docs/containers?topic=containers-changelog_126#1269_1557_M)
-
-    * [Worker node fix pack 1.26.9_1558, released 23 October 2023](/docs/containers?topic=containers-changelog_126#1269_1558_W)
-
-    * [Worker node fix pack 1.26.8_1556, released 9 October 2023](/docs/containers?topic=containers-changelog_126#1268_1556_W)
-
-    * [Worker node fix pack 1.26.8_1555, released 27 September 2023](/docs/containers?topic=containers-changelog_126#1268_1555_W)
-
-    * [Master fix pack 1.26.8_1554, released 20 September 2023](/docs/containers?topic=containers-changelog_126#1268_1554_M)
-
-    * [Worker node fix pack 1.26.7_1552, released 12 September 2023](/docs/containers?topic=containers-changelog_126#1267_1552_W)
-
-    * [Master fix pack 1.26.7_1550, released 30 August 2023](/docs/containers?topic=containers-changelog_126#1267_1550_M)
-
-    * [Worker node fix pack 1.26.7_1551, released 28 August 2023](/docs/containers?topic=containers-changelog_126#1267_1551_W)
-
-    * [Worker node fix pack 1.26.7_1547, released 15 August 2023](/docs/containers?topic=containers-changelog_126#1267_1547_W)
-
-    * [Worker node fix pack 1.26.7_1546, released 1 August 2023](/docs/containers?topic=containers-changelog_126#1267_1546_W)
-
-    * [Master fix pack 1.26.7_1545, released 27 July 2023](/docs/containers?topic=containers-changelog_126#1267_1545_M)
-
-    * [Worker node fix pack 1.26.6_1544, released 17 July 2023](/docs/containers?topic=containers-changelog_126#1266_1544_W)
-
-    * [Worker node fix pack 1.26.6_1542, released 03 July 2023](/docs/containers?topic=containers-changelog_126#1266_1542_W)
-
-    * [Master fix pack 1.26.6_1541, released 27 June 2023](/docs/containers?topic=containers-changelog_126#1266_1541_M)
-
-    * [Worker node fix pack 1.26.5_1540, released 19 June 2023](/docs/containers?topic=containers-changelog_126#1265_1540_W)
-
-    * [Worker node fix pack 1.26.5_1539, released 5 June 2023](/docs/containers?topic=containers-changelog_126#1265_1539_W)
-
-    * [Master fix pack 1.26.5_1537, released 23 May 2023](/docs/containers?topic=containers-changelog_126#1265_1537_M)
-
-    * [Worker node fix pack 1.26.5_1538, released 23 May 2023](/docs/containers?topic=containers-changelog_126#1265_1538_W)
-
-    * [Worker node fix pack 1.26.4_1536, released 9 May 2023](/docs/containers?topic=containers-changelog_126#1264_1536_W)
-
-    * [Master fix pack 1.26.4_1535, released 27 April 2023](/docs/containers?topic=containers-changelog_126#1264_1535M)
-
-    * [Worker node fix pack 1.26.4_1535, released 24 April 2023](/docs/containers?topic=containers-changelog_126#1264_1535)
-
-    * [Worker node fix pack 1.26.3_1533, released 11 April 2023](/docs/containers?topic=containers-changelog_126#1263_1533)
-
-    * [Worker node fix pack 1.26.3_1531, released 29 March 2023](/docs/containers?topic=containers-changelog_126#1263_1531)
-
-    * [Master fix pack 1.26.3_1528, released 28 March 2023](/docs/containers?topic=containers-changelog_126#1263_1528)
-
-    * [Worker node fix pack 1.26.3_1529, released 27 March 2023](/docs/containers?topic=containers-changelog_126#1263_1529)
-
-    * [Worker node fix pack 1.26.1_1525, released 13 March 2023](/docs/containers?topic=containers-changelog_126#1261_1525)
-
-    * [Master fix pack 1.26.1_1524, released 2 March 2023](/docs/containers?topic=containers-changelog_126#1261_1524)
-
-    * [Worker node fix pack 1.26.1_1522, released 27 February 2023](/docs/containers?topic=containers-changelog_126#1261_1522)
-
-    * [Worker node fix pack 1.26.1_1521, released 13 February 2023](/docs/containers?topic=containers-changelog_126#1261_1521)
-
-    * [Master fix pack 1.26.1_1519 and worker node fix pack 1.26.1_1520, released 1 February 2023](/docs/containers?topic=containers-changelog_126#1261_1519_and_1261_1520)
-
-[1.26 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-126)
-
-* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-126#cis-section-1-126)
-
-    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-11-126)
-
-    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-12-126)
-
-    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-13-126)
-
-    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-14-126)
-
-* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-126#cis-section-2-126)
-
-* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-126#cis-section-3-126)
-
-    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-31-126)
-
-    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-32-126)
-
-* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-126#cis-section-4-126)
-
-    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-41-126)
-
-    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-42-126)
-
-* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-126#cis-section-5-126)
-
-    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-51-126)
-
-    * [5.2 Pod Security Policies](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-52-126)
-
-    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-53-126)
-
-    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-54-126)
-
-    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-55-126)
-
-    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-56-126)
-
-* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-126#cis-benchmark-remediations-126)
 
 
 ## Locations
