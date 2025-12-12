@@ -173,7 +173,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.33.5_1544. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Calico | v3.29.4 | v3.29.5 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#v3.29.5){: external}. |

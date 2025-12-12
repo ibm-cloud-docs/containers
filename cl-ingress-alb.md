@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-12-08"
+lastupdated: "2025-12-12"
 
 
 keywords: change log, version history, Ingress ALB
@@ -22,7 +22,6 @@ subcollection: "containers"
 
 Review the version history for Ingress ALB.
 {: shortdesc}
-
 
 
 ## Version 1.13.2
@@ -45,22 +44,16 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1132_297386853_iks}
 
 
-
 ### 1.13.2_291202775_iks, released 28 October 2025
 {: #cl-ingress-alb-1132_291202775_iks}
-
 
 
 ### 1.13.2_288662581_iks, released 14 October 2025
 {: #cl-ingress-alb-1132_288662581_iks}
 
 
-
 ### 1.13.2_7820_iks, released 16 September 2025
 {: #cl-ingress-alb-1132_7820_iks}
-
-
-
 
 
 ## Version 1.12.1
@@ -79,10 +72,8 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1121_297379442_iks}
 
 
-
 ### 1.12.1_291242242_iks, released 28 October 2025
 {: #cl-ingress-alb-1121_291242242_iks}
-
 
 
 ### 1.12.1_288662251_iks, released 14 October 2025
@@ -95,7 +86,6 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1121_7792_iks}
 
 
-
 ### 1.12.1_7742_iks, released 16 July 2025
 {: #cl-ingress-alb-1121_7742_iks}
 
@@ -104,7 +94,6 @@ Review the version history for Ingress ALB.
 
 ### 1.12.1_7702_iks, released 15 July 2025
 {: #cl-ingress-alb-1121_7702_iks}
-
 
 
 ### 1.12.1_7643_iks, released 17 June 2025
@@ -139,8 +128,6 @@ Review the version history for Ingress ALB.
 - The `nginx_ingress_controller_ingress_upstream_latency_seconds` metric has been removed, use `nginx_ingress_controller_connect_duration_seconds` instead.
 
 
-
-
 ## Version 1.11.2
 {: #cl-ingress-alb-1.11.2}
 
@@ -155,10 +142,8 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1112_297368181_iks}
 
 
-
 ### 1.11.2_291246358_iks, released 28 October 2025
 {: #cl-ingress-alb-1112_291246358_iks}
-
 
 
 ### 1.11.2_288648329_iks, released 14 October 2025
@@ -169,7 +154,6 @@ Review the version history for Ingress ALB.
 
 ### 1.11.2_7782_iks, released 18 August 2025
 {: #cl-ingress-alb-1112_7782_iks}
-
 
 
 ### 1.11.2_7740_iks, released 21 July 2025
@@ -186,7 +170,6 @@ Review the version history for Ingress ALB.
 
 ### 1.11.2_7701_iks, released 15 July 2025
 {: #cl-ingress-alb-1112_7701_iks}
-
 
 
 ### 1.11.2_7646_iks, released 17 June 2025
@@ -281,15 +264,12 @@ Review the version history for Ingress ALB.
 - add v1.11.2 Ingress NGINX Controller
 
 
-
-
 ## Version 1.9.6
 {: #cl-ingress-alb-1.9.6}
 
 
 ### 1.9.6_7781_iks, released 18 August 2025
 {: #cl-ingress-alb-196_7781_iks}
-
 
 
 ### 1.9.6_7741_iks, released 16 July 2025
@@ -300,7 +280,6 @@ Review the version history for Ingress ALB.
 
 ### 1.9.6_7700_iks, released 15 July 2025
 {: #cl-ingress-alb-196_7700_iks}
-
 
 
 ### 1.9.6_7645_iks, released 17 June 2025
@@ -435,8 +414,6 @@ Review the version history for Ingress ALB.
 - Initial release of 1.9.6. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.9.6)
 
 
-
-
 ## Version 1.9.4
 {: #cl-ingress-alb-1.9.4}
 
@@ -509,8 +486,6 @@ Review the version history for Ingress ALB.
 
 - Resolves the following CVEs: [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external}, [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}, [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}, [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}, and [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}.
 - Updates Go to version `1.21.5`.
-
-
 
 
 ## Version 1.8.5
@@ -630,8 +605,6 @@ Review the version history for Ingress ALB.
 - Initial release of 1.8.5. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.8.5)
 
 
-
-
 ## Version 1.8.4
 {: #cl-ingress-alb-1.8.4}
 
@@ -646,8 +619,6 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-184_6363_iks}
 
 - Resolves the following CVEs: [CVE-2024-25062](https://nvd.nist.gov/vuln/detail/CVE-2024-25062){: external}, [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external}, [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}, [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}, [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}, and [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}.
-
-
 
 
 ## Version 1.6.4
@@ -696,8 +667,6 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-164_6344_iks}
 
 - Resolves the following CVEs: [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626){: external}.
-
-
 
 
 

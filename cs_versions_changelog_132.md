@@ -173,7 +173,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.32.9_1562. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Calico | v3.29.4 | v3.29.5 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#v3.29.5){: external}. |
@@ -244,7 +243,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.32.8_1555. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | etcd | v3.5.21 | v3.5.22 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.22){: external}. |
@@ -277,7 +275,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #1327_1549_M}
 
 The following table shows the changes that are in the master fix pack 1.32.7_1549. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -356,7 +353,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.32.5_1544. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Calico | v3.29.2 | v3.29.3 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#v3.29.3){: external}. |
@@ -409,7 +405,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.32.5_1541. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.6.8 | v1.6.9 | New version contains updates and security fixes. |
@@ -460,7 +455,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #1324_1538_M}
 
 The following table shows the changes that are in the master fix pack 1.32.4_1538. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -517,7 +511,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #1323_1533_M}
 
 The following table shows the changes that are in the master fix pack 1.32.3_1533. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -588,7 +581,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #1321_1530_M}
 
 The following table shows the changes that are in the master fix pack 1.32.1_1530. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |

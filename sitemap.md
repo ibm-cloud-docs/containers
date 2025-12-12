@@ -4447,7 +4447,7 @@ subcollection: containers
 
     * [Worker node fix pack 1.34.1_1531, released 03 December 2025](/docs/containers?topic=containers-changelog_134#cl-boms-1341_1531_W)
 
-    * [Master fix pack 1.34.1_1529 and worker node fix pack 1.34.1_1530, released 20 November 2025](/docs/containers?topic=containers-changelog_134#1341_1529M_and_1341_1530W)
+    * [Worker node fix pack 1.34.1_1530, released 17 November 2025](/docs/containers?topic=containers-changelog_134#cl-boms-1341_1530_W)
 
 [1.34 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-134#cis-benchmark-134)
 
