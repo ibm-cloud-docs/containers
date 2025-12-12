@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2025
 
-lastupdated: "2025-12-04"
+lastupdated: "2025-12-12"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -26,7 +26,9 @@ For more information about the Kubernetes project versions, see the [Kubernetes 
 ## Available {{site.data.keyword.containerlong_notm}} versions
 {: #cs_versions_available}
 
-<!--<qna:latest-version>-->{{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (`n`) is released, versions up to 2 behind (`n-2`) are supported. Versions more than 2 behind the latest (`n-3`) are first deprecated and then unsupported. To continue receiving important security patch updates, make sure that your clusters always run a supported Kubernetes version. Deprecated clusters might not receive security updates. For more information, see [Release lifecycle](#release_lifecycle).
+<!--<qna:latest-version>-->
+
+{{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (`n`) is released, versions up to 2 behind (`n-2`) are supported. Versions more than 2 behind the latest (`n-3`) are first deprecated and then unsupported. To continue receiving important security patch updates, make sure that your clusters always run a supported Kubernetes version. Deprecated clusters might not receive security updates. For more information, see [Release lifecycle](#release_lifecycle).
 
 
 ![Kubernetes version support timeline](images/iks.svg "Version support timeline"){: caption="Kubernetes version support timeline" caption-side="bottom"}
@@ -42,10 +44,13 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |Version|Release date|End of support|Operating systems|Related links|
 |---|---|---|---|---|
+|1.34|20 November 2025|27 November 2026†|UBUNTU 24| - [1.34 details and update actions](/docs/containers?topic=containers-cs_versions_134)  \n - [Change log](/docs/containers?topic=containers-changelog_134)|
 |1.33 [Default]{: tag-purple} |31 July 2025|14 October 2026†|UBUNTU 24| - [1.33 details and update actions](/docs/containers?topic=containers-cs_versions_133)  \n - [Change log](/docs/containers?topic=containers-changelog_133)|
 |1.32|29 January 2025|22 April 2026†|UBUNTU 24| - [1.32 details and update actions](/docs/containers?topic=containers-cs_versions_132)  \n - [Change log](/docs/containers?topic=containers-changelog_132)|
 |1.31 [Deprecated]{: tag-deprecated} |18 September 2024|18 March 2026|UBUNTU 24| - [1.31 details and update actions](/docs/containers?topic=containers-cs_versions_131)  \n - [Change log](/docs/containers?topic=containers-changelog_131)|
 {: caption="Available versions for Kubernetes" caption-side="bottom"}
+
+
 
 
 

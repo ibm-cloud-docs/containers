@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-12-11"
+lastupdated: "2025-12-12"
 
 
 keywords: kubernetes, containers, 134, version 134, 134 update actions
@@ -77,7 +77,6 @@ The following table shows the actions that you must take after you update the Ku
 
 | Type | Description |
 | --- | --- |
-| **Deprecated**: Deprecated `MessageCountMap` and `CreateAggregateFromMessageCountMap` from `apimachinery/pkg/util/errors` package. Use `errors.Join` instead. For more information, see [`apimachinery/pkg/util/errors`](https://github.com/kubernetes/kubernetes/issues/131726){: external} |
-| **Deprecated**: Deprecated the preferences field in kubeconfig in favor of kuberc. No specific action required. For more information, see [Separate kubectl user preferences from cluster configs](https://github.com/kubernetes/enhancements/issues/3104){: external} |
+| **Deprecated**: Deprecated `MessageCountMap` and `CreateAggregateFromMessageCountMap` from `apimachinery/pkg/util/errors` package. | Use `errors.Join` instead. For more information, see [`apimachinery/pkg/util/errors`](https://github.com/kubernetes/kubernetes/issues/131726){: external} |
+| **Deprecated**: Deprecated the preferences field in kubeconfig in favor of kuberc. | No specific action required. For more information, see [Separate kubectl user preferences from cluster configs](https://github.com/kubernetes/enhancements/issues/3104){: external} |
 {: caption="Changes to make after you update the master to Kubernetes 1.34" caption-side="bottom"}
-
