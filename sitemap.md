@@ -240,6 +240,10 @@ subcollection: containers
 
 * [December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec25)
 
+    * [12 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec1225)
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
+
     * [10 December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec1025)
 
         * New! {{site.data.keyword.containerlong_notm}} version 1.34.

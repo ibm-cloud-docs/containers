@@ -83,7 +83,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #1341_1529M_and_1341_1530W}
 
 | Calico     | v3.29.5   | v3.29.6   | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3296-bug-fix-release).     |
-| Cluster health control-plane operator     | v0.1.8    | v0.1.11   | <https://github.ibm.com/alchemy-containers/armada-health-operator/releases/tag/v0.1.11> |
+| Cluster health control-plane operator     | v0.1.8    | v0.1.11   | [Release notes](https://github.ibm.com/alchemy-containers/armada-health-operator/releases/tag/v0.1.11) |
 | Cluster health image    | v1.6.10   | v1.6.13   | New version contains updates and security fixes. |
 | containerd | 1.7.29    | 2.1.5     | For more information, see the [changelogs](https://github.com/containerd/containerd/releases/tag/v2.1.5). |
 | CoreDNS    | v1.12.2   | v1.12.4   | See the [CoreDNS release notes](https://coredns.io/tags/notes/).      |
