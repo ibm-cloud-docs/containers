@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-12-08"
+lastupdated: "2025-12-12"
 
 
 keywords: change log, version history, 1.33
@@ -42,6 +42,28 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: #133_components}
 
 
+### Change log for Master fix pack 1.33.6_1552, released 10 December 2025
+{: #1336_1552_M}
+
+The following table shows the changes that are in the master fix pack 1.33.6_1552. Master patch updates are applied automatically. 
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
+| Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
+| CoreDNS | v1.12.2 | v1.12.4 | See the [CoreDNS release notes](https://coredns.io/tags/notes/){: external}. |
+| etcd | v3.5.23 | v3.5.25 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.25){: external}. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.20 | v2.5.22 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.33.5-5 | v1.33.6-2 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.17 | 2.10.19 | New version contains updates and security fixes. |
+| Konnectivity agent and server | v0.33.0 | v0.33.1 | See the [Konnectivity release notes](https://github.ibm.com/alchemy-containers/armada-konnectivity-community-build/releases/tag/v0.33.1){: external}. |
+| Kubernetes | v1.33.5 | v1.33.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.6){: external}. |
+| Portieris admission controller | v0.13.30 | v0.13.33 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.33){: external}. |
+| Tigera Operator | v1.36.14 | v1.36.16 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.16){: external}. |
+{: caption="Changes since version 1.33.5-1549" caption-side="bottom"}
+
+
 ### Worker node fix pack 1.33.5_1551, released 03 December 2025
 {: #cl-boms-1335_1551_W}
 
@@ -59,7 +81,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1335_1551_W-component-table}
 
 
-
 ### Worker node fix pack 1.33.5_1550, released 17 November 2025
 {: #cl-boms-1335_1550_W}
 
@@ -75,7 +96,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|1e3d028d8b22980ae70339db3b7f41575fe5ee5f|Resolves the following CVEs: [CVE-2025-5318](https://nvd.nist.gov/vuln/detail/CVE-2025-5318){: external}.|
 {: caption="1.33.5_1550 fix pack." caption-side="bottom"}
 {: #cl-boms-1335_1550_W-component-table}
-
 
 
 ### Master fix pack 1.33.5_1549, released 15 November 2025
@@ -96,7 +116,6 @@ The following table shows the changes that are in the master fix pack 1.33.5_154
 {: caption="Changes since version 1.33.5_1544" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.33.5_1548, released 06 November 2025
 {: #cl-boms-1335_1548_W}
 
@@ -112,7 +131,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|e15a40cb6d9e0ac0b9c345d302c629faad596b30|N/A|
 {: caption="1.33.5_1548 fix pack." caption-side="bottom"}
 {: #cl-boms-1335_1548_W-component-table}
-
 
 
 ### Worker node fix pack 1.33.5_1547, released 21 October 2025
@@ -132,7 +150,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1335_1547_W-component-table}
 
 
-
 ### Worker node fix pack 1.33.5_1545, released 08 October 2025
 {: #cl-boms-1335_1545_W}
 
@@ -148,7 +165,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|45bd1f84378a5eb92041b5102ef21a5cfe8b36d5|N/A|
 {: caption="1.33.5_1545 fix pack." caption-side="bottom"}
 {: #cl-boms-1335_1545_W-component-table}
-
 
 
 ### Master fix pack 1.33.5_1544, released 03 October 2025
@@ -172,7 +188,6 @@ The following table shows the changes that are in the master fix pack 1.33.5_154
 {: caption="Changes since version 1.33.4_1537" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.33.4_1541, released 23 September 2025
 {: #cl-boms-1334_1541_W}
 
@@ -188,7 +203,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|45bd1f84378a5eb92041b5102ef21a5cfe8b36d5|N/A|
 {: caption="1.33.4_1541 fix pack." caption-side="bottom"}
 {: #cl-boms-1334_1541_W-component-table}
-
 
 
 ### Worker node fix pack 1.33.4_1539, released 09 September 2025
@@ -208,7 +222,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1334_1539_W-component-table}
 
 
-
 ### Worker node fix pack 1.33.4_1538, released 26 August 2025
 {: #cl-boms-1334_1538_W}
 
@@ -224,7 +237,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|dc91132711527b5b44d0e89e563354769d3a4a0f|Resolves the following CVEs: [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}, [CVE-2025-5914](https://nvd.nist.gov/vuln/detail/CVE-2025-5914){: external}, [CVE-2024-47081](https://nvd.nist.gov/vuln/detail/CVE-2024-47081){: external}, and [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}.|
 {: caption="1.33.4_1538 fix pack." caption-side="bottom"}
 {: #cl-boms-1334_1538_W-component-table}
-
 
 
 ### Master fix pack 1.33.4_1537, released 20 August 2025
@@ -244,7 +256,6 @@ The following table shows the changes that are in the master fix pack 1.33.4_153
 {: caption="Changes since version 1.33.3_1532" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.33.3_1534, released 12 August 2025
 {: #cl-boms-1333_1534_W}
 
@@ -260,7 +271,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|51c51a011ee21f6dcb8c8143b688c34412f58405|Resolves the following CVEs: [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}, [CVE-2025-7425](https://nvd.nist.gov/vuln/detail/CVE-2025-7425){: external}, [CVE-2024-47081](https://nvd.nist.gov/vuln/detail/CVE-2024-47081){: external}, [CVE-2025-5994](https://nvd.nist.gov/vuln/detail/CVE-2025-5994){: external}, [CVE-2025-32415](https://nvd.nist.gov/vuln/detail/CVE-2025-32415){: external}, and [CVE-2025-6965](https://nvd.nist.gov/vuln/detail/CVE-2025-6965){: external}.|
 {: caption="1.33.3_1534 fix pack." caption-side="bottom"}
 {: #cl-boms-1333_1534_W-component-table}
-
 
 
 ### Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025

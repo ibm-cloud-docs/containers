@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-12-11"
+lastupdated: "2025-12-12"
 
 
 keywords: change log, version history, 1.34
@@ -40,6 +40,26 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.34
 {: #134_components}
+
+
+### Change log for Master fix pack 1.34.2_1534, released 10 December 2025
+{: #1342_1534_M}
+
+The following table shows the changes that are in the master fix pack 1.34.2_1534. Master patch updates are applied automatically. 
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
+| Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
+| etcd | v3.5.24 | v3.5.25 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.25){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.1-6 | v1.34.2-3 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.18 | 2.10.19 | New version contains updates and security fixes. |
+| Konnectivity agent and server | v0.33.0 | v0.34.0 | See the [Konnectivity release notes](https://github.ibm.com/alchemy-containers/armada-konnectivity-community-build/releases/tag/v0.34.0){: external}. |
+| Kubernetes | v1.34.1 | v1.34.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.2){: external}. |
+| Portieris admission controller | v0.13.31 | v0.13.33 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.33){: external}. |
+| Tigera Operator | v1.36.14 | v1.36.16 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.16){: external}. |
+{: caption="Changes since version 1.34.1-1529" caption-side="bottom"}
 
 
 ### Worker node fix pack 1.34.1_1531, released 03 December 2025
@@ -81,7 +101,3 @@ The following table shows the components included in the worker node fix pack 1.
 | Portieris admission controller  | v0.13.30  | v0.13.31  | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.13.31)    |
 | Tigera Operator | v1.36.13  | v1.36.14  | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.14).   |
 {: caption="Changes since version 1.33." caption-side="bottom"}
-
-
-
-
