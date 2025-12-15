@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-11-07"
+lastupdated: "2025-12-15"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -30,6 +30,48 @@ To view a list of add-ons and the supported cluster versions, run the following 
 ibmcloud ks cluster addon versions
 ```
 {: pre}
+
+
+## Version 1.26
+{: #v126}
+
+### Change log for 1.26.6, released 15 December 2025
+{: #1266}
+
+Review the changes that are included in version 1.26.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.25.5
+
+Current version
+:   1.26.6
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.26.0](https://istio.io/latest/news/releases/1.26.x/announcing-1.26/){: external}, [Istio 1.26.1](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.1/){: external}, [Istio 1.26.2](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.2/){: external}, [Istio 1.26.3](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.3/){: external}, [Istio 1.26.4](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.4/){: external}, [Istio 1.26.5](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.5/){: external}, and , [Istio 1.26.6](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.6/){: external},
+
+:   Resolves the following CVEs:
+    - [CVE-2025-32463](https://www.cve.org/CVERecord?id=CVE-2025-32463){: external}
+    - [CVE-2025-32988](https://www.cve.org/CVERecord?id=CVE-2025-32988){: external}
+    - [CVE-2025-47268](https://www.cve.org/CVERecord?id=CVE-2025-47268){: external}
+    - [CVE-2025-5372](https://www.cve.org/CVERecord?id=CVE-2025-5372){: external}
+    - [CVE-2025-6297](https://www.cve.org/CVERecord?id=CVE-2025-6297){: external}
+    - [CVE-2025-32989](https://www.cve.org/CVERecord?id=CVE-2025-32989){: external}
+    - [CVE-2025-4878](https://www.cve.org/CVERecord?id=CVE-2025-4878){: external}
+    - [CVE-2025-5351](https://www.cve.org/CVERecord?id=CVE-2025-5351){: external}
+    - [CVE-2025-5987](https://www.cve.org/CVERecord?id=CVE-2025-5987){: external}
+    - [CVE-2025-4877](https://www.cve.org/CVERecord?id=CVE-2025-4877){: external}
+    - [CVE-2025-48964](https://www.cve.org/CVERecord?id=CVE-2025-48964){: external}
+    - [CVE-2025-32990](https://www.cve.org/CVERecord?id=CVE-2025-32990){: external}
+    - [CVE-2025-9230](https://www.cve.org/CVERecord?id=CVE-2025-9230){: external}
+    - [CVE-2025-32462](https://www.cve.org/CVERecord?id=CVE-2025-32462){: external}
+    - [CVE-2025-5318](https://www.cve.org/CVERecord?id=CVE-2025-5318){: external}
+    - [CVE-2025-40909](https://www.cve.org/CVERecord?id=CVE-2025-40909){: external}
+    - [CVE-2025-5702](https://www.cve.org/CVERecord?id=CVE-2025-5702){: external}
+    - [CVE-2024-10963](https://www.cve.org/CVERecord?id=CVE-2024-10963){: external}
+    - [CVE-2024-8058](https://www.cve.org/CVERecord?id=CVE-2024-8058){: external}
+    - [CVE-2024-6395](https://www.cve.org/CVERecord?id=CVE-2024-6395){: external} 
+
 
 
 ## Version 1.25
