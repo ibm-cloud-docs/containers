@@ -178,7 +178,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.31.13_1574. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Calico | v3.28.5 | v3.29.5 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#v3.29.5){: external}. |
@@ -249,7 +248,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.31.12_1564. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | etcd | v3.5.21 | v3.5.22 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.22){: external}. |
@@ -282,7 +280,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #13111_1558_M}
 
 The following table shows the changes that are in the master fix pack 1.31.11_1558. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -360,7 +357,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.31.9_1553. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Calico | v3.28.3 | v3.28.4 | See the [Calico release notes](https://archive-os-3-28.netlify.app/calico/3.28/release-notes/#v3.28.4){: external}. |
@@ -410,7 +406,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #1319_1550_M}
 
 The following table shows the changes that are in the master fix pack 1.31.9_1550. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -468,7 +463,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.31.7_1547. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Calico | v3.28.2 | v3.28.3 | See the [Calico release notes](https://archive-os-3-28.netlify.app/calico/3.28/release-notes/#v3.28.3){: external}. |
@@ -524,7 +518,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #1317_1543_M}
 
 The following table shows the changes that are in the master fix pack 1.31.7_1543. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -600,7 +593,6 @@ The following table shows the components included in the worker node fix pack 1.
 The following table shows the changes that are in the master fix pack 1.31.5_1540. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.31.4-3 | v1.31.5-3 | New version contains updates and security fixes. |
@@ -650,7 +642,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #1315_1537_M}
 
 The following table shows the changes that are in the master fix pack 1.31.5_1537. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -738,7 +729,6 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 The following table shows the changes that are in the master fix pack 1.31.3_1530. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.31.2-2 | v1.31.2-4 | New version contains updates and security fixes. |
@@ -773,7 +763,6 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 The following table shows the changes that are in the master fix pack 1.31.2_1528. Master patch updates are applied automatically. 
 
 
-
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.15 | v2.5.16 | New version contains updates and security fixes. |
@@ -801,7 +790,6 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 {: #1311_1526_M}
 
 The following table shows the changes that are in the master fix pack 1.31.1_1526. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -850,7 +838,6 @@ The following table shows the changes that are in the worker node fix pack 1.31.
 {: #1311_1521_M}
 
 The following table shows the changes that are in the master fix pack 1.31.1_1521. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |

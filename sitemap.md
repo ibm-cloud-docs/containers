@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-12-12"
+lastupdated: "2025-12-15"
 
 
 keywords: containers
@@ -4447,7 +4447,7 @@ subcollection: containers
 
     * [Worker node fix pack 1.34.1_1531, released 03 December 2025](/docs/containers?topic=containers-changelog_134#cl-boms-1341_1531_W)
 
-    * [Master fix pack 1.34.1_1529 and worker node fix pack 1.34.1_1530, released 20 November 2025](/docs/containers?topic=containers-changelog_134#1341_1529M_and_1341_1530W)
+    * [Worker node fix pack 1.34.1_1530, released 17 November 2025](/docs/containers?topic=containers-changelog_134#cl-boms-1341_1530_W)
 
 [1.34 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-134#cis-benchmark-134)
 
@@ -5770,6 +5770,10 @@ subcollection: containers
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.26](/docs/containers?topic=containers-istio-changelog#v126)
+
+    * [Change log for 1.26.6, released 15 December 2025](/docs/containers?topic=containers-istio-changelog#1266)
 
 * [Version 1.25](/docs/containers?topic=containers-istio-changelog#v125)
 

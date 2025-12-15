@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-12-04"
+lastupdated: "2025-12-12"
 
 
 keywords: change log, version history, ALB OAuth Proxy
@@ -22,7 +22,6 @@ subcollection: "containers"
 
 Review the version history for ALB OAuth Proxy.
 {: shortdesc}
-
 
 
 ## Version 2.0.0

@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2025
 
-lastupdated: "2025-11-20"
+lastupdated: "2025-12-12"
 
 
 keywords: change log, version history, 1.30
@@ -66,7 +66,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13014_1593_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.14_1592, released 06 November 2025
 {: #cl-boms-13014_1592_W}
 
@@ -82,7 +81,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|e15a40cb6d9e0ac0b9c345d302c629faad596b30|N/A|
 {: caption="1.30.14_1592 fix pack." caption-side="bottom"}
 {: #cl-boms-13014_1592_W-component-table}
-
 
 
 ### Worker node fix pack 1.30.14_1591, released 21 October 2025
@@ -102,7 +100,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13014_1591_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.14_1590, released 08 October 2025
 {: #cl-boms-13014_1590_W}
 
@@ -120,12 +117,10 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13014_1590_W-component-table}
 
 
-
 ### Master fix pack 1.30.14_1589, released 03 October 2025
 {: #13014_1589_M}
 
 The following table shows the changes that are in the master fix pack 1.30.14_1589. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -136,7 +131,6 @@ The following table shows the changes that are in the master fix pack 1.30.14_15
 | Kubernetes NodeLocal DNS cache | 1.26.4 | 1.26.5 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.26.5){: external}. |
 | Portieris admission controller | v0.13.29 | v0.13.30 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.30){: external}. |
 {: caption="Changes since version 1.30.14_1580" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.14_1585, released 23 September 2025
@@ -156,7 +150,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13014_1585_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.14_1582, released 09 September 2025
 {: #cl-boms-13014_1582_W}
 
@@ -172,7 +165,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|95e0dbe6a9d2a09a11080e4bf18bc1e33e196ae0|Resolves the following CVEs: [CVE-2025-8941](https://nvd.nist.gov/vuln/detail/CVE-2025-8941){: external}, [CVE-2025-8194](https://nvd.nist.gov/vuln/detail/CVE-2025-8194){: external}, and [CVE-2025-6020](https://nvd.nist.gov/vuln/detail/CVE-2025-6020){: external}.|
 {: caption="1.30.14_1582 fix pack." caption-side="bottom"}
 {: #cl-boms-13014_1582_W-component-table}
-
 
 
 ### Worker node fix pack 1.30.14_1581, released 26 August 2025
@@ -192,12 +184,10 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13014_1581_W-component-table}
 
 
-
 ### Master fix pack 1.30.14_1580, released 20 August 2025
 {: #13014_1580_M}
 
 The following table shows the changes that are in the master fix pack 1.30.14_1580. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -208,7 +198,6 @@ The following table shows the changes that are in the master fix pack 1.30.14_15
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 38dc95c | 8a12251 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.15 | v2.10.16 | New version contains updates and security fixes. |
 {: caption="Changes since version 1.30.14_1574" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.14_1576, released 12 August 2025
@@ -228,12 +217,10 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13014_1576_W-component-table}
 
 
-
 ### Master fix pack 1.30.14_1574, released 30 July 2025
 {: #13014_1574_M}
 
 The following table shows the changes that are in the master fix pack 1.30.14_1574. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -253,7 +240,6 @@ The following table shows the changes that are in the master fix pack 1.30.14_15
 {: caption="Changes since version 1.30.13_1569" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.30.14_1575, released 28 July 2025
 {: #cl-boms-13014_1575_W}
 
@@ -269,7 +255,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|ad7322eabed8ea8245c806369db7a2410944b4b4|Resolves the following CVEs: [CVE-2019-17543](https://nvd.nist.gov/vuln/detail/CVE-2019-17543){: external}, [CVE-2024-52533](https://nvd.nist.gov/vuln/detail/CVE-2024-52533){: external}, [CVE-2024-34397](https://nvd.nist.gov/vuln/detail/CVE-2024-34397){: external}, [CVE-2025-4373](https://nvd.nist.gov/vuln/detail/CVE-2025-4373){: external}, and [CVE-2025-47273](https://nvd.nist.gov/vuln/detail/CVE-2025-47273){: external}.|
 {: caption="1.30.14_1575 fix pack." caption-side="bottom"}
 {: #cl-boms-13014_1575_W-component-table}
-
 
 
 ### Worker node fix pack 1.30.13_1573, released 14 July 2025
@@ -289,7 +274,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13013_1573_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.13_1572, released 01 July 2025
 {: #cl-boms-13013_1572_W}
 
@@ -307,12 +291,10 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13013_1572_W-component-table}
 
 
-
 ### Master fix pack 1.30.13_1569, released 18 June 2025
 {: #13013_1569_M}
 
 The following table shows the changes that are in the master fix pack 1.30.13_1569. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -323,7 +305,6 @@ The following table shows the changes that are in the master fix pack 1.30.13_15
 | {{site.data.keyword.cloud_notm}} RBAC Operator | d1545bd | 38dc95c | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.13 | v2.10.14 | New version contains updates and security fixes. |
 {: caption="Changes since version 1.30.13_1566" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.13_1570, released 16 June 2025
@@ -343,7 +324,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13013_1570_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.13_1567, released 04 June 2025
 {: #cl-boms-13013_1567_W}
 
@@ -361,12 +341,10 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13013_1567_W-component-table}
 
 
-
 ### Master fix pack 1.30.13_1566, released 28 May 2025
 {: #13013_1566_M}
 
 The following table shows the changes that are in the master fix pack 1.30.13_1566. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -380,7 +358,6 @@ The following table shows the changes that are in the master fix pack 1.30.13_15
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3232 | 3293 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.26 | v0.13.28 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.28){: external}. |
 {: caption="Changes since version 1.30.11_1563" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.11_1565, released 19 May 2025
@@ -401,7 +378,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13011_1565_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.11_1564, released 07 May 2025
 {: #cl-boms-13011_1564_W}
 
@@ -420,12 +396,10 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13011_1564_W-component-table}
 
 
-
 ### Master fix pack 1.30.11_1563, released 30 April 2025
 {: #13011_1563_M}
 
 The following table shows the changes that are in the master fix pack 1.30.11_1563. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -441,7 +415,6 @@ The following table shows the changes that are in the master fix pack 1.30.11_15
 | Portieris admission controller | v0.13.25 | v0.13.26 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.26){: external}. |
 | Tigera Operator | v1.34.5-200-iks | v1.34.8 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.34.8){: external}. |
 {: caption="Changes since version 1.30.11_1559" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.11_1562, released 21 April 2025
@@ -462,7 +435,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13011_1562_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.11_1561, released 08 April 2025
 {: #cl-boms-13011_1561_W}
 
@@ -481,12 +453,10 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13011_1561_W-component-table}
 
 
-
 ### Master fix pack 1.30.11_1559, released 26 March 2025
 {: #13011_1559_M}
 
 The following table shows the changes that are in the master fix pack 1.30.11_1559. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -500,7 +470,6 @@ The following table shows the changes that are in the master fix pack 1.30.11_15
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3178 | 3232 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.23 | v0.13.25 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.25){: external}. |
 {: caption="Changes since version 1.30.9_1556" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.11_1560, released 24 March 2025
@@ -521,7 +490,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13011_1560_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.9_1558, released 11 March 2025
 {: #cl-boms-1309_1558_W}
 
@@ -538,7 +506,6 @@ The following table shows the components included in the worker node fix pack 1.
 |GPU Device Plug-in and Installer|57c31795f069cb17cd235792f3ac21ac0e086360|Resolves the following CVEs: [CVE-2024-1488](https://nvd.nist.gov/vuln/detail/CVE-2024-1488){: external}, [CVE-2020-11023](https://nvd.nist.gov/vuln/detail/CVE-2020-11023){: external}, [CVE-2024-8508](https://nvd.nist.gov/vuln/detail/CVE-2024-8508){: external}, and [CVE-2022-49043](https://nvd.nist.gov/vuln/detail/CVE-2022-49043){: external}.|
 {: caption="1.30.9_1558 fix pack." caption-side="bottom"}
 {: #cl-boms-1309_1558_W-component-table}
-
 
 
 ### Worker node fix pack 1.30.9_1557, released 24 February 2025
@@ -559,12 +526,10 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1309_1557_W-component-table}
 
 
-
 ### Master fix pack 1.30.9_1556, released 19 February 2025
 {: #1309_1556_M}
 
 The following table shows the changes that are in the master fix pack 1.30.9_1556. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -574,7 +539,6 @@ The following table shows the changes that are in the master fix pack 1.30.9_155
 | Key Management Service provider | v2.10.9 | v2.10.10 | New version contains updates and security fixes. |
 | Kubernetes NodeLocal DNS cache | 1.23.1 | 1.24.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.24.0){: external}. |
 {: caption="Changes since version 1.30.9_1552" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.9_1555, released 11 February 2025
@@ -595,7 +559,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1309_1555_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.9_1553, released 29 January 2025
 {: #cl-boms-1309_1553_W}
 
@@ -614,12 +577,10 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1309_1553_W-component-table}
 
 
-
 ### Master fix pack 1.30.9_1552, released 22 January 2025
 {: #1309_1552_M}
 
 The following table shows the changes that are in the master fix pack 1.30.9_1552. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -636,7 +597,6 @@ The following table shows the changes that are in the master fix pack 1.30.9_155
 | Portieris admission controller | v0.13.21 | v0.13.23 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.23){: external}. |
 | Tigera Operator | v1.34.5 | v1.34.5-200-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.34.5){: external}. |
 {: caption="Changes since version 1.30.7_1545" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.7_1550, released 13 January 2025
@@ -657,7 +617,6 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1307_1550_W-component-table}
 
 
-
 ### Worker node fix pack 1.30.7_1549, released 30 December 2024
 {: #1307_1549_W}
 
@@ -669,7 +628,6 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 | Ubuntu 20.04 Packages | 5.4.0-202-generic | 5.4.0-204-generic | Worker node kernel & package updates for [CVE-2021-47001](https://nvd.nist.gov/vuln/detail/CVE-2021-47001){: external}, [CVE-2021-47101](https://nvd.nist.gov/vuln/detail/CVE-2021-47101){: external}, [CVE-2022-38096](https://nvd.nist.gov/vuln/detail/CVE-2022-38096){: external}, [CVE-2023-52821](https://nvd.nist.gov/vuln/detail/CVE-2023-52821){: external}, [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-35963](https://nvd.nist.gov/vuln/detail/CVE-2024-35963){: external}, [CVE-2024-35965](https://nvd.nist.gov/vuln/detail/CVE-2024-35965){: external}, [CVE-2024-35966](https://nvd.nist.gov/vuln/detail/CVE-2024-35966){: external}, [CVE-2024-35967](https://nvd.nist.gov/vuln/detail/CVE-2024-35967){: external}, [CVE-2024-36952](https://nvd.nist.gov/vuln/detail/CVE-2024-36952){: external}, [CVE-2024-38553](https://nvd.nist.gov/vuln/detail/CVE-2024-38553){: external}, [CVE-2024-38597](https://nvd.nist.gov/vuln/detail/CVE-2024-38597){: external}, [CVE-2024-40910](https://nvd.nist.gov/vuln/detail/CVE-2024-40910){: external}, [CVE-2024-43892](https://nvd.nist.gov/vuln/detail/CVE-2024-43892){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}. |
 | Ubuntu 24.04 Packages | 6.8.0-50-generic | 6.8.0-51-generic | Worker node kernel & package updates for [CVE-2024-11053](https://nvd.nist.gov/vuln/detail/CVE-2024-11053){: external}, [CVE-2024-47606](https://nvd.nist.gov/vuln/detail/CVE-2024-47606){: external}, [CVE-2024-49967](https://nvd.nist.gov/vuln/detail/CVE-2024-49967){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, [CVE-2024-53057](https://nvd.nist.gov/vuln/detail/CVE-2024-53057){: external}. |
 {: caption="Changes since version 1.30.7_1548" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.7_1548, released 16 December 2024
@@ -685,7 +643,6 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 | HAProxy | 55c1488 | 14daa78 | Security fixes for [CVE-2024-10963](https://nvd.nist.gov/vuln/detail/CVE-2024-10963){: external}, [CVE-2024-11168](https://nvd.nist.gov/vuln/detail/CVE-2024-11168){: external}, [CVE-2024-9287](https://nvd.nist.gov/vuln/detail/CVE-2024-9287){: external}, [CVE-2024-10041](https://nvd.nist.gov/vuln/detail/CVE-2024-10041){: external}. |
 | GPU Device Plug-in and Installer | 96f9b63 | 8904e33 | Security fixes for [CVE-2024-10963](https://nvd.nist.gov/vuln/detail/CVE-2024-10963){: external}, [CVE-2024-50192](https://nvd.nist.gov/vuln/detail/CVE-2024-50192){: external}, [CVE-2024-27399](https://nvd.nist.gov/vuln/detail/CVE-2024-27399){: external}, [CVE-2024-38564](https://nvd.nist.gov/vuln/detail/CVE-2024-38564){: external}, [CVE-2024-10041](https://nvd.nist.gov/vuln/detail/CVE-2024-10041){: external}, [CVE-2024-50082](https://nvd.nist.gov/vuln/detail/CVE-2024-50082){: external}, [CVE-2024-50099](https://nvd.nist.gov/vuln/detail/CVE-2024-50099){: external}, [CVE-2024-50256](https://nvd.nist.gov/vuln/detail/CVE-2024-50256){: external}, [CVE-2024-50264](https://nvd.nist.gov/vuln/detail/CVE-2024-50264){: external}, [CVE-2024-9287](https://nvd.nist.gov/vuln/detail/CVE-2024-9287){: external}, [CVE-2024-27043](https://nvd.nist.gov/vuln/detail/CVE-2024-27043){: external}, [CVE-2024-49949](https://nvd.nist.gov/vuln/detail/CVE-2024-49949){: external}, [CVE-2024-11168](https://nvd.nist.gov/vuln/detail/CVE-2024-11168){: external}, [CVE-2024-50110](https://nvd.nist.gov/vuln/detail/CVE-2024-50110){: external}, [CVE-2024-50142](https://nvd.nist.gov/vuln/detail/CVE-2024-50142){: external}, [CVE-2024-46858](https://nvd.nist.gov/vuln/detail/CVE-2024-46858){: external}, [CVE-2024-46695](https://nvd.nist.gov/vuln/detail/CVE-2024-46695){: external}. |
 {: caption="Changes since version 1.30.7_1547" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.7_1547, released 05 December 2024
@@ -705,12 +662,10 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.6_1544" caption-side="bottom"}
 
 
-
 ### Master fix pack 1.30.7_1545, released 04 December 2024
 {: #1307_1545_M}
 
 The following table shows the changes that are in the master fix pack 1.30.7_1545. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -722,7 +677,6 @@ The following table shows the changes that are in the master fix pack 1.30.7_154
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3051 | 3079 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.20 | v0.13.21 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.21){: external}. |
 {: caption="Changes since version 1.30.6_1543" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.6_1544, released 18 November 2024
@@ -742,12 +696,10 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.5_1542" caption-side="bottom"}
 
 
-
 ### Master fix pack 1.30.6_1543, released 13 November 2024
 {: #1306_1543_M}
 
 The following table shows the changes that are in the master fix pack 1.30.6_1543. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -757,7 +709,6 @@ The following table shows the changes that are in the master fix pack 1.30.6_154
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 77dac6b | c4a05b0 | New version contains updates and security fixes. |
 | Kubernetes | v1.30.5 | v1.30.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.30.6){: external}. |
 {: caption="Changes since version 1.30.5_1541" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.5_1542, released 04 November 2024
@@ -774,12 +725,10 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.5_1540" caption-side="bottom"}
 
 
-
 ### Master fix pack 1.30.5_1541, released 30 October 2024
 {: #1305_1541_M}
 
 The following table shows the changes that are in the master fix pack 1.30.5_1541. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -797,7 +746,6 @@ The following table shows the changes that are in the master fix pack 1.30.5_154
 {: caption="Changes since version 1.30.5_1537" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.30.5_1540, released 21 October 2024
 {: #1305_1540_W}
 
@@ -809,7 +757,6 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 | Ubuntu 20.04 Packages | 5.4.0-196-generic | 5.4.0-198-generic | Kernel and package updates for [CVE-2022-36227](https://nvd.nist.gov/vuln/detail/CVE-2022-36227){: external}, [CVE-2024-26960](https://nvd.nist.gov/vuln/detail/CVE-2024-26960){: external}, [CVE-2024-27397](https://nvd.nist.gov/vuln/detail/CVE-2024-27397){: external}, [CVE-2024-38630](https://nvd.nist.gov/vuln/detail/CVE-2024-38630){: external}, [CVE-2024-45016](https://nvd.nist.gov/vuln/detail/CVE-2024-45016){: external}, [CVE-2024-5742](https://nvd.nist.gov/vuln/detail/CVE-2024-5742){: external}. | 
 | Haproxy | 67d03375 | 88598691 | Security fixes for [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}. |
 {: caption="Changes since version 1.30.5_1539" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.5_1539, released 09 October 2024
@@ -827,12 +774,10 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.5_1538" caption-side="bottom"}
 
 
-
 ### Master fix pack 1.30.5_1537, released 25 September 2024
 {: #1305_1537_M}
 
 The following table shows the changes that are in the master fix pack 1.30.5_1537. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -848,7 +793,6 @@ The following table shows the changes that are in the master fix pack 1.30.5_153
 | Kubernetes Metrics Server | v0.7.1 | v0.7.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.7.2){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3022 | 3051 | New version contains updates and security fixes. |
 {: caption="Changes since version 1.30.4_1534" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.5_1538, released 23 September 2024
@@ -868,7 +812,6 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.4_1536" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.30.4_1536, released 10 September 2024
 {: #1304_1536_W}
 
@@ -885,12 +828,10 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.4_1535" caption-side="bottom"}
 
 
-
 ### Master fix pack 1.30.4_1534, released 28 August 2024
 {: #1304_1534_M}
 
 The following table shows the changes that are in the master fix pack 1.30.4_1534. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -907,7 +848,6 @@ The following table shows the changes that are in the master fix pack 1.30.4_153
 | Portieris admission controller | v0.13.17 | v0.13.18 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.18){: external}. |
 | Tigera Operator | v1.32.10-109-iks | v1.32.10-124-iks | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.32.10){: external}. |
 {: caption="Changes since version 1.30.3_1531" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.4_1535, released 26 August 2024
@@ -927,7 +867,6 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.3_1533" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.30.3_1533, released 12 August 2024
 {: #1303_1533_W}
 
@@ -941,12 +880,10 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.3_1532" caption-side="bottom"}
 
 
-
 ### Master fix pack 1.30.3_1531, released 31 July 2024
 {: #1303_1531_M}
 
 The following table shows the changes that are in the master fix pack 1.30.3_1531. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -966,7 +903,6 @@ The following table shows the changes that are in the master fix pack 1.30.3_153
 {: caption="Changes since version 1.30.2_1525" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.30.3_1532, released 29 July 2024
 {: #1303_1532_W}
 
@@ -982,7 +918,6 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 | GPU device plug-in and installer | 184b5e2 | 47ed2ef | Security fixes for [CVE-2024-4032](https://nvd.nist.gov/vuln/detail/CVE-2024-4032){: external}. |
 | Haproxy | N/A | N/A | N/A |
 {: caption="Changes since version 1.30.2_1528" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.2_1528, released 15 July 2024
@@ -1001,7 +936,6 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.2_1527" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.30.2_1527, released 09 July 2024
 {: #1302_1527_W}
 
@@ -1017,12 +951,10 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.2_1526" caption-side="bottom"}
 
 
-
 ### Master fix pack 1.30.2_1525, released 19 June 2024
 {: #1302_1525_M}
 
 The following table shows the changes that are in the master fix pack 1.30.2_1525. Master patch updates are applied automatically. 
-
 
 
 | Component | Previous | Current | Description |
@@ -1037,7 +969,6 @@ The following table shows the changes that are in the master fix pack 1.30.2_152
 | Kubernetes NodeLocal DNS cache | 1.23.0 | 1.23.1 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.23.1){: external}. |
 | Portieris admission controller | v0.13.15 | v0.13.16 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.16){: external}. |
 {: caption="Changes since version 1.30.1_1520" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.30.2_1526, released 18 June 2024
@@ -1057,7 +988,6 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 {: caption="Changes since version 1.30.1_1521" caption-side="bottom"}
 
 
-
 ### Worker node fix pack 1.30.1_1521, released 03 June 2024
 {: #1301_1521_W}
 
@@ -1072,7 +1002,6 @@ The following table shows the changes that are in the worker node fix pack 1.30.
 | HAProxy | e88695e | 0062a3c | Security fixes for [CVE-2024-0450](https://nvd.nist.gov/vuln/detail/CVE-2024-0450){: external}, [CVE-2024-33599](https://nvd.nist.gov/vuln/detail/CVE-2024-33599){: external}, [CVE-2024-26461](https://nvd.nist.gov/vuln/detail/CVE-2024-26461){: external}, [CVE-2021-43618](https://nvd.nist.gov/vuln/detail/CVE-2021-43618){: external}, [CVE-2024-22365](https://nvd.nist.gov/vuln/detail/CVE-2024-22365){: external}, [CVE-2023-6597](https://nvd.nist.gov/vuln/detail/CVE-2023-6597){: external}, [CVE-2024-26458](https://nvd.nist.gov/vuln/detail/CVE-2024-26458){: external}, [CVE-2024-2961](https://nvd.nist.gov/vuln/detail/CVE-2024-2961){: external}, [CVE-2024-33601](https://nvd.nist.gov/vuln/detail/CVE-2024-33601){: external}, [CVE-2024-33602](https://nvd.nist.gov/vuln/detail/CVE-2024-33602){: external}, [CVE-2023-7008](https://nvd.nist.gov/vuln/detail/CVE-2023-7008){: external}, [CVE-2023-6004](https://nvd.nist.gov/vuln/detail/CVE-2023-6004){: external}, [CVE-2023-6918](https://nvd.nist.gov/vuln/detail/CVE-2023-6918){: external}, [CVE-2024-33600](https://nvd.nist.gov/vuln/detail/CVE-2024-33600){: external}. |
 | GPU device plug-in and installer | 806184d | fdf201e | Security fixes for [CVE-2024-33602](https://nvd.nist.gov/vuln/detail/CVE-2024-33602){: external}, [CVE-2024-28182](https://nvd.nist.gov/vuln/detail/CVE-2024-28182){: external}, [CVE-2024-2961](https://nvd.nist.gov/vuln/detail/CVE-2024-2961){: external}, [CVE-2024-33599](https://nvd.nist.gov/vuln/detail/CVE-2024-33599){: external}, [CVE-2024-33600](https://nvd.nist.gov/vuln/detail/CVE-2024-33600){: external}, [CVE-2024-33601](https://nvd.nist.gov/vuln/detail/CVE-2024-33601){: external}. |
 {: caption="Changes since version 1.30.0_1518" caption-side="bottom"}
-
 
 
 ### Master fix pack 1.30.1_1520 and worker node fix pack 1.30.0_1518, released 29 May 2024
