@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-12-15"
+lastupdated: "2025-12-16"
 
 
 keywords: containers
@@ -1270,40 +1270,6 @@ subcollection: containers
 
         * Worker node fix packs are available. 
 
-* [December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec23)
-
-    * [18 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec1823)
-
-        * Worker node fix packs are available. 
-
-    * [14 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec1423)
-
-        * Information on worker node removal priority.
-
-        * Kubernetes version 1.24 is unsupported.
-
-    * [8 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0823)
-
-        * Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities
-
-    * [7 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0723)
-
-        * Istio add-on version `1.20.0`.
-
-    * [6 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0623)
-
-        * Master fix packs are available. 
-
-    * [5 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0523)
-
-        * Istio add-on version `1.19.4`.
-
-    * [4 December 2023](/docs/containers?topic=containers-containers-relnotes#containers-dec0423)
-
-        * Ingress ALB updates
-
-        * Worker node fix packs are available. 
-
 
 ## Tutorials library for Kubernetes Service
 {: #sitemap_tutorials-library-for-kubernetes-service}
@@ -2424,8 +2390,6 @@ subcollection: containers
 * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-kube-policies#services_one_ns)
 
 * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
-
-    * [Required policy rules for VPCs with a cluster that runs at version 1.28 or later](/docs/containers?topic=containers-vpc-kube-policies#policy-rules-128)
 
 [Opening required ports and IP addresses in allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
 

@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-12-12"
+lastupdated: "2025-12-16"
 
 
 keywords: change log, version history, 1.34
@@ -52,10 +52,10 @@ The following table shows the changes that are in the master fix pack 1.34.2_153
 | --- | --- | --- | --- |
 | Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
 | Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
-| etcd | v3.5.24 | v3.5.25 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.25){: external}. |
+| etcd | v3.5.24 | v3.5.25 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.25){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.1-6 | v1.34.2-3 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.18 | 2.10.19 | New version contains updates and security fixes. |
-| Konnectivity agent and server | v0.33.0 | v0.34.0 | See the [Konnectivity release notes](https://github.ibm.com/alchemy-containers/armada-konnectivity-community-build/releases/tag/v0.34.0){: external}. |
+| Konnectivity agent and server | v0.33.0 | v0.34.0 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.34.0){: external}. |
 | Kubernetes | v1.34.1 | v1.34.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.2){: external}. |
 | Portieris admission controller | v0.13.31 | v0.13.33 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.33){: external}. |
 | Tigera Operator | v1.36.14 | v1.36.16 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.16){: external}. |
