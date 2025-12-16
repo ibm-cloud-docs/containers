@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2025
 
-lastupdated: "2025-12-08"
+lastupdated: "2025-12-16"
 
 keywords: containers, kubernetes, mzr, szr, multizone, multi az
 
@@ -84,9 +84,6 @@ If you create a classic cluster in a region with only one data center, the highl
 {: shortdesc}
 
 Classic regions with one data center are managed from the regional endpoint located in the nearest region that supports classic data centers, such as `mon01` to `us-east` or `sao01` to `us-south`.
-
-The Milan (`mil01`) datacenter is deprecated and closes on 31 October 2025. Migrate your {{site.data.keyword.containerlong_notm}} on IBM Cloud clusters currently hosted in `mil01` to another IBM Cloud datacenter by 31 October 2025.
-{: deprecated}
 
 | Geography | Country | Metro | Region | Zone | Managed from region |
 | --- | --- | --- | --- | --- | --- |
@@ -191,7 +188,7 @@ To switch regions, use the `ibmcloud ks init` [command](/docs/containers?topic=c
 | --- | --- | --- |
 | AP North (standard clusters only) | Tokyo | che01, sng01, **tok02, tok04, tok05** |
 | AP South | Sydney | **syd01, syd04, syd05** |
-| EU Central | Frankfurt | ams03, **fra02, fra04, fra05**, mil01, par01 |
+| EU Central | Frankfurt | ams03, **fra02, fra04, fra05**, par01 |
 | UK South | London | lon02, **lon04, lon05, lon06** |
 | US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
 | US South | Dallas | **dal10, dal12, dal13**, sjc03, sjc04, sao01 |
