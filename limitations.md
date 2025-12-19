@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-10-27"
+lastupdated: "2025-12-19"
 
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
@@ -89,8 +89,6 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Ingress ALBs |  \n - The Ingress application load balancer (ALB) can process 32,768 connections per second. If your Ingress traffic exceeds this number,  [scale up the number of ALB replicas](/docs/containers?topic=containers-comm-ingress-annotations) in your cluster to handle the increased workload. \n - ALBs that run the [{{site.data.keyword.containerlong_notm}} custom Ingress image](/docs/containers?topic=containers-managed-ingress-about) only: HTTP/2 is not supported. \n - ALBs that run the [{{site.data.keyword.containerlong_notm}} custom Ingress image] (/docs/containers?topic=containers-managed-ingress-about) only: The names of the `ClusterIP` services that expose your apps must be unique across all namespaces in your cluster.  |
 | Istio managed add-on | See [Istio add-on limitations](/docs/containers?topic=containers-istio-about#istio_limitations). |
 | Network load balancers (NLB)| - You can't update an existing NLB from version 1.0 to 2.0. You must create a new NLB 2.0. \n - You can't create subdomains for private NLBs. \n - You can register up to 128 subdomains. This limit can be lifted on request by opening a [support case](/docs/account?topic=account-using-avatar).  |
-| (Deprecated) strongSwan VPN service | See [strongSwan VPN service considerations](/docs/containers?topic=containers-vpn#strongswan_limitations). |
-| Service IP addresses | You can have 65,000 IP addresses per cluster in the 172.21.0.0/16 range that you can assign to Kubernetes services within the cluster. |
 | Subnets per VLAN | Each VLAN has a limit of 40 subnets. |
 {: caption="Classic cluster networking limitations"}
 
@@ -152,7 +150,6 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Network speeds | [VPC profile network speeds](/docs/vpc?topic=vpc-profiles) refer to the speeds of the worker node interfaces. The bandwidth available for VPC instances is shared between storage and network traffic. By default, the storage allocation is 25% of maximum bandwidth. Network speed, as shown in the tables below, is the network bandwidth available to a worker with a single network interface after deducting the default 25% storage bandwidth allocation. |
 | NodePort | You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. To access an app from the internet, you must use a VPC load balancer or Ingress service instead. |
 | Pod network | VPC access control lists (ACLs) filter incoming and outgoing traffic for your cluster at the subnet level, and security groups filter incoming and outgoing traffic for your cluster at the worker nodes level. To control traffic within the cluster at the pod-to-pod level, you can't use VPC security groups or ACLs. Instead, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-kube-policies), which can control the pod-level network traffic that uses IP in IP encapsulation. |
-| strongSwan VPN service | The strongSwan service is not supported. To connect your cluster to resources in an on-premises network or another VPC, see [Using VPN with your VPC](/docs/vpc?topic=vpc-vpn-onprem-example). |
 | Subnets |  \n - See [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations). \n - Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.  |
 | VPC load balancer | See [VPC load balancer limitations](/docs/containers?topic=containers-vpclb-about#vpclb_limit). |
 {: caption="VPC cluster networking limitations"}

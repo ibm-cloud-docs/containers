@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-05-29"
+lastupdated: "2025-12-19"
 
 
 keywords: containers, kubernetes, help, network, connectivity, {{site.data.keyword.containerlong_notm}}
@@ -47,7 +47,6 @@ If your worker node is not functioning as expected, you can follow these steps t
 
 1. [Update your cluster and worker nodes to the latest version](/docs/containers?topic=containers-update#update).
 2. [Update your command line tools](/docs/containers?topic=containers-cli-update).
-3. [Run tests in the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool). 
 
 
 ## Debugging your worker node

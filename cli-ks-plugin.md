@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2025
-lastupdated: "2025-12-12"
+lastupdated: "2025-12-19"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -107,32 +107,6 @@ Minimum required permissions
 ibmcloud ks cluster addon disable alb-oauth-proxy --cluster my_cluster
 ```
 {: pre}
-
-#### `ibmcloud ks cluster addon disable debug-tool`
-{: #cs_cluster_addon_disable_debug}
-
-[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
-
-Disable the add-on for the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool.
-{: shortdesc}
-
-```sh
-ibmcloud ks cluster addon disable debug-tool --cluster CLUSTER [-f]
-```
-{: pre}
-
-
-Minimum required permissions
-:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-
-`-c`, `--cluster CLUSTER`
-:    Required: The name or ID of the cluster.
-
-`-f`
-:    Optional: Force the command to run with no user prompts.
-
 
 #### `ibmcloud ks cluster addon disable istio`
 {: #cs_cluster_addon_disable_istio}
@@ -323,38 +297,6 @@ ibmcloud ks cluster addon enable alb-oauth-proxy --cluster my_cluster
 ```
 {: pre}
 
-#### `ibmcloud ks cluster addon enable debug-tool`
-{: #cs_cluster_addon_enable_debug}
-
-[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
-
-Enable the add-on for the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool) in a cluster.
-{: shortdesc}
-
-```sh
-ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [--version VERSION]
-```
-{: pre}
-
-Minimum required permissions
-:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-
-`-c`, `--cluster CLUSTER`
-:    Required: The name or ID of the cluster.
-
-`--version VERSION`
-:    Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.
-
-
-##### Example `addon enable debug-tool` command
-{: #addon-enable-debug-tool}
-
-```sh
-ibmcloud ks cluster addon enable debug-tool --cluster my_cluster
-```
-{: pre}
 
 #### `ibmcloud ks cluster addon enable istio`
 {: #cs_cluster_addon_enable_istio}

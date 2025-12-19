@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2025
-lastupdated: "2025-12-12"
+lastupdated: "2025-12-19"
 
 
 keywords: kubernetes, containers, 134, version 134, 134 update actions
@@ -57,6 +57,13 @@ This information summarizes updates that are likely to have an impact on deploye
 [Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.34. Do not upgrade your cluster to version 1.34 if your apps use Portworx.
 {: important}
 
+
+[CoreDNS](/docs/containers?topic=containers-cluster_dns) The default DNS cache time in both CoreDNS and NodeLocal DNS configurations has been increased from 30 seconds to 120 seconds.
+{: important}
+
+Istio add-on version 1.25 is not supported for IBM Cloud Kubernetes Service version 1.34 because the Istio add-on does not support Istio 1.28. Do not update to IBM Cloud Kubernetes Service version 1.34 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=ui#migrate).
+{: important}
+
 ### Update before master
 {: #before_134}
 
@@ -64,19 +71,20 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description |
 | --- | --- |
-| **Action Required**: DRA Label Update | If you are using Dynamic Resource Allocation (DRA) with admin access, the label `resource.k8s.io/admin-access` has been renamed to `resource.kubernetes.io/admin-access`. Before upgrading, apply the new label `resource.kubernetes.io/admin-access=true` to any namespaces that currently have the old label. You can keep both labels during the upgrade and remove the old one afterwards. |
-| **Action Required**: DRA Drivers |DRA drivers using the v1alpha3 or v1alpha4 APIs will stop working. Ensure your DRA drivers are updated to versions supporting the v1 (or v1beta1) API before upgrading the master. |
+| **Pod Topology Spread**: The implementation of `matchLabelKeys` in `topologySpreadConstraints` now merges into `labelSelector`. | Do not upgrade directly from v1.32 to v1.34 if using this feature; upgrade to v1.33 first. Ensure pods created at v1.32 using `matchLabelKeys` are scheduled or removed before upgrading to v1.34. |
+| **Pod Security Admission**: The `baseline` and `restricted` policies now block the `.host` field in probes and lifecycle handlers (e.g., `livenessProbe`, `httpGet`). | Remove `.host` from your pod configurations if using these policies. |
+| **AppArmor**: AppArmor profiles in `SecurityContext` are no longer synced to the deprecated `container.apparmor.security.beta.kubernetes.io/` annotations. | Update tools to read from `SecurityContext`. |
+| **Leader Election**: The "endpoint-controller" and "workload-leader-election" FlowSchemas were removed. | Workloads relying on `configmapsleases` or `endpointsleases` for leader election must migrate to the `leases` lock type. |
+| **Metrics**: `apiserver_cache_list_fetched_objects_total`, `apiserver_cache_list_returned_objects_total`, `apiserver_cache_list_total` replace `resource_prefix` label with API `group` and `resource` labels. |
+| **Metrics**: `apiserver_selfrequest_total` add a API `group` label. `apiserver_watch_events_sizes` and `apiserver_watch_events_total` replace API `kind` label with `resource` label.  \n - `apiserver_request_body_size_bytes`, `apiserver_storage_events_received_total`, `apiserver_storage_list_evaluated_objects_total`, `apiserver_storage_list_fetched_objects_total`, `apiserver_storage_list_returned_objects_total`, `apiserver_storage_list_total`, `apiserver_watch_cache_events_dispatched_total`, `apiserver_watch_cache_events_received_total`, `apiserver_watch_cache_initializations_total`, `apiserver_watch_cache_resource_version`, `watch_cache_capacity`, `apiserver_init_events_total`, `apiserver_terminated_watchers_total`, `watch_cache_capacity_increase_total`, `watch_cache_capacity_decrease_total`, `apiserver_watch_cache_read_wait_seconds`, `apiserver_watch_cache_consistent_read_total`, `apiserver_storage_consistency_checks_total`, `etcd_bookmark_counts`, `storage_decode_errors_total` extract the API group from `resource` label and put it in new `group` label. ([#131845](https://github.com/kubernetes/kubernetes/pull/131845)) [SIG API Machinery, Etcd, Instrumentation and Testing] |
+| **Containerd 2.0 Docker Schema 1**: Docker Schema 1 image format is no longer supported by default. | Ensure your images are Docker Schema 2 or OCI compliant. |
+| **Containerd 2.0 CRI API**: The CRI v1alpha2 API has been removed. | Ensure Kubernetes components and tools interacting with containerd are using the CRI v1 API. |
+| **Containerd 2.0 Runtimes**: Runtime V1 and Runc V1 shims have been removed. | Verify your workloads are compatible with containerd's Runtime V2 shims. |
+| **Containerd 2.0 - Unprivileged Ports and ICMP**: Unprivileged ports and ICMP are now enabled by default. | Review your application security contexts and remove additional capabilities or sysctls (like `NET_BIND_SERVICE` or `net.ipv4.ping_group_range`) that were previously required for these features. Consult the [upstream changelogs](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md#unprivileged-ports-and-icmp-by-default-for-cri) for the details. |
 {: caption="Changes to make before you update the master to Kubernetes 1.34" caption-side="bottom"}
 
 
 ### Update after master
 {: #after_134}
 
-The following table shows the actions that you must take after you update the Kubernetes master.
-
-
-| Type | Description |
-| --- | --- |
-| **Deprecated**: Deprecated `MessageCountMap` and `CreateAggregateFromMessageCountMap` from `apimachinery/pkg/util/errors` package. | Use `errors.Join` instead. For more information, see [`apimachinery/pkg/util/errors`](https://github.com/kubernetes/kubernetes/issues/131726){: external} |
-| **Deprecated**: Deprecated the preferences field in kubeconfig in favor of kuberc. | No specific action required. For more information, see [Separate kubectl user preferences from cluster configs](https://github.com/kubernetes/enhancements/issues/3104){: external} |
-{: caption="Changes to make after you update the master to Kubernetes 1.34" caption-side="bottom"}
+No actions required.

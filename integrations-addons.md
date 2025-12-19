@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2025
-lastupdated: "2025-09-02"
+lastupdated: "2025-12-19"
 
 
 keywords: kubernetes, helm
@@ -21,7 +21,7 @@ subcollection: containers
 # Adding services by using managed add-ons
 {: #managed-addons}
 
-Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enhance your cluster with extra capabilities and open-source capabilities, such as Istio,  the Diagnostics and Debug Tool, {{site.data.keyword.block_storage_is_short}}, or the Cluster Autoscaler. The version of the driver, plug-in, or open-source tool that you add to your cluster is tested by IBM and approved to be used in {{site.data.keyword.containerlong_notm}}.
+Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enhance your cluster with extra capabilities. The version of the driver, plug-in, or open-source tool that you add to your cluster is tested by IBM and approved to be used in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 The managed add-ons that you can install in your cluster depend on the type of cluster, the container platform, and the infrastructure provider that you choose.
@@ -45,7 +45,6 @@ For more information about the prerequisites for each add-on, see:
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
 - [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-install-addon)
 - [Cluster Autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon)
-- [Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool)
 - [{{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-install)
 - [Istio](/docs/containers?topic=containers-istio)
 - [Static routes](/docs/containers?topic=containers-static-routes)

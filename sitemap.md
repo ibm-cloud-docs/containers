@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-12-17"
+lastupdated: "2025-12-19"
 
 
 keywords: containers
@@ -2262,44 +2262,6 @@ subcollection: containers
 
 [Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
 
-* [(Deprecated) Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)
-
-* [strongSwan VPN service considerations](/docs/containers?topic=containers-vpn#strongswan_limitations)
-
-* [Configuring the strongSwan VPN in a multizone cluster](/docs/containers?topic=containers-vpn#vpn_multizone)
-
-    * [Configuring a single outbound VPN connection from a multizone cluster](/docs/containers?topic=containers-vpn#multizone_one_outbound)
-
-    * [Configuring a single inbound VPN connection to a multizone cluster](/docs/containers?topic=containers-vpn#multizone_one_inbound)
-
-    * [Configuring an inbound VPN connection in each zone of a multizone cluster](/docs/containers?topic=containers-vpn#multizone_multiple)
-
-* [Configuring the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_configure)
-
-    * [Step 1: Get the strongSwan Helm chart](/docs/containers?topic=containers-vpn#strongswan_1)
-
-    * [Step 2: Configure basic IPSec settings](/docs/containers?topic=containers-vpn#strongswan_2)
-
-    * [Step 3: Select inbound or outbound VPN connection](/docs/containers?topic=containers-vpn#strongswan_3)
-
-    * [Step 4: Access cluster resources over the VPN connection](/docs/containers?topic=containers-vpn#strongswan_4)
-
-    * [Step 5: Access remote network resources over the VPN connection](/docs/containers?topic=containers-vpn#strongswan_5)
-
-    * [Step 6 (optional): Enable monitoring with the Slack webhook integration](/docs/containers?topic=containers-vpn#strongswan_6)
-
-    * [Step 7: Deploy the Helm chart](/docs/containers?topic=containers-vpn#strongswan_7)
-
-* [Testing and verifying strongSwan VPN connectivity](/docs/containers?topic=containers-vpn#vpn_test)
-
-* [Limiting strongSwan VPN traffic by namespace or worker node](/docs/containers?topic=containers-vpn#limit)
-
-    * [Limiting strongSwan VPN traffic by namespace](/docs/containers?topic=containers-vpn#limit_namespace)
-
-    * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpn#limit_worker)
-
-* [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
-
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
 
@@ -4417,7 +4379,7 @@ subcollection: containers
 
     * [Worker node fix pack 1.34.1_1531, released 03 December 2025](/docs/containers?topic=containers-changelog_134#cl-boms-1341_1531_W)
 
-    * [Worker node fix pack 1.34.1_1530, released 17 November 2025](/docs/containers?topic=containers-changelog_134#cl-boms-1341_1530_W)
+    * [Change log for master fix pack 1.34.1_1529 and worker node fix pack 1.34.1_1530, released 20 November 2025](/docs/containers?topic=containers-changelog_134#1341_1529M_and_1341_1530W)
 
 [1.34 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-134#cis-benchmark-134)
 
@@ -7188,17 +7150,6 @@ subcollection: containers
 * [Subscribe to RSS](/docs/containers?topic=containers-best-practices-service#bp-4)
 
 
-## Running tests with the Diagnostics and Debug Tool
-{: #sitemap_running_tests_with_the_diagnostics_and_debug_tool}
-
-
-[Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-tool)
-
-* [Enable and run the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
-
-* [Removing the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool#debug-remove)
-
-
 ## Troubleshooting apps in {{site.data.keyword.containerlong_notm}}
 {: #sitemap_troubleshooting_apps_in_}
 
@@ -7627,17 +7578,11 @@ subcollection: containers
 
 [Why does DNS resolution fail when CoreDNS pods are restarted?](/docs/containers?topic=containers-coredns_lameduck#coredns_lameduck)
 
-[Why can't I establish VPN connectivity with the strongSwan Helm chart?](/docs/containers?topic=containers-cs_vpn_fails#cs_vpn_fails)
-
 [Why does my worker node show a `NetworkUnavailable` error?](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node)
 
 * [Workarounds for `calico-node`](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node-work)
 
 [I deleted a portable subnet and now my Classic cluster my Load Balancers are failing. How do I recover?](/docs/containers?topic=containers-ts-network-subnet-recover#ts-network-subnet-recover)
-
-[Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release#cs_strongswan_release)
-
-[Why does strongSwan VPN connectivity fail after I add or delete worker nodes?](/docs/containers?topic=containers-cs_vpn_fails_worker_add#cs_vpn_fails_worker_add)
 
 [Why are certain packets dropped on the public VLAN?](/docs/containers?topic=containers-mangle-table#mangle-table)
 

@@ -1,11 +1,11 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-03-15"
+  years: 2014, 2025
+lastupdated: "2025-12-19"
 
 
-keywords: kubernetes, vyatta, strongswan, ipsec, on-premises, vpn, gateway, static route, routing table
+keywords: containers, kubernetes, vyatta, ipsec, on-premises, vpn, gateway, static route, routing table
 
 subcollection: containers
 
@@ -214,10 +214,3 @@ After you [enable the static route add-on](#enable-add-on), you can create and a
             subnet: 10.94.227.46/24
     ```
     {: screen}
-
-
-
-
-
-
-
