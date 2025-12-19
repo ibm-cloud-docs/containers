@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2025
 
-lastupdated: "2025-12-17"
+lastupdated: "2025-12-19"
 
 
 keywords: change log, version history, 1.34
@@ -86,7 +86,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: shortdesc}
 
 | Component | Version | Description |
-| ---- | ---- | ---- |
+| ---- | ---- | --- |
 |UBUNTU 24|6.8.0-87-generic|Resolves the following CVEs: [CVE-2025-37838](https://nvd.nist.gov/vuln/detail/CVE-2025-37838){: external}, [CVE-2025-38118](https://nvd.nist.gov/vuln/detail/CVE-2025-38118){: external}, [CVE-2025-38352](https://nvd.nist.gov/vuln/detail/CVE-2025-38352){: external}, [CVE-2025-40300](https://nvd.nist.gov/vuln/detail/CVE-2025-40300){: external}, [CVE-2025-6075](https://nvd.nist.gov/vuln/detail/CVE-2025-6075){: external}, and [CVE-2025-8291](https://nvd.nist.gov/vuln/detail/CVE-2025-8291){: external}.|
 |Kubernetes|1.34.1|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.1).|
 |containerd|2.2.0|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v2.2.0).|
@@ -95,19 +95,27 @@ The following table shows the components included in the worker node fix pack 1.
 {: caption="1.34.1_1531 fix pack." caption-side="bottom"}
 {: #cl-boms-1341_1531_W-component-table}
 
+### Change log for master fix pack 1.34.1_1529 and worker node fix pack 1.34.1_1530, released 20 November 2025
+{: #1341_1529M_and_1341_1530W}
 
-### Worker node fix pack 1.34.1_1530, released 17 November 2025
-{: #cl-boms-1341_1530_W}
-
-The following table shows the components included in the worker node fix pack 1.34.1_1530. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
-{: shortdesc}
-
-| Component | Version | Description |
-| ---- | ---- | ---- |
-|UBUNTU_24_04|6.8.0-86-generic|CIS benchmark compliance [2.2.4](https://workbench.cisecurity.org/sections/2891131/recommendations/4685418), [2.3.2.1](https://workbench.cisecurity.org/sections/2891135/recommendations/4685426), [5.1.1](https://workbench.cisecurity.org/sections/2891075/recommendations/4685147)Resolves the following CVEs: [CVE-2024-53008](https://nvd.nist.gov/vuln/detail/CVE-2024-53008){: external}, and [CVE-2025-32464](https://nvd.nist.gov/vuln/detail/CVE-2025-32464){: external}.|
-|Kubernetes|1.34.1|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.1).|
-|containerd|2.1.5|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v2.1.5).|
-|HAProxy|fbe9b8146f23bbd12b2566a79fa897d5981e7273|N/A|
-|GPU Device Plug-in and Installer|1e3d028d8b22980ae70339db3b7f41575fe5ee5f|Resolves the following CVEs: [CVE-2025-5318](https://nvd.nist.gov/vuln/detail/CVE-2025-5318){: external}.|
-{: caption="1.34.1_1530 fix pack." caption-side="bottom"}
-{: #cl-boms-1341_1530_W-component-table}
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.29.5 | v3.29.6 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3296-bug-fix-release). |
+| Cluster health control-plane operator | v0.1.8 | v0.1.11 | New version contains updates and security fixes. |
+| Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
+| containerd | 1.7.29 | 2.1.5 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v2.1.5). |
+| CoreDNS | v1.12.2 | v1.12.4 | See the [CoreDNS release notes](https://coredns.io/tags/notes/). |
+| etcd | v3.5.22 | v3.5.24 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.24). |
+| IBM Cloud Block Storage driver and plug-in | v2.5.21 | v2.5.22 | New version contains updates and security fixes. |
+| IBM Cloud Controller Manager | v1.33.5-1 | v1.34.1-6 | New version contains updates and security fixes. |
+| IBM Cloud File Storage for Classic plug-in and monitor | 450 | 452 | New version contains updates and security fixes. |
+| IBM Cloud Metrics Server Config Watcher | v1.1.6 | v1.1.9 | New version contains updates and security fixes. |
+| IBM Cloud RBAC Operator | 38dc95c | 8a12251 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.17 | 2.10.18 | New version contains updates and security fixes. |
+| Kubernetes | 1.33.5 | 1.34.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.1). |
+| Kubernetes Metrics Server | v0.7.2 | v0.8.0 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.8.0). |
+| Kubernetes NodeLocal DNS cache | 1.26.4 | 1.26.5 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.26.5). |
+| Kubernetes snapshot controller | v8.2.1 | v8.3.0 | See the [Kubernetes snapshot controller release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v8.3.0). |
+| Portieris admission controller | v0.13.30 | v0.13.31 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.13.31). |
+| Tigera Operator | v1.36.13 | v1.36.14 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.14). |
+{: caption="Changes since 1.33" caption-side="bottom"}

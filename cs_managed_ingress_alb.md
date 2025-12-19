@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2025
-lastupdated: "2025-11-30"
+lastupdated: "2025-12-19"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -323,7 +323,7 @@ ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas
 `--custom-metrics-file FILE`
 :   **Autoscaling by using custom metrics**: Specify the name of the configuration file that defines custom metrics and target values for autoscaling. Note that you are responsible for installing and configuring a metrics provider, such as Prometheus. You cannot use this option with the `--cpu-average-utilization` option.
 
-Example custom metrics YAML file. Configure your custom metrics in a YAML file. Save the file and specify the file name with the `--custom-metrics-file` command option. For more information on writing your custom metrics spec file, See the Kubernetes documentation on [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-resource-metrics){: external} or the [MetricSpec API documentation](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#metricspec-v2-autoscaling){: external}).
+Example custom metrics YAML file. Configure your custom metrics in a YAML file. Save the file and specify the file name with the `--custom-metrics-file` command option. For more information on writing your custom metrics spec file, See the Kubernetes documentation on [Horizontal Pod Autoscaling](https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/#support-for-resource-metrics){: external} or the [MetricSpec API documentation](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.26/#metricspec-v2-autoscaling){: external}.
 
 ```yaml
 - type: Object

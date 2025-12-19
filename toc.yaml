@@ -390,7 +390,6 @@ toc:
       - include: ../account/status-bps.md
       - faqs.md
       - best-practices.md
-      - ts-debug-tool.md
       - ts-cluster-debug.md
       - topicgroup:
           label: Troubleshooting
@@ -485,11 +484,8 @@ toc:
               topics:
               - ts-pod-networking.md
               - ts-network-iks-coredns-restart.md
-              - ts-network-strongswan-vpn.md
               - ts-network-calico-node.md
               - ts-network-subnet-recover.md
-              - ts-network-strongswan-install-new.md
-              - ts-network-strongswan-network-nodes.md
               - ts-network-mangle-table.md
               - ts-calico-log-level.md
               - ts-keepalive-sysctl.md
