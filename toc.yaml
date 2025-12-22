@@ -517,6 +517,7 @@ toc:
               - ts-lb-sync-failed.md
               - ts-lb-vpc-healthcheck.md
               - ts-nlb-vpc-zone.md
+              - ts-vpc-lb-sg-protocol-fail.md
           - topicgroup:
               label: Ingress
               topics:
