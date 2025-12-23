@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2025
-lastupdated: "2025-12-19"
+lastupdated: "2025-12-22"
 
 
 keywords: containers
@@ -7662,6 +7662,8 @@ subcollection: containers
 [Why are VPC load balancer health checks failing on my worker nodes?](/docs/containers?topic=containers-vpc-lb-healthcheck-fail#vpc-lb-healthcheck-fail)
 
 [VPC Clusters: My VPC NLB has a zone error and does not update](/docs/containers?topic=containers-ts-nlb-vpc-zone#ts-nlb-vpc-zone)
+
+[VPC clusters: Security Group Protocol error creating or updating LoadBalancer](/docs/containers?topic=containers-vpc_ts_lb_security_group_error#vpc_ts_lb_security_group_error)
 
 
 ### Ingress
