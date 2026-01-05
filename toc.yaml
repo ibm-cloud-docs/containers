@@ -390,7 +390,6 @@ toc:
       - include: ../account/status-bps.md
       - faqs.md
       - best-practices.md
-      - ts-cluster-debug.md
       - topicgroup:
           label: Troubleshooting
           topics:
@@ -448,6 +447,7 @@ toc:
           - topicgroup:
               label: Apps and services
               topics:
+              - ts-cluster-debug.md
               - ts-app-01-debug.md
               - ts-app-02-imgpull.md
               - ts-app-container-start.md

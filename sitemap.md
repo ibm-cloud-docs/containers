@@ -7164,27 +7164,6 @@ subcollection: containers
 * [Subscribe to RSS](/docs/containers?topic=containers-best-practices-service#bp-4)
 
 
-## Troubleshooting apps in {{site.data.keyword.containerlong_notm}}
-{: #sitemap_troubleshooting_apps_in_}
-
-
-[Troubleshooting apps in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-debug_clusters#debug_clusters)
-
-* [Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-debug_clusters#troubleshooting-environments)
-
-* [Get your cluster state and status and review the common issues](/docs/containers?topic=containers-debug_clusters#ts-2)
-
-* [Gather details and document the problem](/docs/containers?topic=containers-debug_clusters#ts-3)
-
-* [Running tests to rule in or rule out each component](/docs/containers?topic=containers-debug_clusters#ts-4)
-
-* [Gathering more data](/docs/containers?topic=containers-debug_clusters#ts-5)
-
-* [Reach out in Slack or review user forums for similar issues](/docs/containers?topic=containers-debug_clusters#ts-6)
-
-* [Next steps](/docs/containers?topic=containers-debug_clusters#advanced-ts-next)
-
-
 ## Troubleshooting
 {: #sitemap_troubleshooting}
 
@@ -7466,6 +7445,22 @@ subcollection: containers
 ### Apps and services
 {: #sitemap_apps_and_services}
 
+
+[Troubleshooting apps in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-debug_clusters#debug_clusters)
+
+* [Review the status of {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-debug_clusters#troubleshooting-environments)
+
+* [Get your cluster state and status and review the common issues](/docs/containers?topic=containers-debug_clusters#ts-2)
+
+* [Gather details and document the problem](/docs/containers?topic=containers-debug_clusters#ts-3)
+
+* [Running tests to rule in or rule out each component](/docs/containers?topic=containers-debug_clusters#ts-4)
+
+* [Gathering more data](/docs/containers?topic=containers-debug_clusters#ts-5)
+
+* [Reach out in Slack or review user forums for similar issues](/docs/containers?topic=containers-debug_clusters#ts-6)
+
+* [Next steps](/docs/containers?topic=containers-debug_clusters#advanced-ts-next)
 
 [Debugging app deployments](/docs/containers?topic=containers-debug_apps#debug_apps)
 
