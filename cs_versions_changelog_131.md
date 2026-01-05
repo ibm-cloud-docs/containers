@@ -1,9 +1,9 @@
 ---
 
 copyright:
-  years: 2024, 2025
+  years: 2024, 2026
 
-lastupdated: "2025-12-17"
+lastupdated: "2026-01-05"
 
 
 keywords: change log, version history, 1.31
@@ -47,6 +47,23 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.31
 {: #131_components}
+
+
+### Worker node fix pack 1.31.14_1584, released 29 December 2025
+{: #cl-boms-13114_1584_W}
+
+The following table shows the components included in the worker node fix pack 1.31.14_1584. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU 24|6.8.0-90-generic|Resolves the following CVEs: [CVE-2025-39993](https://nvd.nist.gov/vuln/detail/CVE-2025-39993){: external}, [CVE-2025-40018](https://nvd.nist.gov/vuln/detail/CVE-2025-40018){: external}, [CVE-2025-39964](https://nvd.nist.gov/vuln/detail/CVE-2025-39964){: external}, [CVE-2025-37958](https://nvd.nist.gov/vuln/detail/CVE-2025-37958){: external}, and [CVE-2025-38666](https://nvd.nist.gov/vuln/detail/CVE-2025-38666){: external}.|
+|Kubernetes|1.31.14|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.14).|
+|containerd|1.7.29|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.29).|
+|HAProxy|d04e61c5b29aa5328bc72455edb95e08e8f6d85c|Resolves the following CVEs: [CVE-2025-9086](https://nvd.nist.gov/vuln/detail/CVE-2025-9086){: external}.|
+|GPU Device Plug-in and Installer|0057dcb30bc3a8446f9a4eeef56228e56e935b66|Resolves the following CVEs: [CVE-2024-5642](https://nvd.nist.gov/vuln/detail/CVE-2024-5642){: external}, [CVE-2025-6075](https://nvd.nist.gov/vuln/detail/CVE-2025-6075){: external}, [CVE-2025-8291](https://nvd.nist.gov/vuln/detail/CVE-2025-8291){: external}, and [CVE-2025-6069](https://nvd.nist.gov/vuln/detail/CVE-2025-6069){: external}.|
+{: caption="1.31.14_1584 fix pack." caption-side="bottom"}
+{: #cl-boms-13114_1584_W-component-table}
 
 
 ### Worker node fix pack 1.31.14_1583, released 16 December 2025
