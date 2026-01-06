@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-10-27"
+  years: 2014, 2026
+lastupdated: "2026-01-06"
 
 
 keywords: kubernetes, helm
@@ -80,7 +80,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 
 |Service|Description|Classic|VPC|
 |----|------------|----|----|
-|CoScale|Monitor worker nodes, containers, replica sets, replication controllers, and services with [CoScale](https://newrelic.com/blog/nerd-life/coscale){: external}.|Yes|Yes|
+|CoScale|Monitor worker nodes, containers, replica sets, replication controllers, and services with [CoScale](https://newrelic.com/blog/news/coscale){: external}.|Yes|Yes|
 |Datadog|Monitor your cluster and view infrastructure and application performance metrics with [Datadog](https://www.datadoghq.com/){: external}.|Yes|Yes|
 |{{site.data.keyword.logs_full_notm}}|Add log management capabilities to your cluster by deploying an {{site.data.keyword.logs_full_notm}} agent to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.logs_full_notm}}](/docs/cloud-logs?topic=cloud-logs-agent-helm-kube-deploy).|Yes|Yes|
 |{{site.data.keyword.mon_full_notm}}|Gain operational visibility into the performance and health of your apps by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/monitoring?topic=monitoring-kubernetes_cluster#kubernetes_cluster).|Yes|Yes|

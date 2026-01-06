@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-12-19"
+  years: 2014, 2026
+lastupdated: "2026-01-06"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -83,7 +83,7 @@ Disable a managed add-on in an existing cluster. This command must be combined w
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
 
-Disable the add-on for the [ALB OAuth Proxy](/docs/containers?topic=containers-debug-tool) in a cluster.
+Disable the add-on for the ALB OAuth Proxy in a cluster.
 {: shortdesc}
 
 ```sh
@@ -268,7 +268,7 @@ Enable a managed add-on in an existing cluster. This command must be combined wi
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
-Enable the add-on for the [ALB OAuth Proxy](/docs/containers?topic=containers-debug-tool) in a cluster. When your ALBs run the Kubernetes Ingress image, you can use the ALB OAuth proxy to enforce authentication for your apps by configuring Ingress with {{site.data.keyword.appid_full_notm}}.
+Enable the add-on for the ALB OAuth Proxy in a cluster. When your ALBs run the Kubernetes Ingress image, you can use the ALB OAuth proxy to enforce authentication for your apps by configuring Ingress with {{site.data.keyword.appid_full_notm}}.
 {: shortdesc}
 
 ```sh

@@ -3027,7 +3027,7 @@ subcollection: containers
 
 * [Setting up Helm](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-helm-install)
 
-* [Modifying existing default gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-custom-gateway)
+* [Modifying existing default gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-custom-gateway-defaults)
 
 * [Creating additional gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#custom_gateways_helm_add)
 
