@@ -328,12 +328,9 @@ toc:
           - cli-map.md
           - cli-ks-plugin.md
           - cli-changelog.md
-      - topicgroup:
+      - link:
           label: API reference
-          topics:
-          - link:
-              label: IBM Cloud Kubernetes Service API
-              href: https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2
+          href: https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2
       - addon_landing.md
       - topicgroup:
           label: Add-on version history

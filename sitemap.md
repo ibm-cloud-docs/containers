@@ -5459,10 +5459,9 @@ subcollection: containers
 
 
 ## API reference
-{: #sitemap_api_reference}
+{: #sitemap_api-reference}
 
-
-[IBM Cloud Kubernetes Service API](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external}
+[API reference](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external}
 
 
 ## Add-ons for {{site.data.keyword.containerlong_notm}}
