@@ -7682,7 +7682,7 @@ subcollection: containers
 
 [VPC Clusters: My VPC NLB has a zone error and does not update](/docs/containers?topic=containers-ts-nlb-vpc-zone#ts-nlb-vpc-zone)
 
-[VPC clusters: Security Group Protocol error creating or updating LoadBalancer](/docs/containers?topic=containers-vpc_ts_lb_security_group_error#vpc_ts_lb_security_group_error)
+[VPC clusters: Security group protocol error creating or updating a LoadBalancer](/docs/containers?topic=containers-vpc_ts_lb_security_group_error#vpc_ts_lb_security_group_error)
 
 
 ### Ingress
