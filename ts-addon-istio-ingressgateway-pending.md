@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2023, 2024
-lastupdated: "2024-01-03"
+  years: 2023, 2026
+lastupdated: "2026-01-06"
 
 
 keywords: istio, ingress gateway, trouble shooting, pending, istio pods
@@ -36,7 +36,14 @@ Events:
 The zone label keys on the `istio-ingressgateway` pods might not match the labels of any of your nodes. This prevents node affinity rules from scheduling pods to nodes.
 {: tsCauses}
 
-To check the zone label keys, run **`kubectl describe cm managed-istio-custom -n ibm-operators`** to view the managed Istio custom ConfigMap. Check the ConfigMap for keys in the `istio-ingressgateway-zone-<#>` format, such as `istio-ingressgateway-zone-1`. If the keys are not present in the ConfigMap, the pod and worker node labels do not match.
+Run the following command to view the managed Istio custom ConfigMap and check the zone label keys.
+
+```sh
+kubectl describe cm managed-istio-custom -n ibm-operators
+```
+{: pre}
+
+Check the ConfigMap for keys in the `istio-ingressgateway-zone-<#>` format, such as `istio-ingressgateway-zone-1`. If the keys are not present in the ConfigMap, the pod and worker node labels do not match.
 
 To resolve the issue, restart the Istio setup job that adds the zone labels into the ConfigMap.
 {: tsResolve}
@@ -51,6 +58,3 @@ To resolve the issue, restart the Istio setup job that adds the zone labels into
 2. Wait 15 minutes for the job to update the ConfigMap and for the `istio-ingressgateway` pods to pick up the zone labels. 
 
 3. Run `kubectl get pod -n istio-system` to check the status of the pods.
-
-
-
