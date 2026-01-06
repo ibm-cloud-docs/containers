@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-11-12"
+  years: 2014, 2026
+lastupdated: "2026-01-06"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -57,7 +57,7 @@ Before you begin deploying and managing custom gateways, set up Helm 3.18.4 or e
 
 
 ## Modifying existing default gateways
-{: #istio-custom-gateway}
+{: #istio-custom-gateway-defaults}
 
 The add-on deploys one customizable `istio-ingressgateway` and one customizable `istio-egressgateway`.  To customize the gateway ConfigMaps for the Helm charts, instead of adding a key-value pair like you do for the control plane, edit the multiline string in the `value.yaml` key.
 
