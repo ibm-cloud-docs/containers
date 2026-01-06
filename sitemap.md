@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-01-05"
+lastupdated: "2026-01-06"
 
 
 keywords: containers
@@ -237,6 +237,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan26)
+
+    * [06 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan0626)
+
+        * Ingress ALB patch updates.
 
 * [December 2025](/docs/containers?topic=containers-containers-relnotes#containers-dec25)
 
@@ -6484,6 +6490,8 @@ subcollection: containers
 
 * [Version 1.13.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.13.2)
 
+    * [1.13.2_306610659_iks, released 06 January 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_306610659_iks)
+
     * [1.13.2_303823545_iks, released 04 December 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_303823545_iks)
 
     * [1.13.2_301309576_iks, released 02 December 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_301309576_iks)
@@ -6497,6 +6505,8 @@ subcollection: containers
     * [1.13.2_7820_iks, released 16 September 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1132_7820_iks)
 
 * [Version 1.12.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.12.1)
+
+    * [1.12.1_307024864_iks, released 06 January 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_307024864_iks)
 
     * [1.12.1_301902064_iks, released 02 December 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_301902064_iks)
 
@@ -6523,6 +6533,8 @@ subcollection: containers
     * [1.12.1_7490_iks, released 02 April 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1121_7490_iks)
 
 * [Version 1.11.2](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.11.2)
+
+    * [1.11.2_306610636_iks, released 06 January 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_306610636_iks)
 
     * [1.11.2_301599557_iks, released 02 December 2025](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1112_301599557_iks)
 
@@ -7849,6 +7861,12 @@ subcollection: containers
 [Why do I see a `MetadataServiceNotEnabled` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-access#ts-storage-vpc-file-eit-access)
 
 [Why does PVC creation fail for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-pvc-fails#ts-storage-vpc-file-eit-pvc-fails)
+
+[Classic: Why am I denied server access when mounting a volume to a worker node?](/docs/containers?topic=containers-ts-storage-file-access-denied#ts-storage-file-access-denied)
+
+* [In the CLI](/docs/containers?topic=containers-ts-storage-file-access-denied#cli)
+
+* [In the UI](/docs/containers?topic=containers-ts-storage-file-access-denied#ui)
 
 [Storage: Feedback, questions, and support](/docs/containers?topic=containers-getting_help_storage#getting_help_storage)
 
