@@ -322,12 +322,6 @@ toc:
               - cs_versions_131.md
               - cs_versions_changelog_131.md
               - cs_benchmarks_131.md
-          - topicgroup:
-              label: Version 1.30
-              topics:
-              - cs_versions_130.md
-              - cs_versions_changelog_130.md
-              - cs_benchmarks_130.md
       - topicgroup:
           label: CLI plug-in reference
           topics:
