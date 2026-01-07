@@ -363,18 +363,6 @@ toc:
           - vpc-flavors.md
           - classic-flavors.md
       - data-portability.md
-      - topicgroup:
-          label: Related links
-          topics:
-          - link:
-              label: Community Kubernetes documentation
-              href: https://kubernetes.io/docs/home/
-          - link:
-              label: IBM Developer - Containers
-              href: https://developer.ibm.com/technologies/containers/
-          - link:
-              label: IBM Developer - Kubernetes
-              href: https://developer.ibm.com/components/kubernetes/
   - navgroup:
       id: help
       topics:
