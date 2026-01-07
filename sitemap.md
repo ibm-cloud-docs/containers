@@ -6848,17 +6848,6 @@ subcollection: containers
 * [Data ownership](/docs/containers?topic=containers-data-portability#data-ownership)
 
 
-## Related links
-{: #sitemap_related_links}
-
-
-[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
-
-[IBM Developer - Containers](https://developer.ibm.com/technologies/containers/){: external}
-
-[IBM Developer - Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
-
-
 ## Monitoring status best practices
 {: #sitemap_monitoring_status_best_practices}
 
