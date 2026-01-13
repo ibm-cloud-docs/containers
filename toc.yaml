@@ -64,17 +64,27 @@ toc:
           - include: ../cli/reference/ibmcloud/uninstall_cli.md
       - api-install.md
       - topicgroup:
-          label: Creating clusters
+          label: Cluster management
           topics:
-          - cluster-create-classic.md
-          - cluster-create-vpc-gen2.md
-          - cluster-create-dedicated-hosts.md
-      - topicgroup:
-          label: Accessing clusters
-          topics:
-          - cs_cluster_access.md
-          - cluster-access-admission-control.md
-          - cluster-access-wireguard.md
+          - topicgroup:
+              label: Creating clusters
+              topics:
+              - cluster-create-classic.md
+              - cluster-create-vpc-gen2.md
+              - cluster-create-dedicated-hosts.md
+          - topicgroup:
+              label: Accessing clusters
+              topics:
+              - cs_cluster_access.md
+              - cluster-access-admission-control.md
+              - cluster-access-wireguard.md
+          - cluster-remove.md
+          - performance.md
+          - topicgroup:
+              label: Managing cluster costs
+              topics:
+              - costs.md
+              - costs-reserved.md
       - topicgroup:
           label: Adding worker nodes
           topics:
@@ -227,55 +237,60 @@ toc:
               - secrets-mgr.md
       - edge-workload-prevent.md
       - edge-sysdig.md
-      - storage-operator.md
-      - storage-block.md
       - topicgroup:
-          label: Setting up Block Storage for VPC
+          label: Storage
           topics:
-          - storage-block-vpc.md
-          - storage-block-vpc-snapshot.md
-          - storage-block-vpc-configmap.md
-          - storage-block-vpc-unmanaged.md
-          - storage-block-vpc-remove.md
-          - storage-block-vpc-migration.md
-          - storage-block-vpc-sc-ref.md
-      - storage-file.md
-      - topicgroup:
-          label: Setting up File Storage for VPC
-          topics:
-          - storage-file-vpc-install.md
-          - storage-file-vpc-apps.md
-          - storage-file-vpc-managing.md
-          - storage-file-vpc-snapshot.md
-          - storage-file-vpc-sc-ref.md
-      - topicgroup:
-          label: Setting up Object Storage
-          topics:
-          - storage-cos-understand.md
-          - storage-cos-install.md
-          - storage-cos-apps.md
-          - storage-cos-tutorial-quota.md
-          - storage-cos-vpc-ip.md
-          - storage-rclone-migration.md
-          - storage-cos-reference.md
-          - storage-cos-install-addon.md
-      - topicgroup:
-          label: Setting up Portworx
-          topics:
-          - storage-portworx-about.md
-          - storage-portworx-plan.md
-          - storage-portworx-preparing.md
-          - storage-portworx-kv-store.md
-          - storage-portworx-encryption.md
-          - storage-portworx-deploy.md
-          - storage-portworx-autopilot.md
-          - storage-portworx-update.md
-          - storage-portworx-recovery.md
-          - storage-portworx-backup.md
-          - storage-portworx-removing.md
-          - storage-portworx-support.md
-      - storage-br.md
-      - storage-utilities.md
+          - topic: storage-operator.md
+            navtitle: Storage Operator add-on
+          - topic: storage-block.md
+            navtitle: Block Storage for Classic
+          - topicgroup:
+              label: Block Storage for VPC add-on
+              topics:
+              - storage-block-vpc.md
+              - storage-block-vpc-snapshot.md
+              - storage-block-vpc-configmap.md
+              - storage-block-vpc-unmanaged.md
+              - storage-block-vpc-remove.md
+              - storage-block-vpc-migration.md
+              - storage-block-vpc-sc-ref.md
+          - storage-file.md
+          - topicgroup:
+              label: File Storage for VPC add-on
+              topics:
+              - storage-file-vpc-install.md
+              - storage-file-vpc-apps.md
+              - storage-file-vpc-managing.md
+              - storage-file-vpc-snapshot.md
+              - storage-file-vpc-sc-ref.md
+          - topicgroup:
+              label: Object Storage
+              topics:
+              - storage-cos-understand.md
+              - storage-cos-install.md
+              - storage-cos-apps.md
+              - storage-cos-tutorial-quota.md
+              - storage-cos-vpc-ip.md
+              - storage-rclone-migration.md
+              - storage-cos-reference.md
+              - storage-cos-install-addon.md
+          - topicgroup:
+              label: Portworx
+              topics:
+              - storage-portworx-about.md
+              - storage-portworx-plan.md
+              - storage-portworx-preparing.md
+              - storage-portworx-kv-store.md
+              - storage-portworx-encryption.md
+              - storage-portworx-deploy.md
+              - storage-portworx-autopilot.md
+              - storage-portworx-update.md
+              - storage-portworx-recovery.md
+              - storage-portworx-backup.md
+              - storage-portworx-removing.md
+              - storage-portworx-support.md
+          - storage-br.md
+          - storage-utilities.md
       - topicgroup:
           label: Enhancing cluster capabilities with integrations
           topics:
@@ -283,13 +298,6 @@ toc:
           - integrations-addons.md
           - integrations-helm.md
           - integrations-svcbind.md
-      - topicgroup:
-          label: Managing cluster costs
-          topics:
-          - costs.md
-          - costs-reserved.md
-      - performance.md
-      - cluster-remove.md
   - navgroup:
       id: reference
       topics:
