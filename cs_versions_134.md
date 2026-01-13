@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2025, 2025
-lastupdated: "2025-12-19"
+  years: 2025, 2026
+lastupdated: "2026-01-13"
 
 
 keywords: kubernetes, containers, 134, version 134, 134 update actions
@@ -51,9 +51,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 This information summarizes updates that are likely to have an impact on deployed apps when you update a cluster to version 1.34. For a complete list of changes, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.34.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_134) for version 1.34. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
 
-[Cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) does not yet support version 1.34. Do not upgrade your cluster to version 1.34 if your cluster uses cluster autoscaler.
-{: important}
-
 [Portworx](/docs/containers?topic=containers-storage_portworx_about) does not yet support version 1.34. Do not upgrade your cluster to version 1.34 if your apps use Portworx.
 {: important}
 
@@ -71,6 +68,7 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description |
 | --- | --- |
+| **Cluster autoscaler**: Only version 2.0.0 and later of the [cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) is supported in version 1.34. | Upgrade your cluster autoscaler to at least version 2.0.0 before updating your cluster to version 1.34. |
 | **Pod Topology Spread**: The implementation of `matchLabelKeys` in `topologySpreadConstraints` now merges into `labelSelector`. | Do not upgrade directly from v1.32 to v1.34 if using this feature; upgrade to v1.33 first. Ensure pods created at v1.32 using `matchLabelKeys` are scheduled or removed before upgrading to v1.34. |
 | **Pod Security Admission**: The `baseline` and `restricted` policies now block the `.host` field in probes and lifecycle handlers (e.g., `livenessProbe`, `httpGet`). | Remove `.host` from your pod configurations if using these policies. |
 | **AppArmor**: AppArmor profiles in `SecurityContext` are no longer synced to the deprecated `container.apparmor.security.beta.kubernetes.io/` annotations. | Update tools to read from `SecurityContext`. |
