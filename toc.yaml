@@ -64,37 +64,27 @@ toc:
           - include: ../cli/reference/ibmcloud/uninstall_cli.md
       - api-install.md
       - topicgroup:
-          label: Cluster management
+          label: Creating clusters
           topics:
-          - topicgroup:
-              label: Creating clusters
-              topics:
-              - cluster-create-classic.md
-              - cluster-create-vpc-gen2.md
-              - cluster-create-dedicated-hosts.md
-          - topicgroup:
-              label: Accessing clusters
-              topics:
-              - cs_cluster_access.md
-              - cluster-access-admission-control.md
-              - cluster-access-wireguard.md
-          - cluster-remove.md
-          - performance.md
-          - topicgroup:
-              label: Managing cluster costs
-              topics:
-              - costs.md
-              - costs-reserved.md
+          - cluster-create-classic.md
+          - cluster-create-vpc-gen2.md
+          - cluster-create-dedicated-hosts.md
       - topicgroup:
-          label: Adding worker nodes
+          label: Accessing clusters
           topics:
-          - add-workers-classic.md
-          - add-workers-vpc.md
+          - cs_cluster_access.md
+          - cluster-access-admission-control.md
+          - cluster-access-wireguard.md
       - topicgroup:
-          label: Managing the cluster and worker node lifecycle
+          label: Managing clusters
           topics:
           - worker-os-check.md
           - update.md
+          - topicgroup:
+              label: Adding worker nodes
+              topics:
+              - add-workers-classic.md
+              - add-workers-vpc.md
           - dedicated-hosts.md
           - host-maintenance.md
           - access-apikey.md
@@ -102,6 +92,13 @@ toc:
           - ubuntu-migrate.md
           - worker-tag-label.md
           - resource-limit-node.md
+          - cluster-remove.md
+          - performance.md
+          - topicgroup:
+              label: Managing cluster costs
+              topics:
+              - costs.md
+              - costs-reserved.md
       - topicgroup:
           label: Setting up encryption
           topics:

@@ -1592,12 +1592,7 @@ subcollection: containers
 * [Refreshing IAM access tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 
-## Cluster management
-{: #sitemap_cluster_management}
-
-
-
-### Creating clusters
+## Creating clusters
 {: #sitemap_creating_clusters}
 
 
@@ -1632,7 +1627,7 @@ subcollection: containers
 [Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
 
-### Accessing clusters
+## Accessing clusters
 {: #sitemap_accessing_clusters}
 
 
@@ -1667,6 +1662,132 @@ subcollection: containers
 * [I need help with a broken webhook. What can I do?](/docs/containers?topic=containers-access_webhooks#access_webhooks-help)
 
 [Accessing private clusters](/docs/containers?topic=containers-cluster-access-wireguard#cluster-access-wireguard)
+
+
+## Managing clusters
+{: #sitemap_managing_clusters}
+
+
+[Checking your cluster version, operating system, and Kubernetes server version](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
+
+* [Checking your cluster master version, worker node version, and worker node operating system in the console](/docs/containers?topic=containers-flavor-os-check&interface=ui#cluster-version-ui)
+
+* [Checking your cluster master version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#cluster-version-cli)
+
+* [Checking your worker node version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-version-cli)
+
+* [Checking a cluster's Kubernetes server version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#kube-version-check)
+
+* [Checking your worker node operating system in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-os-check)
+
+[Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
+
+* [Updating the master](/docs/containers?topic=containers-update#master)
+
+    * [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps)
+
+* [Updating classic worker nodes](/docs/containers?topic=containers-update#worker_node)
+
+    * [Prerequisites](/docs/containers?topic=containers-update#worker-up-prereqs)
+
+    * [Updating classic worker nodes in the CLI with a configmap](/docs/containers?topic=containers-update#worker-up-configmap)
+
+    * [Updating classic worker nodes in the console](/docs/containers?topic=containers-update#worker_up_console)
+
+* [Updating VPC worker nodes](/docs/containers?topic=containers-update#vpc_worker_node)
+
+    * [Prerequisites](/docs/containers?topic=containers-update#vpc_worker_prereqs)
+
+    * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update&interface=cli#vpc_worker_cli)
+
+    * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update&interface=ui#vpc_worker_ui)
+
+* [Updating flavors (machine types)](/docs/containers?topic=containers-update&interface=ui#machine_type)
+
+* [How are worker pools scaled down?](/docs/containers?topic=containers-update&interface=ui#worker-scaledown-logic)
+
+* [Updating cluster components](/docs/containers?topic=containers-update&interface=ui#components)
+
+    * [Managing automatic updates for Fluentd](/docs/containers?topic=containers-update&interface=ui#logging-up)
+
+    * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update&interface=ui#alb)
+
+* [Updating managed add-ons](/docs/containers?topic=containers-update&interface=ui#addons-update)
+
+
+### Adding worker nodes
+{: #sitemap_adding_worker_nodes}
+
+
+[Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic#add-workers-classic)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-classic#add_pool)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-classic#resize-pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
+
+[Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
+
+[Creating and managing dedicated hosts on VPC Gen 2 infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
+
+* [Setting up dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#setup-dedicated-host-cli)
+
+* [Removing worker nodes from a dedicated host in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-worker-nodes-cli)
+
+* [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
+
+* [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
+
+[Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
+
+* [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
+
+* [Actions to take before the maintenance period](/docs/containers?topic=containers-host-maintenance#worker-maintenance-actions)
+
+    * [Workers in Classic clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-classic)
+
+    * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
+
+[Setting the cluster credentials](/docs/containers?topic=containers-access-creds#access-creds)
+
+* [Considerations](/docs/containers?topic=containers-access-creds#creds-considerations)
+
+* [Resetting the cluster API key](/docs/containers?topic=containers-access-creds#admin-set-credentials)
+
+* [Removing user credentials and permissions](/docs/containers?topic=containers-access-creds#apikey-remove-user)
+
+[Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate#cert-rotate)
+
+* [Certificate rotation states](/docs/containers?topic=containers-cert-rotate#cert-rotate-states)
+
+* [FAQ about certificate rotation](/docs/containers?topic=containers-cert-rotate#cert-rotate-faq)
+
+[Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
+
+* [Default operating system by cluster version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-default)
+
+* [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
+
+* [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
+
+[Tagging and labeling clusters and services](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
+
+* [Finding {{site.data.keyword.BluSoftlayer_notm}} resources with service tags from a specific cluster](/docs/containers?topic=containers-worker-tag-label#finding-services-tags)
+
+* [Manually adding user tags to clusters in the console](/docs/containers?topic=containers-worker-tag-label&interface=ui#add-tags-console)
+
+* [Manually adding user tags to clusters by using the CLI](/docs/containers?topic=containers-worker-tag-label&interface=cli#add-tags-cli)
+
+* [Manually adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label&interface=cli#worker_pool_labels)
+
+[Checking worker node resource reserves](/docs/containers?topic=containers-resource-limit-node#resource-limit-node)
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
 
@@ -1750,132 +1871,6 @@ subcollection: containers
 * [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
 
 * [Renewing expiring reservation](/docs/containers?topic=containers-reservations#renew-reservation)
-
-
-## Adding worker nodes
-{: #sitemap_adding_worker_nodes}
-
-
-[Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic#add-workers-classic)
-
-* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-classic#add_pool)
-
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-classic#resize-pool)
-
-* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
-
-[Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
-
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
-
-* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
-
-* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
-
-
-## Managing the cluster and worker node lifecycle
-{: #sitemap_managing_the_cluster_and_worker_node_lifecycle}
-
-
-[Checking your cluster version, operating system, and Kubernetes server version](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
-
-* [Checking your cluster master version, worker node version, and worker node operating system in the console](/docs/containers?topic=containers-flavor-os-check&interface=ui#cluster-version-ui)
-
-* [Checking your cluster master version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#cluster-version-cli)
-
-* [Checking your worker node version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-version-cli)
-
-* [Checking a cluster's Kubernetes server version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#kube-version-check)
-
-* [Checking your worker node operating system in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-os-check)
-
-[Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
-
-* [Updating the master](/docs/containers?topic=containers-update#master)
-
-    * [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps)
-
-* [Updating classic worker nodes](/docs/containers?topic=containers-update#worker_node)
-
-    * [Prerequisites](/docs/containers?topic=containers-update#worker-up-prereqs)
-
-    * [Updating classic worker nodes in the CLI with a configmap](/docs/containers?topic=containers-update#worker-up-configmap)
-
-    * [Updating classic worker nodes in the console](/docs/containers?topic=containers-update#worker_up_console)
-
-* [Updating VPC worker nodes](/docs/containers?topic=containers-update#vpc_worker_node)
-
-    * [Prerequisites](/docs/containers?topic=containers-update#vpc_worker_prereqs)
-
-    * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update&interface=cli#vpc_worker_cli)
-
-    * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update&interface=ui#vpc_worker_ui)
-
-* [Updating flavors (machine types)](/docs/containers?topic=containers-update&interface=ui#machine_type)
-
-* [How are worker pools scaled down?](/docs/containers?topic=containers-update&interface=ui#worker-scaledown-logic)
-
-* [Updating cluster components](/docs/containers?topic=containers-update&interface=ui#components)
-
-    * [Managing automatic updates for Fluentd](/docs/containers?topic=containers-update&interface=ui#logging-up)
-
-    * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update&interface=ui#alb)
-
-* [Updating managed add-ons](/docs/containers?topic=containers-update&interface=ui#addons-update)
-
-[Creating and managing dedicated hosts on VPC Gen 2 infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
-
-* [Setting up dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#setup-dedicated-host-cli)
-
-* [Removing worker nodes from a dedicated host in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-worker-nodes-cli)
-
-* [Removing dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-hosts-cli)
-
-* [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
-
-[Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
-
-* [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
-
-* [Actions to take before the maintenance period](/docs/containers?topic=containers-host-maintenance#worker-maintenance-actions)
-
-    * [Workers in Classic clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-classic)
-
-    * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
-
-[Setting the cluster credentials](/docs/containers?topic=containers-access-creds#access-creds)
-
-* [Considerations](/docs/containers?topic=containers-access-creds#creds-considerations)
-
-* [Resetting the cluster API key](/docs/containers?topic=containers-access-creds#admin-set-credentials)
-
-* [Removing user credentials and permissions](/docs/containers?topic=containers-access-creds#apikey-remove-user)
-
-[Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate#cert-rotate)
-
-* [Certificate rotation states](/docs/containers?topic=containers-cert-rotate#cert-rotate-states)
-
-* [FAQ about certificate rotation](/docs/containers?topic=containers-cert-rotate#cert-rotate-faq)
-
-[Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
-
-* [Default operating system by cluster version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-default)
-
-* [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
-
-* [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
-
-[Tagging and labeling clusters and services](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
-
-* [Finding {{site.data.keyword.BluSoftlayer_notm}} resources with service tags from a specific cluster](/docs/containers?topic=containers-worker-tag-label#finding-services-tags)
-
-* [Manually adding user tags to clusters in the console](/docs/containers?topic=containers-worker-tag-label&interface=ui#add-tags-console)
-
-* [Manually adding user tags to clusters by using the CLI](/docs/containers?topic=containers-worker-tag-label&interface=cli#add-tags-cli)
-
-* [Manually adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label&interface=cli#worker_pool_labels)
-
-[Checking worker node resource reserves](/docs/containers?topic=containers-resource-limit-node#resource-limit-node)
 
 
 ## Setting up encryption
