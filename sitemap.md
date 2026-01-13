@@ -240,6 +240,10 @@ subcollection: containers
 
 * [January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan26)
 
+    * [13 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1326)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [06 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan0626)
 
         * Ingress ALB patch updates.
