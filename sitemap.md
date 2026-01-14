@@ -1322,8 +1322,8 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
-## Planning your cluster environment
-{: #sitemap_planning_your_cluster_environment}
+## Cluster planning
+{: #sitemap_cluster_planning}
 
 
 [Creating a highly available cluster strategy](/docs/containers?topic=containers-strategy#strategy)
@@ -1519,8 +1519,8 @@ subcollection: containers
 * [Next steps](/docs/containers?topic=containers-document-environment#plan-prepare)
 
 
-## Preparing your account
-{: #sitemap_preparing_your_account}
+## Account setup
+{: #sitemap_account_setup}
 
 
 [Preparing your account to create clusters](/docs/containers?topic=containers-clusters#clusters)
@@ -1552,8 +1552,13 @@ subcollection: containers
     * [Suggested classic infrastructure permissions](/docs/containers?topic=containers-iam-platform-access-roles#classic-rbac-suggested)
 
 
-## Installing the CLI
-{: #sitemap_installing_the_cli}
+## CLI and API
+{: #sitemap_cli_and_api}
+
+
+
+### CLI management
+{: #sitemap_cli_management}
 
 
 [Installing the CLI](/docs/containers?topic=containers-cli-install#cli-install)
@@ -1580,11 +1585,6 @@ subcollection: containers
 
 * [Uninstalling on Linux and macOS](/docs/containers?topic=containers-uninstall-ibmcloud-cli#uninstall-cli-linux-macos)
 
-
-## Setting up the API
-{: #sitemap_setting_up_the_api}
-
-
 [Setting up the API](/docs/containers?topic=containers-cs_api_install#cs_api_install)
 
 * [About the API](/docs/containers?topic=containers-cs_api_install#api_about)
@@ -1596,8 +1596,8 @@ subcollection: containers
 * [Refreshing IAM access tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 
-## Creating clusters
-{: #sitemap_creating_clusters}
+## Cluster creation
+{: #sitemap_cluster_creation}
 
 
 [Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster-create-classic)
@@ -1631,8 +1631,8 @@ subcollection: containers
 [Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
 
-## Accessing clusters
-{: #sitemap_accessing_clusters}
+## Cluster access
+{: #sitemap_cluster_access}
 
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster#access_cluster)
@@ -1668,8 +1668,8 @@ subcollection: containers
 [Accessing private clusters](/docs/containers?topic=containers-cluster-access-wireguard#cluster-access-wireguard)
 
 
-## Managing clusters
-{: #sitemap_managing_clusters}
+## Cluster management
+{: #sitemap_cluster_management}
 
 
 [Checking your cluster version, operating system, and Kubernetes server version](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
@@ -1830,6 +1830,63 @@ subcollection: containers
     * [Disabling the port map plug-in in Kubernetes version 1.28 and earlier](/docs/containers?topic=containers-kernel#calico-portmap-128)
 
 
+### Enhancing clusters with integrations
+{: #sitemap_enhancing_clusters_with_integrations}
+
+
+[IBM Cloud services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-3rd-party-integrations)
+
+* [IBM Cloud services](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
+
+    * [IBM Cloud platform services](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
+
+    * [IBM Cloud classic infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
+
+    * [IBM Cloud VPC infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
+
+* [Kubernetes community and open source integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
+
+    * [Integrations operated in partnership](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
+
+    * [Managed add-ons](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
+
+    * [Other third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-helm)
+
+    * [Extending Kubernetes API and software with CRDs and Operators](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-crd-operators)
+
+[Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
+
+* [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
+
+* [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
+
+* [Reviewing add-on states and statuses](/docs/containers?topic=containers-managed-addons#debug_addons_review)
+
+[Adding services by using Helm charts](/docs/containers?topic=containers-helm#helm)
+
+* [About Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm#about-helm)
+
+    * [What is Helm and how do I use it?](/docs/containers?topic=containers-helm#what-is-helm)
+
+    * [What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-helm#supported-charts)
+
+* [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
+
+[Binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#service-binding)
+
+* [Manually binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#add_services_manual)
+
+* [Adding services to clusters by using the `service bind` CLI](/docs/containers?topic=containers-service-binding#bind-services)
+
+* [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
+
+    * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
+
+    * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
+
+* [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
+
+
 ### Managing cluster costs
 {: #sitemap_managing_cluster_costs}
 
@@ -1877,8 +1934,8 @@ subcollection: containers
 * [Renewing expiring reservation](/docs/containers?topic=containers-reservations#renew-reservation)
 
 
-## Setting up encryption
-{: #sitemap_setting_up_encryption}
+## Encryption
+{: #sitemap_encryption}
 
 
 [Setting up a key management service (KMS) provider](/docs/containers?topic=containers-encryption-setup#encryption-setup)
@@ -1904,8 +1961,76 @@ subcollection: containers
 * [Disabling WireGuard encryption](/docs/containers?topic=containers-encrypt-nodes-wireguard#encrypt-nodes-wireguard-disable)
 
 
-## Enhancing security
-{: #sitemap_enhancing_security}
+## Security
+{: #sitemap_security}
+
+
+
+### Cluster workload security
+{: #sitemap_cluster_workload_security}
+
+
+[Setting pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)
+
+* [How does priority scheduling and preemption work?](/docs/containers?topic=containers-pod_priority#priority_scheduling)
+
+* [Understanding default priority classes](/docs/containers?topic=containers-pod_priority#default_priority_class)
+
+* [Creating a priority class](/docs/containers?topic=containers-pod_priority#create_priority_class)
+
+* [Assigning priority to your pods](/docs/containers?topic=containers-pod_priority#prioritize)
+
+[Setting Kubernetes API priority and fairness](/docs/containers?topic=containers-kubeapi-priority#kubeapi-priority)
+
+* [Reviewing default flow schema and priority levels](/docs/containers?topic=containers-kubeapi-priority#kubeapi-default-priority)
+
+    * [Viewing {{site.data.keyword.containerlong_notm}} created priority level configurations](/docs/containers?topic=containers-kubeapi-priority#kube-api-prioritylevelconfig)
+
+[Pod security admission](/docs/containers?topic=containers-pod-security-admission#pod-security-admission)
+
+* [Understanding security profiles](/docs/containers?topic=containers-pod-security-admission#pod_security_profiles)
+
+* [What if Pod Security Admission isn't the right choice for me?](/docs/containers?topic=containers-pod-security-admission#what-if-psa)
+
+* [Configuring Pod Security admission namespace labels](/docs/containers?topic=containers-pod-security-admission#psa-namespace-labels)
+
+* [Default Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default)
+
+* [Customizing the Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom)
+
+[Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
+
+* [Upgrade requirements](/docs/containers?topic=containers-pod-security-admission-migration#psa-upgrade-reqs)
+
+    * [Step 1: Check that all pods run under the ibm-privileged-psp PSP](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
+
+    * [Step 2: Verify the privileged-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
+
+    * [Step 3: Verify the restricted-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
+
+    * [Step 4: Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
+
+* [Migration steps](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-steps)
+
+    * [Step 1: Enable Pod Security admission in your 1.24 cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-enable-124)
+
+    * [Step 2: Review namespace permissions](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-perm)
+
+    * [Step 3: Simplify and standardize PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-simplify)
+
+    * [Step 4: Update the namespaces in your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-update-namespace)
+
+    * [Step 5: Review the namespace creation process](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-creation)
+
+    * [Step 6: Optional. Disable the PSP feature in the cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-disable-psp)
+
+    * [Step 7: Optional. Upgrade your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-cluster-upgrade)
+
+* [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
+
+
+### Security enhancements
+{: #sitemap_security_enhancements}
 
 
 [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
@@ -2081,8 +2206,8 @@ subcollection: containers
 * [Next steps](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-next)
 
 
-## Managing access control
-{: #sitemap_managing_access_control}
+## Access management
+{: #sitemap_access_management}
 
 
 [Configuring a trusted profile for cluster components](/docs/containers?topic=containers-configure-trusted-profile#configure-trusted-profile)
@@ -2178,196 +2303,13 @@ subcollection: containers
     * [Removing custom RBAC permissions](/docs/containers?topic=containers-removing-user-permissions#remove_custom_rbac)
 
 
-## Securing cluster workloads
-{: #sitemap_securing_cluster_workloads}
+## Networking
+{: #sitemap_networking}
 
 
-[Setting pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)
 
-* [How does priority scheduling and preemption work?](/docs/containers?topic=containers-pod_priority#priority_scheduling)
-
-* [Understanding default priority classes](/docs/containers?topic=containers-pod_priority#default_priority_class)
-
-* [Creating a priority class](/docs/containers?topic=containers-pod_priority#create_priority_class)
-
-* [Assigning priority to your pods](/docs/containers?topic=containers-pod_priority#prioritize)
-
-[Setting Kubernetes API priority and fairness](/docs/containers?topic=containers-kubeapi-priority#kubeapi-priority)
-
-* [Reviewing default flow schema and priority levels](/docs/containers?topic=containers-kubeapi-priority#kubeapi-default-priority)
-
-    * [Viewing {{site.data.keyword.containerlong_notm}} created priority level configurations](/docs/containers?topic=containers-kubeapi-priority#kube-api-prioritylevelconfig)
-
-[Pod security admission](/docs/containers?topic=containers-pod-security-admission#pod-security-admission)
-
-* [Understanding security profiles](/docs/containers?topic=containers-pod-security-admission#pod_security_profiles)
-
-* [What if Pod Security Admission isn't the right choice for me?](/docs/containers?topic=containers-pod-security-admission#what-if-psa)
-
-* [Configuring Pod Security admission namespace labels](/docs/containers?topic=containers-pod-security-admission#psa-namespace-labels)
-
-* [Default Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default)
-
-* [Customizing the Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom)
-
-[Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
-
-* [Upgrade requirements](/docs/containers?topic=containers-pod-security-admission-migration#psa-upgrade-reqs)
-
-    * [Step 1: Check that all pods run under the ibm-privileged-psp PSP](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
-
-    * [Step 2: Verify the privileged-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
-
-    * [Step 3: Verify the restricted-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
-
-    * [Step 4: Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
-
-* [Migration steps](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-steps)
-
-    * [Step 1: Enable Pod Security admission in your 1.24 cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-enable-124)
-
-    * [Step 2: Review namespace permissions](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-perm)
-
-    * [Step 3: Simplify and standardize PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-simplify)
-
-    * [Step 4: Update the namespaces in your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-update-namespace)
-
-    * [Step 5: Review the namespace creation process](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-creation)
-
-    * [Step 6: Optional. Disable the PSP feature in the cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-disable-psp)
-
-    * [Step 7: Optional. Upgrade your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-cluster-upgrade)
-
-* [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
-
-
-## Controlling network traffic in Classic clusters
-{: #sitemap_controlling_network_traffic_in_classic_clusters}
-
-
-[Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
-
-* [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
-
-* [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
-
-* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
-
-* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
-
-* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
-
-* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
-
-* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
-
-* [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
-
-[Controlling traffic with network policies](/docs/containers?topic=containers-network_policies#network_policies)
-
-* [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
-
-* [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
-
-* [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
-
-* [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
-
-* [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
-
-* [Example Calico policies to restrict public or private network traffic](/docs/containers?topic=containers-network_policies#isolate_workers_public)
-
-    * [Applying public network policies](/docs/containers?topic=containers-network_policies#calico-public)
-
-    * [Applying private network policies](/docs/containers?topic=containers-network_policies#isolate_workers)
-
-* [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
-
-* [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
-
-[Opening required ports and IP addresses in your allowlist](/docs/containers?topic=containers-firewall#firewall)
-
-* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-firewall#corporate)
-
-    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_bx)
-
-    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_kubectl)
-
-    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_calicoctl)
-
-* [Opening ports in gateway appliance allowlists](/docs/containers?topic=containers-firewall#vyatta_firewall)
-
-    * [Opening required ports in a public allowlist](/docs/containers?topic=containers-firewall#firewall_outbound)
-
-    * [Opening required ports in a private allowlist](/docs/containers?topic=containers-firewall#firewall_private)
-
-    * [Opening ports in a public or private allowlist for inbound traffic](/docs/containers?topic=containers-firewall#firewall_inbound)
-
-* [Allowing the cluster to access resources through Calico network policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
-
-* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-firewall#firewall_workers)
-
-* [Updating IAM allowlists for {{site.data.keyword.containershort}} network zones](/docs/containers?topic=containers-firewall#iam_firewall)
-
-    * [Getting your {{site.data.keyword.containershort}} subnet IP addresses](/docs/containers?topic=containers-firewall#iam_cidr_ip)
-
-[Configuring classic subnets and IP addresses](/docs/containers?topic=containers-subnets#subnets)
-
-* [Overview of classic networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics)
-
-    * [VLANs](/docs/containers?topic=containers-subnets#basics_vlans)
-
-    * [Subnets and IP addresses](/docs/containers?topic=containers-subnets#basics_subnets)
-
-    * [Finding subnets provisioned in your account](/docs/containers?topic=containers-subnets#finding_subnets_account)
-
-    * [Network segmentation](/docs/containers?topic=containers-subnets#basics_segmentation)
-
-* [Using existing subnets to create a cluster](/docs/containers?topic=containers-subnets#subnets_custom)
-
-* [Managing existing portable IP addresses](/docs/containers?topic=containers-subnets#managing_ips)
-
-    * [Viewing available portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)
-
-    * [Freeing up used IP addresses](/docs/containers?topic=containers-subnets#free)
-
-* [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips)
-
-    * [Adding portable IPs by ordering more subnets](/docs/containers?topic=containers-subnets#request)
-
-    * [Adding portable IPs by adding existing subnets to your cluster](/docs/containers?topic=containers-subnets#add-existing)
-
-* [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
-
-    * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
-
-    * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
-
-* [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
-
-[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
-
-* [Setting up the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
-
-* [Setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
-
-    * [Steps to enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#steps-set-up-public)
-
-    * [Steps to disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se)
-
-* [Switching from the public cloud service endpoint to the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
-
-* [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
-
-[Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
-
-* [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
-
-
-## Controlling network traffic in VPC clusters
-{: #sitemap_controlling_network_traffic_in_vpc_clusters}
+### Network traffic in VPC clusters
+{: #sitemap_network_traffic_in_vpc_clusters}
 
 
 [Understanding secure by default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference#vpc-security-group-reference)
@@ -2527,6 +2469,131 @@ subcollection: containers
     * [Use {{site.data.keyword.tg_full_notm}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-use-transit-gw)
 
 
+### Network traffic in Classic clusters
+{: #sitemap_network_traffic_in_classic_clusters}
+
+
+[Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
+
+* [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
+
+* [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
+
+* [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
+
+* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
+
+* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
+
+* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
+
+* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
+
+* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
+
+* [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
+
+[Controlling traffic with network policies](/docs/containers?topic=containers-network_policies#network_policies)
+
+* [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
+
+* [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
+
+* [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
+
+* [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
+
+* [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
+
+* [Example Calico policies to restrict public or private network traffic](/docs/containers?topic=containers-network_policies#isolate_workers_public)
+
+    * [Applying public network policies](/docs/containers?topic=containers-network_policies#calico-public)
+
+    * [Applying private network policies](/docs/containers?topic=containers-network_policies#isolate_workers)
+
+* [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
+
+* [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
+
+[Opening required ports and IP addresses in your allowlist](/docs/containers?topic=containers-firewall#firewall)
+
+* [Opening ports in a corporate allowlist](/docs/containers?topic=containers-firewall#corporate)
+
+    * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_bx)
+
+    * [Running `kubectl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_kubectl)
+
+    * [Running `calicoctl` commands from behind an allowlist](/docs/containers?topic=containers-firewall#firewall_calicoctl)
+
+* [Opening ports in gateway appliance allowlists](/docs/containers?topic=containers-firewall#vyatta_firewall)
+
+    * [Opening required ports in a public allowlist](/docs/containers?topic=containers-firewall#firewall_outbound)
+
+    * [Opening required ports in a private allowlist](/docs/containers?topic=containers-firewall#firewall_private)
+
+    * [Opening ports in a public or private allowlist for inbound traffic](/docs/containers?topic=containers-firewall#firewall_inbound)
+
+* [Allowing the cluster to access resources through Calico network policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
+
+* [Allowing traffic from your cluster in other services' allowlists or in on-premises allowlists](/docs/containers?topic=containers-firewall#firewall_workers)
+
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} network zones](/docs/containers?topic=containers-firewall#iam_firewall)
+
+    * [Getting your {{site.data.keyword.containershort}} subnet IP addresses](/docs/containers?topic=containers-firewall#iam_cidr_ip)
+
+[Configuring classic subnets and IP addresses](/docs/containers?topic=containers-subnets#subnets)
+
+* [Overview of classic networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics)
+
+    * [VLANs](/docs/containers?topic=containers-subnets#basics_vlans)
+
+    * [Subnets and IP addresses](/docs/containers?topic=containers-subnets#basics_subnets)
+
+    * [Finding subnets provisioned in your account](/docs/containers?topic=containers-subnets#finding_subnets_account)
+
+    * [Network segmentation](/docs/containers?topic=containers-subnets#basics_segmentation)
+
+* [Using existing subnets to create a cluster](/docs/containers?topic=containers-subnets#subnets_custom)
+
+* [Managing existing portable IP addresses](/docs/containers?topic=containers-subnets#managing_ips)
+
+    * [Viewing available portable public IP addresses](/docs/containers?topic=containers-subnets#review_ip)
+
+    * [Freeing up used IP addresses](/docs/containers?topic=containers-subnets#free)
+
+* [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips)
+
+    * [Adding portable IPs by ordering more subnets](/docs/containers?topic=containers-subnets#request)
+
+    * [Adding portable IPs by adding existing subnets to your cluster](/docs/containers?topic=containers-subnets#add-existing)
+
+* [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
+
+    * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
+
+    * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
+
+* [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
+
+[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
+
+* [Setting up the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
+
+* [Setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+
+    * [Steps to enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#steps-set-up-public)
+
+    * [Steps to disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se)
+
+* [Switching from the public cloud service endpoint to the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+
+* [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
+
+[Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
+
+* [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
+
+
 ## Adding static routes to worker nodes
 {: #sitemap_adding_static_routes_to_worker_nodes}
 
@@ -2573,8 +2640,8 @@ subcollection: containers
     * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
 
-## Setting up the cluster autoscaler
-{: #sitemap_setting_up_the_cluster_autoscaler}
+## Autoscaling
+{: #sitemap_autoscaling}
 
 
 [Preparing your cluster for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
@@ -2830,21 +2897,8 @@ subcollection: containers
     * [Example daemonset to update a containerd custom registry configuration](/docs/containers?topic=containers-registry#ds-example-registry)
 
 
-## Continuous integration and delivery for app development and deployment
-{: #sitemap_continuous_integration_and_delivery_for_app_development_and_deployment}
-
-
-[Continuous integration and delivery for app development and deployment](/docs/containers?topic=containers-cicd#cicd)
-
-* [Before you begin](/docs/containers?topic=containers-cicd#cicd_before)
-
-* [Creating a toolchain with Delivery Pipeline](/docs/containers?topic=containers-cicd#cicd_toolchain)
-
-* [Other resources for automating your pipeline](/docs/containers?topic=containers-cicd#cicd-other)
-
-
-## Developing and deploying apps
-{: #sitemap_developing_and_deploying_apps}
+## App deployment
+{: #sitemap_app_deployment}
 
 
 [Planning app deployments](/docs/containers?topic=containers-plan_deploy#plan_deploy)
@@ -2973,6 +3027,14 @@ subcollection: containers
 
     * [Deploying a workload](/docs/containers?topic=containers-deploy_app#gpu-workload)
 
+[Continuous integration and delivery for app development and deployment](/docs/containers?topic=containers-cicd#cicd)
+
+* [Before you begin](/docs/containers?topic=containers-cicd#cicd_before)
+
+* [Creating a toolchain with Delivery Pipeline](/docs/containers?topic=containers-cicd#cicd_toolchain)
+
+* [Other resources for automating your pipeline](/docs/containers?topic=containers-cicd#cicd-other)
+
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 
 * [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
@@ -2994,8 +3056,8 @@ subcollection: containers
 [Packaging apps for reuse in multiple environments with Kustomize](/docs/containers?topic=containers-kustomize#kustomize)
 
 
-## Setting up a service mesh with Istio
-{: #sitemap_setting_up_a_service_mesh_with_istio}
+## Istio service mesh
+{: #sitemap_istio_service_mesh}
 
 
 [Getting started with Istio](/docs/containers?topic=containers-istio-qs#istio-qs)
@@ -3177,8 +3239,8 @@ subcollection: containers
     * [Envoy](/docs/containers?topic=containers-istio-health#envoy)
 
 
-## Exposing apps
-{: #sitemap_exposing_apps}
+## App exposure
+{: #sitemap_app_exposure}
 
 
 [Choosing an app exposure service](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
@@ -3220,73 +3282,6 @@ subcollection: containers
     * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_classic)
 
     * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_vpc)
-
-
-### Exposing apps with Classic load balancers
-{: #sitemap_exposing_apps_with_classic_load_balancers}
-
-
-[Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about#loadbalancer-about)
-
-* [Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs](/docs/containers?topic=containers-loadbalancer-about#comparison-lbs)
-
-* [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning)
-
-    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_single)
-
-    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
-
-* [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
-
-    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
-
-    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
-
-[Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-
-* [Setting up an NLB 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-
-* [Setting up an NLB 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
-
-* [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#lb_source_ip)
-
-    * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
-
-    * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
-
-[Classic: Setting up DSR load balancing with an NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2#loadbalancer-v2)
-
-* [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
-
-* [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
-
-* [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
-
-* [Scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling)
-
-    * [Supported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_supported)
-
-    * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
-
-[Isolating Classic NLBs to edge worker nodes](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic)
-
-[Isolating network workloads to edge nodes in VPC clusters](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads)
-
-* [Prerequisites](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-pre)
-
-* [Isolating workloads to edge nodes](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-steps)
-
-* [Next steps](/docs/containers?topic=containers-edge-vpc-workloads#edge-workloads-vpc-next)
-
-[Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
-
-* [Registering NLB IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
-
-* [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
-
-* [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
-
-    * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
 ### Exposing apps with VPC load balancers
@@ -3370,6 +3365,73 @@ subcollection: containers
     * [Enabling TCP health checks for UDP load balancers](/docs/containers?topic=containers-vpclb_manage#vpc_lb_health_udp)
 
 * [Changing a load balancer's subnet or zone](/docs/containers?topic=containers-vpclb_manage#lbaas_change_subnets)
+
+
+### Exposing apps with Classic load balancers
+{: #sitemap_exposing_apps_with_classic_load_balancers}
+
+
+[Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about#loadbalancer-about)
+
+* [Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs](/docs/containers?topic=containers-loadbalancer-about#comparison-lbs)
+
+* [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning)
+
+    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_single)
+
+    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
+
+* [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
+
+    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
+
+    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
+
+[Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer#loadbalancer)
+
+* [Setting up an NLB 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+
+* [Setting up an NLB 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
+
+* [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#lb_source_ip)
+
+    * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
+
+    * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
+
+[Classic: Setting up DSR load balancing with an NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2#loadbalancer-v2)
+
+* [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
+
+* [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
+
+* [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
+
+* [Scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling)
+
+    * [Supported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_supported)
+
+    * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
+
+[Isolating Classic NLBs to edge worker nodes](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic)
+
+[Isolating network workloads to edge nodes in VPC clusters](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads)
+
+* [Prerequisites](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-pre)
+
+* [Isolating workloads to edge nodes](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-steps)
+
+* [Next steps](/docs/containers?topic=containers-edge-vpc-workloads#edge-workloads-vpc-next)
+
+[Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
+
+* [Registering NLB IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
+
+* [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
+
+* [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
+
+    * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
 ### Exposing apps with Ingress
@@ -4249,63 +4311,6 @@ subcollection: containers
 * [Setting up {{site.data.keyword.mon_full_notm}} for storage volumes](/docs/containers?topic=containers-utilities#monitor_storage)
 
     * [Troubleshooting persistent storage when an {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
-
-
-## Enhancing cluster capabilities with integrations
-{: #sitemap_enhancing_cluster_capabilities_with_integrations}
-
-
-[IBM Cloud services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-3rd-party-integrations)
-
-* [IBM Cloud services](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
-
-    * [IBM Cloud platform services](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
-
-    * [IBM Cloud classic infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
-
-    * [IBM Cloud VPC infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
-
-* [Kubernetes community and open source integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
-
-    * [Integrations operated in partnership](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
-
-    * [Managed add-ons](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
-
-    * [Other third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-helm)
-
-    * [Extending Kubernetes API and software with CRDs and Operators](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-crd-operators)
-
-[Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
-
-* [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
-
-* [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
-
-* [Reviewing add-on states and statuses](/docs/containers?topic=containers-managed-addons#debug_addons_review)
-
-[Adding services by using Helm charts](/docs/containers?topic=containers-helm#helm)
-
-* [About Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm#about-helm)
-
-    * [What is Helm and how do I use it?](/docs/containers?topic=containers-helm#what-is-helm)
-
-    * [What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-helm#supported-charts)
-
-* [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
-
-[Binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#service-binding)
-
-* [Manually binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#add_services_manual)
-
-* [Adding services to clusters by using the `service bind` CLI](/docs/containers?topic=containers-service-binding#bind-services)
-
-* [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
-
-    * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
-
-    * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
-
-* [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
 
 ## Version history

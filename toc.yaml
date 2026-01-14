@@ -43,7 +43,7 @@ toc:
       id: howto
       topics:
       - topicgroup:
-          label: Planning your cluster environment
+          label: Cluster planning
           topics:
           - strategy.md
           - cluster-plan-network-vpc.md
@@ -52,31 +52,34 @@ toc:
           - storage-plan.md
           - document-environment.md
       - topicgroup:
-          label: Preparing your account
+          label: Account setup
           topics:
           - cluster-create.md
           - iam-platform-access-roles.md
       - topicgroup:
-          label: Installing the CLI
+          label: CLI and API
           topics:
-          - cli-install.md
-          - cli-update.md
-          - include: ../cli/reference/ibmcloud/uninstall_cli.md
-      - api-install.md
+          - topicgroup:
+              label: CLI management
+              topics:
+              - cli-install.md
+              - cli-update.md
+              - include: ../cli/reference/ibmcloud/uninstall_cli.md
+          - api-install.md
       - topicgroup:
-          label: Creating clusters
+          label: Cluster creation
           topics:
           - cluster-create-classic.md
           - cluster-create-vpc-gen2.md
           - cluster-create-dedicated-hosts.md
       - topicgroup:
-          label: Accessing clusters
+          label: Cluster access
           topics:
           - cs_cluster_access.md
           - cluster-access-admission-control.md
           - cluster-access-wireguard.md
       - topicgroup:
-          label: Managing clusters
+          label: Cluster management
           topics:
           - worker-os-check.md
           - update.md
@@ -95,28 +98,45 @@ toc:
           - cluster-remove.md
           - performance.md
           - topicgroup:
+              label: Enhancing clusters with integrations
+              topics:
+              - integrations-ibm-third-party.md
+              - integrations-addons.md
+              - integrations-helm.md
+              - integrations-svcbind.md
+          - topicgroup:
               label: Managing cluster costs
               topics:
               - costs.md
               - costs-reserved.md
       - topicgroup:
-          label: Setting up encryption
+          label: Encryption
           topics:
           - encryption-setup.md
           - encryption-secrets.md
           - encryption-vpc-worker-disks.md
           - encryption-wireguard-workers.md
       - topicgroup:
-          label: Enhancing security
+          label: Security
           topics:
-          - secure.md
-          - cs_tech.md
-          - data-security.md
-          - cbr.md
-          - cbr-tutorial.md
-          - pse-to-cbr-migration.md
+          - topicgroup:
+              label: Cluster workload security
+              topics:
+              - pod-priority.md
+              - kubeapi-priority.md
+              - pod-security-admission.md
+              - pod-security-admission-migration.md
+          - topicgroup:
+              label: Security enhancements
+              topics:
+              - secure.md
+              - cs_tech.md
+              - data-security.md
+              - cbr.md
+              - cbr-tutorial.md
+              - pse-to-cbr-migration.md
       - topicgroup:
-          label: Managing access control
+          label: Access management
           topics:
           - trusted-profile.md
           - classic-credentials.md
@@ -125,37 +145,33 @@ toc:
           - terraform-cluster-access.md
           - removing-users.md
       - topicgroup:
-          label: Securing cluster workloads
+          label: Networking
           topics:
-          - pod-priority.md
-          - kubeapi-priority.md
-          - pod-security-admission.md
-          - pod-security-admission-migration.md
-      - topicgroup:
-          label: Controlling network traffic in Classic clusters
-          topics:
-          - cs_tutorials_policies.md
-          - network-policy.md
-          - firewall.md
-          - subnets.md
-          - network-cluster.md
-          - vpn.md
-      - topicgroup:
-          label: Controlling network traffic in VPC clusters
-          topics:
-          - vpc-security-group2.md
-          - vpc-sbd-allow-outbound.md
-          - vpc-sbd-enable-existing.md
-          - vpc-security-group-manage.md
-          - vpc-acls.md
-          - vpc-kube-policies.md
-          - vpc-firewall.md
-          - vpc-subnets.md
-          - vpc-vpn.md
+          - topicgroup:
+              label: Network traffic in VPC clusters
+              topics:
+              - vpc-security-group2.md
+              - vpc-sbd-allow-outbound.md
+              - vpc-sbd-enable-existing.md
+              - vpc-security-group-manage.md
+              - vpc-acls.md
+              - vpc-kube-policies.md
+              - vpc-firewall.md
+              - vpc-subnets.md
+              - vpc-vpn.md
+          - topicgroup:
+              label: Network traffic in Classic clusters
+              topics:
+              - cs_tutorials_policies.md
+              - network-policy.md
+              - firewall.md
+              - subnets.md
+              - network-cluster.md
+              - vpn.md
       - static-routes.md
       - cs_dns.md
       - topicgroup:
-          label: Setting up the cluster autoscaler
+          label: Autoscaling
           topics:
           - cluster-scaling-classic-vpc.md
           - cluster-scaling-install-addon.md
@@ -174,19 +190,19 @@ toc:
           - vpc-flow-logs.md
           - at-events-ref.md
       - registry.md
-      - cicd.md
       - topicgroup:
-          label: Developing and deploying apps
+          label: App deployment
           topics:
           - app-plan.md
           - images.md
           - app.md
           - cs_app_deploy.md
+          - cicd.md
           - nodeport.md
           - app-update.md
           - kustomize.md
       - topicgroup:
-          label: Setting up a service mesh with Istio
+          label: Istio service mesh
           topics:
           - cs_istio_qs.md
           - cs_istio_about.md
@@ -197,9 +213,17 @@ toc:
           - cs_istio_custom_gateway.md
           - cs_istio_health.md
       - topicgroup:
-          label: Exposing apps
+          label: App exposure
           topics:
           - cs_network_planning.md
+          - topicgroup:
+              label: Exposing apps with VPC load balancers
+              topics:
+              - vpc_lb_about.md
+              - vpc_alb.md
+              - vpc_nlb.md
+              - vpc_nlb_pp.md
+              - vpc_lb_manage.md
           - topicgroup:
               label: Exposing apps with Classic load balancers
               topics:
@@ -209,14 +233,6 @@ toc:
               - edge-classic-nlb.md
               - edge-vpc-lb.md
               - lb-dns.md
-          - topicgroup:
-              label: Exposing apps with VPC load balancers
-              topics:
-              - vpc_lb_about.md
-              - vpc_alb.md
-              - vpc_nlb.md
-              - vpc_nlb_pp.md
-              - vpc_lb_manage.md
           - topicgroup:
               label: Exposing apps with Ingress
               topics:
@@ -288,13 +304,6 @@ toc:
               - storage-portworx-support.md
           - storage-br.md
           - storage-utilities.md
-      - topicgroup:
-          label: Enhancing cluster capabilities with integrations
-          topics:
-          - integrations-ibm-third-party.md
-          - integrations-addons.md
-          - integrations-helm.md
-          - integrations-svcbind.md
   - navgroup:
       id: reference
       topics:
