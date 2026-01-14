@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-01-13"
+lastupdated: "2026-01-14"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan26)
+
+    * [14 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1426)
+
+        * CLI version `1.0.745` is available.
 
     * [13 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1326)
 
@@ -1664,29 +1668,8 @@ subcollection: containers
 [Accessing private clusters](/docs/containers?topic=containers-cluster-access-wireguard#cluster-access-wireguard)
 
 
-## Adding worker nodes
-{: #sitemap_adding_worker_nodes}
-
-
-[Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic#add-workers-classic)
-
-* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-classic#add_pool)
-
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-classic#resize-pool)
-
-* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
-
-[Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
-
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
-
-* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
-
-* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
-
-
-## Managing the cluster and worker node lifecycle
-{: #sitemap_managing_the_cluster_and_worker_node_lifecycle}
+## Managing clusters
+{: #sitemap_managing_clusters}
 
 
 [Checking your cluster version, operating system, and Kubernetes server version](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
@@ -1734,6 +1717,27 @@ subcollection: containers
     * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update&interface=ui#alb)
 
 * [Updating managed add-ons](/docs/containers?topic=containers-update&interface=ui#addons-update)
+
+
+### Adding worker nodes
+{: #sitemap_adding_worker_nodes}
+
+
+[Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic#add-workers-classic)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-classic#add_pool)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-classic#resize-pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
+
+[Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
 
 [Creating and managing dedicated hosts on VPC Gen 2 infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
 
@@ -1788,6 +1792,89 @@ subcollection: containers
 * [Manually adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label&interface=cli#worker_pool_labels)
 
 [Checking worker node resource reserves](/docs/containers?topic=containers-resource-limit-node#resource-limit-node)
+
+[Removing clusters](/docs/containers?topic=containers-remove#remove)
+
+* [Removing {{site.data.keyword.satelliteshort}} worker nodes or clusters](/docs/containers?topic=containers-remove#satcluster-rm)
+
+* [Next steps](/docs/containers?topic=containers-remove#cluster-remove-next-steps)
+
+[Tuning performance](/docs/containers?topic=containers-kernel#kernel)
+
+* [Default worker node settings](/docs/containers?topic=containers-kernel#worker-default)
+
+    * [Customizing the operating system](/docs/containers?topic=containers-kernel#worker-default-os)
+
+    * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
+
+* [Modifying worker node kernel settings to optimize performance](/docs/containers?topic=containers-kernel#worker-kernel-ds)
+
+* [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
+
+* [Optimizing network keepalive `sysctl` settings](/docs/containers?topic=containers-kernel#keepalive-iks)
+
+* [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
+
+    * [Modify the `metrics-server-config` config map](/docs/containers?topic=containers-kernel#metrics-server-config)
+
+    * [Determining which resources to tune](/docs/containers?topic=containers-kernel#determine-resources)
+
+* [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
+
+* [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
+
+* [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
+
+    * [Disabling the port map plug-in in Kubernetes version 1.29 and later](/docs/containers?topic=containers-kernel#calico-portmap-129)
+
+    * [Disabling the port map plug-in in Kubernetes version 1.28 and earlier](/docs/containers?topic=containers-kernel#calico-portmap-128)
+
+
+### Managing cluster costs
+{: #sitemap_managing_cluster_costs}
+
+
+[Understanding costs for your clusters](/docs/containers?topic=containers-costs#costs)
+
+* [Understanding costs by component](/docs/containers?topic=containers-costs#costs-for-clusters)
+
+    * [Worker nodes](/docs/containers?topic=containers-costs#nodes)
+
+    * [What is the difference between virtual and physical machines?](/docs/containers?topic=containers-costs#physical-vs-virtual)
+
+    * [Public bandwidth](/docs/containers?topic=containers-costs#bandwidth)
+
+    * [Subnet IP addresses](/docs/containers?topic=containers-costs#subnet_ips)
+
+    * [Multizone load balancer](/docs/containers?topic=containers-costs#mzlb_pricing)
+
+    * [Storage](/docs/containers?topic=containers-costs#persistent_storage)
+
+    * [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-costs#services)
+
+    * [Operators and other third-party integrations](/docs/containers?topic=containers-costs#operators_pricing)
+
+    * [VPC worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
+
+* [Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
+
+* [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
+
+[Using reservations to reduce classic worker node costs](/docs/containers?topic=containers-reservations#reservations)
+
+* [Understanding reservations](/docs/containers?topic=containers-reservations#ri-about)
+
+    * [Reservation usage and lifecycle](/docs/containers?topic=containers-reservations#ri-usage-lifecycle)
+
+    * [Billing and discounts](/docs/containers?topic=containers-reservations#ri-about-billing)
+
+* [Creating a reservation](/docs/containers?topic=containers-reservations#ri-create)
+
+* [Using a reservation in a cluster](/docs/containers?topic=containers-reservations#ri-use)
+
+* [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
+
+* [Renewing expiring reservation](/docs/containers?topic=containers-reservations#renew-reservation)
 
 
 ## Setting up encryption
@@ -3565,20 +3652,15 @@ subcollection: containers
 [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge-sysdig#edge-sysdig)
 
 
-## Enabling the IBM Storage Operator cluster add-on
-{: #sitemap_enabling_the_ibm_storage_operator_cluster_add-on}
+## Storage
+{: #sitemap_storage}
 
 
-[Enabling the IBM Storage Operator cluster add-on](/docs/containers?topic=containers-storage-operator#storage-operator)
+[Storage Operator add-on](/docs/containers?topic=containers-storage-operator#storage-operator)
 
 * [Disabling the `ibm-storage-operator` add-on](/docs/containers?topic=containers-storage-operator#storage-operator-disable)
 
-
-## Setting up {{site.data.keyword.blockstorageshort}}
-{: #sitemap_setting_up_}
-
-
-[Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
+[Block Storage for Classic](/docs/containers?topic=containers-block_storage#block_storage)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 
@@ -3655,8 +3737,8 @@ subcollection: containers
 * [Assigning trusted profiles to block storage](/docs/containers?topic=containers-block_storage#block-classic-trusted-profile)
 
 
-## Setting up Block Storage for VPC
-{: #sitemap_setting_up_block_storage_for_vpc}
+### Block Storage for VPC add-on
+{: #sitemap_block_storage_for_vpc_add-on}
 
 
 [Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block)
@@ -3765,11 +3847,6 @@ subcollection: containers
 
 [{{site.data.keyword.block_storage_is_short}} storage class reference](/docs/containers?topic=containers-storage-block-vpc-sc-ref#storage-block-vpc-sc-ref)
 
-
-## Setting up {{site.data.keyword.filestorage_short}}
-{: #sitemap_setting_up_1}
-
-
 [Setting up {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
 * [Quick start for {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
@@ -3839,8 +3916,8 @@ subcollection: containers
 * [Assigning trusted profiles to file storage](/docs/containers?topic=containers-file_storage#file-classic-trusted-profile)
 
 
-## Setting up File Storage for VPC
-{: #sitemap_setting_up_file_storage_for_vpc}
+### File Storage for VPC add-on
+{: #sitemap_file_storage_for_vpc_add-on}
 
 
 [Enabling the {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on](/docs/containers?topic=containers-storage-file-vpc-install#storage-file-vpc-install)
@@ -3918,8 +3995,8 @@ subcollection: containers
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
 
 
-## Setting up Object Storage
-{: #sitemap_setting_up_object_storage}
+### Object Storage
+{: #sitemap_object_storage}
 
 
 [Setting up your {{site.data.keyword.cos_full_notm}} instance](/docs/containers?topic=containers-storage-cos-understand#storage-cos-understand)
@@ -4025,8 +4102,8 @@ subcollection: containers
 * [{{site.data.keyword.cos_full_notm}} cluster add-on storage classes](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon)
 
 
-## Setting up Portworx
-{: #sitemap_setting_up_portworx}
+### Portworx
+{: #sitemap_portworx}
 
 
 [About Portworx](/docs/containers?topic=containers-storage_portworx_about#storage_portworx_about)
@@ -4139,17 +4216,7 @@ subcollection: containers
 
 * [Gathering logs](/docs/containers?topic=containers-storage_portworx_support#portworx_logs)
 
-
-## Backing up and restoring storage data
-{: #sitemap_backing_up_and_restoring_storage_data}
-
-
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
-
-
-## IBM Cloud storage utilities
-{: #sitemap_ibm_cloud_storage_utilities}
-
 
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities#utilities)
 
@@ -4239,99 +4306,6 @@ subcollection: containers
     * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
 
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
-
-
-## Managing cluster costs
-{: #sitemap_managing_cluster_costs}
-
-
-[Understanding costs for your clusters](/docs/containers?topic=containers-costs#costs)
-
-* [Understanding costs by component](/docs/containers?topic=containers-costs#costs-for-clusters)
-
-    * [Worker nodes](/docs/containers?topic=containers-costs#nodes)
-
-    * [What is the difference between virtual and physical machines?](/docs/containers?topic=containers-costs#physical-vs-virtual)
-
-    * [Public bandwidth](/docs/containers?topic=containers-costs#bandwidth)
-
-    * [Subnet IP addresses](/docs/containers?topic=containers-costs#subnet_ips)
-
-    * [Multizone load balancer](/docs/containers?topic=containers-costs#mzlb_pricing)
-
-    * [Storage](/docs/containers?topic=containers-costs#persistent_storage)
-
-    * [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-costs#services)
-
-    * [Operators and other third-party integrations](/docs/containers?topic=containers-costs#operators_pricing)
-
-    * [VPC worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
-
-* [Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
-
-* [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
-
-[Using reservations to reduce classic worker node costs](/docs/containers?topic=containers-reservations#reservations)
-
-* [Understanding reservations](/docs/containers?topic=containers-reservations#ri-about)
-
-    * [Reservation usage and lifecycle](/docs/containers?topic=containers-reservations#ri-usage-lifecycle)
-
-    * [Billing and discounts](/docs/containers?topic=containers-reservations#ri-about-billing)
-
-* [Creating a reservation](/docs/containers?topic=containers-reservations#ri-create)
-
-* [Using a reservation in a cluster](/docs/containers?topic=containers-reservations#ri-use)
-
-* [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
-
-* [Renewing expiring reservation](/docs/containers?topic=containers-reservations#renew-reservation)
-
-
-## Tuning performance
-{: #sitemap_tuning_performance}
-
-
-[Tuning performance](/docs/containers?topic=containers-kernel#kernel)
-
-* [Default worker node settings](/docs/containers?topic=containers-kernel#worker-default)
-
-    * [Customizing the operating system](/docs/containers?topic=containers-kernel#worker-default-os)
-
-    * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
-
-* [Modifying worker node kernel settings to optimize performance](/docs/containers?topic=containers-kernel#worker-kernel-ds)
-
-* [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
-
-* [Optimizing network keepalive `sysctl` settings](/docs/containers?topic=containers-kernel#keepalive-iks)
-
-* [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
-
-    * [Modify the `metrics-server-config` config map](/docs/containers?topic=containers-kernel#metrics-server-config)
-
-    * [Determining which resources to tune](/docs/containers?topic=containers-kernel#determine-resources)
-
-* [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
-
-* [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
-
-* [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
-
-    * [Disabling the port map plug-in in Kubernetes version 1.29 and later](/docs/containers?topic=containers-kernel#calico-portmap-129)
-
-    * [Disabling the port map plug-in in Kubernetes version 1.28 and earlier](/docs/containers?topic=containers-kernel#calico-portmap-128)
-
-
-## Removing clusters
-{: #sitemap_removing_clusters}
-
-
-[Removing clusters](/docs/containers?topic=containers-remove#remove)
-
-* [Removing {{site.data.keyword.satelliteshort}} worker nodes or clusters](/docs/containers?topic=containers-remove#satcluster-rm)
-
-* [Next steps](/docs/containers?topic=containers-remove#cluster-remove-next-steps)
 
 
 ## Version history
@@ -5346,6 +5320,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.745](/docs/containers?topic=containers-cs_cli_changelog#cli-01745)
 
 * [Version v1.0.732](/docs/containers?topic=containers-cs_cli_changelog#cli-01732)
 
@@ -7726,7 +7702,7 @@ subcollection: containers
 
 
 ### Object Storage
-{: #sitemap_object_storage}
+{: #sitemap_object_storage1}
 
 
 [Debugging {{site.data.keyword.cos_full_notm}} failures](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos)
