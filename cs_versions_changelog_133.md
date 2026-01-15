@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-01-05"
+lastupdated: "2026-01-15"
 
 
 keywords: change log, version history, 1.33
@@ -40,6 +40,23 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.33
 {: #133_components}
+
+
+### Worker node fix pack 1.33.6_1555, released 12 January 2026
+{: #cl-boms-1336_1555_W}
+
+The following table shows the components included in the worker node fix pack 1.33.6_1555. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU 24|6.8.0-90-generic|Resolves the following CVEs: [CVE-2025-13601](https://nvd.nist.gov/vuln/detail/CVE-2025-13601){: external}, [CVE-2025-14087](https://nvd.nist.gov/vuln/detail/CVE-2025-14087){: external}, [CVE-2025-3360](https://nvd.nist.gov/vuln/detail/CVE-2025-3360){: external}, [CVE-2025-6052](https://nvd.nist.gov/vuln/detail/CVE-2025-6052){: external}, [CVE-2025-68973](https://nvd.nist.gov/vuln/detail/CVE-2025-68973){: external}, [CVE-2025-69277](https://nvd.nist.gov/vuln/detail/CVE-2025-69277){: external}, [CVE-2025-7039](https://nvd.nist.gov/vuln/detail/CVE-2025-7039){: external}, and [CVE-2025-7424](https://nvd.nist.gov/vuln/detail/CVE-2025-7424){: external}.|
+|Kubernetes|1.33.6|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.6).|
+|containerd|1.7.29|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.29).|
+|HAProxy|d04e61c5b29aa5328bc72455edb95e08e8f6d85c|N/A|
+|GPU Device Plug-in and Installer|b47cd687497789860e50db2fb84d0b43a4b6d5a4|Resolves the following CVEs: [CVE-2025-45582](https://nvd.nist.gov/vuln/detail/CVE-2025-45582){: external}.|
+{: caption="1.33.6_1555 fix pack." caption-side="bottom"}
+{: #cl-boms-1336_1555_W-component-table}
 
 
 ### Worker node fix pack 1.33.6_1554, released 29 December 2025
