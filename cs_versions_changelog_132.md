@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-01-15"
+lastupdated: "2026-01-16"
 
 
 keywords: change log, version history, 1.32
@@ -50,7 +50,7 @@ The following table shows the components included in the worker node fix pack 1.
 
 | Component | Version | Description |
 | ---- | ---- | ---- |
-|UBUNTU 24|6.8.0-90-generic|Resolves the following CVEs: [CVE-2025-13601](https://nvd.nist.gov/vuln/detail/CVE-2025-13601){: external}, [CVE-2025-14087](https://nvd.nist.gov/vuln/detail/CVE-2025-14087){: external}, [CVE-2025-3360](https://nvd.nist.gov/vuln/detail/CVE-2025-3360){: external}, [CVE-2025-6052](https://nvd.nist.gov/vuln/detail/CVE-2025-6052){: external}, [CVE-2025-68973](https://nvd.nist.gov/vuln/detail/CVE-2025-68973){: external}, [CVE-2025-69277](https://nvd.nist.gov/vuln/detail/CVE-2025-69277){: external}, [CVE-2025-7039](https://nvd.nist.gov/vuln/detail/CVE-2025-7039){: external}, and [CVE-2025-7424](https://nvd.nist.gov/vuln/detail/CVE-2025-7424){: external}.|
+|UBUNTU 24|6.8.0-90-generic|CIS benchmark compliance [1.1.1.1](https://workbench.cisecurity.org/sections/2891083/recommendations/4685173), [2.2.6](https://workbench.cisecurity.org/sections/2891131/recommendations/4685422), [4.4.3.1](https://workbench.cisecurity.org/sections/2891129/recommendations/4685398), [4.4.3.2](https://workbench.cisecurity.org/sections/2891129/recommendations/4685401), [5.3.2.2](https://workbench.cisecurity.org/sections/2891109/recommendations/4685304), [5.3.3.1.1](https://workbench.cisecurity.org/sections/2891115/recommendations/4685316), [5.3.3.1.2](https://workbench.cisecurity.org/sections/2891115/recommendations/4685322), [5.3.3.2.5](https://workbench.cisecurity.org/sections/2891119/recommendations/4685360), [5.3.3.2.8](https://workbench.cisecurity.org/sections/2891119/recommendations/4685376), [5.3.3.3.1](https://workbench.cisecurity.org/sections/2891124/recommendations/4685379), [5.3.3.3.2](https://workbench.cisecurity.org/sections/2891124/recommendations/4685381), [5.3.3.3.3](https://workbench.cisecurity.org/sections/2891124/recommendations/4685383), [5.3.3.4.1](https://workbench.cisecurity.org/sections/2891125/recommendations/4685385),[5.4.1.5](https://workbench.cisecurity.org/sections/2891128/recommendations/4685402), [6.1.1.3](https://workbench.cisecurity.org/sections/2891070/recommendations/4685135), [6.1.4.1](https://workbench.cisecurity.org/sections/2891076/recommendations/4685155)Resolves the following CVEs: [CVE-2025-13601](https://nvd.nist.gov/vuln/detail/CVE-2025-13601){: external}, [CVE-2025-14087](https://nvd.nist.gov/vuln/detail/CVE-2025-14087){: external}, [CVE-2025-3360](https://nvd.nist.gov/vuln/detail/CVE-2025-3360){: external}, [CVE-2025-6052](https://nvd.nist.gov/vuln/detail/CVE-2025-6052){: external}, [CVE-2025-68973](https://nvd.nist.gov/vuln/detail/CVE-2025-68973){: external}, [CVE-2025-69277](https://nvd.nist.gov/vuln/detail/CVE-2025-69277){: external}, [CVE-2025-7039](https://nvd.nist.gov/vuln/detail/CVE-2025-7039){: external}, and [CVE-2025-7424](https://nvd.nist.gov/vuln/detail/CVE-2025-7424){: external}.|
 |Kubernetes|1.32.10|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.10).|
 |containerd|1.7.29|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.29).|
 |HAProxy|d04e61c5b29aa5328bc72455edb95e08e8f6d85c|N/A|
