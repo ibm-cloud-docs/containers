@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-01-16"
+lastupdated: "2026-01-20"
 
 
 keywords: change log, version history, 1.34
@@ -40,6 +40,22 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.34
 {: #134_components}
+
+
+### Master fix pack 1.34.3_1539, released 21 January 2026
+{: #1343_1539_M}
+
+The following table shows the changes that are in the master fix pack 1.34.3_1539. Master patch updates are applied automatically. 
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health control-plane operator | v0.1.11 | v0.1.15 | New version contains updates and security fixes. |
+| etcd | v3.5.25 | v3.5.26 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.26){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.2-3 | v1.34.3-3 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.19 | 2.10.20 | New version contains updates and security fixes. |
+| Kubernetes | v1.34.2 | v1.34.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3){: external}. |
+{: caption="Changes since version 1.34.2-1534" caption-side="bottom"}
 
 
 ### Worker node fix pack 1.34.2_1537, released 12 January 2026
@@ -93,7 +109,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-1342_1535_W-component-table}
 
 
-### Change log for Master fix pack 1.34.2_1534, released 10 December 2025
+### Master fix pack 1.34.2_1534, released 10 December 2025
 {: #1342_1534_M}
 
 The following table shows the changes that are in the master fix pack 1.34.2_1534. Master patch updates are applied automatically. 

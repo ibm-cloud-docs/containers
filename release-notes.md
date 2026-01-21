@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-01-15"
+lastupdated: "2026-01-21"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -29,6 +29,40 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## January 2026
 {: #containers-jan26}
+
+### 21 January 2026
+{: #containers-jan2126}
+{: release-note}
+
+
+
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+
+
+
+
+VPC File CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
+
+
+
+IBM Storage Operator cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
+
+
+
+
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+
 
 
 ### 14 January 2026

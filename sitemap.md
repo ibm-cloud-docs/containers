@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-01-15"
+lastupdated: "2026-01-21"
 
 
 keywords: containers
@@ -239,6 +239,16 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan26)
+
+    * [21 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan2126)
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC Block CSI Driver cluster add-on patch updates.
 
     * [14 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1426)
 
@@ -4372,13 +4382,15 @@ subcollection: containers
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
 
+    * [Master fix pack 1.34.3_1539, released 21 January 2026](/docs/containers?topic=containers-changelog_134#1343_1539_M)
+
     * [Worker node fix pack 1.34.2_1537, released 12 January 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1342_1537_W)
 
     * [Worker node fix pack 1.34.2_1536, released 29 December 2025](/docs/containers?topic=containers-changelog_134#cl-boms-1342_1536_W)
 
     * [Worker node fix pack 1.34.2_1535, released 16 December 2025](/docs/containers?topic=containers-changelog_134#cl-boms-1342_1535_W)
 
-    * [Change log for Master fix pack 1.34.2_1534, released 10 December 2025](/docs/containers?topic=containers-changelog_134#1342_1534_M)
+    * [Master fix pack 1.34.2_1534, released 10 December 2025](/docs/containers?topic=containers-changelog_134#1342_1534_M)
 
     * [Worker node fix pack 1.34.1_1531, released 03 December 2025](/docs/containers?topic=containers-changelog_134#cl-boms-1341_1531_W)
 
@@ -4447,13 +4459,15 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
+    * [Master fix pack 1.33.7_1558, released 21 January 2026](/docs/containers?topic=containers-changelog_133#1337_1558_M)
+
     * [Worker node fix pack 1.33.6_1555, released 12 January 2026](/docs/containers?topic=containers-changelog_133#cl-boms-1336_1555_W)
 
     * [Worker node fix pack 1.33.6_1554, released 29 December 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1336_1554_W)
 
     * [Worker node fix pack 1.33.6_1553, released 16 December 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1336_1553_W)
 
-    * [Change log for Master fix pack 1.33.6_1552, released 10 December 2025](/docs/containers?topic=containers-changelog_133#1336_1552_M)
+    * [Master fix pack 1.33.6_1552, released 10 December 2025](/docs/containers?topic=containers-changelog_133#1336_1552_M)
 
     * [Worker node fix pack 1.33.5_1551, released 03 December 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1335_1551_W)
 
@@ -4479,7 +4493,7 @@ subcollection: containers
 
     * [Worker node fix pack 1.33.3_1534, released 12 August 2025](/docs/containers?topic=containers-changelog_133#cl-boms-1333_1534_W)
 
-    * [Change log for master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025](/docs/containers?topic=containers-changelog_133#1333_1532M_and_1333_1533W)
+    * [Master fix pack 1.33.3_1532 and worker node fix pack 1.33.3_1533, released 31 July 2025](/docs/containers?topic=containers-changelog_133#1333_1532M_and_1333_1533W)
 
 [1.33 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-133#cis-benchmark-133)
 
@@ -4544,13 +4558,15 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
+    * [Master fix pack 1.32.11_1574, released 21 January 2026](/docs/containers?topic=containers-changelog_132#13211_1574_M)
+
     * [Worker node fix pack 1.32.10_1572, released 12 January 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13210_1572_W)
 
     * [Worker node fix pack 1.32.10_1571, released 29 December 2025](/docs/containers?topic=containers-changelog_132#cl-boms-13210_1571_W)
 
     * [Worker node fix pack 1.32.10_1570, released 16 December 2025](/docs/containers?topic=containers-changelog_132#cl-boms-13210_1570_W)
 
-    * [Change log for Master fix pack 1.32.10_1569, released 10 December 2025](/docs/containers?topic=containers-changelog_132#13210_1569_M)
+    * [Master fix pack 1.32.10_1569, released 10 December 2025](/docs/containers?topic=containers-changelog_132#13210_1569_M)
 
     * [Worker node fix pack 1.32.9_1568, released 03 December 2025](/docs/containers?topic=containers-changelog_132#cl-boms-1329_1568_W)
 
@@ -4681,13 +4697,15 @@ subcollection: containers
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
 
+    * [Master fix pack 1.31.14_1590, released 21 January 2026](/docs/containers?topic=containers-changelog_131#13114_1590_M)
+
     * [Worker node fix pack 1.31.14_1585, released 12 January 2026](/docs/containers?topic=containers-changelog_131#cl-boms-13114_1585_W)
 
     * [Worker node fix pack 1.31.14_1584, released 29 December 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13114_1584_W)
 
     * [Worker node fix pack 1.31.14_1583, released 16 December 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13114_1583_W)
 
-    * [Change log for Master fix pack 1.31.14_1581, released 10 December 2025](/docs/containers?topic=containers-changelog_131#13114_1581_M)
+    * [Master fix pack 1.31.14_1581, released 10 December 2025](/docs/containers?topic=containers-changelog_131#13114_1581_M)
 
     * [Worker node fix pack 1.31.13_1580, released 03 December 2025](/docs/containers?topic=containers-changelog_131#cl-boms-13113_1580_W)
 
@@ -5536,6 +5554,8 @@ subcollection: containers
 
 * [Version 1.26](/docs/containers?topic=containers-istio-changelog#v126)
 
+    * [Change log for 1.26.8, released 21 January 2025](/docs/containers?topic=containers-istio-changelog#1268)
+
     * [Change log for 1.26.6, released 15 December 2025](/docs/containers?topic=containers-istio-changelog#1266)
 
 * [Version 1.25](/docs/containers?topic=containers-istio-changelog#v125)
@@ -5892,6 +5912,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [v1.0.30_310464697, released 21 January 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1030_310464697)
+
     * [v1.0.29_301949998, released 05 December 2025](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1029_301949998)
 
     * [1.0.27_264, released 22 September 2025](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1027_264)
@@ -5920,6 +5942,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [v5.2.42_310488886, released 21 January 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5242_310488886)
+
     * [5.2.41_296897820, released 12 November 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5241_296897820)
 
     * [5.2.40_293222012, released 05 November 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5240_293222012)
@@ -5933,6 +5957,8 @@ subcollection: containers
     * [5.2.31_687, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [v5.1.41_310494703, released 21 January 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5141_310494703)
 
     * [5.1.40_296898008, released 12 November 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5140_296898008)
 
@@ -6055,6 +6081,8 @@ subcollection: containers
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [v2.0.22_310489003, released 21 January 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2022_310489003)
 
     * [v2.0.21_301434433, released 05 December 2025](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2021_301434433)
 

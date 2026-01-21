@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-01-16"
+lastupdated: "2026-01-20"
 
 
 keywords: change log, version history, 1.31
@@ -47,6 +47,26 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.31
 {: #131_components}
+
+
+### Master fix pack 1.31.14_1590, released 21 January 2026
+{: #13114_1590_M}
+
+The following table shows the changes that are in the master fix pack 1.31.14_1590. Master patch updates are applied automatically. 
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
+| Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
+| etcd | v3.5.24 | v3.5.26 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.26){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.31.13-6 | v1.31.14-7 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.17 | 2.10.20 | New version contains updates and security fixes. |
+| Konnectivity agent and server | v0.31.3 | v0.31.4 | New version contains updates and security fixes. |
+| Kubernetes | v1.31.13 | v1.31.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.14){: external}. |
+| Portieris admission controller | v0.13.31 | v0.13.33 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.33){: external}. |
+| Tigera Operator | v1.36.14 | v1.36.16 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.16){: external}. |
+{: caption="Changes since version 1.31.14-1581" caption-side="bottom"}
 
 
 ### Worker node fix pack 1.31.14_1585, released 12 January 2026
@@ -100,7 +120,7 @@ The following table shows the components included in the worker node fix pack 1.
 {: #cl-boms-13114_1583_W-component-table}
 
 
-### Change log for Master fix pack 1.31.14_1581, released 10 December 2025
+### Master fix pack 1.31.14_1581, released 10 December 2025
 {: #13114_1581_M}
 
 The following table shows the changes that are in the master fix pack 1.31.14_1581. Master patch updates are applied automatically. 
