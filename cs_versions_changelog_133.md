@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-01-20"
+lastupdated: "2026-01-21"
 
 
 keywords: change log, version history, 1.33
@@ -61,6 +61,23 @@ The following table shows the changes that are in the master fix pack 1.33.7_155
 | Portieris admission controller | v0.13.31 | v0.13.33 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.33){: external}. |
 | Tigera Operator | v1.36.14 | v1.36.16 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.16){: external}. |
 {: caption="Changes since version 1.33.6-1552" caption-side="bottom"}
+
+
+### Worker node fix pack 1.33.6_1559, released 17 January 2026
+{: #cl-boms-1336_1559_W}
+
+The following table shows the components included in the worker node fix pack 1.33.6_1559. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU 24|6.8.0-90-generic|Resolves the following CVEs: [CVE-2016-9843](https://nvd.nist.gov/vuln/detail/CVE-2016-9843){: external}, [CVE-2024-25269](https://nvd.nist.gov/vuln/detail/CVE-2024-25269){: external}, [CVE-2025-13151](https://nvd.nist.gov/vuln/detail/CVE-2025-13151){: external}, [CVE-2025-13836](https://nvd.nist.gov/vuln/detail/CVE-2025-13836){: external}, [CVE-2025-66293](https://nvd.nist.gov/vuln/detail/CVE-2025-66293){: external}, [CVE-2025-66471](https://nvd.nist.gov/vuln/detail/CVE-2025-66471){: external}, [CVE-2025-68431](https://nvd.nist.gov/vuln/detail/CVE-2025-68431){: external}, [CVE-2026-21441](https://nvd.nist.gov/vuln/detail/CVE-2026-21441){: external}, [CVE-2026-22695](https://nvd.nist.gov/vuln/detail/CVE-2026-22695){: external}, and [CVE-2026-22801](https://nvd.nist.gov/vuln/detail/CVE-2026-22801){: external}.|
+|Kubernetes|1.33.6|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.6).|
+|containerd|1.7.29|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.29).|
+|HAProxy|d04e61c5b29aa5328bc72455edb95e08e8f6d85c|N/A|
+|GPU Device Plug-in and Installer|b47cd687497789860e50db2fb84d0b43a4b6d5a4|N/A|
+{: caption="1.33.6_1559 fix pack." caption-side="bottom"}
+{: #cl-boms-1336_1559_W-component-table}
 
 
 ### Worker node fix pack 1.33.6_1555, released 12 January 2026

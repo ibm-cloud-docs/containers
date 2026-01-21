@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-01-20"
+lastupdated: "2026-01-21"
 
 
 keywords: change log, version history, 1.34
@@ -56,6 +56,23 @@ The following table shows the changes that are in the master fix pack 1.34.3_153
 | Key Management Service provider | v2.10.19 | 2.10.20 | New version contains updates and security fixes. |
 | Kubernetes | v1.34.2 | v1.34.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3){: external}. |
 {: caption="Changes since version 1.34.2-1534" caption-side="bottom"}
+
+
+### Worker node fix pack 1.34.2_1540, released 17 January 2026
+{: #cl-boms-1342_1540_W}
+
+The following table shows the components included in the worker node fix pack 1.34.2_1540. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU 24|6.8.0-90-generic|Resolves the following CVEs: [CVE-2016-9843](https://nvd.nist.gov/vuln/detail/CVE-2016-9843){: external}, [CVE-2024-25269](https://nvd.nist.gov/vuln/detail/CVE-2024-25269){: external}, [CVE-2025-13151](https://nvd.nist.gov/vuln/detail/CVE-2025-13151){: external}, [CVE-2025-13836](https://nvd.nist.gov/vuln/detail/CVE-2025-13836){: external}, [CVE-2025-66293](https://nvd.nist.gov/vuln/detail/CVE-2025-66293){: external}, [CVE-2025-66471](https://nvd.nist.gov/vuln/detail/CVE-2025-66471){: external}, [CVE-2025-68431](https://nvd.nist.gov/vuln/detail/CVE-2025-68431){: external}, [CVE-2026-21441](https://nvd.nist.gov/vuln/detail/CVE-2026-21441){: external}, [CVE-2026-22695](https://nvd.nist.gov/vuln/detail/CVE-2026-22695){: external}, and [CVE-2026-22801](https://nvd.nist.gov/vuln/detail/CVE-2026-22801){: external}.|
+|Kubernetes|1.34.2|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.2).|
+|containerd|2.2.0|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v2.2.0).|
+|HAProxy|d04e61c5b29aa5328bc72455edb95e08e8f6d85c|N/A|
+|GPU Device Plug-in and Installer|b47cd687497789860e50db2fb84d0b43a4b6d5a4|N/A|
+{: caption="1.34.2_1540 fix pack." caption-side="bottom"}
+{: #cl-boms-1342_1540_W-component-table}
 
 
 ### Worker node fix pack 1.34.2_1537, released 12 January 2026
