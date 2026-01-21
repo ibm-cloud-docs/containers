@@ -30,6 +30,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## January 2026
 {: #containers-jan26}
 
+
 ### 21 January 2026
 {: #containers-jan2126}
 {: release-note}
@@ -68,6 +69,21 @@ VPC Block CSI Driver cluster add-on patch updates.
 
 CLI version `1.0.745` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
+### 17 January 2026
+{: #containers-jan1726}
+{: release-note}
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+
+
 
 ### 13 January 2026
 {: #containers-jan1326}
