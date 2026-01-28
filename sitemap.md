@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-01-21"
+lastupdated: "2026-01-28"
 
 
 keywords: containers
@@ -5507,8 +5507,6 @@ subcollection: containers
 * [`alb-oauth-proxy` 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#alb-oauth-proxy-2.0.0)
 
 * [`cluster-autoscaler` 1.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.1.0)
-
-* [`cluster-autoscaler` 1.2.3](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.3)
 
 * [`cluster-autoscaler` 1.2.4](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.4)
 
