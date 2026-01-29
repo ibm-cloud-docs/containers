@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-01-21"
+lastupdated: "2026-01-29"
 
 
 keywords: change log, version history, 1.34
@@ -40,6 +40,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.34
 {: #134_components}
+
+
+### Worker node fix pack 1.34.3_1541, released 27 January 2026
+{: #cl-boms-1343_1541_W}
+
+The following table shows the components included in the worker node fix pack 1.34.3_1541. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU 24 (VPC)|6.8.0-90-generic|Resolves the following CVEs: [CVE-2025-11230](https://nvd.nist.gov/vuln/detail/CVE-2025-11230){: external}, [CVE-2025-8732](https://nvd.nist.gov/vuln/detail/CVE-2025-8732){: external}, [CVE-2026-0988](https://nvd.nist.gov/vuln/detail/CVE-2026-0988){: external}, [CVE-2026-0989](https://nvd.nist.gov/vuln/detail/CVE-2026-0989){: external}, [CVE-2026-0990](https://nvd.nist.gov/vuln/detail/CVE-2026-0990){: external}, [CVE-2026-0992](https://nvd.nist.gov/vuln/detail/CVE-2026-0992){: external}, and [CVE-2026-23490](https://nvd.nist.gov/vuln/detail/CVE-2026-23490){: external}.|
+|UBUNTU 24 (Classic)|6.8.0-90-generic|Resolves the following CVEs: [CVE-2025-11230](https://nvd.nist.gov/vuln/detail/CVE-2025-11230){: external}, [CVE-2025-8732](https://nvd.nist.gov/vuln/detail/CVE-2025-8732){: external}, [CVE-2026-0988](https://nvd.nist.gov/vuln/detail/CVE-2026-0988){: external}, [CVE-2026-0989](https://nvd.nist.gov/vuln/detail/CVE-2026-0989){: external}, [CVE-2026-0990](https://nvd.nist.gov/vuln/detail/CVE-2026-0990){: external}, [CVE-2026-0992](https://nvd.nist.gov/vuln/detail/CVE-2026-0992){: external}, and [CVE-2026-23490](https://nvd.nist.gov/vuln/detail/CVE-2026-23490){: external}.|
+|Kubernetes|1.34.3|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3).|
+|containerd|2.2.1|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v2.2.1).|
+|HAProxy|c9cb5ad988e916d184d1c308d4f2e5c502d99523|Resolves the following CVEs: [CVE-2025-68973](https://nvd.nist.gov/vuln/detail/CVE-2025-68973){: external}, [CVE-2025-13601](https://nvd.nist.gov/vuln/detail/CVE-2025-13601){: external}, and [CVE-2025-9230](https://nvd.nist.gov/vuln/detail/CVE-2025-9230){: external}.|
+|GPU Device Plug-in and Installer|988adbf62747d86883413ca1773f4bc5141dd516|Resolves the following CVEs: [CVE-2025-13601](https://nvd.nist.gov/vuln/detail/CVE-2025-13601){: external}, and [CVE-2025-68973](https://nvd.nist.gov/vuln/detail/CVE-2025-68973){: external}.|
+{: caption="1.34.3_1541 fix pack." caption-side="bottom"}
+{: #cl-boms-1343_1541_W-component-table}
 
 
 ### Master fix pack 1.34.3_1539, released 21 January 2026

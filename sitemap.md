@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-01-28"
+lastupdated: "2026-01-29"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan26)
+
+    * [27 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan2726)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [21 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan2126)
 
@@ -1951,6 +1955,10 @@ subcollection: containers
 
 * [Renewing expiring reservation](/docs/containers?topic=containers-reservations#renew-reservation)
 
+[Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prevent)
+
+[Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge-sysdig#edge-sysdig)
+
 
 ## Encryption
 {: #sitemap_encryption}
@@ -2611,11 +2619,6 @@ subcollection: containers
 
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
-
-## Adding static routes to worker nodes
-{: #sitemap_adding_static_routes_to_worker_nodes}
-
-
 [Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
 
 * [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
@@ -2627,11 +2630,6 @@ subcollection: containers
     * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
 
 * [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
-
-
-## Configuring the cluster DNS provider
-{: #sitemap_configuring_the_cluster_dns_provider}
-
 
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 
@@ -2723,159 +2721,6 @@ subcollection: containers
 * [Setting up HPA](/docs/containers?topic=containers-cluster-scaling-hpa-gpu#hpa-gpu-setup)
 
 [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-ca_update_worker_node_pool#ca_update_worker_node_pool)
-
-
-## Logging and monitoring
-{: #sitemap_logging_and_monitoring}
-
-
-[Logging for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-logging#logging)
-
-* [Locations where logs are generated](/docs/containers?topic=containers-logging#log-locations)
-
-* [Locations where logs are sent to {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-logging#la-legacy-locations)
-
-* [Locations where logs are sent by {{site.data.keyword.logs_routing_full_notm}}](/docs/containers?topic=containers-logging#lr-locations)
-
-* [Logs that are generated](/docs/containers?topic=containers-logging#log-platform)
-
-* [Enabling logging](/docs/containers?topic=containers-logging#log-enable)
-
-* [Enable logging in an existing cluster](/docs/containers?topic=containers-logging#log-enable-existing)
-
-* [Enable logging while creating a cluster](/docs/containers?topic=containers-logging#log-enable-create)
-
-* [Viewing logs](/docs/containers?topic=containers-logging#log-viewing)
-
-* [Launching {{site.data.keyword.logs_full_notm}} from the Observability page](/docs/containers?topic=containers-logging#log-launch-standalone-ob)
-
-* [Fields by log type](/docs/containers?topic=containers-logging#log-fields)
-
-* [Line identifiers by type](/docs/containers?topic=containers-logging#line-indentifiers)
-
-* [Analyzing {{site.data.keyword.containerlong_notm}} logs](/docs/containers?topic=containers-logging#cloud-logs)
-
-[Monitoring metrics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring)
-
-* [Locations where metrics are generated](/docs/containers?topic=containers-monitoring#mon-locations)
-
-* [Enabling metrics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring-enable)
-
-* [Enable monitoring in an existing cluster](/docs/containers?topic=containers-monitoring#monintoring-enable-existing)
-
-* [Enable monitoring while creating a cluster](/docs/containers?topic=containers-monitoring#monintoring-enable-create)
-
-* [Viewing metrics](/docs/containers?topic=containers-monitoring#monitoring-view)
-
-    * [Launching {{site.data.keyword.mon_full}} from the Observability page](/docs/containers?topic=containers-monitoring#monitoring-view-ob)
-
-* [Monitoring {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring-monitor)
-
-* [Migrating to the new monitoring agent](/docs/containers?topic=containers-monitoring#migrating-new-agent)
-
-[Logging for clusters](/docs/containers?topic=containers-health#health)
-
-* [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
-
-* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
-
-    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health#ob-remove)
-
-* [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
-
-    * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging-external)
-
-    * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
-
-    * [Forwarding logs to your own server over the `udp` or `tcp` protocols](/docs/containers?topic=containers-health#enable-forwarding-udp-tcp)
-
-    * [Forwarding logs to your own server over the `tls` protocol](/docs/containers?topic=containers-health#enable-forwarding-tls)
-
-    * [Filtering logs that are forwarded](/docs/containers?topic=containers-health#filter-logs)
-
-    * [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
-
-[Monitoring cluster health](/docs/containers?topic=containers-health-monitor#health-monitor)
-
-* [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
-
-* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
-
-    * [Reviewing your observability agents](/docs/containers?topic=containers-health-monitor#ob-review-mon)
-
-    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health-monitor#ob-remove-mon)
-
-* [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
-
-    * [App alerts](/docs/containers?topic=containers-health-monitor#app-level-alerts)
-
-    * [Worker node alerts](/docs/containers?topic=containers-health-monitor#worker-node-level-alerts)
-
-    * [Zone alerts](/docs/containers?topic=containers-health-monitor#zone-level-alerts)
-
-    * [Cluster alerts](/docs/containers?topic=containers-health-monitor#cluster-level-alerts)
-
-    * [Account alerts](/docs/containers?topic=containers-health-monitor#account-level-alerts)
-
-    * [{{site.data.keyword.block_storage_is_short}} alerts](/docs/containers?topic=containers-health-monitor#vpc-block-storage-alerts)
-
-* [Monitoring worker node health with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
-
-    * [Understanding the configmap components](/docs/containers?topic=containers-health-monitor#configmap-components)
-
-    * [Understanding the individual components of health checks](/docs/containers?topic=containers-health-monitor#health-check-components)
-
-[Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit#health-audit)
-
-* [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
-
-    * [Considerations and prerequisites](/docs/containers?topic=containers-health-audit#prereqs-apiserver-logs)
-
-    * [Forwarding Kubernetes API audit logs to Cloud Logs](/docs/containers?topic=containers-health-audit#audit-api-server-la)
-
-    * [Manage updates, rotate certificates, and encrypt in transit with HTTPS](/docs/containers?topic=containers-health-audit#secure-setup)
-
-    * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
-
-    * [Forwarding Kubernetes API audit logs to an external server on the public Internet](/docs/containers?topic=containers-health-audit#audit-api-server-external)
-
-    * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
-
-* [Service audit logs](/docs/containers?topic=containers-health-audit#audit-service)
-
-[Enabling Flow Logs for VPC cluster components](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log)
-
-* [Configuring a flow log collector](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_create)
-
-* [Viewing worker node flow logs](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_view)
-
-[{{site.data.keyword.logs_full_notm}} events](/docs/containers?topic=containers-at_events_ref#at_events_ref)
-
-* [Cluster events](/docs/containers?topic=containers-at_events_ref#clusters-events)
-
-* [Cluster account events](/docs/containers?topic=containers-at_events_ref#cluster-account-events)
-
-* [Cluster add-on events](/docs/containers?topic=containers-at_events_ref#cluster-addons)
-
-* [Fluentd logging events](/docs/containers?topic=containers-at_events_ref#at-fluentd)
-
-* [Ingress ALB events](/docs/containers?topic=containers-at_events_ref#ingress-alb-events)
-
-* [Ingress secret events](/docs/containers?topic=containers-at_events_ref#ingress-secret-events)
-
-* [Observability events for logging and monitoring](/docs/containers?topic=containers-at_events_ref#at-lm)
-
-* [NLB DNS events](/docs/containers?topic=containers-at_events_ref#ingress-nlb-dns-events)
-
-* [Private service endpoint allowlist events](/docs/containers?topic=containers-at_events_ref#acl-events)
-
-* [{{site.data.keyword.satelliteshort}} events](/docs/containers?topic=containers-at_events_ref#satellite-events)
-
-* [Storage events](/docs/containers?topic=containers-at_events_ref#storage-events)
-
-* [Worker node and worker pool events](/docs/containers?topic=containers-at_events_ref#worker-events)
-
-* [Viewing your cluster events](/docs/containers?topic=containers-at_events_ref#at-ui)
 
 
 ## Setting up an image registry
@@ -3072,189 +2917,6 @@ subcollection: containers
 * [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
 
 [Packaging apps for reuse in multiple environments with Kustomize](/docs/containers?topic=containers-kustomize#kustomize)
-
-
-## Istio service mesh
-{: #sitemap_istio_service_mesh}
-
-
-[Getting started with Istio](/docs/containers?topic=containers-istio-qs#istio-qs)
-
-* [Step 1: Enable the Istio add-on](/docs/containers?topic=containers-istio-qs#istio-qs-1)
-
-* [Step 2: Set up the BookInfo sample app](/docs/containers?topic=containers-istio-qs#istio-qs-2)
-
-* [Step 3: Simulate a phased rollout of BookInfo](/docs/containers?topic=containers-istio-qs#istio-qs-3)
-
-* [Step 4: Monitor BookInfo with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-qs#istio-qs-4)
-
-* [Step 5: Secure in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-qs#mtls-qs)
-
-[About the managed Istio add-on](/docs/containers?topic=containers-istio-about#istio-about)
-
-* [What is Istio?](/docs/containers?topic=containers-istio-about#istio_ov_what_is)
-
-* [What is Istio on {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-istio-about#istio_ov_addon)
-
-    * [What does this look like in my cluster?](/docs/containers?topic=containers-istio-about#istio-addon-resources)
-
-    * [How does the update process work?](/docs/containers?topic=containers-istio-about#istio-addon-update)
-
-* [What comes with the Istio add-on?](/docs/containers?topic=containers-istio-about#istio_ov_components)
-
-* [Limitations](/docs/containers?topic=containers-istio-about#istio_limitations)
-
-[Setting up the Istio managed add-on](/docs/containers?topic=containers-istio#istio)
-
-* [Removing other Istio installations from a cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
-
-* [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
-
-    * [Installing the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#istio_install_console)
-
-    * [Installing the Istio add-on with the CLI](/docs/containers?topic=containers-istio&interface=cli#istio_install_cli)
-
-    * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl)
-
-* [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=cli#customize)
-
-* [Migrating from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=cli#migrate)
-
-    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#migrate_disable_ui)
-
-    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio&interface=cli#migrate_disable_cli)
-
-    * [Step 2: Scale down the Istio operator](/docs/containers?topic=containers-istio&interface=cli#migrate_scale_operator)
-
-    * [Step 3: Saving resources](/docs/containers?topic=containers-istio&interface=cli#migrate_resources)
-
-    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_installer)
-
-    * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_uninstall_operator)
-
-    * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio&interface=cli#migrate_configmap)
-
-* [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
-
-    * [Step 1: Saving resources before uninstallation](/docs/containers?topic=containers-istio&interface=cli#uninstall_resources)
-
-    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_addon)
-
-    * [Step 3: Removing resources](/docs/containers?topic=containers-istio&interface=cli#istio_remove_resources)
-
-    * [Step 4: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
-
-[Updating Istio](/docs/containers?topic=containers-istio-update#istio-update)
-
-* [Before you begin](/docs/containers?topic=containers-istio-update#istio-update-prereq)
-
-* [Updating from version 1.23 to 1.24 of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor_124)
-
-* [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
-
-* [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
-
-* [Updating from an unsupported version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_update)
-
-[Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh#istio-mesh)
-
-* [Understanding the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#istio_bookinfo)
-
-* [Setting up the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#bookinfo_setup)
-
-* [Publicly accessing BookInfo](/docs/containers?topic=containers-istio-mesh#istio_access_bookinfo)
-
-    * [Creating a gateway URL in Classic clusters](/docs/containers?topic=containers-istio-mesh#istio_create_gatewayURL_classic)
-
-    * [Creating a gateway URL in VPC clusters](/docs/containers?topic=containers-istio-mesh#create-gateway-vpc)
-
-    * [Viewing the BookInfo web page in a browser](/docs/containers?topic=containers-istio-mesh#viewing-bookinfo)
-
-    * [Exposing BookInfo by using an IBM-provided subdomain without TLS](/docs/containers?topic=containers-istio-mesh#istio_expose_bookinfo)
-
-    * [Exposing BookInfo by using an IBM-provided subdomain with TLS](/docs/containers?topic=containers-istio-mesh#istio_expose_bookinfo_tls)
-
-    * [Configuring the bookinfo-gateway to use TLS termination](/docs/containers?topic=containers-istio-mesh#bookinfo-tls)
-
-    * [Understanding what happened](/docs/containers?topic=containers-istio-mesh#istio_bookinfo_understanding)
-
-* [Including apps in the Istio service mesh by setting up sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar)
-
-    * [Enabling automatic sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar_automatic)
-
-    * [Manually injecting sidecars](/docs/containers?topic=containers-istio-mesh#istio_sidecar_manual)
-
-* [Enabling or disabling public Istio load balancers in `addon-istio` 1.23](/docs/containers?topic=containers-istio-mesh#config-gateways)
-
-* [Exposing the Istio ingress gateway with DNS](/docs/containers?topic=containers-istio-mesh#istio_expose)
-
-    * [Exposing the Istio ingress gateway with DNS without TLS termination](/docs/containers?topic=containers-istio-mesh#istio-no-tls)
-
-    * [Exposing the Istio ingress gateway with DNS with TLS termination](/docs/containers?topic=containers-istio-mesh#istio_tls)
-
-* [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
-
-[Deploying custom Istio gateways in Helm](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-custom-gateway-helm)
-
-* [Setting up Helm](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-helm-install)
-
-* [Modifying existing default gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-custom-gateway-defaults)
-
-* [Creating additional gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#custom_gateways_helm_add)
-
-* [Example customizations](/docs/containers?topic=containers-istio-custom-gateway-helm#example-cust)
-
-    * [Egress gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#example-egress)
-
-    * [Resource requests and limits](/docs/containers?topic=containers-istio-custom-gateway-helm#example-limits)
-
-    * [Autoscaling](/docs/containers?topic=containers-istio-custom-gateway-helm#example-autoscaling)
-
-    * [Graceful termination](/docs/containers?topic=containers-istio-custom-gateway-helm#example-term)
-
-    * [Zone affinity](/docs/containers?topic=containers-istio-custom-gateway-helm#example-zone)
-
-    * [Pinning the Istio version](/docs/containers?topic=containers-istio-custom-gateway-helm#example-version)
-
-    * [Disabling the gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#example-disable)
-
-* [Removing gateway deployments](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep)
-
-[Deploying custom Istio gateways in an `IstioOperator`](/docs/containers?topic=containers-istio-custom-gateway#istio-custom-gateway)
-
-* [Considerations](/docs/containers?topic=containers-istio-custom-gateway#considerations)
-
-* [Creating a custom ingress gateway for public traffic](/docs/containers?topic=containers-istio-custom-gateway#custom-ingress-gateway-public)
-
-    * [Set up the BookInfo sample](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-bookinfo)
-
-    * [Exposing BookInfo by using an IBM-provided subdomain with TLS](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-bookinfo-dns)
-
-* [Creating a custom ingress gateway for private network traffic](/docs/containers?topic=containers-istio-custom-gateway#custom-ingress-gateway-private)
-
-* [Controlling custom gateway updates and versions](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-version)
-
-* [Additional gateway customizations](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-options)
-
-* [Creating a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway)
-
-* [Disabling the default gateways](/docs/containers?topic=containers-istio-custom-gateway#disable-default-gateways)
-
-[Observing Istio traffic](/docs/containers?topic=containers-istio-health#istio-health)
-
-* [Enabling access logs for the entire mesh](/docs/containers?topic=containers-istio-health#enable_logs_entire)
-
-* [Enabling access logs for individual containers](/docs/containers?topic=containers-istio-health#enable_logs_individual)
-
-* [Setting up logging with {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_la)
-
-* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_mon)
-
-* [Launching the ControlZ component inspection and Envoy sidecar dashboards](/docs/containers?topic=containers-istio-health#istio_inspect)
-
-    * [ControlZ](/docs/containers?topic=containers-istio-health#controlz)
-
-    * [Envoy](/docs/containers?topic=containers-istio-health#envoy)
 
 
 ## App exposure
@@ -3718,18 +3380,187 @@ subcollection: containers
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
-## Preventing app workloads from running on edge worker nodes
-{: #sitemap_preventing_app_workloads_from_running_on_edge_worker_nodes}
+## Istio service mesh
+{: #sitemap_istio_service_mesh}
 
 
-[Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prevent)
+[Getting started with Istio](/docs/containers?topic=containers-istio-qs#istio-qs)
 
+* [Step 1: Enable the Istio add-on](/docs/containers?topic=containers-istio-qs#istio-qs-1)
 
-## Deploying the Sysdig agent on edge worker nodes
-{: #sitemap_deploying_the_sysdig_agent_on_edge_worker_nodes}
+* [Step 2: Set up the BookInfo sample app](/docs/containers?topic=containers-istio-qs#istio-qs-2)
 
+* [Step 3: Simulate a phased rollout of BookInfo](/docs/containers?topic=containers-istio-qs#istio-qs-3)
 
-[Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge-sysdig#edge-sysdig)
+* [Step 4: Monitor BookInfo with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-qs#istio-qs-4)
+
+* [Step 5: Secure in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-qs#mtls-qs)
+
+[About the managed Istio add-on](/docs/containers?topic=containers-istio-about#istio-about)
+
+* [What is Istio?](/docs/containers?topic=containers-istio-about#istio_ov_what_is)
+
+* [What is Istio on {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-istio-about#istio_ov_addon)
+
+    * [What does this look like in my cluster?](/docs/containers?topic=containers-istio-about#istio-addon-resources)
+
+    * [How does the update process work?](/docs/containers?topic=containers-istio-about#istio-addon-update)
+
+* [What comes with the Istio add-on?](/docs/containers?topic=containers-istio-about#istio_ov_components)
+
+* [Limitations](/docs/containers?topic=containers-istio-about#istio_limitations)
+
+[Setting up the Istio managed add-on](/docs/containers?topic=containers-istio#istio)
+
+* [Removing other Istio installations from a cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
+
+* [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
+
+    * [Installing the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#istio_install_console)
+
+    * [Installing the Istio add-on with the CLI](/docs/containers?topic=containers-istio&interface=cli#istio_install_cli)
+
+    * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio&interface=cli#istioctl)
+
+* [Customizing the Istio installation](/docs/containers?topic=containers-istio&interface=cli#customize)
+
+* [Migrating from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=cli#migrate)
+
+    * [Step 1: Disabling the Istio add-on from the console](/docs/containers?topic=containers-istio&interface=ui#migrate_disable_ui)
+
+    * [Step 1: Disabling the Istio add-ons from the CLI](/docs/containers?topic=containers-istio&interface=cli#migrate_disable_cli)
+
+    * [Step 2: Scale down the Istio operator](/docs/containers?topic=containers-istio&interface=cli#migrate_scale_operator)
+
+    * [Step 3: Saving resources](/docs/containers?topic=containers-istio&interface=cli#migrate_resources)
+
+    * [Step 4: Changing the installer of the IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_installer)
+
+    * [Step 5: Removing the Istio operator and IOPs](/docs/containers?topic=containers-istio&interface=cli#migrate_uninstall_operator)
+
+    * [Step 6: Removing the ConfigMap](/docs/containers?topic=containers-istio&interface=cli#migrate_configmap)
+
+* [Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall)
+
+    * [Step 1: Saving resources before uninstallation](/docs/containers?topic=containers-istio&interface=cli#uninstall_resources)
+
+    * [Step 2: Uninstalling the Istio add-on](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_addon)
+
+    * [Step 3: Removing resources](/docs/containers?topic=containers-istio&interface=cli#istio_remove_resources)
+
+    * [Step 4: Remove the Istio operator](/docs/containers?topic=containers-istio&interface=cli#istio_uninstall_operator)
+
+[Updating Istio](/docs/containers?topic=containers-istio-update#istio-update)
+
+* [Before you begin](/docs/containers?topic=containers-istio-update#istio-update-prereq)
+
+* [Updating from version 1.23 to 1.24 of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor_124)
+
+* [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
+
+* [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
+
+* [Updating from an unsupported version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_update)
+
+[Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh#istio-mesh)
+
+* [Understanding the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#istio_bookinfo)
+
+* [Setting up the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#bookinfo_setup)
+
+* [Publicly accessing BookInfo](/docs/containers?topic=containers-istio-mesh#istio_access_bookinfo)
+
+    * [Creating a gateway URL in Classic clusters](/docs/containers?topic=containers-istio-mesh#istio_create_gatewayURL_classic)
+
+    * [Creating a gateway URL in VPC clusters](/docs/containers?topic=containers-istio-mesh#create-gateway-vpc)
+
+    * [Viewing the BookInfo web page in a browser](/docs/containers?topic=containers-istio-mesh#viewing-bookinfo)
+
+    * [Exposing BookInfo by using an IBM-provided subdomain without TLS](/docs/containers?topic=containers-istio-mesh#istio_expose_bookinfo)
+
+    * [Exposing BookInfo by using an IBM-provided subdomain with TLS](/docs/containers?topic=containers-istio-mesh#istio_expose_bookinfo_tls)
+
+    * [Configuring the bookinfo-gateway to use TLS termination](/docs/containers?topic=containers-istio-mesh#bookinfo-tls)
+
+    * [Understanding what happened](/docs/containers?topic=containers-istio-mesh#istio_bookinfo_understanding)
+
+* [Including apps in the Istio service mesh by setting up sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar)
+
+    * [Enabling automatic sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar_automatic)
+
+    * [Manually injecting sidecars](/docs/containers?topic=containers-istio-mesh#istio_sidecar_manual)
+
+* [Enabling or disabling public Istio load balancers in `addon-istio` 1.23](/docs/containers?topic=containers-istio-mesh#config-gateways)
+
+* [Exposing the Istio ingress gateway with DNS](/docs/containers?topic=containers-istio-mesh#istio_expose)
+
+    * [Exposing the Istio ingress gateway with DNS without TLS termination](/docs/containers?topic=containers-istio-mesh#istio-no-tls)
+
+    * [Exposing the Istio ingress gateway with DNS with TLS termination](/docs/containers?topic=containers-istio-mesh#istio_tls)
+
+* [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
+
+[Deploying custom Istio gateways in Helm](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-custom-gateway-helm)
+
+* [Setting up Helm](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-helm-install)
+
+* [Modifying existing default gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#istio-custom-gateway-defaults)
+
+* [Creating additional gateways](/docs/containers?topic=containers-istio-custom-gateway-helm#custom_gateways_helm_add)
+
+* [Example customizations](/docs/containers?topic=containers-istio-custom-gateway-helm#example-cust)
+
+    * [Egress gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#example-egress)
+
+    * [Resource requests and limits](/docs/containers?topic=containers-istio-custom-gateway-helm#example-limits)
+
+    * [Autoscaling](/docs/containers?topic=containers-istio-custom-gateway-helm#example-autoscaling)
+
+    * [Graceful termination](/docs/containers?topic=containers-istio-custom-gateway-helm#example-term)
+
+    * [Zone affinity](/docs/containers?topic=containers-istio-custom-gateway-helm#example-zone)
+
+    * [Pinning the Istio version](/docs/containers?topic=containers-istio-custom-gateway-helm#example-version)
+
+    * [Disabling the gateway](/docs/containers?topic=containers-istio-custom-gateway-helm#example-disable)
+
+* [Removing gateway deployments](/docs/containers?topic=containers-istio-custom-gateway-helm#remove-gateway-dep)
+
+[Deploying custom Istio gateways in an `IstioOperator`](/docs/containers?topic=containers-istio-custom-gateway#istio-custom-gateway)
+
+* [Considerations](/docs/containers?topic=containers-istio-custom-gateway#considerations)
+
+* [Creating a custom ingress gateway for public traffic](/docs/containers?topic=containers-istio-custom-gateway#custom-ingress-gateway-public)
+
+    * [Set up the BookInfo sample](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-bookinfo)
+
+    * [Exposing BookInfo by using an IBM-provided subdomain with TLS](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-bookinfo-dns)
+
+* [Creating a custom ingress gateway for private network traffic](/docs/containers?topic=containers-istio-custom-gateway#custom-ingress-gateway-private)
+
+* [Controlling custom gateway updates and versions](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-version)
+
+* [Additional gateway customizations](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-options)
+
+* [Creating a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway)
+
+* [Disabling the default gateways](/docs/containers?topic=containers-istio-custom-gateway#disable-default-gateways)
+
+[Observing Istio traffic](/docs/containers?topic=containers-istio-health#istio-health)
+
+* [Enabling access logs for the entire mesh](/docs/containers?topic=containers-istio-health#enable_logs_entire)
+
+* [Enabling access logs for individual containers](/docs/containers?topic=containers-istio-health#enable_logs_individual)
+
+* [Setting up logging with {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_la)
+
+* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_mon)
+
+* [Launching the ControlZ component inspection and Envoy sidecar dashboards](/docs/containers?topic=containers-istio-health#istio_inspect)
+
+    * [ControlZ](/docs/containers?topic=containers-istio-health#controlz)
+
+    * [Envoy](/docs/containers?topic=containers-istio-health#envoy)
 
 
 ## Storage
@@ -4331,6 +4162,159 @@ subcollection: containers
     * [Troubleshooting persistent storage when an {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
 
 
+## Observability
+{: #sitemap_observability}
+
+
+[Logging for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-logging#logging)
+
+* [Locations where logs are generated](/docs/containers?topic=containers-logging#log-locations)
+
+* [Locations where logs are sent to {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-logging#la-legacy-locations)
+
+* [Locations where logs are sent by {{site.data.keyword.logs_routing_full_notm}}](/docs/containers?topic=containers-logging#lr-locations)
+
+* [Logs that are generated](/docs/containers?topic=containers-logging#log-platform)
+
+* [Enabling logging](/docs/containers?topic=containers-logging#log-enable)
+
+* [Enable logging in an existing cluster](/docs/containers?topic=containers-logging#log-enable-existing)
+
+* [Enable logging while creating a cluster](/docs/containers?topic=containers-logging#log-enable-create)
+
+* [Viewing logs](/docs/containers?topic=containers-logging#log-viewing)
+
+* [Launching {{site.data.keyword.logs_full_notm}} from the Observability page](/docs/containers?topic=containers-logging#log-launch-standalone-ob)
+
+* [Fields by log type](/docs/containers?topic=containers-logging#log-fields)
+
+* [Line identifiers by type](/docs/containers?topic=containers-logging#line-indentifiers)
+
+* [Analyzing {{site.data.keyword.containerlong_notm}} logs](/docs/containers?topic=containers-logging#cloud-logs)
+
+[Monitoring metrics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring)
+
+* [Locations where metrics are generated](/docs/containers?topic=containers-monitoring#mon-locations)
+
+* [Enabling metrics for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring-enable)
+
+* [Enable monitoring in an existing cluster](/docs/containers?topic=containers-monitoring#monintoring-enable-existing)
+
+* [Enable monitoring while creating a cluster](/docs/containers?topic=containers-monitoring#monintoring-enable-create)
+
+* [Viewing metrics](/docs/containers?topic=containers-monitoring#monitoring-view)
+
+    * [Launching {{site.data.keyword.mon_full}} from the Observability page](/docs/containers?topic=containers-monitoring#monitoring-view-ob)
+
+* [Monitoring {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-monitoring#monitoring-monitor)
+
+* [Migrating to the new monitoring agent](/docs/containers?topic=containers-monitoring#migrating-new-agent)
+
+[Logging for clusters](/docs/containers?topic=containers-health#health)
+
+* [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
+
+* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health#logging_forwarding)
+
+    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health#ob-remove)
+
+* [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
+
+    * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging-external)
+
+    * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
+
+    * [Forwarding logs to your own server over the `udp` or `tcp` protocols](/docs/containers?topic=containers-health#enable-forwarding-udp-tcp)
+
+    * [Forwarding logs to your own server over the `tls` protocol](/docs/containers?topic=containers-health#enable-forwarding-tls)
+
+    * [Filtering logs that are forwarded](/docs/containers?topic=containers-health#filter-logs)
+
+    * [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
+
+[Monitoring cluster health](/docs/containers?topic=containers-health-monitor#health-monitor)
+
+* [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
+
+* [Migrating logging and monitoring agents to Cloud Logs](/docs/containers?topic=containers-health-monitor#monitoring_forwarding)
+
+    * [Reviewing your observability agents](/docs/containers?topic=containers-health-monitor#ob-review-mon)
+
+    * [Removing the observability plug-in agents](/docs/containers?topic=containers-health-monitor#ob-remove-mon)
+
+* [Setting up {{site.data.keyword.mon_full}} alerts](/docs/containers?topic=containers-health-monitor#monitoring-alerts)
+
+    * [App alerts](/docs/containers?topic=containers-health-monitor#app-level-alerts)
+
+    * [Worker node alerts](/docs/containers?topic=containers-health-monitor#worker-node-level-alerts)
+
+    * [Zone alerts](/docs/containers?topic=containers-health-monitor#zone-level-alerts)
+
+    * [Cluster alerts](/docs/containers?topic=containers-health-monitor#cluster-level-alerts)
+
+    * [Account alerts](/docs/containers?topic=containers-health-monitor#account-level-alerts)
+
+    * [{{site.data.keyword.block_storage_is_short}} alerts](/docs/containers?topic=containers-health-monitor#vpc-block-storage-alerts)
+
+* [Monitoring worker node health with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
+
+    * [Understanding the configmap components](/docs/containers?topic=containers-health-monitor#configmap-components)
+
+    * [Understanding the individual components of health checks](/docs/containers?topic=containers-health-monitor#health-check-components)
+
+[Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit#health-audit)
+
+* [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
+
+    * [Considerations and prerequisites](/docs/containers?topic=containers-health-audit#prereqs-apiserver-logs)
+
+    * [Forwarding Kubernetes API audit logs to Cloud Logs](/docs/containers?topic=containers-health-audit#audit-api-server-la)
+
+    * [Manage updates, rotate certificates, and encrypt in transit with HTTPS](/docs/containers?topic=containers-health-audit#secure-setup)
+
+    * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
+
+    * [Forwarding Kubernetes API audit logs to an external server on the public Internet](/docs/containers?topic=containers-health-audit#audit-api-server-external)
+
+    * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
+
+* [Service audit logs](/docs/containers?topic=containers-health-audit#audit-service)
+
+[Enabling Flow Logs for VPC cluster components](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log)
+
+* [Configuring a flow log collector](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_create)
+
+* [Viewing worker node flow logs](/docs/containers?topic=containers-vpc-flow-log#vpc-flow-log_view)
+
+[{{site.data.keyword.logs_full_notm}} events](/docs/containers?topic=containers-at_events_ref#at_events_ref)
+
+* [Cluster events](/docs/containers?topic=containers-at_events_ref#clusters-events)
+
+* [Cluster account events](/docs/containers?topic=containers-at_events_ref#cluster-account-events)
+
+* [Cluster add-on events](/docs/containers?topic=containers-at_events_ref#cluster-addons)
+
+* [Fluentd logging events](/docs/containers?topic=containers-at_events_ref#at-fluentd)
+
+* [Ingress ALB events](/docs/containers?topic=containers-at_events_ref#ingress-alb-events)
+
+* [Ingress secret events](/docs/containers?topic=containers-at_events_ref#ingress-secret-events)
+
+* [Observability events for logging and monitoring](/docs/containers?topic=containers-at_events_ref#at-lm)
+
+* [NLB DNS events](/docs/containers?topic=containers-at_events_ref#ingress-nlb-dns-events)
+
+* [Private service endpoint allowlist events](/docs/containers?topic=containers-at_events_ref#acl-events)
+
+* [{{site.data.keyword.satelliteshort}} events](/docs/containers?topic=containers-at_events_ref#satellite-events)
+
+* [Storage events](/docs/containers?topic=containers-at_events_ref#storage-events)
+
+* [Worker node and worker pool events](/docs/containers?topic=containers-at_events_ref#worker-events)
+
+* [Viewing your cluster events](/docs/containers?topic=containers-at_events_ref#at-ui)
+
+
 ## Version history
 {: #sitemap_version_history}
 
@@ -4385,6 +4369,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Worker node fix pack 1.34.3_1541, released 27 January 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1343_1541_W)
 
     * [Master fix pack 1.34.3_1539, released 21 January 2026](/docs/containers?topic=containers-changelog_134#1343_1539_M)
 
@@ -4464,6 +4450,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.7_1560, released 27 January 2026](/docs/containers?topic=containers-changelog_133#cl-boms-1337_1560_W)
 
     * [Master fix pack 1.33.7_1558, released 21 January 2026](/docs/containers?topic=containers-changelog_133#1337_1558_M)
 
@@ -4565,6 +4553,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Worker node fix pack 1.32.11_1576, released 27 January 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13211_1576_W)
 
     * [Master fix pack 1.32.11_1574, released 21 January 2026](/docs/containers?topic=containers-changelog_132#13211_1574_M)
 
@@ -4706,6 +4696,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.14_1592, released 27 January 2026](/docs/containers?topic=containers-changelog_131#cl-boms-13114_1592_W)
 
     * [Master fix pack 1.31.14_1590, released 21 January 2026](/docs/containers?topic=containers-changelog_131#13114_1590_M)
 
@@ -7139,8 +7131,6 @@ subcollection: containers
 
 * [Changing the resource auto refresh time interval from the command line](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-dashboard-auto-refresh-cli)
 
-[Why can't I create a new admin certificate?](/docs/containers?topic=containers-ts_admin-cert#ts_admin-cert)
-
 [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage#ts-vpc-byok-encrypted-storage)
 
 [When I create a VPC cluster, my worker nodes are stuck in `Pending security group creation`](/docs/containers?topic=containers-ts-sbd-cluster-create-quota#ts-sbd-cluster-create-quota)
@@ -7471,7 +7461,7 @@ subcollection: containers
 
 
 ### Logging and monitoring
-{: #sitemap_logging_and_monitoring1}
+{: #sitemap_logging_and_monitoring}
 
 
 [Why doesn't the Kubernetes dashboard display utilization graphs?](/docs/containers?topic=containers-cs_dashboard_graphs#cs_dashboard_graphs)

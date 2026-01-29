@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-01-06"
+lastupdated: "2026-01-29"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -710,7 +710,7 @@ Minimum required permissions
 :    Required: The name or ID of the cluster.
 
 `--admin`
-:    Optional: The **Administrator** Platform role is required to use this option. Download the TLS certificates and permission files for the Super User role. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-admin`. The certificates can be revoked or rotated. Fore more information, see [Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate).
+:    Optional: The **Manager** Service role is required to use this option. Download the TLS certificates and permission files for the Super User role. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-<cluster-id>-admin`. Administrator certificates are unique to the IAM ID for the active session. You can verify by viewing the subject name in the downloaded certificates, which has a `CName` with the format of `CN=KubeCert#<IAM_ID>`. The certificates can be revoked or rotated. For more information, see [Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate).
 
 `--endpoint ENDPOINT_TYPE`
 :    Optional: Specify the type of endpoint to use to connect to the cluster. If you don't specify this option, the default service endpoint for your cluster is used.
