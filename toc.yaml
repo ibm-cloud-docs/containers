@@ -109,6 +109,8 @@ toc:
               topics:
               - costs.md
               - costs-reserved.md
+          - edge-workload-prevent.md
+          - edge-sysdig.md
       - topicgroup:
           label: Encryption
           topics:
@@ -168,8 +170,8 @@ toc:
               - subnets.md
               - network-cluster.md
               - vpn.md
-      - static-routes.md
-      - cs_dns.md
+          - static-routes.md
+          - cs_dns.md
       - topicgroup:
           label: Autoscaling
           topics:
@@ -179,16 +181,6 @@ toc:
           - cluster-scaling-deploy-apps.md
           - cluster-scaling-hpa-gpu.md
           - cluster-scaling-resize.md
-      - topicgroup:
-          label: Logging and monitoring
-          topics:
-          - logging.md
-          - monitoring.md
-          - cs_health_log.md
-          - cs_health_monitor.md
-          - health-audit.md
-          - vpc-flow-logs.md
-          - at-events-ref.md
       - registry.md
       - topicgroup:
           label: App deployment
@@ -201,17 +193,6 @@ toc:
           - nodeport.md
           - app-update.md
           - kustomize.md
-      - topicgroup:
-          label: Istio service mesh
-          topics:
-          - cs_istio_qs.md
-          - cs_istio_about.md
-          - cs_istio.md
-          - cs_istio_update.md
-          - cs_istio_mesh.md
-          - cs_istio_custom_gateway_helm.md
-          - cs_istio_custom_gateway.md
-          - cs_istio_health.md
       - topicgroup:
           label: App exposure
           topics:
@@ -248,8 +229,17 @@ toc:
               topics:
               - secrets.md
               - secrets-mgr.md
-      - edge-workload-prevent.md
-      - edge-sysdig.md
+      - topicgroup:
+          label: Istio service mesh
+          topics:
+          - cs_istio_qs.md
+          - cs_istio_about.md
+          - cs_istio.md
+          - cs_istio_update.md
+          - cs_istio_mesh.md
+          - cs_istio_custom_gateway_helm.md
+          - cs_istio_custom_gateway.md
+          - cs_istio_health.md
       - topicgroup:
           label: Storage
           topics:
@@ -304,6 +294,16 @@ toc:
               - storage-portworx-support.md
           - storage-br.md
           - storage-utilities.md
+      - topicgroup:
+          label: Observability
+          topics:
+          - logging.md
+          - monitoring.md
+          - cs_health_log.md
+          - cs_health_monitor.md
+          - health-audit.md
+          - vpc-flow-logs.md
+          - at-events-ref.md
   - navgroup:
       id: reference
       topics:
@@ -410,7 +410,6 @@ toc:
               - ts-master-limits.md
               - ts-metrics-server.md
               - ts-kube-dashboord-oom.md
-              - ts-admin-cert.md
               - ts-vpc-byok-encrypted-storage.md
               - ts-sbd-cluster-create-quota.md
               - ts-sbd-non-sbd-clusters.md
