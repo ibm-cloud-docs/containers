@@ -67,11 +67,11 @@ subcollection: containers
 * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
 
 
-## Your responsibilities with using {{site.data.keyword.containerlong_notm}}
-{: #sitemap_your_responsibilities_with_using_}
+## Your responsibilities
+{: #sitemap_your_responsibilities}
 
 
-[Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
+[Your responsibilities](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
 
 * [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
 
@@ -2723,11 +2723,11 @@ subcollection: containers
 [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-ca_update_worker_node_pool#ca_update_worker_node_pool)
 
 
-## Setting up an image registry
-{: #sitemap_setting_up_an_image_registry}
+## Image registry
+{: #sitemap_image_registry}
 
 
-[Setting up an image registry](/docs/containers?topic=containers-registry#registry)
+[Image registry](/docs/containers?topic=containers-registry#registry)
 
 * [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
 
@@ -5483,14 +5483,14 @@ subcollection: containers
 [API reference](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external}
 
 
-## Add-ons for {{site.data.keyword.containerlong_notm}}
-{: #sitemap_add-ons_for_}
+## Add-ons
+{: #sitemap_add-ons}
 
 
-[Add-ons for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-addons#addons)
+[Available add-ons](/docs/containers?topic=containers-addons#addons)
 
 
-## Add-on version history
+### Add-on version history
 {: #sitemap_add-on_version_history}
 
 
@@ -6697,11 +6697,11 @@ subcollection: containers
 * [Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 
-## Supported IBM Cloud and third-party integrations
-{: #sitemap_supported_ibm_cloud_and_third-party_integrations}
+## Integrations
+{: #sitemap_integrations}
 
 
-[Supported IBM Cloud and third-party integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+[Integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
 
 * [Popular integrations](/docs/containers?topic=containers-supported_integrations#popular_services)
 
@@ -6718,11 +6718,11 @@ subcollection: containers
 * [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
 
 
-## Default service settings for Kubernetes components
-{: #sitemap_default_service_settings_for_kubernetes_components}
+## Default service settings
+{: #sitemap_default_service_settings}
 
 
-[Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings#service-settings)
+[Default service settings](/docs/containers?topic=containers-service-settings#service-settings)
 
 * [`kube-apiserver`](/docs/containers?topic=containers-service-settings#kube-apiserver)
 
@@ -6739,11 +6739,11 @@ subcollection: containers
 * [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
 
 
-## Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}
-{: #sitemap_understanding_high_availability_and_disaster_recovery_for_}
+## High availability and disaster recovery
+{: #sitemap_high_availability_and_disaster_recovery}
 
 
-[Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-iks-ha-dr#iks-ha-dr)
+[High availability and disaster recovery](/docs/containers?topic=containers-iks-ha-dr#iks-ha-dr)
 
 * [High availability architecture](/docs/containers?topic=containers-iks-ha-dr#ha-architecture)
 
@@ -6856,11 +6856,11 @@ subcollection: containers
 * [Washington DC (`wdc`)](/docs/containers?topic=containers-classic-flavors#washington-dc-wdc)
 
 
-## Understanding data portability for {{site.data.keyword.containerlong_notm}}
-{: #sitemap_understanding_data_portability_for_}
+## Data portability
+{: #sitemap_data_portability}
 
 
-[Understanding data portability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-data-portability#data-portability)
+[Data portability](/docs/containers?topic=containers-data-portability#data-portability)
 
 * [Responsibilities](/docs/containers?topic=containers-data-portability#data-portability-responsibilities)
 

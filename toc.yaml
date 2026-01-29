@@ -16,7 +16,8 @@ toc:
       topics:
       - getting-started.md
       - overview.md
-      - responsibilities.md
+      - topic: responsibilities.md
+        navtitle: Your responsibilities
       - topicgroup:
           label: Use cases
           topics:
@@ -181,7 +182,8 @@ toc:
           - cluster-scaling-deploy-apps.md
           - cluster-scaling-hpa-gpu.md
           - cluster-scaling-resize.md
-      - registry.md
+      - topic: registry.md
+        navtitle: Image registry
       - topicgroup:
           label: App deployment
           topics:
@@ -345,30 +347,37 @@ toc:
       - link:
           label: API reference
           href: https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2
-      - addon_landing.md
       - topicgroup:
-          label: Add-on version history
+          label: Add-ons
           topics:
-          - add-on-versions.md
-          - cs_istio_changelog.md
-          - versions-autoscaler.md
-          - cl-add-ons-ibm-storage-operator.md
-          - cl-add-ons-vpc-block-csi-driver.md
-          - cl-add-ons-vpc-file-csi-driver.md
-          - cl-add-ons-ibm-object-csi-driver.md
-          - versions-object.md
-          - cl-add-ons-static-route.md
-          - versions-backup-restore.md
-          - cl-add-ons-alb-oauth-proxy.md
+          - topic: addon_landing.md
+            navtitle: Available add-ons
+          - topicgroup:
+              label: Add-on version history
+              topics:
+              - add-on-versions.md
+              - cs_istio_changelog.md
+              - versions-autoscaler.md
+              - cl-add-ons-ibm-storage-operator.md
+              - cl-add-ons-vpc-block-csi-driver.md
+              - cl-add-ons-vpc-file-csi-driver.md
+              - cl-add-ons-ibm-object-csi-driver.md
+              - versions-object.md
+              - cl-add-ons-static-route.md
+              - versions-backup-restore.md
+              - cl-add-ons-alb-oauth-proxy.md
       - topicgroup:
           label: Ingress version history
           topics:
           - cl-ingress-alb.md
           - ibm-k8s-controller-config-change-log.md
       - locations.md
-      - cs_integrations_overview.md
-      - service-settings.md
-      - ha-dr.md
+      - topic: cs_integrations_overview.md
+        navtitle: Integrations
+      - topic: service-settings.md
+        navtitle: Default service settings
+      - topic: ha-dr.md
+        navtitle: High availability and disaster recovery
       - topic: service-dependency.md
         navtitle: Service dependencies
       - topicgroup:
@@ -376,7 +385,8 @@ toc:
           topics:
           - vpc-flavors.md
           - classic-flavors.md
-      - data-portability.md
+      - topic: data-portability.md
+        navtitle: Data portability
   - navgroup:
       id: help
       topics:
