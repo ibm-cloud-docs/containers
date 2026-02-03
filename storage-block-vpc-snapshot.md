@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-01-27"
+lastupdated: "2026-02-03"
 
 
 keywords: containers, block storage for vpc, snapshot, restore snapshot, create snapshot
@@ -25,7 +25,7 @@ subcollection: containers
 {: shortdesc}
 
 
-Snapshots support is available for cluster version 1.25 and later and with the {{site.data.keyword.block_storage_is_short}} cluster add-on version 5.0 and later.
+The {{site.data.keyword.block_storage_is_short}} cluster add-on automatically creates both volumes and snapshots in the same VPC resource group where the cluster is deployed. Due to a current limitation, specifying the resource group in your storage class does not override this behavior. Make sure you allow for this behavior if you plan to use snapshots as you might hit resource group quotas.
 {: important}
 
 
