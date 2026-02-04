@@ -135,7 +135,7 @@ keyword:
   openshift_420_RHEL_9_unsupported_date: ''
   openshift_420_deprecated: 'False'
   openshift_420_kube_version: '1.33'
-  openshift_420_release_date: None
+  openshift_420_release_date: 04 February 2026
   openshift_420_unsupported_certainty: tentative
   openshift_420_unsupported_date: 01 January 2028
   openshift_46_deprecated: 'True'
@@ -236,7 +236,7 @@ keyword:
   satellite_420_RHEL_9_unsupported_date: ''
   satellite_420_deprecated: 'False'
   satellite_420_kube_version: '1.33'
-  satellite_420_release_date: None
+  satellite_420_release_date: 04 February 2026
   satellite_420_unsupported_certainty: tentative
   satellite_420_unsupported_date: 01 January 2028
   satellite_46_deprecated: 'True'
