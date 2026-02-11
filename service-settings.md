@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-12-19"
+  years: 2014, 2026
+lastupdated: "2026-02-11"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}
@@ -314,62 +314,3 @@ You can use the **`kubectl get --raw /metrics | grep kubernetes_feature_enabled`
 :   `CustomCPUCFSQuotaPeriod=true`
 :   `StrictCostEnforcementForVAP=true`
 :   `StrictCostEnforcementForWebhooks=true`
-
-1.29
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `KMSv1=true`
-:   `StructuredAuthenticationConfiguration=true`
-
-1.28
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `UnauthenticatedHTTP2DOSMitigation=true`
-
-1.27
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `UnauthenticatedHTTP2DOSMitigation=true`
-
-1.26
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `UnauthenticatedHTTP2DOSMitigation=true`
-
-
-1.25
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `UnauthenticatedHTTP2DOSMitigation=true`
-
-
-1.24
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `LegacyServiceAccountTokenNoAutoGeneration=false`
-:   `PodSecurity=false`
-
-1.23
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `ServiceLBNodePortControl=false`
-:   `PodSecurity=false`
-
-1.22
-:   `ServiceLBNodePortControl=false`
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `IPv6DualStack=false`
-
-1.21
-:   `ServiceLoadBalancerClass=true`
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `IPv6DualStack=false`
-
-1.20
-:   `AllowInsecureBackendProxy=false`
-:   `CustomCPUCFSQuotaPeriod=true`
-
-1.19
-:   `RuntimeClass=false`
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `AllowInsecureBackendProxy=false`
-:   `SCTPSupport=false`
-:   `ServiceAppProtocol=false`
-
-1.18
-:   `RuntimeClass=false`
-:   `CustomCPUCFSQuotaPeriod=true`
-:   `AllowInsecureBackendProxy=false`

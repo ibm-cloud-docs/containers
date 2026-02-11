@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-01-30"
+lastupdated: "2026-02-11"
 
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2, containers, {{site.data.keyword.containerlong_notm}}
@@ -78,17 +78,16 @@ Additional flavor types, including flavors with NVIDIA V100, A100, H100, and H20
 Worker pool encryption
 :    Manage encryption of your worker nodes by enabling a key management service (KMS) provider at the worker pool level. Select your KMS instance and CRN.
 
-Master service endpoint
+
+
+Network settings
 :    Service endpoints provide communication to the master. You can choose to configure your cluster with a private service endpoint or both a public and a private cloud service endpoint. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_vpc_basics).
 
 
 
 
-
-Outbound traffic protection  
+Outbound traffic protection 
 :   The default behavior for clusters at version 1.30 and later is to allow only the necessary networking traffic for the cluster to function and disable all other outbound connections. If you have apps or services that require connection to the public Internet, such as GitHub repositories, Docker Hub, , note that you must either disable outbound traffic protection completely (so that all outbound traffic is allowed), or add security group rules to allow only the outbound traffic that you require.
-
-
 
 Cluster encryption
 :    Enable data encryption with a key management service (KMS) to encrypt secrets and other sensitive information in your cluster. You can also [enable KMS](/docs/containers?topic=containers-encryption-setup) later.
@@ -144,8 +143,7 @@ Observability integrations
 
 4. Create the cluster in your VPC. You can use the `ibmcloud ks cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add-workers-vpc) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```sh
-    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--sm-group GROUP] [--sm-instance INSTANCE] [--trusted-profile-id ID] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [[--kms-account-id <kms_account_ID>] --kms-instance <KMS_instance_ID> --crk <root_key_ID>] [--secondary-storage STORAGE] [--disable-outbound-traffic-protection] [--operating-system SYSTEM]
-
+    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--sm-group GROUP] [--sm-instance INSTANCE] [--trusted-profile-id ID] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [[--kms-account-id <kms_account_ID>] --kms-instance <KMS_instance_ID> --crk <root_key_ID>] [--secondary-storage STORAGE] [--disable-outbound-traffic-protection] [--operating-system SYSTEM] 
     ```
     {: pre}
 
@@ -217,8 +215,12 @@ Observability integrations
     `--secondary-storage STORAGE`
     :    Optional. The storage option for the flavor. For example, `900gb.5iops-tier`. When you add a secondary disk, that disk is used for the container runtime, while the primary disk is used for the operating system. To view the storage options for a flavor, run the `ibmcloud ks flavor get --flavor FLAVOR --zone ZONE --provider vpc-gen2` command. To view a list of VPC worker node flavors, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors&interface=ui).
 
-    `--disable-outbound-traffic-protection`  
-    :   Optional.
+    `--disable-outbound-traffic-protection`
+    :   Optional. Disable outbound traffic protection.
+
+
+    
+
     
 5. Verify that the creation of the cluster was requested. It can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
     ```sh
