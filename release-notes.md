@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-02-10"
+lastupdated: "2026-02-11"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -47,6 +47,26 @@ IBM Storage Operator cluster add-on patch updates.
 
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+
+### 09 February 2026
+{: #containers-feb0926}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+
+
+
+
+
+
+
 
 
 ## January 2026
@@ -2959,200 +2979,3 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 
 Ingress ALB versions `1.9.4_6346_iks`, `1.8.4_6345_iks`, `1.6.4_6344_iks` are available for {{site.data.keyword.containerlong_notm}}.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
-
-
-
-
-
-
-
-
-### 08 February 2024
-{: #containers-feb0824}
-{: release-note}
-
-CLI version `1.0.595` is available.
-:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
-
-{{site.data.keyword.block_storage_is_short}} add-on versions `5.2.15_501` and `5.1.21_506` are available.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
-
-{{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2.6_130` is available.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
-
-
-
-
-### 07 February 2024
-{: #containers-feb0724}
-{: release-note}
-
-Istio add-on versions `1.20.2`, `1.19.6`, and `1.18.7` are available.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
-
-
-### 05 February 2024
-{: #containers-feb0524}
-{: release-note}
-
-  
-Ingress ALB updates
-:   Ingress ALB versions `1.9.4_6292_iks`, `1.8.4_6291_iks`, `1.6.4_6293_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
-
-
-
-### 01 February 2024
-{: #containers-feb0124}
-{: release-note}
-
-
-
-Master fix packs are available for {{site.data.keyword.containerlong_notm}}
-:   Review the change logs for your cluster version. Master patch updates are applied automatically.
-:   1.28.6_1542
-:   1.27.10_1561
-:   1.26.13_1569
-
-{{site.data.keyword.containerlong_notm}} version 1.25 is no longer supported.
-:   Update your 1.25 clusters to at least version 1.26.
-
-
-
-
-
-
-{{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch update `1.0.8_346`.
-:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
-
-
-## January 2024
-{: #containers-jan24}
-
-### 30 January 2024
-{: #containers-jan3024}
-{: release-note}
-
-
-
-Worker node fix packs are available. 
-:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
-:    Review the following change logs for your cluster version.
-    - 1.28.6_1543
-    - 1.27.10_1562
-    - 1.26.13_1570
-
-
-
-
-
-### 29 January 2024
-{: #containers-jan2924}
-{: release-note}
-
-{{site.data.keyword.cos_full_notm}} plug-in version `2.2.23`.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
-
-
-
-### 22 January 2024
-{: #containers-jan2224}
-{: release-note}
-
-  
-Ingress ALB updates
-:   Ingress ALB versions `1.9.4_6251_iks`, `1.8.4_6245_iks`, `1.6.4_6250_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
-
-
-
-
-
-### 19 January 2024
-{: #containers-jan1924}
-{: release-note}
-
-CLI version `1.0.589` is available.
-:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
-
-
-
-### 17 January 2024
-{: #containers-jan1724}
-{: release-note}
-
-
-
-Worker node fix packs are available. 
-:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
-:    Review the following change logs for your cluster version.
-    - 1.28.4_1541
-    - 1.27.8_1560
-    - 1.26.11_1568
-    - 1.25.16_1573
-
-
-
-
-
-
-### 16 January 2024
-{: #containers-jan1624}
-{: release-note}
-
-Cluster autoscaler add-on patch updates `1.2.0_322` and `1.0.9_328`.
-:   For more information, see [the change log](/docs/containers?topic=containers-ca_changelog).
-
-
-
-ALB OAuth Proxy add-on version `2.0.0_2063`.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
-
-
-
-
-
-
-
-
-### 10 January 2024
-{: #containers-jan1024}
-{: release-note}
-
-Subscribe to the {{site.data.keyword.cloud_notm}} documentation release notes via RSS.
-:   You can get notified via RSS about documentation updates for {{site.data.keyword.containerlong_notm}} such as worker node fix packs, new cluster versions, new cluster add-on versions, and more.  For more information, see [Subscribing to an RSS feed](/docs/containers?topic=containers-best-practices-service#bp-4).
-
-
-  
-Ingress ALB updates
-:   Ingress ALB versions `1.9.4_6161_iks`, `1.8.4_6173_iks`, `1.6.4_6177_iks` are available. 1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image. For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
-
-Istio cluster add-on versions `1.20.0`, `1.19.5`, and `1.18.6`.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
-
-Istio add-on version 1.18 will no longer be supported on 21 February 2024
-:   Follow the steps to update your [Istio components](/docs/containers?topic=containers-istio-update#istio_minor) to the latest patch version of Istio 1.18 that is supported by {{site.data.keyword.containerlong_notm}}.
-
-
-
-{{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch update `1.2.5_107`.
-:   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
-
-{{site.data.keyword.block_storage_is_short}} cluster add-on patch updates `5.2.14_485` and `5.1.19_486`.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
-
-
-
-
-
-### 2 January 2024
-{: #containers-jan0224}
-{: release-note}
-
-
-
-Worker node fix packs are available. 
-:    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
-:    Review the following change logs for your cluster version.
-    - 1.28.4_1540
-    - 1.27.8_1559
-    - 1.26.11_1567
-    - 1.25.16_1572

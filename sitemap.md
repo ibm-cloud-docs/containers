@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-02-10"
+lastupdated: "2026-02-11"
 
 
 keywords: containers
@@ -249,6 +249,10 @@ subcollection: containers
         * IBM Storage Operator cluster add-on patch updates.
 
         * VPC Block CSI Driver cluster add-on patch updates.
+
+    * [09 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb0926)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
 * [January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan26)
 
@@ -1259,76 +1263,6 @@ subcollection: containers
         * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
 
         * Ingress ALB versions `1.9.4_6346_iks`, `1.8.4_6345_iks`, `1.6.4_6344_iks` are available for {{site.data.keyword.containerlong_notm}}.
-
-    * [08 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb0824)
-
-        * CLI version `1.0.595` is available.
-
-        * {{site.data.keyword.block_storage_is_short}} add-on versions `5.2.15_501` and `5.1.21_506` are available.
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} add-on version `1.2.6_130` is available.
-
-    * [07 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb0724)
-
-        * Istio add-on versions `1.20.2`, `1.19.6`, and `1.18.7` are available.
-
-    * [05 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb0524)
-
-        * Ingress ALB updates
-
-    * [01 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb0124)
-
-        * Master fix packs are available for {{site.data.keyword.containerlong_notm}}
-
-        * {{site.data.keyword.containerlong_notm}} version 1.25 is no longer supported.
-
-        * {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch update `1.0.8_346`.
-
-* [January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan24)
-
-    * [30 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan3024)
-
-        * Worker node fix packs are available. 
-
-    * [29 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan2924)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version `2.2.23`.
-
-    * [22 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan2224)
-
-        * Ingress ALB updates
-
-    * [19 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1924)
-
-        * CLI version `1.0.589` is available.
-
-    * [17 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1724)
-
-        * Worker node fix packs are available. 
-
-    * [16 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1624)
-
-        * Cluster autoscaler add-on patch updates `1.2.0_322` and `1.0.9_328`.
-
-        * ALB OAuth Proxy add-on version `2.0.0_2063`.
-
-    * [10 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan1024)
-
-        * Subscribe to the {{site.data.keyword.cloud_notm}} documentation release notes via RSS.
-
-        * Ingress ALB updates
-
-        * Istio cluster add-on versions `1.20.0`, `1.19.5`, and `1.18.6`.
-
-        * Istio add-on version 1.18 will no longer be supported on 21 February 2024
-
-        * {{site.data.keyword.filestorage_vpc_full_notm}} cluster add-on patch update `1.2.5_107`.
-
-        * {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates `5.2.14_485` and `5.1.19_486`.
-
-    * [2 January 2024](/docs/containers?topic=containers-containers-relnotes#containers-jan0224)
-
-        * Worker node fix packs are available. 
 
 
 ## Tutorials library for Kubernetes Service
@@ -4386,6 +4320,8 @@ subcollection: containers
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
 
+    * [Worker node fix pack 1.34.3_1542, released 09 February 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1343_1542_W)
+
     * [Worker node fix pack 1.34.3_1541, released 27 January 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1343_1541_W)
 
     * [Master fix pack 1.34.3_1539, released 21 January 2026](/docs/containers?topic=containers-changelog_134#1343_1539_M)
@@ -4466,6 +4402,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.7_1561, released 09 February 2026](/docs/containers?topic=containers-changelog_133#cl-boms-1337_1561_W)
 
     * [Worker node fix pack 1.33.7_1560, released 27 January 2026](/docs/containers?topic=containers-changelog_133#cl-boms-1337_1560_W)
 
@@ -4569,6 +4507,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Worker node fix pack 1.32.11_1577, released 09 February 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13211_1577_W)
 
     * [Worker node fix pack 1.32.11_1576, released 27 January 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13211_1576_W)
 
@@ -4712,6 +4652,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.14_1593, released 09 February 2026](/docs/containers?topic=containers-changelog_131#cl-boms-13114_1593_W)
 
     * [Worker node fix pack 1.31.14_1592, released 27 January 2026](/docs/containers?topic=containers-changelog_131#cl-boms-13114_1592_W)
 
