@@ -65,6 +65,14 @@ VPC Block CSI Driver cluster add-on patch updates.
 
 
 
+### 06 February 2026
+{: #containers-feb0626}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
+
 
 
 
