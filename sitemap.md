@@ -240,10 +240,6 @@ subcollection: containers
 
 * [February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb26)
 
-    * [09 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb0926)
-
-        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
-
     * [10 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb1026)
 
         * ALB OAuth Proxy cluster add-on patch updates.
@@ -253,6 +249,10 @@ subcollection: containers
         * IBM Storage Operator cluster add-on patch updates.
 
         * VPC Block CSI Driver cluster add-on patch updates.
+
+    * [09 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb0926)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
 * [January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan26)
 

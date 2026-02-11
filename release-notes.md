@@ -30,24 +30,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2026
 {: #containers-feb26}
 
-### 09 February 2026
-{: #containers-feb0926}
-{: release-note}
-
-
-
-{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
-:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
-:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
-:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
-
-
-
-
-
-
 ### 10 February 2026
 {: #containers-feb1026}
 {: release-note}
@@ -65,6 +47,24 @@ IBM Storage Operator cluster add-on patch updates.
 
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+
+### 09 February 2026
+{: #containers-feb0926}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+
+
+
+
+
 
 
 
