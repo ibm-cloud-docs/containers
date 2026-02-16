@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-02-11"
+lastupdated: "2026-02-16"
 
 
 keywords: containers
@@ -7078,6 +7078,8 @@ subcollection: containers
     * [Using TOTP MFA to create an infrastructure API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cluster_infra_errors#create-api-key-totp-mfa)
 
 [VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
+
+[Why can't I create or renew my CA cert?](/docs/containers?topic=containers-ts-cert-failed#ts-cert-failed)
 
 [Why do I get an `infrastructure operation failed` error when creating a VPC cluster?](/docs/containers?topic=containers-ts-resource-group-permissions#ts-resource-group-permissions)
 
