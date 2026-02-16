@@ -406,6 +406,7 @@ toc:
               - ts-cluster-cli.md
               - ts-cluster-create-delete.md
               - ts-cluster-no-vpc.md
+              - ts-cert-failed.md
               - ts-resource-group-permissions.md
               - ts-etcd-capacity.md
               - ts-pod-security-reset.md
