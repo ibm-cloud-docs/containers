@@ -240,6 +240,10 @@ subcollection: containers
 
 * [February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb26)
 
+    * [16 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb1626)
+
+        * Ingress ALB patch updates.
+
     * [10 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb1026)
 
         * ALB OAuth Proxy cluster add-on patch updates.
@@ -2842,14 +2846,6 @@ subcollection: containers
 
     * [Deploying a workload](/docs/containers?topic=containers-deploy_app#gpu-workload)
 
-[Continuous integration and delivery for app development and deployment](/docs/containers?topic=containers-cicd#cicd)
-
-* [Before you begin](/docs/containers?topic=containers-cicd#cicd_before)
-
-* [Creating a toolchain with Delivery Pipeline](/docs/containers?topic=containers-cicd#cicd_toolchain)
-
-* [Other resources for automating your pipeline](/docs/containers?topic=containers-cicd#cicd-other)
-
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 
 * [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
@@ -2867,8 +2863,6 @@ subcollection: containers
 * [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
 
 * [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
-
-[Packaging apps for reuse in multiple environments with Kustomize](/docs/containers?topic=containers-kustomize#kustomize)
 
 
 ## App exposure

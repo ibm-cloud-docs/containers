@@ -191,10 +191,8 @@ toc:
           - images.md
           - app.md
           - cs_app_deploy.md
-          - cicd.md
           - nodeport.md
           - app-update.md
-          - kustomize.md
       - topicgroup:
           label: App exposure
           topics:
