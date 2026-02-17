@@ -2406,6 +2406,8 @@ subcollection: containers
 
     * [Opening required ports in public allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall-public)
 
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} network zones](/docs/containers?topic=containers-vpc-firewall#iam_firewall)
+
 [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets#vpc-subnets)
 
 * [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
