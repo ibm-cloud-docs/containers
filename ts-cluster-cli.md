@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-05-29"
+  years: 2014, 2026
+lastupdated: "2026-02-18"
 
 
 keywords: kubernetes, containers
@@ -53,7 +53,7 @@ This task requires the [**Administrator** {{site.data.keyword.cloud_notm}} IAM p
 {: #kubectl_fails}
 
 
-When you run `kubectl` commands against your cluster, your commands fail with an error message similar to the following.
+When you run `kubectl` commands against your cluster, your commands fail with an error message similar to the following example.
 {: tsSymptoms}
 
 ```sh
@@ -137,7 +137,3 @@ Private Service Endpoint URL:   https://c105.private.<REGION>.containers.cloud.i
 ```
 
 If your cluster meets these conditions, [enable service endpoints and VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui#vrf) for the account.
-
-
-
-
