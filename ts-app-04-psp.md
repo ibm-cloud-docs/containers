@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-04-28"
+  years: 2014, 2026
+lastupdated: "2026-02-18"
 
 
 keywords: kubernetes
@@ -24,7 +24,7 @@ content-type: troubleshoot
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
 
-After creating a pod or running `kubectl get events` to check on a pod deployment, you see an error message similar to the following.
+After creating a pod or running `kubectl get events` to check on a pod deployment, you see an error message similar to the following example.
 {: tsSymptoms}
 
 ```sh

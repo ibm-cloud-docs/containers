@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-08-21"
+  years: 2024, 2026
+lastupdated: "2026-02-18"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, app not working, {{site.data.keyword.containerlong_notm}}, outbound traffic protection, 4.15, 1.30
@@ -23,7 +23,7 @@ content-type: troubleshoot
 [Virtual Private Cloud]{: tag-vpc}
 [1.30 and later]{: tag-blue}
 
-After creating a version 1.30 cluster, your app no longer works and you see an error message similar to the following.
+After creating a version 1.30 cluster, your app no longer works and you see an error message similar to the following example.
 {: tsSymptoms}
 
 ```sh
@@ -43,4 +43,3 @@ Review the following steps for your use case.
 {: #allow-outbound-ts}
 
 Review your options for allowing all outbound access or allowing outbound access selectively. For more information, see [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound).
-

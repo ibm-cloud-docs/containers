@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2025
-lastupdated: "2025-08-21"
+  years: 2024, 2026
+lastupdated: "2026-02-18"
 
 
 keywords: kubernetes, containers, MountingTargetFailed, encryption in-transit, eit
@@ -20,7 +20,7 @@ subcollection: containers
 
 [Virtual Private Cloud]{: tag-vpc}
 
-Volume mounting fails with an error message similar to the following.
+Volume mounting fails with an error message similar to the following example.
 {: tsSymptoms}
 
 ```sh
