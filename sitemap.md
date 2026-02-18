@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-02-16"
+lastupdated: "2026-02-17"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb26)
+
+    * [18 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb1826)
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
 
     * [16 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb1626)
 
@@ -2402,6 +2406,8 @@ subcollection: containers
 
     * [Opening required ports in public allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall-public)
 
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} network zones](/docs/containers?topic=containers-vpc-firewall#iam_firewall)
+
 [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets#vpc-subnets)
 
 * [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
@@ -4316,6 +4322,8 @@ subcollection: containers
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
 
+    * [Change log for Master fix pack 1.34.4_1543, released 18 February 2026](/docs/containers?topic=containers-changelog_134#1344_1543_M)
+
     * [Worker node fix pack 1.34.3_1542, released 09 February 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1343_1542_W)
 
     * [Worker node fix pack 1.34.3_1541, released 27 January 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1343_1541_W)
@@ -4398,6 +4406,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Change log for Master fix pack 1.33.8_1562, released 18 February 2026](/docs/containers?topic=containers-changelog_133#1338_1562_M)
 
     * [Worker node fix pack 1.33.7_1561, released 09 February 2026](/docs/containers?topic=containers-changelog_133#cl-boms-1337_1561_W)
 
@@ -4503,6 +4513,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Change log for Master fix pack 1.32.12_1579, released 18 February 2026](/docs/containers?topic=containers-changelog_132#13212_1579_M)
 
     * [Worker node fix pack 1.32.11_1577, released 09 February 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13211_1577_W)
 
@@ -4648,6 +4660,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Change log for Master fix pack 1.31.14_1594, released 18 February 2026](/docs/containers?topic=containers-changelog_131#13114_1594_M)
 
     * [Worker node fix pack 1.31.14_1593, released 09 February 2026](/docs/containers?topic=containers-changelog_131#cl-boms-13114_1593_W)
 
