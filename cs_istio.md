@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-10-27"
+  years: 2014, 2026
+lastupdated: "2026-02-20"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -418,7 +418,7 @@ Save any resources that you created or modified in the `istio-system` namespace 
 Delete all Istio operator (IOP) resources, such as for a custom ingress gateway.
 {: shortdesc}
 
-1. Make sure your `istioctl` cli tool is at the necessary patch version.
+1. Make sure that your `istioctl` cli tool is at the necessary patch version.
     ```sh
     istioctl version
     ```

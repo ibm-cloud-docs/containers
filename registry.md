@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-01-29"
+  years: 2014, 2026
+lastupdated: "2026-02-20"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, registry, pull secret, secrets
@@ -193,7 +193,7 @@ To update your cluster image pull secret in the `default` Kubernetes namespace.
     {: screen}
 
 4. Update your [container deployments](/docs/containers?topic=containers-app#image) to pull images from the `icr.io` domain name.
-5. Optional: If you have a firewall, make sure you [allow outbound network traffic to the registry subnets](/docs/containers?topic=containers-firewall#firewall_outbound) for the domains that you use.
+5. Optional: If you have a firewall, make sure that you [allow outbound network traffic to the registry subnets](/docs/containers?topic=containers-firewall#firewall_outbound) for the domains that you use.
 
 6. Complete your setup by using one of the following options.
     * To pull images in Kubernetes namespaces other than `default` or from other {{site.data.keyword.cloud_notm}} accounts, [copy or create another image pull secret](#other).
