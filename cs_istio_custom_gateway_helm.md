@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-01-06"
+lastupdated: "2026-02-20"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -457,7 +457,7 @@ After customizing the default gateway that has one gateway deployment, you might
     # Sets the per-pod terminationGracePeriodSeconds setting.
     terminationGracePeriodSeconds: 30
 
-    # Configure this to a higher priority class in order to make sure your Istio gateway pods
+    # Configure this to a higher priority class in order to make sure that your Istio gateway pods
     # will not be killed because of low priority class.
     # Refer to https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
     # for more detail.

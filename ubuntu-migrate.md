@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2025
-lastupdated: "2025-08-11"
+  years: 2022, 2026
+lastupdated: "2026-02-20"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
@@ -58,7 +58,7 @@ Migrate your worker nodes to use Ubuntu 24. These steps apply to all supported c
 
 1. Update each worker node in the worker pool.
 
-    Make sure you have enough worker nodes to support your workload while you update or replace the relevant worker nodes. For more information, see [Updating VPC worker nodes](/docs/containers?topic=containers-update&interface=ui#vpc_worker_node) or [Updating classic worker nodes](/docs/containers?topic=containers-update&interface=ui#worker_node).
+    Make sure that you have enough worker nodes to support your workload while you update or replace the relevant worker nodes. For more information, see [Updating VPC worker nodes](/docs/containers?topic=containers-update&interface=ui#vpc_worker_node) or [Updating classic worker nodes](/docs/containers?topic=containers-update&interface=ui#worker_node).
     {: tip}
 
     **Classic worker nodes.**
