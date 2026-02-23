@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-02-10"
+lastupdated: "2026-02-23"
 
 
 keywords: change log, version history, ALB OAuth Proxy
@@ -26,6 +26,13 @@ Review the version history for ALB OAuth Proxy.
 
 ## Version 2.0.0
 {: #cl-add-ons-alb-oauth-proxy-2.0.0}
+
+
+### 2.0.0_318867667, released 23 February 2026
+{: #cl-add-ons-alb-oauth-proxy-200_318867667}
+
+- Resolves the following CVEs: [CVE-2025-68121](https://nvd.nist.gov/vuln/detail/CVE-2025-68121){: external}.
+- `oauth2-proxy v7.13.0-318860469`
 
 
 ### 2.0.0_315379759, released 10 February 2026
