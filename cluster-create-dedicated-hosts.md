@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-02-19"
+lastupdated: "2026-02-25"
 
 
 keywords: kubernetes, clusters, worker nodes, worker pools, dedicated hosts
@@ -21,15 +21,15 @@ subcollection: containers
 # Creating clusters on dedicated hosts for VPC
 {: #cluster-create-dedicated-hosts}
 
-[Virtual Private Cloud]{: tag-vpc} 
+[Virtual Private Cloud]{: tag-vpc}
 
 
 Follow the steps to create a dedicated host in a dedicated host pool. Then, provision a cluster on your dedicated host infrastructure in the CLI. For steps to create a cluster on dedicated hosts in the console, review the information in [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui).
 {: shortdesc}
- 
+
 1. List available dedicated host flavors. Note the flavor and flavor class that you want to use to create a dedicated host. 
 
-    ```sh 
+    ```sh
     ibmcloud ks flavors --provider vpc-gen2 --zone us-south-1
     ```
     {: pre}

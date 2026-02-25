@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-02-20"
+lastupdated: "2026-02-25"
 
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2, containers, {{site.data.keyword.containerlong_notm}}
@@ -324,7 +324,7 @@ ibmcloud ks zone add vpc-gen2 --zone ZONE --cluster <cluster_name_or_ID> --worke
     ```
     {: pre}
 
-2. Create a Terraform configuration file for a VPC cluster. Save the file in your Terraform directory. For more information and cluster configuration options, see the [Terraform `ibm_container_cluster`](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs){: external} documentation.
+2. a) Create a Terraform configuration file for a VPC cluster. Save the file in your Terraform directory. For more information and cluster configuration options, see the [Terraform `ibm_container_cluster`](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs){: external} documentation.
 
     Example Terraform configuration file:
 
@@ -370,6 +370,44 @@ ibmcloud ks zone add vpc-gen2 --zone ZONE --cluster <cluster_name_or_ID> --worke
     :   A nested block that describes the zones of the VPC cluster's default worker pool.
     :   - `subnet_id`: Required. The ID of the VPC subnet that you want to use for your worker nodes. To find existing subnets, run `ibmcloud ks subnets --provider classic --zone <zone>`.
     :   - `name`: Required. The zone name for the default worker pool. To see available zones, run `ibmcloud ks zones --provider vpc-gen2`.
+
+    b) Alternatively, if you prefer to use [Terraform IBM Modules](https://cloud.ibm.com/docs/ibm-cloud-provider-for-terraform?topic=ibm-cloud-provider-for-terraform-about-tim), you can refer the below example to provision [Red Hat OpenShift Cluster on VPC Gen2](https://registry.terraform.io/modules/terraform-ibm-modules/base-ocp-vpc/ibm/latest){: external}
+
+    ```sh
+        locals {
+            worker_pools = [
+                {
+                    subnet_prefix    = "default"
+                    pool_name        = "default"
+                    machine_type     = "bx2.4x16"
+                    workers_per_zone = 2
+                    operating_system = "RHCOS"
+                }
+            ]
+            cluster_vpc_subnets = {
+                default    = [
+                    {
+                        id         = "0717-afc29fbb-0dbe-493a-a5b9-f3c5899cb8b9"
+                        cidr_block = "192.168.32.0/22"                        
+                        zone       = "us-south-1"
+                    }
+                ]
+            }
+        }
+
+        module "ocp_base" {
+            source               = "terraform-ibm-modules/base-ocp-vpc/ibm"
+            version              = "3.81.3"
+            region               = "us-south"
+            resource_group_id    = "resource-group-id"
+            cluster_name         = "test-ocp-cluster"
+            force_delete_storage = true
+            vpc_id               = "vpc-id"
+            vpc_subnets          = local.cluster_vpc_subnets
+            worker_pools         = local.worker_pools
+        }
+    ```
+    {: pre}
 
 3. In the CLI, navigate to your Terraform directory.
 
