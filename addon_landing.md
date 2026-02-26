@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2025, 2025
-lastupdated: "2025-09-16"
+  years: 2025, 2026
+lastupdated: "2026-02-26"
 keywords:  
 
 subcollection: containers
@@ -19,7 +19,7 @@ Review the managed add-ons available for {{site.data.keyword.containerlong_notm}
 
 |Add-on name | Description | Information and change log |
 |---|---|---|
-| Autoscaler | Automatically scale the worker pools in your cluster based on the sizing needs of your scheduled workloads. | - [Preparing classic and VPC clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc)  \n - [Cluster autoscaler add-on change log](/docs/containers?topic=containers-ca_changelog) | 
+| Autoscaler | Automatically scale the worker pools in your cluster based on the sizing needs of your scheduled workloads. | - [Preparing classic and VPC clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc)  \n - [Cluster autoscaler add-on change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler) | 
 | ALB OAuth Proxy | Creates and manages the following Kubernetes resources: an OAuth2-Proxy deployment for your App ID service instance, a secret that contains the configuration of the OAuth2-Proxy deployment, and an Ingress resource that configures ALBs to route incoming requests to the OAuth2-Proxy deployment for your App ID instance. | - [Adding App ID authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth)  \n - [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy) |
 | Back up and restore Helm chart | Create a one-time or scheduled backup for data that is stored in a file storage or block storage persistent volume claim (PVC). | - [Backing up and restoring PVC data for file and block storage](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore)  \n - [Back up and restore Helm chart change log](/docs/containers?topic=containers-backup_restore_changelog) |
 | IBM Cloud Object Storage plug-in | Set up pre-defined storage classes for IBM Cloud Object Storage and use these storage classes to create a PVC to provision storage for your apps. | - [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-storage_cos_install)  \n - [IBM Cloud Object Storage plug-in change log](/docs/containers?topic=containers-cos_plugin_changelog) |

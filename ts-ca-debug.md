@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-09-22"
+  years: 2014, 2026
+lastupdated: "2026-02-26"
 
 
 keywords: kubernetes, help, network, connectivity, autoscaler
@@ -44,7 +44,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-2. Compare the version that runs in your cluster against the latest version in Cluster autoscaler add-on [change log](/docs/containers?topic=containers-ca_changelog).
+2. Compare the version that runs in your cluster against the latest version in Cluster autoscaler add-on [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
 3. If your version is outdated, deploy the latest cluster autoscaler version to your cluster. 
 
 ## Step 2: Check the configuration
