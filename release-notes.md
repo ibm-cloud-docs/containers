@@ -79,6 +79,9 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+Cluster autoscaler cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
+
 
 
 ### 16 February 2026
@@ -88,6 +91,10 @@ ALB OAuth Proxy cluster add-on patch updates.
 Ingress ALB patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
+
+
+Cluster autoscaler cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
 
 
 ### 10 February 2026

@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-02-23"
+lastupdated: "2026-02-26"
 
 
 keywords: change log, version history, ALB OAuth Proxy
@@ -19,6 +19,21 @@ subcollection: "containers"
 
 # ALB OAuth Proxy add-on version change log
 {: #cl-add-ons-alb-oauth-proxy}
+
+
+Patch updates
+:   Patch updates are delivered automatically by IBM and don't contain any feature updates or changes in the supported add-on and cluster versions.
+
+Release updates
+:   Release updates contain new features or changes in the supported add-on or cluster versions. You must manually apply release updates to your cluster autoscaler add-on.
+
+To view a list of add-ons and the supported cluster versions, run the following command or see the [Supported cluster add-ons table](/docs/containers?topic=containers-supported-cluster-addon-versions).
+
+```sh
+ibmcloud ks cluster addon versions
+```
+{: pre}
+
 
 Review the version history for ALB OAuth Proxy.
 {: shortdesc}
