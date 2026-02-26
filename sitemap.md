@@ -240,6 +240,14 @@ subcollection: containers
 
 * [February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb26)
 
+    * [26 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb2626)
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC Block CSI Driver cluster add-on patch updates.
+
     * [24 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb2426)
 
         * {{site.data.keyword.cos_full_notm}} plug-in updates.
