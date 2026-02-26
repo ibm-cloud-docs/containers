@@ -355,7 +355,7 @@ toc:
               topics:
               - add-on-versions.md
               - cs_istio_changelog.md
-              - versions-autoscaler.md
+              - cl-add-ons-cluster-autoscaler.md
               - cl-add-ons-ibm-storage-operator.md
               - cl-add-ons-vpc-block-csi-driver.md
               - cl-add-ons-vpc-file-csi-driver.md
