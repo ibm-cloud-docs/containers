@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-02-26"
+lastupdated: "2026-02-27"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,23 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## February 2026
 {: #containers-feb26}
 
+### 27 February 2026
+{: #containers-feb2726}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+
+
+
+
+
 
 ### 26 February 2026
 {: #containers-feb2626}
@@ -51,6 +68,7 @@ VPC Block CSI Driver cluster add-on patch updates.
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
 
 ### 23 February 2026
 {: #containers-feb2326}
