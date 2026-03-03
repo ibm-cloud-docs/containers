@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-03-02"
+lastupdated: "2026-03-03"
 
 
 keywords: containers
@@ -239,6 +239,8 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
+
+    * [03 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar0326)
 
     * [02 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar0226)
 
