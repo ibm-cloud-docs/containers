@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-03-02"
+lastupdated: "2026-03-03"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -32,15 +32,30 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+### 03 March 2026
+{: #containers-mar0326}
+{: release-note}
+
+
+
+
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
+
+
+
+
+
+
+
 ### 02 March 2026
 {: #containers-mar0226}
 {: release-note}
 
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
-
-VPC Block CSI Driver cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 IBM Storage Operator cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
@@ -52,6 +67,8 @@ Ingress ALB patch updates.
 
 
 
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 ## February 2026
