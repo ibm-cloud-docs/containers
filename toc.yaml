@@ -313,6 +313,11 @@ toc:
           - cs_versions_overview.md
           - benchmarks_overview.md
           - topicgroup:
+              label: Version 1.35
+              topics:
+              - cs_versions_135.md
+              - cs_versions_changelog_135.md
+          - topicgroup:
               label: Version 1.34
               topics:
               - cs_versions_134.md

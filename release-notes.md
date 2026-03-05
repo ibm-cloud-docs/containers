@@ -31,6 +31,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-mar26}
 
 
+### 05 March 2026
+{: #containers-mar0526}
+{: release-note}
+
+
+New! {{site.data.keyword.containerlong_notm}} version 1.35.
+:   You can now create or [update clusters to Kubernetes version 1.35](/docs/containers?topic=containers-cs_versions_135). With Kubernetes 1.35, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
+  
+
 
 ### 03 March 2026
 {: #containers-mar0326}
@@ -41,6 +51,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
 
 
 
