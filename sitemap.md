@@ -240,6 +240,10 @@ subcollection: containers
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
 
+    * [05 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar0526)
+
+        * New! {{site.data.keyword.containerlong_notm}} version 1.35.
+
     * [03 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar0326)
 
         * ALB OAuth Proxy cluster add-on patch updates.
@@ -251,6 +255,8 @@ subcollection: containers
         * IBM Storage Operator cluster add-on patch updates.
 
         * Ingress ALB patch updates.
+
+        * VPC Block CSI Driver cluster add-on patch updates.
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
@@ -4344,6 +4350,25 @@ subcollection: containers
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 
 
+### Version 1.35
+{: #sitemap_version_135}
+
+
+[1.35 version information and update actions](/docs/containers?topic=containers-cs_versions_135#cs_versions_135)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_135#release_timeline_135)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_135#prep-up-135)
+
+[1.35 version change log](/docs/containers?topic=containers-changelog_135#changelog_135)
+
+* [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
+
+* [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+    * [Worker node fix pack 1.35.1_1520, released 5 March 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1351_1520_W)
+
+
 ### Version 1.34
 {: #sitemap_version_134}
 
@@ -7076,6 +7101,8 @@ subcollection: containers
 * [Keep your cluster environment up to date](/docs/containers?topic=containers-best-practices-service#bp-1)
 
 * [Keep your command line tools up to date](/docs/containers?topic=containers-best-practices-service#bp-2)
+
+* [Regularly rotate your CA certificates](/docs/containers?topic=containers-best-practices-service#bp-ca)
 
 * [Document your environment architecture](/docs/containers?topic=containers-best-practices-service#bp-3)
 
