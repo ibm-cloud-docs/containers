@@ -256,6 +256,8 @@ subcollection: containers
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
+        * VPC Block CSI Driver cluster add-on patch updates.
+
 * [February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb26)
 
     * [27 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb2726)
