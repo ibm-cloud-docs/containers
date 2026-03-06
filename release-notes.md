@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-03-05"
+lastupdated: "2026-03-06"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -27,6 +27,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
 ## March 2026
 {: #containers-mar26}
 
@@ -34,6 +35,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ### 05 March 2026
 {: #containers-mar0526}
 {: release-note}
+
 
 
 New! {{site.data.keyword.containerlong_notm}} version 1.35.
@@ -82,11 +84,7 @@ Ingress ALB patch updates.
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
-VPC Block CSI Driver cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
-VPC Block CSI Driver cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 ## February 2026
 {: #containers-feb26}

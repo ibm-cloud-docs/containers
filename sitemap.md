@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-03-05"
+lastupdated: "2026-03-06"
 
 
 keywords: containers
@@ -255,10 +255,6 @@ subcollection: containers
         * IBM Storage Operator cluster add-on patch updates.
 
         * Ingress ALB patch updates.
-
-        * VPC Block CSI Driver cluster add-on patch updates.
-
-        * VPC Block CSI Driver cluster add-on patch updates.
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
