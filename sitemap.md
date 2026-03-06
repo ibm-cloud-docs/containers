@@ -4364,6 +4364,48 @@ subcollection: containers
 
     * [Worker node fix pack 1.35.1_1520, released 5 March 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1351_1520_W)
 
+[1.35 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-135#cis-benchmark-135)
+
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-135#1-master-node-security-configuration-135)
+
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-135#11-master-node-configuration-files-135)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-135#12-api-server-135)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-135#13-controller-manager-135)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-135#14-scheduler-135)
+
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-135#2-etcd-node-configuration-135)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-135#3-control-plane-configuration-135)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-135#31-authentication-and-authorization-135)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-135#32-logging-135)
+
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-135#4-worker-node-security-configuration-135)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-135#41-worker-node-configuration-files-135)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-135#42-kubelet-135)
+
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-135#5-kubernetes-policies-135)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-135#51-rbac-and-service-accounts-135)
+
+    * [5.2 Pod security policies](/docs/containers?topic=containers-cis-benchmark-135#52-pod-security-policies-135)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-135#53-network-policies-and-cni-135)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-135#54-secrets-management-135)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-135#55-extensible-admission-control-135)
+
+    * [5.7 General policies](/docs/containers?topic=containers-cis-benchmark-135#57-general-policies-135)
+
+    * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-135#ibm-remediations-and-explanations-135)
+
 
 ### Version 1.34
 {: #sitemap_version_134}
