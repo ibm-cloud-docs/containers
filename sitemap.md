@@ -240,6 +240,10 @@ subcollection: containers
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
 
+    * [12 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar1226)
+
+        * Ingress ALB patch updates.
+
     * [05 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar0526)
 
         * New! {{site.data.keyword.containerlong_notm}} version 1.35.
