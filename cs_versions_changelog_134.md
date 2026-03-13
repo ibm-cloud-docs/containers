@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-02-27"
+lastupdated: "2026-03-13"
 
 
 keywords: change log, version history, 1.34
@@ -40,6 +40,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.34
 {: #134_components}
+
+
+### Worker node fix pack 1.34.4_1545, released 11 March 2026
+{: #cl-boms-1344_1545_W}
+
+The following table shows the components included in the worker node fix pack 1.34.4_1545. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU 24 (VPC)|6.8.0-100-generic|Resolves the following CVEs: [CVE-2025-10148](https://nvd.nist.gov/vuln/detail/CVE-2025-10148){: external}, [CVE-2025-14017](https://nvd.nist.gov/vuln/detail/CVE-2025-14017){: external}, [CVE-2025-14524](https://nvd.nist.gov/vuln/detail/CVE-2025-14524){: external}, [CVE-2025-14819](https://nvd.nist.gov/vuln/detail/CVE-2025-14819){: external}, [CVE-2025-15079](https://nvd.nist.gov/vuln/detail/CVE-2025-15079){: external}, [CVE-2025-15224](https://nvd.nist.gov/vuln/detail/CVE-2025-15224){: external}, [CVE-2025-22037](https://nvd.nist.gov/vuln/detail/CVE-2025-22037){: external}, [CVE-2025-37899](https://nvd.nist.gov/vuln/detail/CVE-2025-37899){: external}, and [CVE-2026-2781](https://nvd.nist.gov/vuln/detail/CVE-2026-2781){: external}.|
+|UBUNTU 24 (Classic)|6.8.0-100-generic|Resolves the following CVEs: [CVE-2025-10148](https://nvd.nist.gov/vuln/detail/CVE-2025-10148){: external}, [CVE-2025-14017](https://nvd.nist.gov/vuln/detail/CVE-2025-14017){: external}, [CVE-2025-14524](https://nvd.nist.gov/vuln/detail/CVE-2025-14524){: external}, [CVE-2025-14819](https://nvd.nist.gov/vuln/detail/CVE-2025-14819){: external}, [CVE-2025-15079](https://nvd.nist.gov/vuln/detail/CVE-2025-15079){: external}, [CVE-2025-15224](https://nvd.nist.gov/vuln/detail/CVE-2025-15224){: external}, [CVE-2025-22037](https://nvd.nist.gov/vuln/detail/CVE-2025-22037){: external}, [CVE-2025-37899](https://nvd.nist.gov/vuln/detail/CVE-2025-37899){: external}, and [CVE-2026-2781](https://nvd.nist.gov/vuln/detail/CVE-2026-2781){: external}.|
+|Kubernetes|1.34.4|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.4).|
+|containerd|2.2.1|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v2.2.1).|
+|HAProxy|965c403695b15b3410d87a3772002edbc5ed2569|Resolves the following CVEs: [CVE-2025-69419](https://nvd.nist.gov/vuln/detail/CVE-2025-69419){: external}.|
+|GPU Device Plug-in and Installer|dc588cffda45a3831875a9236f7c34eb4aadb71c|Resolves the following CVEs: [CVE-2025-69419](https://nvd.nist.gov/vuln/detail/CVE-2025-69419){: external}.|
+{: caption="1.34.4_1545 fix pack." caption-side="bottom"}
+{: #cl-boms-1344_1545_W-component-table}
 
 
 ### Worker node fix pack 1.34.4_1544, released 24 February 2026
