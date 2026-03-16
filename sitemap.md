@@ -1775,7 +1775,7 @@ subcollection: containers
 
 * [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
 
-[Creating and managing dedicated hosts on VPC Gen 2 infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
+[Creating and managing dedicated hosts on VPC infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
 
 * [Setting up dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#setup-dedicated-host-cli)
 
