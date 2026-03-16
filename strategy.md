@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-08-21"
+  years: 2014, 2026
+lastupdated: "2026-03-16"
 
 keywords: kubernetes, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing, containers, {{site.data.keyword.containerlong_notm}}
 
@@ -210,7 +210,7 @@ As you were choosing a cluster type, you already thought about how worker node f
     Choose a flavor, or machine type, with the correct storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 
 
-For a list of available flavors, see [VPC Gen 2 flavors](/docs/containers?topic=containers-vpc-flavors) or [Classic flavors](/docs/containers?topic=containers-classic-flavors).
+For a list of available flavors, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors) or [Classic flavors](/docs/containers?topic=containers-classic-flavors).
 
 
 
