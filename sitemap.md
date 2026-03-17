@@ -244,6 +244,8 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} version 1.32 is deprecated.
 
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
     * [12 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar1226)
 
         * Ingress ALB patch updates.
@@ -6294,6 +6296,8 @@ subcollection: containers
     * [v1.0.13_297764008, released 14 November 2025](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1013_297764008)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.49, released 17 March 2026](/docs/containers?topic=containers-cos_plugin_changelog#02249_object_plugin)
 
 * [Change log for version 2.2.48, released 24 February 2026](/docs/containers?topic=containers-cos_plugin_changelog#02248_object_plugin)
 

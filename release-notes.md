@@ -36,10 +36,15 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-mar1726}
 {: release-note}
 
+
+
 {{site.data.keyword.containerlong_notm}} version 1.32 is deprecated.
 :   Support for 1.32 ends on {{site.data.keyword.kubernetes_132_unsupported_date}}. Update your cluster to [version 1.33](/docs/containers?topic=containers-cs_versions_133) as soon as possible.
 
 
+
+{{site.data.keyword.cos_full_notm}} plug-in updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 
 
