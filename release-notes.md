@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-03-16"
+lastupdated: "2026-03-17"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -29,6 +29,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## March 2026
 {: #containers-mar26}
+
+
+
+### 17 March 2026
+{: #containers-mar1726}
+{: release-note}
+
+{{site.data.keyword.containerlong_notm}} version 1.32 is deprecated.
+:   Support for 1.32 ends on {{site.data.keyword.kubernetes_132_unsupported_date}}. Update your cluster to [version 1.33](/docs/containers?topic=containers-cs_versions_133) as soon as possible.
+
+
 
 
 
