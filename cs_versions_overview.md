@@ -47,7 +47,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 |1.35|05 March 2026|28 April 2027†|UBUNTU 24| - [1.35 details and update actions](/docs/containers?topic=containers-cs_versions_135)  \n - [Change log](/docs/containers?topic=containers-changelog_135)|
 |1.34 [Default]{: tag-purple} |20 November 2025|20 January 2027†|UBUNTU 24| - [1.34 details and update actions](/docs/containers?topic=containers-cs_versions_134)  \n - [Change log](/docs/containers?topic=containers-changelog_134)|
 |1.33|31 July 2025|14 October 2026†|UBUNTU 24| - [1.33 details and update actions](/docs/containers?topic=containers-cs_versions_133)  \n - [Change log](/docs/containers?topic=containers-changelog_133)|
-|1.32 [Deprecated]{: tag-deprecated} |29 January 2025|01 May 2026|UBUNTU 24| - [1.32 details and update actions](/docs/containers?topic=containers-cs_versions_132)  \n - [Change log](/docs/containers?topic=containers-changelog_132)|
+|1.32 [Deprecated]{: tag-deprecated} |29 January 2025|27 May 2026|UBUNTU 24| - [1.32 details and update actions](/docs/containers?topic=containers-cs_versions_132)  \n - [Change log](/docs/containers?topic=containers-changelog_132)|
 |1.31 [Deprecated]{: tag-deprecated} |18 September 2024|22 April 2026|UBUNTU 24| - [1.31 details and update actions](/docs/containers?topic=containers-cs_versions_131)  \n - [Change log](/docs/containers?topic=containers-changelog_131)|
 {: caption="Available versions for Kubernetes" caption-side="bottom"}
 
@@ -114,8 +114,8 @@ Estimated days and versions are provided for general understanding. Actual avail
 
 4. **Unsupported version**: The version is unsupported. IBM only provides support to upgrade to a supported release. The version is unsupported. Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. If the cluster master runs two or more versions behind the oldest supported version, you can no longer apply updates and must delete the cluster and create a new one.
 
-Clusters running an unsupported version will eventually fail because cluster certificates expire. Failures might include, but aren't limited to, an unavailable cluster control plane, `NotReady` worker nodes, or an unhealthy Ingress.
-{: important}
+    Clusters running an unsupported version will eventually fail because cluster certificates expire. Failures might include, but aren't limited to, an unavailable cluster control plane, `NotReady` worker nodes, or an unhealthy Ingress.
+    {: important}
 
 5. **Archived**: The version is unsupported with no upgrade path. IBM provides no support. IBM reserves the right to shut down the control planes for such clusters.
 
