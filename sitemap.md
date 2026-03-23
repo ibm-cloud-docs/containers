@@ -242,6 +242,8 @@ subcollection: containers
 
     * [24 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2426)
 
+        * Istio add-on patch updates.
+
         * IBM Object CSI Driver cluster add-on patch updates.
 
         * IBM Storage Operator cluster add-on patch updates.
