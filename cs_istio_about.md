@@ -72,7 +72,7 @@ If you need to use the latest version of Istio or customize your Istio installat
 ## What comes with the Istio add-on?
 {: #istio_ov_components}
 
-In Kubernetes clusters, you can install the generally available managed Istio add-on, which runs Istio version <istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>.
+In Kubernetes clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.24.6.
 {: shortdesc}
 
 The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation](https://istio.io/latest/about/service-mesh/){: external}.

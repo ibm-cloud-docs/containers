@@ -55,7 +55,7 @@ To remove other Istio installations:
 - If you previously installed BookInfo in the cluster, clean up those resources.
     1. Change the directory to the Istio file location.
         ```sh
-        cd <filepath>/istio-<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>
+        cd <filepath>/istio-1.24.6
         ```
         {: pre}
 
@@ -111,7 +111,7 @@ Before you begin
     ```
     {: pre}
 
-3. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, <istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>, is installed.
+3. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.24.6, is installed.
     ```sh
     ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
     ```
@@ -127,7 +127,7 @@ Before you begin
 
     ```sh
     NAME            Version     Health State   Health Status
-    istio           <istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>       normal         Addon Ready
+    istio           1.24.6       normal         Addon Ready
     ```
     {: screen}
 
@@ -160,13 +160,13 @@ Install the `istioctl` CLI client on your computer. For more information, see th
 
 2. Download the version of `istioctl` that matches your cluster's Istio version to your computer.
     ```sh
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod> sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.24.6 sh -
     ```
     {: pre}
 
 3. Navigate to the Istio package directory.
     ```sh
-    cd istio-<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>
+    cd istio-1.24.6
     ```
     {: pre}
 
@@ -265,16 +265,16 @@ You can customize a set of Istio configuration options by editing the `managed-i
         Example output
 
         ```sh
-        data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>"}
-        data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>"}
-        data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>"}
-        data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>"}
-        data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>"}
-        data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>"}
+        data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.24.6"}
+        data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.24.6"}
+        data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"1.24.6"}
+        data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"1.24.6"}
+        data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"1.24.6"}
+        data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"1.24.6"}
         ```
         {: screen}
 
-    2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>"}`.
+    2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.24.6"}`.
         ```sh
         kubectl delete pod <pod_name> -n <namespace>
         ```

@@ -403,13 +403,13 @@ For example, the patch version of your add-on might be updated automatically by 
 
     ```sh
     client version: version.BuildInfo{Version:"1.11.2"}
-    pilot version: version.BuildInfo{Version:<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>}
-    pilot version: version.BuildInfo{Version:<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-vp97p.istio-system", IstioVersion:<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>}
-    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-qkhgm.istio-system", IstioVersion:<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-dffhq.istio-system", IstioVersion:<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>}
-    data plane version: version.ProxyInfo{ID:"httpbin-74fb669cc6-svc8x.default", IstioVersion:<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>}
-    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-cs9r9.istio-system", IstioVersion:<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>}
+    pilot version: version.BuildInfo{Version:1.24.6}
+    pilot version: version.BuildInfo{Version:1.24.6}
+    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-vp97p.istio-system", IstioVersion:1.24.6}
+    data plane version: version.ProxyInfo{ID:"istio-egressgateway-77bf75c5c-qkhgm.istio-system", IstioVersion:1.24.6}
+    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-dffhq.istio-system", IstioVersion:1.24.6}
+    data plane version: version.ProxyInfo{ID:"httpbin-74fb669cc6-svc8x.default", IstioVersion:1.24.6}
+    data plane version: version.ProxyInfo{ID:"istio-ingressgateway-6dcb67b64d-cs9r9.istio-system", IstioVersion:1.24.6}
     ...
     ```
     {: screen}
@@ -418,14 +418,14 @@ For example, the patch version of your add-on might be updated automatically by 
     1. Download the `istioctl` client of the same version as the control plane components.
     
         ```sh
-        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod> sh -
+        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.24.6 sh -
         ```
         {: pre}
 
     2. Navigate to the Istio package directory.
     
         ```sh
-        cd istio-<istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>
+        cd istio-1.24.6
         ```
         {: pre}
 

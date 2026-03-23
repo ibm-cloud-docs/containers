@@ -284,7 +284,7 @@ To edit the `istio-ingressgateway` and `istio-egressgateway` `value.yaml` conten
     {: important}
 
     ```sh
-    helm upgrade istio-ingressgateway istio/gateway --version <istio-124>1.24</istio-124><istio-in-prod>1.23</istio-in-prod>.0 --install -n istio-system -f gateway-values.yaml --dry-run
+    helm upgrade istio-ingressgateway istio/gateway --version 1.24.0 --install -n istio-system -f gateway-values.yaml --dry-run
     ```
     {: pre}
 
@@ -348,7 +348,7 @@ To edit the `istio-ingressgateway` and `istio-egressgateway` `value.yaml` conten
     a. Show the values.
 
     ```sh
-    helm show values istio/gateway --version <istio-124>1.24.6</istio-124><istio-in-prod>1.23.5</istio-in-prod>
+    helm show values istio/gateway --version 1.24.6
     ```
     {: pre}
 
@@ -375,7 +375,7 @@ After customizing the default gateway that has one gateway deployment, you might
 
 1. Run the `helm show values` command.
     ```sh 
-    helm show values "istio/gateway" --version "<istio-124>1.24</istio-124><istio-in-prod>1.23</istio-in-prod>.0"
+    helm show values "istio/gateway" --version "1.24.0"
     ```
     {: pre}
 
