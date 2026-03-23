@@ -4032,6 +4032,24 @@ subcollection: containers
 
 * [{{site.data.keyword.cos_full_notm}} cluster add-on storage classes](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon)
 
+[COS: Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp_odf#migrate_hpcs_kp_odf)
+
+* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kp_odf#before)
+
+* [Prerequisites for migration](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pre)
+
+* [Migration steps](/docs/containers?topic=containers-migrate_hpcs_kp_odf#steps)
+
+    * [Step 1. List PVCs to migrate](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pvc)
+
+    * [Step 2. List pods to migrate](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pods)
+
+    * [Step 3. Create new secrets](/docs/containers?topic=containers-migrate_hpcs_kp_odf#secrets-new)
+
+    * [Step 4. Recreate PVCs](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pvcs-new)
+
+    * [Step 5. Update pods](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pods-new)
+
 
 ### Portworx
 {: #sitemap_portworx}
