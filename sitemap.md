@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-03-19"
+lastupdated: "2026-03-23"
 
 
 keywords: containers
@@ -239,6 +239,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
+
+    * [24 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2426)
+
+        * IBM Object CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
 
     * [17 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar1726)
 
@@ -5654,6 +5662,10 @@ subcollection: containers
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.27](/docs/containers?topic=containers-istio-changelog#v127)
+
+    * [Change log for 1.27.8, released 27 March 2026](/docs/containers?topic=containers-istio-changelog#1278)
 
 * [Version 1.26](/docs/containers?topic=containers-istio-changelog#v126)
 

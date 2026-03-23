@@ -2,12 +2,11 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-03-16"
+lastupdated: "2026-03-23"
 
 keywords:
 
 subcollection: containers
-
 
 ---
 
@@ -46,21 +45,21 @@ The following dependencies apply to the following deployment locations: Amsterda
 |:---|:---|:---|:---|:---|
 | IBM Cloud Service Endpoints | Availability, Instance control, Operations, Security compliance | No | Both |  Washington DC (us-east)  |
 | {{site.data.keyword.vpc_full}} | Availability, Instance control, Operations | Yes | Both |  Same zone  |
+| IBM Cloud Block Storage | Availability, Disaster recovery, Instance control | No | Both |  Same data center  |
+| {{site.data.keyword.block_storage_is_full}} | Availability, Instance control | No | Both |  Same zone  |
+| IBM Cloud File Storage for Virtual Private Cloud | Availability, Disaster recovery, Instance control | No | Both |  Same zone  |
+| {{site.data.keyword.BluVirtServers}} | Availability, Instance control, Operations | No | Both |  Same data center  |
+| IBM Cloud Bare Metal Servers for VPC | Availability, Instance control | No | Both |  Same zone  |
+| IBM Cloud Virtual Server for VPC | Availability, Instance control | No | Both |  Same zone  |
+| IBM Cloud Classic DNS Servers | Availability, Change management, Instance control | No | Both |  Same data center  |
+| IBM Cloud Virtual Private Endpoint for VPC | Availability, Instance control | No | Both |  Same zone  |
+| {{site.data.keyword.iamlong}} | Access management, Availability, Instance control, Operations, Security compliance | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
+| IBM Cloud Global Search and Tagging | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
+| {{site.data.keyword.dns_full}} | Availability, Disaster recovery | Yes | Both |  Same region  |
 | IBM Cloud Load Balancer for VPC | Availability, Operations | No | Both |  Same zone  |
 | IBM Cloud Bare Metal | Availability, Instance control, Operations | No | Both |  Same data center  |
 | Akamai | Availability, Instance control | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | IBM Cloud File Storage | Availability, Disaster recovery, Instance control | No | Both |  Same data center  |
-| {{site.data.keyword.iamlong}} | Access management, Availability, Instance control, Operations, Security compliance | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
-| IBM Cloud File Storage for Virtual Private Cloud | Availability, Disaster recovery, Instance control | No | Both |  Same zone  |
-| IBM Cloud Classic DNS Servers | Availability, Change management, Instance control | No | Both |  Same data center  |
-| {{site.data.keyword.BluVirtServers}} | Availability, Instance control, Operations | No | Both |  Same data center  |
-| IBM Cloud Bare Metal Servers for VPC | Availability, Instance control | No | Both |  Same zone  |
-| IBM Cloud Block Storage | Availability, Disaster recovery, Instance control | No | Both |  Same data center  |
-| IBM Cloud Virtual Private Endpoint for VPC | Availability, Instance control | No | Both |  Same zone  |
-| IBM Cloud Virtual Server for VPC | Availability, Instance control | No | Both |  Same zone  |
-| IBM Cloud Global Search and Tagging | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
-| {{site.data.keyword.block_storage_is_full}} | Availability, Instance control | No | Both |  Same zone  |
-| {{site.data.keyword.dns_full}} | Availability, Disaster recovery | Yes | Both |  Same region  |
 {: row-headers}
 {: caption="IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud - Data and Control plane deployment for an MZR service dependency information - Critical dependencies" caption-side="top"}
 {: tab-title="Critical dependencies"}
@@ -71,12 +70,12 @@ The following dependencies apply to the following deployment locations: Amsterda
 
 |Dependencies|Dependency impacts|Customer provided|Control or data plane|Location of dependency|
 |:---|:---|:---|:---|:---|
-| IBM Cloud Hyper Protect Crypto | Availability, Instance control | Yes | Both |  Washington DC (us-east)  |
 | {{site.data.keyword.keymanagementservicefull}} | Availability, Instance control, Operations, Security compliance | No | Both |  Washington DC (us-east)  |
+| IBM Cloud Hyper Protect Crypto | Availability, Instance control | Yes | Both |  Washington DC (us-east)  |
 | {{site.data.keyword.registrylong}} | Availability, Change management, Instance control, Operations | No | Both |  Washington DC (us-east)  |
 | IBM Cloud Business Support Services | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | IBM Cloud Classic NTP Servers | Availability, Change management, Instance control | No | Both |  Same data center  |
-| RedHat OpenShift Cluster Manager | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
+| Red Hat OpenShift Cluster Manager | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | Let's Encrypt | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | IBM Cloud Global Resource Catalog | Availability, Change management, Instance control | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | {{site.data.keyword.keymanagementservicefull}} | Availability, Instance control, Security compliance | Yes | Both |  Washington DC (us-east)  |
@@ -90,8 +89,8 @@ The following dependencies apply to the following deployment locations: Amsterda
 
 |Dependencies|Dependency impacts|Customer provided|Control or data plane|Location of dependency|
 |:---|:---|:---|:---|:---|
-| {{site.data.keyword.secrets-manager_full}}| Change management, Disaster recovery, Security compliance | No | Both |  Washington DC (us-east)  |
 | {{site.data.keyword.secrets-manager_full}}| Change management | Yes | Both |  Washington DC (us-east)  |
+| {{site.data.keyword.secrets-manager_full}}| Change management, Disaster recovery, Security compliance | No | Both |  Washington DC (us-east)  |
 {: row-headers}
 {: caption="IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud - Data and Control plane deployment for an MZR service dependency information - Medium dependencies" caption-side="top"}
 {: tab-title="Medium dependencies"}
@@ -102,16 +101,16 @@ The following dependencies apply to the following deployment locations: Amsterda
 
 |Dependencies|Dependency impacts|Customer provided|Control or data plane|Location of dependency|
 |:---|:---|:---|:---|:---|
+| OSS Platform| Operations | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | {{site.data.keyword.monitoringlong}}| Operations | No | Both |  Washington DC (us-east)  |
+| SOS Inventory Management| Security compliance | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
+| IBM Log Analysis Log Routing| Operations | No | Both |  Washington DC (us-east)  |
+| {{site.data.keyword.cos_full}}| Disaster recovery | No | Both |  Same region  |
+| {{site.data.keyword.pag_full}}| Operations, Security compliance | No | Both |  Washington DC (us-east)  |
 | Slack| Operations | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | PagerDuty| Operations | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | {{site.data.keyword.appconfig_full}}| Operations | No | Both |  Same region  |
 | {{site.data.keyword.atracker_full}}| Security compliance | No | Both |  Washington DC (us-east)  |
-| {{site.data.keyword.cos_full}}| Disaster recovery | No | Both |  Same region  |
-| OSS Platform| Operations | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
-| SOS Inventory Management| Security compliance | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
-| IBM Log Analysis Log Routing| Operations | No | Both |  Washington DC (us-east)  |
-| {{site.data.keyword.pag_full}}| Operations, Security compliance | No | Both |  Washington DC (us-east)  |
 {: row-headers}
 {: caption="IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud - Data and Control plane deployment for an MZR service dependency information - Minimal dependencies" caption-side="top"}
 {: tab-title="Minimal dependencies"}
@@ -130,16 +129,16 @@ The following dependencies apply to the following deployment locations: Montreal
 |:---|:---|:---|:---|:---|
 | IBM Cloud Service Endpoints | Availability, Instance control, Operations, Security compliance | No | Both |  Washington DC (us-east)  |
 | {{site.data.keyword.vpc_full}} | Availability, Instance control, Operations | Yes | Both |  Same zone  |
-| IBM Cloud Load Balancer for VPC | Availability, Operations | No | Both |  Same zone  |
-| Akamai | Availability, Instance control | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
-| {{site.data.keyword.iamlong}} | Access management, Availability, Instance control, Operations, Security compliance | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
+| {{site.data.keyword.block_storage_is_full}} | Availability, Instance control | No | Both |  Same zone  |
 | IBM Cloud File Storage for Virtual Private Cloud | Availability, Disaster recovery, Instance control | No | Both |  Same zone  |
 | IBM Cloud Bare Metal Servers for VPC | Availability, Instance control | No | Both |  Same zone  |
-| IBM Cloud Virtual Private Endpoint for VPC | Availability, Instance control | No | Both |  Same zone  |
 | IBM Cloud Virtual Server for VPC | Availability, Instance control | No | Both |  Same zone  |
+| IBM Cloud Virtual Private Endpoint for VPC | Availability, Instance control | No | Both |  Same zone  |
+| {{site.data.keyword.iamlong}} | Access management, Availability, Instance control, Operations, Security compliance | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | IBM Cloud Global Search and Tagging | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
-| {{site.data.keyword.block_storage_is_full}} | Availability, Instance control | No | Both |  Same zone  |
 | {{site.data.keyword.dns_full}} | Availability, Disaster recovery | Yes | Both |  Same region  |
+| IBM Cloud Load Balancer for VPC | Availability, Operations | No | Both |  Same zone  |
+| Akamai | Availability, Instance control | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 {: row-headers}
 {: caption="IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud - Data and Control plane deployment for an NGDC MZR service dependency information - Critical dependencies" caption-side="top"}
 {: tab-title="Critical dependencies"}
@@ -150,11 +149,11 @@ The following dependencies apply to the following deployment locations: Montreal
 
 |Dependencies|Dependency impacts|Customer provided|Control or data plane|Location of dependency|
 |:---|:---|:---|:---|:---|
-| IBM Cloud Hyper Protect Crypto | Availability, Instance control | Yes | Both |  Washington DC (us-east)  |
 | {{site.data.keyword.keymanagementservicefull}} | Availability, Instance control, Operations, Security compliance | No | Both |  Washington DC (us-east)  |
+| IBM Cloud Hyper Protect Crypto | Availability, Instance control | Yes | Both |  Washington DC (us-east)  |
 | {{site.data.keyword.registrylong}} | Availability, Change management, Instance control, Operations | No | Both |  Washington DC (us-east)  |
 | IBM Cloud Business Support Services | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
-| RedHat OpenShift Cluster Manager | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
+| Red Hat OpenShift Cluster Manager | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | Let's Encrypt | Availability | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | IBM Cloud Global Resource Catalog | Availability, Change management, Instance control | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | {{site.data.keyword.keymanagementservicefull}} | Availability, Instance control, Security compliance | Yes | Both |  Washington DC (us-east)  |
@@ -168,8 +167,8 @@ The following dependencies apply to the following deployment locations: Montreal
 
 |Dependencies|Dependency impacts|Customer provided|Control or data plane|Location of dependency|
 |:---|:---|:---|:---|:---|
-| {{site.data.keyword.secrets-manager_full}}| Change management, Disaster recovery, Security compliance | No | Both |  Washington DC (us-east)  |
 | {{site.data.keyword.secrets-manager_full}}| Change management | Yes | Both |  Washington DC (us-east)  |
+| {{site.data.keyword.secrets-manager_full}}| Change management, Disaster recovery, Security compliance | No | Both |  Washington DC (us-east)  |
 {: row-headers}
 {: caption="IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud - Data and Control plane deployment for an NGDC MZR service dependency information - Medium dependencies" caption-side="top"}
 {: tab-title="Medium dependencies"}
@@ -180,16 +179,16 @@ The following dependencies apply to the following deployment locations: Montreal
 
 |Dependencies|Dependency impacts|Customer provided|Control or data plane|Location of dependency|
 |:---|:---|:---|:---|:---|
+| OSS Platform| Operations | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | {{site.data.keyword.monitoringlong}}| Operations | No | Both |  Washington DC (us-east)  |
+| SOS Inventory Management| Security compliance | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
+| IBM Log Analysis Log Routing| Operations | No | Both |  Washington DC (us-east)  |
+| {{site.data.keyword.cos_full}}| Disaster recovery | No | Both |  Same region  |
+| {{site.data.keyword.pag_full}}| Operations, Security compliance | No | Both |  Washington DC (us-east)  |
 | Slack| Operations | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | PagerDuty| Operations | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
 | {{site.data.keyword.appconfig_full}}| Operations | No | Both |  Same region  |
 | {{site.data.keyword.atracker_full}}| Security compliance | No | Both |  Washington DC (us-east)  |
-| {{site.data.keyword.cos_full}}| Disaster recovery | No | Both |  Same region  |
-| OSS Platform| Operations | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
-| SOS Inventory Management| Security compliance | No | Both |  [Global](/docs/resiliency?topic=resiliency-ha-redundancy#global-platform)  |
-| IBM Log Analysis Log Routing| Operations | No | Both |  Washington DC (us-east)  |
-| {{site.data.keyword.pag_full}}| Operations, Security compliance | No | Both |  Washington DC (us-east)  |
 {: row-headers}
 {: caption="IBM Cloud Kubernetes Service and Red Hat OpenShift on IBM Cloud - Data and Control plane deployment for an NGDC MZR service dependency information - Minimal dependencies" caption-side="top"}
 {: tab-title="Minimal dependencies"}
@@ -201,8 +200,6 @@ The following dependencies apply to the following deployment locations: Montreal
 
 ## Understanding service dependency data
 {: #understand-dependency-data}
-
-
 
 If you have any questions about the service dependency data as you review the service dependency information in the tables, you can refer to the following FAQ:
 
