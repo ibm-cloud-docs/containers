@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-11-21"
+  years: 2014, 2026
+lastupdated: "2026-03-23"
 
 
 keywords: istio migration, istio updates, istio upgrades
@@ -32,7 +32,6 @@ Do not use `istioctl` to update the version of Istio that is installed by the ma
     * As updates are rolled out to control plane pods, the pods are re-created. The Istio control plane is not fully available until after the update completes.
     * The Istio data plane continues to function during the update. However, some traffic to apps in the service mesh might be interrupted for a short period of time.
     * The external IP address for the `istio-ingressgateway` load balancer does not change during or after the update.
-
 
 
 ## Updating from version 1.23 to 1.24 of the Istio add-on

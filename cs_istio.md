@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-02-20"
+lastupdated: "2026-03-23"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -639,7 +639,9 @@ After the resources are saved and the add-on is disabled, the resources can be r
     ```
     {: pre}
 
+
 1. Wait 10 minutes before continuing to the next step.
+
 
 
 ### Step 4: Remove the Istio operator

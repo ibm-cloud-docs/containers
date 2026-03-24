@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-03-19"
+lastupdated: "2026-03-24"
 
 
 keywords: containers
@@ -239,6 +239,20 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
+
+    * [24 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2426)
+
+        * New! Mumbai multizone region for VPC
+
+        * Istio add-on patch updates.
+
+        * IBM Object CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * ALB OAuth Proxy cluster add-on patch updates.
 
     * [17 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar1726)
 
@@ -4022,6 +4036,24 @@ subcollection: containers
 
 * [{{site.data.keyword.cos_full_notm}} cluster add-on storage classes](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon)
 
+[COS: Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp_odf#migrate_hpcs_kp_odf)
+
+* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kp_odf#before)
+
+* [Prerequisites for migration](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pre)
+
+* [Migration steps](/docs/containers?topic=containers-migrate_hpcs_kp_odf#steps)
+
+    * [Step 1. List PVCs to migrate](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pvc)
+
+    * [Step 2. List pods to migrate](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pods)
+
+    * [Step 3. Create new secrets](/docs/containers?topic=containers-migrate_hpcs_kp_odf#secrets-new)
+
+    * [Step 4. Recreate PVCs](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pvcs-new)
+
+    * [Step 5. Update pods](/docs/containers?topic=containers-migrate_hpcs_kp_odf#pods-new)
+
 
 ### Portworx
 {: #sitemap_portworx}
@@ -5655,6 +5687,10 @@ subcollection: containers
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
+* [Version 1.27](/docs/containers?topic=containers-istio-changelog#v127)
+
+    * [Change log for 1.27.8, released 27 March 2026](/docs/containers?topic=containers-istio-changelog#1278)
+
 * [Version 1.26](/docs/containers?topic=containers-istio-changelog#v126)
 
     * [Change log for 1.26.8, released 21 January 2025](/docs/containers?topic=containers-istio-changelog#1268)
@@ -6023,6 +6059,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [v1.0.35_325672265, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1035_325672265)
+
     * [v1.0.34_321366482, released 02 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1034_321366482)
 
     * [v1.0.32_319681464, released 26 February 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1032_319681464)
@@ -6211,6 +6249,8 @@ subcollection: containers
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
+    * [v2.0.26_325670948, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2026_325670948)
+
     * [v2.0.25_321043855, released 02 March 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2025_321043855)
 
     * [v2.0.24_319692587, released 26 February 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2024_319692587)
@@ -6292,6 +6332,8 @@ subcollection: containers
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [v1.0.17_320539369, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1017_320539369)
 
     * [v1.0.13_297764008, released 14 November 2025](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1013_297764008)
 
@@ -6430,6 +6472,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_325480053, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_325480053)
 
     * [2.0.0_320412247, released 03 March 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_320412247)
 

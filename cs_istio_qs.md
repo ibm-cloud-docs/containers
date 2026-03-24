@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-09-29"
+  years: 2014, 2026
+lastupdated: "2026-03-23"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -12,8 +12,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
 
 
 
