@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-01-27"
+lastupdated: "2026-03-24"
 
 keywords: containers, kubernetes, mzr, szr, multizone, multi az
 
@@ -24,6 +24,13 @@ subcollection: containers
 
 This image is an artistic representation and does not reflect actual political or geographic boundaries.
 {: note}
+
+
+Mumbai (`in-mum`) MZR limitations
+
+:   **Operating systems**: You can only create clusters at version 1.31 and later in Mumbai and can only use Ubuntu 24 work nodes.
+:   **Baremetal workers**: Baremetal VPC worker nodes are not available in Mumbai.
+:   **Portworx**: Portworx is not yet supported in Mumbai.
 
 
 Chennai (`in-che`) MZR limitations
