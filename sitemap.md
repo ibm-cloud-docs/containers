@@ -7040,6 +7040,8 @@ subcollection: containers
 
 * [Montreal (`ca-mon`)](/docs/containers?topic=containers-vpc-flavors#montreal-ca-mon)
 
+* [Mumbai (`in-mum`)](/docs/containers?topic=containers-vpc-flavors#mumbai-in-mum)
+
 * [Osaka (`jp-osa`)](/docs/containers?topic=containers-vpc-flavors#osaka-jp-osa)
 
 * [Sao Paulo (`br-sao`)](/docs/containers?topic=containers-vpc-flavors#sao-paulo-br-sao)
