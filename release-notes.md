@@ -31,6 +31,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-mar26}
 
 
+
 ### 26 March 2026
 {: #containers-mar2626}
 {: release-note}
@@ -73,11 +74,8 @@ New! Mumbai multizone region for VPC
 :   You can now create clusters on VPC infrastructure in the Mumbai, India (`in-mum`) [location](/docs/containers?topic=containers-regions-and-zones).
 
 
-
 Istio add-on patch updates.
 :   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
-
-
 
 IBM Object CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
