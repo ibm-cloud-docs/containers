@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-03-13"
+lastupdated: "2026-03-26"
 
 
 keywords: change log, version history, 1.32
@@ -40,6 +40,29 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.32
 {: #132_components}
+
+
+### Change log for Master fix pack 1.32.13_1584, released 25 March 2026
+{: #13213_1584_M}
+
+The following table shows the changes that are in the master fix pack 1.32.13_1584. Master patch updates are applied automatically. 
+
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Cluster health image | v1.6.14 | v1.6.15 | New version contains updates and security fixes. |
+| etcd | v3.5.26 | v3.5.27 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.27){: external}. |
+| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.24 | v2.5.25 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.32.11-6 | v1.32.13-1 | New version contains updates and security fixes. |
+| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | v453 | v454 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.9 | v1.1.11 | New version contains updates and security fixes. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 8a12251 | 6212368 | New version contains updates and security fixes. |
+| Key Management Service provider | v2.10.21 | 2.10.22 | New version contains updates and security fixes. |
+| Kubernetes | v1.32.12 | v1.32.13 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.32.13){: external}. |
+| Kubernetes add-on resizer | 1.8.22 | 1.8.23 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.23){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3347 | 3563 | New version contains updates and security fixes. |
+| Portieris admission controller | v0.13.35 | v0.13.36 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.36){: external}. |
+{: caption="Changes since version 1.32.12-1579" caption-side="bottom"}
 
 
 ### Worker node fix pack 1.32.12_1581, released 11 March 2026

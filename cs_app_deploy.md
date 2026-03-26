@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-01-30"
+lastupdated: "2026-03-26"
 
 
 keywords: kubernetes
@@ -20,32 +20,22 @@ subcollection: containers
 # Deploying Kubernetes-native apps in clusters
 {: #deploy_app}
 
-You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running. For example, you can perform rolling updates and rollbacks without downtime for your users.
+Deploy containerized apps in {{site.data.keyword.containerlong}} using Kubernetes techniques. Perform rolling updates and rollbacks without downtime for your users.
 {: shortdesc}
 
-For more information about creating a configuration file for your application, see [Configuration Best Practices](https://kubernetes.io/blog/2025/11/25/configuration-good-practices/){: external}.
+Learn more about creating configuration files in the [Configuration Best Practices](https://kubernetes.io/blog/2025/11/25/configuration-good-practices/){: external} guide.
 
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}
 
-Open a Kubernetes dashboard on your local system to view information about a cluster and its worker nodes. [In the {{site.data.keyword.cloud_notm}} console](#db_gui), you can access the dashboard with a convenient one-click button. [With the CLI](#db_cli), you can access the dashboard or use the steps in an automation process such as for a CI/CD pipeline.
+Access the Kubernetes dashboard to view cluster and worker node information through the [{{site.data.keyword.cloud_notm}} console](#db_gui) or [CLI](#db_cli).
 {: shortdesc}
 
-Do you have so many resources and users in your cluster that the Kubernetes dashboard is a little slow? Your cluster admin can scale the `kubernetes-dashboard` deployment by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
-{: tip}
-
-To check the logs for individual app pods, you can run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard.
-{: important}
-
-Before you begin
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
-- To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-iam-platform-access-roles). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-
-You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
+Before you begin, verify you have the appropriate [access role](/docs/containers?topic=containers-iam-platform-access-roles). [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 ### Launching the Kubernetes dashboard from the {{site.data.keyword.cloud_notm}} console
 {: #db_gui}
+
 
 1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
 2. From the menu bar, select the account that you want to use.
@@ -57,18 +47,18 @@ You can use the default port or set your own port to launch the Kubernetes dashb
 ### Launching the Kubernetes dashboard from the CLI
 {: #db_cli}
 
-Before you begin, [install the CLI](/docs/containers?topic=containers-cli-install).
+The CLI method enables automation and CI/CD integration. [Install the CLI](/docs/containers?topic=containers-cli-install) before you begin.
 
-1. Get your credentials for Kubernetes.
+1. Get your Kubernetes credentials.
 
     ```sh
     kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
     ```
     {: pre}
 
-2. Copy the **id-token** value that is shown in the output.
+2. Copy the **id-token** value from the output.
 
-3. Set the proxy with the default port number.
+3. Start the proxy.
 
     ```sh
     kubectl proxy
@@ -84,84 +74,57 @@ Before you begin, [install the CLI](/docs/containers?topic=containers-cli-instal
 
 4. Sign in to the dashboard.
 
-    1. In your browser, navigate to the following URL:
+    1. Navigate to the following URL in your browser:
 
         ```sh
         http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
         ```
         {: codeblock}
 
-    2. In the sign-on page, select the **Token** authentication method.
+    2. Select the **Token** authentication method on the sign-on page.
 
-    3. Then, paste the **id-token** value that you previously copied into the **Token** field and click **SIGN IN**.
+    3. Paste the **id-token** value into the **Token** field and click **SIGN IN**.
 
-When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy` command. After you exit, the Kubernetes dashboard is no longer available. Run the `proxy` command to restart the Kubernetes dashboard.
-
-Next, you can [run a configuration file from the dashboard.](#app_ui).
+Use `CTRL+C` to exit the `proxy` command. Run `kubectl proxy` again to restart the dashboard.
 
 
 ## Deploying apps with the Kubernetes dashboard
 {: #app_ui}
 
-When you deploy an app to your cluster by using the Kubernetes dashboard, a deployment resource automatically creates, updates, and manages the pods in your cluster. For more information about using the dashboard, see [the Kubernetes docs](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/){: external}.
+Deploy apps through the dashboard by entering configuration details or uploading a YAML file.
 {: shortdesc}
 
-Do you have so many resources and users in your cluster that the Kubernetes dashboard is a little slow? Your cluster admin can scale the `kubernetes-dashboard` deployment by running `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
-{: tip}
+Before you begin, [open the dashboard](#cli_dashboard) and verify you have a [service access role](/docs/containers?topic=containers-iam-platform-access-roles). [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
-Before you begin
+To deploy your app
 
-- [Install the required CLIs](/docs/containers?topic=containers-cli-install).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
-- To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform access role](/docs/containers?topic=containers-iam-platform-access-roles). If you are assigned only a service access role but no platform access role, [launch the Kubernetes dashboard from the CLI](#db_cli).
-
-To deploy your app,
-
-1. Open the Kubernetes [dashboard](#cli_dashboard) and click **+ Create**.
-2. Enter your app details in 1 of 2 ways.
+1. Click **+ Create**.
+2. Choose a deployment method:
     - Select **Specify app details** and enter the details.
     - Select **Upload a YAML or JSON file** to upload your app [configuration file](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/){: external}.
 
-    Need help with your configuration file? Check out this [example YAML file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-ibmliberty.yaml){: external}. In this example, a container is deployed from the **ibmliberty** image in the US-South region. Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
-    {: tip}
-
-3. Verify that you successfully deployed your app in one of the following ways.
-    - In the Kubernetes dashboard, click **Deployments**. A list of successful deployments is displayed.
-    - If your app is [publicly available](/docs/containers?topic=containers-cs_network_planning#public_access), navigate to the cluster overview page in your {{site.data.keyword.containerlong}} dashboard. Copy the subdomain, which is located in the cluster summary section and paste it into a browser to view your app.
+3. Click **Deployments** to verify your app deployed successfully.
 
 ## Deploying apps with the CLI
 {: #app_cli}
 
-After a cluster is created, you can deploy an app into that cluster by using the Kubernetes CLI.
+The CLI method provides precise control and enables automation. You'll create configuration files that define your app's resources and can be version controlled.
 {: shortdesc}
 
-Before you begin
+Before you begin, [install the CLI](/docs/containers?topic=containers-cli-install) and verify you have a [service access role](/docs/containers?topic=containers-iam-platform-access-roles). [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
-- Install the required [CLIs](/docs/containers?topic=containers-cli-install).
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
+To deploy your app
 
-To deploy your app,
+1. Create a configuration file that includes [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external}, [Service](https://kubernetes.io/docs/concepts/services-networking/service/){: external}, and [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external} resources as needed. Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 
-1. Create a configuration file based on [Kubernetes best practices](https://kubernetes.io/blog/2025/11/25/configuration-good-practices/){: external}. Generally, a configuration file contains configuration details for each of the resources you are creating in Kubernetes. Your script might include one or more of the following sections:
-
-    - [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external}: Defines the creation of pods and replica sets. A pod includes an individual containerized app and replica sets control multiple instances of pods.
-
-    - [Service](https://kubernetes.io/docs/concepts/services-networking/service/){: external}: Provides front-end access to pods by using a worker node or load balancer public IP address, or a public Ingress route.
-
-    - [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external}: Specifies a type of load balancer that provides routes to access your app publicly.
-
-    Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
-
-2. Run the configuration file in a cluster's context.
+2. Apply the configuration file.
 
     ```sh
     kubectl apply -f config.yaml
     ```
     {: pre}
 
-3. If you made your app publicly available by using a NodePort service, a load balancer service, or Ingress, verify that you can access the app.
+3. Verify you can access your app.
 
 ## Deploying apps to specific worker nodes by using labels
 {: #node_affinity}
