@@ -93,6 +93,10 @@ VPC File CSI Driver cluster add-on patch updates.
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 
+Cluster autoscaler cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
+
+
 
 ### 17 March 2026
 {: #containers-mar1726}

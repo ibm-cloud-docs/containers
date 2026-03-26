@@ -264,6 +264,8 @@ subcollection: containers
 
         * ALB OAuth Proxy cluster add-on patch updates.
 
+        * Cluster autoscaler cluster add-on patch updates.
+
     * [17 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar1726)
 
         * {{site.data.keyword.containerlong_notm}} version 1.32 is deprecated.
@@ -5839,9 +5841,13 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-2.0.0)
 
+    * [v200-6-0_326846817, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-6-0_326846817)
+
     * [v200-4_316755565, released 18 February 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-4_316755565)
 
 * [Version 1.2.4](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-1.2.4)
+
+    * [v124-8-0_326847250, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v124-8-0_326847250)
 
     * [v124-7_312863411, released 16 February 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v124-7_312863411)
 
