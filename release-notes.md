@@ -30,12 +30,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## March 2026
 {: #containers-mar26}
 
-### 02 February 2026
-{: #containers-feb0226}
+
+### 26 March 2026
+{: #containers-mar2626}
 {: release-note}
 
-VPC Block CSI Driver cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
 
 
 ### 25 March 2026
@@ -328,6 +330,12 @@ VPC Block CSI Driver cluster add-on patch updates.
 
 
 
+### 02 February 2026
+{: #containers-feb0226}
+{: release-note}
+
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 ## January 2026
 {: #containers-jan26}

@@ -240,9 +240,9 @@ subcollection: containers
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
 
-    * [02 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb0226)
+    * [26 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2626)
 
-        * VPC Block CSI Driver cluster add-on patch updates.
+        * ALB OAuth Proxy cluster add-on patch updates.
 
     * [25 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2526)
 
@@ -347,6 +347,10 @@ subcollection: containers
     * [06 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb0626)
 
         * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
+    * [02 February 2026](/docs/containers?topic=containers-containers-relnotes#containers-feb0226)
+
+        * VPC Block CSI Driver cluster add-on patch updates.
 
 * [January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan26)
 
@@ -6502,6 +6506,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_328060981, released 26 March 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_328060981)
 
     * [2.0.0_325480053, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_325480053)
 
