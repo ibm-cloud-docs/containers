@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-03-26"
+lastupdated: "2026-03-29"
 
 
 keywords: change log, version history, 1.33
@@ -64,6 +64,24 @@ The following table shows the changes that are in the master fix pack 1.33.9_156
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3347 | 3563 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.33 | v0.13.36 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.36){: external}. |
 {: caption="Changes since version 1.33.8-1562" caption-side="bottom"}
+
+
+### Worker node fix pack 1.33.9_1566, released 24 March 2026
+{: #cl-boms-1339_1566_W}
+
+The following table shows the components included in the worker node fix pack 1.33.9_1566. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU 24 (VPC)|6.8.0-101-generic|Resolves the following CVEs: [CVE-2025-0167](https://nvd.nist.gov/vuln/detail/CVE-2025-0167){: external}, [CVE-2025-15366](https://nvd.nist.gov/vuln/detail/CVE-2025-15366){: external}, [CVE-2025-15367](https://nvd.nist.gov/vuln/detail/CVE-2025-15367){: external}, [CVE-2026-23865](https://nvd.nist.gov/vuln/detail/CVE-2026-23865){: external}, [CVE-2026-25749](https://nvd.nist.gov/vuln/detail/CVE-2026-25749){: external}, [CVE-2026-26007](https://nvd.nist.gov/vuln/detail/CVE-2026-26007){: external}, [CVE-2026-26269](https://nvd.nist.gov/vuln/detail/CVE-2026-26269){: external}, [CVE-2026-28417](https://nvd.nist.gov/vuln/detail/CVE-2026-28417){: external}, [CVE-2026-28418](https://nvd.nist.gov/vuln/detail/CVE-2026-28418){: external}, [CVE-2026-28419](https://nvd.nist.gov/vuln/detail/CVE-2026-28419){: external}, [CVE-2026-28420](https://nvd.nist.gov/vuln/detail/CVE-2026-28420){: external}, [CVE-2026-28421](https://nvd.nist.gov/vuln/detail/CVE-2026-28421){: external}, [CVE-2026-28422](https://nvd.nist.gov/vuln/detail/CVE-2026-28422){: external}, [CVE-2026-3497](https://nvd.nist.gov/vuln/detail/CVE-2026-3497){: external}, and [CVE-2026-3731](https://nvd.nist.gov/vuln/detail/CVE-2026-3731){: external}.|
+|UBUNTU 24 (Classic)|6.8.0-101-generic|Resolves the following CVEs: [CVE-2025-0167](https://nvd.nist.gov/vuln/detail/CVE-2025-0167){: external}, [CVE-2025-15366](https://nvd.nist.gov/vuln/detail/CVE-2025-15366){: external}, [CVE-2025-15367](https://nvd.nist.gov/vuln/detail/CVE-2025-15367){: external}, [CVE-2026-23865](https://nvd.nist.gov/vuln/detail/CVE-2026-23865){: external}, [CVE-2026-25749](https://nvd.nist.gov/vuln/detail/CVE-2026-25749){: external}, [CVE-2026-26007](https://nvd.nist.gov/vuln/detail/CVE-2026-26007){: external}, [CVE-2026-26269](https://nvd.nist.gov/vuln/detail/CVE-2026-26269){: external}, [CVE-2026-28417](https://nvd.nist.gov/vuln/detail/CVE-2026-28417){: external}, [CVE-2026-28418](https://nvd.nist.gov/vuln/detail/CVE-2026-28418){: external}, [CVE-2026-28419](https://nvd.nist.gov/vuln/detail/CVE-2026-28419){: external}, [CVE-2026-28420](https://nvd.nist.gov/vuln/detail/CVE-2026-28420){: external}, [CVE-2026-28421](https://nvd.nist.gov/vuln/detail/CVE-2026-28421){: external}, [CVE-2026-28422](https://nvd.nist.gov/vuln/detail/CVE-2026-28422){: external}, [CVE-2026-3497](https://nvd.nist.gov/vuln/detail/CVE-2026-3497){: external}, and [CVE-2026-3731](https://nvd.nist.gov/vuln/detail/CVE-2026-3731){: external}.|
+|Kubernetes|1.33.9|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.9).|
+|containerd|1.7.30|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.30).|
+|HAProxy|10c8639e6b5829d0af51a22755e13756f34630cf|Resolves the following CVEs: [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}, and [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}.|
+|GPU Device Plug-in and Installer|1c4faba733bd6bce95c85ead9a63e1ff0bbce86b|Resolves the following CVEs: [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}, [CVE-2026-25749](https://nvd.nist.gov/vuln/detail/CVE-2026-25749){: external}, and [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}.|
+{: caption="1.33.9_1566 fix pack." caption-side="bottom"}
+{: #cl-boms-1339_1566_W-component-table}
 
 
 ### Worker node fix pack 1.33.8_1564, released 11 March 2026
