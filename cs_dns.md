@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-01-30"
+lastupdated: "2026-03-30"
 
 
 keywords: kubernetes, coredns, kubedns, dns
@@ -215,8 +215,14 @@ By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy]
 Do not add the DNS cache label when you already use [zone-aware DNS](#dns_zone_aware) in your cluster. Also, `NodeLocal` DNS caching relies on CoreDNS to maintain the cache of DNS resolutions. Keep applicable `NodeLocal` DNS cache and CoreDNS configurations such as stub domains the same to maintain DNS resolution consistency.
 {: important}
 
-`NodeLocal` DNS cache is generally available in clusters that run Kubernetes 1.18 or later, but still disabled by default.
-{: preview}
+Version 1.34 and earlier
+:   `NodeLocal` DNS cache is opt-in. You must manually enable it by adding the `ibm-cloud.kubernetes.io/node-local-dns-enabled=true` label to worker nodes.
+
+Version 1.35 and later
+:   `NodeLocal` DNS cache is enabled by default on all worker nodes. Clusters that are upgraded to version 1.35 have NodeLocal DNS enabled automatically unless you opt out. To prevent automatic enablement, apply the `ibm-cloud.kubernetes.io/node-local-dns-disabled=true` label to your worker nodes before you upgrade.
+
+For more information about version 1.35 changes, see [1.35 version information](/docs/containers?topic=containers-cs_versions_135#nodelocal-dns-135).
+{: note}
 
 
 
@@ -225,6 +231,12 @@ Do not add the DNS cache label when you already use [zone-aware DNS](#dns_zone_a
 
 Enable `NodeLocal` DNS cache for one or more worker nodes in your Kubernetes cluster.
 {: shortdesc}
+
+Version 1.35 and later
+:   NodeLocal DNS is enabled by default on all worker nodes. Follow these steps only if you previously disabled NodeLocal DNS or are adding new worker nodes with NodeLocal DNS disabled.
+
+Version 1.34 and earlier
+:   NodeLocal DNS is opt-in. Follow these steps to enable it on your worker nodes.
 
 The following steps update DNS pods that run on particular worker nodes. You can also [label the worker pool](/docs/containers?topic=containers-worker-tag-label) so that future nodes inherit the label.
 {: note}
@@ -293,6 +305,17 @@ kubectl get networkpolicy --all-namespaces -o yaml
 
 You can disable the `NodeLocal` DNS cache for one or more worker nodes.
 {: shortdesc}
+
+Version 1.35 and later
+:   To disable NodeLocal DNS, which is enabled by default, add the `ibm-cloud.kubernetes.io/node-local-dns-disabled=true` label to your worker nodes.
+
+    ```sh
+    kubectl label node --all --overwrite "ibm-cloud.kubernetes.io/node-local-dns-disabled=true"
+    ```
+    {: pre}
+
+Version 1.34 and earlier
+:   To disable NodeLocal DNS, remove the `ibm-cloud.kubernetes.io/node-local-dns-enabled` label from your worker nodes.
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 2. Remove the `ibm-cloud.kubernetes.io/node-local-dns-enabled` label from the worker node. This action terminates the DNS caching agent pod on the worker node.
