@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-03-29"
+lastupdated: "2026-03-30"
 
 
 keywords: containers
@@ -243,6 +243,10 @@ subcollection: containers
     * [27 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2726)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+    * [27 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2726)
+
+        * NodeLocal DNS enabled by default in version 1.35
 
     * [26 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2626)
 
@@ -4421,6 +4425,8 @@ subcollection: containers
 * [Release timeline](/docs/containers?topic=containers-cs_versions_135#release_timeline_135)
 
 * [Preparing to update](/docs/containers?topic=containers-cs_versions_135#prep-up-135)
+
+    * [NodeLocal DNS enabled by default](/docs/containers?topic=containers-cs_versions_135#nodelocal-dns-135)
 
 [1.35 version change log](/docs/containers?topic=containers-changelog_135#changelog_135)
 

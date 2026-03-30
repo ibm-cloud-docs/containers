@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-03-29"
+lastupdated: "2026-03-30"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -14,6 +14,7 @@ content-type: release-note
 ---
 
 {{site.data.keyword.attribute-definition-list}}
+
 
 
 # Release notes
@@ -52,6 +53,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+
+### 27 March 2026
+{: #containers-mar2726}
+{: release-note}
+
+NodeLocal DNS enabled by default in version 1.35
+:   Starting with version 1.35, NodeLocal DNS is enabled by default on all worker nodes to improve DNS performance and reliability. Clusters that are upgraded to version 1.35 have NodeLocal DNS enabled automatically unless you opt out before upgrading. If your cluster has zone-aware DNS enabled, NodeLocal DNS is not automatically enabled because these features are mutually exclusive. For more information, see [1.35 version information](/docs/containers?topic=containers-cs_versions_135#nodelocal-dns-135) and [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache).
 
 ### 26 March 2026
 {: #containers-mar2626}
