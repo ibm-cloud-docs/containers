@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-03-30"
+lastupdated: "2026-03-31"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
+
+    * [31 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar3126)
+
+        * VPC File CSI Driver cluster add-on patch updates.
 
     * [27 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2726)
 
@@ -3746,6 +3750,14 @@ subcollection: containers
 
 * [Creating a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-create-snapshot)
 
+* [Creating snapshots in a different resource group](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-different-rg)
+
+    * [Prerequisites](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-different-rg-prereqs)
+
+    * [Creating a custom VolumeSnapshotClass](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-custom-class)
+
+    * [Creating a snapshot with a custom resource group](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-create-custom-rg)
+
 * [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-restore-from-snapshot)
 
 * [Turning off snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-turn-off-snapshots)
@@ -6111,6 +6123,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [v1.0.35_325672265, released 31 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1035_325672265)
+
     * [v1.0.35_325672265, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1035_325672265)
 
     * [v1.0.34_321366482, released 02 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1034_321366482)
@@ -6308,6 +6322,8 @@ subcollection: containers
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [v2.0.27_329001706, released 31 March 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2027_329001706)
 
     * [v2.0.26_325670948, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2026_325670948)
 
