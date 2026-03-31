@@ -3750,6 +3750,14 @@ subcollection: containers
 
 * [Creating a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-create-snapshot)
 
+* [Creating snapshots in a different resource group](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-different-rg)
+
+    * [Prerequisites](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-different-rg-prereqs)
+
+    * [Creating a custom VolumeSnapshotClass](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-custom-class)
+
+    * [Creating a snapshot with a custom resource group](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-snapshot-create-custom-rg)
+
 * [Restoring from a volume snapshot](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-restore-from-snapshot)
 
 * [Turning off snapshots](/docs/containers?topic=containers-vpc-volume-snapshot#vpc-turn-off-snapshots)
