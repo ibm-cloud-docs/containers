@@ -242,6 +242,8 @@ subcollection: containers
 
     * [31 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar3126)
 
+        * CLI version 1.0.680 is available
+
         * VPC File CSI Driver cluster add-on patch updates.
 
     * [27 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2726)
@@ -5341,6 +5343,8 @@ subcollection: containers
 
     * [`ibmcloud ks ingress lb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_get)
 
+    * [`ibmcloud ks ingress lb backend set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_backend_set)
+
     * [`ibmcloud ks ingress lb proxy-protocol disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_disable)
 
     * [`ibmcloud ks ingress lb proxy-protocol enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable)
@@ -5554,6 +5558,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.680](/docs/containers?topic=containers-cs_cli_changelog#cli-01680)
 
 * [Version v1.0.745](/docs/containers?topic=containers-cs_cli_changelog#cli-01745)
 
