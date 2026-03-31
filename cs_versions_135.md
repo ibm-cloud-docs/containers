@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2026
-lastupdated: "2026-03-30"
+lastupdated: "2026-03-31"
 
 
 keywords: kubernetes, containers, 135, version 135, 135 update actions
@@ -53,6 +53,7 @@ For a complete list of changes that might impact your deployed apps when you upd
 
 [Cluster autoscaler](https://cloud.ibm.com/docs/containers?topic=containers-cluster-scaling-classic-vpc) does not yet support version 1.35. Do not upgrade your cluster to version 1.35 if your cluster uses cluster autoscaler.
 {: important}
+
 Istio add-on version 1.26 is not supported for IBM Cloud Kubernetes Service version 1.35 because the Istio add-on does not support Istio 1.29. Do not update to IBM Cloud Kubernetes Service version 1.35 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](https://cloud.ibm.com/docs/containers?topic=containers-istio&interface=ui#migrate).
 {: important}
 
