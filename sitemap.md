@@ -246,6 +246,8 @@ subcollection: containers
 
     * [27 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2726)
 
+        * {{site.data.keyword.cos_full_notm}} plug-in updates.
+
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [27 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2726)
@@ -6414,6 +6416,8 @@ subcollection: containers
     * [v1.0.13_297764008, released 14 November 2025](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1013_297764008)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
+
+* [Change log for version 2.2.50, released 27 March 2026](/docs/containers?topic=containers-cos_plugin_changelog#02250_object_plugin)
 
 * [Change log for version 2.2.49, released 17 March 2026](/docs/containers?topic=containers-cos_plugin_changelog#02249_object_plugin)
 
