@@ -240,6 +240,10 @@ subcollection: containers
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
 
+    * [31 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar3126)
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
     * [27 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2726)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
