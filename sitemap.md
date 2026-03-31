@@ -250,8 +250,6 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
-    * [27 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2726)
-
         * NodeLocal DNS enabled by default in version 1.35
 
     * [26 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2626)

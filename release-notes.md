@@ -63,9 +63,6 @@ VPC File CSI Driver cluster add-on patch updates.
 
 
 
-### 27 March 2026
-{: #containers-mar2726}
-{: release-note}
 
 NodeLocal DNS enabled by default in version 1.35
 :   Starting with version 1.35, NodeLocal DNS is enabled by default on all worker nodes to improve DNS performance and reliability. Clusters that are upgraded to version 1.35 have NodeLocal DNS enabled automatically unless you opt out before upgrading. If your cluster has zone-aware DNS enabled, NodeLocal DNS is not automatically enabled because these features are mutually exclusive. For more information, see [1.35 version information](/docs/containers?topic=containers-cs_versions_135#nodelocal-dns-135) and [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache).
