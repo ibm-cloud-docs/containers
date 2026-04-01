@@ -1054,7 +1054,7 @@ subcollection: containers
 
     * [16 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1624)
 
-        * New! The {{site.data.keyword.cloud}} and Compliance Center Workload Protection integration is available for VPC clusters in the UI. 
+        * New! The {{site.data.keyword.cloud}} and Compliance Center Workload Protection integration is available for VPC clusters in the UI.
 
     * [12 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1224)
 
@@ -1276,7 +1276,7 @@ subcollection: containers
 
     * [09 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr0924)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
     * [03 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr0324)
 
@@ -1296,7 +1296,7 @@ subcollection: containers
 
     * [25 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar2524)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
         * New! NVIDIA L40 GPU support. You can now create VPC clusters with worker nodes which have NVIDIA L40 GPUs.
 
@@ -1306,7 +1306,7 @@ subcollection: containers
 
     * [15 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar1524)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
         * Version 1.29 is the default version for {{site.data.keyword.containerlong_notm}}.
 
@@ -1332,7 +1332,7 @@ subcollection: containers
 
     * [27 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2724)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
         * CLI version `1.0.597` is available.
 
@@ -1374,7 +1374,7 @@ subcollection: containers
 
     * [13 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1324)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
         * Ingress ALB versions `1.9.4_6346_iks`, `1.8.4_6345_iks`, `1.6.4_6344_iks` are available for {{site.data.keyword.containerlong_notm}}.
 
@@ -7320,6 +7320,8 @@ subcollection: containers
 * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-faqs#updating_kube)
 
 * [What operations are blocked if my cluster is running an unsupported operating system?](/docs/containers?topic=containers-faqs#unsupported_os)
+
+* [What is the default time zone for my VPC worker nodes?](/docs/containers?topic=containers-faqs#vpc)
 
 
 ## Best practices for {{site.data.keyword.containerlong_notm}}

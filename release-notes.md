@@ -1,6 +1,6 @@
 ---
 
-copyright: 
+copyright:
   years: 2014, 2026
 lastupdated: "2026-04-01"
 
@@ -152,7 +152,7 @@ Cluster autoscaler cluster add-on patch updates.
 
 
 
-  
+
 ### 12 March 2026
 {: #containers-mar1226}
 {: release-note}
@@ -189,7 +189,7 @@ Ingress ALB patch updates.
 New! {{site.data.keyword.containerlong_notm}} version 1.35.
 :   You can now create or [update clusters to Kubernetes version 1.35](/docs/containers?topic=containers-cs_versions_135). With Kubernetes 1.35, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
-  
+
 
 
 ### 03 March 2026
@@ -400,6 +400,7 @@ Version 1.34 is now the default version for {{site.data.keyword.containerlong_no
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [VPC worker nodes]{: tag-teal} Note that beginning at this patch version, all future patches set the local time for VPC worker nodes to UTC.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
 :   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 :   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
@@ -881,7 +882,7 @@ CLI version `1.0.724` is available.
 {: release-note}
 
 Security Bulletin: {{site.data.keyword.containerlong_notm}} is affected by Kubernetes API server security vulnerabilities
-:   For more information, see the [Security Bulletin for CVE-2025-5187](https://www.ibm.com/support/pages/node/7245968){: external}. 
+:   For more information, see the [Security Bulletin for CVE-2025-5187](https://www.ibm.com/support/pages/node/7245968){: external}.
 
 
 
@@ -1324,7 +1325,7 @@ VPC File CSI Driver cluster add-on patch updates.
 
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
- 
+
 
 
 Ingress ALB cluster add-on patch updates.
@@ -1348,7 +1349,7 @@ Ingress ALB cluster add-on patch updates.
 :   Update your cluster to at least version 1.29 as soon as possible.
 
 Ubuntu 20 is unsupported.
-:   The Ubuntu 20 operating system is no longer supported. [Migrate your worker nodes to Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate) as soon as possible. 
+:   The Ubuntu 20 operating system is no longer supported. [Migrate your worker nodes to Ubuntu 24](/docs/containers?topic=containers-ubuntu-migrate) as soon as possible.
 
 
 
@@ -1566,7 +1567,7 @@ Creating Ubuntu 20 clusters or worker pools in cluster versions 1.29 - 1.31 is n
 
 ## March 2025
 {: #containers-mar25}
-  
+
 ### 27 March 2025
 {: #containers-27march25}
 {: release-note}
@@ -2120,8 +2121,8 @@ New! A new tutorial is available for {{site.data.keyword.containerlong_notm}} th
 {: #containers-oct24}
 
 
-  
- 
+
+
 ### 31 October 2024
 {: #containers-oct3124}
 {: release-note}
@@ -2373,7 +2374,7 @@ Istio add-on version `1.22.4` is available.
 {: #containers-sep1624}
 {: release-note}
 
-New! The {{site.data.keyword.cloud}} and Compliance Center Workload Protection integration is available for VPC clusters in the UI. 
+New! The {{site.data.keyword.cloud}} and Compliance Center Workload Protection integration is available for VPC clusters in the UI.
 :   For more information, see the list of Observability Integrations in [Creating a VPC cluster in the console](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=ui#clusters_vpcg2_ui).
 
 ### 12 September 2024
@@ -2487,7 +2488,7 @@ CLI version `1.0.652` is available.
 {: release-note}
 
 New audit events for cluster operations
-:   The `containers-kubernetes.cluster-master.changed` and `containers-kubernetes.cluster-ssl-certificate.update` [audit events](/docs/containers?topic=containers-at_events_ref) are available. 
+:   The `containers-kubernetes.cluster-master.changed` and `containers-kubernetes.cluster-ssl-certificate.update` [audit events](/docs/containers?topic=containers-at_events_ref) are available.
 
 
 
@@ -2735,11 +2736,11 @@ Istio add-on versions `1.21.3` and `1.20.7` are available.
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.26`.
 :   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
-  
+
 ### 4 June 2024
 {: #containers-june0424}
 {: release-note}
- 
+
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
@@ -2897,7 +2898,7 @@ ALB OAuth Proxy add-on patch updates.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   1.29 
+:   1.29
 :   1.28
 :   1.27
 :   1.26
@@ -2988,7 +2989,7 @@ Istio add-on versions `1.21.1`, `1.20.5`, and `1.19.9` are available.
 
 
 
-Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   1.29
 :   1.28
@@ -3053,7 +3054,7 @@ Master patch updates for {{site.data.keyword.containerlong_notm}} clusters. Mast
 
 
 
-Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   1.29
 :   1.28
@@ -3089,7 +3090,7 @@ Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 
 
 
-Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   1.29
 :   1.28
@@ -3163,7 +3164,7 @@ Master patch updates for {{site.data.keyword.containerlong_notm}} clusters. Mast
 
 
 
-Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - 1.29.2_1529
@@ -3278,7 +3279,7 @@ Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico comp
 
 
 
-Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 :    Worker node updates can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure.
 :    Review the following change logs for your cluster version.
     - 1.28.6_1544
