@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-03-31"
+lastupdated: "2026-04-01"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -36,7 +36,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-mar3126}
 {: release-note}
 
-CLI version 1.0.680 is available
+CLI version 1.0.756 is available
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 VPC File CSI Driver cluster add-on patch updates.

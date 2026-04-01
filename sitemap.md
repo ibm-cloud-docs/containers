@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-03-31"
+lastupdated: "2026-04-01"
 
 
 keywords: containers
@@ -242,7 +242,7 @@ subcollection: containers
 
     * [31 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar3126)
 
-        * CLI version 1.0.680 is available
+        * CLI version 1.0.756 is available
 
         * VPC File CSI Driver cluster add-on patch updates.
 
@@ -5559,7 +5559,7 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
-* [Version v1.0.680](/docs/containers?topic=containers-cs_cli_changelog#cli-01680)
+* [Version v1.0.756](/docs/containers?topic=containers-cs_cli_changelog#cli-01756)
 
 * [Version v1.0.745](/docs/containers?topic=containers-cs_cli_changelog#cli-01745)
 
