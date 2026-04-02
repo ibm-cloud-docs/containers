@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-01"
+lastupdated: "2026-04-02"
 
 
 keywords: containers
@@ -237,6 +237,12 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
+
+    * [02 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr0226)
+
+        * IBM Object CSI Driver cluster add-on patch updates.
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
 
@@ -6414,6 +6420,8 @@ subcollection: containers
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [v1.0.18_320539369, released 02 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1018_320539369)
 
     * [v1.0.17_320539369, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1017_320539369)
 
