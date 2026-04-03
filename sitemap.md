@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-03-31"
+lastupdated: "2026-04-03"
 
 
 keywords: containers
@@ -238,6 +238,14 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
+
+    * [02 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr0226)
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
+
+        * IBM Object CSI Driver cluster add-on patch updates.
+
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
 
     * [31 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar3126)
@@ -257,8 +265,6 @@ subcollection: containers
         * ALB OAuth Proxy cluster add-on patch updates.
 
     * [25 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar2526)
-
-        * {{site.data.keyword.containerlong_notm}} master fix packs.
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
@@ -1052,7 +1058,7 @@ subcollection: containers
 
     * [16 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1624)
 
-        * New! The {{site.data.keyword.cloud}} and Compliance Center Workload Protection integration is available for VPC clusters in the UI. 
+        * New! The {{site.data.keyword.cloud}} and Compliance Center Workload Protection integration is available for VPC clusters in the UI.
 
     * [12 September 2024](/docs/containers?topic=containers-containers-relnotes#containers-sep1224)
 
@@ -1274,7 +1280,7 @@ subcollection: containers
 
     * [09 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr0924)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
     * [03 April 2024](/docs/containers?topic=containers-containers-relnotes#containers-apr0324)
 
@@ -1294,7 +1300,7 @@ subcollection: containers
 
     * [25 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar2524)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
         * New! NVIDIA L40 GPU support. You can now create VPC clusters with worker nodes which have NVIDIA L40 GPUs.
 
@@ -1304,7 +1310,7 @@ subcollection: containers
 
     * [15 March 2024](/docs/containers?topic=containers-containers-relnotes#containers-mar1524)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
         * Version 1.29 is the default version for {{site.data.keyword.containerlong_notm}}.
 
@@ -1330,7 +1336,7 @@ subcollection: containers
 
     * [27 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb2724)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
         * CLI version `1.0.597` is available.
 
@@ -1372,7 +1378,7 @@ subcollection: containers
 
     * [13 February 2024](/docs/containers?topic=containers-containers-relnotes#containers-feb1324)
 
-        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}. 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
         * Ingress ALB versions `1.9.4_6346_iks`, `1.8.4_6345_iks`, `1.6.4_6344_iks` are available for {{site.data.keyword.containerlong_notm}}.
 
@@ -4446,7 +4452,7 @@ subcollection: containers
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
 
-    * [Change log for Master fix pack 1.35.3_1523, released 25 March 2026](/docs/containers?topic=containers-changelog_135#1353_1523_M)
+    * [Change log for Master fix pack 1.35.3_1524, released 02 April 2026](/docs/containers?topic=containers-changelog_135#1353_1524_M)
 
     * [Worker node fix pack 1.35.3_1523, released 24 March 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1353_1523_W)
 
@@ -4517,7 +4523,7 @@ subcollection: containers
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
 
-    * [Change log for Master fix pack 1.34.6_1547, released 25 March 2026](/docs/containers?topic=containers-changelog_134#1346_1547_M)
+    * [Change log for Master fix pack 1.34.6_1547, released 02 April 2026](/docs/containers?topic=containers-changelog_134#1346_1547_M)
 
     * [Worker node fix pack 1.34.6_1547, released 24 March 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1346_1547_W)
 
@@ -4610,7 +4616,7 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
-    * [Change log for Master fix pack 1.33.9_1566, released 25 March 2026](/docs/containers?topic=containers-changelog_133#1339_1566_M)
+    * [Change log for Master fix pack 1.33.9_1566, released 02 April 2026](/docs/containers?topic=containers-changelog_133#1339_1566_M)
 
     * [Worker node fix pack 1.33.9_1566, released 24 March 2026](/docs/containers?topic=containers-changelog_133#cl-boms-1339_1566_W)
 
@@ -4725,7 +4731,7 @@ subcollection: containers
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
 
-    * [Change log for Master fix pack 1.32.13_1584, released 25 March 2026](/docs/containers?topic=containers-changelog_132#13213_1584_M)
+    * [Change log for Master fix pack 1.32.13_1584, released 02 April 2026](/docs/containers?topic=containers-changelog_132#13213_1584_M)
 
     * [Worker node fix pack 1.32.13_1584, released 24 March 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13213_1584_W)
 
@@ -4880,7 +4886,7 @@ subcollection: containers
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
 
-    * [Change log for Master fix pack 1.31.14_1599, released 25 March 2026](/docs/containers?topic=containers-changelog_131#13114_1599_M)
+    * [Change log for Master fix pack 1.31.14_1599, released 02 April 2026](/docs/containers?topic=containers-changelog_131#13114_1599_M)
 
     * [Worker node fix pack 1.31.14_1599, released 24 March 2026](/docs/containers?topic=containers-changelog_131#cl-boms-13114_1599_W)
 
@@ -5340,6 +5346,8 @@ subcollection: containers
     * [`ibmcloud ks ingress instance unregister`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_instance_unregister)
 
     * [`ibmcloud ks ingress lb get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_get)
+
+    * [`ibmcloud ks ingress lb backend set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_backend_set)
 
     * [`ibmcloud ks ingress lb proxy-protocol disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_disable)
 
@@ -6409,6 +6417,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
 
+    * [v1.0.18_320539369, released 02 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1018_320539369)
+
     * [v1.0.17_320539369, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1017_320539369)
 
     * [v1.0.13_297764008, released 14 November 2025](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1013_297764008)
@@ -7314,6 +7324,8 @@ subcollection: containers
 * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-faqs#updating_kube)
 
 * [What operations are blocked if my cluster is running an unsupported operating system?](/docs/containers?topic=containers-faqs#unsupported_os)
+
+* [What is the default time zone for my VPC worker nodes?](/docs/containers?topic=containers-faqs#vpc)
 
 
 ## Best practices for {{site.data.keyword.containerlong_notm}}

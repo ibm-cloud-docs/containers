@@ -1,8 +1,8 @@
 ---
 
-copyright: 
-  years: 2014, 2025
-lastupdated: "2025-12-03"
+copyright:
+  years: 2014, 2026
+lastupdated: "2026-04-01"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -261,7 +261,7 @@ Classic or VPC clusters
 {: faq}
 {: support}
 
-{{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a new version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. 
+{{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a new version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 
 
 For more information about supported versions and update actions that you must take to move from one version to another, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions).
@@ -480,3 +480,11 @@ The following operations are blocked when an operating system is unsupported:
 - worker pool zone add
 - instance group resize (patch)
 - autoscaler remove worker (v2/autoscalerRemoveWorker)
+
+
+
+
+## What is the default time zone for my VPC worker nodes?
+{: #vpc}
+
+Beginning with patch version `1.32.11_1576`, [released 27 Jan 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan2726),  all future patches for VPC clusters set the worker node local time to UTC.
