@@ -244,10 +244,6 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} master fix packs.
 
-* [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
-
-    * [02 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr0226)
-
         * IBM Object CSI Driver cluster add-on patch updates.
 
 * [March 2026](/docs/containers?topic=containers-containers-relnotes#containers-mar26)
