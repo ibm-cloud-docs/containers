@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-04-03"
+lastupdated: "2026-04-06"
 
 
 keywords: change log, version history, 1.32
@@ -63,7 +63,6 @@ The following table shows the changes that are in the master fix pack 1.32.13_15
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3347 | 3563 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.35 | v0.13.36 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.36){: external}. |
 {: caption="Changes since version 1.32.12-1579" caption-side="bottom"}
-
 
 
 ### Worker node fix pack 1.32.13_1584, released 24 March 2026
