@@ -7007,13 +7007,13 @@ subcollection: containers
 
 [Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 
-* [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
+    * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+
+* [Classic regions](/docs/containers?topic=containers-regions-and-zones#locations-classic)
 
     * [Classic regions with multiple data centers](/docs/containers?topic=containers-regions-and-zones#zones-mz)
 
     * [Classic regions with one data center](/docs/containers?topic=containers-regions-and-zones#zones-sz)
-
-    * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 
 * [Where are the resources?](/docs/containers?topic=containers-regions-and-zones#regions_resources)
 
