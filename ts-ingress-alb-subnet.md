@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2026
+lastupdated: "2026-04-06"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -33,7 +33,7 @@ No valid subnets found for the specified zone. Verify that a subnet exists on th
 ```
 {: screen}
 
-However, you ran `ibmcloud ks ks subnets` and verified that one or more subnets are available on the VLAN in the zone where the ALB exists.
+However, you ran `ibmcloud ks subnets` and verified that one or more subnets are available on the VLAN in the zone where the ALB exists.
 
 
 Your ALBs and your worker nodes might not exist on the same VLANs.
@@ -44,9 +44,3 @@ This can occur when you delete worker nodes on the VLANs that the ALBs were also
 
 Move your ALBs to the same VLANs that your worker nodes exist on by following the steps in [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan).
 {: tsResolve}
-
-
-
-
-
-
