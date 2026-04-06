@@ -240,6 +240,10 @@ subcollection: containers
 
 * [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
 
+    * [06 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr0626)
+
+        * CLI version 1.0.756 is available
+
     * [02 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr0226)
 
         * {{site.data.keyword.containerlong_notm}} master fix packs.
@@ -5562,6 +5566,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.756](/docs/containers?topic=containers-cs_cli_changelog#cli-01756)
 
 * [Version v1.0.745](/docs/containers?topic=containers-cs_cli_changelog#cli-01745)
 
