@@ -7007,7 +7007,7 @@ subcollection: containers
 
 [Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 
-    * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+* [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 
 * [Classic regions](/docs/containers?topic=containers-regions-and-zones#locations-classic)
 

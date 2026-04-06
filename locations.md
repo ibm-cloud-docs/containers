@@ -21,6 +21,13 @@ subcollection: containers
 {: shortdesc}
 
 
+
+## VPC multizone regions
+{: #zones-vpc}
+
+VPC resources are provisioned in a region, which is a separate group of zones within a metro. The zones are mapped to separate data centers to ensure that resources are distributed evenly across zones in a multizone architecture. In the API and CLI, zones use the regional zone name in the API and command line (`us-south-1`), but in the console, zones use by the data center location (`Dallas 1`). For the data center code that the VPC zone and location corresponds to, such as `us-south-1` and `DAL10`, see [Multizone regions](/docs/overview?topic=overview-locations#table-mzr).
+{: shortdesc}
+
 Mumbai (`in-mum`) VPC MZR limitations
 
 :   **Operating systems**: You can only create clusters at version 1.31 and later in Mumbai and can only use Ubuntu 24 work nodes.
@@ -38,14 +45,6 @@ Montreal (`ca-mon`) VPC MZR limitations
 
 :   **Operating systems**: You can only create clusters at version 1.31 and later in Montreal and can only use Ubuntu 24 work nodes.
 :   **Portworx Enterprise** and **Portworx Backup**: The default installation method for Portworx Enterprise and Portworx Backup is not yet supported for private-only clusters in the Montreal region. Contact Portworx Support if you need to install Portworx Enterprise or Portworx Backup in a private-only cluster in Montreal. For more information, see [Portworx Support](/docs/containers?topic=containers-storage_portworx_about#portworx-billing-support).
-
-
-
-### VPC multizone regions
-{: #zones-vpc}
-
-VPC resources are provisioned in a region, which is a separate group of zones within a metro. The zones are mapped to separate data centers to ensure that resources are distributed evenly across zones in a multizone architecture. In the API and CLI, zones use the regional zone name in the API and command line (`us-south-1`), but in the console, zones use by the data center location (`Dallas 1`). For the data center code that the VPC zone and location corresponds to, such as `us-south-1` and `DAL10`, see [Multizone regions](/docs/overview?topic=overview-locations#table-mzr).
-{: shortdesc}
 
 ![{{site.data.keyword.containerlong_notm}} VPC multizone regions](images/locations-vpc.svg){: caption="{{site.data.keyword.containerlong_notm}} locations" caption-side="bottom"}
 
