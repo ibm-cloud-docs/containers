@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2026
+lastupdated: "2026-04-06"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -38,6 +38,9 @@ Ingress requires at least two worker nodes per zone to ensure high availability 
 {: tsCauses}
 
 By default, ALB pods have two replicas. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. When only one worker node exists per zone in a classic or VPC cluster, or if only one worker node exists on a VLAN that your classic cluster is attached to, ALB pods can't deploy correctly.
+
+
+Follow these steps to resolve the issue:
 {: tsResolve}
 
 1. Check the number of worker nodes per zone in your cluster.
@@ -46,25 +49,20 @@ By default, ALB pods have two replicas. However, ALB pods have anti-affinity rul
     ```
     {: pre}
 
-    * Classic and VPC clusters: If only one worker node exists in a zone, increase the number of worker nodes in that zone.
-        * **If you don't use edge nodes**: Ensure that at least two worker nodes exist in each zone by resizing an existing worker pool, [creating a new worker pool in a VPC cluster](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool), or [creating a new worker pool in a classic cluster](/docs/containers?topic=containers-add-workers-classic#add_pool).
-        * **If you use edge nodes**: Ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone.
-    * Classic clusters only: If more than one worker node exists in each zone of your classic cluster, your worker nodes might be connected to different VLANs within one zone so that only one worker node exists on a private VLAN. Continue to the next step.
+2. If only one worker node exists in a zone, increase the number of worker nodes in that zone.
+    * **Classic and VPC clusters**:
+        * If you don't use edge nodes: Ensure that at least two worker nodes exist in each zone by resizing an existing worker pool, [creating a new worker pool in a VPC cluster](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool), or [creating a new worker pool in a classic cluster](/docs/containers?topic=containers-add-workers-classic#add_pool).
+        * If you use edge nodes: Ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone.
+    * **Classic clusters only**: If more than one worker node exists in each zone of your classic cluster, your worker nodes might be connected to different VLANs within one zone so that only one worker node exists on a private VLAN. Continue to the next step.
 
-2. For each worker node in one zone, get the private VLAN that the worker node is attached to.
+3. For classic clusters with multiple worker nodes per zone, check the private VLAN that each worker node is attached to.
     ```sh
     ibmcloud ks worker get -w <worker_ID> -c <cluster_name_or_ID>
     ```
     {: pre}
 
-3. If only one worker node exists on a private VLAN, and the other worker nodes in the zone are attached to a different private VLAN, [create a new worker pool](/docs/containers?topic=containers-add-workers-classic) with a size of at least one worker node. When you add a zone to the worker pool in step 6, specify the same zone and private VLAN as the worker node that you previously identified.
+4. If only one worker node exists on a private VLAN, and the other worker nodes in the zone are attached to a different private VLAN, [create a new worker pool](/docs/containers?topic=containers-add-workers-classic) with a size of at least one worker node. When you add a zone to the worker pool, specify the same zone and private VLAN as the worker node that you previously identified.
 
-4. Repeat these steps for each zone in your cluster to ensure that more than one worker node exists on a private VLAN.
+5. Repeat these steps for each zone in your cluster to ensure that more than one worker node exists on a private VLAN.
 
 After the new worker nodes deploy, the ALB pods are automatically scheduled to deploy to those worker nodes.
-
-
-
-
-
-

@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2026
+lastupdated: "2026-04-06"
 
 
 keywords: kubernetes
@@ -24,50 +24,57 @@ content-type: troubleshoot
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
 
-When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
+When you try to bind an {{site.data.keyword.cloud_notm}} service to your cluster, you see an error message indicating that multiple services with the same name were found.
 {: tsSymptoms}
 
 ```txt
 Multiple services with the same name were found.
-Run 'ibmcloud service list' to view available Bluemix service instances...
+Run 'ibmcloud resource service-instances' to view available IBM Cloud service instances...
 ```
 {: screen}
 
 
-Multiple service instances might have the same name in different regions.
+Multiple service instances might have the same name in different regions or resource groups.
 {: tsCauses}
 
 
-Use the service GUID instead of the service instance name in the `ibmcloud ks cluster service bind` command.
+Use the service instance GUID or CRN to uniquely identify the service when creating service credentials and binding them to your cluster.
 {: tsResolve}
 
 1. [Log in to the {{site.data.keyword.cloud_notm}} region that includes the service instance to bind.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
-2. Get the GUID for the service instance.
+2. List your service instances and get the GUID or CRN for the specific service instance.
     ```sh
-    ibmcloud service show <service_instance_name> --guid
+    ibmcloud resource service-instances --output json | grep -A 5 "<service_instance_name>"
     ```
     {: pre}
 
-    Example output
+    Example output showing the GUID and CRN:
 
     ```sh
-    Invoking 'cf service <service_instance_name> --guid'...
-    <service_instance_GUID>
+    "guid": "1234abcd-5678-efgh-9012-ijklmnop3456",
+    "crn": "crn:v1:bluemix:public:service-name:us-south:a/abc123:1234abcd-5678-efgh-9012-ijklmnop3456::",
     ```
     {: screen}
 
-3. Bind the service to the cluster again.
+3. Create service credentials for the service instance using the GUID or CRN.
     ```sh
-    ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
+    ibmcloud resource service-key-create <key_name> <role> --instance-id <service_instance_GUID>
     ```
     {: pre}
 
+4. Get the service credentials.
+    ```sh
+    ibmcloud resource service-key <key_name> --output json
+    ```
+    {: pre}
 
+5. Create a Kubernetes secret in your cluster with the service credentials.
+    ```sh
+    kubectl create secret generic <secret_name> --from-literal=<key>=<value> -n <namespace>
+    ```
+    {: pre}
 
+6. Reference the secret in your app deployment to access the service credentials.
 
-
-
-
-
-
+For more information, see [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding).

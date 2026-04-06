@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2026
+lastupdated: "2026-04-06"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -39,25 +39,32 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public  
 {: screen}
 
 
-In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure account.
+In standard clusters, the first time that you create a cluster in a zone, a public VLAN and a private VLAN in that zone are automatically provisioned for you in your {{site.data.keyword.cloud_notm}} classic infrastructure account.
 {: tsCauses}
 
 In that zone, 1 public portable subnet is requested on the public VLAN that you specify and 1 private portable subnet is requested on the private VLAN that you specify. For {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. If the cluster's VLAN in a zone already reached that limit, the **Ingress Subdomain** fails to provision and the public Ingress ALB for that zone fails to provision.
 
 To view how many subnets a VLAN has:
-1. From the [IBM Cloud infrastructure console](https://cloud.ibm.com/classic?), select **Network** > **IP Management** > **VLANs**.
+1. From the [{{site.data.keyword.cloud_notm}} classic infrastructure console](https://cloud.ibm.com/classic?), select **Network** > **IP Management** > **VLANs**.
 2. Click the **VLAN Number** of the VLAN that you used to create your cluster. Review the **Subnets** section to see whether 40 or more subnets exist.
 
 
-Option 1: If you need a new VLAN, order one by [contacting {{site.data.keyword.cloud_notm}} support](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
+Choose one of the following options to resolve the issue:
 {: tsResolve}
 
-Then, [create a cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create) that uses this new VLAN.
+Option 1: Order a new VLAN
+:   If you need a new VLAN, order one by [contacting {{site.data.keyword.cloud_notm}} support](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Then, [create a cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_create) that uses this new VLAN.
 
-Option 2: If you have another VLAN that is available, you can [set up VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
+Option 2: Use VLAN spanning with an available VLAN
+:   If you have another VLAN that is available, you can [set up VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 
-Option 3: If you are not using all the subnets in the VLAN, you can reuse subnets on the VLAN by adding them to your cluster.
+Option 3: Reuse existing subnets on the VLAN
+:   If you are not using all the subnets in the VLAN, you can reuse subnets on the VLAN by adding them to your cluster.
+
+Complete the following steps after choosing an option.
+
 1. Check that the subnet that you want to use is available.
+    
     The infrastructure account that you use might be shared across multiple {{site.data.keyword.cloud_notm}} accounts. In this case, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.
     {: note}
 
@@ -80,11 +87,6 @@ Option 3: If you are not using all the subnets in the VLAN, you can reuse subnet
     {: screen}
 
 4. Verify that the portable IP addresses from the subnet that you added are used for the ALBs in your cluster. It might take several minutes for the services to use the portable IP addresses from the new subnet.
+    
     * **No Ingress subdomain**: Run `ibmcloud ks cluster get --cluster <cluster>` to verify that the **Ingress Subdomain** is populated.
     * **An ALB does not deploy in a zone**: Run `ibmcloud ks ingress alb ls --cluster <cluster>` to verify that the missing ALB is deployed.
-
-
-
-
-
-
