@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-06"
+lastupdated: "2026-04-07"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
+
+    * [07 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr0726)
+
+        * IBM Storage Operator cluster add-on patch updates.
 
     * [06 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr0626)
 
@@ -6137,6 +6141,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [v1.0.36_328998949, released 07 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1036_328998949)
+
     * [v1.0.35_325672265, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1035_325672265)
 
     * [v1.0.34_321366482, released 02 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1034_321366482)
@@ -6334,6 +6340,8 @@ subcollection: containers
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [v2.0.27_329001706, released 07 April 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2027_329001706)
 
     * [v2.0.26_325670948, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2026_325670948)
 
@@ -7829,6 +7837,8 @@ subcollection: containers
 [Why are Istio components missing?](/docs/containers?topic=containers-istio_components_missing#istio_components_missing)
 
 [Why can't I upgrade to version 1.12 of the managed Istio add-on?](/docs/containers?topic=containers-ts-addon-istio-webhooks#ts-addon-istio-webhooks)
+
+[Why does my custom gateway Istio operator have a reconcile loop error?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
 
 [How do I delete Operator Lifecycle Manager components?](/docs/containers?topic=containers-ts-delete-olm#ts-delete-olm)
 

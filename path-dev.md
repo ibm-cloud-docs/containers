@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-02-16"
+lastupdated: "2026-04-07"
 
 
 keywords: kubernetes, containers
@@ -117,7 +117,7 @@ Perform rolling updates and rollbacks of apps without downtime for your users.
 2. **Set up updates**:
     - Add a [rolling update to your deployment file](/docs/containers?topic=containers-update_app#app_rolling)
     - Perform A/B, canary, and phased rollouts with the [Istio managed add-on](/docs/containers?topic=containers-istio-qs).
-    - Set up [a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-cicd).
+    - Set up a continuous delivery pipeline for a cluster.
 3. **Scaling**: Enable [horizontal pod autoscaling](/docs/containers?topic=containers-update_app#app_scaling) to automatically increase or decrease the number of instances of your apps based on CPU.
 
 

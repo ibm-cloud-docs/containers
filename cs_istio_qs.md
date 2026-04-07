@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-03-23"
+lastupdated: "2026-04-07"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -270,7 +270,7 @@ For more information about referencing metrics and dashboards, monitoring Istio 
 ## Step 5: Secure in-cluster traffic by enabling mTLS
 {: #mtls-qs}
 
-Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://istio.io/latest/docs/tasks/security/authentication/authn-policy){: external}.
+Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mutual TLS documentation](https://istio.io/latest/docs/concepts/security/#mutual-tls-authentication){: external}.
 {: shortdesc}
 
 1. Create an authentication policy file that is named `default.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.
