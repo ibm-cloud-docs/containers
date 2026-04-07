@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-10-16"
+  years: 2014, 2026
+lastupdated: "2026-04-07"
 
 
 keywords: kubernetes, containers
@@ -136,8 +136,8 @@ Set up an image registry and a continuous integration and delivery (CI/CD) pipel
 
 1. **Registry**: Choose and set up an [image registry](/docs/containers?topic=containers-registry) so that developers can pull images from the registry in their app deployment YAML files.
 2. **CI/CD**:
-    - Review available [options for automating app deployment](/docs/containers?topic=containers-cicd).
-    - Set up toolchains with [{{site.data.keyword.deliverypipelinelong}}](/docs/containers?topic=containers-cicd).
+    - Review available options for automating app deployment.
+    - Set up toolchains with {{site.data.keyword.deliverypipelinelong}}.
 
 ## Add storage
 {: #admin_storage}
