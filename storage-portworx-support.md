@@ -56,6 +56,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         sudo ./px_logcollect.sh
         ```
         {: pre}
+
     - To collect logs from specific worker nodes only, run:
         ```sh
         sudo ./px_logcollect.sh --workers <worker-IP> <worker-IP> <worker-IP>
