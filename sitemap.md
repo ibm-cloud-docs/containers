@@ -4129,9 +4129,9 @@ subcollection: containers
 
 * [How do I get support?](/docs/containers?topic=containers-storage_portworx_about#portworx-billing-support)
 
-* [What's next?](/docs/containers?topic=containers-storage_portworx_about#about-px-next)
+* [Next steps](/docs/containers?topic=containers-storage_portworx_about#about-px-next)
 
-* [Exploring other Portworx features](/docs/containers?topic=containers-storage_portworx_about#features)
+* [Explore other Portworx features](/docs/containers?topic=containers-storage_portworx_about#features)
 
 [Planning your Portworx setup](/docs/containers?topic=containers-storage_portworx_plan#storage_portworx_plan)
 
@@ -4139,7 +4139,7 @@ subcollection: containers
 
 * [Overview of the Portworx lifecycle](/docs/containers?topic=containers-storage_portworx_plan#portowrx_lifecycle)
 
-* [Creating a secret to store the KMS credentials](/docs/containers?topic=containers-storage_portworx_plan#px_create_km_secret)
+* [Encryption planning](/docs/containers?topic=containers-storage_portworx_plan#px_create_km_secret)
 
 [Preparing your cluster for Portworx](/docs/containers?topic=containers-storage_portworx_preparing#storage_portworx_preparing)
 
