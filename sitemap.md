@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-07"
+lastupdated: "2026-04-08"
 
 
 keywords: containers
@@ -245,6 +245,8 @@ subcollection: containers
         * IBM Storage Operator cluster add-on patch updates.
 
     * [06 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr0626)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
         * CLI version 1.0.756 is available
 
@@ -4460,6 +4462,8 @@ subcollection: containers
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
 
+    * [Worker node fix pack 1.35.3_1525, released 06 April 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1353_1525_W)
+
     * [Change log for Master fix pack 1.35.3_1524, released 02 April 2026](/docs/containers?topic=containers-changelog_135#1353_1524_M)
 
     * [Worker node fix pack 1.35.3_1523, released 24 March 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1353_1523_W)
@@ -4530,6 +4534,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Worker node fix pack 1.34.6_1548, released 06 April 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1346_1548_W)
 
     * [Change log for Master fix pack 1.34.6_1547, released 02 April 2026](/docs/containers?topic=containers-changelog_134#1346_1547_M)
 
@@ -4623,6 +4629,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.9_1567, released 06 April 2026](/docs/containers?topic=containers-changelog_133#cl-boms-1339_1567_W)
 
     * [Change log for Master fix pack 1.33.9_1566, released 02 April 2026](/docs/containers?topic=containers-changelog_133#1339_1566_M)
 
@@ -4738,6 +4746,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Worker node fix pack 1.32.13_1585, released 06 April 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13213_1585_W)
 
     * [Change log for Master fix pack 1.32.13_1584, released 02 April 2026](/docs/containers?topic=containers-changelog_132#13213_1584_M)
 
@@ -4893,6 +4903,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
 * [Version 1.31](/docs/containers?topic=containers-changelog_131#131_components)
+
+    * [Worker node fix pack 1.31.14_1600, released 06 April 2026](/docs/containers?topic=containers-changelog_131#cl-boms-13114_1600_W)
 
     * [Change log for Master fix pack 1.31.14_1599, released 02 April 2026](/docs/containers?topic=containers-changelog_131#13114_1599_M)
 
