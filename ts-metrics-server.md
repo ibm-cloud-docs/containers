@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2024
-lastupdated: "2024-01-03"
+  years: 2022, 2026
+lastupdated: "2026-04-08"
 
 
 keywords: kubernetes, help
@@ -13,10 +13,6 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
-
-
 
 # Debugging the `metrics-server`
 {: #debug_metrics_server}
