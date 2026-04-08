@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-04-07"
+lastupdated: "2026-04-08"
 
 
 keywords: kubernetes, containers
@@ -160,7 +160,7 @@ Enhance cluster capabilities by integrating various external services and catalo
 
 1. **Review supported integrations**:
     - [All supported integrations](/docs/containers?topic=containers-supported_integrations)
-    - [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-supported_integrations)
+    - [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-ibm-3rd-party-integrations)
 
     - [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations)
 2. **Add services to your cluster**:
