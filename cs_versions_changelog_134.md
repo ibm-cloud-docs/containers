@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-04-08"
+lastupdated: "2026-04-09"
 
 
 keywords: change log, version history, 1.34
@@ -78,7 +78,7 @@ The following table shows the changes that are in the master fix pack 1.34.6_154
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 8a12251 | 6212368 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.20 | 2.10.22 | New version contains updates and security fixes. |
 | Kubernetes | v1.34.3 | v1.34.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.6){: external}. |
-| Kubernetes Metrics Server | v0.8.0 | v0.8.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.8.1){: external}. |
+| Kubernetes Metrics Server | v0.8.0 | v0.8.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3347 | 3563 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.33 | v0.13.36 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.36){: external}. |
 {: caption="Changes since version 1.34.4-1543" caption-side="bottom"}

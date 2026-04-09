@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-04-08"
+lastupdated: "2026-04-09"
 
 
 keywords: change log, version history, 1.35
@@ -75,7 +75,7 @@ The following table shows the changes that are in the master fix pack 1.35.3_152
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 8a12251 | 6212368 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.21 | 2.10.22 | New version contains updates and security fixes. |
 | Kubernetes | v1.35.1 | v1.35.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.35.3){: external}. |
-| Kubernetes Metrics Server | v0.8.0 | v0.8.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.8.1){: external}. |
+| Kubernetes Metrics Server | v0.8.0 | v0.8.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3347 | 3563 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.35 | v0.13.36 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.36){: external}. |
 {: caption="Changes since version 1.35.1-1520" caption-side="bottom"}
@@ -128,14 +128,14 @@ The following table shows the components included in the worker node fix pack 1.
 | Calico | v3.29.6 | v3.30.6 | See the [Calico release notes](https://docs.tigera.io/calico/3.30/release-notes/#calico-open-source-3306-bug-fix-release){: external}. |
 | Cluster health image | v1.6.10 | v1.6.14 | New version contains updates and security fixes. |
 | CoreDNS | v1.12.2 | v1.12.4 | See the [CoreDNS release notes](https://coredns.io/tags/notes/){: external}. |
-| etcd | v3.5.23 | v3.5.27 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.27){: external}. |
+| etcd | v3.5.23 | v3.5.27 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.27){: external}. |
 | IBM Cloud Block Storage driver and plug-in | v2.5.20 | v2.5.24 | New version contains updates and security fixes. |
 | IBM Cloud Controller Manager | v1.34.1-1 | v1.35.1-1 | New version contains updates and security fixes. |
 | IBM Cloud File Storage for Classic plug-in and monitor | 452 | v453 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.17 | 2.10.21 | New version contains updates and security fixes. |
 | Konnectivity agent and server | v0.33.0 | v0.34.0 | See the Konnectivity release notes. |
 | Kubernetes | v1.34.3 | v1.35.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.35.1){: external}. |
-| Kubernetes Metrics Server | v0.8.0 | v0.8.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.8.1){: external}. |
+| Kubernetes Metrics Server | v0.8.0 | v0.8.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1){: external}. |
 | Portieris admission controller | v0.13.30 | v0.13.35 | See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.13.35){: external} |
 | Tigera Operator | v1.36.14 | v1.38.11 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.38.11){: external}. |
 {: caption="1.34.3_1542 fix pack." caption-side="bottom"}
