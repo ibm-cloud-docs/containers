@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2026
+lastupdated: "2026-04-08"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -13,9 +13,6 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
-
 
 # Why are certain packets dropped on the public VLAN?
 {: #mangle-table}

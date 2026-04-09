@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-04-08"
+lastupdated: "2026-04-09"
 
 
 keywords: change log, version history, 1.33
@@ -78,7 +78,7 @@ The following table shows the changes that are in the master fix pack 1.33.9_156
 | {{site.data.keyword.cloud_notm}} RBAC Operator | 8a12251 | 6212368 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.20 | 2.10.22 | New version contains updates and security fixes. |
 | Kubernetes | v1.33.7 | v1.33.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.9){: external}. |
-| Kubernetes Metrics Server | v0.8.0 | v0.8.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.8.1){: external}. |
+| Kubernetes Metrics Server | v0.8.0 | v0.8.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3347 | 3563 | New version contains updates and security fixes. |
 | Portieris admission controller | v0.13.33 | v0.13.36 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.36){: external}. |
 {: caption="Changes since version 1.33.8-1562" caption-side="bottom"}
@@ -203,7 +203,7 @@ The following table shows the changes that are in the master fix pack 1.33.7_155
 | Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
 | Cluster health control-plane operator | v0.1.11 | v0.1.15 | New version contains updates and security fixes. |
 | Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
-| etcd | v3.5.24 | v3.5.26 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.26){: external}. |
+| etcd | v3.5.24 | v3.5.26 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.26){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.33.5-6 | v1.33.7-4 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.17 | 2.10.20 | New version contains updates and security fixes. |
 | Konnectivity agent and server | v0.33.0 | v0.33.1 | New version contains updates and security fixes. |

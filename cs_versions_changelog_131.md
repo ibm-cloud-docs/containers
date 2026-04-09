@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-04-08"
+lastupdated: "2026-04-09"
 
 
 keywords: change log, version history, 1.31
@@ -99,7 +99,7 @@ The following table shows the components included in the worker node fix pack 1.
 | ---- | ---- | ---- |
 |UBUNTU 24 (VPC)|6.8.0-101-generic|Resolves the following CVEs: [CVE-2025-0167](https://nvd.nist.gov/vuln/detail/CVE-2025-0167){: external}, [CVE-2025-15366](https://nvd.nist.gov/vuln/detail/CVE-2025-15366){: external}, [CVE-2025-15367](https://nvd.nist.gov/vuln/detail/CVE-2025-15367){: external}, [CVE-2026-23865](https://nvd.nist.gov/vuln/detail/CVE-2026-23865){: external}, [CVE-2026-25749](https://nvd.nist.gov/vuln/detail/CVE-2026-25749){: external}, [CVE-2026-26007](https://nvd.nist.gov/vuln/detail/CVE-2026-26007){: external}, [CVE-2026-26269](https://nvd.nist.gov/vuln/detail/CVE-2026-26269){: external}, [CVE-2026-28417](https://nvd.nist.gov/vuln/detail/CVE-2026-28417){: external}, [CVE-2026-28418](https://nvd.nist.gov/vuln/detail/CVE-2026-28418){: external}, [CVE-2026-28419](https://nvd.nist.gov/vuln/detail/CVE-2026-28419){: external}, [CVE-2026-28420](https://nvd.nist.gov/vuln/detail/CVE-2026-28420){: external}, [CVE-2026-28421](https://nvd.nist.gov/vuln/detail/CVE-2026-28421){: external}, [CVE-2026-28422](https://nvd.nist.gov/vuln/detail/CVE-2026-28422){: external}, [CVE-2026-3497](https://nvd.nist.gov/vuln/detail/CVE-2026-3497){: external}, and [CVE-2026-3731](https://nvd.nist.gov/vuln/detail/CVE-2026-3731){: external}.|
 |UBUNTU 24 (Classic)|6.8.0-101-generic|Resolves the following CVEs: [CVE-2025-0167](https://nvd.nist.gov/vuln/detail/CVE-2025-0167){: external}, [CVE-2025-15366](https://nvd.nist.gov/vuln/detail/CVE-2025-15366){: external}, [CVE-2025-15367](https://nvd.nist.gov/vuln/detail/CVE-2025-15367){: external}, [CVE-2026-23865](https://nvd.nist.gov/vuln/detail/CVE-2026-23865){: external}, [CVE-2026-25749](https://nvd.nist.gov/vuln/detail/CVE-2026-25749){: external}, [CVE-2026-26007](https://nvd.nist.gov/vuln/detail/CVE-2026-26007){: external}, [CVE-2026-26269](https://nvd.nist.gov/vuln/detail/CVE-2026-26269){: external}, [CVE-2026-28417](https://nvd.nist.gov/vuln/detail/CVE-2026-28417){: external}, [CVE-2026-28418](https://nvd.nist.gov/vuln/detail/CVE-2026-28418){: external}, [CVE-2026-28419](https://nvd.nist.gov/vuln/detail/CVE-2026-28419){: external}, [CVE-2026-28420](https://nvd.nist.gov/vuln/detail/CVE-2026-28420){: external}, [CVE-2026-28421](https://nvd.nist.gov/vuln/detail/CVE-2026-28421){: external}, [CVE-2026-28422](https://nvd.nist.gov/vuln/detail/CVE-2026-28422){: external}, [CVE-2026-3497](https://nvd.nist.gov/vuln/detail/CVE-2026-3497){: external}, and [CVE-2026-3731](https://nvd.nist.gov/vuln/detail/CVE-2026-3731){: external}.|
-|Kubernetes|1.31.14|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.14).|
+|Kubernetes|1.31.14|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.31.14){: external}.|
 |containerd|1.7.30|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.30).|
 |HAProxy|10c8639e6b5829d0af51a22755e13756f34630cf|Resolves the following CVEs: [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}, and [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}.|
 |GPU Device Plug-in and Installer|1c4faba733bd6bce95c85ead9a63e1ff0bbce86b|Resolves the following CVEs: [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}, [CVE-2026-25749](https://nvd.nist.gov/vuln/detail/CVE-2026-25749){: external}, and [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}.|
@@ -206,7 +206,7 @@ The following table shows the changes that are in the master fix pack 1.31.14_15
 | --- | --- | --- | --- |
 | Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
 | Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
-| etcd | v3.5.24 | v3.5.26 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.26){: external}. |
+| etcd | v3.5.24 | v3.5.26 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.26){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.31.13-6 | v1.31.14-7 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.17 | 2.10.20 | New version contains updates and security fixes. |
 | Konnectivity agent and server | v0.31.3 | v0.31.4 | New version contains updates and security fixes. |

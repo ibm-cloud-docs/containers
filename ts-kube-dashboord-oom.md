@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-01-03"
+  years: 2014, 2026
+lastupdated: "2026-04-08"
 
 
 keywords: kubernetes, oomkilled, out of memory
@@ -13,10 +13,6 @@ content-type: troubleshoot
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
-
-
 
 # Why does the Kubernetes dashboard terminate with an out of memory error?
 {: #ts-kube-dashboord-oom}
@@ -78,7 +74,7 @@ You can resolve this issue by changing the `resource auto-refresh` time interval
     {: pre}
 
 1. Exit the editor.
-1. Find the pod name for the `kubenertes-dashboard` pod.
+1. Find the pod name for the `kubernetes-dashboard` pod.
     ```sh
     kubectl -n kube-system get pods | grep kubernetes-dashboard
     ```
@@ -95,5 +91,3 @@ You can resolve this issue by changing the `resource auto-refresh` time interval
     kubectl -n kube-system delete pod kubernetes-dashboard-xxx
     ```
     {: pre}
-
-

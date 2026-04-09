@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-04-08"
+lastupdated: "2026-04-09"
 
 
 keywords: change log, version history, 1.32
@@ -201,7 +201,7 @@ The following table shows the changes that are in the master fix pack 1.32.11_15
 | --- | --- | --- | --- |
 | Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
 | Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
-| etcd | v3.5.24 | v3.5.26 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.26){: external}. |
+| etcd | v3.5.24 | v3.5.26 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.26){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.32.9-6 | v1.32.11-2 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.17 | 2.10.20 | New version contains updates and security fixes. |
 | Konnectivity agent and server | v0.32.0 | v0.32.1 | New version contains updates and security fixes.      |

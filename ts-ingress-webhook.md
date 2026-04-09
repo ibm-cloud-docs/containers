@@ -1,10 +1,10 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-06-26"
+  years: 2024, 2026
+lastupdated: "2026-04-08"
 
-connectivitykeywords: kubernetes, ingress, webhook, alb, validation
+keywords: kubernetes, ingress, webhook, alb, validation
 
 subcollection: containers
 
@@ -86,5 +86,3 @@ Enabling or disabling the validation webhooks might take a few minutes. To check
 kubectl get -n kube-system ValidatingWebhookConfiguration -l 'app.kubernetes.io/part-of=managed-ingress'
 ```
 {: pre}
-
-
