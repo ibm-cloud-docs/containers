@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-04-09"
+lastupdated: "2026-04-10"
 
 
 keywords: change log, version history, 1.35
@@ -67,7 +67,7 @@ The following table shows the changes that are in the master fix pack 1.35.3_152
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| etcd | v3.5.26 | v3.5.27 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.27){: external}. |
+| etcd | v3.5.26 | v3.5.27 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.27){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.24 | v2.5.25 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.35.0-7 | v1.35.3-1 | New version contains updates and security fixes. |
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | v453 | v454 | New version contains updates and security fixes. |

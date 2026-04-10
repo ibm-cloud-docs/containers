@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-01-06"
+lastupdated: "2026-04-10"
 
 
 keywords: kubernetes, helm
@@ -53,7 +53,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 |----|------------|----|----|
 |CloudBees Unify |You can use [CloudBees Unify](https://www.cloudbees.com/capabilities/ci-cd-workflows){: external} for the continuous integration and delivery of containers.|Yes|Yes|
 |Grafeas|[Grafeas](https://grafeas.io){: external} is an open source CI/CD service that provides a common way for how to retrieve, store, and exchange metadata during the software supply chain process. For example, if you integrate Grafeas into your app build process, Grafeas can store information about the initiator of the build request, vulnerability scan results, and quality assurance sign-off so that you can make an informed decision if an app can be deployed to production. You can use this metadata in audits or to prove compliance for your software supply chain.|Yes|Yes|
-|Helm|[Helm](https://helm.sh){: external} is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm).|Yes|Yes|
+|Helm|[Helm](https://helm.sh/){: external} is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm).|Yes|Yes|
 |{{site.data.keyword.cloud_notm}} {{site.data.keyword.contdelivery_short}}|Automate your app builds and container deployments to Kubernetes clusters by using a toolchain. For more information about the setup, see [working with Tekton pipelines](/docs/ContinuousDelivery?topic=ContinuousDelivery-tekton-pipelines).|Yes|Yes|
 |Istio on {{site.data.keyword.containerlong_notm}}|[Istio](https://www.ibm.com/products/istio){: external} is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known as a service mesh, on cloud orchestration platforms. Istio on {{site.data.keyword.containerlong}} provides a one-step installation of Istio into your cluster through a managed add-on. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization up and running. To get started, see [Using the managed Istio add-on](/docs/containers?topic=containers-istio)|Yes|Yes|
 |Jenkins X|Jenkins X is a Kubernetes-native continuous integration and continuous delivery platform that you can use to automate your build process. For more information, see the [Jenkins X documentation](https://jenkins-x.io/v3/){: external}.| | |

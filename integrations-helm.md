@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-01-23"
+  years: 2014, 2026
+lastupdated: "2026-04-10"
 
 
 keywords: kubernetes, helm, integrations, helm chart
@@ -30,7 +30,7 @@ You can add complex Kubernetes apps to your cluster by using Helm charts.
 ### What is Helm and how do I use it?
 {: #what-is-helm}
 
-[Helm](https://helm.sh){: external} is a Kubernetes package manager that uses Helm charts to define, install, and upgrade complex Kubernetes apps in your cluster. Helm charts package the specifications to generate YAML files for Kubernetes resources that build your app. These Kubernetes resources are automatically applied in your cluster and assigned a version by Helm. You can also use Helm to specify and package your own app and let Helm generate the YAML files for your Kubernetes resources.
+[Helm](https://helm.sh/){: external} is a Kubernetes package manager that uses Helm charts to define, install, and upgrade complex Kubernetes apps in your cluster. Helm charts package the specifications to generate YAML files for Kubernetes resources that build your app. These Kubernetes resources are automatically applied in your cluster and assigned a version by Helm. You can also use Helm to specify and package your own app and let Helm generate the YAML files for your Kubernetes resources.
 
 ### What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?
 {: #supported-charts}
@@ -91,7 +91,3 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 
 5. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
-
-
-
-
