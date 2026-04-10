@@ -3997,7 +3997,7 @@ The `locations` alias for this command is deprecated.
 {: note}
 
 ```sh
-ibmcloud ks zone ls --provider (classic | satellite | vpc-gen2) [--location LOCATION] [--region-only] [--output json] [-q]
+ibmcloud ks zone ls --provider classic | satellite | vpc-gen2 [--location LOCATION] [--region-only] [--output json] [-q]
 ```
 {: pre}
 
