@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-08"
+lastupdated: "2026-04-10"
 
 
 keywords: containers
@@ -7291,7 +7291,7 @@ subcollection: containers
 
 * [Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
 
-* [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster)
+* [What is the minimum size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster)
 
 * [Which versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
 
