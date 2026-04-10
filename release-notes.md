@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-08"
+lastupdated: "2026-04-10"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -1151,7 +1151,7 @@ New! {{site.data.keyword.containerlong_notm}} version 1.33.
 :   Support for 1.30 ends on {{site.data.keyword.kubernetes_130_unsupported_date}}. Update your cluster to [version 1.31](/docs/containers?topic=containers-cs_versions_131) as soon as possible.
 
 {{site.data.keyword.containerlong_notm}} version 1.29 is unsupported.
-:   Update your cluster to at least [version 1.30](/docs/containers?topic=containers-cs_versions_130) as soon as possible.
+:   Update your cluster to at least version 1.30 as soon as possible.
 
 
 
@@ -2441,7 +2441,7 @@ CLI version `1.0.657` is available.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   Version 1.30 change log
 :   Version 1.29 change log
 :   Version 1.28 change log
 :   Version 1.27 change log
@@ -2472,7 +2472,7 @@ CLI version `1.0.657` is available.
 
 {{site.data.keyword.containerlong_notm}} master fix packs.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
-:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   Version 1.30 change log
 :   Version 1.29 change log
 :   Version 1.28 change log
 :   Version 1.27 change log
@@ -2506,7 +2506,7 @@ Storage Operator cluster add-on patch update.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   Version 1.30 change log
 :   Version 1.29 change log
 :   Version 1.28 change log
 :   Version 1.27 change log
@@ -2553,7 +2553,7 @@ Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 
 {{site.data.keyword.containerlong_notm}} master fix packs.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
-:   [Version 1.30 change log](/docs/containers?topic=containers-changelog_130)
+:   Version 1.30 change log
 :   Version 1.29 change log
 :   Version 1.28 change log
 :   Version 1.27 change log
@@ -2575,7 +2575,7 @@ Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [1.30](/docs/containers?topic=containers-changelog_130)
+:   1.30
 :   1.29
 :   1.28
 :   1.27
@@ -2602,7 +2602,7 @@ Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [1.30](/docs/containers?topic=containers-changelog_130)
+:   1.30
 :   1.29
 :   1.28
 :   1.27
@@ -2665,7 +2665,7 @@ Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [1.30](/docs/containers?topic=containers-changelog_130)
+:   1.30
 :   1.29
 :   1.28
 :   1.27
@@ -2741,7 +2741,7 @@ Istio add-on versions `1.22.1` is available.
 
 {{site.data.keyword.containerlong_notm}} master and worker node fix packs.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [1.30](/docs/containers?topic=containers-changelog_130)
+:   1.30
 :   1.29
 :   1.28
 :   1.27
@@ -2784,7 +2784,7 @@ Istio add-on versions `1.21.3` and `1.20.7` are available.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [1.30](/docs/containers?topic=containers-changelog_130)
+:   1.30
 :   1.29
 :   1.28
 :   1.27
@@ -2825,17 +2825,17 @@ Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 
 
 New! {{site.data.keyword.containerlong_notm}} version 1.30.
-:   You can now create or [update clusters to Kubernetes version 1.30](/docs/containers?topic=containers-cs_versions_130). With Kubernetes 1.30, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+:   You can now create or update clusters to Kubernetes version 1.30. With Kubernetes 1.30, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
 {{site.data.keyword.containerlong_notm}} version 1.30 Kubernetes certification
-:   {{site.data.keyword.containerlong_notm}} version [1.30](/docs/containers?topic=containers-cs_versions_130) is now Kubernetes certified.
+:   {{site.data.keyword.containerlong_notm}} version 1.30 is now Kubernetes certified.
 
 Important networking changes for {{site.data.keyword.containerlong_notm}} VPC clusters created at version 1.30.
-:   For more information, see the [130 version information](/docs/containers?topic=containers-cs_versions_130) and [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference).
+:   For more information, see the 130 version information and [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference).
 
 Important changes to the default cluster provisioning behavior for new VPC clusters beginning with version 1.30.
 :   Beginning with version 1.30, there is a new option available at cluster creation time via the UI, CLI, API, and Terraform. This new option manages outbound traffic protection for the cluster. The default behavior is to have outbound traffic protection enabled, which means new version 1.30 VPC clusters won't have access the public internet by default. If your cluster needs access to the public internet, you must specifically include the option (from the UI, CLI, API, and Terraform) to disable outbound traffic protection. Note that you can also disable outbound traffic protection after your cluster is created. You can also selectively allow outbound traffic as needed after your cluster is created. If you provision clusters via automation, make sure to adjust your automation accordingly.
-:   For more information, see the [1.30 version information](/docs/containers?topic=containers-cs_versions_130), [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference), and [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound).
+:   For more information, see the 1.30 version information, [Understanding Secure by Default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference), and [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound).
 
 Managing outbound traffic protection in new version 1.30 VPC clusters.
 :   With the introduction of Secure by Default Cluster VPC networking in version 1.30 and later clusters, there are several scenarios where you might need to adjust the security group settings for your clusters to allow outbound traffic to certain resources. For more information, see [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound).
