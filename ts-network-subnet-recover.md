@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2023, 2024
-lastupdated: "2024-03-27"
+  years: 2023, 2026
+lastupdated: "2026-04-10"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, subnet, detach
@@ -41,7 +41,7 @@ Complete the following steps.
 
 1. List the subnets your cluster is using. In the output, make a note of the subnets that your cluster is using.
     ```sh
-    ibmcloud ks subnets --provider classic | grep CLUSTER-ID
+    ibmcloud ks subnets --provider PROVIDER | grep CLUSTER-ID
     ```
     {: pre}
 
@@ -126,5 +126,3 @@ Complete the following steps.
     kubectl apply -f LB-NAMESPACE.LB-NAME.yaml
     ```
     {: pre}
-
-
