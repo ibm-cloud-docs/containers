@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-04-08"
+lastupdated: "2026-04-10"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, rbac, policy, providers, benefits
 
@@ -166,7 +166,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster by using infr
 | Storage | You can choose from non-persistent and persistent storage solutions such as file, block, object, and software-defined storage. For more information, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage-plan). |
 | User access | To create classic infrastructure clusters, you must set up [infrastructure credentials](/docs/containers?topic=containers-access-creds) for each region and resource group. To let users manage the cluster, use [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-iam-platform-access-roles). To grant users access to cluster resources, use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-iam-platform-access-roles), which correspond with Kubernetes RBAC roles. |
 | Integrations | You can extend your cluster and app capabilities with a variety of {{site.data.keyword.cloud_notm}} services, add-ons, and third-party integrations. For a list, see [Supported {{site.data.keyword.cloud_notm}} and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations). |
-| Locations and versions | Classic clusters are available [worldwide](/docs/containers?topic=containers-regions-and-zones#locations). |
+| Locations and versions | Classic clusters are available [worldwide](/docs/containers?topic=containers-regions-and-zones). |
 | Service interface | Classic clusters are fully supported in the {{site.data.keyword.containershort_notm}} [`v1` API](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external}, [CLI](/docs/containers?topic=containers-kubernetes-service-cli), and [console](https://cloud.ibm.com/kubernetes/clusters).|
 | Service compliance | See the classic section in [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards). |
 | Service limitations | See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). Feature-specific limitations are documented by section. |

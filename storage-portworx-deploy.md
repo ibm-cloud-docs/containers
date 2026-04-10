@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-12-19"
+  years: 2014, 2026
+lastupdated: "2026-04-10"
 
 
 keywords: portworx, kubernetes, containers
@@ -282,7 +282,7 @@ To access the storage from your app, you must mount the PVC to your app.
 
 1. Create a configuration file for a deployment that mounts the PVC.
 
-    For tips on how to deploy a stateful set with Portworx, see [StatefulSets](https://docs.portworx.com/portworx-enterprise/deploy-your-applications/application-install-with-kubernetes/cassandra/scale-up#scale-up-the-cassandra-statefulset){: external}{: external}. The Portworx documentation also includes examples for how to deploy Cassandra, [Kafka](https://docs.portworx.com/portworx-enterprise/deploy-your-applications/application-install-with-kubernetes/kafka-with-zookeeper){: external}, [ElasticSearch with Kibana](https://docs.portworx.com/portworx-enterprise/deploy-your-applications/application-install-with-kubernetes/elastic-search-and-kibana){: external}, and [WordPress with MySQL](https://docs.portworx.com/portworx-enterprise/deploy-your-applications/application-install-with-kubernetes/wordpress){: external}.
+    For tips on how to deploy a stateful set with Portworx, see [StatefulSets](https://docs.portworx.com/portworx-enterprise/deploy-your-applications/application-install-with-kubernetes/cassandra/storage-operations-with-cassandra#scale-up-the-cassandra-statefulset){: external}{: external}. The Portworx documentation also includes examples for how to deploy Cassandra, [Kafka](https://docs.portworx.com/portworx-enterprise/deploy-your-applications/application-install-with-kubernetes/kafka-with-zookeeper){: external}, [ElasticSearch with Kibana](https://docs.portworx.com/portworx-enterprise/deploy-your-applications/application-install-with-kubernetes/elastic-search-and-kibana){: external}, and [WordPress with MySQL](https://docs.portworx.com/portworx-enterprise/deploy-your-applications/application-install-with-kubernetes/wordpress){: external}.
     {: tip}
 
     ```yaml

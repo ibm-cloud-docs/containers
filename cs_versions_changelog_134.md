@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-04-09"
+lastupdated: "2026-04-10"
 
 
 keywords: change log, version history, 1.34
@@ -70,7 +70,7 @@ The following table shows the changes that are in the master fix pack 1.34.6_154
 | --- | --- | --- | --- |
 | Cluster health control-plane operator | v0.1.15 | v0.1.20 | N/A |
 | Cluster health image | v1.6.13 | v1.6.15 | New version contains updates and security fixes. |
-| etcd | v3.5.26 | v3.5.27 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.27){: external}. |
+| etcd | v3.5.26 | v3.5.27 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.27){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.22 | v2.5.25 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.3-3 | v1.34.5-2 | New version contains updates and security fixes. |
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 452 | v454 | New version contains updates and security fixes. |
@@ -201,7 +201,7 @@ The following table shows the changes that are in the master fix pack 1.34.3_153
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health control-plane operator | v0.1.11 | v0.1.15 | New version contains updates and security fixes. |
-| etcd | v3.5.25 | v3.5.26 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.26){: external}. |
+| etcd | v3.5.25 | v3.5.26 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.26){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.2-3 | v1.34.3-3 | New version contains updates and security fixes. |
 | Key Management Service provider | v2.10.19 | 2.10.20 | New version contains updates and security fixes. |
 | Kubernetes | v1.34.2 | v1.34.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3){: external}. |
