@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-07-31"
+  years: 2014, 2026
+lastupdated: "2026-04-14"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -25,14 +25,14 @@ content-type: troubleshoot
 
 
 
-You [enabled source IP preservation for an Ingress ALB](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_classic) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.
+You [enabled source IP preservation for an Ingress ALB](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_classic) service by changing `externalTrafficPolicy` to `Local` in the service configuration file. However, no traffic reaches the back-end service for your app.
 {: tsSymptoms}
 
 
 When you enable source IP preservation for Ingress ALB services, the source IP address of the client request is preserved. The service forwards traffic to app pods on the same worker node only to ensure that the request packet's IP address isn't changed.
 {: tsCauses}
 
-Typically, Ingress ALB service pods are deployed to the same worker nodes that the app pods are deployed to. However, some situations exist where the service pods and app pods might not be scheduled onto the same worker node. If you use [Kubernetes taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} on worker nodes, any pods that don't have a taint toleration are prevented from running on the tainted worker nodes. Source IP preservation might not be working based on the type of taint you used:
+Typically, Ingress ALB service pods are deployed to the same worker nodes as the app pods. However, in some situations, the service pods and app pods might not be scheduled on the same worker node. If you use [Kubernetes taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} on worker nodes, any pods that do not have a taint toleration are prevented from running on the tainted worker nodes. Source IP preservation might not work, depending on the type of taint that you used:
 
 * **Edge node taints**: You [added the `dedicated=edge` label](/docs/containers?topic=containers-edge#edge) to two or more worker nodes on each public VLAN in your cluster to ensure that Ingress pods deploy to those worker nodes only. Then, you also [tainted those edge nodes](/docs/containers?topic=containers-edge-workload-prevent) to prevent any other workloads from running on edge nodes. However, you didn't add an edge node affinity rule and toleration to your app deployment. Your app pods can't be scheduled on the same tainted nodes as the service pods, and no traffic reaches the back-end service for your app.
 
@@ -42,11 +42,11 @@ Typically, Ingress ALB service pods are deployed to the same worker nodes that t
 Resolve the issue by choosing one of the following options:
 {: tsResolve}
 
-* **Edge node taints**: To ensure that your ALB and app pods deploy to tainted edge nodes, [add edge node affinity rules and tolerations to your app deployment](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). Ingress ALB pods have these affinity rules and tolerations by default.
+* **Edge node taints**: To ensure that your ALB and app pods are deployed to tainted edge nodes, [add edge node affinity rules and tolerations to your app deployment](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). Ingress ALB pods have these affinity rules and tolerations by default.
 
 * **Custom taints**: Remove custom taints that the `keepalived` pods don't have tolerations for. Instead, you can [label worker nodes as edge nodes, and then taint those edge nodes](/docs/containers?topic=containers-edge).
 
-If you completed the previous steps, but the `keepalived` pods are still not scheduled, you can get more information about the `keepalived` pods:
+If you completed the previous steps, but the `keepalived` pods are still not scheduled, gather more information about the `keepalived` pods:
 
 1. Get the `keepalived` pods.
     ```sh
@@ -61,14 +61,8 @@ If you completed the previous steps, but the `keepalived` pods are still not sch
     ```
     {: screen}
 
-3. Describe each `keepalived` pod and look for the **Events** section. Address any error or warning messages that are listed.
+3. Describe each `keepalived` pod and review the **Events** section. Address any listed error or warning messages.
     ```sh
     kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
-
-
-
-
-
-

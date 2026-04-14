@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2024, 2024
-lastupdated: "2024-07-24"
+  years: 2024, 2026
+lastupdated: "2026-04-14"
 
 
 keywords: kubernetes, help, wireguard, worker encryption
@@ -19,14 +19,14 @@ content-type: troubleshoot
 
 [Classic infrastructure]{: tag-classic-inf} [Virtual Private Cloud]{: tag-vpc}
 
-You can encrypt data that flows between worker nodes in your cluster by using WireGuard. 
+You can encrypt data that flows between worker nodes in your cluster by using WireGuard.
 {: shortdesc}
 
-- Note that this feature only encrypts traffic between worker nodes on the same cluster and does not encrypt traffic between different pods on the same worker node.
+- This feature encrypts traffic only between worker nodes in the same cluster. It does not encrypt traffic between different pods on the same worker node.
 - Worker-to-worker encryption with WireGuard is supported on {{site.data.keyword.containershort_notm}} clusters with workers that run [Ubuntu 20 or later](/docs/containers?topic=containers-ubuntu-migrate).
-- WireGuard is not supported on workers that have user-installed encryption modules on them. 
-- WireGuard is not FIPS or FedRamp compliant.
-- You cannot alter the WireGuard configuration after it is enabled. However, you can disable it.
+- WireGuard is not supported on workers that have user-installed encryption modules.
+- WireGuard is not FIPS or FedRAMP compliant.
+- You cannot change the WireGuard configuration after you enable it. However, you can disable it.
 
 For more information on this configuration setting, see [Enable WireGuard for a cluster](https://archive-os-3-25.netlify.app/calico/3.25/network-policy/encrypt-cluster-pod-traffic/#enable-wireguard-for-a-cluster){: external} in the Calico documentation.
 {: tip}
@@ -48,7 +48,7 @@ For more information on this configuration setting, see [Enable WireGuard for a 
     ```
     {: screen}
 
-2. Verify your setup by reviewing the `felixconfiguration`. In the output, find the WireGuard section and verify that `wireguardEnabled: true`. 
+2. Verify your setup by reviewing the `felixconfiguration`. In the output, find the WireGuard section and verify that `wireguardEnabled: true`.
 
     ```sh
     kubectl get felixconfiguration default -o yaml
@@ -125,5 +125,3 @@ If you no longer need worker-to-worker encryption in your cluster, you can disab
       wireguardEnabled: false
     ```
     {: screen}
-
-
