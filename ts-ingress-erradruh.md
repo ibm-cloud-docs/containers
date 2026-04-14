@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2024
-lastupdated: "2024-10-30"
+  years: 2022, 2026
+lastupdated: "2026-04-14"
 
 
 keywords: containers, ingress status, troubleshoot ingress, erradruh
@@ -26,11 +26,11 @@ content-type: troubleshoot
 You can use the `ibmcloud ks ingress status-report ignored-errors add` command to add an error to the ignored-errors list. Ignored errors still appear in the output of the `ibmcloud ks ingress status-report get` command, but are ignored when calculating the overall Ingress Status.
 {: tip}
 
-When you check the status of your cluster's Ingress components by running the `ibmcloud ks ingress status-report get` command, you see an error similar to the following example.
+When you check the status of your cluster's Ingress components by running the `ibmcloud ks ingress status-report get` command, you see an error like the following example.
 {: tsSymptoms}
 
 ```sh
-One or more ALB pod is not in running state (ERRADRUH).
+One or more ALB pods are not in the running state (ERRADRUH).
 ```
 {: screen}
 
@@ -60,15 +60,15 @@ public-crcn0hav5w07nccmt0iufg-alb1-7df65f554f-qk97w   0/1     Pending   0       
     {: pre}
 
 
-1. If you notice scheduler problems, follow the steps:
+1. If you notice scheduler problems, complete the following steps:
     1. List your ALBs using the **`ibmcloud ks ingress alb ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs).
     1. List your workers using the **`ibmcloud ks worker ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_workers).
     1. **Classic clusters**: Ensure you have at least two worker nodes in the VLANs where your ALBs are deployed. See [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add-workers-classic).
     1. **VPC clusters**: Ensure you have at least two worker nodes in the zones where your ALBs are deployed. See [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add-workers-vpc).
     1. Ensure that your workers are healthy. For more information, see [Worker node states](/docs/containers?topic=containers-worker-node-state-reference).
-    1. Ensure your nodes are not tainted or cordoned. For more information, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) and [Safely Drain a Node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/).
+    1. Ensure that your nodes are not tainted or cordoned. For more information, see [Taints and tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} and [Safely drain a node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/){: external}.
         
-1. If you notice pod restarts, follow the steps.
+1. If you notice pod restarts, complete the following steps.
     1. Get the logs for the failing pod.
         ```sh
         kubectl logs --previous -n kube-system <POD NAME>
@@ -77,6 +77,6 @@ public-crcn0hav5w07nccmt0iufg-alb1-7df65f554f-qk97w   0/1     Pending   0       
         
     1. Review the logs and adjust the Ingress resource configurations or the Ingress ConfigMap in the `kube-system` namespace. For more information, see the NGINX Ingress [Annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) and [ConfigMap](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/).
         
-1. Wait a few minutes and verify if the failing pods are now running.
+1. Wait a few minutes, and verify that the failing pods are now running.
 
 1. If the issue persists, contact support. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

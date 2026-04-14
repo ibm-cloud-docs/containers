@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2026, 2026
-lastupdated: "2026-03-06"
+lastupdated: "2026-04-14"
 
 keywords: containers, benchmarks, 1.35, containers benchmarks, containers 1.35
 
@@ -261,7 +261,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### {{site.data.keyword.IBM_notm}} remediations and explanations
 {: #ibm-remediations-and-explanations-135}
 
-| #      | `Remediation and explanation`. |
+| Section | Remediation and explanation |
 | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1.2.1  | {{site.data.keyword.IBM_notm}} utilizes RBAC for cluster protection, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
 | 1.2.10 | {{site.data.keyword.IBM_notm}} does not enable the [_EventRateLimit_](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller since it is a Kubernetes alpha feature. |
@@ -303,5 +303,3 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 | 5.7.3  | {{site.data.keyword.IBM_notm}} deploys some system components that do not set a [pod or container _securityContext_](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | 5.7.4  | {{site.data.keyword.IBM_notm}} deploys some Kubernetes resources to the default names. |
 {: caption="Section {{site.data.keyword.IBM_notm}} remediations and explanations benchmark results" caption-side="bottom"}
-
-
