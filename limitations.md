@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-12-19"
+  years: 2014, 2026
+lastupdated: "2026-04-15"
 
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
@@ -24,7 +24,7 @@ subcollection: containers
 {: shortdesc}
 
 
-If you anticipate reaching any of the following {{site.data.keyword.containerlong_notm}} limitations, [contact IBM Support](/docs/account?topic=account-using-avatar) and provide the cluster ID, the new quota limit, the region, and infrastructure provider in your support ticket.
+If you anticipate reaching any of the following {{site.data.keyword.containerlong_notm}} limitations, [contact IBM Support](/docs/iam?topic=iam-using-avatar) and provide the cluster ID, the new quota limit, the region, and infrastructure provider in your support ticket.
 {: tip}
 
 ## Service and quota limitations
