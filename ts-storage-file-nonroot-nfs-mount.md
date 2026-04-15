@@ -1,8 +1,8 @@
 ---
 
-copyright: 
-  years: 2014, 2024
-lastupdated: "2024-05-29"
+copyright:
+  years: 2014, 2026
+lastupdated: "2026-04-15"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -12,7 +12,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -54,7 +53,6 @@ When you create a container from this Dockerfile, the creation of the container 
 
 If you use a Helm chart to deploy the image, edit the Helm deployment to use an `init` container.
 {: tip}
-
 
 
 
@@ -145,7 +143,7 @@ The `init` container starts before your app container starts. The `init` contain
       replicas: 1
       selector:
         matchLabels:
-          app: jenkins      
+          app: jenkins
       template:
         metadata:
           labels:
@@ -237,7 +235,7 @@ The `init` container starts before your app container starts. The `init` contain
     {: pre}
 
     Example output
-    
+
     ```sh
     jenkins@mypod-123456789:/$ ls -ln /var/jenkins_home
     total 12
@@ -248,11 +246,3 @@ The `init` container starts before your app container starts. The `init` contain
     {: screen}
 
     This output shows that the GID and UID from your Dockerfile (in this example, `1000` and `1000`) own the mount path inside the container.
-
-
-
-
-
-
-
-

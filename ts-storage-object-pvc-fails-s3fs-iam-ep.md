@@ -1,8 +1,8 @@
 ---
 
-copyright: 
-  years: 2014, 2024
-lastupdated: "2024-04-12"
+copyright:
+  years: 2014, 2026
+lastupdated: "2026-04-15"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -12,7 +12,6 @@ subcollection: containers
 content-type: troubleshoot
 
 ---
-
 
 {{site.data.keyword.attribute-definition-list}}
 
@@ -49,7 +48,7 @@ The s3fs API endpoint for the bucket that you want to use might have the wrong f
 Complete the following steps:
 {: tsResolve}
 
-1. Check the s3fs API endpoint that was automatically assigned by the `ibmc` Helm plug-in to your storage classes during the {{site.data.keyword.cos_full_notm}} plug-in installation. The endpoint is based on the location that your cluster is deployed to.  
+1. Check the s3fs API endpoint that was automatically assigned by the `ibmc` Helm plug-in to your storage classes during the {{site.data.keyword.cos_full_notm}} plug-in installation. The endpoint is based on the location that your cluster is deployed to.
     ```sh
     kubectl get sc ibmc-s3fs-standard-regional -o yaml | grep object-store-endpoint
     ```
@@ -62,9 +61,3 @@ Complete the following steps:
     kubectl describe pvc <pvc_name>
     ```
     {: pre}
-
-
-
-
-
-

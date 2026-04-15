@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-02-20"
+lastupdated: "2026-04-15"
 
 
 keywords: cbr, containers, context based restrictions, security, cbr scenario, cbr
@@ -49,7 +49,7 @@ Before beginning this tutorial, make sure that you have created or installed the
 - An {{site.data.keyword.cloud_notm}} account. For more information, see [Creating an account](/docs/account?topic=account-account-getting-started).
 - The CLI tools including the {{site.data.keyword.cloud_notm}} CLI, the Containers service CLI plug-in, and the CBR plug-in. For more information, see [Getting started with the {{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started).
 - [Create a cluster](/docs/containers?topic=containers-clusters).
-- Review the [What are context-based restrictions](/docs/account?topic=account-context-restrictions-whatis) docs to get an understanding of network zones and rules.
+- Review the [What are context-based restrictions](/docs/iam?topic=iam-context-restrictions-whatis) docs to get an understanding of network zones and rules.
 - Review the [Protecting cluster resources with context-based restrictions](/docs/containers?topic=containers-cbr) docs to understand how you can leverage CBR for your {{site.data.keyword.containerlong_notm}} resources.
 - Review the [limitations for using CBR with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cbr&interface=cli#cbr-limitations).
 

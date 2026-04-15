@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-10"
+lastupdated: "2026-04-15"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -212,7 +212,7 @@ If the user is leaving your organization, the {{site.data.keyword.cloud_notm}} a
 ### How can I lock down my cluster if my API key becomes compromised?
 {: #apikey-lockdown}
 
-If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/account?topic=account-userapikey&interface=ui#delete_user_key) so that no further calls can be made by using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver) security topic.
+If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/iam?topic=iam-userapikey&interface=ui#delete_user_key) so that no further calls can be made by using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver) security topic.
 
 ## How do I rotate the cluster API key if there is a leak?
 {: #faq_api_key_leak}
