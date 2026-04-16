@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-10"
+lastupdated: "2026-04-16"
 
 
 keywords: kubernetes, helm
@@ -27,11 +27,11 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 {: #popular_services}
 
 |Service|Category|Description|Classic|VPC|
-|----|----|------|----|--- |
+|----|----|------|----|---|
 | {{site.data.keyword.appid_full_notm}} |Authentication|Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP or HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth).|Yes|Yes|
 |{{site.data.keyword.cloud_notm}} Classic Block Storage|Block storage|[{{site.data.keyword.cloud_notm}} Block Storage](/docs/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Setting up {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)|Yes| |
-|{{site.data.keyword.block_storage_is_short}}|Block storage|[{{site.data.keyword.block_storage_is_short}}](/docs/vpc?topic=vpc-creating-block-storage) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC cluster. For more information about how to provision VPC Block Storage in your cluster, see [Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)|  |Yes|
-| {{site.data.keyword.codeenginefull_notm}} | Serverless | {{site.data.keyword.codeengineshort}} is a fully managed, serverless platform that runs your containerized workloads, including web apps, micro-services, event-driven functions, or batch jobs. {{site.data.keyword.codeengineshort}} even builds container images for you from your source code. Because these workloads are all hosted within the same Kubernetes infrastructure, all them can seamlessly work together. For more information, see [Getting started with {{site.data.keyword.codeenginefull_notm}}](/docs/codeengine). |
+|{{site.data.keyword.block_storage_is_short}}|Block storage|[{{site.data.keyword.block_storage_is_short}}](/docs/vpc?topic=vpc-creating-block-storage) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC cluster. For more information about how to provision VPC Block Storage in your cluster, see [Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)| |Yes|
+| {{site.data.keyword.codeenginefull_notm}} | Serverless | {{site.data.keyword.codeengineshort}} is a fully managed, serverless platform that runs your containerized workloads, including web apps, micro-services, event-driven functions, or batch jobs. {{site.data.keyword.codeengineshort}} even builds container images for you from your source code. Because these workloads are all hosted within the same Kubernetes infrastructure, all them can seamlessly work together. For more information, see [Getting started with {{site.data.keyword.codeenginefull_notm}}](/docs/codeengine). |Yes|Yes|
 |{{site.data.keyword.registrylong_notm}}|Container images|Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the [{{site.data.keyword.registrylong}} documentation](/docs/Registry?topic=Registry-getting-started){: external}.|Yes|Yes|
 |{{site.data.keyword.cloud_notm}} {{site.data.keyword.contdelivery_short}}|Build automation|Automate your app builds and container deployments to Kubernetes clusters by using a toolchain. For more information about the setup, see [working with Tekton pipelines](/docs/ContinuousDelivery?topic=ContinuousDelivery-tekton-pipelines){: external}.|Yes|Yes|
 | {{site.data.keyword.filestorage_short}} |File storage| NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. |Yes| |

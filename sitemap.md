@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-10"
+lastupdated: "2026-04-16"
 
 
 keywords: containers
@@ -1743,13 +1743,19 @@ subcollection: containers
 
 * [Accessing clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
 
-    * [Accessing VPC clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
+    * [Accessing VPC clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
 
     * [Accessing classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
 
 * [Accessing VPC clusters through the Virtual Private Endpoint Gateway](/docs/containers?topic=containers-access_cluster#vpc_vpe)
 
     * [Protecting clusters using context based restrictions](/docs/containers?topic=containers-access_cluster#protect-service-endpoints-with-cbr)
+
+* [Creating additional Virtual Private Endpoint gateways in other VPCs and accounts](/docs/containers?topic=containers-access_cluster#vpc_cluster_new_vpe_access)
+
+    * [Example: Target account commands](/docs/containers?topic=containers-access_cluster#vpc_cluster_new_vpe_target_example)
+
+    * [Example: Source account commands](/docs/containers?topic=containers-access_cluster#vpc_cluster_new_vpe_source_example)
 
 [Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
 
