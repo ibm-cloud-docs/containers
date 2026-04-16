@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-04-10"
+lastupdated: "2026-04-16"
 
 keywords: containers, kubernetes, mzr, szr, multizone, multi az
 
@@ -29,19 +29,14 @@ VPC resources are provisioned in a region, which is a separate group of zones wi
 {: shortdesc}
 
 Mumbai (`in-mum`) VPC MZR limitations
-
-:   **Operating systems**: You can only create clusters at version 1.31 and later in Mumbai and can only use Ubuntu 24 work nodes.
 :   **Baremetal workers**: Baremetal VPC worker nodes are not available in Mumbai.
 
 Chennai (`in-che`) VPC MZR limitations
-
-:   **Operating systems**: You can only create clusters at version 1.31 and later in Chennai and can only use Ubuntu 24 work nodes.
 :   **Baremetal workers**: Baremetal VPC worker nodes are not available in Chennai.
 
 Montreal (`ca-mon`) VPC MZR limitations
 :   **Webhooks**: Only webhooks that access an in-cluster service work. Webhooks that directly access an external, out of cluster, URL are blocked.
 
-:   **Operating systems**: You can only create clusters at version 1.31 and later in Montreal and can only use Ubuntu 24 work nodes.
 :   **Portworx Enterprise** and **Portworx Backup**: The default installation method for Portworx Enterprise and Portworx Backup is not yet supported for private-only clusters in the Montreal region. Contact Portworx Support if you need to install Portworx Enterprise or Portworx Backup in a private-only cluster in Montreal. For more information, see [Portworx Support](/docs/containers?topic=containers-storage_portworx_about#portworx-billing-support).
 
 ![{{site.data.keyword.containerlong_notm}} VPC multizone regions](images/locations-vpc.svg){: caption="{{site.data.keyword.containerlong_notm}} locations" caption-side="bottom"}
