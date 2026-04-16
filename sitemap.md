@@ -5518,6 +5518,14 @@ subcollection: containers
 
     * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get)
 
+* [`vni` commands](/docs/containers?topic=containers-kubernetes-service-cli#vni)
+
+    * [`ibmcloud ks vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vni_attach_baremetal)
+
+    * [`ibmcloud ks vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vni_detach)
+
+    * [`ibmcloud ks vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vni_ls)
+
 * [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
 
     * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-options)
