@@ -230,10 +230,6 @@ toc:
               - secrets.md
               - secrets-mgr.md
       - topicgroup:
-          label: Headlamp dashboard add-on
-          topics:
-          - addon-headlamp.md
-      - topicgroup:
           label: Istio service mesh
           topics:
           - cs_istio_qs.md

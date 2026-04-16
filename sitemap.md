@@ -3454,11 +3454,6 @@ subcollection: containers
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
-## Headlamp dashboard add-on
-{: #sitemap_headlamp_dashboard_add-on}
-
-
-
 ## Istio service mesh
 {: #sitemap_istio_service_mesh}
 
