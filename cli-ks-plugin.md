@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-10"
+lastupdated: "2026-04-16"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -107,6 +107,7 @@ Minimum required permissions
 ibmcloud ks cluster addon disable alb-oauth-proxy --cluster my_cluster
 ```
 {: pre}
+
 
 #### `ibmcloud ks cluster addon disable istio`
 {: #cs_cluster_addon_disable_istio}
@@ -296,6 +297,7 @@ Minimum required permissions
 ibmcloud ks cluster addon enable alb-oauth-proxy --cluster my_cluster
 ```
 {: pre}
+
 
 
 #### `ibmcloud ks cluster addon enable istio`

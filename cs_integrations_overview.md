@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-10"
+lastupdated: "2026-04-16"
 
 
 keywords: kubernetes, helm
@@ -35,6 +35,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 |{{site.data.keyword.registrylong_notm}}|Container images|Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the [{{site.data.keyword.registrylong}} documentation](/docs/Registry?topic=Registry-getting-started){: external}.|Yes|Yes|
 |{{site.data.keyword.cloud_notm}} {{site.data.keyword.contdelivery_short}}|Build automation|Automate your app builds and container deployments to Kubernetes clusters by using a toolchain. For more information about the setup, see [working with Tekton pipelines](/docs/ContinuousDelivery?topic=ContinuousDelivery-tekton-pipelines){: external}.|Yes|Yes|
 | {{site.data.keyword.filestorage_short}} |File storage| NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. |Yes| |
+
 |{{site.data.keyword.keymanagementservicefull_notm}}|Data encryption|Encrypt the Kubernetes secrets that are in your cluster by [enabling  a key management service (KMS) provider](/docs/containers?topic=containers-encryption-setup). Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.|Yes|Yes|
 |{{site.data.keyword.logs_full_notm}}|Cluster and app logs|Add log management capabilities to your cluster by deploying an {{site.data.keyword.logs_full_notm}} agent to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.logs_full_notm}}](/docs/cloud-logs?topic=cloud-logs-agent-helm-kube-deploy).|Yes|Yes|
 |{{site.data.keyword.mon_full_notm}}|Cluster and app metrics|Gain operational visibility into the performance and health of your apps by deploying an {{site.data.keyword.mon_full_notm}} agent to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/monitoring?topic=monitoring-kubernetes_cluster#kubernetes_cluster).|Yes|Yes|
