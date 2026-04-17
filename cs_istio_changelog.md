@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-03-23"
+lastupdated: "2026-04-17"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -154,6 +154,10 @@ Current version
 :   1.25.5
 
 Updates in this version
+:   This is the final version of `addon-istio` 1.25. `addon-istio` 1.25.5 is unsupported on 15 May 2026. Update your Istio components to the latest patch version of Istio 1.27 that is supported by {{site.data.keyword.containerlong_notm}} before that date.
+
+:   `addon-istio` 1.27 is available and supported on {{site.data.keyword.containerlong_notm}} versions 1.32 and 1.33. To upgrade from 1.25 to 1.27, follow [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor). You must complete both minor upgrades, from 1.25 to 1.26 and from 1.26 to 1.27.
+
 :   See the Istio release notes for [Istio 1.25.0](https://istio.io/latest/news/releases/1.25.x/announcing-1.25/){: external}, [Istio 1.25.1](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.1/){: external}, [Istio 1.25.2](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.2/){: external}, [Istio 1.25.3](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.3/){: external}, [Istio 1.25.4](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.4/){: external}, and [Istio 1.25.5](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.5/){: external}.
 
 :   Resolves the following CVEs:

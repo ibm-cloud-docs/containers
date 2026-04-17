@@ -244,6 +244,8 @@ subcollection: containers
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
+        * Istio add-on version 1.25.5 reaches end of support on 15 May 2026
+
     * [07 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr0726)
 
         * IBM Storage Operator cluster add-on patch updates.
