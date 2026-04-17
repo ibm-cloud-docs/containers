@@ -40,6 +40,12 @@ VPC Block CSI Driver cluster add-on patch updates.
 
 
 
+Istio add-on version 1.25.5 reaches end of support on 15 May 2026
+:   The Istio managed add-on version 1.25.5 becomes unsupported on 15 May 2026. Before that date, update to the latest patch version of Istio add-on version 1.27, which is supported on {{site.data.keyword.containerlong_notm}} versions 1.32 and 1.33. To upgrade from version 1.25 to version 1.27, complete both minor upgrades: from 1.25 to 1.26 and from 1.26 to 1.27. For more information, see [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor) and the [Istio add-on change log](/docs/containers?topic=containers-istio-changelog).
+
+
+
+
 
 ### 07 April 2026
 {: #containers-apr0726}
