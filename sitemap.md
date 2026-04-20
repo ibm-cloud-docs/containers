@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-17"
+lastupdated: "2026-04-20"
 
 
 keywords: containers
@@ -239,6 +239,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
+
+    * [20 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2026)
+
+        * CLI version 1.0.759 is available
 
     * [14 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr1426)
 
@@ -5594,6 +5598,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.759](/docs/containers?topic=containers-cs_cli_changelog#cli-01759)
 
 * [Version v1.0.756](/docs/containers?topic=containers-cs_cli_changelog#cli-01756)
 
