@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2025
-lastupdated: "2025-11-17"
+  years: 2024, 2026
+lastupdated: "2026-04-22"
 
 
 keywords: kubernetes, containers, 131, version 131, 131 update actions
@@ -16,18 +16,23 @@ subcollection: containers
 
 
 
-# 1.31 version information and update actions
+# 1.31 version information and update actions (unsupported)
 {: #cs_versions_131}
 
 
 
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 
 
-Review information about version 1.31 of {{site.data.keyword.containerlong}}. For more information about Kubernetes project version 1.31, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.
+Review information about version 1.31 of {{site.data.keyword.containerlong}}, released {{site.data.keyword.kubernetes_131_release_date}}.
 {: shortdesc}
+
+Looking for general information on updating clusters, or information on a different version? See [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions).
+{: tip}
+
+For more information about Kubernetes project version 1.31, see the [Kubernetes change log](https://kubernetes.io/releases/notes/.){: external}.
 
 
 ![This badge indicates Kubernetes version 1.31 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.31 certification badge" caption-side="bottom"} 
@@ -48,7 +53,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 | Version | Supported? | Release date | Unsupported date |
 |------|------|----------|----------|
-| 1.31 | Yes | {{site.data.keyword.kubernetes_131_release_date}} | {{site.data.keyword.kubernetes_131_unsupported_date}} `†` |
+| 1.31 | No | {{site.data.keyword.kubernetes_131_release_date}} | {{site.data.keyword.kubernetes_131_unsupported_date}} |
 {: caption="Release timeline for {{site.data.keyword.containerlong_notm}} version 1.31" caption-side="bottom"}
 
 

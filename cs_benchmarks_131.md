@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2025
-lastupdated: "2025-11-17"
+  years: 2024, 2026
+lastupdated: "2026-04-22"
 
 keywords: containers, benchmarks, 1.31, containers benchmarks, containers 1.31
 
@@ -12,13 +12,13 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
-# 1.31 CIS Kubernetes benchmark
+# Version 1.31 CIS Kubernetes benchmark
 {: #cis-benchmark-131}
 
 
 
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 
 

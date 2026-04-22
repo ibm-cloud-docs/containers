@@ -35,6 +35,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-apr2226}
 {: release-note}
 
+Kubernetes version 1.31 is unsupported
+:   Kubernetes version 1.31 is unsupported as of 22 April 2026. Update your cluster to at least [version 1.32](/docs/containers?topic=containers-cs_versions_132) as soon as possible.
+
 Ingress ALB patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
