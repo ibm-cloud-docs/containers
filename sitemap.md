@@ -240,6 +240,10 @@ subcollection: containers
 
 * [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
 
+    * [22 March 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2226)
+
+        * Ingress ALB patch updates.
+
     * [21 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2126)
 
         * CLI version 1.0.760 is available
