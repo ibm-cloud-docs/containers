@@ -47,12 +47,32 @@ Ingress ALB patch updates.
 CLI version 1.0.760 is available
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
+### 17 April 2026
+{: #containers-apr1726}
+{: release-note}
+
+{{site.data.keyword.cos_full_notm}} plug-in version 2.2.51 is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+
 ### 20 April 2026
 {: #containers-apr2026}
 {: release-note}
 
 CLI version 1.0.759 is available
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+
+
+
+
 
 ### 14 April 2026
 {: #containers-apr1426}
