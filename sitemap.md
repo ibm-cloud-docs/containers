@@ -248,15 +248,15 @@ subcollection: containers
 
         * CLI version 1.0.760 is available
 
-    * [17 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr1726)
-
-        * {{site.data.keyword.cos_full_notm}} plug-in version 2.2.51 is available.
-
     * [20 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2026)
 
         * CLI version 1.0.759 is available
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+    * [17 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr1726)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version 2.2.51 is available.
 
     * [14 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr1426)
 
