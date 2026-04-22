@@ -31,7 +31,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-### 22 March 2026
+### 22 April 2026
 {: #containers-apr2226}
 {: release-note}
 
