@@ -4120,6 +4120,12 @@ subcollection: containers
 
 * [{{site.data.keyword.cos_full_notm}} cluster add-on storage classes](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon)
 
+    * [Storage class parameters](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon-params)
+
+    * [Default `s3fs` storage class mount options](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon-s3fs)
+
+    * [Default `rclone` storage class mount options](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon-rclone)
+
 [COS: Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp_cos#migrate_hpcs_kp_cos)
 
 * [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kp_cos#before)
