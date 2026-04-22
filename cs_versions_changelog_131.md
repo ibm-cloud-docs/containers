@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-04-13"
+lastupdated: "2026-04-22"
 
 
 keywords: change log, version history, 1.31
@@ -17,13 +17,13 @@ subcollection: containers
 
 
 
-# 1.31 version change log
+# Kubernetes version 1.31 change log
 {: #changelog_131}
 
 
 
-This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
-{: deprecated}
+This version is no longer supported. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: important}
 
 
 

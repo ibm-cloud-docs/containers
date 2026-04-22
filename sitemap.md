@@ -242,6 +242,8 @@ subcollection: containers
 
     * [22 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2226)
 
+        * Kubernetes version 1.31 is unsupported
+
         * Ingress ALB patch updates.
 
     * [21 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2126)
@@ -4118,6 +4120,12 @@ subcollection: containers
 
 * [{{site.data.keyword.cos_full_notm}} cluster add-on storage classes](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon)
 
+    * [Storage class parameters](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon-params)
+
+    * [Default `s3fs` storage class mount options](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon-s3fs)
+
+    * [Default `rclone` storage class mount options](/docs/containers?topic=containers-storage-cos-install-addon#cos-sc-ref-addon-rclone)
+
 [COS: Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp_cos#migrate_hpcs_kp_cos)
 
 * [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kp_cos#before)
@@ -4926,7 +4934,7 @@ subcollection: containers
 {: #sitemap_version_131}
 
 
-[1.31 version information and update actions](/docs/containers?topic=containers-cs_versions_131#cs_versions_131)
+[1.31 version information and update actions (unsupported)](/docs/containers?topic=containers-cs_versions_131#cs_versions_131)
 
 * [Release timeline](/docs/containers?topic=containers-cs_versions_131#release_timeline_131)
 
@@ -4936,7 +4944,7 @@ subcollection: containers
 
     * [Update after master](/docs/containers?topic=containers-cs_versions_131#after_131)
 
-[1.31 version change log](/docs/containers?topic=containers-changelog_131#changelog_131)
+[Kubernetes version 1.31 change log](/docs/containers?topic=containers-changelog_131#changelog_131)
 
 * [Overview](/docs/containers?topic=containers-changelog_131#changelog_overview_131)
 
@@ -5064,7 +5072,7 @@ subcollection: containers
 
     * [Master fix pack 1.31.0_1520 and worker node fix pack 1.31.0_1518, released 18 September 2024](/docs/containers?topic=containers-changelog_131#1310_1520M_and_1310_1518W)
 
-[1.31 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
+[Version 1.31 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-131#cis-benchmark-131)
 
 * [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-131#1-master-node-security-configuration-131)
 
