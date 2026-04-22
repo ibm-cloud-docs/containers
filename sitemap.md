@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-21"
+lastupdated: "2026-04-22"
 
 
 keywords: containers
@@ -240,6 +240,10 @@ subcollection: containers
 
 * [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
 
+    * [22 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2226)
+
+        * Ingress ALB patch updates.
+
     * [21 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2126)
 
         * CLI version 1.0.760 is available
@@ -247,6 +251,12 @@ subcollection: containers
     * [20 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2026)
 
         * CLI version 1.0.759 is available
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+    * [17 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr1726)
+
+        * {{site.data.keyword.cos_full_notm}} plug-in version 2.2.51 is available.
 
     * [14 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr1426)
 
@@ -4482,6 +4492,8 @@ subcollection: containers
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
 
+    * [Worker node fix pack 1.35.4_1527, released 20 April 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1354_1527_W)
+
     * [Worker node fix pack 1.35.3_1525, released 06 April 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1353_1525_W)
 
     * [Change log for Master fix pack 1.35.3_1524, released 02 April 2026](/docs/containers?topic=containers-changelog_135#1353_1524_M)
@@ -4554,6 +4566,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Worker node fix pack 1.34.7_1550, released 20 April 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1347_1550_W)
 
     * [Worker node fix pack 1.34.6_1548, released 06 April 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1346_1548_W)
 
@@ -4649,6 +4663,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.11_1569, released 20 April 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13311_1569_W)
 
     * [Worker node fix pack 1.33.9_1567, released 06 April 2026](/docs/containers?topic=containers-changelog_133#cl-boms-1339_1567_W)
 
@@ -4766,6 +4782,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Worker node fix pack 1.32.13_1587, released 20 April 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13213_1587_W)
 
     * [Worker node fix pack 1.32.13_1585, released 06 April 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13213_1585_W)
 
@@ -6475,6 +6493,8 @@ subcollection: containers
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
+* [Change log for version 2.2.51, released 17 April 2026](/docs/containers?topic=containers-cos_plugin_changelog#02251_object_plugin)
+
 * [Change log for version 2.2.50, released 27 March 2026](/docs/containers?topic=containers-cos_plugin_changelog#02250_object_plugin)
 
 * [Change log for version 2.2.49, released 17 March 2026](/docs/containers?topic=containers-cos_plugin_changelog#02249_object_plugin)
@@ -6660,6 +6680,8 @@ subcollection: containers
 
 * [Version 1.14.5](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.14.5)
 
+    * [1.14.5_334184664_iks, released 22 April 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1145_334184664_iks)
+
     * [1.14.5_328030028_iks, released 25 March 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1145_328030028_iks)
 
 * [Version 1.14.4](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.14.4)
@@ -6667,6 +6689,8 @@ subcollection: containers
     * [1.14.4_326635134_iks, released 19 March 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1144_326635134_iks)
 
 * [Version 1.13.9](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.13.9)
+
+    * [1.13.9_334184586_iks, released 22 April 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1139_334184586_iks)
 
     * [1.13.9_328029561_iks, released 25 March 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1139_328029561_iks)
 
