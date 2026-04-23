@@ -244,6 +244,8 @@ subcollection: containers
 
         * CLI version 1.0.762 is available
 
+        * Headlamp add-on beta is now available
+
     * [22 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2226)
 
         * Kubernetes version 1.31 is unsupported
@@ -3484,6 +3486,43 @@ subcollection: containers
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
+## Headlamp dashboard add-on
+{: #sitemap_headlamp_dashboard_add-on}
+
+
+[Setting up the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-addon)
+
+* [Understanding the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-addon-about)
+
+* [Prerequisites](/docs/containers?topic=containers-headlamp-addon#headlamp-prereqs)
+
+* [Installing the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-install)
+
+    * [Installing the Headlamp add-on with the CLI](/docs/containers?topic=containers-headlamp-addon#headlamp-install-cli)
+
+* [Accessing the Headlamp dashboard](/docs/containers?topic=containers-headlamp-addon#headlamp-access)
+
+* [Migrating from kubernetes-dashboard](/docs/containers?topic=containers-headlamp-addon#headlamp-migrate-kube-dashboard)
+
+* [Understanding Headlamp authentication](/docs/containers?topic=containers-headlamp-addon#headlamp-auth)
+
+* [Updating the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-update)
+
+* [Disabling the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-disable)
+
+    * [Disabling the Headlamp add-on with the CLI](/docs/containers?topic=containers-headlamp-addon#headlamp-disable-cli)
+
+* [Troubleshooting the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-troubleshooting)
+
+    * [Cannot access the Headlamp dashboard](/docs/containers?topic=containers-headlamp-addon#headlamp-ts-access)
+
+    * [Authentication fails](/docs/containers?topic=containers-headlamp-addon#headlamp-ts-auth)
+
+    * [Pods are not running](/docs/containers?topic=containers-headlamp-addon#headlamp-ts-pods)
+
+* [Limitations](/docs/containers?topic=containers-headlamp-addon#headlamp-limitations)
+
+
 ## Istio service mesh
 {: #sitemap_istio_service_mesh}
 
@@ -6680,6 +6719,12 @@ subcollection: containers
     * [2.0.0_2266, released 04 June 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2266)
 
     * [2.0.0_2250, released 08 May 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2250)
+
+[Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
+
+* [Version 0.0.1](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.0.1)
+
+    * [0.0.1, released 07 April 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-001)
 
 
 ## Ingress version history

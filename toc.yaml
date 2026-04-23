@@ -230,6 +230,10 @@ toc:
               - secrets.md
               - secrets-mgr.md
       - topicgroup:
+          label: Headlamp dashboard add-on
+          topics:
+          - addon-headlamp.md
+      - topicgroup:
           label: Istio service mesh
           topics:
           - cs_istio_qs.md
@@ -372,6 +376,7 @@ toc:
               - cl-add-ons-static-route.md
               - versions-backup-restore.md
               - cl-add-ons-alb-oauth-proxy.md
+              - topic: cl-add-ons-headlamp.md
       - topicgroup:
           label: Ingress version history
           topics:

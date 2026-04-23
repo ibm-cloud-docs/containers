@@ -109,6 +109,35 @@ ibmcloud ks cluster addon disable alb-oauth-proxy --cluster my_cluster
 {: pre}
 
 
+#### `ibmcloud ks cluster addon disable headlamp`
+{: #cs_cluster_addon_disable_headlamp}
+
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
+
+Disable the [Headlamp dashboard](/docs/containers?topic=containers-headlamp-addon) add-on.
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon disable headlamp --cluster CLUSTER [-f] [-q]
+```
+{: pre}
+
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+`-c`, `--cluster CLUSTER`
+:    Required: The name or ID of the cluster.
+
+`-f`
+:    Optional: Force the command to run with no user prompts.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+
+
 #### `ibmcloud ks cluster addon disable istio`
 {: #cs_cluster_addon_disable_istio}
 
@@ -297,6 +326,38 @@ Minimum required permissions
 ibmcloud ks cluster addon enable alb-oauth-proxy --cluster my_cluster
 ```
 {: pre}
+
+
+
+#### `ibmcloud ks cluster addon enable headlamp`
+{: #cs_cluster_addon_enable_headlamp}
+
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
+
+Enable the [Headlamp dashboard](/docs/containers?topic=containers-headlamp-addon) add-on in a cluster.
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon enable headlamp --cluster CLUSTER [-q] [--version VERSION] [-y]
+```
+{: pre}
+
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+`-c`, `--cluster CLUSTER`
+:    Required: The name or ID of the cluster.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+`--version VERSION`
+:    Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.
+
+`-y`
+:    Optional: Enable all add-on dependencies.
 
 
 

@@ -38,6 +38,13 @@ CLI version 1.0.762 is available
 
 
 
+Headlamp add-on beta is now available
+:   The Headlamp add-on provides a modern Kubernetes dashboard with a graphical user interface for managing and monitoring your cluster resources. The add-on integrates with {{site.data.keyword.cloud_notm}} IAM for authentication and is automatically exposed through your cluster's default ingress hostname. For more information, see [Setting up the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon) and the [Headlamp add-on change log](/docs/containers?topic=containers-cl-add-ons-headlamp).
+
+
+
+
+
 ### 22 April 2026
 {: #containers-apr2226}
 {: release-note}
