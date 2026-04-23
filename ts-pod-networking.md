@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-01-09"
+lastupdated: "2026-04-23"
 
 
 keywords: pods, pod connectvity, networking, pod networking, pod trouble shooting, pod debug
@@ -310,4 +310,4 @@ Review the outputs from the earlier section to help find the cause of your pod n
 
 - If the DNS lookups from the `dig` commands failed, check that the [cluster DNS is configured properly](/docs/containers?topic=containers-cluster_dns).. 
 
-If you are still unable to resolve your pod networking issue, [open a support case](/docs/account?topic=account-open-case) and include a detailed description of the problem, how you have tried to solve it, what kinds of tests you ran, and [relevant logs](/docs/containers?topic=containers-debug_clusters&interface=ui#ts-5) for your pods and worker nodes. For more information on opening a support case and what information to include, see the [general debugging guide](/docs/containers?topic=containers-debug_clusters&interface=ui#ts-3).
+If you are still unable to resolve your pod networking issue, [open a support case](/docs/iam?topic=iam-open-case) and include a detailed description of the problem, how you have tried to solve it, what kinds of tests you ran, and [relevant logs](/docs/containers?topic=containers-debug_clusters&interface=ui#ts-5) for your pods and worker nodes. For more information on opening a support case and what information to include, see the [general debugging guide](/docs/containers?topic=containers-debug_clusters&interface=ui#ts-3).

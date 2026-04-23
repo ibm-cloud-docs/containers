@@ -1,9 +1,9 @@
 ---
 
 copyright:
-  years: 2014, 2025
+  years: 2014, 2026
 
-lastupdated: "2025-12-19"
+lastupdated: "2026-04-23"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, iro, openshift, red hat, red hat openshift
 
@@ -169,4 +169,4 @@ The following steps present a general process to manage costs for your {{site.da
     * Use Kubernetes features such as [horizontal pod autoscaling](https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/){: external}, [pod priority](/docs/containers?topic=containers-pod_priority), and [resource requests and limits](/docs/containers?topic=containers-app#resourcereq) to control how resources are used within your cluster.
     * Consider setting up a [monitoring tool](/docs/containers?topic=containers-health-monitor#view_metrics) such as {{site.data.keyword.mon_full_notm}} and creating alerts for your workloads when they need more resources.
 6. [View your usage](/docs/account?topic=account-viewingusage#viewingusage) to continuously refine how you consume {{site.data.keyword.cloud_notm}} services.
-7. [Set spending notifications](/docs/account?topic=account-spending).
+7. [Set spending notifications](/docs/iam?topic=iam-spending).
