@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-20"
+lastupdated: "2026-04-23"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -107,6 +107,35 @@ Minimum required permissions
 ibmcloud ks cluster addon disable alb-oauth-proxy --cluster my_cluster
 ```
 {: pre}
+
+
+#### `ibmcloud ks cluster addon disable headlamp`
+{: #cs_cluster_addon_disable_headlamp}
+
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
+
+Disable the [Headlamp dashboard](/docs/containers?topic=containers-headlamp-addon) add-on.
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon disable headlamp --cluster CLUSTER [-f] [-q]
+```
+{: pre}
+
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+`-c`, `--cluster CLUSTER`
+:    Required: The name or ID of the cluster.
+
+`-f`
+:    Optional: Force the command to run with no user prompts.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
 
 
 #### `ibmcloud ks cluster addon disable istio`
@@ -297,6 +326,38 @@ Minimum required permissions
 ibmcloud ks cluster addon enable alb-oauth-proxy --cluster my_cluster
 ```
 {: pre}
+
+
+
+#### `ibmcloud ks cluster addon enable headlamp`
+{: #cs_cluster_addon_enable_headlamp}
+
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
+
+Enable the [Headlamp dashboard](/docs/containers?topic=containers-headlamp-addon) add-on in a cluster.
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon enable headlamp --cluster CLUSTER [-q] [--version VERSION] [-y]
+```
+{: pre}
+
+Minimum required permissions
+:   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+
+`-c`, `--cluster CLUSTER`
+:    Required: The name or ID of the cluster.
+
+`-q`
+:    Optional: Do not show the message of the day or update reminders.
+
+`--version VERSION`
+:    Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.
+
+`-y`
+:    Optional: Enable all add-on dependencies.
 
 
 
@@ -7670,10 +7731,10 @@ Minimum required permissions
 **Command options**:
 
 `--infrastructure-username USERNAME`
-:    Required: IBM Cloud infrastructure account API username. The infrastructure API username is not the same as the IBMid. To view the infrastructure API username, see [Managing classic infrastructure API keys](/docs/account?topic=account-classic_keys).
+:    Required: IBM Cloud infrastructure account API username. The infrastructure API username is not the same as the IBMid. To view the infrastructure API username, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys).
 
 `--infrastructure-api-key API_KEY`
-:    Required: IBM Cloud infrastructure account API key. To view or generate an infrastructure API key, see [Managing classic infrastructure API keys](/docs/account?topic=account-classic_keys).
+:    Required: IBM Cloud infrastructure account API key. To view or generate an infrastructure API key, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys).
 
 `--region REGION`
 :    Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-22"
+lastupdated: "2026-04-23"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## April 2026
 {: #containers-apr26}
+
+### 23 April 2026
+{: #containers-apr2326}
+{: release-note}
+
+CLI version 1.0.762 is available
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
+Headlamp add-on beta is now available
+:   The Headlamp add-on provides a modern Kubernetes dashboard with a graphical user interface for managing and monitoring your cluster resources. The add-on integrates with {{site.data.keyword.cloud_notm}} IAM for authentication and is automatically exposed through your cluster's default ingress hostname. For more information, see [Setting up the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon) and the [Headlamp add-on change log](/docs/containers?topic=containers-cl-add-ons-headlamp).
+
+
 
 
 
