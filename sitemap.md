@@ -5830,6 +5830,8 @@ subcollection: containers
 
 * [`debug-tool` 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#debug-tool-2.0.0)
 
+* [`headlamp` 0.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#headlamp-0.1.0)
+
 * [`ibm-object-csi-driver` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-object-csi-driver-1.0)
 
 * [`ibm-storage-operator` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-storage-operator-1.0)
