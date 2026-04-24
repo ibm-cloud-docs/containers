@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-23"
+lastupdated: "2026-04-24"
 
 
 keywords: containers
@@ -5830,6 +5830,8 @@ subcollection: containers
 
 * [`debug-tool` 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#debug-tool-2.0.0)
 
+* [`headlamp` 0.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#headlamp-0.1.0)
+
 * [`ibm-object-csi-driver` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-object-csi-driver-1.0)
 
 * [`ibm-storage-operator` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-storage-operator-1.0)
@@ -6734,6 +6736,8 @@ subcollection: containers
 [Ingress ALB](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
 * [Version 1.15.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.1)
+
+    * [1.15.1_336158160_iks, released 24 April 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1151_336158160_iks)
 
     * [1.15.1_328030458_iks, released 25 March 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1151_328030458_iks)
 
