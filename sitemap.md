@@ -242,6 +242,8 @@ subcollection: containers
 
     * [27 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2726)
 
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
+
         * IBM Storage Operator cluster add-on patch updates.
 
         * VPC File CSI Driver cluster add-on patch updates.
@@ -4553,6 +4555,8 @@ subcollection: containers
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
 
+    * [Master fix pack 1.35.4_1527, released 27 April 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1354_1527_M)
+
     * [Worker node fix pack 1.35.4_1527, released 20 April 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1354_1527_W)
 
     * [Worker node fix pack 1.35.3_1525, released 06 April 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1353_1525_W)
@@ -4627,6 +4631,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Master fix pack 1.34.7_1550, released 27 April 2026](/docs/containers?topic=containers-changelog_134#cl-boms_master-1347_1550_M)
 
     * [Worker node fix pack 1.34.7_1550, released 20 April 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1347_1550_W)
 
@@ -4724,6 +4730,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Master fix pack 1.33.11_1569, released 27 April 2026](/docs/containers?topic=containers-changelog_133#cl-boms_master-13311_1569_M)
 
     * [Worker node fix pack 1.33.11_1569, released 20 April 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13311_1569_W)
 
@@ -4843,6 +4851,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Master fix pack 1.32.13_1587, released 27 April 2026](/docs/containers?topic=containers-changelog_132#cl-boms_master-13213_1587_M)
 
     * [Worker node fix pack 1.32.13_1587, released 20 April 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13213_1587_W)
 
