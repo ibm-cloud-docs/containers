@@ -240,6 +240,16 @@ subcollection: containers
 
 * [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
 
+    * [27 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2726)
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+    * [26 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2626)
+
+        * IBM Object CSI Driver cluster add-on patch updates.
+
     * [23 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2326)
 
         * CLI version 1.0.762 is available
@@ -6252,6 +6262,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [v1.0.37_333899629, released 27 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1037_333899629)
+
     * [v1.0.36_328998949, released 07 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1036_328998949)
 
     * [v1.0.35_325672265, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1035_325672265)
@@ -6456,6 +6468,8 @@ subcollection: containers
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
+    * [v2.0.28_333900419, released 27 April 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2028_333900419)
+
     * [v2.0.27_329001706, released 07 April 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2027_329001706)
 
     * [v2.0.26_325670948, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2026_325670948)
@@ -6541,6 +6555,8 @@ subcollection: containers
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [v1.0.19_333133599, released 26 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1019_333133599)
 
     * [v1.0.18_320539369, released 02 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1018_320539369)
 
