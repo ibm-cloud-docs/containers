@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-04-22"
+lastupdated: "2026-04-27"
 
 
 keywords: change log, version history, 1.32
@@ -40,6 +40,23 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.32
 {: #132_components}
+
+
+### Master fix pack 1.32.13_1587, released 27 April 2026
+{: #cl-boms_master-13213_1587_M}
+
+The following table shows the components that are in the master fix pack 1.32.13_1587. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|etcd|v3.5.29|See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.29).|
+|IBM Cloud Controller Manager|v1.32.13-5|New version contains updates and security fixes.|
+|Key Management Service provider|2.10.23|New version contains updates and security fixes.|
+|Kubernetes DNS autoscaler|v1.10.3|See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.10.3).|
+|Portieris admission controller|v0.13.37|See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.13.37)|
+{: caption="1.32.13_1587 fix pack." caption-side="bottom"}
+{: #cl-boms_master-13213_1587_M-component-table}
 
 
 ### Worker node fix pack 1.32.13_1587, released 20 April 2026
