@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-24"
+lastupdated: "2026-04-27"
 
 
 keywords: containers
@@ -5851,6 +5851,8 @@ subcollection: containers
 * [`openshift-ai` 417](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-417)
 
 * [`openshift-ai` 418](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-418)
+
+* [`openshift-ai` 419](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-419)
 
 * [`openshift-data-foundation` 4.15.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.15.0)
 
