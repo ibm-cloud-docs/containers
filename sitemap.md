@@ -1919,7 +1919,9 @@ subcollection: containers
 
 [Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate#cert-rotate)
 
-* [Certificate rotation states](/docs/containers?topic=containers-cert-rotate#cert-rotate-states)
+* [Rotation impacts on cluster upgrades](/docs/containers?topic=containers-cert-rotate#cert-upgrade-impact)
+
+* [Certificate states and timestamps](/docs/containers?topic=containers-cert-rotate#cert-rotate-states)
 
 * [FAQ about certificate rotation](/docs/containers?topic=containers-cert-rotate#cert-rotate-faq)
 
