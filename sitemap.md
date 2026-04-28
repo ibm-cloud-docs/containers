@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-27"
+lastupdated: "2026-04-28"
 
 
 keywords: containers
@@ -5899,6 +5899,8 @@ subcollection: containers
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.27](/docs/containers?topic=containers-istio-changelog#v127)
+
+    * [Change log for 1.27.9, released 28 April 2026](/docs/containers?topic=containers-istio-changelog#1279)
 
     * [Change log for 1.27.8, released 27 March 2026](/docs/containers?topic=containers-istio-changelog#1278)
 
