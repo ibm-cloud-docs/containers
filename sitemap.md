@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-27"
+lastupdated: "2026-04-28"
 
 
 keywords: containers
@@ -35,15 +35,21 @@ subcollection: containers
 
 [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
 
+* [Ready to create your first cluster?](/docs/containers?topic=containers-getting-started#getting-started-quick-start)
+
 * [Review the basics](/docs/containers?topic=containers-getting-started#getting-started-basics)
 
 * [Prepare your account](/docs/containers?topic=containers-getting-started#getting-started-prepare-account)
+
+    * [Pricing considerations](/docs/containers?topic=containers-getting-started#getting-started-pricing)
 
 * [Create a cluster environment strategy](/docs/containers?topic=containers-getting-started#getting-started-strategy)
 
 * [Create a cluster](/docs/containers?topic=containers-getting-started#getting-started-create)
 
 * [Deploy a sample app](/docs/containers?topic=containers-getting-started#getting-started-deploy-app)
+
+* [Quick actions](/docs/containers?topic=containers-getting-started#getting-started-quick-actions)
 
 * [What's next?](/docs/containers?topic=containers-getting-started#getting-started-whats-next)
 
@@ -239,6 +245,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
+
+    * [28 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2826)
+
+        * CLI version 1.0.763 is available
+
+        * Istio add-on patch updates.
 
     * [27 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2726)
 
@@ -5500,6 +5512,8 @@ subcollection: containers
 
     * [`ibmcloud ks ingress secret update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update)
 
+    * [`ibmcloud ks ingress status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status)
+
     * [`ibmcloud ks ingress status-report disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_disable)
 
     * [`ibmcloud ks ingress status-report enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_status_report_enable)
@@ -5618,6 +5632,14 @@ subcollection: containers
 
     * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get)
 
+    * [`ibmcloud ks experimental vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-baremetal-cli)
+
+    * [`ibmcloud ks experimental vni attach virtual`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-virtual-cli)
+
+    * [`ibmcloud ks experimental vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-detach-cli)
+
+    * [`ibmcloud ks experimental vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-ls-cli)
+
 * [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
 
     * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-options)
@@ -5693,6 +5715,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.763](/docs/containers?topic=containers-cs_cli_changelog#cli-01763)
 
 * [Version v1.0.762](/docs/containers?topic=containers-cs_cli_changelog#cli-01762)
 
@@ -5899,6 +5923,8 @@ subcollection: containers
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
 
 * [Version 1.27](/docs/containers?topic=containers-istio-changelog#v127)
+
+    * [Change log for 1.27.9, released 28 April 2026](/docs/containers?topic=containers-istio-changelog#1279)
 
     * [Change log for 1.27.8, released 27 March 2026](/docs/containers?topic=containers-istio-changelog#1278)
 
