@@ -109,6 +109,8 @@ ibmcloud ks cluster addon disable alb-oauth-proxy --cluster my_cluster
 {: pre}
 
 
+
+
 #### `ibmcloud ks cluster addon disable headlamp`
 {: #cs_cluster_addon_disable_headlamp}
 
