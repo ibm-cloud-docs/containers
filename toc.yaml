@@ -249,8 +249,10 @@ toc:
           topics:
           - topic: storage-operator.md
             navtitle: Storage Operator add-on
-          - topic: storage-block.md
-            navtitle: Block Storage for Classic
+          - topicgroup:
+              label: Block Storage for Classic
+              topics:
+              - storage-block.md
           - topicgroup:
               label: Block Storage for VPC add-on
               topics:

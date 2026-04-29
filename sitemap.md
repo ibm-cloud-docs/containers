@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-28"
+lastupdated: "2026-04-29"
 
 
 keywords: containers
@@ -3740,7 +3740,12 @@ subcollection: containers
 
 * [Disabling the `ibm-storage-operator` add-on](/docs/containers?topic=containers-storage-operator#storage-operator-disable)
 
-[Block Storage for Classic](/docs/containers?topic=containers-block_storage#block_storage)
+
+### Block Storage for Classic
+{: #sitemap_block_storage_for_classic}
+
+
+[Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
 * [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 
