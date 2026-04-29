@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2026
-lastupdated: "2026-04-28"
+lastupdated: "2026-04-29"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes cluster,  vpc cluster, classic cluster, clusters
@@ -31,48 +31,36 @@ If you already have an IBM Cloud account and want to get started immediately:
 
 Don't have an account? [Sign up for IBM Cloud](https://cloud.ibm.com/registration?target=/kubernetes/catalog/create){: external}
 
-Complete the following steps to get familiar with the basics, understand the service components, create your first cluster, and deploy a starter app.
+Use this page to move through the main setup flow: review the service, prepare your account, plan your environment, create a cluster, and deploy a sample app.
 
 ## Review the basics
 {: #getting-started-basics}
-{: step}
 
-Get an overview of the service by reviewing the concepts, terms, and benefits. For more information, see [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview).
+Start with the core concepts, terminology, and benefits. For more information, see [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview).
 
-Already familiar with containers and {{site.data.keyword.containerlong_notm}}? Continue to the next step to prepare your account for creating clusters.
+If you already know the basics, continue to the next section.
 
 ## Prepare your account
 {: #getting-started-prepare-account}
-{: step}
 
-To set up your {{site.data.keyword.cloud_notm}} account so that you can create clusters, see [Preparing your account to create clusters](/docs/containers?topic=containers-clusters).
+Make sure that your {{site.data.keyword.cloud_notm}} account is ready for cluster creation. For setup steps, see [Preparing your account to create clusters](/docs/containers?topic=containers-clusters).
 
-You'll need to be logged into IBM Cloud to create clusters. If you don't have an account yet, you can [create one](https://cloud.ibm.com/registration){: external}.
-{: tip}
+You must be logged in to IBM Cloud before you create a cluster. If you don't have an account yet, you can [create one](https://cloud.ibm.com/registration){: external}.
 
 ### Pricing considerations
 {: #getting-started-pricing}
 
-Pricing varies based on worker node flavor, number of nodes, and infrastructure type (VPC or Classic). [View detailed pricing information](https://cloud.ibm.com/kubernetes/catalog/about#pricing){: external}.
-{: note}
-
-If you've already prepared your account and you're ready to create a cluster, continue to the next step.
+Pricing varies based on worker node flavor, number of nodes, and infrastructure type. For more information, see [Kubernetes Service pricing](https://cloud.ibm.com/kubernetes/catalog/about#pricing){: external}.
 
 ## Create a cluster environment strategy
 {: #getting-started-strategy}
-{: step}
 
-Review the decision points in the [Creating a cluster environment strategy](/docs/containers?topic=containers-strategy) doc to begin designing your setup.
-
-Most users who create a cluster do so within a couple of hours. Follow this guide to get your first cluster running quickly.
-{: tip}
-
+Before you create a cluster, review the main design choices in [Creating a cluster environment strategy](/docs/containers?topic=containers-strategy). This topic helps you decide on factors such as infrastructure, networking, and availability.
 
 ## Create a cluster
 {: #getting-started-create}
-{: step}
 
-Follow a tutorial, or set up your own custom cluster environment. Review the following table for your deployment options.
+Follow a tutorial or set up your own custom cluster environment. Review the following table for your deployment options.
 
 
 | Type | Level | Time | Description |
@@ -92,27 +80,24 @@ Already have a cluster? **[Learn how to access it](/docs/containers?topic=contai
 {: #getting-started-deploy-app}
 {: step}
 
-After you create a cluster, deploy your first app. You can use a sample `websphere-liberty` Java application server that IBM provides and deploy the app to your cluster by using the Kubernetes dashboard.
-
+After you create a cluster, deploy a sample app by using the Kubernetes dashboard.
 
 1. Select your cluster from the [cluster list](https://cloud.ibm.com/kubernetes/clusters){: external}.
 2. Click **Kubernetes dashboard**.
-3. Click the **Create new resource** icon (`+`) and select the **Create from form** tab.
-    1. Enter a name for your app, such as `liberty`.
-    2. Enter `websphere-liberty` for your container image. Remember that your cluster's VPC subnet must have a public gateway so that the cluster can pull an image from DockerHub.
-    3. Enter the number of pods for your app deployment, such as `1`.
-    4. From the **Service** drop-down menu, select **External** to create a `LoadBalancer` service that external users can use to access the app. Configure the external service as follows.
-        - **Port**: `80`
-        - **Target port**: `9080`
-        - **Protocol**: `TCP`
+3. Click the **Create new resource** icon (`+`), then select the **Create from form** tab.
+4. Enter a name for your app, such as `liberty`.
+5. Enter `websphere-liberty` for the container image.
+6. Enter the number of pods for your app deployment, such as `1`.
+7. From the **Service** list, select **External** to create a `LoadBalancer` service.
+8. Configure the external service:
+   - **Port**: `80`
+   - **Target port**: `9080`
+   - **Protocol**: `TCP`
+9. Click **Deploy**.
+10. From the **Pods** menu, confirm that your `liberty` pod status is **Running**.
+11. From the **Services** menu, open the **External Endpoint** of your `liberty` service. For example, `169.xx.xxx.xxx:80` for classic clusters or `http://<hash>-<region>.lb.appdomain.cloud/` for VPC clusters.
 
-5. Click **Deploy**. During the deployment, the cluster downloads the `websphere-liberty` container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning).
-6. From the **Pods** menu, click your `liberty` pod and check that its status is **Running**.
-7. From the **Services** menu, click the **External Endpoint** of your `liberty` service. For example, `169.xx.xxx.xxx:80` for classic clusters or `http://<hash>-<region>.lb.appdomain.cloud/` for VPC clusters. The **Welcome to Liberty** page is displayed.
-
-
-
-Great job! You just deployed your first app in your Kubernetes cluster.
+Your app is exposed by a Layer 4, version 1.0 network load balancer. To learn about other exposure options, see [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning).
 
 
 
@@ -120,7 +105,7 @@ Great job! You just deployed your first app in your Kubernetes cluster.
 ## Quick actions
 {: #getting-started-quick-actions}
 
-Already have a cluster? Jump to these common next steps:
+If you already have a cluster, use these links to continue:
 
 Access your cluster
 :   Connect to your cluster and run kubectl commands. For more information, see [Accessing clusters](/docs/containers?topic=containers-access_cluster).
@@ -136,6 +121,6 @@ Need to check pricing first? [View Kubernetes Service pricing](https://cloud.ibm
 ## What's next?
 {: #getting-started-whats-next}
 
-Check out the curated learning paths
+Continue with one of these curated learning paths:
 - [Learning path for administrators](/docs/containers?topic=containers-learning-path-admin).
 - [Learning path for developers](/docs/containers?topic=containers-learning-path-dev).

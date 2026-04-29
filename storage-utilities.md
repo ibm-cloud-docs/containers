@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-04-15"
+lastupdated: "2026-04-29"
 
 
 keywords: kubernetes, containers
@@ -1203,4 +1203,4 @@ When an alert is triggered, review the alert details in {{site.data.keyword.mon_
 * [Troubleshooting worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload).
 * [Troubleshooting apps](/docs/containers?topic=containers-debug_apps).
 * [Troubleshooting clusters](/docs/containers?topic=containers-debug_clusters).
-* [Open a support case](/docs/iam?topic=iam-using-avatar).
+* [Open a support case](/docs/containers?topic=containers-get-help).
