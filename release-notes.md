@@ -35,6 +35,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-apr3026}
 {: release-note}
 
+CLI version 1.0.765 is available
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
 Istio add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
 

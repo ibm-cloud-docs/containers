@@ -248,6 +248,8 @@ subcollection: containers
 
     * [30 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr3026)
 
+        * CLI version 1.0.765 is available
+
         * Istio add-on patch updates.
 
     * [28 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2826)
@@ -5724,6 +5726,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.765](/docs/containers?topic=containers-cs_cli_changelog#cli-01765)
 
 * [Version v1.0.763](/docs/containers?topic=containers-cs_cli_changelog#cli-01763)
 
