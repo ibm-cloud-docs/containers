@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2023, 2024
-lastupdated: "2024-10-30"
+  years: 2023, 2026
+lastupdated: "2026-04-30"
 
 connectivitykeywords: kubernetes, errhpaetpi, ingress, autoscaler, alb
 
@@ -55,7 +55,7 @@ Before you change the `ExternalTrafficPolicy` setting, review the information ab
 
     1. Save and apply the changes. Wait 10 to 15 minutes for the updates to apply. Then, check to see if the warning is resolved.
 
-    1. If the issue persists, contact support. Include a detailed list of the troubleshooting steps you took. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+    1. If the issue persists, contact support. Include a detailed list of the troubleshooting steps you took. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
 
 - To disable ALB autoscaling.
 
@@ -67,4 +67,4 @@ Before you change the `ExternalTrafficPolicy` setting, review the information ab
 
     1. Wait 10 to 15 minutes for the updates to apply. Then, check to see if the warning is resolved.
 
-    1. If the issue persists, contact support. Include a detailed list of the troubleshooting steps you took. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+    1. If the issue persists, contact support. Include a detailed list of the troubleshooting steps you took. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

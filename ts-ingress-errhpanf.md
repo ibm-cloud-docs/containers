@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2023, 2024
-lastupdated: "2024-10-30"
+  years: 2023, 2026
+lastupdated: "2026-04-30"
 
 connectivitykeywords: kubernetes, errhpanf, ingress, autoscaler, alb
 
@@ -59,4 +59,4 @@ For more information on ALB autoscaling, see [Dynamically scaling ALBs with auto
     ```
     {: pre}
 
-1. If the issue persists, contact support. Include a detailed list of the troubleshooting steps you took. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+1. If the issue persists, contact support. Include a detailed list of the troubleshooting steps you took. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

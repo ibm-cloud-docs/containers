@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-14"
+lastupdated: "2026-04-30"
 
 
 keywords: containers, ingress status, troubleshoot ingress, erradruh
@@ -79,4 +79,4 @@ public-crcn0hav5w07nccmt0iufg-alb1-7df65f554f-qk97w   0/1     Pending   0       
         
 1. Wait a few minutes, and verify that the failing pods are now running.
 
-1. If the issue persists, contact support. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+1. If the issue persists, contact support. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

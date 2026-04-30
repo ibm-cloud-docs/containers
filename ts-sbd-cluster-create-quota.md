@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-11-25"
+  years: 2024, 2026
+lastupdated: "2026-04-30"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, {{site.data.keyword.containerlong_notm}}, outbound traffic protection, cluster create, quotas, limitations, rules, security groups
@@ -98,4 +98,4 @@ If you choose to delete a cluster from your existing VPC, [refresh the cluster m
     ```
     {: pre}
 
-1. If you can't delete the security groups, any new clusters must be created in a different VPC. Alternatively, a ticket can be opened against the account to request a quota increase. Open a [support case](/docs/account?topic=account-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
+1. If you can't delete the security groups, any new clusters must be created in a different VPC. Alternatively, a ticket can be opened against the account to request a quota increase. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
