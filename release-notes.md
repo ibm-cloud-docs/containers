@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-28"
+lastupdated: "2026-04-30"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## April 2026
 {: #containers-apr26}
+
+
+
+### 30 April 2026
+{: #containers-apr3026}
+{: release-note}
+
+Istio add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+
+
 
 
 ### 28 April 2026

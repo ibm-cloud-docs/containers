@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-28"
+lastupdated: "2026-04-30"
 
 
 keywords: kubernetes, istio, add-on, change log, add-on version, istio version
@@ -30,6 +30,33 @@ To view a list of add-ons and the supported cluster versions, run the following 
 ibmcloud ks cluster addon versions
 ```
 {: pre}
+
+## Version 1.28
+{: #v128}
+
+### Change log for 1.28.6, released 30 April 2026
+{: #1286}
+
+Review the changes that are included in version 1.28.6 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.27.9
+
+Current version
+:   1.28.6
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.28.0](https://istio.io/latest/news/releases/1.28.x/announcing-1.28/){: external}, [Istio 1.28.1](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.1/){: external}, [Istio 1.28.2](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.2/){: external}, [Istio 1.28.3](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.3/){: external}, [Istio 1.28.4](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.4/){: external}, [Istio 1.28.5](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.5/){: external}, and [Istio 1.28.6](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.6/){: external}.
+
+:   Resolves the following CVEs:
+    - [CVE-2026-28387](https://www.cve.org/CVERecord?id=CVE-2026-28387){: external}
+    - [CVE-2026-28388](https://www.cve.org/CVERecord?id=CVE-2026-28388){: external}
+    - [CVE-2026-31789](https://www.cve.org/CVERecord?id=CVE-2026-31789){: external}
+    - [CVE-2026-28389](https://www.cve.org/CVERecord?id=CVE-2026-28389){: external}
+    - [CVE-2026-28390](https://www.cve.org/CVERecord?id=CVE-2026-28390){: external}
+    - [CVE-2026-31790](https://www.cve.org/CVERecord?id=CVE-2026-31790){: external}
+
 
 
 ## Version 1.27
