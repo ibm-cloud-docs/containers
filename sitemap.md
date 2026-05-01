@@ -246,9 +246,9 @@ subcollection: containers
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
 
-    * Ingress ALB patch updates.
-
     * [01 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may0126)
+
+        * Ingress ALB patch updates.
 
 * [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
 

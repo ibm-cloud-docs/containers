@@ -31,12 +31,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## May 2026
 {: #containers-may26}
 
-Ingress ALB patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
-
 ### 01 May 2026
 {: #containers-may0126}
 {: release-note}
+
+Ingress ALB patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 
 
