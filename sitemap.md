@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-01"
 
 
 keywords: containers
@@ -247,6 +247,8 @@ subcollection: containers
 * [April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr26)
 
     * [30 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr3026)
+
+        * CLI version 1.0.765 is available
 
         * Istio add-on patch updates.
 
@@ -5725,6 +5727,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.765](/docs/containers?topic=containers-cs_cli_changelog#cli-01765)
+
 * [Version v1.0.763](/docs/containers?topic=containers-cs_cli_changelog#cli-01763)
 
 * [Version v1.0.762](/docs/containers?topic=containers-cs_cli_changelog#cli-01762)
@@ -5900,6 +5904,8 @@ subcollection: containers
 * [`istio` 1.26](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.26)
 
 * [`istio` 1.27](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.27)
+
+* [`istio` 1.28](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.28)
 
 * [`openshift-ai` 416](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-416)
 
