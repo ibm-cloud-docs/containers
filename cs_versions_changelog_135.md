@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-04-27"
+lastupdated: "2026-05-01"
 
 
 keywords: change log, version history, 1.35
@@ -50,11 +50,11 @@ The following table shows the components that are in the master fix pack 1.35.4_
 | Component | Version | Description |
 | ---- | ---- | ---- |
 |Calico|v3.30.7|See the [Calico release notes](https://docs.tigera.io/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release).|
-|etcd|v3.5.29|See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.29).|
+|etcd|v3.5.29|See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.29).|
 |IBM Cloud Controller Manager|v1.35.3-2|New version contains updates and security fixes.|
 |Key Management Service provider|2.10.23|New version contains updates and security fixes.|
 |Kubernetes|v1.35.4|See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.35.4).|
-|Kubernetes DNS autoscaler|v1.10.3|See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.10.3).|
+|Kubernetes DNS autoscaler|v1.10.3|See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.10.3).|
 |Portieris admission controller|v0.13.37|See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.13.37)|
 |Tigera Operator|v1.38.13|See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.38.13).|
 {: caption="1.35.4_1527 fix pack." caption-side="bottom"}

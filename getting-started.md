@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2026
-lastupdated: "2026-04-29"
+lastupdated: "2026-05-01"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes cluster,  vpc cluster, classic cluster, clusters
@@ -27,7 +27,7 @@ subcollection: containers
 
 If you already have an IBM Cloud account and want to get started immediately:
 
-[Create a cluster now](https://cloud.ibm.com/kubernetes/catalog/create){: external}
+[Create a cluster now](https://cloud.ibm.com/containers/cluster-management/catalog/create){: external}
 
 Don't have an account? [Sign up for IBM Cloud](https://cloud.ibm.com/registration?target=/kubernetes/catalog/create){: external}
 
@@ -50,7 +50,7 @@ You must be logged in to IBM Cloud before you create a cluster. If you don't hav
 ### Pricing considerations
 {: #getting-started-pricing}
 
-Pricing varies based on worker node flavor, number of nodes, and infrastructure type. For more information, see [Kubernetes Service pricing](https://cloud.ibm.com/kubernetes/catalog/about#pricing){: external}.
+Pricing varies based on worker node flavor, number of nodes, and infrastructure type. For more information, see [Kubernetes Service pricing](https://cloud.ibm.com/containers/cluster-management/catalog/about#pricing){: external}.
 
 ## Create a cluster environment strategy
 {: #getting-started-strategy}
@@ -116,7 +116,7 @@ Install the CLI
 Deploy your first app
 :   Get hands-on with a sample application. For more information, see [Deploying apps](/docs/containers?topic=containers-app).
 
-Need to check pricing first? [View Kubernetes Service pricing](https://cloud.ibm.com/kubernetes/catalog/about#pricing){: external}.
+Need to check pricing first? [View Kubernetes Service pricing](https://cloud.ibm.com/containers/cluster-management/catalog/about#pricing){: external}.
 
 ## What's next?
 {: #getting-started-whats-next}

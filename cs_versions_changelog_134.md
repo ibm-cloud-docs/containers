@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-04-27"
+lastupdated: "2026-05-01"
 
 
 keywords: change log, version history, 1.34
@@ -52,7 +52,7 @@ The following table shows the components that are in the master fix pack 1.34.7_
 | ---- | ---- | ---- |
 |Calico|v3.30.7|See the [Calico release notes](https://docs.tigera.io/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release).|
 |Cluster health image|v1.6.15|New version contains updates and security fixes.|
-|etcd|v3.5.29|See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.29).|
+|etcd|v3.5.29|See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.29).|
 |IBM Cloud Block Storage driver and plug-in|v2.5.25|New version contains updates and security fixes.|
 |IBM Cloud Controller Manager|v1.34.6-2|New version contains updates and security fixes.|
 |IBM Cloud File Storage for Classic plug-in and monitor|v454|New version contains updates and security fixes.|
@@ -60,8 +60,8 @@ The following table shows the components that are in the master fix pack 1.34.7_
 |IBM Cloud RBAC Operator|6212368|New version contains updates and security fixes.|
 |Key Management Service provider|2.10.23|New version contains updates and security fixes.|
 |Kubernetes|v1.34.7|See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.7).|
-|Kubernetes DNS autoscaler|v1.10.3|See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.10.3).|
-|Kubernetes Metrics Server|v0.8.1|See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.8.1).|
+|Kubernetes DNS autoscaler|v1.10.3|See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.10.3).|
+|Kubernetes Metrics Server|v0.8.1|See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1).|
 |Load balancer and load balancer monitor for IBM Cloud Provider|3563|New version contains updates and security fixes.|
 |Portieris admission controller|v0.13.37|See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.13.37)|
 |Tigera Operator|v1.38.13|See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.38.13).|
