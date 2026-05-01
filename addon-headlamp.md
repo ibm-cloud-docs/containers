@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-04-23"
+lastupdated: "2026-05-01"
 
 
 keywords: kubernetes, headlamp, dashboard, add-on, gui
@@ -44,7 +44,7 @@ Before you install the Headlamp add-on, ensure that your cluster meets the follo
 - Your cluster must be running a [supported Kubernetes version](/docs/containers?topic=containers-cs_versions).
 - For VPC clusters, you must configure network access to IAM endpoints:
     - Attach a public gateway to your VPC subnets to allow outbound connections.
-    - Configure your cluster's security group to allow outbound HTTPS connections to IAM. Note that VPC security group outbound rules require IP addresses, not domain names. You must specify the IP address ranges for the IAM service endpoints in your region. For more information, see [{{site.data.keyword.cloud_notm}} IP ranges](/docs/cloud-infrastructure?topic=cloud-infrastructure-ibm-cloud-ip-ranges).
+    - Configure your cluster's security group to allow outbound HTTPS connections to IAM. Note that VPC security group outbound rules require IP addresses, not domain names. You must specify the IP address ranges for the IAM service endpoints in your region. For more information, see [{{site.data.keyword.cloud_notm}} IP ranges](/docs/infrastructure-hub?topic=infrastructure-hub-ibm-cloud-ip-ranges).
 - Your browser must have access to:
     - The cluster's default ingress hostname.
     - The {{site.data.keyword.cloud_notm}} IAM authorization endpoint at `https://iam.cloud.ibm.com`.
