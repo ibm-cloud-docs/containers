@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-01"
 
 
 keywords: containers
@@ -5904,6 +5904,8 @@ subcollection: containers
 * [`istio` 1.26](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.26)
 
 * [`istio` 1.27](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.27)
+
+* [`istio` 1.28](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.28)
 
 * [`openshift-ai` 416](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-416)
 
