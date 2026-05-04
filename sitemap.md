@@ -260,6 +260,10 @@ subcollection: containers
 
         * Cluster autoscaler cluster add-on patch updates.
 
+        * VPC Block CSI Driver cluster add-on patch updates.
+
+        * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+
     * [28 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2826)
 
         * CLI version 1.0.763 is available
@@ -6371,6 +6375,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [v5.2.49_335380306, released 30 April 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5249_335380306)
+
     * [v5.2.48_330814432, released 14 April 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5248_330814432)
 
     * [v5.2.47_326490882, released 25 March 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5247_326490882)
@@ -6398,6 +6404,8 @@ subcollection: containers
     * [5.2.31_687, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [v5.1.49_335379980, released 30 April 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5149_335379980)
 
     * [v5.1.48_330814388, released 14 April 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5148_330814388)
 

@@ -64,7 +64,9 @@ Istio add-on patch updates.
 Cluster autoscaler cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
 
-
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 ### 28 April 2026
 {: #containers-apr2826}
