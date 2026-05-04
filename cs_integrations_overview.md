@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-01"
+lastupdated: "2026-05-04"
 
 
 keywords: kubernetes, helm
@@ -119,7 +119,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 
 |Service|Description|Classic|VPC|
 |----|------------|----|----|
-|Heptio Velero|You can use [Heptio Velero](https://github.com/vmware-tanzu/velero){: external} to back up and restore cluster resources and persistent volumes. For more information, see the Heptio Velero [Use cases for disaster recovery and cluster migration](https://github.com/vmware-tanzu/velero/blob/release-0.9/docs/use-cases.md){: external}.|Yes|Yes|
+|Heptio Velero|You can use [Heptio Velero](https://github.com/velero-io/velero){: external} to back up and restore cluster resources and persistent volumes. For more information, see the Heptio Velero [Use cases for disaster recovery and cluster migration](https://github.com/velero-io/velero/blob/release-0.9/docs/use-cases.md){: external}.|Yes|Yes|
 |{{site.data.keyword.cloud_notm}} Classic Block Storage|[{{site.data.keyword.cloud_notm}} Classic Block Storage](/docs/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). For more information about how to provision block storage in your cluster, see [Setting up {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)|Yes| |
 |{{site.data.keyword.block_storage_is_short}}|[{{site.data.keyword.block_storage_is_short}}](/docs/vpc?topic=vpc-creating-block-storage) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC cluster. For more information about how to provision VPC Block Storage in your cluster, see [Setting up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)| |Yes|
 |{{site.data.keyword.cos_full_notm}}|Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic regions, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore) to configure the service to make one-time or scheduled backups for data in your clusters. For more information about the service, see the [{{site.data.keyword.cos_short}} documentation](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage){: external}.|Yes|Yes|

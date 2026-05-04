@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-01"
+lastupdated: "2026-05-04"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -26,17 +26,21 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
-
-
 ## May 2026
 {: #containers-may26}
+
+
+
 
 ### 01 May 2026
 {: #containers-may0126}
 {: release-note}
 
+
+
 Ingress ALB patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
 
 
 
@@ -57,6 +61,12 @@ Istio add-on patch updates.
 
 
 
+Cluster autoscaler cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
+
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 ### 28 April 2026
 {: #containers-apr2826}
