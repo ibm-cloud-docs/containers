@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-01"
+lastupdated: "2026-05-04"
 
 
 keywords: containers
@@ -257,6 +257,8 @@ subcollection: containers
         * CLI version 1.0.765 is available
 
         * Istio add-on patch updates.
+
+        * Cluster autoscaler cluster add-on patch updates.
 
     * [28 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2826)
 
@@ -6074,6 +6076,8 @@ subcollection: containers
 [Cluster autoscaler add-on version change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-2.0.0)
+
+    * [v200-7-0_332133224, released 30 April 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-7-0_332133224)
 
     * [v200-6-0_326846817, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-6-0_326846817)
 
