@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2025
-lastupdated: "2025-01-03"
+  years: 2022, 2026
+lastupdated: "2026-05-04"
 
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
@@ -18,18 +18,18 @@ subcollection: containers
 # Ingress in {{site.data.keyword.cloud_notm}}
 {: #managed-ingress-about}
 
-Ingress is a Kubernetes service discovery method that exposes the services in your cluster to the public or private network by forwarding requests to your apps and balancing network traffic workloads. Ingress manages external access to your services based on a set of routing rules that you configure and that are applied to all incoming traffic. 
+Ingress is a Kubernetes service discovery method that exposes the services in your cluster to the public or private network by forwarding requests to your apps and balancing network traffic workloads. Ingress manages external access to your services based on a set of routing rules that you configure and that are applied to all incoming traffic.
 {: shortdesc}
 
-When you provision an {{site.data.keyword.containerlong_notm}} cluster, IBM provides all the components required to use Ingress. Then, when you are ready to get started, you create an Ingress resource to specify how these components work together. 
+When you provision an {{site.data.keyword.containerlong_notm}} cluster, IBM provides all the components required to use Ingress. Then, when you are ready to get started, you create an Ingress resource to specify how these components work together.
 
-For more information about Kubernetes Ingress, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external}. 
+For more information about Kubernetes Ingress, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external}.
 
 
 ## IBM-provided Ingress components
 {: #managed-ingress-components}
 
-All the components required to use Ingress are provided for you when you create a cluster. You specify these components when you create your Ingress resource. 
+All the components required to use Ingress are provided for you when you create a cluster. You specify these components when you create your Ingress resource.
 {: shortdesc}
 
 - Ingress domain
@@ -37,13 +37,11 @@ All the components required to use Ingress are provided for you when you create 
 - Application Load Balancers (ALBs)
 - TLS certificate
 
-If you do not want to use the IBM-provided components, you can [create custom components](/docs/containers) that you specify in your Ingress resource instead.
-
 
 ### Ingress domain
 {: #managed-ingress-subdomain}
 
-The default Ingress domain is used to form a unique URL for each app in your cluster, and is the domain that is referenced by the IP addresses of any ALBs in your cluster. When you create a cluster, a unique Ingress subdomain is automatically created and registered as the default domain. You can [change the default domain](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-default) to any domain that exists in your cluster. 
+The default Ingress domain is used to form a unique URL for each app in your cluster, and is the domain that is referenced by the IP addresses of any ALBs in your cluster. When you create a cluster, a unique Ingress subdomain is automatically created and registered as the default domain. You can [change the default domain](/docs/containers?topic=containers-ingress-domains#ingress-domain-manage-default) to any domain that exists in your cluster.
 {: shortdesc}
 
 You can also [create or add your own domain](/docs/containers?topic=containers-ingress-domains) registered with {{site.data.keyword.cloud_notm}}'s internal domain provider or with an {{site.data.keyword.cis_full_notm}} external provider.
@@ -84,7 +82,7 @@ mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cl
 The Ingress class determines the type of Ingress controller that is used. IBM provides two Ingress classes, one public (`public-iks-k8s-nginx`) and one private (`private-iks-k8s-nginx`). Both classes implement the NGINX Ingress controller. When you create your Ingress resource, the Ingress class you specify determines if your apps are publicly or privately exposed.
 {: shortdesc}
 
-You can use a custom Ingress class by creating your own `IngressClass` resource. 
+You can use a custom Ingress class by creating your own `IngressClass` resource.
 {: tip}
 
 
@@ -106,10 +104,10 @@ Private ALBs in classic clusters do not use the IBM-provided Ingress subdomain a
 
 If a public or private ALB pod is rescheduled, it keeps the same IP address. However, removing a zone with an ALB, or removing all workers on a VLAN in that zone, removes that ALB's IP address.
 
-#### ALBs in VPC 
+#### ALBs in VPC
 {: #managed-ingress-alb-vpc}
 
-When you create a VPC cluster, one public and one private ALB is automatically created for you in each zone. In addition, one public VPC load balancer is automatically created outside of your cluster in your VPC. When you enable private ALBs in your VPC cluster, a private VPC load balancer is also created. 
+When you create a VPC cluster, one public and one private ALB is automatically created for you in each zone. In addition, one public VPC load balancer is automatically created outside of your cluster in your VPC. When you enable private ALBs in your VPC cluster, a private VPC load balancer is also created.
 {: shortdesc}
 
 IP addresses for ALBs in VPC clusters are not static and might change over time, therefore the VPC load balancers put the public or private IP address of your ALBs behind a static hostname. Separate hostnames are applied for public or private ALBs. Note that the ALB hostname is separate from the cluster's Ingress subdomain.
@@ -119,7 +117,7 @@ To find the hostname of an ALB in a VPC cluster, run `ibmcloud ks ingress alb ls
 #### Worker node requirements for ALBs
 {: #managed-ingress-albs-reqs}
 
-At least two worker nodes are required per zone in your cluster for ALBs to function with high availability and to receive periodic updates. Anti-affinity rules on ALB pods ensure that only one pod is scheduled to each worker node. When automatic updates are applied to ALB pods, the pod is reloaded. If you only have one worker node, and therefore one ALB pod, the pod does not automatically update to avoid traffic interruptions, and updates only apply when you manually delete the pod and reschedule a new one. Having at least two worker nodes per zone avoids this scenario. 
+At least two worker nodes are required per zone in your cluster for ALBs to function with high availability and to receive periodic updates. Anti-affinity rules on ALB pods ensure that only one pod is scheduled to each worker node. When automatic updates are applied to ALB pods, the pod is reloaded. If you only have one worker node, and therefore one ALB pod, the pod does not automatically update to avoid traffic interruptions, and updates only apply when you manually delete the pod and reschedule a new one. Having at least two worker nodes per zone avoids this scenario.
 {: shortdesc}
 
 Note that if a zone fails, you might experience intermittent failures in requests to the Ingress ALB in that zone.
@@ -127,7 +125,7 @@ Note that if a zone fails, you might experience intermittent failures in request
 ### Default TLS certificate
 {: #managed-ingress-tls}
 
-When you create a cluster, a default TLS certificate is created that you can use with the IBM-provided Ingress subdomain. You can specify the default TLS certificate, or a custom certificate that you provide, in the Ingress resource. 
+When you create a cluster, a default TLS certificate is created that you can use with the IBM-provided Ingress subdomain. You can specify the default TLS certificate, or a custom certificate that you provide, in the Ingress resource.
 {: shortdesc}
 
 Consider using [{{site.data.keyword.secrets-manager_short}}](/docs/containers?topic=containers-secrets-mgr) to centrally manage and automatically update your Ingress subdomain certificates and other secrets.
