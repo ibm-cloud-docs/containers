@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-04"
+lastupdated: "2026-05-05"
 
 
 keywords: containers
@@ -245,6 +245,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
+
+    * [05 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may0526)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
+
+    * [04 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may0426)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [01 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may0126)
 
@@ -4592,6 +4600,8 @@ subcollection: containers
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
 
+    * [Worker node fix pack 1.35.4_1528, released 04 May 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1354_1528_W)
+
     * [Master fix pack 1.35.4_1527, released 27 April 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1354_1527_M)
 
     * [Worker node fix pack 1.35.4_1527, released 20 April 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1354_1527_W)
@@ -4668,6 +4678,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Worker node fix pack 1.34.7_1551, released 04 May 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1347_1551_W)
 
     * [Master fix pack 1.34.7_1550, released 27 April 2026](/docs/containers?topic=containers-changelog_134#cl-boms_master-1347_1550_M)
 
@@ -4767,6 +4779,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.11_1570, released 04 May 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13311_1570_W)
 
     * [Master fix pack 1.33.11_1569, released 27 April 2026](/docs/containers?topic=containers-changelog_133#cl-boms_master-13311_1569_M)
 
@@ -4888,6 +4902,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_132#changelog_overview_132)
 
 * [Version 1.32](/docs/containers?topic=containers-changelog_132#132_components)
+
+    * [Worker node fix pack 1.32.13_1588, released 04 May 2026](/docs/containers?topic=containers-changelog_132#cl-boms-13213_1588_W)
 
     * [Master fix pack 1.32.13_1587, released 27 April 2026](/docs/containers?topic=containers-changelog_132#cl-boms_master-13213_1587_M)
 
@@ -6778,6 +6794,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_334964365, released 05 May 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_334964365)
 
     * [2.0.0_328060981, released 26 March 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_328060981)
 
