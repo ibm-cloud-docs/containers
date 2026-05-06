@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-05"
+lastupdated: "2026-05-06"
 
 
 keywords: containers
@@ -245,6 +245,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
+
+    * [06 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may0626)
+
+        * CLI version 1.0.768 is available
 
     * [05 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may0526)
 
@@ -5671,14 +5675,6 @@ subcollection: containers
 
     * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get)
 
-    * [`ibmcloud ks experimental vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-baremetal-cli)
-
-    * [`ibmcloud ks experimental vni attach virtual`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-virtual-cli)
-
-    * [`ibmcloud ks experimental vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-detach-cli)
-
-    * [`ibmcloud ks experimental vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-ls-cli)
-
 * [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
 
     * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-options)
@@ -5690,6 +5686,18 @@ subcollection: containers
 * [`ibmcloud ks vpc outbound-traffic-protection enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-cli)
 
     * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-options)
+
+* [`ibmcloud ks vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#vni-attach-baremetal-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vni-attach-baremetal-options)
+
+* [`ibmcloud ks vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#vni-detach-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vni-detach-options)
+
+* [`ibmcloud ks vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#vni-ls-cli)
+
+    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vni-ls-options)
 
 * [`flavor` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types)
 
@@ -5754,6 +5762,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.768](/docs/containers?topic=containers-cs_cli_changelog#cli-01768)
 
 * [Version v1.0.765](/docs/containers?topic=containers-cs_cli_changelog#cli-01765)
 
