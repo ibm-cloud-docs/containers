@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2026
-lastupdated: "2026-01-13"
+lastupdated: "2026-05-06"
 
 
 keywords: kubernetes, containers, 134, version 134, 134 update actions
@@ -56,9 +56,6 @@ This information summarizes updates that are likely to have an impact on deploye
 
 
 [CoreDNS](/docs/containers?topic=containers-cluster_dns) The default DNS cache time in both CoreDNS and NodeLocal DNS configurations has been increased from 30 seconds to 120 seconds.
-{: important}
-
-Istio add-on version 1.25 is not supported for IBM Cloud Kubernetes Service version 1.34 because the Istio add-on does not support Istio 1.28. Do not update to IBM Cloud Kubernetes Service version 1.34 if you use the add-on in your cluster. As an alternative, you can [migrate from the Istio add-on to community Istio](/docs/containers?topic=containers-istio&interface=ui#migrate).
 {: important}
 
 ### Update before master
