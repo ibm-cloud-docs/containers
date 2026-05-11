@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-06"
+lastupdated: "2026-05-11"
 
 
 keywords: containers
@@ -5974,6 +5974,10 @@ subcollection: containers
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.29](/docs/containers?topic=containers-istio-changelog#v129)
+
+    * [Change log for 1.29.2, released 12 May 2026](/docs/containers?topic=containers-istio-changelog#1292)
 
 * [Version 1.28](/docs/containers?topic=containers-istio-changelog#v128)
 
