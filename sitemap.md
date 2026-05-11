@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-06"
+lastupdated: "2026-05-11"
 
 
 keywords: containers
@@ -245,6 +245,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
+
+    * [11 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may1126)
+
+        * CLI version 1.0.770 is available
 
     * [06 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may0626)
 
@@ -5763,6 +5767,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
 
+* [Version v1.0.770](/docs/containers?topic=containers-cs_cli_changelog#cli-01770)
+
 * [Version v1.0.768](/docs/containers?topic=containers-cs_cli_changelog#cli-01768)
 
 * [Version v1.0.765](/docs/containers?topic=containers-cs_cli_changelog#cli-01765)
@@ -5974,6 +5980,10 @@ subcollection: containers
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
 [Istio add-on change log](/docs/containers?topic=containers-istio-changelog#istio-changelog)
+
+* [Version 1.29](/docs/containers?topic=containers-istio-changelog#v129)
+
+    * [Change log for 1.29.2, released 12 May 2026](/docs/containers?topic=containers-istio-changelog#1292)
 
 * [Version 1.28](/docs/containers?topic=containers-istio-changelog#v128)
 
