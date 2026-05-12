@@ -136,35 +136,32 @@ Create the Ingress resource to define the routing rules that the Ingress control
 
 Resource fields
 
-    `ingressClassName`
-    :   The Ingress class name. The IBM-provided Ingress classes are `public-iks-k8s-nginx` for public ALBs and `private-iks-k8s-nginx` for private ALBs.
+`ingressClassName`
+:   The Ingress class name. The IBM-provided Ingress classes are `public-iks-k8s-nginx` for public ALBs and `private-iks-k8s-nginx` for private ALBs.
 
-    `tls.hosts`
-    :   To use TLS, replace `<domain>` with the IBM-provided Ingress subdomain or your custom domain.
+`tls.hosts`
+:   To use TLS, replace `<domain>` with the IBM-provided Ingress subdomain or your custom domain.
 
-    `tls.secretName`
-    :   Replace `<tls_secret_name>` with the name of the Kubernetes secret where your [TLS certificate](#managed-ingress-steps-tls) is stored.
+`tls.secretName`
+:   Replace `<tls_secret_name>` with the name of the Kubernetes secret where your [TLS certificate](#managed-ingress-steps-tls) is stored.
 
-    `host`
-    :   Replace `<domain>` with the IBM-provided Ingress subdomain or your custom domain.
+`host`
+:   Replace `<domain>` with the IBM-provided Ingress subdomain or your custom domain.
 
-    `path`
-    :   Replace `<app_path>` with a slash or the path that your app is listening on. The path is appended to the specified Ingress domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app runs.
+`path`
+:   Replace `<app_path>` with a slash or the path that your app is listening on. The path is appended to the specified Ingress domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app runs.
 
+`pathType`
+:   The URL path matching method. Supported values are `ImplementationSpecific`, `Exact`, or `Prefix`. For more information about and examples of each path type, see the [community Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types){: external}.
 
-    `pathType`
-    :   The URL path matching method. Supported values are `ImplementationSpecific`, `Exact`, or `Prefix`. For more information about and examples of each path type, see the [community Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types){: external}.
+`service.name`
+:   Replace `app1_service` and `app2_service`, and so on, with the name of the services you created to expose your apps. Make sure that the apps you specify are in the same namespace.
 
+`service.name`
+:   Replace `<app1_service>` and `<app2_service>`, and so on, with the name of the services you created to expose your apps. Make sure that the apps you specify are in the same namespace.
 
-    `service.name`
-    :   Replace `app1_service` and `app2_service`, and so on, with the name of the services you created to expose your apps. Make sure that the apps you specify are in the same namespace.
-
-    `service.name`
-    :   Replace `<app1_service>` and `<app2_service>`, and so on, with the name of the services you created to expose your apps. Make sure that the apps you specify are in the same namespace.
-
-
-    `service.port.number`
-    :   The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.
+`service.port.number`
+:   The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.
 
 
 2. Apply the Ingress resource to your cluster. Ensure that the resource deploys into the same namespace as the app services that you specified in the resource.
