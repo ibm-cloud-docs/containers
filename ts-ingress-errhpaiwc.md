@@ -1,8 +1,8 @@
 ---
 
-copyright: 
+copyright:
   years: 2023, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 connectivitykeywords: kubernetes, errhpaiwc, ingress, autoscaler, alb
 
@@ -14,7 +14,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Why does the Ingress status show an `ERRHPAIWC` error?
+# Ingress error: ERRHPAIWC
 {: #ts-ingress-errhpaiwc}
 {: troubleshoot}
 {: support}
@@ -32,7 +32,7 @@ The cluster does not have enough worker nodes to satisfy the autoscaling configu
 The cluster does not have enough compatible workers to meet the replica count that was specified in your ALB autoscaler configuration.
 {: tsCauses}
 
-Determine the number of required worker nodes. Then, update your autoscaler configuration replica count or add extra workers to your cluster to accommodate the requirements. 
+Determine the number of required worker nodes. Then, update your autoscaler configuration replica count or add extra workers to your cluster to accommodate the requirements.
 {: tsResolve}
 
 For more information on ALB autoscaling, see [Dynamically scaling ALBs with autoscaler](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler).
@@ -83,10 +83,10 @@ For more information on ALB autoscaling, see [Dynamically scaling ALBs with auto
             ibmcloud ks ingress alb autoscale set -c <clusterID> --alb <albID>
             ```
             {: pre}
-    
+
     - **To add extra worker nodes to the cluster**
         1. Follow the steps in [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc). Make sure to add workers to the appropriate zone and VLAN identified in previous steps. If you are using edge nodes, label them as `dedicated=edge`.
 
-1. Wait 15 to 20 minutes for the changes to apply. Then check if the warning is resolved. 
+1. Wait 15 to 20 minutes for the changes to apply. Then check if the warning is resolved.
 
 1. If the issue persists, contact support. Include a detailed list of the troubleshooting steps you took. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

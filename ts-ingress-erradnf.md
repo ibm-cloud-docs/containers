@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 
 keywords: containers, ingress, troubleshoot ingress, deployment missing, erradnf
@@ -16,7 +16,7 @@ content-type: troubleshoot
 
 
 
-# Why does the Ingress status show an `ERRADNF` error?
+# Ingress error: ERRADNF
 {: #ts-ingress-erradnf}
 {: troubleshoot}
 {: support}
@@ -45,7 +45,7 @@ Each ALB that is in the enabled state must have a corresponding deployment on th
     - [Reviewing master health](/docs/containers?topic=containers-debug_master#review-master-health).
     - [Worker node states](/docs/containers?topic=containers-worker-node-state-reference).
 1. List your ALBs with the **`ibmcloud ks ingress alb ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs). Each ALB that is `enabled` must have a corresponding deployment on the cluster.
-1. List the deployments in the `kube-system` namespace. 
+1. List the deployments in the `kube-system` namespace.
     ```sh
     kubectl get deployments -n kube-system
     ```
@@ -62,5 +62,5 @@ Each ALB that is in the enabled state must have a corresponding deployment on th
     kubectl get deployments -n kube-system
     ```
     {: pre}
-    
+
 1. If the issue persists, contact support. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

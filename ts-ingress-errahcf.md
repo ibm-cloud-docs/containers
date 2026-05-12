@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 
 keywords: containers, ingress, troubleshoot ingress, errahcf
@@ -16,7 +16,7 @@ content-type: troubleshoot
 
 
 
-# Why does the Ingress status show an `ERRAHCF` error?
+# Ingress error: ERRAHCF
 {: #ts-ingress-errahcf}
 {: troubleshoot}
 {: support}
@@ -40,7 +40,7 @@ The ALB is unable to respond to health requests (ERRAHCF).
 Review your access control lists to make sure that health traffic is allowed.
 {: tsResolve}
 
-1. List your cluster ALBs using the following command. 
+1. List your cluster ALBs using the following command.
 
     ```sh
     ibmcloud ks ingress alb ls
@@ -56,7 +56,7 @@ Review your access control lists to make sure that health traffic is allowed.
     ibmcloud ks cluster get
     ```
     {: pre }
-    
+
 
 1. Check that the ALB responds to health requests by running the following command. Enter the load balancer address and Ingress subdomain that you retrieved earlier.
     ```sh
@@ -71,7 +71,7 @@ Review your access control lists to make sure that health traffic is allowed.
         - For more information, see [Understanding secure by default cluster VPC networking](/docs/containers?topic=containers-vpc-security-group-reference) and [Creating and managing VPC security groups](/docs/containers?topic=containers-vpc-security-group-manage).
     - **Classic clusters**:
         - Make sure that you enabled [Virtual Router Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) in your account. Health check traffic does not leave the cluster but might be sent from one node to another. Ensure your network policies do not block this traffic.
-        - For more information, see [Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies). 
+        - For more information, see [Controlling traffic with network policies on classic clusters](/docs/containers?topic=containers-network_policies).
 
 1. Wait 10-15 minutes to see if the issue is resolved.
 

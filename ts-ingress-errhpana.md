@@ -1,8 +1,8 @@
 ---
 
-copyright: 
+copyright:
   years: 2023, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 connectivitykeywords: kubernetes, errhpana, ingress, autoscaler, alb
 
@@ -14,7 +14,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Why does the Ingress status show an `ERRHPANA` error?
+# Ingress error: ERRHPANA
 {: #ts-ingress-errhpana}
 {: troubleshoot}
 {: support}
@@ -29,7 +29,7 @@ Autoscaling is failing (ERRHPANA).
 ```
 {: screen}
 
-There are issues with the horizontal pod autoscaler (HPA) resource that are preventing autoscaling from functioning. 
+There are issues with the horizontal pod autoscaler (HPA) resource that are preventing autoscaling from functioning.
 {: tsCauses}
 
 View the HPA resource status for additional information on the error. Check the resource for issues or formatting errors that might prevent the autoscaler from functioning.
@@ -55,11 +55,11 @@ For more information on ALB autoscaling, see [Dynamically scaling ALBs with auto
 
     Run the command to apply any changes and update the autoscaler configuration.
     ```sh
-    ibmcloud ks ingress alb autoscale set 
+    ibmcloud ks ingress alb autoscale set
     ```
     {: pre}
 
-1. Wait 10 to 15 minutes for the changes to apply. Then check if the warning is resolved. 
+1. Wait 10 to 15 minutes for the changes to apply. Then check if the warning is resolved.
     ```sh
     ibmcloud ks ingress status-report get
     ```

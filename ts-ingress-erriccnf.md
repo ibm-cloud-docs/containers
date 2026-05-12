@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 
 keywords: containers, ingress, troubleshoot ingress, configmap missing, erriccnf
@@ -16,7 +16,7 @@ content-type: troubleshoot
 
 
 
-# Why does the Ingress status show an `ERRICCNF` error?
+# Ingress error: ERRICCNF
 {: #ts-ingress-erriccnf}
 {: troubleshoot}
 {: support}
@@ -45,7 +45,7 @@ Create the ConfigMap.
     kubectl create -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/ingress-config/ibm-k8s-controller-config.yaml
     ```
     {: pre}
-    
+
 1. Wait 10 to 15 minutes, then check if the warning is resolved by running the `ibmcloud ks ingress status-report get` command.
 
 1. If the issue persists, contact support. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
