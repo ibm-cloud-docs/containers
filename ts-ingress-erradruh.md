@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 
 keywords: containers, ingress status, troubleshoot ingress, erradruh
@@ -16,7 +16,7 @@ content-type: troubleshoot
 
 
 
-# Why does the Ingress status show an `ERRADRUH` error?
+# Ingress error: ERRADRUH
 {: #ts-ingress-erradruh}
 {: troubleshoot}
 {: support}
@@ -52,7 +52,7 @@ Complete the following steps to verify your cluster setup.
 public-crcn0hav5w07nccmt0iufg-alb1-7df65f554f-qk97w   0/1     Pending   0          30h
     ```
     {: screen}
-    
+
 1. Describe the ALB pods that are not running and review the `Events` section.
     ```sh
     kubectl describe pod POD -n kube-system
@@ -67,16 +67,16 @@ public-crcn0hav5w07nccmt0iufg-alb1-7df65f554f-qk97w   0/1     Pending   0       
     1. **VPC clusters**: Ensure you have at least two worker nodes in the zones where your ALBs are deployed. See [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add-workers-vpc).
     1. Ensure that your workers are healthy. For more information, see [Worker node states](/docs/containers?topic=containers-worker-node-state-reference).
     1. Ensure that your nodes are not tainted or cordoned. For more information, see [Taints and tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} and [Safely drain a node](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/){: external}.
-        
+
 1. If you notice pod restarts, complete the following steps.
     1. Get the logs for the failing pod.
         ```sh
         kubectl logs --previous -n kube-system <POD NAME>
         ```
         {: pre}
-        
+
     1. Review the logs and adjust the Ingress resource configurations or the Ingress ConfigMap in the `kube-system` namespace. For more information, see the NGINX Ingress [Annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) and [ConfigMap](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/).
-        
+
 1. Wait a few minutes, and verify that the failing pods are now running.
 
 1. If the issue persists, contact support. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

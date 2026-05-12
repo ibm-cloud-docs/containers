@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 
 keywords: containers, ingress status, troubleshoot ingress, errahinf
@@ -16,7 +16,7 @@ content-type: troubleshoot
 
 
 
-# Why does the Ingress status show an `ERRAHINF` error?
+# Ingress error: ERRAHINF
 {: #ts-ingress-errahinf}
 {: troubleshoot}
 {: support}
@@ -46,7 +46,7 @@ Manually create the health service.
     ```
     {: pre}
 
-1. Copy the following service configuration and save it to a file called `ingress.yaml`. 
+1. Copy the following service configuration and save it to a file called `ingress.yaml`.
 
     ```yaml
     apiVersion: networking.k8s.io/v1
@@ -84,7 +84,7 @@ Manually create the health service.
     kubectl apply -f ingress.yaml
     ```
     {: pre}
-    
+
 1. Wait 10-15 minutes, then retry the **`ibmcloud ks ingress status-report get`** command to see if the issue is resolved.
 
 1. If the issue persists, contact support. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

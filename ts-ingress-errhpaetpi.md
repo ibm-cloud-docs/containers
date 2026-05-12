@@ -1,8 +1,8 @@
 ---
 
-copyright: 
+copyright:
   years: 2023, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 connectivitykeywords: kubernetes, errhpaetpi, ingress, autoscaler, alb
 
@@ -14,7 +14,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Why does the Ingress status show an `ERRHPAETPI` error?
+# Ingress error: ERRHPAETPI
 {: #ts-ingress-errhpaetpi}
 {: troubleshoot}
 {: support}
@@ -38,7 +38,7 @@ ALB autoscaling is not supported for ALBs with `ExternalTrafficPolicy` set to `L
 To resolve the issue, choose one of the following options.
 
 - Change the `ExternalTrafficPolicy` setting.
-- Disable ALB autoscaling. 
+- Disable ALB autoscaling.
 
 Before you change the `ExternalTrafficPolicy` setting, review the information about [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer&interface=ui#lb_source_ip) for details on how this change might impact your cluster setup. If you decide that need to maintain source IP preservation, follow the step to disable ALB autoscaling instead.
 {: important}

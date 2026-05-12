@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 
 keywords: containers, ingress, troubleshoot ingress, ingress operator, ingress cluster operator, unsupported version, erravus
@@ -16,7 +16,7 @@ content-type: troubleshoot
 
 
 
-# Why does the Ingress status show an `ERRAVUS` error?
+# Ingress error: ERRAVUS
 {: #ts-ingress-erravus}
 {: troubleshoot}
 {: support}

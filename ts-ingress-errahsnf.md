@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 
 keywords: containers, ingress, troubleshoot ingress, errahsnf
@@ -16,7 +16,7 @@ content-type: troubleshoot
 
 
 
-# Why does the Ingress status show an `ERRAHSNF` error?
+# Ingress error: ERRAHSNF
 {: #ts-ingress-errahsnf}
 {: troubleshoot}
 {: support}
@@ -59,14 +59,14 @@ Manually create the health service.
       type: ClusterIP
     ```
     {: codeblock}
-    
+
 1. Create the health check service in your cluster.
 
     ```sh
     kubectl apply -f service.yaml
     ```
     {: pre}
-    
+
 1. Wait 10-15 minutes, then retry the **`ibmcloud ks ingress status-report get`** command to see if the issue is resolved.
 
 1. If the issue persists, contact support. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

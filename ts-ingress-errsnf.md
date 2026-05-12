@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 
 keywords: containers, ingress, troubleshoot ingress, load balancer missing, errsnf
@@ -16,7 +16,7 @@ content-type: troubleshoot
 
 
 
-# Why does the Ingress status show an `ERRSNF` error?
+# Ingress error: ERRSNF
 {: #ts-ingress-errsnf}
 {: troubleshoot}
 {: support}
@@ -69,5 +69,5 @@ Disable and re-enable your Ingress ALB.
     1. Wait until the ALB deployment is removed from the `kube-system` namespace.
     1. Re-enable the ALB using the `ibmcloud ks ingress alb enable` command.
     1. Wait 10 to 15 minutes, then check that the LoadBalancer services are created.
-    
+
 1. If the issue persists, contact support. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.

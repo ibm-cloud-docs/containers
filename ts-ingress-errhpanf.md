@@ -1,8 +1,8 @@
 ---
 
-copyright: 
+copyright:
   years: 2023, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-05-12"
 
 connectivitykeywords: kubernetes, errhpanf, ingress, autoscaler, alb
 
@@ -14,7 +14,7 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Why does the Ingress status show an `ERRHPANF` error?
+# Ingress error: ERRHPANF
 {: #ts-ingress-errhpanf}
 {: troubleshoot}
 {: support}
@@ -33,7 +33,7 @@ The horizontal pod autoscaler (HPA) resource is missing for the ALB, and the dep
 {: tsCauses}
 
 
-Check the HPA resource configuration for errors. Then, apply the resource again. 
+Check the HPA resource configuration for errors. Then, apply the resource again.
 {: tsResolve}
 
 For more information on ALB autoscaling, see [Dynamically scaling ALBs with autoscaler](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler).
@@ -53,7 +53,7 @@ For more information on ALB autoscaling, see [Dynamically scaling ALBs with auto
     ```
     {: pre}
 
-1. Wait 10 to 15 minutes for the changes to apply. Then check if the warning is resolved. 
+1. Wait 10 to 15 minutes for the changes to apply. Then check if the warning is resolved.
     ```sh
     ibmcloud ks ingress status-report get
     ```
