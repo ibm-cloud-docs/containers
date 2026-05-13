@@ -1,8 +1,8 @@
 ---
 
-copyright: 
-  years: 2024, 2024
-lastupdated: "2024-07-24"
+copyright:
+  years: 2024, 2026
+lastupdated: "2026-05-13"
 
 
 keywords: containers, kubernetes, affinity, taint, edge node, edge
@@ -20,6 +20,7 @@ subcollection: containers
 {: #edge}
 
 To ensure that ALB pods are always scheduled to edge worker nodes if they are present and not scheduled to non-edge worker nodes, you must create or use an existing worker pool that has at least two edge worker nodes per zone.
+{: shortdesc}
 
 During the update of an ALB pod, a new ALB pod rolls out to replace an existing ALB pod. To keep the ALB available during update, the rolling update ensures that at least one ALB pod is active. However, ALB pods have anti-affinity rules that don't permit two ALB pods on the same worker. When at least two edge nodes are present in a zone, the new ALB pod can be replaced on one of them while the other one keeps running. 
 
@@ -32,10 +33,16 @@ The steps to isolate ALB workloads to edge nodes is the same for both classic an
 
 
 
+## Before you begin
+{: #edge-prereqs}
+
 * Ensure that you have the following IAM roles:
     * Any platform access role for the cluster
     * **Writer** or **Manager** service access role for all namespaces
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
+
+## Isolating workloads to edge worker nodes
+{: #edge-isolate}
 
 To isolate your workload to edge worker nodes:
 
@@ -137,4 +144,3 @@ To isolate your workload to edge worker nodes:
 
 
 You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all the existing ALBs to the edge nodes. All subsequent ALBs that are added to the cluster are also deployed to an edge node in your edge worker pool. Next, you can prevent other [workloads from running on edge worker nodes](/docs/containers?topic=containers-edge-workload-prevent).
-

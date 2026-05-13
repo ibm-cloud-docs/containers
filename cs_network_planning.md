@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2024
-lastupdated: "2024-10-09"
+  years: 2014, 2026
+lastupdated: "2026-05-13"
 
 
 keywords: kubernetes, networking
@@ -25,7 +25,7 @@ With {{site.data.keyword.containerlong}}, you can manage in-cluster and external
 
 To quickly get started with app networking, follow this decision tree and click an option to see its setup docs:
 
-![Choosing an app exposure service](images/choosing-app-exposure.svg "Choosing an app exposure service"){: caption="This image walks you through choosing the best networking option for your application caption-side="bottom"}
+![Choosing an app exposure service](images/choosing-app-exposure.svg "Choosing an app exposure service"){: caption="This image walks you through choosing the best networking option for your application" caption-side="bottom"}
 
 ## Understanding load balancing for apps through Kubernetes service discovery
 {: #in-cluster}
