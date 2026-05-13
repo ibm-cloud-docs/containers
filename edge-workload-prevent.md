@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-07-24"
+  years: 2024, 2026
+lastupdated: "2026-05-13"
 
 
 keywords: containers, kubernetes, affinity, taint, edge node, edge
@@ -19,15 +19,15 @@ subcollection: containers
 # Preventing app workloads from running on edge worker nodes
 {: #edge-workload-prevent}
 
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
+
 A benefit of edge worker nodes is that they can be specified to run networking services only.
 {: shortdesc}
 
 You can prevent workloads from running on edge worker nodes and consuming worker node resources by using [Kubernetes taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.
 
-Complete the following steps to prevent other workloads from running on edge worker nodes.
-
-
-Before you begin
+## Before you begin
+{: #edge-workload-prereqs}
 * Ensure that you have the following IAM roles:
     * Any platform access role for the cluster
     * **Manager** service access role for all namespaces
@@ -53,7 +53,7 @@ Before you begin
         {: pre}
 
 1. Verify that the worker pool and worker nodes have the `dedicated=edge` label.
-    * To check the worker pool, run the `get` command.
+    * To check the worker pool, use the `get` command.
         ```sh
         ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
         ```
@@ -88,7 +88,7 @@ Before you begin
     ```
     {: pre}
 
-    Example output
+    Example output:
 
     ```sh
     Taints:             dedicated=edge:NoExecute
@@ -97,6 +97,3 @@ Before you begin
     Hostname:    10.184.58.7
     ```
     {: screen}
-
-
-

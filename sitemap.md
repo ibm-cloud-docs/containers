@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-12"
+lastupdated: "2026-05-13"
 
 
 keywords: containers
@@ -2132,6 +2132,8 @@ subcollection: containers
 * [Renewing expiring reservation](/docs/containers?topic=containers-reservations#renew-reservation)
 
 [Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prevent)
+
+* [Before you begin](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prereqs)
 
 [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge-sysdig#edge-sysdig)
 
@@ -7869,6 +7871,8 @@ subcollection: containers
 
 [Classic: Why can't I add worker nodes with an invalid VLAN ID?](/docs/containers?topic=containers-suspended#suspended)
 
+* [Resolving the issue](/docs/containers?topic=containers-suspended#suspended-resolve)
+
 [Why do I see a timeout error when I try to log in to a pod?](/docs/containers?topic=containers-cs_nodes_duplicate_ip#cs_nodes_duplicate_ip)
 
 [Why can't I SSH into my worker node?](/docs/containers?topic=containers-cs_ssh_worker#cs_ssh_worker)
@@ -8289,6 +8293,8 @@ subcollection: containers
 
 [Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot#cs_storage_nonroot)
 
+* [Resolving the issue](/docs/containers?topic=containers-cs_storage_nonroot#nonroot-resolve)
+
 * [Verifying the read and write permissions for the non-root user](/docs/containers?topic=containers-cs_storage_nonroot#verify-rw-permissions)
 
 [Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes#readonly_nodes)
@@ -8302,6 +8308,8 @@ subcollection: containers
 [Why do I see a `MountingTargetFailed` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-mount-failed#ts-storage-vpc-file-eit-mount-failed)
 
 [Why do I see an `UnresponsiveMountHelperContainerUtility` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-unresponsive#ts-storage-vpc-file-eit-unresponsive)
+
+* [Resolving the issue](/docs/containers?topic=containers-ts-storage-vpc-file-eit-unresponsive#vpc-file-eit-resolve)
 
 [Why does PVC creation fail for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-pvc-fails#ts-storage-vpc-file-eit-pvc-fails)
 
@@ -8343,6 +8351,8 @@ subcollection: containers
 [Why does my block storage PVC remain in a pending state?](/docs/containers?topic=containers-block_pvc_pending#block_pvc_pending)
 
 [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts#vpc-block-api-key-reset-ts)
+
+* [Resolving the issue](/docs/containers?topic=containers-vpc-block-api-key-reset-ts#vpc-block-api-key-resolve)
 
 [Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?](/docs/containers?topic=containers-block_not_attached_vpc#block_not_attached_vpc)
 
@@ -8397,6 +8407,8 @@ subcollection: containers
 
 [Why does installing the {{site.data.keyword.cos_full_notm}} plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails#cos_plugin_fails)
 
+* [Resolving the issue](/docs/containers?topic=containers-cos_plugin_fails#cos-plugin-resolve)
+
 [Debugging the Cloud Object Storage add-on](/docs/containers?topic=containers-ts-storage-cos-csi-addon#ts-storage-cos-csi-addon)
 
 [Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure#cred_failure)
@@ -8406,6 +8418,8 @@ subcollection: containers
 [Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending#cos_pvc_pending)
 
 [Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails#cos_secret_access_fails)
+
+* [Resolving the issue](/docs/containers?topic=containers-cos_secret_access_fails#cos-secret-resolve)
 
 [Why is the transport endpoint not connected?](/docs/containers?topic=containers-cos_transport_ts_connect#cos_transport_ts_connect)
 
