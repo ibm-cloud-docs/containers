@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-05-12"
+lastupdated: "2026-05-13"
 
 keywords:
 
@@ -38,7 +38,7 @@ Minimal
 ## Data and Control plane deployment for an MZR
 {: #data-and-control-plane-deployment-for-an-mzr}
 
-The following dependencies apply to the following deployment locations: Amsterdam 03, Chennai 01, Dallas (us-south), Frankfurt (eu-de), London (eu-gb), Madrid (eu-es), Montreal 01, Osaka (jp-osa), Paris 01, San Jose 03, San Jose 04, Sao Paulo (br-sao), Sao Paulo 01, Singapore 01, Sydney (au-syd), Tokyo (jp-tok), Toronto (ca-tor), Toronto 01, Washington DC (us-east).
+The following dependencies apply to the following deployment locations: Amsterdam 03, Chennai 01, Dallas (us-south), Frankfurt (eu-de), London (eu-gb), Madrid (eu-es), Milan 01, Montreal 01, Osaka (jp-osa), Paris 01, San Jose 03, San Jose 04, Sao Paulo (br-sao), Sao Paulo 01, Singapore 01, Sydney (au-syd), Tokyo (jp-tok), Toronto (ca-tor), Toronto 01, Washington DC (us-east).
 
 
 |Dependencies|Dependency impacts|Customer provided|Control or data plane|Location of dependency|
