@@ -3398,6 +3398,10 @@ subcollection: containers
 
 [Isolating Ingress resources to edge worker nodes](/docs/containers?topic=containers-edge#edge)
 
+* [Before you begin](/docs/containers?topic=containers-edge#edge-prereqs)
+
+* [Isolating workloads to edge worker nodes](/docs/containers?topic=containers-edge#edge-isolate)
+
 [Customizing ALB routing](/docs/containers?topic=containers-comm-ingress-annotations#comm-ingress-annotations)
 
 * [Adding a server port to a host header](/docs/containers?topic=containers-comm-ingress-annotations#add-sport-hheader)

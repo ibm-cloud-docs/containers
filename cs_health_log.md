@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-09-02"
+  years: 2014, 2026
+lastupdated: "2026-05-13"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -34,7 +34,7 @@ By default, logs are generated and written locally for all the following {{site.
 To deploy a logging agent to your cluster, see [Managing the Logging agent for Red Hat OpenShift on IBM Cloud clusters](/docs/cloud-logs?topic=cloud-logs-agent-helm-os-deploy) or [Managing the Logging agent for IBM Cloud Kubernetes Service clusters](/docs/cloud-logs?topic=cloud-logs-agent-helm-kube-deploy).
 
 Fluentd with an external server
-: To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd](https://www.fluentd.org/){: external} cluster component collects logs from the paths for a specified source. Fluentd can then forward these logs to an external server that accepts a `syslog` protocol. To get started, see [Understanding log forwarding to an external server](#logging-external).
+:   To collect, forward, and view logs for a cluster component, you can create a logging configuration by using Fluentd. When you create a logging configuration, the [Fluentd](https://www.fluentd.org/){: external} cluster component collects logs from the paths for a specified source. Fluentd can then forward these logs to an external server that accepts a `syslog` protocol. To get started, see [Understanding log forwarding to an external server](#logging-external).
 
 
 ## Migrating logging and monitoring agents to Cloud Logs
@@ -106,7 +106,7 @@ What are the sources that I can configure log forwarding for?
     :   `/var/log/ibmc-s3fs.log`
     :   `/var/log/ibmc-block.log`
 
-    Pods**
+    Pods
     :   `portworx-***`
     :   `ibmcloud-block-storage-attacher-***`
     :   `ibmcloud-block-storage-driver-***`
