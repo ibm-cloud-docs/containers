@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-13"
+lastupdated: "2026-05-14"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -26,7 +26,8 @@ content-type: troubleshoot
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
-
+PVC or pod creation fails because the Kubernetes secret for {{site.data.keyword.cos_full_notm}} is not found or incorrectly referenced.
+{: shortdesc}
 
 When you create your PVC or deploy a pod that mounts the PVC, the creation or deployment fails.
 {: tsSymptoms}
@@ -65,3 +66,18 @@ This task requires the [**Writer** or **Manager** {{site.data.keyword.cloud_notm
 2. If your secret does not show `ibm/ibmc-s3fs` as the **Type**, [re-create your secret](/docs/containers?topic=containers-storage-cos-understand#create_cos_secret).
 
 3. Check your YAML configuration file for your PVC and pod to verify that you used the correct secret name.
+
+4. Verify that the secret exists in the same namespace as your PVC or pod.
+
+    ```sh
+    kubectl get secret <secret_name> -n <namespace>
+    ```
+    {: pre}
+
+5. After correcting the secret reference, redeploy your PVC or pod and verify it mounts successfully.
+
+    ```sh
+    kubectl get pvc
+    kubectl get pods
+    ```
+    {: pre}
