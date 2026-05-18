@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2026, 2026
-lastupdated: "2026-04-14"
+lastupdated: "2026-05-18"
 
 keywords: containers, benchmarks, 1.35, containers benchmarks, containers 1.35
 
@@ -25,7 +25,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 1.1 Master node configuration files
 {: #11-master-node-configuration-files-135}
 
-| #      | Recommendation. | Scored? | Level | Result | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result | Responsibility |
 | ------ | -------------------------------------------------------------------------------------------------------- | ----------------- | ----- | ------ | -------------- |
 | 1.1.1  | Ensure that the API server pod specification file permissions are set to `644` or more restrictive. | Scored            | 1     | Pass   | {{site.data.keyword.IBM_notm}}            |
 | 1.1.2  | Ensure that the API server pod specification file ownership is set to `root:root`. | Scored            | 1     | Pass   | {{site.data.keyword.IBM_notm}}            |
@@ -53,7 +53,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 1.2 API server
 {: #12-api-server-135}
 
-| #      | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ------ | ------------------------------------------------------------------------------------------------------ | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 1.2.1  | Ensure that the `--anonymous-auth` argument is set to `false`. | Not Scored        | 1     | [Fail](#ibm-remediations-and-explanations-135) | {{site.data.keyword.IBM_notm}}            |
 | 1.2.2  | Ensure that the `--basic-auth-file` argument is not set. | Scored            | 1     | Pass                                       | {{site.data.keyword.IBM_notm}}            |
@@ -95,7 +95,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 1.3 Controller manager
 {: #13-controller-manager-135}
 
-| #     | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ----- | --------------------------------------------------------------------------------- | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 1.3.1 | Ensure that the `--terminated-pod-gc-threshold` argument is set as appropriate. | Scored            | 1     | Pass                                       | {{site.data.keyword.IBM_notm}}            |
 | 1.3.2 | Ensure that the `--profiling` argument is set to `false`. | Scored            | 1     | Pass                                       | {{site.data.keyword.IBM_notm}}            |
@@ -109,7 +109,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 1.4 Scheduler
 {: #14-scheduler-135}
 
-| #     | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ----- | ----------------------------------------------------------- | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 1.4.1 | Ensure that the `--profiling` argument is set to `false`. | Scored            | 1     | Pass                                       | {{site.data.keyword.IBM_notm}}            |
 | 1.4.2 | Ensure that the `--bind-address` argument is set to `127.0.0.1`. | Scored            | 1     | [Fail](#ibm-remediations-and-explanations-135) | {{site.data.keyword.IBM_notm}}            |
@@ -135,7 +135,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 3.1 Authentication and authorization
 {: #31-authentication-and-authorization-135}
 
-| #     | Recommendation. | Scored? | Level | Result | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result | Responsibility |
 | ----- | -------------------------------------------------------------- | ----------------- | ----- | ------ | -------------- |
 | 3.1.1 | Client certificate authentication should not be used for users. | Not Scored        | 2     | Pass   | Shared         |
 {: caption="Section 3.1 Authentication and authorization benchmark results" caption-side="bottom"}
@@ -143,7 +143,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 3.2 Logging
 {: #32-logging-135}
 
-| #     | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ----- | --------------------------------------------------------- | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 3.2.1 | Ensure that a minimal audit policy is created. | Scored            | 1     | [Fail](#ibm-remediations-and-explanations-135) | Shared         |
 | 3.2.2 | Ensure that the audit policy covers key security concerns. | Not Scored        | 2     | [Fail](#ibm-remediations-and-explanations-135) | Shared         |
@@ -155,7 +155,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 4.1 Worker node configuration files
 {: #41-worker-node-configuration-files-135}
 
-| #      | Recommendation. | Scored? | Level | Result | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result | Responsibility |
 | ------ | ------------------------------------------------------------------------------------------- | ----------------- | ----- | ------ | -------------- |
 | 4.1.1  | Ensure that the kubelet service file permissions are set to `644` or more restrictive. | Scored            | 1     | Pass   | {{site.data.keyword.IBM_notm}}            |
 | 4.1.2  | Ensure that the kubelet service file ownership is set to `root:root`. | Scored            | 1     | Pass   | {{site.data.keyword.IBM_notm}}            |
@@ -172,7 +172,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 4.2 Kubelet
 {: #42-kubelet-135}
 
-| #      | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ------ | --------------------------------------------------------------------------------------------------- | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 4.2.1  | Ensure that the `--anonymous-auth` argument is set to `false`. | Scored            | 1     | Pass                                       | {{site.data.keyword.IBM_notm}}            |
 | 4.2.2  | Ensure that the `--authorization-mode` argument is not set to `AlwaysAllow`. | Scored            | 1     | Pass                                       | {{site.data.keyword.IBM_notm}}            |
@@ -195,7 +195,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 5.1 RBAC and service accounts
 {: #51-rbac-and-service-accounts-135}
 
-| #     | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ----- | ------------------------------------------------------------------- | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 5.1.1 | Ensure that the cluster-admin role is only used where required. | Not Scored        | 1     | Pass                                       | Shared         |
 | 5.1.2 | Minimize access to secrets. | Not Scored        | 1     | [Fail](#ibm-remediations-and-explanations-135) | Shared         |
@@ -208,7 +208,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 5.2 Pod security policies
 {: #52-pod-security-policies-135}
 
-| #     | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ----- | ----------------------------------------------------------------------------------- | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 5.2.1 | Minimize the admission of privileged containers. | Not Scored        | 1     | [Pass](#ibm-remediations-and-explanations-135) | Shared         |
 | 5.2.2 | Minimize the admission of containers wishing to share the host process ID namespace. | Scored            | 1     | [Pass](#ibm-remediations-and-explanations-135) | Shared         |
@@ -224,7 +224,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 5.3 Network policies and CNI
 {: #53-network-policies-and-cni-135}
 
-| #     | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ----- | -------------------------------------------------------- | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 5.3.1 | Ensure that the CNI in use supports Network Policies. | Not Scored        | 1     | Pass                                       | {{site.data.keyword.IBM_notm}}            |
 | 5.3.2 | Ensure that all Namespaces have Network Policies defined. | Scored            | 2     | [Fail](#ibm-remediations-and-explanations-135) | Shared         |
@@ -233,7 +233,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 5.4 Secrets management
 {: #54-secrets-management-135}
 
-| #     | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ----- | ------------------------------------------------------------------- | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 5.4.1 | Prefer using secrets as files over secrets as environment variables. | Not Scored        | 1     | Pass                                       | Shared         |
 | 5.4.2 | Consider external secret storage. | Not Scored        | 2     | [Fail](#ibm-remediations-and-explanations-135) | Shared         |
@@ -242,7 +242,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 5.5 Extensible admission control
 {: #55-extensible-admission-control-135}
 
-| #     | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ----- | ------------------------------------------------------------------------ | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 5.5.1 | Configure Image Provenance using `ImagePolicyWebhook` admission controller. | Not Scored        | 2     | [Fail](#ibm-remediations-and-explanations-135) | Shared         |
 {: caption="Section 5.5 Extensible admission control benchmark results" caption-side="bottom"}
@@ -250,7 +250,7 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 ### 5.7 General policies
 {: #57-general-policies-135}
 
-| #     | Recommendation. | Scored? | Level | Result                                     | Responsibility |
+| Section| Recommendation. | Scored? | Level | Result                                     | Responsibility |
 | ----- | -------------------------------------------------------------------------------- | ----------------- | ----- | ------------------------------------------ | -------------- |
 | 5.7.1 | Create administrative boundaries between resources using namespaces. | Not Scored        | 1     | Pass                                       | Shared         |
 | 5.7.2 | Ensure that the `seccomp` profile is set to docker/default in your pod definitions. | Not Scored        | 2     | [Fail](#ibm-remediations-and-explanations-135) | Shared         |
