@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-04-07"
+lastupdated: "2026-05-18"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, node scaling, ca, autoscaler
@@ -549,8 +549,6 @@ These conditions might impact cluster flavor availability:
 | mb4c.48x1536  \n(Bare Metal) | syd01  \nsyd04  \nsyd05 | 48 cores  \n1536GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mb4c.4x32  \n(Bare Metal) | syd01  \nsyd04  \nsyd05 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 2000GB HDD |
 | mb4c.4x32.1.9tb.ssd  \n(Bare Metal) | syd01  \nsyd04  \nsyd05 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
-| me4c.4x32  \n(Bare Metal Edge) | syd01  \nsyd04  \nsyd05 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 2000GB HDD |
-| me4c.4x32.1.9tb.ssd  \n(Bare Metal Edge) | syd01  \nsyd04  \nsyd05 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 960GB SSD |
 | mg4c.32x384.2xp100  \n(Bare Metal GPUs) | syd01  \nsyd04  \nsyd05 | 32 cores  \n384GB memory  \n10000Mbps network speed  \n2 P100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mg4c.48x384.2xv100  \n(Bare Metal GPUs) | syd01  \nsyd04  \nsyd05 | 48 cores  \n384GB memory  \n10000Mbps network speed  \n2 V100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 {: class="simple-tab-table"}
