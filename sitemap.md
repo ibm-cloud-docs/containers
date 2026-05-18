@@ -246,13 +246,15 @@ subcollection: containers
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
 
-    * VPC Block CSI Driver cluster add-on patch updates.
+    * [13 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may1326)
 
-    * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+        * VPC Block CSI Driver cluster add-on patch updates.
 
-    * IBM Storage Operator cluster add-on patch updates.
+        * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
-    * VPC File CSI Driver cluster add-on patch updates.
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
 
     * [11 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may1126)
 
