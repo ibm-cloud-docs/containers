@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-18"
+lastupdated: "2026-05-19"
 
 
 keywords: containers
@@ -3877,6 +3877,20 @@ subcollection: containers
 
 * [Assigning trusted profiles to block storage](/docs/containers?topic=containers-block_storage#block-classic-trusted-profile)
 
+[Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate_hpcs_kms_classic_block)
+
+* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-before)
+
+* [Prerequisites for migration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-prereqs)
+
+* [Migration steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-steps)
+
+    * [Step 1: Replace the HPCS secret with a Key Protect configuration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#replace-secret)
+
+    * [Step 2: Update PVC encryption keys to use Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate-keys)
+
+* [Next steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-next)
+
 
 ### Block Storage for VPC add-on
 {: #sitemap_block_storage_for_vpc_add-on}
@@ -6395,6 +6409,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [v1.0.40_340278420, released 19 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1040_340278420)
+
     * [v1.0.39_338302625, released 13 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1039_338302625)
 
     * [v1.0.37_333899629, released 27 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1037_333899629)
@@ -6610,6 +6626,8 @@ subcollection: containers
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [v2.0.31_340278457, released 19 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2031_340278457)
 
     * [v2.0.30_338302575, released 13 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2030_338302575)
 

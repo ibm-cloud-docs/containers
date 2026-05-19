@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-18"
+lastupdated: "2026-05-19"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, node scaling, ca, autoscaler
@@ -69,8 +69,6 @@ These conditions might impact cluster flavor availability:
 | mb4c.48x1536  \n(Bare Metal) | ams03 | 48 cores  \n1536GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mb4c.4x32  \n(Bare Metal) | ams03 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 2000GB HDD |
 | mb4c.4x32.1.9tb.ssd  \n(Bare Metal) | ams03 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
-| me4c.4x32  \n(Bare Metal Edge) | ams03 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 2000GB HDD |
-| me4c.4x32.1.9tb.ssd  \n(Bare Metal Edge) | ams03 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 960GB SSD |
 | mg4c.32x384.2xp100  \n(Bare Metal GPUs) | ams03 | 32 cores  \n384GB memory  \n10000Mbps network speed  \n2 P100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mg4c.48x384.2xv100  \n(Bare Metal GPUs) | ams03 | 48 cores  \n384GB memory  \n10000Mbps network speed  \n2 V100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 {: class="simple-tab-table"}
@@ -174,8 +172,6 @@ These conditions might impact cluster flavor availability:
 | mb4c.48x1536  \n(Bare Metal) | dal10  \ndal12  \ndal13 | 48 cores  \n1536GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mb4c.4x32  \n(Bare Metal) | dal10  \ndal12  \ndal13 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 2000GB HDD |
 | mb4c.4x32.1.9tb.ssd  \n(Bare Metal) | dal10  \ndal12  \ndal13 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
-| me4c.4x32  \n(Bare Metal Edge) | dal10  \ndal12  \ndal13 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 2000GB HDD |
-| me4c.4x32.1.9tb.ssd  \n(Bare Metal Edge) | dal10  \ndal12  \ndal13 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 960GB SSD |
 | mg4c.32x384.2xp100  \n(Bare Metal GPUs) | dal10  \ndal12  \ndal13 | 32 cores  \n384GB memory  \n10000Mbps network speed  \n2 P100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mg4c.48x384.2xv100  \n(Bare Metal GPUs) | dal10  \ndal12  \ndal13 | 48 cores  \n384GB memory  \n10000Mbps network speed  \n2 V100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 {: class="simple-tab-table"}
@@ -225,8 +221,6 @@ These conditions might impact cluster flavor availability:
 | mb4c.48x1536  \n(Bare Metal) | fra02  \nfra04  \nfra05 | 48 cores  \n1536GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mb4c.4x32  \n(Bare Metal) | fra02  \nfra04  \nfra05 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 2000GB HDD |
 | mb4c.4x32.1.9tb.ssd  \n(Bare Metal) | fra02  \nfra04  \nfra05 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
-| me4c.4x32  \n(Bare Metal Edge) | fra02  \nfra04  \nfra05 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 2000GB HDD |
-| me4c.4x32.1.9tb.ssd  \n(Bare Metal Edge) | fra02  \nfra04  \nfra05 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 960GB SSD |
 | mg4c.32x384.2xp100  \n(Bare Metal GPUs) | fra02  \nfra04  \nfra05 | 32 cores  \n384GB memory  \n10000Mbps network speed  \n2 P100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mg4c.48x384.2xv100  \n(Bare Metal GPUs) | fra02  \nfra04  \nfra05 | 48 cores  \n384GB memory  \n10000Mbps network speed  \n2 V100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 {: class="simple-tab-table"}
@@ -276,8 +270,6 @@ These conditions might impact cluster flavor availability:
 | mb4c.48x1536  \n(Bare Metal) | lon02  \nlon04  \nlon05  \nlon06 | 48 cores  \n1536GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mb4c.4x32  \n(Bare Metal) | lon02  \nlon04  \nlon05  \nlon06 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 2000GB HDD |
 | mb4c.4x32.1.9tb.ssd  \n(Bare Metal) | lon02  \nlon04  \nlon05  \nlon06 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
-| me4c.4x32  \n(Bare Metal Edge) | lon02  \nlon04  \nlon05  \nlon06 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 2000GB HDD |
-| me4c.4x32.1.9tb.ssd  \n(Bare Metal Edge) | lon02  \nlon04  \nlon05  \nlon06 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 960GB SSD |
 | mg4c.32x384.2xp100  \n(Bare Metal GPUs) | lon02  \nlon04  \nlon05  \nlon06 | 32 cores  \n384GB memory  \n10000Mbps network speed  \n2 P100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mg4c.48x384.2xv100  \n(Bare Metal GPUs) | lon02  \nlon04  \nlon05  \nlon06 | 48 cores  \n384GB memory  \n10000Mbps network speed  \n2 V100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 {: class="simple-tab-table"}
@@ -327,8 +319,6 @@ These conditions might impact cluster flavor availability:
 | mb4c.48x1536  \n(Bare Metal) | mon01 | 48 cores  \n1536GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mb4c.4x32  \n(Bare Metal) | mon01 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 2000GB HDD |
 | mb4c.4x32.1.9tb.ssd  \n(Bare Metal) | mon01 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
-| me4c.4x32  \n(Bare Metal Edge) | mon01 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 2000GB HDD |
-| me4c.4x32.1.9tb.ssd  \n(Bare Metal Edge) | mon01 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 960GB SSD |
 | mg4c.32x384.2xp100  \n(Bare Metal GPUs) | mon01 | 32 cores  \n384GB memory  \n10000Mbps network speed  \n2 P100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mg4c.48x384.2xv100  \n(Bare Metal GPUs) | mon01 | 48 cores  \n384GB memory  \n10000Mbps network speed  \n2 V100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 {: class="simple-tab-table"}
@@ -433,8 +423,6 @@ These conditions might impact cluster flavor availability:
 | mb4c.48x1536  \n(Bare Metal) | sjc04 | 48 cores  \n1536GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mb4c.4x32  \n(Bare Metal) | sjc04 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 2000GB HDD |
 | mb4c.4x32.1.9tb.ssd  \n(Bare Metal) | sjc04 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
-| me4c.4x32  \n(Bare Metal Edge) | sjc04 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 2000GB HDD |
-| me4c.4x32.1.9tb.ssd  \n(Bare Metal Edge) | sjc04 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 960GB SSD |
 | mg4c.32x384.2xp100  \n(Bare Metal GPUs) | sjc04 | 32 cores  \n384GB memory  \n10000Mbps network speed  \n2 P100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mg4c.48x384.2xv100  \n(Bare Metal GPUs) | sjc04 | 48 cores  \n384GB memory  \n10000Mbps network speed  \n2 V100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 {: class="simple-tab-table"}
@@ -649,8 +637,6 @@ These conditions might impact cluster flavor availability:
 | mb4c.48x1536  \n(Bare Metal) | tor01 | 48 cores  \n1536GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mb4c.4x32  \n(Bare Metal) | tor01 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 2000GB HDD |
 | mb4c.4x32.1.9tb.ssd  \n(Bare Metal) | tor01 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
-| me4c.4x32  \n(Bare Metal Edge) | tor01 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 2000GB HDD |
-| me4c.4x32.1.9tb.ssd  \n(Bare Metal Edge) | tor01 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 960GB SSD |
 | mg4c.32x384.2xp100  \n(Bare Metal GPUs) | tor01 | 32 cores  \n384GB memory  \n10000Mbps network speed  \n2 P100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mg4c.48x384.2xv100  \n(Bare Metal GPUs) | tor01 | 48 cores  \n384GB memory  \n10000Mbps network speed  \n2 V100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 {: class="simple-tab-table"}
@@ -700,8 +686,6 @@ These conditions might impact cluster flavor availability:
 | mb4c.48x1536  \n(Bare Metal) | wdc04  \nwdc06  \nwdc07 | 48 cores  \n1536GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mb4c.4x32  \n(Bare Metal) | wdc04  \nwdc06  \nwdc07 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 2000GB HDD |
 | mb4c.4x32.1.9tb.ssd  \n(Bare Metal) | wdc04  \nwdc06  \nwdc07 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
-| me4c.4x32  \n(Bare Metal Edge) | wdc04  \nwdc06  \nwdc07 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 2000GB HDD |
-| me4c.4x32.1.9tb.ssd  \n(Bare Metal Edge) | wdc04  \nwdc06  \nwdc07 | 4 cores  \n32GB memory  \n10000Mbps network speed  \n No GPUs | | 2000GB HDD | 960GB SSD |
 | mg4c.32x384.2xp100  \n(Bare Metal GPUs) | wdc04  \nwdc06  \nwdc07 | 32 cores  \n384GB memory  \n10000Mbps network speed  \n2 P100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 | mg4c.48x384.2xv100  \n(Bare Metal GPUs) | wdc04  \nwdc06  \nwdc07 | 48 cores  \n384GB memory  \n10000Mbps network speed  \n2 V100 GPUs |  UBUNTU_24_64  \n| 2000GB HDD | 960GB SSD |
 {: class="simple-tab-table"}
