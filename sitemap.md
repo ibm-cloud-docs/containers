@@ -6411,6 +6411,8 @@ subcollection: containers
 
     * [v1.0.40_340278420, released 19 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1040_340278420)
 
+    * [v1.0.41_341664770, released 19 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1041_341664770)
+
     * [v1.0.39_338302625, released 13 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1039_338302625)
 
     * [v1.0.37_333899629, released 27 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1037_333899629)
@@ -6626,8 +6628,6 @@ subcollection: containers
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
-
-    * [v2.0.31_340278457, released 19 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2031_340278457)
 
     * [v2.0.30_338302575, released 13 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2030_338302575)
 
