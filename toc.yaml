@@ -253,6 +253,8 @@ toc:
               label: Block Storage for Classic
               topics:
               - storage-block.md
+              - topic: hpcs-kp-migration-classic-block.md
+                navtitle: Migrating from HPCS to Key Protect
           - topicgroup:
               label: Block Storage for VPC add-on
               topics:
