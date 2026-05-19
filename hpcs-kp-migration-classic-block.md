@@ -231,4 +231,4 @@ For each encrypted PVC that needs to be migrated, follow these steps to unwrap t
 
 - Update your documentation and runbooks to reflect the new Key Protect configuration.
 - Consider setting up [key rotation policies](/docs/key-protect?topic=key-protect-set-rotation-policy) for your Key Protect root keys.
-- If you encounter any issues during or after the migration, [open an IBM Cloud support ticket](/docs/get-support?topic=get-support-using-avatar).
+- If you encounter any issues during or after the migration, [open an IBM Cloud support ticket](/docs/support?topic=support-using-avatar).
