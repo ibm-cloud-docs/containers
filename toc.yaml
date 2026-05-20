@@ -191,6 +191,7 @@ toc:
           - images.md
           - app.md
           - cs_app_deploy.md
+          - cs_gpu_migrate_136.md
           - nodeport.md
           - app-update.md
       - topicgroup:

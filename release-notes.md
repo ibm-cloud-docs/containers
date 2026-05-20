@@ -62,10 +62,6 @@ VPC File CSI Driver cluster add-on patch updates.
 
 
 
-
-
-
-
 ### 13 May 2026
 {: #containers-may1326}
 {: release-note}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-03-26"
+lastupdated: "2026-05-20"
 
 
 keywords: kubernetes
@@ -269,7 +269,8 @@ If you have a GPU machine type, you can speed up the processing time required fo
 
 
 
-In {{site.data.keyword.containerlong_notm}}, the required GPU drivers are automatically installed for you.
+**Important driver changes starting with Kubernetes version 1.36**: IBM Cloud Kubernetes Service no longer installs NVIDIA GPU drivers on worker nodes with GPUs starting from Kubernetes version 1.36. If you plan to run GPU workloads on version 1.36 or later clusters, you must manage GPU driver installation and lifecycle on your own worker nodes. For clusters running version 1.35 or earlier, IBM-provided GPU drivers continue to be available. For migration guidance, see [Migrating to self-managed NVIDIA GPU drivers](#gpu-migrate-136).
+{: important}
 
 
 
@@ -287,6 +288,20 @@ Before you begin
     - [VPC flavors](/docs/containers?topic=containers-vpc-flavors)
 
 - Make sure that you are assigned a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the cluster.
+
+
+
+**For Kubernetes version 1.36 and later**: You must install and manage the NVIDIA GPU driver stack on your own. IBM Cloud Kubernetes Service no longer provides pre-installed GPU drivers on worker nodes. Follow the [NVIDIA GPU Operator installation guide](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html){: external} to install the required components:
+- NVIDIA kernel driver
+- Container runtime components (e.g., nvidia-container-toolkit)
+- Kubernetes device plugin
+
+Until the driver is installed, pods requesting GPUs will remain in `Pending` state. They will transition to `Running` automatically after a compatible driver becomes available on the node.
+{: important}
+
+**For Kubernetes version 1.35 and earlier**: IBM-provided GPU drivers are automatically installed on GPU worker nodes. No additional driver installation is required.
+
+
 
 
 
@@ -441,5 +456,14 @@ Before you begin
     In this example, you see a GPU was used to execute the job because the GPU was scheduled in the worker node. If the limit is set to 2, only 2 GPUs are shown.
 
 Now that you deployed a test GPU workload, you might want to set up your cluster to run a tool that relies on GPU processing, such as [IBM Maximo Visual Inspection](https://www.ibm.com/products/maximo/asset-performance-management){: external}.
+
+
+
+## Migrating to self-managed NVIDIA GPU drivers
+{: #gpu-migrate-136}
+
+For detailed guidance on migrating from IBM-provided GPU drivers to self-managed drivers when upgrading to Kubernetes version 1.36, see [Migrating to self-managed NVIDIA GPU drivers for Kubernetes 1.36](/docs/containers?topic=containers-gpu-migrate-136).
+
+
 
  

@@ -3090,6 +3090,52 @@ subcollection: containers
 
     * [Deploying a workload](/docs/containers?topic=containers-deploy_app#gpu-workload)
 
+* [Migrating to self-managed NVIDIA GPU drivers](/docs/containers?topic=containers-deploy_app#gpu-migrate-136)
+
+[Migrating to self-managed NVIDIA GPU drivers for Kubernetes 1.36](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-136)
+
+* [What's changing?](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-what-changed)
+
+* [What's the impact?](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-impact)
+
+* [Understanding the migration process](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-process)
+
+* [Preparing for migration before version 1.36 is available](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-prepare)
+
+* [Before you begin](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-prereqs)
+
+* [Migration examples](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-examples)
+
+* [Example 1: Single GPU node in the cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-node)
+
+    * [Step 1: Get the initial cluster state](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-initial-state)
+
+    * [Step 2: Install the NVIDIA GPU Operator](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-install-operator)
+
+    * [Step 3: Upgrade the cluster control plane](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-upgrade-master)
+
+    * [Step 4: Add a temporary GPU worker node](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-add-temp)
+
+    * [Step 5: Migrate workloads and upgrade the original node](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-upgrade-original)
+
+    * [Step 6: Remove the temporary node (optional)](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-cleanup)
+
+* [Example 2: Multiple GPU nodes in the cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-nodes)
+
+    * [Step 1: Get the initial cluster state](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-initial-state)
+
+    * [Step 2: Install the NVIDIA GPU Operator](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-install-operator)
+
+    * [Step 3: Upgrade the cluster control plane](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-upgrade-master)
+
+    * [Step 4: Upgrade the first worker node](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-upgrade-first-worker)
+
+    * [Step 5: Upgrade remaining nodes](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-upgrade-remaining)
+
+* [Next steps](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-next-steps)
+
+* [Related information](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-related)
+
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 
 * [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
