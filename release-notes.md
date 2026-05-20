@@ -31,16 +31,19 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-
-
 ### 20 May 2026
 {: #containers-may2026}
 {: release-note}
+
+
 
 Headlamp cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-headlamp).
 
 
+
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 ### 19 May 2026

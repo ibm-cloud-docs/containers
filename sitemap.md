@@ -250,6 +250,8 @@ subcollection: containers
 
         * Headlamp cluster add-on patch updates.
 
+        * VPC Block CSI Driver cluster add-on patch updates.
+
     * [19 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may1926)
 
         * IBM Storage Operator cluster add-on patch updates.
@@ -6461,6 +6463,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [v5.2.51_340196278, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5251_340196278)
+
     * [v5.2.50_338659383, released 13 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5250_338659383)
 
     * [v5.2.49_335380306, released 30 April 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5249_335380306)
@@ -6492,6 +6496,8 @@ subcollection: containers
     * [5.2.31_687, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [v5.1.51_340196313, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5151_340196313)
 
     * [v5.1.50_338876479, released 13 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5150_338876479)
 
