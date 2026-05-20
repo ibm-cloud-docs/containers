@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-19"
+lastupdated: "2026-05-20"
 
 
 keywords: containers
@@ -245,6 +245,12 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
+
+    * [20 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2026)
+
+        * Headlamp cluster add-on patch updates.
+
+        * VPC Block CSI Driver cluster add-on patch updates.
 
     * [19 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may1926)
 
@@ -3083,6 +3089,52 @@ subcollection: containers
     * [Prerequisites](/docs/containers?topic=containers-deploy_app#gpu-prereqs)
 
     * [Deploying a workload](/docs/containers?topic=containers-deploy_app#gpu-workload)
+
+* [Migrating to self-managed NVIDIA GPU drivers](/docs/containers?topic=containers-deploy_app#gpu-migrate-136)
+
+[Migrating to self-managed NVIDIA GPU drivers for Kubernetes 1.36](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-136)
+
+* [What's changing?](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-what-changed)
+
+* [What's the impact?](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-impact)
+
+* [Understanding the migration process](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-process)
+
+* [Preparing for migration before version 1.36 is available](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-prepare)
+
+* [Before you begin](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-prereqs)
+
+* [Migration examples](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-examples)
+
+* [Example 1: Single GPU node in the cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-node)
+
+    * [Step 1: Get the initial cluster state](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-initial-state)
+
+    * [Step 2: Install the NVIDIA GPU Operator](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-install-operator)
+
+    * [Step 3: Upgrade the cluster control plane](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-upgrade-master)
+
+    * [Step 4: Add a temporary GPU worker node](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-add-temp)
+
+    * [Step 5: Migrate workloads and upgrade the original node](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-upgrade-original)
+
+    * [Step 6: Remove the temporary node (optional)](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-cleanup)
+
+* [Example 2: Multiple GPU nodes in the cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-nodes)
+
+    * [Step 1: Get the initial cluster state](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-initial-state)
+
+    * [Step 2: Install the NVIDIA GPU Operator](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-install-operator)
+
+    * [Step 3: Upgrade the cluster control plane](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-upgrade-master)
+
+    * [Step 4: Upgrade the first worker node](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-upgrade-first-worker)
+
+    * [Step 5: Upgrade remaining nodes](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-upgrade-remaining)
+
+* [Next steps](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-next-steps)
+
+* [Related information](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-related)
 
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 
@@ -6457,6 +6509,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [v5.2.51_340196278, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5251_340196278)
+
     * [v5.2.50_338659383, released 13 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5250_338659383)
 
     * [v5.2.49_335380306, released 30 April 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5249_335380306)
@@ -6488,6 +6542,8 @@ subcollection: containers
     * [5.2.31_687, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [v5.1.51_340196313, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5151_340196313)
 
     * [v5.1.50_338876479, released 13 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5150_338876479)
 
@@ -6906,6 +6962,10 @@ subcollection: containers
     * [2.0.0_2250, released 08 May 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2250)
 
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
+
+* [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
+
+    * [headlamp-0.1.0-341854816, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-341854816)
 
 * [Version 0.0.1](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.0.1)
 

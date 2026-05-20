@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-19"
+lastupdated: "2026-05-20"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -31,6 +31,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+### 20 May 2026
+{: #containers-may2026}
+{: release-note}
+
+
+
+Headlamp cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-headlamp).
+
+
+
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+
 
 ### 19 May 2026
 {: #containers-may1926}
@@ -41,10 +55,6 @@ IBM Storage Operator cluster add-on patch updates.
 
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
-
-
-
-
 
 
 

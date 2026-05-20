@@ -2,7 +2,7 @@
 
 copyright:
   years: 2025, 2026
-lastupdated: "2026-05-18"
+lastupdated: "2026-05-20"
 
 
 keywords: kubernetes, containers, 135, version 135, 135 update actions
@@ -50,9 +50,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 For a complete list of changes that might impact your deployed apps when you update your cluster, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.35.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_135) for version 1.35. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
-
-[Cluster autoscaler](https://cloud.ibm.com/docs/containers?topic=containers-cluster-scaling-classic-vpc) does not yet support version 1.35. Do not upgrade your cluster to version 1.35 if your cluster uses cluster autoscaler.
-{: important}
 
 ### NodeLocal DNS enabled by default
 {: #nodelocal-dns-135}
