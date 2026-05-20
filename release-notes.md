@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-19"
+lastupdated: "2026-05-20"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## May 2026
 {: #containers-may26}
+
+
+
+
+
+### 20 May 2026
+{: #containers-may2026}
+{: release-note}
+
+Headlamp cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-headlamp).
 
 
 

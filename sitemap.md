@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-19"
+lastupdated: "2026-05-20"
 
 
 keywords: containers
@@ -245,6 +245,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
+
+    * [20 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2026)
+
+        * Headlamp cluster add-on patch updates.
 
     * [19 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may1926)
 
@@ -6906,6 +6910,10 @@ subcollection: containers
     * [2.0.0_2250, released 08 May 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2250)
 
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
+
+* [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
+
+    * [headlamp-0.1.0-341854816, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-341854816)
 
 * [Version 0.0.1](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.0.1)
 
