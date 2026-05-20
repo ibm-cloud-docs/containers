@@ -43,9 +43,9 @@ The migration to self-managed GPU drivers follows a specific sequence to ensure 
 
 1. **Pre-installation phase**: You install the NVIDIA GPU Operator on your cluster while it's still running version 1.35 or earlier. During installation, you label the existing GPU nodes to prevent the operator from deploying driver resources, which would conflict with the pre-installed drivers.
 
-2. **Control plane upgrade**: When you upgrade the cluster control plane to version 1.36, the pre-installed GPU drivers are removed from the system.
+2. **Control plane upgrade**: You'll upgrade the cluster control plane to version 1.36.
 
-3. **Worker node upgrade**: As you replace each worker node to version 1.36, the labels that prevented driver deployment are automatically removed. This allows the NVIDIA GPU Operator to deploy its driver stack on the new nodes.
+3. **Worker node upgrade**: Replace each worker node to upgrade them version 1.36. When you do this, the labels that prevented driver deployment are automatically removed. This allows the NVIDIA GPU Operator to deploy its driver stack on the new nodes.
 
 4. **Automatic workload recovery**: Once the operator installs drivers on a replaced node, any pending GPU workloads automatically transition to `Running` state.
 
