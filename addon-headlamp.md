@@ -219,7 +219,7 @@ When you choose to access Headlamp from private networks, like over a VPC VPN, y
     {: pre}
 
 
-IBM Cloud backend will update headlamp in 5 minutes, making it available on the new default ingress hostname, with `headlamp.` subdomain.
+The IBM Cloud backend updates headlamp in approximately 5 minutes. When the update completes, the dashboard is available on the new default ingress hostname, with `headlamp.` subdomain.
 
 ## Kubernetes resources created by the addon
 {: #headlamp-k8s-resources}
