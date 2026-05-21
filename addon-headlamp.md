@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-05-01"
+lastupdated: "2026-05-21"
 
 
 keywords: kubernetes, headlamp, dashboard, add-on, gui
@@ -32,7 +32,7 @@ Key features of the Headlamp add-on include:
 
 - **IAM OIDC authentication**: Seamlessly authenticate with your {{site.data.keyword.cloud_notm}} account using IAM OIDC.
 - **Independent lifecycle management**: The add-on version is decoupled from cluster master BOM versions, allowing for independent updates.
-- **Automatic exposure**: The add-on is automatically exposed through an Ingress resource on your cluster's default public ingress hostname with a `headlamp` subdomain.
+- **Ready to Access**: The add-on is automatically exposed through an Ingress resource on your cluster's default public ingress hostname with a `headlamp` subdomain.
 - **Secure access**: Each cluster receives a unique OIDC client ID to prevent authentication spoofing attacks.
 
 ## Prerequisites
@@ -42,9 +42,7 @@ Before you install the Headlamp add-on, ensure that your cluster meets the follo
 
 - You must have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-iam-platform-access-roles) for {{site.data.keyword.containerlong_notm}}.
 - Your cluster must be running a [supported Kubernetes version](/docs/containers?topic=containers-cs_versions).
-- For VPC clusters, you must configure network access to IAM endpoints:
-    - Attach a public gateway to your VPC subnets to allow outbound connections.
-    - Configure your cluster's security group to allow outbound HTTPS connections to IAM. Note that VPC security group outbound rules require IP addresses, not domain names. You must specify the IP address ranges for the IAM service endpoints in your region. For more information, see [{{site.data.keyword.cloud_notm}} IP ranges](/docs/infrastructure-hub?topic=infrastructure-hub-ibm-cloud-ip-ranges).
+- For Classic clusters, you must [enable VRF and service endpoints](/docs/account?topic=account-vrf-service-endpoint&interface=ui).
 - Your browser must have access to:
     - The cluster's default ingress hostname.
     - The {{site.data.keyword.cloud_notm}} IAM authorization endpoint at `https://iam.cloud.ibm.com`.
@@ -134,18 +132,18 @@ The Headlamp add-on uses {{site.data.keyword.cloud_notm}} IAM OIDC authenticatio
 When you enable the Headlamp add-on, the following authentication components are automatically configured:
 
 - **Unique client ID**: A unique OIDC client ID is created for your cluster and stored in a Kubernetes secret in the `ibm-system` namespace.
-- **OIDC discovery**: Headlamp uses OIDC discovery to obtain the necessary endpoints and configuration from IAM.
+- **Hybrid private-public OIDC**: Headlamp uses private IAM endpoints for backchannel requests, while frontchannel - login in the browser - happens over public IAM endpoints.
 - **Token management**: Authentication tokens are stored in browser cookies and automatically included in requests to the Kubernetes API server.
 
 The authentication flow works as follows:
 
 1. When you access the Headlamp dashboard, you're presented with a login page.
-2. Clicking **Sign In** redirects you to the {{site.data.keyword.cloud_notm}} IAM authorization endpoint.
+2. Clicking **Sign In** redirects you to the public {{site.data.keyword.cloud_notm}} IAM authorization endpoint.
 3. After successful authentication, IAM redirects you back to Headlamp with an authorization code.
-4. Headlamp exchanges the authorization code for an access token.
+4. Headlamp exchanges the authorization code for an access token over private network.
 5. The access token is used to authenticate requests to the Kubernetes API server.
 
-Your access to cluster resources is determined by your {{site.data.keyword.cloud_notm}} IAM roles and Kubernetes RBAC permissions.
+Your access to cluster resources is determined by your {{site.data.keyword.cloud_notm}} IAM roles and Kubernetes RBAC permissions enforced by the Kubernetes API server.
 
 ## Updating the Headlamp add-on
 {: #headlamp-update}
@@ -186,6 +184,58 @@ When you disable the Headlamp add-on, the following resources are removed:
     ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
+
+## Accessing Headlamp over private ingress on VPC clusters
+{: #headlamp-private-ingress}
+
+Configure your VPC cluster to access Headlamp through private ingress instead of public ingress for enhanced security.
+{: shortdesc}
+
+When you choose to access Headlamp from private networks, like over a VPC VPN, you can reconfigure your cluster with the following steps:
+
+1. Disable your cluster's public ALB.
+    ```sh
+    ibmcloud ks ingress alb disable --cluster <cluster_name_or_ID> --alb <public_ALB_ID>
+    ```
+	{: pre}
+
+2. Enable private ingress.
+    ```sh
+    ibmcloud ks ingress alb enable vpc-gen2 --cluster <cluster_name_or_ID> --alb <private_ALB_ID>
+    ```
+	{: pre}
+
+3. Register a domain to the private ALB.
+    ```sh
+    ibmcloud ks ingress domain create --cluster <cluster_name_or_ID> --hostname $<private_ALB_ID_hostname>
+    ```
+	{: pre}
+
+
+4. Set the new domain as the default.
+    ```sh
+    ibmcloud ks ingress domain default replace --cluster <cluster_name_or_ID> --domain <new_domain>
+    ```
+    {: pre}
+
+
+IBM Cloud backend will update headlamp in 5 minutes, making it available on the new default ingress hostname, with `headlamp.` subdomain.
+
+## Kubernetes resources created by the addon
+{: #headlamp-k8s-resources}
+
+
+The Headlamp addon creates several Kubernetes resources in your cluster that require proper network configuration.
+{: shortdesc}
+
+If you have a custom firewall or network settings, you need to configure that to allow communication between the following resources:
+* 2 **Ingress** resources
+    + private with private-iks-k8s-nginx ingressClass
+    + public with public-iks-k8s-nginx ingressClass
+* 1 **Service** (ClusterIP on port 80 → 4466)
+* 1 **Deployment** 
+    + headlamp container (port 4466)
+    + nginx sidecar container
 
 ## Troubleshooting the Headlamp add-on
 {: #headlamp-troubleshooting}
@@ -261,6 +311,6 @@ The Headlamp add-on has the following limitations:
 {: shortdesc}
 
 - **Beta release**: The Headlamp add-on is currently in beta. Features and functionality may change.
-- **Public access only**: In the beta release, the Headlamp dashboard is only accessible through the default public ingress hostname. Private-only access is not yet supported.
+- **Public access only by default**: In the beta release, the Headlamp dashboard uses the default public ingress hostname unless you manually configure private ingress access.
 - **VPC network requirements**: VPC clusters require a public gateway and security group configuration to allow access to IAM endpoints.
 - **Browser requirements**: You must use a modern web browser with JavaScript enabled and cookie support.
