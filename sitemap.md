@@ -3652,6 +3652,10 @@ subcollection: containers
 
     * [Disabling the Headlamp add-on with the CLI](/docs/containers?topic=containers-headlamp-addon#headlamp-disable-cli)
 
+* [Accessing Headlamp over private ingress on VPC clusters](/docs/containers?topic=containers-headlamp-addon#headlamp-private-ingress)
+
+* [Kubernetes resources created by the addon](/docs/containers?topic=containers-headlamp-addon#headlamp-k8s-resources)
+
 * [Troubleshooting the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-troubleshooting)
 
     * [Cannot access the Headlamp dashboard](/docs/containers?topic=containers-headlamp-addon#headlamp-ts-access)
