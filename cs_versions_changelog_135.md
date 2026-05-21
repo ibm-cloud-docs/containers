@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-05-05"
+lastupdated: "2026-05-21"
 
 
 keywords: change log, version history, 1.35
@@ -39,6 +39,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.35
 {: #135_components}
+
+
+### Worker node fix pack 1.35.5_1531, released 20 May 2026
+{: #cl-boms-1355_1531_W}
+
+The following table shows the components included in the worker node fix pack 1.35.5_1531. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Version | Description |
+| ---- | ---- | ---- |
+|UBUNTU 24 (VPC)|6.8.0-111-generic|Resolves the following CVEs: [CVE-2026-4873](https://nvd.nist.gov/vuln/detail/CVE-2026-4873){: external}, [CVE-2026-5545](https://nvd.nist.gov/vuln/detail/CVE-2026-5545){: external}, [CVE-2026-5773](https://nvd.nist.gov/vuln/detail/CVE-2026-5773){: external}, [CVE-2026-5958](https://nvd.nist.gov/vuln/detail/CVE-2026-5958){: external}, [CVE-2026-6253](https://nvd.nist.gov/vuln/detail/CVE-2026-6253){: external}, [CVE-2026-6276](https://nvd.nist.gov/vuln/detail/CVE-2026-6276){: external}, [CVE-2026-6429](https://nvd.nist.gov/vuln/detail/CVE-2026-6429){: external}, [CVE-2026-7168](https://nvd.nist.gov/vuln/detail/CVE-2026-7168){: external}, [CVE-2026-23231](https://nvd.nist.gov/vuln/detail/CVE-2026-23231){: external}, and [CVE-2026-23112](https://nvd.nist.gov/vuln/detail/CVE-2026-23112){: external}.|
+|UBUNTU 24 (Classic)|6.8.0-111-generic|Resolves the following CVEs: [CVE-2026-4873](https://nvd.nist.gov/vuln/detail/CVE-2026-4873){: external}, [CVE-2026-5545](https://nvd.nist.gov/vuln/detail/CVE-2026-5545){: external}, [CVE-2026-5773](https://nvd.nist.gov/vuln/detail/CVE-2026-5773){: external}, [CVE-2026-5958](https://nvd.nist.gov/vuln/detail/CVE-2026-5958){: external}, [CVE-2026-6253](https://nvd.nist.gov/vuln/detail/CVE-2026-6253){: external}, [CVE-2026-6276](https://nvd.nist.gov/vuln/detail/CVE-2026-6276){: external}, [CVE-2026-6429](https://nvd.nist.gov/vuln/detail/CVE-2026-6429){: external}, [CVE-2026-7168](https://nvd.nist.gov/vuln/detail/CVE-2026-7168){: external}, [CVE-2026-23231](https://nvd.nist.gov/vuln/detail/CVE-2026-23231){: external}, and [CVE-2026-23112](https://nvd.nist.gov/vuln/detail/CVE-2026-23112){: external}.|
+|Kubernetes|1.35.5|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.35.5).|
+|containerd|2.2.3|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v2.2.3).|
+|HAProxy|6ba93946d8bd08ba581321189c719ab548cadf01|Resolves the following CVEs: [CVE-2025-9714](https://nvd.nist.gov/vuln/detail/CVE-2025-9714){: external}, [CVE-2026-4424](https://nvd.nist.gov/vuln/detail/CVE-2026-4424){: external}, [CVE-2026-40356](https://nvd.nist.gov/vuln/detail/CVE-2026-40356){: external}, [CVE-2025-14512](https://nvd.nist.gov/vuln/detail/CVE-2025-14512){: external}, [CVE-2026-4878](https://nvd.nist.gov/vuln/detail/CVE-2026-4878){: external}, [CVE-2026-40355](https://nvd.nist.gov/vuln/detail/CVE-2026-40355){: external}, [CVE-2026-5121](https://nvd.nist.gov/vuln/detail/CVE-2026-5121){: external}, and [CVE-2025-14087](https://nvd.nist.gov/vuln/detail/CVE-2025-14087){: external}.|
+|GPU Device Plug-in and Installer|1a75f11af9e46a59f058ac046c51c5efb695e51c|Resolves the following CVEs: [CVE-2026-40355](https://nvd.nist.gov/vuln/detail/CVE-2026-40355){: external}, [CVE-2026-40356](https://nvd.nist.gov/vuln/detail/CVE-2026-40356){: external}, [CVE-2026-4878](https://nvd.nist.gov/vuln/detail/CVE-2026-4878){: external}, [CVE-2025-14512](https://nvd.nist.gov/vuln/detail/CVE-2025-14512){: external}, [CVE-2025-14087](https://nvd.nist.gov/vuln/detail/CVE-2025-14087){: external}, [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}, and [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}.|
+{: caption="1.35.5_1531 fix pack." caption-side="bottom"}
+{: #cl-boms-1355_1531_W-component-table}
 
 
 ### Worker node fix pack 1.35.4_1528, released 04 May 2026
