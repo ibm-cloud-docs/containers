@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-21"
+lastupdated: "2026-05-22"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, node scaling, ca, autoscaler
@@ -34,7 +34,7 @@ Beginning in version 1.2.4 the `maxEmptyBulkDelete` option is no longer supporte
 
 
 ## Before you begin
-{: ca-before}
+{: #ca-before}
 
 *  Install the [cluster autoscaler add-on](/docs/containers?topic=containers-cluster-scaling-install-addon).
 *  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)

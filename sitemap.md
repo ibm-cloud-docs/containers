@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-21"
+lastupdated: "2026-05-22"
 
 
 keywords: containers
@@ -2908,7 +2908,7 @@ subcollection: containers
 
 [Setting up autoscaling for your worker pools](/docs/containers?topic=containers-cluster-scaling-install-addon-enable#cluster-scaling-install-addon-enable)
 
-* [Before you begin](/docs/containers?topic=containers-cluster-scaling-install-addon-enable#before-you-begin)
+* [Before you begin](/docs/containers?topic=containers-cluster-scaling-install-addon-enable#ca-before)
 
 * [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-cluster-scaling-install-addon-enable#ca_customize)
 
