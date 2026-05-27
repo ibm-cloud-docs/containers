@@ -44,12 +44,16 @@ IBM Object CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
 
 
+
 ### 23 May 2026
 {: #containers-may2326}
 {: release-note}
 
 CLI version 1.0.773 is available
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+Static Route cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-static-route).
 
 ### 22 May 2026
 {: #containers-may2226}
