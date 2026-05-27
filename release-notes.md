@@ -29,10 +29,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## May 2026
 {: #containers-may26}
 
-
 ### 27 May 2026
 {: #containers-may2726}
 {: release-note}
+
+
+
+Kubernetes version 1.32 is no longer supported.
+:   Kubernetes version 1.32 is unsupported as of 27 May 2026. Update your cluster to at least [version 1.33](/docs/containers?topic=containers-cs_versions_132) as soon as possible.
+
+Version 1.35 is now the default version for {{site.data.keyword.containerlong_notm}}.
+:   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
+
+
+
 
 
 
@@ -42,6 +52,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 IBM Object CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
+
+{{site.data.keyword.cos_full_notm}} plug-in version 2.2.53 is available.
+:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
 
 
 
