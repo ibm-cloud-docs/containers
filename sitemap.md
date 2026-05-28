@@ -2073,13 +2073,9 @@ subcollection: containers
 
 * [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
 
-* [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
+* [Changing the maximum transmission unit (MTU) for clusters using Calico](/docs/containers?topic=containers-kernel#calico-mtu)
 
-* [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
-
-    * [Disabling the port map plug-in in Kubernetes version 1.29 and later](/docs/containers?topic=containers-kernel#calico-portmap-129)
-
-    * [Disabling the port map plug-in in Kubernetes version 1.28 and earlier](/docs/containers?topic=containers-kernel#calico-portmap-128)
+* [Disabling the port map plug-in in Calico](/docs/containers?topic=containers-kernel#calico-portmap)
 
 
 ### Enhancing clusters with integrations
