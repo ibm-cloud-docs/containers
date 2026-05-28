@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-05-27"
+lastupdated: "2026-05-28"
 
 
 keywords: containers
@@ -245,6 +245,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
+
+    * [28 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2826)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
 
     * [27 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2726)
 
@@ -2069,13 +2073,9 @@ subcollection: containers
 
 * [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
 
-* [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
+* [Changing the maximum transmission unit (MTU) for clusters using Calico](/docs/containers?topic=containers-kernel#calico-mtu)
 
-* [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
-
-    * [Disabling the port map plug-in in Kubernetes version 1.29 and later](/docs/containers?topic=containers-kernel#calico-portmap-129)
-
-    * [Disabling the port map plug-in in Kubernetes version 1.28 and earlier](/docs/containers?topic=containers-kernel#calico-portmap-128)
+* [Disabling the port map plug-in in Calico](/docs/containers?topic=containers-kernel#calico-portmap)
 
 
 ### Enhancing clusters with integrations
@@ -6226,6 +6226,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_342054714, released 28 May 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_342054714)
 
     * [2.0.0_339700227, released 21 May 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_339700227)
 
