@@ -35,6 +35,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-may2826}
 {: release-note}
 
+CLI version 1.0.775 is available
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 
