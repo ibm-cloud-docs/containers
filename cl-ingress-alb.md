@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-05-27"
+lastupdated: "2026-06-01"
 
 
 keywords: change log, version history, Ingress ALB
@@ -23,6 +23,26 @@ subcollection: "containers"
 
 Review the version history for Ingress ALB.
 {: shortdesc}
+
+
+## Version 3.7.1
+{: #cl-ingress-alb-3.7.1}
+
+
+### 3.7.1_342378879_iks, released 01 June 2026
+{: #cl-ingress-alb-371_342378879_iks}
+
+- Resolves the following CVEs: [CVE-2026-33811](https://nvd.nist.gov/vuln/detail/CVE-2026-33811){: external}, [CVE-2026-39823](https://nvd.nist.gov/vuln/detail/CVE-2026-39823){: external}, [CVE-2026-39820](https://nvd.nist.gov/vuln/detail/CVE-2026-39820){: external}, [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}, [CVE-2026-39836](https://nvd.nist.gov/vuln/detail/CVE-2026-39836){: external}, [CVE-2026-39825](https://nvd.nist.gov/vuln/detail/CVE-2026-39825){: external}, [CVE-2026-42499](https://nvd.nist.gov/vuln/detail/CVE-2026-42499){: external}, and [CVE-2026-39826](https://nvd.nist.gov/vuln/detail/CVE-2026-39826){: external}.
+
+
+## Version 3.7.0
+{: #cl-ingress-alb-3.7.0}
+
+
+### 3.7.0_342381291_iks, released 01 June 2026
+{: #cl-ingress-alb-370_342381291_iks}
+
+- Resolves the following CVEs: [CVE-2026-33811](https://nvd.nist.gov/vuln/detail/CVE-2026-33811){: external}, [CVE-2026-39823](https://nvd.nist.gov/vuln/detail/CVE-2026-39823){: external}, [CVE-2026-39820](https://nvd.nist.gov/vuln/detail/CVE-2026-39820){: external}, [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}, [CVE-2026-39836](https://nvd.nist.gov/vuln/detail/CVE-2026-39836){: external}, [CVE-2026-39825](https://nvd.nist.gov/vuln/detail/CVE-2026-39825){: external}, [CVE-2026-42499](https://nvd.nist.gov/vuln/detail/CVE-2026-42499){: external}, and [CVE-2026-39826](https://nvd.nist.gov/vuln/detail/CVE-2026-39826){: external}.
 
 
 ## Version 1.15.1
@@ -51,6 +71,10 @@ Review the version history for Ingress ALB.
 
 ## Version 1.14.5
 {: #cl-ingress-alb-1.14.5}
+
+
+### 1.14.5_344257277_iks, released 01 June 2026
+{: #cl-ingress-alb-1145_344257277_iks}
 
 
 ### 1.14.5_342376339_iks, released 26 May 2026

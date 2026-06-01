@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-04-08"
+lastupdated: "2026-06-01"
 
 
 keywords: kubernetes, containers
@@ -52,6 +52,8 @@ Looking for serverless? Try [{{site.data.keyword.codeengineshort}}](/docs/codeen
 
 Create a cluster with infrastructure, network, and availability setups that are customized to your use case and cloud environment.
 {: shortdesc}
+
+
 
 1. **Firewall**: If you have corporate firewalls, make sure that you [open the required ports and IP addresses](/docs/containers?topic=containers-firewall#corporate) to work with {{site.data.keyword.containerlong_notm}}.
 2. **CLI and API**:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-28"
+lastupdated: "2026-06-01"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -26,6 +26,26 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+
+
+## June 2026
+{: #containers-jun26}
+
+## 01 June 2026
+{: #containers-jun0126}
+
+
+
+
+
+
+Ingress ALB patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
+
+
+
+
 ## May 2026
 {: #containers-may26}
 
@@ -34,6 +54,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ### 28 May 2026
 {: #containers-may2826}
 {: release-note}
+
+CLI version 1.0.775 is available
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
