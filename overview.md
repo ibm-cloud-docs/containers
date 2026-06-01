@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-04-10"
+lastupdated: "2026-06-01"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, rbac, policy, providers, benefits
 
@@ -96,7 +96,8 @@ Registry
 With {{site.data.keyword.containerlong}}, you can create a cluster by using infrastructure from the following providers. All the worker nodes in a cluster must be from the same provider.
 
 
-| Component | Description | 
+
+| Component | Description |
 | --- | --- |
 | Overview | Create clusters on virtual servers in your own Virtual Private Cloud (VPC). |
 | Supported container platforms | [{{site.data.keyword.redhat_openshift_notm}}]{: tag-red} or [Kubernetes]{: tag-blue} |

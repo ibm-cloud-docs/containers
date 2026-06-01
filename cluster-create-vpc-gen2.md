@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-06-01"
 
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2, containers, {{site.data.keyword.containerlong_notm}}
@@ -17,10 +17,12 @@ subcollection: containers
 # Creating VPC clusters
 {: #cluster-create-vpc-gen2}
 
-[Virtual Private Cloud]{: tag-vpc} 
+[Virtual Private Cloud]{: tag-vpc}
 
 Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a standard VPC cluster, and customize your cluster to meet the high availability and security requirements of your apps.
 {: shortdesc}
+
+
 
 ## Prerequisites and notes
 {: #cluster-create-vpc-prereq}
