@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-01"
+lastupdated: "2026-06-02"
 
 
 keywords: containers
@@ -244,12 +244,6 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
-* [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
-
-* [01 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0126)
-
-    * Ingress ALB patch updates.
-
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
 
     * [28 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2826)
@@ -257,6 +251,8 @@ subcollection: containers
         * CLI version 1.0.775 is available
 
         * ALB OAuth Proxy cluster add-on patch updates.
+
+        * VPC Block CSI Driver cluster add-on patch updates.
 
     * [27 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2726)
 
@@ -2222,6 +2218,28 @@ subcollection: containers
 
 * [Disabling WireGuard encryption](/docs/containers?topic=containers-encrypt-nodes-wireguard#encrypt-nodes-wireguard-disable)
 
+[Migrating cluster secrets and worker nodes from HPCS to Key Protect](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration)
+
+* [Before you begin](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-prereqs)
+
+* [Step 1. Setting up service-to-service authorization](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-auth)
+
+    * [Authorization for cluster secret encryption](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-auth-secrets)
+
+    * [Authorizations for worker node disk encryption](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-auth-workers)
+
+* [Step 2. Identify key usage for migration](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-detect)
+
+    * [Optional: Using the Key Usage Reporter tool](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#kur-tool)
+
+* [Step 3. Running the migration tool](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-migrate)
+
+    * [What happens during migration](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-process)
+
+    * [Step 4. Verifying the migration](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-verify)
+
+* [Next steps](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-next)
+
 
 ## Security
 {: #sitemap_security}
@@ -3890,6 +3908,16 @@ subcollection: containers
 
 * [Disabling the `ibm-storage-operator` add-on](/docs/containers?topic=containers-storage-operator#storage-operator-disable)
 
+[Migrating storage components from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp#migrate_hpcs_kp)
+
+* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kp#before)
+
+* [Step 1. Get access to migration tools](/docs/containers?topic=containers-migrate_hpcs_kp#request)
+
+* [Step 2. Identify key usage for migration](/docs/containers?topic=containers-migrate_hpcs_kp#encryption-hpcs-to-kp-migration-detect)
+
+* [Step 3. Follow component migration steps](/docs/containers?topic=containers-migrate_hpcs_kp#migrate-script)
+
 
 ### Block Storage for Classic
 {: #sitemap_block_storage_for_classic}
@@ -4103,6 +4131,16 @@ subcollection: containers
 * [Continue migrating your snapshots and apps to Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-next)
 
 [{{site.data.keyword.block_storage_is_short}} storage class reference](/docs/containers?topic=containers-storage-block-vpc-sc-ref#storage-block-vpc-sc-ref)
+
+[Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_block#migrate_hpcs_kms_block)
+
+* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kms_block#hpcs-kms-block-before)
+
+* [Prerequisites for migration](/docs/containers?topic=containers-migrate_hpcs_kms_block#hpcs-kms-block-prereqs)
+
+* [Migration steps](/docs/containers?topic=containers-migrate_hpcs_kms_block#hpcs-kms-block-steps)
+
+* [Next steps](/docs/containers?topic=containers-migrate_hpcs_kms_block#hpcs-kms-block-next)
 
 [Setting up {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
@@ -5815,6 +5853,8 @@ subcollection: containers
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [v5.2.52_342345117, released 28 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5252_342345117)
+
     * [v5.2.51_340196278, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5251_340196278)
 
     * [v5.2.50_338659383, released 13 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5250_338659383)
@@ -5848,6 +5888,8 @@ subcollection: containers
     * [5.2.31_687, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [v5.1.52_342345162, released 28 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5152_342345162)
 
     * [v5.1.51_340196313, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5151_340196313)
 
