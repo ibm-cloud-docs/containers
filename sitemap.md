@@ -246,9 +246,11 @@ subcollection: containers
 
 * [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
 
-    * Ingress ALB patch updates.
+    * [01 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0126)
 
-    * **New**: HPCS to Key Protect migration steps
+        * Ingress ALB patch updates.
+
+        * **New**: HPCS to Key Protect migration steps
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
 
