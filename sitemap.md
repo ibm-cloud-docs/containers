@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-01"
+lastupdated: "2026-06-02"
 
 
 keywords: containers
@@ -243,12 +243,6 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
-
-* [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
-
-* [01 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0126)
-
-    * Ingress ALB patch updates.
 
 * [May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may26)
 
