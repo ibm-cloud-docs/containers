@@ -6553,7 +6553,7 @@ subcollection: containers
 
 * [Change log for version 2.2.53, released 25 May 2026](/docs/containers?topic=containers-cos_plugin_changelog#02253_object_plugin)
 
-* [Change log for version 2.2.52, released 10 May 2026](/docs/containers?topic=containers-cos_plugin_changelog#02252_object_plugin)
+* [Change log for version 2.2.52, released 19 May 2026](/docs/containers?topic=containers-cos_plugin_changelog#02252_object_plugin)
 
 * [Change log for version 2.2.51, released 17 April 2026](/docs/containers?topic=containers-cos_plugin_changelog#02251_object_plugin)
 
