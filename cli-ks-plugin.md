@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-28"
+lastupdated: "2026-06-03"
 
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
@@ -1051,6 +1051,8 @@ Minimum required permissions
 
 :    Note that the pod and service subnets can't overlap.
 
+
+
 `--skip-advance-permissions-check`
 :    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you don't have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
 
@@ -1367,7 +1369,7 @@ Minimum required permissions
 
 Get the OpenShift web console and OAuth server access type.
 
-```txt
+```sh
 ibmcloud ks cluster master console-oauth-access get --cluster CLUSTER [--output OUTPUT] [-q]
 ```
 {: pre}
@@ -1392,7 +1394,7 @@ ibmcloud ks cluster master console-oauth-access get --cluster CLUSTER [--output 
 
 Set the OpenShift web console and OAuth server access type.
 
-```txt
+```sh
 ibmcloud ks cluster master console-oauth-access set --cluster CLUSTER [-f] [-q] [--type TYPE]
 ```
 {: pre}
@@ -1709,8 +1711,6 @@ This hidden command is deprecated and not supported for general use.
 {: shortdesc}
 
 Use context-based restrictions instead. For more information, see [Migrating from private service endpoints allowlisting to context-based restrictions](/docs/containers?topic=containers-pse-to-cbr-migration).
-```
-{: pre}
 
 ### `ibmcloud ks cluster master private-service-endpoint disable`
 {: #cs_cluster_master_pse_disable}
@@ -3358,6 +3358,8 @@ Minimum required permissions
 `-l, --label KEY1=VALUE1`
 :    Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple options, such as `-l key1=value1 -l key2=value2`.
 
+
+
 `--kms-account-id ID`
 :    Optional: The ID of the account that contains the KMS instance you want to use for local disk or secret encryption.
 
@@ -3558,7 +3560,7 @@ ibmcloud ks worker-pool ls --cluster my_cluster
 
 Set the operating system. After you set the operating system, you must update your workers by running either `ibmcloud ks worker update` or `ibmcloud ks worker replace`.
 
-```txt
+```sh
 ibmcloud ks worker-pool operating-system set --cluster CLUSTER --operating-system SYSTEM --worker-pool POOL [-q]
 ```
 {: pre}
@@ -6977,7 +6979,7 @@ ibmcloud ks nlb-dns ls --cluster mycluster
 
 Configure a health check monitor for an existing NLB host name in a cluster. To enable the monitor, include the `--enable` flag. To update an existing monitor, include only the flags for the settings that you want to change.
 
-```txt
+```sh
 ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host HOST [--enable] [--header HEADER ...] [--interval INTERVAL] [--output OUTPUT] [--path PATH] [--port PORT] [-q] [--timeout TIMEOUT] [--type TYPE]
 ```
 {: pre}
@@ -7423,7 +7425,7 @@ ibmcloud ks nlb-dns secret rm --cluster mycluster --nlb-subdomain mycluster-a1b2
 
 Enable Secure By Default VPC Networking for a VPC cluster using legacy Security Groups.
 
-```txt
+```sh
 ibmcloud ks vpc secure-by-default enable --cluster CLUSTER [--disable-outbound-traffic-protection] [-f] [-q]
 ```
 {: pre}
@@ -8109,7 +8111,7 @@ ibmcloud ks vlan spanning get --region us-south
 
 List all VPCs in the targeted resource group. If no resource group is targeted, all VPCs in the account are listed.
 
-```txt
+```sh
 ibmcloud ks vpc ls [--output OUTPUT] [--provider PROVIDER] [-q]
 ```
 {: pre}
@@ -8133,7 +8135,7 @@ ibmcloud ks vpc ls [--output OUTPUT] [--provider PROVIDER] [-q]
 
 Disable outbound traffic protection for a Secure By Default VPC cluster.
 
-```txt
+```sh
 ibmcloud ks vpc outbound-traffic-protection disable --cluster CLUSTER [-f] [-q]
 ```
 {: pre}
@@ -8158,7 +8160,7 @@ ibmcloud ks vpc outbound-traffic-protection disable --cluster CLUSTER [-f] [-q]
 
 Enable outbound traffic protection for a Secure By Default VPC cluster.
 
-```txt
+```sh
 ibmcloud ks vpc outbound-traffic-protection enable --cluster CLUSTER [-f] [-q]
 ```
 {: pre}
@@ -8186,7 +8188,7 @@ ibmcloud ks vpc outbound-traffic-protection enable --cluster CLUSTER [-f] [-q]
 Attach a Virtual Network Interface to a bare metal worker node or cluster.
 {: shortdesc}
 
-```txt
+```sh
 ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
 ```
 {: pre}
@@ -8226,7 +8228,7 @@ ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output
 Detach a Virtual Network Interface from a worker node or cluster.
 {: shortdesc}
 
-```txt
+```sh
 ibmcloud ks vni detach --vni VNI [-f] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
 ```
 {: pre}
@@ -8263,11 +8265,11 @@ ibmcloud ks vni detach --vni VNI [-f] [--output OUTPUT] [-q] (--cluster-id ID | 
 List Virtual Network Interfaces attached to a cluster or worker node.
 {: shortdesc}
 
-```txt
+```sh
 ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
 ```
 {: pre}
-{: #vni-ls-usage}
+
 
 ### Command options
 {: #vni-ls-options}
@@ -8700,7 +8702,7 @@ Reset or sync a security group to the [default traffic rules](/docs/containers?t
 
 List all security groups associated with a cluster.
 
-```txt
+```sh
 ibmcloud ks security-group ls --cluster CLUSTER [--attached-to ATTACHED] [--managed-by MANAGER] [--output OUTPUT] [-q] [--scope SCOPE]
 ```
 {: pre}
@@ -9034,7 +9036,7 @@ ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 
 [Expires on 2026-07-14] Get the default trusted profile for clusters created in a resource-group.
 
-```txt
+```sh
 ibmcloud ks experimental trusted-profile default get --region REGION --resource-group GROUP [--output OUTPUT] [-q]
 ```
 {: pre}
@@ -9062,7 +9064,7 @@ ibmcloud ks experimental trusted-profile default get --region REGION --resource-
 
 [Expires on 2026-07-14] Set the default trusted profile for clusters created in a resource-group.
 
-```txt
+```sh
 ibmcloud ks experimental trusted-profile default set --region REGION --resource-group GROUP --trusted-profile PROFILE [--output OUTPUT] [-q]
 ```
 {: pre}
@@ -9093,7 +9095,7 @@ ibmcloud ks experimental trusted-profile default set --region REGION --resource-
 
 [Expires on 2026-07-14] Get trusted profile for a cluster.
 
-```txt
+```sh
 ibmcloud ks experimental trusted-profile get --cluster CLUSTER [--output OUTPUT] [-q]
 ```
 {: pre}
@@ -9118,7 +9120,7 @@ ibmcloud ks experimental trusted-profile get --cluster CLUSTER [--output OUTPUT]
 
 [Expires on 2026-07-14] Set trusted profile on a cluster.
 
-```txt
+```sh
 ibmcloud ks experimental trusted-profile set --cluster CLUSTER --trusted-profile PROFILE [--output OUTPUT] [-q]
 ```
 {: pre}
