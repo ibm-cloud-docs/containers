@@ -1051,6 +1051,8 @@ Minimum required permissions
 
 :    Note that the pod and service subnets can't overlap.
 
+
+
 `--skip-advance-permissions-check`
 :    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you don't have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
 
@@ -3355,6 +3357,8 @@ Minimum required permissions
 
 `-l, --label KEY1=VALUE1`
 :    Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple options, such as `-l key1=value1 -l key2=value2`.
+
+
 
 `--kms-account-id ID`
 :    Optional: The ID of the account that contains the KMS instance you want to use for local disk or secret encryption.
