@@ -7791,6 +7791,18 @@ subcollection: containers
 
 [Why do I see a `Registration failed` error when I try to provision or reload worker nodes?](/docs/containers?topic=containers-ts-worker-plan-not-avail#ts-worker-plan-not-avail)
 
+[Why do pods show "pull QPS exceeded" errors during image pulls?](/docs/containers?topic=containers-ts-vpc-image-pull-qps#ts-vpc-image-pull-qps)
+
+* [Check disk I/O bandwidth](/docs/containers?topic=containers-ts-vpc-image-pull-qps#check-bandwidth)
+
+    * [Check image pull times](/docs/containers?topic=containers-ts-vpc-image-pull-qps#check-pull-times)
+
+* [Resolve the issue](/docs/containers?topic=containers-ts-vpc-image-pull-qps#resolve-bandwidth)
+
+    * [Primary solution: Use worker pools with secondary storage](/docs/containers?topic=containers-ts-vpc-image-pull-qps#use-secondary-storage)
+
+    * [Additional considerations](/docs/containers?topic=containers-ts-vpc-image-pull-qps#additional-considerations)
+
 
 ### Permissions and credentials
 {: #sitemap_permissions_and_credentials}
