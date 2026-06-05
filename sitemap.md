@@ -4146,6 +4146,42 @@ subcollection: containers
 
 * [Continue migrating your snapshots and apps to Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-next)
 
+[Migrating {{site.data.keyword.block_storage_is_short}} volumes from Gen-1 to Gen-2 profiles](/docs/containers?topic=containers-storage-block-vpc-profile-migration#storage-block-vpc-profile-migration)
+
+* [Understanding the profile generations](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-generations)
+
+    * [Key differences between generations](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-differences)
+
+* [Before you begin](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-migration-prereqs)
+
+* [Identify volumes for migration](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-identify)
+
+* [Check the current volume configuration](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-check)
+
+* [Start the migration](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-migrate)
+
+* [Monitor migration progress](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-monitor)
+
+* [Verify migration completion](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-verify)
+
+* [Updating the PersistentVolume metadata](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-update-pv)
+
+* [Validate your application](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-validate)
+
+* [Create a Gen-2 StorageClass](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-storageclass)
+
+* [Adjust IOPS to optimize performance](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-optimize)
+
+* [Troubleshooting](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-troubleshooting)
+
+    * [Migration stuck in updating status](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-ts-stuck)
+
+    * [PVC shows old StorageClass](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-ts-pvc-class)
+
+    * [Performance not improved](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-ts-performance)
+
+* [Next steps](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-next-steps)
+
 [{{site.data.keyword.block_storage_is_short}} storage class reference](/docs/containers?topic=containers-storage-block-vpc-sc-ref#storage-block-vpc-sc-ref)
 
 [Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_block#migrate_hpcs_kms_block)
