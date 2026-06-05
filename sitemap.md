@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-03"
+lastupdated: "2026-06-05"
 
 
 keywords: containers
@@ -245,6 +245,14 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
+
+    * [03 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0326)
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [01 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0126)
 
@@ -4784,6 +4792,8 @@ subcollection: containers
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
 
+    * [Worker node fix pack 1.35.5_1532, released 03 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1532_W)
+
     * [Master fix pack 1.35.5_1530, released 22 May 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1355_1530_M)
 
     * [Worker node fix pack 1.35.5_1531, released 20 May 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1531_W)
@@ -4866,6 +4876,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Worker node fix pack 1.34.8_1554, released 03 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1554_W)
 
     * [Master fix pack 1.34.8_1552, released 22 May 2026](/docs/containers?topic=containers-changelog_134#cl-boms_master-1348_1552_M)
 
@@ -4971,6 +4983,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.12_1573, released 03 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1573_W)
 
     * [Master fix pack 1.33.12_1571, released 22 May 2026](/docs/containers?topic=containers-changelog_133#cl-boms_master-13312_1571_M)
 
@@ -6219,6 +6233,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [v1.0.42_343448801, released 03 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1042_343448801)
+
     * [v1.0.40_340278420, released 19 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1040_340278420)
 
     * [v1.0.41_341664770, released 19 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1041_341664770)
@@ -6446,6 +6462,8 @@ subcollection: containers
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [v2.0.33_343448437, released 03 June 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2033_343448437)
 
     * [v2.0.32_341664893, released 29 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2032_341664893)
 
