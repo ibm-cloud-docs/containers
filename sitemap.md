@@ -4587,6 +4587,12 @@ subcollection: containers
 
 * [Gathering logs](/docs/containers?topic=containers-storage_portworx_support#portworx_logs)
 
+[Migrate Portworx volumes from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp_px#migrate_hpcs_kp_px)
+
+* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kp_px#hpcs-kp-migration-px-prereqs)
+
+* [Migrating Portworx encrypted volumes](/docs/containers?topic=containers-migrate_hpcs_kp_px#hpcs-kp-migration-px-steps)
+
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
 
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities#utilities)
