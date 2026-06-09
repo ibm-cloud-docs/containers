@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-06-08"
+lastupdated: "2026-06-09"
 
 
 keywords: kubernetes, allowlist, ips
@@ -353,7 +353,6 @@ By default, all IP addresses can be used to log in to the {{site.data.keyword.cl
 If you choose to set an IAM allowlist, you must include a network zone that includes the {{site.data.keyword.containershort}}.  Otherwise your existing clusters will not function properly.  This is because the {{site.data.keyword.containershort}} control plane needs to be able to contact IAM to deploy and manage IBM services necessary for your cluster.  Follow these instructions carefully before setting your IBM allowlist.
 {: important}
 
-
 In your allowlist, you must also configure network zones in the {{site.data.keyword.containerlong_notm}} control plane for the region where your cluster is located so that {{site.data.keyword.containerlong_notm}} can create or access components such as Ingress ALBs 
 
 Before you begin, the following steps require you to change the IAM allowlist for the user whose credentials are used for the cluster's region and resource group infrastructure permissions. If you are the credentials owner, you can change your own IAM allowlist settings. If you are not the credentials owner, but you are assigned the **Editor** or **Administrator** IBM Cloud IAM platform access role for the [User Management service](/docs/iam?topic=iam-account-services), you can update the networks for the credentials owner.
@@ -387,3 +386,5 @@ Before you begin, the following steps require you to change the IAM allowlist fo
     1. Under **Restrict IP address access**, select **Enable** and provide the network zone name from the previous step.
 
     1. Click **Apply**.
+
+ 
