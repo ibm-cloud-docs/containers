@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-06-05"
+lastupdated: "2026-06-09"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,30 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2026
 {: #containers-jun26}
+
+### 09 June 2025
+{: #containers-jun0925}
+{: release-note}
+
+
+
+VPC File CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
+
+
+IBM Storage Operator cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
+
+
+IBM Object CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
+
+
 
 ### 03 June 2026
 {: #containers-jun0326}

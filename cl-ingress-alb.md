@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-06-08"
+lastupdated: "2026-06-09"
 
 
 keywords: change log, version history, Ingress ALB
@@ -94,13 +94,13 @@ Review the version history for Ingress ALB.
 ### 1.14.5_346240330_iks, released 08 June 2026
 {: #cl-ingress-alb-1145_346240330_iks}
 
+[Default version]{: tag-green}
+
 - Updates Go to version `1.26`.
 
 
 ### 1.14.5_344257277_iks, released 01 June 2026
 {: #cl-ingress-alb-1145_344257277_iks}
-
-[Default version]{: tag-green}
 
 
 ### 1.14.5_342376339_iks, released 26 May 2026

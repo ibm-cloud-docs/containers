@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-08"
+lastupdated: "2026-06-09"
 
 
 keywords: containers
@@ -245,6 +245,16 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
+
+    * [09 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-jun0925)
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * ALB OAuth Proxy cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * IBM Object CSI Driver cluster add-on patch updates.
 
     * [03 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0326)
 
@@ -4587,6 +4597,12 @@ subcollection: containers
 
 * [Gathering logs](/docs/containers?topic=containers-storage_portworx_support#portworx_logs)
 
+[Migrate Portworx volumes from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp_px#migrate_hpcs_kp_px)
+
+* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kp_px#hpcs-kp-migration-px-prereqs)
+
+* [Migrating Portworx encrypted volumes](/docs/containers?topic=containers-migrate_hpcs_kp_px#hpcs-kp-migration-px-steps)
+
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
 
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities#utilities)
@@ -5827,8 +5843,6 @@ subcollection: containers
 
 * [`csutil-experimental` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-experimental-1.0.0)
 
-* [`debug-tool` 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#debug-tool-2.0.0)
-
 * [`headlamp` 0.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#headlamp-0.1.0)
 
 * [`ibm-object-csi-driver` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-object-csi-driver-1.0)
@@ -6269,6 +6283,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [v1.0.43_345196902, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1043_345196902)
+
     * [v1.0.42_343448801, released 03 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1042_343448801)
 
     * [v1.0.40_340278420, released 19 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1040_340278420)
@@ -6499,6 +6515,8 @@ subcollection: containers
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
+    * [v2.0.34_345194711, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2034_345194711)
+
     * [v2.0.33_343448437, released 03 June 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2033_343448437)
 
     * [v2.0.32_341664893, released 29 May 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2032_341664893)
@@ -6592,6 +6610,8 @@ subcollection: containers
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [v1.0.21_333133599, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1021_333133599)
 
     * [v1.0.20_333133599, released 25 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1020_333133599)
 
@@ -6748,6 +6768,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [2.0.0_345210432, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_345210432)
 
     * [2.0.0_342054714, released 28 May 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_342054714)
 
