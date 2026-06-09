@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-08"
+lastupdated: "2026-06-09"
 
 
 keywords: containers
@@ -5826,8 +5826,6 @@ subcollection: containers
 * [`csutil` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-1.0.0)
 
 * [`csutil-experimental` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-experimental-1.0.0)
-
-* [`debug-tool` 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#debug-tool-2.0.0)
 
 * [`headlamp` 0.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#headlamp-0.1.0)
 
