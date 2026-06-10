@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-28"
+lastupdated: "2026-06-10"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
@@ -78,6 +78,8 @@ You must have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service acce
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Save the following daemon set in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemon set changes the default maximum number of connections that are allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
+
+    
     ```yaml
     apiVersion: apps/v1
     kind: DaemonSet
@@ -199,7 +201,6 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_not
 
 If a pod has long running TCP connections that are occasionally disconnected when they are idle for a period of time, it might help to change the `sysctl` keepalive settings for the pod. 
 {: shortdesc}
-
 
 
 There currently isn't a way to set these `sysctl` keepalive settings on all pods by default in a cluster. The best way to modify the settings on all pods is to use a privileged `initContainer`. Review the following example of how to set up an `initContainer` for a deployment in a `test-ns` namespace.
