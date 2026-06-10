@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-06-09"
+lastupdated: "2026-06-10"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -81,8 +81,6 @@ VPC File CSI Driver cluster add-on patch updates.
 ### 01 June 2026
 {: #containers-jun0126}
 {: release-note}
-
-
 
 
 
