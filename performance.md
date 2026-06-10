@@ -80,6 +80,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 1. Save the following daemon set in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemon set changes the default maximum number of connections that are allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
 
     
+
     ```yaml
     apiVersion: apps/v1
     kind: DaemonSet
@@ -107,7 +108,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
                 - -c
                 - sysctl -w net.ipv4.tcp_syn_retries="5"; sysctl -w net.ipv4.tcp_fin_timeout="15";
               image: us.icr.io/armada-master/network-alpine:latest
-              imagePullPolicy: Always 
+              imagePullPolicy: Always
               name: sysctl
               resources: {}
               securityContext:
@@ -167,21 +168,22 @@ To optimize kernel settings for app pods, you can insert an [`initContainer`](ht
 Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-iam-platform-access-roles) for all namespaces to run the sample privileged `initContainer`. After the containers for the deployments are initialized, the privileges are dropped.
 
 1. Save the following `initContainer` patch in a file named `pod-patch.yaml` and add the fields and values for the `sysctl` parameters that you want to tune. This example `initContainer` changes the default maximum number of connections allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
+
     ```yaml
     spec:
       template:
         spec:
           initContainers:
-          - command:
-            - sh
-            - -c
-            - sysctl -e -w net.core.somaxconn=32768;  sysctl -e -w net.ipv4.ip_local_port_range="1025 65535";
-            image: alpine:3.6
-            imagePullPolicy: IfNotPresent
-            name: sysctl
-            resources: {}
-            securityContext:
-              privileged: true
+            - command:
+                - sh
+                - -c
+                - sysctl -e -w net.core.somaxconn=32768;  sysctl -e -w net.ipv4.ip_local_port_range="1025 65535";
+              image: alpine:3.6
+              imagePullPolicy: IfNotPresent
+              name: sysctl
+              resources: {}
+              securityContext:
+                privileged: true
     ```
     {: codeblock}
 
@@ -209,43 +211,43 @@ There currently isn't a way to set these `sysctl` keepalive settings on all pods
 
 Deploy the following example `initContainer`. Remember to change the `containers:` section to your own application containers. The `initContainer` then sets the `sysctl` settings for all the regular containers in the pod because they all share the same network namespace.
 
-    ```sh
-    kubectl apply -f - << EOF
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: test-sysctl
-      namespace: test-ns
-      labels:
-        run: test-sysctl
-    spec:
-      replicas: 2
-      selector:
-        matchLabels:
-          run: test-sysctl
-      template:
-        metadata:
-          labels:
-            run: test-sysctl
-        spec:
-          initContainers:
-          - command:
-            - sh
-            - -c
-            - sysctl -e -w net.ipv4.tcp_keepalive_time=40; sysctl -e -w net.ipv4.tcp_keepalive_intvl=15; sysctl -e -w net.ipv4.tcp_keepalive_probes=6;
-            image: us.icr.io/armada-master/alpine:latest
-            imagePullPolicy: IfNotPresent
-            name: sysctl-init
-            resources: {}
-            securityContext:
-              privileged: true
-          containers:
-          - name: test-sysctl
-            image: us.icr.io/armada-master/alpine:latest
-            command: ["sleep", "2592000"]
-      EOF
-    ```
-    {: pre}
+```sh
+kubectl apply -f - << EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: test-sysctl
+	namespace: test-ns
+	labels:
+	run: test-sysctl
+spec:
+	replicas: 2
+	selector:
+	matchLabels:
+		run: test-sysctl
+	template:
+	metadata:
+		labels:
+		run: test-sysctl
+	spec:
+		initContainers:
+		- command:
+		- sh
+		- -c
+		- sysctl -e -w net.ipv4.tcp_keepalive_time=40; sysctl -e -w net.ipv4.tcp_keepalive_intvl=15; sysctl -e -w net.ipv4.tcp_keepalive_probes=6;
+		image: us.icr.io/armada-master/alpine:latest
+		imagePullPolicy: IfNotPresent
+		name: sysctl-init
+		resources: {}
+		securityContext:
+			privileged: true
+		containers:
+		- name: test-sysctl
+		image: us.icr.io/armada-master/alpine:latest
+		command: ["sleep", "2592000"]
+	EOF
+```
+{: pre}
       
 
 
@@ -572,24 +574,24 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       name: hugepages-example
     spec:
       containers:
-      - name: hugepages-example
-        image: fedora:34
-        command:
-        - sleep
-        - inf
-        volumeMounts:
-        - mountPath: /hugepages-2Mi
-          name: hugepage-2mi
-        resources:
-          limits:
-            hugepages-2Mi: 100Mi
-            memory: 100Mi
-          requests:
-            memory: 100Mi
+        - name: hugepages-example
+          image: fedora:34
+          command:
+            - sleep
+            - inf
+          volumeMounts:
+            - mountPath: /hugepages-2Mi
+              name: hugepage-2mi
+          resources:
+            limits:
+              hugepages-2Mi: 100Mi
+              memory: 100Mi
+            requests:
+              memory: 100Mi
       volumes:
-      - name: hugepage-2mi
-        emptyDir:
-          medium: HugePages-2Mi
+        - name: hugepage-2mi
+          emptyDir:
+            medium: HugePages-2Mi
     ```
     {: codeblock}
 
@@ -688,6 +690,7 @@ Before you begin
         {: pre}
 
 2. Change the node MTU with the following example daemonset. This MTU value applies to node-to-node traffic. Modify the `- ip link set dev ens3 mtu <MTU_VALUE>` line to include your MTU value (the example uses a MTU value of 9000). Note that you might also need to change the `ens3` interface name if ens3 is not appropriate for your nodes.
+
     ```yaml
     apiVersion: apps/v1
     kind: DaemonSet
@@ -706,46 +709,46 @@ Before you begin
             name: set-host-mtu
         spec:
           containers:
-          - args:
-            - |
-              while true; do
-                sleep 100000;
-              done
-            command:
-            - /bin/sh
-            - -c
-            image: us.icr.io/armada-master/network-alpine:latest
-            imagePullPolicy: IfNotPresent
-            name: sleepforever
-            resources:
-              requests:
-                cpu: 10m
+            - args:
+                - |
+                  while true; do
+                    sleep 100000;
+                  done
+              command:
+                - /bin/sh
+                - -c
+              image: us.icr.io/armada-master/network-alpine:latest
+              imagePullPolicy: IfNotPresent
+              name: sleepforever
+              resources:
+                requests:
+                  cpu: 10m
           hostNetwork: true
           initContainers:
-          - command:
-            - sh
-            - -c
-            - ip link set dev ens3 mtu 9000
-            image: us.icr.io/armada-master/network-alpine:latest
-            imagePullPolicy: IfNotPresent
-            name: set-host-mtu
-            securityContext:
-              capabilities:
-                add:
-                - NET_ADMIN
-              privileged: true
-            volumeMounts:
-            - mountPath: /sys
-              name: modifysys
+            - command:
+                - sh
+                - -c
+                - ip link set dev ens3 mtu 9000
+              image: us.icr.io/armada-master/network-alpine:latest
+              imagePullPolicy: IfNotPresent
+              name: set-host-mtu
+              securityContext:
+                capabilities:
+                  add:
+                    - NET_ADMIN
+                privileged: true
+              volumeMounts:
+                - mountPath: /sys
+                  name: modifysys
           restartPolicy: Always
           terminationGracePeriodSeconds: 2
           tolerations:
-          - operator: Exists
+            - operator: Exists
           volumes:
-          - hostPath:
-              path: /sys
-              type: ""
-            name: modifysys
+            - hostPath:
+                path: /sys
+                type: ""
+              name: modifysys
       updateStrategy:
         rollingUpdate:
           maxSurge: 0
@@ -815,16 +818,17 @@ If you must use `hostPorts`, don't disable the port map plug-in.
     {: pre}
 
 1. In the `spec.calicoNetwork` section, change the value of `hostPorts` to `Disabled`.
+
     ```yaml
     ...
     spec:
       calicoNetwork:
         hostPorts: Disabled
         ipPools:
-        - cidr: 172.30.0.0/16
-          encapsulation: IPIPCrossSubnet
-          natOutgoing: Enabled
-          nodeSelector: all()
+          - cidr: 172.30.0.0/16
+            encapsulation: IPIPCrossSubnet
+            natOutgoing: Enabled
+            nodeSelector: all()
         mtu: 1480
         nodeAddressAutodetectionV4:
           interface: (^bond0$|^eth0$|^ens6$|^ens3$)
