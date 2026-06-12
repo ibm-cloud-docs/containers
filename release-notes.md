@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-06-10"
+lastupdated: "2026-06-12"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2026
 {: #containers-jun26}
+
+### 10 June 2026
+{: #containers-jun1026}
+{: release-note}
+
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+
 
 ### 09 June 2025
 {: #containers-jun0925}
