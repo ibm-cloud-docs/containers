@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-12"
+lastupdated: "2026-06-15"
 
 
 keywords: containers
@@ -245,6 +245,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
+
+    * [15 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1526)
+
+        * Ingress ALB patch updates.
 
     * [10 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1026)
 
@@ -6840,17 +6844,23 @@ subcollection: containers
 
 * [Version 3.7.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.1)
 
+    * [3.7.1_347083875_iks, released 15 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-371_347083875_iks)
+
     * [3.7.1_345548836_iks, released 08 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-371_345548836_iks)
 
     * [3.7.1_342378879_iks, released 01 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-371_342378879_iks)
 
 * [Version 3.7.0](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.0)
 
+    * [3.7.0_346531572_iks, released 15 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-370_346531572_iks)
+
     * [3.7.0_345548812_iks, released 08 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-370_345548812_iks)
 
     * [3.7.0_342381291_iks, released 01 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-370_342381291_iks)
 
 * [Version 1.15.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.6)
+
+    * [1.15.6_347720691_iks, released 15 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1156_347720691_iks)
 
     * [1.15.6_345933912_iks, released 08 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1156_345933912_iks)
 
@@ -6865,6 +6875,8 @@ subcollection: containers
     * [1.15.1_328030458_iks, released 25 March 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1151_328030458_iks)
 
 * [Version 1.14.5](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.14.5)
+
+    * [1.14.5_347711954_iks, released 15 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1145_347711954_iks)
 
     * [1.14.5_346240330_iks, released 08 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1145_346240330_iks)
 

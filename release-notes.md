@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-06-12"
+lastupdated: "2026-06-15"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2026
 {: #containers-jun26}
+
+### 15 June 2026
+{: #containers-jun1526}
+{: release-note}
+
+
+
+
+Ingress ALB patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
+
 
 ### 10 June 2026
 {: #containers-jun1026}
