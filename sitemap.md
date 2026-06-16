@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-15"
+lastupdated: "2026-06-16"
 
 
 keywords: containers
@@ -4168,8 +4168,6 @@ subcollection: containers
 
 * [Understanding the profile generations](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-generations)
 
-    * [Key differences between generations](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-differences)
-
 * [Before you begin](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-migration-prereqs)
 
 * [Identify volumes for migration](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-identify)
@@ -4188,7 +4186,11 @@ subcollection: containers
 
 * [Create a Gen-2 StorageClass](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-storageclass)
 
-* [Adjust IOPS to optimize performance](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-optimize)
+* [Adjust IOPS and throughput to optimize performance](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-optimize)
+
+    * [Updating IOPS](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-update-iops)
+
+    * [Updating throughput (bandwidth)](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-update-bandwidth)
 
 * [Troubleshooting](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-troubleshooting)
 
