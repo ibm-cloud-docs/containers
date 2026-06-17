@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-06-05"
+lastupdated: "2026-06-16"
 
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2, containers, {{site.data.keyword.containerlong_notm}}
@@ -147,7 +147,7 @@ Observability integrations
 
 4. Create the cluster in your VPC. You can use the `ibmcloud ks cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add-workers-vpc) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```sh
-    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--sm-group GROUP] [--sm-instance INSTANCE] [--trusted-profile-id ID] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [[--kms-account-id <kms_account_ID>] --kms-instance <KMS_instance_ID> --crk <root_key_ID>] [--secondary-storage STORAGE] [--disable-outbound-traffic-protection] [--operating-system SYSTEM] 
+    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--offering OFFERING] [--sm-group GROUP] [--sm-instance INSTANCE] [--trusted-profile-id ID] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [[--kms-account-id <kms_account_ID>] --kms-instance <KMS_instance_ID> --crk <root_key_ID>] [--secondary-storage STORAGE] [--disable-outbound-traffic-protection] [--operating-system SYSTEM] 
     ```
     {: pre}
 
@@ -175,6 +175,8 @@ Observability integrations
     `--operating-system UBUNTU_20_64|UBUNTU_24_64`
 :   Optional. The operating system of the worker nodes in your cluster. For a list of available operating systems by cluster version, see the [Kubernetes version information](/docs/containers?topic=containers-cs_versions). If no option is specified, the default operating system that corresponds to the cluster version is used.
 
+    `--offering <offering>`
+    :   Optional. Specify the cluster offering type. Accepted values are `kubernetes`, `openshift`, and `openshift-vs`. Use `openshift-vs` to create a Red Hat OpenShift Virtualization Service cluster with pre-configured virtualization capabilities. For more information, see [Red Hat OpenShift Virtualization Service overview](/docs/openshift?topic=openshift-rovs-overview).
 
    `--cluster-security-group <group_ID>`
     :   Optional. Specify one or more security group IDs to apply to all workers on the cluster. For OpenShift version 4.15 and Kubernetes version 1.30 and later, these security groups are applied in addition to the IBM-managed `kube-clusterID` security group. For earlier cluster versions, specify the `--cluster-security-group cluster` option to apply the `kube-clusterID` security group. If no value is specified, a default set of security groups including `kube-clusterID` are applied. For more information, see [Adding VPC security groups to clusters and worker pools during create time](/docs/containers?topic=containers-vpc-security-group-manage).
@@ -222,6 +224,8 @@ Observability integrations
     `--disable-outbound-traffic-protection`
     :   Optional. Disable outbound traffic protection.
 
+
+    
 
     
 
