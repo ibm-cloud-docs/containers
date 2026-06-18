@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-16"
+lastupdated: "2026-06-17"
 
 
 keywords: containers
@@ -7898,6 +7898,8 @@ subcollection: containers
     * [Cleaning up after debugging](/docs/containers?topic=containers-cs_ssh_worker#ssh-debug-cleanup)
 
 [Why do I see a `Registration failed` error when I try to provision or reload worker nodes?](/docs/containers?topic=containers-ts-worker-plan-not-avail#ts-worker-plan-not-avail)
+
+[VPC worker nodes fail to provision due to quota limits](/docs/containers?topic=containers-ts-worker-vpc-quota#ts-worker-vpc-quota)
 
 [Why do pods show "pull QPS exceeded" errors during image pulls?](/docs/containers?topic=containers-ts-vpc-image-pull-qps#ts-vpc-image-pull-qps)
 
