@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-05-04"
+lastupdated: "2026-06-18"
 
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
@@ -15,7 +15,7 @@ subcollection: containers
 
 
 
-# Ingress in {{site.data.keyword.cloud_notm}}
+# Ingress-NGINX in {{site.data.keyword.cloud_notm}}
 {: #managed-ingress-about}
 
 Ingress is a Kubernetes service discovery method that exposes the services in your cluster to the public or private network by forwarding requests to your apps and balancing network traffic workloads. Ingress manages external access to your services based on a set of routing rules that you configure and that are applied to all incoming traffic.

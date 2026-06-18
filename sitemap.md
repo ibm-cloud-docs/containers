@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-17"
+lastupdated: "2026-06-18"
 
 
 keywords: containers
@@ -3440,11 +3440,11 @@ subcollection: containers
     * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
-### Exposing apps with Ingress
-{: #sitemap_exposing_apps_with_ingress}
+### Exposing apps with NGINX-Ingress
+{: #sitemap_exposing_apps_with_nginx-ingress}
 
 
-[Ingress in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-about)
+[Ingress-NGINX in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-about)
 
 * [IBM-provided Ingress components](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-components)
 
@@ -3665,6 +3665,37 @@ subcollection: containers
 [Observing Kubernetes Ingress](/docs/containers?topic=containers-cs_ingress_monitor#cs_ingress_monitor)
 
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_ingress_monitor#ingress_health_mon)
+
+
+### Exposing apps with Traefik Ingress
+{: #sitemap_exposing_apps_with_traefik_ingress}
+
+
+[Traefik Ingress in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-about)
+
+* [Preview](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-preview)
+
+    * [DNS handling on Classic clusters](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-dns-classic)
+
+[Setting up Ingress](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-setup)
+
+* [Before you begin](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps-before)
+
+* [Setup steps](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps)
+
+    * [Step 1: Create a `ClusterIP` service](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps-clusterip)
+
+    * [Step 2: Set up TLS termination with TLS certificates and Kubernetes secrets](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps-tls)
+
+    * [Step 3: Create the Ingress resource](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps-resource)
+
+    * [Step 4: Verify your Ingress setup](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-setup-verify)
+
+* [Custom domains with Ingress](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain)
+
+    * [Creating custom domains for public ALBs](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain-public)
+
+    * [Creating custom domains for private ALBs](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain-private)
 
 
 ### Managing certificates and secrets
