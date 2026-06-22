@@ -254,7 +254,9 @@ subcollection: containers
 
         * IBM Object CSI Driver cluster add-on patch updates.
 
-    * [23 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2326)
+    * [19 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1926)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [15 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1526)
 
