@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-17"
+lastupdated: "2026-06-22"
 
 
 keywords: containers
@@ -245,6 +245,18 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
+
+    * [22 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2226)
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Object CSI Driver cluster add-on patch updates.
+
+    * [19 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1926)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
     * [15 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1526)
 
@@ -3440,11 +3452,11 @@ subcollection: containers
     * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
-### Exposing apps with Ingress
-{: #sitemap_exposing_apps_with_ingress}
+### Exposing apps with NGINX-Ingress
+{: #sitemap_exposing_apps_with_nginx-ingress}
 
 
-[Ingress in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-about)
+[Ingress-NGINX in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-about)
 
 * [IBM-provided Ingress components](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-components)
 
@@ -3665,6 +3677,37 @@ subcollection: containers
 [Observing Kubernetes Ingress](/docs/containers?topic=containers-cs_ingress_monitor#cs_ingress_monitor)
 
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_ingress_monitor#ingress_health_mon)
+
+
+### Exposing apps with Traefik Ingress
+{: #sitemap_exposing_apps_with_traefik_ingress}
+
+
+[Traefik Ingress in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-about)
+
+* [Preview](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-preview)
+
+    * [DNS handling on Classic clusters](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-dns-classic)
+
+[Setting up Ingress](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-setup)
+
+* [Before you begin](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps-before)
+
+* [Setup steps](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps)
+
+    * [Step 1: Create a `ClusterIP` service](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps-clusterip)
+
+    * [Step 2: Set up TLS termination with TLS certificates and Kubernetes secrets](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps-tls)
+
+    * [Step 3: Create the Ingress resource](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps-resource)
+
+    * [Step 4: Verify your Ingress setup](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-setup-verify)
+
+* [Custom domains with Ingress](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain)
+
+    * [Creating custom domains for public ALBs](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain-public)
+
+    * [Creating custom domains for private ALBs](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain-private)
 
 
 ### Managing certificates and secrets
@@ -4854,7 +4897,7 @@ subcollection: containers
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
 
-    * [Worker node fix pack 1.35.5_1532, released 03 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1532_W)
+    * [Worker node fix pack 1.35.5_1532, released 15 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1532_W)
 
     * [Master fix pack 1.35.5_1530, released 22 May 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1355_1530_M)
 
@@ -4939,7 +4982,7 @@ subcollection: containers
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
 
-    * [Worker node fix pack 1.34.8_1554, released 03 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1554_W)
+    * [Worker node fix pack 1.34.8_1554, released 15 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1554_W)
 
     * [Master fix pack 1.34.8_1552, released 22 May 2026](/docs/containers?topic=containers-changelog_134#cl-boms_master-1348_1552_M)
 
@@ -5046,7 +5089,7 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
-    * [Worker node fix pack 1.33.12_1573, released 03 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1573_W)
+    * [Worker node fix pack 1.33.12_1573, released 15 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1573_W)
 
     * [Master fix pack 1.33.12_1571, released 22 May 2026](/docs/containers?topic=containers-changelog_133#cl-boms_master-13312_1571_M)
 
@@ -6293,6 +6336,8 @@ subcollection: containers
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [v1.0.44_347952047, released 22 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1044_347952047)
+
     * [v1.0.43_345196902, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1043_345196902)
 
     * [v1.0.42_343448801, released 03 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1042_343448801)
@@ -6529,6 +6574,8 @@ subcollection: containers
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
+    * [v2.0.36_347951752, released 22 June 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2036_347951752)
+
     * [v2.0.34_345194711, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2034_345194711)
 
     * [v2.0.33_343448437, released 03 June 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2033_343448437)
@@ -6624,6 +6671,8 @@ subcollection: containers
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [v1.0.22_348679631, released 22 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1022_348679631)
 
     * [v1.0.21_333133599, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1021_333133599)
 

@@ -1,11 +1,11 @@
 ---
 
 copyright:
-  years: 2022, 2026
+  years: 2026, 2026
 lastupdated: "2026-06-18"
 
 
-keywords: ingress, expose apps, ingress resource, ALB, domain
+keywords: ingress, expose apps, ingress resource, ALB, domain, traefik, ingress controller
 
 subcollection: containers
 
@@ -15,13 +15,13 @@ subcollection: containers
 
 
 # Setting up Ingress
-{: #managed-ingress-setup}
+{: #managed-traefik-ingress-setup}
 
 Create an Ingress resource to configure your Ingress components, define rules for routing requests, and specify the path to your app services. A separate Ingress resource is required for each namespace that contains an app or service that you want to expose.
 {: shortdesc}
 
 ## Before you begin
-{: #managed-ingress-steps-before}
+{: #managed-traefik-ingress-steps-before}
 
 Follow these preparation steps before you begin.
 {: shortdesc}
@@ -35,7 +35,7 @@ Follow these preparation steps before you begin.
     A custom domain, or [manually configuring IBM provided domains](/docs/containers?topic=containers-ingress-domains) required to expose apps over private ALBs.
     {: important}
 
-1. Ensure that the ALB you are going to use is on the expected version. Run the `ibmcloud ks ingress alb versions` command to list currently supported versions, and compare it to the output of `ibmcloud ks ingress alb ls --cluster CLUSTER`. If you are following this documentation, you are expected to run a Ingress-NGINX based Ingress, for Traefik specific guidance follow the [corresponding documentation](/docs/containers?topic=containers-managed-traefik-ingress-setup).
+1. Ensure that the ALB you are going to use is on the expected version. Run the `ibmcloud ks ingress alb versions` command to list currently supported versions, and compare it to the output of `ibmcloud ks ingress alb ls --cluster CLUSTER`. If you are following this documentation, you are expected to run a Traefik based Ingress, for Ingress-NGINX specific guidance follow the [corresponding documentation](/docs/containers?topic=containers-managed-ingress-setup).
 
 1. If you are exposing apps over private ALBs, you must enable each private ALB in the CLI. To get the ALB ID, run `ibmcloud ks ingress alb ls --cluster CLUSTER`.
 
@@ -52,7 +52,7 @@ Follow these preparation steps before you begin.
     {: pre}
 
 
-1. Make sure that your cluster includes at least two worker nodes per zone to ensure high availability and to apply periodic updates. If a zone has only one worker node, the ALB can't receive automatic updates. For more information, see [Worker node requirements for ALBs](/docs/containers?topic=containers-managed-ingress-about#managed-ingress-albs-reqs).
+1. Make sure that your cluster includes at least two worker nodes per zone to ensure high availability and to apply periodic updates. If a zone has only one worker node, the ALB can't receive automatic updates. For more information, see [Worker node requirements for ALBs](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-albs-reqs).
 
 1. If you are using a classic cluster, enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account.
     - To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui).
@@ -69,13 +69,13 @@ If a zone fails, you might see intermittent failures in requests to the Ingress 
 {: note}
 
 ## Setup steps
-{: #managed-ingress-steps}
+{: #managed-traefik-ingress-steps}
 
 Follow the steps to set up Ingress.
 {: shortdesc}
 
 ### Step 1: Create a `ClusterIP` service
-{: #managed-ingress-steps-clusterip}
+{: #managed-traefik-ingress-steps-clusterip}
 
 For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
 
@@ -86,7 +86,7 @@ kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> 
     
 
 ### Step 2: Set up TLS termination with TLS certificates and Kubernetes secrets
-{: #managed-ingress-steps-tls}
+{: #managed-traefik-ingress-steps-tls}
 
 Your TLS certificate must be stored as a Kubernetes secret in each namespace where your apps exist.
 {: shortdesc}
@@ -96,7 +96,7 @@ Your TLS certificate must be stored as a Kubernetes secret in each namespace whe
 * To use a custom domain, see [Setting up TLS secrets for custom subdomains](/docs/containers?topic=containers-secrets#tls-custom).
 
 ### Step 3: Create the Ingress resource
-{: #managed-ingress-steps-resource}
+{: #managed-traefik-ingress-steps-resource}
 
 Create the Ingress resource to define the routing rules that the Ingress controller uses to route traffic to your app service.
 {: shortdesc}
@@ -109,7 +109,7 @@ Create the Ingress resource to define the routing rules that the Ingress control
     metadata:
       name: my-ingress-resource
     spec:
-      ingressClassName: public-iks-k8s-nginx
+      ingressClassName: public-iks-traefik
       tls:
       - hosts:
         - <domain_name>
@@ -139,13 +139,13 @@ Create the Ingress resource to define the routing rules that the Ingress control
 Resource fields
 
 `ingressClassName`
-:   The Ingress class name. The IBM-provided Ingress classes are `public-iks-k8s-nginx` for public ALBs and `private-iks-k8s-nginx` for private ALBs.
+:   The Ingress class name. The IBM-provided Ingress classes are `public-iks-traefik` for public ALBs and `private-iks-traefik` for private ALBs.
 
 `tls.hosts`
 :   To use TLS, replace `<domain>` with the IBM-provided Ingress subdomain or your custom domain.
 
 `tls.secretName`
-:   Replace `<tls_secret_name>` with the name of the Kubernetes secret where your [TLS certificate](#managed-ingress-steps-tls) is stored.
+:   Replace `<tls_secret_name>` with the name of the Kubernetes secret where your [TLS certificate](#managed-traefik-ingress-steps-tls) is stored.
 
 `host`
 :   Replace `<domain>` with the IBM-provided Ingress subdomain or your custom domain.
@@ -173,7 +173,7 @@ Resource fields
     {: pre}
 
 ### Step 4: Verify your Ingress setup
-{: #managed-ingress-setup-verify}
+{: #managed-traefik-ingress-setup-verify}
 
 1. List your ALBs and copy the IP address (classic) or hostname (VPC) for one ALB that runs the Kubernetes Ingress image. In the output, choose an ALB that has a **Build** in the format `<community_version>_<ibm_build>_iks`.
 

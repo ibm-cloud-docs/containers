@@ -217,7 +217,7 @@ toc:
               - edge-vpc-lb.md
               - lb-dns.md
           - topicgroup:
-              label: Exposing apps with Ingress
+              label: Exposing apps with NGINX-Ingress
               topics:
               - cs_managed_ingress_about.md
               - cs_managed_ingress_setup.md
@@ -226,6 +226,11 @@ toc:
               - edge-ingress.md
               - ingress-annotations.md
               - cs_ingress_monitor.md
+          - topicgroup:
+              label: Exposing apps with Traefik Ingress
+              topics:
+              - cs_managed_traefik_ingress_about.md
+              - cs_managed_traefik_ingress_setup.md
           - topicgroup:
               label: Managing certificates and secrets
               topics:
