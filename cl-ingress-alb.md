@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-06-16"
+lastupdated: "2026-06-23"
 
 
 keywords: change log, version history, Ingress ALB
@@ -25,8 +25,28 @@ Review the version history for Ingress ALB.
 {: shortdesc}
 
 
+## Version 3.7.4
+{: #cl-ingress-alb-3.7.4}
+
+
+### 3.7.4_348800920_iks, released 23 June 2026
+{: #cl-ingress-alb-374_348800920_iks}
+
+
+## Version 3.7.3
+{: #cl-ingress-alb-3.7.3}
+
+
+### 3.7.3_349786538_iks, released 23 June 2026
+{: #cl-ingress-alb-373_349786538_iks}
+
+
 ## Version 3.7.1
 {: #cl-ingress-alb-3.7.1}
+
+
+### 3.7.1_349762936_iks, released 23 June 2026
+{: #cl-ingress-alb-371_349762936_iks}
 
 
 ### 3.7.1_347083875_iks, released 15 June 2026
@@ -59,6 +79,14 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-370_342381291_iks}
 
 - Resolves the following CVEs: [CVE-2026-33811](https://nvd.nist.gov/vuln/detail/CVE-2026-33811){: external}, [CVE-2026-39823](https://nvd.nist.gov/vuln/detail/CVE-2026-39823){: external}, [CVE-2026-39820](https://nvd.nist.gov/vuln/detail/CVE-2026-39820){: external}, [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}, [CVE-2026-39836](https://nvd.nist.gov/vuln/detail/CVE-2026-39836){: external}, [CVE-2026-39825](https://nvd.nist.gov/vuln/detail/CVE-2026-39825){: external}, [CVE-2026-42499](https://nvd.nist.gov/vuln/detail/CVE-2026-42499){: external}, and [CVE-2026-39826](https://nvd.nist.gov/vuln/detail/CVE-2026-39826){: external}.
+
+
+## Version 1.15.7
+{: #cl-ingress-alb-1.15.7}
+
+
+### 1.15.7_349797741_iks, released 23 June 2026
+{: #cl-ingress-alb-1157_349797741_iks}
 
 
 ## Version 1.15.6
