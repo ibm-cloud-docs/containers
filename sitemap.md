@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-22"
+lastupdated: "2026-06-23"
 
 
 keywords: containers
@@ -3821,6 +3821,8 @@ subcollection: containers
 
 * [Kubernetes resources created by the addon](/docs/containers?topic=containers-headlamp-addon#headlamp-k8s-resources)
 
+* [Enable OIDC for Headlamp add-on over public endpoints](/docs/containers?topic=containers-headlamp-addon#headlamp-oidc-override)
+
 * [Troubleshooting the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-troubleshooting)
 
     * [Cannot access the Headlamp dashboard](/docs/containers?topic=containers-headlamp-addon#headlamp-ts-access)
@@ -4935,7 +4937,7 @@ subcollection: containers
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
 
-    * [Worker node fix pack 1.35.5_1532, released 15 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1532_W)
+    * [Worker node fix pack 1.35.5_1532, released 03 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1532_W)
 
     * [Master fix pack 1.35.5_1530, released 22 May 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1355_1530_M)
 
@@ -5020,7 +5022,7 @@ subcollection: containers
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
 
-    * [Worker node fix pack 1.34.8_1554, released 15 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1554_W)
+    * [Worker node fix pack 1.34.8_1554, released 03 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1554_W)
 
     * [Master fix pack 1.34.8_1552, released 22 May 2026](/docs/containers?topic=containers-changelog_134#cl-boms_master-1348_1552_M)
 
@@ -5127,7 +5129,7 @@ subcollection: containers
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
 
-    * [Worker node fix pack 1.33.12_1573, released 15 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1573_W)
+    * [Worker node fix pack 1.33.12_1573, released 03 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1573_W)
 
     * [Master fix pack 1.33.12_1571, released 22 May 2026](/docs/containers?topic=containers-changelog_133#cl-boms_master-13312_1571_M)
 
@@ -6931,7 +6933,17 @@ subcollection: containers
 
 [Ingress ALB](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
+* [Version 3.7.4](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.4)
+
+    * [3.7.4_348800920_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_348800920_iks)
+
+* [Version 3.7.3](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.3)
+
+    * [3.7.3_349786538_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-373_349786538_iks)
+
 * [Version 3.7.1](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.1)
+
+    * [3.7.1_349762936_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-371_349762936_iks)
 
     * [3.7.1_347083875_iks, released 15 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-371_347083875_iks)
 
@@ -6946,6 +6958,10 @@ subcollection: containers
     * [3.7.0_345548812_iks, released 08 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-370_345548812_iks)
 
     * [3.7.0_342381291_iks, released 01 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-370_342381291_iks)
+
+* [Version 1.15.7](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.7)
+
+    * [1.15.7_349797741_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_349797741_iks)
 
 * [Version 1.15.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.6)
 

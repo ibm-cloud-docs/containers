@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-05-21"
+lastupdated: "2026-06-23"
 
 
 keywords: kubernetes, headlamp, dashboard, add-on, gui
@@ -236,6 +236,40 @@ If you have a custom firewall or network settings, you need to configure that to
 * 1 **Deployment** 
     + headlamp container (port 4466)
     + nginx sidecar container
+
+## Enable OIDC for Headlamp add-on over public endpoints
+{: #headlamp-oidc-override}
+
+If your cluster cannot connect to private IAM endpoints, override the OIDC endpoint settings to use public endpoints.
+{: shortdesc}
+
+These steps assume that the cluster can access the IAM public endpoints.
+
+Before you begin, ensure that `kubectl` is configured for the cluster.
+
+1. Open the `headlamp-values` ConfigMap for editing:
+    ```sh
+    kubectl edit cm -n ibm-system headlamp-values
+    ```
+    {: pre}
+
+    In the editor, add the following to the `data` section. Replace `<account_id>` with the ID of the account where the cluster is deployed.
+    ```yaml
+    data:
+      values.yaml: |-
+        oidc:
+          overrides:
+            tokenEndpointUrl: "https://iam.cloud.ibm.com/identity/token?account=<account_id>"
+            jwksUri: "https://iam.cloud.ibm.com/identity/keys"
+    ```
+
+2. Wait up to 5 minutes for the updated values to propagate to the cluster.
+
+3. Restart the Headlamp deployment:
+    ```sh
+    kubectl rollout restart deployment/headlamp -n ibm-system
+    ```
+    {: pre}
 
 ## Troubleshooting the Headlamp add-on
 {: #headlamp-troubleshooting}
