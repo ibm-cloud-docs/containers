@@ -4935,6 +4935,8 @@ subcollection: containers
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
 
+    * [Worker node fix pack 1.35.5_1534, released 15 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1534_W)
+
     * [Worker node fix pack 1.35.5_1532, released 03 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1532_W)
 
     * [Master fix pack 1.35.5_1530, released 22 May 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1355_1530_M)
@@ -5019,6 +5021,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Worker node fix pack 1.34.8_1556, released 15 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1556_W)
 
     * [Worker node fix pack 1.34.8_1554, released 03 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1554_W)
 
@@ -5126,6 +5130,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.12_1575, released 15 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1575_W)
 
     * [Worker node fix pack 1.33.12_1573, released 03 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1573_W)
 
