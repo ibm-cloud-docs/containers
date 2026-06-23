@@ -19,9 +19,6 @@ subcollection: containers
 Headlamp is a Kubernetes dashboard that provides a graphical user interface for managing and monitoring your cluster resources. The Headlamp add-on for {{site.data.keyword.containerlong}} provides a seamless installation of Headlamp with automatic lifecycle management and integration with {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) for authentication.
 {: shortdesc}
 
-The Headlamp add-on is available in beta.
-{: beta}
-
 ## Understanding the Headlamp add-on
 {: #headlamp-addon-about}
 
@@ -300,7 +297,7 @@ If you can't access the Headlamp dashboard, verify the following:
     ```
     {: pre}
 
-4. For VPC clusters, verify that your security group allows outbound HTTPS connections to IAM endpoints.
+4. For public-only clusters, verify that network security rules allow outbound HTTPS connections to public IAM endpoints. If needed, see [Enable OIDC for Headlamp add-on over public endpoints](#headlamp-oidc-override) to update the OIDC configuration.
 
 ### Authentication fails
 {: #headlamp-ts-auth}
@@ -335,16 +332,3 @@ If the Headlamp pods are not running:
     kubectl logs -n ibm-system -l app.kubernetes.io/name=addon-headlamp
     ```
     {: pre}
-
-3. For VPC clusters, verify that your cluster has a public gateway attached and can reach external endpoints.
-
-## Limitations
-{: #headlamp-limitations}
-
-The Headlamp add-on has the following limitations:
-{: shortdesc}
-
-- **Beta release**: The Headlamp add-on is currently in beta. Features and functionality may change.
-- **Public access only by default**: In the beta release, the Headlamp dashboard uses the default public ingress hostname unless you manually configure private ingress access.
-- **VPC network requirements**: VPC clusters require a public gateway and security group configuration to allow access to IAM endpoints.
-- **Browser requirements**: You must use a modern web browser with JavaScript enabled and cookie support.

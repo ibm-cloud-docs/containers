@@ -3831,8 +3831,6 @@ subcollection: containers
 
     * [Pods are not running](/docs/containers?topic=containers-headlamp-addon#headlamp-ts-pods)
 
-* [Limitations](/docs/containers?topic=containers-headlamp-addon#headlamp-limitations)
-
 
 ## Istio service mesh
 {: #sitemap_istio_service_mesh}
