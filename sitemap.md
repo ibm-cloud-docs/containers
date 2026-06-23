@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-22"
+lastupdated: "2026-06-23"
 
 
 keywords: containers
@@ -3820,6 +3820,8 @@ subcollection: containers
 * [Accessing Headlamp over private ingress on VPC clusters](/docs/containers?topic=containers-headlamp-addon#headlamp-private-ingress)
 
 * [Kubernetes resources created by the addon](/docs/containers?topic=containers-headlamp-addon#headlamp-k8s-resources)
+
+* [Enable OIDC for Headlamp add-on over public endpoints](/docs/containers?topic=containers-headlamp-addon#headlamp-oidc-override)
 
 * [Troubleshooting the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-troubleshooting)
 
