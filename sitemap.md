@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-23"
+lastupdated: "2026-06-24"
 
 
 keywords: containers
@@ -3709,43 +3709,43 @@ subcollection: containers
 
     * [Creating custom domains for private ALBs](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain-private)
 
-[Managing ALBs](/docs/containers?topic=containers-ingress-alb-manage#ingress-alb-manage)
+[Managing ALBs](/docs/containers?topic=containers-traefik-ingress-alb-manage#traefik-ingress-alb-manage)
 
-* [Updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-update)
+* [Updating ALBs](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb-update)
 
-    * [Enabling automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate)
+    * [Enabling automatic updates](/docs/containers?topic=containers-traefik-ingress-alb-manage#autoupdate)
 
-    * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-ingress-alb-manage#alb-scheduled-updates)
+    * [Scheduling maintenance windows for automatic updates](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb-scheduled-updates)
 
-    * [Disabling automatic updates](/docs/containers?topic=containers-ingress-alb-manage#autoupdate_disable)
+    * [Disabling automatic updates](/docs/containers?topic=containers-traefik-ingress-alb-manage#autoupdate_disable)
 
-    * [Applying manual updates](/docs/containers?topic=containers-ingress-alb-manage#update-alb)
+    * [Applying manual updates](/docs/containers?topic=containers-traefik-ingress-alb-manage#update-alb)
 
-* [Choosing a supported image version](/docs/containers?topic=containers-ingress-alb-manage#alb-version-choose)
+* [Choosing a supported image version](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb-version-choose)
 
-    * [Viewing supported image versions](/docs/containers?topic=containers-ingress-alb-manage#alb-version-list)
+    * [Viewing supported image versions](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb-version-list)
 
-    * [Reverting to an earlier version](/docs/containers?topic=containers-ingress-alb-manage#revert-alb-version)
+    * [Reverting to an earlier version](/docs/containers?topic=containers-traefik-ingress-alb-manage#revert-alb-version)
 
-* [Manually scaling your ALBs](/docs/containers?topic=containers-ingress-alb-manage#scale_albs)
+* [Manually scaling your ALBs](/docs/containers?topic=containers-traefik-ingress-alb-manage#scale_albs)
 
-    * [Creating more ALBs in a zone](/docs/containers?topic=containers-ingress-alb-manage#create_alb)
+    * [Creating more ALBs in a zone](/docs/containers?topic=containers-traefik-ingress-alb-manage#create_alb)
 
-    * [Changing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas)
+    * [Changing the number of ALB pod replicas](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb_replicas)
 
-* [Dynamically scaling ALBs with autoscaler](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler)
+* [Dynamically scaling ALBs with autoscaler](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb_replicas_autoscaler)
 
-    * [Example commands for configuring dynamic ALB autoscaling](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler_ex)
+    * [Example commands for configuring dynamic ALB autoscaling](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb_replicas_autoscaler_ex)
 
-    * [Calculating average CPU utilization](/docs/containers?topic=containers-ingress-alb-manage#alb_scaling_average_cpu)
+    * [Calculating average CPU utilization](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb_scaling_average_cpu)
 
-    * [Disabling ALB autoscaling](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler_disable)
+    * [Disabling ALB autoscaling](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb_replicas_autoscaler_disable)
 
-* [Disabling ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-disable)
+* [Disabling ALBs](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb-disable)
 
-* [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan)
+* [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-traefik-ingress-alb-manage#migrate-alb-vlan)
 
-* [Managing port 80 on the ALBs](/docs/containers?topic=containers-ingress-alb-manage#port80)
+* [Managing port 80 on the ALBs](/docs/containers?topic=containers-traefik-ingress-alb-manage#port80)
 
 
 ### Managing certificates and secrets
