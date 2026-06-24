@@ -258,6 +258,12 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
+    * [17 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-ju1726)
+
+        * Istio cluster add-on patch updates.
+
+        * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
+
     * [15 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1526)
 
         * Ingress ALB patch updates.
