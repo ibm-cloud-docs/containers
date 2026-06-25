@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2021, 2024
-lastupdated: "2024-08-21"
+  years: 2021, 2026
+lastupdated: "2026-06-25"
 
 
 keywords: kubernetes, containers
@@ -26,18 +26,23 @@ content-type: troubleshoot
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
+You experience issues with Calico components such as pods that don't deploy or intermittent networking issues.
+{: shortdesc}
+
+You experience issues with Calico components such as pods that don't deploy or intermittent networking issues.
+{: tsSymptoms}
 
 
-In version 1.29 and later, the Calico Operator determines the number of `calico-typha` pods based on the number of cluster workers and does not consider tainted nodes. If you have fewer than 3 untainted nodes in your cluster, or have a very large cluster with a small number of untainted nodes, you might have one or more `calico-typha` pods are stuck in `Pending` state because the pod can't find an untainted node to run on. Usually, this doesn't cause an issue as long as there is at least one `calico-typha` pod in Running state. However, for high availability it is recommended to have at least two `calico-typha` pods always running. As a best practice, make sure that there are enough untainted nodes to run all the `calico-typha` pods that are created by the Calico operator.
+
+The Calico Operator determines the number of `calico-typha` pods based on the number of cluster workers and does not consider tainted nodes. If you have fewer than 3 untainted nodes in your cluster, or have a very large cluster with a small number of untainted nodes, you might have one or more `calico-typha` pods stuck in `Pending` state because the pod can't find an untainted node to run on. Usually, this doesn't cause an issue as long as there is at least one `calico-typha` pod in Running state. However, for high availability it is recommended to have at least two `calico-typha` pods always running. As a best practice, make sure that there are enough untainted nodes to run all the `calico-typha` pods that are created by the Calico operator.
 {: note}
 
 
 
-You experience issues with Calico components such as pods that don't deploy or intermittent networking issues. 
-{: tsSymptoms}
+Calico networking issues can be difficult to diagnose without detailed logging. The default log level for Calico components is set to `info`, which provides basic operational information but might not include enough detail to troubleshoot complex networking problems.
+{: tsCauses}
 
-
-Increase the logging level of Calico components to gather more information about the issue.
+Increase the logging level of Calico components to `debug` to gather more detailed information about the issue. Debug-level logging provides verbose output that can help identify the root cause of networking problems.
 {: tsResolve}
 
 ## Increasing the log level for the `calico-typha` components
@@ -148,17 +153,17 @@ Complete the following steps to increase the log level for the `calico-node` com
 
 Complete the following steps to increase the log level for the `calico-kube-controllers` component.
 
-1. Edit the daemonset by running the following command. 
+1. Edit the deployment by running the following command.
     
     For 1.29 and later:
     ```sh
-    kubectl edit ds calico-node -n calico-system
+    kubectl edit deploy calico-kube-controllers -n calico-system
     ```
     {: pre}
 
     For 1.28 and earlier:
     ```sh
-    kubectl edit ds calico-node -n kube-system
+    kubectl edit deploy calico-kube-controllers -n kube-system
     ```
     {: pre}
     
@@ -177,7 +182,12 @@ Complete the following steps to increase the log level for the `calico-kube-cont
 ## Gathering Calico logs
 {: #calico-log-gather}
 
-1. List the pods and nodes in your cluster and make a node of the pod name, pod IP address, and worker node that has the issue.
+1. List the pods and nodes in your cluster and make a note of the pod name, pod IP address, and worker node that has the issue.
+    ```sh
+    kubectl get pods -o wide -n kube-system
+    ```
+    {: pre}
+
 2. Get the logs for the `calico-node` pod on the worker node where the problem occurred.
     
     For 1.29 and later:
@@ -207,4 +217,3 @@ Complete the following steps to increase the log level for the `calico-kube-cont
     {: pre}
   
 4. Follow the instructions for [Debugging by using kubectl exec](/docs/containers?topic=containers-cs_ssh_worker#kubectl-exec) to get `/var/log/syslog`, `containerd.log`, `kubelet.log`, and `kern.log` from the worker node.
-

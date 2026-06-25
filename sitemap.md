@@ -2111,7 +2111,11 @@ subcollection: containers
 
 * [Manually adding labels to existing worker pools](/docs/containers?topic=containers-worker-tag-label&interface=cli#worker_pool_labels)
 
-[Checking worker node resource reserves](/docs/containers?topic=containers-resource-limit-node#resource-limit-node)
+[Worker node resource reserves](/docs/containers?topic=containers-resource-limit-node#resource-limit-node)
+
+* [When to check resource reserves](/docs/containers?topic=containers-resource-limit-node#when-check-reserves)
+
+* [Understanding resource reserve tiers](/docs/containers?topic=containers-resource-limit-node#reserve-tiers)
 
 [Removing clusters](/docs/containers?topic=containers-remove#remove)
 
