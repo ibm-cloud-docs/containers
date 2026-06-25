@@ -53,82 +53,6 @@ Review the version history for Static Route.
 - Fix CVEs CVE-2026-33814, CVE-2026-39836
 
 
-### Version 1.0.0 - v1.0.0-342645253, released 23 May 2026
-{: #cl-add-ons-static-route-v100-342645253}
-
-- Resolves the following CVEs: [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}, and [CVE-2026-39836](https://nvd.nist.gov/vuln/detail/CVE-2026-39836){: external}.
-- CVE-2026-33814 
-- CVE-2026-39836 
-- Release the Static Route Operator with Go version 1.25.10
-- Fix CVEs CVE-2026-33814, CVE-2026-39836
-
-
-### Version 1.0.0 - v1.0.0-342645253, released 23 May 2026
-{: #cl-add-ons-static-route-v100-342645253}
-
-- Resolves the following CVEs: [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}, and [CVE-2026-39836](https://nvd.nist.gov/vuln/detail/CVE-2026-39836){: external}.
-- CVE-2026-33814 
-- CVE-2026-39836 
-- Release the Static Route Operator with Go version 1.25.10
-- Fix CVEs CVE-2026-33814, CVE-2026-39836
-
-
-### Version 1.0.0 - v1.0.0-342645253, released 23 May 2026
-{: #cl-add-ons-static-route-v100-342645253}
-
-- Resolves the following CVEs: [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}, and [CVE-2026-39836](https://nvd.nist.gov/vuln/detail/CVE-2026-39836){: external}.
-- CVE-2026-33814 
-- CVE-2026-39836 
-- Release the Static Route Operator with Go version 1.25.10
-- Fix CVEs CVE-2026-33814, CVE-2026-39836
-
-
-### Version 1.0.0 - v1.0.0-342645253, released 23 May 2026
-{: #cl-add-ons-static-route-v100-342645253}
-
-- Resolves the following CVEs: [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}, and [CVE-2026-39836](https://nvd.nist.gov/vuln/detail/CVE-2026-39836){: external}.
-- CVE-2026-33814 
-- CVE-2026-39836 
-- Release the Static Route Operator with Go version 1.25.10
-- Fix CVEs CVE-2026-33814, CVE-2026-39836
-
-
-### Version 1.0.0 - v1.0.0-1661, released 06 February 2025
-{: #cl-add-ons-static-route-v100-1661}
-
-- Resolves the following CVEs: [CVE-2024-45337](https://nvd.nist.gov/vuln/detail/CVE-2024-45337){: external}, and [CVE-2024-45338](https://nvd.nist.gov/vuln/detail/CVE-2024-45338){: external}.
-- CVE-2024-45337 
-- CVE-2024-45338 
-- Fix CVE-2024-45337 and CVE-2024-45338
-
-
-### Version 1.0.0 - v1.0.0-1661, released 06 February 2025
-{: #cl-add-ons-static-route-v100-1661}
-
-- Resolves the following CVEs: [CVE-2024-45337](https://nvd.nist.gov/vuln/detail/CVE-2024-45337){: external}, and [CVE-2024-45338](https://nvd.nist.gov/vuln/detail/CVE-2024-45338){: external}.
-- CVE-2024-45337 
-- CVE-2024-45338 
-- Fix CVE-2024-45337 and CVE-2024-45338
-
-
-### Version 1.0.0 - v1.0.0-1661, released 06 February 2025
-{: #cl-add-ons-static-route-v100-1661}
-
-- Resolves the following CVEs: [CVE-2024-45337](https://nvd.nist.gov/vuln/detail/CVE-2024-45337){: external}, and [CVE-2024-45338](https://nvd.nist.gov/vuln/detail/CVE-2024-45338){: external}.
-- CVE-2024-45337 
-- CVE-2024-45338 
-- Fix CVE-2024-45337 and CVE-2024-45338
-
-
-### Version 1.0.0 - v1.0.0-1661, released 06 February 2025
-{: #cl-add-ons-static-route-v100-1661}
-
-- Resolves the following CVEs: [CVE-2024-45337](https://nvd.nist.gov/vuln/detail/CVE-2024-45337){: external}, and [CVE-2024-45338](https://nvd.nist.gov/vuln/detail/CVE-2024-45338){: external}.
-- CVE-2024-45337 
-- CVE-2024-45338 
-- Fix CVE-2024-45337 and CVE-2024-45338
-
-
 ### Version 1.0.0 - v1.0.0-1661, released 06 February 2025
 {: #cl-add-ons-static-route-v100-1661}
 
@@ -145,35 +69,7 @@ Review the version history for Static Route.
 - `addon-static-route v1.0.0_1581`
 
 
-### Version 1.0.0 - 1.0.0_1581, released 14 November 2024
-{: #cl-add-ons-static-route-100_1581}
-
-- Updates to the latest `ubi-minimal` base image for the operator build. 
-- `addon-static-route v1.0.0_1581`
-
-
-### Version 1.0.0 - 1.0.0_1581, released 14 November 2024
-{: #cl-add-ons-static-route-100_1581}
-
-- Updates to the latest `ubi-minimal` base image for the operator build. 
-- `addon-static-route v1.0.0_1581`
-
-
-### Version 1.0.0 - 1.0.0_1581, released 14 November 2024
-{: #cl-add-ons-static-route-100_1581}
-
-- Updates to the latest `ubi-minimal` base image for the operator build. 
-- `addon-static-route v1.0.0_1581`
-
-
-### Version 1.0.0 - 1.0.0_1581, released 14 November 2024
-{: #cl-add-ons-static-route-100_1581}
-
-- Updates to the latest `ubi-minimal` base image for the operator build. 
-- `addon-static-route v1.0.0_1581`
-
-
-### 1.0.0_1122, released 17 July 2023
+### Version 1.0.0_1122, released 17 July 2023
 {: #cl-add-ons-static-route-100_1122}
 
 Adds support for different worker node architectures.
