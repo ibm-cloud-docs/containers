@@ -3731,6 +3731,52 @@ subcollection: containers
 
     * [Creating custom domains for private ALBs](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain-private)
 
+[Setting up a domain for your cluster](/docs/containers?topic=containers-ingress-domains#ingress-domains)
+
+* [Accessing domains in the console](/docs/containers?topic=containers-ingress-domains&interface=ui#ingress-domains-ui-access)
+
+* [Creating domains in the console](/docs/containers?topic=containers-ingress-domains&interface=ui#ingress-domains-ui)
+
+    * [Domain details](/docs/containers?topic=containers-ingress-domains&interface=ui#ingress-domains-ui-details)
+
+    * [Registration details](/docs/containers?topic=containers-ingress-domains&interface=ui#ingress-domains-ui-registration)
+
+* [Managing your domain in the console](/docs/containers?topic=containers-ingress-domains&interface=ui#ingress-domains-ui-manage)
+
+* [Setting up domains with the managed {{site.data.keyword.cloud_notm}} internal provider](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-int)
+
+* [Setting up domains with {{site.data.keyword.cis_full_notm}}](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-cis)
+
+    * [Set up service-to-service authorization](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-cis-s2s)
+
+    * [Create a domain](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-cis-create)
+
+* [Managing domains](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domains-manage)
+
+    * [Listing all domains in a cluster](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domains-manage-view-ls)
+
+    * [Getting the details of a single domain](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domains-manage-view-get)
+
+    * [Removing a domain from a cluster](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domains-manage-rm)
+
+    * [Updating a domain's IP addresses or hostname](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domains-manage-update)
+
+    * [Changing a cluster's default domain](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-manage-default)
+
+* [Managing domain secrets and certificates](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-manage-secrets)
+
+    * [Regenerating the certificate for an Ingress domain](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-manage-secrets-regen)
+
+    * [Deleting an Ingress domain secret](/docs/containers?topic=containers-ingress-domains&interface=cli#ingress-domain-manage-secrets-rm)
+
+[Isolating Ingress resources to edge worker nodes](/docs/containers?topic=containers-edge#edge)
+
+* [Before you begin](/docs/containers?topic=containers-edge#edge-prereqs)
+
+* [Isolating workloads to edge worker nodes](/docs/containers?topic=containers-edge#edge-isolate)
+
+* [Next steps](/docs/containers?topic=containers-edge#next)
+
 [Managing ALBs](/docs/containers?topic=containers-traefik-ingress-alb-manage#traefik-ingress-alb-manage)
 
 * [Updating ALBs](/docs/containers?topic=containers-traefik-ingress-alb-manage#alb-update)

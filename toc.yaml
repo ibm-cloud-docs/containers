@@ -231,6 +231,8 @@ toc:
               topics:
               - cs_managed_traefik_ingress_about.md
               - cs_managed_traefik_ingress_setup.md
+              - ingress-domains.md
+              - edge-ingress-traefik.md
               - cs_managed_traefik_ingress_alb.md
           - topicgroup:
               label: Managing certificates and secrets
