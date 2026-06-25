@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-06-09"
+lastupdated: "2026-06-25"
 
 
 keywords: change log, version history, ALB OAuth Proxy
@@ -43,13 +43,19 @@ Review the version history for ALB OAuth Proxy.
 {: #cl-add-ons-alb-oauth-proxy-2.0.0}
 
 
-### 2.0.0_345210432, released 09 June 2026
+### Version 2.0.0 - 2.0.0_348521235, released 25 June 2026
+{: #cl-add-ons-alb-oauth-proxy-200_348521235}
+
+- `oauth2-proxy v7.15.2-348514543`
+
+
+### Version 2.0.0 - 2.0.0_345210432, released 09 June 2026
 {: #cl-add-ons-alb-oauth-proxy-200_345210432}
 
 - `oauth2-proxy v7.15.2-345169273`
 
 
-### 2.0.0_342054714, released 28 May 2026
+### Version 2.0.0 - 2.0.0_342054714, released 28 May 2026
 {: #cl-add-ons-alb-oauth-proxy-200_342054714}
 
 - Resolves the following CVEs: [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}.
@@ -57,28 +63,28 @@ Review the version history for ALB OAuth Proxy.
 - `oauth2-proxy v7.15.2-341272170`
 
 
-### 2.0.0_339700227, released 21 May 2026
+### Version 2.0.0 - 2.0.0_339700227, released 21 May 2026
 {: #cl-add-ons-alb-oauth-proxy-200_339700227}
 
 - Updates Go to version `1.26`.
 - `oauth2-proxy v7.15.2-339696729`
 
 
-### 2.0.0_334964365, released 05 May 2026
+### Version 2.0.0 - 2.0.0_334964365, released 05 May 2026
 {: #cl-add-ons-alb-oauth-proxy-200_334964365}
 
 - Updates Go to version `1.26`.
 - `oauth2-proxy v7.13.0-334950687`
 
 
-### 2.0.0_328060981, released 26 March 2026
+### Version 2.0.0 - 2.0.0_328060981, released 26 March 2026
 {: #cl-add-ons-alb-oauth-proxy-200_328060981}
 
 - Updates Go to version `1.25`.
 - `oauth2-proxy v7.13.0-328053545`
 
 
-### 2.0.0_325480053, released 24 March 2026
+### Version 2.0.0 - 2.0.0_325480053, released 24 March 2026
 {: #cl-add-ons-alb-oauth-proxy-200_325480053}
 
 - Resolves the following CVEs: [CVE-2026-27141](https://nvd.nist.gov/vuln/detail/CVE-2026-27141){: external}.
@@ -86,55 +92,55 @@ Review the version history for ALB OAuth Proxy.
 - `oauth2-proxy v7.13.0-325458974`
 
 
-### 2.0.0_320412247, released 03 March 2026
+### Version 2.0.0 - 2.0.0_320412247, released 03 March 2026
 {: #cl-add-ons-alb-oauth-proxy-200_320412247}
 
 - Updates Go to version `1.25`.
 - `oauth2-proxy v7.13.0-320405968`
 
 
-### 2.0.0_318867667, released 23 February 2026
+### Version 2.0.0 - 2.0.0_318867667, released 23 February 2026
 {: #cl-add-ons-alb-oauth-proxy-200_318867667}
 
 - Resolves the following CVEs: [CVE-2025-68121](https://nvd.nist.gov/vuln/detail/CVE-2025-68121){: external}.
 - `oauth2-proxy v7.13.0-318860469`
 
 
-### 2.0.0_315379759, released 10 February 2026
+### Version 2.0.0 - 2.0.0_315379759, released 10 February 2026
 {: #cl-add-ons-alb-oauth-proxy-200_315379759}
 
 - `oauth2-proxy v7.13.0-314571599`
 
 
-### 2.0.0_302041660, released 04 December 2025
+### Version 2.0.0 - 2.0.0_302041660, released 04 December 2025
 {: #cl-add-ons-alb-oauth-proxy-200_302041660}
 
 - Updates Go to version `1.25`.
 - `oauth2-proxy v7.13.0-302028748`
 
 
-### 2.0.0_2943, released 18 August 2025
+### Version 2.0.0 - 2.0.0_2943, released 18 August 2025
 {: #cl-add-ons-alb-oauth-proxy-200_2943}
 
 - Updates Go to version `1.24`.
 - `oauth2-proxy v7.11.0-3074`
 
 
-### 2.0.0_2897, released 16 August 2025
+### Version 2.0.0 - 2.0.0_2897, released 16 August 2025
 {: #cl-add-ons-alb-oauth-proxy-200_2897}
 
 - Updates Go to version `1.24`.
 - `oauth2-proxy v7.11.0-3052`
 
 
-### 2.0.0_2817, released 22 July 2025
+### Version 2.0.0 - 2.0.0_2817, released 22 July 2025
 {: #cl-add-ons-alb-oauth-proxy-200_2817}
 
 - Updates Go to version `1.24`.
 - `oauth2-proxy v7.9.0-2982`
 
 
-### 2.0.0_2765, released 23 June 2025
+### Version 2.0.0 - 2.0.0_2765, released 23 June 2025
 {: #cl-add-ons-alb-oauth-proxy-200_2765}
 
 - Resolves the following CVEs: [CVE-2025-22872](https://nvd.nist.gov/vuln/detail/CVE-2025-22872){: external}.
@@ -142,27 +148,27 @@ Review the version history for ALB OAuth Proxy.
 - `oauth2-proxy v7.9.0-2912`
 
 
-### 2.0.0_2629, released 27 April 2025
+### Version 2.0.0 - 2.0.0_2629, released 27 April 2025
 {: #cl-add-ons-alb-oauth-proxy-200_2629}
 
 - Resolves the following CVEs: [CVE-2025-22870](https://nvd.nist.gov/vuln/detail/CVE-2025-22870){: external}.
 - `oauth2-proxy v7.5.0-2814`
 
 
-### 2.0.0_2557, released 13 March 2025
+### Version 2.0.0 - 2.0.0_2557, released 13 March 2025
 {: #cl-add-ons-alb-oauth-proxy-200_2557}
 
 - Resolves the following CVEs: [CVE-2025-22868](https://nvd.nist.gov/vuln/detail/CVE-2025-22868){: external}.
 - `oauth2-proxy v7.5.0-2760`
 
 
-### 2.0.0_2473, released 15 January 2025
+### Version 2.0.0 - 2.0.0_2473, released 15 January 2025
 {: #cl-add-ons-alb-oauth-proxy-200_2473}
 
 - `oauth2-proxy v7.5.0-2683`
 
 
-### 2.0.0_2400, released 31 October 2024
+### Version 2.0.0 - 2.0.0_2400, released 31 October 2024
 {: #cl-add-ons-alb-oauth-proxy-200_2400}
 
 - Updates Go to version `1.22.7`.
@@ -170,21 +176,21 @@ Review the version history for ALB OAuth Proxy.
 - `oauth2-proxy v7.5.0-2542`
 
 
-### 2.0.0_2340, released 03 September 2024
+### Version 2.0.0 - 2.0.0_2340, released 03 September 2024
 {: #cl-add-ons-alb-oauth-proxy-200_2340}
 
 - Updates Go to version `1.22.4`.
 - `oauth2-proxy v7.5.0-2505`
 
 
-### 2.0.0_2301, released 06 June 2024
+### Version 2.0.0 - 2.0.0_2301, released 06 June 2024
 {: #cl-add-ons-alb-oauth-proxy-200_2301}
 
 - Resolves the following CVEs: [CVE-2024-2961](https://nvd.nist.gov/vuln/detail/CVE-2024-2961){: external}.
 - `oauth2-proxy v7.5.0-2417`
 
 
-### 2.0.0_2266, released 04 June 2024
+### Version 2.0.0 - 2.0.0_2266, released 04 June 2024
 {: #cl-add-ons-alb-oauth-proxy-200_2266}
 
 - Resolves the following CVEs: [CVE-2024-2961](https://nvd.nist.gov/vuln/detail/CVE-2024-2961){: external}.
@@ -192,7 +198,7 @@ Review the version history for ALB OAuth Proxy.
 - `oauth2-proxy v7.5.0-2390`
 
 
-### 2.0.0_2250, released 08 May 2024
+### Version 2.0.0 - 2.0.0_2250, released 08 May 2024
 {: #cl-add-ons-alb-oauth-proxy-200_2250}
 
 - Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/CVE-2024-24786){: external}, and [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288){: external}.

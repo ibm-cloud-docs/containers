@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-06-22"
+lastupdated: "2026-06-25"
 
 
 keywords: change log, version history, IBM Storage Operator
@@ -39,208 +39,15 @@ Review the version history for IBM Storage Operator.
 {: shortdesc}
 
 
-## Version 1.0
-{: #cl-add-ons-ibm-storage-operator-1.0}
-
-
-### v1.0.44_347952047, released 22 June 2026
-{: #cl-add-ons-ibm-storage-operator-v1044_347952047}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2026-28390](https://nvd.nist.gov/vuln/detail/CVE-2026-28390){: external}.
-- `armada-storage-secret v1.3.55`
-
-
-### v1.0.43_345196902, released 09 June 2026
-{: #cl-add-ons-ibm-storage-operator-v1043_345196902}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2026-4438](https://nvd.nist.gov/vuln/detail/CVE-2026-4438){: external}, [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/CVE-2026-4046){: external}, and [CVE-2026-4437](https://nvd.nist.gov/vuln/detail/CVE-2026-4437){: external}.
-- `armada-storage-secret v1.3.51`
-
-
-### v1.0.42_343448801, released 03 June 2026
-{: #cl-add-ons-ibm-storage-operator-v1042_343448801}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}, [CVE-2026-31790](https://nvd.nist.gov/vuln/detail/CVE-2026-31790){: external}, [CVE-2026-29111](https://nvd.nist.gov/vuln/detail/CVE-2026-29111){: external}, [CVE-2026-40355](https://nvd.nist.gov/vuln/detail/CVE-2026-40355){: external}, [CVE-2026-40356](https://nvd.nist.gov/vuln/detail/CVE-2026-40356){: external}, and [CVE-2026-4878](https://nvd.nist.gov/vuln/detail/CVE-2026-4878){: external}.
-- `armada-storage-secret v1.3.50`
-
-
-### v1.0.40_340278420, released 19 May 2026
-{: #cl-add-ons-ibm-storage-operator-v1040_340278420}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2026-29111](https://nvd.nist.gov/vuln/detail/CVE-2026-29111){: external}.
-- `armada-storage-secret v1.2.84`
-
-
-### v1.0.41_341664770, released 19 May 2026
-{: #cl-add-ons-ibm-storage-operator-v1041_341664770}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2026-33811](https://nvd.nist.gov/vuln/detail/CVE-2026-33811){: external}, [CVE-2026-39979](https://nvd.nist.gov/vuln/detail/CVE-2026-39979){: external}, [CVE-2025-14512](https://nvd.nist.gov/vuln/detail/CVE-2025-14512){: external}, [CVE-2025-14087](https://nvd.nist.gov/vuln/detail/CVE-2025-14087){: external}, and [CVE-2026-40164](https://nvd.nist.gov/vuln/detail/CVE-2026-40164){: external}.
-- `armada-storage-secret v1.3.49`
-
-
-### v1.0.39_338302625, released 13 May 2026
-{: #cl-add-ons-ibm-storage-operator-v1039_338302625}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2026-4786](https://nvd.nist.gov/vuln/detail/CVE-2026-4786){: external}, [CVE-2026-6100](https://nvd.nist.gov/vuln/detail/CVE-2026-6100){: external}, and [CVE-2026-4878](https://nvd.nist.gov/vuln/detail/CVE-2026-4878){: external}.
-- `armada-storage-secret v1.2.82`
-
-
-### v1.0.37_333899629, released 27 April 2026
-{: #cl-add-ons-ibm-storage-operator-v1037_333899629}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2026-32281](https://nvd.nist.gov/vuln/detail/CVE-2026-32281){: external}, [CVE-2026-32289](https://nvd.nist.gov/vuln/detail/CVE-2026-32289){: external}, and [CVE-2026-4519](https://nvd.nist.gov/vuln/detail/CVE-2026-4519){: external}.
-- Updates Go to version `1.25.9`.
-- `armada-storage-secret v1.2.80`
-
-
-### v1.0.36_328998949, released 07 April 2026
-{: #cl-add-ons-ibm-storage-operator-v1036_328998949}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2026-33186](https://nvd.nist.gov/vuln/detail/CVE-2026-33186){: external}.
-- Updates Go to version `1.25.8`.
-- `armada-storage-secret v1.2.79`
-
-
-### v1.0.35_325672265, released 24 March 2026
-{: #cl-add-ons-ibm-storage-operator-v1035_325672265}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2025-14831](https://nvd.nist.gov/vuln/detail/CVE-2025-14831){: external}, [CVE-2025-15366](https://nvd.nist.gov/vuln/detail/CVE-2025-15366){: external}, [CVE-2025-15367](https://nvd.nist.gov/vuln/detail/CVE-2025-15367){: external}, [CVE-2026-1299](https://nvd.nist.gov/vuln/detail/CVE-2026-1299){: external}, [CVE-2024-6923](https://nvd.nist.gov/vuln/detail/CVE-2024-6923){: external}, [CVE-2026-0865](https://nvd.nist.gov/vuln/detail/CVE-2026-0865){: external}, [CVE-2026-25679](https://nvd.nist.gov/vuln/detail/CVE-2026-25679){: external}, [CVE-2025-12801](https://nvd.nist.gov/vuln/detail/CVE-2025-12801){: external}, [CVE-2026-27139](https://nvd.nist.gov/vuln/detail/CVE-2026-27139){: external}, and [CVE-2026-27142](https://nvd.nist.gov/vuln/detail/CVE-2026-27142){: external}.
-- `armada-storage-secret v1.2.78`
-
-
-### v1.0.34_321366482, released 02 March 2026
-{: #cl-add-ons-ibm-storage-operator-v1034_321366482}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2026-0861](https://nvd.nist.gov/vuln/detail/CVE-2026-0861){: external}, [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}, and [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}.
-- Fixed an issue where EIT enablement was not triggered for new nodes in EIT‑enabled worker pools after a storage operator restart. 
-- `armada-storage-secret v1.2.77`
-
-
-### v1.0.32_319681464, released 26 February 2026
-{: #cl-add-ons-ibm-storage-operator-v1032_319681464}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2025-68121](https://nvd.nist.gov/vuln/detail/CVE-2025-68121){: external}.
-- `armada-storage-secret v1.2.76`
-
-
-### v1.0.31_316468084, released 10 February 2026
-{: #cl-add-ons-ibm-storage-operator-v1031_316468084}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2025-15467](https://nvd.nist.gov/vuln/detail/CVE-2025-15467){: external}, [CVE-2025-11187](https://nvd.nist.gov/vuln/detail/CVE-2025-11187){: external}, [CVE-2025-15468](https://nvd.nist.gov/vuln/detail/CVE-2025-15468){: external}, [CVE-2025-15469](https://nvd.nist.gov/vuln/detail/CVE-2025-15469){: external}, [CVE-2025-66199](https://nvd.nist.gov/vuln/detail/CVE-2025-66199){: external}, [CVE-2025-68160](https://nvd.nist.gov/vuln/detail/CVE-2025-68160){: external}, [CVE-2025-69418](https://nvd.nist.gov/vuln/detail/CVE-2025-69418){: external}, [CVE-2025-69419](https://nvd.nist.gov/vuln/detail/CVE-2025-69419){: external}, [CVE-2025-69420](https://nvd.nist.gov/vuln/detail/CVE-2025-69420){: external}, [CVE-2025-69421](https://nvd.nist.gov/vuln/detail/CVE-2025-69421){: external}, [CVE-2026-22795](https://nvd.nist.gov/vuln/detail/CVE-2026-22795){: external}, [CVE-2026-22796](https://nvd.nist.gov/vuln/detail/CVE-2026-22796){: external}, and [CVE-2025-9086](https://nvd.nist.gov/vuln/detail/CVE-2025-9086){: external}.
-- `armada-storage-secret v1.2.75`
-
-
-### v1.0.30_310464697, released 21 January 2026
-{: #cl-add-ons-ibm-storage-operator-v1030_310464697}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2025-61729](https://nvd.nist.gov/vuln/detail/CVE-2025-61729){: external}, and [CVE-2025-61727](https://nvd.nist.gov/vuln/detail/CVE-2025-61727){: external}.
-- Updates the K8s client libraries from 1.32.8 to 1.32.10. 
-- Fixed an issue where the EIT enablement was not working in tainted worker pools. 
-- `armada-storage-secret v1.2.74`
-
-
-### v1.0.29_301949998, released 05 December 2025
-{: #cl-add-ons-ibm-storage-operator-v1029_301949998}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2025-9230](https://nvd.nist.gov/vuln/detail/CVE-2025-9230){: external}.
-- Updates Go to version `1.25.4`.
-- Adds support for enabling and disabling the snapshot functionality by using the IS_SNAPSHOT_ENABLED flag. Snapshots are enabled by default.
-
-
-### 1.0.27_264, released 22 September 2025
-{: #cl-add-ons-ibm-storage-operator-1027_264}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}.
-- Updates Go to version `1.23.12`.
-- Adds EIT support for OpenShift clusters with RHEL worker nodes.
-- Adds 3 new storage classes: ibmc-vpc-file-regional, ibmc-vpc-file-regional-max-bandwidth, and ibmc-vpc-file-regional-max-bandwidth-sds. These classes are based on VPC regional file share profiles and are available in Beta for allowlisted accounts.
-- `ibm-vpc-package-deployer v1.0.5`
-
-
-### 1.0.26_258, released 18 August 2025
-{: #cl-add-ons-ibm-storage-operator-1026_258}
-
-[Default version]{: tag-green}
-
-- Updates Go to version `1.23.11`.
-- Fixes an issue with setting the default storage class from the add-on configMap. 
-- Added EIT support for RHEL 9.6 OS.
-- `ibm-vpc-package-deployer v1.0.4`
-
-
-### 1.0.25_248, released 18 July 2025
-{: #cl-add-ons-ibm-storage-operator-1025_248}
-
-[Default version]{: tag-green}
-
-- Resolves the following CVEs: [CVE-2025-4802](https://nvd.nist.gov/vuln/detail/CVE-2025-4802){: external}, [CVE-2025-4673](https://nvd.nist.gov/vuln/detail/CVE-2025-4673){: external}, [CVE-2024-23337](https://nvd.nist.gov/vuln/detail/CVE-2024-23337){: external}, and [CVE-2025-48060](https://nvd.nist.gov/vuln/detail/CVE-2025-48060){: external}.
-- Updates Go to version `1.23.10`.
-- Updates the Kubernetes client libraries from 1.32.3 to 1.32.6, ensuring compatibility with newer clusters. 
-- Updates imagePullPolicy to IfNotPresent for all containers in the deployment. 
-- `armada-storage-secret v1.2.64`
-
-
-### 1.0.23_230, released 16 June 2025
-{: #cl-add-ons-ibm-storage-operator-1023_230}
-
-- Resolves the following CVEs: [CVE-2025-0395](https://nvd.nist.gov/vuln/detail/CVE-2025-0395){: external}, and [CVE-2020-11023](https://nvd.nist.gov/vuln/detail/CVE-2020-11023){: external}.
-- Updates Go to version `1.23.9`.
-- Fixes issue with reconciliation of file resources. 
-- Fixes an issue where updates to the storage operator no longer cause disruption to file resources. 
-- Improves the events published in file-csi-driver-status configmap. 
-- Updates rolling update strategy for operator controller pods to prevent reconciliation delays. 
-- Updates to the EIT packages are now automatically applied if EIT is already installed. 
-- Updates the Kubernetes 1.32 client libraries, ensuring compatibility with newer clusters. 
-- Adds the capability in the operator to persist the `addon-vpc-file-csi-driver-configmap` and `file-csi-driver-status` configmaps.
-
-
-### 1.0.17_173, released 19 February 2025
-{: #cl-add-ons-ibm-storage-operator-1017_173}
-
-- Resolves the following CVEs: [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}.
-- Updates the golang base image to 1.22.12. 
-
-
-
 ## Version 1.0.0
 {: #ibm-storage-operator-1.0.0}
+
 
 ### Change log for version 1.0.16_169, released 11 December 2024
 {: #ibm-storage-operator-1.0.16_169}
 
 
 - Resolves [CVE-2024-51744](https://nvd.nist.gov/vuln/detail/CVE-2024-51744){: external}.
-
 
 
 ### Change log for version 1.0.15_163, released 3 October 2024
@@ -269,3 +76,195 @@ Review the version history for IBM Storage Operator.
 {: #ibm-storage-operator-1.0.0-initial}
 
 - Initial release.
+
+
+## Version 1.0
+{: #cl-add-ons-ibm-storage-operator-1.0}
+
+
+### Version 1.0 - v1.0.44_347952047, released 22 June 2026
+{: #cl-add-ons-ibm-storage-operator-v1044_347952047}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-28390](https://nvd.nist.gov/vuln/detail/CVE-2026-28390){: external}.
+- `armada-storage-secret v1.3.55`
+
+
+### Version 1.0 - v1.0.43_345196902, released 09 June 2026
+{: #cl-add-ons-ibm-storage-operator-v1043_345196902}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-4438](https://nvd.nist.gov/vuln/detail/CVE-2026-4438){: external}, [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/CVE-2026-4046){: external}, and [CVE-2026-4437](https://nvd.nist.gov/vuln/detail/CVE-2026-4437){: external}.
+- `armada-storage-secret v1.3.51`
+
+
+### Version 1.0 - v1.0.42_343448801, released 03 June 2026
+{: #cl-add-ons-ibm-storage-operator-v1042_343448801}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/CVE-2026-33814){: external}, [CVE-2026-31790](https://nvd.nist.gov/vuln/detail/CVE-2026-31790){: external}, [CVE-2026-29111](https://nvd.nist.gov/vuln/detail/CVE-2026-29111){: external}, [CVE-2026-40355](https://nvd.nist.gov/vuln/detail/CVE-2026-40355){: external}, [CVE-2026-40356](https://nvd.nist.gov/vuln/detail/CVE-2026-40356){: external}, and [CVE-2026-4878](https://nvd.nist.gov/vuln/detail/CVE-2026-4878){: external}.
+- `armada-storage-secret v1.3.50`
+
+
+### Version 1.0 - v1.0.40_340278420, released 19 May 2026
+{: #cl-add-ons-ibm-storage-operator-v1040_340278420}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-29111](https://nvd.nist.gov/vuln/detail/CVE-2026-29111){: external}.
+- `armada-storage-secret v1.2.84`
+
+
+### Version 1.0 - v1.0.41_341664770, released 19 May 2026
+{: #cl-add-ons-ibm-storage-operator-v1041_341664770}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-33811](https://nvd.nist.gov/vuln/detail/CVE-2026-33811){: external}, [CVE-2026-39979](https://nvd.nist.gov/vuln/detail/CVE-2026-39979){: external}, [CVE-2025-14512](https://nvd.nist.gov/vuln/detail/CVE-2025-14512){: external}, [CVE-2025-14087](https://nvd.nist.gov/vuln/detail/CVE-2025-14087){: external}, and [CVE-2026-40164](https://nvd.nist.gov/vuln/detail/CVE-2026-40164){: external}.
+- `armada-storage-secret v1.3.49`
+
+
+### Version 1.0 - v1.0.39_338302625, released 13 May 2026
+{: #cl-add-ons-ibm-storage-operator-v1039_338302625}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-4786](https://nvd.nist.gov/vuln/detail/CVE-2026-4786){: external}, [CVE-2026-6100](https://nvd.nist.gov/vuln/detail/CVE-2026-6100){: external}, and [CVE-2026-4878](https://nvd.nist.gov/vuln/detail/CVE-2026-4878){: external}.
+- `armada-storage-secret v1.2.82`
+
+
+### Version 1.0 - v1.0.37_333899629, released 27 April 2026
+{: #cl-add-ons-ibm-storage-operator-v1037_333899629}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-32281](https://nvd.nist.gov/vuln/detail/CVE-2026-32281){: external}, [CVE-2026-32289](https://nvd.nist.gov/vuln/detail/CVE-2026-32289){: external}, and [CVE-2026-4519](https://nvd.nist.gov/vuln/detail/CVE-2026-4519){: external}.
+- Updates Go to version `1.25.9`.
+- `armada-storage-secret v1.2.80`
+
+
+### Version 1.0 - v1.0.36_328998949, released 07 April 2026
+{: #cl-add-ons-ibm-storage-operator-v1036_328998949}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-33186](https://nvd.nist.gov/vuln/detail/CVE-2026-33186){: external}.
+- Updates Go to version `1.25.8`.
+- `armada-storage-secret v1.2.79`
+
+
+### Version 1.0 - v1.0.35_325672265, released 24 March 2026
+{: #cl-add-ons-ibm-storage-operator-v1035_325672265}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2025-14831](https://nvd.nist.gov/vuln/detail/CVE-2025-14831){: external}, [CVE-2025-15366](https://nvd.nist.gov/vuln/detail/CVE-2025-15366){: external}, [CVE-2025-15367](https://nvd.nist.gov/vuln/detail/CVE-2025-15367){: external}, [CVE-2026-1299](https://nvd.nist.gov/vuln/detail/CVE-2026-1299){: external}, [CVE-2024-6923](https://nvd.nist.gov/vuln/detail/CVE-2024-6923){: external}, [CVE-2026-0865](https://nvd.nist.gov/vuln/detail/CVE-2026-0865){: external}, [CVE-2026-25679](https://nvd.nist.gov/vuln/detail/CVE-2026-25679){: external}, [CVE-2025-12801](https://nvd.nist.gov/vuln/detail/CVE-2025-12801){: external}, [CVE-2026-27139](https://nvd.nist.gov/vuln/detail/CVE-2026-27139){: external}, and [CVE-2026-27142](https://nvd.nist.gov/vuln/detail/CVE-2026-27142){: external}.
+- `armada-storage-secret v1.2.78`
+
+
+### Version 1.0 - v1.0.34_321366482, released 02 March 2026
+{: #cl-add-ons-ibm-storage-operator-v1034_321366482}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-0861](https://nvd.nist.gov/vuln/detail/CVE-2026-0861){: external}, [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}, and [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}.
+- Fixed an issue where EIT enablement was not triggered for new nodes in EIT‑enabled worker pools after a storage operator restart. 
+- `armada-storage-secret v1.2.77`
+
+
+### Version 1.0 - v1.0.32_319681464, released 26 February 2026
+{: #cl-add-ons-ibm-storage-operator-v1032_319681464}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2025-68121](https://nvd.nist.gov/vuln/detail/CVE-2025-68121){: external}.
+- `armada-storage-secret v1.2.76`
+
+
+### Version 1.0 - v1.0.31_316468084, released 10 February 2026
+{: #cl-add-ons-ibm-storage-operator-v1031_316468084}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2025-15467](https://nvd.nist.gov/vuln/detail/CVE-2025-15467){: external}, [CVE-2025-11187](https://nvd.nist.gov/vuln/detail/CVE-2025-11187){: external}, [CVE-2025-15468](https://nvd.nist.gov/vuln/detail/CVE-2025-15468){: external}, [CVE-2025-15469](https://nvd.nist.gov/vuln/detail/CVE-2025-15469){: external}, [CVE-2025-66199](https://nvd.nist.gov/vuln/detail/CVE-2025-66199){: external}, [CVE-2025-68160](https://nvd.nist.gov/vuln/detail/CVE-2025-68160){: external}, [CVE-2025-69418](https://nvd.nist.gov/vuln/detail/CVE-2025-69418){: external}, [CVE-2025-69419](https://nvd.nist.gov/vuln/detail/CVE-2025-69419){: external}, [CVE-2025-69420](https://nvd.nist.gov/vuln/detail/CVE-2025-69420){: external}, [CVE-2025-69421](https://nvd.nist.gov/vuln/detail/CVE-2025-69421){: external}, [CVE-2026-22795](https://nvd.nist.gov/vuln/detail/CVE-2026-22795){: external}, [CVE-2026-22796](https://nvd.nist.gov/vuln/detail/CVE-2026-22796){: external}, and [CVE-2025-9086](https://nvd.nist.gov/vuln/detail/CVE-2025-9086){: external}.
+- `armada-storage-secret v1.2.75`
+
+
+### Version 1.0 - v1.0.30_310464697, released 21 January 2026
+{: #cl-add-ons-ibm-storage-operator-v1030_310464697}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2025-61729](https://nvd.nist.gov/vuln/detail/CVE-2025-61729){: external}, and [CVE-2025-61727](https://nvd.nist.gov/vuln/detail/CVE-2025-61727){: external}.
+- Updates the K8s client libraries from 1.32.8 to 1.32.10. 
+- Fixed an issue where the EIT enablement was not working in tainted worker pools. 
+- `armada-storage-secret v1.2.74`
+
+
+### Version 1.0 - v1.0.29_301949998, released 05 December 2025
+{: #cl-add-ons-ibm-storage-operator-v1029_301949998}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2025-9230](https://nvd.nist.gov/vuln/detail/CVE-2025-9230){: external}.
+- Updates Go to version `1.25.4`.
+- Adds support for enabling and disabling the snapshot functionality by using the IS_SNAPSHOT_ENABLED flag. Snapshots are enabled by default.
+
+
+### Version 1.0 - 1.0.27_264, released 22 September 2025
+{: #cl-add-ons-ibm-storage-operator-1027_264}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}.
+- Updates Go to version `1.23.12`.
+- Adds EIT support for OpenShift clusters with RHEL worker nodes.
+- Adds 3 new storage classes: ibmc-vpc-file-regional, ibmc-vpc-file-regional-max-bandwidth, and ibmc-vpc-file-regional-max-bandwidth-sds. These classes are based on VPC regional file share profiles and are available in Beta for allowlisted accounts.
+- `ibm-vpc-package-deployer v1.0.5`
+
+
+### Version 1.0 - 1.0.26_258, released 18 August 2025
+{: #cl-add-ons-ibm-storage-operator-1026_258}
+
+[Default version]{: tag-green}
+
+- Updates Go to version `1.23.11`.
+- Fixes an issue with setting the default storage class from the add-on configMap. 
+- Added EIT support for RHEL 9.6 OS.
+- `ibm-vpc-package-deployer v1.0.4`
+
+
+### Version 1.0 - 1.0.25_248, released 18 July 2025
+{: #cl-add-ons-ibm-storage-operator-1025_248}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2025-4802](https://nvd.nist.gov/vuln/detail/CVE-2025-4802){: external}, [CVE-2025-4673](https://nvd.nist.gov/vuln/detail/CVE-2025-4673){: external}, [CVE-2024-23337](https://nvd.nist.gov/vuln/detail/CVE-2024-23337){: external}, and [CVE-2025-48060](https://nvd.nist.gov/vuln/detail/CVE-2025-48060){: external}.
+- Updates Go to version `1.23.10`.
+- Updates the Kubernetes client libraries from 1.32.3 to 1.32.6, ensuring compatibility with newer clusters. 
+- Updates imagePullPolicy to IfNotPresent for all containers in the deployment. 
+- `armada-storage-secret v1.2.64`
+
+
+### Version 1.0 - 1.0.23_230, released 16 June 2025
+{: #cl-add-ons-ibm-storage-operator-1023_230}
+
+- Resolves the following CVEs: [CVE-2025-0395](https://nvd.nist.gov/vuln/detail/CVE-2025-0395){: external}, and [CVE-2020-11023](https://nvd.nist.gov/vuln/detail/CVE-2020-11023){: external}.
+- Updates Go to version `1.23.9`.
+- Fixes issue with reconciliation of file resources. 
+- Fixes an issue where updates to the storage operator no longer cause disruption to file resources. 
+- Improves the events published in file-csi-driver-status configmap. 
+- Updates rolling update strategy for operator controller pods to prevent reconciliation delays. 
+- Updates to the EIT packages are now automatically applied if EIT is already installed. 
+- Updates the Kubernetes 1.32 client libraries, ensuring compatibility with newer clusters. 
+- Adds the capability in the operator to persist the `addon-vpc-file-csi-driver-configmap` and `file-csi-driver-status` configmaps.
+
+
+### Version 1.0 - 1.0.17_173, released 19 February 2025
+{: #cl-add-ons-ibm-storage-operator-1017_173}
+
+- Resolves the following CVEs: [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/CVE-2024-5535){: external}.
+- Updates the golang base image to 1.22.12. 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-06-24"
+lastupdated: "2026-06-25"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -30,6 +30,34 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## June 2026
 {: #containers-jun26}
+
+### 25 June 2026
+{: #containers-jun2526}
+{: release-note}
+
+OpenShift Virtualization cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-openshift-virtualization).
+
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
+
+
+### 09 June 2026
+{: #containers-jun0926}
+{: release-note}
+
+
+
+
+
+
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
+
 
 
 
@@ -74,6 +102,12 @@ Istio cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
+
+
+
+
+Istio cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -338,6 +372,8 @@ VPC File CSI Driver cluster add-on patch updates.
 
 CLI version 1.0.770 is available
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
 
 ### 06 May 2026
 {: #containers-may0626}
