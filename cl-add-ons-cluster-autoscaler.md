@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-06-25"
+lastupdated: "2026-06-26"
 
 
 keywords: change log, version history, Cluster autoscaler
@@ -396,13 +396,11 @@ Beginning in version 1.2.4 the `maxEmptyBulkDelete` option is no longer supporte
 
 
 
-
 ### Version patch update 1.1.0_362, released 16 February 2024
 {: #110362_ca}
 
 - Image tags: `1.21.0 110-10`, `1.22.0 110-10`, `1.23.0 110-10`, `1.24.0 110-10`, `1.25.0 110-10`.
 - Updates `golang` version to `1.20.11`.
-
 
 
 
@@ -446,7 +444,6 @@ Beginning in version 1.2.4 the `maxEmptyBulkDelete` option is no longer supporte
 - Image tags: `1.20.0 108-3`, `1.21.0 108-3`, `1.22.0 108-3`, `1.23.0 108-3`, `1.24.0 108-3`, `1.25.0 108-3`, `1.26.0 108-3`.
 - Updates the `storage-secret-sidecar` image to `v1.2.21`.
 - Updates the `golang` version to `1.19.8`.
-
 
 
 

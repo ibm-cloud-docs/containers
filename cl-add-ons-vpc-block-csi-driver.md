@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-06-25"
+lastupdated: "2026-06-26"
 
 
 keywords: change log, version history, VPC Block CSI Driver
@@ -459,7 +459,6 @@ Review the version history for VPC Block CSI Driver.
 
 - Node affinity added for controller server and node server, so that pods do not crash on Z system (s390x) based clusters.
 - Resolves the following CVEs: [CVE-2023-26604](https://nvd.nist.gov/vuln/detail/CVE-2023-26604){: external}, [CVE-2020-24736](https://nvd.nist.gov/vuln/detail/CVE-2020-24736){: external}, [CVE-2023-1667](https://nvd.nist.gov/vuln/detail/CVE-2023-1667){: external}, and [CVE-2023-2283](https://nvd.nist.gov/vuln/detail/CVE-2023-2283){: external}.
-
 
 
 
