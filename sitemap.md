@@ -266,7 +266,7 @@ subcollection: containers
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
-    * [17 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-ju1726)
+    * [17 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1726)
 
         * Istio cluster add-on patch updates.
 
