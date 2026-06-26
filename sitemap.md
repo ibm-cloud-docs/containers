@@ -248,8 +248,6 @@ subcollection: containers
 
     * [25 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2526)
 
-        * OpenShift Virtualization cluster add-on patch updates.
-
         * ALB OAuth Proxy cluster add-on patch updates.
 
     * [09 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0926)
@@ -273,8 +271,6 @@ subcollection: containers
         * Istio cluster add-on patch updates.
 
         * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
-
-        * Istio cluster add-on patch updates.
 
     * [15 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1526)
 
