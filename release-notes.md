@@ -94,7 +94,7 @@ IBM Object CSI Driver cluster add-on patch updates.
 
 
 ### 17 June 2026
-{: #containers-ju1726}
+{: #containers-jun1726}
 {: release-note}
 
 Istio cluster add-on patch updates.
