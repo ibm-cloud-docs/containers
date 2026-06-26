@@ -246,6 +246,12 @@ subcollection: containers
 
 * [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
 
+    * [26 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2626)
+
+        * New! {{site.data.keyword.containerlong_notm}} version 1.36.
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs.
+
     * [25 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2526)
 
         * ALB OAuth Proxy cluster add-on patch updates.
@@ -4981,6 +4987,29 @@ subcollection: containers
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 
 
+### Version 1.36
+{: #sitemap_version_136}
+
+
+[1.36 version information and update actions](/docs/containers?topic=containers-cs_versions_136#cs_versions_136)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_136#release_timeline_136)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_136#prep-up-136)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_136#before-master-136)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_136#after-master-136)
+
+[1.36 version change log](/docs/containers?topic=containers-changelog_136#changelog_136)
+
+* [Overview](/docs/containers?topic=containers-changelog_136#changelog_overview_136)
+
+* [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
+
+    * [Change log for Master fix pack 1.36.2_1518, released 26 June 2026](/docs/containers?topic=containers-changelog_136#1362_1518_M)
+
+
 ### Version 1.35
 {: #sitemap_version_135}
 
@@ -4998,6 +5027,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+    * [Master fix pack 1.35.5_1533, released 26 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1355_1533_M)
 
     * [Worker node fix pack 1.35.5_1534, released 15 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1534_W)
 
@@ -5085,6 +5116,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Master fix pack 1.34.8_1555, released 26 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms_master-1348_1555_M)
 
     * [Worker node fix pack 1.34.8_1556, released 15 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1556_W)
 
@@ -5194,6 +5227,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Master fix pack 1.33.12_1574, released 26 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms_master-13312_1574_M)
 
     * [Worker node fix pack 1.33.12_1575, released 15 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1575_W)
 
@@ -6045,6 +6080,8 @@ subcollection: containers
 * [`openshift-data-foundation` 4.20.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.20.0)
 
 * [`openshift-data-foundation` 4.21.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.21.0)
+
+* [`openshift-virtualization` 4.21](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-virtualization-4.21)
 
 * [`static-route` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#static-route-1.0.0)
 
