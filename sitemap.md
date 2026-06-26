@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-25"
+lastupdated: "2026-06-26"
 
 
 keywords: containers
@@ -7109,27 +7109,7 @@ subcollection: containers
 
     * [Version 1.9.4 - 1.9.4_6376_iks, released 26 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-194_6376_iks)
 
-    * [Version 1.9.4_6376_iks, released 26 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_6376_iks)
-
     * [Version 1.9.4 - 1.9.4_6359_iks, released 22 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-194_6359_iks)
-
-    * [Version 1.9.4_6359_iks, released 19 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_6359_iks)
-
-    * [Version 1.9.4_6346_iks, released 13 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_6346_iks)
-
-    * [Version 1.9.4_6292_iks, released 05 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_6292_iks)
-
-    * [Version 1.9.4_6251_iks, released 22 January 2024](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_6251_iks)
-
-    * [Version 1.9.4_6161_iks, released 10 January 2024](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_6161_iks)
-
-    * [Version 1.9.4_5886_iks, released 04 December 2023](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_5886_iks)
-
-    * [Version 1.9.4_5756_iks, released 21 November 2023](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_5756_iks)
-
-    * [Version 1.9.4_5698_iks, released 07 November 2023](/docs/containers?topic=containers-cl-ingress-alb#1.9.4_5698_iks)
-
-    * [](/docs/containers?topic=containers-cl-ingress-alb#)
 
 * [Version 1.6.4](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.6.4)
 
@@ -7145,65 +7125,13 @@ subcollection: containers
 
     * [Version 1.6.4 - 1.6.4_6374_iks, released 26 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-164_6374_iks)
 
-    * [Version 1.6.4_6374_iks, released 26 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_6374_iks)
-
     * [Version 1.6.4 - 1.6.4_6344_iks, released 22 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-164_6344_iks)
 
-    * [Version 1.6.4_6344_iks, released 13 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_6344_iks)
-
-    * [Version 1.6.4_6293_iks, released 05 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_6293_iks)
-
-    * [Version 1.6.4_6250_iks, released 22 January 2024](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_6250_iks)
-
-    * [Version 1.6.4_6177_iks, released 10 January 2024](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_6177_iks)
-
-    * [Version 1.6.4_5884_iks, released 04 December 2023](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_5884_iks)
-
-    * [Version 1.6.4_5727_iks, released 21 November 2023](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_5727_iks)
-
-    * [Version 1.6.4_5642_iks, released 07 November 2023](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_5642_iks)
-
-    * [Version 1.6.4_5544_iks, released 17 October 2023](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_5544_iks)
-
-    * [Version 1.8.1 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#1_8_1)
-
-    * [Version 1.5.1 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#1_5_1)
-
-    * [Version 1.6.4_5435_iks, released 11 October 2023](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_5435_iks)
-
-    * [Version 1.6.4_5406_iks, released 5 October 2023](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_5406_iks)
-
-    * [Version 1.6.4_5270_iks, released 31 August 2023](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_5270_iks)
-
-    * [Version 1.6.4_5219_iks, released 26 July 2023](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_5219_iks)
-
-    * [Version 1.4.0 (unsupported)](/docs/containers?topic=containers-cl-ingress-alb#1_4_0)
-
-    * [Version 1.6.4_5161_iks, released 5 July 2023](/docs/containers?topic=containers-cl-ingress-alb#1.6.4_5161_iks)
+* [Version 1.8.4](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.8.4)
 
     * [Version 1.8.4 - 1.8.4_6375_iks, released 26 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-184_6375_iks)
 
-    * [Version 1.8.4_6375_iks, released 26 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_6375_iks)
-
     * [Version 1.8.4 - 1.8.4_6363_iks, released 22 February 2024](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-184_6363_iks)
-
-    * [Version 1.8.4_6363_iks, released 19 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_6363_iks)
-
-    * [Version 1.8.4_6345_iks, released 13 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_6345_iks)
-
-    * [Version 1.8.4_6291_iks, released 05 February 2024](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_6291_iks)
-
-    * [Version 1.8.4_6245_iks, released 22 January 2024](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_6245_iks)
-
-    * [Version 1.8.4_6173_iks, released 10 January 2024](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_6173_iks)
-
-    * [Version 1.8.4_5885_iks, released 04 December 2023](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_5885_iks)
-
-    * [Version 1.8.4_5757_iks, released 21 November 2023](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_5757_iks)
-
-    * [Version 1.8.4_5644_iks, released 07 November 2023](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_5644_iks)
-
-    * [Version 1.8.4_5586_iks, released 23 October 2023](/docs/containers?topic=containers-cl-ingress-alb#1.8.4_5586_iks)
 
 [Ingress ConfigMap change log](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ibm-k8s-controller-config-change-log)
 
