@@ -55,7 +55,7 @@ The following table shows the components that are in the master fix pack 1.35.5_
 |IBM Cloud Controller Manager v1.35.5-2|New version contains updates and security fixes.|
 |IBM Cloud File Storage for Classic plug-in and monitor v455|New version contains updates and security fixes.|
 |Key Management Service provider 2.10.25|New version contains updates and security fixes.|
-|Konnectivity agent and server v0.35.0|See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.35.0){: external}.|
+|Konnectivity agent and server v0.35.0|See the Konnectivity release notes for v0.35.0.|
 |Kubernetes NodeLocal DNS cache 1.26.8|See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.26.8).|
 |Portieris admission controller v0.14.0|See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.14.0)|
 {: caption="1.35.5_1533 fix pack." caption-side="bottom"}
