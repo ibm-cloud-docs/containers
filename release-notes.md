@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-06-25"
+lastupdated: "2026-06-26"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -35,8 +35,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-jun2526}
 {: release-note}
 
-OpenShift Virtualization cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-openshift-virtualization).
+
 
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
@@ -104,10 +103,6 @@ For more information, see the [change log](/docs/containers?topic=containers-cl-
 
 
 
-
-
-Istio cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
