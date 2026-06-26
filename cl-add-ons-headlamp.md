@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-05-20"
+lastupdated: "2026-06-25"
 
 
 keywords: change log, version history, Headlamp
@@ -43,7 +43,17 @@ Review the version history for Headlamp.
 {: #cl-add-ons-headlamp-0.1.0}
 
 
-### headlamp-0.1.0-341854816, released 20 May 2026
+### Version 0.1.0 - headlamp-0.1.0-341854816, released 20 May 2026
+{: #cl-add-ons-headlamp-headlamp-010-341854816}
+
+[Default version]{: tag-green}
+
+- {'Hybrid public-private OIDC': 'OIDC backchannel routed over private network'}
+- securityContext is defined for containers
+- `headlamp v0.42.0`
+
+
+### Version headlamp-0.1.0-341854816, released 20 May 2026
 {: #cl-add-ons-headlamp-headlamp-010-341854816}
 
 [Default version]{: tag-green}
@@ -57,7 +67,13 @@ Review the version history for Headlamp.
 {: #cl-add-ons-headlamp-0.0.1}
 
 
-### 0.0.1, released 07 April 2026
+### Version 0.0.1, released 07 April 2026
+{: #cl-add-ons-headlamp-001}
+
+- initial release
+
+
+### Version 0.0.1 - 0.0.1, released 07 April 2026
 {: #cl-add-ons-headlamp-001}
 
 - initial release

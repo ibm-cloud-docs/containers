@@ -2,10 +2,10 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-06-22"
+lastupdated: "2026-06-24"
 
 
-keywords: ingress, alb, manage albs, update, alb image
+keywords: ingress, alb, manage albs, update, alb image, traefik
 
 subcollection: containers
 
@@ -15,7 +15,7 @@ subcollection: containers
 
 
 # Managing ALBs
-{: #ingress-alb-manage}
+{: #traefik-ingress-alb-manage}
 
 Manage the Ingress ALBs in your cluster to ensure that traffic flows uninterrupted.
 {: shortdesc}
