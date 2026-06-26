@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-06-23"
+lastupdated: "2026-06-26"
 
 
 keywords: change log, version history, 1.35
@@ -39,6 +39,27 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.35
 {: #135_components}
+
+
+### Master fix pack 1.35.5_1533, released 26 June 2026
+{: #cl-boms_master-1355_1533_M}
+
+The following table shows the components that are in the master fix pack 1.35.5_1533. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Description |
+| ---- | ---- |
+|Cluster health image v1.6.16|New version contains updates and security fixes.|
+|etcd v3.5.30|See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.30).|
+|IBM Cloud Block Storage driver and plug-in v2.5.26|New version contains updates and security fixes.|
+|IBM Cloud Controller Manager v1.35.5-2|New version contains updates and security fixes.|
+|IBM Cloud File Storage for Classic plug-in and monitor v455|New version contains updates and security fixes.|
+|Key Management Service provider 2.10.25|New version contains updates and security fixes.|
+|Konnectivity agent and server v0.35.0|See the Konnectivity release notes for v0.35.0.|
+|Kubernetes NodeLocal DNS cache 1.26.8|See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.26.8).|
+|Portieris admission controller v0.14.0|See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.14.0)|
+{: caption="1.35.5_1533 fix pack." caption-side="bottom"}
+{: #cl-boms_master-1355_1533_M-component-table}
 
 
 ### Worker node fix pack 1.35.5_1534, released 15 June 2026

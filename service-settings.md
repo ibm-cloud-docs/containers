@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-03-05"
+lastupdated: "2026-06-26"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}
@@ -292,6 +292,9 @@ Review the feature gates that are applied to all master and worker node componen
 
 You can use the **`kubectl get --raw /metrics | grep kubernetes_feature_enabled`** command to determine if a feature gate is enabled or disabled.
 {: tip}
+
+1.36
+:   `UnauthenticatedHTTP2DOSMitigation=true`
 
 1.35
 :   `UnauthenticatedHTTP2DOSMitigation=true`

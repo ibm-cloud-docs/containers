@@ -31,6 +31,30 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## June 2026
 {: #containers-jun26}
 
+### 26 June 2026
+{: #containers-jun2626}
+{: release-note}
+
+
+
+
+
+
+
+New! {{site.data.keyword.containerlong_notm}} version 1.36.
+:   You can now create or [update clusters to Kubernetes version 1.36](/docs/containers?topic=containers-cs_versions_136). With Kubernetes 1.36, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs.
+:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
+:   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
+:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+
+
+
+
 ### 25 June 2026
 {: #containers-jun2526}
 {: release-note}
@@ -82,6 +106,7 @@ IBM Object CSI Driver cluster add-on patch updates.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
 :   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
