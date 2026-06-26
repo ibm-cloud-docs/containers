@@ -69,6 +69,9 @@ Kubernetes API server and Konnectivity tunnel served over port 443
 NVIDIA GPU drivers no longer automatically installed
 :   Starting with Kubernetes version 1.36, {{site.data.keyword.containerlong_notm}} no longer automatically installs NVIDIA GPU drivers on GPU worker nodes. You must install and manage GPU drivers yourself to run GPU workloads. For more information, see [Migrating to self-managed GPU drivers](/docs/containers?topic=containers-gpu-migrate-136).
 
+Cluster autoscaler does not yet support version 1.36. Do not update your cluster to version 1.36 if the autoscaler is installed.
+{: important}
+
 ### Update before master
 {: #before-master-136}
 
