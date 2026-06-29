@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-26"
+lastupdated: "2026-06-29"
 
 
 keywords: containers
@@ -6804,6 +6804,8 @@ subcollection: containers
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
 
 * [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
+
+    * [Version 0.1.0 - headlamp-0.1.0-348715568, released 25 June 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-348715568)
 
     * [Version 0.1.0 - headlamp-0.1.0-341854816, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-341854816)
 
