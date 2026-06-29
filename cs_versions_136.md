@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-06-26"
+lastupdated: "2026-06-29"
 
 
 keywords: kubernetes, containers, 136, version 136, 136 update actions
@@ -46,12 +46,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 For a complete list of changes that might impact your deployed apps when you update your cluster, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.36.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_136) for version 1.36. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
 
-Anonymous access to the Kubernetes API server is now restricted
-:   Anonymous access to the Kubernetes API server is now restricted to health check endpoints (`/healthz`, `/readyz`, `/livez`, `/livez/ping`). All other endpoints require authentication (for example, `/version`). This reduces exposure from accidental RBAC misconfigurations that grant permissions to `system:anonymous` or `system:unauthenticated`.
-
-Kubernetes Dashboard is deprecated
-:   The open source Kubernetes Dashboard is deprecated and archived. The Kubernetes Dashboard is no longer installed on newly provisioned clusters and is removed from clusters on earlier versions when you upgrade to 1.36. [The Headlamp add-on](/docs/containers?topic=containers-headlamp-addon) is available as a replacement Kubernetes UI.
-
 Kubernetes API server and Konnectivity tunnel served over port 443
 :   The Kubernetes API server and Konnectivity tunnel are now served over the standard HTTPS port 443 instead of a dynamically assigned node port (for example, a port in the `20000–32767` range). Traffic is routed to the correct backend service using hostname-based routing, which is why each function has a dedicated hostname even though all services share port 443. This change makes it easier to connect to your cluster from restrictive network environments because you no longer need to allow a non-standard port through your firewalls and egress controls. Your cluster exposes two purpose-built hostnames through its private and public service endpoints:
 
@@ -60,11 +54,19 @@ Kubernetes API server and Konnectivity tunnel served over port 443
 
     This capability is available starting with IKS version 1.36 in the following regions: Montreal (`ca-mon`), Chennai (`in-che`), and Mumbai (`in-mum`). Support for additional regions is coming soon.
 
+    If you updated a cluster that uses the public service endpoint, a kubeconfig that still references the public service endpoint URL keeps using the old port, which causes `kubectl` commands to fail with connection timeouts. To avoid this, either download a fresh kubeconfig by running `ibmcloud ks cluster config`, or manually update the port in your existing kubeconfig to 443.
+    {: important}
+
     - **New clusters:** No action is required. New clusters are created with port 443 endpoints and the kubeconfig you download already uses port 443.
-    - **Updated clusters that use the public service endpoint:** After your cluster is updated to use port 443, a kubeconfig that still references the public service endpoint URL keeps using the old port, which will fail. `kubectl` commands will result in connection timeouts. To avoid this, either download a fresh kubeconfig by running `ibmcloud ks cluster config`, or manually update the port in your existing kubeconfig to 443.
     - **Updated clusters that use the private service endpoint only:** No immediate action is required. Existing connections that target the previous NodePort continue to work after the upgrade. The new kubeconfig that you download uses the port 443 endpoint.
     - **Custom network rules:** Update any firewall, security group, or egress allowlist rules that explicitly reference the old high-numbered control plane port to allow outbound HTTPS on port 443 instead. Any rules that pinned the previous high-numbered port can be removed.
     - **IP-based allowlists:** The public service endpoint DNS records now resolve to Akamai IP Protect (IPP) frontend IP addresses instead of the previous load balancer (NLB) IP addresses. If your firewall or egress rules allow traffic to your cluster by destination IP address, update them to use the current Akamai IPP IP ranges.
+
+Anonymous access to the Kubernetes API server is now restricted
+:   Anonymous access to the Kubernetes API server is now restricted to health check endpoints (`/healthz`, `/readyz`, `/livez`, `/livez/ping`). All other endpoints require authentication (for example, `/version`). This reduces exposure from accidental RBAC misconfigurations that grant permissions to `system:anonymous` or `system:unauthenticated`.
+
+Kubernetes Dashboard is deprecated
+:   The open source Kubernetes Dashboard is deprecated and archived. The Kubernetes Dashboard is no longer installed on newly provisioned clusters and is removed from clusters on earlier versions when you upgrade to 1.36. [The Headlamp add-on](/docs/containers?topic=containers-headlamp-addon) is available as a replacement Kubernetes UI.
 
 NVIDIA GPU drivers no longer automatically installed
 :   Starting with Kubernetes version 1.36, {{site.data.keyword.containerlong_notm}} no longer automatically installs NVIDIA GPU drivers on GPU worker nodes. You must install and manage GPU drivers yourself to run GPU workloads. For more information, see [Migrating to self-managed GPU drivers](/docs/containers?topic=containers-gpu-migrate-136).
