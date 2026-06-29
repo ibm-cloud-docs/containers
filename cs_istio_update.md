@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-17"
+lastupdated: "2026-06-29"
 
 
 keywords: istio migration, istio updates, istio upgrades
@@ -346,7 +346,7 @@ To update the minor version of the Istio add-on:
     ```
     {: pre}
 
-1. Review the changes that are in each version in the [Istio add-on change log](/docs/containers?topic=containers-istio-changelog).
+1. Review the changes that are in each version in the [Istio add-on change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 1. Update the Istio add-on.
     ```sh

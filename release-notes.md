@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-06-26"
+lastupdated: "2026-06-29"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -597,7 +597,7 @@ VPC Block CSI Driver cluster add-on patch updates.
 
 
 Istio add-on version 1.25.5 reaches end of support on 15 May 2026
-:   The Istio managed add-on version 1.25.5 becomes unsupported on 15 May 2026. Before that date, update to the latest patch version of Istio add-on version 1.27, which is supported on {{site.data.keyword.containerlong_notm}} versions 1.32 and 1.33. To upgrade from version 1.25 to version 1.27, complete both minor upgrades: from 1.25 to 1.26 and from 1.26 to 1.27. For more information, see [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor) and the [Istio add-on change log](/docs/containers?topic=containers-istio-changelog).
+:   The Istio managed add-on version 1.25.5 becomes unsupported on 15 May 2026. Before that date, update to the latest patch version of Istio add-on version 1.27, which is supported on {{site.data.keyword.containerlong_notm}} versions 1.32 and 1.33. To upgrade from version 1.25 to version 1.27, complete both minor upgrades: from 1.25 to 1.26 and from 1.26 to 1.27. For more information, see [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor) and the [Istio add-on change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -725,7 +725,7 @@ New! Mumbai multizone region for VPC
 
 
 Istio add-on patch updates.
-:   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For the latest patch information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 IBM Object CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
@@ -2077,7 +2077,7 @@ Ingress ALB cluster add-on patch updates.
 {: release-note}
 
 Istio add-on patch updates.
-:   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For the latest patch information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -2311,7 +2311,7 @@ Migrating from the Observability plug-in to {{site.data.keyword.logs_full_notm}}
 {: release-note}
 
 Istio add-on patch updates.
-:   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For the latest patch information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -2461,7 +2461,7 @@ New! {{site.data.keyword.containerlong_notm}} version 1.32.
 {: release-note}
 
 Istio add-on patch updates.
-:   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For the latest patch information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -2616,7 +2616,7 @@ Storage Operator cluster add-on patch update.
 {: release-note}
 
 Istio add-on patch updates.
-:   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For the latest patch information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
@@ -2805,7 +2805,7 @@ Ingress ALB cluster add-on patch updates.
 {: release-note}
 
 Istio add-on patch update `1.22.5` has been reverted.
-:   For the latest patch information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For the latest patch information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -2816,7 +2816,7 @@ Istio add-on patch update `1.22.5` has been reverted.
 {: release-note}
 
 Istio add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -2951,7 +2951,7 @@ Ingress ALB cluster add-on patch updates.
 :   {{site.data.keyword.containerlong_notm}} version [1.31](/docs/containers?topic=containers-cs_versions_131) is now Kubernetes certified.
 
 Istio add-on version `1.23.1` is available.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -2977,7 +2977,7 @@ New! {{site.data.keyword.containerlong_notm}} version 1.31.
 
 
 Istio add-on version `1.22.4` is available.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -3109,7 +3109,7 @@ New audit events for cluster operations
 {: release-note}
 
 Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -3301,7 +3301,7 @@ Ingress ALB updates are available for {{site.data.keyword.containerlong_notm}}.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 Istio add-on versions `1.22.1` is available.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -3319,7 +3319,7 @@ Istio add-on versions `1.22.1` is available.
 :   1.27
 
 Istio add-on versions `1.21.3` and `1.20.7` are available.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -3470,7 +3470,7 @@ Managing outbound traffic protection in new version 1.30 VPC clusters.
 
 
 Istio add-on version `1.19` is no longer supported.
-:   Update the add-on in your clusters to a supported version. For more information, see the [Updating the Istio add-on](/docs/containers?topic=containers-istio-update) and the [change log](/docs/containers?topic=containers-istio-changelog).
+:   Update the add-on in your clusters to a supported version. For more information, see the [Updating the Istio add-on](/docs/containers?topic=containers-istio-update) and the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -3485,7 +3485,7 @@ Istio add-on version `1.19` is no longer supported.
 
 
 Istio add-on versions `1.21.2` and `1.20.6` are available.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -3577,7 +3577,7 @@ Ingress ConfigMap update
 
 
 Istio add-on versions `1.21.1`, `1.20.5`, and `1.19.9` are available.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -3622,7 +3622,7 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 
 
 Istio add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 ALB OAuth Proxy add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
@@ -3736,7 +3736,7 @@ Version 1.29 is the default version for {{site.data.keyword.containerlong_notm}}
 
 
 Istio add-on versions `1.20.3` and `1.19.7` are available.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 CLI version `1.0.601` is available.

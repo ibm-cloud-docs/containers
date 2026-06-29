@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-03-23"
+lastupdated: "2026-06-29"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -327,7 +327,7 @@ Manually update and control the managed Istio version of custom ingress gateways
 
 To manage updates for your custom ingress gateways, you might use the following rollout strategy:
 1. [Create a custom ingress gateway IOPs](#custom-ingress-gateway-public). In the `tag` field, specify a patch version that is the same or earlier than the control plane version. You can find the control plane version by running `istioctl version`.
-2. When a new [patch version is released](/docs/containers?topic=containers-istio-changelog) for the managed Istio add-on, edit the IOP YAML file for one custom gateway to use the latest patch version, and re-apply the IOP in your cluster.
+2. When a new [patch version is released](/docs/containers?topic=containers-cl-add-ons-istio) for the managed Istio add-on, edit the IOP YAML file for one custom gateway to use the latest patch version, and re-apply the IOP in your cluster.
 3. After the custom gateway's pods are updated to the latest patch, test any changes to the custom gateway.
 4. When you are satisfied with the changes, modify the configurations for the rest of your custom gateways to update them to the latest patch.
 
