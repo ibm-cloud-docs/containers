@@ -3713,6 +3713,8 @@ subcollection: containers
 
     * [DNS handling on Classic clusters](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-dns-classic)
 
+    * [Default Ingress Class Handling](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-default-ingress-class)
+
 [Setting up Ingress](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-setup)
 
 * [Before you begin](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-steps-before)
