@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-18"
+lastupdated: "2026-06-29"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -103,7 +103,7 @@ Before you begin
 
 [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
-2. Review the supported [Istio versions](/docs/containers?topic=containers-istio-changelog).
+2. Review the supported [Istio versions](/docs/containers?topic=containers-cl-add-ons-istio).
     ```sh
     ibmcloud ks addon-versions --addon istio
     ```
