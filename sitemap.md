@@ -6583,31 +6583,17 @@ subcollection: containers
 
     * [Version 1.0 - v1.0.22_348679631, released 22 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1022_348679631)
 
-    * [Version v1.0.22_348679631, released 22 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1022_348679631)
-
     * [Version 1.0 - v1.0.21_333133599, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1021_333133599)
-
-    * [Version v1.0.21_333133599, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1021_333133599)
 
     * [Version 1.0 - v1.0.20_333133599, released 25 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1020_333133599)
 
-    * [Version v1.0.20_333133599, released 25 May 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1020_333133599)
-
     * [Version 1.0 - v1.0.19_333133599, released 26 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1019_333133599)
-
-    * [Version v1.0.19_333133599, released 26 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1019_333133599)
 
     * [Version 1.0 - v1.0.18_320539369, released 02 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1018_320539369)
 
-    * [Version v1.0.18_320539369, released 02 April 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1018_320539369)
-
     * [Version 1.0 - v1.0.17_320539369, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1017_320539369)
 
-    * [Version v1.0.17_320539369, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1017_320539369)
-
     * [Version 1.0 - v1.0.13_297764008, released 14 November 2025](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1013_297764008)
-
-    * [Version v1.0.13_297764008, released 14 November 2025](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1013_297764008)
 
 [{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
 
@@ -6805,13 +6791,9 @@ subcollection: containers
 
     * [Version 0.1.0 - headlamp-0.1.0-341854816, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-341854816)
 
-    * [Version headlamp-0.1.0-341854816, released 20 May 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-341854816)
-
 * [Version 0.0.1](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.0.1)
 
     * [Version 0.0.1, released 07 April 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-001)
-
-    * [Version 0.0.1 - 0.0.1, released 07 April 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-001)
 
 
 ## Ingress version history

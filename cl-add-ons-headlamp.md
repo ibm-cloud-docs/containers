@@ -61,27 +61,11 @@ Review the version history for Headlamp.
 - `headlamp v0.42.0`
 
 
-### Version headlamp-0.1.0-341854816, released 20 May 2026
-{: #cl-add-ons-headlamp-headlamp-010-341854816}
-
-[Default version]{: tag-green}
-
-- {'Hybrid public-private OIDC': 'OIDC backchannel routed over private network'}
-- securityContext is defined for containers
-- `headlamp v0.42.0`
-
-
 ## Version 0.0.1
 {: #cl-add-ons-headlamp-0.0.1}
 
 
 ### Version 0.0.1, released 07 April 2026
-{: #cl-add-ons-headlamp-001}
-
-- initial release
-
-
-### Version 0.0.1 - 0.0.1, released 07 April 2026
 {: #cl-add-ons-headlamp-001}
 
 - initial release
