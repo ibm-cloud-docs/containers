@@ -8046,7 +8046,7 @@ subcollection: containers
 
 * [Step 4: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-ingress-debug#ts_ingress_config)
 
-* [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-ingress-debug#one_alb)
+* [Removing an ALB from DNS for debugging on Classic](/docs/containers?topic=containers-ingress-debug#one_alb)
 
 [Gathering Ingress details for debugging](/docs/containers?topic=containers-ingress-must-gather#ingress-must-gather)
 
