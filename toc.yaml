@@ -342,6 +342,7 @@ toc:
               topics:
               - cs_versions_136.md
               - cs_versions_changelog_136.md
+              - topic: cs_benchmarks_136.md
           - topicgroup:
               label: Version 1.35
               topics:
