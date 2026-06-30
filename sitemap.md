@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-06-29"
+lastupdated: "2026-06-30"
 
 
 keywords: containers
@@ -5010,6 +5010,48 @@ subcollection: containers
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
     * [Change log for Master fix pack 1.36.2_1518, released 26 June 2026](/docs/containers?topic=containers-changelog_136#1362_1518_M)
+
+[1.36 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-136#cis-benchmark-136)
+
+* [1 Master node security configuration](/docs/containers?topic=containers-cis-benchmark-136#1-master-node-security-configuration-136)
+
+    * [1.1 Master node configuration files](/docs/containers?topic=containers-cis-benchmark-136#11-master-node-configuration-files-136)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-136#12-api-server-136)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-136#13-controller-manager-136)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-136#14-scheduler-136)
+
+* [2 Etcd node configuration](/docs/containers?topic=containers-cis-benchmark-136#2-etcd-node-configuration-136)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-136#3-control-plane-configuration-136)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-136#31-authentication-and-authorization-136)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-136#32-logging-136)
+
+* [4 Worker node security configuration](/docs/containers?topic=containers-cis-benchmark-136#4-worker-node-security-configuration-136)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-136#41-worker-node-configuration-files-136)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-136#42-kubelet-136)
+
+* [5 Kubernetes policies](/docs/containers?topic=containers-cis-benchmark-136#5-kubernetes-policies-136)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-136#51-rbac-and-service-accounts-136)
+
+    * [5.2 Pod security standards](/docs/containers?topic=containers-cis-benchmark-136#52-pod-security-policies-136)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-136#53-network-policies-and-cni-136)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-136#54-secrets-management-136)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-136#55-extensible-admission-control-136)
+
+    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-136#57-general-policies-136)
+
+* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-136#ibm-remediations-and-explanations-136)
 
 
 ### Version 1.35
