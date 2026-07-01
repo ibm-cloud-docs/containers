@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-06-29"
+lastupdated: "2026-07-01"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -62,26 +62,20 @@ Start by checking for error messages in the Ingress resource deployment events a
     NAME:             myingress
     Namespace:        default
     Address:          169.xx.xxx.xxx,169.xx.xxx.xxx
-    Default backend:  default-http-backend:80 (<none>)
+    Default backend:  <default>
     Rules:
         Host                                             Path  Backends
         ----                                             ----  --------
         mycluster-<hash>-0000.us-south.containers.appdomain.cloud
         /tea      myservice1:80 (<none>)
         /coffee   myservice2:80 (<none>)
-    Annotations:
-        custom-port:        protocol=http port=7490; protocol=https port=4431
-        location-modifier:  modifier='~' serviceName=myservice1;modifier='^~' serviceName=myservice2
+    Annotations:                                         <none>
     Events:
-        Type     Reason             Age   From                                                            Message
-        ----     ------             ----  ----                                                            -------
-        Normal   Success            1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-        Warning  TLSSecretNotFound  1m    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress resource.
-        Normal   Success            59s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-        Warning  AnnotationError    40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Error annotation format error : One of the mandatory fields not valid/missing for annotation ingress.bluemix.net/custom-port
-        Normal   Success            40s   public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
-        Warning  AnnotationError    2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Failed to apply ingress.bluemix.net/custom-port annotation. Invalid port 7490. Annotation can't use ports 7481 - 7490
-        Normal   Success            2s    public-cr87c198fcf4bd458ca61402bb4c7e945a-alb1-258623678-gvf9n  Successfully applied ingress resource.
+      Type    Reason  Age                From                      Message
+      ----    ------  ----               ----                      -------
+      Normal  Sync    26s (x8 over 19m)  nginx-ingress-controller  Scheduled for sync
+      Normal  Sync    26s (x8 over 19m)  nginx-ingress-controller  Scheduled for sync
+
     ```
     {: screen}
 
