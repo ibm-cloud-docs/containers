@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-06-10"
+lastupdated: "2026-07-01"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
@@ -410,8 +410,8 @@ Example output
 Containers:
   metrics-server:
     Container ID:  containerd://fe3d07c9a2541242d36da8097de3896f740c1363f6d2bfd01b8d96a641192b1b
-    Image:         registry.ng.bluemix.net/armada-master/metrics-server:v0.4.4
-    Image ID:      registry.ng.bluemix.net/armada-master/metrics-server@sha256:c2c63900d0e080c2413b5f35c5a59b5ed3b809099355728cf47527aa3f35477c
+    Image:         us.icr.io/armada-master/metrics-server:v0.4.4
+    Image ID:      us.icr.io/armada-master/metrics-server@sha256:c2c63900d0e080c2413b5f35c5a59b5ed3b809099355728cf47527aa3f35477c
     Port:          4443/TCP
     Host Port:     0/TCP
     Command:
@@ -833,7 +833,7 @@ If you must use `hostPorts`, don't disable the port map plug-in.
         nodeAddressAutodetectionV4:
           interface: (^bond0$|^eth0$|^ens6$|^ens3$)
       kubernetesProvider: OpenShift
-      registry: registry.ng.bluemix.net/armada-master/
+      registry: us.icr.io/armada-master/
       variant: Calico
     status:
       variant: Calico
