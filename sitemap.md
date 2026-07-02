@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-01"
+lastupdated: "2026-07-02"
 
 
 keywords: containers
@@ -4609,6 +4609,8 @@ subcollection: containers
 
 * [Restricting nodeserver pod scheduling](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-restrict-node-scheduling)
 
+* [Setting the maximum volumes per node](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-max-volumes-per-node)
+
 * [Deploying an app that uses {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-app)
 
     * [Create a Kubernetes secret that contains your COS credentials.](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-app-secret)
@@ -6093,8 +6095,6 @@ subcollection: containers
 
 * [`image-key-synchronizer` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
 
-* [`istio` 1.24](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.24)
-
 * [`istio` 1.25](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.25)
 
 * [`istio` 1.26](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.26)
@@ -6621,11 +6621,11 @@ subcollection: containers
 
     * [Version 1.1.7_49, released 14 September 2023](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.1.7_is_file_relnote)
 
-    * [Version 1.1, released 3 July 2023](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.1_is_file_relnote)
-
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [Version 1.0 - v1.0.23_349336907, released 03 July 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1023_349336907)
 
     * [Version 1.0 - v1.0.22_348679631, released 22 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1022_348679631)
 
