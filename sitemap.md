@@ -4609,8 +4609,6 @@ subcollection: containers
 
 * [Restricting nodeserver pod scheduling](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-restrict-node-scheduling)
 
-* [Setting the maximum volumes per node](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-max-volumes-per-node)
-
 * [Deploying an app that uses {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-app)
 
     * [Create a Kubernetes secret that contains your COS credentials.](/docs/containers?topic=containers-storage-cos-install-addon#cos-addon-app-secret)
