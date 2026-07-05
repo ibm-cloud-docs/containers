@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-02"
+lastupdated: "2026-07-05"
 
 
 keywords: containers
@@ -6096,8 +6096,6 @@ subcollection: containers
 * [`ibm-storage-operator` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-storage-operator-1.0)
 
 * [`image-key-synchronizer` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
-
-* [`istio` 1.25](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.25)
 
 * [`istio` 1.26](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.26)
 
