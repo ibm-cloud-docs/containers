@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-06-26"
+lastupdated: "2026-07-06"
 
 
 keywords: change log, version history, 1.35
@@ -39,6 +39,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.35
 {: #135_components}
+
+
+### Worker node fix pack 1.35.5_1535, released 01 July 2026
+{: #cl-boms-1355_1535_W}
+
+The following table shows the components included in the worker node fix pack 1.35.5_1535. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Description |
+| ---- | ---- |
+|UBUNTU 24 (VPC) 6.8.0-124-generic|Resolves the following CVEs: [CVE-2026-32741](https://nvd.nist.gov/vuln/detail/CVE-2026-32741){: external}, [CVE-2026-32814](https://nvd.nist.gov/vuln/detail/CVE-2026-32814){: external}, [CVE-2026-32882](https://nvd.nist.gov/vuln/detail/CVE-2026-32882){: external}, [CVE-2026-42496](https://nvd.nist.gov/vuln/detail/CVE-2026-42496){: external}, [CVE-2026-47162](https://nvd.nist.gov/vuln/detail/CVE-2026-47162){: external}, [CVE-2026-47167](https://nvd.nist.gov/vuln/detail/CVE-2026-47167){: external}, [CVE-2026-52858](https://nvd.nist.gov/vuln/detail/CVE-2026-52858){: external}, [CVE-2026-52859](https://nvd.nist.gov/vuln/detail/CVE-2026-52859){: external}, [CVE-2026-52860](https://nvd.nist.gov/vuln/detail/CVE-2026-52860){: external}, [CVE-2026-55203](https://nvd.nist.gov/vuln/detail/CVE-2026-55203){: external}, [CVE-2026-55204](https://nvd.nist.gov/vuln/detail/CVE-2026-55204){: external}, [CVE-2026-5704](https://nvd.nist.gov/vuln/detail/CVE-2026-5704){: external}, [CVE-2026-6653](https://nvd.nist.gov/vuln/detail/CVE-2026-6653){: external}, and [CVE-2026-8376](https://nvd.nist.gov/vuln/detail/CVE-2026-8376){: external}.|
+|UBUNTU 24 (Classic) 6.8.0-124-generic|Resolves the following CVEs: [CVE-2026-32741](https://nvd.nist.gov/vuln/detail/CVE-2026-32741){: external}, [CVE-2026-32814](https://nvd.nist.gov/vuln/detail/CVE-2026-32814){: external}, [CVE-2026-32882](https://nvd.nist.gov/vuln/detail/CVE-2026-32882){: external}, [CVE-2026-42496](https://nvd.nist.gov/vuln/detail/CVE-2026-42496){: external}, [CVE-2026-47162](https://nvd.nist.gov/vuln/detail/CVE-2026-47162){: external}, [CVE-2026-47167](https://nvd.nist.gov/vuln/detail/CVE-2026-47167){: external}, [CVE-2026-52858](https://nvd.nist.gov/vuln/detail/CVE-2026-52858){: external}, [CVE-2026-52859](https://nvd.nist.gov/vuln/detail/CVE-2026-52859){: external}, [CVE-2026-52860](https://nvd.nist.gov/vuln/detail/CVE-2026-52860){: external}, [CVE-2026-55203](https://nvd.nist.gov/vuln/detail/CVE-2026-55203){: external}, [CVE-2026-55204](https://nvd.nist.gov/vuln/detail/CVE-2026-55204){: external}, [CVE-2026-5704](https://nvd.nist.gov/vuln/detail/CVE-2026-5704){: external}, [CVE-2026-6653](https://nvd.nist.gov/vuln/detail/CVE-2026-6653){: external}, and [CVE-2026-8376](https://nvd.nist.gov/vuln/detail/CVE-2026-8376){: external}.|
+|Kubernetes 1.35.5|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.35.5).|
+|containerd 2.2.5|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v2.2.5).|
+|HAProxy 119de539a7da3c92449b38e1531722802988e50c|Resolves the following CVEs: [CVE-2026-45447](https://nvd.nist.gov/vuln/detail/CVE-2026-45447){: external}, [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/CVE-2024-4741){: external}, and [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/CVE-2024-34459){: external}.|
+|GPU Device Plug-in and Installer 0e6e6f89d8902362ba15eaa41555820f61257069|Resolves the following CVEs: [CVE-2026-45447](https://nvd.nist.gov/vuln/detail/CVE-2026-45447){: external}, [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/CVE-2024-4741){: external}, [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/CVE-2024-34459){: external}, and [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/CVE-2026-4046){: external}.|
+{: caption="1.35.5_1535 fix pack." caption-side="bottom"}
+{: #cl-boms-1355_1535_W-component-table}
 
 
 ### Master fix pack 1.35.5_1533, released 26 June 2026

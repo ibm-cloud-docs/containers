@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-05"
+lastupdated: "2026-07-06"
 
 
 keywords: containers
@@ -5013,6 +5013,8 @@ subcollection: containers
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+    * [Worker node fix pack 1.36.2_1519, released 01 July 2026](/docs/containers?topic=containers-changelog_136#cl-boms-1362_1519_W)
+
     * [Change log for Master fix pack 1.36.2_1518, released 26 June 2026](/docs/containers?topic=containers-changelog_136#1362_1518_M)
 
 [1.36 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-136#cis-benchmark-136)
@@ -5077,6 +5079,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+    * [Worker node fix pack 1.35.5_1535, released 01 July 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1535_W)
 
     * [Master fix pack 1.35.5_1533, released 26 June 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1355_1533_M)
 
@@ -5166,6 +5170,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Worker node fix pack 1.34.8_1557, released 01 July 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1557_W)
 
     * [Master fix pack 1.34.8_1555, released 26 June 2026](/docs/containers?topic=containers-changelog_134#cl-boms_master-1348_1555_M)
 
@@ -5277,6 +5283,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.12_1576, released 01 July 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1576_W)
 
     * [Master fix pack 1.33.12_1574, released 26 June 2026](/docs/containers?topic=containers-changelog_133#cl-boms_master-13312_1574_M)
 
@@ -6367,8 +6375,6 @@ subcollection: containers
 
     * [Version patch update 1.0.8_82, released 7 August 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#10882_ca)
 
-    * [Version patch update 1.0.8_56, released 6 July 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#10856_ca)
-
     * [Version patch update 1.0.7_291, released 27 November 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#107291_ca)
 
     * [Version patch update 1.0.7_185, released 13 November 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#107_185_ca)
@@ -6376,8 +6382,6 @@ subcollection: containers
     * [Version patch update 1.0.7_102, released 15 September 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#107102_ca)
 
     * [Version patch update 1.0.7_83, released 7 August 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#10783_ca)
-
-    * [Version patch update 1.0.7_57, released 6 July 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#10757_ca)
 
 [IBM Storage Operator add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator)
 
@@ -6850,9 +6854,13 @@ subcollection: containers
 
 * [Version 3.7.5](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.5)
 
+    * [Version 3.7.5 - 3.7.5_353228763_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-375_353228763_iks)
+
     * [Version 3.7.5 - 3.7.5_351789633_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-375_351789633_iks)
 
 * [Version 3.7.4](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.4)
+
+    * [Version 3.7.4 - 3.7.4_353221089_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_353221089_iks)
 
     * [Version 3.7.4 - 3.7.4_351769381_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_351769381_iks)
 
@@ -6860,15 +6868,21 @@ subcollection: containers
 
 * [Version 3.7.3](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.3)
 
+    * [Version 3.7.3 - 3.7.3_353225103_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-373_353225103_iks)
+
     * [Version 3.7.3 - 3.7.3_351769298_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-373_351769298_iks)
 
     * [Version 3.7.3 - 3.7.3_349786538_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-373_349786538_iks)
 
 * [Version 1.15.8](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.8)
 
+    * [Version 1.15.8 - 1.15.8_352185571_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_352185571_iks)
+
     * [Version 1.15.8 - 1.15.8_351852518_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_351852518_iks)
 
 * [Version 1.15.7](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.7)
+
+    * [Version 1.15.7 - 1.15.7_352179683_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_352179683_iks)
 
     * [Version 1.15.7 - 1.15.7_351812949_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_351812949_iks)
 
