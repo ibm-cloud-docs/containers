@@ -244,6 +244,12 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
+
+    * [01 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul0126)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
 * [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
 
     * [26 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2626)
