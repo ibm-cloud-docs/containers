@@ -1,11 +1,11 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-08-11"
+  years: 2014, 2026
+lastupdated: "2026-07-07"
 
 
-keywords: kubernetes, containers
+keywords: kubernetes, containers, object storage, COS, persistent volume, secret, HMAC authentication, s3fs, bucket
 
 subcollection: containers
 

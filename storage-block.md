@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-07"
 
 
 keywords: kubernetes, containers
@@ -1479,7 +1479,7 @@ Complete the following steps to verify that all existing stateful sets in your c
                   topologyKey: failure-domain.beta.kubernetes.io/zone
           containers:
           - name: nginx
-            image: k8s.gcr.io/nginx-slim:0.8
+            image: registry.k8s.io/nginx-slim:0.8
             ports:
             - containerPort: 80
               name: web
