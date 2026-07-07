@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-08-23"
+  years: 2014, 2026
+lastupdated: "2026-07-07"
 
 
 keywords: kubernetes, help, network, connectivity, autoscaler
@@ -13,20 +13,16 @@ content-type: troubleshoot
 
 ---
 
+{{site.data.keyword.attribute-definition-list}}
 
 # Why are my autoscaled worker pools unbalanced?
 {: #ts-ca-unbalanced}
 
-During a scale-up, the cluster autoscaler balances nodes across zones, with a permitted difference of plus or minus one (+/- 1) worker node. 
+During a scale-up, the cluster autoscaler balances nodes across zones, with a permitted difference of plus or minus one worker node.
 {: tsSymptoms}
-
 
 Your pending workloads might not request enough capacity to make each zone balanced.
 {: tsCauses}
 
-In this case, if you want to manually balance the worker pools, [update your cluster autoscaler ConfigMap](/docs/containers?topic=containers-cluster-scaling-install-addon-enable) to remove the unbalanced worker pool. Then, run the `ibmcloud ks worker-pool rebalance` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_rebalance), and add the worker pool back to the cluster autoscaler ConfigMap.
-{: tsResolve} 
-
-
-
-
+To balance the worker pools manually, [update your cluster autoscaler ConfigMap](/docs/containers?topic=containers-cluster-scaling-install-addon-enable) to remove the unbalanced worker pool. Then, run the `ibmcloud ks worker-pool rebalance` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_rebalance), and add the worker pool back to the cluster autoscaler ConfigMap.
+{: tsResolve}

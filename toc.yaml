@@ -230,6 +230,7 @@ toc:
               label: Exposing apps with Traefik Ingress
               topics:
               - cs_managed_traefik_ingress_about.md
+              - cs_managed_ingress_move_traefik.md
               - cs_managed_traefik_ingress_setup.md
               - ingress-domains.md
               - edge-ingress-traefik.md
