@@ -58,11 +58,7 @@ The following table describes each part of the subdomain.
 | Subdomain component | Description |
 | ------------------- | ----------- |
 | `*` | The wildcard for the subdomain is registered by default for your cluster. |
-| `<cluster_name>` | The name of your cluster.
- - If the cluster name is 26 characters or fewer and the cluster name is unique in this region, the full cluster name is used: `myclustername`.
- - If the cluster name is 26 characters or fewer and another cluster with the same name exists in this region, the full cluster name is used and a dash plus six random characters is added: `myclustername-ABC123`.
- - If the cluster name is 26 characters or more and the cluster name is unique in this region, only the first 24 characters are used: `myveryverylongclusternam`.
- - If the cluster name is 26 characters or more and another cluster with the same name exists in this region, only the first 17 characters are used and a dash plus six random characters is added: `myveryverylongclu-ABC123`. |
+| `<cluster_name>` | The name of your cluster. \n - If the cluster name is 26 characters or fewer and the cluster name is unique in this region, the full cluster name is used: `myclustername`. \n - If the cluster name is 26 characters or fewer and another cluster with the same name exists in this region, the full cluster name is used and a dash plus six random characters is added: `myclustername-ABC123`. \n - If the cluster name is 26 characters or more and the cluster name is unique in this region, only the first 24 characters are used: `myveryverylongclusternam`. \n - If the cluster name is 26 characters or more and another cluster with the same name exists in this region, only the first 17 characters are used and a dash plus six random characters is added: `myveryverylongclu-ABC123`. |
 | `<globally_unique_account_HASH>` | A globally unique hash is created for your {{site.data.keyword.cloud_notm}} account. All subdomains that you create for NLBs in clusters in your account use this hash. |
 | `0000` | Acts as a counter for each subdomain that is created in your cluster. |
 | `<region>` | The region where the cluster is created. |

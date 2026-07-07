@@ -3483,7 +3483,7 @@ subcollection: containers
 
 [Isolating Classic NLBs to edge worker nodes](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic)
 
-    * [Before you begin](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic-prereqs)
+* [Before you begin](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic-prereqs)
 
 [Isolating network workloads to edge nodes in VPC clusters](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads)
 
@@ -6322,8 +6322,6 @@ subcollection: containers
     * [Version patch update 1.2.4_680, released 18 July 2025.](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#124_680_ca)
 
     * [Version patch update 1.2.4_629, released 22 April 2025.](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#124_629_ca)
-
-    * [](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#)
 
     * [Change log for patch update 1.2.4_793, released 18th September 2025](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#124_793_ca)
 
