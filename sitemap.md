@@ -3737,11 +3737,27 @@ subcollection: containers
 
 [Traefik Ingress in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-about)
 
-* [Preview](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-preview)
+* [IBM-provided Ingress components](/docs/containers?topic=containers-managed-traefik-ingress-about#traefik-managed-ingress-components)
 
-    * [DNS handling on Classic clusters](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-dns-classic)
+    * [Ingress domain](/docs/containers?topic=containers-managed-traefik-ingress-about#traefik-managed-ingress-subdomain)
 
-    * [Default Ingress Class Handling](/docs/containers?topic=containers-managed-traefik-ingress-about#managed-traefik-ingress-default-ingress-class)
+    * [Ingress class](/docs/containers?topic=containers-managed-traefik-ingress-about#traefik-managed-ingress-class)
+
+    * [Application Load Balancers (ALBs)](/docs/containers?topic=containers-managed-traefik-ingress-about#traefik-managed-ingress-albs)
+
+    * [Default TLS certificate](/docs/containers?topic=containers-managed-traefik-ingress-about#traefik-managed-ingress-tls)
+
+* [Getting started with Ingress](/docs/containers?topic=containers-managed-traefik-ingress-about#traefik-managed-ingress-getstarted)
+
+[Moving from Ingress-NGINX to Traefik on {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-ingress-move-traefik#managed-ingress-move-traefik)
+
+* [Comparing Ingress-NGINX to Traefik on {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-ingress-move-traefik#comparing-ingress-nginx-to-traefik)
+
+* [Behaviors to consider during migration](/docs/containers?topic=containers-managed-ingress-move-traefik#managed-traefik-move-behaviors)
+
+    * [DNS handling on classic clusters](/docs/containers?topic=containers-managed-ingress-move-traefik#move-traefik-dns-classic)
+
+    * [Default Ingress Class handling](/docs/containers?topic=containers-managed-ingress-move-traefik#move-traefik-default-ingress-class)
 
 [Setting up Ingress](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-setup)
 
