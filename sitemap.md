@@ -180,6 +180,12 @@ subcollection: containers
 
     * [Solution](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_solution)
 
+    * [Step 1: Store data in the cloud](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_step1)
+
+    * [Step 2: Provide access to data with APIs](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_step2)
+
+    * [Step 3: Innovate with IBM Garage and cloud services](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_step3)
+
     * [Results](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_results)
 
 * [Large public port secures exchange of port data and shipping manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
@@ -187,6 +193,12 @@ subcollection: containers
     * [Context](/docs/containers?topic=containers-cs_uc_gov#uc_port_context)
 
     * [Solution](/docs/containers?topic=containers-cs_uc_gov#uc_port_solution)
+
+    * [Step 1: Containerize apps by using microservices](/docs/containers?topic=containers-cs_uc_gov#uc_port_step1)
+
+    * [Step 2: Ensure global availability](/docs/containers?topic=containers-cs_uc_gov#uc_port_step2)
+
+    * [Step 3: Data sharing](/docs/containers?topic=containers-cs_uc_gov#uc_port_step3)
 
     * [Results](/docs/containers?topic=containers-cs_uc_gov#uc_port_results)
 
@@ -3439,7 +3451,11 @@ subcollection: containers
 
 * [Setting up an NLB 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
 
+    * [Before you begin](/docs/containers?topic=containers-loadbalancer#multi_zone_config_prereqs)
+
 * [Setting up an NLB 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
+
+    * [Before you begin](/docs/containers?topic=containers-loadbalancer#lb_config_prereqs)
 
 * [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#lb_source_ip)
 
@@ -3453,7 +3469,11 @@ subcollection: containers
 
 * [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
 
+    * [Before you begin](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config_prereqs)
+
 * [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
+
+    * [Before you begin](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config_prereqs)
 
 * [Scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling)
 
@@ -3462,6 +3482,8 @@ subcollection: containers
     * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
 
 [Isolating Classic NLBs to edge worker nodes](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic)
+
+    * [Before you begin](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic-prereqs)
 
 [Isolating network workloads to edge nodes in VPC clusters](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads)
 
@@ -5462,6 +5484,8 @@ subcollection: containers
 * [ibmcloud ks storage](/docs/containers?topic=containers-icks_map#icks_map_storage)
 
 [{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
+
+* [Before you begin](/docs/containers?topic=containers-kubernetes-service-cli#cli-ks-plugin-prereqs)
 
 * [{{site.data.keyword.containerlong_notm}} commands](/docs/containers?topic=containers-kubernetes-service-cli#cli_commands)
 

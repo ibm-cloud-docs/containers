@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2024, 2024
-lastupdated: "2024-11-13"
+  years: 2024, 2026
+lastupdated: "2026-07-07"
 
 
 keywords: containers, kubernetes, affinity, taint, edge node, edge
@@ -21,12 +21,14 @@ subcollection: containers
 
 [Classic]{: tag-classic-inf}
 
-In the following steps, you add the `dedicated=edge` label to worker nodes on each public or private VLAN in your cluster. This label is used to deploy your network load balancers (NLBs) to those worker nodes only. You can deploy both public and private NLBs can deploy to edge worker nodes.
+In the following steps, you add the `dedicated=edge` label to worker nodes on each public or private VLAN in your cluster. This label is used to deploy your network load balancers (NLBs) to those worker nodes only. Both public and private NLBs can be deployed to edge worker nodes.
+{: shortdesc}
 
 If you plan to use an existing worker pool, the pool must span all zones in your cluster and have at least two worker nodes per zone. You can label the worker pool with `dedicated=edge` by using the [`ibmcloud ks worker-pool label set` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set).
 {: note}
 
-Before you begin
+### Before you begin
+{: #edge-nlb-classic-prereqs}
 
 * Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-iam-platform-access-roles):
     * Any platform access role for the cluster
@@ -36,13 +38,13 @@ Before you begin
 1. Create a worker pool with the label `dedicated=edge` or add the label to one of your existing worker pools.
     * To create a worker pool you can use the `worker-pool create classic` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create).
         ```sh
-        ibmcloud oc worker-pool create classic --name POOL_NAME --cluster CLUSTER --flavor FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION --label dedicated=edge
+        ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flavor FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION --label dedicated=edge
         ```
         {: pre}
 
     * To label an existing worker pool, you can use the `worker-pool label set` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set).
         ```sh
-        ibmcloud oc worker-pool label set --cluster CLUSTER --worker-pool POOL --label dedicated=edge
+        ibmcloud ks worker-pool label set --cluster CLUSTER --worker-pool POOL --label dedicated=edge
         ```
         {: pre}
 
@@ -67,14 +69,13 @@ Before you begin
     ```
     {: pre}
     
-    Example output
+    Example output:
 
     ```sh
     kube-system           private-crc81nk5l10gfhdql4i3qg-nlb1   LoadBalancer   172.21.233.160   10.216.23.123    80:31345/TCP,443:32630/TCP   8d
     kube-system           public-crc81nk5l10gfhdql4i3qg-nlb1    LoadBalancer   172.21.190.18    169.46.17.2      80:31345/TCP,443:32630/TCP   8d
     ```
     {: screen}
-
 
 1. Using the output from the previous step, run the following command for each NLB. This command redeploys the NLB to an edge worker node.
 
@@ -83,7 +84,7 @@ Before you begin
     ```
     {: pre}
 
-    Example output
+    Example output:
 
     ```sh
     service "private-crc81nk5l10gfhdql4i3qg-nlb1" configured
@@ -94,13 +95,13 @@ Before you begin
 1. To verify that networking workloads are restricted to edge nodes, confirm that the load balancers are scheduled onto the edge nodes and are not scheduled onto non-edge nodes.
 
     * NLB pods
-        1. Confirm that the NLB pods are deployed to edge nodes. Search for the external IP address of the load balancer service that is listed in the output of step 3. Replace the periods (`.`) with hyphens (`-`). In the following example for the `crc81nk5l10gfhdql4i3qg`, the NLB has an external IP address of `169.46.17.2`. 
+        1. Confirm that the NLB pods are deployed to edge nodes. Search for the external IP address of the load balancer service that is listed in the output of the previous step. Replace the periods (`.`) with hyphens (`-`). In the following example for the `crc81nk5l10gfhdql4i3qg`, the NLB has an external IP address of `169.46.17.2`.
             ```sh
             kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
             ```
             {: pre}
 
-            Example output
+            Example output:
             ```sh
             ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
             ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-2z64r                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
@@ -122,7 +123,7 @@ Before you begin
     Delete only one pod at a time, and verify that the pod is rescheduled onto an edge node before you delete other pods.
     {: important}
 
-    1. Delete a pod. For example, if one of the `public-crc81nk5l10gfhdql4i3qg-alb1` NLB pods did not schedule to an edge node, you might use this deletion command:
+    1. Delete a pod. For example, if one of the `public-crc81nk5l10gfhdql4i3qg-alb1` NLB pods did not schedule to an edge node:
         ```sh
         kubectl delete pod ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg -n ibm-system
         ```
@@ -134,7 +135,7 @@ Before you begin
         ```
         {: pre}
 
-        Example output
+        Example output:
 
         ```sh
         ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)

@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2024
-lastupdated: "2024-08-23"
+  years: 2014, 2026
+lastupdated: "2026-07-07"
 
 
 keywords: kubernetes, vlan
@@ -108,7 +108,7 @@ If you previously disabled the public endpoint, you can re-enable it.
     ```
     {: pre}
     
-    By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
+    By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually by using the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
     {: important}
 
 
@@ -136,15 +136,12 @@ To disable the public cloud service endpoint, you must first enable the private 
 4. [Create a ConfigMap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 
 5. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.
-    By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
-    {: important}
-    
     ```sh
     ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
     ```
     {: pre}
-    
-    By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
+
+    By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually by using the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
     {: important}
 
 ## Switching from the public cloud service endpoint to the private cloud service endpoint
@@ -158,7 +155,8 @@ All clusters that are connected to a public and a private VLAN use the public cl
 - If you enable the private cloud service endpoint and keep the public cloud service endpoint enabled too, workers always communicate with the master over the private network, but your users can communicate with the master over either the public or private network.
 - If you enable the private cloud service endpoint but disable the public cloud service endpoint, workers and users must communicate with the master over the private network.
 
-Note that you can't disable the private cloud service endpoint after you enable it.
+You can't disable the private cloud service endpoint after you enable it.
+{: note}
 
 1. Enable [VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
@@ -186,7 +184,7 @@ Note that you can't disable the private cloud service endpoint after you enable 
     ```
     {: pre}
 
-7. Optional: To use the private cloud service endpoint only,
+7. Optional: To use the private cloud service endpoint only:
     1. Disable the public cloud service endpoint.
         ```sh
         ibmcloud ks cluster master public-service-endpoint disable --cluster <cluster_name_or_ID>
@@ -220,7 +218,7 @@ Removing all workers from a VLAN removes the IP address of the Ingress ALB in th
 [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 
-To change the VLANs that a worker pool uses to provision worker nodes.
+To change the VLANs that a worker pool uses to provision worker nodes:
 
 1. List the names of the worker pools in your cluster.
     ```sh
@@ -314,12 +312,7 @@ To change the VLANs that a worker pool uses to provision worker nodes.
 
         
 
-8. Optional: You can repeat steps 2 - 7 for each worker pool in your cluster. After you complete these steps, all worker nodes in your cluster are set up with the new VLANs.
+8. Optional: Repeat steps 2–7 for each worker pool in your cluster. After you complete these steps, all worker nodes in your cluster are set up with the new VLANs.
 
 9. The default ALBs in your cluster are still bound to the old VLAN because their IP addresses are from a subnet on that VLAN. Because ALBs can't be moved across VLANs, you can instead [create ALBs on the new VLANs and disable ALBs on the old VLANs](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan).
-
 10. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
-
-
-
-
