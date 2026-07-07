@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-15"
+lastupdated: "2026-07-07"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -65,7 +65,7 @@ For more information about how your cluster resources are set up, see the [Servi
 {: #faq_benefits}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering that delivers powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services that are related to {{site.data.keyword.ibmwatson}}, AI, IoT, DevOps, security, and data analytics. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. The service also has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.
+{{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering that delivers powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services that are related to {{site.data.keyword.ibmwatson}}, AI, IoT, DevOps, security, and data analytics. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} supports intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. The service also has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.
 
 For a detailed overview of capabilities and benefits, see [Benefits of using the service](/docs/containers?topic=containers-overview#benefits).
 
@@ -101,29 +101,8 @@ Worker nodes in standard clusters are provisioned in to your {{site.data.keyword
 ## What kinds of workloads can I move to {{site.data.keyword.containerlong_notm}}?
 {: #move_to_cloud}
 
-The following table provides some examples of what types of workloads that users typically move to the various types of clouds. You might also choose a hybrid approach where you have clusters that run in both environments.
+For examples of the types of workloads that users typically move to the various types of clouds, see [Moving your workloads to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-overview#cloud_workloads). You might also choose a hybrid approach where you have clusters that run in both environments.
 {: shortdesc}
-
-| Workload | {{site.data.keyword.containershort_notm}} off-prem | on-prem |
-| --- | --- | --- |
-| DevOps enablement tools | Yes | |
-| Developing and testing apps | Yes | |
-| Apps have major shifts in demand and need to scale rapidly | Yes | |
-| Business apps such as CRM, HCM, ERP, and E-commerce | Yes | |
-| Collaboration and social tools such as email | Yes | |
-| Linux and x86 workloads | Yes | |
-| Bare metal | Yes | Yes |
-| GPU compute resources | Yes | Yes |
-| PCI and HIPAA-compliant workloads | Yes | Yes |
-| Legacy apps with platform and infrastructure constraints and dependencies | | Yes |
-| Proprietary apps with strict designs, licensing, or heavy regulations | | Yes |
-{: caption="{{site.data.keyword.cloud_notm}} implementations support your workloads" caption-side="bottom"}
-
-Ready to run workloads off-premises in {{site.data.keyword.containerlong_notm}}?
-:   Great! You're already in the public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
-
-Want to run workloads in both on-premises and off-premises clouds?
-:   Explore [{{site.data.keyword.satellitelong_notm}}](/docs/satellite?topic=satellite-faqs) to extend the flexibility and scalability of {{site.data.keyword.cloud_notm}} into your on-premises, edge, or other cloud provider environments.
 
 ## Can I automate my infrastructure deployments?
 {: #infra_packaging}

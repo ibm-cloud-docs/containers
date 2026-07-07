@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-06-01"
+lastupdated: "2026-07-07"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, rbac, policy, providers, benefits
 
@@ -13,15 +13,13 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
-
 # Understanding {{site.data.keyword.containerlong_notm}}
 {: #overview}
 
 Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/products/kubernetes-service){: external}, its capabilities, and the options that are available to you to customize the cluster to your needs.
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}} is a managed offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud.
-{: #overview-iks}
+{{site.data.keyword.containerlong_notm}} is a managed offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} is designed to provide intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud.
 
 
 Review frequently asked questions and key technologies that {{site.data.keyword.containerlong_notm}} uses.
@@ -207,7 +205,7 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Classic infrastructure cluster on only the private network|Yes| |
 | GPU bare metal worker nodes | Yes | Yes |
 |Integrated IBM Cloud Paks and middleware| |Yes|
-|Built-in container image streams, builds, and tooling ([read more](https://blog.cloudowski.com/articles/why-managing-container-images-on-openshift-is-better-than-on-kubernetes/){: external})| |Yes|
+|Built-in container image streams, builds, and tooling ([Learn why managing container images on OpenShift differs from Kubernetes](https://blog.cloudowski.com/articles/why-managing-container-images-on-openshift-is-better-than-on-kubernetes/){: external})| |Yes|
 |Integrated CI/CD with Jenkins| |Yes|
 |Stricter app security context set up by default| |Yes|
 |Simplified Kubernetes developer experience, with an app console that is suited for beginners| |Yes|

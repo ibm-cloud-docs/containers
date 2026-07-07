@@ -27,7 +27,7 @@ In the following steps, you add the `dedicated=edge` label to worker nodes on ea
 If you plan to use an existing worker pool, the pool must span all zones in your cluster and have at least two worker nodes per zone. You can label the worker pool with `dedicated=edge` by using the [`ibmcloud ks worker-pool label set` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set).
 {: note}
 
-### Before you begin
+## Before you begin
 {: #edge-nlb-classic-prereqs}
 
 * Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-iam-platform-access-roles):

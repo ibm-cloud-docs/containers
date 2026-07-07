@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-08-11"
+  years: 2014, 2026
+lastupdated: "2026-07-07"
 
 
 keywords: kubernetes, containers
@@ -756,7 +756,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         spec:
           containers:
           - name: nginx
-            image: k8s.gcr.io/nginx-slim:0.8
+            image: registry.k8s.io/nginx-slim:0.8
             ports:
             - containerPort: 80
               name: web
@@ -838,7 +838,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
                   topologyKey: failure-domain.beta.kubernetes.io/zone
           containers:
           - name: nginx
-            image: k8s.gcr.io/nginx-slim:0.8
+            image: registry.k8s.io/nginx-slim:0.8
             ports:
             - containerPort: 80
               name: web
