@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-06"
+lastupdated: "2026-07-07"
 
 
 keywords: containers
@@ -6285,6 +6285,8 @@ subcollection: containers
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-2.0.0)
 
+    * [Version 2.0.0 - v200-12-0_351296784, released 07 July 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-12-0_351296784)
+
     * [Version 2.0.0 - v200-7-0_332133224, released 30 April 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-7-0_332133224)
 
     * [Version 2.0.0 - v200-6-0_326846817, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-6-0_326846817)
@@ -6294,6 +6296,8 @@ subcollection: containers
     * [Version patch update 2.0.0-2_302959219, released 2 December 2025](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#2.0.0-2_302959219_ca)
 
 * [Version 1.2.4](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-1.2.4)
+
+    * [Version 1.2.4 - v124-13-0_351834855, released 07 July 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v124-13-0_351834855)
 
     * [Version 1.2.4 - v124-8-0_326847250, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v124-8-0_326847250)
 
