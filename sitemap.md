@@ -5819,8 +5819,6 @@ subcollection: containers
 
     * [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-monitor-configure-cli)
 
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-monitor-configure-options)
-
     * [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-disable)
 
     * [`ibmcloud ks nlb-dns monitor enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-enable)
@@ -5839,11 +5837,9 @@ subcollection: containers
 
     * [Experimental: `ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-secret-rm)
 
-* [`ibmcloud ks vpc secure-by-default enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-cli)
+    * [`ibmcloud ks vpc secure-by-default enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-cli)
 
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-options)
-
-* [`webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_webhook_create)
+    * [`webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_webhook_create)
 
     * [Example `webhook-create` command](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-example)
 
@@ -5877,7 +5873,7 @@ subcollection: containers
 
     * [`ibmcloud ks quota ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_quota_ls)
 
-* [`subnets` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_subnets)
+    * [`subnets` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_subnets)
 
 * [`vlan` commands](/docs/containers?topic=containers-kubernetes-service-cli#vlan)
 
@@ -5885,45 +5881,33 @@ subcollection: containers
 
     * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get)
 
-* [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
+    * [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
 
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-options)
+    * [`ibmcloud ks vpc outbound-traffic-protection disable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-cli)
 
-* [`ibmcloud ks vpc outbound-traffic-protection disable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-cli)
+    * [`ibmcloud ks vpc outbound-traffic-protection enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-cli)
 
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-options)
+    * [`ibmcloud ks vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#vni-attach-baremetal-cli)
 
-* [`ibmcloud ks vpc outbound-traffic-protection enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-cli)
+    * [`ibmcloud ks vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#vni-detach-cli)
 
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-enable-options)
+    * [`ibmcloud ks vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#vni-ls-cli)
 
-* [`ibmcloud ks vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#vni-attach-baremetal-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vni-attach-baremetal-options)
-
-* [`ibmcloud ks vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#vni-detach-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vni-detach-options)
-
-* [`ibmcloud ks vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#vni-ls-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#vni-ls-options)
-
-* [`flavor` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types)
+    * [`flavor` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_machine_types)
 
     * [`flavor get` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_flavor_get)
 
     * [`flavor ls` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_flavor_ls)
 
-* [`messages` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_messages)
+    * [`messages` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_messages)
 
-* [locations command](/docs/containers?topic=containers-kubernetes-service-cli#cs_supported-locations)
+    * [`locations` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_supported-locations)
 
-* [`versions` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_versions_command)
+    * [`versions` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_versions_command)
 
-* [`api` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api)
+    * [`api` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cli_api)
 
-* [`init` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_init)
+    * [`init` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_init)
 
 * [`script` commands](/docs/containers?topic=containers-kubernetes-service-cli#script)
 
@@ -5931,9 +5915,7 @@ subcollection: containers
 
 * [`security-group` commands](/docs/containers?topic=containers-kubernetes-service-cli#security_group)
 
-* [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-options)
+    * [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
 
     * [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security_group_reset)
 
@@ -5953,21 +5935,13 @@ subcollection: containers
 
     * [`ibmcloud ks storage volume ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_storage_att_ls_2)
 
-* [`ibmcloud ks experimental trusted-profile default get`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-get-cli)
+    * [`ibmcloud ks experimental trusted-profile default get`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-get-cli)
 
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-get-options)
+    * [`ibmcloud ks experimental trusted-profile default set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-set-cli)
 
-* [`ibmcloud ks experimental trusted-profile default set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-set-cli)
+    * [`ibmcloud ks experimental trusted-profile get`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-get-cli)
 
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-set-options)
-
-* [`ibmcloud ks experimental trusted-profile get`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-get-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-get-options)
-
-* [`ibmcloud ks experimental trusted-profile set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-cli)
-
-    * [Command options](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-options)
+    * [`ibmcloud ks experimental trusted-profile set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-cli)
 
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 

@@ -21,26 +21,20 @@ content-type: cli-docs
 # {{site.data.keyword.containerlong_notm}} CLI reference
 {: #kubernetes-service-cli}
 
-Refer to these commands to create and manage **both community Kubernetes or {{site.data.keyword.redhat_openshift_notm}} clusters** in {{site.data.keyword.containerlong}}.
+Use these commands to create and manage **both community Kubernetes or {{site.data.keyword.redhat_openshift_notm}} clusters** in {{site.data.keyword.containerlong}}.
 {: shortdesc}
-
-* **Kubernetes**: [Install the Kubernetes CLI plug-in](/docs/containers?topic=containers-cli-install).
-* **OpenShift**: [Install the {{site.data.keyword.redhat_openshift_notm}} CLI plug-in](/docs/containers?topic=containers-cli-install).
-
-In the command line, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and options.
 
 ## Before you begin
 {: #cli-ks-plugin-prereqs}
 
-Install the `container-service` or `ks` plug-in.
+- [Install the IBM Cloud CLI](/docs/containers?topic=containers-cli-install).
 
-```sh
-ibmcloud plugin install ks
-```
-{: pre}
+- Install the `container-service` or `ks` plug-in.
 
-Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registrylong_notm}} CLI reference](/docs/Registry?topic=Registry-containerregcli). Looking for `kubectl` commands? See the [Kubernetes documentation](https://kubectl.docs.kubernetes.io/){: external}.
-{: tip}
+	```sh
+	ibmcloud plugin install ks
+	```
+	{: pre}
 
 
 ## {{site.data.keyword.containerlong_notm}} commands
@@ -106,13 +100,14 @@ ibmcloud ks cluster addon disable alb-oauth-proxy --cluster CLUSTER
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-disable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
 
 
-##### Example `addon disable alb-oauth-proxy` command
+#### Example `addon disable alb-oauth-proxy` command
 {: #addon-disable-alb-oauth-proxy}
 
 ```sh
@@ -139,7 +134,8 @@ ibmcloud ks cluster addon disable headlamp --cluster CLUSTER [-f] [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-disable-headlamp-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -169,7 +165,8 @@ ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-disable-istio-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -196,7 +193,8 @@ ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-disable-istio-extras-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -222,7 +220,8 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-disable-istio-sample-bookinfo-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -245,7 +244,8 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-disable-kube-terminal-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -290,7 +290,8 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-disable-vpc-block-csi-driver-options}
 
 `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -324,7 +325,8 @@ ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER [--version VE
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -333,7 +335,7 @@ Minimum required permissions
 :    Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.
 
 
-##### Example `addon enable alb-oauth-proxy` command
+#### Example `addon enable alb-oauth-proxy` command
 {: #addon-enable-alb-oauth-proxy}
 
 ```sh
@@ -359,7 +361,8 @@ ibmcloud ks cluster addon enable headlamp --cluster CLUSTER [-q] [--version VERS
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-enable-headlamp-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -392,7 +395,8 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-enable-istio-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -417,7 +421,8 @@ ibmcloud ks cluster addon enable static-route --cluster CLUSTER [--version VERSI
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-enable-static-route-options}
 
 `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -444,7 +449,8 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [--versi
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-enable-vpc-block-csi-driver-options}
 
 `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -471,7 +477,8 @@ ibmcloud ks cluster addon get --addon ADDON --cluster CLUSTER [--output OUTPUT] 
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-get-options}
 
 `--addon ADDON`
 :    Required: The name of the `addon`. To list installed add-ons, run `ibmcloud ks cluster addon ls`.
@@ -502,7 +509,8 @@ ibmcloud ks cluster addon ls --cluster CLUSTER
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-ls-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -527,7 +535,8 @@ ibmcloud ks cluster addon options --addon ADDON [--output OUTPUT] [-q] [--versio
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-addon-options-options}
 
 `--addon ADDON`
 :    Required: The name of the `addon`. To list available add-ons, run `ibmcloud ks cluster addon versions`.
@@ -558,7 +567,8 @@ ibmcloud ks cluster addon update ADD-ON_NAME --cluster CLUSTER [-f] [-q] [--vers
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #cluster-addon-update-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -589,7 +599,8 @@ ibmcloud ks cluster addon versions [--addon ADD-ON_NAME] [--output json] [-q]
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #cluster-addon-versions-options}
 
 `--addon ADD-ON_NAME`
 :    Optional: Specify an add-on name such as `istio` to filter versions for.
@@ -630,7 +641,8 @@ ibmcloud ks cluster ca create --cluster CLUSTER [-f] [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-ca-create-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -666,7 +678,8 @@ ibmcloud ks cluster ca get --cluster CLUSTER [ --output OUTPUT] [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-ca-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -706,7 +719,8 @@ ibmcloud ks cluster ca rotate --cluster CLUSTER [-f] [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-ca-rotate-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -743,7 +757,8 @@ ibmcloud ks cluster ca status --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-ca-status-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -781,7 +796,8 @@ Minimum required permissions
 * **Platform**: If you have only a platform access role, you can perform this command, but you need a [service access role](/docs/containers?topic=containers-iam-platform-access-roles) to perform Kubernetes actions in the cluster.
 * **Service**: If you have the `service` access role, you can perform this command. However, your cluster admin must gather the cluster details for you by either running the `ibmcloud ks cluster ls` command or using the {{site.data.keyword.containerlong_notm}} console. After you receive the cluster name and ID, you can [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-deploy_app#db_cli) and work with Kubernetes.
 
-**Command options**:
+#### Command options
+{: #cluster-config-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -840,7 +856,8 @@ Minimum required permissions
 :   **Administrator** platform access role for {{site.data.keyword.registrylong_notm}} at the account level
 :   **Super User** role for IBM Cloud infrastructure
 
-**Command options**:
+#### Command options
+{: #cluster-create-classic-options}
 
 `--hardware HARDWARE`
 :    The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. For bare metal flavors, specify `dedicated`.
@@ -895,7 +912,7 @@ Minimum required permissions
 
 
 `--workers WORKERS`
-:    **Optional**: Specify the number of worker nodes to include in the cluster. The default value is 1.
+:    Optional: Specify the number of worker nodes to include in the cluster. The default value is 1.
      If you create a cluster with only one worker node per zone, you might experience issues with Ingress. For high availability, create a cluster with at least two workers per zone. Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
      {: important}
 
@@ -982,7 +999,8 @@ Minimum required permissions
 :   [**Writer** or **Manager** service access role](/docs/containers?topic=containers-iam-platform-access-roles) for {{site.data.keyword.containerlong_notm}}.
 :   [**Administrator** platform access role](/docs/containers?topic=containers-iam-platform-access-roles) for {{site.data.keyword.registrylong_notm}} at the account level.
 
-**Command options**:
+#### Command options
+{: #cluster-create-vpc-gen2-options}
 
 
 `--name NAME`
@@ -1038,8 +1056,8 @@ Minimum required permissions
 `--pod-subnet SUBNET`
 :    In the first cluster that you create in a VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods.
 :    When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least `/23`, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use `/22` to have enough pod IP addresses for eight worker nodes, `/21` to have enough pod IP addresses for 16 worker nodes, and so on.
-:   :    All pods that are deployed to a worker node are assigned a private IP address in the `172.17.0.0/18` range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods.
-:   For VPC clusters, you can specify the subnet size by including it in the `--pod-subnet` option. For example: `--pod-subnet 0.0.0.0/X` where `X` is the required pod subnet size. Then pod subnet is then automatically selected. When allocating the pod subnet automatically, the allocation will start from `172.17.0.0`, the maximum subnet is limited to `13`, and the minimum subnet size is limited to `23`. For more information, see [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets).
+:    All pods that are deployed to a worker node are assigned a private IP address in the `172.17.0.0/18` range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods.
+:    For VPC clusters, you can specify the subnet size by including it in the `--pod-subnet` option. For example: `--pod-subnet 0.0.0.0/X` where `X` is the required pod subnet size. The pod subnet is then automatically selected. When allocating the pod subnet automatically, the allocation starts from `172.17.0.0`, the maximum subnet is limited to `13`, and the minimum subnet size is limited to `23`. For more information, see [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets).
      The subnet that you choose must be within one of the following ranges.
      - `172.17.0.0 - 172.17.255.255`
      - `172.21.0.0 - 172.31.255.255`
@@ -1086,7 +1104,7 @@ Minimum required permissions
 :    The CRN of the {{site.data.keyword.secrets-manager_short}} instance. To find the CRN of an instance, run [`ibmcloud ks ingress instance ls --cluster CLUSTER`](#cs_ingress_instance_ls).
 
 `--secondary-storage STORAGE`
-:    Optional: The storage option for the flavor. For example, `900gb.5iops-tier`. When you add a secondary disk, that disk is used for the container runtime, while the primary disk is used for the operating system. To view the storage options for a flavor, run the `**ibmcloud ks flavor get --flavor FLAVOR --zone ZONE --provider vpc-gen2` command.
+:    Optional: The storage option for the flavor. For example, `900gb.5iops-tier`. When you add a secondary disk, that disk is used for the container runtime, while the primary disk is used for the operating system. To view the storage options for a flavor, run the `ibmcloud ks flavor get --flavor FLAVOR --zone ZONE --provider vpc-gen2` command.
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -1116,7 +1134,8 @@ ibmcloud ks cluster get --cluster CLUSTER [--show-resources] [--output json] [-q
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1155,7 +1174,8 @@ ibmcloud ks cluster image-security disable --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-image-security-disable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1188,7 +1208,8 @@ ibmcloud ks cluster image-security enable --cluster CLUSTER [-f] [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-image-security-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1226,7 +1247,8 @@ ibmcloud ks cluster ls [--provider (classic | vpc-gen2)] [--location LOCATION] [
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-ls-options}
 
 `--provider (classic | vpc-gen2)`
 :    Optional: Filter output based on infrastructure provider type.
@@ -1235,7 +1257,10 @@ Minimum required permissions
 :    Filter output by a specific location. To see supported locations, run `ibmcloud ks locations`. To specify multiple locations, use one option for each location, such as `-l dal -l seo`.
 
 `--output json`
-:    Optional: Prints the command output in JSON format. **Note**: If you don't include the `--provider` option, only classic clusters are returned.
+:    Optional: Prints the command output in JSON format.
+
+If you don't include the `--provider` option, only classic clusters are returned.
+{: note}
 
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
@@ -1254,7 +1279,7 @@ ibmcloud ks cluster ls -l ams03 -l wdc -l ap
 {: #cluster_master_audit_webhook}
 
 Modify the webhook back end that forwards API server audit logs to a remote server.
-{: shprtdesc}
+{: shortdesc}
 
 The `apiserver-config-get|set|unset audit-webhook` aliases for these commands are deprecated.
 {: note}
@@ -1276,7 +1301,8 @@ ibmcloud ks cluster master audit-webhook get --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-audit-webhook-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1287,7 +1313,7 @@ Minimum required permissions
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-##### Example `cluster master audit-webhook get` command
+#### Example `cluster master audit-webhook get` command
 {: #cluster-master-audit-webhook-get-example}
 
 ```sh
@@ -1313,7 +1339,8 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-audit-webhook-set-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1337,7 +1364,7 @@ Minimum required permissions
 :    Optional: Do not show the message of the day or update reminders.
 
 
-##### Example `cluster master audit-webhook set` command
+#### Example `cluster master audit-webhook set` command
 {: #cluster-master-audit-webhook-set-example}
 
 ```sh
@@ -1363,7 +1390,8 @@ ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-audit-webhook-unset-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1442,7 +1470,8 @@ ibmcloud ks cluster master pod-security get --cluster CLUSTER [--output OUTPUT] 
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-pod-security-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1477,7 +1506,8 @@ ibmcloud ks cluster master pod-security policy disable --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-pod-security-policy-disable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1509,7 +1539,8 @@ ibmcloud ks cluster master pod-security policy enable --cluster CLUSTER [--outpu
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-pod-security-policy-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1544,7 +1575,8 @@ ibmcloud ks cluster master pod-security policy get --cluster CLUSTER [--output O
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-pod-security-policy-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1579,7 +1611,8 @@ ibmcloud ks cluster master pod-security set --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-pod-security-set-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1614,7 +1647,8 @@ ibmcloud ks cluster master pod-security unset --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-pod-security-unset-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1662,7 +1696,8 @@ ibmcloud ks cluster master private-service-endpoint allowlist add --cluster CLUS
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-private-service-endpoint-allowlist-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1674,7 +1709,7 @@ Minimum required permissions
 :    Optional: Do not show the message of the day or update reminders.
 
 
-##### Example `cluster master private-service-endpoint allowlist add` command
+#### Example `cluster master private-service-endpoint allowlist add` command
 {: #cluster-master-private-service-endpoint-allowlist-add-example}
 
 ```sh
@@ -1731,10 +1766,11 @@ Use context-based restrictions instead. For more information, see [Migrating fro
 Disable the [private cloud service endpoint](/docs/containers?topic=containers-plan_basics#workeruser-master) to remove private accessibility to your cluster master.
 {: shortdesc}
 
-**Important**: Before you disable the private endpoint, you first must complete the following steps to enable the public cloud service endpoint:
+Before you disable the private endpoint, you first must complete the following steps to enable the public cloud service endpoint:
 1. Enable the public cloud service endpoint by running `ibmcloud ks cluster master public-service-endpoint enable --cluster <cluster_name>`.
 2. Follow the prompt in the CLI to refresh the Kubernetes master API server.
 3. [Reload all the worker nodes in your cluster to pick up the public endpoint configuration.](#cs_worker_reload)
+{: important}
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint disable --cluster CLUSTER [-f] [-q] [-y]
@@ -1744,7 +1780,8 @@ ibmcloud ks cluster master private-service-endpoint disable --cluster CLUSTER [-
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-private-service-endpoint-disable-options}
 
 `-f`
 :   Optional: Force the command to run with no user prompts.
@@ -1787,7 +1824,8 @@ ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER [-q
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-private-service-endpoint-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1817,10 +1855,11 @@ ibmcloud ks cluster master private-service-endpoint enable --cluster my_cluster
 Disable the public cloud service endpoint for a cluster.
 {: shortdesc}
 
-**Important**: Before you disable the public endpoint, you first must complete the following steps to enable the private cloud service endpoint:
+Before you disable the public endpoint, you first must complete the following steps to enable the private cloud service endpoint:
 1. Enable the private cloud service endpoint by running `ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name>`.
 2. Follow the prompt in the CLI to refresh the Kubernetes master API server.
 3. [Reload all the worker nodes in your cluster to pick up the private endpoint configuration.](#cs_worker_reload)
+{: important}
 
 ```sh
 ibmcloud ks cluster master public-service-endpoint disable --cluster CLUSTER [-q] [-f]
@@ -1831,7 +1870,8 @@ ibmcloud ks cluster master public-service-endpoint disable --cluster CLUSTER [-q
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-public-service-endpoint-disable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1872,7 +1912,8 @@ ibmcloud ks cluster master public-service-endpoint enable --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-public-service-endpoint-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1912,7 +1953,8 @@ ibmcloud ks cluster master refresh --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-refresh-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1941,7 +1983,8 @@ ibmcloud ks cluster master update --cluster CLUSTER [--version MAJOR.MINOR.PATCH
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-master-update-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -1987,11 +2030,12 @@ ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 ```
 {: pre}
 
-**Minimum required permissions**:
-*  **Operator or Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
-*  **Administrator** platform access role in {{site.data.keyword.registrylong_notm}} across all regions and resource groups. The policy can't be scoped to a particular region or resource group.
+Minimum required permissions
+:   **Operator or Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+:   **Administrator** platform access role in {{site.data.keyword.registrylong_notm}} across all regions and resource groups. The policy can't be scoped to a particular region or resource group.
 
-**Command options**:
+#### Command options
+{: #cluster-pull-secret-apply-options}
 
 
 `-c`, `--cluster CLUSTER`
@@ -2014,13 +2058,15 @@ ibmcloud ks cluster rm --cluster CLUSTER [--force-delete-storage] [--skip-advanc
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
 
 `--force-delete-storage`
-:    Optional: Deletes the cluster and any persistent storage that the cluster uses. **Attention**: If you include this option, the data that is stored in the cluster or its associated storage instances can't be recovered.
+:    Optional: Deletes the cluster and any persistent storage that the cluster uses. If you include this option, the data that is stored in the cluster or its associated storage instances can't be recovered.
+     {: important}
 
 `--skip-advance-permissions-check`
 :    Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-kubernetes-service-cli#infra_permissions_get) before deleting the cluster. Note that if you don't have the correct infrastructure permissions, the cluster deletion might only partially succeed, such as the IBM-managed master being removed but the worker nodes unable to be removed from your infrastructure account. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.
@@ -2049,7 +2095,8 @@ ibmcloud ks cluster rm --cluster my_cluster
 Add an IBM Cloud service to a cluster by binding the service instance to a Kubernetes namespace. This command creates service credentials of an {{site.data.keyword.cloud_notm}} service and stores these credentials in a Kubernetes secret in your cluster.
 {: shortdesc}
 
-To view available {{site.data.keyword.cloud_notm}} services from the {{site.data.keyword.cloud_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can add only {{site.data.keyword.cloud_notm}} services that support service keys. For more information about service binding and what services you can add to your cluster, see [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding).
+To view available {{site.data.keyword.cloud_notm}} services from the {{site.data.keyword.cloud_notm}} catalog, run `ibmcloud service offerings`. You can add only {{site.data.keyword.cloud_notm}} services that support service keys. For more information about service binding and what services you can add to your cluster, see [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding).
+{: note}
 
 ```sh
 ibmcloud ks cluster service bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE [--key SERVICE_INSTANCE_KEY] [--role IAM_SERVICE_ROLE] --service SERVICE_INSTANCE [-q]
@@ -2059,7 +2106,8 @@ ibmcloud ks cluster service bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-service-bind-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -2106,7 +2154,8 @@ ibmcloud ks cluster service ls --cluster CLUSTER [--namespace KUBERNETES_NAMESPA
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-service-ls-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -2152,7 +2201,8 @@ ibmcloud ks cluster service unbind --cluster CLUSTER --namespace KUBERNETES_NAME
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-service-unbind-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -2196,7 +2246,8 @@ ibmcloud ks cluster subnet add --cluster CLUSTER --subnet-id SUBNET [-q]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-subnet-add-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -2237,7 +2288,8 @@ ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-subnet-create-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster. To list your clusters, use the `ibmcloud ks cluster ls` [command](#cs_clusters).
@@ -2268,7 +2320,8 @@ ibmcloud ks cluster subnet create --cluster my_cluster --size 8 --vlan 1764905
 [Classic infrastructure]{: tag-classic-inf}
 
 
-Detach a public or private portable classic subnet in an IBM Cloud infrastructure account from a cluster. The subnet remains available in your IBM Cloud infrastructure account. **Note**: Any services that were deployed to an IP address from the subnet remain active after the subnet is removed.
+Detach a public or private portable classic subnet in an IBM Cloud infrastructure account from a cluster. The subnet remains available in your IBM Cloud infrastructure account. Any services that were deployed to an IP address from the subnet remain active after the subnet is removed.
+{: note}
 {: shortdesc}
 
 ```sh
@@ -2279,7 +2332,8 @@ ibmcloud ks cluster subnet detach --cluster CLUSTER --subnet-id SUBNET_ID [-f] [
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-subnet-detach-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster. To list your clusters, use the `ibmcloud ks cluster ls` [command](#cs_clusters).
@@ -2327,7 +2381,8 @@ ibmcloud ks cluster user-subnet add --cluster CLUSTER --subnet-cidr SUBNET_CIDR 
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-user-subnet-add-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -2368,7 +2423,8 @@ ibmcloud ks cluster user-subnet rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR -
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #cluster-user-subnet-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -2413,7 +2469,8 @@ ibmcloud ks dedicated flavors --zone ZONE --provider PROVIDER
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-flavors-options}
 
 `--zone ZONE`
 :    The zone to search for dedicated host flavors.
@@ -2424,7 +2481,8 @@ Minimum required permissions
 `--output json`
 :    Optional: Prints the command output in JSON format.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated flavors`` command
+{: #icks-dedicated-flavors-example}
 
 ```sh
 ibmcloud ks dedicated flavors --zone us-south-1 --provider myprovider1
@@ -2448,7 +2506,8 @@ ibmcloud ks dedicated host create --flavor FLAVOR --pool POOL --zone ZONE [--out
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-host-create-options}
 
 `-- flavor FLAVOR`
 :    The flavor of the dedicated host.
@@ -2462,7 +2521,8 @@ Minimum required permissions
 `--output json`
 :    Optional: Prints the command output in JSON format.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated host create`` command
+{: #icks-dedicated-host-create-example}
 
 ```sh
 ibmcloud ks dedicated host create --flavor b3c.4x16 --pool mypool --zone wdc
@@ -2486,7 +2546,8 @@ ibmcloud ks dedicated host get --host HOST --pool POOL [--output OUTPUT] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-host-get-options}
 
 `--host HOST`
 :    The ID of the dedicated host.
@@ -2500,7 +2561,8 @@ Minimum required permissions
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated host get`` command
+{: #icks-dedicated-host-get-example}
 
 ```sh
 ibmcloud ks dedicated host get --host myhost  --pool mypool
@@ -2524,7 +2586,8 @@ ibmcloud ks dedicated host ls --pool POOL [--output OUTPUT] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-host-ls-options}
 
 `--pool POOL`
 :    The ID of the dedicated host pool. To list dedicated host pools run `ibmcloud ks dedicated pool ls`.
@@ -2532,7 +2595,8 @@ Minimum required permissions
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated host ls`` command
+{: #icks-dedicated-host-ls-example}
 
 ```sh
 ibmcloud ks dedicated host ls --pool mypool
@@ -2556,7 +2620,8 @@ ibmcloud ks dedicated host placement disable --host HOST --pool POOL
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-host-placement-disable-options}
 
 `--host HOST`
 :    The ID of the dedicated host to disable placement for.
@@ -2567,7 +2632,8 @@ Minimum required permissions
 `--q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated host placement disable`` command
+{: #icks-dedicated-host-placement-disable-example}
 
 ```sh
 ibmcloud ks dedicated host placement disable --host myhost --pool mypool
@@ -2590,7 +2656,8 @@ ibmcloud ks dedicated host placement enable --host HOST --pool POOL
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-host-placement-enable-options}
 
 `--host HOST`
 :    The ID of the dedicated host to enable placement for.
@@ -2601,7 +2668,8 @@ Minimum required permissions
 `--q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated host placement enable`` command
+{: #icks-dedicated-host-placement-enable-example}
 
 ```sh
 ibmcloud ks dedicated host placement enable --host myhost --pool mypool
@@ -2624,7 +2692,8 @@ ibmcloud ks dedicated host rm --host HOST --pool POOL [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-host-rm-options}
 
 `--pool POOL`
 :    The ID of the dedicated host pool that contains the dedicated host to delete. To list dedicated host pools run `ibmcloud ks dedicated pool ls`.
@@ -2635,7 +2704,8 @@ Minimum required permissions
 `--q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated host rm`` command
+{: #icks-dedicated-host-rm-example}
 
 ```sh
 ibmcloud ks dedicated host rm --host myhost --pool mypool
@@ -2658,7 +2728,8 @@ ibmcloud ks dedicated pool create --flavor-class CLASS --metro METRO --name NAME
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-pool-create-options}
 
 `--flavor-class CLASS`
 :    The flavor-class of the dedicated host pool. To see available options, run `ibmcloud ks flavors`.
@@ -2675,7 +2746,8 @@ Minimum required permissions
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated pool create`` command
+{: #icks-dedicated-pool-create-example}
 
 ```sh
 ibmcloud ks dedicated pool create --flavor-class mb4c.20x64 --metro dal --name mypool
@@ -2698,7 +2770,8 @@ ibmcloud ks dedicated pool get --pool POOL [--output OUTPUT] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-pool-get-options}
 
 `--pool POOL`
 :    The ID of the dedicated host pool. To list dedicated host pools run `ibmcloud ks dedicated pool ls`.
@@ -2708,7 +2781,8 @@ Minimum required permissions
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated pool get`` command
+{: #icks-dedicated-pool-get-example}
 
 ```sh
 ibmcloud ks dedicated pool get --pool mypool
@@ -2731,7 +2805,8 @@ ibmcloud ks dedicated pool ls [--output OUTPUT] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-pool-ls-options}
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -2739,7 +2814,8 @@ Minimum required permissions
 `--q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated pool ls`` command
+{: #icks-dedicated-pool-ls-example}
 
 ```sh
 ibmcloud ks dedicated pool ls
@@ -2762,7 +2838,8 @@ ibmcloud ks dedicated pool rm --pool POOL [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #dedicated-pool-rm-options}
 
 `--pool POOL`
 :    The ID of the dedicated host pool to delete. To list dedicated host pools run `ibmcloud ks dedicated pool ls`.
@@ -2770,7 +2847,8 @@ Minimum required permissions
 `--q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks dedicated pool rm`` command
+{: #icks-dedicated-pool-rm-example}
 
 ```sh
 ibmcloud ks dedicated pool rm --pool mypool
@@ -2802,7 +2880,8 @@ ibmcloud ks worker add --cluster CLUSTER [--hardware HARDWARE] --flavor FLAVOR -
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-add-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -2861,7 +2940,8 @@ ibmcloud ks worker get --cluster CLUSTER_NAME_OR_ID --worker WORKER_NODE_ID [--o
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-get-options}
 
 `-c, --cluster CLUSTER_NAME_OR_ID`
 :    Optional: The name or ID of the worker node's cluster.
@@ -2901,7 +2981,8 @@ ibmcloud ks worker ls --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--s
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-ls-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster for the available worker nodes.
@@ -2983,7 +3064,8 @@ ibmcloud ks worker reboot [--hard] --cluster CLUSTER --worker WORKER_ID [--skip-
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-reboot-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -3055,7 +3137,8 @@ ibmcloud ks worker reload --worker WORKER_ID [--worker WORKER_ID ...] [--cluster
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-reload-options}
 
 `-w, --worker WORKER`
 :    Specify a worker node ID. To reload multiple worker nodes, use multiple options, such as `-w worker1_id -w worker2_id`.
@@ -3134,7 +3217,8 @@ ibmcloud ks worker replace --cluster CLUSTER_NAME_OR_ID --worker WORKER_ID [--up
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #worker-replace-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -3177,7 +3261,8 @@ ibmcloud ks worker rm --cluster CLUSTER --worker WORKER [-f] [-q]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -3229,7 +3314,8 @@ ibmcloud ks worker update --cluster CLUSTER --worker WORKER_ID [-f] [-q]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-update-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where you list available worker nodes.
@@ -3280,7 +3366,8 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flav
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-create-classic-options}
 
 `--name POOL_NAME`
 :    The name that you want to give your worker pool.
@@ -3341,7 +3428,8 @@ ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <clu
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #worker-pool-create-vpc-gen2-options}
 
 
 `--name NAME`
@@ -3419,7 +3507,8 @@ ibmcloud ks worker-pool get --worker-pool WORKER_POOL --cluster CLUSTER [--outpu
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-get-options}
 
 `-p, --worker-pool WORKER_POOL`
 :    Required: The name of the worker node pool that you want to view the details of. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`.
@@ -3462,7 +3551,8 @@ ibmcloud ks worker-pool label rm --cluster CLUSTER --worker-pool POOL [-f] [-q]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-label-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where the worker pool is located.
@@ -3502,7 +3592,8 @@ ibmcloud ks worker-pool label set --cluster CLUSTER --label LABEL [--label LABEL
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-label-set-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where the worker pool is located.
@@ -3545,7 +3636,8 @@ ibmcloud ks worker-pool ls --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-ls-options}
 
 `-c, --cluster CLUSTER_NAME_OR_ID`
 :    Required: The name or ID of the cluster for which you want to list worker pools.
@@ -3611,7 +3703,8 @@ ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-rebalance-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -3648,7 +3741,8 @@ ibmcloud ks worker-pool resize --cluster CLUSTER --worker-pool WORKER_POOL --siz
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-resize-options}
 
 
 `-c`, `--cluster CLUSTER`
@@ -3690,7 +3784,8 @@ ibmcloud ks worker-pool rm --worker-pool WORKER_POOL --cluster CLUSTER [-q] [-f]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-rm-options}
 
 `-p, --worker-pool WORKER_POOL`
 :    Required: The name of the worker node pool that you want to remove.
@@ -3739,7 +3834,8 @@ ibmcloud ks worker-pool taint set --worker-pool WORKER_POOL --cluster CLUSTER --
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-taint-options}
 
 `-p, --worker-pool WORKER_POOL`
 :    Required: The name of the worker node pool that you want to add the taint to. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.
@@ -3782,7 +3878,8 @@ ibmcloud ks worker-pool taint rm --worker-pool WORKER_POOL --cluster CLUSTER [-f
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-taint-rm-options}
 
 `-p, --worker-pool WORKER_POOL`
 :    Required: The name of the worker node pool that you want to add the taint to. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.
@@ -3819,7 +3916,8 @@ ibmcloud ks worker-pool zones --worker-pool WORKER_POOL --cluster CLUSTER [-q] [
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #worker-pool-zones-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where the worker pool exists.
@@ -3867,7 +3965,8 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #zone-add-classic-options}
 
 `--zone ZONE`
 :    Required: The zone that you want to add. The zone must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz) within the cluster's region.
@@ -3927,7 +4026,8 @@ ibmcloud ks zone add vpc-gen2 --zone ZONE --subnet-id VPC_SUBNET_ID --cluster CL
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #zone-add-vpc-gen2-options}
 
 `--zone ZONE`
 :    Required: The zone that you want to add. It must be a VPC zone within the cluster's region. To see available VPC zones, run `ibmcloud ks zone ls --provider vpc-gen2`.
@@ -3975,7 +4075,8 @@ ibmcloud ks zone ls --provider classic | satellite | vpc-gen2 [--location LOCATI
 
 **Minimum permissions**: None
 
-**Command options**:
+#### Command options
+{: #zone-ls-options}
 
 `--provider (classic | satellite | vpc-gen2)`
 :    The infrastructure provider type to list zones for. This option is required.
@@ -3993,7 +4094,8 @@ ibmcloud ks zone ls --provider classic | satellite | vpc-gen2 [--location LOCATI
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example ``ibmcloud ks zone ls`` command
+{: #icks-zone-ls-example}
 ```sh
 ibmcloud ks zone ls -l ap
 ```
@@ -4017,7 +4119,8 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER  --private-vlan PRIVA
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #zone-network-set-options}
 
 `--zone ZONE`
 :    Required: The zone that you want to add. The zone must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz) within the cluster's region.
@@ -4109,7 +4212,8 @@ ibmcloud ks zone rm --cluster CLUSTER --zone ZONE --worker-pool WORKER_POOL [-f]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #zone-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -4162,7 +4266,8 @@ ibmcloud ks ingress alb autoscale get --alb ALB --cluster CLUSTER [--output OUTP
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-autoscale-get-options}
 
 `--alb ALB`
 :    Required: The name or ID of the ALB to configure autoscaling on.
@@ -4201,7 +4306,8 @@ ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-autoscale-set-options}
 
 `--alb ALB`
 :    Required: The name or ID of the ALB to configure autoscaling on.
@@ -4253,7 +4359,8 @@ ibmcloud ks ingress alb autoscale unset --alb ALB --cluster CLUSTER [--output OU
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-autoscale-unset-options}
 
 `--alb ALB`
 :    Required: The name or ID of the ALB to configure autoscaling on.
@@ -4295,7 +4402,8 @@ ibmcloud ks ingress alb autoupdate disable --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-autoupdate-disable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -4331,7 +4439,8 @@ ibmcloud ks ingress alb autoupdate enable --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-autoupdate-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -4356,7 +4465,8 @@ ibmcloud ks ingress alb autoupdate get --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-autoupdate-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -4385,7 +4495,8 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type (PUBLIC|PRIVATE)
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-create-classic-options}
 
 `-c`, `--cluster CLUSTER`
 :    The name or ID of the cluster.
@@ -4435,7 +4546,8 @@ ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE 
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-create-vpc-gen2-options}
 
 `-c`, `--cluster CLUSTER`
 :    The name or ID of the cluster. To view VPC clusters, run `ibmcloud ks cluster ls --provider vpc-gen2`.
@@ -4482,7 +4594,8 @@ ibmcloud ks ingress alb disable --alb ALB_ID --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-disable-options}
 
 `--alb ALB_ID`
 :    Required: The ID for an ALB. To view the IDs for the ALBs in a cluster, run `ibmcloud ks ingress alb ls --cluster CLUSTER`.
@@ -4527,7 +4640,8 @@ ibmcloud ks ingress alb enable classic --alb ALB_ID --cluster CLUSTER [--ip IP_A
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-enable-classic-options}
 
 `--alb ALB_ID`
 :    Required: The ID for an ALB. To view the IDs for the ALBs in a cluster, run `ibmcloud ks ingress alb ls --cluster CLUSTER`.
@@ -4580,7 +4694,8 @@ ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER [--versio
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-enable-vpc-gen2-options}
 
 `--alb ALB_ID`
 :    Required: The ID for an ALB. To view the IDs for the ALBs in a cluster, run `ibmcloud ks ingress alb ls --cluster CLUSTER`.
@@ -4621,7 +4736,8 @@ ibmcloud ks ingress alb get --alb ALB_ID --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-get-options}
 
 `--alb ALB_ID`
 :    Required: The ID for an ALB. To view the IDs for the ALBs in a cluster, run `ibmcloud ks ingress alb ls --cluster CLUSTER`.
@@ -4660,7 +4776,8 @@ ibmcloud ks ingress alb health-checker disable --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-health-checker-disable-options}
 
 `-c`, `--cluster CLUSTER`
 :    The name or ID of the cluster.
@@ -4693,7 +4810,8 @@ ibmcloud ks ingress alb health-checker enable --cluster CLUSTER [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-health-checker-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    The name or ID of the cluster.
@@ -4726,7 +4844,8 @@ ibmcloud ks ingress alb health-checker get --cluster CLUSTER [--output OUTPUT] [
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-health-checker-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    The name or ID of the cluster.
@@ -4765,7 +4884,8 @@ ibmcloud ks ingress alb ls --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-ls-options}
 
 `*-c, --cluster *CLUSTER`
 :    Required: The name or ID of the cluster where you list available ALBs.
@@ -4806,7 +4926,8 @@ ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB1_ID --alb ALB2_ID ..
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-update-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where you want to update the ALBs.
@@ -4852,7 +4973,8 @@ ibmcloud ks ingress alb versions [--output json] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-alb-versions-options}
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -4875,7 +4997,8 @@ ibmcloud ks ingress domain create --cluster CLUSTER [--crn CRN] [--default] [--d
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-domain-create-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where you want to create the domain.
@@ -4932,7 +5055,8 @@ ibmcloud ks ingress domain default replace --cluster CLUSTER --domain DOMAIN [-q
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
-**Command options**:
+#### Command options
+{: #ingress-domain-default-replace-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where the domain is applied.
@@ -4965,7 +5089,8 @@ ibmcloud ks ingress domain get --cluster CLUSTER --domain DOMAIN [--output OUTPU
 Minimum required permissions
 :   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-domain-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where the domain is applied.
@@ -5002,7 +5127,8 @@ ibmcloud ks ingress domain ls --cluster CLUSTER [--output OUTPUT] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-domain-ls-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -5035,7 +5161,8 @@ ibmcloud ks ingress domain rm --cluster CLUSTER --domain DOMAIN [-f] [-q]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-domain-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where the domain is applied.
@@ -5070,7 +5197,8 @@ ibmcloud ks ingress domain secret regenerate --cluster CLUSTER --domain DOMAIN [
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-domain-secret-regenerate-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where the domain is applied.
@@ -5106,7 +5234,8 @@ ibmcloud ks ingress domain secret rm --cluster CLUSTER --domain DOMAIN [-f] [--o
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-domain-secret-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where the domain is applied.
@@ -5147,7 +5276,8 @@ Note that when you add IP addresses or hostnames, you must include any IPs or ho
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-domain-update-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where the domain is applied.
@@ -5193,7 +5323,8 @@ ibmcloud ks ingress instance default set --cluster CLUSTER --crn CRN --name NAME
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-instance-default-set-options}
 
 `--c, --cluster CLUSTER`
 :    Required. The name or ID of the cluster.
@@ -5210,7 +5341,8 @@ Minimum required permissions
 `--secret-group GROUP`
 :    Secret group ID of the IBM Cloud Secret Manager instance where the secrets are persisted. To get a secret group ID, see the [{{site.data.keyword.secrets-manager_short}} CLI reference](/docs/secrets-manager?topic=secrets-manager-secrets-manager-cli#secrets-manager-cli-secret-groups-command).
 
-**Example**:
+#### Example ``ibmcloud ks ingress instance default set`` command
+{: #icks-ingress-instance-default-set-example}
 
 ```sh
 ibmcloud ks ingress instance default set --cluster --cluster a111aaa11a1aaaaaaa1 --crn crn:v1:staging:public:secrets-manager:eu-gb:a/1a11a1a111aa11aa111aa1a1111aa1a1:1aaa1a1a-aaaa-11aa-1a11-a11aaa1a11a1:secret:a1a11a11-111a-11a1-aa11-11aaa1a11a11 --name my-secret-manager --namespace default --secret-group 90e059dd-d04e-a32b-010f-4d303b9050b8
@@ -5236,7 +5368,8 @@ ibmcloud ks ingress instance default unset --cluster CLUSTER --crn CRN --name NA
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-instance-default-unset-options}
 
 `--c, --cluster CLUSTER`
 :    Required. The name or ID of the cluster.
@@ -5250,7 +5383,8 @@ Minimum required permissions
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks ingress instance default unset`` command
+{: #icks-ingress-instance-default-unset-example}
 
 ```sh
 ibmcloud ks ingress instance default unset --cluster --cluster a111aaa11a1aaaaaaa1 --crn crn:v1:staging:public:secrets-manager:eu-gb:a/1a11a1a111aa11aa111aa1a1111aa1a1:1aaa1a1a-aaaa-11aa-1a11-a11aaa1a11a1:secret:a1a11a11-111a-11a1-aa11-11aaa1a11a11 --name my-secret-manager --namespace default
@@ -5273,7 +5407,8 @@ ibmcloud ks ingress instance get --cluster CLUSTER --name NAME [--output OUTPUT]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-instance-get-options}
 
 `--c, --cluster CLUSTER`
 :    Required. The name or ID of the cluster.
@@ -5287,7 +5422,8 @@ Minimum required permissions
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks ingress instance get`` command
+{: #icks-ingress-instance-get-example}
 
 ```sh
 ibmcloud ks ingress instance get --cluster my-cluster --name my-secrets-manager
@@ -5310,7 +5446,8 @@ ibmcloud ks ingress instance ls --cluster CLUSTER [--output OUTPUT] [-q] [--show
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-instance-ls-options}
 
 `--c, --cluster CLUSTER`
 :    Required. The name or ID of the cluster.
@@ -5324,7 +5461,8 @@ Minimum required permissions
 `--show-deleted`
 :   Optional. Add this option to include instances that were unregistered from the cluster.
 
-**Example**:
+#### Example ``ibmcloud ks ingress instance ls`` command
+{: #icks-ingress-instance-ls-example}
 
 ```sh
 ibmcloud ks ingress instance ls --cluster my-cluster --show-deleted
@@ -5347,7 +5485,8 @@ ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-instance-register-options}
 
 `--c, --cluster CLUSTER`
 :    Required. The name or ID of the cluster.
@@ -5364,7 +5503,8 @@ Minimum required permissions
 `--secret-group GROUP`
 :    Secret group ID of the IBM Cloud Secret Manager instance where the secrets are persisted. To get a secret group ID, see the [{{site.data.keyword.secrets-manager_short}} CLI reference](/docs/secrets-manager?topic=secrets-manager-secrets-manager-cli#secrets-manager-cli-secret-groups-command).
 
-**Example**:
+#### Example ``ibmcloud ks ingress instance register`` command
+{: #icks-ingress-instance-register-example}
 
 ```sh
 ibmcloud ks ingress instance register --cluster my-cluster --crn crn:v1:staging:public:secrets-manager:eu-gb:a/1a11a1a111aa11aa111aa1a1111aa1a1:1aaa1a1a-aaaa-11aa-1a11-a11aaa1a11a1:secret:a1a11a11-111a-11a1-aa11-11aaa1a11a11 --secret-group 90e059dd-d04e-a32b-010f-4d303b9050b8
@@ -5387,7 +5527,8 @@ ibmcloud ks ingress instance unregister --cluster CLUSTER --name NAME [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-instance-unregister-options}
 
 `--c, --cluster CLUSTER`
 :    Required. The name or ID of the cluster.
@@ -5398,7 +5539,8 @@ Minimum required permissions
 `-q`
 :    Optional: Do not show the message of the day or update reminders.
 
-**Example**:
+#### Example ``ibmcloud ks ingress instance unregister`` command
+{: #icks-ingress-instance-unregister-example}
 
 ```sh
 ibmcloud ks ingress instance unregister --cluster my-cluster --name my-secrets-manager-instance
@@ -5423,7 +5565,8 @@ ibmcloud ks ingress lb get --cluster CLUSTER [--output OUTPUT] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-lb-get-options}
 
 
 `-c`, `--cluster CLUSTER`
@@ -5462,7 +5605,8 @@ ibmcloud ks ingress lb backend set --cluster CLUSTER [--private-backend BACKEND]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-lb-backend-set-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -5505,7 +5649,8 @@ ibmcloud ks ingress lb proxy-protocol disable --cluster CLUSTER [-f] [-q]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-lb-proxy-protocol-disable-options}
 
 
 
@@ -5549,7 +5694,8 @@ ibmcloud ks ingress lb proxy-protocol enable --cluster CLUSTER [--cidr CIDR ...]
 Minimum required permissions
 :   **Operator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-lb-proxy-protocol-enable-options}
 
 
 `-c`, `--cluster CLUSTER`
@@ -5596,7 +5742,8 @@ ibmcloud ks ingress secret create --cert-crn CERTIFICATE_CRN --cluster CLUSTER -
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-secret-create-options}
 
 
 `--cert-crn CERTIFICATE_CRN`
@@ -5651,7 +5798,8 @@ ibmcloud ks ingress secret field add --cluster CLUSTER --name SECRET_NAME --fiel
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-secret-field-add-options}
 
 `--c, --cluster CLUSTER`
 :    Required. The name or ID of the cluster.
@@ -5693,7 +5841,8 @@ ibmcloud ks ingress secret field ls --cluster CLUSTER --name SECRET_NAME --names
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-secret-field-ls-options}
 
 `--c, --cluster CLUSTER`
 :    Required. The name or ID of the cluster.
@@ -5732,7 +5881,8 @@ ibmcloud ks ingress secret field rm --cluster CLUSTER --name NAME --namespace NA
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-secret-field-rm-options}
 
 `--c, --cluster CLUSTER`
 :    Required. The name or ID of the cluster.
@@ -5773,7 +5923,8 @@ ibmcloud ks ingress secret get --cluster CLUSTER --name SECRET_NAME --namespace 
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-secret-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -5819,7 +5970,8 @@ ibmcloud ks ingress secret ls --cluster CLUSTER [--show-deleted] [--output json]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-secret-ls-options}
 
 
 `-c`, `--cluster CLUSTER`
@@ -5863,7 +6015,8 @@ ibmcloud ks ingress secret rm --cluster CLUSTER --name SECRET_NAME --namespace N
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-secret-rm-options}
 
 
 `-c`, `--cluster CLUSTER`
@@ -5907,7 +6060,8 @@ ibmcloud ks ingress secret update --cluster CLUSTER --name SECRET_NAME --namespa
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-secret-update-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -5950,7 +6104,8 @@ ibmcloud ks ingress status --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-status-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -5986,7 +6141,8 @@ ibmcloud ks ingress status-report disable --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-status-report-disable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6020,7 +6176,8 @@ ibmcloud ks ingress status-report enable --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-status-report-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6054,7 +6211,8 @@ ibmcloud ks ingress status-report get --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-status-report-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6088,7 +6246,8 @@ ibmcloud ks ingress status-report ignored-errors add --cluster CLUSTER --code CO
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-status-report-ignored-errors-add-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6126,7 +6285,8 @@ ibmcloud ks ingress status-report ignored-errors ls --cluster CLUSTER [--output 
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-status-report-ignored-errors-ls-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6160,7 +6320,8 @@ ibmcloud ks ingress status-report ignored-errors rm --cluster CLUSTER --code COD
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #ingress-status-report-ignored-errors-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6207,7 +6368,8 @@ ibmcloud ks logging autoupdate disable --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Command options**:
+#### Command options
+{: #logging-autoupdate-disable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where you want to disable automatic updates for the Fluentd add-on.
@@ -6230,7 +6392,8 @@ ibmcloud ks logging autoupdate enable --cluster CLUSTER [-q]
 ```
 {: pre}
 
-**Command options**:
+#### Command options
+{: #logging-autoupdate-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where you want to enable automatic updates for the Fluentd add-on.
@@ -6252,7 +6415,8 @@ ibmcloud ks logging autoupdate get --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
-**Command options**:
+#### Command options
+{: #logging-autoupdate-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster where you want to check whether automatic updates for the Fluentd add-on are enabled.
@@ -6280,7 +6444,8 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
 Minimum required permissions
 :   **Editor** platform access role for the cluster
 
-**Command options**:
+#### Command options
+{: #logging-config-create-options}
 
 `-c`, `--cluster CLUSTER`
 :    The name or ID of the cluster.
@@ -6353,7 +6518,8 @@ ibmcloud ks logging config get --cluster CLUSTER [--logsource LOG_SOURCE] [--out
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #logging-config-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6396,7 +6562,8 @@ ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_
 Minimum required permissions
 :   **Editor** platform access role for the cluster
 
-**Command options**:
+#### Command options
+{: #logging-config-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6441,7 +6608,8 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #logging-config-update-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6511,7 +6679,8 @@ ibmcloud ks logging filter create --cluster CLUSTER --type LOG_TYPE [--logging-c
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #logging-filter-create-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster to create a logging filter for.
@@ -6529,7 +6698,8 @@ Minimum required permissions
 :    Optional: The name of the container from which you want to filter out logs. This option applies only when you are using log type `container`.
 
 `--level LOGGING_LEVEL`
-:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this option only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
+:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. You can use this option only when log messages are in JSON format and contain a level field. Example output: `{"log": "hello", "level": "info"}`
+     {: note}
 
 `--message MESSAGE`
 :    Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".
@@ -6578,7 +6748,8 @@ ibmcloud ks logging filter get --cluster CLUSTER [--id FILTER_ID] [--show-matchi
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #logging-filter-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster that you want to view filters from.
@@ -6624,7 +6795,8 @@ ibmcloud ks logging filter rm --cluster CLUSTER [--id FILTER_ID] [--all] [--forc
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #logging-filter-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    The name or ID of the cluster that you want to delete a filter from.
@@ -6667,7 +6839,8 @@ ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TY
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #logging-filter-update-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster that you want to update a logging filter for.
@@ -6688,7 +6861,8 @@ Minimum required permissions
 :    Optional: The name of the container from which you want to filter out logs. This option applies only when you are using log type `container`.
 
 `--level LOGGING_LEVEL`
-:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. **Note**: You can use this option only when log messages are in JSON format and contain a level field. Example output `{"log": "hello", "level": "info"}`
+:    Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are `fatal`, `error`, `warn/warning`, `info`, `debug`, and `trace`. As an example, if you filtered logs at the `info` level, `debug`, and `trace` are also filtered. You can use this option only when log messages are in JSON format and contain a level field. Example output: `{"log": "hello", "level": "info"}`
+     {: note}
 
 `--message MESSAGE`
 :    Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".
@@ -6740,7 +6914,8 @@ ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #logging-refresh-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6790,7 +6965,8 @@ ibmcloud ks nlb-dns add --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP2 --ip NLB3_I
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-add-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6834,7 +7010,8 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP -
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-create-classic-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6882,7 +7059,8 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER (--lb-host VPC_ALB_HOSTNAM
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-create-vpc-gen2-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6963,7 +7141,8 @@ ibmcloud ks nlb-dns ls --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-ls-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -6995,7 +7174,10 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host HOST [--enabl
 {: pre}
 {: #nlb-dns-monitor-configure-usage}
 
-### Command options
+Minimum required permissions
+:   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+#### Command options
 {: #nlb-dns-monitor-configure-options}
 
 `--cluster CLUSTER`, `-c CLUSTER`
@@ -7062,7 +7244,8 @@ ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host SUBDOMAIN [--ou
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-monitor-disable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7106,7 +7289,8 @@ ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host SUBDOMAIN [--out
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-monitor-enable-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7147,7 +7331,8 @@ ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host SUBDOMAIN [--output
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-monitor-get-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7188,7 +7373,8 @@ ibmcloud ks nlb-dns monitor ls --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-monitor-ls-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7225,7 +7411,8 @@ ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-host NEW_LB_HOSTNAME --nlb-su
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-replace-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7258,8 +7445,11 @@ ibmcloud ks nlb-dns replace --cluster mycluster --lb-host 1234abcd-us-south.lb.a
 [Classic infrastructure]{: tag-classic-inf}
 
 
-Remove a network load balancer (NLB) IP address from a subdomain. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it. **Note**: You must run this command for each IP address that you want to remove.
+Remove a network load balancer (NLB) IP address from a subdomain. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it.
 {: shortdesc}
+
+Run this command for each IP address that you want to remove.
+{: note}
 
 ```sh
 ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [--output json] [-q]
@@ -7269,7 +7459,8 @@ ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [-
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-rm-classic-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7314,7 +7505,8 @@ ibmcloud ks nlb-dns rm vpc-gen2 --cluster CLUSTER --nlb-subdomain SUBDOMAIN [ --
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-rm-vpc-gen2-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7361,7 +7553,8 @@ ibmcloud ks nlb-dns secret regenerate --cluster CLUSTER --nlb-subdomain SUBDOMAI
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-secret-regenerate-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7403,7 +7596,8 @@ ibmcloud ks nlb-dns secret rm --cluster CLUSTER --nlb-subdomain SUBDOMAIN [-f] [
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #nlb-dns-secret-rm-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7430,7 +7624,7 @@ ibmcloud ks nlb-dns secret rm --cluster mycluster --nlb-subdomain mycluster-a1b2
 {: pre}
 
 
-## `ibmcloud ks vpc secure-by-default enable`
+### `ibmcloud ks vpc secure-by-default enable`
 {: #vpc-secure-by-default-enable-cli}
 
 Enable Secure By Default VPC Networking for a VPC cluster using legacy Security Groups.
@@ -7441,7 +7635,7 @@ ibmcloud ks vpc secure-by-default enable --cluster CLUSTER [--disable-outbound-t
 {: pre}
 {: #vpc-secure-by-default-enable-usage}
 
-### Command options
+#### Command options
 {: #vpc-secure-by-default-enable-options}
 
 `--cluster CLUSTER`, `-c CLUSTER`
@@ -7457,7 +7651,7 @@ ibmcloud ks vpc secure-by-default enable --cluster CLUSTER [--disable-outbound-t
 :    Do not show the message of the day or update reminders.
 {: #vpc-secure-by-default-enable-options-dl}
 
-## `webhook-create` command
+### `webhook-create` command
 {: #cs_webhook_create}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
@@ -7474,7 +7668,8 @@ ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url UR
 Minimum required permissions
 :   **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #webhook-create-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7529,7 +7724,8 @@ ibmcloud ks api-key info --cluster CLUSTER [--output json] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #api-key-info-options}
 
 `-c`, `--cluster CLUSTER`
 :    Required: The name or ID of the cluster.
@@ -7573,7 +7769,8 @@ ibmcloud ks api-key reset --region REGION [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #api-key-reset-options}
 
 `--region REGION`
 :    Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.
@@ -7617,7 +7814,8 @@ ibmcloud ks credential get --region REGION [-q] [--output json]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #credential-get-options}
 
 `--region REGION`
 :    Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.
@@ -7663,7 +7861,8 @@ ibmcloud ks credential set classic --infrastructure-api-key API_KEY --infrastruc
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #credential-set-classic-options}
 
 `--infrastructure-username USERNAME`
 :    Required: IBM Cloud infrastructure account API username. The infrastructure API username is not the same as the IBMid. To view the infrastructure API username, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys).
@@ -7706,7 +7905,8 @@ ibmcloud ks credential unset --region REGION [-q]
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #credential-unset-options}
 
 `--region REGION`
 :    Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.
@@ -7768,7 +7968,8 @@ ibmcloud ks infra-permissions get --region REGION [--output json] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #infra-permissions-get-options}
 
 `--region REGION`
 :    Required: Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.
@@ -7838,7 +8039,8 @@ ibmcloud ks kms crk ls --instance-id KMS_INSTANCE_ID [--output json] [-q]
 Minimum required permissions
 :   **Viewer** platform access role in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #kms-crk-ls-options}
 
 `--instance-id KMS_INSTANCE_ID`
 :    The ID of the key management service instance that you want to list root keys for. To list available KMS instances, run `ibmcloud ks kms instance ls`.
@@ -7877,7 +8079,8 @@ ibmcloud ks kms enable --cluster CLUSTER_NAME_OR_ID --instance-id KMS_INSTANCE_I
 Minimum required permissions
 :   **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #kms-enable-options}
 
 `--container, -c CLUSTER_NAME_OR_ID`
 :    The name or ID of the cluster.
@@ -7922,7 +8125,8 @@ ibmcloud ks kms instance ls [--output json] [-q]
 Minimum required permissions
 :   **Viewer** platform access role in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #kms-instance-ls-options}
 
 
 `--output json`
@@ -7932,7 +8136,8 @@ Minimum required permissions
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example ``ibmcloud ks kms instance ls`` command
+{: #icks-kms-instance-ls-example}
 ```sh
 ibmcloud ks kms instance ls
 ```
@@ -7959,7 +8164,8 @@ ibmcloud ks quota ls [--provider PROVIDER] [--output json]
 Minimum required permissions
 :   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #quota-ls-options}
 
 `--provider (classic | vpc-gen2)`
 :    The infrastructure provider type to list quota and limits for.
@@ -7968,7 +8174,8 @@ Minimum required permissions
 :    Optional: Prints the command output in JSON format.
 
 
-**Example**:
+#### Example ``ibmcloud ks quota ls`` command
+{: #icks-quota-ls-example}
 ```sh
 ibmcloud ks quota ls
 ```
@@ -7977,7 +8184,7 @@ ibmcloud ks quota ls
 
 
 
-## `subnets` command
+### `subnets` command
 {: #cs_subnets}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
@@ -7993,7 +8200,8 @@ ibmcloud ks subnets [--provider (classic | vpc-gen2)] [--vpc-id <VPC_ID> --zone 
 Minimum required permissions
 :   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #subnets-options}
 
 `--provider (classic | vpc-gen2)`
 :    The infrastructure provider type to list subnets for. This option is required to list VPC subnets.
@@ -8014,7 +8222,8 @@ Minimum required permissions
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example ``subnets`` command
+{: #subnets-command-example}
 ```sh
 ibmcloud ks subnets -l ams03 -l wdc -l ap
 ```
@@ -8044,11 +8253,12 @@ ibmcloud ks vlan ls --zone ZONE [--all] [--output json] [-q]
 ```
 {: pre}
 
-**Minimum required permissions**:
-* To view the VLANs that the cluster is connected to in a zone: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
-* To list all available VLANs in a zone: **Viewer** platform access role for the region in {{site.data.keyword.containerlong_notm}}
+Minimum required permissions
+:   To view the VLANs that the cluster is connected to in a zone: **Viewer** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
+:   To list all available VLANs in a zone: **Viewer** platform access role for the region in {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #vlan-ls-options}
 
 `--zone ZONE`
 :    Required: Enter the zone where you want to list your private and public VLANs. To see available zones, run `ibmcloud ks zone ls`.
@@ -8092,7 +8302,8 @@ ibmcloud ks vlan spanning get --region REGION [--output json] [-q]
 Minimum required permissions
 :   **Viewer** platform access role for {{site.data.keyword.containerlong_notm}}
 
-**Command options**:
+#### Command options
+{: #vlan-spanning-get-options}
 
 `--region REGION`
 :    Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.
@@ -8116,7 +8327,7 @@ ibmcloud ks vlan spanning get --region us-south
 
 
 
-## `ibmcloud ks vpc ls`
+### `ibmcloud ks vpc ls`
 {: #vpc-ls-cli}
 
 List all VPCs in the targeted resource group. If no resource group is targeted, all VPCs in the account are listed.
@@ -8127,7 +8338,7 @@ ibmcloud ks vpc ls [--output OUTPUT] [--provider PROVIDER] [-q]
 {: pre}
 {: #vpc-ls-usage}
 
-### Command options
+#### Command options
 {: #vpc-ls-options}
 
 `--output OUTPUT`
@@ -8140,7 +8351,7 @@ ibmcloud ks vpc ls [--output OUTPUT] [--provider PROVIDER] [-q]
 {: #vpc-ls-options-dl}
 
 
-## `ibmcloud ks vpc outbound-traffic-protection disable`
+### `ibmcloud ks vpc outbound-traffic-protection disable`
 {: #vpc-outbound-traffic-protection-disable-cli}
 
 Disable outbound traffic protection for a Secure By Default VPC cluster.
@@ -8151,7 +8362,7 @@ ibmcloud ks vpc outbound-traffic-protection disable --cluster CLUSTER [-f] [-q]
 {: pre}
 {: #vpc-outbound-traffic-protection-disable-usage}
 
-### Command options
+#### Command options
 {: #vpc-outbound-traffic-protection-disable-options}
 
 `--cluster CLUSTER`, `-c CLUSTER`
@@ -8165,7 +8376,7 @@ ibmcloud ks vpc outbound-traffic-protection disable --cluster CLUSTER [-f] [-q]
 {: #vpc-outbound-traffic-protection-disable-options-dl}
 
 
-## `ibmcloud ks vpc outbound-traffic-protection enable`
+### `ibmcloud ks vpc outbound-traffic-protection enable`
 {: #vpc-outbound-traffic-protection-enable-cli}
 
 Enable outbound traffic protection for a Secure By Default VPC cluster.
@@ -8176,7 +8387,7 @@ ibmcloud ks vpc outbound-traffic-protection enable --cluster CLUSTER [-f] [-q]
 {: pre}
 {: #vpc-outbound-traffic-protection-enable-usage}
 
-### Command options
+#### Command options
 {: #vpc-outbound-traffic-protection-enable-options}
 
 `--cluster CLUSTER`, `-c CLUSTER`
@@ -8190,7 +8401,7 @@ ibmcloud ks vpc outbound-traffic-protection enable --cluster CLUSTER [-f] [-q]
 {: #vpc-outbound-traffic-protection-enable-options-dl}
 
 
-## `ibmcloud ks vni attach baremetal`
+### `ibmcloud ks vni attach baremetal`
 {: #vni-attach-baremetal-cli}
 
 [Virtual Private Cloud]{: tag-vpc}
@@ -8204,7 +8415,7 @@ ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output
 {: pre}
 {: #vni-attach-baremetal-usage}
 
-### Command options
+#### Command options
 {: #vni-attach-baremetal-options}
 
 `--auto-delete`
@@ -8230,7 +8441,7 @@ ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output
 {: #vni-attach-baremetal-options-dl}
 
 
-## `ibmcloud ks vni detach`
+### `ibmcloud ks vni detach`
 {: #vni-detach-cli}
 
 [Virtual Private Cloud]{: tag-vpc}
@@ -8244,7 +8455,7 @@ ibmcloud ks vni detach --vni VNI [-f] [--output OUTPUT] [-q] (--cluster-id ID | 
 {: pre}
 {: #vni-detach-usage}
 
-### Command options
+#### Command options
 {: #vni-detach-options}
 
 `--cluster-id ID`, `-c ID`
@@ -8267,7 +8478,7 @@ ibmcloud ks vni detach --vni VNI [-f] [--output OUTPUT] [-q] (--cluster-id ID | 
 {: #vni-detach-options-dl}
 
 
-## `ibmcloud ks vni ls`
+### `ibmcloud ks vni ls`
 {: #vni-ls-cli}
 
 [Virtual Private Cloud]{: tag-vpc}
@@ -8281,7 +8492,7 @@ ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--clu
 {: pre}
 
 
-### Command options
+#### Command options
 {: #vni-ls-options}
 
 `--after AFTER`
@@ -8304,7 +8515,7 @@ ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--clu
 {: #vni-ls-options-dl}
 
 
-## `flavor` command
+### `flavor` command
 {: #cs_machine_types}
 
 Each flavor includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster.
@@ -8330,7 +8541,8 @@ ibmcloud ks flavor get --flavor FLAVOR --provider PROVIDER --zone ZONE [--output
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #flavor-get-options}
 
 `--flavor FLAVOR`
 :    The flavor you want to get information for. Flavors determine how much virtual CPU, memory, and disk space is available to each worker node.
@@ -8373,7 +8585,8 @@ ibmcloud ks flavor ls --zone ZONE [--output OUTPUT] [--provider PROVIDER] [-q] [
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #flavor-ls-options}
 
 `--zone ZONE`
 :    The zone where you want to get flavor information for. To see available zones for classic clusters, run `ibmcloud ks zone ls`. To see available zones for VPC clusters, run `ibmcloud ks zone ls --provider vpc-gen2` for Generation 2 compute.
@@ -8401,7 +8614,7 @@ ibmcloud ks flavor ls --zone us-south-1 --provider vpc-gen2 --show-os --show-sto
 ```
 {: pre}
 
-## `messages` command
+### `messages` command
 {: #cs_messages}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
@@ -8417,11 +8630,12 @@ ibmcloud ks messages
 Minimum required permissions
 :   None
 
-**Command options**: None
+#### Command options
+{: #messages-options}
 
 
 
-## locations command
+### `locations` command
 {: #cs_supported-locations}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
@@ -8437,7 +8651,8 @@ ibmcloud ks locations [--output json]
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #locations-options}
 
 `--output json`
 :    Optional: Prints the command output in JSON format.
@@ -8445,7 +8660,7 @@ Minimum required permissions
 
 
 
-## `versions` command
+### `versions` command
 {: #cs_versions_command}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
@@ -8464,7 +8679,8 @@ ibmcloud ks versions [--show-version (KUBERNETES|OPENSHIFT)] [--output json] [-q
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #versions-options}
 
 `--show-version (KUBERNETES|OPENSHIFT)`
 :    Show only the versions for the specified container platform. Supported values are `kubernetes` or `openshift`.
@@ -8476,7 +8692,8 @@ Minimum required permissions
 :    Optional: Do not show the message of the day or update reminders.
 
 
-**Example**:
+#### Example ``versions`` command
+{: #versions-command-example}
 ```sh
 ibmcloud ks versions
 ```
@@ -8484,7 +8701,7 @@ ibmcloud ks versions
 
 
 
-## `api` command
+### `api` command
 {: #cs_cli_api}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
@@ -8516,10 +8733,12 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #api-options}
 
 `--endpoint ENDPOINT`
-    :    The {{site.data.keyword.containerlong_notm}} API endpoint. **Note**: This endpoint is different than the {{site.data.keyword.cloud_notm}} endpoints. This value is required to set the API endpoint.
+:    The {{site.data.keyword.containerlong_notm}} API endpoint. This endpoint is different than the {{site.data.keyword.cloud_notm}} endpoints. This value is required to set the API endpoint.
+     {: note}
 
 
 `--insecure`
@@ -8536,7 +8755,8 @@ Minimum required permissions
 
 
 
-**Example**: View information about the current API endpoint that is targeted.
+#### Example ``api`` command
+{: #api-command-example}
 ```sh
 ibmcloud ks api
 ```
@@ -8552,7 +8772,7 @@ Region:                us-south
 
 
 
-## `init` command
+### `init` command
 {: #cs_init}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
@@ -8585,7 +8805,8 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-q]
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #init-options}
 
 `--host HOST`
 :    Optional: The {{site.data.keyword.containerlong_notm}} API endpoint to use.
@@ -8641,7 +8862,8 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #script-update-options}
 
 
 `--in-place`
@@ -8707,7 +8929,7 @@ To use this command to prepare your automation scripts for the release of versio
 Reset or sync a security group to the [default traffic rules](/docs/containers?topic=containers-vpc-security-group-reference).
 {: shortdesc}
 
-## `ibmcloud ks security-group ls`
+### `ibmcloud ks security-group ls`
 {: #security-group-ls-cli}
 
 List all security groups associated with a cluster.
@@ -8718,7 +8940,7 @@ ibmcloud ks security-group ls --cluster CLUSTER [--attached-to ATTACHED] [--mana
 {: pre}
 {: #security-group-ls-usage}
 
-### Command options
+#### Command options
 {: #security-group-ls-options}
 
 `--attached-to ATTACHED`
@@ -8756,7 +8978,8 @@ ibmcloud ks security-group reset --cluster CLUSTER --security-group GROUP [-f] [
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #security-group-reset-options}
 
 `--cluster CLUSTER`
 :    Required: Specify the cluster name or ID. To list available clusters, run `ibmcloud ks cluster ls`.
@@ -8764,7 +8987,8 @@ Minimum required permissions
 `--security-group GROUP_ID`
 :    Required: Specify the security group ID.
 
-**Example**:
+#### Example ``ibmcloud ks security-group reset`` command
+{: #icks-security-group-reset-example}
 
 ```sh
 ibmcloud ks security-group reset --cluster mycluster --security-group mygroup
@@ -8787,7 +9011,8 @@ ibmcloud ks security-group sync --cluster CLUSTER --security-group GROUP [-q]
 Minimum required permissions
 :   None
 
-**Command options**:
+#### Command options
+{: #security-group-sync-options}
 
 `--cluster CLUSTER`
 :    Required: Specify the cluster name or ID. To list available clusters, run `ibmcloud ks cluster ls`.
@@ -8795,7 +9020,8 @@ Minimum required permissions
 `--security-group GROUP_ID`
 :    Required: Specify the security group ID.
 
-**Example**:
+#### Example ``ibmcloud ks security-group sync`` command
+{: #icks-security-group-sync-example}
 
 ```sh
 ibmcloud ks security-group sync --cluster mycluster --security-group mygroup
@@ -8832,7 +9058,8 @@ ibmcloud ks storage attachment create --cluster CLUSTER_ID --volume VOLUME --wor
 ```
 {: pre}
 
-**Command options**:
+#### Command options
+{: #storage-attachment-create-options}
 
 
 `--cluster CLUSTER_ID`
@@ -8848,7 +9075,8 @@ ibmcloud ks storage attachment create --cluster CLUSTER_ID --volume VOLUME --wor
 :    Optional: Prints the command output in JSON format.
 
 
-**Example**:
+#### Example ``ibmcloud ks storage attachment create`` command
+{: #icks-storage-attachment-create-example}
 
 ```sh
 ibmcloud ks storage attachment create --cluster aa1111aa11aaaaa11aa1 --volume 111111111 --worker kube-aa1111aa11aaaaa11aa1-my_cluster-default-00000110 [--output json]
@@ -8885,7 +9113,8 @@ ibmcloud ks storage attachment get --cluster CLUSTER_ID --attachment ATTACHMENT 
 :    Optional: Prints the command output in JSON format.
 
 
-**Example**:
+#### Example ``ibmcloud ks storage attachment get`` command
+{: #icks-storage-attachment-get-example}
 
 ```sh
 ibmcloud ks storage attachment get --cluster aa1111aa11aaaaa11aa1 --attachment 0111-1a111aaa-1111-1111-111a-aaa1a1a11a11 --worker kube-aa1111aa11aaaaa11aa1-my_cluster-default-00000110 [--output json]
@@ -8919,7 +9148,8 @@ ibmcloud ks storage attachment ls --cluster CLUSTER_ID --worker WORKER [--output
 :    Optional: Prints the command output in JSON format.
 
 
-**Example**:
+#### Example ``ibmcloud ks storage attachment ls`` command
+{: #icks-storage-attachment-ls-example}
 
 ```sh
 ibmcloud ks storage attachment ls --cluster aa1111aa11aaaaa11aa1 --worker kube-aa1111aa11aaaaa11aa1-my_cluster-default-00000110 [--output json]
@@ -8943,7 +9173,8 @@ ibmcloud ks storage attachment rm --cluster CLUSTER_ID --attachment ATTACHMENT -
 ```
 {: pre}
 
-**Command options**:
+#### Command options
+{: #storage-attachment-rm-options}
 
 
 `--cluster CLUSTER_ID`
@@ -8959,7 +9190,8 @@ ibmcloud ks storage attachment rm --cluster CLUSTER_ID --attachment ATTACHMENT -
 :    Optional: Prints the command output in JSON format.
 
 
-**Example**:
+#### Example ``ibmcloud ks storage attachment rm`` command
+{: #icks-storage-attachment-rm-example}
 
 ```sh
 ibmcloud ks storage attachment rm --cluster aa1111aa11aaaaa11aa1 --attachment 0111-1a111aaa-1111-1111-111a-aaa1a1a11a11 --worker kube-aa1111aa11aaaaa11aa1-my_cluster-default-00000110 [--output json]
@@ -8982,7 +9214,8 @@ ibmcloud ks storage volume get --volume VOLUME
 ```
 {: pre}
 
-**Command options**:
+#### Command options
+{: #storage-volume-get-options}
 
 
 `--volume VOLUME`
@@ -8992,7 +9225,8 @@ ibmcloud ks storage volume get --volume VOLUME
 :    Optional: Prints the command output in JSON format.
 
 
-**Example**:
+#### Example ``ibmcloud ks storage volume get`` command
+{: #icks-storage-volume-get-example}
 
 ```sh
 ibmcloud ks storage volume get --volume 111111111
@@ -9016,7 +9250,8 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zo
 ```
 {: pre}
 
-**Command options**:
+#### Command options
+{: #storage-volume-ls-options}
 
 
 `--cluster CLUSTER_ID`
@@ -9032,7 +9267,8 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zo
 :    Optional: Prints the command output in JSON format.
 
 
-**Example**:
+#### Example ``ibmcloud ks storage volume ls`` command
+{: #icks-storage-volume-ls-example}
 
 ```sh
 ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
@@ -9041,7 +9277,7 @@ ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 
 
 
-## `ibmcloud ks experimental trusted-profile default get`
+### `ibmcloud ks experimental trusted-profile default get`
 {: #experimental-trusted-profile-default-get-cli}
 
 [Expires on 2026-07-14] Get the default trusted profile for clusters created in a resource-group.
@@ -9052,7 +9288,7 @@ ibmcloud ks experimental trusted-profile default get --region REGION --resource-
 {: pre}
 {: #experimental-trusted-profile-default-get-usage}
 
-### Command options
+#### Command options
 {: #experimental-trusted-profile-default-get-options}
 
 `--output OUTPUT`
@@ -9069,7 +9305,7 @@ ibmcloud ks experimental trusted-profile default get --region REGION --resource-
 {: #experimental-trusted-profile-default-get-options-dl}
 
 
-## `ibmcloud ks experimental trusted-profile default set`
+### `ibmcloud ks experimental trusted-profile default set`
 {: #experimental-trusted-profile-default-set-cli}
 
 [Expires on 2026-07-14] Set the default trusted profile for clusters created in a resource-group.
@@ -9080,7 +9316,7 @@ ibmcloud ks experimental trusted-profile default set --region REGION --resource-
 {: pre}
 {: #experimental-trusted-profile-default-set-usage}
 
-### Command options
+#### Command options
 {: #experimental-trusted-profile-default-set-options}
 
 `--output OUTPUT`
@@ -9100,7 +9336,7 @@ ibmcloud ks experimental trusted-profile default set --region REGION --resource-
 {: #experimental-trusted-profile-default-set-options-dl}
 
 
-## `ibmcloud ks experimental trusted-profile get`
+### `ibmcloud ks experimental trusted-profile get`
 {: #experimental-trusted-profile-get-cli}
 
 [Expires on 2026-07-14] Get trusted profile for a cluster.
@@ -9111,7 +9347,7 @@ ibmcloud ks experimental trusted-profile get --cluster CLUSTER [--output OUTPUT]
 {: pre}
 {: #experimental-trusted-profile-get-usage}
 
-### Command options
+#### Command options
 {: #experimental-trusted-profile-get-options}
 
 `--cluster CLUSTER`
@@ -9125,7 +9361,7 @@ ibmcloud ks experimental trusted-profile get --cluster CLUSTER [--output OUTPUT]
 {: #experimental-trusted-profile-get-options-dl}
 
 
-## `ibmcloud ks experimental trusted-profile set`
+### `ibmcloud ks experimental trusted-profile set`
 {: #experimental-trusted-profile-set-cli}
 
 [Expires on 2026-07-14] Set trusted profile on a cluster.
@@ -9136,7 +9372,7 @@ ibmcloud ks experimental trusted-profile set --cluster CLUSTER --trusted-profile
 {: pre}
 {: #experimental-trusted-profile-set-usage}
 
-### Command options
+#### Command options
 {: #experimental-trusted-profile-set-options}
 
 `--cluster CLUSTER`
