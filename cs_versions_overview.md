@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-06-26"
+lastupdated: "2026-07-08"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -44,10 +44,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |Version|Release date|End of support|Operating systems|Related links|
 |---|---|---|---|---|
-|1.36|26 June 2026|01 August 2027†|UBUNTU 24| - [1.36 details and update actions](/docs/containers?topic=containers-cs_versions_136)  \n - [Change log](/docs/containers?topic=containers-changelog_136)|
-|1.35 [Default]{: tag-purple} |05 March 2026|28 April 2027†|UBUNTU 24| - [1.35 details and update actions](/docs/containers?topic=containers-cs_versions_135)  \n - [Change log](/docs/containers?topic=containers-changelog_135)|
-|1.34|20 November 2025|20 January 2027†|UBUNTU 24| - [1.34 details and update actions](/docs/containers?topic=containers-cs_versions_134)  \n - [Change log](/docs/containers?topic=containers-changelog_134)|
-|1.33|31 July 2025|14 October 2026†|UBUNTU 24| - [1.33 details and update actions](/docs/containers?topic=containers-cs_versions_133)  \n - [Change log](/docs/containers?topic=containers-changelog_133)|
+|1.36|26 June 2026|01 August 2027†|UBUNTU 24 64| - [1.36 details and update actions](/docs/containers?topic=containers-cs_versions_136)  \n - [Change log](/docs/containers?topic=containers-changelog_136)|
+|1.35 [Default]{: tag-purple} |05 March 2026|28 April 2027†|UBUNTU 24 64| - [1.35 details and update actions](/docs/containers?topic=containers-cs_versions_135)  \n - [Change log](/docs/containers?topic=containers-changelog_135)|
+|1.34|20 November 2025|20 January 2027†|UBUNTU 24 64| - [1.34 details and update actions](/docs/containers?topic=containers-cs_versions_134)  \n - [Change log](/docs/containers?topic=containers-changelog_134)|
+|1.33|31 July 2025|14 October 2026†|UBUNTU 24 64| - [1.33 details and update actions](/docs/containers?topic=containers-cs_versions_133)  \n - [Change log](/docs/containers?topic=containers-changelog_133)|
 {: caption="Available versions for Kubernetes" caption-side="bottom"}
 
 
