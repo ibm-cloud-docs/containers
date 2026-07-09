@@ -43,7 +43,7 @@ subcollection: containers
 
     * [Pricing considerations](/docs/containers?topic=containers-getting-started#getting-started-pricing)
 
-* [Create a cluster environment strategy](/docs/containers?topic=containers-getting-started#getting-started-strategy)
+* [Choose your infrastructure type](/docs/containers?topic=containers-getting-started#getting-started-infra)
 
 * [Create a cluster](/docs/containers?topic=containers-getting-started#getting-started-create)
 
