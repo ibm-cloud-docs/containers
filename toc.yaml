@@ -221,6 +221,7 @@ toc:
               topics:
               - cs_managed_ingress_about.md
               - cs_managed_ingress_setup.md
+              - cs_ingress_controller_migration.md
               - cs_managed_ingress_alb.md
               - ingress-domains.md
               - edge-ingress.md

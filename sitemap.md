@@ -3542,6 +3542,36 @@ subcollection: containers
 
     * [Creating custom domains for private ALBs](/docs/containers?topic=containers-managed-ingress-setup#ingress-custom-domain-private)
 
+[Migrating from Ingress-NGINX to Traefik Ingress controller](/docs/containers?topic=containers-ingress-controller-migration#ingress-controller-migration)
+
+* [Before you begin](/docs/containers?topic=containers-ingress-controller-migration#ingress-controller-migration-prereqs)
+
+* [Strategy 1: Separate Ingress setup with different domain](/docs/containers?topic=containers-ingress-controller-migration#separate)
+
+    * [Steps](/docs/containers?topic=containers-ingress-controller-migration#separate-steps)
+
+* [Strategy 2: Dual load balancers with same workload](/docs/containers?topic=containers-ingress-controller-migration#dual)
+
+    * [Steps](/docs/containers?topic=containers-ingress-controller-migration#dual-steps)
+
+* [Strategy 3: Split DNS testing](/docs/containers?topic=containers-ingress-controller-migration#split-dns)
+
+    * [Steps](/docs/containers?topic=containers-ingress-controller-migration#split-dns-steps)
+
+* [Strategy 4: Direct migration](/docs/containers?topic=containers-ingress-controller-migration#direct-migration)
+
+    * [Steps](/docs/containers?topic=containers-ingress-controller-migration#direct-migration-steps)
+
+* [Making the switch to Traefik](/docs/containers?topic=containers-ingress-controller-migration#ingress-controller-migration-switch)
+
+    * [Classic clusters](/docs/containers?topic=containers-ingress-controller-migration#switch-classic)
+
+    * [VPC clusters](/docs/containers?topic=containers-ingress-controller-migration#switch-vpc)
+
+* [Post-migration tasks](/docs/containers?topic=containers-ingress-controller-migration#post)
+
+* [Troubleshooting](/docs/containers?topic=containers-ingress-controller-migration#ingress-controller-migration-troubleshooting)
+
 [Managing ALBs](/docs/containers?topic=containers-ingress-alb-manage#ingress-alb-manage)
 
 * [Updating ALBs](/docs/containers?topic=containers-ingress-alb-manage#alb-update)
