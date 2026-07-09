@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-09-23"
+  years: 2014, 2026
+lastupdated: "2026-07-09"
 
 
 keywords: kubernetes, docker, containers
@@ -12,9 +12,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
-
 
 
 # Architecture and dependencies of the service
