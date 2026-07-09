@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-07"
+lastupdated: "2026-07-09"
 
 
 keywords: containers
@@ -3824,6 +3824,70 @@ subcollection: containers
 * [Isolating workloads to edge worker nodes](/docs/containers?topic=containers-edge#edge-isolate)
 
 * [Next steps](/docs/containers?topic=containers-edge#next)
+
+[Customizing ALB routing](/docs/containers?topic=containers-traefik-ingress-customization#traefik-ingress-customization)
+
+* [Adding a server port to a host header](/docs/containers?topic=containers-traefik-ingress-customization#add-serverport-header)
+
+* [Routing incoming requests with a private ALB](/docs/containers?topic=containers-traefik-ingress-customization#alb_id_anno)
+
+* [Authenticating apps with {{site.data.keyword.appid_short_notm}}](/docs/containers?topic=containers-traefik-ingress-customization#app-id-authentication)
+
+* [Setting the maximum client request body size](/docs/containers?topic=containers-traefik-ingress-customization#client-request-bodysize)
+
+* [Enabling client response data buffering](/docs/containers?topic=containers-traefik-ingress-customization#client-response-data-buffering)
+
+* [Adjusting timeouts](/docs/containers?topic=containers-traefik-ingress-customization#adjusting-timeouts)
+
+* [Customizing error actions](/docs/containers?topic=containers-traefik-ingress-customization#custom-error-actions)
+
+* [Changing the default HTTP and HTTPS ports](/docs/containers?topic=containers-traefik-ingress-customization#custom-http-https-ports)
+
+* [Customizing the request header](/docs/containers?topic=containers-traefik-ingress-customization#custom-request-header)
+
+* [Customizing the response header](/docs/containers?topic=containers-traefik-ingress-customization#custom-response-header)
+
+* [Redirecting insecure requests](/docs/containers?topic=containers-traefik-ingress-customization#http-redirects-https)
+
+* [Enabling and disabling HTTP Strict Transport Security](/docs/containers?topic=containers-traefik-ingress-customization#http-strict-transport-security)
+
+* [Modifying how the ALB matches the request URI](/docs/containers?topic=containers-traefik-ingress-customization#location-modifier)
+
+* [Configuring mutual authentication](/docs/containers?topic=containers-traefik-ingress-customization#mutual-authentication)
+
+* [Configuring retry behavior for upstream requests](/docs/containers?topic=containers-traefik-ingress-customization#proxy-next-upstream)
+
+* [Rate limiting](/docs/containers?topic=containers-traefik-ingress-customization#rate-limiting)
+
+* [Rewriting paths](/docs/containers?topic=containers-traefik-ingress-customization#alb-rewrite-paths)
+
+* [Routing traffic with sticky cookies](/docs/containers?topic=containers-traefik-ingress-customization#session-affinity-cookies)
+
+* [Encrypting traffic between your app and the ALB](/docs/containers?topic=containers-traefik-ingress-customization#ssl-services-support)
+
+* [Customizing the ALB deployment](/docs/containers?topic=containers-traefik-ingress-customization#comm-customize-deploy)
+
+* [Customizing the Ingress class](/docs/containers?topic=containers-traefik-ingress-customization#custom-ingress-class)
+
+* [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-traefik-ingress-customization#app-id-auth)
+
+* [Upgrading the ALB OAuth Proxy add-on](/docs/containers?topic=containers-traefik-ingress-customization#upgrading-alb-oauth-proxy-add-on)
+
+* [Preserving the source IP address](/docs/containers?topic=containers-traefik-ingress-customization#preserve_source_ip)
+
+    * [Enabling the PROXY protocol in VPC clusters](/docs/containers?topic=containers-traefik-ingress-customization#preserve_source_ip_vpc)
+
+    * [Changing the `externalTrafficPolicy` in classic clusters](/docs/containers?topic=containers-traefik-ingress-customization#preserve_source_ip_classic)
+
+* [Configuring TLS protocols and ciphers](/docs/containers?topic=containers-traefik-ingress-customization#ssl_protocols_ciphers)
+
+* [Sending your custom certificate to legacy clients](/docs/containers?topic=containers-traefik-ingress-customization#default_server_cert)
+
+* [Tuning ALB performance](/docs/containers?topic=containers-traefik-ingress-customization#perf_tuning)
+
+* [Next steps](/docs/containers?topic=containers-traefik-ingress-customization#traefik-ingress-customization-next)
+
+* [Related links](/docs/containers?topic=containers-traefik-ingress-customization#traefik-ingress-customization-related)
 
 [Managing ALBs](/docs/containers?topic=containers-traefik-ingress-alb-manage#traefik-ingress-alb-manage)
 
