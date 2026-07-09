@@ -258,6 +258,10 @@ subcollection: containers
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
 
+    * [09 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul0926)
+
+        * CLI version 1.0.791 is available.
+
     * [01 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul0126)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
@@ -6040,6 +6044,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.791](/docs/containers?topic=containers-cs_cli_changelog#cli-01791)
 
 * [Version v1.0.775](/docs/containers?topic=containers-cs_cli_changelog#cli-01775)
 
