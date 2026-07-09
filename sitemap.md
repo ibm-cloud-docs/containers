@@ -6237,6 +6237,8 @@ subcollection: containers
 
 * [`openshift-ai` 419](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-419)
 
+* [`openshift-ai` 420](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-420)
+
 * [`openshift-data-foundation` 4.15.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.15.0)
 
 * [`openshift-data-foundation` 4.16.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.16.0)
