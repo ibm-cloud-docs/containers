@@ -43,7 +43,7 @@ subcollection: containers
 
     * [Pricing considerations](/docs/containers?topic=containers-getting-started#getting-started-pricing)
 
-* [Create a cluster environment strategy](/docs/containers?topic=containers-getting-started#getting-started-strategy)
+* [Choose your infrastructure type](/docs/containers?topic=containers-getting-started#getting-started-infra)
 
 * [Create a cluster](/docs/containers?topic=containers-getting-started#getting-started-create)
 
@@ -6237,6 +6237,8 @@ subcollection: containers
 
 * [`openshift-ai` 419](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-419)
 
+* [`openshift-ai` 420](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-420)
+
 * [`openshift-data-foundation` 4.15.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.15.0)
 
 * [`openshift-data-foundation` 4.16.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.16.0)
@@ -6750,6 +6752,8 @@ subcollection: containers
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [Version 1.0 - v1.0.23, released 08 July 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1023)
 
     * [Version 1.0 - v1.0.23_349336907, released 03 July 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1023_349336907)
 

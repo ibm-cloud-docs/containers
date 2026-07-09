@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2026
-lastupdated: "2026-05-01"
+lastupdated: "2026-07-09"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes cluster,  vpc cluster, classic cluster, clusters
@@ -52,16 +52,26 @@ You must be logged in to IBM Cloud before you create a cluster. If you don't hav
 
 Pricing varies based on worker node flavor, number of nodes, and infrastructure type. For more information, see [Kubernetes Service pricing](https://cloud.ibm.com/containers/cluster-management/catalog/about#pricing){: external}.
 
-## Create a cluster environment strategy
-{: #getting-started-strategy}
+## Choose your infrastructure type
+{: #getting-started-infra}
 
-Before you create a cluster, review the main design choices in [Creating a cluster environment strategy](/docs/containers?topic=containers-strategy). This topic helps you decide on factors such as infrastructure, networking, and availability.
+Before you create a cluster, choose the infrastructure type that fits your environment.
+
+[VPC]{: tag-vpc}
+:   Worker nodes are provisioned as virtual server instances on VPC infrastructure. VPC is the recommended infrastructure type for new clusters. It provides network isolation by default and supports the latest {{site.data.keyword.containerlong_notm}} features, including dedicated hosts and secure by default.
+
+[Classic]{: tag-classic-inf}
+:   Worker nodes are provisioned on virtual or bare metal machines on IBM Cloud classic infrastructure. Use Classic if you require bare metal worker nodes, software-defined storage (SDS) flavors, or connections to existing classic infrastructure resources.
+
+[{{site.data.keyword.satelliteshort}}]{: tag-satellite}
+:   Worker nodes are provisioned on your own infrastructure, including on-premises hardware or virtual machines in other cloud providers such as AWS, Azure, and GCP. Use {{site.data.keyword.satelliteshort}} when you need to run {{site.data.keyword.cloud_notm}}-managed clusters outside of IBM Cloud data centers.
+
+For a detailed comparison including worker node options and availability, see [Cluster environment strategy](/docs/containers?topic=containers-strategy).
 
 ## Create a cluster
 {: #getting-started-create}
 
-Follow a tutorial or set up your own custom cluster environment. Review the following table for your deployment options.
-
+Review your deployment options in the following table.
 
 | Type | Level | Time | Description |
 | --- | --- | --- | --- | 
@@ -70,7 +80,7 @@ Follow a tutorial or set up your own custom cluster environment. Review the foll
 | Custom deployment | Intermediate | 1-3 hours | [Create a custom cluster on VPC infrastructure](/docs/containers?topic=containers-cluster-create-vpc-gen2). |
 {: caption="Options for creating a cluster" caption-side="bottom"}
 
-Already have a cluster? **[Learn how to access it](/docs/containers?topic=containers-access_cluster)** and continue to the next step to deploy a sample app!
+Already have a cluster? **[Learn how to access it](/docs/containers?topic=containers-access_cluster)** and continue to the next step to deploy a sample app.
 
 
 
