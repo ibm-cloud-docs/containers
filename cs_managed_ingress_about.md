@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-06-18"
+lastupdated: "2026-07-09"
 
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
@@ -67,7 +67,7 @@ The following table describes each portion of the subdomain.
 |`0000`|Acts as a counter for each subdomain that is created in your cluster.|
 |`<region>`|The region that the cluster is created in.|
 |`containers.appdomain.cloud`|The subdomain for {{site.data.keyword.containerlong_notm}} subdomains.|
-{: caption="Understanding the Ingress subdomain format"}
+{: caption="Understanding the Ingress subdomain format" caption-side="bottom"}
 
 To form a unique URL for each app, the paths to your app services are appended to the public route. For example, see the following app URL.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-01"
+lastupdated: "2026-07-09"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -47,7 +47,7 @@ Ingress issues are often caused by underlying issues in your app deployment or i
 ## Step 2: Check for error messages in your Ingress deployment and the ALB pod logs
 {: #errors}
 
-Start by checking for error messages in the Ingress resource deployment events and ALB pod logs. These error messages can help you find the root causes for failures and further debug your Ingress setup in the next sections.
+Start by checking for error messages in the Ingress resource deployment events and ALB pod logs. These error messages can help you find the root causes for failures and further debug your Ingress setup in the following sections.
 {: shortdesc}
 
 1. Check your Ingress resource deployment and look for warnings or error messages.
