@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-09"
+lastupdated: "2026-07-10"
 
 
 keywords: containers
@@ -257,6 +257,18 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
+
+    * [10 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1026)
+
+        * New! Traefik Ingress for {{site.data.keyword.containerlong_notm}}.
+
+        * {{site.data.keyword.containerlong_notm}} version 1.33 is deprecated.
+
+        * {{site.data.keyword.containerlong_notm}} version 1.36 Kubernetes certification
+
+    * [09 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul0926)
+
+        * CLI version 1.0.791 is available.
 
     * [01 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul0126)
 
@@ -6040,6 +6052,8 @@ subcollection: containers
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.791](/docs/containers?topic=containers-cs_cli_changelog#cli-01791)
 
 * [Version v1.0.775](/docs/containers?topic=containers-cs_cli_changelog#cli-01775)
 

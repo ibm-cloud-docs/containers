@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-07-06"
+lastupdated: "2026-07-10"
 
 
 keywords: change log, version history, 1.33
@@ -359,7 +359,7 @@ The following table shows the components included in the worker node fix pack 1.
 
 | Component | Description |
 | ---- | ---- |
-|UBUNTU 24 (VPC) 6.8.0-90-generic|Resolves the following CVEs: [CVE-2025-11230](https://nvd.nist.gov/vuln/detail/CVE-2025-11230){: external}, [CVE-2025-8732](https://nvd.nist.gov/vuln/detail/CVE-2025-8732){: external}, [CVE-2026-0988](https://nvd.nist.gov/vuln/detail/CVE-2026-0988){: external}, [CVE-2026-0989](https://nvd.nist.gov/vuln/detail/CVE-2026-0989){: external}, [CVE-2026-0990](https://nvd.nist.gov/vuln/detail/CVE-2026-0990){: external}, [CVE-2026-0992](https://nvd.nist.gov/vuln/detail/CVE-2026-0992){: external}, and [CVE-2026-23490](https://nvd.nist.gov/vuln/detail/CVE-2026-23490){: external}.|
+|UBUNTU 24 (VPC) 6.8.0-90-generic|Beginning at this patch version, VPC worker nodes include the following changes: the local time is set to UTC, the root filesystem has changed from ext4 to XFS, and the boot mode has changed from BIOS to UEFI.Resolves the following CVEs: [CVE-2025-11230](https://nvd.nist.gov/vuln/detail/CVE-2025-11230){: external}, [CVE-2025-8732](https://nvd.nist.gov/vuln/detail/CVE-2025-8732){: external}, [CVE-2026-0988](https://nvd.nist.gov/vuln/detail/CVE-2026-0988){: external}, [CVE-2026-0989](https://nvd.nist.gov/vuln/detail/CVE-2026-0989){: external}, [CVE-2026-0990](https://nvd.nist.gov/vuln/detail/CVE-2026-0990){: external}, [CVE-2026-0992](https://nvd.nist.gov/vuln/detail/CVE-2026-0992){: external}, and [CVE-2026-23490](https://nvd.nist.gov/vuln/detail/CVE-2026-23490){: external}.|
 |UBUNTU 24 (Classic) 6.8.0-90-generic|Resolves the following CVEs: [CVE-2025-11230](https://nvd.nist.gov/vuln/detail/CVE-2025-11230){: external}, [CVE-2025-8732](https://nvd.nist.gov/vuln/detail/CVE-2025-8732){: external}, [CVE-2026-0988](https://nvd.nist.gov/vuln/detail/CVE-2026-0988){: external}, [CVE-2026-0989](https://nvd.nist.gov/vuln/detail/CVE-2026-0989){: external}, [CVE-2026-0990](https://nvd.nist.gov/vuln/detail/CVE-2026-0990){: external}, [CVE-2026-0992](https://nvd.nist.gov/vuln/detail/CVE-2026-0992){: external}, and [CVE-2026-23490](https://nvd.nist.gov/vuln/detail/CVE-2026-23490){: external}.|
 |Kubernetes 1.33.7|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.7).|
 |containerd 1.7.30|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v1.7.30).|

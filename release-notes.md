@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-06"
+lastupdated: "2026-07-10"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,32 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2026
 {: #containers-jul26}
+
+### 10 July 2026
+{: #containers-jul1026}
+{: release-note}
+
+
+
+New! Traefik Ingress for {{site.data.keyword.containerlong_notm}}.
+:   {{site.data.keyword.containerlong_notm}} now supports Traefik as the managed Ingress controller, replacing the retired Ingress-NGINX project. For more information, see [Traefik Ingress in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-traefik-ingress-about), [Moving from Ingress-NGINX to Traefik](/docs/containers?topic=containers-managed-ingress-move-traefik), and [Setting up Ingress](/docs/containers?topic=containers-managed-traefik-ingress-setup).
+
+{{site.data.keyword.containerlong_notm}} version 1.33 is deprecated.
+:   Support for 1.33 ends on {{site.data.kubernetes_133_unsupported_date}}. Update your cluster to [version 1.34](/docs/containers?topic=containers-cs_versions_134) as soon as possible.
+
+{{site.data.keyword.containerlong_notm}} version 1.36 Kubernetes certification
+:   {{site.data.keyword.containerlong_notm}} version [1.36](/docs/containers?topic=containers-changelog_136) is now Kubernetes certified.
+
+
+
+
+
+### 09 July 2026
+{: #containers-jul0926}
+{: release-note}
+
+CLI version 1.0.791 is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 01 July 2026
 {: #containers-jul0126}
@@ -1031,7 +1057,7 @@ Version 1.34 is now the default version for {{site.data.keyword.containerlong_no
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [VPC worker nodes]{: tag-teal} Note that beginning at this patch version, all future patches set the local time for VPC worker nodes to UTC.
+:   Note that beginning at this patch version, VPC worker nodes include the following changes: the local time is set to UTC, the root filesystem has changed from ext4 to XFS, and the boot mode has changed from BIOS to UEFI.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
 :   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 :   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
