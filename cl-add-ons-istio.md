@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-06-29"
+lastupdated: "2026-07-13"
 
 
 keywords: change log, version history, Istio
@@ -1251,39 +1251,3 @@ Updates in this version
     - [usn-6099-1](https://ubuntu.com/security/notices/USN-6099-1){: external}
     - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1){: external}
     - [usn-6199-1](https://ubuntu.com/security/notices/USN-6199-1){: external}
-
-
-### Version 1.18.0, released 12 July 2023
-{: #1180}
-
-Review the changes that are included in version 1.18.0 of the managed Istio add-on.
-{: shortdesc}
-
-Previous version
-:   1.17.3
-
-Current version
-:   1.18.0
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.18.0](https://istio.io/latest/news/releases/1.18.x/announcing-1.18/){: external}.
-:   Adds an `enable-targeted-envoy-access-log` Envoy extension provider to the mesh config. You can use Telemetry CRs to enable Envoy access logs on specific workloads rather than enabling it for the entire mesh. For more information, see [Observing Istio traffic](/docs/containers?topic=containers-istio-health).
-:   Protocol sniffing is now enabled for `Addon-Istio`.
-:   `Addon-Istio` pods now have a `nodeAffinity` for amd64 architecture nodes.
-:   Adjusts how `meshConfig` sets `enableAutoMtls`, `enableTracing`, and `protocolDetectionTimeout` to their current values. This results in a no operation change because the values are not changing. The only change is whether they are set implicitly or explicitly.
-:   Sets the security context explicitly in the Istio Operator CR. This results in a no operation change because the values are not changing. The only change is whether they are set implicitly or explicitly.
-:   Resolves the following CVEs:
-    - [CVE-2023-1667](https://www.cve.org/CVERecord?id=CVE-2023-1667){: external}
-    - [CVE-2023-2283](https://www.cve.org/CVERecord?id=CVE-2023-2283){: external}
-    - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1){: external}
-
-
-## Unsupported: Version 1.17
-{: #v117}
-
-Version 1.17 of the managed Istio add-on is unsupported. 
-{: important}
-
-
-
-
