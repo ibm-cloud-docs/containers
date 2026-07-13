@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-10"
+lastupdated: "2026-07-13"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -39,7 +39,7 @@ New! Traefik Ingress for {{site.data.keyword.containerlong_notm}}.
 :   {{site.data.keyword.containerlong_notm}} now supports Traefik as the managed Ingress controller, replacing the retired Ingress-NGINX project. For more information, see [Traefik Ingress in {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-managed-traefik-ingress-about), [Moving from Ingress-NGINX to Traefik](/docs/containers?topic=containers-managed-ingress-move-traefik), and [Setting up Ingress](/docs/containers?topic=containers-managed-traefik-ingress-setup).
 
 {{site.data.keyword.containerlong_notm}} version 1.33 is deprecated.
-:   Support for 1.33 ends on {{site.data.kubernetes_133_unsupported_date}}. Update your cluster to [version 1.34](/docs/containers?topic=containers-cs_versions_134) as soon as possible.
+:   Support for 1.33 ends on {{site.data.keyword.kubernetes_133_unsupported_date}}. Update your cluster to [version 1.34](/docs/containers?topic=containers-cs_versions_134) as soon as possible.
 
 {{site.data.keyword.containerlong_notm}} version 1.36 Kubernetes certification
 :   {{site.data.keyword.containerlong_notm}} version [1.36](/docs/containers?topic=containers-changelog_136) is now Kubernetes certified.
