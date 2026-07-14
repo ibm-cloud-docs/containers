@@ -65,7 +65,6 @@ Review the version history for Istio.
 - Updates in this version: See the Istio release notes for [Istio 1.29.3](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.3/){: external} and [Istio 1.29.4](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.4/){: external}.
 
 
-
 ## Version 1.28
 {: #cl-add-ons-istio-1.28}
 
@@ -114,7 +113,6 @@ Updates in this version
     - [CVE-2026-28389](https://www.cve.org/CVERecord?id=CVE-2026-28389){: external}
     - [CVE-2026-28390](https://www.cve.org/CVERecord?id=CVE-2026-28390){: external}
     - [CVE-2026-31790](https://www.cve.org/CVERecord?id=CVE-2026-31790){: external}
-
 
 
 ## Version 1.27
