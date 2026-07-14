@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-07-13"
+lastupdated: "2026-07-14"
 
 
 keywords: change log, version history, Istio
@@ -43,6 +43,20 @@ Review the version history for Istio.
 {: #cl-add-ons-istio-1.29}
 
 
+### Version 1.29 - 1.29.5, released 15 July 2026
+{: #cl-add-ons-istio-1295}
+
+[Default version]{: tag-green}
+
+- Updates in this version: See the Istio release notes for [Istio 1.29.5](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.5/){: external}.
+
+
+### Version 1.29 - 1.29.4, released 17 June 2026
+{: #cl-add-ons-istio-1294}
+
+- Updates in this version: See the Istio release notes for [Istio 1.29.3](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.3/){: external} and [Istio 1.29.4](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.4/){: external}.
+
+
 ### Version 1.29 - 1.29.4_02100, released 17 June 2026
 {: #cl-add-ons-istio-1294_02100}
 
@@ -53,6 +67,20 @@ Review the version history for Istio.
 
 ## Version 1.28
 {: #cl-add-ons-istio-1.28}
+
+
+### Version 1.28 - 1.28.10, released 15 July 2026
+{: #cl-add-ons-istio-12810}
+
+[Default version]{: tag-green}
+
+- Updates in this version: See the Istio release notes for [Istio 1.28.9](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.9/){: external} and [Istio 1.28.10](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.10/){: external}.
+
+
+### Version 1.28 - 1.28.8, released 17 June 2026
+{: #cl-add-ons-istio-1288}
+
+- Updates in this version: See the Istio release notes for [Istio 1.28.7](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.7/){: external} and [Istio 1.28.8](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.8/){: external}.
 
 
 ### Version 1.28 - 1.28.8_02100, released 17 June 2026

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-13"
+lastupdated: "2026-07-14"
 
 
 keywords: containers
@@ -6281,9 +6281,17 @@ subcollection: containers
 
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
 
+    * [Version 1.29 - 1.29.5, released 15 July 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1295)
+
+    * [Version 1.29 - 1.29.4, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1294)
+
     * [Version 1.29 - 1.29.4_02100, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1294_02100)
 
 * [Version 1.28](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.28)
+
+    * [Version 1.28 - 1.28.10, released 15 July 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-12810)
+
+    * [Version 1.28 - 1.28.8, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1288)
 
     * [Version 1.28 - 1.28.8_02100, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1288_02100)
 
@@ -6974,6 +6982,8 @@ subcollection: containers
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
 
 * [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
+
+    * [Version 0.1.0 - headlamp-0.1.0-353565104, released 14 July 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-353565104)
 
     * [Version 0.1.0 - headlamp-0.1.0-348715568, released 25 June 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-348715568)
 
