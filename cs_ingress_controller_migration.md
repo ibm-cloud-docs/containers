@@ -2,7 +2,7 @@
 
 copyright:
   years: 2025, 2026
-lastupdated: "2026-07-09"
+lastupdated: "2026-07-15"
 
 keywords: ingress, traefik, migration, ingress-nginx, alb, ingress controller
 
@@ -211,6 +211,9 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
     ibmcloud ks ingress alb disable vpc-gen2 --alb <alb_id> --cluster <cluster_name>
     ```
     {: pre}
+
+    **VPC clusters**: If you disable your last public or private ALB, wait for the ALB deployment and corresponding load balancer service resource to be deleted before you enable a Traefik ALB.
+    {: note}
 
 1. Enable the ALB with a Traefik version.
 

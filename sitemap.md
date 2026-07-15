@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-14"
+lastupdated: "2026-07-15"
 
 
 keywords: containers
@@ -5163,6 +5163,8 @@ subcollection: containers
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+    * [Worker node fix pack 1.36.2_1522, released 13 July 2026](/docs/containers?topic=containers-changelog_136#cl-boms-1362_1522_W)
+
     * [Worker node fix pack 1.36.2_1519, released 01 July 2026](/docs/containers?topic=containers-changelog_136#cl-boms-1362_1519_W)
 
     * [Change log for Master fix pack 1.36.2_1518, released 26 June 2026](/docs/containers?topic=containers-changelog_136#1362_1518_M)
@@ -5229,6 +5231,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+    * [Worker node fix pack 1.35.6_1537, released 13 July 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1356_1537_W)
 
     * [Worker node fix pack 1.35.5_1535, released 01 July 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1355_1535_W)
 
@@ -5320,6 +5324,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Worker node fix pack 1.34.9_1559, released 13 July 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1349_1559_W)
 
     * [Worker node fix pack 1.34.8_1557, released 01 July 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1348_1557_W)
 
@@ -5433,6 +5439,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.13_1578, released 13 July 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13313_1578_W)
 
     * [Worker node fix pack 1.33.12_1576, released 01 July 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13312_1576_W)
 
