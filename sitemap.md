@@ -258,6 +258,10 @@ subcollection: containers
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
 
+    * [13 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1326)
+
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
+
     * [10 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1026)
 
         * New! Traefik Ingress for {{site.data.keyword.containerlong_notm}}.
