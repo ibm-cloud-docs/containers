@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-06-29"
+lastupdated: "2026-07-15"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -102,6 +102,12 @@ Before you begin
 {: cli}
 
 [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
+
+1. Update the `container-service` plug-in to the most recent version.
+    ```sh
+    ibmcloud update && ibmcloud plugin update container-service
+    ```
+    {: pre}
 
 2. Review the supported [Istio versions](/docs/containers?topic=containers-cl-add-ons-istio).
     ```sh

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-07-09"
+lastupdated: "2026-07-15"
 
 
 keywords: kubernetes, containers, object storage add-in, cos
@@ -44,6 +44,12 @@ Prerequisites:
 
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
+
+1. Update the `container-service` plug-in to the most recent version.
+    ```sh
+    ibmcloud update && ibmcloud plugin update container-service
+    ```
+    {: pre}
 
 1. List the add-ons and find the version you want to install.
     ```sh
