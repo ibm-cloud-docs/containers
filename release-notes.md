@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-13"
+lastupdated: "2026-07-15"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,26 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## July 2026
 {: #containers-jul26}
+
+### 13 July 2026
+{: #containers-jul1326}
+{: release-note}
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
+:   Fix packs can be applied in the following ways. Review the change logs for your cluster version.
+:   - **Classic infrastructure**: Update or reload the worker node.
+:   - **VPC infrastructure**: Replace the worker node.
+:   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
+:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+
+
+
+
+
 
 ### 10 July 2026
 {: #containers-jul1026}

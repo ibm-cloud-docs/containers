@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-06-23"
+lastupdated: "2026-07-15"
 
 
 keywords: kubernetes, headlamp, dashboard, add-on, gui
@@ -53,6 +53,12 @@ The Headlamp add-on is currently only available through the CLI. You cannot inst
 ### Installing the Headlamp add-on with the CLI
 {: #headlamp-install-cli}
 
+
+1. Update the `container-service` plug-in to the most recent version.
+    ```sh
+    ibmcloud update && ibmcloud plugin update container-service
+    ```
+    {: pre}
 
 1. Target your cluster.
     ```sh

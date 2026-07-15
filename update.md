@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-15"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
@@ -322,7 +322,7 @@ It is good practice to [rotate your CA certificates](/docs/containers?topic=cont
 
 
 
-* **Patch**: A worker node patch update includes security fixes. You can update the VPC worker node to the latest patch by using the `ibmcloud ks worker replace` command.
+* **Patch**: A worker node patch update includes security fixes. For VPC bare metal workers, you can apply the latest patch by using the `ibmcloud ks worker reload` command. For VPC virtual server instance workers, use the `ibmcloud ks worker replace` command.
 * **Major.minor**: A `major.minor` update moves up the Kubernetes version of the worker node to the same version as the master. This type of update often includes changes to the Kubernetes API or other behaviors that you must prepare your cluster for. Remember that your worker nodes can be only up to two versions behind the master version (`n-2`). You can update the VPC worker node to the same patch by using the `ibmcloud ks worker replace` command with the `--update` option.
 
 What happens to my apps during an update?
