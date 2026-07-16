@@ -6789,8 +6789,6 @@ subcollection: containers
 
     * [Version 1.0 - v1.0.24_354254613, released 16 July 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1024_354254613)
 
-    * [Version 1.0 - v1.0.23, released 08 July 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1023)
-
     * [Version 1.0 - v1.0.23_349336907, released 03 July 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1023_349336907)
 
     * [Version 1.0 - v1.0.22_348679631, released 22 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1022_348679631)
