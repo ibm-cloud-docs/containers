@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-07-15"
+lastupdated: "2026-07-16"
 
 
 keywords: kubernetes, headlamp, dashboard, add-on, gui
@@ -232,9 +232,11 @@ The Headlamp addon creates several Kubernetes resources in your cluster that req
 {: shortdesc}
 
 If you have a custom firewall or network settings, you need to configure that to allow communication between the following resources:
-* 2 **Ingress** resources
+* 4 **Ingress** resources
     + private with private-iks-k8s-nginx ingressClass
     + public with public-iks-k8s-nginx ingressClass
+    + private with private-iks-traefik ingressClass
+    + public with public-iks-traefik ingressClass
 * 1 **Service** (ClusterIP on port 80 → 4466)
 * 1 **Deployment** 
     + headlamp container (port 4466)
