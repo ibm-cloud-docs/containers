@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-16"
+lastupdated: "2026-07-20"
 
 
 keywords: containers
@@ -4132,8 +4132,6 @@ subcollection: containers
 
 * [Before you begin](/docs/containers?topic=containers-istio-update#istio-update-prereq)
 
-* [Updating from version 1.23 to 1.24 of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor_124)
-
 * [Updating to a minor version of the Istio add-on](/docs/containers?topic=containers-istio-update#istio_minor)
 
 * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio-update#update_client_sidecar)
@@ -6257,6 +6255,8 @@ subcollection: containers
 
 * [`istio` 1.29](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.29)
 
+* [`istio` 1.30](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.30)
+
 * [`openshift-ai` 416](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-416)
 
 * [`openshift-ai` 417](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-417)
@@ -6343,10 +6343,6 @@ subcollection: containers
 
 * [Version 1.22](/docs/containers?topic=containers-cl-add-ons-istio#v122)
 
-    * [Version 1.22.6, released 3 Dec 2024](/docs/containers?topic=containers-cl-add-ons-istio#1226)
-
-    * [Version 1.22.5, released 9 Oct 2024](/docs/containers?topic=containers-cl-add-ons-istio#1225)
-
     * [Version 1.22.3, released 20 August 2024](/docs/containers?topic=containers-cl-add-ons-istio#1223)
 
     * [Version 1.21.5, released 20 August 2024](/docs/containers?topic=containers-cl-add-ons-istio#1215)
@@ -6358,8 +6354,6 @@ subcollection: containers
     * [Version 1.22.1, released 21 June 2024](/docs/containers?topic=containers-cl-add-ons-istio#1221)
 
 * [Unsupported: Version 1.21](/docs/containers?topic=containers-cl-add-ons-istio#v121)
-
-    * [Version 1.21.6, released 9 Oct 2024](/docs/containers?topic=containers-cl-add-ons-istio#1216)
 
     * [Version 1.21.3, released 19 June 2024](/docs/containers?topic=containers-cl-add-ons-istio#1213)
 
@@ -7014,7 +7008,39 @@ subcollection: containers
 
 [Ingress ALB](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
+* [Version 3.7.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.6)
+
+    * [Version 3.7.6 - 3.7.6_356092760_iks, released 20 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-376_356092760_iks)
+
+* [Version 3.7.5](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.5)
+
+    * [Version 3.7.5 - 3.7.5_356079678_iks, released 20 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-375_356079678_iks)
+
+    * [Version 3.7.5 - 3.7.5_353228763_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-375_353228763_iks)
+
+    * [Version 3.7.5 - 3.7.5_351789633_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-375_351789633_iks)
+
+* [Version 3.7.4](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.4)
+
+    * [Version 3.7.4 - 3.7.4_356092722_iks, released 20 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_356092722_iks)
+
+    * [Version 3.7.4 - 3.7.4_353221089_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_353221089_iks)
+
+    * [Version 3.7.4 - 3.7.4_351769381_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_351769381_iks)
+
+    * [Version 3.7.4 - 3.7.4_348800920_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_348800920_iks)
+
+* [Version 1.15.8](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.8)
+
+    * [Version 1.15.8 - 1.15.8_356092614_iks, released 20 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_356092614_iks)
+
+    * [Version 1.15.8 - 1.15.8_352185571_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_352185571_iks)
+
+    * [Version 1.15.8 - 1.15.8_351852518_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_351852518_iks)
+
 * [Version 1.15.7](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.7)
+
+    * [Version 1.15.7 - 1.15.7_356075333_iks, released 20 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_356075333_iks)
 
     * [Version 1.15.7 - 1.15.7_354913170_iks, released 13 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_354913170_iks)
 
@@ -7024,20 +7050,6 @@ subcollection: containers
 
     * [Version 1.15.7 - 1.15.7_349797741_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_349797741_iks)
 
-* [Version 3.7.5](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.5)
-
-    * [Version 3.7.5 - 3.7.5_353228763_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-375_353228763_iks)
-
-    * [Version 3.7.5 - 3.7.5_351789633_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-375_351789633_iks)
-
-* [Version 3.7.4](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.4)
-
-    * [Version 3.7.4 - 3.7.4_353221089_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_353221089_iks)
-
-    * [Version 3.7.4 - 3.7.4_351769381_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_351769381_iks)
-
-    * [Version 3.7.4 - 3.7.4_348800920_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-374_348800920_iks)
-
 * [Version 3.7.3](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.3)
 
     * [Version 3.7.3 - 3.7.3_353225103_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-373_353225103_iks)
@@ -7045,12 +7057,6 @@ subcollection: containers
     * [Version 3.7.3 - 3.7.3_351769298_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-373_351769298_iks)
 
     * [Version 3.7.3 - 3.7.3_349786538_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-373_349786538_iks)
-
-* [Version 1.15.8](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.8)
-
-    * [Version 1.15.8 - 1.15.8_352185571_iks, released 06 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_352185571_iks)
-
-    * [Version 1.15.8 - 1.15.8_351852518_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_351852518_iks)
 
 * [Version 1.14.5](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.14.5)
 

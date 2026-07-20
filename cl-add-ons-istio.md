@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-07-15"
+lastupdated: "2026-07-20"
 
 
 keywords: change log, version history, Istio
@@ -435,44 +435,6 @@ Updates in this version
 {: #v122}
 
 
-### Version 1.22.6, released 3 Dec 2024
-{: #1226}
-
-Review the changes that are included in version 1.22.6 of the managed Istio add-on.
-{: shortdesc}
-
-Previous version
-:   1.22.4
-
-Current version
-:   1.22.6
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.22.5](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.5/){: external} and [Istio 1.22.6](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.6/){: external}.
-:   Resolves the following CVEs:
-    - [CVE-2024-6119](https://www.cve.org/CVERecord?id=CVE-2024-6119){: external}
-    - [CVE-2024-8096](https://www.cve.org/CVERecord?id=CVE-2024-8096){: external}
-
-
-### Version 1.22.5, released 9 Oct 2024
-{: #1225}
-
-Review the changes that are included in version 1.22.5 of the managed Istio add-on.
-{: shortdesc}
-
-Previous version
-:   1.22.4
-
-Current version
-:   1.22.5
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.22.5](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.5/){: external}.
-:   Resolves the following CVEs:
-    - [CVE-2024-6119](https://www.cve.org/CVERecord?id=CVE-2024-6119){: external}
-    - [usn-6986-1](https://ubuntu.com/security/notices/USN-6986-1){: external}
-
-
 ### Version 1.22.3, released 20 August 2024
 {: #1223}
 
@@ -598,38 +560,6 @@ Updates in this version
 
 Version 1.21 of the managed Istio add-on is unsupported.
 {: important}
-
-
-### Version 1.21.6, released 9 Oct 2024
-{: #1216}
-
-Review the changes that are included in version 1.21.6 of the managed Istio add-on.
-{: shortdesc}
-
-Previous version
-:   1.21.5
-
-Current version
-:   1.21.6
-
-Updates in this version
-:   This is the final version of `addon-istio` 1.21. `addon-istio` 1.21 is unsupported on 13 November 2024.
-:   See the Istio release notes for [Istio 1.21.6](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.6/){: external}.
-:   Resolves the following CVEs:
-    - [CVE-2024-4603](https://www.cve.org/CVERecord?id=CVE-2024-4603){: external}
-    - [CVE-2024-37371](https://www.cve.org/CVERecord?id=CVE-2024-37371){: external}
-    - [CVE-2024-2511](https://www.cve.org/CVERecord?id=CVE-2024-2511){: external}
-    - [CVE-2024-4741](https://www.cve.org/CVERecord?id=CVE-2024-4741){: external}
-    - [CVE-2022-37370](https://www.cve.org/CVERecord?id=CVE-2022-37370){: external}
-    - [CVE-2024-5535](https://www.cve.org/CVERecord?id=CVE-2024-5535){: external}
-    - [CVE-2024-7264](https://www.cve.org/CVERecord?id=CVE-2024-7264){: external}
-    - [CVE-2024-6119](https://www.cve.org/CVERecord?id=CVE-2024-6119){: external}
-    - [CVE-2024-8096](https://www.cve.org/CVERecord?id=CVE-2024-8096){: external}
-    - [usn-6937-1](https://ubuntu.com/security/notices/USN-6937-1){: external}
-    - [usn-6947-1](https://ubuntu.com/security/notices/USN-6947-1){: external}
-    - [usn-6944-1](https://ubuntu.com/security/notices/USN-6944-1){: external}
-    - [usn-6986-1](https://ubuntu.com/security/notices/USN-6986-1){: external}
-    - [usn-7012-1](https://ubuntu.com/security/notices/USN-7012-1){: external}
 
 
 ### Version 1.21.3, released 19 June 2024
