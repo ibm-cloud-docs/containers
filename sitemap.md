@@ -2273,21 +2273,17 @@ subcollection: containers
 
 * [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
 
-[Using reservations to reduce classic worker node costs](/docs/containers?topic=containers-reservations#reservations)
+[Reservations for classic worker node costs](/docs/containers?topic=containers-reservations#reservations)
 
-* [Understanding reservations](/docs/containers?topic=containers-reservations#ri-about)
+* [Deprecation timeline](/docs/containers?topic=containers-reservations#reservations-deprecation-timeline)
 
-    * [Reservation usage and lifecycle](/docs/containers?topic=containers-reservations#ri-usage-lifecycle)
+* [Migrating workloads from reservations](/docs/containers?topic=containers-reservations#reservations-deprecation-migrate)
 
-    * [Billing and discounts](/docs/containers?topic=containers-reservations#ri-about-billing)
-
-* [Creating a reservation](/docs/containers?topic=containers-reservations#ri-create)
-
-* [Using a reservation in a cluster](/docs/containers?topic=containers-reservations#ri-use)
+* [About reservations](/docs/containers?topic=containers-reservations#ri-about)
 
 * [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
 
-* [Renewing expiring reservation](/docs/containers?topic=containers-reservations#renew-reservation)
+* [Next steps](/docs/containers?topic=containers-reservations#reservations-next)
 
 [Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prevent)
 
