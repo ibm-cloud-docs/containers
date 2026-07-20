@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-20"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, clusters, worker nodes, worker pools, add, classic
@@ -20,7 +20,7 @@ subcollection: containers
 
 [Classic infrastructure]{: tag-classic-inf}
 
-Reviewing the following sections for information on how to add worker nodes to your Classic cluster.
+Review the following sections for information on how to add worker nodes to your classic cluster.
 {: shortdesc}
 
 Looking to add workers to VPC clusters? See [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-classic).
@@ -34,13 +34,13 @@ When you create a cluster, the worker nodes are provisioned in a worker pool. Af
 If you have a multizone cluster, keep its worker node resources balanced. Make sure that all the worker pools are spread across the same zones, and add or remove workers by resizing the pools instead of adding individual nodes. After you set up your worker pool, you can [set up the cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 
 
-Want to save on your classic worker node costs? [Create a reservation](/docs/containers?topic=containers-reservations) to lock in a discount over 1 or 3 year terms! Then, create your worker pool by using the reserved instances. Note that autoscaling can't be enabled on worker pools that use reservations.
-{: tip}
+Reservations for classic worker nodes are deprecated. After 15 October 2026, no new reservation contracts can be created. If you have an existing reservation contract that is due to expire, you must create a new worker pool that does not use a reservation and migrate your workloads before the contract expiration date. For more information, see [Reservations deprecation](/docs/containers?topic=containers-reservations-deprecation).
+{: deprecated}
 
 ## Creating a new worker pool
 {: #add_pool}
 
-You can add worker nodes to your classic cluster by creating a new worker pool.
+You can add worker nodes to your classic cluster by creating a new worker pool. If you previously used reservations to provision worker nodes, note that reservations are deprecated. Create a standard worker pool instead.
 {: shortdesc}
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles).
