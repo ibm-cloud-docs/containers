@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-07"
+lastupdated: "2026-07-20"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -72,7 +72,7 @@ If you need to use the latest version of Istio or customize your Istio installat
 ## What comes with the Istio add-on?
 {: #istio_ov_components}
 
-In Kubernetes clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.24.6.
+In Kubernetes clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.29.5.
 {: shortdesc}
 
 The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation](https://istio.io/latest/about/service-mesh/){: external}.
@@ -88,7 +88,6 @@ The Istio add-on installs the core components of Istio. For more information abo
 Review the following limitations for the managed Istio add-on.
 {: shortdesc}
 
-* When you enable the managed Istio add-on, you can't use `IstioOperator` (IOP) resources to customize the Istio control plane installation. Only the resources that are managed by IBM for the Istio control plane are supported.
 * If you create additional custom Istio gateways in your data plane, you are responsible for managing those resources.
 * You can't modify any Istio resources that are created for you in the `istio-system` namespace. If you need to customize the Istio installation, you can [edit the `managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize) or [modify the default istio gateway's value.yaml](/docs/containers?topic=containers-istio-custom-gateway-helm).
 * The following features are not supported in the managed Istio add-on:
