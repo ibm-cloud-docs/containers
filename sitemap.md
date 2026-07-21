@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-20"
+lastupdated: "2026-07-21"
 
 
 keywords: containers
@@ -257,6 +257,10 @@ subcollection: containers
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
+
+    * [14 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1426)
+
+        * Action required: Migrate from origin endpoints before 31 July 2026.
 
     * [13 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1326)
 
@@ -6288,6 +6292,10 @@ subcollection: containers
 * [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
 [Istio add-on version change log](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio)
+
+* [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
+
+    * [Version 1.30 - 1.30.2, released 21 July 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1302)
 
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
 
