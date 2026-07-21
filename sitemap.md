@@ -258,6 +258,10 @@ subcollection: containers
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
 
+    * [14 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1426)
+
+        * Action required: Migrate from origin endpoints before 31 July 2026.
+
     * [13 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1326)
 
         * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
