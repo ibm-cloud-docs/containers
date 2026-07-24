@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-16"
+lastupdated: "2026-07-23"
 
 
 keywords: kubernetes, clusters
@@ -123,7 +123,7 @@ All VPC clusters have a private service endpoint which authorized users can acce
 
 
     * **Log in as user**:
-        1. Download the kubeconfig for the the user you are logged in as.
+        1. Download the kubeconfig for the user you are logged in as.
             ```sh
             ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint private
             ```
