@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-22"
+lastupdated: "2026-07-24"
 
 
 keywords: containers
@@ -8196,7 +8196,7 @@ subcollection: containers
 
 * [Workarounds for `calico-node`](/docs/containers?topic=containers-ts-network-calico-node#ts-network-calico-node-work)
 
-[I deleted a portable subnet and now my Classic cluster my Load Balancers are failing. How do I recover?](/docs/containers?topic=containers-ts-network-subnet-recover#ts-network-subnet-recover)
+[I deleted a portable subnet and now my Classic cluster's Load Balancers are failing. How do I recover?](/docs/containers?topic=containers-ts-network-subnet-recover#ts-network-subnet-recover)
 
 [Why are certain packets dropped on the public VLAN?](/docs/containers?topic=containers-mangle-table#mangle-table)
 

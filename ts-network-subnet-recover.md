@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2023, 2026
-lastupdated: "2026-04-10"
+lastupdated: "2026-07-24"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, subnet, detach
@@ -16,7 +16,7 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-# I deleted a portable subnet and now my Classic cluster my Load Balancers are failing. How do I recover?
+# I deleted a portable subnet and now my Classic cluster's Load Balancers are failing. How do I recover?
 {: #ts-network-subnet-recover}
 {: support}
 

@@ -65,7 +65,7 @@ You can no longer use the `ob` plug-in, Terraform, or API to install observabili
         ```
         {: pre}
 
-After removing the plug-in has been removed, reinstall Logging and Monitoring agents in your cluster using the Cluster dashboard, Terraform, or manually. 
+After the plug-in has been removed, reinstall Logging and Monitoring agents in your cluster using the Cluster dashboard, Terraform, or manually. 
 
 For more information, see the following links:
 - [Sending IBM Cloud Kubernetes Service log data to IBM Cloud Logs](/docs/cloud-logs?topic=cloud-logs-kube2logs)
