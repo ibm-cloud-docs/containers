@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-13"
+lastupdated: "2026-07-24"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -180,7 +180,7 @@ The following table shows the different options that you have when you configure
 
 4. Create a log forwarding configuration. For more information about the parameters, see the [Understanding logging configuration options table](#enable-forwarding).
     ```sh
-    ibmcloud ks logging config create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <container1,2> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ibmcloud ks logging config create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <container1,2> --app-paths <paths_to_logs> --syslog-protocol <protocol>
     ```
     {: pre}
 
@@ -300,8 +300,8 @@ You can stop forwarding logs by deleting one or all the logging configurations f
     ```
     {: pre}
 
-- To delete all the logging configurations:
+- To delete all the logging configurations for a namespace:
     ```sh
-    ibmcloud ks logging config rm --cluster <my_cluster> --all
+    ibmcloud ks logging config rm --cluster <my_cluster> --namespace <kubernetes_namespace>
     ```
     {: pre}
