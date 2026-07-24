@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-15"
+lastupdated: "2026-07-24"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -100,7 +100,7 @@ The observability plug-in installs Sysdig and LogDNA agents in the `ibm-observe`
     ```
     {: pre}
 
-After removing the plug-in has been removed, reinstall Logging and Monitoring agents in your cluster using the Cluster dashboard, Terraform, or manually. 
+After the plug-in has been removed, reinstall Logging and Monitoring agents in your cluster using the Cluster dashboard, Terraform, or manually. 
 
 For more information, see the following links:
 - [Sending IBM Cloud Kubernetes Service log data to IBM Cloud Logs](/docs/cloud-logs?topic=cloud-logs-kube2logs)
