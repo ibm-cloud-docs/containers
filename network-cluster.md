@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-07-07"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, vlan
@@ -44,13 +44,13 @@ Did you create a cluster with only a private cloud service endpoint before you e
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 3. Enable the private cloud service endpoint.
     ```sh
-    ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 4. Refresh the Kubernetes master API server to use the private cloud service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
     ```sh
-    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -61,7 +61,7 @@ Did you create a cluster with only a private cloud service endpoint before you e
     {: important}
     
     ```sh
-    ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
+    ibmcloud ks worker update --cluster CLUSTER_NAME_OR_ID --worker WORKER1,WORKER2
     ```
     {: pre}
 
@@ -91,20 +91,20 @@ The public cloud service endpoint makes your Kubernetes master publicly accessib
 If you previously disabled the public endpoint, you can re-enable it.
 1. Enable the public cloud service endpoint.
     ```sh
-    ibmcloud ks cluster master public-service-endpoint enable --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master public-service-endpoint enable --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 2. Refresh the Kubernetes master API server to use the public cloud service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
     ```sh
-    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 3. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 4. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.
     ```sh
-    ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
+    ibmcloud ks worker update --cluster CLUSTER_NAME_OR_ID --worker WORKER1,WORKER2
     ```
     {: pre}
     
@@ -123,13 +123,13 @@ To disable the public cloud service endpoint, you must first enable the private 
 1. [Enable the private cloud service endpoint](#set-up-private-se).
 2. Disable the public cloud service endpoint.
     ```sh
-    ibmcloud ks cluster master public-service-endpoint disable --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master public-service-endpoint disable --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 3. Refresh the Kubernetes master API server to remove the public cloud service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
     ```sh
-    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -137,7 +137,7 @@ To disable the public cloud service endpoint, you must first enable the private 
 
 5. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.
     ```sh
-    ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
+    ibmcloud ks worker update --cluster CLUSTER_NAME_OR_ID --worker WORKER1,WORKER2
     ```
     {: pre}
 
@@ -162,13 +162,13 @@ You can't disable the private cloud service endpoint after you enable it.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 3. Enable the private cloud service endpoint.
     ```sh
-    ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 4. Refresh the Kubernetes master API server to use the private cloud service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
     ```sh
-    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -180,14 +180,14 @@ You can't disable the private cloud service endpoint after you enable it.
     {: important}
     
     ```sh
-    ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
+    ibmcloud ks worker update --cluster CLUSTER_NAME_OR_ID --worker WORKER1,WORKER2
     ```
     {: pre}
 
 7. Optional: To use the private cloud service endpoint only:
     1. Disable the public cloud service endpoint.
         ```sh
-        ibmcloud ks cluster master public-service-endpoint disable --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster master public-service-endpoint disable --cluster CLUSTER_NAME_OR_ID
         ```
         {: pre}
 
@@ -222,13 +222,13 @@ To change the VLANs that a worker pool uses to provision worker nodes:
 
 1. List the names of the worker pools in your cluster.
     ```sh
-    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+    ibmcloud ks worker-pool ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 2. Determine the zones for one of the worker pools. In the output, look for the **Zones** field.
     ```sh
-    ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ibmcloud ks worker-pool get --cluster CLUSTER_NAME_OR_ID --worker-pool POOL_NAME
     ```
     {: pre}
 
@@ -236,7 +236,7 @@ To change the VLANs that a worker pool uses to provision worker nodes:
 
     1. Check the available public and private VLANs that are listed under **Type** in the output.
         ```sh
-        ibmcloud ks vlan ls --zone <zone>
+        ibmcloud ks vlan ls --zone ZONE
         ```
         {: pre}
 

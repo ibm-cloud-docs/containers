@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-06-24"
+lastupdated: "2026-07-27"
 
 
 keywords: ingress, alb, manage albs, update, alb image, traefik
@@ -95,21 +95,21 @@ To update your ALB image to a specific version with the `--version` option, you 
 * To list the available ALB versions, run the following command.
 
     ```sh
-    ibmcloud ks ingress alb versions --region <region>
+    ibmcloud ks ingress alb versions --region REGION
     ```
     {: pre}
     
 * To update all ALB pods in the cluster, run the following command.
 
     ```sh
-    ibmcloud ks ingress alb update -c <cluster_name_or_ID> --version <image_version>
+    ibmcloud ks ingress alb update -c CLUSTER_NAME_OR_ID --version IMAGE_VERSION
     ```
     {: pre}
 
 * To update the ALB for specific ALBs, run the following command.
 
     ```sh
-    ibmcloud ks ingress alb update -c <cluster_name_or_ID> --version <image_version> --alb <ALB_ID> [--alb <ALB_2_ID> ...]
+    ibmcloud ks ingress alb update -c CLUSTER_NAME_OR_ID --version IMAGE_VERSION --alb ALB_ID [--alb ALB_2_ID ...]
     ```
     {: pre}
 

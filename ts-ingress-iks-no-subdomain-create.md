@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -62,7 +62,7 @@ If the Ingress subdomain and secret are still unavailable after your cluster is 
 
 1. Verify that the worker nodes have a **State** of `normal` and a **Status** of `Ready`. After you create the cluster, it can take up to 20 minutes for the worker nodes to be ready.
     ```sh
-    ibmcloud ks worker ls -c <cluster_name_or_ID>
+    ibmcloud ks worker ls -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 

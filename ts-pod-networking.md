@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-05-18"
+lastupdated: "2026-07-27"
 
 
 keywords: pods, pod connectvity, networking, pod networking, pod trouble shooting, pod debug
@@ -28,13 +28,13 @@ Follow these steps to check the health of your components. Networking issues mig
 
     To check the cluster master version and health:
     ```sh
-    ibmcloud ks cluster get -c <cluster-id>
+    ibmcloud ks cluster get -c CLUSTER-ID
     ```
     {: pre}
 
     To check worker node versions and health:
     ```sh
-    ibmcloud ks workers -c <cluster-id>
+    ibmcloud ks workers -c CLUSTER-ID
     ```
     {: pre}
 

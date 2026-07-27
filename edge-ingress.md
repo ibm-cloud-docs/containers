@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-05-13"
+lastupdated: "2026-07-27"
 
 
 keywords: containers, kubernetes, affinity, taint, edge node, edge
@@ -68,7 +68,7 @@ To isolate your workload to edge worker nodes:
 1. Verify that the worker pool and worker nodes have the `dedicated=edge` label.
     * To check the worker pool, use the `get` command.
         ```sh
-        ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+        ibmcloud ks worker-pool get --cluster CLUSTER_NAME_OR_ID --worker-pool WORKER_POOL_NAME_OR_ID
         ```
         {: pre}
 
@@ -83,7 +83,7 @@ To isolate your workload to edge worker nodes:
 1. Retrieve all existing ALBs in the cluster. Review the command output. For each ALB that has a **Status** of **enabled**, note the **ALB ID** and **Build**.
 
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 

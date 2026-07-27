@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-12-19"
+  years: 2014, 2026
+lastupdated: "2026-07-27"
 
 
 keywords: containers, kubernetes, help, network, connectivity, {{site.data.keyword.containerlong_notm}}
@@ -58,7 +58,7 @@ If your worker node is not functioning as expected, you can follow these steps t
 If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes.
 
 ```sh
-ibmcloud ks worker ls --cluster <cluster_name_or_id>
+ibmcloud ks worker ls --cluster CLUSTER_NAME_OR_ID
 ```
 {: pre}
 
@@ -75,7 +75,7 @@ For more information, see [Worker node states](/docs/containers?topic=containers
 Get the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](/docs/containers?topic=containers-common_worker_nodes_issues) to learn how to resolve the problem.
 
 ```sh
-ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id>
+ibmcloud ks worker get --cluster CLUSTER_NAME_OR_ID --worker WORKER_NODE_ID
 ```
 {: pre}
 

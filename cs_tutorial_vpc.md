@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes
@@ -108,13 +108,13 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         - **Public gateways**: You don't need to attach a public gateway to complete this tutorial. Instead, you can keep your worker nodes isolated from public access by using VPC load balancers to expose workloads securely. You might attach a public gateway if your worker nodes need to access a public URL.
 
         ```sh
-        ibmcloud is subnet-create mysubnet1 <vpc_ID> --zone us-south-1 --ipv4-address-count 256
+        ibmcloud is subnet-create mysubnet1 VPC_ID --zone us-south-1 --ipv4-address-count 256
         ```
         {: pre}
 
 3. Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private cloud service endpoint. You can use the public cloud service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private cloud service endpoint. For more information about the command options, see the [`cluster create vpc-gen2` CLI reference docs](/docs/containers?topic=containers-kubernetes-service-cli#cli_cluster-create-vpc-gen2).
     ```sh
-    ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.35 --flavor bx2.2x8 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
+    ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.35 --flavor bx2.2x8 --workers 1 --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID
     ```
     {: pre}
 

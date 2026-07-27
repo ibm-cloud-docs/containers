@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-07-07"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, containers
@@ -196,7 +196,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
     1. List the current patch version of your worker nodes.
         ```sh
-        ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+        ibmcloud ks worker ls --cluster CLUSTER_NAME_OR_ID
         ```
         {: pre}
 

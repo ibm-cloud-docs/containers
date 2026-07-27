@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, subnets, ips, vlans, networking
@@ -164,7 +164,7 @@ Before you begin
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - To reuse user-managed private subnets from a cluster that you no longer need, delete the unneeded cluster.
     ```sh
-    ibmcloud ks cluster rm --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster rm --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 

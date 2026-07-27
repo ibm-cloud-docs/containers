@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2026
-lastupdated: "2026-02-11"
+lastupdated: "2026-07-27"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, outbound traffic protection, 1.30
 
@@ -82,7 +82,7 @@ ibmcloud ks vpc outbound-traffic-protection disable --cluster CLUSTER
 You can add a security group rule to the cluster worker security group (`kube-<clusterID>`) that allows access to the specific external site. Repeat this step for each site or subnet that your cluster needs to access. For more information, [Example scenarios for selectively allowing outbound traffic](#sbd-examples).
 
 ```sh
-ibmcloud is sg-rulec kube-<clusterID> outbound icmp_tcp_udp --remote <IP-address-or-subnet>
+ibmcloud is sg-rulec kube-CLUSTERID outbound icmp_tcp_udp --remote IP-ADDRESS-OR-SUBNET
 ```
 {: pre}
 
@@ -149,7 +149,7 @@ Beginning with 1.30 clusters, an additional security group rule is needed for VP
 1. Get the details of your cluster and note the VPE port.
 
     ```sh
-    ibmcloud ks cluster get --cluster <clusterID>
+    ibmcloud ks cluster get --cluster CLUSTERID
     ```
     {: pre}
 
@@ -157,7 +157,7 @@ Beginning with 1.30 clusters, an additional security group rule is needed for VP
 
 1. Access your cluster via VPE.
     ```sh
-    ibmcloud ks cluster config --admin --cluster <clusterID> --endpoint vpe
+    ibmcloud ks cluster config --admin --cluster CLUSTERID --endpoint vpe
     ```
     {: pre}
 

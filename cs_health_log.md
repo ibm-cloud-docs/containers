@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-24"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -180,7 +180,7 @@ The following table shows the different options that you have when you configure
 
 4. Create a log forwarding configuration. For more information about the parameters, see the [Understanding logging configuration options table](#enable-forwarding).
     ```sh
-    ibmcloud ks logging config create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <container1,2> --app-paths <paths_to_logs> --syslog-protocol <protocol>
+    ibmcloud ks logging config create --cluster CLUSTER_NAME_OR_ID --logsource LOG_SOURCE --namespace KUBERNETES_NAMESPACE --hostname LOG_SERVER_HOSTNAME_OR_IP --port LOG_SERVER_PORT --type syslog --app-containers CONTAINER1,2 --app-paths PATHS_TO_LOGS --syslog-protocol PROTOCOL
     ```
     {: pre}
 
@@ -236,27 +236,27 @@ You can choose which logs to forward to your external server by filtering out sp
 
 1. Create a logging filter.
     ```sh
-    ibmcloud ks logging filter create --cluster <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
+    ibmcloud ks logging filter create --cluster CLUSTER_NAME_OR_ID --type LOG_TYPE --logging-configs CONFIGS --namespace KUBERNETES_NAMESPACE --container CONTAINER_NAME --level LOGGING_LEVEL --regex-message MESSAGE
     ```
     {: pre}
 
 2. View the log filter that you created.
 
     ```sh
-    ibmcloud ks logging filter get --cluster <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+    ibmcloud ks logging filter get --cluster CLUSTER_NAME_OR_ID --id FILTER_ID --show-matching-configs
     ```
     {: pre}
 
 3. Update the log filter that you created.
     ```sh
-    ibmcloud ks logging filter update --cluster <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+    ibmcloud ks logging filter update --cluster CLUSTER_NAME_OR_ID --id FILTER_ID --type SERVER_TYPE --logging-configs CONFIGS --namespace KUBERNETES_NAMESPACE --container CONTAINER_NAME --level LOGGING_LEVEL --regex-message MESSAGE
     ```
     {: pre}
 
 4. Delete a log filter that you created.
 
     ```sh
-    ibmcloud ks logging filter rm --cluster <cluster_name_or_ID> --id <filter_ID> [--all]
+    ibmcloud ks logging filter rm --cluster CLUSTER_NAME_OR_ID --id FILTER_ID [--all]
     ```
     {: pre}
 
@@ -270,13 +270,13 @@ You can verify that your configuration is set up correctly in 1 of 2 ways:
 
 - To list all the logging configurations in a cluster:
     ```sh
-    ibmcloud ks logging config get --cluster <cluster_name_or_ID>
+    ibmcloud ks logging config get --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 - To list the logging configurations for one type of log source:
     ```sh
-    ibmcloud ks logging config get --cluster <cluster_name_or_ID> --logsource <source>
+    ibmcloud ks logging config get --cluster CLUSTER_NAME_OR_ID --logsource SOURCE
     ```
     {: pre}
 
@@ -285,7 +285,7 @@ You can verify that your configuration is set up correctly in 1 of 2 ways:
 
 You can update a logging configuration that you already created:
 ```sh
-ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --app-containers <container1,2> --app-paths <paths_to_logs>
+ibmcloud ks logging config update --cluster CLUSTER_NAME_OR_ID --id LOG_CONFIG_ID --namespace NAMESPACE --type SERVER_TYPE --syslog-protocol PROTOCOL --logsource SOURCE --hostname HOSTNAME_OR_INGESTION_URL --port PORT --app-containers CONTAINER1,2 --app-paths PATHS_TO_LOGS
 ```
 {: pre}
 
@@ -296,12 +296,12 @@ You can stop forwarding logs by deleting one or all the logging configurations f
 
 - To delete one logging configuration:
     ```sh
-    ibmcloud ks logging config rm --cluster <cluster_name_or_ID> --id <log_config_ID>
+    ibmcloud ks logging config rm --cluster CLUSTER_NAME_OR_ID --id LOG_CONFIG_ID
     ```
     {: pre}
 
 - To delete all the logging configurations for a namespace:
     ```sh
-    ibmcloud ks logging config rm --cluster <my_cluster> --namespace <kubernetes_namespace>
+    ibmcloud ks logging config rm --cluster MY_CLUSTER --namespace KUBERNETES_NAMESPACE
     ```
     {: pre}

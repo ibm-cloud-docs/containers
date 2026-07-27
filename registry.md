@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-29"
+lastupdated: "2026-07-27"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, registry, pull secret, secrets
@@ -147,7 +147,7 @@ Before you begin
 
     Verify that the secret was created successfully
     ```sh
-    ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
+    ibmcloud iam user-policy-create YOUR_USER_EMAIL --service-name container-registry --roles Administrator
     ```
     {: pre}
 
@@ -171,7 +171,7 @@ To update your cluster image pull secret in the `default` Kubernetes namespace.
 1. Run the following command to create a service ID for the cluster and assign the service ID an IAM **Reader** service access role for {{site.data.keyword.registrylong_notm}}. The command also creates an API key to impersonate the service ID credentials and stores the API key in a Kubernetes image pull secret in the cluster. The image pull secret is in the `default` Kubernetes namespace.
 
     ```sh
-    ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster pull-secret apply --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 

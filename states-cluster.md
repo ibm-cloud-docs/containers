@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes
@@ -31,7 +31,7 @@ ibmcloud ks cluster ls
 {: pre}
 
 ```sh
-ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+ibmcloud ks cluster get --cluster CLUSTER_NAME_OR_ID
 ```
 {: pre}
 

@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-09-16"
+  years: 2014, 2026
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, help
@@ -57,6 +57,6 @@ To verify the control plane components installation:
 
 4. If Istio control plane components or other Istio resources are still unavailable, refresh the cluster master.
     ```sh
-    ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh -c CLUSTER_NAME_OR_ID
     ```
     {: pre}

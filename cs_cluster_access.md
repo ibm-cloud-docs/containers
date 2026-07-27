@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-23"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, clusters
@@ -51,7 +51,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 1. Set the cluster that you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
     1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
         ```sh
-        ibmcloud ks cluster config -c <cluster_name_or_ID>
+        ibmcloud ks cluster config -c CLUSTER_NAME_OR_ID
         ```
         {: pre}
 

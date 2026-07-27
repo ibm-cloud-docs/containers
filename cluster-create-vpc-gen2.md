@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-07-23"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2, containers, {{site.data.keyword.containerlong_notm}}
@@ -132,7 +132,7 @@ Observability integrations
 
 1. In your command line, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region). Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso option to log in.
     ```sh
-    ibmcloud login -r <region> [-g <resource_group>] [--sso]
+    ibmcloud login -r REGION [-g <resource_group>] [--sso]
     ```
     {: pre}
 
@@ -150,7 +150,7 @@ Observability integrations
 
 4. Create the cluster in your VPC. You can use the `ibmcloud ks cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add-workers-vpc) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```sh
-    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--offering OFFERING] [--sm-group GROUP] [--sm-instance INSTANCE] [--trusted-profile-id ID] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [[--kms-account-id <kms_account_ID>] --kms-instance <KMS_instance_ID> --crk <root_key_ID>] [--secondary-storage STORAGE] [--disable-outbound-traffic-protection] [--operating-system SYSTEM] 
+    ibmcloud ks cluster create vpc-gen2 --name CLUSTER_NAME --zone VPC_ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--version <major.minor.patch>][--workers NUMBER_WORKERS_PER_ZONE] [--offering OFFERING] [--sm-group GROUP] [--sm-instance INSTANCE] [--trusted-profile-id ID] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint] [[--kms-account-id KMS_ACCOUNT_ID] --kms-instance KMS_INSTANCE_ID --crk ROOT_KEY_ID] [--secondary-storage STORAGE] [--disable-outbound-traffic-protection] [--operating-system SYSTEM] 
     ```
     {: pre}
 

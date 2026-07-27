@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026
-lastupdated: "2026-05-20"
+lastupdated: "2026-07-27"
 
 keywords: kubernetes, gpu, nvidia, driver, migration, 1.36
 
@@ -96,7 +96,7 @@ This example demonstrates migrating a cluster with a single GPU node. Because th
 1. Check the cluster control plane version.
 
     ```sh
-    ibmcloud ks cluster get -c <cluster_name>
+    ibmcloud ks cluster get -c CLUSTER_NAME
     ```
     {: pre}
 

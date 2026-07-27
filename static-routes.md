@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-07-15"
+lastupdated: "2026-07-27"
 
 
 keywords: containers, kubernetes, vyatta, ipsec, on-premises, vpn, gateway, static route, routing table
@@ -80,14 +80,14 @@ To use the CLI, follow these steps.
 1. Enable the `static-route` add-on.
 
     ```sh
-    ibmcloud ks cluster addon enable static-route --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon enable static-route --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 1. Verify that the static route add-on has a status of `Addon Ready`.
 
     ```sh
-    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 

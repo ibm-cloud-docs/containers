@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2026
-lastupdated: "2026-06-01"
+lastupdated: "2026-07-27"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, red hat, encrypt, security, kms, root key, crk
@@ -40,13 +40,13 @@ Setting up cross-account encryption by using a KMS in a different account is sup
 
 1. Get the **ID** of the root key that you previously created.
     ```sh
-    ibmcloud ks kms crk ls --instance-id <KMS_instance_ID>
+    ibmcloud ks kms crk ls --instance-id KMS_INSTANCE_ID
     ```
     {: pre}
 
 1. Enable the KMS provider to encrypt secrets in your cluster. Complete the options with the information that you previously retrieved. The KMS provider's private cloud service endpoint is used by default to download the encryption keys. To use the public cloud service endpoint instead, include the `--public-endpoint` option. The enablement process can take some time to complete.
     ```sh
-    ibmcloud ks kms enable -c <cluster_name_or_ID> --instance-id <kms_instance_ID> --crk <root_key_ID> [--public-endpoint]
+    ibmcloud ks kms enable -c CLUSTER_NAME_OR_ID --instance-id KMS_INSTANCE_ID --crk ROOT_KEY_ID [--public-endpoint]
     ```
     {: pre}
 
@@ -55,7 +55,7 @@ Setting up cross-account encryption by using a KMS in a different account is sup
 
 1. Verify that the KMS enablement process is finished. The process is finished when that the **Master Status** is **Ready** and **Key management service** is **enabled**.
     ```sh
-    ibmcloud ks cluster get -c <cluster_name_or_ID>
+    ibmcloud ks cluster get -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
