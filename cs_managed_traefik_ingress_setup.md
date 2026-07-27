@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-07-24"
+lastupdated: "2026-07-27"
 
 
 keywords: ingress, expose apps, ingress resource, ALB, domain, traefik, ingress controller
@@ -41,13 +41,13 @@ Follow these preparation steps before you begin.
 
    [Classic clusters]{: tag-classic-inf} For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure).
     ```sh
-    ibmcloud ks ingress alb enable classic --alb <alb_id> --cluster <cluster_name>
+    ibmcloud ks ingress alb enable classic --alb ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
    [VPC clusters]{: tag-vpc} For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb_configure_vpc_gen2).
     ```sh
-    ibmcloud ks ingress alb enable vpc-gen2 --alb <alb_id> --cluster <cluster_name>
+    ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -178,7 +178,7 @@ Resource fields
 1. List your ALBs and copy the IP address (classic) or hostname (VPC) for one ALB that runs the Kubernetes Ingress image. In the output, choose an ALB that has a **Build** in the format `<community_version>_<ibm_build>_iks`.
 
     ```sh
-    ibmcloud ks ingress alb ls -c <cluster>
+    ibmcloud ks ingress alb ls -c CLUSTER
     ```
     {: pre}
 

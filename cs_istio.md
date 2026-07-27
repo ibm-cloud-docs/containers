@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-20"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -117,13 +117,13 @@ Before you begin
 
 3. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.29.5, is installed.
     ```sh
-    ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon enable istio --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 4. Verify that the managed Istio add-on has a status of `Addon Ready`.
     ```sh
-    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 

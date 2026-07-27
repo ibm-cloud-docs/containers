@@ -3,7 +3,7 @@
 copyright:
   years: 2026
 
-lastupdated: "2026-07-09"
+lastupdated: "2026-07-27"
 
 keywords: kubernetes, traefik, ingress controller
 
@@ -440,7 +440,7 @@ The `ibm-ingress-deploy-config` ConfigMap controls ALB-level settings such as re
 
 4. Update your ALBs to apply the changes. Changes can take up to five minutes to take effect. If the command returns without output, the update was submitted successfully.
     ```sh
-    ibmcloud ks ingress alb update -c <cluster_name_or_ID>
+    ibmcloud ks ingress alb update -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -508,7 +508,7 @@ Protect your apps from unauthenticated access by integrating [{{site.data.keywor
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` option to use existing service key credentials. Bind the service instance to the same namespace that your Ingress resources are in. All letters in the service instance name must be lowercase.
     ```sh
-    ibmcloud ks cluster service bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <App_ID_service_instance_name> [--key <service_instance_key>]
+    ibmcloud ks cluster service bind --cluster CLUSTER_NAME_OR_ID --namespace NAMESPACE --service APP_ID_SERVICE_INSTANCE_NAME [--key <service_instance_key>]
     ```
     {: pre}
 

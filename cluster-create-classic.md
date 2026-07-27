@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-27"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, clusters, worker nodes, worker pools, classic, create
 
@@ -103,7 +103,7 @@ Create your Classic cluster by using the {{site.data.keyword.cloud_notm}} CLI.
 1. To create clusters in a resource group other than default, target that resource group. A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group. You must have at least the [**Viewer** role](/docs/containers?topic=containers-iam-platform-access-roles) for the resource group to target it.
 
     ```sh
-    ibmcloud target -g <resource_group_name>
+    ibmcloud target -g RESOURCE_GROUP_NAME
     ```
     {: pre} 
 
@@ -122,13 +122,13 @@ Create your Classic cluster by using the {{site.data.keyword.cloud_notm}} CLI.
     {: tip}
 
     ```sh
-    ibmcloud ks flavors --zone <zone>
+    ibmcloud ks flavors --zone ZONE
     ```
     {: pre}
 
 1. Check if you have existing VLANs in the zones that you want to include in your cluster, and note the ID of the VLAN. If you don't have a public or private VLAN in one of the zones that you want to use in your cluster, {{site.data.keyword.containerlong_notm}} automatically creates these VLANs for you when you create the cluster.
     ```sh
-    ibmcloud ks vlan ls --zone <zone>
+    ibmcloud ks vlan ls --zone ZONE
     ```
     {: pre}
 

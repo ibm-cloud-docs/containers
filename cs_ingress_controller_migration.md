@@ -2,7 +2,7 @@
 
 copyright:
   years: 2025, 2026
-lastupdated: "2026-07-15"
+lastupdated: "2026-07-27"
 
 keywords: ingress, traefik, migration, ingress-nginx, alb, ingress controller
 
@@ -59,13 +59,13 @@ Use this strategy when:
 
     [Classic clusters]{: tag-classic-inf}
     ```sh
-    ibmcloud ks ingress alb create classic --cluster <cluster_name> --type <public|private> --zone <zone> --vlan <vlan_id> --version <traefik_version>
+    ibmcloud ks ingress alb create classic --cluster CLUSTER_NAME --type PUBLIC_OR_PRIVATE --zone ZONE --vlan VLAN_ID --version TRAEFIK_VERSION
     ```
     {: pre}
 
     [VPC clusters]{: tag-vpc}
     ```sh
-    ibmcloud ks ingress alb create vpc-gen2 --cluster <cluster_name> --type <public|private> --zone <zone> --version <traefik_version>
+    ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER_NAME --type PUBLIC_OR_PRIVATE --zone ZONE --version TRAEFIK_VERSION
     ```
     {: pre}
 
@@ -97,13 +97,13 @@ Use this strategy when:
 
     [Classic clusters]{: tag-classic-inf}
     ```sh
-    ibmcloud ks ingress alb create classic --cluster <cluster_name> --type <public|private> --zone <zone> --vlan <vlan_id> --version <traefik_version>
+    ibmcloud ks ingress alb create classic --cluster CLUSTER_NAME --type PUBLIC_OR_PRIVATE --zone ZONE --vlan VLAN_ID --version TRAEFIK_VERSION
     ```
     {: pre}
 
     [VPC clusters]{: tag-vpc}
     ```sh
-    ibmcloud ks ingress alb create vpc-gen2 --cluster <cluster_name> --type <public|private> --zone <zone> --version <traefik_version>
+    ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER_NAME --type PUBLIC_OR_PRIVATE --zone ZONE --version TRAEFIK_VERSION
     ```
     {: pre}
 
@@ -142,13 +142,13 @@ Use this strategy when:
 
     [Classic clusters]{: tag-classic-inf}
     ```sh
-    ibmcloud ks ingress alb create classic --cluster <cluster_name> --type <public|private> --zone <zone> --vlan <vlan_id> --version <traefik_version>
+    ibmcloud ks ingress alb create classic --cluster CLUSTER_NAME --type PUBLIC_OR_PRIVATE --zone ZONE --vlan VLAN_ID --version TRAEFIK_VERSION
     ```
     {: pre}
 
     [VPC clusters]{: tag-vpc}
     ```sh
-    ibmcloud ks ingress alb create vpc-gen2 --cluster <cluster_name> --type <public|private> --zone <zone> --version <traefik_version>
+    ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER_NAME --type PUBLIC_OR_PRIVATE --zone ZONE --version TRAEFIK_VERSION
     ```
     {: pre}
 
@@ -156,7 +156,7 @@ Use this strategy when:
 
 1. Get the IP address (classic) or hostname (VPC) of the new Traefik ALB.
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -194,7 +194,7 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
 
 1. Get the ID of your current Ingress-NGINX ALB.
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -202,13 +202,13 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
 
     [Classic clusters]{: tag-classic-inf}
     ```sh
-    ibmcloud ks ingress alb disable classic --alb <alb_id> --cluster <cluster_name>
+    ibmcloud ks ingress alb disable classic --alb ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
     [VPC clusters]{: tag-vpc}
     ```sh
-    ibmcloud ks ingress alb disable vpc-gen2 --alb <alb_id> --cluster <cluster_name>
+    ibmcloud ks ingress alb disable vpc-gen2 --alb ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -219,7 +219,7 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
 
     [Classic clusters]{: tag-classic-inf}
     ```sh
-    ibmcloud ks ingress alb enable classic --alb <alb_id> --version <traefik_version> --cluster <cluster_name>
+    ibmcloud ks ingress alb enable classic --alb ALB_ID --version TRAEFIK_VERSION --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -228,7 +228,7 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
 
     [VPC clusters]{: tag-vpc}
     ```sh
-    ibmcloud ks ingress alb enable vpc-gen2 --alb <alb_id> --version <traefik_version> --cluster <cluster_name>
+    ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --version TRAEFIK_VERSION --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -236,7 +236,7 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
 
     [VPC clusters]{: tag-vpc}
     ```sh
-    ibmcloud ks ingress load-balancer backend set --cluster <cluster-id> --public-backend traefik [--private-backend traefik]
+    ibmcloud ks ingress load-balancer backend set --cluster CLUSTER-ID --public-backend traefik [--private-backend traefik]
     ```
     {: pre}
 
@@ -269,19 +269,19 @@ For classic clusters, update your production domain to point to the load balance
 
 1. Get the IP address of your Traefik ALB.
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME
     ```
     {: pre}
 
 1. Update your domain to point to the Traefik ALB.
     ```sh
-    ibmcloud ks ingress domain update --cluster <cluster_name> --domain <domain_name> --ip <traefik_alb_ip>
+    ibmcloud ks ingress domain update --cluster CLUSTER_NAME --domain DOMAIN_NAME --ip TRAEFIK_ALB_IP
     ```
     {: pre}
 
 1. Verify the domain update.
     ```sh
-    ibmcloud ks ingress domain ls --cluster <cluster_name>
+    ibmcloud ks ingress domain ls --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -294,19 +294,19 @@ Alternatively, you can disable all Ingress-NGINX based ALBs, which automatically
 
 1. List all ALBs and identify the Ingress-NGINX based ones.
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME
     ```
     {: pre}
 
 1. Disable each Ingress-NGINX ALB.
     ```sh
-    ibmcloud ks ingress alb disable classic --alb <nginx_alb_id> --cluster <cluster_name>
+    ibmcloud ks ingress alb disable classic --alb NGINX_ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
 1. Verify that your domain now points to the Traefik ALBs.
     ```sh
-    ibmcloud ks ingress domain ls --cluster <cluster_name>
+    ibmcloud ks ingress domain ls --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -320,19 +320,19 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
 
 1. List all ALBs and identify the Ingress-NGINX based ones to get their IDs and IP addresses.
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME
     ```
     {: pre}
 
 1. Disable the Ingress-NGINX ALB. This causes brief service disruption for traffic on that IP address.
     ```sh
-    ibmcloud ks ingress alb disable classic --alb <alb_id> --cluster <cluster_name>
+    ibmcloud ks ingress alb disable classic --alb ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
 1. Re-enable the ALB with a Traefik version to reuse the same IP address.
     ```sh
-    ibmcloud ks ingress alb enable classic --alb <alb_id> --version <traefik_version> --cluster <cluster_name>
+    ibmcloud ks ingress alb enable classic --alb ALB_ID --version TRAEFIK_VERSION --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -362,13 +362,13 @@ For VPC clusters, update the load balancer backend to expose Traefik instead of 
 
 1. Update the load balancer to use the Traefik backend.
     ```sh
-    ibmcloud ks ingress load-balancer backend set --cluster <cluster_name> --public-backend traefik [--private-backend traefik]
+    ibmcloud ks ingress load-balancer backend set --cluster CLUSTER_NAME --public-backend traefik [--private-backend traefik]
     ```
     {: pre}
 
 1. Verify the load balancer configuration.
     ```sh
-    ibmcloud ks ingress load-balancer get --cluster <cluster_name>
+    ibmcloud ks ingress load-balancer get --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -381,19 +381,19 @@ Alternatively, you can disable all Ingress-NGINX based ALBs.
 
 1. List all ALBs and identify the Ingress-NGINX based ones.
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME
     ```
     {: pre}
 
 1. Disable each Ingress-NGINX ALB.
     ```sh
-    ibmcloud ks ingress alb disable vpc-gen2 --alb <nginx_alb_id> --cluster <cluster_name>
+    ibmcloud ks ingress alb disable vpc-gen2 --alb NGINX_ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
 1. Verify that the load balancer now uses the Traefik ALBs.
     ```sh
-    ibmcloud ks ingress load-balancer get --cluster <cluster_name>
+    ibmcloud ks ingress load-balancer get --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -412,13 +412,13 @@ After migrating to Traefik, complete the following tasks:
 
     [Classic clusters]{: tag-classic-inf}
     ```sh
-    ibmcloud ks ingress alb disable classic --alb <nginx_alb_id> --cluster <cluster_name>
+    ibmcloud ks ingress alb disable classic --alb NGINX_ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
     [VPC clusters]{: tag-vpc}
     ```sh
-    ibmcloud ks ingress alb disable vpc-gen2 --alb <nginx_alb_id> --cluster <cluster_name>
+    ibmcloud ks ingress alb disable vpc-gen2 --alb NGINX_ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -434,7 +434,7 @@ Verify ALB status
 :   Ensure your Traefik ALBs are in a healthy state.
 
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -458,7 +458,7 @@ Run diagnostics
 :   Use the Ingress status report to identify issues.
 
     ```sh
-    ibmcloud ks ingress status-report get --cluster <cluster_name>
+    ibmcloud ks ingress status-report get --cluster CLUSTER_NAME
     ```
     {: pre}
 

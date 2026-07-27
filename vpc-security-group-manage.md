@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2023, 2025
-lastupdated: "2025-11-18"
+  years: 2023, 2026
+lastupdated: "2026-07-27"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, firewall, acl, acls, access control list, rules, security group
@@ -41,7 +41,7 @@ The security groups applied to a cluster cannot be changed once the cluster is c
 When you create your cluster, do not specify any additional security groups.
 
 ```sh
- ibmcloud ks cluster create vpc-gen2 --name <cluster-name> --zone <zone> --vpc-id <vpc-id> --subnet-id <subnet-id>
+ ibmcloud ks cluster create vpc-gen2 --name CLUSTER-NAME --zone ZONE --vpc-id VPC-ID --subnet-id SUBNET-ID
 ```
 {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-24"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -34,13 +34,13 @@ Set up the managed Istio add-on in your cluster.
 
 2. Enable the `istio` add-on.
     ```sh
-    ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon enable istio --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 3. Verify that the managed Istio add-on has a status of `Addon Ready`. Note that it can take a few minutes for the add-on to be ready.
     ```sh
-    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 

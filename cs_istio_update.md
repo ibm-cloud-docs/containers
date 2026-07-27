@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-20"
+lastupdated: "2026-07-27"
 
 
 keywords: istio migration, istio updates, istio upgrades
@@ -53,7 +53,7 @@ To update the minor version of the Istio add-on:
 
 1. Update the Istio add-on.
     ```sh
-    ibmcloud ks cluster addon update istio --version <version> -c <cluster_name_or_ID>
+    ibmcloud ks cluster addon update istio --version VERSION -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -65,7 +65,7 @@ To update the minor version of the Istio add-on:
     1. Ensure that the Istio add-on's **Health State** is `normal` and the **Health Status** is `Addon Ready`. If the state is `updating`, the update is not yet complete.
     
         ```sh
-        ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster addon ls --cluster CLUSTER_NAME_OR_ID
         ```
         {: pre}
 

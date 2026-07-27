@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-07-16"
+lastupdated: "2026-07-27"
 
 
 keywords: kubernetes, headlamp, dashboard, add-on, gui
@@ -62,19 +62,19 @@ The Headlamp add-on is currently only available through the CLI. You cannot inst
 
 1. Target your cluster.
     ```sh
-    ibmcloud ks cluster config --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster config --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 2. Enable the `headlamp` add-on.
     ```sh
-    ibmcloud ks cluster addon enable headlamp --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon enable headlamp --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 3. Verify that the Headlamp add-on has a status of `Addon Ready`.
     ```sh
-    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
