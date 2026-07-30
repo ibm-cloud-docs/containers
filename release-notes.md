@@ -56,10 +56,10 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   :   Replace the worker node.
 :   VPC Bare Metal
 :   :   Reload the worker node.
-:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
+:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
