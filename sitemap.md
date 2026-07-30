@@ -5657,11 +5657,17 @@ subcollection: containers
 
 * [ibmcloud ks commands](/docs/containers?topic=containers-kubernetes-service-cli#cli_commands)
 
-* [`ibmcloud ks api`](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
+* [`ibmcloud ks api` commands](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
+
+    * [`ibmcloud ks api`](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
+
+* [`ibmcloud ks api-key` commands](/docs/containers?topic=containers-kubernetes-service-cli#api-key-cli)
 
     * [`ibmcloud ks api-key info`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-info-cli)
 
     * [`ibmcloud ks api-key reset`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-reset-cli)
+
+* [`ibmcloud ks cluster` commands](/docs/containers?topic=containers-kubernetes-service-cli#cluster-cli)
 
     * [`ibmcloud ks cluster addon disable acm`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-acm-cli)
 
@@ -5839,11 +5845,15 @@ subcollection: containers
 
     * [`ibmcloud ks cluster subnet detach`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-subnet-detach-cli)
 
+* [`ibmcloud ks credential` commands](/docs/containers?topic=containers-kubernetes-service-cli#credential-cli)
+
     * [`ibmcloud ks credential get`](/docs/containers?topic=containers-kubernetes-service-cli#credential-get-cli)
 
     * [`ibmcloud ks credential set classic`](/docs/containers?topic=containers-kubernetes-service-cli#credential-set-classic-cli)
 
     * [`ibmcloud ks credential unset`](/docs/containers?topic=containers-kubernetes-service-cli#credential-unset-cli)
+
+* [`ibmcloud ks experimental` commands](/docs/containers?topic=containers-kubernetes-service-cli#experimental-cli)
 
     * [`ibmcloud ks experimental trusted-profile default get`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-get-cli)
 
@@ -5861,11 +5871,17 @@ subcollection: containers
 
     * [`ibmcloud ks experimental vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-ls-cli)
 
+* [`ibmcloud ks flavor` commands](/docs/containers?topic=containers-kubernetes-service-cli#flavor-cli)
+
     * [`ibmcloud ks flavor get`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-get-cli)
 
     * [`ibmcloud ks flavor ls`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-ls-cli)
 
+* [`ibmcloud ks infra-permissions` commands](/docs/containers?topic=containers-kubernetes-service-cli#infra-permissions-cli)
+
     * [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-kubernetes-service-cli#infra-permissions-get-cli)
+
+* [`ibmcloud ks ingress` commands](/docs/containers?topic=containers-kubernetes-service-cli#ingress-cli)
 
     * [`ibmcloud ks ingress alb autoscale get`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoscale-get-cli)
 
@@ -5973,7 +5989,11 @@ subcollection: containers
 
     * [`ibmcloud ks ingress status-report ignored-errors rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-status-report-ignored-errors-rm-cli)
 
-* [`ibmcloud ks init`](/docs/containers?topic=containers-kubernetes-service-cli#init-cli)
+* [`ibmcloud ks init` commands](/docs/containers?topic=containers-kubernetes-service-cli#init-cli)
+
+    * [`ibmcloud ks init`](/docs/containers?topic=containers-kubernetes-service-cli#init-cli)
+
+* [`ibmcloud ks kms` commands](/docs/containers?topic=containers-kubernetes-service-cli#kms-cli)
 
     * [`ibmcloud ks kms crk ls`](/docs/containers?topic=containers-kubernetes-service-cli#kms-crk-ls-cli)
 
@@ -5981,7 +6001,11 @@ subcollection: containers
 
     * [`ibmcloud ks kms instance ls`](/docs/containers?topic=containers-kubernetes-service-cli#kms-instance-ls-cli)
 
-* [`ibmcloud ks locations`](/docs/containers?topic=containers-kubernetes-service-cli#locations-cli)
+* [`ibmcloud ks locations` commands](/docs/containers?topic=containers-kubernetes-service-cli#locations-cli)
+
+    * [`ibmcloud ks locations`](/docs/containers?topic=containers-kubernetes-service-cli#locations-cli)
+
+* [`ibmcloud ks logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging-cli)
 
     * [`ibmcloud ks logging autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#logging-autoupdate-disable-cli)
 
@@ -6007,7 +6031,11 @@ subcollection: containers
 
     * [`ibmcloud ks logging refresh`](/docs/containers?topic=containers-kubernetes-service-cli#logging-refresh-cli)
 
-* [`ibmcloud ks messages`](/docs/containers?topic=containers-kubernetes-service-cli#messages-cli)
+* [`ibmcloud ks messages` commands](/docs/containers?topic=containers-kubernetes-service-cli#messages-cli)
+
+    * [`ibmcloud ks messages`](/docs/containers?topic=containers-kubernetes-service-cli#messages-cli)
+
+* [`ibmcloud ks nlb-dns` commands](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-cli)
 
     * [`ibmcloud ks nlb-dns add`](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-add-cli)
 
@@ -6039,15 +6067,23 @@ subcollection: containers
 
     * [`ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-secret-rm-cli)
 
+* [`ibmcloud ks quota` commands](/docs/containers?topic=containers-kubernetes-service-cli#quota-cli)
+
     * [`ibmcloud ks quota ls`](/docs/containers?topic=containers-kubernetes-service-cli#quota-ls-cli)
 
+* [`ibmcloud ks script` commands](/docs/containers?topic=containers-kubernetes-service-cli#script-cli)
+
     * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script-update-cli)
+
+* [`ibmcloud ks security-group` commands](/docs/containers?topic=containers-kubernetes-service-cli#security-group-cli)
 
     * [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
 
     * [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-reset-cli)
 
     * [`ibmcloud ks security-group sync`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-sync-cli)
+
+* [`ibmcloud ks storage` commands](/docs/containers?topic=containers-kubernetes-service-cli#storage-cli)
 
     * [`ibmcloud ks storage attachment create`](/docs/containers?topic=containers-kubernetes-service-cli#storage-attachment-create-cli)
 
@@ -6061,19 +6097,29 @@ subcollection: containers
 
     * [`ibmcloud ks storage volume ls`](/docs/containers?topic=containers-kubernetes-service-cli#storage-volume-ls-cli)
 
-* [`ibmcloud ks subnets`](/docs/containers?topic=containers-kubernetes-service-cli#subnets-cli)
+* [`ibmcloud ks subnets` commands](/docs/containers?topic=containers-kubernetes-service-cli#subnets-cli)
 
-* [`ibmcloud ks versions`](/docs/containers?topic=containers-kubernetes-service-cli#versions-cli)
+    * [`ibmcloud ks subnets`](/docs/containers?topic=containers-kubernetes-service-cli#subnets-cli)
+
+* [`ibmcloud ks versions` commands](/docs/containers?topic=containers-kubernetes-service-cli#versions-cli)
+
+    * [`ibmcloud ks versions`](/docs/containers?topic=containers-kubernetes-service-cli#versions-cli)
+
+* [`ibmcloud ks vlan` commands](/docs/containers?topic=containers-kubernetes-service-cli#vlan-cli)
 
     * [`ibmcloud ks vlan ls`](/docs/containers?topic=containers-kubernetes-service-cli#vlan-ls-cli)
 
     * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-kubernetes-service-cli#vlan-spanning-get-cli)
+
+* [`ibmcloud ks vni` commands](/docs/containers?topic=containers-kubernetes-service-cli#vni-cli)
 
     * [`ibmcloud ks vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#vni-attach-baremetal-cli)
 
     * [`ibmcloud ks vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#vni-detach-cli)
 
     * [`ibmcloud ks vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#vni-ls-cli)
+
+* [`ibmcloud ks vpc` commands](/docs/containers?topic=containers-kubernetes-service-cli#vpc-cli)
 
     * [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli)
 
@@ -6083,7 +6129,11 @@ subcollection: containers
 
     * [`ibmcloud ks vpc secure-by-default enable`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-secure-by-default-enable-cli)
 
-* [`ibmcloud ks webhook-create`](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-cli)
+* [`ibmcloud ks webhook-create` commands](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-cli)
+
+    * [`ibmcloud ks webhook-create`](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-cli)
+
+* [`ibmcloud ks worker` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker-cli)
 
     * [`ibmcloud ks worker get`](/docs/containers?topic=containers-kubernetes-service-cli#worker-get-cli)
 
@@ -6098,6 +6148,8 @@ subcollection: containers
     * [`ibmcloud ks worker rm`](/docs/containers?topic=containers-kubernetes-service-cli#worker-rm-cli)
 
     * [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#worker-update-cli)
+
+* [`ibmcloud ks worker-pool` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-cli)
 
     * [`ibmcloud ks worker-pool create classic`](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-create-classic-cli)
 
@@ -6128,6 +6180,8 @@ subcollection: containers
     * [`ibmcloud ks worker-pool taint set`](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-taint-set-cli)
 
     * [`ibmcloud ks worker-pool zones`](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-zones-cli)
+
+* [`ibmcloud ks zone` commands](/docs/containers?topic=containers-kubernetes-service-cli#zone-cli)
 
     * [`ibmcloud ks zone add classic`](/docs/containers?topic=containers-kubernetes-service-cli#zone-add-classic-cli)
 
