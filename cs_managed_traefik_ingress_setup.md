@@ -199,6 +199,22 @@ Resource fields
 Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-ingress-debug). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status-report get -c <cluster_name_or_ID>`.
 {: tip}
 
+## Traefik CRDs
+{: #traefik-crds}
+
+Along with Kubernetes Ingress resources. Traefik based Ingress Controllers allow using resources defined by Traefik's Custom Resource Definitions. The required CRD is automatically deployed on the cluster when a Traefik based ALB is enabled. The deployed CRD version is always corresponding to the highest version of the deployed Traefik ALBs. More information on Custom Resources can be found in [Traefik's documentation](https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/crd/http/ingressroute/){: external}.
+
+Sometimes, depending on the configuration, Traefik CRs may require you to specify entrypoint names. On IBM Cloud Kubernetes Service the default name for the entrypoints are `web` for cleartext HTTP (bound to port `80` by default), and `websecure` for TLS encrypted HTTPS traffic (bound to port `443` by default). You can [configure ports or create additional entrypoints](/docs/containers?topic=containers-traefik-ingress-customization#comm-customize-deploy) if your application requires it.
+{: tip}
+
+## Ingress-NGINX annotations support in Traefik
+{: #ingress-nginx-annotations-support-in-traefik}
+
+Traefik ships a compatibility layer that process Ingress-NGINX specific annotations. This feature is disabled by default on IBM Cloud Kubernetes Service. Enabling it disables the processing of Traefik specific annotations, so only Ingress-NGINX specific ones will be processed by the ALB. The `ingressProvider` option in the [`ibm-ingress-deploy-config` ConfigMap](/docs/containers?topic=containers-traefik-ingress-customization#comm-customize-deploy) can be used to toggle this feature.
+
+For more info on the support state for annotations see [Traefik's documentation](https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/ingress-nginx/){: external}.
+
+
 ## Custom domains with Ingress
 {: #ingress-custom-domain}
 

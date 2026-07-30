@@ -95,9 +95,6 @@ Periodically, Kubernetes releases [major, minor, or patch updates](/docs/contain
 
 Worker nodes in standard clusters are provisioned in to your {{site.data.keyword.cloud_notm}} infrastructure account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches. Security updates and patches are made available by IBM Site Reliability Engineers (SREs) who continuously monitor the Linux image that is installed on your worker nodes to detect vulnerabilities and security compliance issues. For more information, see [Updating worker nodes](/docs/containers?topic=containers-update#worker_node).
 
-
-
-
 ## What kinds of workloads can I move to {{site.data.keyword.containerlong_notm}}?
 {: #move_to_cloud}
 
