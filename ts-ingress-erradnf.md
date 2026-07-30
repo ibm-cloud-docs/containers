@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-05-12"
+lastupdated: "2026-07-30"
 
 
 keywords: containers, ingress, troubleshoot ingress, deployment missing, erradnf
@@ -44,18 +44,18 @@ Each ALB that is in the enabled state must have a corresponding deployment on th
 1. Ensure that your cluster masters and worker nodes are healthy.
     - [Reviewing master health](/docs/containers?topic=containers-debug_master#review-master-health).
     - [Worker node states](/docs/containers?topic=containers-worker-node-state-reference).
-1. List your ALBs with the **`ibmcloud ks ingress alb ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs). Each ALB that is `enabled` must have a corresponding deployment on the cluster.
+1. List your ALBs with the **`ibmcloud ks ingress alb ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-ls-cli). Each ALB that is `enabled` must have a corresponding deployment on the cluster.
 1. List the deployments in the `kube-system` namespace.
     ```sh
     kubectl get deployments -n kube-system
     ```
     {: pre}
 
-1. Disable ALBs that do not have a deployment by using the **`ibmcloud ks ingress alb disable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_disable).
+1. Disable ALBs that do not have a deployment by using the **`ibmcloud ks ingress alb disable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-disable-cli).
 
 1. Wait 10 minutes.
 
-1. Re-enable ALBs by using the **`ibmcloud ks ingress alb enable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure).
+1. Re-enable ALBs by using the **`ibmcloud ks ingress alb enable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli).
 
 1. Wait 15-20 minutes, then check if the deployments are created.
     ```sh

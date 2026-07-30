@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-03-18"
+  years: 2014, 2026
+lastupdated: "2026-07-30"
 
 
 keywords: kubernetes, registry, pull secret, secrets, containers
@@ -210,8 +210,8 @@ You can enable or disable image security enforcement for your cluster from the C
 {: #portieris-enable-cli}
 
 See the following commands.
-- [`ibmcloud ks cluster image-security enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-enable)
-- [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-disable)
+- [`ibmcloud ks cluster image-security enable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-image-security-enable-cli)
+- [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-image-security-disable-cli)
 
 #### Enabling or disabling image security enforcement from the console
 {: #portieris-enable-ui}

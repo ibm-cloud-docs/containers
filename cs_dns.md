@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-30"
 
 
 keywords: kubernetes, coredns, kubedns, dns
@@ -593,14 +593,14 @@ Complete the following step to set up zone-aware DNS in your multizone cluster.
     ```
     {: pre}
 
-1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) to deploy the zone-aware DNS resources.
+1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-refresh-cli) to deploy the zone-aware DNS resources.
 
     ```sh
     ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
     ```
     {: pre}
 
-1. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get).
+1. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cluster-get-cli).
 
     ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>
@@ -710,14 +710,14 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
     ```
     {: pre}
 
-1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cs_apiserver_refresh) to the delete zone-aware DNS resources.
+1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-refresh-cli) to the delete zone-aware DNS resources.
 
     ```sh
     ibmcloud ks cluster master refresh --cluster <cluster-name-or-id>
     ```
     {: pre}
 
-1. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_get).
+1. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cluster-get-cli).
 
     ```sh
     ibmcloud ks cluster get -c <cluster_name_or_ID>

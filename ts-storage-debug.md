@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-07-30"
 
 
 keywords: kubernetes,help, network, connectivity
@@ -63,7 +63,7 @@ Review the options to debug persistent storage and find the root causes for fail
     ```
     {: pre}
 
-1. If restarting your pod does not resolve the issue, [reload your worker node](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload).
+1. If restarting your pod does not resolve the issue, [reload your worker node](/docs/containers?topic=containers-kubernetes-service-cli#worker-reload-cli).
 
 1. Verify that you use the latest {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} plug-in version.
     ```sh

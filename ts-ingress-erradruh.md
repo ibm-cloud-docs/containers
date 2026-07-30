@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-05-12"
+lastupdated: "2026-07-30"
 
 
 keywords: containers, ingress status, troubleshoot ingress, erradruh
@@ -61,8 +61,8 @@ public-crcn0hav5w07nccmt0iufg-alb1-7df65f554f-qk97w   0/1     Pending   0       
 
 
 1. If you notice scheduler problems, complete the following steps:
-    1. List your ALBs using the **`ibmcloud ks ingress alb ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_albs).
-    1. List your workers using the **`ibmcloud ks worker ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_workers).
+    1. List your ALBs using the **`ibmcloud ks ingress alb ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-ls-cli).
+    1. List your workers using the **`ibmcloud ks worker ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#worker-ls-cli).
     1. **Classic clusters**: Ensure you have at least two worker nodes in the VLANs where your ALBs are deployed. See [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add-workers-classic).
     1. **VPC clusters**: Ensure you have at least two worker nodes in the zones where your ALBs are deployed. See [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add-workers-vpc).
     1. Ensure that your workers are healthy. For more information, see [Worker node states](/docs/containers?topic=containers-worker-node-state-reference).
