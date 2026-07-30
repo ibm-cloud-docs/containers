@@ -5565,55 +5565,59 @@ subcollection: containers
 
 [{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map#icks_map)
 
-* [ibmcloud ks cluster](/docs/containers?topic=containers-icks_map#icks_map_cluster)
+* [`api` commands](/docs/containers?topic=containers-icks_map#icks_map_api)
 
-* [ibmcloud ks worker](/docs/containers?topic=containers-icks_map#icks_map_worker)
+* [`api-key` commands](/docs/containers?topic=containers-icks_map#icks_map_api-key)
 
-* [ibmcloud ks worker-pool](/docs/containers?topic=containers-icks_map#icks_map_worker-pool)
+* [`cluster` commands](/docs/containers?topic=containers-icks_map#icks_map_cluster)
 
-* [ibmcloud ks zone](/docs/containers?topic=containers-icks_map#icks_map_zone)
+* [`credential` commands](/docs/containers?topic=containers-icks_map#icks_map_credential)
 
-* [ibmcloud ks ingress](/docs/containers?topic=containers-icks_map#icks_map_ingress)
+* [`experimental` commands](/docs/containers?topic=containers-icks_map#icks_map_experimental)
 
-* [ibmcloud ks logging](/docs/containers?topic=containers-icks_map#icks_map_logging)
+* [`flavor` commands](/docs/containers?topic=containers-icks_map#icks_map_flavor)
 
-* [ibmcloud ks nlb-dns](/docs/containers?topic=containers-icks_map#icks_map_nlb-dns)
+* [`infra-permissions` commands](/docs/containers?topic=containers-icks_map#icks_map_infra-permissions)
 
-* [ibmcloud ks webhook-create](/docs/containers?topic=containers-icks_map#icks_map_webhook-create)
+* [`ingress` commands](/docs/containers?topic=containers-icks_map#icks_map_ingress)
 
-* [ibmcloud ks api-key](/docs/containers?topic=containers-icks_map#icks_map_api-key)
+* [`init` commands](/docs/containers?topic=containers-icks_map#icks_map_init)
 
-* [ibmcloud ks credential](/docs/containers?topic=containers-icks_map#icks_map_credential)
+* [`kms` commands](/docs/containers?topic=containers-icks_map#icks_map_kms)
 
-* [ibmcloud ks infra-permissions](/docs/containers?topic=containers-icks_map#icks_map_infra-permissions)
+* [`locations` commands](/docs/containers?topic=containers-icks_map#icks_map_locations)
 
-* [ibmcloud ks kms](/docs/containers?topic=containers-icks_map#icks_map_kms)
+* [`logging` commands](/docs/containers?topic=containers-icks_map#icks_map_logging)
 
-* [ibmcloud ks quota](/docs/containers?topic=containers-icks_map#icks_map_quota)
+* [`messages` commands](/docs/containers?topic=containers-icks_map#icks_map_messages)
 
-* [ibmcloud ks subnets](/docs/containers?topic=containers-icks_map#icks_map_subnets)
+* [`nlb-dns` commands](/docs/containers?topic=containers-icks_map#icks_map_nlb-dns)
 
-* [ibmcloud ks vlan](/docs/containers?topic=containers-icks_map#icks_map_vlan)
+* [`quota` commands](/docs/containers?topic=containers-icks_map#icks_map_quota)
 
-* [ibmcloud ks vpcs](/docs/containers?topic=containers-icks_map#icks_map_vpcs)
+* [`script` commands](/docs/containers?topic=containers-icks_map#icks_map_script)
 
-* [ibmcloud ks flavors](/docs/containers?topic=containers-icks_map#icks_map_flavors)
+* [`security-group` commands](/docs/containers?topic=containers-icks_map#icks_map_security-group)
 
-* [ibmcloud ks locations](/docs/containers?topic=containers-icks_map#icks_map_locations)
+* [`storage` commands](/docs/containers?topic=containers-icks_map#icks_map_storage)
 
-* [ibmcloud ks messages](/docs/containers?topic=containers-icks_map#icks_map_messages)
+* [`subnets` commands](/docs/containers?topic=containers-icks_map#icks_map_subnets)
 
-* [ibmcloud ks versions](/docs/containers?topic=containers-icks_map#icks_map_versions)
+* [`versions` commands](/docs/containers?topic=containers-icks_map#icks_map_versions)
 
-* [ibmcloud ks api](/docs/containers?topic=containers-icks_map#icks_map_api)
+* [`vlan` commands](/docs/containers?topic=containers-icks_map#icks_map_vlan)
 
-* [ibmcloud ks `init`](/docs/containers?topic=containers-icks_map#icks_map_init)
+* [`vni` commands](/docs/containers?topic=containers-icks_map#icks_map_vni)
 
-* [ibmcloud ks script](/docs/containers?topic=containers-icks_map#icks_map_script)
+* [`vpc` commands](/docs/containers?topic=containers-icks_map#icks_map_vpc)
 
-* [ibmcloud ks security-group](/docs/containers?topic=containers-icks_map#icks_map_security_group)
+* [`webhook-create` commands](/docs/containers?topic=containers-icks_map#icks_map_webhook-create)
 
-* [ibmcloud ks storage](/docs/containers?topic=containers-icks_map#icks_map_storage)
+* [`worker` commands](/docs/containers?topic=containers-icks_map#icks_map_worker)
+
+* [`worker-pool` commands](/docs/containers?topic=containers-icks_map#icks_map_worker-pool)
+
+* [`zone` commands](/docs/containers?topic=containers-icks_map#icks_map_zone)
 
 [{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
 
