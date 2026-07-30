@@ -2,7 +2,7 @@
 
 copyright:
   years: 2025, 2026
-lastupdated: "2026-07-27"
+lastupdated: "2026-07-30"
 
 keywords: ingress, traefik, migration, ingress-nginx, alb, ingress controller
 
@@ -186,7 +186,7 @@ Use this strategy when:
 - You have already validated Traefik compatibility in another environment.
 - On Classic, you must keep the IP addresses of your ALBs unchanged because your clients connect using IP addresses instead of DNS domains.
 
-Disabling and re-enabling an ALB preserves its original IP address, unless that IP address has been picked up by other services in the meantime. For more information, see [Enabling or disabling ALBs](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure).
+Disabling and re-enabling an ALB preserves its original IP address, unless that IP address has been picked up by other services in the meantime. For more information, see [Enabling or disabling ALBs](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli).
 {: note}
 
 ### Steps
@@ -223,7 +223,7 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
     ```
     {: pre}
 
-    To use a specific IP address for the ALB on classic, use the `--ip` flag. For more information, see [Enabling or disabling ALBs](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure).
+    To use a specific IP address for the ALB on classic, use the `--ip` flag. For more information, see [Enabling or disabling ALBs](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli).
     {: note}
 
     [VPC clusters]{: tag-vpc}

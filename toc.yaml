@@ -369,6 +369,7 @@ toc:
           topics:
           - cli-map.md
           - cli-ks-plugin.md
+          - cli-ks-plugin-v2.md
           - cli-changelog.md
       - link:
           label: API reference

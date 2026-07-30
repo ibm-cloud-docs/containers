@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-13"
+lastupdated: "2026-07-30"
 
 
 keywords: kubernetes, networking
@@ -292,7 +292,7 @@ Ingress ALB
 :   **Load-balancing method**: HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules.
 :   **Use case**: Implement custom routing rules and SSL termination for multiple apps.
 :   **Implementation**:
-        1. [Disable the public ALB](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure).
+        1. [Disable the public ALB](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli).
         2. [Enable the private ALB and create an Ingress resource](/docs/containers?topic=containers-managed-ingress-setup).
         3. Customize ALB routing rules with [annotations](/docs/containers?topic=containers-comm-ingress-annotations).
         4. An NLB with a portable private IP address still has a public node port open on every worker node. Create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to the public NodePorts.

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-02-18"
+lastupdated: "2026-07-30"
 
 
 keywords: kubernetes, containers
@@ -51,4 +51,4 @@ Steps:
     ```
     {: pre}
 
-2. [Use the `ibmcloud ks cluster pull-secret apply` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_pull_secret_apply) to re-create an image pull secret with the appropriate registry credentials.
+2. [Use the `ibmcloud ks cluster pull-secret apply` command](/docs/containers?topic=containers-kubernetes-service-cli#cluster-pull-secret-apply-cli) to re-create an image pull secret with the appropriate registry credentials.

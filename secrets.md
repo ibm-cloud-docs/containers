@@ -138,7 +138,7 @@ Learn how you can centrally manage your non-TLS secrets with [{{site.data.keywor
 ### Creating a non-TLS secret in your cluster
 {: #non-tls-create}
 
-Create a non-TLS secret by specifying the `--type Opaque` option in the **`ibmcloud ks ingress secret create`** command. With the `Opaque` type, you can include multiple non-certificate CRN values. If the `--type` option is not specified, TLS is applied by default. For more information and additional command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create).
+Create a non-TLS secret by specifying the `--type Opaque` option in the **`ibmcloud ks ingress secret create`** command. With the `Opaque` type, you can include multiple non-certificate CRN values. If the `--type` option is not specified, TLS is applied by default. For more information and additional command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-secret-create-cli).
 {: shortdesc}
 
 The following example command creates a non-TLS secret with the `Opaque` type specified. Non-TLS secrets require at least one secret [field](#non-tls-field-add). Note that how you specify the `--field` option varies [based on the type of secret you create](#non-tls-field-add). 
@@ -209,7 +209,7 @@ You can also list the fields in a secret with the `ibmcloud ks ingress secret fi
 #### Adding a secret field
 {: #non-tls-field-add}
 
-Add a secret field to a non-TLS secret by running the [`ibmcloud ks ingress secret field add`](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add) command with the `--field` option. You can also use this option to add fields when you create a secret with the [**`ibmcloud ks ingress secret create`**](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_create) command. This option is not supported for TLS secrets. 
+Add a secret field to a non-TLS secret by running the [`ibmcloud ks ingress secret field add`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-secret-field-add-cli) command with the `--field` option. You can also use this option to add fields when you create a secret with the [**`ibmcloud ks ingress secret create`**](/docs/containers?topic=containers-kubernetes-service-cli#ingress-secret-create-cli) command. This option is not supported for TLS secrets. 
 {: shortdesc}
 
 There are three ways to specify the `--field` option. The one you choose depends on the secret type and how you want to name the field in the secret.
@@ -245,7 +245,7 @@ data:
 #### Updating secret fields
 {: #non-tls-field-update}
 
-Run the **`ingress secret update`** command to update a secret field's values. Note that this does not update the CRN. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_update).
+Run the **`ingress secret update`** command to update a secret field's values. Note that this does not update the CRN. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-secret-update-cli).
 {: #shortdesc}
 
 ```sh
@@ -256,7 +256,7 @@ ibmcloud ks ingress secret update --cluster example-cluster --name example-secre
 #### Removing a secret field
 {: #non-tls-field-rm}
 
-You can remove a secret field from a non-TLS secret. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_secret_field_add).
+You can remove a secret field from a non-TLS secret. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-secret-field-add-cli).
 {: shortdesc}
 
 ```sh

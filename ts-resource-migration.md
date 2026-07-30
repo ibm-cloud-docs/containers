@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2022, 2025
-lastupdated: "2025-08-01"
+  years: 2022, 2026
+lastupdated: "2026-07-30"
 
 
 keywords: kubernetes, tigera, master
@@ -70,7 +70,7 @@ To troubleshoot the migration:
     ```
     {: screen}
 
-1. For the problem worker nodes, [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) or [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) them.
+1. For the problem worker nodes, [reboot](/docs/containers?topic=containers-kubernetes-service-cli#worker-reboot-cli) or [reload](/docs/containers?topic=containers-kubernetes-service-cli#worker-reload-cli) them.
 
 Result: 
 
@@ -103,6 +103,6 @@ To confirm the migration is complete:
     ```
     {: screen}
 
-1. If the migration is still stuck, [replace](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_replace) or [remove](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_rm) the problematic nodes. For more information, see [Debugging worker nodes](/docs/containers?topic=containers-debug_worker_nodes).
+1. If the migration is still stuck, [replace](/docs/containers?topic=containers-kubernetes-service-cli#worker-replace-cli) or [remove](/docs/containers?topic=containers-kubernetes-service-cli#worker-rm-cli) the problematic nodes. For more information, see [Debugging worker nodes](/docs/containers?topic=containers-debug_worker_nodes).
 
 When you have confirmed that the migration is complete, proceed with the master update to {{site.data.keyword.containerlong_notm}} version 1.30.

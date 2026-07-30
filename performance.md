@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-07-01"
+lastupdated: "2026-07-30"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
@@ -152,7 +152,7 @@ To revert your worker nodes `sysctl` parameters to the default values, follow th
     ```
     {: pre}
 
-1. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot). The worker nodes come back online with the default values applied.
+1. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-kubernetes-service-cli#worker-reboot-cli). The worker nodes come back online with the default values applied.
 
 
 

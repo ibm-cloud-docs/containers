@@ -3,7 +3,7 @@
 copyright:
   years: 2026
 
-lastupdated: "2026-07-27"
+lastupdated: "2026-07-30"
 
 keywords: kubernetes, traefik, ingress controller
 
@@ -765,7 +765,7 @@ The [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt
 Enabling the PROXY protocol recreates your load balancers, which might cause a brief service disruption. Two unused IP addresses per load balancer must be available in each subnet during recreation.
 {: important}
 
-1. Enable the PROXY protocol. For more information about the command parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable).
+1. Enable the PROXY protocol. For more information about the command parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-load-balancer-proxy-protocol-enable-cli).
 
     ```sh
     ibmcloud ks ingress lb proxy-protocol enable --cluster <cluster_name_or_ID> --cidr <subnet_CIDR>
@@ -793,7 +793,7 @@ By default, the source IP address of the client request is not preserved. When a
 
 To preserve the original source IP address of the client request, you can enable [source IP preservation](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer){: external}. Preserving the client's IP is useful, for example, when app servers have to apply security and access-control policies.
 
-When source IP preservation is enabled, load balancers shift from forwarding traffic to an ALB pod on a different worker node to an ALB pod on the same worker node. Your apps might experience downtime during this shift. If you [disable an ALB](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure), you lose any source IP changes you made to the load balancer service that exposes the ALB. When you re-enable the ALB, you must enable source IP again.
+When source IP preservation is enabled, load balancers shift from forwarding traffic to an ALB pod on a different worker node to an ALB pod on the same worker node. Your apps might experience downtime during this shift. If you [disable an ALB](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli), you lose any source IP changes you made to the load balancer service that exposes the ALB. When you re-enable the ALB, you must enable source IP again.
 
 In classic clusters, [increasing the ALB replica count to more than two](/docs/containers?topic=containers-ingress-alb-manage#alb_replicas) increases the number of replicas, but when `externalTrafficPolicy` is set to `Local`, any replicas beyond two are not used. Only two load balancer pods are present on the cluster in an active-passive setup and, because of this traffic policy, they forward incoming traffic only to the ALB pod on the same node.
 {: important}

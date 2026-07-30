@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2026
-lastupdated: "2026-07-27"
+lastupdated: "2026-07-30"
 
 
 keywords: containers, kubernetes, affinity, taint, edge node, edge
@@ -24,7 +24,7 @@ subcollection: containers
 In the following steps, you add the `dedicated=edge` label to worker nodes on each public or private VLAN in your cluster. This label is used to deploy your network load balancers (NLBs) to those worker nodes only. Both public and private NLBs can be deployed to edge worker nodes.
 {: shortdesc}
 
-If you plan to use an existing worker pool, the pool must span all zones in your cluster and have at least two worker nodes per zone. You can label the worker pool with `dedicated=edge` by using the [`ibmcloud ks worker-pool label set` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set).
+If you plan to use an existing worker pool, the pool must span all zones in your cluster and have at least two worker nodes per zone. You can label the worker pool with `dedicated=edge` by using the [`ibmcloud ks worker-pool label set` command](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-label-set-cli).
 {: note}
 
 ## Before you begin
@@ -36,13 +36,13 @@ If you plan to use an existing worker pool, the pool must span all zones in your
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
 1. Create a worker pool with the label `dedicated=edge` or add the label to one of your existing worker pools.
-    * To create a worker pool you can use the `worker-pool create classic` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create).
+    * To create a worker pool you can use the `worker-pool create classic` [command](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-create-classic-cli).
         ```sh
         ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flavor FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION --label dedicated=edge
         ```
         {: pre}
 
-    * To label an existing worker pool, you can use the `worker-pool label set` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set).
+    * To label an existing worker pool, you can use the `worker-pool label set` [command](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-label-set-cli).
         ```sh
         ibmcloud ks worker-pool label set --cluster CLUSTER --worker-pool POOL --label dedicated=edge
         ```

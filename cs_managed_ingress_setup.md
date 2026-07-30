@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-07-27"
+lastupdated: "2026-07-30"
 
 
 keywords: ingress, expose apps, ingress resource, ALB, domain
@@ -39,13 +39,13 @@ Follow these preparation steps before you begin.
 
 1. If you are exposing apps over private ALBs, you must enable each private ALB in the CLI. To get the ALB ID, run `ibmcloud ks ingress alb ls --cluster CLUSTER`.
 
-   [Classic clusters]{: tag-classic-inf} For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_configure).
+   [Classic clusters]{: tag-classic-inf} For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli).
     ```sh
     ibmcloud ks ingress alb enable classic --alb ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
-   [VPC clusters]{: tag-vpc} For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cli_alb_configure_vpc_gen2).
+   [VPC clusters]{: tag-vpc} For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli).
     ```sh
     ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER_NAME
     ```

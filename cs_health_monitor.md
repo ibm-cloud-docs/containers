@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-24"
+lastupdated: "2026-07-30"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -195,7 +195,7 @@ Reloading or rebooting the worker can resolve the issue. However, you might need
     - [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic).
     - [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc).
 
-3. If all the worker nodes are in the `Ready` state, [reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker nodes.
+3. If all the worker nodes are in the `Ready` state, [reload](/docs/containers?topic=containers-kubernetes-service-cli#worker-reload-cli) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#worker-reboot-cli) your worker nodes.
     1. Describe your worker node and review the **Events** section for common error messages.
         ```sh
         kubectl describe node <node>
@@ -210,7 +210,7 @@ Reloading or rebooting the worker can resolve the issue. However, you might need
         ```
         {: pre}
 
-    1. [Reload](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) your worker node.
+    1. [Reload](/docs/containers?topic=containers-kubernetes-service-cli#worker-reload-cli) or [reboot](/docs/containers?topic=containers-kubernetes-service-cli#worker-reboot-cli) your worker node.
 
 
 ### Zone alerts

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-05-12"
+lastupdated: "2026-07-30"
 
 
 keywords: containers, ingress, troubleshoot ingress, errahcf
@@ -77,5 +77,5 @@ Review your access control lists to make sure that health traffic is allowed.
 
 1. If the issue persists, contact support. Open a [support case](/docs/support?topic=support-using-avatar). In the case details, be sure to include any relevant log files, error messages, or command outputs.
 
-If you don't want to use the ALB health check, you can remove the health checker application using running the **`ibmcloud ks ingress alb health-checker disable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_alb_healthchecker_disable).
+If you don't want to use the ALB health check, you can remove the health checker application using running the **`ibmcloud ks ingress alb health-checker disable`** [command](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-health-checker-disable-cli).
 {: tip}
