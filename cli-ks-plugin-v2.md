@@ -24,7 +24,7 @@ In the command line, you are notified when updates to the `ibmcloud` CLI and plu
 ## Prerequisites
 {: #ks-cli-prereq}
 
-* Install the [CLI](/docs/containers?topic=containers-cli-install).
+* Install the [ CLI](/docs/containers?topic=containers-cli-install).
 * Install the `ks` plug-in by running the following command:
 
    ```sh
@@ -71,7 +71,13 @@ The following tables list the `ibmcloud ks` command groups. For a complete list 
 | [`ibmcloud ks security-group`](#security-group-cli) | Run operations against a security group. |
 {: caption="ibmcloud ks CLI command groups" caption-side="bottom"}
 
-## `ibmcloud ks api`
+
+## `ibmcloud ks api` commands
+{: #api-cli}
+
+View or set the API endpoint and API version for the service.
+
+### `ibmcloud ks api`
 {: #api-cli}
 
 
@@ -118,6 +124,12 @@ ibmcloud ks api \
 {: pre}
 
 
+
+## `ibmcloud ks api-key` commands
+{: #api-key-cli}
+
+View information about the API key for a cluster or reset it to a new key.
+
 ### `ibmcloud ks api-key info`
 {: #api-key-info-cli}
 
@@ -161,7 +173,7 @@ ibmcloud ks api-key info --cluster CLUSTER_NAME_OR_ID --output json -q
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
-Replace the API key for all clusters in the specified region and targeted resource group. If no resource group is targeted the command applies to the default resource group. For more information, see [https://cloud.ibm.com/docs/containers?topic=containers-access-creds#api_key_about](https://cloud.ibm.com/docs/containers?topic=containers-access-creds#api_key_about).
+Replace the API key for all clusters in the specified region and targeted resource group. If no resource group is targeted the command applies to the default resource group. For more information, see [http://ibm.biz/api-key](http://ibm.biz/api-key).
 {: shortdesc}
 
 ```sh
@@ -196,6 +208,12 @@ ibmcloud ks api-key reset --output json --region REGION -f
 ```
 {: pre}
 
+
+
+## `ibmcloud ks cluster` commands
+{: #cluster-cli}
+
+View and modify cluster and cluster service settings.
 
 ### `ibmcloud ks cluster addon disable acm`
 {: #cluster-addon-disable-acm-cli}
@@ -2400,7 +2418,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT] [--
 :    Specify the cluster name or ID.
 
 `--endpoint ENDPOINT`
-:    The server URL to use for the cluster context. If you do not include this flag, the default cluster service endpoint is used. For more info, see [https://cloud.ibm.com/docs/containers?topic=containers-access_cluster#access_private_se](https://cloud.ibm.com/docs/containers?topic=containers-access_cluster#access_private_se) for Kubernetes or [https://cloud.ibm.com/docs/openshift?topic=openshift-access_cluster](https://cloud.ibm.com/docs/openshift?topic=openshift-access_cluster) for OpenShift clusters. Accepted values: `private`, `link`, `vpe`
+:    The server URL to use for the cluster context. If you do not include this flag, the default cluster service endpoint is used. For more info, see [https://ibm.biz/context-kube](https://ibm.biz/context-kube) for Kubernetes or [https://ibm.biz/context-ocp](https://ibm.biz/context-ocp) for OpenShift clusters. Accepted values: `private`, `link`, `vpe`
 
 `--network`
 :    Retrieve the Calico network config with the Admin config.
@@ -2468,7 +2486,7 @@ ibmcloud ks cluster create classic --flavor FLAVOR --name NAME --zone ZONE [--di
 :    Specify the name of the operating system.
 
 `--pod-subnet SUBNET`
-:    Specify a custom subnet CIDR to provide private IP addresses for pods. The subnet must be at least `/23` or larger. For more info, see [https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-classic-cli](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-classic-cli)
+:    Specify a custom subnet CIDR to provide private IP addresses for pods. The subnet must be at least `/23` or larger. For more info, see [https://ibm.biz/cluster-create-classic](https://ibm.biz/cluster-create-classic)
 
 `--private-only`
 :    Use this flag to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag without specifying the `--public-vlan` flag.
@@ -2489,7 +2507,7 @@ ibmcloud ks cluster create classic --flavor FLAVOR --name NAME --zone ZONE [--di
 :    Do not show the message of the day or update reminders.
 
 `--service-subnet SUBNET`
-:    Specify a custom subnet CIDR to provide private IP addresses for services. The subnet must be at least `/24` or larger. For more info, see [https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-classic-cli](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-classic-cli). Default value: `172.21.0.0/16`
+:    Specify a custom subnet CIDR to provide private IP addresses for services. The subnet must be at least `/24` or larger. For more info, see [https://ibm.biz/cluster-create-classic](https://ibm.biz/cluster-create-classic). Default value: `172.21.0.0/16`
 
 `--skip-advance-permissions-check`
 :    Skip checking for infrastructure permissions before completing this action. Note that if you do not have the correct infrastructure permissions, this action might only partially succeed.
@@ -2567,7 +2585,7 @@ ibmcloud ks cluster create satellite --location LOCATION --name NAME --version V
 :    The method for selecting the node network interface for the internal pod network. This option can be used only if the Satellite location that you specify has Red Hat CoreOS enabled. To provide a direct URL or IP address, specify `can-reach=<url>` or `can-reach=<ip_address>`. To choose a network interface, specify `interface=<network_interface>`.
 
 `--pod-subnet SUBNET`
-:    Specify a custom subnet CIDR to provide private IP addresses for pods. The subnet must be at least `/23` or larger. For more info, see [https://cloud.ibm.com/docs/openshift?topic=openshift-kubernetes-service-cli#cluster-create-satellite-cli](https://cloud.ibm.com/docs/openshift?topic=openshift-kubernetes-service-cli#cluster-create-satellite-cli). Default value: `172.30.0.0/16`
+:    Specify a custom subnet CIDR to provide private IP addresses for pods. The subnet must be at least `/23` or larger. For more info, see [https://ibm.biz/cluster-create-satellite](https://ibm.biz/cluster-create-satellite). Default value: `172.30.0.0/16`
 
 `--pull-secret SECRET`
 :    Specify an existing OpenShift entitlement for this cluster's worker nodes by providing your Red Hat account pull secret.
@@ -2576,7 +2594,7 @@ ibmcloud ks cluster create satellite --location LOCATION --name NAME --version V
 :    Do not show the message of the day or update reminders.
 
 `--service-subnet SUBNET`
-:    Specify a custom subnet CIDR to provide private IP addresses for services. The subnet must be at least `/24` or larger. For more info, see [https://cloud.ibm.com/docs/openshift?topic=openshift-kubernetes-service-cli#cluster-create-satellite-cli](https://cloud.ibm.com/docs/openshift?topic=openshift-kubernetes-service-cli#cluster-create-satellite-cli). Default value: `172.21.0.0/16`
+:    Specify a custom subnet CIDR to provide private IP addresses for services. The subnet must be at least `/24` or larger. For more info, see [https://ibm.biz/cluster-create-satellite](https://ibm.biz/cluster-create-satellite). Default value: `172.21.0.0/16`
 
 `--sm-group GROUP`
 :    The Secret Group ID of the IBM Cloud Secrets Manager instance where your secrets are persisted.
@@ -2642,13 +2660,13 @@ ibmcloud ks cluster create vpc-classic --flavor FLAVOR --name NAME --subnet-id I
 :    Specify the name of the operating system.
 
 `--pod-subnet SUBNET`
-:    Specify a custom subnet CIDR to provide private IP addresses for pods. The subnet must be at least `/23` or larger. For more info, see [https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-vpc-gen2-cli](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-vpc-gen2-cli)
+:    Specify a custom subnet CIDR to provide private IP addresses for pods. The subnet must be at least `/23` or larger. For more info, see [https://ibm.biz/cluster-create-vpc](https://ibm.biz/cluster-create-vpc)
 
 `-q`
 :    Do not show the message of the day or update reminders.
 
 `--service-subnet SUBNET`
-:    Specify a custom subnet CIDR to provide private IP addresses for services. The subnet must be at least `/24` or larger. For more info, see [https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-vpc-gen2-cli](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-vpc-gen2-cli). Default value: `172.21.0.0/16`
+:    Specify a custom subnet CIDR to provide private IP addresses for services. The subnet must be at least `/24` or larger. For more info, see [https://ibm.biz/cluster-create-vpc](https://ibm.biz/cluster-create-vpc). Default value: `172.21.0.0/16`
 
 `--sm-group GROUP`
 :    The Secret Group ID of the IBM Cloud Secrets Manager instance where your secrets are persisted.
@@ -2740,7 +2758,7 @@ ibmcloud ks cluster create vpc-gen2 --flavor FLAVOR --name NAME --subnet-id ID -
 :    Specify the name of the operating system.
 
 `--pod-subnet SUBNET`
-:    Specify a custom subnet CIDR to provide private IP addresses for pods. The subnet must be at least `/23` or larger. For more info, see [https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-vpc-gen2-cli](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-vpc-gen2-cli)
+:    Specify a custom subnet CIDR to provide private IP addresses for pods. The subnet must be at least `/23` or larger. For more info, see [https://ibm.biz/cluster-create-vpc](https://ibm.biz/cluster-create-vpc)
 
 `-q`
 :    Do not show the message of the day or update reminders.
@@ -2749,7 +2767,7 @@ ibmcloud ks cluster create vpc-gen2 --flavor FLAVOR --name NAME --subnet-id ID -
 :    The secondary storage option for the flavor. To view the secondary storage options that are available for a flavor, run `ibmcloud ks flavor get --provider vpc-gen2 --zone <zone name>`.
 
 `--service-subnet SUBNET`
-:    Specify a custom subnet CIDR to provide private IP addresses for services. The subnet must be at least `/24` or larger. For more info, see [https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-vpc-gen2-cli](https://cloud.ibm.com/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-vpc-gen2-cli). Default value: `172.21.0.0/16`
+:    Specify a custom subnet CIDR to provide private IP addresses for services. The subnet must be at least `/24` or larger. For more info, see [https://ibm.biz/cluster-create-vpc](https://ibm.biz/cluster-create-vpc). Default value: `172.21.0.0/16`
 
 `--sm-group GROUP`
 :    The Secret Group ID of the IBM Cloud Secrets Manager instance where your secrets are persisted.
@@ -3330,7 +3348,7 @@ ibmcloud ks cluster master pod-security set --cluster CLUSTER [--config-file FIL
 :    Specify the cluster name or ID.
 
 `--config-file FILE`
-:    The filepath of a custom PodSecurity configuration. If not specified, the Kubernetes defaults are applied. For more information, see https://cloud.ibm.com/docs/containers?topic=containers-pod-security-admission
+:    The filepath of a custom PodSecurity configuration. If not specified, the Kubernetes defaults are applied. For more information, see https://ibm.biz/BdPtUB
 
 `-q`
 :    Do not show the message of the day or update reminders.
@@ -4167,6 +4185,12 @@ ibmcloud ks cluster subnet detach \
 {: pre}
 
 
+
+## `ibmcloud ks credential` commands
+{: #credential-cli}
+
+Set and unset credentials that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account.
+
 ### `ibmcloud ks credential get`
 {: #credential-get-cli}
 
@@ -4287,6 +4311,12 @@ ibmcloud ks credential unset --region REGION -q
 ```
 {: pre}
 
+
+
+## `ibmcloud ks experimental` commands
+{: #experimental-cli}
+
+[Expires on 2026-10-21] Experiment with new commands. IMPORTANT: Commands here will retire after the [date] in their description.
 
 ### `ibmcloud ks experimental trusted-profile default get`
 {: #experimental-trusted-profile-default-get-cli}
@@ -4664,6 +4694,12 @@ ibmcloud ks experimental vni ls \
 {: pre}
 
 
+
+## `ibmcloud ks flavor` commands
+{: #flavor-cli}
+
+Getting flavor related information. Flavors determine how much virtual CPU, memory, and disk space is available to each worker node.
+
 ### `ibmcloud ks flavor get`
 {: #flavor-get-cli}
 
@@ -4755,6 +4791,12 @@ ibmcloud ks flavor ls --zone ZONE --show-storage SHOW-STORAGE --show-os SHOW-OS
 {: pre}
 
 
+
+## `ibmcloud ks infra-permissions` commands
+{: #infra-permissions-cli}
+
+View information about infrastructure permissions that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account.
+
 ### `ibmcloud ks infra-permissions get`
 {: #infra-permissions-get-cli}
 
@@ -4792,6 +4834,12 @@ ibmcloud ks infra-permissions get --output json --region REGION -q
 ```
 {: pre}
 
+
+
+## `ibmcloud ks ingress` commands
+{: #ingress-cli}
+
+View and modify Ingress services and settings
 
 ### `ibmcloud ks ingress alb autoscale get`
 {: #ingress-alb-autoscale-get-cli}
@@ -4864,7 +4912,7 @@ ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas
 :    Average CPU utilization threshold. Used to dynamically calculate the number of replicas.
 
 `--custom-metrics-file FILE`
-:    Path for the custom metric file. See https://cloud.ibm.com/docs/containers?topic=containers-ingress-alb-manage#alb_replicas_autoscaler for more details.
+:    Path for the custom metric file. See https://ibm.biz/iks-ingress-custom-metrics for more details.
 
 `--max-replicas REPLICAS`
 :    The maximum replicas for the given ALB. Ensure you have enough workers.
@@ -5567,7 +5615,7 @@ ibmcloud ks ingress domain create --cluster CLUSTER [--crn CRN] [--domain DOMAIN
 :    The Ingress domain. To see existing domains, run `ibmcloud ks ingress domain ls`.
 
 `--domain-provider PROVIDER`
-:    The DNS provider. The default DNS provider is our internal one. For supported providers see our documentation: https://cloud.ibm.com/docs/containers?topic=containers-ingress-domains&interface=cli
+:    The DNS provider. The default DNS provider is our internal one. For supported providers see our documentation: https://ibm.biz/containers-ingress-domains
 
 `--domain-zone ZONE`
 :    The ZoneID for CIS.
@@ -7079,7 +7127,13 @@ ibmcloud ks ingress status-report ignored-errors rm \
 {: pre}
 
 
-## `ibmcloud ks init`
+
+## `ibmcloud ks init` commands
+{: #init-cli}
+
+Initialize the Kubernetes Service plug-in and get authentication tokens.
+
+### `ibmcloud ks init`
 {: #init-cli}
 
 
@@ -7122,6 +7176,12 @@ ibmcloud ks init --host HOSTNAME -u U -p POOL_NAME
 ```
 {: pre}
 
+
+
+## `ibmcloud ks kms` commands
+{: #kms-cli}
+
+View and configure Key Management Service integrations.
 
 ### `ibmcloud ks kms crk ls`
 {: #kms-crk-ls-cli}
@@ -7246,7 +7306,13 @@ ibmcloud ks kms instance ls --output json -q
 {: pre}
 
 
-## `ibmcloud ks locations`
+
+## `ibmcloud ks locations` commands
+{: #locations-cli}
+
+List supported IBM Cloud Kubernetes Service locations.
+
+### `ibmcloud ks locations`
 {: #locations-cli}
 
 
@@ -7286,6 +7352,12 @@ ibmcloud ks locations --provider PROVIDER_ID --show-flavors FLAVOR --output json
 ```
 {: pre}
 
+
+
+## `ibmcloud ks logging` commands
+{: #logging-cli}
+
+Forward logs from your cluster.
 
 ### `ibmcloud ks logging autoupdate disable`
 {: #logging-autoupdate-disable-cli}
@@ -7928,7 +8000,13 @@ ibmcloud ks logging refresh \
 {: pre}
 
 
-## `ibmcloud ks messages`
+
+## `ibmcloud ks messages` commands
+{: #messages-cli}
+
+View the current user messages.
+
+### `ibmcloud ks messages`
 {: #messages-cli}
 
 
@@ -7959,6 +8037,12 @@ ibmcloud sat messages -q
 ```
 {: pre}
 
+
+
+## `ibmcloud ks nlb-dns` commands
+{: #nlb-dns-cli}
+
+Create and manage host names for network load balancer (NLB) IP addresses in a cluster and health check monitors for host names.
 
 ### `ibmcloud ks nlb-dns add`
 {: #nlb-dns-add-cli}
@@ -8651,6 +8735,12 @@ ibmcloud ks nlb-dns secret rm --cluster CLUSTER_NAME_OR_ID --nlb-subdomain DOMAI
 {: pre}
 
 
+
+## `ibmcloud ks quota` commands
+{: #quota-cli}
+
+View the quota and limits for cluster-related resources in your IBM Cloud account.
+
 ### `ibmcloud ks quota ls`
 {: #quota-ls-cli}
 
@@ -8689,6 +8779,12 @@ ibmcloud ks quota ls --output json --provider PROVIDER_ID -q
 {: pre}
 
 
+
+## `ibmcloud ks script` commands
+{: #script-cli}
+
+Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. Legacy-structured commands are replaced with beta-structured commands.
+
 ### `ibmcloud ks script update`
 {: #script-update-cli}
 
@@ -8723,6 +8819,12 @@ ibmcloud ks script update --in-place IN-PLACE -q
 ```
 {: pre}
 
+
+
+## `ibmcloud ks security-group` commands
+{: #security-group-cli}
+
+Run operations against a security group.
 
 ### `ibmcloud ks security-group ls`
 {: #security-group-ls-cli}
@@ -8855,6 +8957,12 @@ ibmcloud ks security-group sync --cluster CLUSTER_NAME_OR_ID --security-group GR
 ```
 {: pre}
 
+
+
+## `ibmcloud ks storage` commands
+{: #storage-cli}
+
+View and modify storage resources.
 
 ### `ibmcloud ks storage attachment create`
 {: #storage-attachment-create-cli}
@@ -9141,7 +9249,13 @@ ibmcloud ks storage volume ls \
 {: pre}
 
 
-## `ibmcloud ks subnets`
+
+## `ibmcloud ks subnets` commands
+{: #subnets-cli}
+
+List available portable subnets in your IBM Cloud infrastructure account.
+
+### `ibmcloud ks subnets`
 {: #subnets-cli}
 
 
@@ -9193,7 +9307,13 @@ ibmcloud ks subnets \
 {: pre}
 
 
-## `ibmcloud ks versions`
+
+## `ibmcloud ks versions` commands
+{: #versions-cli}
+
+List all the container platform versions that are available for IBM Cloud Kubernetes Service clusters.
+
+### `ibmcloud ks versions`
 {: #versions-cli}
 
 
@@ -9230,6 +9350,12 @@ ibmcloud ks versions --output json --show-version VERSION -q
 ```
 {: pre}
 
+
+
+## `ibmcloud ks vlan` commands
+{: #vlan-cli}
+
+List public and private VLANs for a zone and view the VLAN spanning status.
 
 ### `ibmcloud ks vlan ls`
 {: #vlan-ls-cli}
@@ -9306,6 +9432,12 @@ ibmcloud ks vlan spanning get --output json --region REGION -q
 ```
 {: pre}
 
+
+
+## `ibmcloud ks vni` commands
+{: #vni-cli}
+
+Attach, detach, and list Virtual Network Interfaces on worker nodes.
 
 ### `ibmcloud ks vni attach baremetal`
 {: #vni-attach-baremetal-cli}
@@ -9453,6 +9585,12 @@ ibmcloud ks vni ls --cluster-id CLUSTER_NAME_OR_ID --worker WORKER_ID --after AF
 ```
 {: pre}
 
+
+
+## `ibmcloud ks vpc` commands
+{: #vpc-cli}
+
+Get information about VPCs and manage VPC clusters.
 
 ### `ibmcloud ks vpc ls`
 {: #vpc-ls-cli}
@@ -9612,7 +9750,13 @@ ibmcloud ks vpc secure-by-default enable \
 {: pre}
 
 
-## `ibmcloud ks webhook-create`
+
+## `ibmcloud ks webhook-create` commands
+{: #webhook-create-cli}
+
+Register a webhook in a cluster.
+
+### `ibmcloud ks webhook-create`
 {: #webhook-create-cli}
 
 
@@ -9655,6 +9799,12 @@ ibmcloud ks webhook-create --cluster CLUSTER_NAME_OR_ID --type TYPE --url URL
 ```
 {: pre}
 
+
+
+## `ibmcloud ks worker` commands
+{: #worker-cli}
+
+View and modify worker nodes for a cluster.
 
 ### `ibmcloud ks worker get`
 {: #worker-get-cli}
@@ -9969,6 +10119,12 @@ ibmcloud ks worker update --cluster CLUSTER_NAME_OR_ID -f --worker WORKER_ID
 ```
 {: pre}
 
+
+
+## `ibmcloud ks worker-pool` commands
+{: #worker-pool-cli}
+
+View and modify worker pools for a cluster.
 
 ### `ibmcloud ks worker-pool create classic`
 {: #worker-pool-create-classic-cli}
@@ -10719,6 +10875,12 @@ ibmcloud ks worker-pool zones \
 ```
 {: pre}
 
+
+
+## `ibmcloud ks zone` commands
+{: #zone-cli}
+
+List availability zones and modify the zones attached to a worker pool.
 
 ### `ibmcloud ks zone add classic`
 {: #zone-add-classic-cli}
