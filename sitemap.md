@@ -3827,6 +3827,10 @@ subcollection: containers
 
     * [Step 4: Verify your Ingress setup](/docs/containers?topic=containers-managed-traefik-ingress-setup#managed-traefik-ingress-setup-verify)
 
+* [Traefik CRDs](/docs/containers?topic=containers-managed-traefik-ingress-setup#traefik-crds)
+
+* [Ingress-NGINX annotations support in Traefik](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-nginx-annotations-support-in-traefik)
+
 * [Custom domains with Ingress](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain)
 
     * [Creating custom domains for public ALBs](/docs/containers?topic=containers-managed-traefik-ingress-setup#ingress-custom-domain-public)
