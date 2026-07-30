@@ -42,6 +42,28 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: #133_components}
 
 
+### Master fix pack 1.33.13_1577, released 28 July 2026
+{: #cl-boms_master-13313_1577_M}
+
+The following table shows the components that are in the master fix pack 1.33.13_1577. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Description |
+| ---- | ---- |
+|Cluster health image v1.6.17|New version contains updates and security fixes.|
+|etcd v3.5.30|See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.30).|
+|IBM Cloud Block Storage driver and plug-in v2.5.26|New version contains updates and security fixes.|
+|IBM Cloud Controller Manager v1.33.13-4|New version contains updates and security fixes.|
+|IBM Cloud File Storage for Classic plug-in and monitor v455|New version contains updates and security fixes.|
+|IBM Cloud RBAC Operator 92ba7dd|New version contains updates and security fixes.|
+|Key Management Service provider 2.10.27|New version contains updates and security fixes.|
+|Kubernetes v1.33.13|See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.33.13).|
+|Kubernetes NodeLocal DNS cache 1.26.8|See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.26.8).|
+|Portieris admission controller v0.14.2|See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.14.2)|
+{: caption="1.33.13_1577 fix pack." caption-side="bottom"}
+{: #cl-boms_master-13313_1577_M-component-table}
+
+
 ### Worker node fix pack 1.33.13_1578, released 13 July 2026
 {: #cl-boms-13313_1578_W}
 

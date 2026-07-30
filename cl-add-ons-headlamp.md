@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-07-14"
+lastupdated: "2026-07-30"
 
 
 keywords: change log, version history, Headlamp
@@ -41,6 +41,24 @@ Review the version history for Headlamp.
 
 ## Version 0.1.0
 {: #cl-add-ons-headlamp-0.1.0}
+
+
+### Version 0.1.0 - headlamp-0.1.0-358109573, released 30 July 2026
+{: #cl-add-ons-headlamp-headlamp-010-358109573}
+
+[Default version]{: tag-green}
+
+- Security context options applied on pod level 
+- `nginx 0.1.0-358109573`
+
+
+### Version 0.1.0 - headlamp-0.1.0-356396053, released 23 July 2026
+{: #cl-add-ons-headlamp-headlamp-010-356396053}
+
+[Default version]{: tag-green}
+
+- Added support for Traefik
+- `nginx 0.1.0-356396053`
 
 
 ### Version 0.1.0 - headlamp-0.1.0-353565104, released 14 July 2026

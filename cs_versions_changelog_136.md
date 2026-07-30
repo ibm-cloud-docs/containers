@@ -41,6 +41,25 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: #136_components}
 
 
+### Master fix pack 1.36.2_1523, released 28 July 2026
+{: #cl-boms_master-1362_1523_M}
+
+The following table shows the components that are in the master fix pack 1.36.2_1523. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Description |
+| ---- | ---- |
+|Calico v3.31.6|See the [Calico release notes](https://docs.tigera.io/calico/3.31/release-notes/#calico-open-source-3316-bug-fix-release).|
+|Cluster health image v1.6.17|New version contains updates and security fixes.|
+|IBM Cloud Controller Manager v1.36.2-4|New version contains updates and security fixes.|
+|IBM Cloud RBAC Operator 92ba7dd|New version contains updates and security fixes.|
+|Key Management Service provider 2.10.27|New version contains updates and security fixes.|
+|Portieris admission controller v0.14.2|See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.14.2)|
+|Tigera Operator v1.40.13|See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.40.13).|
+{: caption="1.36.2_1523 fix pack." caption-side="bottom"}
+{: #cl-boms_master-1362_1523_M-component-table}
+
+
 ### Worker node fix pack 1.36.2_1522, released 13 July 2026
 {: #cl-boms-1362_1522_W}
 
