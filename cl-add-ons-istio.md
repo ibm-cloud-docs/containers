@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-07-21"
+lastupdated: "2026-07-30"
 
 
 keywords: change log, version history, Istio
@@ -1199,79 +1199,3 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.16.7](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.7/){: external}.
 :   For more information, see the [Istio security bulletin 2023-003](https://istio.io/latest/news/security/istio-security-2023-003/){: external}.
-
-
-### Version 1.18.1, released 27 July 2023
-{: #1181}
-
-Review the changes that are included in version 1.18.1 of the managed Istio add-on. For more information, see the [Istio security bulletin 2023-002](https://istio.io/latest/news/security/istio-security-2023-002/){: external}.
-{: shortdesc}
-
-Previous version
-:   1.18.0
-
-Current version
-:   1.18.1
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.18.1](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.1/){: external}.
-:   Resolves the following CVEs:
-    - [CVE-2023-2602](https://www.cve.org/CVERecord?id=CVE-2023-2602){: external}
-    - [CVE-2023-2603](https://www.cve.org/CVERecord?id=CVE-2023-2603){: external}
-    - [usn-6166-1](https://ubuntu.com/security/notices/USN-6166-1){: external}
-
-
-### Version 1.17.4, released 27 July 2023
-{: #1174}
-
-Review the changes that are included in version 1.17.4 of the managed Istio add-on. For more information, see the [Istio security bulletin 2023-002](https://istio.io/latest/news/security/istio-security-2023-002/){: external}.
-{: shortdesc}
-
-Previous version
-:   1.17.3
-
-Current version
-:   1.17.4
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.17.4](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.4/){: external}.
-:   Resolves the following CVEs:
-    - [CVE-2023-2602](https://www.cve.org/CVERecord?id=CVE-2023-2602){: external}
-    - [CVE-2023-2603](https://www.cve.org/CVERecord?id=CVE-2023-2603){: external}
-    - [CVE-2023-1667](https://www.cve.org/CVERecord?id=CVE-2023-1667){: external}
-    - [CVE-2023-2283](https://www.cve.org/CVERecord?id=CVE-2023-2283){: external}
-    - [usn-6166-1](https://ubuntu.com/security/notices/USN-6166-1){: external}
-    - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1){: external}
-
-
-### Version 1.16.6, released 27 July 2023
-{: #1166}
-
-Review the changes that are included in version 1.16.6 of the managed Istio add-on. For more information, see the [Istio security bulletin 2023-002](https://istio.io/latest/news/security/istio-security-2023-002/){: external}.
-{: shortdesc}
-
-Previous version
-:   1.16.5
-
-Current version
-:   1.16.6
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.16.6](https://istio.io/latest/news/releases/1.16.x/announcing-1.16.6/){: external}.
-:   Resolves the following CVEs:
-    - [CVE-2023-2602](https://www.cve.org/CVERecord?id=CVE-2023-2602){: external}
-    - [CVE-2023-2603](https://www.cve.org/CVERecord?id=CVE-2023-2603){: external}
-    - [CVE-2019-17594](https://www.cve.org/CVERecord?id=CVE-2019-17594){: external}
-    - [CVE-2019-17595](https://www.cve.org/CVERecord?id=CVE-2019-17595){: external}
-    - [CVE-2021-39537](https://www.cve.org/CVERecord?id=CVE-2021-39537){: external}
-    - [CVE-2022-29458](https://www.cve.org/CVERecord?id=CVE-2022-29458){: external}
-    - [CVE-2023-29491](https://www.cve.org/CVERecord?id=CVE-2023-29491){: external}
-    - [CVE-2023-1667](https://www.cve.org/CVERecord?id=CVE-2023-1667){: external}
-    - [CVE-2023-2283](https://www.cve.org/CVERecord?id=CVE-2023-2283){: external}
-    - [CVE-2023-1255](https://www.cve.org/CVERecord?id=CVE-2023-1255){: external}
-    - [CVE-2023-2650](https://www.cve.org/CVERecord?id=CVE-2023-2650){: external}
-    - usn-6105-1
-    - [usn-6166-1](https://ubuntu.com/security/notices/USN-6166-1){: external}
-    - [usn-6099-1](https://ubuntu.com/security/notices/USN-6099-1){: external}
-    - [usn-6138-1](https://ubuntu.com/security/notices/USN-6138-1){: external}
-    - [usn-6199-1](https://ubuntu.com/security/notices/USN-6199-1){: external}
