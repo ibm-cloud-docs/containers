@@ -360,8 +360,6 @@ subcollection: containers
 
         * IBM Object CSI Driver cluster add-on patch updates.
 
-* [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
-
     * [03 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0326)
 
         * IBM Storage Operator cluster add-on patch updates.

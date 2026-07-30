@@ -311,9 +311,6 @@ IBM Storage Operator cluster add-on patch updates.
 IBM Object CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
 
-## June 2026
-{: #containers-jun26}
-
 ### 03 June 2026
 {: #containers-jun0326}
 {: release-note}
