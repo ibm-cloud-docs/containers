@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-07-09"
+lastupdated: "2026-07-30"
 
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps
@@ -53,7 +53,7 @@ Private ALBs do not reference the IBM-provided Ingress subdomain and instead req
 The subdomain is registered in the following format.
 
 ```sh
-<cluster_name>.<globally_unique_account_HASH>-0000.<region>.containers.appdomain.cloud
+<cluster_name>-<globally_unique_account_HASH>-0000.<region>.containers.appdomain.cloud
 ```
 {: screen}
 
@@ -61,7 +61,6 @@ The following table describes each portion of the subdomain.
 
 |Subdomain component|Description|
 |----|----|
-|`*`|The wildcard for the subdomain is registered by default for your cluster.|
 |`<cluster_name>`|The name of your cluster. \n - If the cluster name is 26 characters or fewer and the cluster name is unique in this region, the entire cluster name is included and is not modified: `myclustername`. \n - If the cluster name is 26 characters or fewer and there is an existing cluster of the same name in this region, the entire cluster name is included and a dash with six random characters is added: `myclustername-ABC123`. \n - If the cluster name is 26 characters or greater and the cluster name is unique in this region, only the first 24 characters of the cluster name are used: `myveryverylongclusternam`. \n - If the cluster name is 26 characters or greater and there is an existing cluster of the same name in this region, only the first 17 characters of the cluster name are used and a dash with six random characters is added: `myveryverylongclu-ABC123`.|
 |`<globally_unique_account_HASH>`|A globally unique HASH is created for your {{site.data.keyword.cloud_notm}} account. All subdomains that you create for NLBs in clusters in your account use this globally unique HASH.|
 |`0000`|Acts as a counter for each subdomain that is created in your cluster.|
