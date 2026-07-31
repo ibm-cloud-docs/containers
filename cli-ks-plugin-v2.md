@@ -2,11 +2,13 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-07-31"
 
 keywords: containers, cli reference, kubernetes cli, openshift cli, {{site.data.keyword.containerlong_notm}}
 
 subcollection: containers
+
+content-type: cli-docs
 
 ---
 
@@ -2453,7 +2455,7 @@ Create a cluster with worker nodes on classic infrastructure.
 {: shortdesc}
 
 ```sh
-ibmcloud ks cluster create classic --flavor FLAVOR --name NAME --zone ZONE [--disable-disk-encrypt] [--entitlement ENTITLEMENT] [--hardware HARDWARE] [--location LOCATION] [--no-subnet] [--operating-system SYSTEM] [--pod-subnet SUBNET] [--private-service-endpoint] [--private-vlan VLAN] [--public-service-endpoint] [-q] [--service-subnet SUBNET] [--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [--version VERSION] [--workers COUNT] (--private-only | --public-vlan VLAN)
+ibmcloud ks cluster create classic --flavor FLAVOR --name NAME --zone ZONE [--disable-disk-encrypt] [--entitlement ENTITLEMENT] [--hardware HARDWARE] [--location LOCATION] [--no-subnet] [--operating-system SYSTEM] [--pod-subnet SUBNET] [--private-service-endpoint] [--private-vlan VLAN] [--public-service-endpoint] [-q] [--service-subnet SUBNET] [--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [--version VERSION] [--workers COUNT] --private-only
 ```
 {: pre}
 
@@ -3927,7 +3929,7 @@ Add an IBM Cloud service to a cluster by binding the service instance to a Kuber
 {: shortdesc}
 
 ```sh
-ibmcloud ks cluster service bind --cluster CLUSTER --namespace NAMESPACE --service SERVICE [-q] (--key KEY | --role ROLE)
+ibmcloud ks cluster service bind --cluster CLUSTER --namespace NAMESPACE --service SERVICE [-q] --key KEY
 ```
 {: pre}
 
@@ -3977,7 +3979,7 @@ List services bound to a Kubernetes namespace.
 {: shortdesc}
 
 ```sh
-ibmcloud ks cluster service ls --cluster CLUSTER [--output OUTPUT] [-q] (--all-namespaces | --namespace NAMESPACE)
+ibmcloud ks cluster service ls --cluster CLUSTER [--output OUTPUT] [-q] --all-namespaces
 ```
 {: pre}
 
@@ -4503,7 +4505,7 @@ ibmcloud ks experimental trusted-profile set \
 {: shortdesc}
 
 ```sh
-ibmcloud ks experimental vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
+ibmcloud ks experimental vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output OUTPUT] [-q] --cluster-id ID
 ```
 {: pre}
 
@@ -4603,7 +4605,7 @@ ibmcloud ks experimental vni attach virtual \
 {: shortdesc}
 
 ```sh
-ibmcloud ks experimental vni detach --vni VNI [-f] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
+ibmcloud ks experimental vni detach --vni VNI [-f] [--output OUTPUT] [-q] --cluster-id ID
 ```
 {: pre}
 
@@ -4653,7 +4655,7 @@ ibmcloud ks experimental vni detach \
 {: shortdesc}
 
 ```sh
-ibmcloud ks experimental vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
+ibmcloud ks experimental vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] --cluster-id ID
 ```
 {: pre}
 
@@ -4891,7 +4893,7 @@ Configure autoscaling for Ingress ALBs.
 {: shortdesc}
 
 ```sh
-ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas REPLICAS --min-replicas REPLICAS [--output OUTPUT] [-q] (--cpu-average-utilization PERCENT | --custom-metrics-file FILE)
+ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas REPLICAS --min-replicas REPLICAS [--output OUTPUT] [-q] --cpu-average-utilization PERCENT
 ```
 {: pre}
 
@@ -7473,7 +7475,7 @@ Create a logging configuration. If you are using a Dedicated account, you must l
 {: shortdesc}
 
 ```sh
-ibmcloud ks logging config create --cluster CLUSTER --logsource LOGSOURCE --type TYPE [--force-update] [--hostname HOSTNAME] [--output OUTPUT] [--port PORT] [-q] (--ca-cert CERT --syslog-protocol PROTOCOL --verify-mode MODE | --org ORG --skip-validation --space SPACE) (--namespace NAMESPACE | -C CONTAINER -p PATH)
+ibmcloud ks logging config create --cluster CLUSTER --logsource LOGSOURCE --type TYPE [--force-update] [--hostname HOSTNAME] [--output OUTPUT] [--port PORT] [-q] --ca-cert CERT --syslog-protocol PROTOCOL --verify-mode MODE --namespace NAMESPACE
 ```
 {: pre}
 
@@ -7604,7 +7606,7 @@ Delete a log forwarding configuration from a cluster.
 {: shortdesc}
 
 ```sh
-ibmcloud ks logging config rm --cluster CLUSTER [--force-update] [-q] (--all | --id ID | --namespace NAMESPACE)
+ibmcloud ks logging config rm --cluster CLUSTER [--force-update] [-q] --all
 ```
 {: pre}
 
@@ -7651,7 +7653,7 @@ Update a log forwarding configuration for a cluster.
 {: shortdesc}
 
 ```sh
-ibmcloud ks logging config update --cluster CLUSTER --id ID --logsource LOGSOURCE --type TYPE [--force-update] [--hostname HOSTNAME] [--output OUTPUT] [--port PORT] [-q] (--ca-cert CERT --syslog-protocol PROTOCOL --verify-mode MODE | --org ORG --skip-validation --space SPACE) (--namespace NAMESPACE | -C CONTAINER -p PATH)
+ibmcloud ks logging config update --cluster CLUSTER --id ID --logsource LOGSOURCE --type TYPE [--force-update] [--hostname HOSTNAME] [--output OUTPUT] [--port PORT] [-q] --ca-cert CERT --syslog-protocol PROTOCOL --verify-mode MODE --namespace NAMESPACE
 ```
 {: pre}
 
@@ -7741,7 +7743,7 @@ Filter out logs that are forwarded by your logging configuration.
 {: shortdesc}
 
 ```sh
-ibmcloud ks logging filter create --cluster CLUSTER [--container CONTAINER] [--force-update] [--lc LOGGING-CONFIG ...] [--level LEVEL] [--namespace NAMESPACE] [--output OUTPUT] [-q] [--type TYPE] (--message MESSAGE | --regex-message MESSAGE)
+ibmcloud ks logging filter create --cluster CLUSTER [--container CONTAINER] [--force-update] [--lc LOGGING-CONFIG ...] [--level LEVEL] [--namespace NAMESPACE] [--output OUTPUT] [-q] [--type TYPE] --message MESSAGE
 ```
 {: pre}
 
@@ -7856,7 +7858,7 @@ Delete a logging filter.
 {: shortdesc}
 
 ```sh
-ibmcloud ks logging filter rm --cluster CLUSTER [--force-update] [-q] (--all | --id ID)
+ibmcloud ks logging filter rm --cluster CLUSTER [--force-update] [-q] --all
 ```
 {: pre}
 
@@ -7900,7 +7902,7 @@ Update a logging filter.
 {: shortdesc}
 
 ```sh
-ibmcloud ks logging filter update --cluster CLUSTER --id ID [--container CONTAINER] [--force-update] [--lc LOGGING-CONFIG ...] [--level LEVEL] [--namespace NAMESPACE] [--output OUTPUT] [-q] [--type TYPE] (--message MESSAGE | --regex-message MESSAGE)
+ibmcloud ks logging filter update --cluster CLUSTER --id ID [--container CONTAINER] [--force-update] [--lc LOGGING-CONFIG ...] [--level LEVEL] [--namespace NAMESPACE] [--output OUTPUT] [-q] [--type TYPE] --message MESSAGE
 ```
 {: pre}
 
@@ -8144,7 +8146,7 @@ Create a DNS record to register a load balancer host name or load balancer IP ad
 {: shortdesc}
 
 ```sh
-ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER [--output OUTPUT] [-q] [--secret-namespace NAMESPACE] (--ip IP | --lb-host HOST)
+ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER [--output OUTPUT] [-q] [--secret-namespace NAMESPACE] --ip IP
 ```
 {: pre}
 
@@ -9445,7 +9447,7 @@ Attach a Virtual Network Interface to a bare metal worker node or cluster.
 {: shortdesc}
 
 ```sh
-ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
+ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output OUTPUT] [-q] --cluster-id ID
 ```
 {: pre}
 
@@ -9498,7 +9500,7 @@ Detach a Virtual Network Interface from a worker node or cluster.
 {: shortdesc}
 
 ```sh
-ibmcloud ks vni detach --vni VNI [-f] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
+ibmcloud ks vni detach --vni VNI [-f] [--output OUTPUT] [-q] --cluster-id ID
 ```
 {: pre}
 
@@ -9545,7 +9547,7 @@ List Virtual Network Interfaces attached to a cluster or worker node.
 {: shortdesc}
 
 ```sh
-ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
+ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] --cluster-id ID
 ```
 {: pre}
 
@@ -10888,7 +10890,7 @@ Add a zone to one or more worker pools in a classic cluster.
 {: shortdesc}
 
 ```sh
-ibmcloud ks zone add classic --cluster CLUSTER --worker-pool POOL [--worker-pool POOL ...] --zone ZONE [--output OUTPUT] [--private-vlan VLAN] [-q] (--private-only | --public-vlan VLAN)
+ibmcloud ks zone add classic --cluster CLUSTER --worker-pool POOL [--worker-pool POOL ...] --zone ZONE [--output OUTPUT] [--private-vlan VLAN] [-q] --private-only
 ```
 {: pre}
 
@@ -11139,7 +11141,7 @@ Set the network metadata in a specific zone for the given worker pools in a clas
 {: shortdesc}
 
 ```sh
-ibmcloud ks zone network-set --cluster CLUSTER --private-vlan VLAN --worker-pool POOL [--worker-pool POOL ...] --zone ZONE [-f] [-q] (--private-only | --public-vlan VLAN)
+ibmcloud ks zone network-set --cluster CLUSTER --private-vlan VLAN --worker-pool POOL [--worker-pool POOL ...] --zone ZONE [-f] [-q] --private-only
 ```
 {: pre}
 

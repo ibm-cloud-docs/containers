@@ -2618,13 +2618,11 @@ subcollection: containers
 
 * [Minimum access requirements for all storage components](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-all)
 
-* [Minimum access requirements for individual storage components](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-component)
+* [Minimum access requirements for individual components](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-component)
 
-    * [VPC block storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-block)
+    * [Advanced Cluster Management (ACM)](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-acm)
 
     * [Classic block storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-classic-block)
-
-    * [VPC file storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-file)
 
     * [Classic file storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-classic-file)
 
@@ -2633,6 +2631,10 @@ subcollection: containers
     * [Object Storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-cos)
 
     * [ODF billing agent](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-odf-billing)
+
+    * [VPC block storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-block)
+
+    * [VPC file storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-file)
 
 * [Set up a trusted profile in the CLI](/docs/containers?topic=containers-configure-trusted-profile&interface=cli#tp-setup-cli)
 
