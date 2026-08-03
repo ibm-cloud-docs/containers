@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-07-31"
+lastupdated: "2026-08-03"
 
 
 keywords: containers
@@ -258,6 +258,14 @@ subcollection: containers
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
 
+* [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
+
+    * [3 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0326)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
+
+* [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
+
     * [28 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul2826)
 
         * {{site.data.keyword.containerlong_notm}} master fix packs.
@@ -359,6 +367,8 @@ subcollection: containers
         * IBM Storage Operator cluster add-on patch updates.
 
         * IBM Object CSI Driver cluster add-on patch updates.
+
+* [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
 
     * [03 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0326)
 
@@ -7112,6 +7122,8 @@ subcollection: containers
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [Version 2.0.0 - 2.0.0_357166617, released 03 August 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_357166617)
 
     * [Version 2.0.0 - 2.0.0_351688260, released 09 July 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_351688260)
 
