@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-03"
 
 keywords: containers, kubernetes, mzr, szr, multizone, multi az
 
@@ -14,10 +14,10 @@ subcollection: containers
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Locations
+# Understanding {{site.data.keyword.cloud_notm}} locations and regions
 {: #regions-and-zones}
 
-[{{site.data.keyword.cloud_notm}} resources](/docs/overview?topic=overview-locations) are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of the {{site.data.keyword.cloud_notm}} locations, including worldwide multizone regions (MZRs) and single-campus multizone regions (SC-MZRs).
+Learn how {{site.data.keyword.cloud_notm}} locations and regions are organized for cluster deployments, including multizone regions and single-campus multizone regions.
 {: shortdesc}
 
 

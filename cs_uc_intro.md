@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-12-03"
+  years: 2014, 2026
+lastupdated: "2026-08-03"
 
 
 keywords: kubernetes
@@ -17,10 +17,10 @@ subcollection: containers
 
 
 
-# Overview of use cases
+# Use cases for {{site.data.keyword.containerlong_notm}}
 {: #cs_uc_intro}
 
-Various use cases show the strengths of {{site.data.keyword.containerlong_notm}} and  {{site.data.keyword.cloud_notm}} services when used together. These stories highlight several industries as well as types of workloads.
+Explore industry and workload use cases that show how {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.cloud_notm}} services work together.
 {: shortdesc}
 
 Even though each use case is presented through the lens of a particular industry, these workloads are typical across various industries. You see workload themes, such as:
