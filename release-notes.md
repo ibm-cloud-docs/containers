@@ -187,8 +187,6 @@ CLI version 1.0.791 is available.
 
 
 
-
-
 New! {{site.data.keyword.containerlong_notm}} version 1.36.
 :   You can now create or [update clusters to Kubernetes version 1.36](/docs/containers?topic=containers-cs_versions_136). With Kubernetes 1.36, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
@@ -221,8 +219,6 @@ VPC File CSI Driver cluster add-on patch updates.
 ### 09 June 2026
 {: #containers-jun0926}
 {: release-note}
-
-
 
 
 
@@ -278,10 +274,6 @@ For more information, see the [change log](/docs/containers?topic=containers-cl-
 
 
 
-
-
-
-
 ### 15 June 2026
 {: #containers-jun1526}
 {: release-note}
@@ -301,11 +293,8 @@ Ingress ALB patch updates.
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
-## June 2025
-{: #containers-jun25}
-
-### 09 June 2025
-{: #containers-jun0925}
+### 09 June 2026
+{: #containers-jun0926}
 {: release-note}
 
 

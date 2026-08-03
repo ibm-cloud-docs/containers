@@ -3,7 +3,7 @@
 copyright:
   years: 2026, 2026
 
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-03"
 
 
 keywords: change log, version history, 1.36
@@ -39,6 +39,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.36
 {: #136_components}
+
+
+### Master fix pack 1.36.3_1525, released 03 August 2026
+{: #cl-boms_master-1363_1525_M}
+
+The following table shows the components that are in the master fix pack 1.36.3_1525. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Description |
+| ---- | ---- |
+|etcd v3.5.32|See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.32).|
+|IBM Cloud Block Storage driver and plug-in v2.5.27|New version contains updates and security fixes.|
+|IBM Cloud Controller Manager v1.36.2-6|New version contains updates and security fixes.|
+|IBM Cloud File Storage for Classic plug-in and monitor v456|New version contains updates and security fixes.|
+|Key Management Service provider 2.10.28|New version contains updates and security fixes.|
+|Kubernetes v1.36.3|See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.36.3).|
+{: caption="1.36.3_1525 fix pack." caption-side="bottom"}
+{: #cl-boms_master-1363_1525_M-component-table}
 
 
 ### Worker node fix pack 1.36.2_1524, released 28 July 2026
