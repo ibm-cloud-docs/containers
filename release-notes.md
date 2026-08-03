@@ -343,9 +343,6 @@ Ingress ALB patch updates.
 :    Review the steps for migrating your encrypted resources from HPCS to Key Protect. See [Migrating storage components from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp) and [Migrating cluster secrets and worker nodes from HPCS to Key Protect](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration) for more information.
 
 
-
-
-
 ## May 2026
 {: #containers-may26}
 
@@ -361,6 +358,15 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+
+
+
+### 29 May 2026
+{: #containers-may2926}
+{: release-note}
+
+VPC File CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
 
@@ -1143,6 +1149,7 @@ VPC Block CSI Driver cluster add-on patch updates.
 :   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 :   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
 :   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
+
 
 
 

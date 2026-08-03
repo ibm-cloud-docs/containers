@@ -388,6 +388,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
+    * [29 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2926)
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
     * [27 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2726)
 
         * Kubernetes version 1.32 is no longer supported.
