@@ -354,9 +354,7 @@ subcollection: containers
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
-* [June 2025](/docs/containers?topic=containers-containers-relnotes#containers-jun25)
-
-    * [09 June 2025](/docs/containers?topic=containers-containers-relnotes#containers-jun0925)
+    * [09 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0926)
 
         * VPC File CSI Driver cluster add-on patch updates.
 
@@ -5219,6 +5217,8 @@ subcollection: containers
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+    * [Master fix pack 1.36.3_1525, released 03 August 2026](/docs/containers?topic=containers-changelog_136#cl-boms_master-1363_1525_M)
+
     * [Worker node fix pack 1.36.2_1524, released 28 July 2026](/docs/containers?topic=containers-changelog_136#cl-boms-1362_1524_W)
 
     * [Master fix pack 1.36.2_1523, released 28 July 2026](/docs/containers?topic=containers-changelog_136#cl-boms_master-1362_1523_M)
@@ -5291,6 +5291,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+    * [Master fix pack 1.35.7_1539, released 03 August 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1357_1539_M)
 
     * [Worker node fix pack 1.35.6_1538, released 28 July 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1356_1538_W)
 
@@ -5388,6 +5390,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Master fix pack 1.34.10_1561, released 03 August 2026](/docs/containers?topic=containers-changelog_134#cl-boms_master-13410_1561_M)
 
     * [Worker node fix pack 1.34.9_1560, released 28 July 2026](/docs/containers?topic=containers-changelog_134#cl-boms-1349_1560_W)
 
@@ -5507,6 +5511,8 @@ subcollection: containers
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Master fix pack 1.33.13_1580, released 03 August 2026](/docs/containers?topic=containers-changelog_133#cl-boms_master-13313_1580_M)
 
     * [Worker node fix pack 1.33.13_1579, released 28 July 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13313_1579_W)
 
@@ -8211,7 +8217,7 @@ subcollection: containers
 
 [VPC worker nodes fail to provision due to quota limits](/docs/containers?topic=containers-ts-worker-vpc-quota#ts-worker-vpc-quota)
 
-[Why do pods show "pull QPS exceeded" errors during image pulls?](/docs/containers?topic=containers-ts-vpc-image-pull-qps#ts-vpc-image-pull-qps)
+[Why do pods show `pull QPS exceeded` errors during image pulls?](/docs/containers?topic=containers-ts-vpc-image-pull-qps#ts-vpc-image-pull-qps)
 
 * [Check disk I/O bandwidth](/docs/containers?topic=containers-ts-vpc-image-pull-qps#check-bandwidth)
 
