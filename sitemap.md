@@ -256,8 +256,6 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
-* [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
-
 * [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
 
     * [3 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0326)
@@ -367,8 +365,6 @@ subcollection: containers
         * IBM Storage Operator cluster add-on patch updates.
 
         * IBM Object CSI Driver cluster add-on patch updates.
-
-* [June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun26)
 
     * [03 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0326)
 
@@ -784,7 +780,7 @@ subcollection: containers
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
 
-    * [07 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-nov0725)
+    * [07 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0725)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
@@ -4658,7 +4654,7 @@ subcollection: containers
 
 * [Setting up KMS encryption for {{site.data.keyword.filestorage_vpc_short}}](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-kms)
 
-* [Setting up encryption in-transit (EIT)](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-eit)
+* [Setting up encryption in-transit (EIT)](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-apps-eit)
 
 * [Updating container resource requests and limits](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-container-resources)
 

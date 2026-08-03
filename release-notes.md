@@ -26,9 +26,6 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
-## July 2026
-{: #containers-jul26}
-
 ## August 2026
 {: #containers-aug26}
 
@@ -328,9 +325,6 @@ IBM Storage Operator cluster add-on patch updates.
 
 IBM Object CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
-
-## June 2026
-{: #containers-jun26}
 
 ### 03 June 2026
 {: #containers-jun0326}
@@ -1431,7 +1425,7 @@ VPC File CSI Driver cluster add-on patch updates.
 {: #containers-oct25}
 
 ### 07 October 2025
-{: #containers-nov0725}
+{: #containers-oct0725}
 {: release-note}
 
 
