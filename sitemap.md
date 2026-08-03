@@ -326,10 +326,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * VPC File CSI Driver cluster add-on patch updates.
 
-    * [09 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0926)
-
-        * ALB OAuth Proxy cluster add-on patch updates.
-
     * [23 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2326)
 
     * [22 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2226)
@@ -362,11 +358,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * VPC File CSI Driver cluster add-on patch updates.
 
-        * ALB OAuth Proxy cluster add-on patch updates.
-
         * IBM Storage Operator cluster add-on patch updates.
 
         * IBM Object CSI Driver cluster add-on patch updates.
+
+        * ALB OAuth Proxy cluster add-on patch updates.
 
     * [03 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0326)
 
@@ -688,13 +684,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
-    * [14 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1426)
-
-        * CLI version `1.0.745` is available.
-
     * [17 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1726)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+    * [14 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1426)
+
+        * CLI version `1.0.745` is available.
 
     * [13 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1326)
 
@@ -782,10 +778,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
 
-    * [07 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0725)
-
-        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
-
     * [28 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct2825)
 
         * The strongSwan IPSec VPN Service is deprecated
@@ -817,6 +809,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * New! General availability of the {{site.data.keyword.cos_full_notm}} cluster add-on
 
     * [08 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0825)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+    * [07 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0725)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
