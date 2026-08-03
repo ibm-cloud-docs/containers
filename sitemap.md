@@ -344,8 +344,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * Istio cluster add-on patch updates.
 
-        * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
-
     * [15 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1526)
 
         * Ingress ALB patch updates.
@@ -436,8 +434,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
-        * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
-
         * IBM Storage Operator cluster add-on patch updates.
 
         * VPC File CSI Driver cluster add-on patch updates.
@@ -473,8 +469,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * Cluster autoscaler cluster add-on patch updates.
 
         * VPC Block CSI Driver cluster add-on patch updates.
-
-        * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
     * [28 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2826)
 
