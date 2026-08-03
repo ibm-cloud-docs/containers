@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-27"
+lastupdated: "2026-08-03"
 
 
 keywords: kubernetes, clusters
@@ -411,7 +411,7 @@ The following steps show you how to create a cross-account VPE gateway.
         `SOURCE_ACCOUNT_RESOURCE_GROUP`
         :   The resource group name in the source account.
     
-    1. If you get an error "Could not find service", verify the Target CRN is correct. If correct, you need to create the authorization in the target account. See [Creating service authorization for cross-account VPE in the console](/docs/vpc?topic=vpc-ordering-cross-account-endpoint-gateway&interface=ui#cross-account-vpe-prerequisite-console).
+    1. If you get an error `Could not find service`, verify the Target CRN is correct. If correct, you need to create the authorization in the target account. See [Creating service authorization for cross-account VPE in the console](/docs/vpc?topic=vpc-ordering-cross-account-endpoint-gateway&interface=ui#cross-account-vpe-prerequisite-console).
 
 3. Add reserved IPs to your VPE gateway.
 
@@ -441,7 +441,7 @@ The following steps show you how to create a cross-account VPE gateway.
     
         * Security groups on the VSI and VPE gateway allow the necessary traffic
         * VPC ACL allows the traffic
-        * Context Based Restriction (CBR) rules on the target cluster allow private traffic from the source VPC (add the three "Cloud Service Endpoint source addresses" from your source VPC to the private CBR rule)
+        * Context Based Restriction (CBR) rules on the target cluster allow private traffic from the source VPC (add the three `Cloud Service Endpoint source addresses` from your source VPC to the private CBR rule)
 
 
 ### Example: Target account commands

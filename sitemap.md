@@ -8217,7 +8217,7 @@ subcollection: containers
 
 [VPC worker nodes fail to provision due to quota limits](/docs/containers?topic=containers-ts-worker-vpc-quota#ts-worker-vpc-quota)
 
-[Why do pods show "pull QPS exceeded" errors during image pulls?](/docs/containers?topic=containers-ts-vpc-image-pull-qps#ts-vpc-image-pull-qps)
+[Why do pods show `pull QPS exceeded` errors during image pulls?](/docs/containers?topic=containers-ts-vpc-image-pull-qps#ts-vpc-image-pull-qps)
 
 * [Check disk I/O bandwidth](/docs/containers?topic=containers-ts-vpc-image-pull-qps#check-bandwidth)
 
