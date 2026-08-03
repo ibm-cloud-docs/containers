@@ -17,9 +17,11 @@ subcollection: containers
 
 
 
-# Site map
+# {{site.data.keyword.containerlong_notm}} documentation site map
 {: #cs_sitemap}
 
+Browse the site map for {{site.data.keyword.containerlong_notm}} documentation to find topics for cluster setup, networking, storage, security, troubleshooting, and more.
+{: shortdesc}
 
 
 
@@ -100,7 +102,7 @@ subcollection: containers
 {: #sitemap_use_cases}
 
 
-[Overview of use cases](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
+[Use cases for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
 [Financial services use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
 
@@ -324,10 +326,6 @@ subcollection: containers
 
         * VPC File CSI Driver cluster add-on patch updates.
 
-    * [09 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0926)
-
-        * ALB OAuth Proxy cluster add-on patch updates.
-
     * [23 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2326)
 
     * [22 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2226)
@@ -346,8 +344,6 @@ subcollection: containers
 
         * Istio cluster add-on patch updates.
 
-        * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
-
     * [15 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun1526)
 
         * Ingress ALB patch updates.
@@ -360,11 +356,11 @@ subcollection: containers
 
         * VPC File CSI Driver cluster add-on patch updates.
 
-        * ALB OAuth Proxy cluster add-on patch updates.
-
         * IBM Storage Operator cluster add-on patch updates.
 
         * IBM Object CSI Driver cluster add-on patch updates.
+
+        * ALB OAuth Proxy cluster add-on patch updates.
 
     * [03 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun0326)
 
@@ -389,6 +385,10 @@ subcollection: containers
         * ALB OAuth Proxy cluster add-on patch updates.
 
         * VPC Block CSI Driver cluster add-on patch updates.
+
+    * [29 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2926)
+
+        * VPC File CSI Driver cluster add-on patch updates.
 
     * [27 May 2026](/docs/containers?topic=containers-containers-relnotes#containers-may2726)
 
@@ -434,8 +434,6 @@ subcollection: containers
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
-        * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
-
         * IBM Storage Operator cluster add-on patch updates.
 
         * VPC File CSI Driver cluster add-on patch updates.
@@ -471,8 +469,6 @@ subcollection: containers
         * Cluster autoscaler cluster add-on patch updates.
 
         * VPC Block CSI Driver cluster add-on patch updates.
-
-        * For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
     * [28 April 2026](/docs/containers?topic=containers-containers-relnotes#containers-apr2826)
 
@@ -686,13 +682,13 @@ subcollection: containers
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
-    * [14 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1426)
-
-        * CLI version `1.0.745` is available.
-
     * [17 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1726)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+    * [14 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1426)
+
+        * CLI version `1.0.745` is available.
 
     * [13 January 2026](/docs/containers?topic=containers-containers-relnotes#containers-jan1326)
 
@@ -780,10 +776,6 @@ subcollection: containers
 
 * [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
 
-    * [07 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0725)
-
-        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
-
     * [28 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct2825)
 
         * The strongSwan IPSec VPN Service is deprecated
@@ -815,6 +807,10 @@ subcollection: containers
         * New! General availability of the {{site.data.keyword.cos_full_notm}} cluster add-on
 
     * [08 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0825)
+
+        * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+
+    * [07 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct0725)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 
@@ -2275,7 +2271,7 @@ subcollection: containers
 {: #sitemap_managing_cluster_costs}
 
 
-[Understanding costs for your clusters](/docs/containers?topic=containers-costs#costs)
+[Managing costs for your clusters](/docs/containers?topic=containers-costs#costs)
 
 * [Understanding costs by component](/docs/containers?topic=containers-costs#costs-for-clusters)
 
@@ -6987,126 +6983,6 @@ subcollection: containers
 
     * [Version 1.0 - v1.0.13_297764008, released 14 November 2025](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1013_297764008)
 
-[{{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-cos_plugin_changelog#cos_plugin_changelog)
-
-* [Change log for version 2.2.53, released 25 May 2026](/docs/containers?topic=containers-cos_plugin_changelog#02253_object_plugin)
-
-* [Change log for version 2.2.52, released 19 May 2026](/docs/containers?topic=containers-cos_plugin_changelog#02252_object_plugin)
-
-* [Change log for version 2.2.51, released 17 April 2026](/docs/containers?topic=containers-cos_plugin_changelog#02251_object_plugin)
-
-* [Change log for version 2.2.50, released 27 March 2026](/docs/containers?topic=containers-cos_plugin_changelog#02250_object_plugin)
-
-* [Change log for version 2.2.49, released 17 March 2026](/docs/containers?topic=containers-cos_plugin_changelog#02249_object_plugin)
-
-* [Change log for version 2.2.48, released 24 February 2026](/docs/containers?topic=containers-cos_plugin_changelog#02248_object_plugin)
-
-* [Change log for version 2.2.47, released 06 February 2026](/docs/containers?topic=containers-cos_plugin_changelog#02247_object_plugin)
-
-* [Change log for version 2.2.46, released 13 January 2026](/docs/containers?topic=containers-cos_plugin_changelog#02246_object_plugin)
-
-* [Change log for version 2.2.45, released 28 November 2025](/docs/containers?topic=containers-cos_plugin_changelog#02245_object_plugin)
-
-* [Change log for version 2.2.44, released 13 November 2025](/docs/containers?topic=containers-cos_plugin_changelog#02244_object_plugin)
-
-* [Change log for version 2.2.42, released 12 November 2025](/docs/containers?topic=containers-cos_plugin_changelog#02242_object_plugin)
-
-* [Change log for version 2.2.41, released 18 August 2025](/docs/containers?topic=containers-cos_plugin_changelog#02241_object_plugin)
-
-* [Change log for version 2.2.40, released 05 August 2025](/docs/containers?topic=containers-cos_plugin_changelog#02240_object_plugin)
-
-* [Change log for version 2.2.39, released 20 June 2025](/docs/containers?topic=containers-cos_plugin_changelog#02239_object_plugin)
-
-* [Change log for version 2.2.38, released 24 April 2025](/docs/containers?topic=containers-cos_plugin_changelog#02238_object_plugin)
-
-* [Change log for version 2.2.37, released 07 April 2025](/docs/containers?topic=containers-cos_plugin_changelog#02237_object_plugin)
-
-* [Change log for version 2.2.36, released 10 March 2025](/docs/containers?topic=containers-cos_plugin_changelog#02236_object_plugin)
-
-* [Change log for version 2.2.35, released 27 January 2025](/docs/containers?topic=containers-cos_plugin_changelog#02235_object_plugin)
-
-* [Change log for version 2.2.33, released 21 November 2024](/docs/containers?topic=containers-cos_plugin_changelog#02233_object_plugin)
-
-* [Change log for version 2.2.32, released 26 September 2024](/docs/containers?topic=containers-cos_plugin_changelog#02232_object_plugin)
-
-* [Change log for version 2.2.31, released 24 September 2024](/docs/containers?topic=containers-cos_plugin_changelog#02231_object_plugin)
-
-* [Change log for version 2.2.30, released 29 August 2024](/docs/containers?topic=containers-cos_plugin_changelog#02230_object_plugin)
-
-* [Change log for version 2.2.29, released 31 July 2024](/docs/containers?topic=containers-cos_plugin_changelog#02229_object_plugin)
-
-* [Change log for version 2.2.28, released 17 July 2024](/docs/containers?topic=containers-cos_plugin_changelog#02228_object_plugin)
-
-* [Change log for version 2.2.27, released 17 July 2024](/docs/containers?topic=containers-cos_plugin_changelog#02227_object_plugin)
-
-* [Change log for version 2.2.26, released 5 June 2024](/docs/containers?topic=containers-cos_plugin_changelog#02226_object_plugin)
-
-* [Change log for version 2.2.25, released 24 April 2024](/docs/containers?topic=containers-cos_plugin_changelog#02225_object_plugin)
-
-* [Change log for version 2.2.24, released 22 February 2024](/docs/containers?topic=containers-cos_plugin_changelog#02224_object_plugin)
-
-* [Change log for version 2.2.23, released 29 January 2024](/docs/containers?topic=containers-cos_plugin_changelog#02223_object_plugin)
-
-* [Change log for version 2.2.22, released 20 November 2023](/docs/containers?topic=containers-cos_plugin_changelog#02222_object_plugin)
-
-* [Change log for version 2.2.21, released 13 November 2023](/docs/containers?topic=containers-cos_plugin_changelog#02221_object_plugin)
-
-* [Change log for version 2.2.20, released 30 October 2023](/docs/containers?topic=containers-cos_plugin_changelog#02220_object_plugin)
-
-* [Change log for version 2.2.19, released 12 October 2023](/docs/containers?topic=containers-cos_plugin_changelog#02219_object_plugin)
-
-* [Change log for version 2.2.18, released 7 September 2023](/docs/containers?topic=containers-cos_plugin_changelog#02218_object_plugin)
-
-* [Change log for version 2.2.17, released 3 July 2023](/docs/containers?topic=containers-cos_plugin_changelog#02217_object_plugin)
-
-* [Change log for version 2.2.16, released 3 July 2023](/docs/containers?topic=containers-cos_plugin_changelog#02216_object_plugin)
-
-* [Change log for version 2.2.15, released 19 June 2023](/docs/containers?topic=containers-cos_plugin_changelog#02215_object_plugin)
-
-* [Change log for version 2.2.14, released 02 May 2023](/docs/containers?topic=containers-cos_plugin_changelog#02214_object_plugin)
-
-* [Change log for version 2.2.13, released 03 April 2023](/docs/containers?topic=containers-cos_plugin_changelog#02213_object_plugin)
-
-* [Change log for version 2.2.12, released 20 March 2023](/docs/containers?topic=containers-cos_plugin_changelog#02212_object_plugin)
-
-* [Change log for version 2.2.11, released 03 March 2023](/docs/containers?topic=containers-cos_plugin_changelog#02211_object_plugin)
-
-* [Change log for version 2.2.10, released 21 February 2023](/docs/containers?topic=containers-cos_plugin_changelog#02210_object_plugin)
-
-* [Change log for version 2.2.9, released 13 February 2023](/docs/containers?topic=containers-cos_plugin_changelog#0229_object_plugin)
-
-* [Change log for version 2.2.8, released 23 January 2023](/docs/containers?topic=containers-cos_plugin_changelog#0228_object_plugin)
-
-* [Change log for version 2.2.7, released 5 January 2023](/docs/containers?topic=containers-cos_plugin_changelog#0227_object_plugin)
-
-* [Change log for version 2.2.6, released 15 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0226_object_plugin)
-
-* [Change log for version 2.2.5, released 9 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0225_object_plugin)
-
-* [Change log for version 2.2.4, released 5 December 2022](/docs/containers?topic=containers-cos_plugin_changelog#0224_object_plugin)
-
-* [Change log for version 2.2.3, released 15 November 2022](/docs/containers?topic=containers-cos_plugin_changelog#0223_object_plugin)
-
-* [Change log for version 2.2.2, released 8 November 2022](/docs/containers?topic=containers-cos_plugin_changelog#0222_object_plugin)
-
-* [Change log for version 2.2.1, released 20 September 2022](/docs/containers?topic=containers-cos_plugin_changelog#0221_object_plugin)
-
-* [Change log for version 2.2.0, released 12 September 2022](/docs/containers?topic=containers-cos_plugin_changelog#0220_object_plugin)
-
-* [Change log for version 2.1.21, released 24 August 2022](/docs/containers?topic=containers-cos_plugin_changelog#02121_object_plugin)
-
-* [Change log for version 2.1.20, released 17 August 2022](/docs/containers?topic=containers-cos_plugin_changelog#02120_object_plugin)
-
-* [Change log for version 2.1.19, released 27 July 2022](/docs/containers?topic=containers-cos_plugin_changelog#02119_object_plugin)
-
-* [Change log for version 2.1.18, released 14 July 2022](/docs/containers?topic=containers-cos_plugin_changelog#02118_object_plugin)
-
-* [Change log for version 2.1.17, released 28 June 2022](/docs/containers?topic=containers-cos_plugin_changelog#02117_object_plugin)
-
-* [Change log for version 2.1.16, released 25 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02116_object_plugin)
-
-* [Change log for version 2.1.15, released 6 May 2022](/docs/containers?topic=containers-cos_plugin_changelog#02115_object_plugin)
-
 [Static Route add-on version change log](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route)
 
 * [Version 1.0.0](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-1.0.0)
@@ -7607,11 +7483,11 @@ subcollection: containers
 * [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
 
 
-## Locations
-{: #sitemap_locations}
+## Understanding {{site.data.keyword.cloud_notm}} locations and regions
+{: #sitemap_understanding_locations_and_regions}
 
 
-[Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+[Understanding {{site.data.keyword.cloud_notm}} locations and regions](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 
 * [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 
@@ -8829,22 +8705,22 @@ subcollection: containers
 [Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint#px-kms-endpoint)
 
 
-## Contacting support
-{: #sitemap_contacting_support}
+## Getting help and support for your cluster
+{: #sitemap_getting_help_and_support_for_your_cluster}
 
 
-[Contacting support](/docs/containers?topic=containers-get-help#get-help)
+[Getting help and support for your cluster](/docs/containers?topic=containers-get-help#get-help)
 
 * [Get your cluster details](/docs/containers?topic=containers-get-help#cluster-details)
 
 * [Open a support case](/docs/containers?topic=containers-get-help#support-case)
 
 
-## Service limitations
-{: #sitemap_service_limitations}
+## Service limitations and quotas
+{: #sitemap_service_limitations_and_quotas}
 
 
-[Service limitations](/docs/containers?topic=containers-limitations#limitations)
+[Service limitations and quotas](/docs/containers?topic=containers-limitations#limitations)
 
 * [Service and quota limitations](/docs/containers?topic=containers-limitations#tech_limits)
 

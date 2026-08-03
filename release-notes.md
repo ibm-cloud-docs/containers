@@ -41,6 +41,7 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+
 ## July 2026
 {: #containers-jul26}
 
@@ -75,6 +76,7 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
 :   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+
 
 
 
@@ -206,25 +208,20 @@ New! {{site.data.keyword.containerlong_notm}} version 1.36.
 
 
 
+
+
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
 
 
 
 IBM Storage Operator cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
+
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
-
-### 09 June 2026
-{: #containers-jun0926}
-{: release-note}
-
-
-
-
-ALB OAuth Proxy cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 
 ### 23 June 2026
 {: #containers-jun2326}
@@ -272,7 +269,8 @@ IBM Object CSI Driver cluster add-on patch updates.
 
 Istio cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
-For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
+
+
 
 
 
@@ -304,18 +302,18 @@ VPC Block CSI Driver cluster add-on patch updates.
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
+IBM Storage Operator cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
+
+IBM Object CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
+
+
+
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 
 
-
-
-IBM Storage Operator cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
-
-
-IBM Object CSI Driver cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
 
 ### 03 June 2026
 {: #containers-jun0326}
@@ -355,9 +353,6 @@ Ingress ALB patch updates.
 :    Review the steps for migrating your encrypted resources from HPCS to Key Protect. See [Migrating storage components from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp) and [Migrating cluster secrets and worker nodes from HPCS to Key Protect](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration) for more information.
 
 
-
-
-
 ## May 2026
 {: #containers-may26}
 
@@ -368,11 +363,26 @@ Ingress ALB patch updates.
 CLI version 1.0.775 is available
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
+
+
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 
+
+
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+
+
+
+### 29 May 2026
+{: #containers-may2926}
+{: release-note}
+
+VPC File CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
+
 
 ### 27 May 2026
 {: #containers-may2726}
@@ -458,8 +468,6 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
-
-
 ### 20 May 2026
 {: #containers-may2026}
 {: release-note}
@@ -496,7 +504,6 @@ VPC File CSI Driver cluster add-on patch updates.
 
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
-For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
@@ -516,8 +523,6 @@ VPC File CSI Driver cluster add-on patch updates.
 CLI version 1.0.770 is available
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
-
-
 ### 06 May 2026
 {: #containers-may0626}
 {: release-note}
@@ -535,13 +540,15 @@ CLI version 1.0.768 is available
 
 
 
-
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
 
 ### 04 May 2026
 {: #containers-may0426}
 {: release-note}
+
 
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
@@ -589,7 +596,6 @@ Cluster autoscaler cluster add-on patch updates.
 
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
-For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 ### 28 April 2026
 {: #containers-apr2826}
@@ -905,6 +911,7 @@ New! {{site.data.keyword.containerlong_notm}} version 1.35.
 
 
 
+
 ### 03 March 2026
 {: #containers-mar0326}
 {: release-note}
@@ -1142,18 +1149,11 @@ IBM Storage Operator cluster add-on patch updates.
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
-### 14 January 2026
-{: #containers-jan1426}
-{: release-note}
-
-CLI version `1.0.745` is available.
-:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
-
-
-
 ### 17 January 2026
 {: #containers-jan1726}
 {: release-note}
+
+
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
@@ -1163,6 +1163,16 @@ CLI version `1.0.745` is available.
 :   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
 
 
+
+
+
+
+### 14 January 2026
+{: #containers-jan1426}
+{: release-note}
+
+CLI version `1.0.745` is available.
+:   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 13 January 2026
 {: #containers-jan1326}
@@ -1415,24 +1425,6 @@ VPC File CSI Driver cluster add-on patch updates.
 ## October 2025
 {: #containers-oct25}
 
-### 07 October 2025
-{: #containers-oct0725}
-{: release-note}
-
-
-
-{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
-:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
-:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
-:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
-
-
-
-
-
-
-
 
 
 ### 28 October 2025
@@ -1519,6 +1511,22 @@ New! General availability of the {{site.data.keyword.cos_full_notm}} cluster add
 
 
 
+
+
+
+
+
+### 07 October 2025
+{: #containers-oct0725}
+{: release-note}
+
+
+
+{{site.data.keyword.containerlong_notm}} worker node fix packs are available.
+:   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   [Version 1.32 change log](/docs/containers?topic=containers-changelog_132)
+:   [Version 1.31 change log](/docs/containers?topic=containers-changelog_131)
 
 
 
@@ -2375,6 +2383,7 @@ Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
 
 
+
 ### 24 February 2025
 {: #containers-feb2425}
 {: release-note}
@@ -2656,6 +2665,7 @@ Istio add-on patch updates.
 :   For the latest patch information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
 
 
 
@@ -3737,6 +3747,7 @@ Istio add-on versions `1.20.3` and `1.19.7` are available.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
+
 CLI version `1.0.601` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
@@ -3870,6 +3881,7 @@ Starting with {{site.data.keyword.containerlong_notm}} version 1.29, Calico comp
 
 {{site.data.keyword.containerlong_notm}} version 1.26 is deprecated.
 :   Update your cluster to at least version 1.27 as soon as possible.
+
 
 
 ### 13 February 2024

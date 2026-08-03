@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-03"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, iro, openshift, red hat, red hat openshift
 
@@ -15,10 +15,10 @@ subcollection: containers
 
 
 
-# Understanding costs for your clusters
+# Managing costs for your clusters
 {: #costs}
 
-With {{site.data.keyword.cloud}}, you can plan for, estimate, review, and modify your cluster environment to control costs. Just by using a managed service like {{site.data.keyword.containerlong}}, you are saving many expenses that are associated with managing, updating, and maintaining an infrastructure environment.
+Plan, estimate, review, and adjust your cluster environment to understand and control costs for your cluster resources.
 {: shortdesc}
 
 ## Understanding costs by component
