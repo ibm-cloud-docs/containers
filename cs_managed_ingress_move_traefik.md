@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-07-07"
+lastupdated: "2026-08-04"
 
 
 keywords: ingress, alb, application load balancer, nginx, ingress controller, network traffic, exposing apps, traefik, migration
@@ -64,7 +64,7 @@ The following table compares how you configure common features in Ingress-NGINX 
 {: caption="Configuration feature comparison between Ingress-NGINX and Traefik" caption-side="bottom"}
 {: summary="This table has row and column headers. The row headers identify a configuration feature, and the column headers describe how to configure that feature in Ingress-NGINX and Traefik."}
 
-If a feature depends on Traefik CRDs, such as `Middleware`, `TLSOption`, or `ServersTransport`, ensure that CRD processing is enabled. CRD processing is enabled by default. To configure CRD processing, see the `processTraefikCRDs` field in the `ibm-ingress-deploy-config` ConfigMap in [Creating custom settings in the Ingress ConfigMap](/docs/containers?topic=containers-traefik-ingress-customization#create-ingress-configmap-custom).
+If a feature depends on Traefik CRDs, such as `Middleware`, `TLSOption`, or `ServersTransport`, ensure that CRD processing is enabled. CRD processing is enabled by default. To configure CRD processing, see the `processTraefikCRDs` field in the `ibm-ingress-deploy-config` ConfigMap in [Creating custom settings in the Ingress ConfigMap](/docs/containers?topic=containers-traefik-ingress-customization#comm-customize-deploy).
 {: note}
 
 The following table lists the customizable deployment parameters that Ingress-NGINX and Traefik support.
@@ -121,4 +121,3 @@ If the cluster has only Traefik-based ALBs enabled, `public-iks-traefik` or `pri
 Custom Ingress Classes are never made the default automatically.
 
 For more information about configuring and customizing Traefik, see [About Ingress with Traefik](/docs/containers?topic=containers-managed-traefik-ingress-about).
-

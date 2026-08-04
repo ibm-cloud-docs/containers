@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-04"
 
 keywords: kubernetes, containers
 
@@ -23,7 +23,7 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 ## `api` commands
 {: #icks_map_api}
 
-View or set the API endpoint and API version for the service.
+View the current API endpoint.
 {: shortdesc}
 
     * [`ibmcloud ks api`](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
@@ -267,15 +267,6 @@ View and modify Ingress services and settings
     * [`ibmcloud ks ingress status-report ignored-errors add`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-status-report-ignored-errors-add-cli)
     * [`ibmcloud ks ingress status-report ignored-errors ls`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-status-report-ignored-errors-ls-cli)
     * [`ibmcloud ks ingress status-report ignored-errors rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-status-report-ignored-errors-rm-cli)
-
-
-## `init` commands
-{: #icks_map_init}
-
-Initialize the Kubernetes Service plug-in and get authentication tokens.
-{: shortdesc}
-
-    * [`ibmcloud ks init`](/docs/containers?topic=containers-kubernetes-service-cli#init-cli)
 
 
 ## `kms` commands
