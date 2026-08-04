@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-04"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -49,7 +49,7 @@ I want to follow a tutorial
 :   Begin by reviewing the [Getting started](/docs/containers?topic=containers-getting-started) doc, then [choose one of the available tutorials](/docs/containers?topic=containers-getting-started#getting-started-create).
 
 I want to design my own cluster environment
-:   Begin by reviewing the [Getting started](/docs/containers?topic=containers-getting-started)  doc, then [create your cluster environment strategy](/docs/containers?topic=containers-getting-started#getting-started-strategy).
+:   Begin by reviewing the [Getting started](/docs/containers?topic=containers-getting-started)  doc, then [create your cluster environment strategy](/docs/containers?topic=containers-strategy).
 
 
 ## How does {{site.data.keyword.containerlong_notm}} work?

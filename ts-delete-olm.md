@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-04-08"
+lastupdated: "2026-08-04"
 
 
 keywords: kubernetes, OLM, operator lifecycle manager, delete olm, delete operator lifecycle manager components
@@ -40,7 +40,7 @@ If you want to continue using OLM components in your cluster, or you want to ins
     {: pre}
 
 
-1. Check if you are using versions 1.4 through 1.9 of the Istio add-on. Istio versions 1.4 through 1.9 are unsupported and use OLM. If you use these versions, [upgrade to a supported version of the Istio add-on](/docs/containers?topic=containers-istio-changelog&interface=ui) that does not use the OLM operator. After you upgrade to a supported Istio version, you can delete the OLM operator.  
+1. Check if you are using versions 1.4 through 1.9 of the Istio add-on. Istio versions 1.4 through 1.9 are unsupported and use OLM. If you use these versions, [upgrade to a supported version of the Istio add-on](/docs/containers?topic=containers-cl-add-ons-istio) that does not use the OLM operator. After you upgrade to a supported Istio version, you can delete the OLM operator.  
     ```sh
     ibmcloud ks cluster addons -c CLUSTER
     ```

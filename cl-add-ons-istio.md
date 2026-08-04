@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-04"
 
 
 keywords: change log, version history, Istio
@@ -293,7 +293,7 @@ Current version
 :   1.24.6
 
 Updates in this version
-:   The Istio managed add-on is migrating from the in-cluster operator in 1.23.x to a cyclic Helm upgrade installation in 1.24. This upgrade requires a different process than earlier versions, so  review the [migration documentation](/docs/containers?topic=containers-istio-update#istio_minor_124) before getting started.
+:   The Istio managed add-on is migrating from the in-cluster operator in 1.23.x to a cyclic Helm upgrade installation in 1.24. This upgrade requires a different process than earlier versions, so  review the [migration documentation](/docs/containers?topic=containers-istio-update#istio_minor) before getting started.
 
 :   With the move to a Helm-based installation, the gateways are switching from the `istio/gateways` chart that the in-cluster operator used to the `istio/gateway` chart that Istio recommends for Helm-based Istio. The main change is that the Istio gateways are set to `image: auto` to have the sidecar injector automatically select the image to use.
 

@@ -3,7 +3,7 @@
 copyright:
   years: 2026, 2026
 
-lastupdated: "2026-08-03"
+lastupdated: "2026-08-04"
 
 
 keywords: change log, version history, 1.36
@@ -49,7 +49,7 @@ The following table shows the components that are in the master fix pack 1.36.3_
 
 | Component | Description |
 | ---- | ---- |
-|etcd v3.5.32|See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.32).|
+|etcd v3.5.32|See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.32).|
 |IBM Cloud Block Storage driver and plug-in v2.5.27|New version contains updates and security fixes.|
 |IBM Cloud Controller Manager v1.36.2-6|New version contains updates and security fixes.|
 |IBM Cloud File Storage for Classic plug-in and monitor v456|New version contains updates and security fixes.|
@@ -143,7 +143,7 @@ The following table shows the changes that are in the master fix pack 1.36.2_151
 | Calico | v3.30.6 | v3.31.5 | See the [Calico release notes](https://docs.tigera.io/calico/3.31/release-notes/#calico-open-source-3315-bug-fix-release){: external}. |
 | Cluster health image | v1.6.15 | v1.6.16 | New version contains updates and security fixes. |
 | CoreDNS | v1.12.4 | v1.14.3 | See the [CoreDNS release notes](https://coredns.io/tags/notes/){: external}. |
-| etcd | v3.5.29 | v3.5.30 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.30){: external}. |
+| etcd | v3.5.29 | v3.5.30 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.30){: external}. |
 | {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.25 | v2.5.26 | New version contains updates and security fixes. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.35.4-4 | v1.36.2-1 | New version contains updates and security fixes. |
 | {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | v454 | v455 | New version contains updates and security fixes. |
@@ -152,7 +152,7 @@ The following table shows the changes that are in the master fix pack 1.36.2_151
 | Konnectivity agent and server | v0.34.0 | v0.36.0 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.36.0){: external}. |
 | Kubernetes | v1.36.0 | v1.36.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.36.2){: external}. |
 | Kubernetes Dashboard | v2.7.0 | N/A | Open source Kubernetes Dashboard is deprecated and archived. The Kubernetes Dashboard will no longer be installed on newly provisioned clusters and will be removed from clusters on earlier versions upgrading to 1.36. [The Headlamp add-on](https://cloud.ibm.com/docs/containers?topic=containers-headlamp-addon){: external} is available as a replacement Kubernetes UI. |
-| Kubernetes DNS autoscaler | v1.9.0 | v1.10.3 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/v1.10.3){: external}. |
+| Kubernetes DNS autoscaler | v1.9.0 | v1.10.3 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/v1.10.3){: external}. |
 | Kubernetes NodeLocal DNS cache | 1.26.5 | 1.26.8 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.26.8){: external}. |
 | Kubernetes snapshot controller | v8.3.0 | v8.5.0 | See the [Kubernetes snapshot controller release notes](https://github.com/kubernetes-csi/external-snapshotter/releases/tag/v8.5.0){: external}. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3534 | 3563 | New version contains updates and security fixes. |

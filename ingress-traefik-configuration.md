@@ -3,7 +3,7 @@
 copyright:
   years: 2026
 
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-04"
 
 keywords: kubernetes, traefik, ingress controller
 
@@ -36,7 +36,7 @@ Overwriting the `Host` header for legacy apps
 
     ```yaml
     # Example (Kubernetes Middleware)
-    apiVersion: traefik.io/v1
+    apiVersion: traefik.io/v1alpha1
     kind: Middleware
     metadata:
       name: test-header
@@ -47,7 +47,7 @@ Overwriting the `Host` header for legacy apps
     ```
     {: codeblock}
 
-    Apply the Middleware to your Ingress resource by using the Traefik Ingress [annotation](https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/ingress/#opt-traefik-ingress-kubernetes-iorouter-middlewares){: external}. Ensure that CRD processing is enabled (the default). To configure CRD processing, see the `ibm-ingress-deploy-config` ConfigMap [processTraefikCRDs field](#create-ingress-configmap-custom).
+    Apply the Middleware to your Ingress resource by using the Traefik Ingress [annotation](https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/ingress/#opt-traefik-ingress-kubernetes-iorouter-middlewares){: external}. Ensure that CRD processing is enabled (the default). To configure CRD processing, see the `ibm-ingress-deploy-config` ConfigMap [processTraefikCRDs field](#comm-customize-deploy).
     {: note}
 
 ## Routing incoming requests with a private ALB
@@ -77,7 +77,7 @@ Traefik rejects any request that exceeds the configured limit with an HTTP 413 r
 
     ```yaml
     # Example (Kubernetes Middleware)
-    apiVersion: traefik.io/v1
+    apiVersion: traefik.io/v1alpha1
     kind: Middleware
     metadata:
       name: limit
@@ -100,7 +100,7 @@ To enable response buffering, complete the following steps:
 
     ```yaml
     # Example (Kubernetes Middleware)
-    apiVersion: traefik.io/v1
+    apiVersion: traefik.io/v1alpha1
     kind: Middleware
     metadata:
       name: response-buffer
@@ -118,17 +118,17 @@ To enable response buffering, complete the following steps:
 
 Traefik exposes two sets of timeout controls: timeouts between the client and the ALB, and timeouts between the ALB and your back-end app. Configure them separately depending on where the bottleneck is.
 
-To set client-to-ALB timeouts, configure the corresponding `ibm-ingress-deploy-config` ConfigMap [fields](#create-ingress-configmap-custom):
+To set client-to-ALB timeouts, configure the corresponding `ibm-ingress-deploy-config` ConfigMap [fields](#comm-customize-deploy):
 
-- To configure how long an incoming HTTP or HTTPS request waits for the Traefik instance to respond, use the [httpReadTimeout and httpsReadTimeout fields](#create-ingress-configmap-custom).
-- To configure the maximum duration before response writes time out, use the [httpWriteTimeout and httpsWriteTimeout fields](#create-ingress-configmap-custom).
-- To configure the maximum duration that a keepalive connection stays open before it closes, use the [httpIdleTimeout and httpsIdleTimeout fields](#create-ingress-configmap-custom).
+- To configure how long an incoming HTTP or HTTPS request waits for the Traefik instance to respond, use the [httpReadTimeout and httpsReadTimeout fields](#comm-customize-deploy).
+- To configure the maximum duration before response writes time out, use the [httpWriteTimeout and httpsWriteTimeout fields](#comm-customize-deploy).
+- To configure the maximum duration that a keepalive connection stays open before it closes, use the [httpIdleTimeout and httpsIdleTimeout fields](#comm-customize-deploy).
 
 To set the connection and read timeout between the ALB and your back-end app, use [ServersTransport](https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/crd/http/serverstransport/){: external} to configure the transport between Traefik and your HTTP servers.
 
 ```yaml
 # Example (Kubernetes ServersTransport)
-apiVersion: traefik.io/v1
+apiVersion: traefik.io/v1alpha1
 kind: ServersTransport
 metadata:
   name: mytransport
@@ -166,7 +166,7 @@ To indicate custom actions that the ALB can take for specific HTTP errors, confi
 ## Changing the default HTTP and HTTPS ports
 {: #custom-http-https-ports}
 
-By default, ALBs listen on port 80 for HTTP and port 443 for HTTPS. If your cluster requires non-standard ports, you can change these values for each ALB by using the [httpPort and httpsPort fields](#create-ingress-configmap-custom) in the `ibm-ingress-deploy-config` ConfigMap.
+By default, ALBs listen on port 80 for HTTP and port 443 for HTTPS. If your cluster requires non-standard ports, you can change these values for each ALB by using the [httpPort and httpsPort fields](#comm-customize-deploy) in the `ibm-ingress-deploy-config` ConfigMap.
 
 ## Customizing the request header
 {: #custom-request-header}
@@ -175,7 +175,7 @@ Use the Traefik [Headers Middleware](https://doc.traefik.io/traefik/reference/ro
 
 ```yaml
 # Example (Kubernetes Middleware)
-apiVersion: traefik.io/v1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: test-header
@@ -195,7 +195,7 @@ Use the Traefik [Headers Middleware](https://doc.traefik.io/traefik/reference/ro
 
 ```yaml
 # Example (Kubernetes Middleware)
-apiVersion: traefik.io/v1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: test-header
@@ -220,7 +220,7 @@ HTTP Strict Transport Security (HSTS) instructs browsers to access a domain over
 
 ```yaml
 # Example (Kubernetes Middleware) - produces: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-apiVersion: traefik.io/v1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: security-headers
@@ -252,7 +252,7 @@ Mutual TLS (mTLS) requires both the server and the client to present valid certi
 
 ```yaml
 # Example (Kubernetes TLSOption)
-apiVersion: traefik.io/v1
+apiVersion: traefik.io/v1alpha1
 kind: TLSOption
 metadata:
   name: mtls
@@ -288,7 +288,7 @@ Path rewriting lets you expose a public URL path that differs from the path your
 
 ```yaml
 # Example Replace the path with /foo
-apiVersion: traefik.io/v1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: test-replacepath
@@ -300,7 +300,7 @@ spec:
 
 ```yaml
 # Example Replace path with regex
-apiVersion: traefik.io/v1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: test-replacepathregex
@@ -326,7 +326,7 @@ By default, Traefik forwards traffic to your back-end app over plain HTTP. If yo
 
 ```yaml
 # Example (Kubernetes ServersTransport)
-apiVersion: traefik.io/v1
+apiVersion: traefik.io/v1alpha1
 kind: ServersTransport
 metadata:
   name: backend-transport
@@ -539,7 +539,7 @@ Protect your apps from unauthenticated access by integrating [{{site.data.keywor
     1. Create a Traefik [ForwardAuth Middleware](https://doc.traefik.io/traefik/reference/routing-configuration/http/middlewares/forwardauth/){: external} resource. The `address` specifies the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance, which acts as the OIDC Relying Party (RP). All letters in the service instance name must be lowercase.
 
         ```yaml
-        apiVersion: traefik.io/v1
+        apiVersion: traefik.io/v1alpha1
         kind: Middleware
         metadata:
           name: oauth-verify
@@ -559,7 +559,7 @@ Protect your apps from unauthenticated access by integrating [{{site.data.keywor
         * To send only the `ID Token`, add the `authResponseHeaders` option to your ForwardAuth Middleware:
 
             ```yaml
-            apiVersion: traefik.io/v1
+            apiVersion: traefik.io/v1alpha1
             kind: Middleware
             metadata:
               name: oauth-verify
@@ -577,7 +577,7 @@ Protect your apps from unauthenticated access by integrating [{{site.data.keywor
         * To send only the `Access Token`, add the `authResponseHeaders` option to your ForwardAuth Middleware:
 
             ```yaml
-            apiVersion: traefik.io/v1
+            apiVersion: traefik.io/v1alpha1
             kind: Middleware
             metadata:
               name: oauth-verify
@@ -595,7 +595,7 @@ Protect your apps from unauthenticated access by integrating [{{site.data.keywor
         * To send both the `Access Token` and the `ID Token`, add the `authResponseHeaders` option to your ForwardAuth Middleware:
 
             ```yaml
-            apiVersion: traefik.io/v1
+            apiVersion: traefik.io/v1alpha1
             kind: Middleware
             metadata:
               name: oauth-verify
@@ -614,7 +614,7 @@ Protect your apps from unauthenticated access by integrating [{{site.data.keywor
     3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `authSigninURL` to your ForwardAuth Middleware. All letters in the service instance name must be lowercase.
 
         ```yaml
-        apiVersion: traefik.io/v1
+        apiVersion: traefik.io/v1alpha1
         kind: Middleware
         metadata:
           name: oauth-verify
@@ -638,7 +638,7 @@ Protect your apps from unauthenticated access by integrating [{{site.data.keywor
 
     ```yaml
     # Example (Kubernetes ServersTransport)
-    apiVersion: traefik.io/v1
+    apiVersion: traefik.io/v1alpha1
     kind: ServersTransport
     metadata:
       name: skip-tls-verify
@@ -931,12 +931,12 @@ Worker nodes are automatically provisioned with optimized kernel tuning that sui
 
 - [Manage your Ingress ALBs](/docs/containers?topic=containers-ingress-alb-manage) to scale, update, or disable ALBs in your cluster.
 - [Set up Ingress](/docs/containers?topic=containers-managed-ingress-setup) to expose your apps by using the managed Ingress service.
-- [Debug Ingress](/docs/containers?topic=containers-debug_ingress) to diagnose and resolve common Ingress issues.
+- [Debug Ingress](/docs/containers?topic=containers-ingress-debug) to diagnose and resolve common Ingress issues.
 
 ## Related links
 {: #traefik-ingress-customization-related}
 
 - [Traefik documentation](https://doc.traefik.io/traefik/){: external}
-- [Traefik Middleware reference](https://doc.traefik.io/traefik/reference/routing-configuration/http/middlewares/){: external}
+- [Traefik Middleware reference](https://doc.traefik.io/traefik/middlewares/overview/){: external}
 - [Traefik CRD reference](https://doc.traefik.io/traefik/reference/install-configuration/providers/kubernetes/kubernetes-crd/){: external}
 - [{{site.data.keyword.appid_full_notm}} documentation](/docs/appid?topic=appid-getting-started)

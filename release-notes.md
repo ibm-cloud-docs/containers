@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-03"
+lastupdated: "2026-08-04"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -587,7 +587,7 @@ CLI version 1.0.765 is available
 
 
 Istio add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 
@@ -609,7 +609,7 @@ CLI version 1.0.763 is available
 
 
 Istio add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-istio-changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
 

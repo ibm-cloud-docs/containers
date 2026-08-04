@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-03"
+lastupdated: "2026-08-04"
 
 
 keywords: containers
@@ -5655,8 +5655,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`ingress` commands](/docs/containers?topic=containers-icks_map#icks_map_ingress)
 
-* [`init` commands](/docs/containers?topic=containers-icks_map#icks_map_init)
-
 * [`kms` commands](/docs/containers?topic=containers-icks_map#icks_map_kms)
 
 * [`locations` commands](/docs/containers?topic=containers-icks_map#icks_map_locations)
@@ -5869,6 +5867,16 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`ibmcloud ks cluster master refresh`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-refresh-cli)
 
+    * [`ibmcloud ks cluster master satellite-service-endpoint allowlist add`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-satellite-service-endpoint-allowlist-add-cli)
+
+    * [`ibmcloud ks cluster master satellite-service-endpoint allowlist disable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-satellite-service-endpoint-allowlist-disable-cli)
+
+    * [`ibmcloud ks cluster master satellite-service-endpoint allowlist enable`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-satellite-service-endpoint-allowlist-enable-cli)
+
+    * [`ibmcloud ks cluster master satellite-service-endpoint allowlist get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-satellite-service-endpoint-allowlist-get-cli)
+
+    * [`ibmcloud ks cluster master satellite-service-endpoint allowlist rm`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-satellite-service-endpoint-allowlist-rm-cli)
+
     * [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli)
 
     * [`ibmcloud ks cluster pull-secret apply`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-pull-secret-apply-cli)
@@ -6030,10 +6038,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [`ibmcloud ks ingress status-report ignored-errors ls`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-status-report-ignored-errors-ls-cli)
 
     * [`ibmcloud ks ingress status-report ignored-errors rm`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-status-report-ignored-errors-rm-cli)
-
-* [`ibmcloud ks init` commands](/docs/containers?topic=containers-kubernetes-service-cli#init-cli)
-
-    * [`ibmcloud ks init`](/docs/containers?topic=containers-kubernetes-service-cli#init-cli)
 
 * [`ibmcloud ks kms` commands](/docs/containers?topic=containers-kubernetes-service-cli#kms-cli)
 

@@ -1,7 +1,7 @@
 ---
 copyright:
   years: 2026, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-04"
 
 keywords: ingress, alb, application load balancer, traefik, ingress controller, network traffic, exposing apps
 
@@ -76,7 +76,7 @@ mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cl
 
 The Ingress class determines the type of Ingress controller that is used. {{site.data.keyword.IBM_notm}} provides two Ingress classes: one public (`public-iks-traefik`) and one private (`private-iks-traefik`). Both classes implement the Traefik Ingress controller. When you create your Ingress resource, the Ingress class that you specify determines whether your apps are publicly or privately exposed.
 
-You can use a custom Ingress class by configuring `ingressClass` in the [customizable deployment config](/docs/containers?topic=containers-traefik-ingress-customization#create-ingress-configmap-custom).
+You can use a custom Ingress class by configuring `ingressClass` in the [customizable deployment config](/docs/containers?topic=containers-traefik-ingress-customization#comm-customize-deploy).
 {: tip}
 
 
