@@ -233,10 +233,6 @@ IBM Storage Operator cluster add-on patch updates.
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
-### 23 June 2026
-{: #containers-jun2326}
-{: release-note}
-
 
 
 ### 22 June 2026

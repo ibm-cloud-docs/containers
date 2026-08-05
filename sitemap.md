@@ -332,8 +332,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * VPC File CSI Driver cluster add-on patch updates.
 
-    * [23 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2326)
-
     * [22 June 2026](/docs/containers?topic=containers-containers-relnotes#containers-jun2226)
 
         * IBM Storage Operator cluster add-on patch updates.
