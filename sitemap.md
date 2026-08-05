@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-04"
+lastupdated: "2026-08-05"
 
 
 keywords: containers
@@ -259,6 +259,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
+
+    * [5 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0526)
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
 
     * [3 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0326)
 
@@ -6717,6 +6723,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [Version 1.0 - v1.0.53_359554333, released 05 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1053_359554333)
+
     * [Version 1.0 - v1.0.52_358395144, released 29 July 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1052_358395144)
 
     * [Version 1.0 - v1.0.45_349678516, released 25 June 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1045_349678516)
@@ -6886,6 +6894,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [Version 2.0 - v2.0.45_359566968, released 05 August 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2045_359566968)
 
     * [Version 2.0 - v2.0.44_358039267, released 29 July 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2044_358039267)
 

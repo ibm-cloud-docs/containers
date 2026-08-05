@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-04"
+lastupdated: "2026-08-05"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## August 2026
 {: #containers-aug26}
+
+### 5 August 2026
+{: #containers-aug0526}
+{: release-note}
+
+IBM Storage Operator cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
+
+VPC File CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 ### 3 August 2026
 {: #containers-aug0326}
@@ -229,7 +239,6 @@ VPC File CSI Driver cluster add-on patch updates.
 
 
 
-
 ### 22 June 2026
 {: #containers-jun2226}
 {: release-note}
@@ -352,7 +361,6 @@ Ingress ALB patch updates.
 **New**: HPCS to Key Protect migration steps
 :    Review the steps for migrating your encrypted resources from HPCS to Key Protect. See [Migrating storage components from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp) and [Migrating cluster secrets and worker nodes from HPCS to Key Protect](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration) for more information.
 
-
 ## May 2026
 {: #containers-may26}
 
@@ -373,16 +381,12 @@ ALB OAuth Proxy cluster add-on patch updates.
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
-
-
 ### 29 May 2026
 {: #containers-may2926}
 {: release-note}
 
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
-
-
 
 ### 27 May 2026
 {: #containers-may2726}
@@ -464,7 +468,6 @@ Static Route cluster add-on patch updates.
 
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
-
 
 
 
@@ -1422,8 +1425,10 @@ VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
+
 ## October 2025
 {: #containers-oct25}
+
 
 
 
