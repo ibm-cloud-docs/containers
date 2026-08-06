@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-05"
+lastupdated: "2026-08-06"
 
 
 keywords: containers
@@ -777,8 +777,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * {{site.data.keyword.block_storage_is_short}} cluster add-on patch updates.
 
         * VPC File CSI Driver cluster add-on patch updates.
-
-* [October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct25)
 
     * [28 October 2025](/docs/containers?topic=containers-containers-relnotes#containers-oct2825)
 
@@ -6697,8 +6695,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Version patch update 1.0.9_103, released 15 September 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#109103_ca)
 
-    * [Version patch update 1.0.9_81, released 07 August 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#10981_ca)
-
     * [Version patch update 1.1.0_362, released 16 February 2024](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#110362_ca)
 
     * [Version patch update 1.0.8_292, released 27 November 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#108292_ca)
@@ -6707,15 +6703,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Version patch update 1.0.8_104, released 15 September 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#108104_ca)
 
-    * [Version patch update 1.0.8_82, released 7 August 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#10882_ca)
-
     * [Version patch update 1.0.7_291, released 27 November 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#107291_ca)
 
     * [Version patch update 1.0.7_185, released 13 November 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#107_185_ca)
 
     * [Version patch update 1.0.7_102, released 15 September 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#107102_ca)
-
-    * [Version patch update 1.0.7_83, released 7 August 2023](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#10783_ca)
 
 [IBM Storage Operator add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator)
 
