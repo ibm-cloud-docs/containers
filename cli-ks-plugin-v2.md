@@ -78,7 +78,7 @@ The following tables list the `ibmcloud ks` command groups. For a complete list 
 
 View the current API endpoint.
 
-### `ibmcloud ks api`
+## `ibmcloud ks api`
 {: #api-cli}
 
 
@@ -118,7 +118,7 @@ ibmcloud ks api \
 
 View information about the API key for a cluster or reset it to a new key.
 
-### `ibmcloud ks api-key info`
+## `ibmcloud ks api-key info`
 {: #api-key-info-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
@@ -155,7 +155,7 @@ ibmcloud ks api-key info --cluster CLUSTER_NAME_OR_ID --output json -q
 {: pre}
 
 
-### `ibmcloud ks api-key reset`
+## `ibmcloud ks api-key reset`
 {: #api-key-reset-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
@@ -4773,14 +4773,14 @@ ibmcloud ks experimental vni ls [--after AFTER] [--first FIRST] [--output OUTPUT
 List Virtual Network Interfaces attached to a cluster.
 
 ```sh
-ibmcloud ks experimental vni ls --cluster-id CLUSTER_NAME_OR_ID
+ibmcloud ks experimental vni ls --cluster-id ID
 ```
 {: pre}
 
 List Virtual Network Interfaces attached to a worker node.
 
 ```sh
-ibmcloud ks experimental vni ls --worker WORKER_ID
+ibmcloud ks experimental vni ls --worker WORKER
 ```
 {: pre}
 
@@ -4791,7 +4791,7 @@ ibmcloud ks experimental vni ls --worker WORKER_ID
 
 Getting flavor related information. Flavors determine how much virtual CPU, memory, and disk space is available to each worker node.
 
-### `ibmcloud ks flavor get`
+## `ibmcloud ks flavor get`
 {: #flavor-get-cli}
 
 
@@ -4834,7 +4834,7 @@ ibmcloud ks flavor get --zone ZONE --provider PROVIDER_ID --flavor FLAVOR
 {: pre}
 
 
-### `ibmcloud ks flavor ls`
+## `ibmcloud ks flavor ls`
 {: #flavor-ls-cli}
 
 
@@ -4886,7 +4886,7 @@ ibmcloud ks flavor ls --zone ZONE --show-storage SHOW-STORAGE --show-os SHOW-OS
 
 View information about infrastructure permissions that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account.
 
-### `ibmcloud ks infra-permissions get`
+## `ibmcloud ks infra-permissions get`
 {: #infra-permissions-get-cli}
 
 [Classic infrastructure]{: tag-classic-inf} 
@@ -7294,7 +7294,7 @@ ibmcloud ks kms instance ls --output json -q
 
 List supported IBM Cloud Kubernetes Service locations.
 
-### `ibmcloud ks locations`
+## `ibmcloud ks locations`
 {: #locations-cli}
 
 
@@ -7975,7 +7975,7 @@ ibmcloud ks logging refresh \
 
 View the current user messages.
 
-### `ibmcloud ks messages`
+## `ibmcloud ks messages`
 {: #messages-cli}
 
 
@@ -8694,7 +8694,7 @@ ibmcloud ks nlb-dns secret rm --cluster CLUSTER_NAME_OR_ID --nlb-subdomain DOMAI
 
 View the quota and limits for cluster-related resources in your IBM Cloud account.
 
-### `ibmcloud ks quota ls`
+## `ibmcloud ks quota ls`
 {: #quota-ls-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
@@ -8737,7 +8737,7 @@ ibmcloud ks quota ls --output json --provider PROVIDER_ID -q
 
 Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. Legacy-structured commands are replaced with beta-structured commands.
 
-### `ibmcloud ks script update`
+## `ibmcloud ks script update`
 {: #script-update-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
@@ -8777,7 +8777,7 @@ ibmcloud ks script update --in-place IN-PLACE -q
 
 Run operations against a security group.
 
-### `ibmcloud ks security-group ls`
+## `ibmcloud ks security-group ls`
 {: #security-group-ls-cli}
 
 
@@ -8826,7 +8826,7 @@ ibmcloud ks security-group ls \
 {: pre}
 
 
-### `ibmcloud ks security-group reset`
+## `ibmcloud ks security-group reset`
 {: #security-group-reset-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
@@ -8869,7 +8869,7 @@ ibmcloud ks security-group reset \
 {: pre}
 
 
-### `ibmcloud ks security-group sync`
+## `ibmcloud ks security-group sync`
 {: #security-group-sync-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
@@ -9197,7 +9197,7 @@ ibmcloud ks storage volume ls \
 
 List available portable subnets in your IBM Cloud infrastructure account.
 
-### `ibmcloud ks subnets`
+## `ibmcloud ks subnets`
 {: #subnets-cli}
 
 
@@ -9254,7 +9254,7 @@ ibmcloud ks subnets \
 
 List all the container platform versions that are available for IBM Cloud Kubernetes Service clusters.
 
-### `ibmcloud ks versions`
+## `ibmcloud ks versions`
 {: #versions-cli}
 
 
@@ -9516,14 +9516,14 @@ ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--clu
 List Virtual Network Interfaces attached to a cluster.
 
 ```sh
-ibmcloud ks vni ls --cluster-id CLUSTER_NAME_OR_ID
+ibmcloud ks vni ls --cluster-id ID
 ```
 {: pre}
 
 List Virtual Network Interfaces attached to a worker node.
 
 ```sh
-ibmcloud ks vni ls --worker WORKER_ID
+ibmcloud ks vni ls --worker WORKER
 ```
 {: pre}
 
@@ -9694,7 +9694,7 @@ ibmcloud ks vpc secure-by-default enable \
 
 Register a webhook in a cluster.
 
-### `ibmcloud ks webhook-create`
+## `ibmcloud ks webhook-create`
 {: #webhook-create-cli}
 
 
@@ -9743,7 +9743,7 @@ ibmcloud ks webhook-create --cluster CLUSTER_NAME_OR_ID --type TYPE --url URL
 
 View and modify worker nodes for a cluster.
 
-### `ibmcloud ks worker get`
+## `ibmcloud ks worker get`
 {: #worker-get-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
@@ -9783,7 +9783,7 @@ ibmcloud ks worker get --cluster CLUSTER_NAME_OR_ID --worker WORKER_ID --output 
 {: pre}
 
 
-### `ibmcloud ks worker ls`
+## `ibmcloud ks worker ls`
 {: #worker-ls-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
@@ -9835,7 +9835,7 @@ ibmcloud ks worker ls \
 {: pre}
 
 
-### `ibmcloud ks worker reboot`
+## `ibmcloud ks worker reboot`
 {: #worker-reboot-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
@@ -9884,7 +9884,7 @@ ibmcloud ks worker reboot \
 {: pre}
 
 
-### `ibmcloud ks worker reload`
+## `ibmcloud ks worker reload`
 {: #worker-reload-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
@@ -9924,7 +9924,7 @@ ibmcloud ks worker reload --skip-master-health IP_ADDRESS -f --worker WORKER_ID
 {: pre}
 
 
-### `ibmcloud ks worker replace`
+## `ibmcloud ks worker replace`
 {: #worker-replace-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
@@ -9970,7 +9970,7 @@ ibmcloud ks worker replace \
 {: pre}
 
 
-### `ibmcloud ks worker rm`
+## `ibmcloud ks worker rm`
 {: #worker-rm-cli}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
@@ -10010,7 +10010,7 @@ ibmcloud ks worker rm --cluster CLUSTER_NAME_OR_ID -f --worker WORKER_ID
 {: pre}
 
 
-### `ibmcloud ks worker update`
+## `ibmcloud ks worker update`
 {: #worker-update-cli}
 
 [Classic infrastructure]{: tag-classic-inf} 

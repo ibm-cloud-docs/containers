@@ -5701,13 +5701,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`ibmcloud ks api` commands](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
 
-    * [`ibmcloud ks api`](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
+* [`ibmcloud ks api`](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
 
 * [`ibmcloud ks api-key` commands](/docs/containers?topic=containers-kubernetes-service-cli#api-key-cli)
 
-    * [`ibmcloud ks api-key info`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-info-cli)
+* [`ibmcloud ks api-key info`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-info-cli)
 
-    * [`ibmcloud ks api-key reset`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-reset-cli)
+* [`ibmcloud ks api-key reset`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-reset-cli)
 
 * [`ibmcloud ks cluster` commands](/docs/containers?topic=containers-kubernetes-service-cli#cluster-cli)
 
@@ -5925,13 +5925,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`ibmcloud ks flavor` commands](/docs/containers?topic=containers-kubernetes-service-cli#flavor-cli)
 
-    * [`ibmcloud ks flavor get`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-get-cli)
+* [`ibmcloud ks flavor get`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-get-cli)
 
-    * [`ibmcloud ks flavor ls`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-ls-cli)
+* [`ibmcloud ks flavor ls`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-ls-cli)
 
 * [`ibmcloud ks infra-permissions` commands](/docs/containers?topic=containers-kubernetes-service-cli#infra-permissions-cli)
 
-    * [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-kubernetes-service-cli#infra-permissions-get-cli)
+* [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-kubernetes-service-cli#infra-permissions-get-cli)
 
 * [`ibmcloud ks ingress` commands](/docs/containers?topic=containers-kubernetes-service-cli#ingress-cli)
 
@@ -6051,7 +6051,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`ibmcloud ks locations` commands](/docs/containers?topic=containers-kubernetes-service-cli#locations-cli)
 
-    * [`ibmcloud ks locations`](/docs/containers?topic=containers-kubernetes-service-cli#locations-cli)
+* [`ibmcloud ks locations`](/docs/containers?topic=containers-kubernetes-service-cli#locations-cli)
 
 * [`ibmcloud ks logging` commands](/docs/containers?topic=containers-kubernetes-service-cli#logging-cli)
 
@@ -6081,7 +6081,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`ibmcloud ks messages` commands](/docs/containers?topic=containers-kubernetes-service-cli#messages-cli)
 
-    * [`ibmcloud ks messages`](/docs/containers?topic=containers-kubernetes-service-cli#messages-cli)
+* [`ibmcloud ks messages`](/docs/containers?topic=containers-kubernetes-service-cli#messages-cli)
 
 * [`ibmcloud ks nlb-dns` commands](/docs/containers?topic=containers-kubernetes-service-cli#nlb-dns-cli)
 
@@ -6117,19 +6117,19 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`ibmcloud ks quota` commands](/docs/containers?topic=containers-kubernetes-service-cli#quota-cli)
 
-    * [`ibmcloud ks quota ls`](/docs/containers?topic=containers-kubernetes-service-cli#quota-ls-cli)
+* [`ibmcloud ks quota ls`](/docs/containers?topic=containers-kubernetes-service-cli#quota-ls-cli)
 
 * [`ibmcloud ks script` commands](/docs/containers?topic=containers-kubernetes-service-cli#script-cli)
 
-    * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script-update-cli)
+* [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script-update-cli)
 
 * [`ibmcloud ks security-group` commands](/docs/containers?topic=containers-kubernetes-service-cli#security-group-cli)
 
-    * [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
+* [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
 
-    * [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-reset-cli)
+* [`ibmcloud ks security-group reset`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-reset-cli)
 
-    * [`ibmcloud ks security-group sync`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-sync-cli)
+* [`ibmcloud ks security-group sync`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-sync-cli)
 
 * [`ibmcloud ks storage` commands](/docs/containers?topic=containers-kubernetes-service-cli#storage-cli)
 
@@ -6147,11 +6147,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`ibmcloud ks subnets` commands](/docs/containers?topic=containers-kubernetes-service-cli#subnets-cli)
 
-    * [`ibmcloud ks subnets`](/docs/containers?topic=containers-kubernetes-service-cli#subnets-cli)
+* [`ibmcloud ks subnets`](/docs/containers?topic=containers-kubernetes-service-cli#subnets-cli)
 
 * [`ibmcloud ks versions` commands](/docs/containers?topic=containers-kubernetes-service-cli#versions-cli)
 
-    * [`ibmcloud ks versions`](/docs/containers?topic=containers-kubernetes-service-cli#versions-cli)
+* [`ibmcloud ks versions`](/docs/containers?topic=containers-kubernetes-service-cli#versions-cli)
 
 * [`ibmcloud ks vlan` commands](/docs/containers?topic=containers-kubernetes-service-cli#vlan-cli)
 
@@ -6179,23 +6179,23 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`ibmcloud ks webhook-create` commands](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-cli)
 
-    * [`ibmcloud ks webhook-create`](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-cli)
+* [`ibmcloud ks webhook-create`](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-cli)
 
 * [`ibmcloud ks worker` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker-cli)
 
-    * [`ibmcloud ks worker get`](/docs/containers?topic=containers-kubernetes-service-cli#worker-get-cli)
+* [`ibmcloud ks worker get`](/docs/containers?topic=containers-kubernetes-service-cli#worker-get-cli)
 
-    * [`ibmcloud ks worker ls`](/docs/containers?topic=containers-kubernetes-service-cli#worker-ls-cli)
+* [`ibmcloud ks worker ls`](/docs/containers?topic=containers-kubernetes-service-cli#worker-ls-cli)
 
-    * [`ibmcloud ks worker reboot`](/docs/containers?topic=containers-kubernetes-service-cli#worker-reboot-cli)
+* [`ibmcloud ks worker reboot`](/docs/containers?topic=containers-kubernetes-service-cli#worker-reboot-cli)
 
-    * [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#worker-reload-cli)
+* [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#worker-reload-cli)
 
-    * [`ibmcloud ks worker replace`](/docs/containers?topic=containers-kubernetes-service-cli#worker-replace-cli)
+* [`ibmcloud ks worker replace`](/docs/containers?topic=containers-kubernetes-service-cli#worker-replace-cli)
 
-    * [`ibmcloud ks worker rm`](/docs/containers?topic=containers-kubernetes-service-cli#worker-rm-cli)
+* [`ibmcloud ks worker rm`](/docs/containers?topic=containers-kubernetes-service-cli#worker-rm-cli)
 
-    * [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#worker-update-cli)
+* [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#worker-update-cli)
 
 * [`ibmcloud ks worker-pool` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-cli)
 
