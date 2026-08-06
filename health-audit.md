@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-08-03"
+lastupdated: "2026-08-06"
 
 
 keywords: containers, kubernetes, logmet, logs, metrics, audit, events
@@ -241,19 +241,19 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
 
 9. Check the certificate authority status. If your certificates are nearing expiration, follow the steps to [rotate your certificates](/docs/containers?topic=containers-cert-rotate).
     ```sh
-    ibmcloud ks cluster ca status -c <cluster>
+    ibmcloud ks cluster ca status -c CLUSTER
     ```
     {: pre}
     
 10. Save the `certificate-authority` of the cluster to file `cluster-ca.pem`. {: #query-cert}
     ```sh
-    ibmcloud ks cluster ca get -c <cluster> --output json | jq -r .caCert | base64 -D > cluster-ca.pem
+    ibmcloud ks cluster ca get -c CLUSTER --output json | jq -r .caCert | base64 -D > cluster-ca.pem
     ```
     {: pre}
 
 11. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster) Prepare a certificate-based kubeconfig and save it to `kubeconfig.json`. Make sure to specify the `--admin` option to download the `client-certificate` and the `client-key` data to your local machine. This data is used later to configure the audit webhook.
     ```sh
-    ibmcloud ks cluster config --cluster <cluster> --admin --output json > kubeconfig.json
+    ibmcloud ks cluster config --cluster CLUSTER --admin --output json > kubeconfig.json
     ```
     {: pre}
 
@@ -294,7 +294,7 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
 
 15. Verify that the audit webhook is created in your cluster.
     ```sh
-    ibmcloud ks cluster master audit-webhook get --cluster <cluster>
+    ibmcloud ks cluster master audit-webhook get --cluster CLUSTER
     ```
     {: pre}
 
@@ -308,7 +308,7 @@ The Kubernetes audit system in your cluster consists of an audit webhook, a log 
 
 16. Apply the webhook to your Kubernetes API server by refreshing the cluster master. It might take several minutes for the master to refresh.
     ```sh
-    ibmcloud ks cluster master refresh --cluster <cluster>
+    ibmcloud ks cluster master refresh --cluster CLUSTER
     ```
     {: pre}
 
@@ -631,7 +631,7 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 
 6. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster) Make sure to specify the `--admin` option to download the `client-certificate` and the `client-key` files to your local machine. These files are used later to configure the audit webhook.
     ```sh
-    ibmcloud ks cluster config --cluster <cluster> --admin
+    ibmcloud ks cluster config --cluster CLUSTER --admin
     ```
     {: pre}
 
@@ -643,7 +643,7 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
     
 8. Query the `certificate-authority` of the cluster and save it into a file.
    ```sh
-    ibmcloud ks cluster ca get -c <cluster> --output json | jq -r .caCert | base64 -D > <certificate-authority>
+    ibmcloud ks cluster ca get -c CLUSTER --output json | jq -r .caCert | base64 -D > CERTIFICATE_AUTHORITY
     ```
     {: pre}
 
@@ -667,13 +667,13 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 
 10. Configure the audit webhook and specify the `certificate-authority`, `client-certificate`, and `client-key` that you retrieved in the steps 5-7.
     ```sh
-    ibmcloud ks cluster master audit-webhook set --cluster <cluster> --remote-server https://127.0.0.1:2040/api/v1/namespaces/ibm-kube-audit/services/kube-audit-forwarder/proxy/post --ca-cert <certificate-authority> --client-cert <client-certificate> --client-key <client-key> [--policy default|verbose]
+    ibmcloud ks cluster master audit-webhook set --cluster CLUSTER --remote-server https://127.0.0.1:2040/api/v1/namespaces/ibm-kube-audit/services/kube-audit-forwarder/proxy/post --ca-cert CERTIFICATE_AUTHORITY --client-cert CLIENT_CERTIFICATE --client-key CLIENT_KEY [--policy default|verbose]
     ```
     {: pre}
 
 11. Verify that the audit webhook is created in your cluster.
     ```sh
-    ibmcloud ks cluster master audit-webhook get --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master audit-webhook get --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -688,7 +688,7 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 
 12. Apply the webhook to your Kubernetes API server by refreshing the cluster master. The master might take several minutes to refresh.
     ```sh
-    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -707,23 +707,23 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 1. Set up the webhook. If you don't provide any information in the options, a default configuration is used.
 
     ```sh
-    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <server_URL_or_IP> --ca-cert <CA_cert_path> --client-cert <client_cert_path> --client-key <client_key_path> [--policy default|verbose]
+    ibmcloud ks cluster master audit-webhook set --cluster CLUSTER_NAME_OR_ID --remote-server SERVER_URL_OR_IP --ca-cert CA_CERT_PATH --client-cert CLIENT_CERT_PATH --client-key CLIENT_KEY_PATH [--policy default|verbose]
     ```
     {: pre}
     
     | Option | Description |
     | --- | ------ |
-    | `<cluster_name_or_ID>` | The name or ID of the cluster. |
-    | `<server_URL>` | A publicly accessible URL or IP address for the remote logging service that you want to send logs to. Certificates are ignored if you provide an unsecure server URL. |
-    | `<CA_cert_path>` | The file path for the CA certificate that is used to verify the remote logging service. |
-    | `<client_cert_path>` | The file path for the client certificate that is used to authenticate against the remote logging service. |
-    | `<client_key_path>` | The file path for the corresponding client key that is used to connect to the remote logging service. |
+    | `CLUSTER_NAME_OR_ID` | The name or ID of the cluster. |
+    | `SERVER_URL` | A publicly accessible URL or IP address for the remote logging service that you want to send logs to. Certificates are ignored if you provide an unsecure server URL. |
+    | `CA_CERT_PATH` | The file path for the CA certificate that is used to verify the remote logging service. |
+    | `CLIENT_CERT_PATH` | The file path for the client certificate that is used to authenticate against the remote logging service. |
+    | `CLIENT_KEY_PATH` | The file path for the corresponding client key that is used to connect to the remote logging service. |
     {: caption="Understanding this command's components" caption-side="bottom"}
 
 2. Verify that log forwarding was enabled by viewing the URL for the remote logging service.
 
     ```sh
-    ibmcloud ks cluster master audit-webhook get --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master audit-webhook get --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -738,7 +738,7 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
 3. Apply the configuration update by restarting the Kubernetes master.
 
     ```sh
-    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -747,14 +747,14 @@ Before you begin, ensure that you reviewed the [considerations and prerequisites
     2. Disable the webhook back-end configuration for the cluster's API server.
 
         ```sh
-        ibmcloud ks cluster master audit-webhook unset --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER_NAME_OR_ID
         ```
         {: pre}
 
     3. Apply the configuration update by restarting the Kubernetes master.
 
         ```sh
-        ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster master refresh --cluster CLUSTER_NAME_OR_ID
         ```
         {: pre}
 

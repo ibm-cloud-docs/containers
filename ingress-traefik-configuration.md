@@ -3,7 +3,7 @@
 copyright:
   years: 2026
 
-lastupdated: "2026-08-04"
+lastupdated: "2026-08-06"
 
 keywords: kubernetes, traefik, ingress controller
 
@@ -140,7 +140,7 @@ spec:
 ```
 {: codeblock}
 
-For VPC clusters, you must also modify the idle connection timeout on the load balancer service that exposes your public ALB. Replace `<clusterid>` with your cluster ID, which you can retrieve by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. The following example sets the timeout to 910 seconds:
+For VPC clusters, you must also modify the idle connection timeout on the load balancer service that exposes your public ALB. Replace `CLUSTER_ID` with your cluster ID, which you can retrieve by running `ibmcloud ks cluster get --cluster CLUSTER_NAME_OR_ID`. The following example sets the timeout to 910 seconds:
 
 ```sh
 kubectl annotate svc -n kube-system public-cr<clusterid> service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-idle-connection-timeout="910"
@@ -508,7 +508,7 @@ Protect your apps from unauthenticated access by integrating [{{site.data.keywor
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` option to use existing service key credentials. Bind the service instance to the same namespace that your Ingress resources are in. All letters in the service instance name must be lowercase.
     ```sh
-    ibmcloud ks cluster service bind --cluster CLUSTER_NAME_OR_ID --namespace NAMESPACE --service APP_ID_SERVICE_INSTANCE_NAME [--key <service_instance_key>]
+    ibmcloud ks cluster service bind --cluster CLUSTER_NAME_OR_ID --namespace NAMESPACE --service APP_ID_SERVICE_INSTANCE_NAME [--key SERVICE_INSTANCE_KEY]
     ```
     {: pre}
 
@@ -525,13 +525,13 @@ Protect your apps from unauthenticated access by integrating [{{site.data.keywor
 4. Enable the ALB OAuth Proxy add-on in your cluster. This add-on creates and manages the following Kubernetes resources: an OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} service instance, a secret that contains the OAuth2-Proxy configuration, and an Ingress resource that routes incoming requests to the OAuth2-Proxy deployment. The name of each resource begins with `oauth2-`.
     1. Enable the `alb-oauth-proxy` add-on.
         ```sh
-        ibmcloud ks cluster addon enable alb-oauth-proxy --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER_NAME_OR_ID
         ```
         {: pre}
 
     2. Verify that the ALB OAuth Proxy add-on has a status of `Addon Ready`. Wait a few minutes and rerun the command if the status shows `Enabling`.
         ```sh
-        ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster addon ls --cluster CLUSTER_NAME_OR_ID
         ```
         {: pre}
 
@@ -736,7 +736,7 @@ The upgrade process is noninterruptive because the supervised `oauth2-proxy` ins
 
 1. Disable the add-on.
     ```sh
-    ibmcloud ks cluster addon disable alb-oauth-proxy --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon disable alb-oauth-proxy --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -748,7 +748,7 @@ The upgrade process is noninterruptive because the supervised `oauth2-proxy` ins
 
 3. Enable the add-on and specify the `--version` option. If you don't specify a version, the default version is enabled.
     ```sh
-    ibmcloud ks cluster addon enable alb-oauth-proxy --cluster <cluster_name_or_ID> [--version <version>]
+    ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER_NAME_OR_ID [--version VERSION]
     ```
     {: pre}
 
@@ -768,19 +768,19 @@ Enabling the PROXY protocol recreates your load balancers, which might cause a b
 1. Enable the PROXY protocol. For more information about the command parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-load-balancer-proxy-protocol-enable-cli).
 
     ```sh
-    ibmcloud ks ingress lb proxy-protocol enable --cluster <cluster_name_or_ID> --cidr <subnet_CIDR>
+    ibmcloud ks ingress lb proxy-protocol enable --cluster CLUSTER_NAME_OR_ID --cidr SUBNET_CIDR
     ```
     {: pre}
 
 2. Confirm that the PROXY protocol is enabled for the load balancers that expose ALBs in your cluster. In the output, verify that the `Proxy Protocol` field shows `Enabled`.
     ```sh
-    ibmcloud ks ingress lb get --cluster <cluster_name_or_ID>
+    ibmcloud ks ingress lb get --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 3. To disable the PROXY protocol later, run the following command:
     ```sh
-    ibmcloud ks ingress lb proxy-protocol disable --cluster <cluster_name_or_ID>
+    ibmcloud ks ingress lb proxy-protocol disable --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 

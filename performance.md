@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-08-04"
+lastupdated: "2026-08-06"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
@@ -556,13 +556,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 4. Restart the kubelet that runs on each worker node by rebooting the worker nodes. Do **not** reload the worker node to restart the kubelet. Reloading the worker node before the kubelet picks up on the huge pages enablement causes the enablement to fail.
     1. List the worker nodes in your cluster.
         ```sh
-        ibmcloud ks worker ls -c <cluster_name_or_ID>
+        ibmcloud ks worker ls -c CLUSTER_NAME_OR_ID
         ```
         {: pre}
 
     2. Reboot the worker nodes. You can reboot multiple worker nodes by including multiple `-w` options, but make sure to leave enough worker nodes running at the same time for your apps to avoid an outage.
         ```sh
-        ibmcloud ks worker reboot -c <cluster_name_or_ID> -w <worker1_ID> -w <worker2_ID>
+        ibmcloud ks worker reboot -c CLUSTER_NAME_OR_ID -w WORKER1_ID -w WORKER2_ID
         ```
         {: pre}
 

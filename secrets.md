@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: secret, certificate, field, tls, non-tls, rotate, ingress
@@ -76,7 +76,7 @@ Follow the steps to use the default TLS certificate for the IBM-provided Ingress
 
 
     ```sh
-    ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
+    ibmcloud ks ingress secret get -c CLUSTER --name SECRET_NAME --namespace default
     ```
     {: pre}
 
@@ -86,7 +86,7 @@ Follow the steps to use the default TLS certificate for the IBM-provided Ingress
     {: tip}
 
     ```sh
-    ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace default
+    ibmcloud ks ingress secret create --cluster CLUSTER_NAME_OR_ID --cert-crn CRN --name SECRET_NAME --namespace default
     ```
     {: pre}
 
@@ -111,7 +111,7 @@ By storing custom TLS certificates in [{{site.data.keyword.secrets-manager_short
 
 
     ```sh
-    ibmcloud ks ingress secret create --name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn> --namespace default
+    ibmcloud ks ingress secret create --name SECRET_NAME --cluster CLUSTER_NAME_OR_ID --cert-crn CERTIFICATE_CRN --namespace default
     ```
     {: pre}
 

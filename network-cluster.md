@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: kubernetes, vlan
@@ -264,20 +264,20 @@ To change the VLANs that a worker pool uses to provision worker nodes:
 
     - Example to add both public and private VLANs, such as if you change from private-only to both private and public:
         ```sh
-        ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
+        ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER_NAME_OR_ID --worker-pool POOL_NAME --private-vlan PRIVATE_VLAN_ID --public-vlan PUBLIC_VLAN_ID
         ```
         {: pre}
 
     - Example to add only a private VLAN, such as if you change from public and private VLANs to private-only when you have a [VRF-enabled account that uses service endpoints](/docs/account?topic=account-vrf-service-endpoint):
 
         ```sh
-        ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_vlan_id> --private-only
+        ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER_NAME_OR_ID --worker-pool POOL_NAME --private-vlan PRIVATE_VLAN_ID --private-only
         ```
         {: pre}
 
 5. Add worker nodes to the worker pool by resizing the pool.
     ```sh
-    ibmcloud ks worker-pool resize --cluster <cluster_name_or_ID> --worker-pool <pool_name> --size-per-zone <number_of_workers_per_zone>
+    ibmcloud ks worker-pool resize --cluster CLUSTER_NAME_OR_ID --worker-pool POOL_NAME --size-per-zone NUMBER_OF_WORKERS_PER_ZONE
     ```
     {: pre}
 
@@ -286,7 +286,7 @@ To change the VLANs that a worker pool uses to provision worker nodes:
 
 6. Verify that new worker nodes are created with the appropriate **Public IP** and **Private IP** addresses in the output. For example, if you change the worker pool from a public and private VLAN to private-only, the new worker nodes have only a private IP. If you change the worker pool from private-only to both public and private VLANs, the new worker nodes have both public and private IPs.
     ```sh
-    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ibmcloud ks worker ls --cluster CLUSTER_NAME_OR_ID --worker-pool POOL_NAME
     ```
     {: pre}
 
@@ -294,19 +294,19 @@ To change the VLANs that a worker pool uses to provision worker nodes:
     1. In the output of the previous step, note the **ID** of the worker nodes that you want to remove from the worker pool.
     2. Remove the worker node.
         ```sh
-        ibmcloud ks worker rm --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
+        ibmcloud ks worker rm --cluster CLUSTER_NAME_OR_ID --worker WORKER_NAME_OR_ID
         ```
         {: pre}
 
     3. Verify that the worker node is removed.
         ```sh
-        ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+        ibmcloud ks worker ls --cluster CLUSTER_NAME_OR_ID --worker-pool POOL_NAME
         ```
         {: pre}
 
     4. Rebalance the worker pool.
         ```sh
-        ibmcloud ks worker-pool rebalance --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+        ibmcloud ks worker-pool rebalance --cluster CLUSTER_NAME_OR_ID --worker-pool POOL_NAME
         ```
         {: pre}
 
