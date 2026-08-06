@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -25,7 +25,7 @@ content-type: troubleshoot
 
 
 
-When you have a multizone classic cluster and run `ibmcloud ks ingress alb ls --cluster <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
+When you have a multizone classic cluster and run `ibmcloud ks ingress alb ls --cluster CLUSTER`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
 {: tsSymptoms}
 
 ```txt
@@ -56,7 +56,7 @@ Option 1: Order a new VLAN
 :   If you need a new VLAN, order one by [contacting {{site.data.keyword.cloud_notm}} support](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Then, [create a cluster](/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-classic-cli) that uses this new VLAN.
 
 Option 2: Use VLAN spanning with an available VLAN
-:   If you have another VLAN that is available, you can [set up VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#vlan-spanning-get-cli).
+:   If you have another VLAN that is available, you can [set up VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region REGION` [command](/docs/containers?topic=containers-kubernetes-service-cli#vlan-spanning-get-cli).
 
 Option 3: Reuse existing subnets on the VLAN
 :   If you are not using all the subnets in the VLAN, you can reuse subnets on the VLAN by adding them to your cluster.
@@ -72,7 +72,7 @@ Complete the following steps after choosing an option.
 
 3. Verify that the subnet was successfully created and added to your cluster. The subnet CIDR is listed in the **Subnet VLANs** section.
     ```sh
-    ibmcloud ks cluster get --cluster <cluster_name> --show-resources
+    ibmcloud ks cluster get --cluster CLUSTER_NAME --show-resources
     ```
     {: pre}
 
@@ -88,5 +88,5 @@ Complete the following steps after choosing an option.
 
 4. Verify that the portable IP addresses from the subnet that you added are used for the ALBs in your cluster. It might take several minutes for the services to use the portable IP addresses from the new subnet.
     
-    * **No Ingress subdomain**: Run `ibmcloud ks cluster get --cluster <cluster>` to verify that the **Ingress Subdomain** is populated.
-    * **An ALB does not deploy in a zone**: Run `ibmcloud ks ingress alb ls --cluster <cluster>` to verify that the missing ALB is deployed.
+    * **No Ingress subdomain**: Run `ibmcloud ks cluster get --cluster CLUSTER` to verify that the **Ingress Subdomain** is populated.
+    * **An ALB does not deploy in a zone**: Run `ibmcloud ks ingress alb ls --cluster CLUSTER` to verify that the missing ALB is deployed.

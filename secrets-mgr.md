@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-08-04"
+lastupdated: "2026-08-06"
 
 
 keywords: secrets manager, secrets, certificates, secret group, CRN
@@ -137,14 +137,14 @@ Follow the steps to register your {{site.data.keyword.secrets-manager_short}} in
     {: tip}
 
     ```sh
-    ibmcloud ks ingress instance register --cluster <cluster_name_or_id> --crn <instance_crn> [--is-default]
+    ibmcloud ks ingress instance register --cluster CLUSTER_NAME_OR_ID --crn INSTANCE_CRN [--is-default]
     ```
     {: pre}
 
 3. Verify that the {{site.data.keyword.secrets-manager_short}} instance was registered to the cluster. 
 
     ```sh
-    ibmcloud ks ingress instance ls --cluster <cluster_name_or_id>
+    ibmcloud ks ingress instance ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -170,7 +170,7 @@ When you set a default {{site.data.keyword.secrets-manager_short}} instance, all
 1. Run the command to set the new default instance. You can optionally specify a [secret group](/docs/secrets-manager?topic=secrets-manager-secret-groups) that is allowed access to the secrets in the instance. 
 
     ```sh
-    ibmcloud ks ingress instance default set --cluster <cluster_name_or_id> --name <instance_name> --secret-group <secret_group_id>
+    ibmcloud ks ingress instance default set --cluster CLUSTER_NAME_OR_ID --name INSTANCE_NAME --secret-group SECRET_GROUP_ID
     ```
     {: pre}
 
@@ -179,7 +179,7 @@ When you set a default {{site.data.keyword.secrets-manager_short}} instance, all
     1. List the nlb-dns subdomains in your cluster.
 
         ```sh
-        ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
+        ibmcloud ks nlb-dns ls --cluster CLUSTER_NAME_OR_ID
         ```
         {: pre}
   
@@ -189,7 +189,7 @@ When you set a default {{site.data.keyword.secrets-manager_short}} instance, all
         {: important}
 
         ```sh
-        ibmcloud ks nlb-dns secret regenerate --cluster <cluster_name_or_id> --nlb-subdomain <nlb_subdomain>
+        ibmcloud ks nlb-dns secret regenerate --cluster CLUSTER_NAME_OR_ID --nlb-subdomain NLB_SUBDOMAIN
         ```
         {: pre}
 
@@ -200,7 +200,7 @@ When you set a default {{site.data.keyword.secrets-manager_short}} instance, all
         {: note}
 
         ```sh
-        ibmcloud ks ingress secret ls --show-crn --cluster <cluster_name_or_id>
+        ibmcloud ks ingress secret ls --show-crn --cluster CLUSTER_NAME_OR_ID
         ```
         {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: kubernetes
@@ -55,7 +55,7 @@ The cluster cannot be created. Delete the failed cluster and try to create anoth
 ## Delete failed
 {: #cluster-state-delete-failed}
 
-The Kubernetes master or at least one worker node can't be deleted. List worker nodes by running `ibmcloud ks worker ls --cluster <cluster_name_or_ID>`.
+The Kubernetes master or at least one worker node can't be deleted. List worker nodes by running `ibmcloud ks worker ls --cluster CLUSTER_NAME_OR_ID`.
 
 IBM Support is notified and works to resolve the issue. You can't resolve the issue by trying to delete the cluster again.
 
@@ -148,4 +148,4 @@ The [Kubernetes version](/docs/containers?topic=containers-cs_versions#cs_versio
 
 At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. Try to [reload](/docs/containers?topic=containers-kubernetes-service-cli#worker-reload-cli) the unavailable worker nodes.
 - Your cluster has zero worker nodes, such as if you created a cluster without any worker nodes or manually removed all the worker nodes from the cluster. Resize your worker pool to add worker nodes to recover from a `Warning` state, and then [update the Calico node entries for your worker nodes](/docs/containers?topic=containers-zero_nodes_calico_failure).
-- A control plane operation for your cluster failed. View the cluster in the console or run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` to [check](/docs/containers?topic=containers-debug_master) the **Master Status** for further debugging.
+- A control plane operation for your cluster failed. View the cluster in the console or run `ibmcloud ks cluster get --cluster CLUSTER_NAME_OR_ID` to [check](/docs/containers?topic=containers-debug_master) the **Master Status** for further debugging.

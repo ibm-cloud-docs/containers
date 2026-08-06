@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: ingress, alb, manage albs, update, alb image, traefik
@@ -78,9 +78,9 @@ To set a time for automatic updates, you set the `updateStartTime` and `updateEn
 To receive bug fixes and security updates, keep automatic updates enabled. When automatic updates are disabled, you are responsible for updating your ALBs manually.
 {: important}
 
-You can disable automatic updates for your ALBs by running [`ibmcloud ks ingress alb autoupdate disable -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-enable-cli).
+You can disable automatic updates for your ALBs by running [`ibmcloud ks ingress alb autoupdate disable -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-enable-cli).
 
-To check if automatic updates are enabled for your cluster, use the [`ibmcloud ks ingress alb autoupdate get -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-get-cli) command. If you decide to enable automatic updates again, you can run [`ibmcloud ks ingress alb autoupdate enable -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-disable-cli).
+To check if automatic updates are enabled for your cluster, use the [`ibmcloud ks ingress alb autoupdate get -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-get-cli) command. If you decide to enable automatic updates again, you can run [`ibmcloud ks ingress alb autoupdate enable -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-disable-cli).
 
 
 ### Applying manual updates
@@ -186,14 +186,14 @@ When using Ingress resource validation, every create and update request is valid
     The following command applies to **classic clusters**. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-create-classic-cli).
 
     ```sh
-    ibmcloud ks ingress alb create --cluster <cluster_name_or_ID> --type <public_or_private> --zone <zone> --vlan <VLAN_ID> --version traefik_image_version [--ip <IP_address>] 
+    ibmcloud ks ingress alb create --cluster CLUSTER_NAME_OR_ID --type PUBLIC_OR_PRIVATE --zone ZONE --vlan VLAN_ID --version traefik_image_version [--ip IP_ADDRESS]
     ```
     {: pre}
 
     The following command applies to **VPC clusters**. For more information and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-create-vpc-gen2-cli).
 
     ```sh
-    ibmcloud ks ingress alb create vpc-gen2 --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> --version traefik_image_version
+    ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER_NAME_OR_ID --type PUBLIC_OR_PRIVATE --zone VPC_ZONE --version traefik_image_version
     ```
     {: pre}
 
@@ -201,7 +201,7 @@ When using Ingress resource validation, every create and update request is valid
 2. Verify that the ALBs that you created in each zone have a **Status** of `enabled`. For classic clusters, check that an **ALB IP** is assigned. For VPC clusters, check that **Load Balancer Hostname** is assigned.
 
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -248,7 +248,7 @@ Manually change the number of ALB replicas by creating a ConfigMap. Note that yo
 1. Get the IDs for your ALBs.
 
     ```sh
-    ibmcloud ks ingress alb ls -c <cluster_name_or_ID>
+    ibmcloud ks ingress alb ls -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -277,7 +277,7 @@ Manually change the number of ALB replicas by creating a ConfigMap. Note that yo
 4. To apply the changes, update your ALBs. Note that it might take up to 5 minutes for the changes to apply.
 
     ```sh
-    ibmcloud ks ingress alb update -c <cluster_name_or_ID>
+    ibmcloud ks ingress alb update -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -314,7 +314,7 @@ ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas
 
 
 `--cpu-average-utilization PERCENT`
-:   **Autoscaling by using average CPU utilization**: The target CPU utilization percentage for the autoscaler. The average represents the percentage of used CPU compared to the requested CPU for all ALB pods. To check the current CPU usage by ALB pods, run `kubectl top pods -n kube-system -l app=<alb-id>`. To check the CPU amount requested for ALB pods, run `kubectl get deployment -n kube-system <alb-id> -o=jsonpath='{.spec.template.spec.containers[0].resources.requests.cpu}`. You cannot use this option with the `--custom-metrics-file` option. 
+:   **Autoscaling by using average CPU utilization**: The target CPU utilization percentage for the autoscaler. The average represents the percentage of used CPU compared to the requested CPU for all ALB pods. To check the current CPU usage by ALB pods, run `kubectl top pods -n kube-system -l app=ALB_ID`. To check the CPU amount requested for ALB pods, run `kubectl get deployment -n kube-system ALB_ID -o=jsonpath='{.spec.template.spec.containers[0].resources.requests.cpu}`. You cannot use this option with the `--custom-metrics-file` option.
 
 `--custom-metrics-file FILE`
 :   **Autoscaling by using custom metrics**: Specify the name of the configuration file that defines custom metrics and target values for autoscaling. Note that you are responsible for installing and configuring a metrics provider, such as Prometheus. You cannot use this option with the `--cpu-average-utilization` option.
@@ -344,14 +344,14 @@ Example custom metrics YAML file. Configure your custom metrics in a YAML file. 
 Example command for dynamic scaling based on an average CPU utilization of 60%.
 
 ```sh
-ibmcloud ks ingress alb autoscale set -c <cluster_name_or_ID> --alb <alb-id> --min-replicas 2 --max-replicas 5 --cpu-average-utilization 60
+ibmcloud ks ingress alb autoscale set -c CLUSTER_NAME_OR_ID --alb ALB_ID --min-replicas 2 --max-replicas 5 --cpu-average-utilization 60
 ```
 {: pre}
 
 Example command for dynamic scaling based on custom metrics stored in a file named `my-custom-metrics.yaml`.
 
 ```sh
-ibmcloud ks ingress alb autoscale set -c <cluster_name_or_ID> --alb <alb-id> --min-replicas 2 --max-replicas 5 --custom-metrics-file my-custom-metrics.yaml
+ibmcloud ks ingress alb autoscale set -c CLUSTER_NAME_OR_ID --alb ALB_ID --min-replicas 2 --max-replicas 5 --custom-metrics-file my-custom-metrics.yaml
 ```
 {: pre}
 
@@ -383,11 +383,11 @@ To scale down your ALBs, you can disable an ALB so that it no longer routes traf
 {: shortdesc}
 
 ```sh
-ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
+ibmcloud ks ingress alb disable --alb ALB_ID -c CLUSTER_NAME_OR_ID
 ```
 {: pre}
 
-You can re-enable an ALB at any time by running [`ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli) for classic clusters or [`ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli) .
+You can re-enable an ALB at any time by running [`ibmcloud ks ingress alb enable classic --alb ALB_ID -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli) for classic clusters or [`ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli) .
 
 
 ## Moving ALBs across VLANs in classic clusters
@@ -408,7 +408,7 @@ Removing all workers from a VLAN removes the IP address of the ALB in the VLAN's
     1. List the details for a worker in a zone.
 
         ```sh
-        ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_id>
+        ibmcloud ks worker get --cluster CLUSTER_NAME_OR_ID --worker WORKER_ID
         ```
         {: pre}
 
@@ -421,14 +421,14 @@ Removing all workers from a VLAN removes the IP address of the ALB in the VLAN's
 2. In each zone, create an ALB on the new VLAN. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-create-classic-cli).
 
     ```sh
-    ibmcloud ks ingress alb create --cluster <cluster_name_or_ID> --type <public_or_private> --zone <zone> --vlan <VLAN_ID> --version traefik_image_version [--ip <IP_address>] 
+    ibmcloud ks ingress alb create --cluster CLUSTER_NAME_OR_ID --type PUBLIC_OR_PRIVATE --zone ZONE --vlan VLAN_ID --version traefik_image_version [--ip IP_ADDRESS]
     ```
     {: pre}
 
 3. Verify that the ALBs that you created on the new VLANs in each zone have a **Status** of `enabled` and that an **ALB IP** address is assigned.
 
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -448,14 +448,14 @@ Removing all workers from a VLAN removes the IP address of the ALB in the VLAN's
 4. Disable each ALB that is connected to the old VLANs.
 
     ```sh
-    ibmcloud ks ingress alb disable --alb <old_ALB_ID> -c <cluster_name_or_ID>
+    ibmcloud ks ingress alb disable --alb OLD_ALB_ID -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 5. Verify that each ALB that is connected to the old VLANs has a **Status** of `disabled`. Only the ALBs that are connected to the new VLANs receive incoming network traffic and communicate with your app pods.
 
     ```sh
-    ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>
+    ibmcloud ks ingress alb ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -472,7 +472,7 @@ Removing all workers from a VLAN removes the IP address of the ALB in the VLAN's
     ```
     {: screen}
 
-6. Optional for public ALBs: Verify that the IP addresses of the new ALBs are listed under the IBM-provided Ingress subdomain for your cluster. You can find this subdomain by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
+6. Optional for public ALBs: Verify that the IP addresses of the new ALBs are listed under the IBM-provided Ingress subdomain for your cluster. You can find this subdomain by running `ibmcloud ks cluster get --cluster CLUSTER_NAME_OR_ID`.
 
     ```sh
     nslookup <Ingress_subdomain>
@@ -503,20 +503,20 @@ You can manage port 80 on your ALBs by using the following commands. Note that a
 * To get the status of port 80 on your ALBs, run the following command.
 
     ```sh
-    ibmcloud ks ingress security port80 get --cluster <cluster_name_or_ID>
+    ibmcloud ks ingress security port80 get --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 * To enable port 80 on your ALBs, run the following command.
 
     ```sh
-    ibmcloud ks ingress security port80 enable --cluster <cluster_name_or_ID>
+    ibmcloud ks ingress security port80 enable --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 * To disable port 80 on your ALBs, run the following command.
 
     ```sh
-    ibmcloud ks ingress security port80 disable --cluster <cluster_name_or_ID>
+    ibmcloud ks ingress security port80 disable --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}

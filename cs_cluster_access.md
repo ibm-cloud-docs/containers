@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-03"
+lastupdated: "2026-08-06"
 
 
 keywords: kubernetes, clusters
@@ -117,7 +117,7 @@ All VPC clusters have a private service endpoint which authorized users can acce
         1. Make sure that you have the [**Administrator** platform access role for the cluster](/docs/containers?topic=containers-iam-platform-access-roles).
         2. Download the kubeconfig for the administrator.
             ```sh
-            ibmcloud ks cluster config -c <cluster_name_or_ID> --admin --endpoint private
+            ibmcloud ks cluster config -c CLUSTER_NAME_OR_ID --admin --endpoint private
             ```
             {: pre}
 
@@ -125,7 +125,7 @@ All VPC clusters have a private service endpoint which authorized users can acce
     * **Log in as user**:
         1. Download the kubeconfig for the user you are logged in as.
             ```sh
-            ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint private
+            ibmcloud ks cluster config -c CLUSTER_NAME_OR_ID --endpoint private
             ```
             {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -81,7 +81,7 @@ Before you begin
 
 * You can't run community Istio concurrently with the managed Istio add-on in your cluster. If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 
-* Classic multizone clusters: Ensure that you enable a [Virtual Routing and Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Manage Network VLAN Spanning** infrastructure permission, or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#vlan-spanning-get-cli).
+* Classic multizone clusters: Ensure that you enable a [Virtual Routing and Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint&interface=ui) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you can't or don't want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Manage Network VLAN Spanning** infrastructure permission, or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region REGION` [command](/docs/containers?topic=containers-kubernetes-service-cli#vlan-spanning-get-cli).
 
 ### Installing the Istio add-on from the console
 {: #istio_install_console}
@@ -351,13 +351,13 @@ Disable the add-on and verify that no additional Istio add-ons remain.
 
 1. Disable the `istio` add-on.
     ```sh
-    ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
+    ibmcloud ks cluster addon disable istio --cluster CLUSTER_NAME_OR_ID -f
     ```
     {: pre}
 
 2. Verify that all managed Istio add-ons are disabled in this cluster. No Istio add-ons are returned in the output.
     ```sh
-    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -535,25 +535,25 @@ If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras`
 
 1. Disable the `istio-sample-bookinfo` add-on.
     ```sh
-    ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 2. Disable the `istio-extras` add-on.
     ```sh
-    ibmcloud ks cluster addon disable istio-extras --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 3. Disable the `istio` add-on.
     ```sh
-    ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
+    ibmcloud ks cluster addon disable istio --cluster CLUSTER_NAME_OR_ID -f
     ```
     {: pre}
 
 4. Verify that all managed Istio add-ons are disabled in this cluster. No Istio add-ons are returned in the output.
     ```sh
-    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon ls --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 

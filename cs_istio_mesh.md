@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-24"
+lastupdated: "2026-08-06"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo, istio
@@ -817,7 +817,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 2. Apply the authentication policy to a namespace.
     ```sh
-    kubectl apply -f default.yaml -n <namespace>
+    kubectl apply -f default.yaml -n NAMESPACE
     ```
     {: pre}
 
@@ -837,7 +837,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 4. Apply the destination rule.
     ```sh
-    kubectl apply -f destination-mtls.yaml -n <namespace>
+    kubectl apply -f destination-mtls.yaml -n NAMESPACE
     ```
     {: pre}
 

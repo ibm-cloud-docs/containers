@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -78,8 +78,8 @@ Could not obtain network VLAN with ID: <vlan-id>
 **Description and resolution**:
 
 Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:
-* You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. To retrieve the VLAN ID, run `ibmcloud ks vlan ls --zone <zone>`.
-* The VLAN ID might not be associated with the IBM Cloud infrastructure account that you use. To list available VLAN IDs for your account, run `ibmcloud ks vlan ls --zone <zone>` . To change the IBM Cloud infrastructure account, see [`ibmcloud ks credential set`](/docs/containers?topic=containers-kubernetes-service-cli#credential-set-classic-cli).
+* You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. To retrieve the VLAN ID, run `ibmcloud ks vlan ls --zone ZONE`.
+* The VLAN ID might not be associated with the IBM Cloud infrastructure account that you use. To list available VLAN IDs for your account, run `ibmcloud ks vlan ls --zone ZONE` . To change the IBM Cloud infrastructure account, see [`ibmcloud ks credential set`](/docs/containers?topic=containers-kubernetes-service-cli#credential-set-classic-cli).
 
 ## Location invalid
 {: #location-invalid}
@@ -130,7 +130,7 @@ Worker unable to talk to IBM Cloud Kubernetes Service servers. Please verify you
 If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).
 
 
-Check whether your cluster does not have a public IP by running `ibmcloud ks worker ls --cluster <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.
+Check whether your cluster does not have a public IP by running `ibmcloud ks worker ls --cluster MYCLUSTER`. If no public IP is listed, then your cluster has only private VLANs.
     * If you want the cluster to have only private VLANs, set up your [VLAN connection](/docs/containers?topic=containers-plan_basics#private_clusters) and your [firewall](/docs/containers?topic=containers-firewall#firewall_outbound).
     * If you created the cluster with only the private cloud service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint&interface=ui) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint), your workers can't connect to the master. Try [setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account. If you still want a private cloud service endpoint only cluster after your account is updated, you can then disable the public cloud service endpoint.
     * If you want the cluster to have a public IP, [add new worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-create-classic-cli) with both public and private VLANs.
@@ -175,11 +175,11 @@ The owner of the API key that is used to access the IBM Cloud infrastructure por
 
 As the **user**, follow these steps:
 1. If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}.
-2. Run `ibmcloud ks api-key info --cluster <cluster_name_or_ID>` to view the current API key owner that is used to access the IBM Cloud infrastructure portfolio.
+2. Run `ibmcloud ks api-key info --cluster CLUSTER_NAME_OR_ID` to view the current API key owner that is used to access the IBM Cloud infrastructure portfolio.
 3. Run `ibmcloud account list` to view the owner of the {{site.data.keyword.cloud_notm}} account that you currently use.
 4. Contact the owner of the {{site.data.keyword.cloud_notm}} account and report that the API key owner has insufficient permissions in IBM Cloud infrastructure or might be pending to be deleted.
 
 As the **account owner**, follow these steps:
 1. Review the [required classic permissions in IBM Cloud infrastructure](/docs/containers?topic=containers-iam-platform-access-roles) to perform the action that previously failed. For the VPC infrastructure provider, the API key owner must have the **Administrator** platform access role.
-2. Fix the permissions of the API key owner or create a new API key by using the [`ibmcloud ks api-key reset --region <region>`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-reset-cli) command.
-3. If you or another account admin manually set IBM Cloud infrastructure credentials in your account, run [`ibmcloud ks credential unset --region <region>`](/docs/containers?topic=containers-kubernetes-service-cli#credential-unset-cli) to remove the credentials from your account.
+2. Fix the permissions of the API key owner or create a new API key by using the [`ibmcloud ks api-key reset --region REGION`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-reset-cli) command.
+3. If you or another account admin manually set IBM Cloud infrastructure credentials in your account, run [`ibmcloud ks credential unset --region REGION`](/docs/containers?topic=containers-kubernetes-service-cli#credential-unset-cli) to remove the credentials from your account.

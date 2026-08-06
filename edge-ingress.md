@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: containers, kubernetes, affinity, taint, edge node, edge
@@ -102,7 +102,7 @@ To isolate your workload to edge worker nodes:
     {: tip}
 
     ```sh
-    ibmcloud ks ingress alb update -c <cluster_name_or_ID> --alb <ALB_ID> [--version <build_version>] 
+    ibmcloud ks ingress alb update -c CLUSTER_NAME_OR_ID --alb ALB_ID [--version BUILD_VERSION]
     ```
     {: pre}
 

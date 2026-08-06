@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: kubernetes, coredns, kubedns, dns
@@ -596,14 +596,14 @@ Complete the following step to set up zone-aware DNS in your multizone cluster.
 1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-refresh-cli) to deploy the zone-aware DNS resources.
 
     ```sh
-    ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 1. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cluster-get-cli).
 
     ```sh
-    ibmcloud ks cluster get -c <cluster_name_or_ID>
+    ibmcloud ks cluster get -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -713,13 +713,13 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
 1. [Refresh the cluster master](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-refresh-cli) to the delete zone-aware DNS resources.
 
     ```sh
-    ibmcloud ks cluster master refresh --cluster <cluster-name-or-id>
+    ibmcloud ks cluster master refresh --cluster CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
 1. Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-kubernetes-service-cli#cluster-get-cli).
 
     ```sh
-    ibmcloud ks cluster get -c <cluster_name_or_ID>
+    ibmcloud ks cluster get -c CLUSTER_NAME_OR_ID
     ```
     {: pre}

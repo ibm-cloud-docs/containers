@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-06"
 
 
 keywords: ingress, expose apps, ingress resource, ALB, domain
@@ -196,7 +196,7 @@ Resource fields
     ```
     {: pre}
 
-Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-ingress-debug). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status-report get -c <cluster_name_or_ID>`.
+Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-ingress-debug). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status-report get -c CLUSTER_NAME_OR_ID`.
 {: tip}
 
 ## Custom domains with Ingress
@@ -213,7 +213,7 @@ Follow the steps to create a custom domain for public ALBs.
 
 1. Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/dns-svcs?topic=dns-svcs-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`. Note that domains are limited to 130 characters or fewer in Kubernetes version 1.20 or later.
 
-2. Define an alias for your custom domain by specifying the IBM-provided subdomain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster get --cluster <cluster_name>` and look for the **Ingress subdomain** field.
+2. Define an alias for your custom domain by specifying the IBM-provided subdomain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster get --cluster CLUSTER_NAME` and look for the **Ingress subdomain** field.
 
     Specifying the IBM-provided subdomain as a CNAME is required for automatic health checks to remove any failing IPs from the DNS response, and to ensure that your custom domain updates when you add or remove ALBs.
     {: note}
@@ -231,4 +231,4 @@ If you have a classic cluster with only a private VLAN, you must first configure
 
 1. Create a custom domain through your DNS service provider. Note that Ingress URLs must be 130 characters or fewer.
 
-2. Map your custom domain to the private ALBs by adding their IP addresses as A records (classic clusters) or their VPC hostname as a CNAME (VPC clusters). To find the ALB IP addresses (classic) or hostname (VPC), run `ibmcloud ks ingress alb ls -c <cluster_name_or_ID>`.
+2. Map your custom domain to the private ALBs by adding their IP addresses as A records (classic clusters) or their VPC hostname as a CNAME (VPC clusters). To find the ALB IP addresses (classic) or hostname (VPC), run `ibmcloud ks ingress alb ls -c CLUSTER_NAME_OR_ID`.
