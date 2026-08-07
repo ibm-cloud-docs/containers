@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-06"
+lastupdated: "2026-08-07"
 
 
 keywords: containers
@@ -7536,12 +7536,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Version 1.18.3, released 3 October 2023](/docs/containers?topic=containers-cl-add-ons-istio#1183)
 
     * [Version 1.17.6, released 3 October 2023](/docs/containers?topic=containers-cl-add-ons-istio#1176)
-
-    * [Version 1.18.2, released 8 August 2023](/docs/containers?topic=containers-cl-add-ons-istio#1182)
-
-    * [Version 1.17.5, released 8 August 2023](/docs/containers?topic=containers-cl-add-ons-istio#1175)
-
-    * [Version 1.16.7, released 8 August 2023](/docs/containers?topic=containers-cl-add-ons-istio#1167)
 
 [Cluster autoscaler add-on version change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler)
 
