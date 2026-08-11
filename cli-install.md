@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-05-27"
+  years: 2014, 2026
+lastupdated: "2026-08-11"
 
 
 keywords: containers,kubernetes, ic, ks, kubectl
@@ -37,7 +37,7 @@ You can use the following tools to manage your {{site.data.keyword.containerlong
 | `ibmcloud` | You can use the `ibmcloud` CLI to login to your account, add users, manage your catalogs and more. |
 | `ks` plug-in | After installing the `ibmcloud` CLI, you can use the `ks` plug-in to create and manage {{site.data.keyword.containerlong_notm}} clusters. |
 | `kubectl` | You can use the `kubectl` CLI to manage resources within your clusters like pods, deployments, and more. |
-{: caption="Table 1: CLI tools" caption-side="bottom"}
+{: caption="CLI tools" caption-side="bottom"}
 
 
 {{../cli/index.md#step1-install-idt}}
