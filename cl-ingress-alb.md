@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-11"
 
 
 keywords: change log, version history, Ingress ALB
@@ -25,8 +25,22 @@ Review the version history for Ingress ALB.
 {: shortdesc}
 
 
+## Version 3.7.8
+{: #cl-ingress-alb-3.7.8}
+
+
+### Version 3.7.8 - 3.7.8_358418506_iks, released 11 August 2026
+{: #cl-ingress-alb-378_358418506_iks}
+
+
 ## Version 3.7.7
 {: #cl-ingress-alb-3.7.7}
+
+
+### Version 3.7.7 - 3.7.7_360793979_iks, released 11 August 2026
+{: #cl-ingress-alb-377_360793979_iks}
+
+- GO-2026-6061 
 
 
 ### Version 3.7.7 - 3.7.7_358058274_iks, released 27 July 2026
@@ -37,6 +51,12 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-3.7.6}
 
 
+### Version 3.7.6 - 3.7.6_360793471_iks, released 11 August 2026
+{: #cl-ingress-alb-376_360793471_iks}
+
+- Resolves the following CVEs: [GO-2026-6061](https://nvd.nist.gov/vuln/detail/GO-2026-6061){: external}.
+
+
 ### Version 3.7.6 - 3.7.6_356947877_iks, released 27 July 2026
 {: #cl-ingress-alb-376_356947877_iks}
 
@@ -45,28 +65,44 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-376_356092760_iks}
 
 
-## Version 3.7.5
-{: #cl-ingress-alb-3.7.5}
+## Version 1.15.8
+{: #cl-ingress-alb-1.15.8}
 
 
-### Version 3.7.5 - 3.7.5_356968537_iks, released 27 July 2026
-{: #cl-ingress-alb-375_356968537_iks}
+### Version 1.15.8 - 1.15.8_359618591_iks, released 11 August 2026
+{: #cl-ingress-alb-1158_359618591_iks}
+
+- Resolves the following CVEs: [CVE-2026-33630](https://nvd.nist.gov/vuln/detail/CVE-2026-33630){: external}, and [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/CVE-2026-56852){: external}.
+- Updates Go to version `1.26`.
 
 
-### Version 3.7.5 - 3.7.5_356079678_iks, released 20 July 2026
-{: #cl-ingress-alb-375_356079678_iks}
+### Version 1.15.8 - 1.15.8_356092614_iks, released 20 July 2026
+{: #cl-ingress-alb-1158_356092614_iks}
+
+- Updates Go to version `1.26`.
 
 
-### Version 3.7.5 - 3.7.5_353228763_iks, released 06 July 2026
-{: #cl-ingress-alb-375_353228763_iks}
+### Version 1.15.8 - 1.15.8_352185571_iks, released 06 July 2026
+{: #cl-ingress-alb-1158_352185571_iks}
+
+- Updates Go to version `1.26`.
 
 
-### Version 3.7.5 - 3.7.5_351789633_iks, released 01 July 2026
-{: #cl-ingress-alb-375_351789633_iks}
+### Version 1.15.8 - 1.15.8_351852518_iks, released 01 July 2026
+{: #cl-ingress-alb-1158_351852518_iks}
+
+- Resolves the following CVEs: [CVE-2026-25680](https://nvd.nist.gov/vuln/detail/CVE-2026-25680){: external}, [CVE-2026-25681](https://nvd.nist.gov/vuln/detail/CVE-2026-25681){: external}, [CVE-2026-27136](https://nvd.nist.gov/vuln/detail/CVE-2026-27136){: external}, [CVE-2026-39821](https://nvd.nist.gov/vuln/detail/CVE-2026-39821){: external}, [CVE-2026-42502](https://nvd.nist.gov/vuln/detail/CVE-2026-42502){: external}, and [CVE-2026-42506](https://nvd.nist.gov/vuln/detail/CVE-2026-42506){: external}.
 
 
 ## Version 1.15.7
 {: #cl-ingress-alb-1.15.7}
+
+
+### Version 1.15.7 - 1.15.7_359611426_iks, released 11 August 2026
+{: #cl-ingress-alb-1157_359611426_iks}
+
+- Resolves the following CVEs: [CVE-2026-33630](https://nvd.nist.gov/vuln/detail/CVE-2026-33630){: external}, and [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/CVE-2026-56852){: external}.
+- Updates Go to version `1.26`.
 
 
 ### Version 1.15.7 - 1.15.7_358001162_iks, released 27 July 2026
@@ -103,6 +139,26 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-1157_349797741_iks}
 
 
+## Version 3.7.5
+{: #cl-ingress-alb-3.7.5}
+
+
+### Version 3.7.5 - 3.7.5_356968537_iks, released 27 July 2026
+{: #cl-ingress-alb-375_356968537_iks}
+
+
+### Version 3.7.5 - 3.7.5_356079678_iks, released 20 July 2026
+{: #cl-ingress-alb-375_356079678_iks}
+
+
+### Version 3.7.5 - 3.7.5_353228763_iks, released 06 July 2026
+{: #cl-ingress-alb-375_353228763_iks}
+
+
+### Version 3.7.5 - 3.7.5_351789633_iks, released 01 July 2026
+{: #cl-ingress-alb-375_351789633_iks}
+
+
 ## Version 3.7.4
 {: #cl-ingress-alb-3.7.4}
 
@@ -121,28 +177,6 @@ Review the version history for Ingress ALB.
 
 ### Version 3.7.4 - 3.7.4_348800920_iks, released 23 June 2026
 {: #cl-ingress-alb-374_348800920_iks}
-
-
-## Version 1.15.8
-{: #cl-ingress-alb-1.15.8}
-
-
-### Version 1.15.8 - 1.15.8_356092614_iks, released 20 July 2026
-{: #cl-ingress-alb-1158_356092614_iks}
-
-- Updates Go to version `1.26`.
-
-
-### Version 1.15.8 - 1.15.8_352185571_iks, released 06 July 2026
-{: #cl-ingress-alb-1158_352185571_iks}
-
-- Updates Go to version `1.26`.
-
-
-### Version 1.15.8 - 1.15.8_351852518_iks, released 01 July 2026
-{: #cl-ingress-alb-1158_351852518_iks}
-
-- Resolves the following CVEs: [CVE-2026-25680](https://nvd.nist.gov/vuln/detail/CVE-2026-25680){: external}, [CVE-2026-25681](https://nvd.nist.gov/vuln/detail/CVE-2026-25681){: external}, [CVE-2026-27136](https://nvd.nist.gov/vuln/detail/CVE-2026-27136){: external}, [CVE-2026-39821](https://nvd.nist.gov/vuln/detail/CVE-2026-39821){: external}, [CVE-2026-42502](https://nvd.nist.gov/vuln/detail/CVE-2026-42502){: external}, and [CVE-2026-42506](https://nvd.nist.gov/vuln/detail/CVE-2026-42506){: external}.
 
 
 ## Version 3.7.3
