@@ -5639,7 +5639,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 {: #sitemap_cli_plug-in_reference}
 
 
-[{{site.data.keyword.containerlong_notm}} CLI command reference](/docs/containers?topic=containers-icks_map#icks_map)
+[{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map#icks_map)
 
 * [`api` commands](/docs/containers?topic=containers-icks_map#icks_map_api)
 
