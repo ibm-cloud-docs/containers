@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-08-04"
+lastupdated: "2026-08-12"
 
 
 keywords: change log, version history, 1.34
@@ -40,6 +40,24 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.34
 {: #134_components}
+
+
+### Worker node fix pack 1.34.10_1562, released 12 August 2026
+{: #cl-boms-13410_1562_W}
+
+The following table shows the components included in the worker node fix pack 1.34.10_1562. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Description |
+| ---- | ---- |
+|UBUNTU 24 (VPC) 6.8.0-137-generic|Resolves the following CVEs: [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/CVE-2026-4046){: external}, [CVE-2026-43083](https://nvd.nist.gov/vuln/detail/CVE-2026-43083){: external}, [CVE-2026-43197](https://nvd.nist.gov/vuln/detail/CVE-2026-43197){: external}, [CVE-2026-43198](https://nvd.nist.gov/vuln/detail/CVE-2026-43198){: external}, [CVE-2026-43465](https://nvd.nist.gov/vuln/detail/CVE-2026-43465){: external}, [CVE-2026-443](https://nvd.nist.gov/vuln/detail/CVE-2026-443){: external}, [CVE-2026-4437](https://nvd.nist.gov/vuln/detail/CVE-2026-4437){: external}, [CVE-2026-4438](https://nvd.nist.gov/vuln/detail/CVE-2026-4438){: external}, [CVE-2026-46242](https://nvd.nist.gov/vuln/detail/CVE-2026-46242){: external}, [CVE-2026-46325](https://nvd.nist.gov/vuln/detail/CVE-2026-46325){: external}, [CVE-2026-46331](https://nvd.nist.gov/vuln/detail/CVE-2026-46331){: external}, [CVE-2026-52914](https://nvd.nist.gov/vuln/detail/CVE-2026-52914){: external}, [CVE-2026-52924](https://nvd.nist.gov/vuln/detail/CVE-2026-52924){: external}, [CVE-2026-52931](https://nvd.nist.gov/vuln/detail/CVE-2026-52931){: external}, [CVE-2026-53151](https://nvd.nist.gov/vuln/detail/CVE-2026-53151){: external}, [CVE-2026-53176](https://nvd.nist.gov/vuln/detail/CVE-2026-53176){: external}, [CVE-2026-53212](https://nvd.nist.gov/vuln/detail/CVE-2026-53212){: external}, [CVE-2026-53215](https://nvd.nist.gov/vuln/detail/CVE-2026-53215){: external}, [CVE-2026-53225](https://nvd.nist.gov/vuln/detail/CVE-2026-53225){: external}, [CVE-2026-53228](https://nvd.nist.gov/vuln/detail/CVE-2026-53228){: external}, [CVE-2026-53359](https://nvd.nist.gov/vuln/detail/CVE-2026-53359){: external}, [CVE-2026-5435](https://nvd.nist.gov/vuln/detail/CVE-2026-5435){: external}, [CVE-2026-5450](https://nvd.nist.gov/vuln/detail/CVE-2026-5450){: external}, [CVE-2026-5928](https://nvd.nist.gov/vuln/detail/CVE-2026-5928){: external}, and [CVE-2026-6238](https://nvd.nist.gov/vuln/detail/CVE-2026-6238){: external}.|
+|UBUNTU 24 (Classic) 6.8.0-137-generic|Resolves the following CVEs: [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/CVE-2026-4046){: external}, [CVE-2026-43083](https://nvd.nist.gov/vuln/detail/CVE-2026-43083){: external}, [CVE-2026-43197](https://nvd.nist.gov/vuln/detail/CVE-2026-43197){: external}, [CVE-2026-43198](https://nvd.nist.gov/vuln/detail/CVE-2026-43198){: external}, [CVE-2026-43465](https://nvd.nist.gov/vuln/detail/CVE-2026-43465){: external}, [CVE-2026-443](https://nvd.nist.gov/vuln/detail/CVE-2026-443){: external}, [CVE-2026-4437](https://nvd.nist.gov/vuln/detail/CVE-2026-4437){: external}, [CVE-2026-4438](https://nvd.nist.gov/vuln/detail/CVE-2026-4438){: external}, [CVE-2026-46242](https://nvd.nist.gov/vuln/detail/CVE-2026-46242){: external}, [CVE-2026-46325](https://nvd.nist.gov/vuln/detail/CVE-2026-46325){: external}, [CVE-2026-46331](https://nvd.nist.gov/vuln/detail/CVE-2026-46331){: external}, [CVE-2026-52914](https://nvd.nist.gov/vuln/detail/CVE-2026-52914){: external}, [CVE-2026-52924](https://nvd.nist.gov/vuln/detail/CVE-2026-52924){: external}, [CVE-2026-52931](https://nvd.nist.gov/vuln/detail/CVE-2026-52931){: external}, [CVE-2026-53151](https://nvd.nist.gov/vuln/detail/CVE-2026-53151){: external}, [CVE-2026-53176](https://nvd.nist.gov/vuln/detail/CVE-2026-53176){: external}, [CVE-2026-53212](https://nvd.nist.gov/vuln/detail/CVE-2026-53212){: external}, [CVE-2026-53215](https://nvd.nist.gov/vuln/detail/CVE-2026-53215){: external}, [CVE-2026-53225](https://nvd.nist.gov/vuln/detail/CVE-2026-53225){: external}, [CVE-2026-53228](https://nvd.nist.gov/vuln/detail/CVE-2026-53228){: external}, [CVE-2026-53359](https://nvd.nist.gov/vuln/detail/CVE-2026-53359){: external}, [CVE-2026-5435](https://nvd.nist.gov/vuln/detail/CVE-2026-5435){: external}, [CVE-2026-5450](https://nvd.nist.gov/vuln/detail/CVE-2026-5450){: external}, [CVE-2026-5928](https://nvd.nist.gov/vuln/detail/CVE-2026-5928){: external}, and [CVE-2026-6238](https://nvd.nist.gov/vuln/detail/CVE-2026-6238){: external}.|
+|Kubernetes 1.34.10|For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.10).|
+|containerd 2.2.6|For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v2.2.6).|
+|HAProxy bd7e64ef86b90455535107263466d1825f3e7f9f|Resolves the following CVEs: [CVE-2026-56391](https://nvd.nist.gov/vuln/detail/CVE-2026-56391){: external}, and [CVE-2026-56392](https://nvd.nist.gov/vuln/detail/CVE-2026-56392){: external}.|
+|GPU Device Plug-in and Installer 22593b92ec9c3df7a58e00c3eec845f8fd447cc3|Resolves the following CVEs: [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/CVE-2026-56852){: external}, [CVE-2026-54370](https://nvd.nist.gov/vuln/detail/CVE-2026-54370){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/CVE-2025-6170){: external}, [CVE-2026-28390](https://nvd.nist.gov/vuln/detail/CVE-2026-28390){: external}, [CVE-2026-44431](https://nvd.nist.gov/vuln/detail/CVE-2026-44431){: external}, [CVE-2026-54369](https://nvd.nist.gov/vuln/detail/CVE-2026-54369){: external}, [CVE-2026-58016](https://nvd.nist.gov/vuln/detail/CVE-2026-58016){: external}, [CVE-2025-13151](https://nvd.nist.gov/vuln/detail/CVE-2025-13151){: external}, [CVE-2026-15308](https://nvd.nist.gov/vuln/detail/CVE-2026-15308){: external}, and [CVE-2026-48864](https://nvd.nist.gov/vuln/detail/CVE-2026-48864){: external}.|
+{: caption="1.34.10_1562 fix pack." caption-side="bottom"}
+{: #cl-boms-13410_1562_W-component-table}
 
 
 ### Master fix pack 1.34.10_1561, released 03 August 2026
