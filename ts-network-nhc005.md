@@ -1,7 +1,7 @@
 ---
 copyright: 
   years: 2025, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-08-12"
 
 keywords: kubernetes, help, network, calico, tigera, degraded, nhc005, calico degraded, tigera operator
 
@@ -19,6 +19,9 @@ content-type: troubleshoot
 {: support}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
+
+Troubleshoot network health check error NHC005.
+{: shortdesc}
 
 When you check the status of your cluster's health by running the `ibmcloud ks cluster health issues --cluster <CLUSTER_ID>`, you see an error similar to the following example.
 {: tsSymptoms}

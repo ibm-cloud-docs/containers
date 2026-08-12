@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-12"
 
 
 keywords: kubernetes, tigera, master
@@ -16,10 +16,13 @@ content-type: troubleshoot
 {{site.data.keyword.attribute-definition-list}}
 
 
-# Why do I see the error `Cannot complete cluster master upgrade because there is a migration in progress`?
+# Resolving cluster master upgrade issues: Migration in progress error
 {: #ts-resource-migration}
 {: troubleshoot}
 {: support}
+
+Learn how to troubleshoot and resolve the `Cannot complete cluster master upgrade because there is a migration in progress` error in IBM Cloud.
+{: shortdesc}
 
 [Virtual Private Cloud]{: tag-vpc}
 [Classic infrastructure]{: tag-classic-inf}

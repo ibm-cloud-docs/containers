@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-08-06"
+lastupdated: "2026-08-12"
 
 
 keywords: kubernetes, node scaling, ca, autoscaler
@@ -18,10 +18,11 @@ subcollection: containers
 
 
 
-# VPC flavors
+# VPC worker node flavors
 {: #vpc-flavors}
 
-Review the VPC worker node flavors by metro.
+Review VPC worker node flavors by metro, including available configurations and limitations. Check flavor availability for your cluster.
+{: shortdesc}
 
 The flavors listed here might differ from what is actually available for your cluster. You can find a list of available flavors specific to your clusters by running **`ibmcloud ks flavor ls`** [command](/docs/containers?topic=containers-kubernetes-service-cli#flavor-ls-cli) or review the list of flavors when creating a cluster in the console.
 

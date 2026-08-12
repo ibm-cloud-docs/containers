@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-11"
+lastupdated: "2026-08-12"
 
 
 keywords: containers
@@ -259,6 +259,20 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
+
+    * [12 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug1226)
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}} and OpenShift Virtualization Service.
+
+    * [10 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug1026)
+
+        * OpenShift Virtualization cluster add-on patch updates.
+
+        * IBM Object CSI Driver cluster add-on patch updates.
 
     * [5 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0526)
 
@@ -2129,7 +2143,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
 
-[Preparing for host maintenance updates](/docs/containers?topic=containers-host-maintenance#host-maintenance)
+[Preparing IBM Cloud host maintenance updates security enhancements](/docs/containers?topic=containers-host-maintenance#host-maintenance)
 
 * [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
 
@@ -5217,6 +5231,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+    * [Worker node fix pack 1.36.3_1526, released 12 August 2026](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1526_W)
+
     * [Master fix pack 1.36.3_1525, released 03 August 2026](/docs/containers?topic=containers-changelog_136#cl-boms_master-1363_1525_M)
 
     * [Worker node fix pack 1.36.2_1524, released 28 July 2026](/docs/containers?topic=containers-changelog_136#cl-boms-1362_1524_W)
@@ -5291,6 +5307,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+    * [Worker node fix pack 1.35.7_1540, released 12 August 2026](/docs/containers?topic=containers-changelog_135#cl-boms-1357_1540_W)
 
     * [Master fix pack 1.35.7_1539, released 03 August 2026](/docs/containers?topic=containers-changelog_135#cl-boms_master-1357_1539_M)
 
@@ -5390,6 +5408,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+    * [Worker node fix pack 1.34.10_1562, released 12 August 2026](/docs/containers?topic=containers-changelog_134#cl-boms-13410_1562_W)
 
     * [Master fix pack 1.34.10_1561, released 03 August 2026](/docs/containers?topic=containers-changelog_134#cl-boms_master-13410_1561_M)
 
@@ -5511,6 +5531,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+    * [Worker node fix pack 1.33.13_1581, released 12 August 2026](/docs/containers?topic=containers-changelog_133#cl-boms-13313_1581_W)
 
     * [Master fix pack 1.33.13_1580, released 03 August 2026](/docs/containers?topic=containers-changelog_133#cl-boms_master-13313_1580_M)
 
@@ -7643,6 +7665,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [Version 1.0 - v1.0.55_360965725, released 12 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1055_360965725)
+
     * [Version 1.0 - v1.0.53_359554333, released 05 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1053_359554333)
 
     * [Version 1.0 - v1.0.52_358395144, released 29 July 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1052_358395144)
@@ -7814,6 +7838,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [Version 2.0 - v2.0.47_360961675, released 12 August 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2047_360961675)
 
     * [Version 2.0 - v2.0.45_359566968, released 05 August 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2045_359566968)
 
@@ -8556,7 +8582,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 {: #sitemap_worker_node_flavors}
 
 
-[VPC flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
+[VPC worker node flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
 * [Chennai (`in-che`)](/docs/containers?topic=containers-vpc-flavors#chennai-in-che)
 
@@ -8584,7 +8610,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Washington DC (`us-east`)](/docs/containers?topic=containers-vpc-flavors#washington-dc-us-east)
 
-[Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
+[Classic worker node flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
 
 * [Amsterdam (`ams`)](/docs/containers?topic=containers-classic-flavors#amsterdam-ams)
 
@@ -8822,7 +8848,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Warning](/docs/containers?topic=containers-cluster-states-reference#cluster-state-warning)
 
-[Debugging webhooks](/docs/containers?topic=containers-ts-webhook-debug#ts-webhook-debug)
+[Troubleshooting webhook errors in IBM Cloud Kubernetes clusters](/docs/containers?topic=containers-ts-webhook-debug#ts-webhook-debug)
 
 * [Reviewing the service that the webhook is calling](/docs/containers?topic=containers-ts-webhook-debug#review-webhook-service)
 
@@ -8834,7 +8860,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Understanding the impact of a master outage](/docs/containers?topic=containers-debug_master#review-master-outage)
 
-[Why do I see the error `Cannot complete cluster master upgrade because there is a migration in progress`?](/docs/containers?topic=containers-ts-resource-migration#ts-resource-migration)
+[Resolving cluster master upgrade issues: Migration in progress error](/docs/containers?topic=containers-ts-resource-migration#ts-resource-migration)
 
 [Debugging common CLI issues with clusters](/docs/containers?topic=containers-ts_clis#ts_clis)
 
@@ -8876,9 +8902,9 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Why is my Portieris cluster image security enforcement installation canceled?](/docs/containers?topic=containers-portieris_enable#portieris_enable)
 
-[Why does my cluster stay in a pending state?](/docs/containers?topic=containers-cs_cluster_pending#cs_cluster_pending)
+[Troubleshooting Kubernetes cluster stuck pending state IBM Cloud](/docs/containers?topic=containers-cs_cluster_pending#cs_cluster_pending)
 
-[Why can't I view or work with my cluster?](/docs/containers?topic=containers-cs_cluster_access#cs_cluster_access)
+[Troubleshooting cluster access issues in IBM Cloud Kubernetes](/docs/containers?topic=containers-cs_cluster_access#cs_cluster_access)
 
 [Classic: Why can't I access resources in my cluster?](/docs/containers?topic=containers-cs_firewall#cs_firewall)
 
@@ -8888,7 +8914,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit#master_resource_limit)
 
-[Debugging the `metrics-server`](/docs/containers?topic=containers-debug_metrics_server#debug_metrics_server)
+[Troubleshooting metrics server issues in Kubernetes clusters](/docs/containers?topic=containers-debug_metrics_server#debug_metrics_server)
 
 [Why does the Kubernetes dashboard terminate with an out of memory error?](/docs/containers?topic=containers-ts-kube-dashboord-oom#ts-kube-dashboord-oom)
 
@@ -9113,15 +9139,15 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name#ts-app-svc-bind-name)
 
-[Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
+[Resolving service binding errors in IBM Cloud clusters](/docs/containers?topic=containers-ts-app-svc-key#ts-app-svc-key)
 
-[Why can't I install a Helm chart with updated configuration values?](/docs/containers?topic=containers-ts-app-helm-install#ts-app-helm-install)
+[Troubleshooting helm chart installation updated configuration values](/docs/containers?topic=containers-ts-app-helm-install#ts-app-helm-install)
 
 [After creating a version 1.30 cluster, my app no longer works](/docs/containers?topic=containers-ts-sbd-app-not-working#ts-sbd-app-not-working)
 
 * [Allowing outbound access](/docs/containers?topic=containers-ts-sbd-app-not-working#allow-outbound-ts)
 
-[When I update my cluster to 1.30 or later, my nodeport app no longer works](/docs/containers?topic=containers-ts-sbd-nodeport-not-working#ts-sbd-nodeport-not-working)
+[Fixing nodeport apps after updating cluster version 1.30 or later](/docs/containers?topic=containers-ts-sbd-nodeport-not-working#ts-sbd-nodeport-not-working)
 
 
 ### Cluster autoscaler
@@ -9268,7 +9294,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Why are Istio components missing?](/docs/containers?topic=containers-istio_components_missing#istio_components_missing)
 
-[Why can't I upgrade to version 1.12 of the managed Istio add-on?](/docs/containers?topic=containers-ts-addon-istio-webhooks#ts-addon-istio-webhooks)
+[Troubleshooting managed istio add-on upgrade to version 1.12](/docs/containers?topic=containers-ts-addon-istio-webhooks#ts-addon-istio-webhooks)
 
 [Why does my custom gateway Istio operator have a reconcile loop error?](/docs/containers?topic=containers-istio_control_plane#istio_control_plane)
 
@@ -9593,7 +9619,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Why does installing the Object storage Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails#cos_helm_fails)
 
-[Why can't non-root users access files?](/docs/containers?topic=containers-cos_nonroot_access#cos_nonroot_access)
+[Resolving non-root user access issues to files in IBM Cloud](/docs/containers?topic=containers-cos_nonroot_access#cos_nonroot_access)
 
 * [Verifying that the permissions for your files are updated](/docs/containers?topic=containers-cos_nonroot_access#verifying_file_permission_update)
 

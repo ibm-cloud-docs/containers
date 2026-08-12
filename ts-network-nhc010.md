@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-08-12"
 
 keywords: kubernetes, help, network, security groups, nhc010, exceeded security group rules quota
 
@@ -20,6 +20,10 @@ content-type: troubleshoot
 {: support}
 
 [Virtual Private Cloud]{: tag-vpc}
+
+
+Troubleshoot network health check error NHC010.
+{: shortdesc}
 
 When you check the status of your cluster's health by running the `ibmcloud ks cluster health issues --cluster <CLUSTER_ID>`, you see an error similar to the following example.
 {: tsSymptoms}
