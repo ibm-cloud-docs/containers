@@ -1,7 +1,7 @@
 ---
 copyright: 
   years: 2025, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-08-12"
 
 keywords: kubernetes, help, network, container registry, image pull, nhc003, container registry unreachable
 
@@ -21,6 +21,10 @@ content-type: troubleshoot
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
 When you check the status of your cluster's health by running the `ibmcloud ks cluster health issues --cluster <CLUSTER_ID>`, you see an error similar to the following example.
+
+Troubleshoot network health check error NHC003.
+{: shortdesc}
+
 {: tsSymptoms}
 
 ```sh

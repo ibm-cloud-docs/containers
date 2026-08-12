@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2026
-lastupdated: "2026-08-06"
+lastupdated: "2026-08-12"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, {{site.data.keyword.containerlong_notm}}, outbound traffic protection, cluster create, quotas, limitations, rules, security groups
@@ -21,6 +21,10 @@ content-type: troubleshoot
 
 [Virtual Private Cloud]{: tag-vpc}
 [1.30 and later]{: tag-blue}
+
+
+Troubleshoot cluster creation quota errors when using Satellite storage.
+{: shortdesc}
 
 
 After you create a VPC cluster, your worker nodes are stuck in the `Provision_pending` state with the message `Pending security group creation` .

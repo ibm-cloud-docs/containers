@@ -8858,7 +8858,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Using TOTP MFA to create an infrastructure API key for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cluster_infra_errors#create-api-key-totp-mfa)
 
-[VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#ts_no_vpc)
+[VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc#vpc-why-is-no-vpc-available-when-i-create-a-cluster-in-the-console)
 
 [Why can't I create or renew my CA cert?](/docs/containers?topic=containers-ts-cert-failed#ts-cert-failed)
 
@@ -9146,7 +9146,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Step 7: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
 
-[Autoscaling fails after API key reset](/docs/containers?topic=containers-ts-storage-ca-apikey-reset#ts-storage-ca-apikey-reset)
+[Autoscaling fails after API key reset](/docs/containers?topic=containers-ts-storage-ca-apikey-reset#autoscaling-fails-after-api-key-reset)
 
 [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ts-ca-resize#ts-ca-resize)
 
@@ -9445,7 +9445,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Why can't my app access or write to PVCs?](/docs/containers?topic=containers-file_app_failures#file_app_failures)
 
-[Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root#root)
+[Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root#why-does-my-app-fail-with-a-group-id-error-for-nfs-file-storage-permissions)
 
 [Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot#nonroot)
 
@@ -9461,7 +9461,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Verifying the read and write permissions for the non-root user](/docs/containers?topic=containers-cs_storage_nonroot#verify-rw-permissions)
 
-[Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes#readonly_nodes)
+[Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes#why-are-the-file-systems-for-worker-nodes-changed-to-read-only)
 
 [Why can't I create {{site.data.keyword.filestorage_vpc_short}} snapshots?](/docs/containers?topic=containers-ts-storage-vpc-file-snapshot-create#ts-storage-vpc-file-snapshot-create)
 
@@ -9562,9 +9562,9 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Why does my Block Storage persistent volume show a `limited` connectivity status?](/docs/containers?topic=containers-block-pv-limited-connectivity#block-pv-limited-connectivity)
 
-[Why can't I delete my {{site.data.keyword.block_storage_is_short}} volume snapshot resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#ts-storage-volumesnapshotdelete)
+[Why can't I delete my {{site.data.keyword.block_storage_is_short}} volume snapshot resources?](/docs/containers?topic=containers-ts-storage-volumesnapshotdelete#why-cant-i-delete-my--volume-snapshot-resources)
 
-[Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-snapshotfails#ts-storage-snapshotfails)
+[Why can't I create {{site.data.keyword.block_storage_is_short}} snapshots?](/docs/containers?topic=containers-ts-storage-snapshotfails#why-cant-i-create--snapshots)
 
 
 ### Object Storage
@@ -9589,7 +9589,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Updating the Helm chart](/docs/containers?topic=containers-debug_storage_cos#debug-helm-update)
 
-[Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails#cos_access_bucket_fails)
+[Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails#why-cant-my-pvc-access-an-existing-bucket)
 
 [Why does installing the Object storage Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails#cos_helm_fails)
 
@@ -9597,7 +9597,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Verifying that the permissions for your files are updated](/docs/containers?topic=containers-cos_nonroot_access#verifying_file_permission_update)
 
-[Why does my app pod fail with an `Operation not permitted` error?](/docs/containers?topic=containers-cos_operation_not_permitted#cos_operation_not_permitted)
+[Why does my app pod fail with an `Operation not permitted` error?](/docs/containers?topic=containers-cos_operation_not_permitted#why-does-my-app-pod-fail-with-an-operation-not-permitted-error)
 
 [Why can't the ownership of the mount path be changed?](/docs/containers?topic=containers-cos_mountpath_error#cos_mountpath_error)
 
@@ -9605,9 +9605,9 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Resolving the issue](/docs/containers?topic=containers-cos_plugin_fails#cos-plugin-resolve)
 
-[Debugging the Cloud Object Storage add-on](/docs/containers?topic=containers-ts-storage-cos-csi-addon#ts-storage-cos-csi-addon)
+[Debugging the Cloud Object Storage add-on](/docs/containers?topic=containers-ts-storage-cos-csi-addon#debugging-the-cloud-object-storage-add-on)
 
-[Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure#cred_failure)
+[Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure#why-do-i-see-wrong-credentials-or-access-denied-messages-when-i-create-a-pvc)
 
 [Why do I see wrong s3fs or IAM API endpoints when I create a PVC?](/docs/containers?topic=containers-cos_api_endpoint_failure#cos_api_endpoint_failure)
 
@@ -9617,7 +9617,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Resolving the issue](/docs/containers?topic=containers-cos_secret_access_fails#cos-secret-resolve)
 
-[Why is the transport endpoint not connected?](/docs/containers?topic=containers-cos_transport_ts_connect#cos_transport_ts_connect)
+[Why is the transport endpoint not connected?](/docs/containers?topic=containers-cos_transport_ts_connect#why-is-the-transport-endpoint-not-connected)
 
 [Why do I see transport endpoint not connected errors when using the {{site.data.keyword.cos_full_notm}} cluster add-on?](/docs/containers?topic=containers-cos_transport_ts_connect_addon#cos_transport_ts_connect_addon)
 
