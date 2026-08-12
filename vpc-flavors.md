@@ -18,7 +18,7 @@ subcollection: containers
 
 
 
-# VPC worker node flavors by metro: Configuration and availability
+# VPC worker node flavors
 {: #vpc-flavors}
 
 Review VPC worker node flavors by metro, including available configurations and limitations. Check flavor availability for your cluster.

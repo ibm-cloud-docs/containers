@@ -8556,7 +8556,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 {: #sitemap_worker_node_flavors}
 
 
-[VPC worker node flavors by metro: Configuration and availability](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
+[VPC worker node flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
 * [Chennai (`in-che`)](/docs/containers?topic=containers-vpc-flavors#chennai-in-che)
 
@@ -8584,7 +8584,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Washington DC (`us-east`)](/docs/containers?topic=containers-vpc-flavors#washington-dc-us-east)
 
-[Classic flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
+[Classic worker node flavors](/docs/containers?topic=containers-classic-flavors#classic-flavors)
 
 * [Amsterdam (`ams`)](/docs/containers?topic=containers-classic-flavors#amsterdam-ams)
 
