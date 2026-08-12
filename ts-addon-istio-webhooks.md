@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2022, 2025
-lastupdated: "2025-09-02"
+  years: 2022, 2026
+lastupdated: "2026-08-12"
 
 
 keywords: kubernetes, help
@@ -17,13 +17,16 @@ content-type: troubleshoot
 
 
 
-# Why can't I upgrade to version 1.12 of the managed Istio add-on?
+# Troubleshooting managed istio add-on upgrade to version 1.12
 {: #ts-addon-istio-webhooks}
 {: support}
 
+Resolve issues upgrading managed istio components from version 1.11 to 1.12 in IBM Cloud including managed Istio upgrade including Istio version 1.12.
+{: shortdesc}
+
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
-When you upgrade your managed Istio components from version 1.11 to version 1.12, the upgrade does not complete. 
+When you upgrade your managed Istio components from version 1.11 to version 1.12, the upgrade does not complete.
 {: tsSymptoms}
 
 When you [check the status](/docs/containers?topic=containers-debug_addons) of the Istio add-on, the **HEALTH STATUS** remains set to `(1.11 --> 1.12)`.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-08"
+lastupdated: "2026-08-12"
 
 
 keywords: kubernetes, help
@@ -14,9 +14,12 @@ content-type: troubleshoot
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Debugging the `metrics-server`
+# Troubleshooting metrics server issues in Kubernetes clusters
 {: #debug_metrics_server}
 {: support}
+
+Learn how to debug and resolve common issues with the metrics-server in your Kubernetes cluster, including symptoms, causes, and step-by-step.
+{: shortdesc}
 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf}
 
