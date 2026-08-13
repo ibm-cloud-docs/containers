@@ -2,7 +2,7 @@
 
 copyright:
   years: 2025, 2026
-lastupdated: "2026-04-23"
+lastupdated: "2026-08-13"
 keywords:  
 
 subcollection: containers
@@ -22,7 +22,7 @@ Review the managed add-ons available for {{site.data.keyword.containerlong_notm}
 | Autoscaler | Automatically scale the worker pools in your cluster based on the sizing needs of your scheduled workloads. | - [Preparing classic and VPC clusters for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc)  \n - [Cluster autoscaler add-on change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler) | 
 | ALB OAuth Proxy | Creates and manages the following Kubernetes resources: an OAuth2-Proxy deployment for your App ID service instance, a secret that contains the configuration of the OAuth2-Proxy deployment, and an Ingress resource that configures ALBs to route incoming requests to the OAuth2-Proxy deployment for your App ID instance. | - [Adding App ID authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id-auth)  \n - [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy) |
 | Back up and restore Helm chart | Create a one-time or scheduled backup for data that is stored in a file storage or block storage persistent volume claim (PVC). | - [Backing up and restoring PVC data for file and block storage](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore)  \n - [Back up and restore Helm chart change log](/docs/containers?topic=containers-backup_restore_changelog) |
-| IBM Cloud Object Storage plug-in | Set up pre-defined storage classes for IBM Cloud Object Storage and use these storage classes to create a PVC to provision storage for your apps. | - [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-storage_cos_install)  \n - [IBM Cloud Object Storage plug-in change log](/docs/containers?topic=containers-cos_plugin_changelog) |
+| IBM Cloud Object Storage plug-in | Set up pre-defined storage classes for IBM Cloud Object Storage and use these storage classes to create a PVC to provision storage for your apps. | - [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-storage_cos_install)  \n - [IBM Cloud Object Storage plug-in change log](/docs/containers?topic=containers-cl-object-storage-plug-in) |
 | IBM Storage Operator |  Manage several storage configmaps and resources in your cluster. This add-on is installed by default in VPC clusters that run version 1.30 or later. | - [Enabling the IBM Storage Operator](/docs/containers?topic=containers-storage-operator)  \n - [IBM Storage Operator add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator) |
 | Headlamp dashboard | A modern Kubernetes dashboard that provides a graphical user interface for managing and monitoring cluster resources with IBM Cloud IAM authentication. | - [Headlamp Kubernetes dashboard add-on](/docs/containers?topic=containers-headlamp-addon)  \n - [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp) |
 | Istio | An open service mesh platform to connect, secure, control, and observe microservices on cloud platforms. The Istio add-on is offered as a managed service that integrates Istio directly with your cluster. | - [Setting up the Istio managed add-on](/docs/containers?topic=containers-istio)  \n - [Istio add-on change log](/docs/containers?topic=containers-istio) | 
