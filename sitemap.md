@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-12"
+lastupdated: "2026-08-13"
 
 
 keywords: containers
@@ -285,6 +285,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * ALB OAuth Proxy cluster add-on patch updates.
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
+
+    * [29 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul2926)
+
+        * VPC Block CSI Driver cluster add-on patch updates.
 
     * [28 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul2826)
 
@@ -4682,6 +4686,24 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Limiting file share access to pods on worker nodes in multiple worker pools](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-multiple-pools)
 
+[Enabling automatic capacity roundoff for fixed IOPS profiles](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff)
+
+* [How capacity roundoff works](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-overview)
+
+* [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-prereqs)
+
+* [Create a StorageClass with capacity roundoff enabled](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-sc)
+
+* [Provision a PVC with capacity roundoff](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-pvc)
+
+    * [Scenario 1: Capacity is below the minimum and gets rounded up](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-scenario-low)
+
+    * [Scenario 2: Capacity meets the minimum and provisions as requested](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-scenario-exact)
+
+* [Next steps](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-next)
+
+* [Related links](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-links)
+
 [Encryption in transit for {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-eit#storage-file-vpc-eit)
 
 * [Zonal file shares — Setting up encryption in transit](/docs/containers?topic=containers-storage-file-vpc-eit#vpc-file-dp2-eit)
@@ -7727,6 +7749,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [Version 5.2 - v5.2.58_359719682, released 06 August 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5258_359719682)
+
+    * [Version 5.2 - v5.2.57_356951284, released 29 July 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5257_356951284)
+
     * [Version 5.2 - v5.2.55_349394850, released 25 June 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5255_349394850)
 
     * [Version 5.2 - v5.2.54_345553805, released 10 June 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5254_345553805)
@@ -7766,6 +7792,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Version 5.2 - 5.2.31_687, released 17 February 2025](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [Version 5.1 - v5.1.58_359720275, released 06 August 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5158_359720275)
+
+    * [Version 5.1 - v5.1.57_356951142, released 29 July 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5157_356951142)
 
     * [Version 5.1 - v5.1.55_349394898, released 25 June 2026](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5155_349394898)
 
@@ -9534,6 +9564,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Why does my application with `hostNetwork: true` fail to bind a port?](/docs/containers?topic=containers-ts-storage-vpc-file-rfs-eit#ts-rfs-eit-hostnetwork-port)
 
 * [Related topics](/docs/containers?topic=containers-ts-storage-vpc-file-rfs-eit#ts-rfs-eit-related)
+
+[Why does my PVC stay in Pending status when using capacity roundoff?](/docs/containers?topic=containers-ts-storage-vpc-file-capacity-roundoff#ts-storage-vpc-file-capacity-roundoff)
 
 [Classic: Why am I denied server access when mounting a volume to a worker node?](/docs/containers?topic=containers-ts-storage-file-access-denied#ts-storage-file-access-denied)
 
