@@ -3908,7 +3908,6 @@ Ingress ALB versions `1.9.4_6359_iks` and `1.8.4_6363_iks` are available for {{s
 {: release-note}
 
 
-
 {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch update `1.1.0_362`.
 :   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
 
