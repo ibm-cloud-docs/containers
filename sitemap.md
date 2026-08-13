@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-12"
+lastupdated: "2026-08-13"
 
 
 keywords: containers
@@ -4681,6 +4681,24 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Limiting file share access to pods on worker nodes in a single worker pool](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-one-pool)
 
     * [Limiting file share access to pods on worker nodes in multiple worker pools](/docs/containers?topic=containers-storage-file-vpc-apps#storage-file-vpc-vni-multiple-pools)
+
+[Enabling automatic capacity roundoff for fixed IOPS profiles](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff)
+
+* [How capacity roundoff works](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-overview)
+
+* [Prerequisites](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-prereqs)
+
+* [Create a StorageClass with capacity roundoff enabled](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-sc)
+
+* [Provision a PVC with capacity roundoff](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-pvc)
+
+    * [Scenario 1: Capacity is below the minimum and gets rounded up](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-scenario-low)
+
+    * [Scenario 2: Capacity meets the minimum and provisions as requested](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-scenario-exact)
+
+* [Next steps](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-next)
+
+* [Related links](/docs/containers?topic=containers-storage-file-vpc-capacity-roundoff#storage-file-vpc-capacity-roundoff-links)
 
 [Encryption in transit for {{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-eit#storage-file-vpc-eit)
 
@@ -9534,6 +9552,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Why does my application with `hostNetwork: true` fail to bind a port?](/docs/containers?topic=containers-ts-storage-vpc-file-rfs-eit#ts-rfs-eit-hostnetwork-port)
 
 * [Related topics](/docs/containers?topic=containers-ts-storage-vpc-file-rfs-eit#ts-rfs-eit-related)
+
+[Why does my PVC stay in Pending status when using capacity roundoff?](/docs/containers?topic=containers-ts-storage-vpc-file-capacity-roundoff#ts-storage-vpc-file-capacity-roundoff)
 
 [Classic: Why am I denied server access when mounting a volume to a worker node?](/docs/containers?topic=containers-ts-storage-file-access-denied#ts-storage-file-access-denied)
 
