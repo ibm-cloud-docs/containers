@@ -158,8 +158,12 @@ CLI version 1.0.804 is available.
 {: #containers-jul2326}
 {: release-note}
 
+
+
 Headlamp cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-headlamp).
+
+
 
 ### 22 July 2026
 {: #containers-jul2226}
@@ -462,7 +466,7 @@ IBM Object CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
 
 {{site.data.keyword.cos_full_notm}} plug-in version 2.2.53 is available.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 
 
@@ -757,7 +761,7 @@ CLI version 1.0.759 is available
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in version 2.2.51 is available.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 14 April 2026
 {: #containers-apr1426}
@@ -839,7 +843,7 @@ VPC File CSI Driver cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 
 
@@ -917,7 +921,7 @@ Cluster autoscaler cluster add-on patch updates.
 
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 
 
@@ -1040,7 +1044,7 @@ VPC Block CSI Driver cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 23 February 2026
 {: #containers-feb2326}
@@ -1125,7 +1129,7 @@ VPC Block CSI Driver cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 
 
@@ -1231,7 +1235,7 @@ CLI version `1.0.745` is available.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 12 January 2026
 {: #containers-jan1226}
@@ -1458,7 +1462,7 @@ Ingress ALB cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 11 November 2025
 {: #containers-nov1125}
@@ -1762,7 +1766,7 @@ VPC File CSI Driver cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 19 August 2025
 {: #containers-aug1925}
@@ -1824,7 +1828,7 @@ CLI version `1.0.714` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ## July 2025
 {: #containers-jul25}
@@ -2210,7 +2214,7 @@ ALB OAuth Proxy cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 22 April 2025
 {: #containers-22april25}
@@ -2257,7 +2261,7 @@ Ingress ALB cluster add-on patch updates.
 
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 
 
@@ -2392,7 +2396,7 @@ Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_no
 :   For more information, see [Cluster autoscaler add-on change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 05 March 2025
 {: #containers-05march25}
@@ -2569,7 +2573,7 @@ Istio add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 23 January 2025
 {: #containers-jan2325}
@@ -2726,7 +2730,7 @@ Ingress ALB cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 20 November 2024
 {: #containers-nov2024}
@@ -2975,7 +2979,7 @@ New! The {{site.data.keyword.cos_full_notm}} cluster add-on is available in Beta
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 25 September 2024
 {: #containers-sep2524}
@@ -3007,7 +3011,7 @@ Ubuntu 24 is now available for {{site.data.keyword.containerlong_notm}} clusters
 
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 23 September 2024
 {: #containers-23september24}
@@ -3116,7 +3120,7 @@ CLI version `1.0.657` is available.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 28 August 2024
 {: #containers-aug2824}
@@ -3216,7 +3220,7 @@ Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 29 July 2024
 {: #containers-july2924}
@@ -3238,7 +3242,7 @@ Istio add-on versions `1.22.3`, `1.21.5`, and `1.20.8` are available.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 {{site.data.keyword.containerlong_notm}} CLI version `1.0.640` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
@@ -3416,7 +3420,7 @@ Istio add-on versions `1.21.3` and `1.20.7` are available.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.26`.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 4 June 2024
 {: #containers-june0424}
@@ -3648,7 +3652,7 @@ Istio add-on versions `1.21.1`, `1.20.5`, and `1.19.9` are available.
 
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.25`.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 {{site.data.keyword.containerlong_notm}} CLI version `1.0.617` is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
@@ -3874,7 +3878,7 @@ New worker node flavors are available with L4 GPUs.
 {: release-note}
 
 {{site.data.keyword.cos_full_notm}} plug-in version `2.2.24`.
-:   For more information, see the [change log](/docs/containers?topic=containers-cos_plugin_changelog).
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
 
 ### 21 February 2024
 {: #containers-feb2124}
