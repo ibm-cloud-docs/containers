@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-13"
 
 
 keywords: kubernetes, containers network, classic
@@ -80,7 +80,7 @@ If you don’t want to or can't enable VRF for your account, your worker nodes c
 
 To make your master publicly or privately accessible to cluster users, you can enable the public and private cloud service endpoints. VRF is required in your {{site.data.keyword.cloud_notm}} account, and you must enable your account to use service endpoints. To enable VRF and service endpoints, run `ibmcloud account update --service-endpoint-enable true`.
 - If worker nodes are connected to public and private VLANs, communication between worker nodes and master is established over both the private network through the private cloud service endpoint and the public network through the public cloud service endpoint. By routing half of the worker-to-master traffic over the public endpoint and half over the private endpoint, your master-to-worker communication is protected from potential outages of the public or private network. If worker nodes are connected to private VLANs only, communication between worker nodes and master is established over the private network through the private cloud service endpoint only.
-- The master is publicly accessible to authorized cluster users through the public cloud service endpoint. The master is privately accessible through the private cloud service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a VPN connection or {{site.data.keyword.dl_full_notm}}. Note that you must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-access_cluster#access_private_se) so that users can access the master through a VPN or {{site.data.keyword.dl_full_notm}} connection.
+- The master is publicly accessible to authorized cluster users through the public cloud service endpoint. The master is privately accessible through the private cloud service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a VPN connection or {{site.data.keyword.dl_full_notm}}. Note that you must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-access-private-classic) so that users can access the master through a VPN or {{site.data.keyword.dl_full_notm}} connection.
 - You can optionally secure access to your cluster's public and private service endpoints by using [context based restrictions](/docs/containers?topic=containers-cbr).
 
 ### Private service endpoint only
@@ -88,7 +88,7 @@ To make your master publicly or privately accessible to cluster users, you can e
 
 To make your master only privately accessible, you can enable the private cloud service endpoint. VRF is required in your {{site.data.keyword.cloud_notm}} account, and you must enable your account to use service endpoints. To enable VRF and service endpoints, run `ibmcloud account update --service-endpoint-enable true`. Note that using private cloud service endpoint only incurs no billed or metered bandwidth charges.
 - Communication between worker nodes and master is established over the private network through the private cloud service endpoint.
-- The master is privately accessible if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a VPN connection or DirectLink. Note that you must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-access_cluster#access_private_se) so that users can access the master through a VPN or DirectLink connection.
+- The master is privately accessible if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a VPN connection or DirectLink. Note that you must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-access-private-classic) so that users can access the master through a VPN or DirectLink connection.
 - You can optionally secure access to your cluster's public and private service endpoints by using [context based restrictions](/docs/containers?topic=containers-cbr).
 
 
