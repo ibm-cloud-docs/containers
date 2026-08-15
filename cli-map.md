@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-08-12"
+lastupdated: "2026-08-15"
 
 keywords: kubernetes, containers
 
@@ -60,13 +60,11 @@ View and modify cluster and cluster service settings.
     * **Beta** [`ibmcloud ks cluster addon disable headlamp`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-headlamp-cli)
     * [`ibmcloud ks cluster addon disable hpcs-router`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-hpcs-router-cli)
     * **Beta** [`ibmcloud ks cluster addon disable ibm-storage-operator`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-ibm-storage-operator-cli)
-    * [`ibmcloud ks cluster addon disable image-key-synchronizer`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-image-key-synchronizer-cli)
     * [`ibmcloud ks cluster addon disable istio`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-istio-cli)
     * **Deprecated** [`ibmcloud ks cluster addon disable istio-extras`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-istio-extras-cli)
     * **Deprecated** [`ibmcloud ks cluster addon disable istio-sample-bookinfo`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-istio-sample-bookinfo-cli)
     * [`ibmcloud ks cluster addon disable knative`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-knative-cli)
     * [`ibmcloud ks cluster addon disable kube-terminal`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-kube-terminal-cli)
-    * [`ibmcloud ks cluster addon disable openshift-data-foundation`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-openshift-data-foundation-cli)
     * [`ibmcloud ks cluster addon disable static-route`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-static-route-cli)
     * [`ibmcloud ks cluster addon disable vpc-block-csi-driver`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-vpc-block-csi-driver-cli)
     * [`ibmcloud ks cluster addon enable acm`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-acm-cli)
@@ -76,11 +74,9 @@ View and modify cluster and cluster service settings.
     * **Beta** [`ibmcloud ks cluster addon enable headlamp`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-headlamp-cli)
     * [`ibmcloud ks cluster addon enable hpcs-router`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-hpcs-router-cli)
     * **Beta** [`ibmcloud ks cluster addon enable ibm-storage-operator`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-ibm-storage-operator-cli)
-    * [`ibmcloud ks cluster addon enable image-key-synchronizer`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-image-key-synchronizer-cli)
     * [`ibmcloud ks cluster addon enable istio`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-istio-cli)
     * **Deprecated** [`ibmcloud ks cluster addon enable istio-extras`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-istio-extras-cli)
     * **Deprecated** [`ibmcloud ks cluster addon enable istio-sample-bookinfo`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-istio-sample-bookinfo-cli)
-    * [`ibmcloud ks cluster addon enable openshift-data-foundation`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-openshift-data-foundation-cli)
     * [`ibmcloud ks cluster addon enable static-route`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-static-route-cli)
     * [`ibmcloud ks cluster addon enable vpc-block-csi-driver`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-vpc-block-csi-driver-cli)
     * [`ibmcloud ks cluster addon get`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-get-cli)
