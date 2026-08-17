@@ -3,7 +3,7 @@
 copyright:
   years: 2026
 
-lastupdated: "2026-08-06"
+lastupdated: "2026-08-17"
 
 keywords: kubernetes, traefik, ingress controller
 
@@ -370,8 +370,8 @@ The `ibm-ingress-deploy-config` ConfigMap controls ALB-level settings such as re
       name: ibm-ingress-deploy-config
       namespace: kube-system
     data:
-      <alb1-id>: '{"replicas":<number_of_replicas>, "ingressClass":"<class>", "httpsPort":"<port>", "httpPort":"<port>", "logLevel": "<TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC>", "ingressProvider": "<ingress|ingress-nginx>", "processTraefikCRDs": <true|false>, "traefikIngressNginxAllowExternalNameServices": <true|false>, "traefikCRDAllowCrossNamespace": <true|false>, "traefikCRDAllowExternalNameServices": <true|false>, "httpReadTimeout": <seconds>, "httpWriteTimeout": <seconds>, "httpIdleTimeout": <seconds>, "httpsReadTimeout": <seconds>, "httpsWriteTimeout": <seconds>, "httpsIdleTimeout": <seconds>, "httpsRedirect": <true|false>, "tolerations": [{"key":"<key>","operator":"<Equal|Exists>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
-      <alb2-id>: '{"replicas":<number_of_replicas>, "ingressClass":"<class>", "httpsPort":"<port>", "httpPort":"<port>", "logLevel": "<TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC>", "ingressProvider": "<ingress|ingress-nginx>", "processTraefikCRDs": <true|false>, "traefikIngressNginxAllowExternalNameServices": <true|false>, "traefikCRDAllowCrossNamespace": <true|false>, "traefikCRDAllowExternalNameServices": <true|false>, "httpReadTimeout": <seconds>, "httpWriteTimeout": <seconds>, "httpIdleTimeout": <seconds>, "httpsReadTimeout": <seconds>, "httpsWriteTimeout": <seconds>, "httpsIdleTimeout": <seconds>, "httpsRedirect": <true|false>, "tolerations": [{"key":"<key>","operator":"<Equal|Exists>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
+      <alb1-id>: '{"replicas":<number_of_replicas>, "ingressClass":"<class>", "httpsPort":"<port>", "httpPort":"<port>", "logLevel": "<TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC>", "ingressProvider": "<ingress|ingress-nginx>", "processTraefikCRDs": <true|false>, "traefikIngressNginxAllowExternalNameServices": <true|false>, "traefikCRDAllowCrossNamespace": <true|false>, "traefikCRDAllowExternalNameServices": <true|false>, "httpReadTimeout": <seconds>, "httpWriteTimeout": <seconds>, "httpIdleTimeout": <seconds>, "httpsReadTimeout": <seconds>, "httpsWriteTimeout": <seconds>, "httpsIdleTimeout": <seconds>, "httpsRedirect": <true|false>, "customEntryPoints": {"<name>": {"port": <port>, "protocol": "<TCP|UDP>", "readTimeout": <seconds|0>, "writeTimeout": <seconds|0>, "idleTimeout": <seconds|0>, "udpTimeout": <seconds>}}, "tolerations": [{"key":"<key>","operator":"<Equal|Exists>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
+      <alb2-id>: '{"replicas":<number_of_replicas>, "ingressClass":"<class>", "httpsPort":"<port>", "httpPort":"<port>", "logLevel": "<TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC>", "ingressProvider": "<ingress|ingress-nginx>", "processTraefikCRDs": <true|false>, "traefikIngressNginxAllowExternalNameServices": <true|false>, "traefikCRDAllowCrossNamespace": <true|false>, "traefikCRDAllowExternalNameServices": <true|false>, "httpReadTimeout": <seconds>, "httpWriteTimeout": <seconds>, "httpIdleTimeout": <seconds>, "httpsReadTimeout": <seconds>, "httpsWriteTimeout": <seconds>, "httpsIdleTimeout": <seconds>, "httpsRedirect": <true|false>, "customEntryPoints": {"<name>": {"port": <port>, "protocol": "<TCP|UDP>", "readTimeout": <seconds|0>, "writeTimeout": <seconds|0>, "idleTimeout": <seconds|0>, "udpTimeout": <seconds>}}, "tolerations": [{"key":"<key>","operator":"<Equal|Exists>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
     ```
     {: codeblock}
 
@@ -412,15 +412,15 @@ The `ibm-ingress-deploy-config` ConfigMap controls ALB-level settings such as re
     :   Default: `false`.
 
     `httpReadTimeout`, `httpsReadTimeout`
-    :   Configures the HTTP/HTTPS read timeout between the ALB and the client. Setting this value to zero disables the timeout.
+    :   Configures the HTTP/HTTPS read timeout between the ALB and the client. The value must be a whole number of seconds,setting it to zero disables the timeout.
     :   For more information, see the [Traefik documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#opt-transport-respondingTimeouts-readTimeout){: external}.
 
     `httpWriteTimeout`, `httpsWriteTimeout`
-    :   Configures the HTTP/HTTPS write timeout between the ALB and the client. Setting this value to zero disables the timeout.
+    :   Configures the HTTP/HTTPS write timeout between the ALB and the client. The value must be a whole number of seconds,setting it to zero disables the timeout.
     :   For more information, see the [Traefik documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#opt-transport-respondingTimeouts-writeTimeout){: external}.
 
     `httpIdleTimeout`, `httpsIdleTimeout`
-    :   Configures the HTTP/HTTPS idle timeout (keepalive) between the ALB and the client. Setting this value to zero disables the timeout.
+    :   Configures the HTTP/HTTPS idle timeout (keepalive) between the ALB and the client. The value must be a whole number of seconds,setting it to zero disables the timeout.
     :   For more information, see the [Traefik documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#opt-transport-respondingTimeouts-idleTimeout){: external}.
     :   If you use IBM Cloud Internet Services (CIS) or Cloudflare with Web Application Firewall (WAF) or global load balancing, configure this value to more than 900 seconds. For more information, see [Adjusting timeouts](#adjusting-timeouts).
     {: important}
@@ -428,6 +428,34 @@ The `ibm-ingress-deploy-config` ConfigMap controls ALB-level settings such as re
     `httpsRedirect`
     :   Enables a permanent redirect of all incoming HTTP requests to the HTTPS endpoint.
     :   Default: `false`.
+
+    `customEntryPoints`
+    :   Specifies additional custom entrypoints for Traefik. The name of the entrypoint will be the key of the object. The following entrypoint names are reserved and can not be used: `web`, `websecure`, `traefik`, `hc`, `http` and `https`.
+    :   In case of an invalid entrypoint configuration, none of the custom entrypoints will be processed!
+    {: important}
+
+    `customEntryPoints.<name>.port`
+    :   Port of the entrypoint to use. This field is mandatory. Make sure it does not clash with other ports.
+    :   The port and protocol defined here must be manually exposed on the Load Balancer, see below for instructions.
+
+    `customEntryPoints.<name>.protocol`
+    :   Protocol of the entrypoint to use. This field is mandatory. Valid values are `TCP` and `UDP`.
+
+    `customEntryPoints.<name>.readTimeout`
+    :   Configures the entrypoint's read timeout, between the ALB and the client. The value must be a whole number of seconds, setting it to zero disables the timeout.
+    :   For more information, see the [Traefik documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#opt-transport-respondingTimeouts-readTimeout){: external}.
+
+    `customEntryPoints.<name>.writeTimeout`
+    :   Configures the entrypoint's write timeout between the ALB and the client. The value must be a whole number of seconds, setting it to zero disables the timeout.
+    :   For more information, see the [Traefik documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#opt-transport-respondingTimeouts-writeTimeout){: external}.
+
+    `customEntryPoints.<name>.idleTimeout`
+    :   Configures the entrypoint's idle timeout (keepalive) between the ALB and the client. The value must be a whole number of seconds, setting it to zero disables the timeout.
+    :   For more information, see the [Traefik documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#opt-transport-respondingTimeouts-idleTimeout){: external}.
+
+    `customEntryPoints.<name>.udpTimeout`
+    :   Configures the entrypoint's idle timeout for the UDP listener. This field is only considered for endpoints that use the UDP protocol. The value must be a whole number of seconds and greater than zero.
+    :   For more information, see the [Traefik documentation](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#opt-udp-timeout){: external}.
 
     `tolerations`
     :   Specifies additional custom tolerations for the ALB pods. For more information, see [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.
@@ -444,7 +472,7 @@ The `ibm-ingress-deploy-config` ConfigMap controls ALB-level settings such as re
     ```
     {: pre}
 
-5. If you specified non-standard HTTP, HTTPS, or TCP ports, you must open the ports on each ALB service.
+5. If you specified non-standard HTTP, HTTPS ports, or created additional entrypoints, you must open the ports on each ALB service.
     1. For each ALB service that you found in step 1, edit the YAML file.
         ```sh
         kubectl edit svc -n kube-system <alb_svc_name>
