@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-08-13"
+lastupdated: "2026-08-17"
 
 
 keywords: change log, version history, Ingress ALB
@@ -25,48 +25,46 @@ Review the version history for Ingress ALB.
 {: shortdesc}
 
 
+## Version 3.7.10
+{: #cl-ingress-alb-3.7.10}
+
+
+### Version 3.7.10 - 3.7.10_362601619_iks, released 17 August 2026
+{: #cl-ingress-alb-3710_362601619_iks}
+
+
 ## Version 3.7.8
 {: #cl-ingress-alb-3.7.8}
+
+
+### Version 3.7.8 - 3.7.8_360780167_iks, released 17 August 2026
+{: #cl-ingress-alb-378_360780167_iks}
+
+- GO-2026-6061 
 
 
 ### Version 3.7.8 - 3.7.8_358418506_iks, released 11 August 2026
 {: #cl-ingress-alb-378_358418506_iks}
 
 
-## Version 3.7.7
-{: #cl-ingress-alb-3.7.7}
+## Version 1.15.10
+{: #cl-ingress-alb-1.15.10}
 
 
-### Version 3.7.7 - 3.7.7_360793979_iks, released 11 August 2026
-{: #cl-ingress-alb-377_360793979_iks}
+### Version 1.15.10 - 1.15.10_362585453_iks, released 17 August 2026
+{: #cl-ingress-alb-11510_362585453_iks}
 
-- GO-2026-6061 
-
-
-### Version 3.7.7 - 3.7.7_358058274_iks, released 27 July 2026
-{: #cl-ingress-alb-377_358058274_iks}
-
-
-## Version 3.7.6
-{: #cl-ingress-alb-3.7.6}
-
-
-### Version 3.7.6 - 3.7.6_360793471_iks, released 11 August 2026
-{: #cl-ingress-alb-376_360793471_iks}
-
-- Resolves the following CVEs: [GO-2026-6061](https://nvd.nist.gov/vuln/detail/GO-2026-6061){: external}.
-
-
-### Version 3.7.6 - 3.7.6_356947877_iks, released 27 July 2026
-{: #cl-ingress-alb-376_356947877_iks}
-
-
-### Version 3.7.6 - 3.7.6_356092760_iks, released 20 July 2026
-{: #cl-ingress-alb-376_356092760_iks}
+- Updates Go to version `1.26`.
 
 
 ## Version 1.15.8
 {: #cl-ingress-alb-1.15.8}
+
+
+### Version 1.15.8 - 1.15.8_362262238_iks, released 17 August 2026
+{: #cl-ingress-alb-1158_362262238_iks}
+
+- Updates Go to version `1.26`.
 
 
 ### Version 1.15.8 - 1.15.8_359618591_iks, released 11 August 2026
@@ -96,6 +94,12 @@ Review the version history for Ingress ALB.
 
 ## Version 1.15.7
 {: #cl-ingress-alb-1.15.7}
+
+
+### Version 1.15.7 - 1.15.7_362266907_iks, released 17 August 2026
+{: #cl-ingress-alb-1157_362266907_iks}
+
+- Updates Go to version `1.26`.
 
 
 ### Version 1.15.7 - 1.15.7_359611426_iks, released 11 August 2026
@@ -137,6 +141,38 @@ Review the version history for Ingress ALB.
 
 ### Version 1.15.7 - 1.15.7_349797741_iks, released 23 June 2026
 {: #cl-ingress-alb-1157_349797741_iks}
+
+
+## Version 3.7.7
+{: #cl-ingress-alb-3.7.7}
+
+
+### Version 3.7.7 - 3.7.7_360793979_iks, released 11 August 2026
+{: #cl-ingress-alb-377_360793979_iks}
+
+- GO-2026-6061 
+
+
+### Version 3.7.7 - 3.7.7_358058274_iks, released 27 July 2026
+{: #cl-ingress-alb-377_358058274_iks}
+
+
+## Version 3.7.6
+{: #cl-ingress-alb-3.7.6}
+
+
+### Version 3.7.6 - 3.7.6_360793471_iks, released 11 August 2026
+{: #cl-ingress-alb-376_360793471_iks}
+
+- Resolves the following CVEs: [GO-2026-6061](https://nvd.nist.gov/vuln/detail/GO-2026-6061){: external}.
+
+
+### Version 3.7.6 - 3.7.6_356947877_iks, released 27 July 2026
+{: #cl-ingress-alb-376_356947877_iks}
+
+
+### Version 3.7.6 - 3.7.6_356092760_iks, released 20 July 2026
+{: #cl-ingress-alb-376_356092760_iks}
 
 
 ## Version 3.7.5
