@@ -166,6 +166,8 @@ IBM Object CSI Driver cluster add-on patch updates.
 CLI version 1.0.804 is available.
 :   For more information, see [Updating the CLI](/docs/containers?topic=containers-cli-update) and the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
+
+
 ### 23 July 2026
 {: #containers-jul2326}
 {: release-note}
