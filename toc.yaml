@@ -420,7 +420,6 @@ toc:
       topics:
       - include: ../account/status-bps.md
       - faqs.md
-      - best-practices.md
       - topicgroup:
           label: Troubleshooting
           topics:
