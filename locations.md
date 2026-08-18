@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-08-03"
+lastupdated: "2026-08-18"
 
 keywords: containers, kubernetes, mzr, szr, multizone, multi az
 
@@ -164,35 +164,3 @@ Other cluster resources, such as storage, networking, compute, or apps running i
 *   [Increasing the availability of your app](/docs/containers?topic=containers-app).
 
 When you initiate cluster management actions, such as running [`ibmcloud ks` commands](/docs/containers?topic=containers-kubernetes-service-cli), basic information about the cluster, such as name, ID, user, the command is routed through the global endpoint.
-
-
-
-
-
-
-## Previous {{site.data.keyword.cloud_notm}} region and zone structure
-{: #bluemix_regions}
-
-Previously, your {{site.data.keyword.cloud_notm}} resources were organized into regions. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries and geographies. The following table maps the previous {{site.data.keyword.cloud_notm}} regions, {{site.data.keyword.containerlong_notm}} regions, and {{site.data.keyword.containerlong_notm}} zones. Multizone-capable zones are in bold.
-{: shortdesc}
-
-Region-specific endpoints for {{site.data.keyword.containerlong_notm}} are deprecated. Use the global endpoint instead. If you must use regional endpoints, use the `ibmcloud ks api` command. For more information, see [`ibmcloud ks api`](/docs/containers?topic=containers-kubernetes-service-cli#api-cli).
-{: deprecated}
-
-By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.cloud_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.cloud_notm}} as a whole.
-
-You might want to log in to another {{site.data.keyword.containerlong_notm}} region for the following reasons:
-    * You created {{site.data.keyword.cloud_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
-    * You want to access a cluster in a region that is different from the default {{site.data.keyword.cloud_notm}} region that you are logged in to.
-
-To switch regions, use the `ibmcloud ks init` [command](/docs/containers?topic=containers-kubernetes-service-cli#init-cli).
-
-| {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.cloud_notm}} regions | Available zones in the region |
-| --- | --- | --- |
-| AP North (standard clusters only) | Tokyo | che01, sng01, **tok02, tok04, tok05** |
-| AP South | Sydney | **syd01, syd04, syd05** |
-| EU Central | Frankfurt | ams03, **fra02, fra04, fra05**, par01 |
-| UK South | London | lon02, **lon04, lon05, lon06** |
-| US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
-| US South | Dallas | **dal10, dal12, dal13**, sjc03, sjc04, sao01 |
-{: caption="Corresponding {{site.data.keyword.containershort}} and {{site.data.keyword.cloud_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="bottom"}

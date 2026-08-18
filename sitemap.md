@@ -7633,8 +7633,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Resources in multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
-* [Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
-
 
 ## Integrations
 {: #sitemap_integrations}
