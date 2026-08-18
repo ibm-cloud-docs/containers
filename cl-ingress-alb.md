@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-08-17"
+lastupdated: "2026-08-18"
 
 
 keywords: change log, version history, Ingress ALB
@@ -64,6 +64,8 @@ Review the version history for Ingress ALB.
 ### Version 1.15.8 - 1.15.8_362262238_iks, released 17 August 2026
 {: #cl-ingress-alb-1158_362262238_iks}
 
+[Default version]{: tag-green}
+
 - Updates Go to version `1.26`.
 
 
@@ -104,8 +106,6 @@ Review the version history for Ingress ALB.
 
 ### Version 1.15.7 - 1.15.7_359611426_iks, released 11 August 2026
 {: #cl-ingress-alb-1157_359611426_iks}
-
-[Default version]{: tag-green}
 
 - Resolves the following CVEs: [CVE-2026-33630](https://nvd.nist.gov/vuln/detail/CVE-2026-33630){: external}, and [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/CVE-2026-56852){: external}.
 - Updates Go to version `1.26`.

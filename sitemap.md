@@ -260,6 +260,14 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
 
+    * [18 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug1826)
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * Istio cluster add-on patch updates.
+
     * [17 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug1726)
 
         * ALB OAuth Proxy cluster add-on patch updates.
@@ -6543,9 +6551,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
 
+    * [Version 1.30 - 1.30.3, released 18 August 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1303)
+
     * [Version 1.30 - 1.30.2, released 21 July 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1302)
 
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
+
+    * [Version 1.29 - 1.29.6, released 18 August 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1296)
 
     * [Version 1.29 - 1.29.5, released 15 July 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1295)
 
@@ -6767,6 +6779,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [Version 1.0 - v1.0.56_362323509, released 18 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1056_362323509)
+
     * [Version 1.0 - v1.0.55_360965725, released 12 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1055_360965725)
 
     * [Version 1.0 - v1.0.53_359554333, released 05 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1053_359554333)
@@ -6948,6 +6962,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [Version 2.0 - v2.0.49_362519752, released 18 August 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2049_362519752)
 
     * [Version 2.0 - v2.0.47_360961675, released 12 August 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2047_360961675)
 
@@ -7923,6 +7939,40 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 ## Troubleshooting
 {: #sitemap_troubleshooting}
 
+
+[Troubleshooting error message reference](/docs/containers?topic=containers-ts-error-glossary#ts-error-glossary)
+
+* [Clusters and masters](/docs/containers?topic=containers-ts-error-glossary#ts-errors-cluster)
+
+* [Worker nodes](/docs/containers?topic=containers-ts-error-glossary#ts-errors-workers)
+
+* [Network health check (NHC) errors](/docs/containers?topic=containers-ts-error-glossary#ts-errors-nhc)
+
+* [Ingress status errors (ERR and ESS codes)](/docs/containers?topic=containers-ts-error-glossary#ts-errors-ingress-codes)
+
+    * [Shared Ingress errors](/docs/containers?topic=containers-ts-error-glossary#ts-errors-ingress-shared)
+
+    * [IBM Cloud Kubernetes Service Ingress errors](/docs/containers?topic=containers-ts-error-glossary#ts-errors-ingress-iks)
+
+    * [IBM Cloud Kubernetes Service general Ingress errors](/docs/containers?topic=containers-ts-error-glossary#ts-errors-ingress-iks-general)
+
+* [Load balancers](/docs/containers?topic=containers-ts-error-glossary#ts-errors-lb)
+
+* [Apps and services](/docs/containers?topic=containers-ts-error-glossary#ts-errors-apps)
+
+* [Permissions and credentials](/docs/containers?topic=containers-ts-error-glossary#ts-errors-perms)
+
+* [Secure by default (SBD)](/docs/containers?topic=containers-ts-error-glossary#ts-errors-sbd)
+
+* [File Storage](/docs/containers?topic=containers-ts-error-glossary#ts-errors-file)
+
+* [Block Storage](/docs/containers?topic=containers-ts-error-glossary#ts-errors-block)
+
+* [Object Storage](/docs/containers?topic=containers-ts-error-glossary#ts-errors-cos)
+
+* [Portworx Storage](/docs/containers?topic=containers-ts-error-glossary#ts-errors-portworx)
+
+* [Related links](/docs/containers?topic=containers-ts-error-glossary#ts-errors-related)
 
 
 ### Clusters and masters

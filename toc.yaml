@@ -424,6 +424,7 @@ toc:
       - topicgroup:
           label: Troubleshooting
           topics:
+          - ts-error-glossary.md
           - topicgroup:
               label: Clusters and masters
               topics:
