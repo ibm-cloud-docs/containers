@@ -1,8 +1,8 @@
 ---
 
-copyright: 
+copyright:
   years: 2014, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-08-17"
 
 keywords: kubernetes, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing, containers, {{site.data.keyword.containerlong_notm}}
 
@@ -262,6 +262,38 @@ When you create a deployment, also limit it so that your app's pod deploys only 
 Containers and pods are, by design, short-lived and can fail unexpectedly. For example, a container or pod might crash if an error occurs in your app. To make your app highly available, you must ensure that you have enough instances to handle the workload plus additional instances in the case of a failure. You can ensure that there are enough instances by setting up [automatic scaling](/docs/containers?topic=containers-update_app#app_scaling). 
 
 
+
+## Ongoing best practices
+{: #best-practices-ongoing}
+
+After your cluster is running, follow these best practices to keep it secure and healthy.
+
+### Keep your cluster environment up to date
+{: #bp-1}
+
+Check monthly for available security and operating system patches to [update your worker nodes](/docs/containers?topic=containers-update#worker_node). Make sure to [update your cluster](/docs/containers?topic=containers-update) regularly to remain on a supported version of {{site.data.keyword.containershort}}.
+
+### Keep your command line tools up to date
+{: #bp-2}
+
+In the command line, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and options.
+
+Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cli-install) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/releases/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
+
+### Regularly rotate your CA certificates
+{: #bp-ca}
+
+Regular rotation of certificate authority (CA) certificates is recommended for security purposes. The steps for CA rotation include reloading or replacing worker nodes, so consider rotating CA certificates whenever you update your worker nodes. For more information, see [Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate).
+
+### Document your environment architecture
+{: #bp-3}
+
+Maintaining up-to-date documentation and diagrams can help when debugging issues. For more information, see [Documenting your environment architecture](/docs/containers?topic=containers-document-environment).
+
+### Subscribe to release note updates
+{: #bp-4}
+
+You can receive documentation release notes for {{site.data.keyword.containerlong_notm}} via RSS. For more information, see [Release notes](/docs/containers?topic=containers-release-notes).
 
 ## Next steps
 {: #plan-network-next}

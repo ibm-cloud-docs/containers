@@ -1752,6 +1752,18 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Make your apps highly available too](/docs/containers?topic=containers-strategy#apps-ha)
 
+* [Ongoing best practices](/docs/containers?topic=containers-strategy#best-practices-ongoing)
+
+    * [Keep your cluster environment up to date](/docs/containers?topic=containers-strategy#bp-1)
+
+    * [Keep your command line tools up to date](/docs/containers?topic=containers-strategy#bp-2)
+
+    * [Regularly rotate your CA certificates](/docs/containers?topic=containers-strategy#bp-ca)
+
+    * [Document your environment architecture](/docs/containers?topic=containers-strategy#bp-3)
+
+    * [Subscribe to release note updates](/docs/containers?topic=containers-strategy#bp-4)
+
 * [Next steps](/docs/containers?topic=containers-strategy#plan-network-next)
 
 [Understanding VPC cluster networking](/docs/containers?topic=containers-plan_vpc_basics#plan_vpc_basics)
@@ -7892,23 +7904,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [What operations are blocked if my cluster is running an unsupported operating system?](/docs/containers?topic=containers-faqs#unsupported_os)
 
 * [What is the default time zone for my VPC worker nodes?](/docs/containers?topic=containers-faqs#vpc)
-
-
-## Best practices for {{site.data.keyword.containerlong_notm}}
-{: #sitemap_best_practices_for_}
-
-
-[Best practices for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-best-practices-service#best-practices-service)
-
-* [Keep your cluster environment up to date](/docs/containers?topic=containers-best-practices-service#bp-1)
-
-* [Keep your command line tools up to date](/docs/containers?topic=containers-best-practices-service#bp-2)
-
-* [Regularly rotate your CA certificates](/docs/containers?topic=containers-best-practices-service#bp-ca)
-
-* [Document your environment architecture](/docs/containers?topic=containers-best-practices-service#bp-3)
-
-* [Subscribe to RSS](/docs/containers?topic=containers-best-practices-service#bp-4)
 
 
 ## Troubleshooting
