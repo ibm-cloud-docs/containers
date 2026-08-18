@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-08-17"
+lastupdated: "2026-08-18"
 
 
 keywords: change log, version history, Istio
@@ -43,6 +43,14 @@ Review the version history for Istio.
 {: #cl-add-ons-istio-1.30}
 
 
+### Version 1.30 - 1.30.3, released 18 August 2026
+{: #cl-add-ons-istio-1303}
+
+[Default version]{: tag-green}
+
+- Updates in this version: See the Istio release notes for [Istio 1.30.3](https://istio.io/latest/news/releases/1.30.x/announcing-1.30.3/){: external}
+
+
 ### Version 1.30 - 1.30.2, released 21 July 2026
 {: #cl-add-ons-istio-1302}
 
@@ -51,6 +59,14 @@ Review the version history for Istio.
 
 ## Version 1.29
 {: #cl-add-ons-istio-1.29}
+
+
+### Version 1.29 - 1.29.6, released 18 August 2026
+{: #cl-add-ons-istio-1296}
+
+[Default version]{: tag-green}
+
+- Updates in this version: See the Istio release notes for [Istio 1.29.6](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.6/){: external}.
 
 
 ### Version 1.29 - 1.29.5, released 15 July 2026
