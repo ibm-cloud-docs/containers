@@ -282,8 +282,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [10 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug1026)
 
-        * OpenShift Virtualization cluster add-on patch updates.
-
         * IBM Object CSI Driver cluster add-on patch updates.
 
     * [5 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0526)
