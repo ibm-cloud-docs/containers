@@ -2,7 +2,8 @@
 
 copyright:
   years: 2025, 2026
-lastupdated: "2026-08-18"
+
+lastupdated: "2026-08-19"
 
 keywords: kubernetes, error messages, error codes, troubleshooting reference
 
@@ -22,7 +23,7 @@ This reference lists all documented error messages and error codes across troubl
 {: #ts-errors-cluster}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `Cannot complete cluster master operations because the cluster has a broken webhook application.` | [Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update) |
 | `Cannot complete cluster master upgrade because the Upgradeable status condition is set to False.` | [Why do I see a `Cannot complete cluster master upgrade` message?](/docs/containers?topic=containers-ts-cluster-master-upgrade) |
 | `The master is approaching its allotted memory resource limit (93%).` | [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit) |
@@ -37,21 +38,16 @@ This reference lists all documented error messages and error codes across troubl
 | `Encrypted storage cannot be configured. Review the customer root key configuration for the worker pool.` | [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage) |
 | `Pending security group creation` | [When I create a VPC cluster, my worker nodes are stuck in `Pending security group creation`](/docs/containers?topic=containers-ts-sbd-cluster-create-quota) |
 | `Infrastructure instance status is 'failed': Can't start instance because provisioning failed.` | [Why do I see DNS failures after adding a custom DNS resolver?](/docs/containers?topic=containers-ts-sbd-custom-dns) |
-{: caption="Cluster and master error messages" caption-side="bottom"}
-
-
 | `Version update canceled. CAE009: Cannot complete cluster master operations because the cluster does not pass Pod Security upgrade prerequisites.` | [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security) |
 | `Cannot complete cluster master operations because there is a migration in progress` | [Resolving cluster master upgrade issues: Migration in progress error](/docs/containers?topic=containers-ts-resource-migration) |
-{: caption="Cluster and master error messages (IBM Cloud Kubernetes Service only)" caption-side="bottom"}
 
-
-
+{: caption="Cluster and master error messages" caption-side="bottom"}
 
 ## Worker nodes
 {: #ts-errors-workers}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `The worker node instance ID changed. Reload the worker node if bare metal hardware was serviced.` | [Classic: Why is the bare metal instance ID inconsistent with worker records?](/docs/containers?topic=containers-bm_machine_id) |
 | `The dedicated hosts for the zone 'eu-de-2' are not ready.` | [VPC: Why can't I create worker nodes on dedicated hosts?](/docs/containers?topic=containers-ts-worker-dedicated) |
 | `SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.` | [Classic: Why can't I add worker nodes with an invalid VLAN ID?](/docs/containers?topic=containers-suspended) |
@@ -66,7 +62,7 @@ This reference lists all documented error messages and error codes across troubl
 The following error codes appear in the output of the `ibmcloud ks cluster health issues` command.
 
 | Error code | Severity | Description | Troubleshooting topic |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `NHC001` | Warning | Tigera operator has been reporting that Calico is in 'progressing' state for over an hour. | [Why does the Network status show an `NHC001` error?](/docs/containers?topic=containers-ts-network-nhc001) |
 | `NHC003` | Warning | Some worker nodes in the cluster can not reach container image registries to pull images. | [Why does the Network status show an `NHC003` error?](/docs/containers?topic=containers-ts-network-nhc003) |
 | `NHC004` | Warning | Some worker nodes in the cluster can not resolve VPE gateway hostnames. | [Why does the Network status show an `NHC004` error?](/docs/containers?topic=containers-ts-network-nhc004) |
@@ -81,15 +77,10 @@ The following error codes appear in the output of the `ibmcloud ks cluster healt
 ## Ingress status errors (ERR and ESS codes)
 {: #ts-errors-ingress-codes}
 
-The following error codes appear in the output of the `ibmcloud ks ingress status-report get` command.
-
-### Shared Ingress errors
-{: #ts-errors-ingress-shared}
-
-These error codes appear in both {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.openshiftlong_notm}}.
+The following error codes appear in the output of the `ibmcloud ks ingress status-report get` command. Shared codes appear in both {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.openshiftlong_notm}}.
 
 | Error code | Error message | Troubleshooting topic |
-|---|---|---|
+| --- | --- | --- |
 | `ERRDSIA` | The subdomain has incorrect addresses registered. | [Ingress error: ERRDSIA](/docs/containers?topic=containers-ts-ingress-errdsia) |
 | `ERRDRISS` | The subdomain has DNS resolution issues. | [Ingress error: ERRDRISS](/docs/containers?topic=containers-ts-ingress-errdriss) |
 | `ERRDSAISS` | The external provider for the given subdomain has authorization issues. | [Ingress error: ERRDSAISS](/docs/containers?topic=containers-ts-ingress-errdsaiss) |
@@ -103,16 +94,6 @@ These error codes appear in both {{site.data.keyword.containerlong_notm}} and {{
 | `ESSSMINF` | The Secrets Manager instance is not found. | [Ingress error: ESSSMINF](/docs/containers?topic=containers-ts-ingress-esssminf) |
 | `ESSVC` | The CRN does not match the default secret with the same domain. | [Ingress error: ESSVC](/docs/containers?topic=containers-ts-ingress-essvc) |
 | `ESSWS` | The secret status shows a warning. | [Ingress error: ESSWS](/docs/containers?topic=containers-ts-ingress-essws) |
-{: caption="Shared Ingress error codes (ERR and ESS)" caption-side="bottom"}
-
-
-### IBM Cloud Kubernetes Service Ingress errors
-{: #ts-errors-ingress-iks}
-
-These error codes appear only in {{site.data.keyword.containerlong_notm}}.
-
-| Error code | Error message | Troubleshooting topic |
-|---|---|---|
 | `ERRADNF` | The ALB deployment is not found on the cluster. | [Ingress error: ERRADNF](/docs/containers?topic=containers-ts-ingress-erradnf) |
 | `ERRADRUH` | One or more ALB pods are not in the running state. | [Ingress error: ERRADRUH](/docs/containers?topic=containers-ts-ingress-erradruh) |
 | `ERRAHCF` | The ALB is unable to respond to health requests. | [Ingress error: ERRAHCF](/docs/containers?topic=containers-ts-ingress-errahcf) |
@@ -125,26 +106,16 @@ These error codes appear only in {{site.data.keyword.containerlong_notm}}.
 | `ERRHPANF` | The autoscaler resource is missing. | [Ingress error: ERRHPANF](/docs/containers?topic=containers-ts-ingress-errhpanf) |
 | `ERRICCNF` | The Ingress controller ConfigMap is not found on the cluster. | [Ingress error: ERRICCNF](/docs/containers?topic=containers-ts-ingress-erriccnf) |
 | `ERRSNF` | The load balancer service is missing. | [Ingress error: ERRSNF](/docs/containers?topic=containers-ts-ingress-errsnf) |
-{: caption="IBM Cloud Kubernetes Service Ingress error codes" caption-side="bottom"}
-
-### IBM Cloud Kubernetes Service general Ingress errors
-{: #ts-errors-ingress-iks-general}
-
-| Error message | Troubleshooting topic |
-|---|---|
-| `0/3 nodes are available: 1 node(s) didn't match pod affinity/anti-affinity` | [Why do ALB pods not deploy to worker nodes?](/docs/containers?topic=containers-alb-pod-affinity) |
-| `No valid subnets found for the specified zone.` | [Classic clusters: Why does enabling Ingress ALBs result in subnet errors?](/docs/containers?topic=containers-cs_alb_subnet) |
-| `admission webhook "validate.nginx.ingress.kubernetes.io" denied the request: nginx.ingress.kubernetes.io/configuration-snippet annotation cannot be used.` | [Ingress resource operations refused by validating webhook](/docs/containers?topic=containers-ts-ingress-webhook) |
-{: caption="IBM Cloud Kubernetes Service general Ingress error messages" caption-side="bottom"}
-
-
-
+| | `0/3 nodes are available: 1 node(s) didn't match pod affinity/anti-affinity` | [Why do ALB pods not deploy to worker nodes?](/docs/containers?topic=containers-alb-pod-affinity) |
+| | `No valid subnets found for the specified zone.` | [Classic clusters: Why does enabling Ingress ALBs result in subnet errors?](/docs/containers?topic=containers-cs_alb_subnet) |
+| | `admission webhook "validate.nginx.ingress.kubernetes.io" denied the request: nginx.ingress.kubernetes.io/configuration-snippet annotation cannot be used.` | [Ingress resource operations refused by validating webhook](/docs/containers?topic=containers-ts-ingress-webhook) |
+{: caption="Ingress status error codes (ERR and ESS)" caption-side="bottom"}
 
 ## Load balancers
 {: #ts-errors-lb}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `The VPC load balancer that routes requests to this Kubernetes LoadBalancer service is offline.` | [VPC clusters: Why can't my app connect via load balancer?](/docs/containers?topic=containers-vpc_ts_lb) |
 | `The subnet with ID(s) '<subnet_id>' has insufficient available ipv4 addresses.` | [VPC clusters: Why does a Kubernetes `LoadBalancer` service fail with no IPs?](/docs/containers?topic=containers-vpc_no_lb) |
 | `The load balancer was created in zone <zone>. This setting cannot be changed.` | [VPC Clusters: My VPC NLB has a zone error and does not update](/docs/containers?topic=containers-ts-nlb-vpc-zone) |
@@ -152,13 +123,11 @@ These error codes appear only in {{site.data.keyword.containerlong_notm}}.
 | Security group protocol mismatch events on load balancer creation or update | [VPC clusters: Security group protocol error creating or updating a LoadBalancer](/docs/containers?topic=containers-vpc_ts_lb_security_group_error) |
 {: caption="Load balancer error messages" caption-side="bottom"}
 
-
-
 ## Apps and services
 {: #ts-errors-apps}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `Failed to create pod sandbox: rpc error: ... failed to request 1 IPv4 addresses. IPAM allocated only 0` | [Why don't my containers start?](/docs/containers?topic=containers-ts-app-container-start) |
 | `ImagePullBackOff` or image pull authorization errors | [Why do images fail to pull from registry with `ImagePullBackOff` or authorization errors?](/docs/containers?topic=containers-ts-app-image-pull) |
 | `pull QPS exceeded` errors during image pulls | [Why do pods show `pull QPS exceeded` errors during image pulls?](/docs/containers?topic=containers-ts-vpc-image-pull-qps) |
@@ -166,22 +135,16 @@ These error codes appear only in {{site.data.keyword.containerlong_notm}}.
 | `This service doesn't support creation of keys` | [Resolving service binding errors in IBM Cloud clusters](/docs/containers?topic=containers-ts-app-svc-key) |
 | Pod remains in `Pending` state | [Why do pods remain in pending state?](/docs/containers?topic=containers-ts-app-pod-pending) |
 | Pod repeatedly fails to restart or is unexpectedly removed | [Why do pods repeatedly fail to restart or are unexpectedly removed?](/docs/containers?topic=containers-ts-app-pod-fail) |
-{: caption="App and service error messages" caption-side="bottom"}
-
-
 | `unable to validate against any pod security policy` | [Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp) |
 | Cluster or service instance already exists with the same name | [Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name) |
 | `The server is currently unable to handle the request (get pods.metrics.k8s.io)` | [Troubleshooting metrics server issues in Kubernetes clusters](/docs/containers?topic=containers-debug_metrics_server) |
-{: caption="App and service error messages (IBM Cloud Kubernetes Service only)" caption-side="bottom"}
-
-
-
+{: caption="App and service error messages" caption-side="bottom"}
 
 ## Permissions and credentials
 {: #ts-errors-perms}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `User doesn't have permissions to create or manage Storage` | [What permissions do I need to manage storage and create PVCs?](/docs/containers?topic=containers-missing_permissions) |
 {: caption="Permission and credential error messages" caption-side="bottom"}
 
@@ -189,7 +152,7 @@ These error codes appear only in {{site.data.keyword.containerlong_notm}}.
 {: #ts-errors-sbd}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `warning: Container container-00 is unable to start due to an error: Back-off pulling image "registry.redhat.io/rhel8/support-tools"` | [After creating a version 1.30 cluster, my app no longer works](/docs/containers?topic=containers-ts-sbd-app-not-working) |
 | `Pending security group creation` | [When I create a VPC cluster, my worker nodes are stuck in `Pending security group creation`](/docs/containers?topic=containers-ts-sbd-cluster-create-quota) |
 | `Infrastructure instance status is 'failed': Can't start instance because provisioning failed.` | [Why do I see DNS failures after adding a custom DNS resolver?](/docs/containers?topic=containers-ts-sbd-custom-dns) |
@@ -202,7 +165,7 @@ These error codes appear only in {{site.data.keyword.containerlong_notm}}.
 {: #ts-errors-file}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `MountVolume.SetUp failed for volume ... mount.nfs: access denied by server while mounting` | [Classic: Why am I denied server access when mounting a volume to a worker node?](/docs/containers?topic=containers-ts-storage-file-access-denied) |
 | `write-permission` or non-root user ownership errors on NFS mount path | [Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot) |
 | Group ID error applying NFS file storage permissions | [Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root) |
@@ -227,7 +190,7 @@ These error codes appear only in {{site.data.keyword.containerlong_notm}}.
 {: #ts-errors-block}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `failed to mount the volume as "ext4", it already contains xfs. Mount error: mount failed: exit status 32` | [Why does mounting existing block storage to a pod fail with the wrong file system?](/docs/containers?topic=containers-block_filesystem) |
 | `Volume not attached` | [Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?](/docs/containers?topic=containers-block_not_attached_vpc) |
 | Block storage changes to read-only | [Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block) |
@@ -246,7 +209,7 @@ These error codes appear only in {{site.data.keyword.containerlong_notm}}.
 {: #ts-errors-cos}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `pvc:...:can't access bucket <bucket_name>: NotFound: Not Found` | [Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails) |
 | `Error: symlink ... helm-ibmc: file exists` | [Why does installing the Object storage Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails) |
 | `d--------- 1 root root 0 Jan 1 1970 <file_name>` (non-root user cannot access files) | [Resolving non-root user access issues to files in IBM Cloud](/docs/containers?topic=containers-cos_nonroot_access) |
@@ -266,7 +229,7 @@ These error codes appear only in {{site.data.keyword.containerlong_notm}}.
 {: #ts-errors-portworx}
 
 | Error message | Troubleshooting topic |
-|---|---|
+| --- | --- |
 | `kp.Error: ... msg='Unauthorized: The user does not have access to the specified resource'` | [Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint) |
 {: caption="Portworx Storage error messages" caption-side="bottom"}
 
