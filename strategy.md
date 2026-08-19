@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-17"
+lastupdated: "2026-08-19"
 
 keywords: kubernetes, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing, containers, {{site.data.keyword.containerlong_notm}}
 
@@ -293,7 +293,7 @@ Maintaining up-to-date documentation and diagrams can help when debugging issues
 ### Subscribe to release note updates
 {: #bp-4}
 
-You can receive documentation release notes for {{site.data.keyword.containerlong_notm}} via RSS. For more information, see [Release notes](/docs/containers?topic=containers-release-notes).
+You can receive documentation release notes for {{site.data.keyword.containerlong_notm}} via RSS. For more information, see [Release notes](/docs/containers?topic=containers-relnotes).
 
 ## Next steps
 {: #plan-network-next}
