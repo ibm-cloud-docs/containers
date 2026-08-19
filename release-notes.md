@@ -29,6 +29,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2026
 {: #containers-aug26}
 
+### 19 August 2026
+{: #containers-aug1926}
+{: release-note}
+
+CLI version 1.0.829 is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 ### 18 August 2026
 {: #containers-aug1826}
 {: release-note}
@@ -124,6 +131,9 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+
+CLI version 1.0.815 is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ## July 2026
 {: #containers-jul26}
