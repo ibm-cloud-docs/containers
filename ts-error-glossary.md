@@ -40,7 +40,6 @@ This reference lists all documented error messages and error codes across troubl
 | `Infrastructure instance status is 'failed': Can't start instance because provisioning failed.` | [Why do I see DNS failures after adding a custom DNS resolver?](/docs/containers?topic=containers-ts-sbd-custom-dns) |
 | `Version update canceled. CAE009: Cannot complete cluster master operations because the cluster does not pass Pod Security upgrade prerequisites.` | [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security) |
 | `Cannot complete cluster master operations because there is a migration in progress` | [Resolving cluster master upgrade issues: Migration in progress error](/docs/containers?topic=containers-ts-resource-migration) |
-
 {: caption="Cluster and master error messages" caption-side="bottom"}
 
 ## Worker nodes
@@ -170,7 +169,7 @@ The following error codes appear in the output of the `ibmcloud ks ingress statu
 | `write-permission` or non-root user ownership errors on NFS mount path | [Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot) |
 | Group ID error applying NFS file storage permissions | [Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root) |
 | Non-root user cannot add access to persistent storage | [Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot) |
-| File systems for worker nodes changed to read-only | [Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-ts_storage_file_readonly) |
+| File systems for worker nodes changed to read-only | [Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes) |
 | PVC remains in pending state (file storage) | [Why does my file storage PVC stay in a pending state?](/docs/containers?topic=containers-file_pvc_pending) |
 | `MetadataServiceNotEnabled` | [Why do I see a `MetadataServiceNotEnabled` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-metadata) |
 | `MountingTargetFailed` or `rpc error: code = DeadlineExceeded desc = context deadline exceeded` | [Why do I see a `MountingTargetFailed` error for {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-storage-vpc-file-eit-mount-failed) |
@@ -239,7 +238,7 @@ The following error codes appear in the output of the `ibmcloud ks ingress statu
 {: #ts-errors-related}
 
 - [Checking the Ingress status report](/docs/containers?topic=containers-ingress-status)
-- [Checking the status of Network components](/docs/containers?topic=containers-ts-network-health)
+- [Checking the status of Network components](/docs/containers?topic=containers-network-status)
 - [Cluster states and statuses](/docs/containers?topic=containers-cluster-states-reference)
 - [Worker node states](/docs/containers?topic=containers-worker-node-state-reference)
 - [Getting help and support](/docs/containers?topic=containers-get-help)
