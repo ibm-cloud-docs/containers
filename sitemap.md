@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-18"
+lastupdated: "2026-08-19"
 
 
 keywords: containers
@@ -281,8 +281,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}} and OpenShift Virtualization Service.
 
     * [10 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug1026)
-
-        * OpenShift Virtualization cluster add-on patch updates.
 
         * IBM Object CSI Driver cluster add-on patch updates.
 
@@ -7947,12 +7945,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Network health check (NHC) errors](/docs/containers?topic=containers-ts-error-glossary#ts-errors-nhc)
 
 * [Ingress status errors (ERR and ESS codes)](/docs/containers?topic=containers-ts-error-glossary#ts-errors-ingress-codes)
-
-    * [Shared Ingress errors](/docs/containers?topic=containers-ts-error-glossary#ts-errors-ingress-shared)
-
-    * [IBM Cloud Kubernetes Service Ingress errors](/docs/containers?topic=containers-ts-error-glossary#ts-errors-ingress-iks)
-
-    * [IBM Cloud Kubernetes Service general Ingress errors](/docs/containers?topic=containers-ts-error-glossary#ts-errors-ingress-iks-general)
 
 * [Load balancers](/docs/containers?topic=containers-ts-error-glossary#ts-errors-lb)
 
