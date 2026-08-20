@@ -9849,10 +9849,10 @@ ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--clu
 #### Examples
 {: #vni-ls-examples}
 
-List Virtual Network Interfaces attached to a cluster or worker node.
+List Virtual Network Interfaces attached to a cluster or worker node
 
 ```sh
-ibmcloud ks vni ls --cluster-id CLUSTER_NAME_OR_ID --worker WORKER_ID --after AFTER --first FIRST
+ibmcloud ks vni ls --cluster-id CLUSTER_NAME_OR_ID
 ```
 {: pre}
 
