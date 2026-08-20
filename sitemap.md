@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-19"
+lastupdated: "2026-08-20"
 
 
 keywords: containers
@@ -5987,13 +5987,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`ibmcloud ks experimental trusted-profile set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-cli)
 
-    * [`ibmcloud ks experimental vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-baremetal-cli)
-
     * [`ibmcloud ks experimental vni attach virtual`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-virtual-cli)
-
-    * [`ibmcloud ks experimental vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-detach-cli)
-
-    * [`ibmcloud ks experimental vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-ls-cli)
 
 * [Flavor commands](/docs/containers?topic=containers-kubernetes-service-cli#flavor-cli)
 

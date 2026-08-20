@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-08-18"
+lastupdated: "2026-08-20"
 
 keywords: kubernetes, containers
 
@@ -172,10 +172,7 @@ Set and unset credentials that allow you to access the IBM Cloud classic infrast
     * [`ibmcloud ks experimental trusted-profile default set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-set-cli)
     * [`ibmcloud ks experimental trusted-profile get`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-get-cli)
     * [`ibmcloud ks experimental trusted-profile set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-cli)
-    * [`ibmcloud ks experimental vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-baremetal-cli)
     * [`ibmcloud ks experimental vni attach virtual`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-virtual-cli)
-    * [`ibmcloud ks experimental vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-detach-cli)
-    * [`ibmcloud ks experimental vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-ls-cli)
 
 
 ## `flavor` commands
