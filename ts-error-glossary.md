@@ -40,8 +40,9 @@ This reference lists all documented error messages and error codes across troubl
 | `Infrastructure instance status is 'failed': Can't start instance because provisioning failed.` | [Why do I see DNS failures after adding a custom DNS resolver?](/docs/containers?topic=containers-ts-sbd-custom-dns) |
 | `Version update canceled. CAE009: Cannot complete cluster master operations because the cluster does not pass Pod Security upgrade prerequisites.` | [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-pod-security-125) |
 | `Cannot complete cluster master operations because there is a migration in progress` | [Resolving cluster master upgrade issues: Migration in progress error](/docs/containers?topic=containers-ts-resource-migration) |
-
 {: caption="Cluster and master error messages" caption-side="bottom"}
+
+
 
 ## Worker nodes
 {: #ts-errors-workers}
