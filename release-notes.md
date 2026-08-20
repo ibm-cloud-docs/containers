@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-19"
+lastupdated: "2026-08-20"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## August 2026
 {: #containers-aug26}
+
+### 20 August 2026
+{: #containers-aug2026}
+{: release-note}
+
+IBM Object CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
 
 ### 19 August 2026
 {: #containers-aug1926}
