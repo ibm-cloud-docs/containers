@@ -25,7 +25,6 @@ This reference lists all documented error messages and error codes across troubl
 | Error message | Troubleshooting topic |
 | --- | --- |
 | `Cannot complete cluster master operations because the cluster has a broken webhook application.` | [Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update) |
-
 | `The master is approaching its allotted memory resource limit (93%).` | [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit) |
 | `etcd database size is approaching the maximum` | [Why do I see an `etcd database size is approaching the maximum` error?](/docs/containers?topic=containers-ts-etcd-capacity) |
 | `The 'configuration' field is not a valid Kubernetes PodSecurityConfiguration setting.` | [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset) |
