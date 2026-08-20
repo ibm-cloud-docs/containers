@@ -105,6 +105,20 @@ View information about the API key for a cluster or reset it to a new key.
 {: shortdesc}
 
 
+### `ibmcloud ks api-key help`
+{: #api-key-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks api-key help
+```
+
+
+
 ### `ibmcloud ks api-key info`
 {: #api-key-info-cli}
 
@@ -121,7 +135,7 @@ ibmcloud ks api-key info --cluster CLUSTER [--output OUTPUT] [-q]
 {: #api-key-info-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -205,7 +219,7 @@ ibmcloud ks cluster addon disable acm --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-acm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -242,7 +256,7 @@ ibmcloud ks cluster addon disable alb-oauth-proxy --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-alb-oauth-proxy-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -279,7 +293,7 @@ ibmcloud ks cluster addon disable cluster-autoscaler --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-cluster-autoscaler-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -316,7 +330,7 @@ ibmcloud ks cluster addon disable debug-tool --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-debug-tool-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -356,7 +370,7 @@ ibmcloud ks cluster addon disable headlamp --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-headlamp-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -377,6 +391,20 @@ ibmcloud ks cluster addon disable headlamp --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster addon disable help`
+{: #cluster-addon-disable-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon disable help
+```
+
+
+
 ### `ibmcloud ks cluster addon disable hpcs-router`
 {: #cluster-addon-disable-hpcs-router-cli}
 
@@ -393,7 +421,7 @@ ibmcloud ks cluster addon disable hpcs-router --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-hpcs-router-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -433,7 +461,7 @@ ibmcloud ks cluster addon disable ibm-storage-operator --cluster CLUSTER [-f] [-
 {: #cluster-addon-disable-ibm-storage-operator-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -470,7 +498,7 @@ ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-istio-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -510,7 +538,7 @@ ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-istio-extras-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -550,7 +578,7 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER [-f] [
 {: #cluster-addon-disable-istio-sample-bookinfo-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -587,7 +615,7 @@ ibmcloud ks cluster addon disable knative --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-knative-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -624,7 +652,7 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-kube-terminal-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -661,7 +689,7 @@ ibmcloud ks cluster addon disable static-route --cluster CLUSTER [-f] [-q]
 {: #cluster-addon-disable-static-route-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -698,7 +726,7 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f] [-
 {: #cluster-addon-disable-vpc-block-csi-driver-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -735,7 +763,7 @@ ibmcloud ks cluster addon enable acm --cluster CLUSTER [-f] [--param PARAM] [-q]
 {: #cluster-addon-enable-acm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -781,7 +809,7 @@ ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER [-q] [--versi
 {: #cluster-addon-enable-alb-oauth-proxy-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -821,7 +849,7 @@ ibmcloud ks cluster addon enable cluster-autoscaler --cluster CLUSTER [-q] [--ve
 {: #cluster-addon-enable-cluster-autoscaler-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -861,7 +889,7 @@ ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [-q] [--version VE
 {: #cluster-addon-enable-debug-tool-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -904,7 +932,7 @@ ibmcloud ks cluster addon enable headlamp --cluster CLUSTER [-q] [--version VERS
 {: #cluster-addon-enable-headlamp-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -928,6 +956,20 @@ ibmcloud ks cluster addon enable headlamp --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster addon enable help`
+{: #cluster-addon-enable-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon enable help
+```
+
+
+
 ### `ibmcloud ks cluster addon enable hpcs-router`
 {: #cluster-addon-enable-hpcs-router-cli}
 
@@ -944,7 +986,7 @@ ibmcloud ks cluster addon enable hpcs-router --cluster CLUSTER [-q] [--version V
 {: #cluster-addon-enable-hpcs-router-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -987,7 +1029,7 @@ ibmcloud ks cluster addon enable ibm-storage-operator --cluster CLUSTER [-q] [--
 {: #cluster-addon-enable-ibm-storage-operator-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -1027,7 +1069,7 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [-q] [--version VERSION
 {: #cluster-addon-enable-istio-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -1070,7 +1112,7 @@ ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [-q] [--version 
 {: #cluster-addon-enable-istio-extras-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -1113,7 +1155,7 @@ ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster CLUSTER [-q] [-
 {: #cluster-addon-enable-istio-sample-bookinfo-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -1153,7 +1195,7 @@ ibmcloud ks cluster addon enable static-route --cluster CLUSTER [-q] [--version 
 {: #cluster-addon-enable-static-route-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -1193,7 +1235,7 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [-q] [--
 {: #cluster-addon-enable-vpc-block-csi-driver-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -1236,7 +1278,7 @@ ibmcloud ks cluster addon get --addon ADDON --cluster CLUSTER [--output OUTPUT] 
 `--addon ADDON`
 :    The add-on name or ID.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -1257,6 +1299,20 @@ ibmcloud ks cluster addon get --addon ADDON --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster addon help`
+{: #cluster-addon-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon help
+```
+
+
+
 ### `ibmcloud ks cluster addon ls`
 {: #cluster-addon-ls-cli}
 
@@ -1273,7 +1329,7 @@ ibmcloud ks cluster addon ls --cluster CLUSTER [--output OUTPUT] [-q]
 {: #cluster-addon-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -1350,7 +1406,7 @@ ibmcloud ks cluster addon update acm --cluster CLUSTER [-f] [-q] [--version VERS
 {: #cluster-addon-update-acm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1393,7 +1449,7 @@ ibmcloud ks cluster addon update alb-oauth-proxy --cluster CLUSTER [-f] [-q] [--
 {: #cluster-addon-update-alb-oauth-proxy-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1436,7 +1492,7 @@ ibmcloud ks cluster addon update cluster-autoscaler --cluster CLUSTER [-f] [-q] 
 {: #cluster-addon-update-cluster-autoscaler-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1479,7 +1535,7 @@ ibmcloud ks cluster addon update debug-tool --cluster CLUSTER [-f] [-q] [--versi
 {: #cluster-addon-update-debug-tool-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1525,7 +1581,7 @@ ibmcloud ks cluster addon update headlamp --cluster CLUSTER [-f] [-q] [--version
 {: #cluster-addon-update-headlamp-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1552,6 +1608,20 @@ ibmcloud ks cluster addon update headlamp --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster addon update help`
+{: #cluster-addon-update-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon update help
+```
+
+
+
 ### `ibmcloud ks cluster addon update hpcs-router`
 {: #cluster-addon-update-hpcs-router-cli}
 
@@ -1568,7 +1638,7 @@ ibmcloud ks cluster addon update hpcs-router --cluster CLUSTER [-f] [-q] [--vers
 {: #cluster-addon-update-hpcs-router-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1614,7 +1684,7 @@ ibmcloud ks cluster addon update ibm-storage-operator --cluster CLUSTER [-f] [-q
 {: #cluster-addon-update-ibm-storage-operator-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1657,7 +1727,7 @@ ibmcloud ks cluster addon update image-key-synchronizer --cluster CLUSTER [-f] [
 {: #cluster-addon-update-image-key-synchronizer-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1700,7 +1770,7 @@ ibmcloud ks cluster addon update istio --cluster CLUSTER [-f] [-q] [--version VE
 {: #cluster-addon-update-istio-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1746,7 +1816,7 @@ ibmcloud ks cluster addon update istio-extras --cluster CLUSTER [-f] [-q] [--ver
 {: #cluster-addon-update-istio-extras-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1792,7 +1862,7 @@ ibmcloud ks cluster addon update istio-sample-bookinfo --cluster CLUSTER [-f] [-
 {: #cluster-addon-update-istio-sample-bookinfo-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1835,7 +1905,7 @@ ibmcloud ks cluster addon update knative --cluster CLUSTER [-f] [-q] [--version 
 {: #cluster-addon-update-knative-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1878,7 +1948,7 @@ ibmcloud ks cluster addon update kube-terminal --cluster CLUSTER [-f] [-q] [--ve
 {: #cluster-addon-update-kube-terminal-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1921,7 +1991,7 @@ ibmcloud ks cluster addon update openshift-data-foundation --cluster CLUSTER [-f
 {: #cluster-addon-update-openshift-data-foundation-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -1964,7 +2034,7 @@ ibmcloud ks cluster addon update static-route --cluster CLUSTER [-f] [-q] [--ver
 {: #cluster-addon-update-static-route-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -2007,7 +2077,7 @@ ibmcloud ks cluster addon update vpc-block-csi-driver --cluster CLUSTER [-f] [-q
 {: #cluster-addon-update-vpc-block-csi-driver-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -2083,7 +2153,7 @@ ibmcloud ks cluster ca create --cluster CLUSTER [-f] [-q]
 {: #cluster-ca-create-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -2120,7 +2190,7 @@ ibmcloud ks cluster ca get --cluster CLUSTER [--output OUTPUT] [-q]
 {: #cluster-ca-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -2141,6 +2211,20 @@ ibmcloud ks cluster ca get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster ca help`
+{: #cluster-ca-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster ca help
+```
+
+
+
 ### `ibmcloud ks cluster ca rotate`
 {: #cluster-ca-rotate-cli}
 
@@ -2157,7 +2241,7 @@ ibmcloud ks cluster ca rotate --cluster CLUSTER [-f] [-q]
 {: #cluster-ca-rotate-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -2194,7 +2278,7 @@ ibmcloud ks cluster ca status --cluster CLUSTER [-q]
 {: #cluster-ca-status-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -2231,7 +2315,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT] [--
 `--admin`
 :    Retrieve administrator certificates and PEM keys.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--endpoint ENDPOINT`
@@ -2353,6 +2437,20 @@ Create a cluster with worker nodes on classic infrastructure
 ibmcloud ks cluster create classic --flavor FLAVOR --name NAME --zone ZONE --private-only
 ```
 {: pre}
+
+
+### `ibmcloud ks cluster create help`
+{: #cluster-create-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster create help
+```
+
 
 
 ### `ibmcloud ks cluster create satellite`
@@ -2633,7 +2731,7 @@ ibmcloud ks cluster get --cluster CLUSTER [--output OUTPUT] [-q] [--show-resourc
 {: #cluster-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -2657,6 +2755,20 @@ ibmcloud ks cluster get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster help`
+{: #cluster-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster help
+```
+
+
+
 ### `ibmcloud ks cluster image-security disable`
 {: #cluster-image-security-disable-cli}
 
@@ -2673,7 +2785,7 @@ ibmcloud ks cluster image-security disable --cluster CLUSTER [-q]
 {: #cluster-image-security-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -2707,7 +2819,7 @@ ibmcloud ks cluster image-security enable --cluster CLUSTER [-f] [-q]
 {: #cluster-image-security-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -2726,6 +2838,20 @@ Enable image security enforcement in your cluster
 ibmcloud ks cluster image-security enable --cluster CLUSTER
 ```
 {: pre}
+
+
+### `ibmcloud ks cluster image-security help`
+{: #cluster-image-security-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster image-security help
+```
+
 
 
 ### `ibmcloud ks cluster ls`
@@ -2774,7 +2900,7 @@ ibmcloud ks cluster master audit-webhook get --cluster CLUSTER [--output OUTPUT]
 {: #cluster-master-audit-webhook-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -2795,6 +2921,20 @@ ibmcloud ks cluster master audit-webhook get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster master audit-webhook help`
+{: #cluster-master-audit-webhook-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master audit-webhook help
+```
+
+
+
 ### `ibmcloud ks cluster master audit-webhook set`
 {: #cluster-master-audit-webhook-set-cli}
 
@@ -2811,6 +2951,9 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--ca-cert CERT] 
 {: #cluster-master-audit-webhook-set-options}
 
 
+`-c`, `--cluster CLUSTER`
+:    Specify the cluster name or ID.
+
 `--ca-cert CERT`
 :    The filepath of the CA cert used to verify the remote logging service.
 
@@ -2819,9 +2962,6 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--ca-cert CERT] 
 
 `--client-key KEY`
 :    The filepath for the corresponding client key that is used to connect to the remote logging service.
-
-`--cluster CLUSTER`, `-c CLUSTER`
-:    Specify the cluster name or ID.
 
 `--policy POLICY`
 :    Specify the audit policy type. Accepted values: `default`, `verbose`
@@ -2860,7 +3000,7 @@ ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER [-q]
 {: #cluster-master-audit-webhook-unset-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -2894,7 +3034,7 @@ ibmcloud ks cluster master console-oauth-access get --cluster CLUSTER [--output 
 {: #cluster-master-console-oauth-access-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -2915,6 +3055,20 @@ ibmcloud ks cluster master console-oauth-access get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster master console-oauth-access help`
+{: #cluster-master-console-oauth-access-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master console-oauth-access help
+```
+
+
+
 ### `ibmcloud ks cluster master console-oauth-access set`
 {: #cluster-master-console-oauth-access-set-cli}
 
@@ -2931,7 +3085,7 @@ ibmcloud ks cluster master console-oauth-access set --cluster CLUSTER [-f] [-q] 
 {: #cluster-master-console-oauth-access-set-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -2955,6 +3109,20 @@ ibmcloud ks cluster master console-oauth-access set --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster master help`
+{: #cluster-master-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master help
+```
+
+
+
 ### `ibmcloud ks cluster master pod-security get`
 {: #cluster-master-pod-security-get-cli}
 
@@ -2971,7 +3139,7 @@ ibmcloud ks cluster master pod-security get --cluster CLUSTER [--output OUTPUT] 
 {: #cluster-master-pod-security-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -2992,6 +3160,20 @@ ibmcloud ks cluster master pod-security get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster master pod-security help`
+{: #cluster-master-pod-security-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master pod-security help
+```
+
+
+
 ### `ibmcloud ks cluster master pod-security policy disable`
 {: #cluster-master-pod-security-policy-disable-cli}
 
@@ -3008,7 +3190,7 @@ ibmcloud ks cluster master pod-security policy disable --cluster CLUSTER [-q]
 {: #cluster-master-pod-security-policy-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -3042,7 +3224,7 @@ ibmcloud ks cluster master pod-security policy enable --cluster CLUSTER [-q]
 {: #cluster-master-pod-security-policy-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -3076,7 +3258,7 @@ ibmcloud ks cluster master pod-security policy get --cluster CLUSTER [--output O
 {: #cluster-master-pod-security-policy-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -3097,6 +3279,20 @@ ibmcloud ks cluster master pod-security policy get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster master pod-security policy help`
+{: #cluster-master-pod-security-policy-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master pod-security policy help
+```
+
+
+
 ### `ibmcloud ks cluster master pod-security set`
 {: #cluster-master-pod-security-set-cli}
 
@@ -3113,7 +3309,7 @@ ibmcloud ks cluster master pod-security set --cluster CLUSTER [--config-file FIL
 {: #cluster-master-pod-security-set-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--config-file FILE`
@@ -3150,7 +3346,7 @@ ibmcloud ks cluster master pod-security unset --cluster CLUSTER [-q]
 {: #cluster-master-pod-security-unset-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -3187,7 +3383,7 @@ ibmcloud ks cluster master private-service-endpoint allowlist add --cluster CLUS
 {: #cluster-master-private-service-endpoint-allowlist-add-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -3227,7 +3423,7 @@ ibmcloud ks cluster master private-service-endpoint allowlist disable --cluster 
 {: #cluster-master-private-service-endpoint-allowlist-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3267,7 +3463,7 @@ ibmcloud ks cluster master private-service-endpoint allowlist enable --cluster C
 {: #cluster-master-private-service-endpoint-allowlist-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3307,7 +3503,7 @@ ibmcloud ks cluster master private-service-endpoint allowlist get --cluster CLUS
 {: #cluster-master-private-service-endpoint-allowlist-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -3323,6 +3519,20 @@ Get a cluster's private service endpoint allowlist
 ibmcloud ks cluster master private-service-endpoint allowlist get --cluster CLUSTER
 ```
 {: pre}
+
+
+### `ibmcloud ks cluster master private-service-endpoint allowlist help`
+{: #cluster-master-private-service-endpoint-allowlist-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master private-service-endpoint allowlist help
+```
+
 
 
 ### `ibmcloud ks cluster master private-service-endpoint allowlist rm`
@@ -3344,7 +3554,7 @@ ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster CLUST
 {: #cluster-master-private-service-endpoint-allowlist-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3384,7 +3594,7 @@ ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER [-f
 {: #cluster-master-private-service-endpoint-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3408,6 +3618,20 @@ ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster master private-service-endpoint help`
+{: #cluster-master-private-service-endpoint-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master private-service-endpoint help
+```
+
+
+
 ### `ibmcloud ks cluster master public-service-endpoint disable`
 {: #cluster-master-public-service-endpoint-disable-cli}
 
@@ -3424,7 +3648,7 @@ ibmcloud ks cluster master public-service-endpoint disable --cluster CLUSTER [-f
 {: #cluster-master-public-service-endpoint-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3464,7 +3688,7 @@ ibmcloud ks cluster master public-service-endpoint enable --cluster CLUSTER [-f]
 {: #cluster-master-public-service-endpoint-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3488,6 +3712,20 @@ ibmcloud ks cluster master public-service-endpoint enable --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster master public-service-endpoint help`
+{: #cluster-master-public-service-endpoint-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master public-service-endpoint help
+```
+
+
+
 ### `ibmcloud ks cluster master refresh`
 {: #cluster-master-refresh-cli}
 
@@ -3504,7 +3742,7 @@ ibmcloud ks cluster master refresh --cluster CLUSTER [-q]
 {: #cluster-master-refresh-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -3538,7 +3776,7 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist add --cluster CL
 {: #cluster-master-satellite-service-endpoint-allowlist-add-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -3577,7 +3815,7 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist disable --cluste
 {: #cluster-master-satellite-service-endpoint-allowlist-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3614,7 +3852,7 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist enable --cluster
 {: #cluster-master-satellite-service-endpoint-allowlist-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3651,7 +3889,7 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist get --cluster CL
 {: #cluster-master-satellite-service-endpoint-allowlist-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -3667,6 +3905,20 @@ Get a Satellite cluster's service endpoint allowlist
 ibmcloud ks cluster master satellite-service-endpoint allowlist get --cluster CLUSTER
 ```
 {: pre}
+
+
+### `ibmcloud ks cluster master satellite-service-endpoint allowlist help`
+{: #cluster-master-satellite-service-endpoint-allowlist-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master satellite-service-endpoint allowlist help
+```
+
 
 
 ### `ibmcloud ks cluster master satellite-service-endpoint allowlist rm`
@@ -3685,7 +3937,7 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist rm --cluster CLU
 {: #cluster-master-satellite-service-endpoint-allowlist-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3709,6 +3961,20 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist rm --cluster CLU
 {: pre}
 
 
+### `ibmcloud ks cluster master satellite-service-endpoint help`
+{: #cluster-master-satellite-service-endpoint-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster master satellite-service-endpoint help
+```
+
+
+
 ### `ibmcloud ks cluster master update`
 {: #cluster-master-update-cli}
 
@@ -3725,7 +3991,7 @@ ibmcloud ks cluster master update --cluster CLUSTER [-f] [--force-update] [-q] [
 {: #cluster-master-update-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -3768,7 +4034,7 @@ ibmcloud ks cluster pull-secret apply --cluster CLUSTER [-q]
 {: #cluster-pull-secret-apply-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -3784,6 +4050,20 @@ Generate a new image pull secret that stores IAM credentials for the cluster to 
 ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 ```
 {: pre}
+
+
+### `ibmcloud ks cluster pull-secret help`
+{: #cluster-pull-secret-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster pull-secret help
+```
+
 
 
 ### `ibmcloud ks cluster rm`
@@ -3802,7 +4082,7 @@ ibmcloud ks cluster rm --cluster CLUSTER [--delete-openshift-registry-cos-bucket
 {: #cluster-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--delete-openshift-registry-cos-bucket`
@@ -3848,13 +4128,13 @@ ibmcloud ks cluster service bind --cluster CLUSTER --namespace NAMESPACE --servi
 {: #cluster-service-bind-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--key KEY`
 :    Specify the name or GUID of an existing service key. If you define a service key, you cannot set the `--role` option at the same time.
 
-`--namespace NAMESPACE`, `-n NAMESPACE`
+`-n CLUSTER`, `--namespace NAMESPACE`
 :    Specify the Kubernetes namespace.
 
 `-q`
@@ -3878,6 +4158,20 @@ ibmcloud ks cluster service bind --cluster CLUSTER --namespace NAMESPACE --servi
 {: pre}
 
 
+### `ibmcloud ks cluster service help`
+{: #cluster-service-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster service help
+```
+
+
+
 ### `ibmcloud ks cluster service ls`
 {: #cluster-service-ls-cli}
 
@@ -3897,10 +4191,10 @@ ibmcloud ks cluster service ls --cluster CLUSTER [--output OUTPUT] [-q] (--all-n
 `--all-namespaces`
 :    Include all Kubernetes namespaces.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
-`--namespace NAMESPACE`, `-n NAMESPACE`
+`-n CLUSTER`, `--namespace NAMESPACE`
 :    The Kubernetes namespace. Will use the `default` namespace if not specified.
 
 `--output OUTPUT`
@@ -3937,10 +4231,10 @@ ibmcloud ks cluster service unbind --cluster CLUSTER --namespace NAMESPACE --ser
 {: #cluster-service-unbind-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
-`--namespace NAMESPACE`, `-n NAMESPACE`
+`-n CLUSTER`, `--namespace NAMESPACE`
 :    Specify the Kubernetes namespace.
 
 `-q`
@@ -3977,7 +4271,7 @@ ibmcloud ks cluster subnet add --cluster CLUSTER --subnet-id ID [-q]
 {: #cluster-subnet-add-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -4014,7 +4308,7 @@ ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN [-q]
 {: #cluster-subnet-create-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -4054,7 +4348,7 @@ ibmcloud ks cluster subnet detach --cluster CLUSTER --subnet-id ID [-f] [-q]
 {: #cluster-subnet-detach-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -4076,6 +4370,20 @@ Detach an existing public or private portable subnet from a classic cluster
 ibmcloud ks cluster subnet detach --cluster CLUSTER --subnet-id ID
 ```
 {: pre}
+
+
+### `ibmcloud ks cluster subnet help`
+{: #cluster-subnet-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster subnet help
+```
+
 
 
 ## Credential commands
@@ -4124,6 +4432,20 @@ ibmcloud ks credential get --region REGION
 {: pre}
 
 
+### `ibmcloud ks credential help`
+{: #credential-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks credential help
+```
+
+
+
 ### `ibmcloud ks credential set classic`
 {: #credential-set-classic-cli}
 
@@ -4165,6 +4487,20 @@ ibmcloud ks credential set classic \
   --region REGION
 ```
 {: pre}
+
+
+### `ibmcloud ks credential set help`
+{: #credential-set-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks credential set help
+```
+
 
 
 ### `ibmcloud ks credential unset`
@@ -4210,6 +4546,20 @@ ibmcloud ks credential unset --region REGION
 {: shortdesc}
 
 
+### `ibmcloud ks experimental help`
+{: #experimental-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks experimental help
+```
+
+
+
 ### `ibmcloud ks experimental trusted-profile default get`
 {: #experimental-trusted-profile-default-get-cli}
 
@@ -4248,6 +4598,20 @@ ibmcloud ks experimental trusted-profile default get --region REGION --resource-
 ibmcloud ks experimental trusted-profile default get --region REGION --resource-group GROUP
 ```
 {: pre}
+
+
+### `ibmcloud ks experimental trusted-profile default help`
+{: #experimental-trusted-profile-default-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks experimental trusted-profile default help
+```
+
 
 
 ### `ibmcloud ks experimental trusted-profile default set`
@@ -4331,6 +4695,20 @@ ibmcloud ks experimental trusted-profile get --cluster CLUSTER [--output OUTPUT]
 ibmcloud ks experimental trusted-profile get --cluster CLUSTER
 ```
 {: pre}
+
+
+### `ibmcloud ks experimental trusted-profile help`
+{: #experimental-trusted-profile-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks experimental trusted-profile help
+```
+
 
 
 ### `ibmcloud ks experimental trusted-profile set`
@@ -4423,6 +4801,20 @@ ibmcloud ks flavor get --flavor FLAVOR --provider PROVIDER --zone ZONE
 {: pre}
 
 
+### `ibmcloud ks flavor help`
+{: #flavor-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks flavor help
+```
+
+
+
 ### `ibmcloud ks flavor ls`
 {: #flavor-ls-cli}
 
@@ -4503,6 +4895,20 @@ ibmcloud ks infra-permissions get [--output OUTPUT] [-q] [--region REGION]
 
 
 
+### `ibmcloud ks infra-permissions help`
+{: #infra-permissions-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks infra-permissions help
+```
+
+
+
 ## Ingress commands
 {: #ingress-cli}
 
@@ -4529,7 +4935,7 @@ ibmcloud ks ingress alb autoscale get --alb ALB --cluster CLUSTER [--output OUTP
 `--alb ALB`
 :    The ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -4548,6 +4954,20 @@ See autoscaling status and configuration for Ingress ALBs
 ibmcloud ks ingress alb autoscale get --alb ALB --cluster CLUSTER
 ```
 {: pre}
+
+
+### `ibmcloud ks ingress alb autoscale help`
+{: #ingress-alb-autoscale-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress alb autoscale help
+```
+
 
 
 ### `ibmcloud ks ingress alb autoscale set`
@@ -4569,7 +4989,7 @@ ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas
 `--alb ALB`
 :    The ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--cpu-average-utilization PERCENT`
@@ -4626,7 +5046,7 @@ ibmcloud ks ingress alb autoscale unset --alb ALB --cluster CLUSTER [-q]
 `--alb ALB`
 :    The ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -4660,7 +5080,7 @@ ibmcloud ks ingress alb autoupdate disable --cluster CLUSTER [-q]
 {: #ingress-alb-autoupdate-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -4694,7 +5114,7 @@ ibmcloud ks ingress alb autoupdate enable --cluster CLUSTER [-q]
 {: #ingress-alb-autoupdate-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -4728,7 +5148,7 @@ ibmcloud ks ingress alb autoupdate get --cluster CLUSTER [--output OUTPUT] [-q]
 {: #ingress-alb-autoupdate-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -4749,6 +5169,20 @@ ibmcloud ks ingress alb autoupdate get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks ingress alb autoupdate help`
+{: #ingress-alb-autoupdate-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress alb autoupdate help
+```
+
+
+
 ### `ibmcloud ks ingress alb create classic`
 {: #ingress-alb-create-classic-cli}
 
@@ -4765,7 +5199,7 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type TYPE --vlan VLAN
 {: #ingress-alb-create-classic-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--ip IP`
@@ -4798,6 +5232,20 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type TYPE --vlan VLAN
 {: pre}
 
 
+### `ibmcloud ks ingress alb create help`
+{: #ingress-alb-create-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress alb create help
+```
+
+
+
 ### `ibmcloud ks ingress alb create vpc-gen2`
 {: #ingress-alb-create-vpc-gen2-cli}
 
@@ -4814,7 +5262,7 @@ ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type TYPE --zone ZON
 {: #ingress-alb-create-vpc-gen2-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -4860,7 +5308,7 @@ ibmcloud ks ingress alb disable --alb ALB --cluster CLUSTER [-q]
 `--alb ALB`
 :    The ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -4897,7 +5345,7 @@ ibmcloud ks ingress alb enable classic --alb ALB --cluster CLUSTER [--ip IP] [-q
 `--alb ALB`
 :    The ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--ip IP`
@@ -4921,6 +5369,20 @@ ibmcloud ks ingress alb enable classic --alb ALB --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks ingress alb enable help`
+{: #ingress-alb-enable-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress alb enable help
+```
+
+
+
 ### `ibmcloud ks ingress alb enable vpc-gen2`
 {: #ingress-alb-enable-vpc-gen2-cli}
 
@@ -4940,7 +5402,7 @@ ibmcloud ks ingress alb enable vpc-gen2 --alb ALB --cluster CLUSTER [-q] [--vers
 `--alb ALB`
 :    The ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -4980,7 +5442,7 @@ ibmcloud ks ingress alb get --alb ALB --cluster CLUSTER [--output OUTPUT] [-q]
 `--alb ALB`
 :    The ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -5017,7 +5479,7 @@ ibmcloud ks ingress alb health-checker disable --cluster CLUSTER [-q]
 {: #ingress-alb-health-checker-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -5051,7 +5513,7 @@ ibmcloud ks ingress alb health-checker enable --cluster CLUSTER [-q]
 {: #ingress-alb-health-checker-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -5085,7 +5547,7 @@ ibmcloud ks ingress alb health-checker get --cluster CLUSTER [--output OUTPUT] [
 {: #ingress-alb-health-checker-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -5106,6 +5568,34 @@ ibmcloud ks ingress alb health-checker get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks ingress alb health-checker help`
+{: #ingress-alb-health-checker-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress alb health-checker help
+```
+
+
+
+### `ibmcloud ks ingress alb help`
+{: #ingress-alb-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress alb help
+```
+
+
+
 ### `ibmcloud ks ingress alb ls`
 {: #ingress-alb-ls-cli}
 
@@ -5122,7 +5612,7 @@ ibmcloud ks ingress alb ls --cluster CLUSTER [--output OUTPUT] [-q]
 {: #ingress-alb-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -5162,7 +5652,7 @@ ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB ...] [--output OUTPU
 `--alb ALB`
 :    To update a specific ALB, specify the ALB ID. To see available ALB IDs, run `ibmcloud ks ingress alb ls`. To update more than one ALB, specify one ALB ID in each flag, such as `--alb ID_1 --alb ID_2`. To update all ALBs, do not include this flag.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -5229,7 +5719,7 @@ ibmcloud ks ingress domain create --cluster CLUSTER [--crn CRN] [--domain DOMAIN
 {: #ingress-domain-create-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--crn CRN`
@@ -5274,6 +5764,20 @@ ibmcloud ks ingress domain create --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks ingress domain default help`
+{: #ingress-domain-default-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress domain default help
+```
+
+
+
 ### `ibmcloud ks ingress domain default replace`
 {: #ingress-domain-default-replace-cli}
 
@@ -5290,7 +5794,7 @@ ibmcloud ks ingress domain default replace --cluster CLUSTER --domain DOMAIN [-q
 {: #ingress-domain-default-replace-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--domain DOMAIN`
@@ -5327,7 +5831,7 @@ ibmcloud ks ingress domain get --cluster CLUSTER --domain DOMAIN [--output OUTPU
 {: #ingress-domain-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--domain DOMAIN`
@@ -5351,6 +5855,20 @@ ibmcloud ks ingress domain get --cluster CLUSTER --domain DOMAIN
 {: pre}
 
 
+### `ibmcloud ks ingress domain help`
+{: #ingress-domain-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress domain help
+```
+
+
+
 ### `ibmcloud ks ingress domain ls`
 {: #ingress-domain-ls-cli}
 
@@ -5367,7 +5885,7 @@ ibmcloud ks ingress domain ls --cluster CLUSTER [--output OUTPUT] [-q]
 {: #ingress-domain-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -5404,7 +5922,7 @@ ibmcloud ks ingress domain rm --cluster CLUSTER --domain DOMAIN [-f] [-q]
 {: #ingress-domain-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--domain DOMAIN`
@@ -5428,6 +5946,20 @@ ibmcloud ks ingress domain rm --cluster CLUSTER --domain DOMAIN
 {: pre}
 
 
+### `ibmcloud ks ingress domain secret help`
+{: #ingress-domain-secret-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress domain secret help
+```
+
+
+
 ### `ibmcloud ks ingress domain secret regenerate`
 {: #ingress-domain-secret-regenerate-cli}
 
@@ -5444,7 +5976,7 @@ ibmcloud ks ingress domain secret regenerate --cluster CLUSTER --domain DOMAIN [
 {: #ingress-domain-secret-regenerate-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--domain DOMAIN`
@@ -5484,7 +6016,7 @@ ibmcloud ks ingress domain secret rm --cluster CLUSTER --domain DOMAIN [-f] [--o
 {: #ingress-domain-secret-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--domain DOMAIN`
@@ -5527,7 +6059,7 @@ ibmcloud ks ingress domain update --cluster CLUSTER --domain DOMAIN [--hostname 
 {: #ingress-domain-update-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--domain DOMAIN`
@@ -5554,6 +6086,34 @@ ibmcloud ks ingress domain update --cluster CLUSTER --domain DOMAIN
 {: pre}
 
 
+### `ibmcloud ks ingress help`
+{: #ingress-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress help
+```
+
+
+
+### `ibmcloud ks ingress instance default help`
+{: #ingress-instance-default-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress instance default help
+```
+
+
+
 ### `ibmcloud ks ingress instance default set`
 {: #ingress-instance-default-set-cli}
 
@@ -5570,7 +6130,7 @@ ibmcloud ks ingress instance default set --cluster CLUSTER --name NAME [-q] [--s
 {: #ingress-instance-default-set-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--name NAME`
@@ -5610,7 +6170,7 @@ ibmcloud ks ingress instance default unset --cluster CLUSTER --name NAME [-q]
 {: #ingress-instance-default-unset-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--name NAME`
@@ -5647,7 +6207,7 @@ ibmcloud ks ingress instance get --cluster CLUSTER --name NAME [--output OUTPUT]
 {: #ingress-instance-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--name NAME`
@@ -5671,6 +6231,20 @@ ibmcloud ks ingress instance get --cluster CLUSTER --name NAME
 {: pre}
 
 
+### `ibmcloud ks ingress instance help`
+{: #ingress-instance-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress instance help
+```
+
+
+
 ### `ibmcloud ks ingress instance ls`
 {: #ingress-instance-ls-cli}
 
@@ -5687,7 +6261,7 @@ ibmcloud ks ingress instance ls --cluster CLUSTER [--output OUTPUT] [-q] [--show
 {: #ingress-instance-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -5727,7 +6301,7 @@ ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default]
 {: #ingress-instance-register-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--crn CRN`
@@ -5770,7 +6344,7 @@ ibmcloud ks ingress instance unregister --cluster CLUSTER --name NAME [-q]
 {: #ingress-instance-unregister-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--name NAME`
@@ -5791,6 +6365,20 @@ ibmcloud ks ingress instance unregister --cluster CLUSTER --name NAME
 {: pre}
 
 
+### `ibmcloud ks ingress load-balancer backend help`
+{: #ingress-load-balancer-backend-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress load-balancer backend help
+```
+
+
+
 ### `ibmcloud ks ingress load-balancer backend set`
 {: #ingress-load-balancer-backend-set-cli}
 
@@ -5807,7 +6395,7 @@ ibmcloud ks ingress load-balancer backend set --cluster CLUSTER [--private-backe
 {: #ingress-load-balancer-backend-set-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--private-backend BACKEND`
@@ -5847,7 +6435,7 @@ ibmcloud ks ingress load-balancer get --cluster CLUSTER [--output OUTPUT] [-q]
 {: #ingress-load-balancer-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -5868,6 +6456,20 @@ ibmcloud ks ingress load-balancer get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks ingress load-balancer help`
+{: #ingress-load-balancer-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress load-balancer help
+```
+
+
+
 ### `ibmcloud ks ingress load-balancer proxy-protocol disable`
 {: #ingress-load-balancer-proxy-protocol-disable-cli}
 
@@ -5884,7 +6486,7 @@ ibmcloud ks ingress load-balancer proxy-protocol disable --cluster CLUSTER [-f] 
 {: #ingress-load-balancer-proxy-protocol-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -5921,11 +6523,11 @@ ibmcloud ks ingress load-balancer proxy-protocol enable --cluster CLUSTER [--cid
 {: #ingress-load-balancer-proxy-protocol-enable-options}
 
 
+`-c`, `--cluster CLUSTER`
+:    Specify the cluster name or ID.
+
 `--cidr CIDR`
 :    The IP address ranges of your load balancers in CIDR format. PROXY headers that are forwarded by load balancers in other IP ranges are not processed.
-
-`--cluster CLUSTER`, `-c CLUSTER`
-:    Specify the cluster name or ID.
 
 `-f`
 :    Force the command to run without user prompts.
@@ -5945,6 +6547,20 @@ ibmcloud ks ingress load-balancer proxy-protocol enable --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks ingress load-balancer proxy-protocol help`
+{: #ingress-load-balancer-proxy-protocol-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress load-balancer proxy-protocol help
+```
+
+
+
 ### `ibmcloud ks ingress secret create`
 {: #ingress-secret-create-cli}
 
@@ -5961,20 +6577,20 @@ ibmcloud ks ingress secret create --cluster CLUSTER --name NAME [--cert-crn CRN]
 {: #ingress-secret-create-options}
 
 
+`-c`, `--cluster CLUSTER`
+:    Specify the cluster name or ID.
+
 `--cert-crn CRN`
 :    The certificate CRN.
-
-`--cluster CLUSTER`, `-c CLUSTER`
-:    Specify the cluster name or ID.
 
 `--field FIELD`
 :    The secret CRN to include as a field. To pull in the secret without specifying the name, use `--field <crn>`. To specify the field name, use `--field name=<crn>`. To use the IBM Cloud Secrets Manager secret as the prefix, use `--field prefix=<crn>`.
 
+`-n CLUSTER`, `--namespace NAMESPACE`
+:    Specify the Kubernetes namespace.
+
 `--name NAME`
 :    A name for the Ingress secret that is created in the cluster.
-
-`--namespace NAMESPACE`, `-n NAMESPACE`
-:    Specify the Kubernetes namespace.
 
 `--persist`
 :    Persist the secret in the cluster so that it cannot be deleted.
@@ -6013,17 +6629,17 @@ ibmcloud ks ingress secret field add --cluster CLUSTER --name NAME --namespace N
 {: #ingress-secret-field-add-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--field FIELD`
 :    The secret CRN to include as a field. To pull in the secret without specifying the name, use `--field <crn>`. To specify the field name, use `--field name=<crn>`. To use the IBM Cloud Secrets Manager secret as the prefix, use `--field prefix=<crn>`.
 
+`-n CLUSTER`, `--namespace NAMESPACE`
+:    Specify the Kubernetes namespace.
+
 `--name NAME`
 :    A name for the Ingress secret that is created in the cluster.
-
-`--namespace NAMESPACE`, `-n NAMESPACE`
-:    Specify the Kubernetes namespace.
 
 `-q`
 :    Do not show the message of the day or update reminders.
@@ -6038,6 +6654,20 @@ Add fields to an existing Ingress secret
 ibmcloud ks ingress secret field add --cluster CLUSTER --name NAME --namespace NAMESPACE
 ```
 {: pre}
+
+
+### `ibmcloud ks ingress secret field help`
+{: #ingress-secret-field-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress secret field help
+```
+
 
 
 ### `ibmcloud ks ingress secret field ls`
@@ -6056,14 +6686,14 @@ ibmcloud ks ingress secret field ls --cluster CLUSTER --name NAME --namespace NA
 {: #ingress-secret-field-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
+
+`-n CLUSTER`, `--namespace NAMESPACE`
+:    Specify the Kubernetes namespace.
 
 `--name NAME`
 :    A name for the Ingress secret that is created in the cluster.
-
-`--namespace NAMESPACE`, `-n NAMESPACE`
-:    Specify the Kubernetes namespace.
 
 `--output OUTPUT`
 :    Prints the command output in the provided format. Accepted values: `json`
@@ -6102,17 +6732,17 @@ ibmcloud ks ingress secret field rm --cluster CLUSTER --name NAME --namespace NA
 {: #ingress-secret-field-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--field-name NAME`
 :    The name of the field to remove from the secret.
 
+`-n CLUSTER`, `--namespace NAMESPACE`
+:    Specify the Kubernetes namespace.
+
 `--name NAME`
 :    A name for the Ingress secret that is created in the cluster.
-
-`--namespace NAMESPACE`, `-n NAMESPACE`
-:    Specify the Kubernetes namespace.
 
 `-q`
 :    Do not show the message of the day or update reminders.
@@ -6145,14 +6775,14 @@ ibmcloud ks ingress secret get --cluster CLUSTER --name NAME --namespace NAMESPA
 {: #ingress-secret-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
+
+`-n CLUSTER`, `--namespace NAMESPACE`
+:    Specify the Kubernetes namespace.
 
 `--name NAME`
 :    A name for the Ingress secret that is created in the cluster.
-
-`--namespace NAMESPACE`, `-n NAMESPACE`
-:    Specify the Kubernetes namespace.
 
 `--output OUTPUT`
 :    Prints the command output in the provided format. Accepted values: `json`
@@ -6172,6 +6802,20 @@ ibmcloud ks ingress secret get --cluster CLUSTER --name NAME --namespace NAMESPA
 {: pre}
 
 
+### `ibmcloud ks ingress secret help`
+{: #ingress-secret-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress secret help
+```
+
+
+
 ### `ibmcloud ks ingress secret ls`
 {: #ingress-secret-ls-cli}
 
@@ -6188,7 +6832,7 @@ ibmcloud ks ingress secret ls --cluster CLUSTER [--output OUTPUT] [-q] [--show-c
 {: #ingress-secret-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -6231,14 +6875,14 @@ ibmcloud ks ingress secret rm --cluster CLUSTER --name NAME --namespace NAMESPAC
 {: #ingress-secret-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
+
+`-n CLUSTER`, `--namespace NAMESPACE`
+:    Specify the Kubernetes namespace.
 
 `--name NAME`
 :    A name for the Ingress secret that is created in the cluster.
-
-`--namespace NAMESPACE`, `-n NAMESPACE`
-:    Specify the Kubernetes namespace.
 
 `-q`
 :    Do not show the message of the day or update reminders.
@@ -6271,17 +6915,17 @@ ibmcloud ks ingress secret update --cluster CLUSTER --name NAME --namespace NAME
 {: #ingress-secret-update-options}
 
 
+`-c`, `--cluster CLUSTER`
+:    Specify the cluster name or ID.
+
 `--cert-crn CRN`
 :    The certificate CRN.
 
-`--cluster CLUSTER`, `-c CLUSTER`
-:    Specify the cluster name or ID.
+`-n CLUSTER`, `--namespace NAMESPACE`
+:    Specify the Kubernetes namespace.
 
 `--name NAME`
 :    A name for the Ingress secret that is created in the cluster.
-
-`--namespace NAMESPACE`, `-n NAMESPACE`
-:    Specify the Kubernetes namespace.
 
 `-q`
 :    Do not show the message of the day or update reminders.
@@ -6296,6 +6940,20 @@ Update an existing Ingress secret
 ibmcloud ks ingress secret update --cluster CLUSTER --name NAME --namespace NAMESPACE
 ```
 {: pre}
+
+
+### `ibmcloud ks ingress security help`
+{: #ingress-security-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress security help
+```
+
 
 
 ### `ibmcloud ks ingress security port80 disable`
@@ -6314,7 +6972,7 @@ ibmcloud ks ingress security port80 disable --cluster CLUSTER [-f] [-q]
 {: #ingress-security-port80-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -6351,7 +7009,7 @@ ibmcloud ks ingress security port80 enable --cluster CLUSTER [-f] [-q]
 {: #ingress-security-port80-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -6388,7 +7046,7 @@ ibmcloud ks ingress security port80 get --cluster CLUSTER [--output OUTPUT] [-q]
 {: #ingress-security-port80-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -6409,6 +7067,20 @@ ibmcloud ks ingress security port80 get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks ingress security port80 help`
+{: #ingress-security-port80-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress security port80 help
+```
+
+
+
 ### `ibmcloud ks ingress status-report disable`
 {: #ingress-status-report-disable-cli}
 
@@ -6425,7 +7097,7 @@ ibmcloud ks ingress status-report disable --cluster CLUSTER [--output OUTPUT] [-
 {: #ingress-status-report-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -6462,7 +7134,7 @@ ibmcloud ks ingress status-report enable --cluster CLUSTER [--output OUTPUT] [-q
 {: #ingress-status-report-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -6499,7 +7171,7 @@ ibmcloud ks ingress status-report get --cluster CLUSTER [--output OUTPUT] [-q]
 {: #ingress-status-report-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -6520,6 +7192,20 @@ ibmcloud ks ingress status-report get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks ingress status-report help`
+{: #ingress-status-report-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress status-report help
+```
+
+
+
 ### `ibmcloud ks ingress status-report ignored-errors add`
 {: #ingress-status-report-ignored-errors-add-cli}
 
@@ -6536,7 +7222,7 @@ ibmcloud ks ingress status-report ignored-errors add --cluster CLUSTER --code CO
 {: #ingress-status-report-ignored-errors-add-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--code CODE`
@@ -6560,6 +7246,20 @@ ibmcloud ks ingress status-report ignored-errors add --cluster CLUSTER --code CO
 {: pre}
 
 
+### `ibmcloud ks ingress status-report ignored-errors help`
+{: #ingress-status-report-ignored-errors-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks ingress status-report ignored-errors help
+```
+
+
+
 ### `ibmcloud ks ingress status-report ignored-errors ls`
 {: #ingress-status-report-ignored-errors-ls-cli}
 
@@ -6576,7 +7276,7 @@ ibmcloud ks ingress status-report ignored-errors ls --cluster CLUSTER [--output 
 {: #ingress-status-report-ignored-errors-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -6613,7 +7313,7 @@ ibmcloud ks ingress status-report ignored-errors rm --cluster CLUSTER --code COD
 {: #ingress-status-report-ignored-errors-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--code CODE`
@@ -6642,6 +7342,20 @@ ibmcloud ks ingress status-report ignored-errors rm --cluster CLUSTER --code COD
 
 View and configure Key Management Service integrations.
 {: shortdesc}
+
+
+### `ibmcloud ks kms crk help`
+{: #kms-crk-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks kms crk help
+```
+
 
 
 ### `ibmcloud ks kms crk ls`
@@ -6697,7 +7411,7 @@ ibmcloud ks kms enable --cluster CLUSTER --crk CRK --instance-id ID [--kms-accou
 {: #kms-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--crk CRK`
@@ -6725,6 +7439,34 @@ Enable a key management service (KMS) in your cluster to encrypt your secrets
 ibmcloud ks kms enable --cluster CLUSTER --crk CRK --instance-id ID
 ```
 {: pre}
+
+
+### `ibmcloud ks kms help`
+{: #kms-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks kms help
+```
+
+
+
+### `ibmcloud ks kms instance help`
+{: #kms-instance-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks kms instance help
+```
+
 
 
 ### `ibmcloud ks kms instance ls`
@@ -6811,7 +7553,7 @@ ibmcloud ks logging autoupdate disable --cluster CLUSTER [-q]
 {: #logging-autoupdate-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -6845,7 +7587,7 @@ ibmcloud ks logging autoupdate enable --cluster CLUSTER [-q]
 {: #logging-autoupdate-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -6879,7 +7621,7 @@ ibmcloud ks logging autoupdate get --cluster CLUSTER [--output OUTPUT] [-q]
 {: #logging-autoupdate-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -6898,6 +7640,20 @@ View whether your Fluentd pods are set to automatically update in a cluster
 ibmcloud ks logging autoupdate get --cluster CLUSTER
 ```
 {: pre}
+
+
+### `ibmcloud ks logging autoupdate help`
+{: #logging-autoupdate-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks logging autoupdate help
+```
+
 
 
 ### `ibmcloud ks logging config create`
@@ -6919,11 +7675,11 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOGSOURCE --type
 `-C CONTAINER`, `--app-container CONTAINER`
 :    Specify the containers that you want to collect logs for. To specify more than one path, use multiple flags, such as `-C container1 -C container2`. This option is required for the `application` log source. If not provided, logs are collected from all containers from the application log paths passed in.
 
+`-c CONTAINER`, `--cluster CLUSTER`
+:    Specify the cluster name or ID.
+
 `--ca-cert CERT`
 :    When the logging type is `syslog` and the protocol is tls, the Kubernetes secret name that contains the Certificate Authority certificate.
-
-`--cluster CLUSTER`, `-c CLUSTER`
-:    Specify the cluster name or ID.
 
 `--force-update`
 :    Force an update of the Fluentd pods in the cluster to the latest version.
@@ -6934,7 +7690,7 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOGSOURCE --type
 `--logsource LOGSOURCE`
 :    The source of the logs to forward. Supported values are `container`, `application`, `ingress`, `worker`, `storage`, and `kubernetes`. This argument supports a comma separated list of log sources. If you do not provide a log source, logs for `container` and `ingress` are forwarded.
 
-`--namespace NAMESPACE`, `-n NAMESPACE`
+`-n CLUSTER`, `--namespace NAMESPACE`
 :    The namespace you want to apply the log forwarding configuration to. Only use this flag with the `container` log source or if you do not specify a log source. If you do not specify a namespace, then all namespaces use this configuration.
 
 `--org ORG`
@@ -7002,7 +7758,7 @@ ibmcloud ks logging config get --cluster CLUSTER [--logsource LOGSOURCE] [--outp
 {: #logging-config-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--logsource LOGSOURCE`
@@ -7026,6 +7782,20 @@ ibmcloud ks logging config get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks logging config help`
+{: #logging-config-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks logging config help
+```
+
+
+
 ### `ibmcloud ks logging config rm`
 {: #logging-config-rm-cli}
 
@@ -7045,7 +7815,7 @@ ibmcloud ks logging config rm --cluster CLUSTER [--force-update] [-q] (--all | -
 `--all`
 :    Remove all log forwarding configurations.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--force-update`
@@ -7054,7 +7824,7 @@ ibmcloud ks logging config rm --cluster CLUSTER [--force-update] [-q] (--all | -
 `--id ID`
 :    Specify the ID of the logging configuration.
 
-`--namespace NAMESPACE`, `-n NAMESPACE`
+`-n CLUSTER`, `--namespace NAMESPACE`
 :    The namespace you want to remove the log forwarding configuration from. If there is more than one config for the same namespace, use the `--id <logging configuration ID>` flag instead.
 
 `-q`
@@ -7091,11 +7861,11 @@ ibmcloud ks logging config update --cluster CLUSTER --id ID --logsource LOGSOURC
 `-C CONTAINER`, `--app-container CONTAINER`
 :    Specify the containers that you want to collect logs for. To specify more than one path, use multiple flags, such as `-C container1 -C container2`. This option is required for the `application` log source. If not provided, logs are collected from all containers from the application log paths passed in.
 
+`-c CONTAINER`, `--cluster CLUSTER`
+:    Specify the cluster name or ID.
+
 `--ca-cert CERT`
 :    When the logging type is `syslog` and the protocol is tls, the Kubernetes secret name that contains the Certificate Authority certificate.
-
-`--cluster CLUSTER`, `-c CLUSTER`
-:    Specify the cluster name or ID.
 
 `--force-update`
 :    Force an update of the Fluentd pods in the cluster to the latest version.
@@ -7109,7 +7879,7 @@ ibmcloud ks logging config update --cluster CLUSTER --id ID --logsource LOGSOURC
 `--logsource LOGSOURCE`
 :    The source of the logs to forward. Supported values are `container`, `application`, `ingress`, `worker`, `storage`, and `kubernetes`. This argument supports a comma separated list of log sources. If you do not provide a log source, logs for `container` and `ingress` are forwarded.
 
-`--namespace NAMESPACE`, `-n NAMESPACE`
+`-n CLUSTER`, `--namespace NAMESPACE`
 :    The namespace you want to apply the log forwarding configuration to. Only use this flag with the `container` log source or if you do not specify a log source. If you do not specify a namespace, then all namespaces use this configuration.
 
 `--org ORG`
@@ -7178,7 +7948,7 @@ ibmcloud ks logging filter create --cluster CLUSTER [--container CONTAINER] [--f
 {: #logging-filter-create-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--container CONTAINER`
@@ -7196,7 +7966,7 @@ ibmcloud ks logging filter create --cluster CLUSTER [--container CONTAINER] [--f
 `--message MESSAGE`
 :    Filters out any logs that contain a specified message anywhere in the log. The message is matched literally and not as an expression. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".
 
-`--namespace NAMESPACE`, `-n NAMESPACE`
+`-n LOGGING-CONFIG`, `--namespace NAMESPACE`
 :    The Kubernetes namespace from which you want to filter logs.
 
 `--output OUTPUT`
@@ -7239,7 +8009,7 @@ ibmcloud ks logging filter get --cluster CLUSTER [--id ID] [--output OUTPUT] [-q
 {: #logging-filter-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--id ID`
@@ -7269,6 +8039,20 @@ ibmcloud ks logging filter get --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks logging filter help`
+{: #logging-filter-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks logging filter help
+```
+
+
+
 ### `ibmcloud ks logging filter rm`
 {: #logging-filter-rm-cli}
 
@@ -7288,7 +8072,7 @@ ibmcloud ks logging filter rm --cluster CLUSTER [--force-update] [-q] (--all | -
 `--all`
 :    Delete all log forwarding filters.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--force-update`
@@ -7328,7 +8112,7 @@ ibmcloud ks logging filter update --cluster CLUSTER --id ID [--container CONTAIN
 {: #logging-filter-update-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--container CONTAINER`
@@ -7349,7 +8133,7 @@ ibmcloud ks logging filter update --cluster CLUSTER --id ID [--container CONTAIN
 `--message MESSAGE`
 :    Filters out any logs that contain a specified message anywhere in the log. The message is matched literally and not as an expression. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".
 
-`--namespace NAMESPACE`, `-n NAMESPACE`
+`-n LOGGING-CONFIG`, `--namespace NAMESPACE`
 :    The Kubernetes namespace from which you want to filter logs.
 
 `--output OUTPUT`
@@ -7376,6 +8160,20 @@ ibmcloud ks logging filter update --cluster CLUSTER --id ID --message MESSAGE
 {: pre}
 
 
+### `ibmcloud ks logging help`
+{: #logging-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks logging help
+```
+
+
+
 ### `ibmcloud ks logging refresh`
 {: #logging-refresh-cli}
 
@@ -7392,7 +8190,7 @@ ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-q]
 {: #logging-refresh-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--force-update`
@@ -7464,7 +8262,7 @@ ibmcloud ks nlb-dns add --cluster CLUSTER --ip IP [--ip IP ...] --nlb-host HOST 
 {: #nlb-dns-add-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--ip IP`
@@ -7507,7 +8305,7 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip IP [--ip IP ...] [--ou
 {: #nlb-dns-create-classic-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--ip IP`
@@ -7534,6 +8332,20 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip IP
 {: pre}
 
 
+### `ibmcloud ks nlb-dns create help`
+{: #nlb-dns-create-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks nlb-dns create help
+```
+
+
+
 ### `ibmcloud ks nlb-dns create vpc-gen2`
 {: #nlb-dns-create-vpc-gen2-cli}
 
@@ -7550,7 +8362,7 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER [--output OUTPUT] [-q] [--
 {: #nlb-dns-create-vpc-gen2-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--ip IP`
@@ -7596,7 +8408,7 @@ ibmcloud ks nlb-dns get --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--output OU
 {: #nlb-dns-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--nlb-subdomain SUBDOMAIN`
@@ -7620,6 +8432,20 @@ ibmcloud ks nlb-dns get --cluster CLUSTER --nlb-subdomain SUBDOMAIN
 {: pre}
 
 
+### `ibmcloud ks nlb-dns help`
+{: #nlb-dns-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks nlb-dns help
+```
+
+
+
 ### `ibmcloud ks nlb-dns ls`
 {: #nlb-dns-ls-cli}
 
@@ -7636,7 +8462,7 @@ ibmcloud ks nlb-dns ls --cluster CLUSTER [--output OUTPUT] [-q]
 {: #nlb-dns-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -7673,7 +8499,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host HOST [--enabl
 {: #nlb-dns-monitor-configure-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--enable`
@@ -7734,7 +8560,7 @@ ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host HOST [--output 
 {: #nlb-dns-monitor-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--nlb-host HOST`
@@ -7774,7 +8600,7 @@ ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host HOST [--output O
 {: #nlb-dns-monitor-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--nlb-host HOST`
@@ -7814,7 +8640,7 @@ ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host HOST [--output OUTP
 {: #nlb-dns-monitor-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--nlb-host HOST`
@@ -7838,6 +8664,20 @@ ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host HOST
 {: pre}
 
 
+### `ibmcloud ks nlb-dns monitor help`
+{: #nlb-dns-monitor-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks nlb-dns monitor help
+```
+
+
+
 ### `ibmcloud ks nlb-dns monitor ls`
 {: #nlb-dns-monitor-ls-cli}
 
@@ -7854,7 +8694,7 @@ ibmcloud ks nlb-dns monitor ls --cluster CLUSTER [--output OUTPUT] [-q]
 {: #nlb-dns-monitor-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -7891,7 +8731,7 @@ ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-host HOST --nlb-subdomain SUB
 {: #nlb-dns-replace-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--lb-host HOST`
@@ -7934,7 +8774,7 @@ ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host HOST [--outp
 {: #nlb-dns-rm-classic-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--ip IP`
@@ -7961,6 +8801,20 @@ ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host HOST
 {: pre}
 
 
+### `ibmcloud ks nlb-dns rm help`
+{: #nlb-dns-rm-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks nlb-dns rm help
+```
+
+
+
 ### `ibmcloud ks nlb-dns rm vpc-gen2`
 {: #nlb-dns-rm-vpc-gen2-cli}
 
@@ -7977,7 +8831,7 @@ ibmcloud ks nlb-dns rm vpc-gen2 --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--i
 {: #nlb-dns-rm-vpc-gen2-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--ip IP`
@@ -8004,6 +8858,20 @@ ibmcloud ks nlb-dns rm vpc-gen2 --cluster CLUSTER --nlb-subdomain SUBDOMAIN
 {: pre}
 
 
+### `ibmcloud ks nlb-dns secret help`
+{: #nlb-dns-secret-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks nlb-dns secret help
+```
+
+
+
 ### `ibmcloud ks nlb-dns secret regenerate`
 {: #nlb-dns-secret-regenerate-cli}
 
@@ -8020,7 +8888,7 @@ ibmcloud ks nlb-dns secret regenerate --cluster CLUSTER --nlb-subdomain SUBDOMAI
 {: #nlb-dns-secret-regenerate-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--nlb-subdomain SUBDOMAIN`
@@ -8060,7 +8928,7 @@ ibmcloud ks nlb-dns secret rm --cluster CLUSTER --nlb-subdomain SUBDOMAIN [-f] [
 {: #nlb-dns-secret-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -8092,6 +8960,20 @@ ibmcloud ks nlb-dns secret rm --cluster CLUSTER --nlb-subdomain SUBDOMAIN
 
 View the quota and limits for cluster-related resources in your IBM Cloud account.
 {: shortdesc}
+
+
+### `ibmcloud ks quota help`
+{: #quota-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks quota help
+```
+
 
 
 ### `ibmcloud ks quota ls`
@@ -8128,6 +9010,20 @@ Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. Legacy-
 {: shortdesc}
 
 
+### `ibmcloud ks script help`
+{: #script-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks script help
+```
+
+
+
 ### `ibmcloud ks script update`
 {: #script-update-cli}
 
@@ -8159,6 +9055,20 @@ Run operations against a security group.
 {: shortdesc}
 
 
+### `ibmcloud ks security-group help`
+{: #security-group-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks security-group help
+```
+
+
+
 ### `ibmcloud ks security-group ls`
 {: #security-group-ls-cli}
 
@@ -8178,7 +9088,7 @@ ibmcloud ks security-group ls --cluster CLUSTER [--attached-to ATTACHED] [--mana
 `--attached-to ATTACHED`
 :    Filter the security groups by the components they are attached to. Accepted values: `cluster`, `load-balancer`, `vpc`, `vpe-gateway`, `worker-pool`
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--managed-by MANAGER`
@@ -8221,7 +9131,7 @@ ibmcloud ks security-group reset --cluster CLUSTER --security-group GROUP [-f] [
 {: #security-group-reset-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -8261,7 +9171,7 @@ ibmcloud ks security-group sync --cluster CLUSTER --security-group GROUP [-q]
 {: #security-group-sync-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
@@ -8308,7 +9218,7 @@ ibmcloud ks storage attachment create --cluster CLUSTER --volume VOLUME --worker
 {: #storage-attachment-create-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -8320,7 +9230,7 @@ ibmcloud ks storage attachment create --cluster CLUSTER --volume VOLUME --worker
 `--volume VOLUME`
 :    Specify the volume ID. To list available volumes, run `ibmcloud ks storage volume ls`.
 
-`--worker WORKER`, `-w WORKER`
+`-w CLUSTER`, `--worker WORKER`
 :    Specify the worker ID. To list available workers, run `ibmcloud ks workers`.
 
 
@@ -8357,7 +9267,7 @@ ibmcloud ks storage attachment get --attachment ATTACHMENT --cluster CLUSTER --w
 `--attachment ATTACHMENT`
 :    Specify the volume attachment ID. To list available attachments, run `ibmcloud ks storage attachment ls`.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -8366,7 +9276,7 @@ ibmcloud ks storage attachment get --attachment ATTACHMENT --cluster CLUSTER --w
 `-q`
 :    Do not show the message of the day or update reminders.
 
-`--worker WORKER`, `-w WORKER`
+`-w CLUSTER`, `--worker WORKER`
 :    Specify the worker ID. To list available workers, run `ibmcloud ks workers`.
 
 
@@ -8379,6 +9289,20 @@ Get the details of a volume attachment in a cluster
 ibmcloud ks storage attachment get --attachment ATTACHMENT --cluster CLUSTER --worker WORKER_ID
 ```
 {: pre}
+
+
+### `ibmcloud ks storage attachment help`
+{: #storage-attachment-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks storage attachment help
+```
+
 
 
 ### `ibmcloud ks storage attachment ls`
@@ -8400,7 +9324,7 @@ ibmcloud ks storage attachment ls --cluster CLUSTER --worker WORKER [--output OU
 {: #storage-attachment-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -8409,7 +9333,7 @@ ibmcloud ks storage attachment ls --cluster CLUSTER --worker WORKER [--output OU
 `-q`
 :    Do not show the message of the day or update reminders.
 
-`--worker WORKER`, `-w WORKER`
+`-w CLUSTER`, `--worker WORKER`
 :    Specify the worker ID. To list available workers, run `ibmcloud ks workers`.
 
 
@@ -8446,13 +9370,13 @@ ibmcloud ks storage attachment rm --attachment ATTACHMENT --cluster CLUSTER --wo
 `--attachment ATTACHMENT`
 :    Specify the volume attachment ID. To list available attachments, run `ibmcloud ks storage attachment ls`.
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-q`
 :    Do not show the message of the day or update reminders.
 
-`--worker WORKER`, `-w WORKER`
+`-w CLUSTER`, `--worker WORKER`
 :    Specify the worker ID. To list available workers, run `ibmcloud ks workers`.
 
 
@@ -8465,6 +9389,20 @@ Delete a volume attachment from a worker node
 ibmcloud ks storage attachment rm --attachment ATTACHMENT --cluster CLUSTER --worker WORKER_ID
 ```
 {: pre}
+
+
+### `ibmcloud ks storage help`
+{: #storage-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks storage help
+```
+
 
 
 ### `ibmcloud ks storage volume get`
@@ -8507,6 +9445,20 @@ ibmcloud ks storage volume get --volume VOLUME
 {: pre}
 
 
+### `ibmcloud ks storage volume help`
+{: #storage-volume-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks storage volume help
+```
+
+
+
 ### `ibmcloud ks storage volume ls`
 {: #storage-volume-ls-cli}
 
@@ -8526,7 +9478,7 @@ ibmcloud ks storage volume ls [--cluster CLUSTER] [--output OUTPUT] [--provider 
 {: #storage-volume-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -8637,6 +9589,20 @@ List public and private VLANs for a zone and view the VLAN spanning status.
 {: shortdesc}
 
 
+### `ibmcloud ks vlan help`
+{: #vlan-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks vlan help
+```
+
+
+
 ### `ibmcloud ks vlan ls`
 {: #vlan-ls-cli}
 
@@ -8701,6 +9667,20 @@ ibmcloud ks vlan spanning get [--output OUTPUT] [-q] [--region REGION]
 
 
 
+### `ibmcloud ks vlan spanning help`
+{: #vlan-spanning-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks vlan spanning help
+```
+
+
+
 ## Vni commands
 {: #vni-cli}
 
@@ -8727,7 +9707,7 @@ ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output
 `--auto-delete`
 :    Automatically delete the VNI when it is removed from the cluster.
 
-`--cluster-id ID`, `-c ID`
+`-c`, `--cluster-id ID`
 :    The ID of the cluster.
 
 `--output OUTPUT`
@@ -8742,7 +9722,7 @@ ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output
 `--vni VNI`
 :    The ID of the Virtual Network Interface to attach. You must specify VNIs without any current target resource. To list all the VNIs, run `ibmcloud is vnis`. To check if a specific VNI is already attached to a resource, check for the "Target" field in 'ibmcloud is vni <VNI_ID>.
 
-`--worker WORKER`, `-w WORKER`
+`-w ID`, `--worker WORKER`
 :    The ID of the worker node.
 
 
@@ -8755,6 +9735,20 @@ Attach a Virtual Network Interface to a bare metal worker node or cluster
 ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI --cluster-id CLUSTER_NAME_OR_ID
 ```
 {: pre}
+
+
+### `ibmcloud ks vni attach help`
+{: #vni-attach-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks vni attach help
+```
+
 
 
 ### `ibmcloud ks vni detach`
@@ -8773,7 +9767,7 @@ ibmcloud ks vni detach --vni VNI [-f] [--output OUTPUT] [-q] (--cluster-id ID | 
 {: #vni-detach-options}
 
 
-`--cluster-id ID`, `-c ID`
+`-c`, `--cluster-id ID`
 :    The ID of the cluster.
 
 `-f`
@@ -8788,7 +9782,7 @@ ibmcloud ks vni detach --vni VNI [-f] [--output OUTPUT] [-q] (--cluster-id ID | 
 `--vni VNI`
 :    The ID of the Virtual Network Interface to detach.
 
-`--worker WORKER`, `-w WORKER`
+`-w ID`, `--worker WORKER`
 :    The ID of the worker node.
 
 
@@ -8801,6 +9795,20 @@ Detach a Virtual Network Interface from a worker node or cluster
 ibmcloud ks vni detach --vni VNI --cluster-id CLUSTER_NAME_OR_ID
 ```
 {: pre}
+
+
+### `ibmcloud ks vni help`
+{: #vni-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks vni help
+```
+
 
 
 ### `ibmcloud ks vni ls`
@@ -8822,7 +9830,7 @@ ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--clu
 `--after AFTER`
 :    Show Virtual Network Interfaces after the given cursor.
 
-`--cluster-id ID`, `-c ID`
+`-c`, `--cluster-id ID`
 :    The ID of the cluster.
 
 `--first FIRST`
@@ -8834,7 +9842,7 @@ ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--clu
 `-q`
 :    Do not show the message of the day or update reminders.
 
-`--worker WORKER`, `-w WORKER`
+`-w ID`, `--worker WORKER`
 :    The ID of the worker node.
 
 
@@ -8854,6 +9862,20 @@ ibmcloud ks vni ls --cluster-id CLUSTER_NAME_OR_ID --worker WORKER_ID --after AF
 
 Get information about VPCs and manage VPC clusters.
 {: shortdesc}
+
+
+### `ibmcloud ks vpc help`
+{: #vpc-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks vpc help
+```
+
 
 
 ### `ibmcloud ks vpc ls`
@@ -8899,7 +9921,7 @@ ibmcloud ks vpc outbound-traffic-protection disable --cluster CLUSTER [-f] [-q]
 {: #vpc-outbound-traffic-protection-disable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -8936,7 +9958,7 @@ ibmcloud ks vpc outbound-traffic-protection enable --cluster CLUSTER [-f] [-q]
 {: #vpc-outbound-traffic-protection-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -8957,6 +9979,20 @@ ibmcloud ks vpc outbound-traffic-protection enable --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks vpc outbound-traffic-protection help`
+{: #vpc-outbound-traffic-protection-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks vpc outbound-traffic-protection help
+```
+
+
+
 ### `ibmcloud ks vpc secure-by-default enable`
 {: #vpc-secure-by-default-enable-cli}
 
@@ -8973,7 +10009,7 @@ ibmcloud ks vpc secure-by-default enable --cluster CLUSTER [--disable-outbound-t
 {: #vpc-secure-by-default-enable-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--disable-outbound-traffic-protection`
@@ -8995,6 +10031,20 @@ Enable Secure By Default VPC Networking for a VPC cluster using legacy Security 
 ibmcloud ks vpc secure-by-default enable --cluster CLUSTER
 ```
 {: pre}
+
+
+### `ibmcloud ks vpc secure-by-default help`
+{: #vpc-secure-by-default-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks vpc secure-by-default help
+```
+
 
 
 ## Webhook-create commands
@@ -9020,7 +10070,7 @@ ibmcloud ks webhook-create --cluster CLUSTER --type TYPE --url URL [--level LEVE
 {: #webhook-create-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--level LEVEL`
@@ -9070,7 +10120,7 @@ ibmcloud ks worker get --cluster CLUSTER --worker WORKER [--output OUTPUT] [-q]
 {: #worker-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -9079,7 +10129,7 @@ ibmcloud ks worker get --cluster CLUSTER --worker WORKER [--output OUTPUT] [-q]
 `-q`
 :    Do not show the message of the day or update reminders.
 
-`--worker WORKER`, `-w WORKER`
+`-w CLUSTER`, `--worker WORKER`
 :    Specify the worker ID. To list available workers, run `ibmcloud ks workers`.
 
 
@@ -9092,6 +10142,20 @@ View the details of a worker node
 ibmcloud ks worker get --cluster CLUSTER --worker WORKER_ID
 ```
 {: pre}
+
+
+### `ibmcloud ks worker help`
+{: #worker-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks worker help
+```
+
 
 
 ### `ibmcloud ks worker ls`
@@ -9110,11 +10174,14 @@ ibmcloud ks worker ls --cluster CLUSTER [--output OUTPUT] [-q] [--show-delete-re
 {: #worker-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
 :    Prints the command output in the provided format. Accepted values: `json`
+
+`-p CLUSTER`, `--worker-pool POOL`
+:    Show only worker nodes that belong to the worker pool you specify.
 
 `-q`
 :    Do not show the message of the day or update reminders.
@@ -9127,9 +10194,6 @@ ibmcloud ks worker ls --cluster CLUSTER [--output OUTPUT] [-q] [--show-delete-re
 
 `--show-pools`
 :    See the worker pool that each worker belongs to.
-
-`--worker-pool POOL`, `-p POOL`
-:    Show only worker nodes that belong to the worker pool you specify.
 
 
 #### Examples
@@ -9159,7 +10223,7 @@ ibmcloud ks worker reboot --cluster CLUSTER --worker WORKER [--worker WORKER ...
 {: #worker-reboot-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -9174,7 +10238,7 @@ ibmcloud ks worker reboot --cluster CLUSTER --worker WORKER [--worker WORKER ...
 `--skip-master-health`
 :    Skips checking of master health before initiating action.
 
-`--worker WORKER`, `-w WORKER`
+`-w CLUSTER`, `--worker WORKER`
 :    Specify one or more worker IDs.
 
 
@@ -9214,7 +10278,7 @@ ibmcloud ks worker reload --worker WORKER [--worker WORKER ...] [-f] [-q] [--ski
 `--skip-master-health`
 :    Skips checking of master health before initiating action.
 
-`--worker WORKER`, `-w WORKER`
+`-w`, `--worker WORKER`
 :    Specify one or more worker IDs.
 
 
@@ -9245,7 +10309,7 @@ ibmcloud ks worker replace --cluster CLUSTER --worker WORKER [-f] [-q] [--update
 {: #worker-replace-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -9257,7 +10321,7 @@ ibmcloud ks worker replace --cluster CLUSTER --worker WORKER [-f] [-q] [--update
 `--update`
 :    Update the worker node to the same major and minor version of the master and the latest patch. Also updates the operating system if the worker pool operating system has been updated.
 
-`--worker WORKER`, `-w WORKER`
+`-w CLUSTER`, `--worker WORKER`
 :    Specify the worker ID. To list available workers, run `ibmcloud ks workers`.
 
 
@@ -9288,7 +10352,7 @@ ibmcloud ks worker rm --cluster CLUSTER --worker WORKER [--worker WORKER ...] [-
 {: #worker-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -9297,7 +10361,7 @@ ibmcloud ks worker rm --cluster CLUSTER --worker WORKER [--worker WORKER ...] [-
 `-q`
 :    Do not show the message of the day or update reminders.
 
-`--worker WORKER`, `-w WORKER`
+`-w CLUSTER`, `--worker WORKER`
 :    Specify one or more worker IDs.
 
 
@@ -9328,7 +10392,7 @@ ibmcloud ks worker update --cluster CLUSTER --worker WORKER [--worker WORKER ...
 {: #worker-update-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
@@ -9337,7 +10401,7 @@ ibmcloud ks worker update --cluster CLUSTER --worker WORKER [--worker WORKER ...
 `-q`
 :    Do not show the message of the day or update reminders.
 
-`--worker WORKER`, `-w WORKER`
+`-w CLUSTER`, `--worker WORKER`
 :    Specify one or more worker IDs.
 
 
@@ -9375,7 +10439,7 @@ ibmcloud ks worker-pool create classic --cluster CLUSTER --flavor FLAVOR --name 
 {: #worker-pool-create-classic-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--disable-disk-encrypt`
@@ -9390,7 +10454,7 @@ ibmcloud ks worker-pool create classic --cluster CLUSTER --flavor FLAVOR --name 
 `--hardware HARDWARE`
 :    The level of hardware isolation for your worker node. Use `dedicated` to have available physical resources dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. For IBM Cloud Public accounts, the default value is shared. For IBM Cloud Dedicated accounts, dedicated is the only available option.
 
-`--label LABEL`, `-l LABEL`
+`-l CLUSTER`, `--label LABEL`
 :    Sets labels on all the workers in the worker pool.
 
 `--name NAME`
@@ -9424,6 +10488,20 @@ ibmcloud ks worker-pool create classic \
 {: pre}
 
 
+### `ibmcloud ks worker-pool create help`
+{: #worker-pool-create-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks worker-pool create help
+```
+
+
+
 ### `ibmcloud ks worker-pool create satellite`
 {: #worker-pool-create-satellite-cli}
 
@@ -9440,7 +10518,7 @@ ibmcloud ks worker-pool create satellite --cluster CLUSTER --host-label LABEL [-
 {: #worker-pool-create-satellite-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--entitlement ENTITLEMENT`
@@ -9449,7 +10527,7 @@ ibmcloud ks worker-pool create satellite --cluster CLUSTER --host-label LABEL [-
 `--host-label LABEL`, `--hl LABEL`
 :    Enter any labels as key-value pairs to identify the host to assign to your Satellite control plane or Red Hat OpenShift cluster. The first host that has this label and is unassigned is automatically assigned to the control plane or cluster. To find available host labels, run `ibmcloud sat host get --host <host_name_or_ID> --location <location_name_or_ID>`.
 
-`--label LABEL`, `-l LABEL`
+`-l LABEL`, `--label LABEL`
 :    Sets labels on all the workers in the worker pool.
 
 `--name NAME`
@@ -9503,7 +10581,7 @@ ibmcloud ks worker-pool create vpc-classic --cluster CLUSTER --flavor FLAVOR --n
 {: #worker-pool-create-vpc-classic-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--entitlement ENTITLEMENT`
@@ -9512,7 +10590,7 @@ ibmcloud ks worker-pool create vpc-classic --cluster CLUSTER --flavor FLAVOR --n
 `--flavor FLAVOR`
 :    The flavor of a worker node. To see available flavors, run `ibmcloud ks flavor ls --zone <zone name>` (for public IBM Cloud accounts) or `ibmcloud ks flavor ls` (for IBM Cloud Dedicated accounts).
 
-`--label LABEL`, `-l LABEL`
+`-l CLUSTER`, `--label LABEL`
 :    Sets labels on all the workers in the worker pool.
 
 `--name NAME`
@@ -9565,7 +10643,7 @@ ibmcloud ks worker-pool create vpc-gen2 --cluster CLUSTER --flavor FLAVOR --name
 {: #worker-pool-create-vpc-gen2-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--crk CRK`
@@ -9586,7 +10664,7 @@ ibmcloud ks worker-pool create vpc-gen2 --cluster CLUSTER --flavor FLAVOR --name
 `--kms-instance INSTANCE`
 :    The ID of the KMS instance to use for local disk encryption. To list available KMS instances, run `ibmcloud ks kms instance ls`.
 
-`--label LABEL`, `-l LABEL`
+`-l CLUSTER`, `--label LABEL`
 :    Sets labels on all the workers in the worker pool.
 
 `--name NAME`
@@ -9645,17 +10723,17 @@ ibmcloud ks worker-pool get --cluster CLUSTER --worker-pool POOL [--output OUTPU
 {: #worker-pool-get-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
 :    Prints the command output in the provided format. Accepted values: `json`
 
+`-p CLUSTER`, `--worker-pool POOL`
+:    Specify a worker pool.
+
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -9667,6 +10745,34 @@ List the details of a worker pool
 ibmcloud ks worker-pool get --cluster CLUSTER --worker-pool POOL
 ```
 {: pre}
+
+
+### `ibmcloud ks worker-pool help`
+{: #worker-pool-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks worker-pool help
+```
+
+
+
+### `ibmcloud ks worker-pool label help`
+{: #worker-pool-label-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks worker-pool label help
+```
+
 
 
 ### `ibmcloud ks worker-pool label rm`
@@ -9685,17 +10791,17 @@ ibmcloud ks worker-pool label rm --cluster CLUSTER --worker-pool POOL [-f] [-q]
 {: #worker-pool-label-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
 :    Force the command to run without user prompts.
 
+`-p CLUSTER`, `--worker-pool POOL`
+:    Specify a worker pool.
+
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -9725,20 +10831,20 @@ ibmcloud ks worker-pool label set --cluster CLUSTER --label LABEL [--label LABEL
 {: #worker-pool-label-set-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
 :    Force the command to run without user prompts.
 
-`--label LABEL`, `-l LABEL`
+`-l CLUSTER`, `--label LABEL`
 :    Set custom Kubernetes labels in the format `key=value` for all the worker nodes in the worker pool. For multiple labels, repeat this flag. To keep any existing custom labels on the worker pool, include those labels with this flag.
+
+`-p LABEL`, `--worker-pool POOL`
+:    Specify a worker pool.
 
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -9768,7 +10874,7 @@ ibmcloud ks worker-pool ls --cluster CLUSTER [--output OUTPUT] [-q]
 {: #worker-pool-ls-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -9789,6 +10895,20 @@ ibmcloud ks worker-pool ls --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks worker-pool operating-system help`
+{: #worker-pool-operating-system-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks worker-pool operating-system help
+```
+
+
+
 ### `ibmcloud ks worker-pool operating-system set`
 {: #worker-pool-operating-system-set-cli}
 
@@ -9805,17 +10925,17 @@ ibmcloud ks worker-pool operating-system set --cluster CLUSTER --operating-syste
 {: #worker-pool-operating-system-set-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--operating-system SYSTEM`
 :    Specify the name of the operating system.
 
+`-p CLUSTER`, `--worker-pool POOL`
+:    Specify a worker pool.
+
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -9848,17 +10968,17 @@ ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool POOL [-f] [-q]
 {: #worker-pool-rebalance-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
 :    Force the command to run without user prompts.
 
+`-p CLUSTER`, `--worker-pool POOL`
+:    Specify a worker pool.
+
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -9888,17 +11008,17 @@ ibmcloud ks worker-pool resize --cluster CLUSTER --size-per-zone SIZE --worker-p
 {: #worker-pool-resize-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
+
+`-p CLUSTER`, `--worker-pool POOL`
+:    Specify a worker pool.
 
 `-q`
 :    Do not show the message of the day or update reminders.
 
 `--size-per-zone SIZE`
 :    Specify the desired number of workers per zone in this worker pool.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -9928,17 +11048,17 @@ ibmcloud ks worker-pool rm --cluster CLUSTER --worker-pool POOL [-f] [-q]
 {: #worker-pool-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
 :    Force the command to run without user prompts.
 
+`-p CLUSTER`, `--worker-pool POOL`
+:    Specify a worker pool.
+
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -9950,6 +11070,20 @@ Remove a worker pool from a cluster
 ibmcloud ks worker-pool rm --cluster CLUSTER --worker-pool POOL
 ```
 {: pre}
+
+
+### `ibmcloud ks worker-pool taint help`
+{: #worker-pool-taint-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks worker-pool taint help
+```
+
 
 
 ### `ibmcloud ks worker-pool taint rm`
@@ -9968,17 +11102,17 @@ ibmcloud ks worker-pool taint rm --cluster CLUSTER --worker-pool POOL [-f] [-q]
 {: #worker-pool-taint-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
 :    Force the command to run without user prompts.
 
+`-p CLUSTER`, `--worker-pool POOL`
+:    Specify a worker pool.
+
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -10008,20 +11142,20 @@ ibmcloud ks worker-pool taint set --cluster CLUSTER --taint TAINT [--taint TAINT
 {: #worker-pool-taint-set-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
 :    Force the command to run without user prompts.
+
+`-p CLUSTER`, `--worker-pool POOL`
+:    Specify a worker pool.
 
 `-q`
 :    Do not show the message of the day or update reminders.
 
 `--taint TAINT`
 :    Sets taints on all the workers in the worker pool. Specify the Kubernetes taint in the format `key=value:effect`. The `key=value` is a pair such as `env=prod` that you use to manage the worker node taint and matching pod tolerations. The `effect` is a Kubernetes taint effect such as `NoSchedule` that describes how the taint works.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -10051,17 +11185,17 @@ ibmcloud ks worker-pool zones --cluster CLUSTER --worker-pool POOL [--output OUT
 {: #worker-pool-zones-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
 :    Prints the command output in the provided format. Accepted values: `json`
 
+`-p CLUSTER`, `--worker-pool POOL`
+:    Specify a worker pool.
+
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    Specify a worker pool.
 
 
 #### Examples
@@ -10098,11 +11232,14 @@ ibmcloud ks zone add classic --cluster CLUSTER --worker-pool POOL [--worker-pool
 {: #zone-add-classic-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
 :    Prints the command output in the provided format. Accepted values: `json`
+
+`-p CLUSTER`, `--worker-pool POOL`
+:    The name of the worker pool to modify. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.
 
 `--private-only`
 :    Use this flag to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag without specifying the `--public-vlan` flag.
@@ -10115,9 +11252,6 @@ ibmcloud ks zone add classic --cluster CLUSTER --worker-pool POOL [--worker-pool
 
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    The name of the worker pool to modify. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.
 
 `--zone ZONE`
 :    Specify the zone for the worker pool in a multizone cluster. To list available zones, run `ibmcloud ks zone ls`.
@@ -10132,6 +11266,20 @@ Add a zone to one or more worker pools in a classic cluster
 ibmcloud ks zone add classic --cluster CLUSTER --worker-pool POOL --zone ZONE --private-only
 ```
 {: pre}
+
+
+### `ibmcloud ks zone add help`
+{: #zone-add-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks zone add help
+```
+
 
 
 ### `ibmcloud ks zone add satellite`
@@ -10150,17 +11298,17 @@ ibmcloud ks zone add satellite --cluster CLUSTER --worker-pool POOL [--worker-po
 {: #zone-add-satellite-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
 :    Prints the command output in the provided format. Accepted values: `json`
 
+`-p CLUSTER`, `--worker-pool POOL`
+:    The name of the worker pool to modify. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.
+
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    The name of the worker pool to modify. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.
 
 `--zone ZONE`
 :    Specify the zone for the worker pool in a multizone cluster. To list available zones, run `ibmcloud ks zone ls`.
@@ -10193,7 +11341,7 @@ ibmcloud ks zone add vpc-classic --cluster CLUSTER --subnet-id ID --worker-pool 
 {: #zone-add-vpc-classic-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -10239,7 +11387,7 @@ ibmcloud ks zone add vpc-gen2 --cluster CLUSTER --subnet-id ID --worker-pool POO
 {: #zone-add-vpc-gen2-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `--output OUTPUT`
@@ -10267,6 +11415,20 @@ Add a zone to one or more worker pools in a VPC Gen 2 cluster
 ibmcloud ks zone add vpc-gen2 --cluster CLUSTER --subnet-id ID --worker-pool POOL --zone ZONE
 ```
 {: pre}
+
+
+### `ibmcloud ks zone help`
+{: #zone-help-cli}
+
+
+
+Show help
+{: shortdesc}
+
+```sh
+ibmcloud ks zone help
+```
+
 
 
 ### `ibmcloud ks zone ls`
@@ -10331,11 +11493,14 @@ ibmcloud ks zone network-set --cluster CLUSTER --private-vlan VLAN --worker-pool
 {: #zone-network-set-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
 :    Force the command to run without user prompts.
+
+`-p CLUSTER`, `--worker-pool POOL`
+:    The name of the worker pool to modify. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.
 
 `--private-only`
 :    Unset the public VLAN so that the workers in this zone are connected to a private VLAN only.
@@ -10348,9 +11513,6 @@ ibmcloud ks zone network-set --cluster CLUSTER --private-vlan VLAN --worker-pool
 
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    The name of the worker pool to modify. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.
 
 `--zone ZONE`
 :    Specify the zone for the worker pool in a multizone cluster. To list available zones, run `ibmcloud ks zone ls`.
@@ -10388,17 +11550,17 @@ ibmcloud ks zone rm --cluster CLUSTER --worker-pool POOL [--worker-pool POOL ...
 {: #zone-rm-options}
 
 
-`--cluster CLUSTER`, `-c CLUSTER`
+`-c`, `--cluster CLUSTER`
 :    Specify the cluster name or ID.
 
 `-f`
 :    Force the command to run without user prompts.
 
+`-p CLUSTER`, `--worker-pool POOL`
+:    The name of the worker pool to modify. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.
+
 `-q`
 :    Do not show the message of the day or update reminders.
-
-`--worker-pool POOL`, `-p POOL`
-:    The name of the worker pool to modify. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.
 
 `--zone ZONE`
 :    Specify the zone for the worker pool in a multizone cluster. To list available zones, run `ibmcloud ks zone ls`.
