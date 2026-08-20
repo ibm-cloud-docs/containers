@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-08-19"
+lastupdated: "2026-08-20"
 
 keywords: kubernetes, error messages, error codes, troubleshooting reference
 
@@ -25,7 +25,7 @@ This reference lists all documented error messages and error codes across troubl
 | Error message | Troubleshooting topic |
 | --- | --- |
 | `Cannot complete cluster master operations because the cluster has a broken webhook application.` | [Why do cluster master operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update) |
-| `Cannot complete cluster master upgrade because the Upgradeable status condition is set to False.` | [Why do I see a `Cannot complete cluster master upgrade` message?](/docs/containers?topic=containers-ts-cluster-master-upgrade) |
+
 | `The master is approaching its allotted memory resource limit (93%).` | [Why does my cluster master status say it is approaching its resource limit?](/docs/containers?topic=containers-master_resource_limit) |
 | `etcd database size is approaching the maximum` | [Why do I see an `etcd database size is approaching the maximum` error?](/docs/containers?topic=containers-ts-etcd-capacity) |
 | `The 'configuration' field is not a valid Kubernetes PodSecurityConfiguration setting.` | [Why do I get an error that my PodSecurityConfiguration is not valid?](/docs/containers?topic=containers-ts-pod-security-reset) |
@@ -38,7 +38,7 @@ This reference lists all documented error messages and error codes across troubl
 | `Encrypted storage cannot be configured. Review the customer root key configuration for the worker pool.` | [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage) |
 | `Pending security group creation` | [When I create a VPC cluster, my worker nodes are stuck in `Pending security group creation`](/docs/containers?topic=containers-ts-sbd-cluster-create-quota) |
 | `Infrastructure instance status is 'failed': Can't start instance because provisioning failed.` | [Why do I see DNS failures after adding a custom DNS resolver?](/docs/containers?topic=containers-ts-sbd-custom-dns) |
-| `Version update canceled. CAE009: Cannot complete cluster master operations because the cluster does not pass Pod Security upgrade prerequisites.` | [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security) |
+| `Version update canceled. CAE009: Cannot complete cluster master operations because the cluster does not pass Pod Security upgrade prerequisites.` | [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-pod-security-125) |
 | `Cannot complete cluster master operations because there is a migration in progress` | [Resolving cluster master upgrade issues: Migration in progress error](/docs/containers?topic=containers-ts-resource-migration) |
 
 {: caption="Cluster and master error messages" caption-side="bottom"}

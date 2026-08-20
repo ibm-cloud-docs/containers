@@ -4373,49 +4373,6 @@ ibmcloud ks experimental trusted-profile set --cluster CLUSTER --trusted-profile
 {: pre}
 
 
-### `ibmcloud ks experimental vni attach virtual`
-{: #experimental-vni-attach-virtual-cli}
-
-
-
-[Expires on 2026-05-20] Attach a Virtual Network Interface to a virtual worker node.
-{: shortdesc}
-
-```sh
-ibmcloud ks experimental vni attach virtual --vni VNI --worker WORKER [--auto-delete] [--output OUTPUT] [-q]
-```
-
-#### Command options
-{: #experimental-vni-attach-virtual-options}
-
-
-`--auto-delete`
-:    Automatically delete the VNI when it is removed from the cluster.
-
-`--output OUTPUT`
-:    Prints the command output in the provided format. Accepted values: `json`
-
-`-q`
-:    Do not show the message of the day or update reminders.
-
-`--vni VNI`
-:    The ID of the Virtual Network Interface to attach. You must specify VNIs without any current target resource. To list all the VNIs, run `ibmcloud is vnis`. To check if a specific VNI is already attached to a resource, check for the "Target" field in 'ibmcloud is vni <VNI_ID>.
-
-`--worker WORKER`, `-w WORKER`
-:    The ID of the worker node.
-
-
-#### Examples
-{: #experimental-vni-attach-virtual-examples}
-
-[Expires on 2026-05-20] Attach a Virtual Network Interface to a virtual worker node
-
-```sh
-ibmcloud ks experimental vni attach virtual --vni VNI --worker WORKER_ID
-```
-{: pre}
-
-
 ## Flavor commands
 {: #flavor-cli}
 
