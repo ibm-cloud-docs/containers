@@ -97,6 +97,16 @@ ibmcloud ks api [-q]
 :    Do not show the message of the day or update reminders.
 
 
+#### Examples
+{: #api-examples}
+
+View the current API endpoint
+
+```sh
+ibmcloud ks api
+```
+{: pre}
+
 
 ## Api-key commands
 {: #api-key-cli}
@@ -117,6 +127,16 @@ Show help
 ibmcloud ks api-key help
 ```
 
+
+#### Examples
+{: #api-key-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks api-key help
+```
+{: pre}
 
 
 ### `ibmcloud ks api-key info`
@@ -403,6 +423,16 @@ Show help
 ibmcloud ks cluster addon disable help
 ```
 
+
+#### Examples
+{: #cluster-addon-disable-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster addon disable help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster addon disable hpcs-router`
@@ -969,6 +999,16 @@ ibmcloud ks cluster addon enable help
 ```
 
 
+#### Examples
+{: #cluster-addon-enable-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster addon enable help
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster addon enable hpcs-router`
 {: #cluster-addon-enable-hpcs-router-cli}
@@ -1312,6 +1352,16 @@ ibmcloud ks cluster addon help
 ```
 
 
+#### Examples
+{: #cluster-addon-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster addon help
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster addon ls`
 {: #cluster-addon-ls-cli}
@@ -1620,6 +1670,16 @@ Show help
 ibmcloud ks cluster addon update help
 ```
 
+
+#### Examples
+{: #cluster-addon-update-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster addon update help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster addon update hpcs-router`
@@ -2136,6 +2196,16 @@ ibmcloud ks cluster addon versions [--addon ADDON] [--offering OFFERING] [--outp
 :    Show the default version columns in the output.
 
 
+#### Examples
+{: #cluster-addon-versions-examples}
+
+List supported versions for managed add-ons
+
+```sh
+ibmcloud ks cluster addon versions
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster ca create`
 {: #cluster-ca-create-cli}
@@ -2223,6 +2293,16 @@ Show help
 ibmcloud ks cluster ca help
 ```
 
+
+#### Examples
+{: #cluster-ca-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster ca help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster ca rotate`
@@ -2451,6 +2531,16 @@ Show help
 ibmcloud ks cluster create help
 ```
 
+
+#### Examples
+{: #cluster-create-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster create help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster create satellite`
@@ -2768,6 +2858,16 @@ ibmcloud ks cluster help
 ```
 
 
+#### Examples
+{: #cluster-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster help
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster image-security disable`
 {: #cluster-image-security-disable-cli}
@@ -2853,6 +2953,16 @@ ibmcloud ks cluster image-security help
 ```
 
 
+#### Examples
+{: #cluster-image-security-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster image-security help
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster ls`
 {: #cluster-ls-cli}
@@ -2882,6 +2992,16 @@ ibmcloud ks cluster ls [-l LOCATION ...] [--output OUTPUT] [--provider PROVIDER]
 `-q`
 :    Do not show the message of the day or update reminders.
 
+
+#### Examples
+{: #cluster-ls-examples}
+
+List all clusters in your IBM Cloud account
+
+```sh
+ibmcloud ks cluster ls
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster master audit-webhook get`
@@ -2933,6 +3053,16 @@ Show help
 ibmcloud ks cluster master audit-webhook help
 ```
 
+
+#### Examples
+{: #cluster-master-audit-webhook-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master audit-webhook help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster master audit-webhook set`
@@ -3068,6 +3198,16 @@ ibmcloud ks cluster master console-oauth-access help
 ```
 
 
+#### Examples
+{: #cluster-master-console-oauth-access-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master console-oauth-access help
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster master console-oauth-access set`
 {: #cluster-master-console-oauth-access-set-cli}
@@ -3122,6 +3262,16 @@ ibmcloud ks cluster master help
 ```
 
 
+#### Examples
+{: #cluster-master-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master help
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster master pod-security get`
 {: #cluster-master-pod-security-get-cli}
@@ -3172,6 +3322,16 @@ Show help
 ibmcloud ks cluster master pod-security help
 ```
 
+
+#### Examples
+{: #cluster-master-pod-security-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master pod-security help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster master pod-security policy disable`
@@ -3291,6 +3451,16 @@ Show help
 ibmcloud ks cluster master pod-security policy help
 ```
 
+
+#### Examples
+{: #cluster-master-pod-security-policy-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master pod-security policy help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster master pod-security set`
@@ -3534,6 +3704,16 @@ ibmcloud ks cluster master private-service-endpoint allowlist help
 ```
 
 
+#### Examples
+{: #cluster-master-private-service-endpoint-allowlist-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master private-service-endpoint allowlist help
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster master private-service-endpoint allowlist rm`
 {: #cluster-master-private-service-endpoint-allowlist-rm-cli}
@@ -3631,6 +3811,16 @@ ibmcloud ks cluster master private-service-endpoint help
 ```
 
 
+#### Examples
+{: #cluster-master-private-service-endpoint-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master private-service-endpoint help
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster master public-service-endpoint disable`
 {: #cluster-master-public-service-endpoint-disable-cli}
@@ -3724,6 +3914,16 @@ Show help
 ibmcloud ks cluster master public-service-endpoint help
 ```
 
+
+#### Examples
+{: #cluster-master-public-service-endpoint-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master public-service-endpoint help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster master refresh`
@@ -3920,6 +4120,16 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist help
 ```
 
 
+#### Examples
+{: #cluster-master-satellite-service-endpoint-allowlist-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master satellite-service-endpoint allowlist help
+```
+{: pre}
+
 
 ### `ibmcloud ks cluster master satellite-service-endpoint allowlist rm`
 {: #cluster-master-satellite-service-endpoint-allowlist-rm-cli}
@@ -3973,6 +4183,16 @@ Show help
 ibmcloud ks cluster master satellite-service-endpoint help
 ```
 
+
+#### Examples
+{: #cluster-master-satellite-service-endpoint-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster master satellite-service-endpoint help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster master update`
@@ -4064,6 +4284,16 @@ Show help
 ibmcloud ks cluster pull-secret help
 ```
 
+
+#### Examples
+{: #cluster-pull-secret-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster pull-secret help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster rm`
@@ -4170,6 +4400,16 @@ Show help
 ibmcloud ks cluster service help
 ```
 
+
+#### Examples
+{: #cluster-service-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster service help
+```
+{: pre}
 
 
 ### `ibmcloud ks cluster service ls`
@@ -4385,6 +4625,16 @@ ibmcloud ks cluster subnet help
 ```
 
 
+#### Examples
+{: #cluster-subnet-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks cluster subnet help
+```
+{: pre}
+
 
 ## Credential commands
 {: #credential-cli}
@@ -4445,6 +4695,16 @@ ibmcloud ks credential help
 ```
 
 
+#### Examples
+{: #credential-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks credential help
+```
+{: pre}
+
 
 ### `ibmcloud ks credential set classic`
 {: #credential-set-classic-cli}
@@ -4501,6 +4761,16 @@ Show help
 ibmcloud ks credential set help
 ```
 
+
+#### Examples
+{: #credential-set-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks credential set help
+```
+{: pre}
 
 
 ### `ibmcloud ks credential unset`
@@ -4559,6 +4829,16 @@ ibmcloud ks experimental help
 ```
 
 
+#### Examples
+{: #experimental-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks experimental help
+```
+{: pre}
+
 
 ### `ibmcloud ks experimental trusted-profile default get`
 {: #experimental-trusted-profile-default-get-cli}
@@ -4612,6 +4892,16 @@ Show help
 ibmcloud ks experimental trusted-profile default help
 ```
 
+
+#### Examples
+{: #experimental-trusted-profile-default-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks experimental trusted-profile default help
+```
+{: pre}
 
 
 ### `ibmcloud ks experimental trusted-profile default set`
@@ -4709,6 +4999,16 @@ Show help
 ibmcloud ks experimental trusted-profile help
 ```
 
+
+#### Examples
+{: #experimental-trusted-profile-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks experimental trusted-profile help
+```
+{: pre}
 
 
 ### `ibmcloud ks experimental trusted-profile set`
@@ -4814,6 +5114,16 @@ ibmcloud ks flavor help
 ```
 
 
+#### Examples
+{: #flavor-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks flavor help
+```
+{: pre}
+
 
 ### `ibmcloud ks flavor ls`
 {: #flavor-ls-cli}
@@ -4894,6 +5204,16 @@ ibmcloud ks infra-permissions get [--output OUTPUT] [-q] [--region REGION]
 :    Specify the region to target. If a region is not already targeted, this argument must be specified. To check if a region is targeted, run `ibmcloud target`.
 
 
+#### Examples
+{: #infra-permissions-get-examples}
+
+Check whether the credentials that allow access to the IBM Cloud classic infrastructure portfolio for the targeted resource group are missing suggested or required infrastructure permissions
+
+```sh
+ibmcloud ks infra-permissions get
+```
+{: pre}
+
 
 ### `ibmcloud ks infra-permissions help`
 {: #infra-permissions-help-cli}
@@ -4907,6 +5227,16 @@ Show help
 ibmcloud ks infra-permissions help
 ```
 
+
+#### Examples
+{: #infra-permissions-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks infra-permissions help
+```
+{: pre}
 
 
 ## Ingress commands
@@ -4968,6 +5298,16 @@ Show help
 ibmcloud ks ingress alb autoscale help
 ```
 
+
+#### Examples
+{: #ingress-alb-autoscale-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress alb autoscale help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress alb autoscale set`
@@ -5182,6 +5522,16 @@ ibmcloud ks ingress alb autoupdate help
 ```
 
 
+#### Examples
+{: #ingress-alb-autoupdate-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress alb autoupdate help
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress alb create classic`
 {: #ingress-alb-create-classic-cli}
@@ -5244,6 +5594,16 @@ Show help
 ibmcloud ks ingress alb create help
 ```
 
+
+#### Examples
+{: #ingress-alb-create-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress alb create help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress alb create vpc-gen2`
@@ -5381,6 +5741,16 @@ Show help
 ibmcloud ks ingress alb enable help
 ```
 
+
+#### Examples
+{: #ingress-alb-enable-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress alb enable help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress alb enable vpc-gen2`
@@ -5581,6 +5951,16 @@ ibmcloud ks ingress alb health-checker help
 ```
 
 
+#### Examples
+{: #ingress-alb-health-checker-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress alb health-checker help
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress alb help`
 {: #ingress-alb-help-cli}
@@ -5594,6 +5974,16 @@ Show help
 ibmcloud ks ingress alb help
 ```
 
+
+#### Examples
+{: #ingress-alb-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress alb help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress alb ls`
@@ -5702,6 +6092,16 @@ ibmcloud ks ingress alb versions [--output OUTPUT] [-q] [--region REGION]
 :    Specify the region to target.
 
 
+#### Examples
+{: #ingress-alb-versions-examples}
+
+List Ingress ALB image versions that are available
+
+```sh
+ibmcloud ks ingress alb versions
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress domain create`
 {: #ingress-domain-create-cli}
@@ -5776,6 +6176,16 @@ Show help
 ibmcloud ks ingress domain default help
 ```
 
+
+#### Examples
+{: #ingress-domain-default-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress domain default help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress domain default replace`
@@ -5868,6 +6278,16 @@ ibmcloud ks ingress domain help
 ```
 
 
+#### Examples
+{: #ingress-domain-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress domain help
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress domain ls`
 {: #ingress-domain-ls-cli}
@@ -5958,6 +6378,16 @@ Show help
 ibmcloud ks ingress domain secret help
 ```
 
+
+#### Examples
+{: #ingress-domain-secret-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress domain secret help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress domain secret regenerate`
@@ -6099,6 +6529,16 @@ ibmcloud ks ingress help
 ```
 
 
+#### Examples
+{: #ingress-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress help
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress instance default help`
 {: #ingress-instance-default-help-cli}
@@ -6112,6 +6552,16 @@ Show help
 ibmcloud ks ingress instance default help
 ```
 
+
+#### Examples
+{: #ingress-instance-default-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress instance default help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress instance default set`
@@ -6243,6 +6693,16 @@ Show help
 ibmcloud ks ingress instance help
 ```
 
+
+#### Examples
+{: #ingress-instance-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress instance help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress instance ls`
@@ -6378,6 +6838,16 @@ ibmcloud ks ingress load-balancer backend help
 ```
 
 
+#### Examples
+{: #ingress-load-balancer-backend-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress load-balancer backend help
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress load-balancer backend set`
 {: #ingress-load-balancer-backend-set-cli}
@@ -6469,6 +6939,16 @@ ibmcloud ks ingress load-balancer help
 ```
 
 
+#### Examples
+{: #ingress-load-balancer-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress load-balancer help
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress load-balancer proxy-protocol disable`
 {: #ingress-load-balancer-proxy-protocol-disable-cli}
@@ -6559,6 +7039,16 @@ Show help
 ibmcloud ks ingress load-balancer proxy-protocol help
 ```
 
+
+#### Examples
+{: #ingress-load-balancer-proxy-protocol-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress load-balancer proxy-protocol help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress secret create`
@@ -6668,6 +7158,16 @@ Show help
 ibmcloud ks ingress secret field help
 ```
 
+
+#### Examples
+{: #ingress-secret-field-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress secret field help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress secret field ls`
@@ -6815,6 +7315,16 @@ ibmcloud ks ingress secret help
 ```
 
 
+#### Examples
+{: #ingress-secret-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress secret help
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress secret ls`
 {: #ingress-secret-ls-cli}
@@ -6955,6 +7465,16 @@ ibmcloud ks ingress security help
 ```
 
 
+#### Examples
+{: #ingress-security-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress security help
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress security port80 disable`
 {: #ingress-security-port80-disable-cli}
@@ -7079,6 +7599,16 @@ Show help
 ibmcloud ks ingress security port80 help
 ```
 
+
+#### Examples
+{: #ingress-security-port80-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress security port80 help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress status-report disable`
@@ -7205,6 +7735,16 @@ ibmcloud ks ingress status-report help
 ```
 
 
+#### Examples
+{: #ingress-status-report-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress status-report help
+```
+{: pre}
+
 
 ### `ibmcloud ks ingress status-report ignored-errors add`
 {: #ingress-status-report-ignored-errors-add-cli}
@@ -7258,6 +7798,16 @@ Show help
 ibmcloud ks ingress status-report ignored-errors help
 ```
 
+
+#### Examples
+{: #ingress-status-report-ignored-errors-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks ingress status-report ignored-errors help
+```
+{: pre}
 
 
 ### `ibmcloud ks ingress status-report ignored-errors ls`
@@ -7357,6 +7907,16 @@ ibmcloud ks kms crk help
 ```
 
 
+#### Examples
+{: #kms-crk-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks kms crk help
+```
+{: pre}
+
 
 ### `ibmcloud ks kms crk ls`
 {: #kms-crk-ls-cli}
@@ -7454,6 +8014,16 @@ ibmcloud ks kms help
 ```
 
 
+#### Examples
+{: #kms-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks kms help
+```
+{: pre}
+
 
 ### `ibmcloud ks kms instance help`
 {: #kms-instance-help-cli}
@@ -7467,6 +8037,16 @@ Show help
 ibmcloud ks kms instance help
 ```
 
+
+#### Examples
+{: #kms-instance-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks kms instance help
+```
+{: pre}
 
 
 ### `ibmcloud ks kms instance ls`
@@ -7491,6 +8071,16 @@ ibmcloud ks kms instance ls [--output OUTPUT] [-q]
 `-q`
 :    Do not show the message of the day or update reminders.
 
+
+#### Examples
+{: #kms-instance-ls-examples}
+
+List available Key Management Service instances
+
+```sh
+ibmcloud ks kms instance ls
+```
+{: pre}
 
 
 ## Locations commands
@@ -7528,6 +8118,16 @@ ibmcloud ks locations
 `--show-flavors`
 :    Show the available worker node flavors in the zone for VPC.
 
+
+#### Examples
+{: #locations-examples}
+
+List supported IBM Cloud Kubernetes Service locations
+
+```sh
+ibmcloud ks locations
+```
+{: pre}
 
 
 ## Logging commands
@@ -7654,6 +8254,16 @@ Show help
 ibmcloud ks logging autoupdate help
 ```
 
+
+#### Examples
+{: #logging-autoupdate-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks logging autoupdate help
+```
+{: pre}
 
 
 ### `ibmcloud ks logging config create`
@@ -7794,6 +8404,16 @@ Show help
 ibmcloud ks logging config help
 ```
 
+
+#### Examples
+{: #logging-config-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks logging config help
+```
+{: pre}
 
 
 ### `ibmcloud ks logging config rm`
@@ -8052,6 +8672,16 @@ ibmcloud ks logging filter help
 ```
 
 
+#### Examples
+{: #logging-filter-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks logging filter help
+```
+{: pre}
+
 
 ### `ibmcloud ks logging filter rm`
 {: #logging-filter-rm-cli}
@@ -8173,6 +8803,16 @@ ibmcloud ks logging help
 ```
 
 
+#### Examples
+{: #logging-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks logging help
+```
+{: pre}
+
 
 ### `ibmcloud ks logging refresh`
 {: #logging-refresh-cli}
@@ -8237,6 +8877,16 @@ ibmcloud ks messages [-q]
 `-q`
 :    Do not show the message of the day or update reminders.
 
+
+#### Examples
+{: #messages-examples}
+
+View the current user messages
+
+```sh
+ibmcloud ks messages
+```
+{: pre}
 
 
 ## Nlb-dns commands
@@ -8345,6 +8995,16 @@ ibmcloud ks nlb-dns create help
 ```
 
 
+#### Examples
+{: #nlb-dns-create-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks nlb-dns create help
+```
+{: pre}
+
 
 ### `ibmcloud ks nlb-dns create vpc-gen2`
 {: #nlb-dns-create-vpc-gen2-cli}
@@ -8444,6 +9104,16 @@ Show help
 ibmcloud ks nlb-dns help
 ```
 
+
+#### Examples
+{: #nlb-dns-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks nlb-dns help
+```
+{: pre}
 
 
 ### `ibmcloud ks nlb-dns ls`
@@ -8677,6 +9347,16 @@ ibmcloud ks nlb-dns monitor help
 ```
 
 
+#### Examples
+{: #nlb-dns-monitor-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks nlb-dns monitor help
+```
+{: pre}
+
 
 ### `ibmcloud ks nlb-dns monitor ls`
 {: #nlb-dns-monitor-ls-cli}
@@ -8814,6 +9494,16 @@ ibmcloud ks nlb-dns rm help
 ```
 
 
+#### Examples
+{: #nlb-dns-rm-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks nlb-dns rm help
+```
+{: pre}
+
 
 ### `ibmcloud ks nlb-dns rm vpc-gen2`
 {: #nlb-dns-rm-vpc-gen2-cli}
@@ -8870,6 +9560,16 @@ Show help
 ibmcloud ks nlb-dns secret help
 ```
 
+
+#### Examples
+{: #nlb-dns-secret-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks nlb-dns secret help
+```
+{: pre}
 
 
 ### `ibmcloud ks nlb-dns secret regenerate`
@@ -8975,6 +9675,16 @@ ibmcloud ks quota help
 ```
 
 
+#### Examples
+{: #quota-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks quota help
+```
+{: pre}
+
 
 ### `ibmcloud ks quota ls`
 {: #quota-ls-cli}
@@ -9002,6 +9712,16 @@ ibmcloud ks quota ls [--output OUTPUT] [--provider PROVIDER] [-q]
 :    Do not show the message of the day or update reminders.
 
 
+#### Examples
+{: #quota-ls-examples}
+
+List all quota and limits for cluster-related resources in your IBM Cloud account
+
+```sh
+ibmcloud ks quota ls
+```
+{: pre}
+
 
 ## Script commands
 {: #script-cli}
@@ -9022,6 +9742,16 @@ Show help
 ibmcloud ks script help
 ```
 
+
+#### Examples
+{: #script-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks script help
+```
+{: pre}
 
 
 ### `ibmcloud ks script update`
@@ -9047,6 +9777,16 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 :    Do not show the message of the day or update reminders.
 
 
+#### Examples
+{: #script-update-examples}
+
+Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands
+
+```sh
+ibmcloud ks script update FILE
+```
+{: pre}
+
 
 ## Security-group commands
 {: #security-group-cli}
@@ -9067,6 +9807,16 @@ Show help
 ibmcloud ks security-group help
 ```
 
+
+#### Examples
+{: #security-group-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks security-group help
+```
+{: pre}
 
 
 ### `ibmcloud ks security-group ls`
@@ -9304,6 +10054,16 @@ ibmcloud ks storage attachment help
 ```
 
 
+#### Examples
+{: #storage-attachment-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks storage attachment help
+```
+{: pre}
+
 
 ### `ibmcloud ks storage attachment ls`
 {: #storage-attachment-ls-cli}
@@ -9404,6 +10164,16 @@ ibmcloud ks storage help
 ```
 
 
+#### Examples
+{: #storage-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks storage help
+```
+{: pre}
+
 
 ### `ibmcloud ks storage volume get`
 {: #storage-volume-get-cli}
@@ -9458,6 +10228,16 @@ ibmcloud ks storage volume help
 ```
 
 
+#### Examples
+{: #storage-volume-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks storage volume help
+```
+{: pre}
+
 
 ### `ibmcloud ks storage volume ls`
 {: #storage-volume-ls-cli}
@@ -9493,6 +10273,16 @@ ibmcloud ks storage volume ls [--cluster CLUSTER] [--output OUTPUT] [--provider 
 `--zone ZONE`
 :    A zone to filter for. To list available zones, run `ibmcloud ks locations`.
 
+
+#### Examples
+{: #storage-volume-ls-examples}
+
+List the details of volumes
+
+```sh
+ibmcloud ks storage volume ls
+```
+{: pre}
 
 
 ## Subnets commands
@@ -9581,6 +10371,16 @@ ibmcloud ks versions [--output OUTPUT] [-q] [--show-version VERSION]
 :    Show only the versions for the specified container platform. Accepted values: `OpenShift`, `Kubernetes`
 
 
+#### Examples
+{: #versions-examples}
+
+List all the container platform versions that are available for IBM Cloud Kubernetes Service clusters
+
+```sh
+ibmcloud ks versions
+```
+{: pre}
+
 
 ## Vlan commands
 {: #vlan-cli}
@@ -9601,6 +10401,16 @@ Show help
 ibmcloud ks vlan help
 ```
 
+
+#### Examples
+{: #vlan-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks vlan help
+```
+{: pre}
 
 
 ### `ibmcloud ks vlan ls`
@@ -9666,6 +10476,16 @@ ibmcloud ks vlan spanning get [--output OUTPUT] [-q] [--region REGION]
 :    Specify the region to target. If a region is not already targeted, this argument must be specified. To check if a region is targeted, run `ibmcloud target`.
 
 
+#### Examples
+{: #vlan-spanning-get-examples}
+
+View the VLAN spanning status for your IBM Cloud classic infrastructure account
+
+```sh
+ibmcloud ks vlan spanning get
+```
+{: pre}
+
 
 ### `ibmcloud ks vlan spanning help`
 {: #vlan-spanning-help-cli}
@@ -9679,6 +10499,16 @@ Show help
 ibmcloud ks vlan spanning help
 ```
 
+
+#### Examples
+{: #vlan-spanning-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks vlan spanning help
+```
+{: pre}
 
 
 ## Vni commands
@@ -9750,6 +10580,16 @@ ibmcloud ks vni attach help
 ```
 
 
+#### Examples
+{: #vni-attach-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks vni attach help
+```
+{: pre}
+
 
 ### `ibmcloud ks vni detach`
 {: #vni-detach-cli}
@@ -9809,6 +10649,16 @@ Show help
 ibmcloud ks vni help
 ```
 
+
+#### Examples
+{: #vni-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks vni help
+```
+{: pre}
 
 
 ### `ibmcloud ks vni ls`
@@ -9877,6 +10727,16 @@ ibmcloud ks vpc help
 ```
 
 
+#### Examples
+{: #vpc-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks vpc help
+```
+{: pre}
+
 
 ### `ibmcloud ks vpc ls`
 {: #vpc-ls-cli}
@@ -9903,6 +10763,16 @@ ibmcloud ks vpc ls [--output OUTPUT] [--provider PROVIDER] [-q]
 `-q`
 :    Do not show the message of the day or update reminders.
 
+
+#### Examples
+{: #vpc-ls-examples}
+
+List all VPCs in the targeted resource group
+
+```sh
+ibmcloud ks vpc ls
+```
+{: pre}
 
 
 ### `ibmcloud ks vpc outbound-traffic-protection disable`
@@ -9992,6 +10862,16 @@ ibmcloud ks vpc outbound-traffic-protection help
 ```
 
 
+#### Examples
+{: #vpc-outbound-traffic-protection-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks vpc outbound-traffic-protection help
+```
+{: pre}
+
 
 ### `ibmcloud ks vpc secure-by-default enable`
 {: #vpc-secure-by-default-enable-cli}
@@ -10045,6 +10925,16 @@ Show help
 ibmcloud ks vpc secure-by-default help
 ```
 
+
+#### Examples
+{: #vpc-secure-by-default-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks vpc secure-by-default help
+```
+{: pre}
 
 
 ## Webhook-create commands
@@ -10156,6 +11046,16 @@ Show help
 ibmcloud ks worker help
 ```
 
+
+#### Examples
+{: #worker-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks worker help
+```
+{: pre}
 
 
 ### `ibmcloud ks worker ls`
@@ -10501,6 +11401,16 @@ ibmcloud ks worker-pool create help
 ```
 
 
+#### Examples
+{: #worker-pool-create-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks worker-pool create help
+```
+{: pre}
+
 
 ### `ibmcloud ks worker-pool create satellite`
 {: #worker-pool-create-satellite-cli}
@@ -10760,6 +11670,16 @@ ibmcloud ks worker-pool help
 ```
 
 
+#### Examples
+{: #worker-pool-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks worker-pool help
+```
+{: pre}
+
 
 ### `ibmcloud ks worker-pool label help`
 {: #worker-pool-label-help-cli}
@@ -10773,6 +11693,16 @@ Show help
 ibmcloud ks worker-pool label help
 ```
 
+
+#### Examples
+{: #worker-pool-label-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks worker-pool label help
+```
+{: pre}
 
 
 ### `ibmcloud ks worker-pool label rm`
@@ -10907,6 +11837,16 @@ Show help
 ibmcloud ks worker-pool operating-system help
 ```
 
+
+#### Examples
+{: #worker-pool-operating-system-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks worker-pool operating-system help
+```
+{: pre}
 
 
 ### `ibmcloud ks worker-pool operating-system set`
@@ -11084,6 +12024,16 @@ Show help
 ibmcloud ks worker-pool taint help
 ```
 
+
+#### Examples
+{: #worker-pool-taint-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks worker-pool taint help
+```
+{: pre}
 
 
 ### `ibmcloud ks worker-pool taint rm`
@@ -11281,6 +12231,16 @@ ibmcloud ks zone add help
 ```
 
 
+#### Examples
+{: #zone-add-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks zone add help
+```
+{: pre}
+
 
 ### `ibmcloud ks zone add satellite`
 {: #zone-add-satellite-cli}
@@ -11429,6 +12389,16 @@ Show help
 ibmcloud ks zone help
 ```
 
+
+#### Examples
+{: #zone-help-examples}
+
+Show help
+
+```sh
+ibmcloud ks zone help
+```
+{: pre}
 
 
 ### `ibmcloud ks zone ls`
