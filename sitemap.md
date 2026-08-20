@@ -2063,23 +2063,53 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Prerequisites](/docs/containers?topic=containers-access_cluster#prereqs)
 
-* [Accessing clusters through the public cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_public_se)
+[Accessing clusters through the public cloud service endpoint](/docs/containers?topic=containers-cluster-access-public#cluster-access-public)
 
-* [Accessing clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
+* [Before you begin](/docs/containers?topic=containers-cluster-access-public#access-public-prereqs)
 
-    * [Accessing VPC clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
+* [Connecting from the CLI](/docs/containers?topic=containers-cluster-access-public#access-public-cli)
 
-    * [Accessing classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
+* [Connecting to the Headlamp dashboard](/docs/containers?topic=containers-cluster-access-public#access-public-dashboard)
 
-* [Accessing VPC clusters through the Virtual Private Endpoint Gateway](/docs/containers?topic=containers-access_cluster#vpc_vpe)
+    * [Legacy: Connecting with kubectl proxy](/docs/containers?topic=containers-cluster-access-public#access-public-dashboard-legacy)
 
-    * [Protecting clusters using context based restrictions](/docs/containers?topic=containers-access_cluster#protect-service-endpoints-with-cbr)
+* [Connecting with an API key](/docs/containers?topic=containers-cluster-access-public#access-public-cli-apikey)
 
-* [Creating additional Virtual Private Endpoint gateways in other VPCs and accounts](/docs/containers?topic=containers-access_cluster#vpc_cluster_new_vpe_access)
+[Accessing Classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access-private-classic#access-private-classic)
 
-    * [Example: Target account commands](/docs/containers?topic=containers-access_cluster#vpc_cluster_new_vpe_target_example)
+* [Before you begin](/docs/containers?topic=containers-access-private-classic#access-private-classic-prereqs)
 
-    * [Example: Source account commands](/docs/containers?topic=containers-access_cluster#vpc_cluster_new_vpe_source_example)
+* [Exposing the master endpoint through a private NLB](/docs/containers?topic=containers-access-private-classic#access-private-classic-nlb)
+
+[Accessing VPC clusters through the private cloud service endpoint](/docs/containers?topic=containers-cluster-access-private-vpc#cluster-access-private-vpc)
+
+* [Before you begin](/docs/containers?topic=containers-cluster-access-private-vpc#access-private-vpc-prereqs)
+
+* [Accessing a private VPC cluster from the CLI](/docs/containers?topic=containers-cluster-access-private-vpc#access-private-vpc-cli)
+
+* [Accessing through the Virtual Private Endpoint (VPE) gateway](/docs/containers?topic=containers-cluster-access-private-vpc#access-private-vpc-vpe)
+
+[Accessing VPC clusters through the Virtual Private Endpoint gateway](/docs/containers?topic=containers-cluster-access-vpe#cluster-access-vpe)
+
+* [Before you begin](/docs/containers?topic=containers-cluster-access-vpe#cluster-access-vpe-prereqs)
+
+* [Accessing a VPC cluster through the VPE gateway](/docs/containers?topic=containers-cluster-access-vpe#cluster-access-vpe-steps)
+
+    * [Protecting clusters using context based restrictions](/docs/containers?topic=containers-cluster-access-vpe#protect-service-endpoints-with-cbr)
+
+* [Creating additional VPE gateways in other VPCs and accounts](/docs/containers?topic=containers-cluster-access-vpe#vpc_cluster_new_vpe_access)
+
+    * [Example: Target account commands](/docs/containers?topic=containers-cluster-access-vpe#vpc_cluster_new_vpe_target_example)
+
+    * [Example: Source account commands](/docs/containers?topic=containers-cluster-access-vpe#vpc_cluster_new_vpe_source_example)
+
+[Accessing clusters from automation tools](/docs/containers?topic=containers-cluster-access-automation#cluster-access-automation)
+
+* [Using an API key to log in](/docs/containers?topic=containers-cluster-access-automation#access-api-key)
+
+* [Using a service ID to log in](/docs/containers?topic=containers-cluster-access-automation#access-service-id)
+
+    * [Protecting clusters using context based restrictions](/docs/containers?topic=containers-cluster-access-automation#protect-service-endpoints-with-cbr)
 
 [Accessing the cluster master with admission controllers and webhooks](/docs/containers?topic=containers-access_webhooks#access_webhooks)
 

@@ -1,4 +1,5 @@
 [-a-z0-9]*[a-z0-9]
+/docs/get-support?topic=get-support-open-case
 /docs/containers?topic=containers-ingress-alb-manage
 /docs/containers?topic=containers-managed-ingress-about
 /docs/containers?topic=containers-managed-ingress-setup

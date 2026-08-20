@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-04-06"
+lastupdated: "2026-08-20"
 
 
 keywords: kubernetes
@@ -41,7 +41,7 @@ Multiple service instances might have the same name in different regions or reso
 Use the service instance GUID or CRN to uniquely identify the service when creating service credentials and binding them to your cluster.
 {: tsResolve}
 
-1. [Log in to the {{site.data.keyword.cloud_notm}} region that includes the service instance to bind.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
+1. [Log in to the {{site.data.keyword.cloud_notm}} region that includes the service instance to bind.](/docs/containers?topic=containers-regions-and-zones)
 
 2. List your service instances and get the GUID or CRN for the specific service instance.
     ```sh
