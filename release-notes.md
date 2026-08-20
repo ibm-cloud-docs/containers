@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-19"
+lastupdated: "2026-08-20"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,20 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## August 2026
 {: #containers-aug26}
+
+### 20 August 2026
+{: #containers-aug2026}
+{: release-note}
+
+IBM Object CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
+
+### 19 August 2026
+{: #containers-aug1926}
+{: release-note}
+
+CLI version 1.0.829 is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 18 August 2026
 {: #containers-aug1826}
@@ -124,6 +138,9 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+
+CLI version 1.0.815 is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ## July 2026
 {: #containers-jul26}

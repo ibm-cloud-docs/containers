@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-19"
+lastupdated: "2026-08-20"
 
 
 keywords: containers
@@ -260,6 +260,14 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
 
+    * [20 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug2026)
+
+        * IBM Object CSI Driver cluster add-on patch updates.
+
+    * [19 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug1926)
+
+        * CLI version 1.0.829 is available.
+
     * [18 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug1826)
 
         * VPC File CSI Driver cluster add-on patch updates.
@@ -293,6 +301,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [3 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0326)
 
         * ALB OAuth Proxy cluster add-on patch updates.
+
+        * CLI version 1.0.815 is available.
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
 
@@ -5981,13 +5991,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`ibmcloud ks experimental trusted-profile set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-cli)
 
-    * [`ibmcloud ks experimental vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-baremetal-cli)
-
     * [`ibmcloud ks experimental vni attach virtual`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-virtual-cli)
-
-    * [`ibmcloud ks experimental vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-detach-cli)
-
-    * [`ibmcloud ks experimental vni ls`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-ls-cli)
 
 * [Flavor commands](/docs/containers?topic=containers-kubernetes-service-cli#flavor-cli)
 
@@ -6314,6 +6318,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.829](/docs/containers?topic=containers-cs_cli_changelog#cli-01829)
+
+* [Version v1.0.815](/docs/containers?topic=containers-cs_cli_changelog#cli-01815)
 
 * [Version v1.0.804](/docs/containers?topic=containers-cs_cli_changelog#cli-01804)
 
@@ -7046,6 +7054,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [Version 1.0 - v1.0.27_360474192, released 20 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1027_360474192)
 
     * [Version 1.0 - v1.0.26_360474192, released 10 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1026_360474192)
 
