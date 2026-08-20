@@ -5991,8 +5991,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`ibmcloud ks experimental trusted-profile set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-cli)
 
-    * [`ibmcloud ks experimental vni attach virtual`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-vni-attach-virtual-cli)
-
 * [Flavor commands](/docs/containers?topic=containers-kubernetes-service-cli#flavor-cli)
 
     * [`ibmcloud ks flavor get`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-get-cli)
