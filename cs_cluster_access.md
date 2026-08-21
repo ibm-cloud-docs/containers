@@ -43,7 +43,6 @@ Not sure which type you have? In the IBM Cloud console, go to **Kubernetes → C
 | [Private cloud service endpoint — VPC](/docs/containers?topic=containers-cluster-access-private-vpc) | VPC | Your cluster is private-only and you are connected to the VPC network through a VPN or Direct Link connection |
 | [Private cloud service endpoint — Classic](/docs/containers?topic=containers-access-private-classic) | Classic | Your cluster is private-only and you are connected to the classic private network |
 | [Virtual Private Endpoint (VPE) gateway](/docs/containers?topic=containers-cluster-access-vpe) | VPC | Your VPC cluster uses VPE for private master connectivity |
-
 | [API key or service ID](/docs/containers?topic=containers-cluster-access-automation) | All | Automated pipelines and non-interactive scripts |
 | [Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-cluster-access-wireguard) | Classic, VPC | You want to access a private-only cluster from outside IBM Cloud using a WireGuard VPN |
 | [Admission controller webhooks](/docs/containers?topic=containers-cluster-access-admission-control) | All | You need to allow cluster access for admission controller webhooks |

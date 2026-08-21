@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-04-15"
+lastupdated: "2026-08-21"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, ic, ks, kubectl, api
@@ -360,7 +360,7 @@ The following instructions require public network access in your cluster to conn
     ```
     {: screen}
 
-5. To use a private cloud service endpoint, you must first [expose the private cloud service endpoint by using a load balancer IP that is routable from your VPN connection into the private network](/docs/containers?topic=containers-access_cluster#access_private_se).
+5. To use a private cloud service endpoint, you must first [expose the private cloud service endpoint by using a load balancer IP that is routable from your VPN connection into the private network](/docs/containers?topic=containers-cluster-access-private-classic).
 
 6. Run Kubernetes API requests against your cluster by using the IAM ID token that you retrieved earlier. For example, list the Kubernetes version that runs in your cluster.
 

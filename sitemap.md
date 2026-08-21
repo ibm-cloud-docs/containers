@@ -9109,6 +9109,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [In the UI](/docs/containers?topic=containers-ts-storage-file-access-denied#ui)
 
+[Why is the {{site.data.keyword.filestorage_vpc_short}} add-on in `Critical` state](/docs/containers?topic=containers-ts-storage-file-addon-cm#ts-storage-file-addon-cm)
+
 [Storage: Feedback, questions, and support](/docs/containers?topic=containers-getting_help_storage#getting_help_storage)
 
 

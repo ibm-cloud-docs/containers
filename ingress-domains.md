@@ -2,7 +2,7 @@
 
 copyright:
   years: 2023, 2026
-lastupdated: "2026-08-13"
+lastupdated: "2026-08-21"
 
 
 keywords: kubernetes, containers
@@ -252,7 +252,7 @@ Learn how to manage the TLS certificate for your Ingress domain.
 
 Regenerate the domain certificate to generate a new token in your DNS provider and apply it to your cluster.
 
-For more details and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-regenerate)
+For more details and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-regenerate-cli)
 
 ```sh
 ibmcloud ks ingress domain secret regenerate --cluster CLUSTER --domain DOMAIN
@@ -264,7 +264,7 @@ ibmcloud ks ingress domain secret regenerate --cluster CLUSTER --domain DOMAIN
 
 Delete the secret for an Ingress domain and prevent future renewal of the certificate. 
 
-For more details and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-rm)
+For more details and command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-domain-secret-rm-cli)
 
 ```sh
 ibmcloud ks ingress domain secret rm --cluster CLUSTER --domain DOMAIN 
