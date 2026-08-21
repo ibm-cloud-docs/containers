@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-08-20"
+lastupdated: "2026-08-21"
 
 keywords: kubernetes, containers
 
@@ -24,7 +24,6 @@ This page lists all `ibmcloud ks` commands as they are structured in the CLI. Fo
 {: #icks_map_api}
 
 View the current API endpoint.
-{: shortdesc}
 
 * [`ibmcloud ks api`](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
 
@@ -33,7 +32,6 @@ View the current API endpoint.
 {: #icks_map_api-key}
 
 View information about the API key for a cluster or reset it to a new key.
-{: shortdesc}
 
 * [`ibmcloud ks api-key help`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-help-cli)
 * [`ibmcloud ks api-key info`](/docs/containers?topic=containers-kubernetes-service-cli#api-key-info-cli)
@@ -44,7 +42,6 @@ View information about the API key for a cluster or reset it to a new key.
 {: #icks_map_cluster}
 
 View and modify cluster and cluster service settings.
-{: shortdesc}
 
 * **`cluster addon`**: View, enable, update, and disable cluster add-ons.
 * **`cluster ca`**: Manage the Certificate Authority (CA) certificates of a cluster.
@@ -174,7 +171,6 @@ View and modify cluster and cluster service settings.
 {: #icks_map_credential}
 
 Set and unset credentials that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account.
-{: shortdesc}
 
 * **`credential set`**: Set credentials that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account. This command applies to the targeted resource group, or to the default resource group if no resource group is targeted.
     * [`ibmcloud ks credential get`](/docs/containers?topic=containers-kubernetes-service-cli#credential-get-cli)
@@ -188,7 +184,6 @@ Set and unset credentials that allow you to access the IBM Cloud classic infrast
 {: #icks_map_experimental}
 
 [Expires on 2026-10-21] Experiment with new commands. IMPORTANT: Commands here will retire after the [date] in their description.
-{: shortdesc}
 
 * **`experimental trusted-profile`**: [Expires on 2026-10-21] View and set the trusted profile on a cluster or the default trusted profile for clusters created in a resource-group.
 * **`experimental vni`**: [Deactivated on 2026-05-20! Use `ibmcloud ks vni` instead] Attach, detach, and list Virtual Network Interfaces on worker nodes.
@@ -205,7 +200,6 @@ Set and unset credentials that allow you to access the IBM Cloud classic infrast
 {: #icks_map_flavor}
 
 Getting flavor related information. Flavors determine how much virtual CPU, memory, and disk space is available to each worker node.
-{: shortdesc}
 
 * [`ibmcloud ks flavor get`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-get-cli)
 * [`ibmcloud ks flavor help`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-help-cli)
@@ -216,7 +210,6 @@ Getting flavor related information. Flavors determine how much virtual CPU, memo
 {: #icks_map_infra-permissions}
 
 View information about infrastructure permissions that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account.
-{: shortdesc}
 
 * [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-kubernetes-service-cli#infra-permissions-get-cli)
 * [`ibmcloud ks infra-permissions help`](/docs/containers?topic=containers-kubernetes-service-cli#infra-permissions-help-cli)
@@ -226,7 +219,6 @@ View information about infrastructure permissions that allow you to access the I
 {: #icks_map_ingress}
 
 View and modify Ingress services and settings
-{: shortdesc}
 
 * **`ingress alb`**: View and configure an Ingress application load balancer (ALB).
 * **`ingress domain`**: Manage a cluster's Ingress domains.
@@ -315,7 +307,6 @@ View and modify Ingress services and settings
 {: #icks_map_kms}
 
 View and configure Key Management Service integrations.
-{: shortdesc}
 
 * **`kms crk`**: List and configure the root keys for a Key Management Service instance.
 * **`kms instance`**: View and configure available Key Management Service instances.
@@ -331,7 +322,6 @@ View and configure Key Management Service integrations.
 {: #icks_map_locations}
 
 List supported IBM Cloud Kubernetes Service locations.
-{: shortdesc}
 
 * [`ibmcloud ks locations`](/docs/containers?topic=containers-kubernetes-service-cli#locations-cli)
 
@@ -340,7 +330,6 @@ List supported IBM Cloud Kubernetes Service locations.
 {: #icks_map_logging}
 
 Forward logs from your cluster.
-{: shortdesc}
 
 * **`logging autoupdate`**: Manage automatic updates of the Fluentd add-on in a cluster.
 * **`logging config`**: View or modify log forwarding configurations for a cluster.
@@ -367,7 +356,6 @@ Forward logs from your cluster.
 {: #icks_map_messages}
 
 View the current user messages.
-{: shortdesc}
 
 * [`ibmcloud ks messages`](/docs/containers?topic=containers-kubernetes-service-cli#messages-cli)
 
@@ -376,7 +364,6 @@ View the current user messages.
 {: #icks_map_nlb-dns}
 
 Create and manage host names for network load balancer (NLB) IP addresses in a cluster and health check monitors for host names.
-{: shortdesc}
 
 * **`nlb-dns create`**: Create a DNS host name.
 * **`nlb-dns monitor`**: Create and manage health check monitors for network load balancer (NLB) IP addresses and host names in a cluster
@@ -408,7 +395,6 @@ Create and manage host names for network load balancer (NLB) IP addresses in a c
 {: #icks_map_quota}
 
 View the quota and limits for cluster-related resources in your IBM Cloud account.
-{: shortdesc}
 
 * [`ibmcloud ks quota help`](/docs/containers?topic=containers-kubernetes-service-cli#quota-help-cli)
 * [`ibmcloud ks quota ls`](/docs/containers?topic=containers-kubernetes-service-cli#quota-ls-cli)
@@ -418,7 +404,6 @@ View the quota and limits for cluster-related resources in your IBM Cloud accoun
 {: #icks_map_script}
 
 Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. Legacy-structured commands are replaced with beta-structured commands.
-{: shortdesc}
 
 * [`ibmcloud ks script help`](/docs/containers?topic=containers-kubernetes-service-cli#script-help-cli)
 * [`ibmcloud ks script update`](/docs/containers?topic=containers-kubernetes-service-cli#script-update-cli)
@@ -428,7 +413,6 @@ Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. Legacy-
 {: #icks_map_security-group}
 
 Run operations against a security group.
-{: shortdesc}
 
 * [`ibmcloud ks security-group help`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-help-cli)
 * [`ibmcloud ks security-group ls`](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli)
@@ -440,7 +424,6 @@ Run operations against a security group.
 {: #icks_map_storage}
 
 View and modify storage resources.
-{: shortdesc}
 
 * **`storage attachment`**: View and modify storage volume attachments of worker nodes in your cluster.
 * **`storage volume`**: View a list of storage volumes.
@@ -459,7 +442,6 @@ View and modify storage resources.
 {: #icks_map_subnets}
 
 List available portable subnets in your IBM Cloud infrastructure account.
-{: shortdesc}
 
 * [`ibmcloud ks subnets`](/docs/containers?topic=containers-kubernetes-service-cli#subnets-cli)
 
@@ -468,7 +450,6 @@ List available portable subnets in your IBM Cloud infrastructure account.
 {: #icks_map_versions}
 
 List all the container platform versions that are available for IBM Cloud Kubernetes Service clusters.
-{: shortdesc}
 
 * [`ibmcloud ks versions`](/docs/containers?topic=containers-kubernetes-service-cli#versions-cli)
 
@@ -477,7 +458,6 @@ List all the container platform versions that are available for IBM Cloud Kubern
 {: #icks_map_vlan}
 
 List public and private VLANs for a zone and view the VLAN spanning status.
-{: shortdesc}
 
 * **`vlan spanning`**: View the VLAN spanning status for your IBM Cloud classic infrastructure account.
     * [`ibmcloud ks vlan help`](/docs/containers?topic=containers-kubernetes-service-cli#vlan-help-cli)
@@ -490,7 +470,6 @@ List public and private VLANs for a zone and view the VLAN spanning status.
 {: #icks_map_vni}
 
 Attach, detach, and list Virtual Network Interfaces on worker nodes.
-{: shortdesc}
 
 * **`vni attach`**: Attach a Virtual Network Interface to a worker node.
     * [`ibmcloud ks vni attach baremetal`](/docs/containers?topic=containers-kubernetes-service-cli#vni-attach-baremetal-cli)
@@ -504,7 +483,6 @@ Attach, detach, and list Virtual Network Interfaces on worker nodes.
 {: #icks_map_vpc}
 
 Get information about VPCs and manage VPC clusters.
-{: shortdesc}
 
 * **`vpc outbound-traffic-protection`**: Change the outbound traffic protection for a Secure By Default VPC cluster.
 * **`vpc secure-by-default`**: Modify Secure By Default Network settings for a VPC cluster.
@@ -521,7 +499,6 @@ Get information about VPCs and manage VPC clusters.
 {: #icks_map_webhook-create}
 
 Register a webhook in a cluster.
-{: shortdesc}
 
 * [`ibmcloud ks webhook-create`](/docs/containers?topic=containers-kubernetes-service-cli#webhook-create-cli)
 
@@ -530,7 +507,6 @@ Register a webhook in a cluster.
 {: #icks_map_worker}
 
 View and modify worker nodes for a cluster.
-{: shortdesc}
 
 * [`ibmcloud ks worker get`](/docs/containers?topic=containers-kubernetes-service-cli#worker-get-cli)
 * [`ibmcloud ks worker help`](/docs/containers?topic=containers-kubernetes-service-cli#worker-help-cli)
@@ -546,7 +522,6 @@ View and modify worker nodes for a cluster.
 {: #icks_map_worker-pool}
 
 View and modify worker pools for a cluster.
-{: shortdesc}
 
 * **`worker-pool create`**: Add a worker pool to a cluster. No worker nodes are created until zones are added to the worker pool.
 * **`worker-pool label`**: Set and remove custom Kubernetes labels for all worker nodes in a worker pool.
@@ -578,7 +553,6 @@ View and modify worker pools for a cluster.
 {: #icks_map_zone}
 
 List availability zones and modify the zones attached to a worker pool.
-{: shortdesc}
 
 * **`zone add`**: Add a zone to one or more worker pools in a cluster.
     * [`ibmcloud ks zone add classic`](/docs/containers?topic=containers-kubernetes-service-cli#zone-add-classic-cli)
