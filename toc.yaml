@@ -636,6 +636,7 @@ toc:
               - ts-storage-vpc-file-rfs-eit.md
               - ts-storage-vpc-file-capacity-roundoff.md
               - ts-storage-classic-file-access-denied.md
+              - ts-storage-file-addon-cm.md
               - ts-storage-feedback.md
           - topicgroup:
               label: Block Storage
