@@ -27,11 +27,9 @@ Prerequisites
 {: #ks-cli-prereq}
 {: dl}
 
-Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-install).
+Install the {{site.data.keyword.cloud_notm}} CLI.
 :   See [Getting started with the IBM Cloud CLI](/docs/containers?topic=containers-cli-install).
-
-Install the `ks` plug-in.
-:   Run the following command:
+:   Install the `ks` plug-in. Run the following command.
 
     ```console
     ibmcloud plugin install ks
@@ -43,7 +41,6 @@ Install the `ks` plug-in.
 {: #cli_commands}
 
 The following tables list the `ibmcloud ks` command groups. For a complete list of all `ibmcloud ks` commands as they are structured in the CLI, see the [CLI map](/docs/containers?topic=containers-icks_map).
-{: shortdesc}
 
 | Command group | Description |
 | --- | --- |
@@ -78,7 +75,6 @@ The following tables list the `ibmcloud ks` command groups. For a complete list 
 {: #api-cli}
 
 View the current API endpoint.
-{: shortdesc}
 
 
 ### `ibmcloud ks api`
@@ -87,7 +83,6 @@ View the current API endpoint.
 
 
 View the current API endpoint.
-{: shortdesc}
 
 ```sh
 ibmcloud ks api [-q]
@@ -116,7 +111,6 @@ ibmcloud ks api
 {: #api-key-cli}
 
 View information about the API key for a cluster or reset it to a new key.
-{: shortdesc}
 
 
 ### `ibmcloud ks api-key help`
@@ -125,7 +119,6 @@ View information about the API key for a cluster or reset it to a new key.
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks api-key help
@@ -149,7 +142,6 @@ ibmcloud ks api-key help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 View information about the API key owner for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks api-key info --cluster CLUSTER [--output OUTPUT] [-q]
@@ -186,7 +178,6 @@ ibmcloud ks api-key info --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Replace the API key for all clusters in the specified region and targeted resource group. If no resource group is targeted the command applies to the default resource group. For more information, see [http://ibm.biz/api-key](http://ibm.biz/api-key).
-{: shortdesc}
 
 ```sh
 ibmcloud ks api-key reset --region REGION [-f] [--output OUTPUT] [-q]
@@ -224,7 +215,6 @@ ibmcloud ks api-key reset --region REGION
 {: #cluster-cli}
 
 View and modify cluster and cluster service settings.
-{: shortdesc}
 
 
 ### `ibmcloud ks cluster addon disable acm`
@@ -233,7 +223,6 @@ View and modify cluster and cluster service settings.
 
 
 Disable the Red Hat Advanced Cluster Management add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable acm --cluster CLUSTER [-f] [-q]
@@ -270,7 +259,6 @@ ibmcloud ks cluster addon disable acm --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable the ALB OAuth Proxy add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable alb-oauth-proxy --cluster CLUSTER [-f] [-q]
@@ -307,7 +295,6 @@ ibmcloud ks cluster addon disable alb-oauth-proxy --cluster CLUSTER
 
 
 Disable the Cluster Autoscaler add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable cluster-autoscaler --cluster CLUSTER [-f] [-q]
@@ -344,7 +331,6 @@ ibmcloud ks cluster addon disable cluster-autoscaler --cluster CLUSTER
 
 
 Disable the Diagnostics and Debug Tool add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable debug-tool --cluster CLUSTER [-f] [-q]
@@ -384,7 +370,6 @@ The `cluster addon disable headlamp` command is a beta feature.
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable the Headlamp add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable headlamp --cluster CLUSTER [-f] [-q]
@@ -421,7 +406,6 @@ ibmcloud ks cluster addon disable headlamp --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable help
@@ -445,7 +429,6 @@ ibmcloud ks cluster addon disable help
 
 
 Disable the HPCS Router Operator add-on for OpenShift.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable hpcs-router --cluster CLUSTER [-f] [-q]
@@ -485,7 +468,6 @@ The `cluster addon disable ibm-storage-operator` command is a beta feature.
 
 
 Disable the IBM Cloud Storage Operator add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable ibm-storage-operator --cluster CLUSTER [-f] [-q]
@@ -522,7 +504,6 @@ ibmcloud ks cluster addon disable ibm-storage-operator --cluster CLUSTER
 [Classic infrastructure]{: tag-classic-inf} 
 
 Disable the managed Istio add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f] [-q]
@@ -562,7 +543,6 @@ The `cluster addon disable istio-extras` command is deprecated.
 [Classic infrastructure]{: tag-classic-inf} 
 
 Disable extra Istio components: Grafana, Jaeger, and Kiali.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f] [-q]
@@ -602,7 +582,6 @@ The `cluster addon disable istio-sample-bookinfo` command is deprecated.
 [Classic infrastructure]{: tag-classic-inf} 
 
 Disable the BookInfo sample application for Istio.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER [-f] [-q]
@@ -639,7 +618,6 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER
 
 
 Disable the Knative serverless framework add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable knative --cluster CLUSTER [-f] [-q]
@@ -676,7 +654,6 @@ ibmcloud ks cluster addon disable knative --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable the Kubernetes web terminal add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f] [-q]
@@ -713,7 +690,6 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable the Static Route add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable static-route --cluster CLUSTER [-f] [-q]
@@ -750,7 +726,6 @@ ibmcloud ks cluster addon disable static-route --cluster CLUSTER
 [Classic infrastructure]{: tag-classic-inf} 
 
 Disable the VPC Block Storage CSI Driver add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f] [-q]
@@ -787,7 +762,6 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER
 
 
 Enable the Red Hat Advanced Cluster Management add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable acm --cluster CLUSTER [-f] [--param PARAM] [-q] [--version VERSION] [-y]
@@ -833,7 +807,6 @@ ibmcloud ks cluster addon enable acm --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Enable the ALB OAuth Proxy add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -873,7 +846,6 @@ ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER
 
 
 Enable the Cluster Autoscaler add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable cluster-autoscaler --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -913,7 +885,6 @@ ibmcloud ks cluster addon enable cluster-autoscaler --cluster CLUSTER
 
 
 Enable the Diagnostics and Debug Tool add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -956,7 +927,6 @@ The `cluster addon enable headlamp` command is a beta feature.
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Enable the Headlamp add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable headlamp --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -996,7 +966,6 @@ ibmcloud ks cluster addon enable headlamp --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable help
@@ -1020,7 +989,6 @@ ibmcloud ks cluster addon enable help
 
 
 Enable the HPCS Router Operator add-on for OpenShift.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable hpcs-router --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -1063,7 +1031,6 @@ The `cluster addon enable ibm-storage-operator` command is a beta feature.
 
 
 Enable the IBM Cloud Storage Operator add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable ibm-storage-operator --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -1103,7 +1070,6 @@ ibmcloud ks cluster addon enable ibm-storage-operator --cluster CLUSTER
 [Classic infrastructure]{: tag-classic-inf} 
 
 Enable the managed Istio add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable istio --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -1146,7 +1112,6 @@ The `cluster addon enable istio-extras` command is deprecated.
 
 
 Enable extra Istio components: Grafana, Jaeger, and Kiali.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -1189,7 +1154,6 @@ The `cluster addon enable istio-sample-bookinfo` command is deprecated.
 
 
 The BookInfo sample application for Istio.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -1229,7 +1193,6 @@ ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Enable the Static Route add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable static-route --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -1269,7 +1232,6 @@ ibmcloud ks cluster addon enable static-route --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} 
 
 Enable the VPC Block Storage CSI Driver add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [-q] [--version VERSION] [-y]
@@ -1309,7 +1271,6 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View details of an installed add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon get --addon ADDON --cluster CLUSTER [--output OUTPUT] [-q]
@@ -1349,7 +1310,6 @@ ibmcloud ks cluster addon get --addon ADDON --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon help
@@ -1373,7 +1333,6 @@ ibmcloud ks cluster addon help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List enabled add-ons.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon ls --cluster CLUSTER [--output OUTPUT] [-q]
@@ -1410,7 +1369,6 @@ ibmcloud ks cluster addon ls --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View installation options for an add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon options --addon ADDON [--output OUTPUT] [-q] [--version VERSION]
@@ -1450,7 +1408,6 @@ ibmcloud ks cluster addon options --addon ADDON
 
 
 Update the Red Hat Advanced Cluster Management add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update acm --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1493,7 +1450,6 @@ ibmcloud ks cluster addon update acm --cluster CLUSTER
 
 
 Update the ALB OAuth Proxy add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update alb-oauth-proxy --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1536,7 +1492,6 @@ ibmcloud ks cluster addon update alb-oauth-proxy --cluster CLUSTER
 
 
 Update the Cluster Autoscaler add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update cluster-autoscaler --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1579,7 +1534,6 @@ ibmcloud ks cluster addon update cluster-autoscaler --cluster CLUSTER
 
 
 Update the Diagnostics and Debug Tool add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update debug-tool --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1625,7 +1579,6 @@ The `cluster addon update headlamp` command is a beta feature.
 
 
 Update the Headlamp add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update headlamp --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1668,7 +1621,6 @@ ibmcloud ks cluster addon update headlamp --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update help
@@ -1692,7 +1644,6 @@ ibmcloud ks cluster addon update help
 
 
 Update the HPCS Router Operator add-on for OpenShift.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update hpcs-router --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1738,7 +1689,6 @@ The `cluster addon update ibm-storage-operator` command is a beta feature.
 
 
 Update the IBM Cloud Storage Operator add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update ibm-storage-operator --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1781,7 +1731,6 @@ ibmcloud ks cluster addon update ibm-storage-operator --cluster CLUSTER
 
 
 Update the Image Key Synchronizer add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update image-key-synchronizer --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1824,7 +1773,6 @@ ibmcloud ks cluster addon update image-key-synchronizer --cluster CLUSTER
 
 
 Update the managed Istio add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update istio --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1870,7 +1818,6 @@ The `cluster addon update istio-extras` command is deprecated.
 
 
 Update extra Istio components: Grafana, Jaeger, and Kiali.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update istio-extras --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1916,7 +1863,6 @@ The `cluster addon update istio-sample-bookinfo` command is deprecated.
 
 
 Update the BookInfo sample application for Istio.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update istio-sample-bookinfo --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -1959,7 +1905,6 @@ ibmcloud ks cluster addon update istio-sample-bookinfo --cluster CLUSTER
 
 
 Update the Knative serverless framework add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update knative --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -2002,7 +1947,6 @@ ibmcloud ks cluster addon update knative --cluster CLUSTER
 
 
 Update the Kubernetes web terminal add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update kube-terminal --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -2045,7 +1989,6 @@ ibmcloud ks cluster addon update kube-terminal --cluster CLUSTER
 
 
 Update the OpenShift Data Foundation add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update openshift-data-foundation --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -2088,7 +2031,6 @@ ibmcloud ks cluster addon update openshift-data-foundation --cluster CLUSTER
 
 
 Update the Static Route add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update static-route --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -2131,7 +2073,6 @@ ibmcloud ks cluster addon update static-route --cluster CLUSTER
 
 
 Update the VPC Block Storage CSI Driver add-on.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon update vpc-block-csi-driver --cluster CLUSTER [-f] [-q] [--version VERSION] [-y]
@@ -2174,7 +2115,6 @@ ibmcloud ks cluster addon update vpc-block-csi-driver --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List supported versions for managed add-ons.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster addon versions [--addon ADDON] [--offering OFFERING] [--output OUTPUT] [-q] [--show-defaults]
@@ -2217,7 +2157,6 @@ ibmcloud ks cluster addon versions
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Create a CA certificate for your cluster. Then, you must rotate the previous certificates to use the new certificates.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster ca create --cluster CLUSTER [-f] [-q]
@@ -2254,7 +2193,6 @@ ibmcloud ks cluster ca create --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the details of a cluster's CA certificate.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster ca get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -2291,7 +2229,6 @@ ibmcloud ks cluster ca get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster ca help
@@ -2315,7 +2252,6 @@ ibmcloud ks cluster ca help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Rotate the CA certificates of a cluster, which requires that you previously created CA certificates. Rotating invalidates the previous certificates and refreshes the API server of the cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster ca rotate --cluster CLUSTER [-f] [-q]
@@ -2352,7 +2288,6 @@ ibmcloud ks cluster ca rotate --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the rotation status of CA certificates for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster ca status --cluster CLUSTER [-q]
@@ -2386,7 +2321,6 @@ ibmcloud ks cluster ca status --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Download the Kubernetes configuration files and certificates to connect to your cluster by using kubectl commands.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster config --cluster CLUSTER [--admin] [--endpoint ENDPOINT] [--network] [--output OUTPUT] [-q] [--skip-rbac]
@@ -2435,7 +2369,6 @@ ibmcloud ks cluster config --cluster CLUSTER
 [Classic infrastructure]{: tag-classic-inf} 
 
 Create a cluster with worker nodes on classic infrastructure.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster create classic --flavor FLAVOR --name NAME --zone ZONE [--disable-disk-encrypt] [--entitlement ENTITLEMENT] [--hardware HARDWARE] [--location LOCATION] [--no-subnet] [--operating-system SYSTEM] [--pod-subnet SUBNET] [--private-service-endpoint] [--private-vlan VLAN] [--public-service-endpoint] [-q] [--service-subnet SUBNET] [--skip-advance-permissions-check] [--sm-group GROUP] [--sm-instance INSTANCE] [--version VERSION] [--workers COUNT] (--private-only | --public-vlan VLAN)
@@ -2529,7 +2462,6 @@ ibmcloud ks cluster create classic --flavor FLAVOR --name NAME --zone ZONE --pri
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster create help
@@ -2553,7 +2485,6 @@ ibmcloud ks cluster create help
 
 
 Create an IBM Cloud Satellite cluster on your own infrastructure.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster create satellite --location LOCATION --name NAME --version VERSION [--enable-config-admin] [--entitlement ENTITLEMENT] [--host-label LABEL ...] [--infrastructure-topology TOPOLOGY] [--operating-system SYSTEM] [--pod-network-interface-selection SELECTION] [--pod-subnet SUBNET] [--pull-secret SECRET] [-q] [--service-subnet SUBNET] [--sm-group GROUP] [--sm-instance INSTANCE] [--workers COUNT] [--zone ZONE]
@@ -2632,7 +2563,6 @@ ibmcloud ks cluster create satellite --location LOCATION --name NAME --version V
 
 
 Create a cluster with worker nodes on Virtual Private Cloud (VPC) Gen 1 infrastructure.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster create vpc-classic --flavor FLAVOR --name NAME --subnet-id ID --vpc-id ID --zone ZONE [--disable-public-service-endpoint] [--entitlement ENTITLEMENT] [--operating-system SYSTEM] [--pod-subnet SUBNET] [-q] [--service-subnet SUBNET] [--sm-group GROUP] [--sm-instance INSTANCE] [--version VERSION] [--workers COUNT]
@@ -2710,7 +2640,6 @@ ibmcloud ks cluster create vpc-classic \
 [Virtual Private Cloud]{: tag-vpc} 
 
 Create a cluster with worker nodes on Virtual Private Cloud (VPC) Gen 2 infrastructure.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster create vpc-gen2 --flavor FLAVOR --name NAME --subnet-id ID --vpc-id ID --zone ZONE [--cluster-security-group GROUP ...] [--cni CNI] [--cos-instance INSTANCE] [--crk CRK] [--disable-outbound-traffic-protection] [--disable-public-service-endpoint] [--entitlement ENTITLEMENT] [--kms-account-id ID] [--kms-instance INSTANCE] [--offering OFFERING] [--operating-system SYSTEM] [--pod-subnet SUBNET] [-q] [--secondary-storage STORAGE] [--service-subnet SUBNET] [--sm-group GROUP] [--sm-instance INSTANCE] [--version VERSION] [--workers COUNT]
@@ -2815,7 +2744,6 @@ ibmcloud ks cluster create vpc-gen2 \
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the details of a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster get --cluster CLUSTER [--output OUTPUT] [-q] [--show-resources]
@@ -2855,7 +2783,6 @@ ibmcloud ks cluster get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster help
@@ -2879,7 +2806,6 @@ ibmcloud ks cluster help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable image security enforcement in your cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster image-security disable --cluster CLUSTER [-q]
@@ -2913,7 +2839,6 @@ ibmcloud ks cluster image-security disable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Enable image security enforcement in your cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster image-security enable --cluster CLUSTER [-f] [-q]
@@ -2950,7 +2875,6 @@ ibmcloud ks cluster image-security enable --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster image-security help
@@ -2974,7 +2898,6 @@ ibmcloud ks cluster image-security help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List all clusters in your IBM Cloud account.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster ls [-l LOCATION ...] [--output OUTPUT] [--provider PROVIDER] [-q]
@@ -3014,7 +2937,6 @@ ibmcloud ks cluster ls
 [Classic infrastructure]{: tag-classic-inf} 
 
 View the audit webhook configuration for a cluster's Kubernetes API server. The webhook backend forwards API server audit logs to a remote server.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master audit-webhook get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -3051,7 +2973,6 @@ ibmcloud ks cluster master audit-webhook get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master audit-webhook help
@@ -3075,7 +2996,6 @@ ibmcloud ks cluster master audit-webhook help
 [Classic infrastructure]{: tag-classic-inf} 
 
 Set the audit webhook configuration for a cluster's Kubernetes API server. The webhook backend forwards API server audit logs to a remote server.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--ca-cert CERT] [--client-cert CERT] [--client-key KEY] [--policy POLICY] [-q] [--remote-server SERVER]
@@ -3124,7 +3044,6 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER
 [Classic infrastructure]{: tag-classic-inf} 
 
 Remove the audit webhook configuration for a cluster's Kubernetes API server.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER [-q]
@@ -3158,7 +3077,6 @@ ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER
 
 
 Get the OpenShift web console and OAuth server access type.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master console-oauth-access get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -3195,7 +3113,6 @@ ibmcloud ks cluster master console-oauth-access get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master console-oauth-access help
@@ -3219,7 +3136,6 @@ ibmcloud ks cluster master console-oauth-access help
 
 
 Set the OpenShift web console and OAuth server access type.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master console-oauth-access set --cluster CLUSTER [-f] [-q] [--type TYPE]
@@ -3259,7 +3175,6 @@ ibmcloud ks cluster master console-oauth-access set --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master help
@@ -3283,7 +3198,6 @@ ibmcloud ks cluster master help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the PodSecurity admission configuration for a cluster's Kubernetes API server.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master pod-security get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -3320,7 +3234,6 @@ ibmcloud ks cluster master pod-security get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master pod-security help
@@ -3344,7 +3257,6 @@ ibmcloud ks cluster master pod-security help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable PodSecurityPolicy for a cluster's Kubernetes API server.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master pod-security policy disable --cluster CLUSTER [-q]
@@ -3378,7 +3290,6 @@ ibmcloud ks cluster master pod-security policy disable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Enable PodSecurityPolicy for a cluster's Kubernetes API server.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master pod-security policy enable --cluster CLUSTER [-q]
@@ -3412,7 +3323,6 @@ ibmcloud ks cluster master pod-security policy enable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the PodSecurityPolicy configuration for a cluster's Kubernetes API server.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master pod-security policy get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -3449,7 +3359,6 @@ ibmcloud ks cluster master pod-security policy get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master pod-security policy help
@@ -3473,7 +3382,6 @@ ibmcloud ks cluster master pod-security policy help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Set and enable the PodSecurity admission configuration for a cluster's Kubernetes API server.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master pod-security set --cluster CLUSTER [--config-file FILE] [-q]
@@ -3510,7 +3418,6 @@ ibmcloud ks cluster master pod-security set --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove the PodSecurity admission configuration for a cluster's Kubernetes API server.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master pod-security unset --cluster CLUSTER [-q]
@@ -3547,7 +3454,6 @@ The `cluster master private-service-endpoint allowlist add` command is deprecate
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Add subnets to a cluster's private service endpoint allowlist.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist add --cluster CLUSTER --subnet SUBNET [--subnet SUBNET ...] [-q]
@@ -3587,7 +3493,6 @@ The `cluster master private-service-endpoint allowlist disable` command is depre
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Disable the allowlist. When disabled, authorized requests to the cluster master from any subnet are permitted through the private service endpoint.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist disable --cluster CLUSTER [-f] [-q]
@@ -3627,7 +3532,6 @@ The `cluster master private-service-endpoint allowlist enable` command is deprec
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Enable the allowlist. When enabled, only authorized requests to the cluster master from subnets in the allowlist are permitted through the private service endpoint.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist enable --cluster CLUSTER [-f] [-q]
@@ -3667,7 +3571,6 @@ The `cluster master private-service-endpoint allowlist get` command is deprecate
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Get a cluster's private service endpoint allowlist.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist get --cluster CLUSTER [-q]
@@ -3701,7 +3604,6 @@ ibmcloud ks cluster master private-service-endpoint allowlist get --cluster CLUS
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist help
@@ -3728,7 +3630,6 @@ The `cluster master private-service-endpoint allowlist rm` command is deprecated
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Remove subnets from a cluster's private service endpoint allowlist.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster CLUSTER --subnet SUBNET [--subnet SUBNET ...] [-f] [-q]
@@ -3768,7 +3669,6 @@ ibmcloud ks cluster master private-service-endpoint allowlist rm --cluster CLUST
 [Classic infrastructure]{: tag-classic-inf} 
 
 Enable the private service endpoint to make the master privately accessible.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER [-f] [-q] [-y]
@@ -3808,7 +3708,6 @@ ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master private-service-endpoint help
@@ -3832,7 +3731,6 @@ ibmcloud ks cluster master private-service-endpoint help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Disable the public service endpoint to make the master only privately accessible.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master public-service-endpoint disable --cluster CLUSTER [-f] [-q] [-y]
@@ -3872,7 +3770,6 @@ ibmcloud ks cluster master public-service-endpoint disable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Enable the public service endpoint to make the master publicly accessible.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master public-service-endpoint enable --cluster CLUSTER [-f] [-q] [-y]
@@ -3912,7 +3809,6 @@ ibmcloud ks cluster master public-service-endpoint enable --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master public-service-endpoint help
@@ -3936,7 +3832,6 @@ ibmcloud ks cluster master public-service-endpoint help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Restart the cluster master nodes to apply new Kubernetes API configuration changes. Your worker nodes, apps, and resources are not modified and continue to run.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master refresh --cluster CLUSTER [-q]
@@ -3970,7 +3865,6 @@ ibmcloud ks cluster master refresh --cluster CLUSTER
 
 
 Add subnets to a Satellite cluster's service endpoint allowlist.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master satellite-service-endpoint allowlist add --cluster CLUSTER --subnet SUBNET [--subnet SUBNET ...] [-q]
@@ -4009,7 +3903,6 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist add \
 
 
 Disable the allowlist for a Satellite cluster. When disabled, authorized requests to the cluster master from any subnet are permitted through the Satellite service endpoint.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master satellite-service-endpoint allowlist disable --cluster CLUSTER [-f] [-q]
@@ -4046,7 +3939,6 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist disable --cluste
 
 
 Enable the allowlist for a Satellite cluster. When enabled, only authorized requests to the cluster master from subnets in the allowlist are permitted through the Satellite service endpoint.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master satellite-service-endpoint allowlist enable --cluster CLUSTER [-f] [-q]
@@ -4083,7 +3975,6 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist enable --cluster
 
 
 Get a Satellite cluster's service endpoint allowlist.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master satellite-service-endpoint allowlist get --cluster CLUSTER [-q]
@@ -4117,7 +4008,6 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist get --cluster CL
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master satellite-service-endpoint allowlist help
@@ -4141,7 +4031,6 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist help
 
 
 Remove subnets from a Satellite cluster's service endpoint allowlist.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master satellite-service-endpoint allowlist rm --cluster CLUSTER --subnet SUBNET [--subnet SUBNET ...] [-f] [-q]
@@ -4181,7 +4070,6 @@ ibmcloud ks cluster master satellite-service-endpoint allowlist rm --cluster CLU
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master satellite-service-endpoint help
@@ -4205,7 +4093,6 @@ ibmcloud ks cluster master satellite-service-endpoint help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Update the cluster master to the latest version.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster master update --cluster CLUSTER [-f] [--force-update] [-q] [--version VERSION]
@@ -4248,7 +4135,6 @@ ibmcloud ks cluster master update --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Generate a new image pull secret that stores IAM credentials for the cluster to access images in IBM Cloud Container Registry.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster pull-secret apply --cluster CLUSTER [-q]
@@ -4282,7 +4168,6 @@ ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster pull-secret help
@@ -4306,7 +4191,6 @@ ibmcloud ks cluster pull-secret help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Delete a cluster. All worker nodes, apps, and containers are permanently deleted. This action cannot be undone.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster rm --cluster CLUSTER [--delete-openshift-registry-cos-bucket] [--delete-storage] [-f] [-q] [--skip-advance-permissions-check]
@@ -4352,7 +4236,6 @@ ibmcloud ks cluster rm --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Add an IBM Cloud service to a cluster by binding the service instance to a Kubernetes namespace.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster service bind --cluster CLUSTER --namespace NAMESPACE --service SERVICE [-q] (--key KEY | --role ROLE)
@@ -4398,7 +4281,6 @@ ibmcloud ks cluster service bind --cluster CLUSTER --namespace NAMESPACE --servi
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster service help
@@ -4422,7 +4304,6 @@ ibmcloud ks cluster service help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List services bound to a Kubernetes namespace.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster service ls --cluster CLUSTER [--output OUTPUT] [-q] (--all-namespaces | --namespace NAMESPACE)
@@ -4465,7 +4346,6 @@ ibmcloud ks cluster service ls --cluster CLUSTER --all-namespaces
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove an IBM Cloud service from a cluster by unbinding it from a Kubernetes namespace.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster service unbind --cluster CLUSTER --namespace NAMESPACE --service SERVICE [-q]
@@ -4505,7 +4385,6 @@ ibmcloud ks cluster service unbind --cluster CLUSTER --namespace NAMESPACE --ser
 [Classic infrastructure]{: tag-classic-inf} 
 
 Make an existing public or private portable subnet in your IBM Cloud infrastructure account available to a classic cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster subnet add --cluster CLUSTER --subnet-id ID [-q]
@@ -4542,7 +4421,6 @@ ibmcloud ks cluster subnet add --cluster CLUSTER --subnet-id ID
 [Classic infrastructure]{: tag-classic-inf} 
 
 Create a portable subnet on your public or private VLAN and make it available to a classic cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN [-q]
@@ -4582,7 +4460,6 @@ ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN
 [Classic infrastructure]{: tag-classic-inf} 
 
 Detach an existing public or private portable subnet from a classic cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster subnet detach --cluster CLUSTER --subnet-id ID [-f] [-q]
@@ -4622,7 +4499,6 @@ ibmcloud ks cluster subnet detach --cluster CLUSTER --subnet-id ID
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks cluster subnet help
@@ -4644,7 +4520,6 @@ ibmcloud ks cluster subnet help
 {: #credential-cli}
 
 Set and unset credentials that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account.
-{: shortdesc}
 
 
 ### `ibmcloud ks credential get`
@@ -4653,7 +4528,6 @@ Set and unset credentials that allow you to access the IBM Cloud classic infrast
 [Classic infrastructure]{: tag-classic-inf} 
 
 If you set up your IBM Cloud account to use different credentials to access the IBM Cloud classic infrastructure portfolio, get the infrastructure user name. This command applies to the targeted resource group, or to the default resource group if no resource group is targeted.
-{: shortdesc}
 
 ```sh
 ibmcloud ks credential get --region REGION [--output OUTPUT] [-q]
@@ -4692,7 +4566,6 @@ ibmcloud ks credential get --region REGION
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks credential help
@@ -4716,7 +4589,6 @@ ibmcloud ks credential help
 [Classic infrastructure]{: tag-classic-inf} 
 
 Set credentials that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account.
-{: shortdesc}
 
 ```sh
 ibmcloud ks credential set classic --infrastructure-api-key KEY --infrastructure-username USERNAME --region REGION [-q]
@@ -4759,7 +4631,6 @@ ibmcloud ks credential set classic \
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks credential set help
@@ -4783,7 +4654,6 @@ ibmcloud ks credential set help
 [Classic infrastructure]{: tag-classic-inf} 
 
 Remove the credentials that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account. This command applies to the targeted resource group, or to the default resource group if no resource group is targeted.
-{: shortdesc}
 
 ```sh
 ibmcloud ks credential unset --region REGION [-q]
@@ -4817,7 +4687,6 @@ ibmcloud ks credential unset --region REGION
 {: #experimental-cli}
 
 [Expires on 2026-10-21] Experiment with new commands. IMPORTANT: Commands here will retire after the [date] in their description.
-{: shortdesc}
 
 
 ### `ibmcloud ks experimental help`
@@ -4826,7 +4695,6 @@ ibmcloud ks credential unset --region REGION
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks experimental help
@@ -4850,7 +4718,6 @@ ibmcloud ks experimental help
 
 
 [Expires on 2026-10-21] Get the default trusted profile for clusters created in a resource-group.
-{: shortdesc}
 
 ```sh
 ibmcloud ks experimental trusted-profile default get --region REGION --resource-group GROUP [--output OUTPUT] [-q]
@@ -4890,7 +4757,6 @@ ibmcloud ks experimental trusted-profile default get --region REGION --resource-
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks experimental trusted-profile default help
@@ -4914,7 +4780,6 @@ ibmcloud ks experimental trusted-profile default help
 
 
 [Expires on 2026-10-21] Set the default trusted profile for clusters created in a resource-group.
-{: shortdesc}
 
 ```sh
 ibmcloud ks experimental trusted-profile default set --region REGION --resource-group GROUP --trusted-profile PROFILE [--output OUTPUT] [-q]
@@ -4960,7 +4825,6 @@ ibmcloud ks experimental trusted-profile default set \
 
 
 [Expires on 2026-10-21] Get trusted profile for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks experimental trusted-profile get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -4997,7 +4861,6 @@ ibmcloud ks experimental trusted-profile get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks experimental trusted-profile help
@@ -5021,7 +4884,6 @@ ibmcloud ks experimental trusted-profile help
 
 
 [Expires on 2026-10-21] Set trusted profile on a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks experimental trusted-profile set --cluster CLUSTER --trusted-profile PROFILE [--output OUTPUT] [-q]
@@ -5059,7 +4921,6 @@ ibmcloud ks experimental trusted-profile set --cluster CLUSTER --trusted-profile
 {: #flavor-cli}
 
 Getting flavor related information. Flavors determine how much virtual CPU, memory, and disk space is available to each worker node.
-{: shortdesc}
 
 
 ### `ibmcloud ks flavor get`
@@ -5068,7 +4929,6 @@ Getting flavor related information. Flavors determine how much virtual CPU, memo
 
 
 Get the information of a flavor for a zone and provider.
-{: shortdesc}
 
 ```sh
 ibmcloud ks flavor get --flavor FLAVOR --provider PROVIDER --zone ZONE [--output OUTPUT] [-q]
@@ -5111,7 +4971,6 @@ ibmcloud ks flavor get --flavor FLAVOR --provider PROVIDER --zone ZONE
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks flavor help
@@ -5135,7 +4994,6 @@ ibmcloud ks flavor help
 
 
 List available flavors for a zone.
-{: shortdesc}
 
 ```sh
 ibmcloud ks flavor ls --zone ZONE [--output OUTPUT] [--provider PROVIDER] [-q] [--show-os] [--show-storage]
@@ -5179,7 +5037,6 @@ ibmcloud ks flavor ls --zone ZONE
 {: #infra-permissions-cli}
 
 View information about infrastructure permissions that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account.
-{: shortdesc}
 
 
 ### `ibmcloud ks infra-permissions get`
@@ -5188,7 +5045,6 @@ View information about infrastructure permissions that allow you to access the I
 [Classic infrastructure]{: tag-classic-inf} 
 
 Check whether the credentials that allow access to the IBM Cloud classic infrastructure portfolio for the targeted resource group are missing suggested or required infrastructure permissions. This command applies to the targeted resource group, or to the default resource group if no resource group is targeted.
-{: shortdesc}
 
 ```sh
 ibmcloud ks infra-permissions get [--output OUTPUT] [-q] [--region REGION]
@@ -5225,7 +5081,6 @@ ibmcloud ks infra-permissions get
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks infra-permissions help
@@ -5247,7 +5102,6 @@ ibmcloud ks infra-permissions help
 {: #ingress-cli}
 
 View and modify Ingress services and settings
-{: shortdesc}
 
 
 ### `ibmcloud ks ingress alb autoscale get`
@@ -5256,7 +5110,6 @@ View and modify Ingress services and settings
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 See autoscaling status and configuration for Ingress ALBs.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb autoscale get --alb ALB --cluster CLUSTER [--output OUTPUT] [-q]
@@ -5296,7 +5149,6 @@ ibmcloud ks ingress alb autoscale get --alb ALB --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb autoscale help
@@ -5320,7 +5172,6 @@ ibmcloud ks ingress alb autoscale help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Configure autoscaling for Ingress ALBs.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb autoscale set --alb ALB --cluster CLUSTER --max-replicas REPLICAS --min-replicas REPLICAS [--output OUTPUT] [-q] (--cpu-average-utilization PERCENT | --custom-metrics-file FILE)
@@ -5377,7 +5228,6 @@ ibmcloud ks ingress alb autoscale set \
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Delete the autoscaling configuration for Ingress ALBs.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb autoscale unset --alb ALB --cluster CLUSTER [-q]
@@ -5414,7 +5264,6 @@ ibmcloud ks ingress alb autoscale unset --alb ALB --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable automatic updates of all Ingress ALB pods in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb autoupdate disable --cluster CLUSTER [-q]
@@ -5448,7 +5297,6 @@ ibmcloud ks ingress alb autoupdate disable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Enable automatic updates of all Ingress ALB pods in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb autoupdate enable --cluster CLUSTER [-q]
@@ -5482,7 +5330,6 @@ ibmcloud ks ingress alb autoupdate enable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View whether the Ingress ALB pods in a cluster are set to automatically update and whether ALB pods are at the latest version.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb autoupdate get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -5519,7 +5366,6 @@ ibmcloud ks ingress alb autoupdate get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb autoupdate help
@@ -5543,7 +5389,6 @@ ibmcloud ks ingress alb autoupdate help
 [Classic infrastructure]{: tag-classic-inf} 
 
 Create and enable an Ingress ALB in a classic cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb create classic --cluster CLUSTER --type TYPE --vlan VLAN --zone ZONE [--ip IP] [-q] [--version VERSION]
@@ -5592,7 +5437,6 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type TYPE --vlan VLAN
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb create help
@@ -5616,7 +5460,6 @@ ibmcloud ks ingress alb create help
 [Virtual Private Cloud]{: tag-vpc} 
 
 Create and enable an Ingress ALB in a VPC Gen 2 cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type TYPE --zone ZONE [-q] [--version VERSION]
@@ -5659,7 +5502,6 @@ ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type TYPE --zone ZON
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable an Ingress ALB in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb disable --alb ALB --cluster CLUSTER [-q]
@@ -5696,7 +5538,6 @@ ibmcloud ks ingress alb disable --alb ALB --cluster CLUSTER
 [Classic infrastructure]{: tag-classic-inf} 
 
 Enable an Ingress ALB in a classic cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb enable classic --alb ALB --cluster CLUSTER [--ip IP] [-q] [--version VERSION]
@@ -5739,7 +5580,6 @@ ibmcloud ks ingress alb enable classic --alb ALB --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb enable help
@@ -5763,7 +5603,6 @@ ibmcloud ks ingress alb enable help
 [Virtual Private Cloud]{: tag-vpc} 
 
 Enable an Ingress ALB in a VPC Gen 2 cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb enable vpc-gen2 --alb ALB --cluster CLUSTER [-q] [--version VERSION]
@@ -5803,7 +5642,6 @@ ibmcloud ks ingress alb enable vpc-gen2 --alb ALB --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the details of an Ingress ALB in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb get --alb ALB --cluster CLUSTER [--output OUTPUT] [-q]
@@ -5843,7 +5681,6 @@ ibmcloud ks ingress alb get --alb ALB --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable the Ingress health checker.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb health-checker disable --cluster CLUSTER [-q]
@@ -5877,7 +5714,6 @@ ibmcloud ks ingress alb health-checker disable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Enable the Ingress health checker.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb health-checker enable --cluster CLUSTER [-q]
@@ -5911,7 +5747,6 @@ ibmcloud ks ingress alb health-checker enable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View status of the Ingress health checker.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb health-checker get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -5948,7 +5783,6 @@ ibmcloud ks ingress alb health-checker get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb health-checker help
@@ -5972,7 +5806,6 @@ ibmcloud ks ingress alb health-checker help
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb help
@@ -5996,7 +5829,6 @@ ibmcloud ks ingress alb help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List all Ingress ALB IDs in a cluster and whether ALB pods are at the latest version.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb ls --cluster CLUSTER [--output OUTPUT] [-q]
@@ -6033,7 +5865,6 @@ ibmcloud ks ingress alb ls --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Force a one-time update of the pods for individual or all ALBs in the cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB ...] [--output OUTPUT] [-q] [--version VERSION]
@@ -6076,7 +5907,6 @@ ibmcloud ks ingress alb update --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List Ingress ALB image versions that are available.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress alb versions [--output OUTPUT] [-q] [--region REGION]
@@ -6113,7 +5943,6 @@ ibmcloud ks ingress alb versions
 
 
 Create an Ingress domain for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain create --cluster CLUSTER [--crn CRN] [--domain DOMAIN] [--domain-provider PROVIDER] [--domain-zone ZONE] [--hostname HOSTNAME] [--ip IP] [--is-default] [--output OUTPUT] [-q] [--secret-namespace NAMESPACE]
@@ -6174,7 +6003,6 @@ ibmcloud ks ingress domain create --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain default help
@@ -6198,7 +6026,6 @@ ibmcloud ks ingress domain default help
 
 
 Change a cluster's default Ingress domain.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain default replace --cluster CLUSTER --domain DOMAIN [-q]
@@ -6235,7 +6062,6 @@ ibmcloud ks ingress domain default replace --cluster CLUSTER --domain DOMAIN
 
 
 View the details of an Ingress domain.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain get --cluster CLUSTER --domain DOMAIN [--output OUTPUT] [-q]
@@ -6275,7 +6101,6 @@ ibmcloud ks ingress domain get --cluster CLUSTER --domain DOMAIN
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain help
@@ -6299,7 +6124,6 @@ ibmcloud ks ingress domain help
 
 
 List all Ingress domains for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain ls --cluster CLUSTER [--output OUTPUT] [-q]
@@ -6336,7 +6160,6 @@ ibmcloud ks ingress domain ls --cluster CLUSTER
 
 
 Remove an Ingress domain from a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain rm --cluster CLUSTER --domain DOMAIN [-f] [-q]
@@ -6376,7 +6199,6 @@ ibmcloud ks ingress domain rm --cluster CLUSTER --domain DOMAIN
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain secret help
@@ -6400,7 +6222,6 @@ ibmcloud ks ingress domain secret help
 
 
 Regenerate the certificate for an Ingress domain.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain secret regenerate --cluster CLUSTER --domain DOMAIN [--output OUTPUT] [-q]
@@ -6440,7 +6261,6 @@ ibmcloud ks ingress domain secret regenerate --cluster CLUSTER --domain DOMAIN
 
 
 Delete a secret for an Ingress domain and prevent future renewal of the certificate.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain secret rm --cluster CLUSTER --domain DOMAIN [-f] [--output OUTPUT] [-q]
@@ -6483,7 +6303,6 @@ ibmcloud ks ingress domain secret rm --cluster CLUSTER --domain DOMAIN
 
 
 Update an Ingress domain for a cluster. The records passed in will fully replace the current records associated with the domain. Passing in no records will unregister the current records from a domain.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress domain update --cluster CLUSTER --domain DOMAIN [--hostname HOSTNAME] [--ip IP] [-q]
@@ -6526,7 +6345,6 @@ ibmcloud ks ingress domain update --cluster CLUSTER --domain DOMAIN
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress help
@@ -6550,7 +6368,6 @@ ibmcloud ks ingress help
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress instance default help
@@ -6574,7 +6391,6 @@ ibmcloud ks ingress instance default help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Set a registered IBM Cloud Secrets Manager instance as the default. If an existing default instance exists, it is unset.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress instance default set --cluster CLUSTER --name NAME [-q] [--secret-group GROUP]
@@ -6614,7 +6430,6 @@ ibmcloud ks ingress instance default set --cluster CLUSTER --name NAME
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Unset a registered IBM Cloud Secrets Manager instance from default.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress instance default unset --cluster CLUSTER --name NAME [-q]
@@ -6651,7 +6466,6 @@ ibmcloud ks ingress instance default unset --cluster CLUSTER --name NAME
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View details of a registered Secrets Manager instance.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress instance get --cluster CLUSTER --name NAME [--output OUTPUT] [-q]
@@ -6691,7 +6505,6 @@ ibmcloud ks ingress instance get --cluster CLUSTER --name NAME
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress instance help
@@ -6715,7 +6528,6 @@ ibmcloud ks ingress instance help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List registered Secrets Manager instances in your account.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress instance ls --cluster CLUSTER [--output OUTPUT] [-q] [--show-deleted]
@@ -6755,7 +6567,6 @@ ibmcloud ks ingress instance ls --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Register an IBM Cloud Secrets Manager instance to a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN [--is-default] [-q] [--secret-group GROUP]
@@ -6798,7 +6609,6 @@ ibmcloud ks ingress instance register --cluster CLUSTER --crn CRN
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Unregister an IBM Cloud Secrets Manager instance from a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress instance unregister --cluster CLUSTER --name NAME [-q]
@@ -6835,7 +6645,6 @@ ibmcloud ks ingress instance unregister --cluster CLUSTER --name NAME
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress load-balancer backend help
@@ -6859,7 +6668,6 @@ ibmcloud ks ingress load-balancer backend help
 [Virtual Private Cloud]{: tag-vpc} 
 
 Set the Ingress controller currently exposed by the VPC ALB load balancer.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress load-balancer backend set --cluster CLUSTER [--private-backend BACKEND] [--public-backend BACKEND] [-q]
@@ -6899,7 +6707,6 @@ ibmcloud ks ingress load-balancer backend set --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Get the configuration of load balancers that expose Ingress ALBs in your cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress load-balancer get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -6936,7 +6743,6 @@ ibmcloud ks ingress load-balancer get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress load-balancer help
@@ -6960,7 +6766,6 @@ ibmcloud ks ingress load-balancer help
 [Virtual Private Cloud]{: tag-vpc} 
 
 Disable the PROXY protocol on Ingress ALBs.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress load-balancer proxy-protocol disable --cluster CLUSTER [-f] [-q]
@@ -6997,7 +6802,6 @@ ibmcloud ks ingress load-balancer proxy-protocol disable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} 
 
 Enable the PROXY protocol so that client connection information is passed in request headers to ALBs.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress load-balancer proxy-protocol enable --cluster CLUSTER [--cidr CIDR ...] [-f] [-q]
@@ -7037,7 +6841,6 @@ ibmcloud ks ingress load-balancer proxy-protocol enable --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress load-balancer proxy-protocol help
@@ -7061,7 +6864,6 @@ ibmcloud ks ingress load-balancer proxy-protocol help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Create an Ingress secret in a cluster for a secret stored in IBM Cloud Secret Manager.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret create --cluster CLUSTER --name NAME [--cert-crn CRN] [--field FIELD] [--namespace NAMESPACE] [--persist] [-q] [--type TYPE]
@@ -7113,7 +6915,6 @@ ibmcloud ks ingress secret create --cluster CLUSTER --name NAME
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Add fields to an existing Ingress secret.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret field add --cluster CLUSTER --name NAME --namespace NAMESPACE [--field FIELD] [-q]
@@ -7156,7 +6957,6 @@ ibmcloud ks ingress secret field add --cluster CLUSTER --name NAME --namespace N
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret field help
@@ -7180,7 +6980,6 @@ ibmcloud ks ingress secret field help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the fields of an Ingress secret.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret field ls --cluster CLUSTER --name NAME --namespace NAMESPACE [--output OUTPUT] [-q] [--show-crn]
@@ -7226,7 +7025,6 @@ ibmcloud ks ingress secret field ls --cluster CLUSTER --name NAME --namespace NA
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove fields from an existing Ingress secret.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret field rm --cluster CLUSTER --name NAME --namespace NAMESPACE [--field-name NAME] [-q]
@@ -7269,7 +7067,6 @@ ibmcloud ks ingress secret field rm --cluster CLUSTER --name NAME --namespace NA
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the details of an Ingress secret.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret get --cluster CLUSTER --name NAME --namespace NAMESPACE [--output OUTPUT] [-q]
@@ -7312,7 +7109,6 @@ ibmcloud ks ingress secret get --cluster CLUSTER --name NAME --namespace NAMESPA
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret help
@@ -7336,7 +7132,6 @@ ibmcloud ks ingress secret help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List all Ingress secrets in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret ls --cluster CLUSTER [--output OUTPUT] [-q] [--show-crn] [--show-deleted]
@@ -7379,7 +7174,6 @@ ibmcloud ks ingress secret ls --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove an Ingress secret from a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret rm --cluster CLUSTER --name NAME --namespace NAMESPACE [-q]
@@ -7419,7 +7213,6 @@ ibmcloud ks ingress secret rm --cluster CLUSTER --name NAME --namespace NAMESPAC
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Update an existing Ingress secret.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress secret update --cluster CLUSTER --name NAME --namespace NAMESPACE [--cert-crn CRN] [-q]
@@ -7462,7 +7255,6 @@ ibmcloud ks ingress secret update --cluster CLUSTER --name NAME --namespace NAME
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress security help
@@ -7486,7 +7278,6 @@ ibmcloud ks ingress security help
 
 
 Disable the usage of port 80 in your cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress security port80 disable --cluster CLUSTER [-f] [-q]
@@ -7523,7 +7314,6 @@ ibmcloud ks ingress security port80 disable --cluster CLUSTER
 
 
 Enable the usage of port 80 in your cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress security port80 enable --cluster CLUSTER [-f] [-q]
@@ -7560,7 +7350,6 @@ ibmcloud ks ingress security port80 enable --cluster CLUSTER
 
 
 Get the security configuration of port 80 in your cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress security port80 get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -7597,7 +7386,6 @@ ibmcloud ks ingress security port80 get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress security port80 help
@@ -7621,7 +7409,6 @@ ibmcloud ks ingress security port80 help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Disable status reporting for Ingress components in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress status-report disable --cluster CLUSTER [--output OUTPUT] [-q]
@@ -7658,7 +7445,6 @@ ibmcloud ks ingress status-report disable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Enable status reporting for Ingress components in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress status-report enable --cluster CLUSTER [--output OUTPUT] [-q]
@@ -7695,7 +7481,6 @@ ibmcloud ks ingress status-report enable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Get the status report for Ingress components in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress status-report get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -7732,7 +7517,6 @@ ibmcloud ks ingress status-report get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress status-report help
@@ -7756,7 +7540,6 @@ ibmcloud ks ingress status-report help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Suppress warnings from Ingress status reports for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress status-report ignored-errors add --cluster CLUSTER --code CODE [--code CODE ...] [--output OUTPUT] [-q]
@@ -7796,7 +7579,6 @@ ibmcloud ks ingress status-report ignored-errors add --cluster CLUSTER --code CO
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress status-report ignored-errors help
@@ -7820,7 +7602,6 @@ ibmcloud ks ingress status-report ignored-errors help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List warnings that are currently ignored by Ingress status for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress status-report ignored-errors ls --cluster CLUSTER [--output OUTPUT] [-q]
@@ -7857,7 +7638,6 @@ ibmcloud ks ingress status-report ignored-errors ls --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove warnings that are currently ignored by Ingress status for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks ingress status-report ignored-errors rm --cluster CLUSTER --code CODE [--code CODE ...] [--output OUTPUT] [-q]
@@ -7895,7 +7675,6 @@ ibmcloud ks ingress status-report ignored-errors rm --cluster CLUSTER --code COD
 {: #kms-cli}
 
 View and configure Key Management Service integrations.
-{: shortdesc}
 
 
 ### `ibmcloud ks kms crk help`
@@ -7904,7 +7683,6 @@ View and configure Key Management Service integrations.
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks kms crk help
@@ -7928,7 +7706,6 @@ ibmcloud ks kms crk help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List available root keys for a Key Management Service instance.
-{: shortdesc}
 
 ```sh
 ibmcloud ks kms crk ls --instance-id ID [--output OUTPUT] [-q]
@@ -7965,7 +7742,6 @@ ibmcloud ks kms crk ls --instance-id ID
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Enable a key management service (KMS) in your cluster to encrypt your secrets.
-{: shortdesc}
 
 ```sh
 ibmcloud ks kms enable --cluster CLUSTER --crk CRK --instance-id ID [--kms-account-id ID] [--public-endpoint] [-q]
@@ -8011,7 +7787,6 @@ ibmcloud ks kms enable --cluster CLUSTER --crk CRK --instance-id ID
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks kms help
@@ -8035,7 +7810,6 @@ ibmcloud ks kms help
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks kms instance help
@@ -8059,7 +7833,6 @@ ibmcloud ks kms instance help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List available Key Management Service instances.
-{: shortdesc}
 
 ```sh
 ibmcloud ks kms instance ls [--output OUTPUT] [-q]
@@ -8091,7 +7864,6 @@ ibmcloud ks kms instance ls
 {: #locations-cli}
 
 List supported IBM Cloud Kubernetes Service locations.
-{: shortdesc}
 
 
 ### `ibmcloud ks locations`
@@ -8100,7 +7872,6 @@ List supported IBM Cloud Kubernetes Service locations.
 
 
 List supported IBM Cloud Kubernetes Service locations.
-{: shortdesc}
 
 ```sh
 ibmcloud ks locations
@@ -8138,7 +7909,6 @@ ibmcloud ks locations
 {: #logging-cli}
 
 Forward logs from your cluster.
-{: shortdesc}
 
 
 ### `ibmcloud ks logging autoupdate disable`
@@ -8147,7 +7917,6 @@ Forward logs from your cluster.
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Disable automatic updates of all Fluentd pods in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging autoupdate disable --cluster CLUSTER [-q]
@@ -8181,7 +7950,6 @@ ibmcloud ks logging autoupdate disable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Enable automatic updates of all Fluentd pods in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging autoupdate enable --cluster CLUSTER [-q]
@@ -8215,7 +7983,6 @@ ibmcloud ks logging autoupdate enable --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 View whether your Fluentd pods are set to automatically update in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging autoupdate get --cluster CLUSTER [--output OUTPUT] [-q]
@@ -8252,7 +8019,6 @@ ibmcloud ks logging autoupdate get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging autoupdate help
@@ -8276,7 +8042,6 @@ ibmcloud ks logging autoupdate help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Create a logging configuration. If you are using a Dedicated account, you must log in to the public IBM Cloud endpoint and target your public org and space to enable log forwarding.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging config create --cluster CLUSTER --logsource LOGSOURCE --type TYPE [--force-update] [--hostname HOSTNAME] [--output OUTPUT] [--port PORT] [-q] (--ca-cert CERT --syslog-protocol PROTOCOL --verify-mode MODE | --org ORG --skip-validation --space SPACE) (--namespace NAMESPACE | -C CONTAINER -p PATH)
@@ -8362,7 +8127,6 @@ ibmcloud ks logging config create \
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 View log forwarding configurations for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging config get --cluster CLUSTER [--logsource LOGSOURCE] [--output OUTPUT] [-q]
@@ -8402,7 +8166,6 @@ ibmcloud ks logging config get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging config help
@@ -8426,7 +8189,6 @@ ibmcloud ks logging config help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Delete a log forwarding configuration from a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging config rm --cluster CLUSTER [--force-update] [-q] (--all | --id ID | --namespace NAMESPACE)
@@ -8472,7 +8234,6 @@ ibmcloud ks logging config rm --cluster CLUSTER --all
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Update a log forwarding configuration for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging config update --cluster CLUSTER --id ID --logsource LOGSOURCE --type TYPE [--force-update] [--hostname HOSTNAME] [--output OUTPUT] [--port PORT] [-q] (--ca-cert CERT --syslog-protocol PROTOCOL --verify-mode MODE | --org ORG --skip-validation --space SPACE) (--namespace NAMESPACE | -C CONTAINER -p PATH)
@@ -8562,7 +8323,6 @@ ibmcloud ks logging config update \
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Create a filter to exclude log lines from forwarding.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging filter create --cluster CLUSTER [--container CONTAINER] [--force-update] [--lc LOGGING-CONFIG ...] [--level LEVEL] [--namespace NAMESPACE] [--output OUTPUT] [-q] [--type TYPE] (--message MESSAGE | --regex-message MESSAGE)
@@ -8623,7 +8383,6 @@ ibmcloud ks logging filter create --cluster CLUSTER --message MESSAGE
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 View a logging filter configuration.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging filter get --cluster CLUSTER [--id ID] [--output OUTPUT] [-q] [--show-covering-filters] [--show-matching-configs]
@@ -8669,7 +8428,6 @@ ibmcloud ks logging filter get --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging filter help
@@ -8693,7 +8451,6 @@ ibmcloud ks logging filter help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Delete a logging filter.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging filter rm --cluster CLUSTER [--force-update] [-q] (--all | --id ID)
@@ -8736,7 +8493,6 @@ ibmcloud ks logging filter rm --cluster CLUSTER --all
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Update a logging filter.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging filter update --cluster CLUSTER --id ID [--container CONTAINER] [--force-update] [--lc LOGGING-CONFIG ...] [--level LEVEL] [--namespace NAMESPACE] [--output OUTPUT] [-q] [--type TYPE] (--message MESSAGE | --regex-message MESSAGE)
@@ -8800,7 +8556,6 @@ ibmcloud ks logging filter update --cluster CLUSTER --id ID --message MESSAGE
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging help
@@ -8824,7 +8579,6 @@ ibmcloud ks logging help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Refresh the logging configuration for a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-q]
@@ -8859,7 +8613,6 @@ ibmcloud ks logging refresh --cluster CLUSTER
 {: #messages-cli}
 
 View the current user messages.
-{: shortdesc}
 
 
 ### `ibmcloud ks messages`
@@ -8868,7 +8621,6 @@ View the current user messages.
 
 
 View the current user messages.
-{: shortdesc}
 
 ```sh
 ibmcloud ks messages [-q]
@@ -8897,7 +8649,6 @@ ibmcloud ks messages
 {: #nlb-dns-cli}
 
 Create and manage host names for network load balancer (NLB) IP addresses in a cluster and health check monitors for host names.
-{: shortdesc}
 
 
 ### `ibmcloud ks nlb-dns add`
@@ -8906,7 +8657,6 @@ Create and manage host names for network load balancer (NLB) IP addresses in a c
 [Classic infrastructure]{: tag-classic-inf} 
 
 Add an NLB IP to an existing host name that you created with `ibmcloud ks nlb-dns create`.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns add --cluster CLUSTER --ip IP [--ip IP ...] --nlb-host HOST [--output OUTPUT] [-q]
@@ -8949,7 +8699,6 @@ ibmcloud ks nlb-dns add --cluster CLUSTER --ip IP --nlb-host HOST
 [Classic infrastructure]{: tag-classic-inf} 
 
 Create a DNS host name to register one or more NLB IPs in a classic cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip IP [--ip IP ...] [--output OUTPUT] [-q] [--secret-namespace NAMESPACE]
@@ -8992,7 +8741,6 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip IP
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns create help
@@ -9016,7 +8764,6 @@ ibmcloud ks nlb-dns create help
 [Virtual Private Cloud]{: tag-vpc} 
 
 Create a DNS record to register a load balancer host name or load balancer IP addresses in a VPC cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER [--output OUTPUT] [-q] [--secret-namespace NAMESPACE] (--ip IP | --lb-host HOST)
@@ -9062,7 +8809,6 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER --ip IP
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the details of a registered NLB host name in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns get --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--output OUTPUT] [-q]
@@ -9102,7 +8848,6 @@ ibmcloud ks nlb-dns get --cluster CLUSTER --nlb-subdomain SUBDOMAIN
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns help
@@ -9126,7 +8871,6 @@ ibmcloud ks nlb-dns help
 
 
 List the registered NLB host names and IP addresses in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns ls --cluster CLUSTER [--output OUTPUT] [-q]
@@ -9163,7 +8907,6 @@ ibmcloud ks nlb-dns ls --cluster CLUSTER
 
 
 Configure a health check monitor for an existing NLB host name in a cluster. To enable the monitor, include the `--enable` flag. To update an existing monitor, include only the flags for the settings that you want to change.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host HOST [--enable] [--header HEADER ...] [--interval INTERVAL] [--output OUTPUT] [--path PATH] [--port PORT] [-q] [--timeout TIMEOUT] [--type TYPE]
@@ -9224,7 +8967,6 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host HOST
 [Classic infrastructure]{: tag-classic-inf} 
 
 Disable an existing health check monitor for a NLB host name in a cluster..
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host HOST [--output OUTPUT] [-q]
@@ -9264,7 +9006,6 @@ ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host HOST
 [Classic infrastructure]{: tag-classic-inf} 
 
 Enable a health check monitor for an NLB host name in a cluster. Note: You must first configure the monitor with `ibmcloud ks nlb-dns monitor configure`.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host HOST [--output OUTPUT] [-q]
@@ -9304,7 +9045,6 @@ ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host HOST
 [Classic infrastructure]{: tag-classic-inf} 
 
 View the settings for an existing health check monitor.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host HOST [--output OUTPUT] [-q]
@@ -9344,7 +9084,6 @@ ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host HOST
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns monitor help
@@ -9368,7 +9107,6 @@ ibmcloud ks nlb-dns monitor help
 [Classic infrastructure]{: tag-classic-inf} 
 
 List the health check monitor settings for each NLB host name in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns monitor ls --cluster CLUSTER [--output OUTPUT] [-q]
@@ -9405,7 +9143,6 @@ ibmcloud ks nlb-dns monitor ls --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} 
 
 Update an existing DNS host name by replacing the load balancer hostname associated with it in a VPC cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-host HOST --nlb-subdomain SUBDOMAIN [--output OUTPUT] [-q]
@@ -9448,7 +9185,6 @@ ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-host HOST --nlb-subdomain SUB
 [Classic infrastructure]{: tag-classic-inf} 
 
 Remove an NLB IP address from an NLB host name. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host HOST [--output OUTPUT] [-q]
@@ -9491,7 +9227,6 @@ ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host HOST
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns rm help
@@ -9515,7 +9250,6 @@ ibmcloud ks nlb-dns rm help
 [Virtual Private Cloud]{: tag-vpc} 
 
 Remove a load balancer host name or IP address from a DNS record in a VPC cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns rm vpc-gen2 --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--ip IP] [--output OUTPUT] [-q]
@@ -9558,7 +9292,6 @@ ibmcloud ks nlb-dns rm vpc-gen2 --cluster CLUSTER --nlb-subdomain SUBDOMAIN
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns secret help
@@ -9582,7 +9315,6 @@ ibmcloud ks nlb-dns secret help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Regenerate the certificate and secret for an NLB subdomain.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns secret regenerate --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--output OUTPUT] [-q]
@@ -9622,7 +9354,6 @@ ibmcloud ks nlb-dns secret regenerate --cluster CLUSTER --nlb-subdomain SUBDOMAI
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Delete a secret from an NLB subdomain and prevent future renewal of the certificate.
-{: shortdesc}
 
 ```sh
 ibmcloud ks nlb-dns secret rm --cluster CLUSTER --nlb-subdomain SUBDOMAIN [-f] [--output OUTPUT] [-q]
@@ -9663,7 +9394,6 @@ ibmcloud ks nlb-dns secret rm --cluster CLUSTER --nlb-subdomain SUBDOMAIN
 {: #quota-cli}
 
 View the quota and limits for cluster-related resources in your IBM Cloud account.
-{: shortdesc}
 
 
 ### `ibmcloud ks quota help`
@@ -9672,7 +9402,6 @@ View the quota and limits for cluster-related resources in your IBM Cloud accoun
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks quota help
@@ -9696,7 +9425,6 @@ ibmcloud ks quota help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List all quota and limits for cluster-related resources in your IBM Cloud account.
-{: shortdesc}
 
 ```sh
 ibmcloud ks quota ls [--output OUTPUT] [--provider PROVIDER] [-q]
@@ -9731,7 +9459,6 @@ ibmcloud ks quota ls
 {: #script-cli}
 
 Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. Legacy-structured commands are replaced with beta-structured commands.
-{: shortdesc}
 
 
 ### `ibmcloud ks script help`
@@ -9740,7 +9467,6 @@ Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. Legacy-
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks script help
@@ -9764,7 +9490,6 @@ ibmcloud ks script help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. Legacy-structured commands are replaced with beta-structured commands.
-{: shortdesc}
 
 ```sh
 ibmcloud ks script update [--in-place] FILE [FILE ...]
@@ -9796,7 +9521,6 @@ ibmcloud ks script update FILE
 {: #security-group-cli}
 
 Run operations against a security group.
-{: shortdesc}
 
 
 ### `ibmcloud ks security-group help`
@@ -9805,7 +9529,6 @@ Run operations against a security group.
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks security-group help
@@ -9829,7 +9552,6 @@ ibmcloud ks security-group help
 
 
 List all security groups associated with a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks security-group ls --cluster CLUSTER [--attached-to ATTACHED] [--managed-by MANAGER] [--output OUTPUT] [-q] [--scope SCOPE]
@@ -9875,7 +9597,6 @@ ibmcloud ks security-group ls --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Deletes all existing security group rules, and reapplies default rules.
-{: shortdesc}
 
 ```sh
 ibmcloud ks security-group reset --cluster CLUSTER --security-group GROUP [-f] [-q]
@@ -9915,7 +9636,6 @@ ibmcloud ks security-group reset --cluster CLUSTER --security-group GROUP
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Reapplies default security group rules that do not exist. Does not delete any preexisting rules.
-{: shortdesc}
 
 ```sh
 ibmcloud ks security-group sync --cluster CLUSTER --security-group GROUP [-q]
@@ -9950,7 +9670,6 @@ ibmcloud ks security-group sync --cluster CLUSTER --security-group GROUP
 {: #storage-cli}
 
 View and modify storage resources.
-{: shortdesc}
 
 
 ### `ibmcloud ks storage attachment create`
@@ -9962,7 +9681,6 @@ The `storage attachment create` command is a beta feature.
 [Virtual Private Cloud]{: tag-vpc} 
 
 Attach a storage volume to a worker node.
-{: shortdesc}
 
 ```sh
 ibmcloud ks storage attachment create --cluster CLUSTER --volume VOLUME --worker WORKER [--output OUTPUT] [-q]
@@ -10008,7 +9726,6 @@ The `storage attachment get` command is a beta feature.
 [Virtual Private Cloud]{: tag-vpc} 
 
 Get the details of a volume attachment in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks storage attachment get --attachment ATTACHMENT --cluster CLUSTER --worker WORKER [--output OUTPUT] [-q]
@@ -10051,7 +9768,6 @@ ibmcloud ks storage attachment get --attachment ATTACHMENT --cluster CLUSTER --w
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks storage attachment help
@@ -10078,7 +9794,6 @@ The `storage attachment ls` command is a beta feature.
 [Virtual Private Cloud]{: tag-vpc} 
 
 List all storage volume attachments of a worker in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks storage attachment ls --cluster CLUSTER --worker WORKER [--output OUTPUT] [-q]
@@ -10121,7 +9836,6 @@ The `storage attachment rm` command is a beta feature.
 [Virtual Private Cloud]{: tag-vpc} 
 
 Delete a volume attachment from a worker node.
-{: shortdesc}
 
 ```sh
 ibmcloud ks storage attachment rm --attachment ATTACHMENT --cluster CLUSTER --worker WORKER [-q]
@@ -10161,7 +9875,6 @@ ibmcloud ks storage attachment rm --attachment ATTACHMENT --cluster CLUSTER --wo
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks storage help
@@ -10188,7 +9901,6 @@ The `storage volume get` command is a beta feature.
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 Get the details of a volume.
-{: shortdesc}
 
 ```sh
 ibmcloud ks storage volume get --volume VOLUME [--output OUTPUT] [-q]
@@ -10225,7 +9937,6 @@ ibmcloud ks storage volume get --volume VOLUME
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks storage volume help
@@ -10252,7 +9963,6 @@ The `storage volume ls` command is a beta feature.
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} 
 
 List the details of volumes.
-{: shortdesc}
 
 ```sh
 ibmcloud ks storage volume ls [--cluster CLUSTER] [--output OUTPUT] [--provider PROVIDER] [-q] [--zone ZONE]
@@ -10293,7 +10003,6 @@ ibmcloud ks storage volume ls
 {: #subnets-cli}
 
 List available portable subnets in your IBM Cloud infrastructure account.
-{: shortdesc}
 
 
 ### `ibmcloud ks subnets`
@@ -10302,7 +10011,6 @@ List available portable subnets in your IBM Cloud infrastructure account.
 
 
 List available portable subnets in your IBM Cloud infrastructure account.
-{: shortdesc}
 
 ```sh
 ibmcloud ks subnets --provider PROVIDER [-l LOCATION ...] [--output OUTPUT] [-q] [--vpc-id ID] [--zone ZONE]
@@ -10346,7 +10054,6 @@ ibmcloud ks subnets --provider PROVIDER
 {: #versions-cli}
 
 List all the container platform versions that are available for IBM Cloud Kubernetes Service clusters.
-{: shortdesc}
 
 
 ### `ibmcloud ks versions`
@@ -10355,7 +10062,6 @@ List all the container platform versions that are available for IBM Cloud Kubern
 
 
 List all the container platform versions that are available for IBM Cloud Kubernetes Service clusters.
-{: shortdesc}
 
 ```sh
 ibmcloud ks versions [--output OUTPUT] [-q] [--show-version VERSION]
@@ -10390,7 +10096,6 @@ ibmcloud ks versions
 {: #vlan-cli}
 
 List public and private VLANs for a zone and view the VLAN spanning status.
-{: shortdesc}
 
 
 ### `ibmcloud ks vlan help`
@@ -10399,7 +10104,6 @@ List public and private VLANs for a zone and view the VLAN spanning status.
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks vlan help
@@ -10423,7 +10127,6 @@ ibmcloud ks vlan help
 [Classic infrastructure]{: tag-classic-inf} 
 
 List available public and private VLANs for a zone.
-{: shortdesc}
 
 ```sh
 ibmcloud ks vlan ls --zone ZONE [--output OUTPUT] [-q]
@@ -10460,7 +10163,6 @@ ibmcloud ks vlan ls --zone ZONE
 [Classic infrastructure]{: tag-classic-inf} 
 
 View the VLAN spanning status for your IBM Cloud classic infrastructure account.
-{: shortdesc}
 
 ```sh
 ibmcloud ks vlan spanning get [--output OUTPUT] [-q] [--region REGION]
@@ -10497,7 +10199,6 @@ ibmcloud ks vlan spanning get
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks vlan spanning help
@@ -10519,7 +10220,6 @@ ibmcloud ks vlan spanning help
 {: #vni-cli}
 
 Attach, detach, and list Virtual Network Interfaces on worker nodes.
-{: shortdesc}
 
 
 ### `ibmcloud ks vni attach baremetal`
@@ -10528,7 +10228,6 @@ Attach, detach, and list Virtual Network Interfaces on worker nodes.
 [Virtual Private Cloud]{: tag-vpc} 
 
 Attach a Virtual Network Interface to a bare metal worker node or cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI [--auto-delete] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
@@ -10577,7 +10276,6 @@ ibmcloud ks vni attach baremetal --vlan VLAN --vni VNI --cluster-id CLUSTER_NAME
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks vni attach help
@@ -10601,7 +10299,6 @@ ibmcloud ks vni attach help
 [Virtual Private Cloud]{: tag-vpc} 
 
 Detach a Virtual Network Interface from a worker node or cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks vni detach --vni VNI [-f] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
@@ -10647,7 +10344,6 @@ ibmcloud ks vni detach --vni VNI --cluster-id CLUSTER_NAME_OR_ID
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks vni help
@@ -10671,7 +10367,6 @@ ibmcloud ks vni help
 [Virtual Private Cloud]{: tag-vpc} 
 
 List Virtual Network Interfaces attached to a cluster or worker node.
-{: shortdesc}
 
 ```sh
 ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
@@ -10715,7 +10410,6 @@ ibmcloud ks vni ls --cluster-id CLUSTER_NAME_OR_ID
 {: #vpc-cli}
 
 Get information about VPCs and manage VPC clusters.
-{: shortdesc}
 
 
 ### `ibmcloud ks vpc help`
@@ -10724,7 +10418,6 @@ Get information about VPCs and manage VPC clusters.
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks vpc help
@@ -10748,7 +10441,6 @@ ibmcloud ks vpc help
 
 
 List all VPCs in the targeted resource group. If no resource group is targeted, all VPCs in the account are listed.
-{: shortdesc}
 
 ```sh
 ibmcloud ks vpc ls [--output OUTPUT] [--provider PROVIDER] [-q]
@@ -10785,7 +10477,6 @@ ibmcloud ks vpc ls
 
 
 Disable outbound traffic protection for a Secure By Default VPC cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks vpc outbound-traffic-protection disable --cluster CLUSTER [-f] [-q]
@@ -10822,7 +10513,6 @@ ibmcloud ks vpc outbound-traffic-protection disable --cluster CLUSTER
 
 
 Enable outbound traffic protection for a Secure By Default VPC cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks vpc outbound-traffic-protection enable --cluster CLUSTER [-f] [-q]
@@ -10859,7 +10549,6 @@ ibmcloud ks vpc outbound-traffic-protection enable --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks vpc outbound-traffic-protection help
@@ -10883,7 +10572,6 @@ ibmcloud ks vpc outbound-traffic-protection help
 
 
 Enable Secure By Default VPC Networking for a VPC cluster using legacy Security Groups.
-{: shortdesc}
 
 ```sh
 ibmcloud ks vpc secure-by-default enable --cluster CLUSTER [--disable-outbound-traffic-protection] [-f] [-q]
@@ -10923,7 +10611,6 @@ ibmcloud ks vpc secure-by-default enable --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks vpc secure-by-default help
@@ -10945,7 +10632,6 @@ ibmcloud ks vpc secure-by-default help
 {: #webhook-create-cli}
 
 Register a webhook in a cluster.
-{: shortdesc}
 
 
 ### `ibmcloud ks webhook-create`
@@ -10954,7 +10640,6 @@ Register a webhook in a cluster.
 
 
 Register a webhook in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks webhook-create --cluster CLUSTER --type TYPE --url URL [--level LEVEL] [-q]
@@ -10995,7 +10680,6 @@ ibmcloud ks webhook-create --cluster CLUSTER --type TYPE --url URL
 {: #worker-cli}
 
 View and modify worker nodes for a cluster.
-{: shortdesc}
 
 
 ### `ibmcloud ks worker get`
@@ -11004,7 +10688,6 @@ View and modify worker nodes for a cluster.
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the details of a worker node.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker get --cluster CLUSTER --worker WORKER [--output OUTPUT] [-q]
@@ -11044,7 +10727,6 @@ ibmcloud ks worker get --cluster CLUSTER --worker WORKER_ID
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker help
@@ -11068,7 +10750,6 @@ ibmcloud ks worker help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List all worker nodes in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker ls --cluster CLUSTER [--output OUTPUT] [-q] [--show-delete-reason] [--show-deleted] [--show-pools] [--worker-pool POOL]
@@ -11117,7 +10798,6 @@ ibmcloud ks worker ls --cluster CLUSTER
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Restart a worker node.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker reboot --cluster CLUSTER --worker WORKER [--worker WORKER ...] [-f] [--hard] [-q] [--skip-master-health]
@@ -11163,7 +10843,6 @@ ibmcloud ks worker reboot --cluster CLUSTER --worker WORKER_ID
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Delete the data, reimage, and reinstall Kubernetes with the latest patch version on one or more worker nodes. This action cannot be undone. Classic nodes and bare metal VPC nodes are supported.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker reload --worker WORKER [--worker WORKER ...] [-f] [-q] [--skip-master-health]
@@ -11203,7 +10882,6 @@ ibmcloud ks worker reload --worker WORKER_ID
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Delete a worker node and replace it with a new worker node in the same worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker replace --cluster CLUSTER --worker WORKER [-f] [-q] [--update]
@@ -11246,7 +10924,6 @@ ibmcloud ks worker replace --cluster CLUSTER --worker WORKER_ID
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove a worker node from a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker rm --cluster CLUSTER --worker WORKER [--worker WORKER ...] [-f] [-q]
@@ -11286,7 +10963,6 @@ ibmcloud ks worker rm --cluster CLUSTER --worker WORKER_ID
 [Classic infrastructure]{: tag-classic-inf} 
 
 Update one or more worker nodes in a classic cluster to a new Kubernetes version. During the update, the worker node is updated with the latest image and data is permanently deleted if not stored on persistent storage.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker update --cluster CLUSTER --worker WORKER [--worker WORKER ...] [-f] [-q]
@@ -11324,7 +11000,6 @@ ibmcloud ks worker update --cluster CLUSTER --worker WORKER_ID
 {: #worker-pool-cli}
 
 View and modify worker pools for a cluster.
-{: shortdesc}
 
 
 ### `ibmcloud ks worker-pool create classic`
@@ -11333,7 +11008,6 @@ View and modify worker pools for a cluster.
 [Classic infrastructure]{: tag-classic-inf} 
 
 Add a worker pool to a classic cluster. No worker nodes are created until zones are added to the worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool create classic --cluster CLUSTER --flavor FLAVOR --name NAME --size-per-zone SIZE [--disable-disk-encrypt] [--entitlement ENTITLEMENT] [--hardware HARDWARE] [--label LABEL ...] [--operating-system SYSTEM] [--output OUTPUT] [-q]
@@ -11398,7 +11072,6 @@ ibmcloud ks worker-pool create classic \
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool create help
@@ -11422,7 +11095,6 @@ ibmcloud ks worker-pool create help
 
 
 Add a worker pool to an IBM Cloud Satellite cluster. No worker nodes are created until zones are added to the worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool create satellite --cluster CLUSTER --host-label LABEL [--host-label LABEL ...] --name NAME --size-per-zone SIZE --zone ZONE [--entitlement ENTITLEMENT] [--label LABEL ...] [--operating-system SYSTEM] [--output OUTPUT] [-q]
@@ -11485,7 +11157,6 @@ ibmcloud ks worker-pool create satellite \
 
 
 Add a worker pool to a VPC Gen 1 cluster. No worker nodes are created until zones are added to the worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool create vpc-classic --cluster CLUSTER --flavor FLAVOR --name NAME --size-per-zone SIZE [--entitlement ENTITLEMENT] [--label LABEL ...] [--operating-system SYSTEM] [--output OUTPUT] [-q] [--vpc-id ID]
@@ -11547,7 +11218,6 @@ ibmcloud ks worker-pool create vpc-classic \
 [Virtual Private Cloud]{: tag-vpc} 
 
 Add a worker pool to a VPC Gen 2 cluster. No worker nodes are created until zones are added to the worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool create vpc-gen2 --cluster CLUSTER --flavor FLAVOR --name NAME --size-per-zone SIZE [--crk CRK] [--disable-disk-encrypt] [--entitlement ENTITLEMENT] [--kms-account-id ID] [--kms-instance INSTANCE] [--label LABEL ...] [--operating-system SYSTEM] [--output OUTPUT] [-q] [--secondary-storage STORAGE] [--security-group GROUP ...] [--vpc-id ID]
@@ -11627,7 +11297,6 @@ ibmcloud ks worker-pool create vpc-gen2 \
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List the details of a worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool get --cluster CLUSTER --worker-pool POOL [--output OUTPUT] [-q]
@@ -11667,7 +11336,6 @@ ibmcloud ks worker-pool get --cluster CLUSTER --worker-pool POOL
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool help
@@ -11691,7 +11359,6 @@ ibmcloud ks worker-pool help
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool label help
@@ -11715,7 +11382,6 @@ ibmcloud ks worker-pool label help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove all custom Kubernetes labels from all worker nodes in a worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool label rm --cluster CLUSTER --worker-pool POOL [-f] [-q]
@@ -11755,7 +11421,6 @@ ibmcloud ks worker-pool label rm --cluster CLUSTER --worker-pool POOL
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Set custom Kubernetes labels for all worker nodes in a worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool label set --cluster CLUSTER --label LABEL [--label LABEL ...] --worker-pool POOL [-f] [-q]
@@ -11798,7 +11463,6 @@ ibmcloud ks worker-pool label set --cluster CLUSTER --label LABEL --worker-pool 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List all worker pools in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool ls --cluster CLUSTER [--output OUTPUT] [-q]
@@ -11835,7 +11499,6 @@ ibmcloud ks worker-pool ls --cluster CLUSTER
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool operating-system help
@@ -11859,7 +11522,6 @@ ibmcloud ks worker-pool operating-system help
 
 
 Set the operating system. After you set the operating system, you must update your workers by running either `ibmcloud ks worker update` or `ibmcloud ks worker replace`.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool operating-system set --cluster CLUSTER --operating-system SYSTEM --worker-pool POOL [-q]
@@ -11902,7 +11564,6 @@ ibmcloud ks worker-pool operating-system set \
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Rebalance a worker pool in a cluster. Rebalancing adds and removes worker nodes to match the worker pool's size per zone. Satellite worker pools might remove manually assigned nodes if they do not match the worker pool's host labels.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool POOL [-f] [-q]
@@ -11942,7 +11603,6 @@ ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool POOL
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Resize the worker pool to the number of workers per zone that you specify.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool resize --cluster CLUSTER --size-per-zone SIZE --worker-pool POOL [-q]
@@ -11982,7 +11642,6 @@ ibmcloud ks worker-pool resize --cluster CLUSTER --size-per-zone SIZE --worker-p
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove a worker pool from a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool rm --cluster CLUSTER --worker-pool POOL [-f] [-q]
@@ -12022,7 +11681,6 @@ ibmcloud ks worker-pool rm --cluster CLUSTER --worker-pool POOL
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool taint help
@@ -12046,7 +11704,6 @@ ibmcloud ks worker-pool taint help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove all Kubernetes taints from all worker nodes in a worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool taint rm --cluster CLUSTER --worker-pool POOL [-f] [-q]
@@ -12086,7 +11743,6 @@ ibmcloud ks worker-pool taint rm --cluster CLUSTER --worker-pool POOL
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Set Kubernetes taints for all worker nodes in a worker pool. Taints prevent pods without matching tolerations from running on the worker nodes.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool taint set --cluster CLUSTER --taint TAINT [--taint TAINT ...] --worker-pool POOL [-f] [-q]
@@ -12129,7 +11785,6 @@ ibmcloud ks worker-pool taint set --cluster CLUSTER --taint TAINT --worker-pool 
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 View the zones attached to a worker pool.
-{: shortdesc}
 
 ```sh
 ibmcloud ks worker-pool zones --cluster CLUSTER --worker-pool POOL [--output OUTPUT] [-q]
@@ -12167,7 +11822,6 @@ ibmcloud ks worker-pool zones --cluster CLUSTER --worker-pool POOL
 {: #zone-cli}
 
 List availability zones and modify the zones attached to a worker pool.
-{: shortdesc}
 
 
 ### `ibmcloud ks zone add classic`
@@ -12176,7 +11830,6 @@ List availability zones and modify the zones attached to a worker pool.
 [Classic infrastructure]{: tag-classic-inf} 
 
 Add a zone to one or more worker pools in a classic cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks zone add classic --cluster CLUSTER --worker-pool POOL [--worker-pool POOL ...] --zone ZONE [--output OUTPUT] [--private-vlan VLAN] [-q] (--private-only | --public-vlan VLAN)
@@ -12228,7 +11881,6 @@ ibmcloud ks zone add classic --cluster CLUSTER --worker-pool POOL --zone ZONE --
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks zone add help
@@ -12252,7 +11904,6 @@ ibmcloud ks zone add help
 
 
 Add a zone to one or more worker pools in a Satellite cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks zone add satellite --cluster CLUSTER --worker-pool POOL [--worker-pool POOL ...] --zone ZONE [--output OUTPUT] [-q]
@@ -12295,7 +11946,6 @@ ibmcloud ks zone add satellite --cluster CLUSTER --worker-pool POOL --zone ZONE
 
 
 Add a zone to one or more worker pools in a VPC Gen 1 cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks zone add vpc-classic --cluster CLUSTER --subnet-id ID --worker-pool POOL --zone ZONE [--output OUTPUT] [-q]
@@ -12341,7 +11991,6 @@ ibmcloud ks zone add vpc-classic --cluster CLUSTER --subnet-id ID --worker-pool 
 [Virtual Private Cloud]{: tag-vpc} 
 
 Add a zone to one or more worker pools in a VPC Gen 2 cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks zone add vpc-gen2 --cluster CLUSTER --subnet-id ID --worker-pool POOL --zone ZONE [--output OUTPUT] [-q]
@@ -12387,7 +12036,6 @@ ibmcloud ks zone add vpc-gen2 --cluster CLUSTER --subnet-id ID --worker-pool POO
 
 
 Show help
-{: shortdesc}
 
 ```sh
 ibmcloud ks zone help
@@ -12411,7 +12059,6 @@ ibmcloud ks zone help
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 List all availability zones in a region.
-{: shortdesc}
 
 ```sh
 ibmcloud ks zone ls --provider PROVIDER [-l LOCATION ...] [--output OUTPUT] [-q] [--region-only] [--show-flavors]
@@ -12457,7 +12104,6 @@ ibmcloud ks zone ls --provider PROVIDER
 [Classic infrastructure]{: tag-classic-inf} 
 
 Set the network metadata in a specific zone for the given worker pools in a classic cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks zone network-set --cluster CLUSTER --private-vlan VLAN --worker-pool POOL [--worker-pool POOL ...] --zone ZONE [-f] [-q] (--private-only | --public-vlan VLAN)
@@ -12514,7 +12160,6 @@ ibmcloud ks zone network-set \
 [Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
 
 Remove a zone from one or more worker pools in a cluster.
-{: shortdesc}
 
 ```sh
 ibmcloud ks zone rm --cluster CLUSTER --worker-pool POOL [--worker-pool POOL ...] --zone ZONE [-f] [-q]
