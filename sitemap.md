@@ -31,11 +31,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 
-## Getting started with {{site.data.keyword.containerlong_notm}}
-{: #sitemap_getting_started_with_}
+## Getting started
+{: #sitemap_getting_started}
 
 
-[Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started#getting-started)
+[Getting started](/docs/containers?topic=containers-getting-started#getting-started)
 
 * [Ready to create your first cluster?](/docs/containers?topic=containers-getting-started#getting-started-quick-start)
 
@@ -54,48 +54,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Quick actions](/docs/containers?topic=containers-getting-started#getting-started-quick-actions)
 
 * [What's next?](/docs/containers?topic=containers-getting-started#getting-started-whats-next)
-
-
-## Understanding {{site.data.keyword.containerlong_notm}}
-{: #sitemap_understanding_}
-
-
-[Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview#overview)
-
-* [What is Kubernetes?](/docs/containers?topic=containers-overview#what-is-kube-overview)
-
-* [What are containers?](/docs/containers?topic=containers-overview#what-are-containers-overview)
-
-* [What compute host infrastructure does {{site.data.keyword.containerlong_notm}} offer?](/docs/containers?topic=containers-overview#what-compute-infra-is-offered)
-
-* [What are the benefits of using the service?](/docs/containers?topic=containers-overview#benefits)
-
-* [Comparison between {{site.data.keyword.redhat_openshift_notm}} and Kubernetes clusters](/docs/containers?topic=containers-overview#openshift_kubernetes)
-
-* [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
-
-
-## Your responsibilities
-{: #sitemap_your_responsibilities}
-
-
-[Your responsibilities](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
-
-* [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
-
-* [Tasks for shared responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
-
-    * [Incident and operations management](/docs/containers?topic=containers-responsibilities_iks#incident-and-ops)
-
-    * [Change management](/docs/containers?topic=containers-responsibilities_iks#change-management)
-
-    * [Identity and access management](/docs/containers?topic=containers-responsibilities_iks#iam-responsibilities)
-
-    * [Security and regulation compliance](/docs/containers?topic=containers-responsibilities_iks#security-compliance)
-
-    * [Disaster recovery](/docs/containers?topic=containers-responsibilities_iks#disaster-recovery)
-
-    * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
 
 ## Use cases
@@ -205,6 +163,25 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Results](/docs/containers?topic=containers-cs_uc_gov#uc_port_results)
 
 
+## Understanding the service
+{: #sitemap_understanding_the_service}
+
+
+[Understanding the service](/docs/containers?topic=containers-overview#overview)
+
+* [What is Kubernetes?](/docs/containers?topic=containers-overview#what-is-kube-overview)
+
+* [What are containers?](/docs/containers?topic=containers-overview#what-are-containers-overview)
+
+* [What compute host infrastructure does {{site.data.keyword.containerlong_notm}} offer?](/docs/containers?topic=containers-overview#what-compute-infra-is-offered)
+
+* [What are the benefits of using the service?](/docs/containers?topic=containers-overview#benefits)
+
+* [Comparison between {{site.data.keyword.redhat_openshift_notm}} and Kubernetes clusters](/docs/containers?topic=containers-overview#openshift_kubernetes)
+
+* [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
+
+
 ## Learning paths
 {: #sitemap_learning_paths}
 
@@ -250,6 +227,228 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Add app storage](/docs/containers?topic=containers-learning-path-dev#dev_storage)
 
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
+
+
+## Plan your cluster
+{: #sitemap_plan_your_cluster}
+
+
+[Creating a highly available cluster strategy](/docs/containers?topic=containers-strategy#strategy)
+
+* [Decide how many clusters to create](/docs/containers?topic=containers-strategy#env_multicluster)
+
+* [Determine how many locations are needed](/docs/containers?topic=containers-strategy#plan_locations)
+
+    * [Multizone clusters](/docs/containers?topic=containers-strategy#mz-strategy)
+
+    * [Multiple clusters linked with load balancers](/docs/containers?topic=containers-strategy#mz-cluster-strategy)
+
+    * [Single zone clusters](/docs/containers?topic=containers-strategy#sz-single-zone-strategy)
+
+* [Select a cluster type](/docs/containers?topic=containers-strategy#env_flavors)
+
+* [Select an operating system for the cluster](/docs/containers?topic=containers-strategy#os)
+
+* [Define a cluster naming strategy](/docs/containers?topic=containers-strategy#naming)
+
+* [Decide how many worker nodes for each cluster](/docs/containers?topic=containers-strategy#sizing_workers)
+
+* [Select worker node flavors](/docs/containers?topic=containers-strategy#env_flavors_node)
+
+* [Determine worker node capacity for the resources](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
+
+* [Choose how many namespaces to create within the cluster](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
+
+* [Establish resource requests and limits for the namespaces](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
+
+* [Make your apps highly available too](/docs/containers?topic=containers-strategy#apps-ha)
+
+* [Ongoing best practices](/docs/containers?topic=containers-strategy#best-practices-ongoing)
+
+    * [Keep your cluster environment up to date](/docs/containers?topic=containers-strategy#bp-1)
+
+    * [Keep your command line tools up to date](/docs/containers?topic=containers-strategy#bp-2)
+
+    * [Regularly rotate your CA certificates](/docs/containers?topic=containers-strategy#bp-ca)
+
+    * [Document your environment architecture](/docs/containers?topic=containers-strategy#bp-3)
+
+    * [Subscribe to release note updates](/docs/containers?topic=containers-strategy#bp-4)
+
+* [Next steps](/docs/containers?topic=containers-strategy#plan-network-next)
+
+[Understanding VPC cluster networking](/docs/containers?topic=containers-plan_vpc_basics#plan_vpc_basics)
+
+* [Worker-to-worker communication using VPC subnets](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-worker)
+
+* [Worker-to-master and user-to-master communication using Virtual private endpoints or cloud service endpoints](/docs/containers?topic=containers-plan_vpc_basics#vpc-workeruser-master)
+
+* [Worker-to-master communication in VPC clusters](/docs/containers?topic=containers-plan_vpc_basics#worker-to-master-comms)
+
+* [User-to-master communication in VPC clusters](/docs/containers?topic=containers-plan_vpc_basics#user-to-master-comms)
+
+* [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem)
+
+* [Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-cloud-service)
+
+* [Communication with resources in on-premises data centers](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-resources)
+
+    * [Communication with resources in other VPCs](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-other-vpcs)
+
+    * [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-classic)
+
+* [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-external-workers)
+
+* [Private traffic to cluster apps](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-apps-private)
+
+* [Public traffic to cluster apps](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-apps-public)
+
+* [Example scenarios for VPC cluster network setups](/docs/containers?topic=containers-plan_vpc_basics#vpc-scenarios)
+
+    * [Scenario: Run internet-facing app workloads in a VPC cluster](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw)
+
+    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-worker)
+
+    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-master)
+
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-services)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-external)
+
+* [Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw)
+
+    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-worker)
+
+    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-master)
+
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-services)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-external)
+
+* [Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn)
+
+    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-worker)
+
+    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-master)
+
+    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-services)
+
+    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-external)
+
+* [Next steps](/docs/containers?topic=containers-plan_vpc_basics#plan-encryption-next-vpc)
+
+[Understanding Classic cluster networking](/docs/containers?topic=containers-plan_basics#plan_basics)
+
+* [Worker-to-worker communication: classic VLANs and subnets](/docs/containers?topic=containers-plan_basics#worker-worker)
+
+    * [VLAN connections for worker nodes](/docs/containers?topic=containers-plan_basics#worker-worker-nodes)
+
+    * [Worker node communication across subnets and VLANs](/docs/containers?topic=containers-plan_basics#worker-worker-subnets)
+
+* [Worker-to-master and user-to-master communication: Service endpoints](/docs/containers?topic=containers-plan_basics#workeruser-master)
+
+    * [Public service endpoint only](/docs/containers?topic=containers-plan_basics#workeruser-master-endpoint)
+
+    * [Public and private cloud service endpoints](/docs/containers?topic=containers-plan_basics#workeruser-master-pub-priv)
+
+    * [Private service endpoint only](/docs/containers?topic=containers-plan_basics#workeruser-master-private)
+
+* [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](/docs/containers?topic=containers-plan_basics#worker-services-onprem)
+
+    * [Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network](/docs/containers?topic=containers-plan_basics#worker-services-onprem-pub-priv)
+
+    * [{{site.data.keyword.BluDirectLink}} for communication over the private network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-direct-link)
+
+    * [VPN connection for communication over the public network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-vpn)
+
+* [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#external-workers)
+
+    * [Private traffic to cluster apps](/docs/containers?topic=containers-plan_basics#external-workers-private)
+
+    * [Public traffic to cluster apps](/docs/containers?topic=containers-plan_basics#external-workers-public)
+
+* [Scenario: Running internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_basics#internet-facing)
+
+    * [Worker-to-worker communication in classic clusters with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-worker)
+
+    * [Worker-to-master and user-to-master communication in classic clusters with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-master)
+
+    * [Worker communication to other services or networks with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-services)
+
+    * [External communication to apps that run on worker nodes with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-external)
+
+* [Scenario: Allow limited public connectivity with a gateway appliance](/docs/containers?topic=containers-plan_basics#vyatta-gateway)
+
+    * [Worker-to-worker communication, worker-to-master and user-to-master communication with a gateway appliance](/docs/containers?topic=containers-plan_basics#limited-public-gw-worker)
+
+    * [Worker communication to other services or networks with a gateway appliance](/docs/containers?topic=containers-plan_basics#limited-public-gw-services)
+
+    * [External communication to apps that run on worker nodes with a gateway appliance](/docs/containers?topic=containers-plan_basics#limited-public-gw-external)
+
+* [Scenario: Extend your on-premises data center to a classic cluster](/docs/containers?topic=containers-plan_basics#private_clusters)
+
+    * [Worker-to-worker communication for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-worker)
+
+    * [Worker-to-master and user-to-master communication for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-master)
+
+    * [Worker communication to other services or networks for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-services)
+
+    * [External communication to apps that run on worker nodes for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-external)
+
+* [Next steps](/docs/containers?topic=containers-plan_basics#plan-encryption-next-cl)
+
+[Encryption overview](/docs/containers?topic=containers-encryption#encryption)
+
+* [Control plane](/docs/containers?topic=containers-encryption#control-plane-encryption)
+
+* [Worker node disks](/docs/containers?topic=containers-encryption#worker-node-encryption)
+
+* [Cluster secrets](/docs/containers?topic=containers-encryption#cluster-secret-encryption)
+
+* [Persistent storage](/docs/containers?topic=containers-encryption#persistent-encryption)
+
+* [Worker-to-worker traffic](/docs/containers?topic=containers-encryption#worker-to-worker-encryption)
+
+* [Next steps](/docs/containers?topic=containers-encryption#plan-storage-next)
+
+[Documenting your environment architecture](/docs/containers?topic=containers-document-environment#document-environment)
+
+* [Step 1: Understanding your app and architecture](/docs/containers?topic=containers-document-environment#understand-arch)
+
+    * [Example 1: A basic app running in a single OpenShift cluster](/docs/containers?topic=containers-document-environment#example-arch-1)
+
+    * [Example 2: A multi-cluster architecture with a global load balancer and Cloudant service](/docs/containers?topic=containers-document-environment#example-arch-2)
+
+    * [Example 3: A VSI client contacting a VPC network load balancer with an external service backend](/docs/containers?topic=containers-document-environment#example-arch-3)
+
+* [Step 2: Choose a tool](/docs/containers?topic=containers-document-environment#choose-arch-tool)
+
+* [Step 3: Create the diagram](/docs/containers?topic=containers-document-environment#create-arch-diagram)
+
+* [Next steps](/docs/containers?topic=containers-document-environment#plan-prepare)
+
+
+## Your responsibilities
+{: #sitemap_your_responsibilities}
+
+
+[Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
+
+* [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
+
+* [Tasks for shared responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
+
+    * [Incident and operations management](/docs/containers?topic=containers-responsibilities_iks#incident-and-ops)
+
+    * [Change management](/docs/containers?topic=containers-responsibilities_iks#change-management)
+
+    * [Identity and access management](/docs/containers?topic=containers-responsibilities_iks#iam-responsibilities)
+
+    * [Security and regulation compliance](/docs/containers?topic=containers-responsibilities_iks#security-compliance)
+
+    * [Disaster recovery](/docs/containers?topic=containers-responsibilities_iks#disaster-recovery)
+
+    * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
 
 ## Release notes
@@ -2061,7 +2260,9 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster#access_cluster)
 
-* [Prerequisites](/docs/containers?topic=containers-access_cluster#prereqs)
+* [Before you begin](/docs/containers?topic=containers-access_cluster#access-prereqs)
+
+* [Choosing an access method](/docs/containers?topic=containers-access_cluster#access-method-choose)
 
 [Accessing clusters through the public cloud service endpoint](/docs/containers?topic=containers-cluster-access-public#cluster-access-public)
 
