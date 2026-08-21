@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-20"
+lastupdated: "2026-08-21"
 
 keywords: kubernetes, clusters, access, private, endpoint, classic, vpn, nlb
 
@@ -32,7 +32,7 @@ Before you can connect to the cluster master over the private network, you must 
 
 1. Get the private cloud service endpoint URL and port for your cluster.
     ```sh
-    ibmcloud ks cluster get -c <cluster_name_or_ID>
+    ibmcloud ks cluster get -c CLUSTER_NAME_OR_ID
     ```
     {: pre}
 
@@ -92,7 +92,7 @@ Before you can connect to the cluster master over the private network, you must 
     * If you also enabled the public cloud service endpoint, you already have access to the master.
         1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
             ```sh
-            ibmcloud ks cluster config -c <cluster_name_or_ID>
+            ibmcloud ks cluster config -c CLUSTER_NAME_OR_ID
             ```
             {: pre}
 
@@ -140,7 +140,7 @@ Before you can connect to the cluster master over the private network, you must 
 
 1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
     ```sh
-    ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint private
+    ibmcloud ks cluster config -c CLUSTER_NAME_OR_ID --endpoint private
     ```
     {: pre}
 

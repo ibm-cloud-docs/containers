@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-20"
+lastupdated: "2026-08-21"
 
 keywords: containers, clusters, access, vpe, virtual private endpoint, vpc, cross-account
 
@@ -39,7 +39,7 @@ A [Virtual Private Endpoint (VPE) gateway](/docs/vpc?topic=vpc-about-vpe) is cre
 
 1. Download and add the `kubeconfig` configuration file for your cluster. The `--endpoint vpe` flag ensures the `<CLUSTERID>.private.<REGION>.containers.cloud.ibm.com:XXXXX` URL is used.
     ```sh
-    ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint vpe
+    ibmcloud ks cluster config -c CLUSTER_NAME_OR_ID --endpoint vpe
     ```
     {: pre}
 
