@@ -47,4 +47,4 @@ Not sure which type you have? In the IBM Cloud console, go to **Kubernetes → C
 | [API key or service ID](/docs/containers?topic=containers-cluster-access-automation) | All | Automated pipelines and non-interactive scripts |
 | [Accessing private clusters by using the WireGuard VPN](/docs/containers?topic=containers-cluster-access-wireguard) | Classic, VPC | You want to access a private-only cluster from outside IBM Cloud using a WireGuard VPN |
 | [Admission controller webhooks](/docs/containers?topic=containers-cluster-access-admission-control) | All | You need to allow cluster access for admission controller webhooks |
-| {: caption="Cluster access methods" caption-side="bottom"}
+{: caption="Cluster access methods" caption-side="bottom"}
