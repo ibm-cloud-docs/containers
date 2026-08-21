@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-08-20"
+lastupdated: "2026-08-21"
 
 keywords: containers, cli reference, kubernetes cli, {{site.data.keyword.containerlong_notm}}
 
@@ -23,16 +23,20 @@ Refer to these commands to create and manage {{site.data.keyword.containerlong_n
 In the command line, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and options.
 
 
-## Prerequisites
+Prerequisites
 {: #ks-cli-prereq}
+{: dl}
 
-* Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-install).
-* Install the `ks` plug-in by running the following command:
+Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/containers?topic=containers-cli-install).
+:   See [Getting started with the IBM Cloud CLI](/docs/containers?topic=containers-cli-install).
 
-   ```console
-   ibmcloud plugin install ks
-   ```
-   {: pre}
+Install the `ks` plug-in.
+:   Run the following command:
+
+    ```console
+    ibmcloud plugin install ks
+    ```
+    {: pre}
 
 
 ## ibmcloud ks commands

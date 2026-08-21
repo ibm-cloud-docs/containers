@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-20"
+lastupdated: "2026-08-21"
 
 
 keywords: containers
@@ -5800,8 +5800,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [`zone` commands](/docs/containers?topic=containers-icks_map#icks_map_zone)
 
 [{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
-
-* [Prerequisites](/docs/containers?topic=containers-kubernetes-service-cli#ks-cli-prereq)
 
 * [ibmcloud ks commands](/docs/containers?topic=containers-kubernetes-service-cli#cli_commands)
 
