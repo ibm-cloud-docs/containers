@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-08-12"
+lastupdated: "2026-08-24"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, rbac, policy, providers, benefits
 
@@ -236,7 +236,7 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Complete cluster management experience through the {{site.data.keyword.containerlong_notm}} automation tools (API, CLI, console)|Yes|Yes|
 |Worldwide availability in single and multizones|Yes|Yes|
 |Consistent container orchestration across hybrid cloud providers|Yes|Yes|
-|Access to {{site.data.keyword.cloud_notm}} services such as AI|Yes|Yes|
+|Access to {{site.data.keyword.cloud_notm}} services such as Artificial Intelligence (AI)|Yes|Yes|
 |Software-defined storage Portworx solution available for multizone data use cases|Yes|Yes|
 |Create a cluster in an IBM Virtual Private Cloud (VPC)|Yes|Yes|
 |Latest Kubernetes distribution|Yes| |
