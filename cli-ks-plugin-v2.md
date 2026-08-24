@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-08-21"
+lastupdated: "2026-08-24"
 
 keywords: containers, cli reference, kubernetes cli, {{site.data.keyword.containerlong_notm}}
 
@@ -23,13 +23,10 @@ Refer to these commands to create and manage {{site.data.keyword.containerlong_n
 In the command line, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and options.
 
 
-Prerequisites
-{: #ks-cli-prereq}
-{: dl}
 
-Install the {{site.data.keyword.cloud_notm}} CLI.
-:   See [Getting started with the IBM Cloud CLI](/docs/containers?topic=containers-cli-install).
-:   Install the `ks` plug-in. Run the following command.
+1. Install the {{site.data.keyword.cloud_notm}} CLI. See [Getting started with the IBM Cloud CLI](/docs/containers?topic=containers-cli-install).
+
+2. Install the `ks` plug-in.
 
     ```console
     ibmcloud plugin install ks
@@ -37,39 +34,6 @@ Install the {{site.data.keyword.cloud_notm}} CLI.
     {: pre}
 
 
-## ibmcloud ks commands
-{: #cli_commands}
-
-The following tables list the `ibmcloud ks` command groups. For a complete list of all `ibmcloud ks` commands as they are structured in the CLI, see the [CLI map](/docs/containers?topic=containers-icks_map).
-
-| Command group | Description |
-| --- | --- |
-| [`ibmcloud ks api`](#api-cli) | View the current API endpoint. |
-| [`ibmcloud ks api-key`](#api-key-cli) | View information about the API key for a cluster or reset it to a new key. |
-| [`ibmcloud ks credential`](#credential-cli) | Set and unset credentials that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account. |
-| [`ibmcloud ks infra-permissions`](#infra-permissions-cli) | View information about infrastructure permissions that allow you to access the IBM Cloud classic infrastructure portfolio through your IBM Cloud account. |
-| [`ibmcloud ks logging`](#logging-cli) | Forward logs from your cluster. |
-| [`ibmcloud ks messages`](#messages-cli) | View the current user messages. |
-| [`ibmcloud ks quota`](#quota-cli) | View the quota and limits for cluster-related resources in your IBM Cloud account. |
-| [`ibmcloud ks script`](#script-cli) | Rewrite scripts that call IBM Cloud Kubernetes Service plug-in commands. Legacy-structured commands are replaced with beta-structured commands. |
-| [`ibmcloud ks subnets`](#subnets-cli) | List available portable subnets in your IBM Cloud infrastructure account. |
-| [`ibmcloud ks webhook-create`](#webhook-create-cli) | Register a webhook in a cluster. |
-| [`ibmcloud ks vpc`](#vpc-cli) | Get information about VPCs and manage VPC clusters. |
-| [`ibmcloud ks flavor`](#flavor-cli) | Getting flavor related information. Flavors determine how much virtual CPU, memory, and disk space is available to each worker node. |
-| [`ibmcloud ks cluster`](#cluster-cli) | View and modify cluster and cluster service settings. |
-| [`ibmcloud ks ingress`](#ingress-cli) | View and modify Ingress services and settings |
-| [`ibmcloud ks kms`](#kms-cli) | View and configure Key Management Service integrations. |
-| [`ibmcloud ks versions`](#versions-cli) | List all the container platform versions that are available for IBM Cloud Kubernetes Service clusters. |
-| [`ibmcloud ks locations`](#locations-cli) | List supported IBM Cloud Kubernetes Service locations. |
-| [`ibmcloud ks nlb-dns`](#nlb-dns-cli) | Create and manage host names for network load balancer (NLB) IP addresses in a cluster and health check monitors for host names. |
-| **Beta** [`ibmcloud ks storage`](#storage-cli) | View and modify storage resources. |
-| [`ibmcloud ks vlan`](#vlan-cli) | List public and private VLANs for a zone and view the VLAN spanning status. |
-| [`ibmcloud ks vni`](#vni-cli) | Attach, detach, and list Virtual Network Interfaces on worker nodes. |
-| [`ibmcloud ks worker`](#worker-cli) | View and modify worker nodes for a cluster. |
-| [`ibmcloud ks worker-pool`](#worker-pool-cli) | View and modify worker pools for a cluster. |
-| [`ibmcloud ks zone`](#zone-cli) | List availability zones and modify the zones attached to a worker pool. |
-| [`ibmcloud ks security-group`](#security-group-cli) | Run operations against a security group. |
-{: caption="ibmcloud ks CLI command groups" caption-side="bottom"}
 
 ## Api commands
 {: #api-cli}

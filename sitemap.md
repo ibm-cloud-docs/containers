@@ -6006,8 +6006,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
 
-* [ibmcloud ks commands](/docs/containers?topic=containers-kubernetes-service-cli#cli_commands)
-
 * [Api commands](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
 
     * [`ibmcloud ks api`](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
@@ -6883,72 +6881,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions#supported-cluster-addon-versions)
-
-* [`acm` 2.16.0](/docs/containers?topic=containers-supported-cluster-addon-versions#acm-2.16.0)
-
-* [`alb-oauth-proxy` 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#alb-oauth-proxy-2.0.0)
-
-* [`cluster-autoscaler` 1.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.1.0)
-
-* [`cluster-autoscaler` 1.2.4](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-1.2.4)
-
-* [`cluster-autoscaler` 2.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#cluster-autoscaler-2.0.0)
-
-* [`csutil` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-1.0.0)
-
-* [`csutil-experimental` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#csutil-experimental-1.0.0)
-
-* [`headlamp` 0.1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#headlamp-0.1.0)
-
-* [`ibm-object-csi-driver` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-object-csi-driver-1.0)
-
-* [`ibm-storage-operator` 1.0](/docs/containers?topic=containers-supported-cluster-addon-versions#ibm-storage-operator-1.0)
-
-* [`image-key-synchronizer` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#image-key-synchronizer-1.0.0)
-
-* [`istio` 1.26](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.26)
-
-* [`istio` 1.27](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.27)
-
-* [`istio` 1.28](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.28)
-
-* [`istio` 1.29](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.29)
-
-* [`istio` 1.30](/docs/containers?topic=containers-supported-cluster-addon-versions#istio-1.30)
-
-* [`openshift-ai` 416](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-416)
-
-* [`openshift-ai` 417](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-417)
-
-* [`openshift-ai` 418](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-418)
-
-* [`openshift-ai` 419](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-419)
-
-* [`openshift-ai` 420](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-ai-420)
-
-* [`openshift-data-foundation` 4.15.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.15.0)
-
-* [`openshift-data-foundation` 4.16.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.16.0)
-
-* [`openshift-data-foundation` 4.17.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.17.0)
-
-* [`openshift-data-foundation` 4.18.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.18.0)
-
-* [`openshift-data-foundation` 4.19.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.19.0)
-
-* [`openshift-data-foundation` 4.20.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.20.0)
-
-* [`openshift-data-foundation` 4.21.0](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-data-foundation-4.21.0)
-
-* [`openshift-virtualization` 4.21](/docs/containers?topic=containers-supported-cluster-addon-versions#openshift-virtualization-4.21)
-
-* [`static-route` 1.0.0](/docs/containers?topic=containers-supported-cluster-addon-versions#static-route-1.0.0)
-
-* [`vpc-block-csi-driver` 5.1](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.1)
-
-* [`vpc-block-csi-driver` 5.2](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-block-csi-driver-5.2)
-
-* [`vpc-file-csi-driver` 2.0](/docs/containers?topic=containers-supported-cluster-addon-versions#vpc-file-csi-driver-2.0)
 
 [Istio add-on version change log](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio)
 
