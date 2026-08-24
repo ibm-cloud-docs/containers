@@ -29,12 +29,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2026
 {: #containers-aug26}
 
+
+
 ### 24 August 2026
 {: #containers-aug2426}
 {: release-note}
 
 Headlamp cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-headlamp).
+
+
 
 ### 20 August 2026
 {: #containers-aug2026}
