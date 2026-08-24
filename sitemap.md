@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-21"
+lastupdated: "2026-08-24"
 
 
 keywords: containers
@@ -458,6 +458,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
+
+    * [24 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug2426)
+
+        * Headlamp cluster add-on patch updates.
 
     * [20 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug2026)
 
@@ -7562,6 +7566,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
 
+    * [Version 0.1.0, released 24 August 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-)
+
     * [Version 0.1.0 - headlamp-0.1.0-358109573, released 30 July 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-358109573)
 
     * [Version 0.1.0 - headlamp-0.1.0-356396053, released 23 July 2026](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-356396053)
@@ -7585,19 +7591,35 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 3.7.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.10)
 
+    * [Version 3.7.10 - 3.7.10_365003730_iks, released 24 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_365003730_iks)
+
     * [Version 3.7.10 - 3.7.10_362601619_iks, released 17 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_362601619_iks)
 
 * [Version 3.7.8](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.8)
+
+    * [Version 3.7.8 - 3.7.8_364997849_iks, released 24 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-378_364997849_iks)
 
     * [Version 3.7.8 - 3.7.8_360780167_iks, released 17 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-378_360780167_iks)
 
     * [Version 3.7.8 - 3.7.8_358418506_iks, released 11 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-378_358418506_iks)
 
+* [Version 3.7.7](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.7)
+
+    * [Version 3.7.7 - 3.7.7_364982600_iks, released 24 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-377_364982600_iks)
+
+    * [Version 3.7.7 - 3.7.7_360793979_iks, released 11 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-377_360793979_iks)
+
+    * [Version 3.7.7 - 3.7.7_358058274_iks, released 27 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-377_358058274_iks)
+
 * [Version 1.15.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.10)
+
+    * [Version 1.15.10 - 1.15.10_365003791_iks, released 24 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_365003791_iks)
 
     * [Version 1.15.10 - 1.15.10_362585453_iks, released 17 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_362585453_iks)
 
 * [Version 1.15.8](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.8)
+
+    * [Version 1.15.8 - 1.15.8_364997769_iks, released 24 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_364997769_iks)
 
     * [Version 1.15.8 - 1.15.8_362262238_iks, released 17 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_362262238_iks)
 
@@ -7610,6 +7632,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Version 1.15.8 - 1.15.8_351852518_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1158_351852518_iks)
 
 * [Version 1.15.7](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.7)
+
+    * [Version 1.15.7 - 1.15.7_364982634_iks, released 24 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_364982634_iks)
 
     * [Version 1.15.7 - 1.15.7_362266907_iks, released 17 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_362266907_iks)
 
@@ -7626,12 +7650,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Version 1.15.7 - 1.15.7_351812949_iks, released 01 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_351812949_iks)
 
     * [Version 1.15.7 - 1.15.7_349797741_iks, released 23 June 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1157_349797741_iks)
-
-* [Version 3.7.7](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.7)
-
-    * [Version 3.7.7 - 3.7.7_360793979_iks, released 11 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-377_360793979_iks)
-
-    * [Version 3.7.7 - 3.7.7_358058274_iks, released 27 July 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-377_358058274_iks)
 
 * [Version 3.7.6](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.6)
 
