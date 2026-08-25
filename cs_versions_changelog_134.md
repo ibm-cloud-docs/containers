@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-08-19"
+lastupdated: "2026-08-25"
 
 
 keywords: change log, version history, 1.34
@@ -558,7 +558,7 @@ The following table shows the changes that are in the master fix pack 1.34.2_153
 
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
-| Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://docs.tigera.io/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
+| Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://archive-os-3-29.netlify.app/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
 | Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
 | etcd | v3.5.24 | v3.5.25 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.25){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.1-6 | v1.34.2-3 | New version contains updates and security fixes. |

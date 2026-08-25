@@ -8649,6 +8649,28 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp#ts-app-psp)
 
+[Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security#ts-app-pod-security)
+
+* [Could not get `PodSecurityPolicies`](/docs/containers?topic=containers-ts-app-pod-security#could-not-get-psps)
+
+* [Found non-IBM `PodSecurityPolicy`](/docs/containers?topic=containers-ts-app-pod-security#non-ibm-psp)
+
+* [Could not get ClusterRoleBinding privileged-psp-user](/docs/containers?topic=containers-ts-app-pod-security#psp-user-not-get)
+
+* [ClusterRoleBinding `privileged-psp-user` does not have expected `roleRef`](/docs/containers?topic=containers-ts-app-pod-security#unexpected-role-ref)
+
+* [ClusterRoleBinding privileged-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-privilieged-unexpected-subjects)
+
+* [Could not get ClusterRoleBinding `restricted-psp-user`](/docs/containers?topic=containers-ts-app-pod-security#psp-restrictred-user-missing)
+
+* [ClusterRoleBinding `restricted-psp-user` does not have expected `roleRef`](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-role-ref)
+
+* [ClusterRoleBinding restricted-psp-user does not have expected subjects](/docs/containers?topic=containers-ts-app-pod-security#psp-restricted-subjects)
+
+* [Creating or updating the `privileged-psp-user` ClusterRoleBinding](/docs/containers?topic=containers-ts-app-pod-security#create-privileged-psp-user)
+
+* [Creating the `restricted-psp-user` cluster role binding](/docs/containers?topic=containers-ts-app-pod-security#create-restricted-psp-user)
+
 [Why do pods remain in pending state?](/docs/containers?topic=containers-ts-app-pod-pending#ts-app-pod-pending)
 
 [Why do pods repeatedly fail to restart or are unexpectedly removed?](/docs/containers?topic=containers-ts-app-pod-fail#ts-app-pod-fail)
