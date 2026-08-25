@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-24"
+lastupdated: "2026-08-25"
 
 
 keywords: containers
@@ -4285,6 +4285,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Moving ALBs across VLANs in classic clusters](/docs/containers?topic=containers-traefik-ingress-alb-manage#migrate-alb-vlan)
 
 * [Managing port 80 on the ALBs](/docs/containers?topic=containers-traefik-ingress-alb-manage#port80)
+
+[Observing Traefik Ingress](/docs/containers?topic=containers-cs_traefik_ingress_monitor#cs_traefik_ingress_monitor)
+
+* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-cs_traefik_ingress_monitor#traefik_ingress_health_mon)
 
 
 ### Managing certificates and secrets
