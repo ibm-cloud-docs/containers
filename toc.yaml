@@ -254,6 +254,7 @@ toc:
               - edge-ingress-traefik.md
               - ingress-traefik-configuration.md
               - cs_managed_traefik_ingress_alb.md
+              - cs_traefik_ingress_monitor.md
           - topicgroup:
               label: Managing certificates and secrets
               topics:
