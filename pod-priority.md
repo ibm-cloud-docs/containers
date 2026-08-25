@@ -1,8 +1,8 @@
 ---
 
 copyright: 
-  years: 2014, 2025
-lastupdated: "2025-04-28"
+  years: 2014, 2026
+lastupdated: "2026-08-25"
 
 
 keywords: kubernetes, containers
@@ -13,9 +13,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-
-
 
 
 # Setting pod priority
