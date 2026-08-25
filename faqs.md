@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-04"
+lastupdated: "2026-08-25"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -98,7 +98,7 @@ Worker nodes in standard clusters are provisioned in to your {{site.data.keyword
 ## What kinds of workloads can I move to {{site.data.keyword.containerlong_notm}}?
 {: #move_to_cloud}
 
-For examples of the types of workloads that users typically move to the various types of clouds, see [Moving your workloads to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-overview#cloud_workloads). You might also choose a hybrid approach where you have clusters that run in both environments.
+For examples of the types of workloads that users typically move to the various types of clouds, see [Moving your workloads to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-overview). You might also choose a hybrid approach where you have clusters that run in both environments.
 {: shortdesc}
 
 ## Can I automate my infrastructure deployments?

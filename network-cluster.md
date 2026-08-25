@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-08-21"
+lastupdated: "2026-08-25"
 
 
 keywords: kubernetes, vlan
@@ -71,7 +71,7 @@ Did you create a cluster with only a private cloud service endpoint before you e
 
 8. Optional: To use the private cloud service endpoint only:
     1. [Disable the public cloud service endpoint](#disable-public-se).
-    2. [Set up access to the master on the private cloud service endpoint](/docs/containers?topic=containers-cluster-access-private-classic).
+    2. [Set up access to the master on the private cloud service endpoint](/docs/containers?topic=containers-access-private-classic).
 
 
 
@@ -191,7 +191,7 @@ You can't disable the private cloud service endpoint after you enable it.
         ```
         {: pre}
 
-    2. [Set up access to the master on the private cloud service endpoint](/docs/containers?topic=containers-cluster-access-private-classic).
+    2. [Set up access to the master on the private cloud service endpoint](/docs/containers?topic=containers-access-private-classic).
 
 
 

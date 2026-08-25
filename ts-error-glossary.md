@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-08-21"
+lastupdated: "2026-08-25"
 
 keywords: kubernetes, error messages, error codes, troubleshooting reference
 
@@ -37,7 +37,7 @@ This reference lists all documented error messages and error codes across troubl
 | `Encrypted storage cannot be configured. Review the customer root key configuration for the worker pool.` | [Why can't I create a VPC cluster with encrypted worker nodes?](/docs/containers?topic=containers-ts-vpc-byok-encrypted-storage) |
 | `Pending security group creation` | [When I create a VPC cluster, my worker nodes are stuck in `Pending security group creation`](/docs/containers?topic=containers-ts-sbd-cluster-create-quota) |
 | `Infrastructure instance status is 'failed': Can't start instance because provisioning failed.` | [Why do I see DNS failures after adding a custom DNS resolver?](/docs/containers?topic=containers-ts-sbd-custom-dns) |
-| `Version update canceled. CAE009: Cannot complete cluster master operations because the cluster does not pass Pod Security upgrade prerequisites.` | [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-ts-app-pod-security) |
+| `Version update canceled. CAE009: Cannot complete cluster master operations because the cluster does not pass Pod Security upgrade prerequisites.` | [Why does my cluster upgrade fail due to Pod Security upgrade prerequisites?](/docs/containers?topic=containers-pod-security-admission-migration) |
 | `Cannot complete cluster master operations because there is a migration in progress` | [Resolving cluster master upgrade issues: Migration in progress error](/docs/containers?topic=containers-ts-resource-migration) |
 {: caption="Cluster and master error messages" caption-side="bottom"}
 
