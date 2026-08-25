@@ -504,6 +504,7 @@ toc:
               - ts-app-02-imgpull.md
               - ts-app-container-start.md
               - ts-app-04-psp.md
+              - ts-pod-security-125.md
               - ts-app-pod-pending.md
               - ts-app-pod-fail.md
               - ts-app-07-svc-name.md
