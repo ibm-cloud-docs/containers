@@ -459,6 +459,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
 
+* [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
+
     * [24 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug2426)
 
         * Headlamp cluster add-on patch updates.

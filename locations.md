@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-08-18"
+lastupdated: "2026-08-25"
 
 keywords: containers, kubernetes, mzr, szr, multizone, multi az
 
@@ -44,6 +44,9 @@ Montreal (`ca-mon`) VPC MZR limitations
 This image is an artistic representation and does not reflect actual political or geographic boundaries.
 {: note}
 
+
+
+
 | Geography | Country | Metro | Region | Zones |
 | --- | --- | --- | --- | --- |
 | Asia Pacific | Australia | Sydney | au-syd | au-syd-1, au-syd-2, au-syd-3 |
@@ -83,6 +86,9 @@ If you create a classic cluster with multiple data centers, the replicas of the 
 This image is an artistic representation and does not reflect actual political or geographic boundaries.
 {: note}
 
+
+
+
 | Geography | Country | Metro | Region | Zones |
 | --- | --- | --- | --- | --- |
 | Asia Pacific | Australia | Sydney | au-syd | syd01, syd04, syd05 |
@@ -114,6 +120,9 @@ Classic regions with one data center are managed from the regional endpoint loca
 
 This image is an artistic representation and does not reflect actual political or geographic boundaries.
 {: note}
+
+
+
 
 | Geography | Country | Metro | Region | Zone | Managed from region |
 | --- | --- | --- | --- | --- | --- |
