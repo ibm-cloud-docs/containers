@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-25"
+lastupdated: "2026-08-26"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -31,6 +31,38 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+### 26 August 2026
+{: #containers-aug2626}
+{: release-note}
+
+VPC File CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
+IBM Storage Operator cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
+
+### 25 August 2026
+{: #containers-aug2526}
+{: release-note}
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}} and OpenShift Virtualization Service.
+:   Fix packs can be applied in the following ways. Review the change logs for your cluster version.
+:   Classic infrastructure
+:   :   Update or reload the worker node.
+:   VPC infrastructure
+:   :   Replace the worker node.
+:   VPC Bare Metal
+:   :   Reload the worker node.
+:   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
+:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+
+
+
+
 ### 24 August 2026
 {: #containers-aug2426}
 {: release-note}
@@ -53,6 +85,9 @@ IBM Object CSI Driver cluster add-on patch updates.
 
 CLI version 1.0.829 is available.
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 ### 18 August 2026
 {: #containers-aug1826}
