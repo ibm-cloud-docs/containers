@@ -61,8 +61,6 @@ HAProxy a70e8a8452c4d476687ad749df47b6f27a61851a
 GPU Device Plug-in and Installer 5feeb6912d16f495588aa0500d5e7ddeee3f70ba
 :   Resolves the following CVEs: [CVE-2026-54411](https://nvd.nist.gov/vuln/detail/CVE-2026-54411){: external}, [CVE-2026-54371](https://nvd.nist.gov/vuln/detail/CVE-2026-54371){: external}, [CVE-2026-45409](https://nvd.nist.gov/vuln/detail/CVE-2026-45409){: external}, [CVE-2026-11940](https://nvd.nist.gov/vuln/detail/CVE-2026-11940){: external}, and [CVE-2026-58055](https://nvd.nist.gov/vuln/detail/CVE-2026-58055){: external}.
 
-{: #cl-boms-13410_1563_W-component-table}
-
 
 ### Worker node fix pack 1.34.10_1562, released 12 August 2026
 {: #cl-boms-13410_1562_W}
@@ -82,8 +80,6 @@ HAProxy bd7e64ef86b90455535107263466d1825f3e7f9f
 :   Resolves the following CVEs: [CVE-2026-56391](https://nvd.nist.gov/vuln/detail/CVE-2026-56391){: external}, and [CVE-2026-56392](https://nvd.nist.gov/vuln/detail/CVE-2026-56392){: external}.
 GPU Device Plug-in and Installer 22593b92ec9c3df7a58e00c3eec845f8fd447cc3
 :   Resolves the following CVEs: [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/CVE-2026-56852){: external}, [CVE-2026-54370](https://nvd.nist.gov/vuln/detail/CVE-2026-54370){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/CVE-2025-6170){: external}, [CVE-2026-28390](https://nvd.nist.gov/vuln/detail/CVE-2026-28390){: external}, [CVE-2026-44431](https://nvd.nist.gov/vuln/detail/CVE-2026-44431){: external}, [CVE-2026-54369](https://nvd.nist.gov/vuln/detail/CVE-2026-54369){: external}, [CVE-2026-58016](https://nvd.nist.gov/vuln/detail/CVE-2026-58016){: external}, [CVE-2025-13151](https://nvd.nist.gov/vuln/detail/CVE-2025-13151){: external}, [CVE-2026-15308](https://nvd.nist.gov/vuln/detail/CVE-2026-15308){: external}, and [CVE-2026-48864](https://nvd.nist.gov/vuln/detail/CVE-2026-48864){: external}.
-
-{: #cl-boms-13410_1562_W-component-table}
 
 
 ### Master fix pack 1.34.10_1561, released 03 August 2026
@@ -111,8 +107,6 @@ Kubernetes v1.34.10
 Portieris admission controller v0.14.2
 :   See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.14.2){: external}
 
-{: #cl-boms_master-13410_1561_M-component-table}
-
 
 ### Worker node fix pack 1.34.9_1560, released 28 July 2026
 {: #cl-boms-1349_1560_W}
@@ -132,8 +126,6 @@ HAProxy 346c7130717ef7cc25d1dfbca7d57ca32396b692
 :   Resolves the following CVEs: [CVE-2026-6238](https://nvd.nist.gov/vuln/detail/CVE-2026-6238){: external}, [CVE-2026-5928](https://nvd.nist.gov/vuln/detail/CVE-2026-5928){: external}, [CVE-2026-48864](https://nvd.nist.gov/vuln/detail/CVE-2026-48864){: external}, [CVE-2026-54370](https://nvd.nist.gov/vuln/detail/CVE-2026-54370){: external}, [CVE-2026-28390](https://nvd.nist.gov/vuln/detail/CVE-2026-28390){: external}, [CVE-2026-5435](https://nvd.nist.gov/vuln/detail/CVE-2026-5435){: external}, [CVE-2025-13151](https://nvd.nist.gov/vuln/detail/CVE-2025-13151){: external}, [CVE-2026-54369](https://nvd.nist.gov/vuln/detail/CVE-2026-54369){: external}, [CVE-2026-58016](https://nvd.nist.gov/vuln/detail/CVE-2026-58016){: external}, and [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/CVE-2025-6170){: external}.
 GPU Device Plug-in and Installer a4b6a3ff753749da7e6274c83c55a17c5f3f3cfc
 :   Resolves the following CVEs: [CVE-2026-58016](https://nvd.nist.gov/vuln/detail/CVE-2026-58016){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/CVE-2025-6170){: external}, [CVE-2026-44431](https://nvd.nist.gov/vuln/detail/CVE-2026-44431){: external}, [CVE-2026-48864](https://nvd.nist.gov/vuln/detail/CVE-2026-48864){: external}, [CVE-2026-5450](https://nvd.nist.gov/vuln/detail/CVE-2026-5450){: external}, [CVE-2025-13151](https://nvd.nist.gov/vuln/detail/CVE-2025-13151){: external}, [CVE-2026-54370](https://nvd.nist.gov/vuln/detail/CVE-2026-54370){: external}, [CVE-2026-15308](https://nvd.nist.gov/vuln/detail/CVE-2026-15308){: external}, [CVE-2026-28390](https://nvd.nist.gov/vuln/detail/CVE-2026-28390){: external}, and [CVE-2026-54369](https://nvd.nist.gov/vuln/detail/CVE-2026-54369){: external}.
-
-{: #cl-boms-1349_1560_W-component-table}
 
 
 ### Master fix pack 1.34.9_1558, released 28 July 2026
@@ -163,8 +155,6 @@ Kubernetes NodeLocal DNS cache 1.26.8
 Portieris admission controller v0.14.2
 :   See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.14.2){: external}
 
-{: #cl-boms_master-1349_1558_M-component-table}
-
 
 ### Worker node fix pack 1.34.9_1559, released 13 July 2026
 {: #cl-boms-1349_1559_W}
@@ -185,8 +175,6 @@ HAProxy 27f76d0c7626993cde6e1ff90fa42253718cc5fa
 GPU Device Plug-in and Installer ec8f279d185b792b940dd2d39c7551b8a319beb8
 :   Resolves the following CVEs: [CVE-2026-5450](https://nvd.nist.gov/vuln/detail/CVE-2026-5450){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/CVE-2025-6170){: external}, [CVE-2026-48864](https://nvd.nist.gov/vuln/detail/CVE-2026-48864){: external}, and [CVE-2026-44431](https://nvd.nist.gov/vuln/detail/CVE-2026-44431){: external}.
 
-{: #cl-boms-1349_1559_W-component-table}
-
 
 ### Worker node fix pack 1.34.8_1557, released 01 July 2026
 {: #cl-boms-1348_1557_W}
@@ -206,8 +194,6 @@ HAProxy 119de539a7da3c92449b38e1531722802988e50c
 :   Resolves the following CVEs: [CVE-2026-45447](https://nvd.nist.gov/vuln/detail/CVE-2026-45447){: external}, [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/CVE-2024-4741){: external}, and [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/CVE-2024-34459){: external}.
 GPU Device Plug-in and Installer 0e6e6f89d8902362ba15eaa41555820f61257069
 :   Resolves the following CVEs: [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/CVE-2024-4741){: external}, [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/CVE-2024-34459){: external}, [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/CVE-2026-4046){: external}, and [CVE-2026-45447](https://nvd.nist.gov/vuln/detail/CVE-2026-45447){: external}.
-
-{: #cl-boms-1348_1557_W-component-table}
 
 
 ### Master fix pack 1.34.8_1555, released 26 June 2026
@@ -237,8 +223,6 @@ Kubernetes NodeLocal DNS cache 1.26.8
 Portieris admission controller v0.14.0
 :   See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.14.0){: external}
 
-{: #cl-boms_master-1348_1555_M-component-table}
-
 
 ### Worker node fix pack 1.34.8_1556, released 15 June 2026
 {: #cl-boms-1348_1556_W}
@@ -259,8 +243,6 @@ HAProxy d4656f400ca14059e1b5b8ef8078b4903290791a
 GPU Device Plug-in and Installer 0f070c15558c3540c1ce086a9ded4465637a0d87
 :   Resolves the following CVEs: [CVE-2026-45186](https://nvd.nist.gov/vuln/detail/CVE-2026-45186){: external}, and [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/CVE-2026-4046){: external}.
 
-{: #cl-boms-1348_1556_W-component-table}
-
 
 ### Worker node fix pack 1.34.8_1554, released 03 June 2026
 {: #cl-boms-1348_1554_W}
@@ -280,8 +262,6 @@ HAProxy 0e0730588ba21878845cdb0bee615a371a489a02
 :   Resolves the following CVEs: [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/CVE-2026-4046){: external}, [CVE-2026-33846](https://nvd.nist.gov/vuln/detail/CVE-2026-33846){: external}, [CVE-2026-42010](https://nvd.nist.gov/vuln/detail/CVE-2026-42010){: external}, [CVE-2026-5260](https://nvd.nist.gov/vuln/detail/CVE-2026-5260){: external}, [CVE-2026-42014](https://nvd.nist.gov/vuln/detail/CVE-2026-42014){: external}, [CVE-2026-3833](https://nvd.nist.gov/vuln/detail/CVE-2026-3833){: external}, [CVE-2026-42015](https://nvd.nist.gov/vuln/detail/CVE-2026-42015){: external}, [CVE-2026-33845](https://nvd.nist.gov/vuln/detail/CVE-2026-33845){: external}, [CVE-2026-42011](https://nvd.nist.gov/vuln/detail/CVE-2026-42011){: external}, [CVE-2026-42009](https://nvd.nist.gov/vuln/detail/CVE-2026-42009){: external}, [CVE-2026-42013](https://nvd.nist.gov/vuln/detail/CVE-2026-42013){: external}, and [CVE-2026-42012](https://nvd.nist.gov/vuln/detail/CVE-2026-42012){: external}.
 GPU Device Plug-in and Installer 434b31bf9a90fddac062542792b2550a4334fcd3
 :   Resolves the following CVEs: [CVE-2026-42012](https://nvd.nist.gov/vuln/detail/CVE-2026-42012){: external}, [CVE-2026-3833](https://nvd.nist.gov/vuln/detail/CVE-2026-3833){: external}, [CVE-2026-5260](https://nvd.nist.gov/vuln/detail/CVE-2026-5260){: external}, [CVE-2026-42013](https://nvd.nist.gov/vuln/detail/CVE-2026-42013){: external}, [CVE-2026-42011](https://nvd.nist.gov/vuln/detail/CVE-2026-42011){: external}, [CVE-2026-33846](https://nvd.nist.gov/vuln/detail/CVE-2026-33846){: external}, [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/CVE-2026-4046){: external}, [CVE-2026-42015](https://nvd.nist.gov/vuln/detail/CVE-2026-42015){: external}, [CVE-2026-42014](https://nvd.nist.gov/vuln/detail/CVE-2026-42014){: external}, [CVE-2026-33845](https://nvd.nist.gov/vuln/detail/CVE-2026-33845){: external}, [CVE-2026-42009](https://nvd.nist.gov/vuln/detail/CVE-2026-42009){: external}, and [CVE-2026-42010](https://nvd.nist.gov/vuln/detail/CVE-2026-42010){: external}.
-
-{: #cl-boms-1348_1554_W-component-table}
 
 
 ### Master fix pack 1.34.8_1552, released 22 May 2026
@@ -307,8 +287,6 @@ Portieris admission controller v0.13.38
 Tigera Operator v1.38.13
 :   See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.38.13){: external}.
 
-{: #cl-boms_master-1348_1552_M-component-table}
-
 
 ### Worker node fix pack 1.34.8_1553, released 20 May 2026
 {: #cl-boms-1348_1553_W}
@@ -329,8 +307,6 @@ HAProxy 6ba93946d8bd08ba581321189c719ab548cadf01
 GPU Device Plug-in and Installer 1a75f11af9e46a59f058ac046c51c5efb695e51c
 :   Resolves the following CVEs: [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}, [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}, [CVE-2026-40355](https://nvd.nist.gov/vuln/detail/CVE-2026-40355){: external}, [CVE-2026-40356](https://nvd.nist.gov/vuln/detail/CVE-2026-40356){: external}, [CVE-2026-4878](https://nvd.nist.gov/vuln/detail/CVE-2026-4878){: external}, [CVE-2025-14512](https://nvd.nist.gov/vuln/detail/CVE-2025-14512){: external}, and [CVE-2025-14087](https://nvd.nist.gov/vuln/detail/CVE-2025-14087){: external}.
 
-{: #cl-boms-1348_1553_W-component-table}
-
 
 ### Worker node fix pack 1.34.7_1551, released 04 May 2026
 {: #cl-boms-1347_1551_W}
@@ -350,8 +326,6 @@ HAProxy c7e825675cbd75e8433801c99f8aca3b207a5a46
 :   Resolves the following CVEs: [CVE-2026-5121](https://nvd.nist.gov/vuln/detail/CVE-2026-5121){: external}, [CVE-2025-9714](https://nvd.nist.gov/vuln/detail/CVE-2025-9714){: external}, and [CVE-2026-4424](https://nvd.nist.gov/vuln/detail/CVE-2026-4424){: external}.
 GPU Device Plug-in and Installer 58dfaecaab05f56be65df5befb5e8d57bba3d42f
 :   Resolves the following CVEs: [CVE-2026-6100](https://nvd.nist.gov/vuln/detail/CVE-2026-6100){: external}, [CVE-2025-9714](https://nvd.nist.gov/vuln/detail/CVE-2025-9714){: external}, [CVE-2026-34982](https://nvd.nist.gov/vuln/detail/CVE-2026-34982){: external}, [CVE-2026-4786](https://nvd.nist.gov/vuln/detail/CVE-2026-4786){: external}, [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}, [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}, [CVE-2026-4424](https://nvd.nist.gov/vuln/detail/CVE-2026-4424){: external}, and [CVE-2026-5121](https://nvd.nist.gov/vuln/detail/CVE-2026-5121){: external}.
-
-{: #cl-boms-1347_1551_W-component-table}
 
 
 ### Master fix pack 1.34.7_1550, released 27 April 2026
@@ -391,8 +365,6 @@ Portieris admission controller v0.13.37
 Tigera Operator v1.38.13
 :   See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.38.13){: external}.
 
-{: #cl-boms_master-1347_1550_M-component-table}
-
 
 ### Worker node fix pack 1.34.7_1550, released 20 April 2026
 {: #cl-boms-1347_1550_W}
@@ -412,8 +384,6 @@ HAProxy c7e825675cbd75e8433801c99f8aca3b207a5a46
 :   Resolves the following CVEs: [CVE-2026-27135](https://nvd.nist.gov/vuln/detail/CVE-2026-27135){: external}.
 GPU Device Plug-in and Installer a51f753c5b377589a30ca4121042925d2fc24ce9
 :   Resolves the following CVEs: [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}, [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}, and [CVE-2026-27135](https://nvd.nist.gov/vuln/detail/CVE-2026-27135){: external}.
-
-{: #cl-boms-1347_1550_W-component-table}
 
 
 ### Worker node fix pack 1.34.6_1548, released 06 April 2026
@@ -435,31 +405,39 @@ HAProxy 91cc06f4e0a123d06f5ee7c226df6fb83e1ca223
 GPU Device Plug-in and Installer 9029276f9f74361a43a6db81236eda29cbb07b3a
 :   Resolves the following CVEs: [CVE-2025-0938](https://nvd.nist.gov/vuln/detail/CVE-2025-0938){: external}, [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}, [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}, [CVE-2025-9820](https://nvd.nist.gov/vuln/detail/CVE-2025-9820){: external}, and [CVE-2025-14831](https://nvd.nist.gov/vuln/detail/CVE-2025-14831){: external}.
 
-{: #cl-boms-1346_1548_W-component-table}
-
 
 ### Change log for Master fix pack 1.34.6_1547, released 02 April 2026
 {: #1346_1547_M}
 
-The following table shows the changes that are in the master fix pack 1.34.6_1547. Master patch updates are applied automatically. 
+The following list shows the changes that are in the master fix pack 1.34.6_1547. Master patch updates are applied automatically. 
 
 
-| Component | Previous | Current | Description |
-| --- | --- | --- | --- |
-| Cluster health control-plane operator | v0.1.15 | v0.1.20 | N/A |
-| Cluster health image | v1.6.13 | v1.6.15 | New version contains updates and security fixes. |
-| etcd | v3.5.26 | v3.5.27 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.27){: external}. |
-| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.22 | v2.5.25 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.3-3 | v1.34.5-2 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 452 | v454 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} Metrics Server Config Watcher | v1.1.9 | v1.1.11 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} RBAC Operator | 8a12251 | 6212368 | New version contains updates and security fixes. |
-| Key Management Service provider | v2.10.20 | 2.10.22 | New version contains updates and security fixes. |
-| Kubernetes | v1.34.3 | v1.34.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.6){: external}. |
-| Kubernetes Metrics Server | v0.8.0 | v0.8.1 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1){: external}. |
-| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 3347 | 3563 | New version contains updates and security fixes. |
-| Portieris admission controller | v0.13.33 | v0.13.36 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.36){: external}. |
-{: caption="Changes since version 1.34.4-1543" caption-side="bottom"}
+Cluster health control-plane operator v0.1.20
+:   
+Cluster health image v1.6.15
+:   New version contains updates and security fixes.
+etcd v3.5.27
+:   See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.27){: external}.
+{{site.data.keyword.cloud_notm}} Block Storage driver and plug-in v2.5.25
+:   New version contains updates and security fixes.
+{{site.data.keyword.cloud_notm}} Controller Manager v1.34.5-2
+:   New version contains updates and security fixes.
+{{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor v454
+:   New version contains updates and security fixes.
+{{site.data.keyword.cloud_notm}} Metrics Server Config Watcher v1.1.11
+:   New version contains updates and security fixes.
+{{site.data.keyword.cloud_notm}} RBAC Operator 6212368
+:   New version contains updates and security fixes.
+Key Management Service provider 2.10.22
+:   New version contains updates and security fixes.
+Kubernetes v1.34.6
+:   See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.6){: external}.
+Kubernetes Metrics Server v0.8.1
+:   See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-sigs/metrics-server/releases/tag/v0.8.1){: external}.
+Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider 3563
+:   New version contains updates and security fixes.
+Portieris admission controller v0.13.36
+:   See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.36){: external}.
 
 
 ### Worker node fix pack 1.34.6_1547, released 24 March 2026
@@ -481,8 +459,6 @@ HAProxy 10c8639e6b5829d0af51a22755e13756f34630cf
 GPU Device Plug-in and Installer 1c4faba733bd6bce95c85ead9a63e1ff0bbce86b
 :   Resolves the following CVEs: [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/CVE-2026-0915){: external}, [CVE-2026-25749](https://nvd.nist.gov/vuln/detail/CVE-2026-25749){: external}, and [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/CVE-2025-15281){: external}.
 
-{: #cl-boms-1346_1547_W-component-table}
-
 
 ### Worker node fix pack 1.34.4_1545, released 11 March 2026
 {: #cl-boms-1344_1545_W}
@@ -502,8 +478,6 @@ HAProxy 965c403695b15b3410d87a3772002edbc5ed2569
 :   Resolves the following CVEs: [CVE-2025-69419](https://nvd.nist.gov/vuln/detail/CVE-2025-69419){: external}.
 GPU Device Plug-in and Installer dc588cffda45a3831875a9236f7c34eb4aadb71c
 :   Resolves the following CVEs: [CVE-2025-69419](https://nvd.nist.gov/vuln/detail/CVE-2025-69419){: external}.
-
-{: #cl-boms-1344_1545_W-component-table}
 
 
 ### Worker node fix pack 1.34.4_1544, released 24 February 2026
@@ -525,25 +499,27 @@ HAProxy 2bf1aebe51a37cd9b4661656ce21e53f918166ea
 GPU Device Plug-in and Installer 19ce461883e9fe115df89258f0b4568daff1795e
 :   Resolves the following CVEs: [CVE-2025-15367](https://nvd.nist.gov/vuln/detail/CVE-2025-15367){: external}, [CVE-2026-0865](https://nvd.nist.gov/vuln/detail/CVE-2026-0865){: external}, [CVE-2026-1299](https://nvd.nist.gov/vuln/detail/CVE-2026-1299){: external}, [CVE-2024-6923](https://nvd.nist.gov/vuln/detail/CVE-2024-6923){: external}, [CVE-2025-15366](https://nvd.nist.gov/vuln/detail/CVE-2025-15366){: external}, and [CVE-2025-6176](https://nvd.nist.gov/vuln/detail/CVE-2025-6176){: external}.
 
-{: #cl-boms-1344_1544_W-component-table}
-
 
 ### Change log for Master fix pack 1.34.4_1543, released 18 February 2026
 {: #1344_1543_M}
 
-The following table shows the changes that are in the master fix pack 1.34.4_1543. Master patch updates are applied automatically. 
+The following list shows the changes that are in the master fix pack 1.34.4_1543. Master patch updates are applied automatically. 
 
 
-| Component | Previous | Current | Description |
-| --- | --- | --- | --- |
-| Cluster health image | v1.6.13 | v1.6.14 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} Block Storage driver and plug-in | v2.5.22 | v2.5.24 | New version contains updates and security fixes. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.3-3 | v1.34.3-7 | New version contains updates and security fixes. |
-| {{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor | 452 | v453 | New version contains updates and security fixes. |
-| Key Management Service provider | v2.10.20 | 2.10.21 | New version contains updates and security fixes. |
-| Kubernetes | v1.34.3 | v1.34.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.4){: external}. |
-| Portieris admission controller | v0.13.33 | v0.13.35 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.35){: external}. |
-{: caption="Changes since version 1.34.3-1539" caption-side="bottom"}
+Cluster health image v1.6.14
+:   New version contains updates and security fixes.
+{{site.data.keyword.cloud_notm}} Block Storage driver and plug-in v2.5.24
+:   New version contains updates and security fixes.
+{{site.data.keyword.cloud_notm}} Controller Manager v1.34.3-7
+:   New version contains updates and security fixes.
+{{site.data.keyword.filestorage_full_notm}} for Classic plug-in and monitor v453
+:   New version contains updates and security fixes.
+Key Management Service provider 2.10.21
+:   New version contains updates and security fixes.
+Kubernetes v1.34.4
+:   See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.4){: external}.
+Portieris admission controller v0.13.35
+:   See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.35){: external}.
 
 
 ### Worker node fix pack 1.34.3_1542, released 09 February 2026
@@ -565,8 +541,6 @@ HAProxy ace947f4ecf45f28effe8d125ffda48f9890223b
 GPU Device Plug-in and Installer db9b359a50563e5b4e717b2901571cb206dba8d9
 :   Resolves the following CVEs: [CVE-2025-14104](https://nvd.nist.gov/vuln/detail/CVE-2025-14104){: external}, [CVE-2025-9086](https://nvd.nist.gov/vuln/detail/CVE-2025-9086){: external}, [CVE-2025-11187](https://nvd.nist.gov/vuln/detail/CVE-2025-11187){: external}, [CVE-2025-15467](https://nvd.nist.gov/vuln/detail/CVE-2025-15467){: external}, [CVE-2025-69419](https://nvd.nist.gov/vuln/detail/CVE-2025-69419){: external}, [CVE-2026-22795](https://nvd.nist.gov/vuln/detail/CVE-2026-22795){: external}, [CVE-2026-22796](https://nvd.nist.gov/vuln/detail/CVE-2026-22796){: external}, [CVE-2025-69421](https://nvd.nist.gov/vuln/detail/CVE-2025-69421){: external}, [CVE-2025-66418](https://nvd.nist.gov/vuln/detail/CVE-2025-66418){: external}, [CVE-2025-15469](https://nvd.nist.gov/vuln/detail/CVE-2025-15469){: external}, [CVE-2025-68160](https://nvd.nist.gov/vuln/detail/CVE-2025-68160){: external}, [CVE-2025-69418](https://nvd.nist.gov/vuln/detail/CVE-2025-69418){: external}, [CVE-2025-69420](https://nvd.nist.gov/vuln/detail/CVE-2025-69420){: external}, [CVE-2025-66471](https://nvd.nist.gov/vuln/detail/CVE-2025-66471){: external}, [CVE-2026-21441](https://nvd.nist.gov/vuln/detail/CVE-2026-21441){: external}, [CVE-2025-12084](https://nvd.nist.gov/vuln/detail/CVE-2025-12084){: external}, [CVE-2025-66199](https://nvd.nist.gov/vuln/detail/CVE-2025-66199){: external}, and [CVE-2025-15468](https://nvd.nist.gov/vuln/detail/CVE-2025-15468){: external}.
 
-{: #cl-boms-1343_1542_W-component-table}
-
 
 ### Worker node fix pack 1.34.3_1541, released 27 January 2026
 {: #cl-boms-1343_1541_W}
@@ -587,23 +561,23 @@ HAProxy c9cb5ad988e916d184d1c308d4f2e5c502d99523
 GPU Device Plug-in and Installer 988adbf62747d86883413ca1773f4bc5141dd516
 :   Resolves the following CVEs: [CVE-2025-13601](https://nvd.nist.gov/vuln/detail/CVE-2025-13601){: external}, and [CVE-2025-68973](https://nvd.nist.gov/vuln/detail/CVE-2025-68973){: external}.
 
-{: #cl-boms-1343_1541_W-component-table}
-
 
 ### Master fix pack 1.34.3_1539, released 21 January 2026
 {: #1343_1539_M}
 
-The following table shows the changes that are in the master fix pack 1.34.3_1539. Master patch updates are applied automatically. 
+The following list shows the changes that are in the master fix pack 1.34.3_1539. Master patch updates are applied automatically. 
 
 
-| Component | Previous | Current | Description |
-| --- | --- | --- | --- |
-| Cluster health control-plane operator | v0.1.11 | v0.1.15 | New version contains updates and security fixes. |
-| etcd | v3.5.25 | v3.5.26 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.26){: external}. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.2-3 | v1.34.3-3 | New version contains updates and security fixes. |
-| Key Management Service provider | v2.10.19 | 2.10.20 | New version contains updates and security fixes. |
-| Kubernetes | v1.34.2 | v1.34.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3){: external}. |
-{: caption="Changes since version 1.34.2-1534" caption-side="bottom"}
+Cluster health control-plane operator v0.1.15
+:   New version contains updates and security fixes.
+etcd v3.5.26
+:   See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.26){: external}.
+{{site.data.keyword.cloud_notm}} Controller Manager v1.34.3-3
+:   New version contains updates and security fixes.
+Key Management Service provider 2.10.20
+:   New version contains updates and security fixes.
+Kubernetes v1.34.3
+:   See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.3){: external}.
 
 
 ### Worker node fix pack 1.34.2_1540, released 17 January 2026
@@ -623,8 +597,6 @@ HAProxy d04e61c5b29aa5328bc72455edb95e08e8f6d85c
 GPU Device Plug-in and Installer b47cd687497789860e50db2fb84d0b43a4b6d5a4
 :   
 
-{: #cl-boms-1342_1540_W-component-table}
-
 
 ### Worker node fix pack 1.34.2_1537, released 12 January 2026
 {: #cl-boms-1342_1537_W}
@@ -642,8 +614,6 @@ HAProxy d04e61c5b29aa5328bc72455edb95e08e8f6d85c
 :   
 GPU Device Plug-in and Installer b47cd687497789860e50db2fb84d0b43a4b6d5a4
 :   Resolves the following CVEs: [CVE-2025-45582](https://nvd.nist.gov/vuln/detail/CVE-2025-45582){: external}.
-
-{: #cl-boms-1342_1537_W-component-table}
 
 
 ### Worker node fix pack 1.34.2_1536, released 29 December 2025
@@ -663,8 +633,6 @@ HAProxy d04e61c5b29aa5328bc72455edb95e08e8f6d85c
 GPU Device Plug-in and Installer 0057dcb30bc3a8446f9a4eeef56228e56e935b66
 :   Resolves the following CVEs: [CVE-2025-8291](https://nvd.nist.gov/vuln/detail/CVE-2025-8291){: external}, [CVE-2025-6069](https://nvd.nist.gov/vuln/detail/CVE-2025-6069){: external}, [CVE-2024-5642](https://nvd.nist.gov/vuln/detail/CVE-2024-5642){: external}, and [CVE-2025-6075](https://nvd.nist.gov/vuln/detail/CVE-2025-6075){: external}.
 
-{: #cl-boms-1342_1536_W-component-table}
-
 
 ### Worker node fix pack 1.34.2_1535, released 16 December 2025
 {: #cl-boms-1342_1535_W}
@@ -683,27 +651,31 @@ HAProxy 03b74b82b63cd53403b6b587b84233c93edef18d
 GPU Device Plug-in and Installer 1b40f92bf929456042c1f42ba54fa73cdaafb653
 :   Resolves the following CVEs: [CVE-2025-8058](https://nvd.nist.gov/vuln/detail/CVE-2025-8058){: external}.
 
-{: #cl-boms-1342_1535_W-component-table}
-
 
 ### Master fix pack 1.34.2_1534, released 10 December 2025
 {: #1342_1534_M}
 
-The following table shows the changes that are in the master fix pack 1.34.2_1534. Master patch updates are applied automatically. 
+The following list shows the changes that are in the master fix pack 1.34.2_1534. Master patch updates are applied automatically. 
 
 
-| Component | Previous | Current | Description |
-| --- | --- | --- | --- |
-| Calico | v3.29.6 | v3.29.7 | See the [Calico release notes](https://archive-os-3-29.netlify.app/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}. |
-| Cluster health image | v1.6.10 | v1.6.13 | New version contains updates and security fixes. |
-| etcd | v3.5.24 | v3.5.25 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.25){: external}. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.34.1-6 | v1.34.2-3 | New version contains updates and security fixes. |
-| Key Management Service provider | v2.10.18 | 2.10.19 | New version contains updates and security fixes. |
-| Konnectivity agent and server | v0.33.0 | v0.34.0 | See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.34.0){: external}. |
-| Kubernetes | v1.34.1 | v1.34.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.2){: external}. |
-| Portieris admission controller | v0.13.31 | v0.13.33 | See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.33){: external}. |
-| Tigera Operator | v1.36.14 | v1.36.16 | See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.16){: external}. |
-{: caption="Changes since version 1.34.1-1529" caption-side="bottom"}
+Calico v3.29.7
+:   See the [Calico release notes](https://archive-os-3-29.netlify.app/calico/3.29/release-notes/#calico-open-source-3297-bug-fix-release){: external}.
+Cluster health image v1.6.13
+:   New version contains updates and security fixes.
+etcd v3.5.25
+:   See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.25){: external}.
+{{site.data.keyword.cloud_notm}} Controller Manager v1.34.2-3
+:   New version contains updates and security fixes.
+Key Management Service provider 2.10.19
+:   New version contains updates and security fixes.
+Konnectivity agent and server v0.34.0
+:   See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.34.0){: external}.
+Kubernetes v1.34.2
+:   See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.34.2){: external}.
+Portieris admission controller v0.13.33
+:   See the [Portieris admission controller release notes](https://github.com/{{site.data.keyword.IBM_notm}}/portieris/releases/tag/v0.13.33){: external}.
+Tigera Operator v1.36.16
+:   See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.36.16){: external}.
 
 
 ### Worker node fix pack 1.34.1_1531, released 03 December 2025
@@ -723,8 +695,6 @@ HAProxy 03b74b82b63cd53403b6b587b84233c93edef18d
 GPU Device Plug-in and Installer 184bbc2d05e029bb5b0c3c18798c10697e950967
 :   Resolves the following CVEs: [CVE-2025-59375](https://nvd.nist.gov/vuln/detail/CVE-2025-59375){: external}.
 
-{: #cl-boms-1341_1531_W-component-table}
-
 
 ### Worker node fix pack 1.34.1_1530, released 17 November 2025
 {: #cl-boms-1341_1530_W}
@@ -742,5 +712,3 @@ HAProxy fbe9b8146f23bbd12b2566a79fa897d5981e7273
 :   
 GPU Device Plug-in and Installer 1e3d028d8b22980ae70339db3b7f41575fe5ee5f
 :   Resolves the following CVEs: [CVE-2025-5318](https://nvd.nist.gov/vuln/detail/CVE-2025-5318){: external}.
-
-{: #cl-boms-1341_1530_W-component-table}
