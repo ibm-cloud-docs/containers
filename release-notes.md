@@ -29,6 +29,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## August 2026
 {: #containers-aug26}
 
+### 27 August 2026
+{: #containers-aug2726}
+{: release-note}
+
+
+CLI version 1.0.843 is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 ### 26 August 2026
 {: #containers-aug2626}
 {: release-note}
