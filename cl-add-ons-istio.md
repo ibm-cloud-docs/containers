@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-08-18"
+lastupdated: "2026-08-27"
 
 
 keywords: change log, version history, Istio
@@ -115,12 +115,12 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.28.0](https://istio.io/latest/news/releases/1.28.x/announcing-1.28/){: external}, [Istio 1.28.1](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.1/){: external}, [Istio 1.28.2](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.2/){: external}, [Istio 1.28.3](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.3/){: external}, [Istio 1.28.4](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.4/){: external}, [Istio 1.28.5](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.5/){: external}, and [Istio 1.28.6](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.6/){: external}.
 
 :   Resolves the following CVEs:
-    - [CVE-2026-28387](https://www.cve.org/CVERecord?id=CVE-2026-28387){: external}
-    - [CVE-2026-28388](https://www.cve.org/CVERecord?id=CVE-2026-28388){: external}
-    - [CVE-2026-31789](https://www.cve.org/CVERecord?id=CVE-2026-31789){: external}
-    - [CVE-2026-28389](https://www.cve.org/CVERecord?id=CVE-2026-28389){: external}
-    - [CVE-2026-28390](https://www.cve.org/CVERecord?id=CVE-2026-28390){: external}
-    - [CVE-2026-31790](https://www.cve.org/CVERecord?id=CVE-2026-31790){: external}
+    - [CVE-2026-28387](https://www.cve.org/cveRecord?id=cve-2026-28387){: external}
+    - [CVE-2026-28388](https://www.cve.org/cveRecord?id=cve-2026-28388){: external}
+    - [CVE-2026-31789](https://www.cve.org/cveRecord?id=cve-2026-31789){: external}
+    - [CVE-2026-28389](https://www.cve.org/cveRecord?id=cve-2026-28389){: external}
+    - [CVE-2026-28390](https://www.cve.org/cveRecord?id=cve-2026-28390){: external}
+    - [CVE-2026-31790](https://www.cve.org/cveRecord?id=cve-2026-31790){: external}
 
 
 ## Version 1.27
@@ -143,13 +143,13 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.27.9](https://istio.io/latest/news/releases/1.27.x/announcing-1.27.9/){: external}.
 
 :   Resolves the following CVEs:
-    - [CVE-2026-35535](https://www.cve.org/CVERecord?id=CVE-2026-35535){: external}
-    - [CVE-2026-1965](https://www.cve.org/CVERecord?id=CVE-2026-1965){: external}
-    - [CVE-2026-3731](https://www.cve.org/CVERecord?id=CVE-2026-3731){: external}
-    - [CVE-2026-3783](https://www.cve.org/CVERecord?id=CVE-2026-3783){: external}
-    - [CVE-2026-29111](https://www.cve.org/CVERecord?id=CVE-2026-29111){: external}
-    - [CVE-2025-0167](https://www.cve.org/CVERecord?id=CVE-2025-0167){: external}
-    - [CVE-2026-3784](https://www.cve.org/CVERecord?id=CVE-2026-3784){: external}
+    - [CVE-2026-35535](https://www.cve.org/cveRecord?id=cve-2026-35535){: external}
+    - [CVE-2026-1965](https://www.cve.org/cveRecord?id=cve-2026-1965){: external}
+    - [CVE-2026-3731](https://www.cve.org/cveRecord?id=cve-2026-3731){: external}
+    - [CVE-2026-3783](https://www.cve.org/cveRecord?id=cve-2026-3783){: external}
+    - [CVE-2026-29111](https://www.cve.org/cveRecord?id=cve-2026-29111){: external}
+    - [CVE-2025-0167](https://www.cve.org/cveRecord?id=cve-2025-0167){: external}
+    - [CVE-2026-3784](https://www.cve.org/cveRecord?id=cve-2026-3784){: external}
 
 
 ### Version 1.27.8, released 27 March 2026
@@ -168,33 +168,33 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.27.0](https://istio.io/latest/news/releases/1.27.x/announcing-1.27/){: external}, [Istio 1.27.1](https://istio.io/latest/news/releases/1.27.x/announcing-1.27.1/){: external}, [Istio 1.27.2](https://istio.io/latest/news/releases/1.27.x/announcing-1.27.2/){: external}, [Istio 1.27.3](https://istio.io/latest/news/releases/1.27.x/announcing-1.27.3/){: external}, [Istio 1.27.4](https://istio.io/latest/news/releases/1.27.x/announcing-1.27.4/){: external}, [Istio 1.27.5](https://istio.io/latest/news/releases/1.27.x/announcing-1.27.5/){: external}, [Istio 1.27.6](https://istio.io/latest/news/releases/1.27.x/announcing-1.27.6/){: external}, [Istio 1.27.7](https://istio.io/latest/news/releases/1.27.x/announcing-1.27.7/){: external}, and [Istio 1.27.8](https://istio.io/latest/news/releases/1.27.x/announcing-1.27.8/){: external}.
 
 :   Resolves the following CVEs:
-    - [CVE-2026-22796](https://www.cve.org/CVERecord?id=CVE-2026-22796){: external}
-    - [CVE-2026-0965](https://www.cve.org/CVERecord?id=CVE-2026-0965){: external}
-    - [CVE-2025-68973](https://www.cve.org/CVERecord?id=CVE-2025-68973){: external}
-    - [CVE-2025-15281](https://www.cve.org/CVERecord?id=CVE-2025-15281){: external}
-    - [CVE-2026-0968](https://www.cve.org/CVERecord?id=CVE-2026-0968){: external}
-    - [CVE-2026-0964](https://www.cve.org/CVERecord?id=CVE-2026-0964){: external}
-    - [CVE-2025-15224](https://www.cve.org/CVERecord?id=CVE-2025-15224){: external}
-    - [CVE-2025-8277](https://www.cve.org/CVERecord?id=CVE-2025-8277){: external}
-    - [CVE-2026-22795](https://www.cve.org/CVERecord?id=CVE-2026-22795){: external}
-    - [CVE-2025-9820](https://www.cve.org/CVERecord?id=CVE-2025-9820){: external}
-    - [CVE-2025-14524](https://www.cve.org/CVERecord?id=CVE-2025-14524){: external}
-    - [CVE-2025-69421](https://www.cve.org/CVERecord?id=CVE-2025-69421){: external}
-    - [CVE-2025-15079](https://www.cve.org/CVERecord?id=CVE-2025-15079){: external}
-    - [CVE-2026-0915](https://www.cve.org/CVERecord?id=CVE-2026-0915){: external}
-    - [CVE-2025-13151](https://www.cve.org/CVERecord?id=CVE-2025-13151){: external}
-    - [CVE-2025-14819](https://www.cve.org/CVERecord?id=CVE-2025-14819){: external}
-    - [CVE-2026-0861](https://www.cve.org/CVERecord?id=CVE-2026-0861){: external}
-    - [CVE-2025-14831](https://www.cve.org/CVERecord?id=CVE-2025-14831){: external}
-    - [CVE-2025-69419](https://www.cve.org/CVERecord?id=CVE-2025-69419){: external}
-    - [CVE-2026-0966](https://www.cve.org/CVERecord?id=CVE-2026-0966){: external}
-    - [CVE-2025-15467](https://www.cve.org/CVERecord?id=CVE-2025-15467){: external}
-    - [CVE-2026-0967](https://www.cve.org/CVERecord?id=CVE-2026-0967){: external}
-    - [CVE-2025-69420](https://www.cve.org/CVERecord?id=CVE-2025-69420){: external}
-    - [CVE-2025-68160](https://www.cve.org/CVERecord?id=CVE-2025-68160){: external}
-    - [CVE-2025-10148](https://www.cve.org/CVERecord?id=CVE-2025-10148){: external}
-    - [CVE-2025-69418](https://www.cve.org/CVERecord?id=CVE-2025-69418){: external}
-    - [CVE-2025-14017](https://www.cve.org/CVERecord?id=CVE-2025-14017){: external}
+    - [CVE-2026-22796](https://www.cve.org/cveRecord?id=cve-2026-22796){: external}
+    - [CVE-2026-0965](https://www.cve.org/cveRecord?id=cve-2026-0965){: external}
+    - [CVE-2025-68973](https://www.cve.org/cveRecord?id=cve-2025-68973){: external}
+    - [CVE-2025-15281](https://www.cve.org/cveRecord?id=cve-2025-15281){: external}
+    - [CVE-2026-0968](https://www.cve.org/cveRecord?id=cve-2026-0968){: external}
+    - [CVE-2026-0964](https://www.cve.org/cveRecord?id=cve-2026-0964){: external}
+    - [CVE-2025-15224](https://www.cve.org/cveRecord?id=cve-2025-15224){: external}
+    - [CVE-2025-8277](https://www.cve.org/cveRecord?id=cve-2025-8277){: external}
+    - [CVE-2026-22795](https://www.cve.org/cveRecord?id=cve-2026-22795){: external}
+    - [CVE-2025-9820](https://www.cve.org/cveRecord?id=cve-2025-9820){: external}
+    - [CVE-2025-14524](https://www.cve.org/cveRecord?id=cve-2025-14524){: external}
+    - [CVE-2025-69421](https://www.cve.org/cveRecord?id=cve-2025-69421){: external}
+    - [CVE-2025-15079](https://www.cve.org/cveRecord?id=cve-2025-15079){: external}
+    - [CVE-2026-0915](https://www.cve.org/cveRecord?id=cve-2026-0915){: external}
+    - [CVE-2025-13151](https://www.cve.org/cveRecord?id=cve-2025-13151){: external}
+    - [CVE-2025-14819](https://www.cve.org/cveRecord?id=cve-2025-14819){: external}
+    - [CVE-2026-0861](https://www.cve.org/cveRecord?id=cve-2026-0861){: external}
+    - [CVE-2025-14831](https://www.cve.org/cveRecord?id=cve-2025-14831){: external}
+    - [CVE-2025-69419](https://www.cve.org/cveRecord?id=cve-2025-69419){: external}
+    - [CVE-2026-0966](https://www.cve.org/cveRecord?id=cve-2026-0966){: external}
+    - [CVE-2025-15467](https://www.cve.org/cveRecord?id=cve-2025-15467){: external}
+    - [CVE-2026-0967](https://www.cve.org/cveRecord?id=cve-2026-0967){: external}
+    - [CVE-2025-69420](https://www.cve.org/cveRecord?id=cve-2025-69420){: external}
+    - [CVE-2025-68160](https://www.cve.org/cveRecord?id=cve-2025-68160){: external}
+    - [CVE-2025-10148](https://www.cve.org/cveRecord?id=cve-2025-10148){: external}
+    - [CVE-2025-69418](https://www.cve.org/cveRecord?id=cve-2025-69418){: external}
+    - [CVE-2025-14017](https://www.cve.org/cveRecord?id=cve-2025-14017){: external}
 
 
 ## Version 1.26
@@ -217,26 +217,26 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.26.0](https://istio.io/latest/news/releases/1.26.x/announcing-1.26/){: external}, [Istio 1.26.1](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.1/){: external}, [Istio 1.26.2](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.2/){: external}, [Istio 1.26.3](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.3/){: external}, [Istio 1.26.4](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.4/){: external}, [Istio 1.26.5](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.5/){: external}, and , [Istio 1.26.6](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.6/){: external},
 
 :   Resolves the following CVEs:
-    - [CVE-2025-32463](https://www.cve.org/CVERecord?id=CVE-2025-32463){: external}
-    - [CVE-2025-32988](https://www.cve.org/CVERecord?id=CVE-2025-32988){: external}
-    - [CVE-2025-47268](https://www.cve.org/CVERecord?id=CVE-2025-47268){: external}
-    - [CVE-2025-5372](https://www.cve.org/CVERecord?id=CVE-2025-5372){: external}
-    - [CVE-2025-6297](https://www.cve.org/CVERecord?id=CVE-2025-6297){: external}
-    - [CVE-2025-32989](https://www.cve.org/CVERecord?id=CVE-2025-32989){: external}
-    - [CVE-2025-4878](https://www.cve.org/CVERecord?id=CVE-2025-4878){: external}
-    - [CVE-2025-5351](https://www.cve.org/CVERecord?id=CVE-2025-5351){: external}
-    - [CVE-2025-5987](https://www.cve.org/CVERecord?id=CVE-2025-5987){: external}
-    - [CVE-2025-4877](https://www.cve.org/CVERecord?id=CVE-2025-4877){: external}
-    - [CVE-2025-48964](https://www.cve.org/CVERecord?id=CVE-2025-48964){: external}
-    - [CVE-2025-32990](https://www.cve.org/CVERecord?id=CVE-2025-32990){: external}
-    - [CVE-2025-9230](https://www.cve.org/CVERecord?id=CVE-2025-9230){: external}
-    - [CVE-2025-32462](https://www.cve.org/CVERecord?id=CVE-2025-32462){: external}
-    - [CVE-2025-5318](https://www.cve.org/CVERecord?id=CVE-2025-5318){: external}
-    - [CVE-2025-40909](https://www.cve.org/CVERecord?id=CVE-2025-40909){: external}
-    - [CVE-2025-5702](https://www.cve.org/CVERecord?id=CVE-2025-5702){: external}
-    - [CVE-2024-10963](https://www.cve.org/CVERecord?id=CVE-2024-10963){: external}
-    - [CVE-2024-8058](https://www.cve.org/CVERecord?id=CVE-2024-8058){: external}
-    - [CVE-2024-6395](https://www.cve.org/CVERecord?id=CVE-2024-6395){: external} 
+    - [CVE-2025-32463](https://www.cve.org/cveRecord?id=cve-2025-32463){: external}
+    - [CVE-2025-32988](https://www.cve.org/cveRecord?id=cve-2025-32988){: external}
+    - [CVE-2025-47268](https://www.cve.org/cveRecord?id=cve-2025-47268){: external}
+    - [CVE-2025-5372](https://www.cve.org/cveRecord?id=cve-2025-5372){: external}
+    - [CVE-2025-6297](https://www.cve.org/cveRecord?id=cve-2025-6297){: external}
+    - [CVE-2025-32989](https://www.cve.org/cveRecord?id=cve-2025-32989){: external}
+    - [CVE-2025-4878](https://www.cve.org/cveRecord?id=cve-2025-4878){: external}
+    - [CVE-2025-5351](https://www.cve.org/cveRecord?id=cve-2025-5351){: external}
+    - [CVE-2025-5987](https://www.cve.org/cveRecord?id=cve-2025-5987){: external}
+    - [CVE-2025-4877](https://www.cve.org/cveRecord?id=cve-2025-4877){: external}
+    - [CVE-2025-48964](https://www.cve.org/cveRecord?id=cve-2025-48964){: external}
+    - [CVE-2025-32990](https://www.cve.org/cveRecord?id=cve-2025-32990){: external}
+    - [CVE-2025-9230](https://www.cve.org/cveRecord?id=cve-2025-9230){: external}
+    - [CVE-2025-32462](https://www.cve.org/cveRecord?id=cve-2025-32462){: external}
+    - [CVE-2025-5318](https://www.cve.org/cveRecord?id=cve-2025-5318){: external}
+    - [CVE-2025-40909](https://www.cve.org/cveRecord?id=cve-2025-40909){: external}
+    - [CVE-2025-5702](https://www.cve.org/cveRecord?id=cve-2025-5702){: external}
+    - [CVE-2024-10963](https://www.cve.org/cveRecord?id=cve-2024-10963){: external}
+    - [CVE-2024-8058](https://www.cve.org/cveRecord?id=cve-2024-8058){: external}
+    - [CVE-2024-6395](https://www.cve.org/cveRecord?id=cve-2024-6395){: external} 
 
 
 ### Version 1.26.8, released 21 January 2025
@@ -255,7 +255,7 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.26.7](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.7/){: external}, and , [Istio 1.26.8](https://istio.io/latest/news/releases/1.26.x/announcing-1.26.8/){: external},
 
 :   Resolves the following CVEs:
-    - [CVE-2025-8114](https://www.cve.org/CVERecord?id=CVE-2025-8114){: external}
+    - [CVE-2025-8114](https://www.cve.org/cveRecord?id=cve-2025-8114){: external}
 
 
 ## Version 1.25
@@ -282,10 +282,10 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.25.0](https://istio.io/latest/news/releases/1.25.x/announcing-1.25/){: external}, [Istio 1.25.1](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.1/){: external}, [Istio 1.25.2](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.2/){: external}, [Istio 1.25.3](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.3/){: external}, [Istio 1.25.4](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.4/){: external}, and [Istio 1.25.5](https://istio.io/latest/news/releases/1.25.x/announcing-1.25.5/){: external}.
 
 :   Resolves the following CVEs:
-    - [CVE-2025-3576](https://www.cve.org/CVERecord?id=CVE-2025-3576){: external}
-    - [CVE-2025-4598](https://www.cve.org/CVERecord?id=CVE-2025-4598){: external}
-    - [CVE-2025-46836](https://www.cve.org/CVERecord?id=CVE-2025-46836){: external}
-    - [CVE-2025-6020](https://www.cve.org/CVERecord?id=CVE-2025-6020){: external}
+    - [CVE-2025-3576](https://www.cve.org/cveRecord?id=cve-2025-3576){: external}
+    - [CVE-2025-4598](https://www.cve.org/cveRecord?id=cve-2025-4598){: external}
+    - [CVE-2025-46836](https://www.cve.org/cveRecord?id=cve-2025-46836){: external}
+    - [CVE-2025-6020](https://www.cve.org/cveRecord?id=cve-2025-6020){: external}
 
 
 ## Version 1.24
@@ -314,9 +314,9 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.24.0](https://istio.io/latest/news/releases/1.24.x/announcing-1.24/){: external}, Istio 1.24.1, [Istio 1.24.2](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.2/){: external}, [Istio 1.24.3](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.3/){: external}, [Istio 1.24.4](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.4/){: external}, [Istio 1.24.5](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.5/){: external}, and [Istio 1.24.6](https://istio.io/latest/news/releases/1.24.x/announcing-1.24.6/){: external}.
 
 :   Resolves the following CVEs:
-    - [CVE-2024-56406](https://www.cve.org/CVERecord?id=CVE-2024-56406){: external}
-    - [CVE-2025-30258](https://www.cve.org/CVERecord?id=CVE-2025-30258){: external}
-    - [CVE-2025-31115](https://www.cve.org/CVERecord?id=CVE-2025-31115){: external}
+    - [CVE-2024-56406](https://www.cve.org/cveRecord?id=cve-2024-56406){: external}
+    - [CVE-2025-30258](https://www.cve.org/cveRecord?id=cve-2025-30258){: external}
+    - [CVE-2025-31115](https://www.cve.org/cveRecord?id=cve-2025-31115){: external}
 
 
 ## Version 1.23
@@ -338,22 +338,22 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.23.6](https://istio.io/latest/news/releases/1.23.x/announcing-1.23.6/.){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-25260](https://www.cve.org/CVERecord?id=CVE-2024-25260){: external}
-    - [CVE-2025-1365](https://www.cve.org/CVERecord?id=CVE-2025-1365){: external}
-    - [CVE-2025-1371](https://www.cve.org/CVERecord?id=CVE-2025-1371){: external}
-    - [CVE-2025-1372](https://www.cve.org/CVERecord?id=CVE-2025-1372){: external}
-    - [CVE-2025-1377](https://www.cve.org/CVERecord?id=CVE-2025-1377){: external}
-    - [CVE-2024-12243](https://www.cve.org/CVERecord?id=CVE-2024-12243){: external}
-    - [CVE-2024-26458](https://www.cve.org/CVERecord?id=CVE-2024-26458){: external}
-    - [CVE-2024-26461](https://www.cve.org/CVERecord?id=CVE-2024-26461){: external}
-    - [CVE-2024-26462](https://www.cve.org/CVERecord?id=CVE-2024-26462){: external}
-    - [CVE-2025-24528](https://www.cve.org/CVERecord?id=CVE-2025-24528){: external}
-    - [CVE-2024-12133](https://www.cve.org/CVERecord?id=CVE-2024-12133){: external}
-    - [CVE-2025-0395](https://www.cve.org/CVERecord?id=CVE-2025-0395){: external}
-    - [CVE-2024-13176](https://www.cve.org/CVERecord?id=CVE-2024-13176){: external}
-    - [CVE-2024-9143](https://www.cve.org/CVERecord?id=CVE-2024-9143){: external}
-    - [CVE-2024-3596](https://www.cve.org/CVERecord?id=CVE-2024-3596){: external}
-    - [CVE-2025-1390](https://www.cve.org/CVERecord?id=CVE-2025-1390){: external}
+    - [CVE-2024-25260](https://www.cve.org/cveRecord?id=cve-2024-25260){: external}
+    - [CVE-2025-1365](https://www.cve.org/cveRecord?id=cve-2025-1365){: external}
+    - [CVE-2025-1371](https://www.cve.org/cveRecord?id=cve-2025-1371){: external}
+    - [CVE-2025-1372](https://www.cve.org/cveRecord?id=cve-2025-1372){: external}
+    - [CVE-2025-1377](https://www.cve.org/cveRecord?id=cve-2025-1377){: external}
+    - [CVE-2024-12243](https://www.cve.org/cveRecord?id=cve-2024-12243){: external}
+    - [CVE-2024-26458](https://www.cve.org/cveRecord?id=cve-2024-26458){: external}
+    - [CVE-2024-26461](https://www.cve.org/cveRecord?id=cve-2024-26461){: external}
+    - [CVE-2024-26462](https://www.cve.org/cveRecord?id=cve-2024-26462){: external}
+    - [CVE-2025-24528](https://www.cve.org/cveRecord?id=cve-2025-24528){: external}
+    - [CVE-2024-12133](https://www.cve.org/cveRecord?id=cve-2024-12133){: external}
+    - [CVE-2025-0395](https://www.cve.org/cveRecord?id=cve-2025-0395){: external}
+    - [CVE-2024-13176](https://www.cve.org/cveRecord?id=cve-2024-13176){: external}
+    - [CVE-2024-9143](https://www.cve.org/cveRecord?id=cve-2024-9143){: external}
+    - [CVE-2024-3596](https://www.cve.org/cveRecord?id=cve-2024-3596){: external}
+    - [CVE-2025-1390](https://www.cve.org/cveRecord?id=cve-2025-1390){: external}
     - [usn-7369-1](https://ubuntu.com/security/notices/USN-7369-1){: external}
     - [usn-7281-1](https://ubuntu.com/security/notices/USN-7281-1){: external}
     - [usn-7314-1](https://ubuntu.com/security/notices/USN-7314-1){: external}
@@ -380,8 +380,8 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.23.5](https://istio.io/latest/news/releases/1.23.x/announcing-1.23.5/){: external}.
 :   Expanded testing and support to IKS 1.31.
 :   Resolves the following CVEs:
-    - [CVE-2025-0665](https://www.cve.org/CVERecord?id=CVE-2025-0665){: external}
-    - [CVE-2024-11053](https://www.cve.org/CVERecord?id=CVE-2024-11053){: external}
+    - [CVE-2025-0665](https://www.cve.org/cveRecord?id=cve-2025-0665){: external}
+    - [CVE-2024-11053](https://www.cve.org/cveRecord?id=cve-2024-11053){: external}
 
 
 ### Version 1.23.1, released 20 September 2024
@@ -399,7 +399,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.23.0](https://istio.io/latest/news/releases/1.23.x/announcing-1.23/){: external} and [Istio 1.23.1](https://istio.io/latest/news/releases/1.23.x/announcing-1.23.1/.){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-6119](https://www.cve.org/CVERecord?id=CVE-2024-6119){: external}
+    - [CVE-2024-6119](https://www.cve.org/cveRecord?id=cve-2024-6119){: external}
     - [usn-6986-1](https://ubuntu.com/security/notices/USN-6986-1){: external}
 
 
@@ -418,7 +418,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.23.4](https://istio.io/latest/news/releases/1.23.x/announcing-1.23.4/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-9681](https://www.cve.org/CVERecord?id=CVE-2024-9681){: external}
+    - [CVE-2024-9681](https://www.cve.org/cveRecord?id=cve-2024-9681){: external}
 
 
 ### Version 1.23.3, released 3 Dec 2024
@@ -436,7 +436,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.23.3](https://istio.io/latest/news/releases/1.23.x/announcing-1.23.3/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-8096](https://www.cve.org/CVERecord?id=CVE-2024-8096){: external}
+    - [CVE-2024-8096](https://www.cve.org/cveRecord?id=cve-2024-8096){: external}
 
 
 ### Version 1.23.2, released 9 Oct 2024
@@ -474,12 +474,12 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.22.2](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.2/){: external} and [Istio 1.22.3](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.3/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-33599](https://www.cve.org/CVERecord?id=CVE-2024-33599){: external}
-    - [CVE-2024-33600](https://www.cve.org/CVERecord?id=CVE-2024-33600){: external}
-    - [CVE-2024-33601](https://www.cve.org/CVERecord?id=CVE-2024-33601){: external}
-    - [CVE-2024-33602](https://www.cve.org/CVERecord?id=CVE-2024-33602){: external}
-    - [CVE-2022-40735](https://www.cve.org/CVERecord?id=CVE-2022-40735){: external}
-    - [CVE-2024-28182](https://www.cve.org/CVERecord?id=CVE-2024-28182){: external}
+    - [CVE-2024-33599](https://www.cve.org/cveRecord?id=cve-2024-33599){: external}
+    - [CVE-2024-33600](https://www.cve.org/cveRecord?id=cve-2024-33600){: external}
+    - [CVE-2024-33601](https://www.cve.org/cveRecord?id=cve-2024-33601){: external}
+    - [CVE-2024-33602](https://www.cve.org/cveRecord?id=cve-2024-33602){: external}
+    - [CVE-2022-40735](https://www.cve.org/cveRecord?id=cve-2022-40735){: external}
+    - [CVE-2024-28182](https://www.cve.org/cveRecord?id=cve-2024-28182){: external}
     - [usn-6804-1](https://ubuntu.com/security/notices/USN-6804-1){: external}
     - [usn-6854-1](https://ubuntu.com/security/notices/USN-6854-1){: external}
     - [usn-6754-1](https://ubuntu.com/security/notices/USN-6754-1){: external}
@@ -502,11 +502,11 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.21.4](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.4/){: external} and [Istio 1.21.5](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.5/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-33599](https://www.cve.org/CVERecord?id=CVE-2024-33599){: external}
-    - [CVE-2024-33600](https://www.cve.org/CVERecord?id=CVE-2024-33600){: external}
-    - [CVE-2024-33601](https://www.cve.org/CVERecord?id=CVE-2024-33601){: external}
-    - [CVE-2024-33602](https://www.cve.org/CVERecord?id=CVE-2024-33602){: external}
-    - [CVE-2022-40735](https://www.cve.org/CVERecord?id=CVE-2022-40735){: external}
+    - [CVE-2024-33599](https://www.cve.org/cveRecord?id=cve-2024-33599){: external}
+    - [CVE-2024-33600](https://www.cve.org/cveRecord?id=cve-2024-33600){: external}
+    - [CVE-2024-33601](https://www.cve.org/cveRecord?id=cve-2024-33601){: external}
+    - [CVE-2024-33602](https://www.cve.org/cveRecord?id=cve-2024-33602){: external}
+    - [CVE-2022-40735](https://www.cve.org/cveRecord?id=cve-2022-40735){: external}
     - [usn-6804-1](https://ubuntu.com/security/notices/USN-6804-1){: external}
     - [usn-6854-1](https://ubuntu.com/security/notices/USN-6854-1){: external}
 
@@ -529,10 +529,10 @@ Updates in this version
 :   This is the final version of `addon-istio` 1.20. `addon-istio` 1.20 is unsupported on 18 September 2024.
 :   See the Istio release notes for [Istio 1.20.8](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.8/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-33599](https://www.cve.org/CVERecord?id=CVE-2024-33599){: external}
-    - [CVE-2024-33600](https://www.cve.org/CVERecord?id=CVE-2024-33600){: external}
-    - [CVE-2024-33601](https://www.cve.org/CVERecord?id=CVE-2024-33601){: external}
-    - [CVE-2024-33602](https://www.cve.org/CVERecord?id=CVE-2024-33602){: external}
+    - [CVE-2024-33599](https://www.cve.org/cveRecord?id=cve-2024-33599){: external}
+    - [CVE-2024-33600](https://www.cve.org/cveRecord?id=cve-2024-33600){: external}
+    - [CVE-2024-33601](https://www.cve.org/cveRecord?id=cve-2024-33601){: external}
+    - [CVE-2024-33602](https://www.cve.org/cveRecord?id=cve-2024-33602){: external}
     - [usn-6804-1](https://ubuntu.com/security/notices/USN-6804-1){: external}
 
 
@@ -551,13 +551,13 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.22.4](https://istio.io/latest/news/releases/1.22.x/announcing-1.22.4/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-4603](https://www.cve.org/CVERecord?id=CVE-2024-4603){: external}
-    - [CVE-2024-37371](https://www.cve.org/CVERecord?id=CVE-2024-37371){: external}
-    - [CVE-2024-2511](https://www.cve.org/CVERecord?id=CVE-2024-2511){: external}
-    - [CVE-2024-4741](https://www.cve.org/CVERecord?id=CVE-2024-4741){: external}
-    - [CVE-2022-37370](https://www.cve.org/CVERecord?id=CVE-2022-37370){: external}
-    - [CVE-2024-5535](https://www.cve.org/CVERecord?id=CVE-2024-5535){: external}
-    - [CVE-2024-7264](https://www.cve.org/CVERecord?id=CVE-2024-7264){: external}
+    - [CVE-2024-4603](https://www.cve.org/cveRecord?id=cve-2024-4603){: external}
+    - [CVE-2024-37371](https://www.cve.org/cveRecord?id=cve-2024-37371){: external}
+    - [CVE-2024-2511](https://www.cve.org/cveRecord?id=cve-2024-2511){: external}
+    - [CVE-2024-4741](https://www.cve.org/cveRecord?id=cve-2024-4741){: external}
+    - [CVE-2022-37370](https://www.cve.org/cveRecord?id=cve-2022-37370){: external}
+    - [CVE-2024-5535](https://www.cve.org/cveRecord?id=cve-2024-5535){: external}
+    - [CVE-2024-7264](https://www.cve.org/cveRecord?id=cve-2024-7264){: external}
     - [usn-6937-1](https://ubuntu.com/security/notices/USN-6937-1){: external}
     - [usn-6947-1](https://ubuntu.com/security/notices/USN-6947-1){: external}
     - [usn-6944-1](https://ubuntu.com/security/notices/USN-6944-1){: external}
@@ -601,8 +601,8 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.21.3](https://istio.io/latest/news/releases/1.21.x/announcing-1.21.3/.){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-2961](https://www.cve.org/CVERecord?id=CVE-2024-2961){: external}
-    - [CVE-2024-28182](https://www.cve.org/CVERecord?id=CVE-2024-28182){: external}
+    - [CVE-2024-2961](https://www.cve.org/cveRecord?id=cve-2024-2961){: external}
+    - [CVE-2024-28182](https://www.cve.org/cveRecord?id=cve-2024-28182){: external}
     - [usn- 6737-1](https://ubuntu.com/security/notices/USN-6737-1){: external}
     - [usn-6754-1](https://ubuntu.com/security/notices/USN-6754-1){: external}
 
@@ -624,8 +624,8 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.20.7](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.7/.){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-2961](https://www.cve.org/CVERecord?id=CVE-2024-2961){: external}
-    - [CVE-2024-28182](https://www.cve.org/CVERecord?id=CVE-2024-28182){: external}
+    - [CVE-2024-2961](https://www.cve.org/cveRecord?id=cve-2024-2961){: external}
+    - [CVE-2024-28182](https://www.cve.org/cveRecord?id=cve-2024-28182){: external}
     - [usn- 6737-1](https://ubuntu.com/security/notices/USN-6737-1){: external}
     - [usn-6754-1](https://ubuntu.com/security/notices/USN-6754-1){: external}
 
@@ -716,9 +716,9 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.20.5](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.5/){: external}.
 
 :   Resolves the following CVEs:
-    - [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}
-    - [CVE-2024-28085](https://nvd.nist.gov/vuln/detail/CVE-2024-28085){: external}
-    - [CVE-2022-3715](https://nvd.nist.gov/vuln/detail/CVE-2022-3715){: external}
+    - [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/cve-2024-2398){: external}
+    - [CVE-2024-28085](https://nvd.nist.gov/vuln/detail/cve-2024-28085){: external}
+    - [CVE-2022-3715](https://nvd.nist.gov/vuln/detail/cve-2022-3715){: external}
 
 
 ### Version 1.19.9, released 24 April 2024
@@ -738,9 +738,9 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2024-002](https://istio.io/latest/news/security/istio-security-2024-002){: external}.
 :   See the Istio release notes for [Istio 1.19.9](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.9/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/CVE-2024-2398){: external}
-    - [CVE-2024-28085](https://nvd.nist.gov/vuln/detail/CVE-2024-28085){: external}
-    - [CVE-2022-3715](https://nvd.nist.gov/vuln/detail/CVE-2022-3715){: external}
+    - [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/cve-2024-2398){: external}
+    - [CVE-2024-28085](https://nvd.nist.gov/vuln/detail/cve-2024-28085){: external}
+    - [CVE-2022-3715](https://nvd.nist.gov/vuln/detail/cve-2022-3715){: external}
 
 
 ### Version 1.20.4, released 03 April 2024
@@ -759,11 +759,11 @@ Updates in this version
 :   Uninstalling `Addon-Istio` no longer deletes the `istio-system` namespace. This cleanup became unnecessary over time.
 :   See the Istio release notes for [Istio 1.20.4](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.4/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}
-    - [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}
-    - [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/CVE-2023-5678){: external}
-    - [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external}
-    - [CVE-2023-4641](https://nvd.nist.gov/vuln/detail/CVE-2023-4641){: external}
+    - [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/cve-2024-0727){: external}
+    - [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/cve-2023-6237){: external}
+    - [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/cve-2023-5678){: external}
+    - [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/cve-2023-6129){: external}
+    - [CVE-2023-4641](https://nvd.nist.gov/vuln/detail/cve-2023-4641){: external}
 
 
 ### Version 1.19.8, released 03 April 2024
@@ -783,11 +783,11 @@ Updates in this version
 :   Uninstalling `Addon-Istio` no longer deletes the `istio-system` namespace. This cleanup became unnecessary over time.
 :   See the Istio release notes for [Istio 1.19.8](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.8/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/CVE-2024-0727){: external}
-    - [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/CVE-2023-6237){: external}
-    - [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/CVE-2023-5678){: external}
-    - [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/CVE-2023-6129){: external}
-    - [CVE-2023-4641](https://nvd.nist.gov/vuln/detail/CVE-2023-4641){: external}
+    - [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/cve-2024-0727){: external}
+    - [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/cve-2023-6237){: external}
+    - [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/cve-2023-5678){: external}
+    - [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/cve-2023-6129){: external}
+    - [CVE-2023-4641](https://nvd.nist.gov/vuln/detail/cve-2023-4641){: external}
 
 
 ### Version 1.20.3, released 06 March 2024
@@ -805,15 +805,15 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.20.3](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.3/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2023-6779](https://nvd.nist.gov/vuln/detail/CVE-2023-6779){: external}
-    - [CVE-2023-6246](https://nvd.nist.gov/vuln/detail/CVE-2023-6246){: external}
-    - [CVE-2023-6004](https://nvd.nist.gov/vuln/detail/CVE-2023-6004){: external}
-    - [CVE-2024-0553](https://nvd.nist.gov/vuln/detail/CVE-2024-0553){: external}
-    - [CVE-2023-6918](https://nvd.nist.gov/vuln/detail/CVE-2023-6918){: external}
-    - [CVE-2023-2953](https://nvd.nist.gov/vuln/detail/CVE-2023-2953){: external}
-    - [CVE-2024-22365](https://nvd.nist.gov/vuln/detail/CVE-2024-22365){: external}
-    - [CVE-2024-0567](https://nvd.nist.gov/vuln/detail/CVE-2024-0567){: external}
-    - [CVE-2023-6780](https://nvd.nist.gov/vuln/detail/CVE-2023-6780){: external}
+    - [CVE-2023-6779](https://nvd.nist.gov/vuln/detail/cve-2023-6779){: external}
+    - [CVE-2023-6246](https://nvd.nist.gov/vuln/detail/cve-2023-6246){: external}
+    - [CVE-2023-6004](https://nvd.nist.gov/vuln/detail/cve-2023-6004){: external}
+    - [CVE-2024-0553](https://nvd.nist.gov/vuln/detail/cve-2024-0553){: external}
+    - [CVE-2023-6918](https://nvd.nist.gov/vuln/detail/cve-2023-6918){: external}
+    - [CVE-2023-2953](https://nvd.nist.gov/vuln/detail/cve-2023-2953){: external}
+    - [CVE-2024-22365](https://nvd.nist.gov/vuln/detail/cve-2024-22365){: external}
+    - [CVE-2024-0567](https://nvd.nist.gov/vuln/detail/cve-2024-0567){: external}
+    - [CVE-2023-6780](https://nvd.nist.gov/vuln/detail/cve-2023-6780){: external}
 
 
 ### Version 1.19.7, released 06 March 2024
@@ -831,15 +831,15 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.19.7](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.7/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2023-6779](https://nvd.nist.gov/vuln/detail/CVE-2023-6779){: external}
-    - [CVE-2023-6246](https://nvd.nist.gov/vuln/detail/CVE-2023-6246){: external}
-    - [CVE-2023-6004](https://nvd.nist.gov/vuln/detail/CVE-2023-6004){: external}
-    - [CVE-2024-0553](https://nvd.nist.gov/vuln/detail/CVE-2024-0553){: external}
-    - [CVE-2023-6918](https://nvd.nist.gov/vuln/detail/CVE-2023-6918){: external}
-    - [CVE-2023-2953](https://nvd.nist.gov/vuln/detail/CVE-2023-2953){: external}
-    - [CVE-2024-22365](https://nvd.nist.gov/vuln/detail/CVE-2024-22365){: external}
-    - [CVE-2024-0567](https://nvd.nist.gov/vuln/detail/CVE-2024-0567){: external}
-    - [CVE-2023-6780](https://nvd.nist.gov/vuln/detail/CVE-2023-6780){: external}
+    - [CVE-2023-6779](https://nvd.nist.gov/vuln/detail/cve-2023-6779){: external}
+    - [CVE-2023-6246](https://nvd.nist.gov/vuln/detail/cve-2023-6246){: external}
+    - [CVE-2023-6004](https://nvd.nist.gov/vuln/detail/cve-2023-6004){: external}
+    - [CVE-2024-0553](https://nvd.nist.gov/vuln/detail/cve-2024-0553){: external}
+    - [CVE-2023-6918](https://nvd.nist.gov/vuln/detail/cve-2023-6918){: external}
+    - [CVE-2023-2953](https://nvd.nist.gov/vuln/detail/cve-2023-2953){: external}
+    - [CVE-2024-22365](https://nvd.nist.gov/vuln/detail/cve-2024-22365){: external}
+    - [CVE-2024-0567](https://nvd.nist.gov/vuln/detail/cve-2024-0567){: external}
+    - [CVE-2023-6780](https://nvd.nist.gov/vuln/detail/cve-2023-6780){: external}
 
 
 ### Version 1.20.2, released 07 February 2024
@@ -857,8 +857,8 @@ Current version
 Updates in this version
 :   For more information, see the [Istio 1.20.2 release notes](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.2/.){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
-    - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}
+    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/cve-2023-39804){: external}
+    - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}
 
 
 ### Version 1.19.6, released 07 February 2024
@@ -876,8 +876,8 @@ Current version
 Updates in this version
 :   See the [Istio 1.19.6 release notes](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.6){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
-    - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}
+    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/cve-2023-39804){: external}
+    - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}
 
 
 ### Version 1.18.7, released 07 February 2024
@@ -896,8 +896,8 @@ Updates in this version
 :   This version is the EOL version for 1.18. Support for Istio 1.18 ends on 21 February 2024.
 :   See the Istio release notes for [Istio 1.18.7](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.7){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
-    - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/CVE-2023-48795){: external}
+    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/cve-2023-39804){: external}
+    - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}
 
 
 ### Version 1.20.1, released 10 January 2024
@@ -917,21 +917,21 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.20.1](https://istio.io/latest/news/releases/1.20.x/announcing-1.20.1/.){: external}.
 :   Resolves the following CVEs:
     - [USN-6517-1](https://ubuntu.com/security/notices/USN-6517-1){: external}
-    - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/CVE-2022-48522){: external}
-    - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
+    - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/cve-2022-48522){: external}
+    - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/cve-2023-47038){: external}
     - USN-6477-1
-    - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
+    - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/cve-2023-4016){: external}
     - USN-6427-1
-    - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
+    - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487){: external}
     - [USN-6535-1](https://ubuntu.com/security/notices/USN-6535-1){: external}
-    - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}
-    - [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){: external}
+    - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/cve-2023-46218){: external}
+    - [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/cve-2023-46219){: external}
     - [USN-6541-1](https://ubuntu.com/security/notices/USN-6541-1){: external}
-    - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/CVE-2023-4806){: external}
-    - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/CVE-2023-4813){: external}
-    - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/CVE-2023-5156){: external}
+    - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/cve-2023-4806){: external}
+    - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/cve-2023-4813){: external}
+    - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/cve-2023-5156){: external}
     - USN-6499-1
-    - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}
+    - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/cve-2023-5981){: external}
 
 
 ### Version 1.19.5, released 10 January 2024
@@ -951,21 +951,21 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.19.5](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.5/.){: external}.
 :   Resolves the following CVEs:
     - [USN-6517-1](https://ubuntu.com/security/notices/USN-6517-1){: external}
-    - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/CVE-2022-48522){: external}
-    - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
+    - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/cve-2022-48522){: external}
+    - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/cve-2023-47038){: external}
     - USN-6477-1
-    - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
+    - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/cve-2023-4016){: external}
     - USN-6427-1
-    - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
+    - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487){: external}
     - [USN-6535-1](https://ubuntu.com/security/notices/USN-6535-1){: external}
-    - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}
-    - [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){: external}
+    - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/cve-2023-46218){: external}
+    - [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/cve-2023-46219){: external}
     - [USN-6541-1](https://ubuntu.com/security/notices/USN-6541-1){: external}
-    - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/CVE-2023-4806){: external}
-    - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/CVE-2023-4813){: external}
-    - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/CVE-2023-5156){: external}
+    - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/cve-2023-4806){: external}
+    - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/cve-2023-4813){: external}
+    - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/cve-2023-5156){: external}
     - USN-6499-1
-    - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}
+    - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/cve-2023-5981){: external}
 
 
 ### Version 1.18.6, released 10 January 2024
@@ -985,34 +985,34 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2023-005](https://istio.io/latest/news/security/istio-security-2023-005/){: external}.
 :   Resolves the following CVEs:
     - [USN-6517-1](https://ubuntu.com/security/notices/USN-6517-1){: external}
-    - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/CVE-2022-48522){: external}
-    - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/CVE-2023-47038){: external}
+    - [CVE-2022-48522](https://nvd.nist.gov/vuln/detail/cve-2022-48522){: external}
+    - [CVE-2023-47038](https://nvd.nist.gov/vuln/detail/cve-2023-47038){: external}
     - [USN-6450-1](https://ubuntu.com/security/notices/USN-6450-1){: external}
-    - [CVE-2023-2975](https://nvd.nist.gov/vuln/detail/CVE-2023-2975){: external}
-    - [CVE-2023-5363](https://nvd.nist.gov/vuln/detail/CVE-2023-5363){: external}
+    - [CVE-2023-2975](https://nvd.nist.gov/vuln/detail/cve-2023-2975){: external}
+    - [CVE-2023-5363](https://nvd.nist.gov/vuln/detail/cve-2023-5363){: external}
     - [USN-6435-1](https://ubuntu.com/security/notices/USN-6435-1){: external}
-    - [CVE-2023-3446](https://nvd.nist.gov/vuln/detail/CVE-2023-3446){: external}
-    - [CVE-2023-3817](https://nvd.nist.gov/vuln/detail/CVE-2023-3817){: external}
+    - [CVE-2023-3446](https://nvd.nist.gov/vuln/detail/cve-2023-3446){: external}
+    - [CVE-2023-3817](https://nvd.nist.gov/vuln/detail/cve-2023-3817){: external}
     - USN-6467-1
-    - [CVE-2023-36054](https://nvd.nist.gov/vuln/detail/CVE-2023-36054){: external}
+    - [CVE-2023-36054](https://nvd.nist.gov/vuln/detail/cve-2023-36054){: external}
     - [USN-6429-1](https://ubuntu.com/security/notices/USN-6429-1){: external}
-    - [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/CVE-2023-38545){: external}
-    - [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/CVE-2023-38546){: external}
+    - [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/cve-2023-38545){: external}
+    - [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/cve-2023-38546){: external}
     - [USN-6543-1](https://ubuntu.com/security/notices/USN-6543-1){: external}
-    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/CVE-2023-39804){: external}
+    - [CVE-2023-39804](https://nvd.nist.gov/vuln/detail/cve-2023-39804){: external}
     - USN-6477-1
-    - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/CVE-2023-4016){: external}
+    - [CVE-2023-4016](https://nvd.nist.gov/vuln/detail/cve-2023-4016){: external}
     - USN-6427-1
-    - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external}
+    - [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487){: external}
     - [USN-6535-1](https://ubuntu.com/security/notices/USN-6535-1){: external}
-    - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/CVE-2023-46218){: external}
-    - [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/CVE-2023-46219){: external}
+    - [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/cve-2023-46218){: external}
+    - [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/cve-2023-46219){: external}
     - [USN-6541-1](https://ubuntu.com/security/notices/USN-6541-1){: external}
-    - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/CVE-2023-4806){: external}
-    - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/CVE-2023-4813){: external}
-    - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/CVE-2023-5156){: external}
+    - [CVE-2023-4806](https://nvd.nist.gov/vuln/detail/cve-2023-4806){: external}
+    - [CVE-2023-4813](https://nvd.nist.gov/vuln/detail/cve-2023-4813){: external}
+    - [CVE-2023-5156](https://nvd.nist.gov/vuln/detail/cve-2023-5156){: external}
     - USN-6499-1
-    - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/CVE-2023-5981){: external}
+    - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/cve-2023-5981){: external}
 
 
 ### Version 1.20.0, released 7 December 2023
@@ -1052,14 +1052,14 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.19.64](https://istio.io/latest/news/releases/1.19.x/announcing-1.19.4/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2023-2975](https://www.cve.org/CVERecord?id=CVE-2023-2975){: external}
-    - [CVE-2023-3446](https://www.cve.org/CVERecord?id=CVE-2023-3446){: external}
-    - [CVE-2023-38545](https://www.cve.org/CVERecord?id=CVE-2023-38545){: external}
-    - [CVE-2023-38546](https://www.cve.org/CVERecord?id=CVE-2023-38546){: external}
-    - [CVE-2023-3817](https://www.cve.org/CVERecord?id=CVE-2023-3817){: external}
-    - [CVE-2023-4911](https://www.cve.org/CVERecord?id=CVE-2023-4911){: external}
-    - [CVE-2023-5363](https://www.cve.org/CVERecord?id=CVE-2023-5363){: external}
-    - [CVE-2023-36054](https://www.cve.org/CVERecord?id=CVE-2023-36054){: external}
+    - [CVE-2023-2975](https://www.cve.org/cveRecord?id=cve-2023-2975){: external}
+    - [CVE-2023-3446](https://www.cve.org/cveRecord?id=cve-2023-3446){: external}
+    - [CVE-2023-38545](https://www.cve.org/cveRecord?id=cve-2023-38545){: external}
+    - [CVE-2023-38546](https://www.cve.org/cveRecord?id=cve-2023-38546){: external}
+    - [CVE-2023-3817](https://www.cve.org/cveRecord?id=cve-2023-3817){: external}
+    - [CVE-2023-4911](https://www.cve.org/cveRecord?id=cve-2023-4911){: external}
+    - [CVE-2023-5363](https://www.cve.org/cveRecord?id=cve-2023-5363){: external}
+    - [CVE-2023-36054](https://www.cve.org/cveRecord?id=cve-2023-36054){: external}
     - [usn-6429-1](https://ubuntu.com/security/notices/USN-6429-1){: external}  
     - [usn-6450-1](https://ubuntu.com/security/notices/USN-6450-1){: external}
 
@@ -1075,7 +1075,7 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.18.5](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.5/.){: external}.
-:   Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487){: external} and [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325){: external}.
+:   Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487){: external} and [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/cve-2023-39325){: external}.
 :   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}.  
 
 
@@ -1090,7 +1090,7 @@ Current version
 
 Updates in this version
 :   See the Istio release notes for [Istio 1.17.8](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.8/.){: external}.
-:   Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/CVE-2023-44487) and [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325).
+:   Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487) and [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/cve-2023-39325).
 :   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}   
 
 
@@ -1135,9 +1135,9 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.18.3](https://istio.io/latest/news/releases/1.18.x/announcing-1.18.3/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2023-28321](https://www.cve.org/CVERecord?id=CVE-2023-28321){: external}
-    - [CVE-2023-28322](https://www.cve.org/CVERecord?id=CVE-2023-28322){: external}
-    - [CVE-2023-32001](https://www.cve.org/CVERecord?id=CVE-2023-32001){: external}
+    - [CVE-2023-28321](https://www.cve.org/cveRecord?id=cve-2023-28321){: external}
+    - [CVE-2023-28322](https://www.cve.org/cveRecord?id=cve-2023-28322){: external}
+    - [CVE-2023-32001](https://www.cve.org/cveRecord?id=cve-2023-32001){: external}
     - usn-6237-2
 
 
@@ -1156,7 +1156,7 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.17.6](https://istio.io/latest/news/releases/1.17.x/announcing-1.17.6/){: external}.
 :   Resolves the following CVEs:
-    - [CVE-2023-28321](https://www.cve.org/CVERecord?id=CVE-2023-28321){: external}
-    - [CVE-2023-28322](https://www.cve.org/CVERecord?id=CVE-2023-28322){: external}
-    - [CVE-2023-32001](https://www.cve.org/CVERecord?id=CVE-2023-32001){: external}
+    - [CVE-2023-28321](https://www.cve.org/cveRecord?id=cve-2023-28321){: external}
+    - [CVE-2023-28322](https://www.cve.org/cveRecord?id=cve-2023-28322){: external}
+    - [CVE-2023-32001](https://www.cve.org/cveRecord?id=cve-2023-32001){: external}
     - usn-6237-2
