@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-08-26"
+lastupdated: "2026-08-27"
 
 
 keywords: containers
@@ -7443,6 +7443,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Object Storage plug in](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in)
 
 * [Version 2.2](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2.2)
+
+    * [Version 2.2 - 2.2.59, released 27 August 2026](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2259)
 
     * [Version 2.2 - 2.2.58, released 15 August 2026](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2258)
 
