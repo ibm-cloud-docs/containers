@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-26"
+lastupdated: "2026-08-27"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,8 +28,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## August 2026
 {: #containers-aug26}
-
-
 
 
 ### 26 August 2026
@@ -60,6 +58,8 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
 :   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+
+
 
 
 
@@ -134,12 +134,9 @@ VPC File CSI Driver cluster add-on patch updates.
 
 Worker node fix packs are available for {{site.data.keyword.containerlong_notm}} and OpenShift Virtualization Service.
 :   Fix packs can be applied in the following ways. Review the change logs for your cluster version.
-:   Classic infrastructure
-:   :   Update or reload the worker node.
-:   VPC infrastructure
-:   :   Replace the worker node.
-:   VPC Bare Metal
-:   :   Reload the worker node.
+:   Classic infrastructure: Update or reload the worker node.
+:   VPC VSI: Replace the worker node.
+:   VPC Bare Metal: Reload the worker node.
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
