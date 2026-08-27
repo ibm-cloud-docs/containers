@@ -459,6 +459,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
 
+    * [27 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug2726)
+
+        * CLI version 1.0.843 is available.
+
     * [26 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug2626)
 
         * VPC File CSI Driver cluster add-on patch updates.
@@ -6737,6 +6741,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.843](/docs/containers?topic=containers-cs_cli_changelog#cli-01843)
 
 * [Version v1.0.829](/docs/containers?topic=containers-cs_cli_changelog#cli-01829)
 
