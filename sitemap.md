@@ -2317,12 +2317,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Connecting with an API key](/docs/containers?topic=containers-cluster-access-public#access-public-cli-apikey)
 
-[Accessing Classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access-private-classic#access-private-classic)
-
-* [Before you begin](/docs/containers?topic=containers-access-private-classic#access-private-classic-prereqs)
-
-* [Exposing the master endpoint through a private NLB](/docs/containers?topic=containers-access-private-classic#access-private-classic-nlb)
-
 [Accessing VPC clusters through the private cloud service endpoint](/docs/containers?topic=containers-cluster-access-private-vpc#cluster-access-private-vpc)
 
 * [Before you begin](/docs/containers?topic=containers-cluster-access-private-vpc#access-private-vpc-prereqs)
