@@ -451,6 +451,23 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
 
+## Important notices
+{: #sitemap_important_notices}
+
+
+[Classic cluster creation restrictions](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction)
+
+* [Who is affected by this restriction?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-affected)
+
+* [Why does this restriction exist?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-why)
+
+* [What error do I see when classic cluster creation is blocked?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-error)
+
+* [What are my options if I'm affected?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-next)
+
+* [How do I check whether my account has existing classic clusters?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-check)
+
+
 ## Release notes
 {: #sitemap_release_notes}
 
@@ -528,6 +545,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * CLI version 1.0.815 is available.
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
+
+    * [14 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1426)
+
+        * New restriction on classic cluster creation.
 
     * [29 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul2926)
 
