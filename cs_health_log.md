@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-27"
+lastupdated: "2026-08-31"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -43,7 +43,7 @@ Fluentd with an external server
 The observability CLI plug-in `ibmcloud ob` and the `v2/observe` endpoints are no longer supported. There is no direct replacement, but you can now manage your logging and monitoring integrations through the [IBM Cloud Kubernetes Service extension](/docs/cloud-logs?topic=cloud-logs-extensions-kubernetes) or by [Sending IBM Cloud Kubernetes Service log data to IBM Cloud Logs](/docs/cloud-logs?topic=cloud-logs-kube2logs).
 {: deprecated}
 
-You can no longer use the `ob` plug-in, Terraform, or API to install observability agents on a cluster or to modify your existing configuration. Sysdig agents continue to send metrics to the specified IBM Cloud Monitoring instance. LogDNA agents can no longer send logs since IBM Cloud Log Analysis is replaced by IBM Cloud Logs.
+You can no longer use the `ob` plug-in, Terraform, or API to install observability agents on a cluster or to modify your existing configuration. Sysdig agents continue to send metrics to the specified IBM Cloud Monitoring instance.
 
 ### Removing the observability plug-in agents
 {: #ob-remove}
@@ -52,9 +52,7 @@ You can no longer use the `ob` plug-in, Terraform, or API to install observabili
 
     1. Clean up the daemonsets and configmaps.
         ```sh
-        kubectl delete daemonset logdna-agent -n ibm-observe
         kubectl delete daemonset sysdig-agent -n ibm-observe
-        kubectl delete configmap <logdna-configmap> -n ibm-observe
         kubectl delete configmap <sysdig-configmap> -n ibm-observe
         ```
         {: pre}
