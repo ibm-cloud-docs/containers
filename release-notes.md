@@ -212,13 +212,6 @@ CLI version 1.0.815 is available.
 ## July 2026
 {: #containers-jul26}
 
-### 14 July 2026
-{: #containers-jul1426}
-{: release-note}
-
-New restriction on classic cluster creation.
-:   Starting [VERIFY: date], accounts that do not have existing classic clusters in a region are blocked from creating new classic clusters there. If your account is affected, use a VPC cluster or create clusters in a region where you already have a classic cluster. If you require classic infrastructure in a new region, open a support case. For more information, see [Classic cluster creation restrictions](/docs/containers?topic=containers-classic-create-restriction).
-
 ### 29 July 2026
 {: #containers-jul2926}
 {: release-note}
