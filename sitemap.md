@@ -546,8 +546,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul26)
 
-    * [14 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1426)
-
     * [29 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul2926)
 
         * VPC Block CSI Driver cluster add-on patch updates.

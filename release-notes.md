@@ -212,10 +212,6 @@ CLI version 1.0.815 is available.
 ## July 2026
 {: #containers-jul26}
 
-### 14 July 2026
-{: #containers-jul1426}
-{: release-note}
-
 ### 29 July 2026
 {: #containers-jul2926}
 {: release-note}
