@@ -4388,6 +4388,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Accessing Headlamp over private ingress on VPC clusters](/docs/containers?topic=containers-headlamp-addon#headlamp-private-ingress)
 
+* [Exposing Headlamp with the Istio ingress gateway](/docs/containers?topic=containers-headlamp-addon#headlamp-istio)
+
 * [Kubernetes resources created by the addon](/docs/containers?topic=containers-headlamp-addon#headlamp-k8s-resources)
 
 * [Enable OIDC for Headlamp add-on over public endpoints](/docs/containers?topic=containers-headlamp-addon#headlamp-oidc-override)
