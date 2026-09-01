@@ -4390,6 +4390,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Exposing Headlamp with the Istio ingress gateway](/docs/containers?topic=containers-headlamp-addon#headlamp-istio)
 
+    * [Before you begin](/docs/containers?topic=containers-headlamp-addon#headlamp-istio-before)
+
 * [Kubernetes resources created by the addon](/docs/containers?topic=containers-headlamp-addon#headlamp-k8s-resources)
 
 * [Enable OIDC for Headlamp add-on over public endpoints](/docs/containers?topic=containers-headlamp-addon#headlamp-oidc-override)

@@ -233,7 +233,8 @@ If your cluster routes external traffic through the Istio ingress gateway, you c
 You must expose Headlamp through an IBM-provided subdomain in the `*.containers.appdomain.cloud` domain. The OIDC client ID for your cluster is registered with a redirect URI that matches that domain. The raw `istio-ingressgateway` load balancer hostname is not in that domain, and authentication fails if you use it directly.
 {: important}
 
-**Before you begin**
+### Before you begin
+{: #headlamp-istio-before}
 
 - Enable the [Managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).
 - Configure `kubectl` to target the cluster.
