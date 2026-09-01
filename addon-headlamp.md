@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-07-27"
+lastupdated: "2026-09-01"
 
 
 keywords: kubernetes, headlamp, dashboard, add-on, gui
@@ -223,6 +223,166 @@ When you choose to access Headlamp from private networks, like over a VPC VPN, y
 
 
 The IBM Cloud backend updates headlamp in approximately 5 minutes. When the update completes, the dashboard is available on the new default ingress hostname, with `headlamp.` subdomain.
+
+## Exposing Headlamp with the Istio ingress gateway
+{: #headlamp-istio}
+
+If your cluster routes external traffic through the Istio ingress gateway, you can disable the default Ingress resources that the Headlamp add-on creates and expose Headlamp with an Istio `Gateway` and `VirtualService` instead.
+{: shortdesc}
+
+You must expose Headlamp through an IBM-provided subdomain in the `*.containers.appdomain.cloud` domain. The OIDC client ID for your cluster is registered with a redirect URI that matches that domain. The raw `istio-ingressgateway` load balancer hostname is not in that domain, and authentication fails if you use it directly.
+{: important}
+
+**Before you begin**
+
+- Enable the [Managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).
+- Configure `kubectl` to target the cluster.
+
+1. Open the `headlamp-values` ConfigMap for editing to disable the default Ingress resources that the Headlamp add-on creates.
+    ```sh
+    kubectl edit cm -n ibm-system headlamp-values
+    ```
+    {: pre}
+
+    Add the following to the `data` section to prevent the add-on from creating the default NGINX and Traefik Ingress resources.
+    ```yaml
+    data:
+      values.yaml: |-
+        createDefaultPublicIngressNginx: false
+        createDefaultPrivateIngressNginx: false
+        createDefaultPublicIngressTraefik: false
+        createDefaultPrivateIngressTraefik: false
+    ```
+    {: codeblock}
+
+2. Wait up to 5 minutes for the updated values to propagate to the cluster.
+
+3. Verify that the default Ingress resources are removed.
+    ```sh
+    kubectl get ingress -n ibm-system
+    ```
+    {: pre}
+
+4. Get the IP address (classic clusters) or hostname (VPC clusters) of the `istio-ingressgateway` load balancer.
+    * Classic clusters:
+        ```sh
+        kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+        ```
+        {: pre}
+
+    * VPC clusters:
+        ```sh
+        kubectl get service istio-ingressgateway -n istio-system -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+        ```
+        {: pre}
+
+    If the command returns an empty value, the load balancer is not yet provisioned. Verify that the service has an external IP and check the service events for errors, such as a load balancer quota limit.
+    {: note}
+
+    ```sh
+    kubectl describe service istio-ingressgateway -n istio-system
+    ```
+    {: pre}
+
+5. Register the IP address (classic) or hostname (VPC) of the load balancer by creating an IBM-provided subdomain. Specify the `istio-system` namespace for the TLS secret so that the TLS certificate is available to the `istio-ingressgateway`.
+    * Classic clusters:
+        ```sh
+        ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_ID> --ip <istio_ingressgateway_IP> --secret-namespace istio-system
+        ```
+        {: pre}
+
+    * VPC clusters:
+        ```sh
+        ibmcloud ks nlb-dns create vpc-gen2 --cluster <cluster_name_or_ID> --lb-host <istio_ingressgateway_hostname> --secret-namespace istio-system
+        ```
+        {: pre}
+
+6. Verify that the subdomain is created, and note the subdomain and the SSL certificate secret name.
+    ```sh
+    ibmcloud ks nlb-dns ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Example output for classic clusters:
+    ```sh
+    Subdomain                                                                               IP(s)              SSL Cert Status   SSL Cert Secret Name                            Secret Namespace
+    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      created           mycluster-a1b2cdef345678g9hi012j3kl4567890-0001 istio-system
+    ```
+    {: screen}
+
+    Example output for VPC clusters:
+    ```sh
+    Subdomain                                                                               Target(s)                                     SSL Cert Status   SSL Cert Secret Name                            Secret Namespace
+    mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     1234abcd-us-south.lb.appdomain.cloud          created           mycluster-a1b2cdef345678g9hi012j3kl4567890-0001 istio-system
+    ```
+    {: screen}
+
+    If the cluster has multiple NLB-DNS entries, identify the subdomain that you created in the previous step by matching the `Target(s)` or `IP(s)` column to the `istio-ingressgateway` load balancer address, and by verifying that the `Secret Namespace` column shows `istio-system`.
+    {: note}
+
+7. Create a file named `headlamp-istio.yaml` that defines a `Gateway` and a `VirtualService` for Headlamp. Replace `<subdomain>` with the subdomain from the previous step and `<ssl_cert_secret_name>` with the SSL certificate secret name.
+
+    The TLS certificate secret is created in the `istio-system` namespace. The `istio-ingressgateway` reads the secret named in the `credentialName` field from that namespace. Do not copy the certificate value into the `Gateway` resource.
+    {: note}
+
+    ```yaml
+    apiVersion: networking.istio.io/v1
+    kind: Gateway
+    metadata:
+      name: headlamp-gateway
+      namespace: ibm-system
+    spec:
+      selector:
+        istio: ingressgateway
+      servers:
+      - port:
+          number: 443
+          name: https
+          protocol: HTTPS
+        tls:
+          mode: SIMPLE
+          credentialName: <ssl_cert_secret_name>
+        hosts:
+        - <subdomain>
+    ---
+    apiVersion: networking.istio.io/v1
+    kind: VirtualService
+    metadata:
+      name: headlamp
+      namespace: ibm-system
+    spec:
+      hosts:
+      - <subdomain>
+      gateways:
+      - headlamp-gateway
+      http:
+      - route:
+        - destination:
+            host: headlamp.ibm-system.svc.cluster.local
+            port:
+              number: 80
+    ```
+    {: codeblock}
+
+8. Apply the `Gateway` and `VirtualService` resources.
+    ```sh
+    kubectl apply -f headlamp-istio.yaml
+    ```
+    {: pre}
+
+9. Open the Headlamp dashboard in a web browser by using the subdomain that you noted in step 6.
+    ```sh
+    https://<subdomain>
+    ```
+    {: screen}
+
+    To verify connectivity from the command line, run the following command. Use the `-k` option to skip certificate verification during testing only — do not use `-k` in production environments.
+    {: important}
+
+    ```sh
+    curl -k -s -o /dev/null -w "%{http_code}\n" https://<subdomain>
+    ```
+    {: pre}
 
 ## Kubernetes resources created by the addon
 {: #headlamp-k8s-resources}
