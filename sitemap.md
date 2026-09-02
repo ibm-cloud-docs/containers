@@ -9342,3 +9342,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 [Requesting access to allowlisted features](/docs/containers?topic=containers-allowlist-request#allowlist-request)
+
+* [Standard, Advanced, or Premium support accounts](/docs/containers?topic=containers-allowlist-request#allowlist-standard)
+
+* [Basic support accounts](/docs/containers?topic=containers-allowlist-request#allowlist-basic)
