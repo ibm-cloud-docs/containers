@@ -3,7 +3,7 @@
 copyright:
   years: 2026
 
-lastupdated: "2026-08-25"
+lastupdated: "2026-09-02"
 
 keywords: kubernetes, traefik, ingress controller
 
@@ -150,7 +150,7 @@ kubectl annotate svc -n kube-system public-cr<clusterid> service.kubernetes.io/i
 Traefik supports a value of `0` for its timeouts, which disables the timeout.
 {: note}
 
-The `ibm-load-balancer-cloud-provider-vpc-idle-connection-timeout` annotation on the VPC load balancer does not support a zero value. You can set a timeout value between 50 seconds and 7200 seconds (2 hours). If you need a value greater than 2 hours, open a [support case](/docs/get-support){: external} and provide the business justification.
+The `ibm-load-balancer-cloud-provider-vpc-idle-connection-timeout` annotation on the VPC load balancer does not support a zero value. You can set a timeout value between 50 seconds and 7200 seconds (2 hours). If you need a value greater than 2 hours, open a [support case](/docs/support?topic=support-open-case) and provide the business justification.
 {: note}
 
 If your clusters are exposed through IBM Cloud Internet Services (CIS) or Cloudflare with Web Application Firewall (WAF) or global load balancing enabled, set these timeouts to more than 900 seconds. For more information, see the [Cloudflare documentation](https://developers.cloudflare.com/fundamentals/reference/connection-limits/#between-cloudflare-and-origin-server){: external}.
