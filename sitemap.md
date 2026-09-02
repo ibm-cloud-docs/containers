@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-01"
+lastupdated: "2026-09-02"
 
 
 keywords: containers
@@ -458,6 +458,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
+
+    * [2 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep0226)
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
 
     * [1 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep0126)
 
@@ -7146,6 +7152,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [Version 1.0 - v1.0.58_365773320, released 02 September 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1058_365773320)
+
     * [Version 1.0 - v1.0.57_364066782, released 26 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1057_364066782)
 
     * [Version 1.0 - v1.0.56_362323509, released 18 August 2026](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1056_362323509)
@@ -7335,6 +7343,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [Version 2.0 - v2.0.51_365773339, released 02 September 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2051_365773339)
 
     * [Version 2.0 - v2.0.50_364067134, released 26 August 2026](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2050_364067134)
 
@@ -7569,9 +7579,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 3.7.11](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.11)
 
+    * [Version 3.7.11 - 3.7.11_367269952_iks, released 02 September 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_367269952_iks)
+
     * [Version 3.7.11 - 3.7.11_366175407_iks, released 31 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_366175407_iks)
 
 * [Version 3.7.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.10)
+
+    * [Version 3.7.10 - 3.7.10_367269787_iks, released 02 September 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_367269787_iks)
 
     * [Version 3.7.10 - 3.7.10_366465868_iks, released 31 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_366465868_iks)
 
@@ -7580,6 +7594,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Version 3.7.10 - 3.7.10_362601619_iks, released 17 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_362601619_iks)
 
 * [Version 3.7.8](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.8)
+
+    * [Version 3.7.8 - 3.7.8_367267896_iks, released 02 September 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-378_367267896_iks)
 
     * [Version 3.7.8 - 3.7.8_366167192_iks, released 31 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-378_366167192_iks)
 
@@ -7590,6 +7606,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Version 3.7.8 - 3.7.8_358418506_iks, released 11 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-378_358418506_iks)
 
 * [Version 1.15.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.10)
+
+    * [Version 1.15.10 - 1.15.10_367083084_iks, released 02 September 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_367083084_iks)
 
     * [Version 1.15.10 - 1.15.10_366115312_iks, released 31 August 2026](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_366115312_iks)
 
