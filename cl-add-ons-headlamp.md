@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-08-24"
+lastupdated: "2026-09-03"
 
 
 keywords: change log, version history, Headlamp
@@ -43,7 +43,7 @@ Review the version history for Headlamp.
 {: #cl-add-ons-headlamp-0.1.0}
 
 
-### Version 0.1.0, released 24 August 2026
+### 24 August 2026, Version 0.1.0
 {: #cl-add-ons-headlamp-}
 
 [Default version]{: tag-green}
@@ -52,7 +52,7 @@ Review the version history for Headlamp.
 - `nginx 0.1.0-360106067`
 
 
-### Version 0.1.0 - headlamp-0.1.0-358109573, released 30 July 2026
+### 30 July 2026, Version 0.1.0 - headlamp-0.1.0-358109573
 {: #cl-add-ons-headlamp-headlamp-010-358109573}
 
 [Default version]{: tag-green}
@@ -61,7 +61,7 @@ Review the version history for Headlamp.
 - `nginx 0.1.0-358109573`
 
 
-### Version 0.1.0 - headlamp-0.1.0-356396053, released 23 July 2026
+### 23 July 2026, Version 0.1.0 - headlamp-0.1.0-356396053
 {: #cl-add-ons-headlamp-headlamp-010-356396053}
 
 [Default version]{: tag-green}
@@ -70,7 +70,7 @@ Review the version history for Headlamp.
 - `nginx 0.1.0-356396053`
 
 
-### Version 0.1.0 - headlamp-0.1.0-353565104, released 14 July 2026
+### 14 July 2026, Version 0.1.0 - headlamp-0.1.0-353565104
 {: #cl-add-ons-headlamp-headlamp-010-353565104}
 
 [Default version]{: tag-green}
@@ -78,7 +78,7 @@ Review the version history for Headlamp.
 - `nginx 0.1.0-353565104`
 
 
-### Version 0.1.0 - headlamp-0.1.0-348715568, released 25 June 2026
+### 25 June 2026, Version 0.1.0 - headlamp-0.1.0-348715568
 {: #cl-add-ons-headlamp-headlamp-010-348715568}
 
 [Default version]{: tag-green}
@@ -86,7 +86,7 @@ Review the version history for Headlamp.
 - `headlamp v0.43.0`
 
 
-### Version 0.1.0 - headlamp-0.1.0-341854816, released 20 May 2026
+### 20 May 2026, Version 0.1.0 - headlamp-0.1.0-341854816
 {: #cl-add-ons-headlamp-headlamp-010-341854816}
 
 [Default version]{: tag-green}
@@ -100,7 +100,7 @@ Review the version history for Headlamp.
 {: #cl-add-ons-headlamp-0.0.1}
 
 
-### Version 0.0.1, released 07 April 2026
+### 07 April 2026, Version 0.0.1
 {: #cl-add-ons-headlamp-001}
 
 - initial release

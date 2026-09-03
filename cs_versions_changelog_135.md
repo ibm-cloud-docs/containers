@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-08-28"
+lastupdated: "2026-09-03"
 
 
 keywords: change log, version history, 1.35
@@ -41,7 +41,7 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 {: #135_components}
 
 
-## Worker node fix pack 1.35.7_1541, released 25 August 2026
+## 25 August 2026, Worker node fix pack 1.35.7_1541
 {: #cl-boms-1357_1541_W}
 
 The following list shows the components included in the worker node fix pack 1.35.7_1541. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -73,7 +73,7 @@ GPU Device Plug-in and Installer 5feeb6912d16f495588aa0500d5e7ddeee3f70ba
 :   Resolves the following CVEs: [CVE-2026-58055](https://nvd.nist.gov/vuln/detail/cve-2026-58055){: external}, [CVE-2026-54411](https://nvd.nist.gov/vuln/detail/cve-2026-54411){: external}, [CVE-2026-54371](https://nvd.nist.gov/vuln/detail/cve-2026-54371){: external}, [CVE-2026-45409](https://nvd.nist.gov/vuln/detail/cve-2026-45409){: external}, and [CVE-2026-11940](https://nvd.nist.gov/vuln/detail/cve-2026-11940){: external}.
 
 
-## Worker node fix pack 1.35.7_1540, released 12 August 2026
+## 12 August 2026, Worker node fix pack 1.35.7_1540
 {: #cl-boms-1357_1540_W}
 
 The following list shows the components included in the worker node fix pack 1.35.7_1540. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -105,7 +105,7 @@ GPU Device Plug-in and Installer 22593b92ec9c3df7a58e00c3eec845f8fd447cc3
 :   Resolves the following CVEs: [CVE-2025-13151](https://nvd.nist.gov/vuln/detail/cve-2025-13151){: external}, [CVE-2026-54370](https://nvd.nist.gov/vuln/detail/cve-2026-54370){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/cve-2025-6170){: external}, [CVE-2026-15308](https://nvd.nist.gov/vuln/detail/cve-2026-15308){: external}, [CVE-2026-54369](https://nvd.nist.gov/vuln/detail/cve-2026-54369){: external}, [CVE-2026-58016](https://nvd.nist.gov/vuln/detail/cve-2026-58016){: external}, [CVE-2026-28390](https://nvd.nist.gov/vuln/detail/cve-2026-28390){: external}, [CVE-2026-44431](https://nvd.nist.gov/vuln/detail/cve-2026-44431){: external}, [CVE-2026-48864](https://nvd.nist.gov/vuln/detail/cve-2026-48864){: external}, and [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/cve-2026-56852){: external}.
 
 
-## Master fix pack 1.35.7_1539, released 03 August 2026
+## 03 August 2026, Master fix pack 1.35.7_1539
 {: #cl-boms_master-1357_1539_M}
 
 The following list shows the components that are in the master fix pack 1.35.7_1539. Master patch updates are applied automatically.
@@ -155,7 +155,7 @@ Tigera Operator v1.40.13
 :   See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.40.13){: external}.
 
 
-## Worker node fix pack 1.35.6_1538, released 28 July 2026
+## 28 July 2026, Worker node fix pack 1.35.6_1538
 {: #cl-boms-1356_1538_W}
 
 The following list shows the components included in the worker node fix pack 1.35.6_1538. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -187,7 +187,7 @@ GPU Device Plug-in and Installer a4b6a3ff753749da7e6274c83c55a17c5f3f3cfc
 :   Resolves the following CVEs: [CVE-2026-54370](https://nvd.nist.gov/vuln/detail/cve-2026-54370){: external}, [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/cve-2025-6170){: external}, [CVE-2026-15308](https://nvd.nist.gov/vuln/detail/cve-2026-15308){: external}, [CVE-2026-28390](https://nvd.nist.gov/vuln/detail/cve-2026-28390){: external}, [CVE-2026-58016](https://nvd.nist.gov/vuln/detail/cve-2026-58016){: external}, [CVE-2026-48864](https://nvd.nist.gov/vuln/detail/cve-2026-48864){: external}, [CVE-2026-44431](https://nvd.nist.gov/vuln/detail/cve-2026-44431){: external}, [CVE-2026-54369](https://nvd.nist.gov/vuln/detail/cve-2026-54369){: external}, [CVE-2026-5450](https://nvd.nist.gov/vuln/detail/cve-2026-5450){: external}, and [CVE-2025-13151](https://nvd.nist.gov/vuln/detail/cve-2025-13151){: external}.
 
 
-## Master fix pack 1.35.6_1536, released 28 July 2026
+## 28 July 2026, Master fix pack 1.35.6_1536
 {: #cl-boms_master-1356_1536_M}
 
 The following list shows the components that are in the master fix pack 1.35.6_1536. Master patch updates are applied automatically.
@@ -233,7 +233,7 @@ Portieris admission controller v0.14.2
 :   See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.14.2){: external}
 
 
-## Worker node fix pack 1.35.6_1537, released 13 July 2026
+## 13 July 2026, Worker node fix pack 1.35.6_1537
 {: #cl-boms-1356_1537_W}
 
 The following list shows the components included in the worker node fix pack 1.35.6_1537. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -265,7 +265,7 @@ GPU Device Plug-in and Installer ec8f279d185b792b940dd2d39c7551b8a319beb8
 :   Resolves the following CVEs: [CVE-2025-6170](https://nvd.nist.gov/vuln/detail/cve-2025-6170){: external}, [CVE-2026-48864](https://nvd.nist.gov/vuln/detail/cve-2026-48864){: external}, [CVE-2026-44431](https://nvd.nist.gov/vuln/detail/cve-2026-44431){: external}, and [CVE-2026-5450](https://nvd.nist.gov/vuln/detail/cve-2026-5450){: external}.
 
 
-## Worker node fix pack 1.35.5_1535, released 01 July 2026
+## 01 July 2026, Worker node fix pack 1.35.5_1535
 {: #cl-boms-1355_1535_W}
 
 The following list shows the components included in the worker node fix pack 1.35.5_1535. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -297,7 +297,7 @@ GPU Device Plug-in and Installer 0e6e6f89d8902362ba15eaa41555820f61257069
 :   Resolves the following CVEs: [CVE-2026-45447](https://nvd.nist.gov/vuln/detail/cve-2026-45447){: external}, [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/cve-2024-4741){: external}, [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/cve-2024-34459){: external}, and [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/cve-2026-4046){: external}.
 
 
-## Master fix pack 1.35.5_1533, released 26 June 2026
+## 26 June 2026, Master fix pack 1.35.5_1533
 {: #cl-boms_master-1355_1533_M}
 
 The following list shows the components that are in the master fix pack 1.35.5_1533. Master patch updates are applied automatically.
@@ -339,7 +339,7 @@ Portieris admission controller v0.14.0
 :   See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.14.0){: external}
 
 
-## Worker node fix pack 1.35.5_1534, released 15 June 2026
+## 15 June 2026, Worker node fix pack 1.35.5_1534
 {: #cl-boms-1355_1534_W}
 
 The following list shows the components included in the worker node fix pack 1.35.5_1534. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -371,7 +371,7 @@ GPU Device Plug-in and Installer 0f070c15558c3540c1ce086a9ded4465637a0d87
 :   Resolves the following CVEs: [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/cve-2026-4046){: external}, and [CVE-2026-45186](https://nvd.nist.gov/vuln/detail/cve-2026-45186){: external}.
 
 
-## Worker node fix pack 1.35.5_1532, released 03 June 2026
+## 03 June 2026, Worker node fix pack 1.35.5_1532
 {: #cl-boms-1355_1532_W}
 
 The following list shows the components included in the worker node fix pack 1.35.5_1532. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -401,7 +401,7 @@ GPU Device Plug-in and Installer 434b31bf9a90fddac062542792b2550a4334fcd3
 :   Resolves the following CVEs: [CVE-2026-42011](https://nvd.nist.gov/vuln/detail/cve-2026-42011){: external}, [CVE-2026-42015](https://nvd.nist.gov/vuln/detail/cve-2026-42015){: external}, [CVE-2026-42012](https://nvd.nist.gov/vuln/detail/cve-2026-42012){: external}, [CVE-2026-3833](https://nvd.nist.gov/vuln/detail/cve-2026-3833){: external}, [CVE-2026-33845](https://nvd.nist.gov/vuln/detail/cve-2026-33845){: external}, [CVE-2026-42013](https://nvd.nist.gov/vuln/detail/cve-2026-42013){: external}, [CVE-2026-42010](https://nvd.nist.gov/vuln/detail/cve-2026-42010){: external}, [CVE-2026-33846](https://nvd.nist.gov/vuln/detail/cve-2026-33846){: external}, [CVE-2026-4046](https://nvd.nist.gov/vuln/detail/cve-2026-4046){: external}, [CVE-2026-42014](https://nvd.nist.gov/vuln/detail/cve-2026-42014){: external}, [CVE-2026-5260](https://nvd.nist.gov/vuln/detail/cve-2026-5260){: external}, and [CVE-2026-42009](https://nvd.nist.gov/vuln/detail/cve-2026-42009){: external}.
 
 
-## Master fix pack 1.35.5_1530, released 22 May 2026
+## 22 May 2026, Master fix pack 1.35.5_1530
 {: #cl-boms_master-1355_1530_M}
 
 The following list shows the components that are in the master fix pack 1.35.5_1530. Master patch updates are applied automatically.
@@ -439,7 +439,7 @@ Tigera Operator v1.38.13
 :   See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.38.13){: external}.
 
 
-## Worker node fix pack 1.35.5_1531, released 20 May 2026
+## 20 May 2026, Worker node fix pack 1.35.5_1531
 {: #cl-boms-1355_1531_W}
 
 The following list shows the components included in the worker node fix pack 1.35.5_1531. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -469,7 +469,7 @@ GPU Device Plug-in and Installer 1a75f11af9e46a59f058ac046c51c5efb695e51c
 :   Resolves the following CVEs: [CVE-2026-40355](https://nvd.nist.gov/vuln/detail/cve-2026-40355){: external}, [CVE-2026-40356](https://nvd.nist.gov/vuln/detail/cve-2026-40356){: external}, [CVE-2026-4878](https://nvd.nist.gov/vuln/detail/cve-2026-4878){: external}, [CVE-2025-14512](https://nvd.nist.gov/vuln/detail/cve-2025-14512){: external}, [CVE-2025-14087](https://nvd.nist.gov/vuln/detail/cve-2025-14087){: external}, [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/cve-2026-0915){: external}, and [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/cve-2025-15281){: external}.
 
 
-## Worker node fix pack 1.35.4_1528, released 04 May 2026
+## 04 May 2026, Worker node fix pack 1.35.4_1528
 {: #cl-boms-1354_1528_W}
 
 The following list shows the components included in the worker node fix pack 1.35.4_1528. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -499,7 +499,7 @@ GPU Device Plug-in and Installer 58dfaecaab05f56be65df5befb5e8d57bba3d42f
 :   Resolves the following CVEs: [CVE-2026-6100](https://nvd.nist.gov/vuln/detail/cve-2026-6100){: external}, [CVE-2025-9714](https://nvd.nist.gov/vuln/detail/cve-2025-9714){: external}, [CVE-2026-34982](https://nvd.nist.gov/vuln/detail/cve-2026-34982){: external}, [CVE-2026-4786](https://nvd.nist.gov/vuln/detail/cve-2026-4786){: external}, [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/cve-2026-0915){: external}, [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/cve-2025-15281){: external}, [CVE-2026-4424](https://nvd.nist.gov/vuln/detail/cve-2026-4424){: external}, and [CVE-2026-5121](https://nvd.nist.gov/vuln/detail/cve-2026-5121){: external}.
 
 
-## Master fix pack 1.35.4_1527, released 27 April 2026
+## 27 April 2026, Master fix pack 1.35.4_1527
 {: #cl-boms_master-1354_1527_M}
 
 The following list shows the components that are in the master fix pack 1.35.4_1527. Master patch updates are applied automatically.
@@ -537,7 +537,7 @@ Tigera Operator v1.38.13
 :   See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.38.13){: external}.
 
 
-## Worker node fix pack 1.35.4_1527, released 20 April 2026
+## 20 April 2026, Worker node fix pack 1.35.4_1527
 {: #cl-boms-1354_1527_W}
 
 The following list shows the components included in the worker node fix pack 1.35.4_1527. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -567,7 +567,7 @@ GPU Device Plug-in and Installer a51f753c5b377589a30ca4121042925d2fc24ce9
 :   Resolves the following CVEs: [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/cve-2026-0915){: external}, [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/cve-2025-15281){: external}, and [CVE-2026-27135](https://nvd.nist.gov/vuln/detail/cve-2026-27135){: external}.
 
 
-## Worker node fix pack 1.35.3_1525, released 06 April 2026
+## 06 April 2026, Worker node fix pack 1.35.3_1525
 {: #cl-boms-1353_1525_W}
 
 The following list shows the components included in the worker node fix pack 1.35.3_1525. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -597,7 +597,7 @@ GPU Device Plug-in and Installer 9029276f9f74361a43a6db81236eda29cbb07b3a
 :   Resolves the following CVEs: [CVE-2025-9820](https://nvd.nist.gov/vuln/detail/cve-2025-9820){: external}, [CVE-2025-14831](https://nvd.nist.gov/vuln/detail/cve-2025-14831){: external}, [CVE-2025-0938](https://nvd.nist.gov/vuln/detail/cve-2025-0938){: external}, [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/cve-2026-0915){: external}, and [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/cve-2025-15281){: external}.
 
 
-## Worker node fix pack 1.35.3_1523, released 24 March 2026
+## 24 March 2026, Worker node fix pack 1.35.3_1523
 {: #cl-boms-1353_1523_W}
 
 The following list shows the components included in the worker node fix pack 1.35.3_1523. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
@@ -627,7 +627,7 @@ GPU Device Plug-in and Installer 1c4faba733bd6bce95c85ead9a63e1ff0bbce86b
 :   Resolves the following CVEs: [CVE-2026-0915](https://nvd.nist.gov/vuln/detail/cve-2026-0915){: external}, [CVE-2026-25749](https://nvd.nist.gov/vuln/detail/cve-2026-25749){: external}, and [CVE-2025-15281](https://nvd.nist.gov/vuln/detail/cve-2025-15281){: external}.
 
 
-## Worker node fix pack 1.35.1_1521, released 11 March 2026
+## 11 March 2026, Worker node fix pack 1.35.1_1521
 {: #cl-boms-1351_1521_W}
 
 The following list shows the components included in the worker node fix pack 1.35.1_1521. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
