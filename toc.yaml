@@ -172,6 +172,7 @@ toc:
               label: Network traffic in VPC clusters
               topics:
               - vpc-security-group2.md
+              - vpc-iam-vpe-gateway.md
               - vpc-sbd-allow-outbound.md
               - vpc-sbd-enable-existing.md
               - vpc-security-group-manage.md

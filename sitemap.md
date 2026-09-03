@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-02"
+lastupdated: "2026-09-03"
 
 
 keywords: containers
@@ -3058,6 +3058,28 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [User-provided {{site.data.keyword.security-groups}}](/docs/containers?topic=containers-vpc-security-group-reference#user-provided-sgs)
 
 * [Limitations](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-limitations)
+
+[Understanding the IAM VPE Gateway for VPC clusters](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-gateway)
+
+* [Why is {{site.data.keyword.containerlong_notm}} adding an IAM VPE Gateway?](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-why)
+
+* [Who is affected by this change?](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-impact)
+
+* [Check whether your environment is affected](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-check)
+
+* [Before you begin](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-prereqs)
+
+* [Create the IAM VPE Gateway](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-create)
+
+* [Resolve connectivity issues](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-resolve)
+
+    * [Update security group rules](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-update-sg-rules)
+
+    * [Update custom network ACL rules](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-update-acl-rules)
+
+    * [Update Kubernetes and Calico network policies](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-update-network-policies)
+
+* [Next steps](/docs/containers?topic=containers-vpc-iam-vpe-gateway#vpc-iam-vpe-next)
 
 [Managing outbound traffic protection in VPC clusters](/docs/containers?topic=containers-sbd-allow-outbound#sbd-allow-outbound)
 
