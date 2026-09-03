@@ -16,15 +16,8 @@ toc:
       topics:
       - topic: getting-started.md
         navtitle: Getting started
-      - topicgroup:
-          label: Use cases
-          topics:
-          - cs_uc_intro.md
-          - uc-finance.md
-          - uc-health.md
-          - uc-retail.md
-          - uc-transport.md
-          - uc-gov.md
+      - topic: use-cases.md
+        navtitle: Use cases
       - topic: overview.md
         navtitle: Understanding the service
       - topic: cs_tech.md

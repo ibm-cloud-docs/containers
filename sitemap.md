@@ -60,107 +60,37 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 {: #sitemap_use_cases}
 
 
-[Use cases for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
+[Use cases](/docs/containers?topic=containers-use-cases#use-cases)
 
-[Financial services use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
+* [Financial services](/docs/containers?topic=containers-use-cases#uc-finance)
 
-* [Mortgage company trims costs and accelerates regulatory compliance](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)
+    * [Trim IT costs and accelerate regulatory compliance](/docs/containers?topic=containers-use-cases#uc-finance-mortgage)
 
-    * [Context](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage_context)
+    * [Deploy AI-enabled tools 4x faster](/docs/containers?topic=containers-use-cases#uc-finance-payments)
 
-    * [Solution](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage_solution)
+* [Healthcare](/docs/containers?topic=containers-use-cases#uc-health)
 
-    * [Results](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage_results)
+    * [Migrate patient systems from VMs to containers](/docs/containers?topic=containers-use-cases#uc-health-migrate)
 
-* [Payment tech company streamlines developer productivity, deploying AI-enabled tools to their partners 4 times faster](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech)
+    * [Securely host sensitive research data](/docs/containers?topic=containers-use-cases#uc-health-research)
 
-    * [Context](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech_context)
+* [Retail](/docs/containers?topic=containers-use-cases#uc-retail)
 
-    * [Solution](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech_solution)
+    * [Share data via APIs to drive omnichannel sales](/docs/containers?topic=containers-use-cases#uc-retail-data)
 
-    * [Results](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech_results)
+    * [Optimize inventory with digital insights](/docs/containers?topic=containers-use-cases#uc-retail-grocer)
 
-[Healthcare use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_health#cs_uc_health)
+* [Transportation](/docs/containers?topic=containers-use-cases#uc-transport)
 
-* [Healthcare provider migrates workloads from inefficient VMs to Ops-friendly containers for reporting and patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)
+    * [Build and deploy HR sites with AI in under 3 weeks](/docs/containers?topic=containers-use-cases#uc-transport-airline)
 
-    * [Context](/docs/containers?topic=containers-cs_uc_health#uc_migrate_context)
+    * [Increase availability of worldwide partner systems](/docs/containers?topic=containers-use-cases#uc-transport-shipping)
 
-    * [Solution](/docs/containers?topic=containers-cs_uc_health#uc_migrate_solution_model)
+* [Government](/docs/containers?topic=containers-use-cases#uc-gov)
 
-    * [Results](/docs/containers?topic=containers-cs_uc_health#uc_migrate_results)
+    * [Secure data exchange between public and private organizations](/docs/containers?topic=containers-use-cases#uc-gov-port)
 
-* [Research nonprofit securely hosts sensitive data while it grows research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)
-
-    * [Context](/docs/containers?topic=containers-cs_uc_health#uc_research_context)
-
-    * [Solution](/docs/containers?topic=containers-cs_uc_health#uc_research_solution)
-
-    * [Results](/docs/containers?topic=containers-cs_uc_health#uc_research_results)
-
-[Retail use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
-
-* [Brick-and-mortar retailer shares data, by using APIs with global business partners to drive omnichannel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)
-
-    * [Context](/docs/containers?topic=containers-cs_uc_retail#uc_data-share_context)
-
-    * [Solution](/docs/containers?topic=containers-cs_uc_retail#uc_data-share_solution)
-
-    * [Results](/docs/containers?topic=containers-cs_uc_retail#uc_data-share_results)
-
-* [Traditional grocer increases customer traffic and sales with digital insights](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)
-
-    * [Context](/docs/containers?topic=containers-cs_uc_retail#uc_grocer_context)
-
-    * [Results](/docs/containers?topic=containers-cs_uc_retail#uc_grocer_results)
-
-[Transportation use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_transport#cs_uc_transport)
-
-* [Shipping company increases availability of worldwide systems for business partner ecosystem](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)
-
-    * [Context](/docs/containers?topic=containers-cs_uc_transport#uc_shipping_context)
-
-    * [Solution](/docs/containers?topic=containers-cs_uc_transport#uc_shipping_solution)
-
-    * [Results](/docs/containers?topic=containers-cs_uc_transport#uc_shipping_results)
-
-* [Airline delivers innovative Human Resources (HR) benefits site in under 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline)
-
-    * [Context](/docs/containers?topic=containers-cs_uc_transport#uc_airline_context)
-
-    * [Solution](/docs/containers?topic=containers-cs_uc_transport#uc_airline_solution)
-
-    * [Results](/docs/containers?topic=containers-cs_uc_transport#uc_airline_results)
-
-[Government use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov#cs_uc_gov)
-
-* [Regional government improves collaboration and velocity with community Developers who combine public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)
-
-    * [Context](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_context)
-
-    * [Solution](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_solution)
-
-    * [Step 1: Store data in the cloud](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_step1)
-
-    * [Step 2: Provide access to data with APIs](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_step2)
-
-    * [Step 3: Innovate with IBM Garage and cloud services](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_step3)
-
-    * [Results](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup_results)
-
-* [Large public port secures exchange of port data and shipping manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
-
-    * [Context](/docs/containers?topic=containers-cs_uc_gov#uc_port_context)
-
-    * [Solution](/docs/containers?topic=containers-cs_uc_gov#uc_port_solution)
-
-    * [Step 1: Containerize apps by using microservices](/docs/containers?topic=containers-cs_uc_gov#uc_port_step1)
-
-    * [Step 2: Ensure global availability](/docs/containers?topic=containers-cs_uc_gov#uc_port_step2)
-
-    * [Step 3: Data sharing](/docs/containers?topic=containers-cs_uc_gov#uc_port_step3)
-
-    * [Results](/docs/containers?topic=containers-cs_uc_gov#uc_port_results)
+    * [Improve collaboration velocity with open data](/docs/containers?topic=containers-use-cases#uc-gov-data)
 
 
 ## Understanding the service
