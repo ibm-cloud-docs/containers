@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-09-03"
 
 
 keywords: containers, kubernetes, affinity, taint, edge node, edge
@@ -99,3 +99,7 @@ You can prevent workloads from running on edge worker nodes and consuming worker
     Hostname:    10.184.58.7
     ```
     {: screen}
+
+
+
+

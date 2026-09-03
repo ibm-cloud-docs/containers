@@ -1,7 +1,7 @@
 ---
 copyright:
   years: 2022, 2026
-lastupdated: "2026-08-26"
+lastupdated: "2026-09-03"
 
 keywords: containers, add-ons, cluster addon
 
@@ -23,7 +23,7 @@ Review the supported cluster add-ons. Each add-on version can be used on any clu
 
 
 ALB OAuth proxy `2.0.0`
-:   Supported Kubernetes versions: `>=1.19.0 <1.37.0`
+:   Supported Kubernetes versions: `>=1.19.0 <1.38.0`
 
 Headlamp `0.1.0`
 :   Supported Kubernetes versions: `>=1.31.0 <1.37.0`

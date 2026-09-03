@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-26"
+lastupdated: "2026-09-03"
 
 
 keywords: kubernetes, containers
@@ -680,3 +680,9 @@ If you want to clean up the blocklist and the log policies:
 
 - Read more about [controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 - For more example Calico network policies that control traffic to and from your cluster, you can check out the [Calico tutorials](https://www.tigera.io/tutorials/){: external}.
+
+
+
+
+
+

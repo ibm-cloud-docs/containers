@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-09"
+lastupdated: "2026-09-03"
 
 
 keywords: kubernetes, docker, containers
@@ -157,3 +157,12 @@ The following architectural overviews are specific to the VPC infrastructure pro
 | App networking | You can create a Kubernetes `LoadBalancer` service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. For more information, see [Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpclb-about). Calico is used as the cluster networking policy fabric. |
 | Storage | You can set up only block persistent storage. Block storage is available as a cluster add-on. For more information, see [Setting up IBM Block Storage for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-block_storage). |
 {: caption="Kubernetes cluster in a VPC" caption-side="bottom"}
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-05-13"
+lastupdated: "2026-09-03"
 
 
 keywords: containers, kubernetes, affinity, taint, edge node, edge
@@ -33,3 +33,4 @@ kubectl patch ds sysdig-agent -n ibm-observe --type merge --type='json' -p='[{"o
 
 If you used pod labels such as `dedicated=edge`, you can also apply this label to any pods that you want to allow on your edge nodes.
 {: tip}
+

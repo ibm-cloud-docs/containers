@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-08-27"
+lastupdated: "2026-09-03"
 
 
 keywords: change log, version history, Istio
@@ -43,7 +43,7 @@ Review the version history for Istio.
 {: #cl-add-ons-istio-1.30}
 
 
-### Version 1.30 - 1.30.3, released 18 August 2026
+### 18 August 2026, Version 1.30 - 1.30.3
 {: #cl-add-ons-istio-1303}
 
 [Default version]{: tag-green}
@@ -51,7 +51,7 @@ Review the version history for Istio.
 - Updates in this version: See the Istio release notes for [Istio 1.30.3](https://istio.io/latest/news/releases/1.30.x/announcing-1.30.3/){: external}
 
 
-### Version 1.30 - 1.30.2, released 21 July 2026
+### 21 July 2026, Version 1.30 - 1.30.2
 {: #cl-add-ons-istio-1302}
 
 - Updates in this version: See the Istio release notes for [Istio 1.29.6](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.6/){: external}, [Istio 1.30.1](https://istio.io/latest/news/releases/1.30.x/announcing-1.30.1/){: external} and [Istio 1.30.2](https://istio.io/latest/news/releases/1.30.x/announcing-1.30.2/){: external}
@@ -61,7 +61,7 @@ Review the version history for Istio.
 {: #cl-add-ons-istio-1.29}
 
 
-### Version 1.29 - 1.29.6, released 18 August 2026
+### 18 August 2026, Version 1.29 - 1.29.6
 {: #cl-add-ons-istio-1296}
 
 [Default version]{: tag-green}
@@ -69,13 +69,13 @@ Review the version history for Istio.
 - Updates in this version: See the Istio release notes for [Istio 1.29.6](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.6/){: external}.
 
 
-### Version 1.29 - 1.29.5, released 15 July 2026
+### 15 July 2026, Version 1.29 - 1.29.5
 {: #cl-add-ons-istio-1295}
 
 - Updates in this version: See the Istio release notes for [Istio 1.29.5](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.5/){: external}.
 
 
-### Version 1.29 - 1.29.4, released 17 June 2026
+### 17 June 2026, Version 1.29 - 1.29.4
 {: #cl-add-ons-istio-1294}
 
 - Updates in this version: See the Istio release notes for [Istio 1.29.3](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.3/){: external} and [Istio 1.29.4](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.4/){: external}.
@@ -85,7 +85,7 @@ Review the version history for Istio.
 {: #cl-add-ons-istio-1.28}
 
 
-### Version 1.28 - 1.28.10, released 15 July 2026
+### 15 July 2026, Version 1.28 - 1.28.10
 {: #cl-add-ons-istio-12810}
 
 [Default version]{: tag-green}
@@ -93,13 +93,13 @@ Review the version history for Istio.
 - Updates in this version: See the Istio release notes for [Istio 1.28.9](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.9/){: external} and [Istio 1.28.10](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.10/){: external}.
 
 
-### Version 1.28 - 1.28.8, released 17 June 2026
+### 17 June 2026, Version 1.28 - 1.28.8
 {: #cl-add-ons-istio-1288}
 
 - Updates in this version: See the Istio release notes for [Istio 1.28.7](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.7/){: external} and [Istio 1.28.8](https://istio.io/latest/news/releases/1.28.x/announcing-1.28.8/){: external}.
 
 
-### Version 1.28.6, released 30 April 2026
+### 30 April 2026, Version 1.28.6
 {: #1286}
 
 Review the changes that are included in version 1.28.6 of the managed Istio add-on.
@@ -127,7 +127,7 @@ Updates in this version
 {: #v127}
 
 
-### Version 1.27.9, released 28 April 2026
+### 28 April 2026, Version 1.27.9
 {: #1279}
 
 Review the changes that are included in version 1.27.9 of the managed Istio add-on.
@@ -152,7 +152,7 @@ Updates in this version
     - [CVE-2026-3784](https://www.cve.org/cveRecord?id=cve-2026-3784){: external}
 
 
-### Version 1.27.8, released 27 March 2026
+### 27 March 2026, Version 1.27.8
 {: #1278}
 
 Review the changes that are included in version 1.27.8 of the managed Istio add-on.
@@ -201,7 +201,7 @@ Updates in this version
 {: #v126}
 
 
-### Version 1.26.6, released 15 December 2025
+### 15 December 2025, Version 1.26.6
 {: #1266}
 
 Review the changes that are included in version 1.26.6 of the managed Istio add-on.
@@ -239,7 +239,7 @@ Updates in this version
     - [CVE-2024-6395](https://www.cve.org/cveRecord?id=cve-2024-6395){: external} 
 
 
-### Version 1.26.8, released 21 January 2025
+### 21 January 2025, Version 1.26.8
 {: #1268}
 
 Review the changes that are included in version 1.26.8 of the managed Istio add-on.
@@ -262,7 +262,7 @@ Updates in this version
 {: #v125}
 
 
-### Version 1.25.5, released 05 November 2025
+### 05 November 2025, Version 1.25.5
 {: #1255}
 
 Review the changes that are included in version 1.25.5 of the managed Istio add-on.
@@ -292,7 +292,7 @@ Updates in this version
 {: #v124}
 
 
-### Version 1.24.6, released 26 September 2025
+### 26 September 2025, Version 1.24.6
 {: #1246}
 
 Review the changes that are included in version 1.24.6 of the managed Istio add-on.
@@ -323,7 +323,7 @@ Updates in this version
 {: #v123}
 
 
-### Version 1.23.6, released 29 April 2025
+### 29 April 2025, Version 1.23.6
 {: #1236}
 
 Review the changes that are included in version 1.23.6 of the managed Istio add-on.
@@ -364,7 +364,7 @@ Updates in this version
     - [usn-7287-1](https://ubuntu.com/security/notices/USN-7287-1){: external}
 
 
-### Version 1.23.5, released 4 March 2025
+### 4 March 2025, Version 1.23.5
 {: #1235}
 
 Review the changes that are included in version 1.23.5 of the managed Istio add-on.
@@ -384,7 +384,7 @@ Updates in this version
     - [CVE-2024-11053](https://www.cve.org/cveRecord?id=cve-2024-11053){: external}
 
 
-### Version 1.23.1, released 20 September 2024
+### 20 September 2024, Version 1.23.1
 {: #1231}
 
 Review the changes that are included in version 1.23.1 of the managed Istio add-on.
@@ -403,7 +403,7 @@ Updates in this version
     - [usn-6986-1](https://ubuntu.com/security/notices/USN-6986-1){: external}
 
 
-### Version 1.23.4, released 28 Jan 2025
+### 28 Jan 2025, Version 1.23.4
 {: #1234}
 
 Review the changes that are included in version 1.23.4 of the managed Istio add-on.
@@ -421,7 +421,7 @@ Updates in this version
     - [CVE-2024-9681](https://www.cve.org/cveRecord?id=cve-2024-9681){: external}
 
 
-### Version 1.23.3, released 3 Dec 2024
+### 3 Dec 2024, Version 1.23.3
 {: #1233}
 
 Review the changes that are included in version 1.23.3 of the managed Istio add-on.
@@ -439,7 +439,7 @@ Updates in this version
     - [CVE-2024-8096](https://www.cve.org/cveRecord?id=cve-2024-8096){: external}
 
 
-### Version 1.23.2, released 9 Oct 2024
+### 9 Oct 2024, Version 1.23.2
 {: #1232}
 
 Review the changes that are included in version 1.23.2 of the managed Istio add-on.
@@ -459,7 +459,7 @@ Updates in this version
 {: #v122}
 
 
-### Version 1.22.3, released 20 August 2024
+### 20 August 2024, Version 1.22.3
 {: #1223}
 
 Review the changes that are included in version 1.22.3 of the managed Istio add-on.
@@ -487,7 +487,7 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2024-005](https://istio.io/latest/news/security/istio-security-2024-005/){: external}.
 
 
-### Version 1.21.5, released 20 August 2024
+### 20 August 2024, Version 1.21.5
 {: #1215}
 
 Review the changes that are included in version 1.21.5 of the managed Istio add-on.
@@ -513,7 +513,7 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2024-005](https://istio.io/latest/news/security/istio-security-2024-005/){: external}.
 
 
-### Version 1.20.8, released 20 August 2024
+### 20 August 2024, Version 1.20.8
 {: #1208}
 
 Review the changes that are included in version 1.20.8 of the managed Istio add-on.
@@ -536,7 +536,7 @@ Updates in this version
     - [usn-6804-1](https://ubuntu.com/security/notices/USN-6804-1){: external}
 
 
-### Version 1.22.4, released 18 August 2024
+### 18 August 2024, Version 1.22.4
 {: #1224}
 
 Review the changes that are included in version 1.22.4 of the managed Istio add-on.
@@ -563,7 +563,7 @@ Updates in this version
     - [usn-6944-1](https://ubuntu.com/security/notices/USN-6944-1){: external}
 
 
-### Version 1.22.1, released 21 June 2024
+### 21 June 2024, Version 1.22.1
 {: #1221}
 
 Review the changes that are included in version 1.22.1 of the managed Istio add-on.
@@ -586,7 +586,7 @@ Version 1.21 of the managed Istio add-on is unsupported.
 {: important}
 
 
-### Version 1.21.3, released 19 June 2024
+### 19 June 2024, Version 1.21.3
 {: #1213}
 
 Review the changes that are included in version 1.21.3 of the managed Istio add-on.
@@ -609,7 +609,7 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2024-004](https://istio.io/latest/news/security/istio-security-2024-004/){: external}
 
 
-### Version 1.20.7, released 19 June 2024
+### 19 June 2024, Version 1.20.7
 {: #1207}
 
 Review the changes that are included in version 1.20.7 of the managed Istio add-on.
@@ -632,7 +632,7 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2024-004](https://istio.io/latest/news/security/istio-security-2024-004/){: external}   
 
 
-### Version 1.21.2, released 8 May 2024
+### 8 May 2024, Version 1.21.2
 {: #1212}
 
 Review the changes that are included in version 1.21.2 of the managed Istio add-on.
@@ -653,7 +653,7 @@ Updates in this version
     - CVE-2024-28834 
 
 
-### Version 1.20.6, released 8 May 2024
+### 8 May 2024, Version 1.20.6
 {: #1206}
 
 Review the changes that are included in version 1.20.6 of the managed Istio add-on.
@@ -674,7 +674,7 @@ Updates in this version
     - CVE-2024-28834 
 
 
-### Version 1.21.1, released 26 April 2024
+### 26 April 2024, Version 1.21.1
 {: #1211}
 
 Review the changes that are included in version 1.21.1 of the managed Istio add-on.
@@ -698,7 +698,7 @@ Version 1.20 of the managed Istio add-on is unsupported.
 {: important}
 
 
-### Version 1.20.5, released 24 April 2024
+### 24 April 2024, Version 1.20.5
 {: #1205}
 
 Review the changes that are included in version 1.20.5 of the managed Istio add-on.
@@ -721,7 +721,7 @@ Updates in this version
     - [CVE-2022-3715](https://nvd.nist.gov/vuln/detail/cve-2022-3715){: external}
 
 
-### Version 1.19.9, released 24 April 2024
+### 24 April 2024, Version 1.19.9
 {: #1199}
 
 Review the changes that are included in version 1.19.9 of the managed Istio add-on.
@@ -743,7 +743,7 @@ Updates in this version
     - [CVE-2022-3715](https://nvd.nist.gov/vuln/detail/cve-2022-3715){: external}
 
 
-### Version 1.20.4, released 03 April 2024
+### 03 April 2024, Version 1.20.4
 {: #1204}
 
 Review the changes that are included in version 1.20.4 of the managed Istio add-on.
@@ -766,7 +766,7 @@ Updates in this version
     - [CVE-2023-4641](https://nvd.nist.gov/vuln/detail/cve-2023-4641){: external}
 
 
-### Version 1.19.8, released 03 April 2024
+### 03 April 2024, Version 1.19.8
 {: #1198}
 
 Review the changes that are included in version 1.19.8 of the managed Istio add-on.
@@ -790,7 +790,7 @@ Updates in this version
     - [CVE-2023-4641](https://nvd.nist.gov/vuln/detail/cve-2023-4641){: external}
 
 
-### Version 1.20.3, released 06 March 2024
+### 06 March 2024, Version 1.20.3
 {: #1203}
 
 Review the changes that are included in version 1.20.3 of the managed Istio add-on.
@@ -816,7 +816,7 @@ Updates in this version
     - [CVE-2023-6780](https://nvd.nist.gov/vuln/detail/cve-2023-6780){: external}
 
 
-### Version 1.19.7, released 06 March 2024
+### 06 March 2024, Version 1.19.7
 {: #1197}
 
 Review the changes that are included in version 1.19.7 of the managed Istio add-on.
@@ -842,7 +842,7 @@ Updates in this version
     - [CVE-2023-6780](https://nvd.nist.gov/vuln/detail/cve-2023-6780){: external}
 
 
-### Version 1.20.2, released 07 February 2024
+### 07 February 2024, Version 1.20.2
 {: #1202}
 
 Review the changes that are included in version 1.20.2 of the managed Istio add-on.
@@ -861,7 +861,7 @@ Updates in this version
     - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}
 
 
-### Version 1.19.6, released 07 February 2024
+### 07 February 2024, Version 1.19.6
 {: #1196}
 
 Review the changes that are included in version 1.19.6 of the managed Istio add-on.
@@ -880,7 +880,7 @@ Updates in this version
     - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}
 
 
-### Version 1.18.7, released 07 February 2024
+### 07 February 2024, Version 1.18.7
 {: #1187}
 
 Review the changes that are included in version 1.18.7 of the managed Istio add-on.
@@ -900,7 +900,7 @@ Updates in this version
     - [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}
 
 
-### Version 1.20.1, released 10 January 2024
+### 10 January 2024, Version 1.20.1
 {: #1201}
 
 Review the changes that are included in version 1.20.1 of the managed Istio add-on.
@@ -934,7 +934,7 @@ Updates in this version
     - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/cve-2023-5981){: external}
 
 
-### Version 1.19.5, released 10 January 2024
+### 10 January 2024, Version 1.19.5
 {: #1195}
 
 Review the changes that are included in version 1.19.5 of the managed Istio add-on.
@@ -968,7 +968,7 @@ Updates in this version
     - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/cve-2023-5981){: external}
 
 
-### Version 1.18.6, released 10 January 2024
+### 10 January 2024, Version 1.18.6
 {: #1186}
 
 Review the changes that are included in version 1.18.6 of the managed Istio add-on.
@@ -1015,7 +1015,7 @@ Updates in this version
     - [CVE-2023-5981](https://nvd.nist.gov/vuln/detail/cve-2023-5981){: external}
 
 
-### Version 1.20.0, released 7 December 2023
+### 7 December 2023, Version 1.20.0
 {: #1200}
 
 Review the changes that are included in version 1.20.0 of the managed Istio add-on.
@@ -1037,7 +1037,7 @@ Version 1.19 of the managed Istio add-on is unsupported.
 {: important}
 
 
-### Version 1.19.4, released 5 December 2023
+### 5 December 2023, Version 1.19.4
 {: #1194}
 
 Review the changes that are included in version 1.19.4 of the managed Istio add-on.
@@ -1064,7 +1064,7 @@ Updates in this version
     - [usn-6450-1](https://ubuntu.com/security/notices/USN-6450-1){: external}
 
 
-### Version 1.18.5, released 18 October 2023
+### 18 October 2023, Version 1.18.5
 {: #1185}
 
 Previous version
@@ -1079,7 +1079,7 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}.  
 
 
-### Version 1.17.8, released 18 October 2023
+### 18 October 2023, Version 1.17.8
 {: #1178}
 
 Previous version
@@ -1094,7 +1094,7 @@ Updates in this version
 :   For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}   
 
 
-### Version 1.19.3, released 10 October 2023
+### 10 October 2023, Version 1.19.3
 {: #1193}
 
 Review the changes that are included in version 1.19.3 of the managed Istio add-on.
@@ -1120,7 +1120,7 @@ Version 1.18 of the managed Istio add-on is unsupported.
 {: important}
 
 
-### Version 1.18.3, released 3 October 2023
+### 3 October 2023, Version 1.18.3
 {: #1183}
 
 Review the changes that are included in version 1.18.3 of the managed Istio add-on.
@@ -1141,7 +1141,7 @@ Updates in this version
     - usn-6237-2
 
 
-### Version 1.17.6, released 3 October 2023
+### 3 October 2023, Version 1.17.6
 {: #1176}
 
 Review the changes that are included in version 1.17.6 of the managed Istio add-on.

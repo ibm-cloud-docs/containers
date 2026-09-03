@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-04-30"
+lastupdated: "2026-09-03"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, troubleshooting apps, app debugging, application troublshooting in clusters
@@ -107,12 +107,10 @@ Once you know the app flow, the specific error you are seeing, and where that er
     - [Cluster node access](/docs/containers?topic=containers-cs_ssh_worker)
 - Packet trace information. Running [`tcpdump`](https://www.redhat.com/en/blog/introduction-using-tcpdump-linux-command-line) is a common way to get packet trace information.
 
-## Reach out in Slack or review user forums for similar issues
+## Review user forums for similar issues
 {: #ts-6}
 {: step}
 
-1. Post in the {{site.data.keyword.containershort}} Slack.
-    * If you are an external user, post in the [#general](https://ibm-cloud-success.slack.com/archives/C4G6362ER){: external}{: external} channel. 
 1. Review forums such as {{site.data.keyword.containershort}} help or Stack Overflow to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.cloud_notm}} development teams.
     * If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-cloud+containers){: external} and tag your question with `ibm-cloud` and `containers`.
     * See [Getting help](/docs/containers?topic=containers-get-help) for more details about using the forums.
