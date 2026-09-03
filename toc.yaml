@@ -27,6 +27,8 @@ toc:
           - uc-gov.md
       - topic: overview.md
         navtitle: Understanding the service
+      - topic: cs_tech.md
+        navtitle: Architecture and dependencies
       - topicgroup:
           label: Learning paths
           topics:
@@ -55,6 +57,7 @@ toc:
           label: Tutorials library for Kubernetes Service
           href: https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20
       - cs_tutorial_vpc.md
+      - cs_tutorials_policies.md
   - navgroup:
       id: howto
       topics:
@@ -218,9 +221,11 @@ toc:
               - vpc_nlb.md
               - vpc_nlb_pp.md
               - vpc_lb_manage.md
+              - vpc_lbaas.md
           - topicgroup:
               label: Exposing apps with Classic load balancers
               topics:
+              - lb-quickstart.md
               - lb-about.md
               - lb.md
               - lb-v2.md
@@ -356,6 +361,9 @@ toc:
           - health-audit.md
           - vpc-flow-logs.md
           - at-events-ref.md
+          - at-events.md
+          - edge-sysdig.md
+          - edge-workload-prevent.md
   - navgroup:
       id: reference
       topics:
@@ -457,6 +465,7 @@ toc:
               - states-cluster.md
               - ts-webhook-debug.md
               - ts-cluster-master.md
+              - ts-cluster-master-upgrade.md
               - ts-resource-migration.md
               - ts-cluster-cli.md
               - ts-cluster-create-delete.md

@@ -182,6 +182,31 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
 
 
+## Architecture and dependencies
+{: #sitemap_architecture_and_dependencies}
+
+
+[Architecture and dependencies](/docs/containers?topic=containers-service-arch#service-arch)
+
+* [Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
+
+    * [Non-VRF or VRF-enabled account with public cloud service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
+
+    * [VRF-enabled account with private and public cloud service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
+
+    * [Kubernetes master components](/docs/containers?topic=containers-service-arch#master-components)
+
+    * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
+
+    * [`kube-system` namespace](/docs/containers?topic=containers-service-arch#kube-system-ns-resources)
+
+    * [`ibm-system` namespace](/docs/containers?topic=containers-service-arch#ibm-system-ns-resources)
+
+    * [`default` namespace](/docs/containers?topic=containers-service-arch#default-ns-resources)
+
+* [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
+
+
 ## Learning paths
 {: #sitemap_learning_paths}
 
@@ -2027,6 +2052,31 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
 
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
+
+
+## Using Calico network policies to control traffic on Classic clusters
+{: #sitemap_using_calico_network_policies_to_control_traffic_on_classic_clusters}
+
+
+[Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
+
+* [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
+
+* [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
+
+* [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
+
+* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
+
+* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
+
+* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
+
+* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
+
+* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
+
+* [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
 
 ## Before you begin
@@ -5261,6 +5311,26 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Worker node and worker pool events](/docs/containers?topic=containers-at_events_ref#worker-events)
 
 * [Viewing your cluster events](/docs/containers?topic=containers-at_events_ref#at-ui)
+
+[Activity tracking events for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-at_events#at_events)
+
+* [Locations where activity tracking events are generated](/docs/containers?topic=containers-at_events#at-locations)
+
+* [Locations where activity tracking events are sent by {{site.data.keyword.atracker_full_notm}}](/docs/containers?topic=containers-at_events#atracker-locations)
+
+* [Enabling activity tracking events for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-at_events#at-enable)
+
+* [Viewing activity tracking events for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-at_events#at-viewing)
+
+    * [Launching {{site.data.keyword.logs_full_notm}} from the Observability page](/docs/containers?topic=containers-at_events#log-launch-standalone)
+
+* [List of platform events](/docs/containers?topic=containers-at_events#at_actions_platform)
+
+[Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge-sysdig#edge-sysdig)
+
+[Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prevent)
+
+* [Before you begin](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prereqs)
 
 
 ## Version history
@@ -8581,6 +8651,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Reviewing master health, status, and states](/docs/containers?topic=containers-debug_master#review-master-health)
 
 * [Understanding the impact of a master outage](/docs/containers?topic=containers-debug_master#review-master-outage)
+
+[Why do I see a `Cannot complete cluster master upgrade` message?](/docs/containers?topic=containers-ts-cluster-master-upgrade#ts-cluster-master-upgrade)
 
 [Resolving cluster master upgrade issues: Migration in progress error](/docs/containers?topic=containers-ts-resource-migration#ts-resource-migration)
 
