@@ -427,6 +427,66 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Next steps](/docs/containers?topic=containers-document-environment#plan-prepare)
 
+[Security overview](/docs/containers?topic=containers-security#security)
+
+* [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
+
+* [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
+
+    * [How is access to my API server granted?](/docs/containers?topic=containers-security#api-server-access)
+
+    * [What does {{site.data.keyword.containerlong_notm}} do to secure my API server and etcd data store?](/docs/containers?topic=containers-security#secure-api-server)
+
+    * [What else can I do to secure my API server?](/docs/containers?topic=containers-security#api-server-what-else)
+
+* [Worker node](/docs/containers?topic=containers-security#workernodes)
+
+    * [Who owns the worker node and am I responsible to secure it?](/docs/containers?topic=containers-security#worker-node-owner)
+
+    * [How does my worker node setup look?](/docs/containers?topic=containers-security#worker-node-setup)
+
+* [Network](/docs/containers?topic=containers-security#network)
+
+    * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
+
+    * [What network traffic is allowed for my Classic cluster by default?](/docs/containers?topic=containers-security#default-network-traffic-allowed)
+
+    * [What is network segmentation and how can I set it up for a Classic cluster?](/docs/containers?topic=containers-security#network-segmentation-setup)
+
+    * [What else can I do to reduce the surface for external attacks for Classic clusters?](/docs/containers?topic=containers-security#external-what-else)
+
+    * [What if I want to connect my cluster to an on-prem data center?](/docs/containers?topic=containers-security#onprem-network-setup)
+
+    * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
+
+    * [What network traffic is allowed for my VPC cluster by default?](/docs/containers?topic=containers-security#vpc-network-traffic-default)
+
+    * [What is network segmentation and how can I set it up for a VPC cluster?](/docs/containers?topic=containers-security#network-segment-what-is)
+
+    * [What else can I do to reduce the surface for external attacks for VPC clusters?](/docs/containers?topic=containers-security#vpc-external-what-else)
+
+    * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
+
+    * [Can I use security groups to manage my cluster's network traffic?](/docs/containers?topic=containers-security#can-i-use-security-groups)
+
+    * [How can I secure the source IP within the cluster?](/docs/containers?topic=containers-security#secure-source-ip-cluster)
+
+    * [How can I do TLS termination with LoadBalancer and Ingress services?](/docs/containers?topic=containers-security#tls-termination-lb)
+
+* [Persistent storage](/docs/containers?topic=containers-security#storage)
+
+* [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
+
+* [Image and registry](/docs/containers?topic=containers-security#images_registry)
+
+* [Container isolation and security](/docs/containers?topic=containers-security#container)
+
+    * [Should I set up a single-tenant or a multi-tenant cluster?](/docs/containers?topic=containers-security#single-tenant-or-multi)
+
+* [Storing personal information](/docs/containers?topic=containers-security#pi)
+
+* [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
+
 
 ## Your responsibilities
 {: #sitemap_your_responsibilities}
@@ -1969,217 +2029,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 
-## Cluster planning
-{: #sitemap_cluster_planning}
-
-
-[Creating a highly available cluster strategy](/docs/containers?topic=containers-strategy#strategy)
-
-* [Decide how many clusters to create](/docs/containers?topic=containers-strategy#env_multicluster)
-
-* [Determine how many locations are needed](/docs/containers?topic=containers-strategy#plan_locations)
-
-    * [Multizone clusters](/docs/containers?topic=containers-strategy#mz-strategy)
-
-    * [Multiple clusters linked with load balancers](/docs/containers?topic=containers-strategy#mz-cluster-strategy)
-
-    * [Single zone clusters](/docs/containers?topic=containers-strategy#sz-single-zone-strategy)
-
-* [Select a cluster type](/docs/containers?topic=containers-strategy#env_flavors)
-
-* [Select an operating system for the cluster](/docs/containers?topic=containers-strategy#os)
-
-* [Define a cluster naming strategy](/docs/containers?topic=containers-strategy#naming)
-
-* [Decide how many worker nodes for each cluster](/docs/containers?topic=containers-strategy#sizing_workers)
-
-* [Select worker node flavors](/docs/containers?topic=containers-strategy#env_flavors_node)
-
-* [Determine worker node capacity for the resources](/docs/containers?topic=containers-strategy#env_resources_worker_capacity)
-
-* [Choose how many namespaces to create within the cluster](/docs/containers?topic=containers-strategy#env_resources_multiple_namespaces)
-
-* [Establish resource requests and limits for the namespaces](/docs/containers?topic=containers-strategy#env_resources_resource_quotas)
-
-* [Make your apps highly available too](/docs/containers?topic=containers-strategy#apps-ha)
-
-* [Ongoing best practices](/docs/containers?topic=containers-strategy#best-practices-ongoing)
-
-    * [Keep your cluster environment up to date](/docs/containers?topic=containers-strategy#bp-1)
-
-    * [Keep your command line tools up to date](/docs/containers?topic=containers-strategy#bp-2)
-
-    * [Regularly rotate your CA certificates](/docs/containers?topic=containers-strategy#bp-ca)
-
-    * [Document your environment architecture](/docs/containers?topic=containers-strategy#bp-3)
-
-    * [Subscribe to release note updates](/docs/containers?topic=containers-strategy#bp-4)
-
-* [Next steps](/docs/containers?topic=containers-strategy#plan-network-next)
-
-[Understanding VPC cluster networking](/docs/containers?topic=containers-plan_vpc_basics#plan_vpc_basics)
-
-* [Worker-to-worker communication using VPC subnets](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-worker)
-
-* [Worker-to-master and user-to-master communication using Virtual private endpoints or cloud service endpoints](/docs/containers?topic=containers-plan_vpc_basics#vpc-workeruser-master)
-
-* [Worker-to-master communication in VPC clusters](/docs/containers?topic=containers-plan_vpc_basics#worker-to-master-comms)
-
-* [User-to-master communication in VPC clusters](/docs/containers?topic=containers-plan_vpc_basics#user-to-master-comms)
-
-* [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem)
-
-* [Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-cloud-service)
-
-* [Communication with resources in on-premises data centers](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-resources)
-
-    * [Communication with resources in other VPCs](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-other-vpcs)
-
-    * [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-classic)
-
-* [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-external-workers)
-
-* [Private traffic to cluster apps](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-apps-private)
-
-* [Public traffic to cluster apps](/docs/containers?topic=containers-plan_vpc_basics#vpc-worker-services-onprem-apps-public)
-
-* [Example scenarios for VPC cluster network setups](/docs/containers?topic=containers-plan_vpc_basics#vpc-scenarios)
-
-    * [Scenario: Run internet-facing app workloads in a VPC cluster](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw)
-
-    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-worker)
-
-    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-master)
-
-    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-services)
-
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-no-pgw-external)
-
-* [Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw)
-
-    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-worker)
-
-    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-master)
-
-    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-services)
-
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-pgw-external)
-
-* [Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn)
-
-    * [Worker-to-worker communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-worker)
-
-    * [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-master)
-
-    * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-services)
-
-    * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_vpc_basics#vpc-vpn-external)
-
-* [Next steps](/docs/containers?topic=containers-plan_vpc_basics#plan-encryption-next-vpc)
-
-[Understanding Classic cluster networking](/docs/containers?topic=containers-plan_basics#plan_basics)
-
-* [Worker-to-worker communication: classic VLANs and subnets](/docs/containers?topic=containers-plan_basics#worker-worker)
-
-    * [VLAN connections for worker nodes](/docs/containers?topic=containers-plan_basics#worker-worker-nodes)
-
-    * [Worker node communication across subnets and VLANs](/docs/containers?topic=containers-plan_basics#worker-worker-subnets)
-
-* [Worker-to-master and user-to-master communication: Service endpoints](/docs/containers?topic=containers-plan_basics#workeruser-master)
-
-    * [Public service endpoint only](/docs/containers?topic=containers-plan_basics#workeruser-master-endpoint)
-
-    * [Public and private cloud service endpoints](/docs/containers?topic=containers-plan_basics#workeruser-master-pub-priv)
-
-    * [Private service endpoint only](/docs/containers?topic=containers-plan_basics#workeruser-master-private)
-
-* [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](/docs/containers?topic=containers-plan_basics#worker-services-onprem)
-
-    * [Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network](/docs/containers?topic=containers-plan_basics#worker-services-onprem-pub-priv)
-
-    * [{{site.data.keyword.BluDirectLink}} for communication over the private network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-direct-link)
-
-    * [VPN connection for communication over the public network with resources in on-premises data centers](/docs/containers?topic=containers-plan_basics#worker-services-onprem-vpn)
-
-* [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_basics#external-workers)
-
-    * [Private traffic to cluster apps](/docs/containers?topic=containers-plan_basics#external-workers-private)
-
-    * [Public traffic to cluster apps](/docs/containers?topic=containers-plan_basics#external-workers-public)
-
-* [Scenario: Running internet-facing app workloads in a classic cluster](/docs/containers?topic=containers-plan_basics#internet-facing)
-
-    * [Worker-to-worker communication in classic clusters with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-worker)
-
-    * [Worker-to-master and user-to-master communication in classic clusters with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-master)
-
-    * [Worker communication to other services or networks with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-services)
-
-    * [External communication to apps that run on worker nodes with internet-facing workloads](/docs/containers?topic=containers-plan_basics#internet-facing-external)
-
-* [Scenario: Allow limited public connectivity with a gateway appliance](/docs/containers?topic=containers-plan_basics#vyatta-gateway)
-
-    * [Worker-to-worker communication, worker-to-master and user-to-master communication with a gateway appliance](/docs/containers?topic=containers-plan_basics#limited-public-gw-worker)
-
-    * [Worker communication to other services or networks with a gateway appliance](/docs/containers?topic=containers-plan_basics#limited-public-gw-services)
-
-    * [External communication to apps that run on worker nodes with a gateway appliance](/docs/containers?topic=containers-plan_basics#limited-public-gw-external)
-
-* [Scenario: Extend your on-premises data center to a classic cluster](/docs/containers?topic=containers-plan_basics#private_clusters)
-
-    * [Worker-to-worker communication for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-worker)
-
-    * [Worker-to-master and user-to-master communication for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-master)
-
-    * [Worker communication to other services or networks for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-services)
-
-    * [External communication to apps that run on worker nodes for private clusters](/docs/containers?topic=containers-plan_basics#private_clusters-external)
-
-* [Next steps](/docs/containers?topic=containers-plan_basics#plan-encryption-next-cl)
-
-[Encryption overview](/docs/containers?topic=containers-encryption#encryption)
-
-* [Control plane](/docs/containers?topic=containers-encryption#control-plane-encryption)
-
-* [Worker node disks](/docs/containers?topic=containers-encryption#worker-node-encryption)
-
-* [Cluster secrets](/docs/containers?topic=containers-encryption#cluster-secret-encryption)
-
-* [Persistent storage](/docs/containers?topic=containers-encryption#persistent-encryption)
-
-* [Worker-to-worker traffic](/docs/containers?topic=containers-encryption#worker-to-worker-encryption)
-
-* [Next steps](/docs/containers?topic=containers-encryption#plan-storage-next)
-
-[{{site.data.keyword.containerlong_notm}} storage overview](/docs/containers?topic=containers-storage-plan#storage-plan)
-
-* [Non-persistent storage options](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
-
-* [Single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
-
-* [Multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
-
-* [Next steps](/docs/containers?topic=containers-storage-plan#plan-document-next)
-
-[Documenting your environment architecture](/docs/containers?topic=containers-document-environment#document-environment)
-
-* [Step 1: Understanding your app and architecture](/docs/containers?topic=containers-document-environment#understand-arch)
-
-    * [Example 1: A basic app running in a single OpenShift cluster](/docs/containers?topic=containers-document-environment#example-arch-1)
-
-    * [Example 2: A multi-cluster architecture with a global load balancer and Cloudant service](/docs/containers?topic=containers-document-environment#example-arch-2)
-
-    * [Example 3: A VSI client contacting a VPC network load balancer with an external service backend](/docs/containers?topic=containers-document-environment#example-arch-3)
-
-* [Step 2: Choose a tool](/docs/containers?topic=containers-document-environment#choose-arch-tool)
-
-* [Step 3: Create the diagram](/docs/containers?topic=containers-document-environment#create-arch-diagram)
-
-* [Next steps](/docs/containers?topic=containers-document-environment#plan-prepare)
-
-
-## Account setup
-{: #sitemap_account_setup}
+## Before you begin
+{: #sitemap_before_you_begin}
 
 
 [Preparing your account to create clusters](/docs/containers?topic=containers-clusters#clusters)
@@ -2196,6 +2047,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Next steps](/docs/containers?topic=containers-clusters#next-steps)
 
+
+### IAM roles and access
+{: #sitemap_iam_roles_and_access}
+
+
 [IAM roles and actions](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles)
 
 * [Kubernetes Service](/docs/containers?topic=containers-iam-platform-access-roles#iam-platform-access-roles-include-containers-kubernetes-roles)
@@ -2211,13 +2067,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Suggested classic infrastructure permissions](/docs/containers?topic=containers-iam-platform-access-roles#classic-rbac-suggested)
 
 
-## CLI and API
-{: #sitemap_cli_and_api}
-
-
-
-### CLI management
-{: #sitemap_cli_management}
+## Setting up your tools
+{: #sitemap_setting_up_your_tools}
 
 
 [Installing the CLI](/docs/containers?topic=containers-cli-install#cli-install)
@@ -2259,20 +2110,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 {: #sitemap_cluster_creation}
 
 
-[Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster-create-classic)
-
-* [Prerequisites](/docs/containers?topic=containers-cluster-create-classic#classic-cluster-prereqs)
-
-* [Creating a classic cluster in the console](/docs/containers?topic=containers-cluster-create-classic&interface=ui#clusters_ui)
-
-* [Creating a classic cluster in the CLI](/docs/containers?topic=containers-cluster-create-classic&interface=cli#clusters_cli_steps)
-
-* [Example commands to create classic clusters](/docs/containers?topic=containers-cluster-create-classic&interface=cli#cluster_create_classic)
-
-* [Creating a single-zone classic cluster with Terraform](/docs/containers?topic=containers-cluster-create-classic&interface=terraform#cluster_classic_tf)
-
-* [Next steps for Classic clusters](/docs/containers?topic=containers-cluster-create-classic&interface=terraform#cluster-create-classic-next-steps)
-
 [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
 
 * [Prerequisites and notes](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-prereq)
@@ -2286,6 +2123,20 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Creating a VPC cluster with Terraform](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=terraform#cluster_vpcg2_tf)
 
 * [Next steps for VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=terraform#cluster-create-vpc-next-steps)
+
+[Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster-create-classic)
+
+* [Prerequisites](/docs/containers?topic=containers-cluster-create-classic#classic-cluster-prereqs)
+
+* [Creating a classic cluster in the console](/docs/containers?topic=containers-cluster-create-classic&interface=ui#clusters_ui)
+
+* [Creating a classic cluster in the CLI](/docs/containers?topic=containers-cluster-create-classic&interface=cli#clusters_cli_steps)
+
+* [Example commands to create classic clusters](/docs/containers?topic=containers-cluster-create-classic&interface=cli#cluster_create_classic)
+
+* [Creating a single-zone classic cluster with Terraform](/docs/containers?topic=containers-cluster-create-classic&interface=terraform#cluster_classic_tf)
+
+* [Next steps for Classic clusters](/docs/containers?topic=containers-cluster-create-classic&interface=terraform#cluster-create-classic-next-steps)
 
 [Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
@@ -2312,12 +2163,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Connecting with an API key](/docs/containers?topic=containers-cluster-access-public#access-public-cli-apikey)
 
-[Accessing Classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access-private-classic#access-private-classic)
-
-* [Before you begin](/docs/containers?topic=containers-access-private-classic#access-private-classic-prereqs)
-
-* [Exposing the master endpoint through a private NLB](/docs/containers?topic=containers-access-private-classic#access-private-classic-nlb)
-
 [Accessing VPC clusters through the private cloud service endpoint](/docs/containers?topic=containers-cluster-access-private-vpc#cluster-access-private-vpc)
 
 * [Before you begin](/docs/containers?topic=containers-cluster-access-private-vpc#access-private-vpc-prereqs)
@@ -2325,6 +2170,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Accessing a private VPC cluster from the CLI](/docs/containers?topic=containers-cluster-access-private-vpc#access-private-vpc-cli)
 
 * [Accessing through the Virtual Private Endpoint (VPE) gateway](/docs/containers?topic=containers-cluster-access-private-vpc#access-private-vpc-vpe)
+
+[Accessing Classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access-private-classic#access-private-classic)
+
+* [Before you begin](/docs/containers?topic=containers-access-private-classic#access-private-classic-prereqs)
+
+* [Exposing the master endpoint through a private NLB](/docs/containers?topic=containers-access-private-classic#access-private-classic-nlb)
 
 [Accessing VPC clusters through the Virtual Private Endpoint gateway](/docs/containers?topic=containers-cluster-access-vpe#cluster-access-vpe)
 
@@ -2364,9 +2215,41 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Accessing private clusters](/docs/containers?topic=containers-cluster-access-wireguard#cluster-access-wireguard)
 
+[Assigning cluster access by using Terraform for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-terraform-setup#terraform-setup)
+
+* [Creating a {{site.data.keyword.containershort}} cluster by using Terraform](/docs/containers?topic=containers-terraform-setup#terraform-cluster-create)
+
+* [Assigning IAM user access to {{site.data.keyword.containershort}} clusters](/docs/containers?topic=containers-terraform-setup#terraform-cluster-IAM)
+
 
 ## Cluster management
 {: #sitemap_cluster_management}
+
+
+
+### Adding worker nodes
+{: #sitemap_adding_worker_nodes}
+
+
+[Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
+
+[Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic#add-workers-classic)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-classic#add_pool)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-classic#resize-pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
+
+
+### Updating and maintaining worker nodes
+{: #sitemap_updating_and_maintaining_worker_nodes}
 
 
 [Checking your cluster version, operating system, and Kubernetes server version](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
@@ -2415,27 +2298,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Updating managed add-ons](/docs/containers?topic=containers-update&interface=ui#addons-update)
 
-
-### Adding worker nodes
-{: #sitemap_adding_worker_nodes}
-
-
-[Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic#add-workers-classic)
-
-* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-classic#add_pool)
-
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-classic#resize-pool)
-
-* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
-
-[Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
-
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
-
-* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
-
-* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
-
 [Creating and managing dedicated hosts on VPC infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
 
 * [Setting up dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#setup-dedicated-host-cli)
@@ -2446,6 +2308,14 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
 
+[Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
+
+* [Default operating system by cluster version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-default)
+
+* [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
+
+* [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
+
 [Preparing IBM Cloud host maintenance updates security enhancements](/docs/containers?topic=containers-host-maintenance#host-maintenance)
 
 * [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
@@ -2455,30 +2325,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Workers in Classic clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-classic)
 
     * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
-
-[Setting the cluster credentials](/docs/containers?topic=containers-access-creds#access-creds)
-
-* [Considerations](/docs/containers?topic=containers-access-creds#creds-considerations)
-
-* [Resetting the cluster API key](/docs/containers?topic=containers-access-creds#admin-set-credentials)
-
-* [Removing user credentials and permissions](/docs/containers?topic=containers-access-creds#apikey-remove-user)
-
-[Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate#cert-rotate)
-
-* [Rotation impacts on cluster upgrades](/docs/containers?topic=containers-cert-rotate#cert-upgrade-impact)
-
-* [Certificate states and timestamps](/docs/containers?topic=containers-cert-rotate#cert-rotate-states)
-
-* [FAQ about certificate rotation](/docs/containers?topic=containers-cert-rotate#cert-rotate-faq)
-
-[Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
-
-* [Default operating system by cluster version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-default)
-
-* [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
-
-* [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
 
 [Tagging and labeling clusters and services](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
 
@@ -2496,11 +2342,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Understanding resource reserve tiers](/docs/containers?topic=containers-resource-limit-node#reserve-tiers)
 
-[Removing clusters](/docs/containers?topic=containers-remove#remove)
 
-* [Removing {{site.data.keyword.satelliteshort}} worker nodes or clusters](/docs/containers?topic=containers-remove#satcluster-rm)
+### Tuning performance
+{: #sitemap_tuning_performance}
 
-* [Next steps](/docs/containers?topic=containers-remove#cluster-remove-next-steps)
 
 [Tuning performance](/docs/containers?topic=containers-kernel#kernel)
 
@@ -2528,62 +2373,21 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Disabling the port map plug-in in Calico](/docs/containers?topic=containers-kernel#calico-portmap)
 
+[Setting pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)
 
-### Enhancing clusters with integrations
-{: #sitemap_enhancing_clusters_with_integrations}
+* [How does priority scheduling and preemption work?](/docs/containers?topic=containers-pod_priority#priority_scheduling)
 
+* [Understanding default priority classes](/docs/containers?topic=containers-pod_priority#default_priority_class)
 
-[IBM Cloud services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-3rd-party-integrations)
+* [Creating a priority class](/docs/containers?topic=containers-pod_priority#create_priority_class)
 
-* [IBM Cloud services](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
+* [Assigning priority to your pods](/docs/containers?topic=containers-pod_priority#prioritize)
 
-    * [IBM Cloud platform services](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
+[Setting Kubernetes API priority and fairness](/docs/containers?topic=containers-kubeapi-priority#kubeapi-priority)
 
-    * [IBM Cloud classic infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
+* [Reviewing default flow schema and priority levels](/docs/containers?topic=containers-kubeapi-priority#kubeapi-default-priority)
 
-    * [IBM Cloud VPC infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
-
-* [Kubernetes community and open source integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
-
-    * [Integrations operated in partnership](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
-
-    * [Managed add-ons](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
-
-    * [Other third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-helm)
-
-    * [Extending Kubernetes API and software with CRDs and Operators](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-crd-operators)
-
-[Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
-
-* [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
-
-* [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
-
-* [Reviewing add-on states and statuses](/docs/containers?topic=containers-managed-addons#debug_addons_review)
-
-[Adding services by using Helm charts](/docs/containers?topic=containers-helm#helm)
-
-* [About Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm#about-helm)
-
-    * [What is Helm and how do I use it?](/docs/containers?topic=containers-helm#what-is-helm)
-
-    * [What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-helm#supported-charts)
-
-* [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
-
-[Binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#service-binding)
-
-* [Manually binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#add_services_manual)
-
-* [Adding services to clusters by using the `service bind` CLI](/docs/containers?topic=containers-service-binding#bind-services)
-
-* [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
-
-    * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
-
-    * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
-
-* [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
+    * [Viewing {{site.data.keyword.containerlong_notm}} created priority level configurations](/docs/containers?topic=containers-kubeapi-priority#kube-api-prioritylevelconfig)
 
 
 ### Managing cluster costs
@@ -2628,14 +2432,136 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Next steps](/docs/containers?topic=containers-reservations#reservations-next)
 
-[Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prevent)
 
-* [Before you begin](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prereqs)
-
-[Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge-sysdig#edge-sysdig)
+### Credentials and certificates
+{: #sitemap_credentials_and_certificates}
 
 
-## Encryption
+[Setting the cluster credentials](/docs/containers?topic=containers-access-creds#access-creds)
+
+* [Considerations](/docs/containers?topic=containers-access-creds#creds-considerations)
+
+* [Resetting the cluster API key](/docs/containers?topic=containers-access-creds#admin-set-credentials)
+
+* [Removing user credentials and permissions](/docs/containers?topic=containers-access-creds#apikey-remove-user)
+
+[Rotating CA certificates in your cluster](/docs/containers?topic=containers-cert-rotate#cert-rotate)
+
+* [Rotation impacts on cluster upgrades](/docs/containers?topic=containers-cert-rotate#cert-upgrade-impact)
+
+* [Certificate states and timestamps](/docs/containers?topic=containers-cert-rotate#cert-rotate-states)
+
+* [FAQ about certificate rotation](/docs/containers?topic=containers-cert-rotate#cert-rotate-faq)
+
+
+### Removing clusters
+{: #sitemap_removing_clusters}
+
+
+[Removing clusters](/docs/containers?topic=containers-remove#remove)
+
+* [Removing {{site.data.keyword.satelliteshort}} worker nodes or clusters](/docs/containers?topic=containers-remove#satcluster-rm)
+
+* [Next steps](/docs/containers?topic=containers-remove#cluster-remove-next-steps)
+
+
+## Security and access
+{: #sitemap_security_and_access}
+
+
+
+### Access management
+{: #sitemap_access_management}
+
+
+[Configuring a trusted profile for cluster components](/docs/containers?topic=containers-configure-trusted-profile#configure-trusted-profile)
+
+* [About trusted profiles](/docs/containers?topic=containers-configure-trusted-profile#tp-about)
+
+* [Minimum access requirements for all storage components](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-all)
+
+* [Minimum access requirements for individual components](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-component)
+
+    * [Advanced Cluster Management (ACM)](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-acm)
+
+    * [Classic block storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-classic-block)
+
+    * [Classic file storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-classic-file)
+
+    * [Cluster autoscaler](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-autoscaler)
+
+    * [Object Storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-cos)
+
+    * [ODF billing agent](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-odf-billing)
+
+    * [VPC block storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-block)
+
+    * [VPC file storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-file)
+
+* [Set up a trusted profile in the CLI](/docs/containers?topic=containers-configure-trusted-profile&interface=cli#tp-setup-cli)
+
+* [Set up a trusted profile with the UI](/docs/containers?topic=containers-configure-trusted-profile&interface=ui#tp-setup-ui)
+
+* [Set up a trusted profile with the API](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-setup-api)
+
+* [Setting the trusted profile for a cluster or resource group](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-set-cluster-rg)
+
+* [Limitations and considerations](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-limitations)
+
+[Understanding RBAC permissions](/docs/containers?topic=containers-understand-rbac#understand-rbac)
+
+* [What are the types of RBAC roles?](/docs/containers?topic=containers-understand-rbac#rbac-types)
+
+* [What are RBAC role bindings and cluster role bindings?](/docs/containers?topic=containers-understand-rbac#what-is-rbac)
+
+* [What do these roles look like in my cluster?](/docs/containers?topic=containers-understand-rbac#what-do-roles-look-like)
+
+* [Can I create custom roles or cluster roles?](/docs/containers?topic=containers-understand-rbac#create-custom-rbac-roles)
+
+* [When do I need to use custom cluster role bindings and role bindings?](/docs/containers?topic=containers-understand-rbac#when-do-i-use-custom-rbac)
+
+* [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-understand-rbac#rbac)
+
+* [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-understand-rbac#rbac_aggregate)
+
+    * [What are some common operations that I might want to extend permissions for a default cluster role?](/docs/containers?topic=containers-understand-rbac#common-rbac-operations)
+
+* [Checking RBAC roles](/docs/containers?topic=containers-understand-rbac#checking-rbac)
+
+    * [Checking RBAC roles from the UI](/docs/containers?topic=containers-understand-rbac#checking-rbac-ui)
+
+    * [Checking RBAC roles with the CLI](/docs/containers?topic=containers-understand-rbac#checking-rbac-cli)
+
+* [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-understand-rbac#rbac_service)
+
+    * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-understand-rbac#rbac_ref)
+
+    * [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-understand-rbac#iam-issuer-users)
+
+[Authorizing resources with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity#pod-iam-identity)
+
+* [Creating an IAM trusted profile](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-create)
+
+* [Set the default trusted profile for the cluster](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-set)
+
+* [Get the details of your trusted profile](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-get)
+
+* [Configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-pod-iam-identity#iam-identity-pod)
+
+[Removing users](/docs/containers?topic=containers-removing-user-permissions#removing-user-permissions)
+
+* [Checking whether the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-removing-user-permissions#removing_check_infra)
+
+* [Removing {{site.data.keyword.cloud_notm}} IAM platform permissions and the associated pre-defined RBAC permissions](/docs/containers?topic=containers-removing-user-permissions#remove_iam_rbac)
+
+    * [Removing custom RBAC permissions](/docs/containers?topic=containers-removing-user-permissions#remove_custom_rbac)
+
+[Understanding Classic infrastructure credentials](/docs/containers?topic=containers-classic-credentials#classic-credentials)
+
+* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-classic-credentials#credentials)
+
+
+### Encryption
 {: #sitemap_encryption}
 
 
@@ -2684,157 +2610,9 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Next steps](/docs/containers?topic=containers-encryption-hpcs-to-kp-migration#encryption-hpcs-to-kp-migration-next)
 
 
-## Security
-{: #sitemap_security}
+### Security policies
+{: #sitemap_security_policies}
 
-
-
-### Cluster workload security
-{: #sitemap_cluster_workload_security}
-
-
-[Setting pod priority](/docs/containers?topic=containers-pod_priority#pod_priority)
-
-* [How does priority scheduling and preemption work?](/docs/containers?topic=containers-pod_priority#priority_scheduling)
-
-* [Understanding default priority classes](/docs/containers?topic=containers-pod_priority#default_priority_class)
-
-* [Creating a priority class](/docs/containers?topic=containers-pod_priority#create_priority_class)
-
-* [Assigning priority to your pods](/docs/containers?topic=containers-pod_priority#prioritize)
-
-[Setting Kubernetes API priority and fairness](/docs/containers?topic=containers-kubeapi-priority#kubeapi-priority)
-
-* [Reviewing default flow schema and priority levels](/docs/containers?topic=containers-kubeapi-priority#kubeapi-default-priority)
-
-    * [Viewing {{site.data.keyword.containerlong_notm}} created priority level configurations](/docs/containers?topic=containers-kubeapi-priority#kube-api-prioritylevelconfig)
-
-[Pod security admission](/docs/containers?topic=containers-pod-security-admission#pod-security-admission)
-
-* [Understanding security profiles](/docs/containers?topic=containers-pod-security-admission#pod_security_profiles)
-
-* [What if Pod Security Admission isn't the right choice for me?](/docs/containers?topic=containers-pod-security-admission#what-if-psa)
-
-* [Configuring Pod Security admission namespace labels](/docs/containers?topic=containers-pod-security-admission#psa-namespace-labels)
-
-* [Default Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default)
-
-* [Customizing the Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom)
-
-[Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
-
-* [Upgrade requirements](/docs/containers?topic=containers-pod-security-admission-migration#psa-upgrade-reqs)
-
-    * [Step 1: Check that all pods run under the ibm-privileged-psp PSP](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
-
-    * [Step 2: Verify the privileged-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
-
-    * [Step 3: Verify the restricted-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
-
-    * [Step 4: Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
-
-* [Migration steps](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-steps)
-
-    * [Step 1: Enable Pod Security admission in your 1.24 cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-enable-124)
-
-    * [Step 2: Review namespace permissions](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-perm)
-
-    * [Step 3: Simplify and standardize PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-simplify)
-
-    * [Step 4: Update the namespaces in your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-update-namespace)
-
-    * [Step 5: Review the namespace creation process](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-creation)
-
-    * [Step 6: Optional. Disable the PSP feature in the cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-disable-psp)
-
-    * [Step 7: Optional. Upgrade your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-cluster-upgrade)
-
-* [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
-
-
-### Security enhancements
-{: #sitemap_security_enhancements}
-
-
-[Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
-
-* [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
-
-* [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
-
-    * [How is access to my API server granted?](/docs/containers?topic=containers-security#api-server-access)
-
-    * [What does {{site.data.keyword.containerlong_notm}} do to secure my API server and etcd data store?](/docs/containers?topic=containers-security#secure-api-server)
-
-    * [What else can I do to secure my API server?](/docs/containers?topic=containers-security#api-server-what-else)
-
-* [Worker node](/docs/containers?topic=containers-security#workernodes)
-
-    * [Who owns the worker node and am I responsible to secure it?](/docs/containers?topic=containers-security#worker-node-owner)
-
-    * [How does my worker node setup look?](/docs/containers?topic=containers-security#worker-node-setup)
-
-* [Network](/docs/containers?topic=containers-security#network)
-
-    * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
-
-    * [What network traffic is allowed for my Classic cluster by default?](/docs/containers?topic=containers-security#default-network-traffic-allowed)
-
-    * [What is network segmentation and how can I set it up for a Classic cluster?](/docs/containers?topic=containers-security#network-segmentation-setup)
-
-    * [What else can I do to reduce the surface for external attacks for Classic clusters?](/docs/containers?topic=containers-security#external-what-else)
-
-    * [What if I want to connect my cluster to an on-prem data center?](/docs/containers?topic=containers-security#onprem-network-setup)
-
-    * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
-
-    * [What network traffic is allowed for my VPC cluster by default?](/docs/containers?topic=containers-security#vpc-network-traffic-default)
-
-    * [What is network segmentation and how can I set it up for a VPC cluster?](/docs/containers?topic=containers-security#network-segment-what-is)
-
-    * [What else can I do to reduce the surface for external attacks for VPC clusters?](/docs/containers?topic=containers-security#vpc-external-what-else)
-
-    * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
-
-    * [Can I use security groups to manage my cluster's network traffic?](/docs/containers?topic=containers-security#can-i-use-security-groups)
-
-    * [How can I secure the source IP within the cluster?](/docs/containers?topic=containers-security#secure-source-ip-cluster)
-
-    * [How can I do TLS termination with LoadBalancer and Ingress services?](/docs/containers?topic=containers-security#tls-termination-lb)
-
-* [Persistent storage](/docs/containers?topic=containers-security#storage)
-
-* [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
-
-* [Image and registry](/docs/containers?topic=containers-security#images_registry)
-
-* [Container isolation and security](/docs/containers?topic=containers-security#container)
-
-    * [Should I set up a single-tenant or a multi-tenant cluster?](/docs/containers?topic=containers-security#single-tenant-or-multi)
-
-* [Storing personal information](/docs/containers?topic=containers-security#pi)
-
-* [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
-
-[Architecture and dependencies of the service](/docs/containers?topic=containers-service-arch#service-arch)
-
-* [Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
-
-    * [Non-VRF or VRF-enabled account with public cloud service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
-
-    * [VRF-enabled account with private and public cloud service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
-
-    * [Kubernetes master components](/docs/containers?topic=containers-service-arch#master-components)
-
-    * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
-
-    * [`kube-system` namespace](/docs/containers?topic=containers-service-arch#kube-system-ns-resources)
-
-    * [`ibm-system` namespace](/docs/containers?topic=containers-service-arch#ibm-system-ns-resources)
-
-    * [`default` namespace](/docs/containers?topic=containers-service-arch#default-ns-resources)
-
-* [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
 
 [Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-ibm-data#ibm-data)
 
@@ -2928,102 +2706,47 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Next steps](/docs/containers?topic=containers-pse-to-cbr-migration&interface=cli#pse-cbr-next)
 
+[Pod security admission](/docs/containers?topic=containers-pod-security-admission#pod-security-admission)
 
-## Access management
-{: #sitemap_access_management}
+* [Understanding security profiles](/docs/containers?topic=containers-pod-security-admission#pod_security_profiles)
 
+* [What if Pod Security Admission isn't the right choice for me?](/docs/containers?topic=containers-pod-security-admission#what-if-psa)
 
-[Configuring a trusted profile for cluster components](/docs/containers?topic=containers-configure-trusted-profile#configure-trusted-profile)
+* [Configuring Pod Security admission namespace labels](/docs/containers?topic=containers-pod-security-admission#psa-namespace-labels)
 
-* [About trusted profiles](/docs/containers?topic=containers-configure-trusted-profile#tp-about)
+* [Default Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-default)
 
-* [Minimum access requirements for all storage components](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-all)
+* [Customizing the Pod Security Admission plug-in configuration](/docs/containers?topic=containers-pod-security-admission#psa-plugin-config-custom)
 
-* [Minimum access requirements for individual components](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-component)
+[Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration#pod-security-admission-migration)
 
-    * [Advanced Cluster Management (ACM)](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-acm)
+* [Upgrade requirements](/docs/containers?topic=containers-pod-security-admission-migration#psa-upgrade-reqs)
 
-    * [Classic block storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-classic-block)
+    * [Step 1: Check that all pods run under the ibm-privileged-psp PSP](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-pod-check)
 
-    * [Classic file storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-classic-file)
+    * [Step 2: Verify the privileged-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-verify-crb)
 
-    * [Cluster autoscaler](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-autoscaler)
+    * [Step 3: Verify the restricted-psp-user cluster role binding uses the default configuration](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-crb-verify)
 
-    * [Object Storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-cos)
+    * [Step 4: Checking for non-IBM PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-check-psp)
 
-    * [ODF billing agent](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-odf-billing)
+* [Migration steps](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-steps)
 
-    * [VPC block storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-block)
+    * [Step 1: Enable Pod Security admission in your 1.24 cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-enable-124)
 
-    * [VPC file storage](/docs/containers?topic=containers-configure-trusted-profile#tp-minreqs-vpc-file)
+    * [Step 2: Review namespace permissions](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-perm)
 
-* [Set up a trusted profile in the CLI](/docs/containers?topic=containers-configure-trusted-profile&interface=cli#tp-setup-cli)
+    * [Step 3: Simplify and standardize PSPs](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-simplify)
 
-* [Set up a trusted profile with the UI](/docs/containers?topic=containers-configure-trusted-profile&interface=ui#tp-setup-ui)
+    * [Step 4: Update the namespaces in your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-update-namespace)
 
-* [Set up a trusted profile with the API](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-setup-api)
+    * [Step 5: Review the namespace creation process](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-namespace-creation)
 
-* [Setting the trusted profile for a cluster or resource group](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-set-cluster-rg)
+    * [Step 6: Optional. Disable the PSP feature in the cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-disable-psp)
 
-* [Limitations and considerations](/docs/containers?topic=containers-configure-trusted-profile&interface=api#tp-limitations)
+    * [Step 7: Optional. Upgrade your cluster](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-cluster-upgrade)
 
-[Understanding Classic infrastructure credentials](/docs/containers?topic=containers-classic-credentials#classic-credentials)
-
-* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-classic-credentials#credentials)
-
-[Understanding RBAC permissions](/docs/containers?topic=containers-understand-rbac#understand-rbac)
-
-* [What are the types of RBAC roles?](/docs/containers?topic=containers-understand-rbac#rbac-types)
-
-* [What are RBAC role bindings and cluster role bindings?](/docs/containers?topic=containers-understand-rbac#what-is-rbac)
-
-* [What do these roles look like in my cluster?](/docs/containers?topic=containers-understand-rbac#what-do-roles-look-like)
-
-* [Can I create custom roles or cluster roles?](/docs/containers?topic=containers-understand-rbac#create-custom-rbac-roles)
-
-* [When do I need to use custom cluster role bindings and role bindings?](/docs/containers?topic=containers-understand-rbac#when-do-i-use-custom-rbac)
-
-* [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-understand-rbac#rbac)
-
-* [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-understand-rbac#rbac_aggregate)
-
-    * [What are some common operations that I might want to extend permissions for a default cluster role?](/docs/containers?topic=containers-understand-rbac#common-rbac-operations)
-
-* [Checking RBAC roles](/docs/containers?topic=containers-understand-rbac#checking-rbac)
-
-    * [Checking RBAC roles from the UI](/docs/containers?topic=containers-understand-rbac#checking-rbac-ui)
-
-    * [Checking RBAC roles with the CLI](/docs/containers?topic=containers-understand-rbac#checking-rbac-cli)
-
-* [Kubernetes service access roles and corresponding RBAC roles](/docs/containers?topic=containers-understand-rbac#rbac_service)
-
-    * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-understand-rbac#rbac_ref)
-
-    * [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-understand-rbac#iam-issuer-users)
-
-[Authorizing resources with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity#pod-iam-identity)
-
-* [Creating an IAM trusted profile](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-create)
-
-* [Set the default trusted profile for the cluster](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-set)
-
-* [Get the details of your trusted profile](/docs/containers?topic=containers-pod-iam-identity#iam-trusted-profile-get)
-
-* [Configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-pod-iam-identity#iam-identity-pod)
-
-[Assigning cluster access by using Terraform for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-terraform-setup#terraform-setup)
-
-* [Creating a {{site.data.keyword.containershort}} cluster by using Terraform](/docs/containers?topic=containers-terraform-setup#terraform-cluster-create)
-
-* [Assigning IAM user access to {{site.data.keyword.containershort}} clusters](/docs/containers?topic=containers-terraform-setup#terraform-cluster-IAM)
-
-[Removing users](/docs/containers?topic=containers-removing-user-permissions#removing-user-permissions)
-
-* [Checking whether the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-removing-user-permissions#removing_check_infra)
-
-* [Removing {{site.data.keyword.cloud_notm}} IAM platform permissions and the associated pre-defined RBAC permissions](/docs/containers?topic=containers-removing-user-permissions#remove_iam_rbac)
-
-    * [Removing custom RBAC permissions](/docs/containers?topic=containers-removing-user-permissions#remove_custom_rbac)
+* [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
 
 ## Networking
@@ -3031,8 +2754,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 
-### Network traffic in VPC clusters
-{: #sitemap_network_traffic_in_vpc_clusters}
+### VPC clusters
+{: #sitemap_vpc_clusters}
 
 
 [Understanding secure by default Cluster VPC Networking](/docs/containers?topic=containers-vpc-security-group-reference#vpc-security-group-reference)
@@ -3215,32 +2938,24 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Use {{site.data.keyword.tg_full_notm}}](/docs/containers?topic=containers-vpc-vpnaas#vpc-use-transit-gw)
 
+[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
 
-### Network traffic in Classic clusters
-{: #sitemap_network_traffic_in_classic_clusters}
+* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
+
+* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+
+    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
+
+    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
+
+* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 
-[Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
+### Classic clusters
+{: #sitemap_classic_clusters}
 
-* [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
 
-* [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
-
-* [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
-
-* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
-
-* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
-
-* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
-
-* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
-
-* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
-
-* [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
-
-[Controlling traffic with network policies](/docs/containers?topic=containers-network_policies#network_policies)
+[Network policies (Classic)](/docs/containers?topic=containers-network_policies#network_policies)
 
 * [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
 
@@ -3322,35 +3037,9 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
 
-[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
-
-* [Setting up the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
-
-* [Setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
-
-    * [Steps to enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#steps-set-up-public)
-
-    * [Steps to disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se)
-
-* [Switching from the public cloud service endpoint to the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
-
-* [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
-
 [Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
 
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
-
-[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes#static-routes)
-
-* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
-
-* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
-
-    * [Enabling the static route add-on from the console](/docs/containers?topic=containers-static-routes#enable-add-on-console)
-
-    * [Enabling the static route add-on with the CLI](/docs/containers?topic=containers-static-routes#enable-add-on-cli)
-
-* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 
@@ -4614,15 +4303,82 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Envoy](/docs/containers?topic=containers-istio-health#envoy)
 
 
+## Add-ons and operators
+{: #sitemap_add-ons_and_operators}
+
+
+[IBM Cloud services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-3rd-party-integrations)
+
+* [IBM Cloud services](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
+
+    * [IBM Cloud platform services](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
+
+    * [IBM Cloud classic infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
+
+    * [IBM Cloud VPC infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
+
+* [Kubernetes community and open source integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
+
+    * [Integrations operated in partnership](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
+
+    * [Managed add-ons](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
+
+    * [Other third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-helm)
+
+    * [Extending Kubernetes API and software with CRDs and Operators](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-crd-operators)
+
+[Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons)
+
+* [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
+
+* [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
+
+* [Reviewing add-on states and statuses](/docs/containers?topic=containers-managed-addons#debug_addons_review)
+
+[Adding services by using Helm charts](/docs/containers?topic=containers-helm#helm)
+
+* [About Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm#about-helm)
+
+    * [What is Helm and how do I use it?](/docs/containers?topic=containers-helm#what-is-helm)
+
+    * [What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-helm#supported-charts)
+
+* [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
+
+[Binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#service-binding)
+
+* [Manually binding service credentials to your cluster](/docs/containers?topic=containers-service-binding#add_services_manual)
+
+* [Adding services to clusters by using the `service bind` CLI](/docs/containers?topic=containers-service-binding#bind-services)
+
+* [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
+
+    * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
+
+    * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
+
+* [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
+
+
 ## Storage
 {: #sitemap_storage}
 
+
+[Storage overview](/docs/containers?topic=containers-storage-plan#storage-plan)
+
+* [Non-persistent storage options](/docs/containers?topic=containers-storage-plan#storage-plan-non-persistent)
+
+* [Single zone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-single-zone)
+
+* [Multizone clusters](/docs/containers?topic=containers-storage-plan#storage-plan-multizone)
+
+* [Next steps](/docs/containers?topic=containers-storage-plan#plan-document-next)
 
 [Storage Operator add-on](/docs/containers?topic=containers-storage-operator#storage-operator)
 
 * [Disabling the `ibm-storage-operator` add-on](/docs/containers?topic=containers-storage-operator#storage-operator-disable)
 
-[Migrating storage components from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kp#migrate_hpcs_kp)
+[Key management overview](/docs/containers?topic=containers-migrate_hpcs_kp#migrate_hpcs_kp)
 
 * [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kp#before)
 
@@ -4631,101 +4387,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Step 2. Identify key usage for migration](/docs/containers?topic=containers-migrate_hpcs_kp#encryption-hpcs-to-kp-migration-detect)
 
 * [Step 3. Follow component migration steps](/docs/containers?topic=containers-migrate_hpcs_kp#migrate-script)
-
-
-### Block Storage for Classic
-{: #sitemap_block_storage_for_classic}
-
-
-[Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
-
-* [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
-
-* [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
-
-    * [Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#update_block)
-
-    * [Removing the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#rm_block)
-
-* [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
-
-* [Setting up encryption for {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_encryption_setup)
-
-    * [Encrypting volume data by using your own storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
-
-    * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
-
-    * [Verifying the encryption of your {{site.data.keyword.blockstorageshort}} volumes](/docs/containers?topic=containers-block_storage#block_encrypt)
-
-* [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block)
-
-* [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
-
-    * [Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
-
-    * [Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
-
-* [Using block storage in a stateful set](/docs/containers?topic=containers-block_storage#block_statefulset)
-
-    * [Creating the PVC by using dynamic provisioning when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
-
-    * [Static provisioning by using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
-
-* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-block_storage#block_backup_restore)
-
-    * [Setting up periodic snapshots](/docs/containers?topic=containers-block_storage#block-snaps)
-
-    * [Replicating snapshots to another zone](/docs/containers?topic=containers-block_storage#block-replicate)
-
-    * [Duplicating storage](/docs/containers?topic=containers-block_storage#block-dupe)
-
-    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-block_storage#block-cos-backup)
-
-    * [Copying data to and from pods and containers](/docs/containers?topic=containers-block_storage#block-cp)
-
-* [Storage class reference](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
-
-    * [Bronze](/docs/containers?topic=containers-block_storage#bronze-block)
-
-    * [Silver](/docs/containers?topic=containers-block_storage#silver-block)
-
-    * [Gold](/docs/containers?topic=containers-block_storage#gold-block)
-
-    * [Custom](/docs/containers?topic=containers-block_storage#custom-block)
-
-* [Sample customized storage classes](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
-
-    * [Creating topology-aware storage](/docs/containers?topic=containers-block_storage#topology_yaml)
-
-    * [Specifying the zone and region](/docs/containers?topic=containers-block_storage#block_multizone_yaml)
-
-    * [Mounting block storage with an `XFS` file system](/docs/containers?topic=containers-block_storage#xfs)
-
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup_block)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options_block)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
-
-* [Setting up monitoring for `limited` connectivity PVs](/docs/containers?topic=containers-block_storage#storage-block-vpc-limited-monitoring)
-
-* [Assigning trusted profiles to block storage](/docs/containers?topic=containers-block_storage#block-classic-trusted-profile)
-
-[Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate_hpcs_kms_classic_block)
-
-* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-before)
-
-* [Prerequisites for migration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-prereqs)
-
-* [Migration steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-steps)
-
-    * [Step 1: Replace the HPCS secret with a Key Protect configuration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#replace-secret)
-
-    * [Step 2: Update PVC encryption keys to use Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate-keys)
-
-* [Next steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-next)
 
 
 ### Block Storage for VPC add-on
@@ -4824,26 +4485,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Cleaning up {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-storage-block-vpc-remove#cleaning-up-block-vpc)
 
-[Migrating {{site.data.keyword.block_storage_is_short}} apps and data between IBM Cloud accounts](/docs/containers?topic=containers-storage-block-vpc-migration#storage-block-vpc-migration)
-
-* [Prerequisites](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-migration-prereqs)
-
-* [Get your account IDs](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-account-IDs)
-
-* [Set up your permissions](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-s2s)
-
-* [Optional: Deploy an app](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-deploy)
-
-* [Create a snapshot](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot)
-
-* [Get the details of your snapshot](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-details)
-
-* [Restore the snapshot in Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-restore)
-
-* [Redeploy your app](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-redeploy)
-
-* [Continue migrating your snapshots and apps to Account 2](/docs/containers?topic=containers-storage-block-vpc-migration#vpc-block-mig-snapshot-next)
-
 [Migrating {{site.data.keyword.block_storage_is_short}} volumes from Gen-1 to Gen-2 profiles](/docs/containers?topic=containers-storage-block-vpc-profile-migration#storage-block-vpc-profile-migration)
 
 * [Understanding the profile generations](/docs/containers?topic=containers-storage-block-vpc-profile-migration#vpc-block-profile-generations)
@@ -4894,73 +4535,100 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Next steps](/docs/containers?topic=containers-migrate_hpcs_kms_block#hpcs-kms-block-next)
 
-[Setting up {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_storage)
 
-* [Quick start for {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+### Block Storage for Classic
+{: #sitemap_block_storage_for_classic}
 
-* [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 
-    * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
+[Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
 
-    * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
+* [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 
-    * [Reclaim policy](/docs/containers?topic=containers-file_storage#file-reclaim)
+* [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
 
-    * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
+    * [Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#update_block)
 
-* [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
+    * [Removing the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#rm_block)
 
-* [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
+* [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
 
-    * [Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
+* [Setting up encryption for {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_encryption_setup)
 
-    * [Creating a persistent volume and a persistent volume claim](/docs/containers?topic=containers-file_storage#existing-file-2)
+    * [Encrypting volume data by using your own storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
 
-* [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
+    * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
 
-    * [Creating the PVC when you create a stateful set by using dynamic provisioning](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
+    * [Verifying the encryption of your {{site.data.keyword.blockstorageshort}} volumes](/docs/containers?topic=containers-block_storage#block_encrypt)
 
-    * [Static provisioning: Using an existing PVC with your stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
+* [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block)
 
-* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-file_storage#file_change_storage_configuration)
+* [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
 
-* [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
+    * [Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
 
-    * [Creating a customized storage class with a specific NFS version](/docs/containers?topic=containers-file_storage#custom-sc-nfs-creat)
+    * [Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
 
-    * [Changing your existing PV to use a different NFS version](/docs/containers?topic=containers-file_storage#changing-pv-nfs)
+* [Using block storage in a stateful set](/docs/containers?topic=containers-block_storage#block_statefulset)
 
-* [Scaling down the default {{site.data.keyword.filestorage_short}} plug-in](/docs/containers?topic=containers-file_storage#file_scaledown_plugin)
+    * [Creating the PVC by using dynamic provisioning when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
 
-* [Backing up and restoring data](/docs/containers?topic=containers-file_storage#file_backup_restore)
+    * [Static provisioning by using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
 
-    * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
+* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
 
-    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#file-replicate-snapshot-diff-zone)
+* [Backing up and restoring data](/docs/containers?topic=containers-block_storage#block_backup_restore)
 
-    * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
+    * [Setting up periodic snapshots](/docs/containers?topic=containers-block_storage#block-snaps)
 
-    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-file_storage#file-backup-helm)
+    * [Replicating snapshots to another zone](/docs/containers?topic=containers-block_storage#block-replicate)
 
-    * [Copying data to and from pods and containers](/docs/containers?topic=containers-file_storage#file-cp-data)
+    * [Duplicating storage](/docs/containers?topic=containers-block_storage#block-dupe)
 
-* [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-block_storage#block-cos-backup)
 
-* [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
+    * [Copying data to and from pods and containers](/docs/containers?topic=containers-block_storage#block-cp)
 
-    * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
+* [Storage class reference](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
 
-    * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
+    * [Bronze](/docs/containers?topic=containers-block_storage#bronze-block)
 
-    * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
+    * [Silver](/docs/containers?topic=containers-block_storage#silver-block)
 
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup_file)
+    * [Gold](/docs/containers?topic=containers-block_storage#gold-block)
 
-    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
+    * [Custom](/docs/containers?topic=containers-block_storage#custom-block)
 
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
+* [Sample customized storage classes](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
 
-* [Assigning trusted profiles to file storage](/docs/containers?topic=containers-file_storage#file-classic-trusted-profile)
+    * [Creating topology-aware storage](/docs/containers?topic=containers-block_storage#topology_yaml)
+
+    * [Specifying the zone and region](/docs/containers?topic=containers-block_storage#block_multizone_yaml)
+
+    * [Mounting block storage with an `XFS` file system](/docs/containers?topic=containers-block_storage#xfs)
+
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup_block)
+
+    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options_block)
+
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
+
+* [Setting up monitoring for `limited` connectivity PVs](/docs/containers?topic=containers-block_storage#storage-block-vpc-limited-monitoring)
+
+* [Assigning trusted profiles to block storage](/docs/containers?topic=containers-block_storage#block-classic-trusted-profile)
+
+[Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate_hpcs_kms_classic_block)
+
+* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-before)
+
+* [Prerequisites for migration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-prereqs)
+
+* [Migration steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-steps)
+
+    * [Step 1: Replace the HPCS secret with a Key Protect configuration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#replace-secret)
+
+    * [Step 2: Update PVC encryption keys to use Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate-keys)
+
+* [Next steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-next)
 
 
 ### File Storage for VPC add-on
@@ -5080,6 +4748,74 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Turning off snapshots](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-turn-off-snapshots)
 
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
+
+[File Storage for Classic](/docs/containers?topic=containers-file_storage#file_storage)
+
+* [Quick start for {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+
+* [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
+
+    * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
+
+    * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
+
+    * [Reclaim policy](/docs/containers?topic=containers-file_storage#file-reclaim)
+
+    * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
+
+* [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
+
+* [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
+
+    * [Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
+
+    * [Creating a persistent volume and a persistent volume claim](/docs/containers?topic=containers-file_storage#existing-file-2)
+
+* [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
+
+    * [Creating the PVC when you create a stateful set by using dynamic provisioning](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
+
+    * [Static provisioning: Using an existing PVC with your stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
+
+* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-file_storage#file_change_storage_configuration)
+
+* [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
+
+    * [Creating a customized storage class with a specific NFS version](/docs/containers?topic=containers-file_storage#custom-sc-nfs-creat)
+
+    * [Changing your existing PV to use a different NFS version](/docs/containers?topic=containers-file_storage#changing-pv-nfs)
+
+* [Scaling down the default {{site.data.keyword.filestorage_short}} plug-in](/docs/containers?topic=containers-file_storage#file_scaledown_plugin)
+
+* [Backing up and restoring data](/docs/containers?topic=containers-file_storage#file_backup_restore)
+
+    * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
+
+    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#file-replicate-snapshot-diff-zone)
+
+    * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
+
+    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-file_storage#file-backup-helm)
+
+    * [Copying data to and from pods and containers](/docs/containers?topic=containers-file_storage#file-cp-data)
+
+* [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+
+* [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
+
+    * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
+
+    * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
+
+    * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
+
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup_file)
+
+    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
+
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
+
+* [Assigning trusted profiles to file storage](/docs/containers?topic=containers-file_storage#file-classic-trusted-profile)
 
 
 ### Object Storage
@@ -5339,8 +5075,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Migrating Portworx encrypted volumes](/docs/containers?topic=containers-migrate_hpcs_kp_px#hpcs-kp-migration-px-steps)
 
-[Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
-
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities#utilities)
 
 * [Classic: Installing the IBM Cloud Block Storage Attacher plug-in (beta)](/docs/containers?topic=containers-utilities#block_storage_attacher)
@@ -5372,6 +5106,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Setting up {{site.data.keyword.mon_full_notm}} for storage volumes](/docs/containers?topic=containers-utilities#monitor_storage)
 
     * [Troubleshooting persistent storage when an {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
+
+[Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
 
 
 ## Observability
@@ -6004,8 +5740,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-133#ibm-remediations-and-explanations-133)
 
 
-## CLI plug-in reference
-{: #sitemap_cli_plug-in_reference}
+## CLI reference
+{: #sitemap_cli_reference}
 
 
 [{{site.data.keyword.containerlong_notm}} CLI Map](/docs/containers?topic=containers-icks_map#icks_map)
@@ -6929,16 +6665,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [API reference](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external}
 
 
-## Add-ons
-{: #sitemap_add-ons}
+## Add-on version history
+{: #sitemap_add-on_version_history}
 
 
 [Available add-ons](/docs/containers?topic=containers-addons#addons)
-
-
-### Add-on version history
-{: #sitemap_add-on_version_history}
-
 
 [Supported cluster add-on versions](/docs/containers?topic=containers-supported-cluster-addon-versions#supported-cluster-addon-versions)
 
@@ -8062,8 +7793,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [17 August 2022](/docs/containers?topic=containers-ibm-k8s-controller-config-change-log#ingress-cm-17-aug-2022)
 
 
-## Understanding {{site.data.keyword.cloud_notm}} locations and regions
-{: #sitemap_understanding_locations_and_regions}
+## Service settings
+{: #sitemap_service_settings}
 
 
 [Understanding {{site.data.keyword.cloud_notm}} locations and regions](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
@@ -8082,11 +7813,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Resources in multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 
-
-## Integrations
-{: #sitemap_integrations}
-
-
 [Integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
 
 * [Popular integrations](/docs/containers?topic=containers-supported_integrations#popular_services)
@@ -8103,12 +7829,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
 
-
-## Default service settings
-{: #sitemap_default_service_settings}
-
-
-[Default service settings](/docs/containers?topic=containers-service-settings#service-settings)
+[Default settings](/docs/containers?topic=containers-service-settings#service-settings)
 
 * [`kube-apiserver`](/docs/containers?topic=containers-service-settings#kube-apiserver)
 
@@ -8124,10 +7845,51 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
 
+[Dependencies](/docs/containers?topic=containers-service-dependencies#service-dependencies)
 
-## High availability and disaster recovery
-{: #sitemap_high_availability_and_disaster_recovery}
+* [Data and Control plane deployment for an MZR](/docs/containers?topic=containers-service-dependencies#data-and-control-plane-deployment-for-an-mzr)
 
+* [Data and Control plane deployment for an NGDC MZR](/docs/containers?topic=containers-service-dependencies#data-and-control-plane-deployment-for-an-ngdc-mzr)
+
+* [Understanding service dependency data](/docs/containers?topic=containers-service-dependencies#understand-dependency-data)
+
+    * [What is the expected impact to the functions described?](/docs/containers?topic=containers-service-dependencies#expected-impact)
+
+    * [What services does my service depend on?](/docs/containers?topic=containers-service-dependencies#dependent-services)
+
+    * [What function does the dependency impact?](/docs/containers?topic=containers-service-dependencies#function-impact)
+
+    * [What does customer provided mean for dependencies?](/docs/containers?topic=containers-service-dependencies#customer-provided-dep)
+
+    * [Where do dependency services need to be deployed regarding my service?](/docs/containers?topic=containers-service-dependencies#deploy-dependencies)
+
+    * [Where are the separate control plane and data plane located, if applicable?](/docs/containers?topic=containers-service-dependencies#separate-plans)
+
+* [Additional resources](/docs/containers?topic=containers-service-dependencies#additional-resources)
+
+[Limitations](/docs/containers?topic=containers-limitations#limitations)
+
+* [Service and quota limitations](/docs/containers?topic=containers-limitations#tech_limits)
+
+* [Classic cluster limitations](/docs/containers?topic=containers-limitations#classic_limits)
+
+    * [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)
+
+    * [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
+
+    * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
+
+* [Classic user access](/docs/containers?topic=containers-limitations#classic_access_limit)
+
+* [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
+
+    * [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
+
+    * [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
+
+    * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
+
+* [VPC user access](/docs/containers?topic=containers-limitations#vpc_access_limit)
 
 [High availability and disaster recovery](/docs/containers?topic=containers-iks-ha-dr#iks-ha-dr)
 
@@ -8153,32 +7915,21 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Considerations for app and service deployment](/docs/containers?topic=containers-iks-ha-dr#app-considerations)
 
+[Data portability](/docs/containers?topic=containers-data-portability#data-portability)
 
-## Service dependencies
-{: #sitemap_service_dependencies}
+* [Responsibilities](/docs/containers?topic=containers-data-portability#data-portability-responsibilities)
 
+* [Data export procedures](/docs/containers?topic=containers-data-portability#data-portability-procedures)
 
-[Service dependencies](/docs/containers?topic=containers-service-dependencies#service-dependencies)
+    * [Exporting data by using the `kubectl` CLI](/docs/containers?topic=containers-data-portability#export-procedure-kubectl)
 
-* [Data and Control plane deployment for an MZR](/docs/containers?topic=containers-service-dependencies#data-and-control-plane-deployment-for-an-mzr)
+    * [Exporting data by using Velero](/docs/containers?topic=containers-data-portability#export-velero)
 
-* [Data and Control plane deployment for an NGDC MZR](/docs/containers?topic=containers-service-dependencies#data-and-control-plane-deployment-for-an-ngdc-mzr)
+    * [Other options for exporting data](/docs/containers?topic=containers-data-portability#data-other)
 
-* [Understanding service dependency data](/docs/containers?topic=containers-service-dependencies#understand-dependency-data)
+* [Exported data formats](/docs/containers?topic=containers-data-portability#data-portability-data-formats)
 
-    * [What is the expected impact to the functions described?](/docs/containers?topic=containers-service-dependencies#expected-impact)
-
-    * [What services does my service depend on?](/docs/containers?topic=containers-service-dependencies#dependent-services)
-
-    * [What function does the dependency impact?](/docs/containers?topic=containers-service-dependencies#function-impact)
-
-    * [What does customer provided mean for dependencies?](/docs/containers?topic=containers-service-dependencies#customer-provided-dep)
-
-    * [Where do dependency services need to be deployed regarding my service?](/docs/containers?topic=containers-service-dependencies#deploy-dependencies)
-
-    * [Where are the separate control plane and data plane located, if applicable?](/docs/containers?topic=containers-service-dependencies#separate-plans)
-
-* [Additional resources](/docs/containers?topic=containers-service-dependencies#additional-resources)
+* [Data ownership](/docs/containers?topic=containers-data-portability#data-ownership)
 
 
 ## Worker node flavors
@@ -8244,27 +7995,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Washington DC (`wdc`)](/docs/containers?topic=containers-classic-flavors#washington-dc-wdc)
 
 
-## Data portability
-{: #sitemap_data_portability}
-
-
-[Data portability](/docs/containers?topic=containers-data-portability#data-portability)
-
-* [Responsibilities](/docs/containers?topic=containers-data-portability#data-portability-responsibilities)
-
-* [Data export procedures](/docs/containers?topic=containers-data-portability#data-portability-procedures)
-
-    * [Exporting data by using the `kubectl` CLI](/docs/containers?topic=containers-data-portability#export-procedure-kubectl)
-
-    * [Exporting data by using Velero](/docs/containers?topic=containers-data-portability#export-velero)
-
-    * [Other options for exporting data](/docs/containers?topic=containers-data-portability#data-other)
-
-* [Exported data formats](/docs/containers?topic=containers-data-portability#data-portability-data-formats)
-
-* [Data ownership](/docs/containers?topic=containers-data-portability#data-ownership)
-
-
 ## Monitoring status best practices
 {: #sitemap_monitoring_status_best_practices}
 
@@ -8280,11 +8010,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Subscribing to email notifications](/docs/containers?topic=containers-best-practices#monbp-subscribing)
 
 
-## FAQ for {{site.data.keyword.containerlong}}
-{: #sitemap_faq_for_}
+## FAQ
+{: #sitemap_faq}
 
 
-[FAQ for {{site.data.keyword.containerlong}}](/docs/containers?topic=containers-faqs#faqs)
+[FAQ](/docs/containers?topic=containers-faqs#faqs)
 
 * [What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
 

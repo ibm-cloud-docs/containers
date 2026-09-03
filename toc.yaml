@@ -40,10 +40,13 @@ toc:
           - cluster-plan-network-classic.md
           - encryption.md
           - document-environment.md
+          - topic: secure.md
+            navtitle: Security overview
       - topicgroup:
           label: Your responsibilities
           topics:
           - responsibilities.md
+          - satellite-resp.md
       - release-notes.md
   - navgroup:
       id: tutorial
@@ -56,120 +59,109 @@ toc:
       id: howto
       topics:
       - topicgroup:
-          label: Cluster planning
-          topics:
-          - strategy.md
-          - cluster-plan-network-vpc.md
-          - cluster-plan-network-classic.md
-          - encryption.md
-          - storage-plan.md
-          - document-environment.md
-      - topicgroup:
-          label: Account setup
+          label: Before you begin
           topics:
           - cluster-create.md
-          - iam-platform-access-roles.md
-      - topicgroup:
-          label: CLI and API
-          topics:
           - topicgroup:
-              label: CLI management
+              label: IAM roles and access
               topics:
-              - cli-install.md
-              - cli-update.md
-              - include: ../cli/reference/ibmcloud/uninstall_cli.md
+              - iam-platform-access-roles.md
+      - topicgroup:
+          label: Setting up your tools
+          topics:
+          - cli-install.md
+          - cli-update.md
+          - include: ../cli/reference/ibmcloud/uninstall_cli.md
           - api-install.md
       - topicgroup:
           label: Cluster creation
           topics:
-          - cluster-create-classic.md
           - cluster-create-vpc-gen2.md
+          - cluster-create-classic.md
           - cluster-create-dedicated-hosts.md
       - topicgroup:
           label: Cluster access
           topics:
           - cs_cluster_access.md
           - cluster-access-public.md
-          - cluster-access-private-classic.md
           - cluster-access-private-vpc.md
+          - cluster-access-private-classic.md
           - cluster-access-vpe.md
           - cluster-access-automation.md
           - cluster-access-admission-control.md
           - cluster-access-wireguard.md
+          - terraform-cluster-access.md
       - topicgroup:
           label: Cluster management
           topics:
-          - worker-os-check.md
-          - update.md
           - topicgroup:
               label: Adding worker nodes
               topics:
-              - add-workers-classic.md
               - add-workers-vpc.md
-          - dedicated-hosts.md
-          - host-maintenance.md
-          - access-apikey.md
-          - ca-rotate.md
-          - ubuntu-migrate.md
-          - worker-tag-label.md
-          - resource-limit-node.md
-          - cluster-remove.md
-          - performance.md
+              - add-workers-classic.md
           - topicgroup:
-              label: Enhancing clusters with integrations
+              label: Updating and maintaining worker nodes
               topics:
-              - integrations-ibm-third-party.md
-              - integrations-addons.md
-              - integrations-helm.md
-              - integrations-svcbind.md
+              - worker-os-check.md
+              - update.md
+              - dedicated-hosts.md
+              - ubuntu-migrate.md
+              - host-maintenance.md
+              - worker-tag-label.md
+              - resource-limit-node.md
+          - topicgroup:
+              label: Tuning performance
+              topics:
+              - performance.md
+              - pod-priority.md
+              - kubeapi-priority.md
           - topicgroup:
               label: Managing cluster costs
               topics:
               - costs.md
               - costs-reserved.md
-          - edge-workload-prevent.md
-          - edge-sysdig.md
+          - topicgroup:
+              label: Credentials and certificates
+              topics:
+              - access-apikey.md
+              - ca-rotate.md
+          - topicgroup:
+              label: Removing clusters
+              topics:
+              - cluster-remove.md
       - topicgroup:
-          label: Encryption
-          topics:
-          - encryption-setup.md
-          - encryption-secrets.md
-          - encryption-vpc-worker-disks.md
-          - encryption-wireguard-workers.md
-          - encryption-hpcs-to-kp-migration.md
-      - topicgroup:
-          label: Security
+          label: Security and access
           topics:
           - topicgroup:
-              label: Cluster workload security
+              label: Access management
               topics:
-              - pod-priority.md
-              - kubeapi-priority.md
-              - pod-security-admission.md
-              - pod-security-admission-migration.md
+              - trusted-profile.md
+              - access-iam-rbac.md
+              - access-pod-identity.md
+              - removing-users.md
+              - classic-credentials.md
           - topicgroup:
-              label: Security enhancements
+              label: Encryption
               topics:
-              - secure.md
-              - cs_tech.md
+              - encryption-setup.md
+              - encryption-secrets.md
+              - encryption-vpc-worker-disks.md
+              - encryption-wireguard-workers.md
+              - encryption-hpcs-to-kp-migration.md
+          - topicgroup:
+              label: Security policies
+              topics:
               - data-security.md
               - cbr.md
               - cbr-tutorial.md
               - pse-to-cbr-migration.md
-      - topicgroup:
-          label: Access management
-          topics:
-          - trusted-profile.md
-          - classic-credentials.md
-          - access-iam-rbac.md
-          - access-pod-identity.md
-          - terraform-cluster-access.md
-          - removing-users.md
+              - pod-security-admission.md
+              - pod-security-admission-migration.md
       - topicgroup:
           label: Networking
           topics:
           - topicgroup:
-              label: Network traffic in VPC clusters
+              label: VPC clusters
               topics:
               - vpc-security-group2.md
               - vpc-iam-vpe-gateway.md
@@ -178,19 +170,20 @@ toc:
               - vpc-security-group-manage.md
               - vpc-acls.md
               - vpc-kube-policies.md
+              - cni.md
               - vpc-firewall.md
               - vpc-subnets.md
+              - vpc-vni.md
               - vpc-vpn.md
+              - static-routes.md
           - topicgroup:
-              label: Network traffic in Classic clusters
+              label: Classic clusters
               topics:
-              - cs_tutorials_policies.md
-              - network-policy.md
+              - topic: network-policy.md
+                navtitle: Network policies (Classic)
               - firewall.md
               - subnets.md
-              - network-cluster.md
               - vpn.md
-          - static-routes.md
           - cs_dns.md
       - topicgroup:
           label: Autoscaling
@@ -277,17 +270,21 @@ toc:
           - cs_istio_custom_gateway.md
           - cs_istio_health.md
       - topicgroup:
+          label: Add-ons and operators
+          topics:
+          - integrations-ibm-third-party.md
+          - integrations-addons.md
+          - integrations-helm.md
+          - integrations-svcbind.md
+      - topicgroup:
           label: Storage
           topics:
+          - topic: storage-plan.md
+            navtitle: Storage overview
           - topic: storage-operator.md
             navtitle: Storage Operator add-on
-          - hpcs-kp-overview.md
-          - topicgroup:
-              label: Block Storage for Classic
-              topics:
-              - storage-block.md
-              - topic: hpcs-kp-migration-classic-block.md
-                navtitle: Migrating from HPCS to Key Protect
+          - topic: hpcs-kp-overview.md
+            navtitle: Key management overview
           - topicgroup:
               label: Block Storage for VPC add-on
               topics:
@@ -296,12 +293,16 @@ toc:
               - storage-block-vpc-configmap.md
               - storage-block-vpc-unmanaged.md
               - storage-block-vpc-remove.md
-              - storage-block-vpc-migration.md
               - storage-block-vpc-profile-migration.md
               - storage-block-vpc-sc-ref.md
               - topic: hpcs-kp-migration-block.md
                 navtitle: Migrating from HPCS to Key Protect
-          - storage-file.md
+          - topicgroup:
+              label: Block Storage for Classic
+              topics:
+              - storage-block.md
+              - topic: hpcs-kp-migration-classic-block.md
+                navtitle: Migrating from HPCS to Key Protect
           - topicgroup:
               label: File Storage for VPC add-on
               topics:
@@ -312,6 +313,8 @@ toc:
               - storage-file-vpc-managing.md
               - storage-file-vpc-snapshot.md
               - storage-file-vpc-sc-ref.md
+          - topic: storage-file.md
+            navtitle: File Storage for Classic
           - topicgroup:
               label: Object Storage
               topics:
@@ -341,8 +344,8 @@ toc:
               - storage-portworx-removing.md
               - storage-portworx-support.md
               - hpcs-kp-migration-px.md
-          - storage-br.md
           - storage-utilities.md
+          - storage-br.md
       - topicgroup:
           label: Observability
           topics:
@@ -386,7 +389,7 @@ toc:
               - cs_versions_changelog_133.md
               - cs_benchmarks_133.md
       - topicgroup:
-          label: CLI plug-in reference
+          label: CLI reference
           topics:
           - cli-map.md
           - cli-ks-plugin-v2.md
@@ -395,51 +398,55 @@ toc:
           label: API reference
           href: https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2
       - topicgroup:
-          label: Add-ons
+          label: Add-on version history
           topics:
           - topic: addon_landing.md
             navtitle: Available add-ons
-          - topicgroup:
-              label: Add-on version history
-              topics:
-              - add-on-versions.md
-              - cl-add-ons-istio.md
-              - cl-add-ons-cluster-autoscaler.md
-              - cl-add-ons-ibm-storage-operator.md
-              - cl-add-ons-vpc-block-csi-driver.md
-              - cl-add-ons-vpc-file-csi-driver.md
-              - cl-add-ons-ibm-object-csi-driver.md
-              - cl-object-storage-plug-in.md
-              - cl-add-ons-static-route.md
-              - versions-backup-restore.md
-              - cl-add-ons-alb-oauth-proxy.md
-              - topic: cl-add-ons-headlamp.md
+          - add-on-versions.md
+          - cl-add-ons-istio.md
+          - cl-add-ons-cluster-autoscaler.md
+          - cl-add-ons-ibm-storage-operator.md
+          - cl-add-ons-vpc-block-csi-driver.md
+          - cl-add-ons-vpc-file-csi-driver.md
+          - cl-add-ons-ibm-object-csi-driver.md
+          - cl-object-storage-plug-in.md
+          - cl-add-ons-static-route.md
+          - versions-backup-restore.md
+          - cl-add-ons-alb-oauth-proxy.md
+          - topic: cl-add-ons-headlamp.md
       - topicgroup:
           label: Ingress version history
           topics:
           - cl-ingress-alb.md
           - ibm-k8s-controller-config-change-log.md
-      - locations.md
-      - topic: cs_integrations_overview.md
-        navtitle: Integrations
-      - topic: service-settings.md
-        navtitle: Default service settings
-      - topic: ha-dr.md
-        navtitle: High availability and disaster recovery
-      - topic: service-dependency.md
-        navtitle: Service dependencies
+      - topicgroup:
+          label: Service settings
+          topics:
+          - locations.md
+          - topic: cs_integrations_overview.md
+            navtitle: Integrations
+          - topic: service-settings.md
+            navtitle: Default settings
+          - topic: service-dependency.md
+            navtitle: Dependencies
+          - topic: limitations.md
+            navtitle: Limitations
+          - topic: ha-dr.md
+            navtitle: High availability and disaster recovery
+          - topic: data-portability.md
+            navtitle: Data portability
       - topicgroup:
           label: Worker node flavors
           topics:
           - vpc-flavors.md
           - classic-flavors.md
-      - topic: data-portability.md
-        navtitle: Data portability
   - navgroup:
       id: help
       topics:
       - include: ../account/status-bps.md
-      - faqs.md
+        navtitle: Monitoring account status
+      - topic: faqs.md
+        navtitle: FAQ
       - topicgroup:
           label: Troubleshooting
           topics:
