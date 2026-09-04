@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-03"
+lastupdated: "2026-09-04"
 
 
 keywords: containers
@@ -483,6 +483,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [1 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep0126)
 
         * IBM Object CSI Driver cluster add-on patch updates.
+
+        * VPC Block CSI Driver cluster add-on patch updates.
 
 * [August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug26)
 
@@ -6973,6 +6975,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [01 September 2026, Version 5.2 - v5.2.60_365903834](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5260_365903834)
+
     * [19 August 2026, Version 5.2 - v5.2.59_362336000](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5259_362336000)
 
     * [06 August 2026, Version 5.2 - v5.2.58_359719682](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5258_359719682)
@@ -7018,6 +7022,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [17 February 2025, Version 5.2 - 5.2.31_687](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [01 September 2026, Version 5.1 - v5.1.60_365903944](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5160_365903944)
 
     * [19 August 2026, Version 5.1 - v5.1.59_362336122](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5159_362336122)
 
