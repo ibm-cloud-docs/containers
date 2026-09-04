@@ -5244,20 +5244,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Viewing your cluster events](/docs/containers?topic=containers-at_events_ref#at-ui)
 
-[Activity tracking events for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-at_events#at_events)
-
-* [Locations where activity tracking events are generated](/docs/containers?topic=containers-at_events#at-locations)
-
-* [Locations where activity tracking events are sent by {{site.data.keyword.atracker_full_notm}}](/docs/containers?topic=containers-at_events#atracker-locations)
-
-* [Enabling activity tracking events for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-at_events#at-enable)
-
-* [Viewing activity tracking events for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-at_events#at-viewing)
-
-    * [Launching {{site.data.keyword.logs_full_notm}} from the Observability page](/docs/containers?topic=containers-at_events#log-launch-standalone)
-
-* [List of platform events](/docs/containers?topic=containers-at_events#at_actions_platform)
-
 [Deploying the Sysdig agent on edge worker nodes](/docs/containers?topic=containers-edge-sysdig#edge-sysdig)
 
 [Preventing app workloads from running on edge worker nodes](/docs/containers?topic=containers-edge-workload-prevent#edge-workload-prevent)
@@ -6677,129 +6663,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Istio add-on version change log](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio)
 
-* [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
-
-    * [18 August 2026, Version 1.30 - 1.30.3](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1303)
-
-    * [21 July 2026, Version 1.30 - 1.30.2](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1302)
-
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
 
-    * [18 August 2026, Version 1.29 - 1.29.6](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1296)
-
-    * [15 July 2026, Version 1.29 - 1.29.5](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1295)
-
-    * [17 June 2026, Version 1.29 - 1.29.4](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1294)
+    * [1.29.4_02100, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1294_02100)
 
 * [Version 1.28](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.28)
 
-    * [15 July 2026, Version 1.28 - 1.28.10](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-12810)
-
-    * [17 June 2026, Version 1.28 - 1.28.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1288)
-
-    * [30 April 2026, Version 1.28.6](/docs/containers?topic=containers-cl-add-ons-istio#1286)
-
-* [Version 1.27](/docs/containers?topic=containers-cl-add-ons-istio#v127)
-
-    * [28 April 2026, Version 1.27.9](/docs/containers?topic=containers-cl-add-ons-istio#1279)
-
-    * [27 March 2026, Version 1.27.8](/docs/containers?topic=containers-cl-add-ons-istio#1278)
-
-* [Version 1.26](/docs/containers?topic=containers-cl-add-ons-istio#v126)
-
-    * [15 December 2025, Version 1.26.6](/docs/containers?topic=containers-cl-add-ons-istio#1266)
-
-    * [21 January 2025, Version 1.26.8](/docs/containers?topic=containers-cl-add-ons-istio#1268)
-
-* [Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
-
-    * [05 November 2025, Version 1.25.5](/docs/containers?topic=containers-cl-add-ons-istio#1255)
-
-* [Version 1.24](/docs/containers?topic=containers-cl-add-ons-istio#v124)
-
-    * [26 September 2025, Version 1.24.6](/docs/containers?topic=containers-cl-add-ons-istio#1246)
-
-* [Version 1.23](/docs/containers?topic=containers-cl-add-ons-istio#v123)
-
-    * [29 April 2025, Version 1.23.6](/docs/containers?topic=containers-cl-add-ons-istio#1236)
-
-    * [4 March 2025, Version 1.23.5](/docs/containers?topic=containers-cl-add-ons-istio#1235)
-
-    * [20 September 2024, Version 1.23.1](/docs/containers?topic=containers-cl-add-ons-istio#1231)
-
-    * [28 Jan 2025, Version 1.23.4](/docs/containers?topic=containers-cl-add-ons-istio#1234)
-
-    * [3 Dec 2024, Version 1.23.3](/docs/containers?topic=containers-cl-add-ons-istio#1233)
-
-    * [9 Oct 2024, Version 1.23.2](/docs/containers?topic=containers-cl-add-ons-istio#1232)
-
-* [Version 1.22](/docs/containers?topic=containers-cl-add-ons-istio#v122)
-
-    * [20 August 2024, Version 1.22.3](/docs/containers?topic=containers-cl-add-ons-istio#1223)
-
-    * [20 August 2024, Version 1.21.5](/docs/containers?topic=containers-cl-add-ons-istio#1215)
-
-    * [20 August 2024, Version 1.20.8](/docs/containers?topic=containers-cl-add-ons-istio#1208)
-
-    * [18 August 2024, Version 1.22.4](/docs/containers?topic=containers-cl-add-ons-istio#1224)
-
-    * [21 June 2024, Version 1.22.1](/docs/containers?topic=containers-cl-add-ons-istio#1221)
-
-* [Unsupported: Version 1.21](/docs/containers?topic=containers-cl-add-ons-istio#v121)
-
-    * [19 June 2024, Version 1.21.3](/docs/containers?topic=containers-cl-add-ons-istio#1213)
-
-    * [19 June 2024, Version 1.20.7](/docs/containers?topic=containers-cl-add-ons-istio#1207)
-
-    * [8 May 2024, Version 1.21.2](/docs/containers?topic=containers-cl-add-ons-istio#1212)
-
-    * [8 May 2024, Version 1.20.6](/docs/containers?topic=containers-cl-add-ons-istio#1206)
-
-    * [26 April 2024, Version 1.21.1](/docs/containers?topic=containers-cl-add-ons-istio#1211)
-
-* [Unsupported: Version 1.20](/docs/containers?topic=containers-cl-add-ons-istio#v120)
-
-    * [24 April 2024, Version 1.20.5](/docs/containers?topic=containers-cl-add-ons-istio#1205)
-
-    * [24 April 2024, Version 1.19.9](/docs/containers?topic=containers-cl-add-ons-istio#1199)
-
-    * [03 April 2024, Version 1.20.4](/docs/containers?topic=containers-cl-add-ons-istio#1204)
-
-    * [03 April 2024, Version 1.19.8](/docs/containers?topic=containers-cl-add-ons-istio#1198)
-
-    * [06 March 2024, Version 1.20.3](/docs/containers?topic=containers-cl-add-ons-istio#1203)
-
-    * [06 March 2024, Version 1.19.7](/docs/containers?topic=containers-cl-add-ons-istio#1197)
-
-    * [07 February 2024, Version 1.20.2](/docs/containers?topic=containers-cl-add-ons-istio#1202)
-
-    * [07 February 2024, Version 1.19.6](/docs/containers?topic=containers-cl-add-ons-istio#1196)
-
-    * [07 February 2024, Version 1.18.7](/docs/containers?topic=containers-cl-add-ons-istio#1187)
-
-    * [10 January 2024, Version 1.20.1](/docs/containers?topic=containers-cl-add-ons-istio#1201)
-
-    * [10 January 2024, Version 1.19.5](/docs/containers?topic=containers-cl-add-ons-istio#1195)
-
-    * [10 January 2024, Version 1.18.6](/docs/containers?topic=containers-cl-add-ons-istio#1186)
-
-    * [7 December 2023, Version 1.20.0](/docs/containers?topic=containers-cl-add-ons-istio#1200)
-
-* [Unsupported: Version 1.19](/docs/containers?topic=containers-cl-add-ons-istio#v119)
-
-    * [5 December 2023, Version 1.19.4](/docs/containers?topic=containers-cl-add-ons-istio#1194)
-
-    * [18 October 2023, Version 1.18.5](/docs/containers?topic=containers-cl-add-ons-istio#1185)
-
-    * [18 October 2023, Version 1.17.8](/docs/containers?topic=containers-cl-add-ons-istio#1178)
-
-    * [10 October 2023, Version 1.19.3](/docs/containers?topic=containers-cl-add-ons-istio#1193)
-
-* [Unsupported: Version 1.18](/docs/containers?topic=containers-cl-add-ons-istio#v118)
-
-    * [3 October 2023, Version 1.18.3](/docs/containers?topic=containers-cl-add-ons-istio#1183)
-
-    * [3 October 2023, Version 1.17.6](/docs/containers?topic=containers-cl-add-ons-istio#1176)
+    * [1.28.8_02100, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1288_02100)
 
 [Cluster autoscaler add-on version change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler)
 
