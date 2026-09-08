@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-09-04"
+lastupdated: "2026-09-08"
 
 keywords: containers, cli reference, kubernetes cli, {{site.data.keyword.containerlong_notm}}
 
@@ -10623,7 +10623,7 @@ ibmcloud ks webhook-create --cluster CLUSTER --type TYPE --url URL [--level LEVE
 :    Do not show the message of the day or update reminders.
 
 `--type`
-:    Specify the webhook type.
+:    The type of webhook that you want to use. Currently `slack` is supported.
 
 `--url`
 :    The webhook URL.
