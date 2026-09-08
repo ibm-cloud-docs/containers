@@ -41,7 +41,6 @@ toc:
           label: Your responsibilities
           topics:
           - responsibilities.md
-          - satellite-resp.md
       - release-notes.md
   - navgroup:
       id: tutorial
@@ -169,7 +168,6 @@ toc:
               - cni.md
               - vpc-firewall.md
               - vpc-subnets.md
-              - vpc-vni.md
               - vpc-vpn.md
               - static-routes.md
           - topicgroup:
@@ -179,6 +177,7 @@ toc:
                 navtitle: Network policies (Classic)
               - firewall.md
               - subnets.md
+              - network-cluster.md
               - vpn.md
           - cs_dns.md
       - topicgroup:
@@ -353,7 +352,6 @@ toc:
           - health-audit.md
           - vpc-flow-logs.md
           - at-events-ref.md
-          - at-events.md
           - edge-sysdig.md
           - edge-workload-prevent.md
   - navgroup:
