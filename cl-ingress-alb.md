@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-03"
+lastupdated: "2026-09-08"
 
 
 keywords: change log, version history, Ingress ALB
@@ -25,24 +25,24 @@ Review the version history for Ingress ALB.
 {: shortdesc}
 
 
-## Version 3.7.11
-{: #cl-ingress-alb-3.7.11}
+## Version 3.7.12
+{: #cl-ingress-alb-3.7.12}
 
 
-### 02 September 2026, Version 3.7.11 - 3.7.11_367269952_iks
-{: #cl-ingress-alb-3711_367269952_iks}
-
-- Resolves the following CVEs: [CVE-2026-56854](https://nvd.nist.gov/vuln/detail/cve-2026-56854){: external}.
-
-
-### 31 August 2026, Version 3.7.11 - 3.7.11_366175407_iks
-{: #cl-ingress-alb-3711_366175407_iks}
+### 07 September 2026, Version 3.7.12 - 3.7.12_367967461_iks
+{: #cl-ingress-alb-3712_367967461_iks}
 
 - No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ## Version 3.7.10
 {: #cl-ingress-alb-3.7.10}
+
+
+### 07 September 2026, Version 3.7.10 - 3.7.10_367635175_iks
+{: #cl-ingress-alb-3710_367635175_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 02 September 2026, Version 3.7.10 - 3.7.10_367269787_iks
@@ -65,6 +65,58 @@ Review the version history for Ingress ALB.
 
 ### 17 August 2026, Version 3.7.10 - 3.7.10_362601619_iks
 {: #cl-ingress-alb-3710_362601619_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 1.15.10
+{: #cl-ingress-alb-1.15.10}
+
+
+### 07 September 2026, Version 1.15.10 - 1.15.10_368272072_iks
+{: #cl-ingress-alb-11510_368272072_iks}
+
+[Default version]{: tag-green}
+
+- Updates Go to version `1.26`.
+
+
+### 02 September 2026, Version 1.15.10 - 1.15.10_367083084_iks
+{: #cl-ingress-alb-11510_367083084_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 31 August 2026, Version 1.15.10 - 1.15.10_366115312_iks
+{: #cl-ingress-alb-11510_366115312_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 24 August 2026, Version 1.15.10 - 1.15.10_365003791_iks
+{: #cl-ingress-alb-11510_365003791_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 17 August 2026, Version 1.15.10 - 1.15.10_362585453_iks
+{: #cl-ingress-alb-11510_362585453_iks}
+
+- Updates Go to version `1.26`.
+
+
+## Version 3.7.11
+{: #cl-ingress-alb-3.7.11}
+
+
+### 02 September 2026, Version 3.7.11 - 3.7.11_367269952_iks
+{: #cl-ingress-alb-3711_367269952_iks}
+
+- Resolves the following CVEs: [CVE-2026-56854](https://nvd.nist.gov/vuln/detail/cve-2026-56854){: external}.
+
+
+### 31 August 2026, Version 3.7.11 - 3.7.11_366175407_iks
+{: #cl-ingress-alb-3711_366175407_iks}
 
 - No feature changes. Updates dependencies and base images to the latest versions.
 
@@ -101,36 +153,6 @@ Review the version history for Ingress ALB.
 {: #cl-ingress-alb-378_358418506_iks}
 
 - No feature changes. Updates dependencies and base images to the latest versions.
-
-
-## Version 1.15.10
-{: #cl-ingress-alb-1.15.10}
-
-
-### 02 September 2026, Version 1.15.10 - 1.15.10_367083084_iks
-{: #cl-ingress-alb-11510_367083084_iks}
-
-[Default version]{: tag-green}
-
-- Updates Go to version `1.26`.
-
-
-### 31 August 2026, Version 1.15.10 - 1.15.10_366115312_iks
-{: #cl-ingress-alb-11510_366115312_iks}
-
-- Updates Go to version `1.26`.
-
-
-### 24 August 2026, Version 1.15.10 - 1.15.10_365003791_iks
-{: #cl-ingress-alb-11510_365003791_iks}
-
-- Updates Go to version `1.26`.
-
-
-### 17 August 2026, Version 1.15.10 - 1.15.10_362585453_iks
-{: #cl-ingress-alb-11510_362585453_iks}
-
-- Updates Go to version `1.26`.
 
 
 ## Version 1.15.8

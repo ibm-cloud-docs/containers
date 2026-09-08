@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-04"
+lastupdated: "2026-09-08"
 
 
 keywords: containers
@@ -473,6 +473,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
+
+    * [8 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep0826)
+
+        * Kubernetes version 1.36 is now the default version for {{site.data.keyword.containerlong_notm}}.
 
     * [2 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep0226)
 
@@ -6663,13 +6667,129 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Istio add-on version change log](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio)
 
+* [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
+
+    * [18 August 2026, Version 1.30 - 1.30.3](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1303)
+
+    * [21 July 2026, Version 1.30 - 1.30.2](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1302)
+
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
 
-    * [1.29.4_02100, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1294_02100)
+    * [18 August 2026, Version 1.29 - 1.29.6](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1296)
+
+    * [15 July 2026, Version 1.29 - 1.29.5](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1295)
+
+    * [17 June 2026, Version 1.29 - 1.29.4](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1294)
 
 * [Version 1.28](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.28)
 
-    * [1.28.8_02100, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1288_02100)
+    * [15 July 2026, Version 1.28 - 1.28.10](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-12810)
+
+    * [17 June 2026, Version 1.28 - 1.28.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1288)
+
+    * [30 April 2026, Version 1.28.6](/docs/containers?topic=containers-cl-add-ons-istio#1286)
+
+* [Version 1.27](/docs/containers?topic=containers-cl-add-ons-istio#v127)
+
+    * [28 April 2026, Version 1.27.9](/docs/containers?topic=containers-cl-add-ons-istio#1279)
+
+    * [27 March 2026, Version 1.27.8](/docs/containers?topic=containers-cl-add-ons-istio#1278)
+
+* [Version 1.26](/docs/containers?topic=containers-cl-add-ons-istio#v126)
+
+    * [15 December 2025, Version 1.26.6](/docs/containers?topic=containers-cl-add-ons-istio#1266)
+
+    * [21 January 2025, Version 1.26.8](/docs/containers?topic=containers-cl-add-ons-istio#1268)
+
+* [Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
+
+    * [05 November 2025, Version 1.25.5](/docs/containers?topic=containers-cl-add-ons-istio#1255)
+
+* [Version 1.24](/docs/containers?topic=containers-cl-add-ons-istio#v124)
+
+    * [26 September 2025, Version 1.24.6](/docs/containers?topic=containers-cl-add-ons-istio#1246)
+
+* [Version 1.23](/docs/containers?topic=containers-cl-add-ons-istio#v123)
+
+    * [29 April 2025, Version 1.23.6](/docs/containers?topic=containers-cl-add-ons-istio#1236)
+
+    * [4 March 2025, Version 1.23.5](/docs/containers?topic=containers-cl-add-ons-istio#1235)
+
+    * [20 September 2024, Version 1.23.1](/docs/containers?topic=containers-cl-add-ons-istio#1231)
+
+    * [28 Jan 2025, Version 1.23.4](/docs/containers?topic=containers-cl-add-ons-istio#1234)
+
+    * [3 Dec 2024, Version 1.23.3](/docs/containers?topic=containers-cl-add-ons-istio#1233)
+
+    * [9 Oct 2024, Version 1.23.2](/docs/containers?topic=containers-cl-add-ons-istio#1232)
+
+* [Version 1.22](/docs/containers?topic=containers-cl-add-ons-istio#v122)
+
+    * [20 August 2024, Version 1.22.3](/docs/containers?topic=containers-cl-add-ons-istio#1223)
+
+    * [20 August 2024, Version 1.21.5](/docs/containers?topic=containers-cl-add-ons-istio#1215)
+
+    * [20 August 2024, Version 1.20.8](/docs/containers?topic=containers-cl-add-ons-istio#1208)
+
+    * [18 August 2024, Version 1.22.4](/docs/containers?topic=containers-cl-add-ons-istio#1224)
+
+    * [21 June 2024, Version 1.22.1](/docs/containers?topic=containers-cl-add-ons-istio#1221)
+
+* [Unsupported: Version 1.21](/docs/containers?topic=containers-cl-add-ons-istio#v121)
+
+    * [19 June 2024, Version 1.21.3](/docs/containers?topic=containers-cl-add-ons-istio#1213)
+
+    * [19 June 2024, Version 1.20.7](/docs/containers?topic=containers-cl-add-ons-istio#1207)
+
+    * [8 May 2024, Version 1.21.2](/docs/containers?topic=containers-cl-add-ons-istio#1212)
+
+    * [8 May 2024, Version 1.20.6](/docs/containers?topic=containers-cl-add-ons-istio#1206)
+
+    * [26 April 2024, Version 1.21.1](/docs/containers?topic=containers-cl-add-ons-istio#1211)
+
+* [Unsupported: Version 1.20](/docs/containers?topic=containers-cl-add-ons-istio#v120)
+
+    * [24 April 2024, Version 1.20.5](/docs/containers?topic=containers-cl-add-ons-istio#1205)
+
+    * [24 April 2024, Version 1.19.9](/docs/containers?topic=containers-cl-add-ons-istio#1199)
+
+    * [03 April 2024, Version 1.20.4](/docs/containers?topic=containers-cl-add-ons-istio#1204)
+
+    * [03 April 2024, Version 1.19.8](/docs/containers?topic=containers-cl-add-ons-istio#1198)
+
+    * [06 March 2024, Version 1.20.3](/docs/containers?topic=containers-cl-add-ons-istio#1203)
+
+    * [06 March 2024, Version 1.19.7](/docs/containers?topic=containers-cl-add-ons-istio#1197)
+
+    * [07 February 2024, Version 1.20.2](/docs/containers?topic=containers-cl-add-ons-istio#1202)
+
+    * [07 February 2024, Version 1.19.6](/docs/containers?topic=containers-cl-add-ons-istio#1196)
+
+    * [07 February 2024, Version 1.18.7](/docs/containers?topic=containers-cl-add-ons-istio#1187)
+
+    * [10 January 2024, Version 1.20.1](/docs/containers?topic=containers-cl-add-ons-istio#1201)
+
+    * [10 January 2024, Version 1.19.5](/docs/containers?topic=containers-cl-add-ons-istio#1195)
+
+    * [10 January 2024, Version 1.18.6](/docs/containers?topic=containers-cl-add-ons-istio#1186)
+
+    * [7 December 2023, Version 1.20.0](/docs/containers?topic=containers-cl-add-ons-istio#1200)
+
+* [Unsupported: Version 1.19](/docs/containers?topic=containers-cl-add-ons-istio#v119)
+
+    * [5 December 2023, Version 1.19.4](/docs/containers?topic=containers-cl-add-ons-istio#1194)
+
+    * [18 October 2023, Version 1.18.5](/docs/containers?topic=containers-cl-add-ons-istio#1185)
+
+    * [18 October 2023, Version 1.17.8](/docs/containers?topic=containers-cl-add-ons-istio#1178)
+
+    * [10 October 2023, Version 1.19.3](/docs/containers?topic=containers-cl-add-ons-istio#1193)
+
+* [Unsupported: Version 1.18](/docs/containers?topic=containers-cl-add-ons-istio#v118)
+
+    * [3 October 2023, Version 1.18.3](/docs/containers?topic=containers-cl-add-ons-istio#1183)
+
+    * [3 October 2023, Version 1.17.6](/docs/containers?topic=containers-cl-add-ons-istio#1176)
 
 [Cluster autoscaler add-on version change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler)
 
@@ -7206,13 +7326,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Ingress ALB](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
-* [Version 3.7.11](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.11)
+* [Version 3.7.12](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.12)
 
-    * [02 September 2026, Version 3.7.11 - 3.7.11_367269952_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_367269952_iks)
-
-    * [31 August 2026, Version 3.7.11 - 3.7.11_366175407_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_366175407_iks)
+    * [07 September 2026, Version 3.7.12 - 3.7.12_367967461_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3712_367967461_iks)
 
 * [Version 3.7.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.10)
+
+    * [07 September 2026, Version 3.7.10 - 3.7.10_367635175_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_367635175_iks)
 
     * [02 September 2026, Version 3.7.10 - 3.7.10_367269787_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_367269787_iks)
 
@@ -7221,6 +7341,24 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [24 August 2026, Version 3.7.10 - 3.7.10_365003730_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_365003730_iks)
 
     * [17 August 2026, Version 3.7.10 - 3.7.10_362601619_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_362601619_iks)
+
+* [Version 1.15.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.10)
+
+    * [07 September 2026, Version 1.15.10 - 1.15.10_368272072_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_368272072_iks)
+
+    * [02 September 2026, Version 1.15.10 - 1.15.10_367083084_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_367083084_iks)
+
+    * [31 August 2026, Version 1.15.10 - 1.15.10_366115312_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_366115312_iks)
+
+    * [24 August 2026, Version 1.15.10 - 1.15.10_365003791_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_365003791_iks)
+
+    * [17 August 2026, Version 1.15.10 - 1.15.10_362585453_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_362585453_iks)
+
+* [Version 3.7.11](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.11)
+
+    * [02 September 2026, Version 3.7.11 - 3.7.11_367269952_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_367269952_iks)
+
+    * [31 August 2026, Version 3.7.11 - 3.7.11_366175407_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_366175407_iks)
 
 * [Version 3.7.8](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.8)
 
@@ -7233,16 +7371,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [17 August 2026, Version 3.7.8 - 3.7.8_360780167_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-378_360780167_iks)
 
     * [11 August 2026, Version 3.7.8 - 3.7.8_358418506_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-378_358418506_iks)
-
-* [Version 1.15.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.10)
-
-    * [02 September 2026, Version 1.15.10 - 1.15.10_367083084_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_367083084_iks)
-
-    * [31 August 2026, Version 1.15.10 - 1.15.10_366115312_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_366115312_iks)
-
-    * [24 August 2026, Version 1.15.10 - 1.15.10_365003791_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_365003791_iks)
-
-    * [17 August 2026, Version 1.15.10 - 1.15.10_362585453_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_362585453_iks)
 
 * [Version 1.15.8](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.8)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-06"
+lastupdated: "2026-09-08"
 
 
 keywords: kubernetes
@@ -79,7 +79,7 @@ Command-line tools
     ```
     {: pre}
 
-5. Make sure that the [`kubectl` version](/docs/containers?topic=containers-cli-install) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.35**.
+5. Make sure that the [`kubectl` version](/docs/containers?topic=containers-cli-install) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.36**.
 
 
 ## Create a cluster in VPC
@@ -114,7 +114,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
 3. Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private cloud service endpoint. You can use the public cloud service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private cloud service endpoint. For more information about the command options, see the [`cluster create vpc-gen2` CLI reference docs](/docs/containers?topic=containers-kubernetes-service-cli#cluster-create-vpc-gen2-cli).
     ```sh
-    ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.35 --flavor bx2.2x8 --workers 1 --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID
+    ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.36 --flavor bx2.2x8 --workers 1 --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID
     ```
     {: pre}
 
@@ -139,8 +139,8 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
         Example output
         ```sh
-        Client Version: 1.35
-        Server Version: 1.35+IKS
+        Client Version: 1.36
+        Server Version: 1.36+IKS
         ```
         {: screen}
 
