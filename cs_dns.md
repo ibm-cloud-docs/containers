@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-06"
+lastupdated: "2026-09-08"
 
 
 keywords: kubernetes, coredns, kubedns, dns
@@ -279,7 +279,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.35+IKS   true
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.36+IKS   true
         ```
         {: screen}
 
@@ -345,7 +345,7 @@ Version 1.34 and earlier
         
         ```sh
         NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.35+IKS   
+        10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.36+IKS   
         ```
         {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-04"
+lastupdated: "2026-09-08"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## September 2026
 {: #containers-sep26}
+
+
+
+### 8 September 2026
+{: #containers-sep0826}
+{: release-note}
+
+Kubernetes version 1.36 is now the default version for {{site.data.keyword.containerlong_notm}}.
+:   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
+
+
 
 ### 2 September 2026
 {: #containers-sep0226}
