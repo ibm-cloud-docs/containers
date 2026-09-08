@@ -2854,6 +2854,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-kube-policies#services_across_ns)
 
+[Selecting a container network interface](/docs/containers?topic=containers-cni#cni)
+
+* [Comparing Calico and OVN](/docs/containers?topic=containers-cni#cni-compare)
+
 [Opening required ports and IP addresses in allowlists](/docs/containers?topic=containers-vpc-firewall#vpc-firewall)
 
 * [Opening ports in a corporate allowlist](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
@@ -8438,8 +8442,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Running tests to rule in or rule out each component](/docs/containers?topic=containers-debug_clusters#ts-4)
 
 * [Gathering more data](/docs/containers?topic=containers-debug_clusters#ts-5)
-
-* [Review user forums for similar issues](/docs/containers?topic=containers-debug_clusters#ts-6)
 
 * [Next steps](/docs/containers?topic=containers-debug_clusters#advanced-ts-next)
 
