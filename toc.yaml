@@ -306,7 +306,6 @@ toc:
               topics:
               - storage-file-vpc-install.md
               - storage-file-vpc-apps.md
-              - storage-file-vpc-capacity-roundoff.md
               - storage-file-vpc-eit.md
               - storage-file-vpc-managing.md
               - storage-file-vpc-snapshot.md
@@ -646,7 +645,6 @@ toc:
               - ts-storage-vpc-file-eit-pvc-fails.md
               - ts-storage-vpc-file-eit-metadata.md
               - ts-storage-vpc-file-rfs-eit.md
-              - ts-storage-vpc-file-capacity-roundoff.md
               - ts-storage-classic-file-access-denied.md
               - ts-storage-file-addon-cm.md
               - ts-storage-feedback.md

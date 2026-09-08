@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-08-25"
+lastupdated: "2026-09-08"
 
 keywords: kubernetes, error messages, error codes, troubleshooting reference
 
@@ -180,7 +180,7 @@ The following error codes appear in the output of the `ibmcloud ks ingress statu
 | `shares_snapshot_not_found` on PVC restore | [Why can't I restore my {{site.data.keyword.filestorage_vpc_short}} snapshot to a PVC?](/docs/containers?topic=containers-ts-storage-vpc-file-snapshot-restore) |
 | VPC File Storage snapshot cannot be deleted | [Why can't I delete my {{site.data.keyword.filestorage_vpc_short}} snapshot?](/docs/containers?topic=containers-ts-storage-vpc-file-snapshot-delete) |
 | `'rfs' profile is not accessible` or `stunnel manager is not initialized` | [Troubleshooting Regional File Storage encryption in transit](/docs/containers?topic=containers-ts-storage-vpc-file-rfs-eit) |
-| VPC File Storage PVC stays in `Pending` with capacity roundoff | [Why does my PVC stay in Pending status when using capacity roundoff?](/docs/containers?topic=containers-ts-storage-vpc-file-capacity-roundoff) |
+
 | VPC File Storage deployment permissions error | [Why does my {{site.data.keyword.filestorage_vpc_short}} deployment fail due to a permissions error?](/docs/containers?topic=containers-ts-storage-vpc-file-non-root) |
 | App pod stuck in `Container creating` when mounting VPC File Storage | [Why is my app pod stuck in `Container creating` when trying to mount {{site.data.keyword.filestorage_vpc_short}}?](/docs/containers?topic=containers-ts-vpc-file-container-creating) |
 | File Storage add-on in `Critical` state | [Why is the {{site.data.keyword.filestorage_vpc_short}} add-on in `Critical` state?](/docs/containers?topic=containers-ts-storage-file-addon-cm) |
