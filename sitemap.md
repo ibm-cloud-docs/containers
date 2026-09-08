@@ -466,6 +466,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
 
+## Important notices
+{: #sitemap_important_notices}
+
+
+[Important notice: IAM VPE Gateway is being added to your VPC](/docs/containers?topic=containers-notice-vpc-iam-vpe-gateway#notice-vpc-iam-vpe-gateway)
+
+
 ## Release notes
 {: #sitemap_release_notes}
 
@@ -6687,15 +6694,15 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [21 January 2025, Version 1.26.8](/docs/containers?topic=containers-cl-add-ons-istio#1268)
 
-* [Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
+* [Unsupported: Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
 
     * [05 November 2025, Version 1.25.5](/docs/containers?topic=containers-cl-add-ons-istio#1255)
 
-* [Version 1.24](/docs/containers?topic=containers-cl-add-ons-istio#v124)
+* [Unsupported: Version 1.24](/docs/containers?topic=containers-cl-add-ons-istio#v124)
 
     * [26 September 2025, Version 1.24.6](/docs/containers?topic=containers-cl-add-ons-istio#1246)
 
-* [Version 1.23](/docs/containers?topic=containers-cl-add-ons-istio#v123)
+* [Unsupported: Version 1.23](/docs/containers?topic=containers-cl-add-ons-istio#v123)
 
     * [29 April 2025, Version 1.23.6](/docs/containers?topic=containers-cl-add-ons-istio#1236)
 
@@ -6709,7 +6716,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [9 Oct 2024, Version 1.23.2](/docs/containers?topic=containers-cl-add-ons-istio#1232)
 
-* [Version 1.22](/docs/containers?topic=containers-cl-add-ons-istio#v122)
+* [Unsupported: Version 1.22](/docs/containers?topic=containers-cl-add-ons-istio#v122)
 
     * [20 August 2024, Version 1.22.3](/docs/containers?topic=containers-cl-add-ons-istio#1223)
 
