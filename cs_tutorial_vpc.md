@@ -445,6 +445,3 @@ Now that you have a VPC cluster, learn more about what you can do.
 * [Setting up block storage for your apps](/docs/containers?topic=containers-vpc-block)
 * [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 * [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
-
-Need help, have questions, or want to give feedback on VPC clusters? Try posting in the [Slack channel](https://ibm-cloud-success.slack.com/join/shared_invite/zt-2p5zqh275-FL8XUSEmn_vvAJZzrHqYcA){: external}.
-{: tip}

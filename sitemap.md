@@ -8439,8 +8439,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Gathering more data](/docs/containers?topic=containers-debug_clusters#ts-5)
 
-* [Review user forums for similar issues](/docs/containers?topic=containers-debug_clusters#ts-6)
-
 * [Next steps](/docs/containers?topic=containers-debug_clusters#advanced-ts-next)
 
 [Debugging app deployments](/docs/containers?topic=containers-debug_apps#debug_apps)
