@@ -254,7 +254,7 @@ Updates in this version
     - [CVE-2025-8114](https://www.cve.org/cveRecord?id=cve-2025-8114){: external}
 
 
-## Version 1.25
+## Unsupported: Version 1.25
 {: #v125}
 
 
@@ -284,7 +284,7 @@ Updates in this version
     - [CVE-2025-6020](https://www.cve.org/cveRecord?id=cve-2025-6020){: external}
 
 
-## Version 1.24
+## Unsupported: Version 1.24
 {: #v124}
 
 
@@ -315,7 +315,7 @@ Updates in this version
     - [CVE-2025-31115](https://www.cve.org/cveRecord?id=cve-2025-31115){: external}
 
 
-## Version 1.23
+## Unsupported: Version 1.23
 {: #v123}
 
 
@@ -451,7 +451,7 @@ Updates in this version
 :   See the Istio release notes for [Istio 1.23.2](https://istio.io/latest/news/releases){: external}.
 
 
-## Version 1.22
+## Unsupported: Version 1.22
 {: #v122}
 
 
