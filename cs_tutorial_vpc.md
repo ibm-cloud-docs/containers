@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-08"
+lastupdated: "2026-09-09"
 
 
 keywords: kubernetes
@@ -22,7 +22,7 @@ completion-time: 60m
 
 
 
-# Setting up your first cluster in your Virtual Private Cloud (VPC)
+# Setting up your first cluster in your Virtual Private Cloud (VPC) (recommended)
 {: #vpc_ks_tutorial}
 {: toc-content-type="tutorial"}
 {: toc-services="containers, vpc, Registry"}
