@@ -461,8 +461,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
 
-* [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
-
     * [8 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep0826)
 
         * Kubernetes version 1.36 is now the default version for {{site.data.keyword.containerlong_notm}}.
