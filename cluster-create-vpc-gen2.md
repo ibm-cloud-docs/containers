@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-09-08"
+lastupdated: "2026-09-09"
 
 
 keywords: kubernetes, clusters, worker nodes, worker pools, vpc-gen2, containers, {{site.data.keyword.containerlong_notm}}
@@ -14,7 +14,7 @@ subcollection: containers
 
 {{site.data.keyword.attribute-definition-list}}
 
-# Creating VPC clusters
+# Creating VPC clusters (recommended)
 {: #cluster-create-vpc-gen2}
 
 [Virtual Private Cloud]{: tag-vpc}

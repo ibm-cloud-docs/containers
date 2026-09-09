@@ -31,8 +31,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 
-## Getting started
-{: #sitemap_getting_started}
+## Containers
+{: #sitemap_containers}
 
 
 [Getting started](/docs/containers?topic=containers-getting-started#getting-started)
@@ -54,11 +54,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Quick actions](/docs/containers?topic=containers-getting-started#getting-started-quick-actions)
 
 * [What's next?](/docs/containers?topic=containers-getting-started#getting-started-whats-next)
-
-
-## Use cases
-{: #sitemap_use_cases}
-
 
 [Use cases](/docs/containers?topic=containers-use-cases#use-cases)
 
@@ -92,11 +87,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Improve collaboration velocity with open data](/docs/containers?topic=containers-use-cases#uc-gov-data)
 
-
-## Understanding the service
-{: #sitemap_understanding_the_service}
-
-
 [Understanding the service](/docs/containers?topic=containers-overview#overview)
 
 * [What is Kubernetes?](/docs/containers?topic=containers-overview#what-is-kube-overview)
@@ -110,11 +100,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Comparison between {{site.data.keyword.redhat_openshift_notm}} and Kubernetes clusters](/docs/containers?topic=containers-overview#openshift_kubernetes)
 
 * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
-
-
-## Architecture and dependencies
-{: #sitemap_architecture_and_dependencies}
-
 
 [Architecture and dependencies](/docs/containers?topic=containers-service-arch#service-arch)
 
@@ -135,11 +120,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [`default` namespace](/docs/containers?topic=containers-service-arch#default-ns-resources)
 
 * [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
-
-
-## Learning paths
-{: #sitemap_learning_paths}
-
 
 [Learning path for administrators](/docs/containers?topic=containers-learning-path-admin#learning-path-admin)
 
@@ -481,9 +461,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
 
+* [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
+
     * [8 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep0826)
 
         * Kubernetes version 1.36 is now the default version for {{site.data.keyword.containerlong_notm}}.
+
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
     * [2 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep0226)
 
@@ -1968,17 +1952,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * Ingress ALB versions `1.9.4_6346_iks`, `1.8.4_6345_iks`, `1.6.4_6344_iks` are available for {{site.data.keyword.containerlong_notm}}.
 
 
-## Tutorials library for Kubernetes Service
-{: #sitemap_tutorials-library-for-kubernetes-service}
-
-[Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
+## Containers
+{: #sitemap_containers1}
 
 
-## Setting up your first cluster in your Virtual Private Cloud (VPC)
-{: #sitemap_setting_up_your_first_cluster_in_your_virtual_private_cloud_vpc}
-
-
-[Setting up your first cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
+[Create a VPC cluster with the CLI (recommended)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
 
 * [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
 
@@ -1996,12 +1974,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
-
-## Using Calico network policies to control traffic on Classic clusters
-{: #sitemap_using_calico_network_policies_to_control_traffic_on_classic_clusters}
-
-
-[Using Calico network policies to control traffic on Classic clusters](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
+[Isolating apps with network policies on Classic](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
 
 * [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
 
@@ -2020,6 +1993,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
 
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
+
+[Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 
 ## Before you begin
@@ -2103,7 +2078,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 {: #sitemap_cluster_creation}
 
 
-[Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
+[Creating VPC clusters (recommended)](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
 
 * [Prerequisites and notes](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-prereq)
 
@@ -2164,12 +2139,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Accessing through the Virtual Private Endpoint (VPE) gateway](/docs/containers?topic=containers-cluster-access-private-vpc#access-private-vpc-vpe)
 
-[Accessing Classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access-private-classic#access-private-classic)
-
-* [Before you begin](/docs/containers?topic=containers-access-private-classic#access-private-classic-prereqs)
-
-* [Exposing the master endpoint through a private NLB](/docs/containers?topic=containers-access-private-classic#access-private-classic-nlb)
-
 [Accessing VPC clusters through the Virtual Private Endpoint gateway](/docs/containers?topic=containers-cluster-access-vpe#cluster-access-vpe)
 
 * [Before you begin](/docs/containers?topic=containers-cluster-access-vpe#cluster-access-vpe-prereqs)
@@ -2183,6 +2152,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Example: Target account commands](/docs/containers?topic=containers-cluster-access-vpe#vpc_cluster_new_vpe_target_example)
 
     * [Example: Source account commands](/docs/containers?topic=containers-cluster-access-vpe#vpc_cluster_new_vpe_source_example)
+
+[Accessing Classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access-private-classic#access-private-classic)
+
+* [Before you begin](/docs/containers?topic=containers-access-private-classic#access-private-classic-prereqs)
+
+* [Exposing the master endpoint through a private NLB](/docs/containers?topic=containers-access-private-classic#access-private-classic-nlb)
 
 [Accessing clusters from automation tools](/docs/containers?topic=containers-cluster-access-automation#cluster-access-automation)
 
@@ -2947,6 +2922,30 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
+[Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
+
+* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
+
+* [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
+
+* [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache)
+
+    * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
+
+    * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
+
+* [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
+
+    * [Editing the `node-local-dns` ConfigMap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
+
+    * [Editing the `node-local-dns-config` ConfigMap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
+
+* [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
+
+    * [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
+
+    * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
+
 
 ### Classic clusters
 {: #sitemap_classic_clusters}
@@ -3037,30 +3036,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
 
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
-
-[Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns)
-
-* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
-
-* [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
-
-* [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache)
-
-    * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
-
-    * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
-
-* [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
-
-    * [Editing the `node-local-dns` ConfigMap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
-
-    * [Editing the `node-local-dns-config` ConfigMap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
-
-* [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
-
-    * [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
-
-    * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
 
 ## Autoscaling
@@ -3423,7 +3398,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Limitations](/docs/containers?topic=containers-vpclb-about#vpclb_limit)
 
-[Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_alb#setup_vpc_alb)
+[Setting up an Application Load Balancer (ALB) for VPC](/docs/containers?topic=containers-setup_vpc_alb#setup_vpc_alb)
 
 * [Setting up a public or private VPC ALB](/docs/containers?topic=containers-setup_vpc_alb#setup_vpc_alb_pub_priv)
 
@@ -3437,7 +3412,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Optional annotations and specifications](/docs/containers?topic=containers-setup_vpc_alb#vpc_alb_annotations_opt)
 
-[Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-setup_vpc_nlb#setup_vpc_nlb)
+[Setting up a Network Load Balancer (NLB) for VPC](/docs/containers?topic=containers-setup_vpc_nlb#setup_vpc_nlb)
 
 * [Setting up a public or private VPC NLB](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_pub_priv)
 
@@ -3490,83 +3465,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Enabling TCP health checks for UDP load balancers](/docs/containers?topic=containers-vpclb_manage#vpc_lb_health_udp)
 
 * [Changing a load balancer's subnet or zone](/docs/containers?topic=containers-vpclb_manage#lbaas_change_subnets)
-
-
-### Exposing apps with Classic load balancers
-{: #sitemap_exposing_apps_with_classic_load_balancers}
-
-
-[Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about#loadbalancer-about)
-
-* [Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs](/docs/containers?topic=containers-loadbalancer-about#comparison-lbs)
-
-* [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning)
-
-    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_single)
-
-    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
-
-* [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
-
-    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
-
-    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
-
-[Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-
-* [Setting up an NLB 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-
-    * [Before you begin](/docs/containers?topic=containers-loadbalancer#multi_zone_config_prereqs)
-
-* [Setting up an NLB 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
-
-    * [Before you begin](/docs/containers?topic=containers-loadbalancer#lb_config_prereqs)
-
-* [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#lb_source_ip)
-
-    * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
-
-    * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
-
-[Classic: Setting up DSR load balancing with an NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2#loadbalancer-v2)
-
-* [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
-
-* [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
-
-    * [Before you begin](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config_prereqs)
-
-* [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
-
-    * [Before you begin](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config_prereqs)
-
-* [Scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling)
-
-    * [Supported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_supported)
-
-    * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
-
-[Isolating Classic NLBs to edge worker nodes](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic)
-
-* [Before you begin](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic-prereqs)
-
-[Isolating network workloads to edge nodes in VPC clusters](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads)
-
-* [Prerequisites](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-pre)
-
-* [Isolating workloads to edge nodes](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-steps)
-
-* [Next steps](/docs/containers?topic=containers-edge-vpc-workloads#edge-workloads-vpc-next)
-
-[Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
-
-* [Registering NLB IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
-
-* [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
-
-* [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
-
-    * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
 ### Exposing apps with NGINX-Ingress
@@ -4074,6 +3972,83 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Registering a {{site.data.keyword.secrets-manager_short}} instance when creating a cluster](/docs/containers?topic=containers-secrets-mgr#secrets-mgr_cluster_create)
 
 
+### Exposing apps with Classic load balancers
+{: #sitemap_exposing_apps_with_classic_load_balancers}
+
+
+[Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about#loadbalancer-about)
+
+* [Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs](/docs/containers?topic=containers-loadbalancer-about#comparison-lbs)
+
+* [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning)
+
+    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_single)
+
+    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
+
+* [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
+
+    * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
+
+    * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
+
+[Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer#loadbalancer)
+
+* [Setting up an NLB 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+
+    * [Before you begin](/docs/containers?topic=containers-loadbalancer#multi_zone_config_prereqs)
+
+* [Setting up an NLB 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
+
+    * [Before you begin](/docs/containers?topic=containers-loadbalancer#lb_config_prereqs)
+
+* [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#lb_source_ip)
+
+    * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
+
+    * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
+
+[Classic: Setting up DSR load balancing with an NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2#loadbalancer-v2)
+
+* [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
+
+* [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
+
+    * [Before you begin](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config_prereqs)
+
+* [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
+
+    * [Before you begin](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config_prereqs)
+
+* [Scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling)
+
+    * [Supported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_supported)
+
+    * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
+
+[Isolating Classic NLBs to edge worker nodes](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic)
+
+* [Before you begin](/docs/containers?topic=containers-edge-nlb-classic#edge-nlb-classic-prereqs)
+
+[Isolating network workloads to edge nodes in VPC clusters](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads)
+
+* [Prerequisites](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-pre)
+
+* [Isolating workloads to edge nodes](/docs/containers?topic=containers-edge-vpc-workloads#edge-vpc-workloads-steps)
+
+* [Next steps](/docs/containers?topic=containers-edge-vpc-workloads#edge-workloads-vpc-next)
+
+[Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
+
+* [Registering NLB IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
+
+* [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
+
+* [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
+
+    * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
+
+
 ## Headlamp dashboard add-on
 {: #sitemap_headlamp_dashboard_add-on}
 
@@ -4533,101 +4508,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Next steps](/docs/containers?topic=containers-migrate_hpcs_kms_block#hpcs-kms-block-next)
 
 
-### Block Storage for Classic
-{: #sitemap_block_storage_for_classic}
-
-
-[Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
-
-* [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
-
-* [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
-
-    * [Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#update_block)
-
-    * [Removing the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#rm_block)
-
-* [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
-
-* [Setting up encryption for {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_encryption_setup)
-
-    * [Encrypting volume data by using your own storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
-
-    * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
-
-    * [Verifying the encryption of your {{site.data.keyword.blockstorageshort}} volumes](/docs/containers?topic=containers-block_storage#block_encrypt)
-
-* [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block)
-
-* [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
-
-    * [Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
-
-    * [Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
-
-* [Using block storage in a stateful set](/docs/containers?topic=containers-block_storage#block_statefulset)
-
-    * [Creating the PVC by using dynamic provisioning when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
-
-    * [Static provisioning by using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
-
-* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-block_storage#block_backup_restore)
-
-    * [Setting up periodic snapshots](/docs/containers?topic=containers-block_storage#block-snaps)
-
-    * [Replicating snapshots to another zone](/docs/containers?topic=containers-block_storage#block-replicate)
-
-    * [Duplicating storage](/docs/containers?topic=containers-block_storage#block-dupe)
-
-    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-block_storage#block-cos-backup)
-
-    * [Copying data to and from pods and containers](/docs/containers?topic=containers-block_storage#block-cp)
-
-* [Storage class reference](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
-
-    * [Bronze](/docs/containers?topic=containers-block_storage#bronze-block)
-
-    * [Silver](/docs/containers?topic=containers-block_storage#silver-block)
-
-    * [Gold](/docs/containers?topic=containers-block_storage#gold-block)
-
-    * [Custom](/docs/containers?topic=containers-block_storage#custom-block)
-
-* [Sample customized storage classes](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
-
-    * [Creating topology-aware storage](/docs/containers?topic=containers-block_storage#topology_yaml)
-
-    * [Specifying the zone and region](/docs/containers?topic=containers-block_storage#block_multizone_yaml)
-
-    * [Mounting block storage with an `XFS` file system](/docs/containers?topic=containers-block_storage#xfs)
-
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup_block)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options_block)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
-
-* [Setting up monitoring for `limited` connectivity PVs](/docs/containers?topic=containers-block_storage#storage-block-vpc-limited-monitoring)
-
-* [Assigning trusted profiles to block storage](/docs/containers?topic=containers-block_storage#block-classic-trusted-profile)
-
-[Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate_hpcs_kms_classic_block)
-
-* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-before)
-
-* [Prerequisites for migration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-prereqs)
-
-* [Migration steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-steps)
-
-    * [Step 1: Replace the HPCS secret with a Key Protect configuration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#replace-secret)
-
-    * [Step 2: Update PVC encryption keys to use Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate-keys)
-
-* [Next steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-next)
-
-
 ### File Storage for VPC add-on
 {: #sitemap_file_storage_for_vpc_add-on}
 
@@ -4727,74 +4607,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Turning off snapshots](/docs/containers?topic=containers-vpc-volume-snapshot-file#vpc-turn-off-snapshots)
 
 [Storage class reference](/docs/containers?topic=containers-storage-file-vpc-sc-ref#storage-file-vpc-sc-ref)
-
-[File Storage for Classic](/docs/containers?topic=containers-file_storage#file_storage)
-
-* [Quick start for {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
-
-* [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
-
-    * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
-
-    * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
-
-    * [Reclaim policy](/docs/containers?topic=containers-file_storage#file-reclaim)
-
-    * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
-
-* [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
-
-* [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
-
-    * [Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
-
-    * [Creating a persistent volume and a persistent volume claim](/docs/containers?topic=containers-file_storage#existing-file-2)
-
-* [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
-
-    * [Creating the PVC when you create a stateful set by using dynamic provisioning](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
-
-    * [Static provisioning: Using an existing PVC with your stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
-
-* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-file_storage#file_change_storage_configuration)
-
-* [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
-
-    * [Creating a customized storage class with a specific NFS version](/docs/containers?topic=containers-file_storage#custom-sc-nfs-creat)
-
-    * [Changing your existing PV to use a different NFS version](/docs/containers?topic=containers-file_storage#changing-pv-nfs)
-
-* [Scaling down the default {{site.data.keyword.filestorage_short}} plug-in](/docs/containers?topic=containers-file_storage#file_scaledown_plugin)
-
-* [Backing up and restoring data](/docs/containers?topic=containers-file_storage#file_backup_restore)
-
-    * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
-
-    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#file-replicate-snapshot-diff-zone)
-
-    * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
-
-    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-file_storage#file-backup-helm)
-
-    * [Copying data to and from pods and containers](/docs/containers?topic=containers-file_storage#file-cp-data)
-
-* [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
-
-* [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
-
-    * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
-
-    * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
-
-    * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
-
-* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup_file)
-
-    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
-
-    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
-
-* [Assigning trusted profiles to file storage](/docs/containers?topic=containers-file_storage#file-classic-trusted-profile)
 
 
 ### Object Storage
@@ -5089,6 +4901,169 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br#storage_br)
 
 
+### Block Storage for Classic
+{: #sitemap_block_storage_for_classic}
+
+
+[Setting up {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_storage)
+
+* [Quick start for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
+
+* [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
+
+    * [Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#update_block)
+
+    * [Removing the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#rm_block)
+
+* [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
+
+* [Setting up encryption for {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_encryption_setup)
+
+    * [Encrypting volume data by using your own storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
+
+    * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
+
+    * [Verifying the encryption of your {{site.data.keyword.blockstorageshort}} volumes](/docs/containers?topic=containers-block_storage#block_encrypt)
+
+* [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block)
+
+* [Using existing block storage in your cluster](/docs/containers?topic=containers-block_storage#existing_block)
+
+    * [Retrieving the information of your existing block storage](/docs/containers?topic=containers-block_storage#existing-block-1)
+
+    * [Creating a persistent volume (PV) and a matching persistent volume claim (PVC)](/docs/containers?topic=containers-block_storage#existing-block-2)
+
+* [Using block storage in a stateful set](/docs/containers?topic=containers-block_storage#block_statefulset)
+
+    * [Creating the PVC by using dynamic provisioning when you create a stateful set](/docs/containers?topic=containers-block_storage#block_dynamic_statefulset)
+
+    * [Static provisioning by using existing PVCs with a stateful set](/docs/containers?topic=containers-block_storage#block_static_statefulset)
+
+* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
+
+* [Backing up and restoring data](/docs/containers?topic=containers-block_storage#block_backup_restore)
+
+    * [Setting up periodic snapshots](/docs/containers?topic=containers-block_storage#block-snaps)
+
+    * [Replicating snapshots to another zone](/docs/containers?topic=containers-block_storage#block-replicate)
+
+    * [Duplicating storage](/docs/containers?topic=containers-block_storage#block-dupe)
+
+    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-block_storage#block-cos-backup)
+
+    * [Copying data to and from pods and containers](/docs/containers?topic=containers-block_storage#block-cp)
+
+* [Storage class reference](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
+
+    * [Bronze](/docs/containers?topic=containers-block_storage#bronze-block)
+
+    * [Silver](/docs/containers?topic=containers-block_storage#silver-block)
+
+    * [Gold](/docs/containers?topic=containers-block_storage#gold-block)
+
+    * [Custom](/docs/containers?topic=containers-block_storage#custom-block)
+
+* [Sample customized storage classes](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
+
+    * [Creating topology-aware storage](/docs/containers?topic=containers-block_storage#topology_yaml)
+
+    * [Specifying the zone and region](/docs/containers?topic=containers-block_storage#block_multizone_yaml)
+
+    * [Mounting block storage with an `XFS` file system](/docs/containers?topic=containers-block_storage#xfs)
+
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-block_storage#cleanup_block)
+
+    * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options_block)
+
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove_block)
+
+* [Setting up monitoring for `limited` connectivity PVs](/docs/containers?topic=containers-block_storage#storage-block-vpc-limited-monitoring)
+
+* [Assigning trusted profiles to block storage](/docs/containers?topic=containers-block_storage#block-classic-trusted-profile)
+
+[Migrating from HPCS to Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate_hpcs_kms_classic_block)
+
+* [Before you begin](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-before)
+
+* [Prerequisites for migration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-prereqs)
+
+* [Migration steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-steps)
+
+    * [Step 1: Replace the HPCS secret with a Key Protect configuration](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#replace-secret)
+
+    * [Step 2: Update PVC encryption keys to use Key Protect](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#migrate-keys)
+
+* [Next steps](/docs/containers?topic=containers-migrate_hpcs_kms_classic_block#hpcs-kms-classic-block-next)
+
+[File Storage for Classic](/docs/containers?topic=containers-file_storage#file_storage)
+
+* [Quick start for {{site.data.keyword.filestorage_short}}](/docs/containers?topic=containers-file_storage#file_qs)
+
+* [Deciding on the {{site.data.keyword.filestorage_short}} configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
+
+    * [File storage types](/docs/containers?topic=containers-file_storage#file-types)
+
+    * [IOPS](/docs/containers?topic=containers-file_storage#file-iops)
+
+    * [Reclaim policy](/docs/containers?topic=containers-file_storage#file-reclaim)
+
+    * [Billing type](/docs/containers?topic=containers-file_storage#file-billing)
+
+* [Adding {{site.data.keyword.filestorage_short}} to apps](/docs/containers?topic=containers-file_storage#add_file)
+
+* [Using existing {{site.data.keyword.filestorage_short}} in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
+
+    * [Preparing your existing storage](/docs/containers?topic=containers-file_storage#existing-file-1)
+
+    * [Creating a persistent volume and a persistent volume claim](/docs/containers?topic=containers-file_storage#existing-file-2)
+
+* [Using {{site.data.keyword.filestorage_short}} in a stateful set](/docs/containers?topic=containers-file_storage#file_statefulset)
+
+    * [Creating the PVC when you create a stateful set by using dynamic provisioning](/docs/containers?topic=containers-file_storage#file_dynamic_statefulset)
+
+    * [Static provisioning: Using an existing PVC with your stateful set](/docs/containers?topic=containers-file_storage#file_static_statefulset)
+
+* [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-file_storage#file_change_storage_configuration)
+
+* [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version)
+
+    * [Creating a customized storage class with a specific NFS version](/docs/containers?topic=containers-file_storage#custom-sc-nfs-creat)
+
+    * [Changing your existing PV to use a different NFS version](/docs/containers?topic=containers-file_storage#changing-pv-nfs)
+
+* [Scaling down the default {{site.data.keyword.filestorage_short}} plug-in](/docs/containers?topic=containers-file_storage#file_scaledown_plugin)
+
+* [Backing up and restoring data](/docs/containers?topic=containers-file_storage#file_backup_restore)
+
+    * [Setting up periodic snapshots](/docs/containers?topic=containers-file_storage#file-snapshots)
+
+    * [Replicating snapshots to another zone](/docs/containers?topic=containers-file_storage#file-replicate-snapshot-diff-zone)
+
+    * [Duplicating storage](/docs/containers?topic=containers-file_storage#file-dupe-storage)
+
+    * [Backing up data to {{site.data.keyword.cos_full}}](/docs/containers?topic=containers-file_storage#file-backup-helm)
+
+    * [Copying data to and from pods and containers](/docs/containers?topic=containers-file_storage#file-cp-data)
+
+* [Storage class reference](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
+
+* [Sample customized storage classes](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
+
+    * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
+
+    * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
+
+    * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
+
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-file_storage#cleanup_file)
+
+    * [Understanding your storage removal options](/docs/containers?topic=containers-file_storage#storage_delete_options_file)
+
+    * [Cleaning up persistent storage](/docs/containers?topic=containers-file_storage#storage_remove_file)
+
+* [Assigning trusted profiles to file storage](/docs/containers?topic=containers-file_storage#file-classic-trusted-profile)
+
+
 ## Observability
 {: #sitemap_observability}
 
@@ -5303,6 +5278,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+* [08 September 2026, Worker node fix pack 1.36.3_1529](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1529_W)
+
 * [25 August 2026, Worker node fix pack 1.36.3_1527](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1527_W)
 
 * [12 August 2026, Worker node fix pack 1.36.3_1526](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1526_W)
@@ -5379,6 +5356,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+* [08 September 2026, Worker node fix pack 1.35.7_1543](/docs/containers?topic=containers-changelog_135#cl-boms-1357_1543_W)
 
 * [25 August 2026, Worker node fix pack 1.35.7_1541](/docs/containers?topic=containers-changelog_135#cl-boms-1357_1541_W)
 
@@ -5480,6 +5459,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+* [08 September 2026, Worker node fix pack 1.34.10_1565](/docs/containers?topic=containers-changelog_134#cl-boms-13410_1565_W)
 
 * [25 August 2026, Worker node fix pack 1.34.10_1563](/docs/containers?topic=containers-changelog_134#cl-boms-13410_1563_W)
 
@@ -5601,6 +5582,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+* [08 September 2026, Worker node fix pack 1.33.13_1584](/docs/containers?topic=containers-changelog_133#cl-boms-13313_1584_W)
 
 * [25 August 2026, Worker node fix pack 1.33.13_1582](/docs/containers?topic=containers-changelog_133#cl-boms-13313_1582_W)
 

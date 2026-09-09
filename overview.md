@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-08-24"
+lastupdated: "2026-09-09"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, infrastructure, rbac, policy, providers, benefits
 
@@ -117,7 +117,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster by using infr
 {: class="simple-tab-table"}
 {: caption="Infrastructure overview" caption-side="bottom"}
 {: #infra-1}
-{: tab-title="VPC"}
+{: tab-title="VPC (recommended)"}
 {: tab-group="infra-table"}
 
 
