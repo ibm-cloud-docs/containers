@@ -6641,6 +6641,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Istio add-on version change log](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio)
 
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-supported-versions)
+
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
 
     * [18 August 2026, Version 1.30 - 1.30.3](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1303)
@@ -6759,6 +6761,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Cluster autoscaler add-on version change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler)
 
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-supported-versions)
+
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-2.0.0)
 
     * [07 July 2026, Version 2.0.0 - v200-12-0_351296784](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-12-0_351296784)
@@ -6861,6 +6865,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [IBM Storage Operator add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator)
 
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-supported-versions)
+
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
     * [02 September 2026, Version 1.0 - v1.0.58_365773320](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1058_365773320)
@@ -6928,6 +6934,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [03 July 2024, Version 1.0.10_141](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#ibm-storage-operator-1.0.0-initial)
 
 [VPC Block CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver)
+
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-supported-versions)
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
@@ -7057,6 +7065,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-supported-versions)
+
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
     * [02 September 2026, Version 2.0 - v2.0.51_365773339](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2051_365773339)
@@ -7147,6 +7157,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-supported-versions)
+
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
 
     * [01 September 2026, Version 1.0 - v1.0.28_365471792](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1028_365471792)
@@ -7193,6 +7205,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Static Route add-on version change log](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route)
 
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-supported-versions)
+
 * [Version 1.0.0](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-1.0.0)
 
     * [23 May 2026, Version 1.0.0 - v1.0.0-342645253](/docs/containers?topic=containers-cl-add-ons-static-route#cl-add-ons-static-route-v100-342645253)
@@ -7208,6 +7222,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Change log for 1.0.5, released 17 December 2020](/docs/containers?topic=containers-backup_restore_changelog#0105_br_chart)
 
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
+
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-supported-versions)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
 
@@ -7266,6 +7282,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [08 May 2024, Version 2.0.0 - 2.0.0_2250](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2250)
 
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
+
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-supported-versions)
 
 * [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
 
