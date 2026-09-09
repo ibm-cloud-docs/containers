@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-08"
+lastupdated: "2026-09-09"
 
 
 keywords: change log, version history, Istio
@@ -235,29 +235,6 @@ Updates in this version
     - [CVE-2024-6395](https://www.cve.org/cveRecord?id=cve-2024-6395){: external} 
 
 
-### 21 January 2025, Version 1.26.8
-{: #1268}
-
-Review the changes that are included in version 1.26.8 of the managed Istio add-on.
-{: shortdesc}
-
-Previous version
-:   1.26.6
-
-Current version
-:   1.26.8
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.26.7](https://istio.io/latest/news/releases){: external}, and , [Istio 1.26.8](https://istio.io/latest/news/releases){: external},
-
-:   Resolves the following CVEs:
-    - [CVE-2025-8114](https://www.cve.org/cveRecord?id=cve-2025-8114){: external}
-
-
-## Unsupported: Version 1.25
-{: #v125}
-
-
 ### 05 November 2025, Version 1.25.5
 {: #1255}
 
@@ -380,6 +357,29 @@ Updates in this version
     - [CVE-2024-11053](https://www.cve.org/cveRecord?id=cve-2024-11053){: external}
 
 
+### 21 January 2025, Version 1.26.8
+{: #1268}
+
+Review the changes that are included in version 1.26.8 of the managed Istio add-on.
+{: shortdesc}
+
+Previous version
+:   1.26.6
+
+Current version
+:   1.26.8
+
+Updates in this version
+:   See the Istio release notes for [Istio 1.26.7](https://istio.io/latest/news/releases){: external}, and , [Istio 1.26.8](https://istio.io/latest/news/releases){: external},
+
+:   Resolves the following CVEs:
+    - [CVE-2025-8114](https://www.cve.org/cveRecord?id=cve-2025-8114){: external}
+
+
+## Unsupported: Version 1.25
+{: #v125}
+
+
 ### 20 September 2024, Version 1.23.1
 {: #1231}
 
@@ -397,62 +397,6 @@ Updates in this version
 :   Resolves the following CVEs:
     - [CVE-2024-6119](https://www.cve.org/cveRecord?id=cve-2024-6119){: external}
     - [usn-6986-1](https://ubuntu.com/security/notices/USN-6986-1){: external}
-
-
-### 28 Jan 2025, Version 1.23.4
-{: #1234}
-
-Review the changes that are included in version 1.23.4 of the managed Istio add-on.
-{: shortdesc}
-
-Previous version
-:   1.23.3
-
-Current version
-:   1.23.4
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.23.4](https://istio.io/latest/news/releases){: external}.
-:   Resolves the following CVEs:
-    - [CVE-2024-9681](https://www.cve.org/cveRecord?id=cve-2024-9681){: external}
-
-
-### 3 Dec 2024, Version 1.23.3
-{: #1233}
-
-Review the changes that are included in version 1.23.3 of the managed Istio add-on.
-{: shortdesc}
-
-Previous version
-:   1.23.2
-
-Current version
-:   1.23.3
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.23.3](https://istio.io/latest/news/releases){: external}.
-:   Resolves the following CVEs:
-    - [CVE-2024-8096](https://www.cve.org/cveRecord?id=cve-2024-8096){: external}
-
-
-### 9 Oct 2024, Version 1.23.2
-{: #1232}
-
-Review the changes that are included in version 1.23.2 of the managed Istio add-on.
-{: shortdesc}
-
-Previous version
-:   1.23.1
-
-Current version
-:   1.23.2
-
-Updates in this version
-:   See the Istio release notes for [Istio 1.23.2](https://istio.io/latest/news/releases){: external}.
-
-
-## Unsupported: Version 1.22
-{: #v122}
 
 
 ### 20 August 2024, Version 1.22.3

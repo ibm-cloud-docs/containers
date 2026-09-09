@@ -2,7 +2,7 @@
 
 copyright:
   years: 2025, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-09-09"
 
 keywords: ingress, traefik, migration, ingress-nginx, alb, ingress controller
 
@@ -200,15 +200,8 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
 
 1. Disable the Ingress-NGINX ALB.
 
-    [Classic clusters]{: tag-classic-inf}
     ```sh
-    ibmcloud ks ingress alb disable classic --alb ALB_ID --cluster CLUSTER_NAME
-    ```
-    {: pre}
-
-    [VPC clusters]{: tag-vpc}
-    ```sh
-    ibmcloud ks ingress alb disable vpc-gen2 --alb ALB_ID --cluster CLUSTER_NAME
+    ibmcloud ks ingress alb disable --alb ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -300,7 +293,7 @@ Alternatively, you can disable all Ingress-NGINX based ALBs, which automatically
 
 1. Disable each Ingress-NGINX ALB.
     ```sh
-    ibmcloud ks ingress alb disable classic --alb NGINX_ALB_ID --cluster CLUSTER_NAME
+    ibmcloud ks ingress alb disable --alb NGINX_ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -326,7 +319,7 @@ Disabling and re-enabling an ALB preserves its original IP address, unless that 
 
 1. Disable the Ingress-NGINX ALB. This causes brief service disruption for traffic on that IP address.
     ```sh
-    ibmcloud ks ingress alb disable classic --alb ALB_ID --cluster CLUSTER_NAME
+    ibmcloud ks ingress alb disable --alb ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -387,7 +380,7 @@ Alternatively, you can disable all Ingress-NGINX based ALBs.
 
 1. Disable each Ingress-NGINX ALB.
     ```sh
-    ibmcloud ks ingress alb disable vpc-gen2 --alb NGINX_ALB_ID --cluster CLUSTER_NAME
+    ibmcloud ks ingress alb disable --alb NGINX_ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
@@ -410,15 +403,8 @@ After migrating to Traefik, complete the following tasks:
 
 1. After confirming that Traefik works as expected, disable remaining Ingress-NGINX ALBs.
 
-    [Classic clusters]{: tag-classic-inf}
     ```sh
-    ibmcloud ks ingress alb disable classic --alb NGINX_ALB_ID --cluster CLUSTER_NAME
-    ```
-    {: pre}
-
-    [VPC clusters]{: tag-vpc}
-    ```sh
-    ibmcloud ks ingress alb disable vpc-gen2 --alb NGINX_ALB_ID --cluster CLUSTER_NAME
+    ibmcloud ks ingress alb disable --alb NGINX_ALB_ID --cluster CLUSTER_NAME
     ```
     {: pre}
 
