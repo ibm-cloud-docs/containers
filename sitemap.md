@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-08"
+lastupdated: "2026-09-09"
 
 
 keywords: containers
@@ -6692,10 +6692,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [15 December 2025, Version 1.26.6](/docs/containers?topic=containers-cl-add-ons-istio#1266)
 
-    * [21 January 2025, Version 1.26.8](/docs/containers?topic=containers-cl-add-ons-istio#1268)
-
-* [Unsupported: Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
-
     * [05 November 2025, Version 1.25.5](/docs/containers?topic=containers-cl-add-ons-istio#1255)
 
 * [Unsupported: Version 1.24](/docs/containers?topic=containers-cl-add-ons-istio#v124)
@@ -6708,15 +6704,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [4 March 2025, Version 1.23.5](/docs/containers?topic=containers-cl-add-ons-istio#1235)
 
+    * [21 January 2025, Version 1.26.8](/docs/containers?topic=containers-cl-add-ons-istio#1268)
+
+* [Unsupported: Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
+
     * [20 September 2024, Version 1.23.1](/docs/containers?topic=containers-cl-add-ons-istio#1231)
-
-    * [28 Jan 2025, Version 1.23.4](/docs/containers?topic=containers-cl-add-ons-istio#1234)
-
-    * [3 Dec 2024, Version 1.23.3](/docs/containers?topic=containers-cl-add-ons-istio#1233)
-
-    * [9 Oct 2024, Version 1.23.2](/docs/containers?topic=containers-cl-add-ons-istio#1232)
-
-* [Unsupported: Version 1.22](/docs/containers?topic=containers-cl-add-ons-istio#v122)
 
     * [20 August 2024, Version 1.22.3](/docs/containers?topic=containers-cl-add-ons-istio#1223)
 
