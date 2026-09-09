@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-03"
+lastupdated: "2026-09-09"
 
 
 keywords: change log, version history, Cluster autoscaler
@@ -33,6 +33,24 @@ To view a list of add-ons and the supported cluster versions, run the following 
 ibmcloud ks cluster addon versions
 ```
 {: pre}
+
+
+
+
+## Supported versions
+{: #cl-add-ons-cluster-autoscaler-supported-versions}
+
+| Add-on version | Supported Kubernetes versions |
+|---|---|
+| `2.0.0` | `>=1.31.0 <1.36.0` |
+| `1.2.4` | `>=1.28.0 <1.35.0` |
+| `1.1.0` | `>=1.20.0 <1.24.0` |
+{: caption="Supported Cluster autoscaler add-on versions" caption-side="bottom"}
+
+
+
+
+
 
 
 Review the version history for Cluster autoscaler.

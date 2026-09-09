@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-03"
+lastupdated: "2026-09-09"
 
 
 keywords: change log, version history, ALB OAuth Proxy
@@ -33,6 +33,19 @@ To view a list of add-ons and the supported cluster versions, run the following 
 ibmcloud ks cluster addon versions
 ```
 {: pre}
+
+
+
+
+## Supported versions
+{: #cl-add-ons-alb-oauth-proxy-supported-versions}
+
+| Add-on version | Supported Kubernetes versions |
+|---|---|
+| `2.0.0` | `>=1.19.0 <1.38.0` |
+{: caption="Supported ALB OAuth Proxy add-on versions" caption-side="bottom"}
+
+
 
 
 Review the version history for ALB OAuth Proxy.

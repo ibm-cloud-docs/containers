@@ -35,6 +35,23 @@ ibmcloud ks cluster addon versions
 {: pre}
 
 
+
+
+## Supported versions
+{: #cl-add-ons-istio-supported-versions}
+
+| Add-on version | Supported Kubernetes versions |
+|---|---|
+| `1.30` | `>=1.32.0 <1.37.0` |
+| `1.29` | `>=1.31.0 <1.36.0` |
+| `1.28` | `>=1.31.0 <1.35.0` |
+| `1.27` | `>=1.31.0 <1.34.0` |
+| `1.26` | `>=1.31.0 <1.34.0` |
+{: caption="Supported Istio add-on versions" caption-side="bottom"}
+
+
+
+
 Review the version history for Istio.
 {: shortdesc}
 
@@ -522,9 +539,6 @@ Updates in this version
 ## Unsupported: Version 1.21
 {: #v121}
 
-Version 1.21 of the managed Istio add-on is unsupported.
-{: important}
-
 
 ### 19 June 2024, Version 1.21.3
 {: #1213}
@@ -633,9 +647,6 @@ Updates in this version
 
 ## Unsupported: Version 1.20
 {: #v120}
-
-Version 1.20 of the managed Istio add-on is unsupported. 
-{: important}
 
 
 ### 24 April 2024, Version 1.20.5
@@ -970,11 +981,9 @@ Current version
 Updates in this version
 :   See the Istio release notes for [Istio 1.20.0](https://istio.io/latest/news/releases){: external}.
 
+
 ## Unsupported: Version 1.19
 {: #v119}
-
-Version 1.19 of the managed Istio add-on is unsupported. 
-{: important}
 
 
 ### 5 December 2023, Version 1.19.4
@@ -1055,9 +1064,6 @@ Updates in this version
 
 ## Unsupported: Version 1.18
 {: #v118}
-
-Version 1.18 of the managed Istio add-on is unsupported. 
-{: important}
 
 
 ### 3 October 2023, Version 1.18.3
