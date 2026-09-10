@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-09"
+lastupdated: "2026-09-10"
 
 
 keywords: containers
@@ -460,6 +460,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
+
+    * [10 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep1026)
+
+        * Istio cluster add-on patch updates.
 
     * [8 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep0826)
 
@@ -6645,11 +6649,15 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
 
+    * [10 September 2026, Version 1.30 - 1.30.4](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1304)
+
     * [18 August 2026, Version 1.30 - 1.30.3](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1303)
 
     * [21 July 2026, Version 1.30 - 1.30.2](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1302)
 
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
+
+    * [10 September 2026, Version 1.29 - 1.29.7](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1297)
 
     * [18 August 2026, Version 1.29 - 1.29.6](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1296)
 
