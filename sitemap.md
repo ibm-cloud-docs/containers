@@ -450,7 +450,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 {: #sitemap_important_notices}
 
 
-[Important notice: IAM VPE Gateway is being added to your VPC](/docs/containers?topic=containers-notice-vpc-iam-vpe-gateway#notice-vpc-iam-vpe-gateway)
+[IAM VPE Gateway is being added to your VPC](/docs/containers?topic=containers-notice-vpc-iam-vpe-gateway#notice-vpc-iam-vpe-gateway)
 
 
 ## Release notes
