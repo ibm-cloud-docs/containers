@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-09"
+lastupdated: "2026-09-11"
 
 
 keywords: change log, version history, IBM Object CSI Driver
@@ -42,7 +42,7 @@ ibmcloud ks cluster addon versions
 
 | Add-on version | Supported Kubernetes versions |
 |---|---|
-| `1.0` | `>=1.31.0 <1.37.0` |
+| `1.0` | `>=1.31.0 <1.38.0` |
 {: caption="Supported IBM Object CSI Driver add-on versions" caption-side="bottom"}
 
 
