@@ -227,7 +227,29 @@ These conditions might impact cluster flavor availability:
 
 | Name | Data centers | Resources | OS | Primary storage | Secondary storage | Secondary storage options (GB / iops-tier)|
 | ---- | ---- |-------------------------------- | ---- | --------------- | ----------------- |  -------------- | 
-|No flavors available.| N/A | N/A | N/A | N/A | N/A | N/A |
+| bx2.metal.96x384  \n(Balanced) | us-south-1  \nus-south-2  \nus-south-3 | 48 cores  \n384GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| bx2d.metal.96x384  \n(Balanced) | us-south-1  \nus-south-2  \nus-south-3 | 48 cores  \n384GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| bx3.metal.48x256  \n(Balanced) | us-south-1  \nus-south-2  \nus-south-3 | 24 cores  \n256GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| bx3.metal.64x256  \n(Balanced) | us-south-1  \nus-south-2  \nus-south-3 | 32 cores  \n256GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| bx3d.metal.192x1024  \n(Balanced) | us-south-1  \nus-south-2  \nus-south-3 | 96 cores  \n1024GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| bx3d.metal.48x256  \n(Balanced) | us-south-1  \nus-south-2  \nus-south-3 | 24 cores  \n256GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| bx3d.metal.64x256  \n(Balanced) | us-south-1  \nus-south-2  \nus-south-3 | 32 cores  \n256GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| cx2.metal.96x192  \n(Compute) | us-south-1 | 48 cores  \n192GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| cx2d.metal.96x192  \n(Compute) | us-south-1  \nus-south-3 | 48 cores  \n192GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| cx3.metal.64x128  \n(Compute) | us-south-1  \nus-south-2  \nus-south-3 | 32 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| cx3d.metal.48x128  \n(Compute) | us-south-1  \nus-south-2  \nus-south-3 | 24 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| cx3d.metal.64x128  \n(Compute) | us-south-1  \nus-south-2  \nus-south-3 | 32 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx2.metal.96x768  \n(Memory) | us-south-1  \nus-south-3 | 48 cores  \n768GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| mx2d.metal.96x768  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 48 cores  \n768GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| mx3.metal.16x128  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 8 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3.metal.48x512  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 24 cores  \n512GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3.metal.64x512  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 32 cores  \n512GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.128x1024  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 64 cores  \n1024GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.16x128  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 8 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.192x2048  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 96 cores  \n2048GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.48x512  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 24 cores  \n512GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.64x512  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 32 cores  \n512GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.96x1024  \n(Memory) | us-south-1  \nus-south-2  \nus-south-3 | 48 cores  \n1024GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
 {: class="simple-tab-table"}
 {: caption="Bare metal flavors in Dallas." caption-side="bottom"}
 {: #us-south-physical-table}
@@ -343,7 +365,29 @@ These conditions might impact cluster flavor availability:
 
 | Name | Data centers | Resources | OS | Primary storage | Secondary storage | Secondary storage options (GB / iops-tier)|
 | ---- | ---- |-------------------------------- | ---- | --------------- | ----------------- |  -------------- | 
-|No flavors available.| N/A | N/A | N/A | N/A | N/A | N/A |
+| bx2.metal.96x384  \n(Balanced) | eu-de-1  \neu-de-2 | 48 cores  \n384GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| bx2d.metal.96x384  \n(Balanced) | eu-de-1  \neu-de-2 | 48 cores  \n384GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| bx3.metal.48x256  \n(Balanced) | eu-de-1  \neu-de-2  \neu-de-3 | 24 cores  \n256GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| bx3.metal.64x256  \n(Balanced) | eu-de-1  \neu-de-2  \neu-de-3 | 32 cores  \n256GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| bx3d.metal.192x1024  \n(Balanced) | eu-de-1  \neu-de-2  \neu-de-3 | 96 cores  \n1024GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| bx3d.metal.48x256  \n(Balanced) | eu-de-1  \neu-de-2  \neu-de-3 | 24 cores  \n256GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| bx3d.metal.64x256  \n(Balanced) | eu-de-1  \neu-de-2  \neu-de-3 | 32 cores  \n256GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| cx2.metal.96x192  \n(Compute) | eu-de-1  \neu-de-2 | 48 cores  \n192GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| cx2d.metal.96x192  \n(Compute) | eu-de-1  \neu-de-2 | 48 cores  \n192GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| cx3.metal.64x128  \n(Compute) | eu-de-1  \neu-de-2  \neu-de-3 | 32 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| cx3d.metal.48x128  \n(Compute) | eu-de-1  \neu-de-2  \neu-de-3 | 24 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| cx3d.metal.64x128  \n(Compute) | eu-de-1  \neu-de-2  \neu-de-3 | 32 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx2.metal.96x768  \n(Memory) | eu-de-1  \neu-de-2 | 48 cores  \n768GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| mx2d.metal.96x768  \n(Memory) | eu-de-1  \neu-de-2 | 48 cores  \n768GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| mx3.metal.16x128  \n(Memory) | eu-de-1  \neu-de-2  \neu-de-3 | 8 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3.metal.48x512  \n(Memory) | eu-de-1  \neu-de-2  \neu-de-3 | 24 cores  \n512GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3.metal.64x512  \n(Memory) | eu-de-1  \neu-de-2  \neu-de-3 | 32 cores  \n512GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.128x1024  \n(Memory) | eu-de-1  \neu-de-2  \neu-de-3 | 64 cores  \n1024GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.16x128  \n(Memory) | eu-de-1  \neu-de-2  \neu-de-3 | 8 cores  \n128GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.192x2048  \n(Memory) | eu-de-1  \neu-de-2  \neu-de-3 | 96 cores  \n2048GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.48x512  \n(Memory) | eu-de-1  \neu-de-2  \neu-de-3 | 24 cores  \n512GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.64x512  \n(Memory) | eu-de-1  \neu-de-2  \neu-de-3 | 32 cores  \n512GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
+| mx3d.metal.96x1024  \n(Memory) | eu-de-1  \neu-de-2  \neu-de-3 | 48 cores  \n1024GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 480GB SSD | N/A | N/A|
 {: class="simple-tab-table"}
 {: caption="Bare metal flavors in Frankfurt." caption-side="bottom"}
 {: #eu-de-physical-table}
@@ -575,7 +619,10 @@ These conditions might impact cluster flavor availability:
 
 | Name | Data centers | Resources | OS | Primary storage | Secondary storage | Secondary storage options (GB / iops-tier)|
 | ---- | ---- |-------------------------------- | ---- | --------------- | ----------------- |  -------------- | 
-|No flavors available.| N/A | N/A | N/A | N/A | N/A | N/A |
+| bx2.metal.96x384  \n(Balanced) | eu-es-1  \neu-es-3 | 48 cores  \n384GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| bx2d.metal.96x384  \n(Balanced) | eu-es-1  \neu-es-3 | 48 cores  \n384GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| cx2.metal.96x192  \n(Compute) | eu-es-1 | 48 cores  \n192GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| cx2d.metal.96x192  \n(Compute) | eu-es-1 | 48 cores  \n192GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
 {: class="simple-tab-table"}
 {: caption="Bare metal flavors in Madrid." caption-side="bottom"}
 {: #eu-es-physical-table}
@@ -1173,7 +1220,9 @@ These conditions might impact cluster flavor availability:
 
 | Name | Data centers | Resources | OS | Primary storage | Secondary storage | Secondary storage options (GB / iops-tier)|
 | ---- | ---- |-------------------------------- | ---- | --------------- | ----------------- |  -------------- | 
-|No flavors available.| N/A | N/A | N/A | N/A | N/A | N/A |
+| bx2d.metal.96x384  \n(Balanced) | jp-tok-2  \njp-tok-3 | 48 cores  \n384GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| cx2d.metal.96x192  \n(Compute) | jp-tok-2  \njp-tok-3 | 48 cores  \n192GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
+| mx2d.metal.96x768  \n(Memory) | jp-tok-2  \njp-tok-3 | 48 cores  \n768GB memory  \n100Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 960GB SSD | N/A | N/A|
 {: class="simple-tab-table"}
 {: caption="Bare metal flavors in Tokyo." caption-side="bottom"}
 {: #jp-tok-physical-table}

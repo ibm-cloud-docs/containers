@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-08"
+lastupdated: "2026-09-11"
 
 
 keywords: change log, version history, Ingress ALB
@@ -290,7 +290,7 @@ Review the version history for Ingress ALB.
 ### 11 August 2026, Version 3.7.6 - 3.7.6_360793471_iks
 {: #cl-ingress-alb-376_360793471_iks}
 
-- Resolves the following CVEs: [GO-2026-6061](https://pkg.go.dev/vuln/GO-2026-6061){: external}.
+- Resolves the following CVEs: [GO-2026-6061](https://pkg.go.dev/vuln/go-2026-6061){: external}.
 
 
 ### 27 July 2026, Version 3.7.6 - 3.7.6_356947877_iks
