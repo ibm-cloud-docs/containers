@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-10"
+lastupdated: "2026-09-14"
 
 
 keywords: containers
@@ -6855,21 +6855,15 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [04 October 2023, Version patch update 1.0.9_134](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#109134_ca)
 
-    * [15 September 2023, Version patch update 1.0.9_103](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#109103_ca)
-
     * [16 February 2024, Version patch update 1.1.0_362](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#110362_ca)
 
     * [27 November 2023, Version patch update 1.0.8_292](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#108292_ca)
 
     * [13 November 2023, Version patch update 1.0.8_233](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#108233_ca)
 
-    * [15 September 2023, Version patch update 1.0.8_104](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#108104_ca)
-
     * [27 November 2023, Version patch update 1.0.7_291](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#107291_ca)
 
     * [13 November 2023, Version patch update 1.0.7_185](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#107_185_ca)
-
-    * [15 September 2023, Version patch update 1.0.7_102](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#107102_ca)
 
 [IBM Storage Operator add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator)
 
@@ -7063,13 +7057,9 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Change log for version 5.1.15_419 released 13 November 2023](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#5.1.15_419_is_block_relnote)
 
-    * [14 September 2023, Version 5.1.13_345](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#5.1.13_345_is_block_relnote)
-
     * [27 November 2023, Version 5.0.23_437](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#5.0.23_437_is_block_relnote)
 
     * [13 November 2023, Version 5.0.21_401](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#5.0.21_401_is_block_relnote)
-
-    * [14 September 2023, Version 5.0.19_358](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#5.0.19_358_is_block_relnote)
 
 [VPC File CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver)
 
@@ -7160,8 +7150,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [27 November 2023, Version 1.1.10_93](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.1.10_93_is_file_relnote)
 
     * [13 November 2023, Version 1.1.9_87](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.1.9_87_is_file_relnote)
-
-    * [14 September 2023, Version 1.1.7_49](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.1.7_is_file_relnote)
 
 [IBM Object CSI Driver add-on version change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver)
 
