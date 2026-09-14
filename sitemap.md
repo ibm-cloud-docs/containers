@@ -461,6 +461,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
 
+    * ALB OAuth Proxy cluster add-on patch updates.
+
     * [10 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep1026)
 
         * Istio cluster add-on patch updates.
@@ -7272,6 +7274,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-supported-versions)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [14 September 2026, Version 2.0.0 - 2.0.0_367915291](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_367915291)
 
     * [31 August 2026, Version 2.0.0 - 2.0.0_364405571](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_364405571)
 
