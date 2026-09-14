@@ -461,7 +461,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
 
-    * ALB OAuth Proxy cluster add-on patch updates.
+    * [14 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep1426)
+
+        * CLI version 1.0.864 is available.
+
+        * ALB OAuth Proxy cluster add-on patch updates.
 
     * [10 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep1026)
 
@@ -6529,6 +6533,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+
+* [Version v1.0.864](/docs/containers?topic=containers-cs_cli_changelog#cli-01864)
 
 * [Version v1.0.843](/docs/containers?topic=containers-cs_cli_changelog#cli-01843)
 
