@@ -61,6 +61,13 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+### 11 September 2026
+{: #containers-sep1126}
+{: release-note}
+
+New! VPC bare metal worker node flavors are available for {{site.data.keyword.containerlong_notm}} version 1.36 with Ubuntu 24.
+:   New VPC bare metal worker node flavors are now available in select regions and provide high-performance bare metal infrastructure for demanding workloads. For more information, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors).
+
 ### 10 September 2026
 {: #containers-sep1026}
 {: release-note}
