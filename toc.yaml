@@ -205,6 +205,7 @@ toc:
           label: App deployment
           topics:
           - app-plan.md
+          - app-resiliency.md
           - images.md
           - app.md
           - cs_app_deploy.md
