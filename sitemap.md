@@ -3226,6 +3226,42 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [After I deploy my app, how can I monitor its health?](/docs/containers?topic=containers-plan_deploy#app_plan_logmet_monitor)
 
+[Developing and testing apps for resiliency](/docs/containers?topic=containers-app-resiliency#app-resiliency)
+
+* [Overview of cluster architecture and responsibilities](/docs/containers?topic=containers-app-resiliency#app-resiliency-overview)
+
+* [How {{site.data.keyword.IBM_notm}} applies control plane patches](/docs/containers?topic=containers-app-resiliency#control-plane-patches)
+
+* [Workload impact during control plane updates](/docs/containers?topic=containers-app-resiliency#workload-impact)
+
+* [Simulating scenarios to test application resiliency](/docs/containers?topic=containers-app-resiliency#simulating-resiliency)
+
+    * [Simulating a control plane patch with a control plane refresh](/docs/containers?topic=containers-app-resiliency#simulate-control-plane-refresh)
+
+    * [Simulating network routing updates by adding and removing worker nodes](/docs/containers?topic=containers-app-resiliency#simulate-worker-routing)
+
+* [Recommended practices for workload resiliency](/docs/containers?topic=containers-app-resiliency#resiliency-best-practices)
+
+    * [Run multiple replicas for every workload](/docs/containers?topic=containers-app-resiliency#resiliency-replicas)
+
+    * [Spread replicas across zones and worker nodes](/docs/containers?topic=containers-app-resiliency#resiliency-topology-spread)
+
+    * [Configure Pod Disruption Budgets (PDBs)](/docs/containers?topic=containers-app-resiliency#resiliency-pdb)
+
+    * [Define readiness and liveness probes](/docs/containers?topic=containers-app-resiliency#resiliency-probes)
+
+    * [Set appropriate resource requests and limits](/docs/containers?topic=containers-app-resiliency#resiliency-resources)
+
+    * [Implement graceful shutdown handling](/docs/containers?topic=containers-app-resiliency#resiliency-graceful-shutdown)
+
+    * [Avoid relying on long-lived connections to the API server](/docs/containers?topic=containers-app-resiliency#resiliency-api-connections)
+
+    * [Use retry logic and circuit breakers](/docs/containers?topic=containers-app-resiliency#resiliency-retry-logic)
+
+* [Next steps](/docs/containers?topic=containers-app-resiliency#resiliency-next-steps)
+
+* [Related links](/docs/containers?topic=containers-app-resiliency#resiliency-related-links)
+
 [Building images for your apps](/docs/containers?topic=containers-images#images)
 
 * [Deploying containers from an {{site.data.keyword.registrylong_notm}} image to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace)
@@ -5235,6 +5271,22 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Understanding the configmap components](/docs/containers?topic=containers-health-monitor#configmap-components)
 
     * [Understanding the individual components of health checks](/docs/containers?topic=containers-health-monitor#health-check-components)
+
+[Using {{site.data.keyword.mon_full_notm}} and {{site.data.keyword.logs_full_notm}} to debug your cluster](/docs/containers?topic=containers-debug-with-observability#debug-with-observability)
+
+* [Before you begin](/docs/containers?topic=containers-debug-with-observability#debug-observability-prereqs)
+
+* [Check worker node resource usage with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-debug-with-observability#debug-observability-nodes)
+
+* [Check pod health and restart counts with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-debug-with-observability#debug-observability-pods)
+
+* [Investigate container logs with {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-debug-with-observability#debug-observability-logs)
+
+* [Check Kubernetes events with {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-debug-with-observability#debug-observability-events)
+
+* [Next steps](/docs/containers?topic=containers-debug-with-observability#debug-observability-next)
+
+* [Related links](/docs/containers?topic=containers-debug-with-observability#debug-observability-related)
 
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit#health-audit)
 
