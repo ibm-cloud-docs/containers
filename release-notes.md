@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-15"
+lastupdated: "2026-09-17"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## September 2026
 {: #containers-sep26}
+
+
 
 ### 15 September 2026
 {: #containers-sep1526}
@@ -58,6 +60,13 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+
+### 11 September 2026
+{: #containers-sep1126}
+{: release-note}
+
+New! VPC bare metal worker node flavors are available for {{site.data.keyword.containerlong_notm}} version 1.36 with Ubuntu 24.
+:   New VPC bare metal worker node flavors are now available in select regions and provide high-performance bare metal infrastructure for demanding workloads. For more information, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors).
 
 ### 10 September 2026
 {: #containers-sep1026}

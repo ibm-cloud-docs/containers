@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-15"
+lastupdated: "2026-09-17"
 
 
 keywords: containers
@@ -472,6 +472,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * CLI version 1.0.864 is available.
 
         * ALB OAuth Proxy cluster add-on patch updates.
+
+    * [11 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep1126)
+
+        * New! VPC bare metal worker node flavors are available for {{site.data.keyword.containerlong_notm}} version 1.36 with Ubuntu 24.
 
     * [10 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep1026)
 
