@@ -2,7 +2,7 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-09-08"
+lastupdated: "2026-09-17"
 
 keywords: containers, cli reference, kubernetes cli, {{site.data.keyword.containerlong_notm}}
 
@@ -10333,7 +10333,7 @@ ibmcloud ks vni help
 List Virtual Network Interfaces attached to a cluster or worker node.
 
 ```sh
-ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--cluster-id ID | --worker WORKER)
+ibmcloud ks vni ls (--cluster-id ID | --worker WORKER) [--after AFTER] [--first FIRST] [--output OUTPUT] [-q]
 ```
 
 #### Command options
@@ -10362,10 +10362,10 @@ ibmcloud ks vni ls [--after AFTER] [--first FIRST] [--output OUTPUT] [-q] (--clu
 #### Examples
 {: #vni-ls-examples}
 
-List VNIs for a cluster.
+List Virtual Network Interfaces attached to a cluster or worker node
 
 ```sh
-ibmcloud oc vni ls --after AFTER --first FIRST -q --cluster-id ID
+ibmcloud ks vni ls --cluster-id CLUSTER_NAME_OR_ID
 ```
 {: pre}
 
