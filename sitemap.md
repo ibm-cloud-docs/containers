@@ -5272,6 +5272,22 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Understanding the individual components of health checks](/docs/containers?topic=containers-health-monitor#health-check-components)
 
+[Using {{site.data.keyword.mon_full_notm}} and {{site.data.keyword.logs_full_notm}} to debug your cluster](/docs/containers?topic=containers-debug-with-observability#debug-with-observability)
+
+* [Before you begin](/docs/containers?topic=containers-debug-with-observability#debug-observability-prereqs)
+
+* [Check worker node resource usage with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-debug-with-observability#debug-observability-nodes)
+
+* [Check pod health and restart counts with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-debug-with-observability#debug-observability-pods)
+
+* [Investigate container logs with {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-debug-with-observability#debug-observability-logs)
+
+* [Check Kubernetes events with {{site.data.keyword.logs_full_notm}}](/docs/containers?topic=containers-debug-with-observability#debug-observability-events)
+
+* [Next steps](/docs/containers?topic=containers-debug-with-observability#debug-observability-next)
+
+* [Related links](/docs/containers?topic=containers-debug-with-observability#debug-observability-related)
+
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit#health-audit)
 
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)

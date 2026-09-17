@@ -360,6 +360,7 @@ toc:
           - monitoring.md
           - cs_health_log.md
           - cs_health_monitor.md
+          - debug-with-observability.md
           - health-audit.md
           - vpc-flow-logs.md
           - at-events-ref.md
