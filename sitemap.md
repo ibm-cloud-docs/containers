@@ -6696,9 +6696,112 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 ## API reference
-{: #sitemap_api-reference}
+{: #sitemap_api_reference}
 
-[API reference](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external}
+
+[Rest API reference](https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2){: external}
+
+[GraphQL API reference](/docs/containers?topic=containers-cs-graphql-api#cs-graphql-api)
+
+* [Queries](/docs/containers?topic=containers-cs-graphql-api#queries)
+
+    * [`globalSearchSatelliteConnectorAccounts`](/docs/containers?topic=containers-cs-graphql-api#globalsearchsatelliteconnectoraccounts)
+
+    * [`node`](/docs/containers?topic=containers-cs-graphql-api#node)
+
+    * [`satelliteConnectors`](/docs/containers?topic=containers-cs-graphql-api#satelliteconnectors)
+
+* [Mutations](/docs/containers?topic=containers-cs-graphql-api#mutations)
+
+    * [`addVirtualNetworkInterfaceToBareMetalNode`](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnode)
+
+    * [`createSatelliteConnector`](/docs/containers?topic=containers-cs-graphql-api#createsatelliteconnector)
+
+    * [`reinitializeKubernetesNode`](/docs/containers?topic=containers-cs-graphql-api#reinitializekubernetesnode)
+
+    * [`removeSatelliteConnector`](/docs/containers?topic=containers-cs-graphql-api#removesatelliteconnector)
+
+    * [`removeVirtualNetworkInterfaceFromNode`](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnode)
+
+    * [`updateSatelliteLocation`](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocation)
+
+* [Object types](/docs/containers?topic=containers-cs-graphql-api#object-types)
+
+    * [Account](/docs/containers?topic=containers-cs-graphql-api#account)
+
+    * [AddVirtualNetworkInterfaceToBareMetalNodePayload](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnodepayload)
+
+    * [BareMetalNetworkAttachmentByVLAN](/docs/containers?topic=containers-cs-graphql-api#baremetalnetworkattachmentbyvlan)
+
+    * [BareMetalVirtualNetworkInterface](/docs/containers?topic=containers-cs-graphql-api#baremetalvirtualnetworkinterface)
+
+    * [CreateSatelliteConnectorPayload](/docs/containers?topic=containers-cs-graphql-api#createsatelliteconnectorpayload)
+
+    * [KubernetesCluster](/docs/containers?topic=containers-cs-graphql-api#kubernetescluster)
+
+    * [Region](/docs/containers?topic=containers-cs-graphql-api#region)
+
+    * [ReinitializeKubernetesNodePayload](/docs/containers?topic=containers-cs-graphql-api#reinitializekubernetesnodepayload)
+
+    * [RemoveSatelliteConnectorPayload](/docs/containers?topic=containers-cs-graphql-api#removesatelliteconnectorpayload)
+
+    * [RemoveVirtualNetworkInterfaceFromNodePayload](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnodepayload)
+
+    * [ResourceGroup](/docs/containers?topic=containers-cs-graphql-api#resourcegroup)
+
+    * [SatelliteConnector](/docs/containers?topic=containers-cs-graphql-api#satelliteconnector)
+
+    * [SatelliteLocation](/docs/containers?topic=containers-cs-graphql-api#satellitelocation)
+
+    * [SecurityGroup](/docs/containers?topic=containers-cs-graphql-api#securitygroup)
+
+    * [Subnet](/docs/containers?topic=containers-cs-graphql-api#subnet)
+
+    * [UpdateSatelliteLocationPayload](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocationpayload)
+
+    * [VPCBareMetalKubernetesNode](/docs/containers?topic=containers-cs-graphql-api#vpcbaremetalkubernetesnode)
+
+* [Interface types](/docs/containers?topic=containers-cs-graphql-api#interface-types)
+
+    * [KubernetesNode](/docs/containers?topic=containers-cs-graphql-api#kubernetesnode)
+
+    * [Location](/docs/containers?topic=containers-cs-graphql-api#location)
+
+    * [NetworkAttachable](/docs/containers?topic=containers-cs-graphql-api#networkattachable)
+
+    * [NetworkAttachment](/docs/containers?topic=containers-cs-graphql-api#networkattachment)
+
+    * [Node](/docs/containers?topic=containers-cs-graphql-api#node)
+
+    * [VirtualNetworkInterface](/docs/containers?topic=containers-cs-graphql-api#virtualnetworkinterface)
+
+* [Input types](/docs/containers?topic=containers-cs-graphql-api#input-types)
+
+    * [AddVirtualNetworkInterfaceToBareMetalNodeInput](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnodeinput)
+
+    * [CreateSatelliteConnectorInput](/docs/containers?topic=containers-cs-graphql-api#createsatelliteconnectorinput)
+
+    * [ReinitializeKubernetesNodeInput](/docs/containers?topic=containers-cs-graphql-api#reinitializekubernetesnodeinput)
+
+    * [RemoveSatelliteConnectorInput](/docs/containers?topic=containers-cs-graphql-api#removesatelliteconnectorinput)
+
+    * [RemoveVirtualNetworkInterfaceFromNodeInput](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnodeinput)
+
+    * [UpdateSatelliteLocationInput](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocationinput)
+
+* [Enum types](/docs/containers?topic=containers-cs-graphql-api#enum-types)
+
+    * [SatelliteConnectorState](/docs/containers?topic=containers-cs-graphql-api#satelliteconnectorstate)
+
+* [Scalar types](/docs/containers?topic=containers-cs-graphql-api#scalar-types)
+
+    * [CloudResourceName](/docs/containers?topic=containers-cs-graphql-api#cloudresourcename)
+
+    * [DateTime](/docs/containers?topic=containers-cs-graphql-api#datetime)
+
+    * [IPv4Address](/docs/containers?topic=containers-cs-graphql-api#ipv4address)
+
+    * [MACAddress](/docs/containers?topic=containers-cs-graphql-api#macaddress)
 
 
 ## Add-on version history

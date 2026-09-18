@@ -404,9 +404,14 @@ toc:
           - cli-map.md
           - cli-ks-plugin-v2.md
           - cli-changelog.md
-      - link:
+      - topicgroup:
           label: API reference
-          href: https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2
+          topics:
+          - link:
+              label: Rest API reference
+              href: https://cloud.ibm.com/apidocs/kubernetes/containers-v1-v2
+          - topic: cs-graphql-api.md
+            navtitle: GraphQL API reference
       - topicgroup:
           label: Add-on version history
           topics:
