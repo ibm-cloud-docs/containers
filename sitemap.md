@@ -6705,8 +6705,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Queries](/docs/containers?topic=containers-cs-graphql-api#queries)
 
-    * [`globalSearchSatelliteConnectorAccounts`](/docs/containers?topic=containers-cs-graphql-api#globalsearchsatelliteconnectoraccounts)
-
     * [`node`](/docs/containers?topic=containers-cs-graphql-api#node)
 
     * [`satelliteConnectors`](/docs/containers?topic=containers-cs-graphql-api#satelliteconnectors)
