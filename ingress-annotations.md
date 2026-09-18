@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-06"
+lastupdated: "2026-09-18"
 
 keywords: kubernetes, nginx, ingress controller
 
@@ -21,7 +21,7 @@ subcollection: containers
 Modify the default settings for ALBs that run the Kubernetes Ingress image.
 {: shortdesc}
 
-Sometimes, you can customize routing for Ingress by adding [Kubernetes NGINX annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external} (`nginx.ingress.kubernetes.io/<annotation>`). Kubernetes NGINX annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations. Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.
+Sometimes, you can customize routing for Ingress by adding [Kubernetes NGINX annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external} (`nginx.ingress.kubernetes.io/<annotation>`). Kubernetes NGINX annotations are always applied to all service paths in the resource, and you can't specify service names within the annotations.
 {: note}
 
 Kubernetes Ingress Controllers (ALBs) on clusters created on or after 31 January 2022 do not process Ingress resources that have snippet annotations (for example, `nginx.ingress.kubernetes.io/configuration-snippet`) by default as all new clusters are deployed with `allow-snippet-annotations: "false"` configuration in the ALB's ConfigMap. If you add any configuration snippets recommended here, you need to edit the ALB's ConfigMap (`kube-system/ibm-k8s-controller-config`) and change `allow-snippet-annotations: "false"` to `allow-snippet-annotations: "true"`.
