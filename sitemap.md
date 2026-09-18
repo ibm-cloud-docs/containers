@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-17"
+lastupdated: "2026-09-18"
 
 
 keywords: containers
@@ -458,8 +458,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
-
-* [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
 
     * [16 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep1626)
 
@@ -6695,62 +6693,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Version v1.0.595](/docs/containers?topic=containers-cs_cli_changelog#cli-01959)
 
 * [Version v1.0.589](/docs/containers?topic=containers-cs_cli_changelog#cli-01589)
-
-* [Version v1.0.579](/docs/containers?topic=containers-cs_cli_changelog#cli-01579)
-
-* [Version 0.1.573](/docs/containers?topic=containers-cs_cli_changelog#cli-01573)
-
-* [Version v1.0.566](/docs/containers?topic=containers-cs_cli_changelog#cli-10566)
-
-* [Version v1.0.540](/docs/containers?topic=containers-cs_cli_changelog#cli-10549)
-
-* [Version v1.0.528](/docs/containers?topic=containers-cs_cli_changelog#cli-10528)
-
-* [Version v1.0.523](/docs/containers?topic=containers-cs_cli_changelog#cli-10523)
-
-* [Version v1.0.516](/docs/containers?topic=containers-cs_cli_changelog#cli-10516)
-
-* [Version v1.0.510](/docs/containers?topic=containers-cs_cli_changelog#cli-10510)
-
-* [Version v1.0.498](/docs/containers?topic=containers-cs_cli_changelog#cli-10498)
-
-* [Version 1.0.489](/docs/containers?topic=containers-cs_cli_changelog#cli-10489)
-
-* [Version 1.0.487](/docs/containers?topic=containers-cs_cli_changelog#cli-10487)
-
-* [Version 1.0.480](/docs/containers?topic=containers-cs_cli_changelog#cli-10480)
-
-* [Version 1.0.471](/docs/containers?topic=containers-cs_cli_changelog#cli-10471)
-
-* [Version 1.0.459](/docs/containers?topic=containers-cs_cli_changelog#cli-10459)
-
-* [Version 1.0.454](/docs/containers?topic=containers-cs_cli_changelog#cli-10454)
-
-* [Version 1.0.452](/docs/containers?topic=containers-cs_cli_changelog#cli-10452)
-
-* [Version 1.0.446](/docs/containers?topic=containers-cs_cli_changelog#cli-10446)
-
-* [Version 1.0.444](/docs/containers?topic=containers-cs_cli_changelog#cli-10444)
-
-* [Version 1.0.439](/docs/containers?topic=containers-cs_cli_changelog#cli-10439)
-
-* [Version 1.0.433](/docs/containers?topic=containers-cs_cli_changelog#cli-10433)
-
-* [Version 1.0.431](/docs/containers?topic=containers-cs_cli_changelog#cli-10431)
-
-* [Version 1.0.430](/docs/containers?topic=containers-cs_cli_changelog#cli-10430)
-
-* [Version 1.0.426](/docs/containers?topic=containers-cs_cli_changelog#cli-10426)
-
-* [Version 1.0.422](/docs/containers?topic=containers-cs_cli_changelog#cli-10422)
-
-* [Version 1.0.420](/docs/containers?topic=containers-cs_cli_changelog#cli-10420)
-
-* [Version 1.0.419](/docs/containers?topic=containers-cs_cli_changelog#cli-10419)
-
-* [Version 1.0.415](/docs/containers?topic=containers-cs_cli_changelog#cli-10415)
-
-* [Version 1.0.408](/docs/containers?topic=containers-cs_cli_changelog#cli-10408)
 
 
 ## API reference
