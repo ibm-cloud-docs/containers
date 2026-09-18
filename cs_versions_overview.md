@@ -46,7 +46,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 |---|---|---|---|---|
 |1.36 [Default]{: tag-purple} |26 June 2026|01 August 2027†|UBUNTU 24 64| - [1.36 details and update actions](/docs/containers?topic=containers-cs_versions_136)  \n - [Change log](/docs/containers?topic=containers-changelog_136)|
 |1.35|05 March 2026|28 April 2027†|UBUNTU 24 64| - [1.35 details and update actions](/docs/containers?topic=containers-cs_versions_135)  \n - [Change log](/docs/containers?topic=containers-changelog_135)|
-|1.34 [Deprecated]{: tag-deprecated} |20 November 2025|01 November 2026|UBUNTU 24 64| - [1.34 details and update actions](/docs/containers?topic=containers-cs_versions_134)  \n - [Change log](/docs/containers?topic=containers-changelog_134)|
+|1.34 [Deprecated]{: tag-deprecated} |20 November 2025|20 January 2027|UBUNTU 24 64| - [1.34 details and update actions](/docs/containers?topic=containers-cs_versions_134)  \n - [Change log](/docs/containers?topic=containers-changelog_134)|
 |1.33 [Deprecated]{: tag-deprecated} |31 July 2025|14 October 2026|UBUNTU 24 64| - [1.33 details and update actions](/docs/containers?topic=containers-cs_versions_133)  \n - [Change log](/docs/containers?topic=containers-changelog_133)|
 {: caption="Available versions for Kubernetes" caption-side="bottom"}
 
