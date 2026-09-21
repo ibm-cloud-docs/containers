@@ -2,9 +2,9 @@
 
 copyright:
   years: 2024, 2026
-lastupdated: "2026-09-17"
+lastupdated: "2026-09-21"
 
-keywords: containers, cli reference, kubernetes cli, {{site.data.keyword.containerlong_notm}}
+keywords: containers, openshift, cli reference, kubernetes cli, {{site.data.keyword.containerlong_notm}}
 
 subcollection: containers
 
@@ -14,10 +14,10 @@ content-type: cli-docs
 
 {{site.data.keyword.attribute-definition-list}}
 
-# {{site.data.keyword.containerlong_notm}} CLI reference
+# {{site.data.keyword.containerlong_notm}} CLI plug-in reference
 {: #kubernetes-service-cli}
 
-Refer to these commands to create and manage {{site.data.keyword.containerlong_notm}} clusters.
+Use these commands to create and manage clusters for {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.openshiftlong_notm}}, and {{site.data.keyword.satellitelong_notm}}.
 {: shortdesc}
 
 In the command line, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and options.
@@ -462,6 +462,42 @@ ibmcloud ks cluster addon disable ibm-storage-operator --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster addon disable image-key-synchronizer`
+{: #cluster-addon-disable-image-key-synchronizer-cli}
+
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
+
+The IBM Cloud Image Key Synchronizer add-on.
+
+```sh
+ibmcloud ks cluster addon disable image-key-synchronizer --cluster CLUSTER [-f] [-q]
+```
+
+#### Command options
+{: #cluster-addon-disable-image-key-synchronizer-options}
+
+
+`-c`, `--cluster`
+:    Specify the cluster name or ID.
+
+`-f`
+:    Force the command to run without user prompts.
+
+`-q`
+:    Do not show the message of the day or update reminders.
+
+
+#### Examples
+{: #cluster-addon-disable-image-key-synchronizer-examples}
+
+The IBM Cloud Image Key Synchronizer add-on
+
+```sh
+ibmcloud ks cluster addon disable image-key-synchronizer --cluster CLUSTER
+```
+{: pre}
+
+
 ### `ibmcloud ks cluster addon disable istio`
 {: #cluster-addon-disable-istio-cli}
 
@@ -644,6 +680,42 @@ Disable the Kubernetes web terminal add-on
 
 ```sh
 ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER
+```
+{: pre}
+
+
+### `ibmcloud ks cluster addon disable openshift-data-foundation`
+{: #cluster-addon-disable-openshift-data-foundation-cli}
+
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
+
+The Red Hat OpenShift Data Foundation on IBM Cloud add-on
+
+```sh
+ibmcloud ks cluster addon disable openshift-data-foundation --cluster CLUSTER [-f] [-q]
+```
+
+#### Command options
+{: #cluster-addon-disable-openshift-data-foundation-options}
+
+
+`-c`, `--cluster`
+:    Specify the cluster name or ID.
+
+`-f`
+:    Force the command to run without user prompts.
+
+`-q`
+:    Do not show the message of the day or update reminders.
+
+
+#### Examples
+{: #cluster-addon-disable-openshift-data-foundation-examples}
+
+The Red Hat OpenShift Data Foundation on IBM Cloud add-on
+
+```sh
+ibmcloud ks cluster addon disable openshift-data-foundation --cluster CLUSTER
 ```
 {: pre}
 
@@ -1028,6 +1100,45 @@ ibmcloud ks cluster addon enable ibm-storage-operator --cluster CLUSTER
 {: pre}
 
 
+### `ibmcloud ks cluster addon enable image-key-synchronizer`
+{: #cluster-addon-enable-image-key-synchronizer-cli}
+
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
+
+The IBM Cloud Image Key Synchronizer add-on.
+
+```sh
+ibmcloud ks cluster addon enable image-key-synchronizer --cluster CLUSTER [-q] [--version VERSION] [-y]
+```
+
+#### Command options
+{: #cluster-addon-enable-image-key-synchronizer-options}
+
+
+`-c`, `--cluster`
+:    Specify the cluster name or ID.
+
+`-q`
+:    Do not show the message of the day or update reminders.
+
+`--version`
+:    Specify the version of the add-on to install. If no version is specified, the default version is installed.
+
+`-y`
+:    Enable all add-on dependencies.
+
+
+#### Examples
+{: #cluster-addon-enable-image-key-synchronizer-examples}
+
+The IBM Cloud Image Key Synchronizer add-on
+
+```sh
+ibmcloud ks cluster addon enable image-key-synchronizer --cluster CLUSTER
+```
+{: pre}
+
+
 ### `ibmcloud ks cluster addon enable istio`
 {: #cluster-addon-enable-istio-cli}
 
@@ -1147,6 +1258,51 @@ Enable the Istio BookInfo sample application add-on on a cluster (deprecated)
 
 ```sh
 ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster CLUSTER
+```
+{: pre}
+
+
+### `ibmcloud ks cluster addon enable openshift-data-foundation`
+{: #cluster-addon-enable-openshift-data-foundation-cli}
+
+[Virtual Private Cloud]{: tag-vpc} [Classic infrastructure]{: tag-classic-inf} [Satellite]{: tag-satellite} 
+
+The Red Hat OpenShift Data Foundation on IBM Cloud add-on
+
+```sh
+ibmcloud ks cluster addon enable openshift-data-foundation --cluster CLUSTER [-f] [--param PARAM] [-q] [--version VERSION] [-y]
+```
+
+#### Command options
+{: #cluster-addon-enable-openshift-data-foundation-options}
+
+
+`-c`, `--cluster`
+:    Specify the cluster name or ID.
+
+`-f`
+:    Force the command to run without user prompts.
+
+`--param`
+:    Specify installation options for the add-on. If no parameters are specified, the default values are used. Review the available options with the `ibmcloud ks cluster addon options` command.
+
+`-q`
+:    Do not show the message of the day or update reminders.
+
+`--version`
+:    Specify the version of the add-on to install. If no version is specified, the default version is installed.
+
+`-y`
+:    Enable all add-on dependencies.
+
+
+#### Examples
+{: #cluster-addon-enable-openshift-data-foundation-examples}
+
+The Red Hat OpenShift Data Foundation on IBM Cloud add-on
+
+```sh
+ibmcloud ks cluster addon enable openshift-data-foundation --cluster CLUSTER
 ```
 {: pre}
 
