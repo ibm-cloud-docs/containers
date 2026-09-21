@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-18"
+lastupdated: "2026-09-21"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -767,8 +767,6 @@ VPC File CSI Driver cluster add-on patch updates.
 
 
 
-
-
 ### 13 May 2026
 {: #containers-may1326}
 {: release-note}
@@ -1135,7 +1133,6 @@ Cluster autoscaler cluster add-on patch updates.
 
 
 
-
 ### 12 March 2026
 {: #containers-mar1226}
 {: release-note}
@@ -1330,8 +1327,6 @@ VPC Block CSI Driver cluster add-on patch updates.
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
-
-
 
 
 
@@ -1611,8 +1606,6 @@ Ingress ALB cluster add-on patch updates.
 
 
 
-
-
 ### 16 November 2025
 {: #containers-nov1625}
 {: release-note}
@@ -1707,7 +1700,6 @@ CLI version `1.0.727` is available.
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
-
 
 
 
@@ -2252,8 +2244,6 @@ Ubuntu 20 is unsupported.
 
 
 
-
-
 ### 20 May 2025
 {: #containers-may2025}
 {: release-note}
@@ -2348,7 +2338,6 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
-
 ### 24 April 2025
 {: #containers-24april25}
 {: release-note}
@@ -2388,8 +2377,6 @@ Ingress ALB cluster add-on patch updates.
 
 
 
-
-
 ### 08 April 2025
 {: #containers-08april25}
 {: release-note}
@@ -2400,7 +2387,6 @@ Ingress ALB cluster add-on patch updates.
 
 {{site.data.keyword.cos_full_notm}} plug-in updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-object-storage-plug-in).
-
 
 
 
@@ -2478,6 +2464,7 @@ Ingress ALB cluster add-on patch updates.
 
 
 
+
 ### 17 March 2025
 {: #containers-17march25}
 {: release-note}
@@ -2543,7 +2530,6 @@ Version 1.32 is now the default version for {{site.data.keyword.containerlong_no
 
 Migrating from the Observability plug-in to {{site.data.keyword.logs_full_notm}}
 :   Support for the Observability plug-in ends on 28 March 2025. Review and complete the migration steps before support ends.
-
 
 
 
@@ -2673,12 +2659,14 @@ Static Route cluster add-on patch updates.
 
 
 
+
 ### 29 January 2025
 {: #containers-jan2925}
 {: release-note}
 
 New! {{site.data.keyword.containerlong_notm}} version 1.32.
 :   You can now create or update clusters to Kubernetes version 1.32. With Kubernetes 1.32, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
 
 
 
@@ -2736,13 +2724,13 @@ Istio add-on patch updates.
 
 
 
-
 ### 08 January 2025
 {: #containers-jan0825}
 {: release-note}
 
 Ingress ALB cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
 
 
 
@@ -3398,7 +3386,6 @@ Cluster autoscaler add-on patch updates for {{site.data.keyword.containerlong_no
 
 
 
-
 ### 11 July 2024
 {: #containers-july1124}
 {: release-note}
@@ -3858,7 +3845,6 @@ New! NVIDIA L40 GPU support. You can now create VPC clusters with worker nodes w
 
 
 
-
 ### 18 March 2024
 {: #containers-mar1824}
 {: release-note}
@@ -3899,7 +3885,6 @@ Version 1.29 is the default version for {{site.data.keyword.containerlong_notm}}
 
 {{site.data.keyword.filestorage_vpc_full_notm}} add-on patch update.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
-
 
 
 
@@ -4006,8 +3991,6 @@ Kubernetes version 1.29 certification
 
 
 
-
-
 ### 19 February 2024
 {: #containers-feb1924}
 {: release-note}
@@ -4024,8 +4007,6 @@ Ingress ALB versions `1.9.4_6359_iks` and `1.8.4_6363_iks` are available for {{s
 
 {{site.data.keyword.containerlong_notm}} cluster autoscaler add-on patch update `1.1.0_362`.
 :   For more information, see [the change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
-
-
 
 
 

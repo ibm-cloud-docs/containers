@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-18"
+lastupdated: "2026-09-21"
 
 
 keywords: containers
@@ -5888,7 +5888,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`zone` commands](/docs/containers?topic=containers-icks_map#icks_map_zone)
 
-[{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
+[{{site.data.keyword.containerlong_notm}} CLI plug-in reference](/docs/containers?topic=containers-kubernetes-service-cli#kubernetes-service-cli)
 
 * [Api commands](/docs/containers?topic=containers-kubernetes-service-cli#api-cli)
 
@@ -5920,6 +5920,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`ibmcloud ks cluster addon disable ibm-storage-operator`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-ibm-storage-operator-cli)
 
+    * [`ibmcloud ks cluster addon disable image-key-synchronizer`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-image-key-synchronizer-cli)
+
     * [`ibmcloud ks cluster addon disable istio`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-istio-cli)
 
     * [`ibmcloud ks cluster addon disable istio-extras`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-istio-extras-cli)
@@ -5929,6 +5931,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [`ibmcloud ks cluster addon disable knative`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-knative-cli)
 
     * [`ibmcloud ks cluster addon disable kube-terminal`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-kube-terminal-cli)
+
+    * [`ibmcloud ks cluster addon disable openshift-data-foundation`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-openshift-data-foundation-cli)
 
     * [`ibmcloud ks cluster addon disable static-route`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-disable-static-route-cli)
 
@@ -5950,11 +5954,15 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`ibmcloud ks cluster addon enable ibm-storage-operator`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-ibm-storage-operator-cli)
 
+    * [`ibmcloud ks cluster addon enable image-key-synchronizer`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-image-key-synchronizer-cli)
+
     * [`ibmcloud ks cluster addon enable istio`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-istio-cli)
 
     * [`ibmcloud ks cluster addon enable istio-extras`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-istio-extras-cli)
 
     * [`ibmcloud ks cluster addon enable istio-sample-bookinfo`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-istio-sample-bookinfo-cli)
+
+    * [`ibmcloud ks cluster addon enable openshift-data-foundation`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-openshift-data-foundation-cli)
 
     * [`ibmcloud ks cluster addon enable static-route`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-static-route-cli)
 
