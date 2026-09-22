@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-21"
+lastupdated: "2026-09-22"
 
 
 keywords: containers
@@ -6809,6 +6809,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [MACAddress](/docs/containers?topic=containers-cs-graphql-api#macaddress)
 
+* [Internal queries](/docs/containers?topic=containers-cs-graphql-api#internal-queries)
+
+    * [`globalSearchSatelliteConnectorAccounts`](/docs/containers?topic=containers-cs-graphql-api#globalsearchsatelliteconnectoraccounts)
+
 
 ## Add-on version history
 {: #sitemap_add-on_version_history}
@@ -7467,6 +7471,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-supported-versions)
 
 * [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
+
+    * [22 September 2026, Version 0.1.0 - headlamp-0.1.0-370836550](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-370836550)
 
     * [24 August 2026, Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-)
 
