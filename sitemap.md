@@ -459,6 +459,22 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
+
+    * [23 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2326)
+
+        * VPC Block CSI Driver cluster add-on patch updates.
+
+        * Istio cluster add-on patch updates.
+
+    * [21 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2126)
+
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
+
+    * [18 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep1826)
+
+        * {{site.data.keyword.containerlong_notm}} version 1.34 is deprecated.
+
     * [16 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep1626)
 
         * VPC Block CSI Driver cluster add-on patch updates.
@@ -5400,6 +5416,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+* [21 September 2026, Worker node fix pack 1.36.3_1530](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1530_W)
+
 * [08 September 2026, Worker node fix pack 1.36.3_1529](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1529_W)
 
 * [25 August 2026, Worker node fix pack 1.36.3_1527](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1527_W)
@@ -5478,6 +5496,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+* [21 September 2026, Worker node fix pack 1.35.7_1544](/docs/containers?topic=containers-changelog_135#cl-boms-1357_1544_W)
 
 * [08 September 2026, Worker node fix pack 1.35.7_1543](/docs/containers?topic=containers-changelog_135#cl-boms-1357_1543_W)
 
@@ -5581,6 +5601,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+* [21 September 2026, Worker node fix pack 1.34.10_1566](/docs/containers?topic=containers-changelog_134#cl-boms-13410_1566_W)
 
 * [08 September 2026, Worker node fix pack 1.34.10_1565](/docs/containers?topic=containers-changelog_134#cl-boms-13410_1565_W)
 
@@ -5704,6 +5726,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+* [21 September 2026, Worker node fix pack 1.33.13_1585](/docs/containers?topic=containers-changelog_133#cl-boms-13313_1585_W)
 
 * [08 September 2026, Worker node fix pack 1.33.13_1584](/docs/containers?topic=containers-changelog_133#cl-boms-13313_1584_W)
 
