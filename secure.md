@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-08-06"
+lastupdated: "2026-09-23"
 
 
 keywords: containers
@@ -203,7 +203,7 @@ Encrypted disks {: #encrypted_disk}
     {: note}
 
 Expert AppArmor policies
-:   Every worker node is set up with security and access policies that are enforced by [AppArmor](https://wiki.ubuntu.com/AppArmor){: external} profiles that are loaded into the worker node during bootstrapping. AppArmor profiles can't be changed by the user or owner of the machine. 
+:   Every worker node is set up with security and access policies that are enforced by [AppArmor](https://apparmor.net/){: external} profiles that are loaded into the worker node during bootstrapping. AppArmor profiles can't be changed by the user or owner of the machine.
 
 SSH disabled
 :   By default, SSH access is disabled on the worker node to protect your cluster from malicious attacks. When SSH access is disabled, access to the cluster is forced via the Kubernetes API server. The Kubernetes API server requires every request to be checked against the policies that are set in the authentication, authorization, and admission control module before the request is executed in the cluster.
