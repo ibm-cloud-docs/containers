@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-22"
+lastupdated: "2026-09-23"
 
 
 keywords: containers
@@ -6826,6 +6826,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-supported-versions)
 
+* [Version 1.31](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.31)
+
+    * [23 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
+
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
 
     * [10 September 2026, Version 1.30 - 1.30.4](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1304)
@@ -7122,6 +7126,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
+    * [23 September 2026, Version 5.2 - v5.2.62_371105267](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5262_371105267)
+
     * [16 September 2026, Version 5.2 - v5.2.61_369265005](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5261_369265005)
 
     * [01 September 2026, Version 5.2 - v5.2.60_365903834](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5260_365903834)
@@ -7171,6 +7177,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [17 February 2025, Version 5.2 - 5.2.31_687](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5231_687)
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
+
+    * [23 September 2026, Version 5.1 - v5.1.62_371311380](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5162_371311380)
 
     * [16 September 2026, Version 5.1 - v5.1.61_369264966](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5161_369264966)
 
