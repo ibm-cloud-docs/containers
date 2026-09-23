@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-09"
+lastupdated: "2026-09-23"
 
 
 keywords: change log, version history, Static Route
@@ -42,7 +42,7 @@ ibmcloud ks cluster addon versions
 
 | Add-on version | Supported Kubernetes versions |
 |---|---|
-| `1.0.0` | `>=1.26.0 <1.37.0` |
+| `1.0.0` | `>=1.26.0 <1.38.0` |
 {: caption="Supported Static Route add-on versions" caption-side="bottom"}
 
 

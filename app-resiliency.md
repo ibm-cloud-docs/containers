@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026
-lastupdated: "2026-09-17"
+lastupdated: "2026-09-23"
 
 keywords: containers, resiliency, high availability, control plane, patch, master refresh, replica set, pod disruption budget, probes
 
@@ -177,7 +177,7 @@ When your application interacts with the Kubernetes API, external databases, or 
 
 - Review [Planning app deployments](/docs/containers?topic=containers-plan_deploy) to learn more about workload types and Kubernetes objects.
 - Learn about [Deploying apps to clusters](/docs/containers?topic=containers-app) with complete configuration examples.
-- Read [High availability and disaster recovery](/docs/containers?topic=containers-ha-dr) for cluster-level availability strategies.
+- Read [High availability and disaster recovery](/docs/containers?topic=containers-iks-ha-dr) for cluster-level availability strategies.
 
 ## Related links
 {: #resiliency-related-links}
