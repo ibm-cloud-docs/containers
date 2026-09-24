@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2026
-lastupdated: "2026-03-02"
+lastupdated: "2026-09-24"
 
 
 keywords: kubernetes, containers, 133, version 133, 133 update actions
@@ -24,7 +24,13 @@ Review information about version 1.33 of {{site.data.keyword.containerlong}}. Fo
 {: shortdesc}
 
 
-![This badge indicates Kubernetes version 1.33 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.33 certification badge" caption-side="bottom"} 
+
+This version is deprecated. Update your cluster to a [supported version](/docs/containers?topic=containers-cs_versions) as soon as possible.
+{: deprecated}
+
+
+
+![This badge indicates Kubernetes version 1.33 certification for {{site.data.keyword.containerlong_notm}}](images/certified-kubernetes-color.svg){: caption="Kubernetes version 1.33 certification badge" caption-side="bottom"}
 
 {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.33 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._
 
