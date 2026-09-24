@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2024, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-09-24"
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, secure by default, outbound traffic protection, 1.30
 
@@ -356,7 +356,7 @@ You can choose one of the following options to allow traffic over the public net
     1. Get your cluster details and note of the API server port.
 
         ```sh
-        ic ks cluster get --cluster <clusterID>
+        ibmcloud ks cluster get --cluster <clusterID>
         ```
         {: pre}
 
