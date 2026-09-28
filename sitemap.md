@@ -461,9 +461,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
 
-    * [23 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2326)
+    * [28 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2826)
 
         * VPC Block CSI Driver cluster add-on patch updates.
+
+        * Self-managed NVIDIA GPU driver documentation updates for Kubernetes version 1.36 and later
 
         * Istio cluster add-on patch updates.
 
@@ -2288,6 +2290,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update&interface=cli#vpc_worker_cli)
 
+    * [Firmware updates during VPC bare metal worker reload](/docs/containers?topic=containers-update&interface=cli#vpc_bm_firmware)
+
     * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update&interface=ui#vpc_worker_ui)
 
 * [Updating flavors (machine types)](/docs/containers?topic=containers-update&interface=ui#machine_type)
@@ -3069,6 +3073,20 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
 
+[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
+
+* [Setting up the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
+
+* [Setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+
+    * [Steps to enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#steps-set-up-public)
+
+    * [Steps to disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se)
+
+* [Switching from the public cloud service endpoint to the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+
+* [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
+
 [Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
 
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
@@ -3362,7 +3380,17 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Migration examples](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-examples)
 
-* [Example 1: Single GPU node in the cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-node)
+* [Example 1: New cluster on version 1.36 or later](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-cluster)
+
+    * [Step 1: Verify cluster and worker nodes](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-verify-nodes)
+
+    * [Step 2: Install the NVIDIA GPU Operator](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-install-operator)
+
+    * [Step 3: Verify GPU operator components](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-verify-operator)
+
+    * [Step 4: Verify GPU workloads](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-verify-workload)
+
+* [Example 1: Single GPU node in an existing cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-node)
 
     * [Step 1: Get the initial cluster state](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-initial-state)
 
@@ -3376,7 +3404,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Step 6: Remove the temporary node (optional)](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-cleanup)
 
-* [Example 2: Multiple GPU nodes in the cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-nodes)
+* [Example 2: Multiple GPU nodes in an existing cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-nodes)
 
     * [Step 1: Get the initial cluster state](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-initial-state)
 
@@ -6852,7 +6880,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.31](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.31)
 
-    * [23 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
+    * [28 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
 
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
 
@@ -7150,7 +7178,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 5.2](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.2)
 
-    * [23 September 2026, Version 5.2 - v5.2.62_371105267](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5262_371105267)
+    * [28 September 2026, Version 5.2 - v5.2.62_371105267](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5262_371105267)
 
     * [16 September 2026, Version 5.2 - v5.2.61_369265005](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5261_369265005)
 
@@ -7202,7 +7230,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
 
-    * [23 September 2026, Version 5.1 - v5.1.62_371311380](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5162_371311380)
+    * [28 September 2026, Version 5.1 - v5.1.62_371311380](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5162_371311380)
 
     * [16 September 2026, Version 5.1 - v5.1.61_369264966](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5161_369264966)
 
@@ -8540,7 +8568,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`Reloading` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
 
-* [`Reloading_failed` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
+* [`reload_failed` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
 
 * [`Reload_pending` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
 

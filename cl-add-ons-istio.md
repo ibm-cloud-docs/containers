@@ -3,12 +3,12 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-23"
+lastupdated: "2026-09-28"
 
 
 keywords: change log, version history, Istio
 
-subcollection: "containers"
+subcollection: containers
 
 ---
 
@@ -35,8 +35,6 @@ ibmcloud ks cluster addon versions
 {: pre}
 
 
-
-
 ## Supported versions
 {: #cl-add-ons-istio-supported-versions}
 
@@ -52,7 +50,6 @@ ibmcloud ks cluster addon versions
 
 
 
-
 Review the version history for Istio.
 {: shortdesc}
 
@@ -61,7 +58,7 @@ Review the version history for Istio.
 {: #cl-add-ons-istio-1.31}
 
 
-### 23 September 2026, Version 1.31 - 1.31.0
+### 28 September 2026, Version 1.31 - 1.31.0
 {: #cl-add-ons-istio-1310}
 
 [Default version]{: tag-green}

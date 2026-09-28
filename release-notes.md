@@ -29,19 +29,25 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## September 2026
 {: #containers-sep26}
 
-
-
-### 23 September 2026
-{: #containers-sep2326}
+### 28 September 2026
+{: #containers-sep2826}
 {: release-note}
+
+
 
 VPC Block CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 
 
+Self-managed NVIDIA GPU driver documentation updates for Kubernetes version 1.36 and later
+:   For more information, see [Migrating to self-managed NVIDIA GPU drivers for Kubernetes 1.36](/docs/containers?topic=containers-gpu-migrate-136).
+
 Istio cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
+
+
+
 
 
 ### 21 September 2026
