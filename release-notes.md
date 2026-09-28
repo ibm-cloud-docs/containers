@@ -31,7 +31,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
-### 23 September 2026
+### 28 September 2026
 {: #containers-sep2326}
 {: release-note}
 
@@ -43,6 +43,19 @@ VPC Block CSI Driver cluster add-on patch updates.
 Istio cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
+
+### 28 September 2026
+{: #containers-sep2326}
+{: release-note}
+
+Red Hat OpenShift on IBM Cloud version 4.22 is now available
+:   You can now create or update clusters to Red Hat OpenShift version 4.22. OpenShift 4.22 is based on Kubernetes {{site.data.keyword.openshift_422_kube_version}} and includes new features, performance improvements, and security enhancements. For more information, see:
+    - [Version 4.22 overview](/docs/openshift?topic=openshift-openshift_versions)
+    - [Version 4.22 change log](/docs/openshift?topic=openshift-openshift_changelog_422)
+    - [Preparing to update to version 4.22](/docs/openshift?topic=openshift-cs_versions_422)
+
+Cluster control plane reachable over port 443 (4.22+)
+:   Starting with version 4.22, the cluster control plane is reachable over port 443 in addition to port 30000-32767. Review your firewall rules and network configurations to ensure that port 443 access is permitted. For more information, see [Cluster control plane reachable over port 443](/docs/openshift?topic=openshift-notice-cp-port-443).
 
 ### 21 September 2026
 {: #containers-sep2126}
