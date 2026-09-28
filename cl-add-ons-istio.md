@@ -65,14 +65,6 @@ Review the version history for Istio.
 - Updates in this version: See the Istio release notes for [Istio 1.31.0](https://istio.io/latest/news/releases/1.31.x/announcing-1.31/){: external}.
 
 
-### 23 September 2026, Version 1.31 - 1.31.0
-{: #cl-add-ons-istio-1310}
-
-[Default version]{: tag-green}
-
-- Updates in this version: See the Istio release notes for [Istio 1.31.0](https://istio.io/latest/news/releases/1.31.x/announcing-1.31/){: external}.
-
-
 ## Version 1.30
 {: #cl-add-ons-istio-1.30}
 

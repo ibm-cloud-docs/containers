@@ -125,16 +125,6 @@ Review the version history for Cluster autoscaler.
 - `1.34.1-v200-2`
 
 
-### 2 December 2025, Version patch update 2.0.0-2_302959219
-{: #2.0.0-2_302959219_ca}
-
-- Adds support for scale down to 0.
-- Adds support for cluster version 1.34.
-- Updates base golang version to `1.25.4`.
-- Updates storage secret sidecar `1.3.37`.
-- Image tags: `1.30.7-v200-2`, `1.31.5-v200-2`, `1.32.4-v200-2`, `1.33.2-v200-2`, `1.34.1-v200-2`.
-
-
 ## Version 1.2.4
 {: #cl-add-ons-cluster-autoscaler-1.2.4}
 
@@ -251,18 +241,6 @@ Review the version history for Cluster autoscaler.
 
 Beginning in version 1.2.4 the `maxEmptyBulkDelete` option is no longer supported. Remove this option from your configmap by running `kubectl edit configmap iks-ca-configmap -n kube-system` command and deleting the option. As a replacement, you can use the `maxScaleDownParallelism` option which was added in version 1.2.4. For more information, see the [configmap reference](#ca-configmap).
 {: important}
-
-
-### Change log for patch update 1.2.4_793, released 18th September 2025
-{: #124_793_ca}
-
-- Adds support for cluster version 1.33.
-- Updates Golang version to 1.24.0.
-- Updates storage secret sidecar 1.3.32.
-- Resolves the following CVEs: CVE-2025-4563.
-- The `--max-empty-bulk-delete` option is no longer supported. Instead, use the `--max-scale-down-parallelism` option.
-- Adds GPU support with the `--scale-down-gpu-utilization-threshold` option for Nvidia vendors.
-- Image tags: `1.28.7 124-4`, `1.29.5 124-4`, `1.30.5 124-4`, `1.31.3 124-4`, `1.32.2 124-4`, `1.33.0 124-4`.
 
 
 ## Version 1.2.3

@@ -6888,8 +6888,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [28 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
 
-    * [23 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
-
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
 
     * [10 September 2026, Version 1.30 - 1.30.4](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1304)
@@ -7038,8 +7036,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [02 December 2025, Version 2.0.0 - v200-2_302959219](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-2_302959219)
 
-    * [2 December 2025, Version patch update 2.0.0-2_302959219](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#2.0.0-2_302959219_ca)
-
 * [Version 1.2.4](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-1.2.4)
 
     * [07 July 2026, Version 1.2.4 - v124-13-0_351834855](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v124-13-0_351834855)
@@ -7057,8 +7053,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [22 April 2025, Version 1.2.4 - 1.2.4_629](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-124_629)
 
     * [22 April 2025, Version patch update 1.2.4_629.](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#124_629_ca)
-
-    * [Change log for patch update 1.2.4_793, released 18th September 2025](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#124_793_ca)
 
 * [Version 1.2.3](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-1.2.3)
 
@@ -7264,8 +7258,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [28 September 2026, Version 5.2 - v5.2.62_371105267](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5262_371105267)
 
-    * [23 September 2026, Version 5.2 - v5.2.62_371105267](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5262_371105267)
-
     * [16 September 2026, Version 5.2 - v5.2.61_369265005](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5261_369265005)
 
     * [01 September 2026, Version 5.2 - v5.2.60_365903834](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5260_365903834)
@@ -7317,8 +7309,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
 
     * [28 September 2026, Version 5.1 - v5.1.62_371311380](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5162_371311380)
-
-    * [23 September 2026, Version 5.1 - v5.1.62_371311380](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5162_371311380)
 
     * [16 September 2026, Version 5.1 - v5.1.61_369264966](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5161_369264966)
 
