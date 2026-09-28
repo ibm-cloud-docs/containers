@@ -44,7 +44,6 @@ ibmcloud ks cluster addon versions
 {: caption="Supported Headlamp add-on versions" caption-side="bottom"}
 
 
-
 Review the version history for Headlamp.
 {: shortdesc}
 

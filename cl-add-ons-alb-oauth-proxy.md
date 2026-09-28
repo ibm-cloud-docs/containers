@@ -44,7 +44,6 @@ ibmcloud ks cluster addon versions
 {: caption="Supported ALB OAuth Proxy add-on versions" caption-side="bottom"}
 
 
-
 Review the version history for ALB OAuth Proxy.
 {: shortdesc}
 
@@ -246,3 +245,21 @@ Review the version history for ALB OAuth Proxy.
 - Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/cve-2024-24786){: external}, and [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/cve-2023-45288){: external}.
 - Updates Go to version `1.22.0`.
 - `oauth2-proxy v7.5.0-2356`
+
+
+### 03 April 2024, Version 2.0.0 - 2.0.0_2156
+{: #cl-add-ons-alb-oauth-proxy-200_2156}
+
+- Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/cve-2024-24786){: external}.
+
+
+### 16 January 2024, Version 2.0.0 - 2.0.0_2063
+{: #cl-add-ons-alb-oauth-proxy-200_2063}
+
+- Resolves the following CVEs: [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}.
+
+
+### 25 October 2023, Version 2.0.0 - 2.0.0_1901
+{: #cl-add-ons-alb-oauth-proxy-200_1901}
+
+- Resolves the following CVEs: [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/cve-2023-39325){: external}.

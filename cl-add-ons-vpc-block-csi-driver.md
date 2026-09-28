@@ -66,6 +66,12 @@ Review the version history for VPC Block CSI Driver.
 - Resolves the following CVEs: [CVE-2026-54411](https://nvd.nist.gov/vuln/detail/cve-2026-54411){: external}.
 
 
+### 23 September 2026, Version 5.2 - v5.2.62_371105267
+{: #cl-add-ons-vpc-block-csi-driver-v5262_371105267}
+
+- Resolves the following CVEs: [CVE-2026-54411](https://nvd.nist.gov/vuln/detail/cve-2026-54411){: external}.
+
+
 ### 16 September 2026, Version 5.2 - v5.2.61_369265005
 {: #cl-add-ons-vpc-block-csi-driver-v5261_369265005}
 
@@ -278,6 +284,12 @@ Review the version history for VPC Block CSI Driver.
 
 
 ### 28 September 2026, Version 5.1 - v5.1.62_371311380
+{: #cl-add-ons-vpc-block-csi-driver-v5162_371311380}
+
+- Resolves the following CVEs: [CVE-2026-54411](https://nvd.nist.gov/vuln/detail/cve-2026-54411){: external}.
+
+
+### 23 September 2026, Version 5.1 - v5.1.62_371311380
 {: #cl-add-ons-vpc-block-csi-driver-v5162_371311380}
 
 - Resolves the following CVEs: [CVE-2026-54411](https://nvd.nist.gov/vuln/detail/cve-2026-54411){: external}.
