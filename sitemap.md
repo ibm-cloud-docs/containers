@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-23"
+lastupdated: "2026-09-28"
 
 
 keywords: containers
@@ -7529,7 +7529,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Ingress ALB](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb)
 
+* [Version 3.7.13](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.13)
+
+    * [28 September 2026, Version 3.7.13 - 3.7.13_371458947_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3713_371458947_iks)
+
 * [Version 3.7.12](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.12)
+
+    * [28 September 2026, Version 3.7.12 - 3.7.12_370993582_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3712_370993582_iks)
 
     * [15 September 2026, Version 3.7.12 - 3.7.12_369902319_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3712_369902319_iks)
 
@@ -7537,11 +7543,29 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 3.7.11](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.11)
 
+    * [28 September 2026, Version 3.7.11 - 3.7.11_372218432_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_372218432_iks)
+
     * [15 September 2026, Version 3.7.11 - 3.7.11_369902325_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_369902325_iks)
 
     * [02 September 2026, Version 3.7.11 - 3.7.11_367269952_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_367269952_iks)
 
     * [31 August 2026, Version 3.7.11 - 3.7.11_366175407_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_366175407_iks)
+
+* [Version 1.15.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.10)
+
+    * [28 September 2026, Version 1.15.10 - 1.15.10_372196798_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_372196798_iks)
+
+    * [15 September 2026, Version 1.15.10 - 1.15.10_369973979_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_369973979_iks)
+
+    * [07 September 2026, Version 1.15.10 - 1.15.10_368272072_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_368272072_iks)
+
+    * [02 September 2026, Version 1.15.10 - 1.15.10_367083084_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_367083084_iks)
+
+    * [31 August 2026, Version 1.15.10 - 1.15.10_366115312_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_366115312_iks)
+
+    * [24 August 2026, Version 1.15.10 - 1.15.10_365003791_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_365003791_iks)
+
+    * [17 August 2026, Version 1.15.10 - 1.15.10_362585453_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_362585453_iks)
 
 * [Version 3.7.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.10)
 
@@ -7556,20 +7580,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [24 August 2026, Version 3.7.10 - 3.7.10_365003730_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_365003730_iks)
 
     * [17 August 2026, Version 3.7.10 - 3.7.10_362601619_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3710_362601619_iks)
-
-* [Version 1.15.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.10)
-
-    * [15 September 2026, Version 1.15.10 - 1.15.10_369973979_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_369973979_iks)
-
-    * [07 September 2026, Version 1.15.10 - 1.15.10_368272072_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_368272072_iks)
-
-    * [02 September 2026, Version 1.15.10 - 1.15.10_367083084_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_367083084_iks)
-
-    * [31 August 2026, Version 1.15.10 - 1.15.10_366115312_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_366115312_iks)
-
-    * [24 August 2026, Version 1.15.10 - 1.15.10_365003791_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_365003791_iks)
-
-    * [17 August 2026, Version 1.15.10 - 1.15.10_362585453_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_362585453_iks)
 
 * [Version 3.7.8](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.8)
 
