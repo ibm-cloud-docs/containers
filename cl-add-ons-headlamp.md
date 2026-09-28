@@ -35,8 +35,6 @@ ibmcloud ks cluster addon versions
 {: pre}
 
 
-
-
 ## Supported versions
 {: #cl-add-ons-headlamp-supported-versions}
 
@@ -44,7 +42,6 @@ ibmcloud ks cluster addon versions
 |---|---|
 | `0.1.0` | `>=1.31.0 <1.38.0` |
 {: caption="Supported Headlamp add-on versions" caption-side="bottom"}
-
 
 
 

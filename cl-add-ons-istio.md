@@ -35,8 +35,6 @@ ibmcloud ks cluster addon versions
 {: pre}
 
 
-
-
 ## Supported versions
 {: #cl-add-ons-istio-supported-versions}
 
@@ -49,7 +47,6 @@ ibmcloud ks cluster addon versions
 | `1.27` | `>=1.31.0 <1.34.0` |
 | `1.26` | `>=1.31.0 <1.34.0` |
 {: caption="Supported Istio add-on versions" caption-side="bottom"}
-
 
 
 

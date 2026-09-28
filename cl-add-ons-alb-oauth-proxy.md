@@ -35,8 +35,6 @@ ibmcloud ks cluster addon versions
 {: pre}
 
 
-
-
 ## Supported versions
 {: #cl-add-ons-alb-oauth-proxy-supported-versions}
 
@@ -44,7 +42,6 @@ ibmcloud ks cluster addon versions
 |---|---|
 | `2.0.0` | `>=1.19.0 <1.38.0` |
 {: caption="Supported ALB OAuth Proxy add-on versions" caption-side="bottom"}
-
 
 
 
