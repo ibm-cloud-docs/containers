@@ -152,7 +152,8 @@ During a worker node update, the worker node machine is reimaged and all data th
 If you have Portworx installed in your cluster, you must [update your Portworx configuration before you update worker nodes](/docs/containers?topic=containers-storage_portworx_plan#portworx_limitations).
 {: important}
 
-**Pre-update actions (complete in order)**
+#### Pre-update actions (complete in order)
+{: #classic-worker-prereq-actions}
 
 1. Review the [Kubernetes version information](/docs/containers?topic=containers-cs_versions) for the latest security patches and required changes.
 2. Make any changes that are marked with _Update before master_ or _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
@@ -160,7 +161,8 @@ If you have Portworx installed in your cluster, you must [update your Portworx c
 4. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 5. Consider [adding worker nodes](/docs/containers?topic=containers-add-workers-classic) to your cluster to provide extra capacity for workload rescheduling during the update. You can remove the extra nodes after the update is complete.
 
-**Required permissions**
+#### Required permissions
+{: #classic-worker-prereq-perms}
 
 Make sure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles). If you're unsure of your access role, go to **Manage → Access (IAM) → Users** in the IBM Cloud console, or ask your account administrator.
 
@@ -298,11 +300,13 @@ Use a ConfigMap to perform a rolling update of your classic worker nodes. The Co
 
 10. Verify that you don't have duplicate worker nodes. Sometimes, older clusters list duplicate worker nodes with a **`NotReady`** status after an update. To remove duplicates, see [troubleshooting](/docs/containers?topic=containers-cs_duplicate_nodes).
 
-**Next steps**
+#### Next steps
+{: #classic-worker-next-steps}
 
 1. Repeat the update process with other worker pools.
 2. Notify all developers who work in the cluster to [update their `kubectl` CLI](/docs/containers?topic=containers-cli-install) to match the Kubernetes master version. Running a `kubectl` client that is two or more versions apart from the server version is not supported and can cause unexpected errors.
 {: important}
+
 3. If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](/docs/containers?topic=containers-cs_dashboard_graphs).
 
 ### Updating classic worker nodes in the console
@@ -326,12 +330,12 @@ If you have Portworx installed in your cluster, you must restart the Portworx po
 {: #vpc_worker_node}
 
 VPC worker nodes are updated differently depending on their type. The `ibmcloud ks worker update` command is not supported for any VPC worker node. In all cases, the cluster master must be updated first.
+{: shortdesc}
 
 
 
 - **VPC bare metal workers** and **VPC virtual server instance (VSI) workers**: Replaced using `ibmcloud ks worker replace --update` (to match the master version) or `ibmcloud ks worker replace` (patch refresh only). The old node is deleted and a new one is provisioned.
 
-{: shortdesc}
 
 You can make two types of updates:
 
@@ -367,14 +371,16 @@ For VPC VSI workers, the worker node is deleted and replaced with a new node. Fo
 If you have Portworx deployed in your cluster, follow the steps to [update VPC worker nodes with Portworx volumes](/docs/containers?topic=containers-storage_portworx_update#portworx_vpc_up) instead of the steps on this page.
 {: important}
 
-**Pre-update actions (complete in order)**
+#### Pre-update actions (complete in order)
+{: #vpc-worker-prereq-actions}
 
 1. Review the [Kubernetes version information](/docs/containers?topic=containers-cs_versions) for the latest security patches and required changes.
 2. Make any changes that are marked with _Update before master_ or _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
 3. [Update the master](#master) before updating worker nodes. The worker node version cannot be higher than the API server version that runs in the master.
 4. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 
-**Required permissions**
+#### Required permissions
+{: #vpc-worker-prereq-perms}
 
 Make sure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles). If you're unsure of your access role, go to **Manage → Access (IAM) → Users** in the IBM Cloud console, or ask your account administrator.
 
@@ -462,13 +468,15 @@ What the **Update** action does depends on the worker node type:
 Update the flavor (machine type) of your worker nodes when you need different compute resources — for example, more memory, additional CPUs, or a GPU-enabled machine. Updating a flavor provisions a new worker pool with the new flavor and then removes the old worker pool. Because this process replaces nodes, all data on the worker nodes that is not stored on persistent storage is permanently deleted.
 {: shortdesc}
 
-**Before you begin**
+#### Before you begin
+{: #machine-type-prereqs}
 
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-access_cluster)
 - Verify that any data you need to retain is stored on [persistent storage](/docs/containers?topic=containers-storage-plan) outside the worker node. Data stored only on the worker node is lost and cannot be recovered.
 - Make sure that you have the [**Operator** or **Administrator** IAM platform access role](/docs/containers?topic=containers-iam-platform-access-roles). If you're unsure of your access role, go to **Manage → Access (IAM) → Users** in the IBM Cloud console, or ask your account administrator.
 
-**To update flavors:**
+#### To update flavors
+{: #machine-type-steps}
 
 1. List available worker nodes and note their private IP address.
 
@@ -537,6 +545,7 @@ Update the flavor (machine type) of your worker nodes when you need different co
 
 5. Remove the old worker pool. If you are removing a Classic bare metal flavor (which is billed monthly), you are charged for the entire month even if you remove it mid-month. VPC workers, including bare metal, are billed hourly.
 {: important}
+
     1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
         ```sh
         ibmcloud ks worker-pool rm --worker-pool WORKER-POOL --cluster CLUSTER
