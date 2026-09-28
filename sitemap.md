@@ -461,17 +461,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
 
-    * [28 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2326)
+    * [28 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2826)
 
         * VPC Block CSI Driver cluster add-on patch updates.
 
+        * Self-managed NVIDIA GPU driver documentation updates for Kubernetes version 1.36 and later
+
         * Istio cluster add-on patch updates.
-
-    * [28 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2326)
-
-        * Red Hat OpenShift on IBM Cloud version 4.22 is now available
-
-        * Cluster control plane reachable over port 443 (4.22+)
 
     * [21 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2126)
 
@@ -2294,6 +2290,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update&interface=cli#vpc_worker_cli)
 
+    * [Firmware updates during VPC bare metal worker reload](/docs/containers?topic=containers-update&interface=cli#vpc_bm_firmware)
+
     * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update&interface=ui#vpc_worker_ui)
 
 * [Updating flavors (machine types)](/docs/containers?topic=containers-update&interface=ui#machine_type)
@@ -3382,7 +3380,17 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Migration examples](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-examples)
 
-* [Example 1: Single GPU node in the cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-node)
+* [Example 1: New cluster on version 1.36 or later](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-cluster)
+
+    * [Step 1: Verify cluster and worker nodes](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-verify-nodes)
+
+    * [Step 2: Install the NVIDIA GPU Operator](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-install-operator)
+
+    * [Step 3: Verify GPU operator components](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-verify-operator)
+
+    * [Step 4: Verify GPU workloads](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-new-verify-workload)
+
+* [Example 1: Single GPU node in an existing cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-node)
 
     * [Step 1: Get the initial cluster state](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-initial-state)
 
@@ -3396,7 +3404,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Step 6: Remove the temporary node (optional)](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-single-cleanup)
 
-* [Example 2: Multiple GPU nodes in the cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-nodes)
+* [Example 2: Multiple GPU nodes in an existing cluster](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-nodes)
 
     * [Step 1: Get the initial cluster state](/docs/containers?topic=containers-gpu-migrate-136#gpu-migrate-multiple-initial-state)
 
@@ -8366,7 +8374,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [`Reloading` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading)
 
-* [`Reloading_failed` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
+* [`reload_failed` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reloading-failed)
 
 * [`Reload_pending` state](/docs/containers?topic=containers-worker-node-state-reference#worker-node-reload-pending)
 

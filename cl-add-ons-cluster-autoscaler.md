@@ -3,12 +3,12 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-14"
+lastupdated: "2026-09-28"
 
 
 keywords: change log, version history, Cluster autoscaler
 
-subcollection: "containers"
+subcollection: containers
 
 ---
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026
-lastupdated: "2026-07-27"
+lastupdated: "2026-09-28"
 
 keywords: kubernetes, gpu, nvidia, driver, migration, 1.36
 
@@ -83,9 +83,133 @@ By completing these preparation steps early, you reduce the work required during
 ## Migration examples
 {: #gpu-migrate-examples}
 
-The following examples demonstrate how to migrate your cluster based on the number of GPU nodes.
+Review the following examples to install the NVIDIA GPU Operator on a new cluster or migrate an existing cluster.
 
-## Example 1: Single GPU node in the cluster
+## Example 1: New cluster on version 1.36 or later
+{: #gpu-migrate-new-cluster}
+
+This example demonstrates installing the NVIDIA GPU Operator on a newly created cluster running Kubernetes version 1.36 or later with GPU worker nodes.
+
+### Step 1: Verify cluster and worker nodes
+{: #gpu-migrate-new-verify-nodes}
+
+1. Check that the GPU worker nodes are running and ready.
+
+    ```sh
+    ibmcloud ks worker ls -c <cluster_name>
+    ```
+    {: pre}
+
+    Example output:
+
+    ```sh
+    ID                                                         Primary IP    Flavor         State    Status   Zone         Version       Operating System
+    new-d1234abc56ef78ghijk0-btspstggpu136-default-000001a1   10.240.1.10   gx3.16x80.l4   normal   Ready    us-south-1   1.36.0_1507   UBUNTU_24_64
+    new-d1234abc56ef78ghijk0-btspstggpu136-default-000002b2   10.240.1.11   gx3.16x80.l4   normal   Ready    us-south-1   1.36.0_1507   UBUNTU_24_64
+    ```
+    {: screen}
+
+2. Verify that the nodes are accessible through `kubectl`.
+
+    ```sh
+    kubectl get nodes
+    ```
+    {: pre}
+
+    Example output:
+
+    ```sh
+    NAME          STATUS   ROLES    AGE   VERSION
+    10.240.1.10   Ready    <none>   10m   v1.36.0+IKS
+    10.240.1.11   Ready    <none>   10m   v1.36.0+IKS
+    ```
+    {: screen}
+
+### Step 2: Install the NVIDIA GPU Operator
+{: #gpu-migrate-new-install-operator}
+
+1. Add the NVIDIA Helm repository and update your Helm chart cache.
+
+    ```sh
+    helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
+    helm repo update
+    ```
+    {: pre}
+
+2. Install the NVIDIA GPU Operator into the `gpu-operator` namespace.
+
+    ```sh
+    helm install --wait --generate-name -n gpu-operator --create-namespace nvidia/gpu-operator
+    ```
+    {: pre}
+
+    Example output:
+
+    ```sh
+    NAME: gpu-operator-1778900000
+    LAST DEPLOYED: Fri May 15 11:00:00 2026
+    NAMESPACE: gpu-operator
+    STATUS: deployed
+    REVISION: 1
+    TEST SUITE: None
+    ```
+    {: screen}
+
+### Step 3: Verify GPU operator components
+{: #gpu-migrate-new-verify-operator}
+
+Verify that all GPU operator pods are running on every GPU worker node.
+
+```sh
+kubectl get pods -n gpu-operator -o wide
+```
+{: pre}
+
+Example output:
+
+```sh
+NAME                                                              READY   STATUS      RESTARTS   AGE     IP               NODE          NOMINATED NODE   READINESS GATES
+gpu-feature-discovery-aa1bb                                       1/1     Running     0          3m      172.17.10.101    10.240.1.10   <none>           <none>
+gpu-feature-discovery-cc2dd                                       1/1     Running     0          3m      172.17.10.111    10.240.1.11   <none>           <none>
+gpu-operator-1778900000-node-feature-discovery-master-xyz123      1/1     Running     0          4m      172.17.10.100    10.240.1.10   <none>           <none>
+gpu-operator-1778900000-node-feature-discovery-worker-aa111       1/1     Running     0          4m      172.17.10.102    10.240.1.10   <none>           <none>
+gpu-operator-1778900000-node-feature-discovery-worker-bb222       1/1     Running     0          4m      172.17.10.112    10.240.1.11   <none>           <none>
+gpu-operator-abcdef1234-xyz99                                     1/1     Running     0          4m      172.17.10.103    10.240.1.10   <none>           <none>
+nvidia-container-toolkit-daemonset-aa111                          1/1     Running     0          3m      172.17.10.104    10.240.1.10   <none>           <none>
+nvidia-container-toolkit-daemonset-bb222                          1/1     Running     0          3m      172.17.10.114    10.240.1.11   <none>           <none>
+nvidia-cuda-validator-aa111                                       0/1     Completed   0          2m      172.17.10.107    10.240.1.10   <none>           <none>
+nvidia-cuda-validator-bb222                                       0/1     Completed   0          2m      172.17.10.117    10.240.1.11   <none>           <none>
+nvidia-dcgm-exporter-aa111                                        1/1     Running     0          3m      172.17.10.108    10.240.1.10   <none>           <none>
+nvidia-dcgm-exporter-bb222                                        1/1     Running     0          3m      172.17.10.118    10.240.1.11   <none>           <none>
+nvidia-device-plugin-daemonset-aa111                              1/1     Running     0          3m      172.17.10.105    10.240.1.10   <none>           <none>
+nvidia-device-plugin-daemonset-bb222                              1/1     Running     0          3m      172.17.10.115    10.240.1.11   <none>           <none>
+nvidia-driver-daemonset-aa111                                     1/1     Running     0          3m30s   172.17.10.109    10.240.1.10   <none>           <none>
+nvidia-driver-daemonset-bb222                                     1/1     Running     0          3m30s   172.17.10.119    10.240.1.11   <none>           <none>
+nvidia-operator-validator-aa111                                   1/1     Running     0          3m      172.17.10.106    10.240.1.10   <none>           <none>
+nvidia-operator-validator-bb222                                   1/1     Running     0          3m      172.17.10.116    10.240.1.11   <none>           <none>
+```
+{: screen}
+
+### Step 4: Verify GPU workloads
+{: #gpu-migrate-new-verify-workload}
+
+Deploy a sample GPU workload (such as `gpu-burn`) to confirm GPU pods run successfully.
+
+```sh
+kubectl get pods -o wide
+```
+{: pre}
+
+Example output:
+
+```sh
+NAME             READY   STATUS    RESTARTS   AGE   IP               NODE          NOMINATED NODE   READINESS GATES
+gpu-burn-xz1ab   1/1     Running   0          30s   172.17.10.120    10.240.1.10   <none>           <none>
+gpu-burn-yz2cd   1/1     Running   0          30s   172.17.10.121    10.240.1.11   <none>           <none>
+```
+{: screen}
+
+## Example 1: Single GPU node in an existing cluster
 {: #gpu-migrate-single-node}
 
 This example demonstrates migrating a cluster with a single GPU node. Because the sole GPU node will be unavailable during the upgrade, you add a temporary second GPU worker to maintain capacity.
@@ -313,7 +437,7 @@ After the original node is healthy and workloads are stable, you can optionally 
     ```
     {: pre}
 
-## Example 2: Multiple GPU nodes in the cluster
+## Example 2: Multiple GPU nodes in an existing cluster
 {: #gpu-migrate-multiple-nodes}
 
 This example demonstrates migrating a cluster with two GPU nodes from Kubernetes version 1.35 to 1.36. With multiple nodes, you can upgrade nodes one at a time while maintaining GPU capacity.

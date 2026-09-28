@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-12"
+lastupdated: "2026-09-28"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -40,7 +40,9 @@ By default, your worker pools are set to automatically rebalance when you replac
 1. You have a worker pool that automatically rebalances by default.
 2. You have a troublesome worker node in the worker pool that you removed individually, such as with the `ibmcloud ks worker rm` command.
 3. Now, automatic rebalancing is disabled for your worker pool, and is not reset unless you try to rebalance or resize the worker pool.
-4. You try to replace a worker node with the `ibmcloud ks worker replace` command or update a VPC worker node with the `ibmcloud ks worker replace --update` command. The worker node is removed, but another worker node is not added back to your worker pool.
+4. You try to maintain a worker node using one of the following commands, but no additional worker node is created to replace it.
+    - **Classic bare metal workers**: `ibmcloud ks worker reload` reloads the worker in place (no deletion or addition). `ibmcloud ks worker update` moves the worker to the master BOM version.
+    - **VPC workers**: `ibmcloud ks worker replace --update` deletes the existing worker and provisions a new one at the master version. `ibmcloud ks worker replace` does the same at the current patch version. Note that `ibmcloud ks worker update` is not supported for VPC worker nodes.
 
 You might also have issued the `remove` command shortly after the `replace` command. If the `remove` command is processed before the `replace` command, the worker pool automatic rebalancing is still disabled, so your worker node is not replaced.
 {: note}

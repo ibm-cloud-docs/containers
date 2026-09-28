@@ -8,7 +8,7 @@ lastupdated: "2026-09-28"
 
 keywords: change log, version history, Istio
 
-subcollection: "containers"
+subcollection: containers
 
 ---
 
