@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026
-lastupdated: "2026-09-28"
+lastupdated: "2026-09-29"
 
 keywords: kubernetes, gpu, nvidia, driver, migration, 1.36
 
@@ -57,8 +57,8 @@ You can complete the pre-installation steps before version 1.36 is released to p
 1. Label your existing GPU worker nodes to prevent the operator from deploying resources that would conflict with pre-installed drivers.
 
     ```sh
-    kubectl label node/<node_name> nvidia.com/gpu.deploy.operands=false
-    kubectl label node/<node_name> nvidia.com/gpu.deploy.driver=false
+    kubectl label node/NODE_NAME nvidia.com/gpu.deploy.operands=false
+    kubectl label node/NODE_NAME nvidia.com/gpu.deploy.driver=false
     ```
     {: pre}
 
@@ -96,7 +96,7 @@ This example demonstrates installing the NVIDIA GPU Operator on a newly created 
 1. Check that the GPU worker nodes are running and ready.
 
     ```sh
-    ibmcloud ks worker ls -c <cluster_name>
+    ibmcloud ks worker ls -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -238,7 +238,7 @@ This example demonstrates migrating a cluster with a single GPU node. Because th
 2. Check the worker node version.
 
     ```sh
-    ibmcloud ks worker ls -c <cluster_name>
+    ibmcloud ks worker ls -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -295,14 +295,14 @@ If you followed the steps in [Preparing for migration before version 1.36 is ava
 1. Upgrade the cluster control plane to version 1.36.
 
     ```sh
-    ibmcloud ks cluster master update --cluster <cluster_name> --version 1.36.0
+    ibmcloud ks cluster master update --cluster CLUSTER_NAME --version 1.36.0
     ```
     {: pre}
 
 2. Verify the control plane upgrade.
 
     ```sh
-    ibmcloud ks cluster get -c <cluster_name>
+    ibmcloud ks cluster get -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -323,14 +323,14 @@ If you followed the steps in [Preparing for migration before version 1.36 is ava
 1. Add a temporary second GPU worker to the cluster with Kubernetes version 1.36.
 
     ```sh
-    ibmcloud ks worker-pool create vpc-gen2 --name temp-gpu-pool --cluster <cluster_name> --flavor gx3.16x80.l4 --size-per-zone 1 --zone us-south-1
+    ibmcloud ks worker-pool create vpc-gen2 --name temp-gpu-pool --cluster CLUSTER_NAME --flavor gx3.16x80.l4 --size-per-zone 1 --zone us-south-1
     ```
     {: pre}
 
 2. Verify the temporary node is ready.
 
     ```sh
-    ibmcloud ks worker ls -c <cluster_name>
+    ibmcloud ks worker ls -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -377,14 +377,14 @@ If you followed the steps in [Preparing for migration before version 1.36 is ava
 2. Replace the original GPU node.
 
     ```sh
-    ibmcloud ks worker replace -w test-d8397vk20kb65iocenn0-btspstggput-default-000001e4 -c <cluster_name> --update
+    ibmcloud ks worker replace -w test-d8397vk20kb65iocenn0-btspstggput-default-000001e4 -c CLUSTER_NAME --update
     ```
     {: pre}
 
 3. Verify the node upgrade.
 
     ```sh
-    ibmcloud ks worker ls -c <cluster_name>
+    ibmcloud ks worker ls -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -426,14 +426,14 @@ After the original node is healthy and workloads are stable, you can optionally 
 1. Delete the temporary worker pool.
 
     ```sh
-    ibmcloud ks worker-pool rm --cluster <cluster_name> --worker-pool temp-gpu-pool
+    ibmcloud ks worker-pool rm --cluster CLUSTER_NAME --worker-pool temp-gpu-pool
     ```
     {: pre}
 
 2. Verify only the original node remains.
 
     ```sh
-    ibmcloud ks worker ls -c <cluster_name>
+    ibmcloud ks worker ls -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -448,7 +448,7 @@ This example demonstrates migrating a cluster with two GPU nodes from Kubernetes
 1. Check the cluster control plane version.
 
     ```sh
-    ibmcloud ks cluster get -c <cluster_name>
+    ibmcloud ks cluster get -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -466,7 +466,7 @@ This example demonstrates migrating a cluster with two GPU nodes from Kubernetes
 2. Check the worker node versions.
 
     ```sh
-    ibmcloud ks worker ls -c <cluster_name>
+    ibmcloud ks worker ls -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -527,14 +527,14 @@ If you followed the steps in [Preparing for migration before version 1.36 is ava
 1. Upgrade the cluster control plane to version 1.36.
 
     ```sh
-    ibmcloud ks cluster master update --cluster <cluster_name> --version 1.36.0
+    ibmcloud ks cluster master update --cluster CLUSTER_NAME --version 1.36.0
     ```
     {: pre}
 
 2. Verify the control plane upgrade.
 
     ```sh
-    ibmcloud ks cluster get -c <cluster_name>
+    ibmcloud ks cluster get -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -555,14 +555,14 @@ If you followed the steps in [Preparing for migration before version 1.36 is ava
 1. Replace the first worker node.
 
     ```sh
-    ibmcloud ks worker replace -w test-d8397vk20kb65iocenn0-btspstggput-default-000001e4 -c <cluster_name> --update
+    ibmcloud ks worker replace -w test-d8397vk20kb65iocenn0-btspstggput-default-000001e4 -c CLUSTER_NAME --update
     ```
     {: pre}
 
 2. Verify the node upgrade.
 
     ```sh
-    ibmcloud ks worker ls -c <cluster_name>
+    ibmcloud ks worker ls -c CLUSTER_NAME
     ```
     {: pre}
 
@@ -632,7 +632,7 @@ If you followed the steps in [Preparing for migration before version 1.36 is ava
 2. After all nodes are upgraded, verify all worker nodes are running version 1.36.
 
     ```sh
-    ibmcloud ks worker ls -c <cluster_name>
+    ibmcloud ks worker ls -c CLUSTER_NAME
     ```
     {: pre}
 

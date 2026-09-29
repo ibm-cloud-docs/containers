@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-28"
+lastupdated: "2026-09-29"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -29,6 +29,16 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## September 2026
 {: #containers-sep26}
 
+### 29 September 2026
+{: #containers-sep2926}
+{: release-note}
+
+IBM Storage Operator cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
+
+VPC File CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
 ### 28 September 2026
 {: #containers-sep2826}
 {: release-note}
@@ -45,9 +55,6 @@ Self-managed NVIDIA GPU driver documentation updates for Kubernetes version 1.36
 
 Istio cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
-
-
-
 
 
 ### 21 September 2026
@@ -475,6 +482,9 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 
 
 
+Cluster autoscaler cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
+
 ### 10 July 2026
 {: #containers-jul1026}
 {: release-note}
@@ -839,6 +849,17 @@ IBM Storage Operator cluster add-on patch updates.
 
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
+
+
+### 12 May 2026
+{: #containers-may1226}
+{: release-note}
+
+Istio cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
+
+
 
 ### 11 May 2026
 {: #containers-may1126}
@@ -3854,6 +3875,11 @@ ALB OAuth Proxy add-on patch updates.
 Version 1.0.9 of the cluster autoscaler add-on is deprecated with an end of support date of 30 April 2024.
 :   Update to a supported version of the add-on before 30 April 2024.
 
+
+
+
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 
 
 

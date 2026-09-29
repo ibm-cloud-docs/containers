@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-28"
+lastupdated: "2026-09-29"
 
 
 keywords: change log, version history, Headlamp
@@ -44,13 +44,20 @@ ibmcloud ks cluster addon versions
 {: caption="Supported Headlamp add-on versions" caption-side="bottom"}
 
 
-
 Review the version history for Headlamp.
 {: shortdesc}
 
 
 ## Version 0.1.0
 {: #cl-add-ons-headlamp-0.1.0}
+
+
+### 29 September 2026, Version 0.1.0 - headlamp-0.1.0-371553758
+{: #cl-add-ons-headlamp-headlamp-010-371553758}
+
+[Default version]{: tag-green}
+
+- `nginx 0.1.0-371553758`
 
 
 ### 22 September 2026, Version 0.1.0 - headlamp-0.1.0-370836550
