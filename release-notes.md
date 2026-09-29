@@ -57,6 +57,7 @@ Istio cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
+
 ### 21 September 2026
 {: #containers-sep2126}
 {: release-note}
@@ -1155,6 +1156,8 @@ NodeLocal DNS enabled by default in version 1.35
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 
+
+
 ### 25 March 2026
 {: #containers-mar2526}
 {: release-note}
@@ -1187,6 +1190,8 @@ VPC File CSI Driver cluster add-on patch updates.
 
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
 
 Cluster autoscaler cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
@@ -1264,6 +1269,8 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+
+
 ### 02 March 2026
 {: #containers-mar0226}
 {: release-note}
@@ -1332,6 +1339,8 @@ VPC Block CSI Driver cluster add-on patch updates.
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
 
+
+
 ### 18 February 2026
 {: #containers-feb1826}
 {: release-note}
@@ -1372,6 +1381,8 @@ Cluster autoscaler cluster add-on patch updates.
 
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
 
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
@@ -1611,6 +1622,8 @@ New! Chennai multizone region for VPC
 
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
 
 
 
@@ -2117,6 +2130,8 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+
+
 ### 21 July 2025
 {: #containers-21july25}
 {: release-note}
@@ -2200,6 +2215,8 @@ VPC Block CSI Driver cluster add-on patch updates.
 
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
 
 
 
@@ -2414,6 +2431,8 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+
+
 ### 24 April 2025
 {: #containers-24april25}
 {: release-note}
@@ -2559,6 +2578,8 @@ CLI version `1.0.687` is available.
 
 ALB OAuth Proxy cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
 
 ### 11 March 2025
 {: #containers-11march25}
