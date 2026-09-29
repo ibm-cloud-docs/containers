@@ -1595,6 +1595,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * {{site.data.keyword.containerlong_notm}} master fix packs.
 
+        * Ingress ALB updates.
+
     * [21 October 2024](/docs/containers?topic=containers-containers-relnotes#containers-oct2124)
 
         * {{site.data.keyword.containerlong_notm}} worker node fix packs are available.

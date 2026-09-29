@@ -3061,6 +3061,13 @@ Version 1.31 is now the default version for {{site.data.keyword.containerlong_no
 
 
 
+Ingress ALB updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
+
+
+
+
+
 ### 21 October 2024
 {: #containers-oct2124}
 {: release-note}
@@ -3895,6 +3902,8 @@ ALB OAuth Proxy add-on patch updates.
 
 Version 1.0.9 of the cluster autoscaler add-on is deprecated with an end of support date of 30 April 2024.
 :   Update to a supported version of the add-on before 30 April 2024.
+
+
 
 
 
