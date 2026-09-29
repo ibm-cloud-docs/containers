@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-28"
+lastupdated: "2026-09-29"
 
 
 keywords: containers
@@ -460,6 +460,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
+
+    * [29 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2926)
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
 
     * [28 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2826)
 
@@ -6888,6 +6894,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [28 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
 
+    * [23 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
+
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
 
     * [10 September 2026, Version 1.30 - 1.30.4](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1304)
@@ -7184,6 +7192,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [29 September 2026, Version 1.0 - v1.0.61_372201350](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1061_372201350)
+
     * [15 September 2026, Version 1.0 - v1.0.59_369240550](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1059_369240550)
 
     * [02 September 2026, Version 1.0 - v1.0.58_365773320](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1058_365773320)
@@ -7258,6 +7268,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [28 September 2026, Version 5.2 - v5.2.62_371105267](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5262_371105267)
 
+    * [23 September 2026, Version 5.2 - v5.2.62_371105267](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5262_371105267)
+
     * [16 September 2026, Version 5.2 - v5.2.61_369265005](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5261_369265005)
 
     * [01 September 2026, Version 5.2 - v5.2.60_365903834](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5260_365903834)
@@ -7309,6 +7321,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Version 5.1](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-5.1)
 
     * [28 September 2026, Version 5.1 - v5.1.62_371311380](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5162_371311380)
+
+    * [23 September 2026, Version 5.1 - v5.1.62_371311380](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5162_371311380)
 
     * [16 September 2026, Version 5.1 - v5.1.61_369264966](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver#cl-add-ons-vpc-block-csi-driver-v5161_369264966)
 
@@ -7389,6 +7403,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-supported-versions)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [29 September 2026, Version 2.0 - v2.0.54_372210496](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2054_372210496)
 
     * [15 September 2026, Version 2.0 - v2.0.52_369240368](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2052_369240368)
 
@@ -7615,6 +7631,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-supported-versions)
 
 * [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
+
+    * [29 September 2026, Version 0.1.0 - headlamp-0.1.0-371553758](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-371553758)
 
     * [22 September 2026, Version 0.1.0 - headlamp-0.1.0-370836550](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-370836550)
 
