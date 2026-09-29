@@ -482,6 +482,9 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 
 
 
+Cluster autoscaler cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
+
 ### 10 July 2026
 {: #containers-jul1026}
 {: release-note}

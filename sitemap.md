@@ -629,6 +629,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
+        * Cluster autoscaler cluster add-on patch updates.
+
     * [10 July 2026](/docs/containers?topic=containers-containers-relnotes#containers-jul1026)
 
         * New! Traefik Ingress for {{site.data.keyword.containerlong_notm}}.
@@ -2307,6 +2309,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update&interface=ui#vpc_worker_ui)
 
 * [Updating flavors (machine types)](/docs/containers?topic=containers-update&interface=ui#machine_type)
+
+    * [Before you begin](/docs/containers?topic=containers-update&interface=ui#machine-type-prereqs)
+
+    * [To update flavors](/docs/containers?topic=containers-update&interface=ui#machine-type-steps)
 
 * [How are worker pools scaled down?](/docs/containers?topic=containers-update&interface=ui#worker-scaledown-logic)
 
@@ -7033,6 +7039,20 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-supported-versions)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-2.0.0)
+
+    * [17 September 2026, Version 2.0.0 - v200-18-0_369390702](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-18-0_369390702)
+
+    * [02 September 2026, Version 2.0.0 - v200-17-0_366057995](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-17-0_366057995)
+
+    * [27 August 2026, Version 2.0.0 - v200-16-2_364653497](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-16-2_364653497)
+
+    * [20 August 2026, Version 2.0.0 - v200-16-1_362894571](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-16-1_362894571)
+
+    * [10 August 2026, Version 2.0.0 - v200-16-0_360121060](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-16-0_360121060)
+
+    * [23 July 2026, Version 2.0.0 - v200-14-0_356116403](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-14-0_356116403)
+
+    * [13 July 2026, Version 2.0.0 - v200-13-0_353354474](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-13-0_353354474)
 
     * [07 July 2026, Version 2.0.0 - v200-12-0_351296784](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-12-0_351296784)
 

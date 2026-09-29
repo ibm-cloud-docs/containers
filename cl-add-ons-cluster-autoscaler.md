@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-09-28"
+lastupdated: "2026-09-29"
 
 
 keywords: change log, version history, Cluster autoscaler
@@ -61,30 +61,124 @@ Review the version history for Cluster autoscaler.
 {: #cl-add-ons-cluster-autoscaler-2.0.0}
 
 
+### 17 September 2026, Version 2.0.0 - v200-18-0_369390702
+{: #cl-add-ons-cluster-autoscaler-v200-18-0_369390702}
+
+- Updates Go to version `1.25.13`.
+- Zone Balancing Bug Fix 
+- Update storage secret sidecar 1.3.65 
+- `1.30.7-v200-18`
+- `1.31.5-v200-18`
+- `1.32.7-v200-18`
+- `1.33.4-v200-18`
+- `1.34.4-v200-18`
+- `1.35.0-v200-18`
+
+
+### 02 September 2026, Version 2.0.0 - v200-17-0_366057995
+{: #cl-add-ons-cluster-autoscaler-v200-17-0_366057995}
+
+- Resolves the following CVEs: [CVE-2026-33818](https://nvd.nist.gov/vuln/detail/cve-2026-33818){: external}, [CVE-2026-56853](https://nvd.nist.gov/vuln/detail/cve-2026-56853){: external}, [CVE-2026-56858](https://nvd.nist.gov/vuln/detail/cve-2026-56858){: external}, [CVE-2026-56859](https://nvd.nist.gov/vuln/detail/cve-2026-56859){: external}, [CVE-2026-56860](https://nvd.nist.gov/vuln/detail/cve-2026-56860){: external}, and [CVE-2026-56862](https://nvd.nist.gov/vuln/detail/cve-2026-56862){: external}.
+- Updates Go to version `1.25.13`.
+- Update storage secret sidecar 1.3.64 
+- `1.30.7-v200-17`
+- `1.31.5-v200-17`
+- `1.32.7-v200-17`
+- `1.33.4-v200-17`
+- `1.34.4-v200-17`
+- `1.35.0-v200-17`
+
+
+### 27 August 2026, Version 2.0.0 - v200-16-2_364653497
+{: #cl-add-ons-cluster-autoscaler-v200-16-2_364653497}
+
+- Updates Go to version `1.25.12`.
+- Update storage secret sidecar 1.3.63 
+- `1.30.7-v200-16`
+- `1.31.5-v200-16`
+- `1.32.7-v200-16`
+- `1.33.4-v200-16`
+- `1.34.4-v200-16`
+- `1.35.0-v200-16`
+
+
+### 20 August 2026, Version 2.0.0 - v200-16-1_362894571
+{: #cl-add-ons-cluster-autoscaler-v200-16-1_362894571}
+
+- Updates Go to version `1.25.12`.
+- Update storage secret sidecar 1.3.62 
+- `1.30.7-v200-16`
+- `1.31.5-v200-16`
+- `1.32.7-v200-16`
+- `1.33.4-v200-16`
+- `1.34.4-v200-16`
+- `1.35.0-v200-16`
+
+
+### 10 August 2026, Version 2.0.0 - v200-16-0_360121060
+{: #cl-add-ons-cluster-autoscaler-v200-16-0_360121060}
+
+- Resolves the following CVEs: [CVE-2026-5435](https://nvd.nist.gov/vuln/detail/cve-2026-5435){: external}, and [CVE-2026-6238](https://nvd.nist.gov/vuln/detail/cve-2026-6238){: external}.
+- Updates Go to version `1.25.12`.
+- Update storage secret sidecar 1.3.60 
+- `1.30.7-v200-16`
+- `1.31.5-v200-16`
+- `1.32.7-v200-16`
+- `1.33.4-v200-16`
+- `1.34.4-v200-16`
+- `1.35.0-v200-16`
+
+
+### 23 July 2026, Version 2.0.0 - v200-14-0_356116403
+{: #cl-add-ons-cluster-autoscaler-v200-14-0_356116403}
+
+- Updates Go to version `1.25.12`.
+- Update storage secret sidecar 1.3.58 
+- `1.30.7-v200-14`
+- `1.31.5-v200-14`
+- `1.32.7-v200-14`
+- `1.33.4-v200-14`
+- `1.34.4-v200-14`
+- `1.35.0-v200-14`
+
+
+### 13 July 2026, Version 2.0.0 - v200-13-0_353354474
+{: #cl-add-ons-cluster-autoscaler-v200-13-0_353354474}
+
+- Updates Go to version `1.25.11`.
+- Update storage secret sidecar 1.3.57 
+- `1.30.7-v200-13`
+- `1.31.5-v200-13`
+- `1.32.7-v200-13`
+- `1.33.4-v200-13`
+- `1.34.4-v200-13`
+- `1.35.0-v200-13`
+
+
 ### 07 July 2026, Version 2.0.0 - v200-12-0_351296784
 {: #cl-add-ons-cluster-autoscaler-v200-12-0_351296784}
 
 - Resolves the following CVEs: [CVE-2026-42507](https://nvd.nist.gov/vuln/detail/cve-2026-42507){: external}.
 - Updates Go to version `1.25.11`.
 - Update storage secret sidecar 1.3.56 
-- `1.30.7 200-12`
-- `1.31.5 200-12`
-- `1.32.7 200-12`
-- `1.33.4 200-12`
-- `1.34.4 200-12`
-- `1.35.0 200-12`
+- `1.30.7-v200-12`
+- `1.31.5-v200-12`
+- `1.32.7-v200-12`
+- `1.33.4-v200-12`
+- `1.34.4-v200-12`
+- `1.35.0-v200-12`
 
 
 ### 30 April 2026, Version 2.0.0 - v200-7-0_332133224
 {: #cl-add-ons-cluster-autoscaler-v200-7-0_332133224}
 
 - Update storage secret sidecar 1.3.44 
-- `1.30.7 200-7`
-- `1.31.5 200-7`
-- `1.32.7 200-7`
-- `1.33.4 200-7`
-- `1.34.4 200-7`
-- `1.35.0 200-7`
+- `1.30.7-v200-7`
+- `1.31.5-v200-7`
+- `1.32.7-v200-7`
+- `1.33.4-v200-7`
+- `1.34.4-v200-7`
+- `1.35.0-v200-7`
 
 
 ### 24 March 2026, Version 2.0.0 - v200-6-0_326846817
@@ -92,11 +186,11 @@ Review the version history for Cluster autoscaler.
 
 - Update storage secret sidecar 1.3.43 
 - Fix issue where scale down to 0 was not working in CA 1.34 
-- `1.30.7 200-6`
-- `1.31.5 200-6`
-- `1.32.5 200-6`
-- `1.33.3 200-6`
-- `1.34.2 200-6.`
+- `1.30.7-v200-6`
+- `1.31.5-v200-6`
+- `1.32.5-v200-6`
+- `1.33.3-v200-6`
+- `1.34.2-v200-6.`
 
 
 ### 18 February 2026, Version 2.0.0 - v200-4_316755565
@@ -104,11 +198,11 @@ Review the version history for Cluster autoscaler.
 
 - Resolves the following CVEs: [CVE-2025-13281](https://nvd.nist.gov/vuln/detail/cve-2025-13281){: external}.
 - Update storage secret sidecar v1.3.40 
-- `1.30.7 200-4`
-- `1.31.5 200-4`
-- `1.32.5 200-4`
-- `1.33.3 200-4`
-- `1.34.2 200-4.`
+- `1.30.7-v200-4`
+- `1.31.5-v200-4`
+- `1.32.5-v200-4`
+- `1.33.3-v200-4`
+- `1.34.2-v200-4.`
 
 
 ### 02 December 2025, Version 2.0.0 - v200-2_302959219
