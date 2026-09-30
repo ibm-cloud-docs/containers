@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-05-04"
+lastupdated: "2026-09-29"
 
 
 keywords: kubernetes, helm
