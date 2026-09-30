@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-09-29"
+lastupdated: "2026-09-30"
 
 
 keywords: containers
@@ -6896,13 +6896,145 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Istio add-on version change log](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio)
 
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-supported-versions)
+
+* [Version 1.31](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.31)
+
+    * [28 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
+
+    * [23 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
+
+* [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
+
+    * [10 September 2026, Version 1.30 - 1.30.4](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1304)
+
+    * [18 August 2026, Version 1.30 - 1.30.3](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1303)
+
+    * [21 July 2026, Version 1.30 - 1.30.2](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1302)
+
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
 
-    * [1.29.4_02100, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1294_02100)
+    * [10 September 2026, Version 1.29 - 1.29.7](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1297)
+
+    * [18 August 2026, Version 1.29 - 1.29.6](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1296)
+
+    * [15 July 2026, Version 1.29 - 1.29.5](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1295)
+
+    * [17 June 2026, Version 1.29 - 1.29.4](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1294)
+
+    * [12 May 2026, Version 1.29 - 1.29.2](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1292)
 
 * [Version 1.28](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.28)
 
-    * [1.28.8_02100, released 17 June 2026](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1288_02100)
+    * [15 July 2026, Version 1.28 - 1.28.10](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-12810)
+
+    * [17 June 2026, Version 1.28 - 1.28.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1288)
+
+    * [30 April 2026, Version 1.28 - 1.28.6](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1286)
+
+* [Version 1.27](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.27)
+
+    * [28 April 2026, Version 1.27 - 1.27.9](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1279)
+
+    * [27 March 2026, Version 1.27 - 1.27.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1278)
+
+* [Version 1.26](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.26)
+
+    * [15 December 2025, Version 1.26 - 1.26.6](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1266)
+
+    * [05 November 2025, Version 1.25.5](/docs/containers?topic=containers-cl-add-ons-istio#1255)
+
+    * [21 January 2025, Version 1.26 - 1.26.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1268)
+
+* [Unsupported: Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
+
+    * [20 September 2024, Version 1.23.1](/docs/containers?topic=containers-cl-add-ons-istio#1231)
+
+    * [20 August 2024, Version 1.22.3](/docs/containers?topic=containers-cl-add-ons-istio#1223)
+
+    * [20 August 2024, Version 1.21.5](/docs/containers?topic=containers-cl-add-ons-istio#1215)
+
+    * [20 August 2024, Version 1.20.8](/docs/containers?topic=containers-cl-add-ons-istio#1208)
+
+    * [18 August 2024, Version 1.22.4](/docs/containers?topic=containers-cl-add-ons-istio#1224)
+
+    * [21 June 2024, Version 1.22.1](/docs/containers?topic=containers-cl-add-ons-istio#1221)
+
+* [Unsupported: Version 1.24](/docs/containers?topic=containers-cl-add-ons-istio#v124)
+
+    * [26 September 2025, Version 1.24.6](/docs/containers?topic=containers-cl-add-ons-istio#1246)
+
+* [Unsupported: Version 1.23](/docs/containers?topic=containers-cl-add-ons-istio#v123)
+
+    * [29 April 2025, Version 1.23.6](/docs/containers?topic=containers-cl-add-ons-istio#1236)
+
+    * [4 March 2025, Version 1.23.5](/docs/containers?topic=containers-cl-add-ons-istio#1235)
+
+* [Unsupported: Version 1.22](/docs/containers?topic=containers-cl-add-ons-istio#v122)
+
+    * [3 Dec 2024, Version 1.22.6](/docs/containers?topic=containers-cl-add-ons-istio#1226)
+
+    * [9 Oct 2024, Version 1.22.5](/docs/containers?topic=containers-cl-add-ons-istio#1225)
+
+    * [9 Oct 2024, Version 1.21.6](/docs/containers?topic=containers-cl-add-ons-istio#1216)
+
+    * [Change log for 1.16.0, released November 30th, 2022](/docs/containers?topic=containers-cl-add-ons-istio#1160)
+
+* [Unsupported: Version 1.21](/docs/containers?topic=containers-cl-add-ons-istio#v121)
+
+    * [19 June 2024, Version 1.21.3](/docs/containers?topic=containers-cl-add-ons-istio#1213)
+
+    * [19 June 2024, Version 1.20.7](/docs/containers?topic=containers-cl-add-ons-istio#1207)
+
+    * [8 May 2024, Version 1.21.2](/docs/containers?topic=containers-cl-add-ons-istio#1212)
+
+    * [8 May 2024, Version 1.20.6](/docs/containers?topic=containers-cl-add-ons-istio#1206)
+
+    * [26 April 2024, Version 1.21.1](/docs/containers?topic=containers-cl-add-ons-istio#1211)
+
+* [Unsupported: Version 1.20](/docs/containers?topic=containers-cl-add-ons-istio#v120)
+
+    * [24 April 2024, Version 1.20.5](/docs/containers?topic=containers-cl-add-ons-istio#1205)
+
+    * [24 April 2024, Version 1.19.9](/docs/containers?topic=containers-cl-add-ons-istio#1199)
+
+    * [03 April 2024, Version 1.20.4](/docs/containers?topic=containers-cl-add-ons-istio#1204)
+
+    * [03 April 2024, Version 1.19.8](/docs/containers?topic=containers-cl-add-ons-istio#1198)
+
+    * [06 March 2024, Version 1.20.3](/docs/containers?topic=containers-cl-add-ons-istio#1203)
+
+    * [06 March 2024, Version 1.19.7](/docs/containers?topic=containers-cl-add-ons-istio#1197)
+
+    * [07 February 2024, Version 1.20.2](/docs/containers?topic=containers-cl-add-ons-istio#1202)
+
+    * [07 February 2024, Version 1.19.6](/docs/containers?topic=containers-cl-add-ons-istio#1196)
+
+    * [07 February 2024, Version 1.18.7](/docs/containers?topic=containers-cl-add-ons-istio#1187)
+
+    * [10 January 2024, Version 1.20.1](/docs/containers?topic=containers-cl-add-ons-istio#1201)
+
+    * [10 January 2024, Version 1.19.5](/docs/containers?topic=containers-cl-add-ons-istio#1195)
+
+    * [10 January 2024, Version 1.18.6](/docs/containers?topic=containers-cl-add-ons-istio#1186)
+
+    * [7 December 2023, Version 1.20.0](/docs/containers?topic=containers-cl-add-ons-istio#1200)
+
+* [Unsupported: Version 1.19](/docs/containers?topic=containers-cl-add-ons-istio#v119)
+
+    * [5 December 2023, Version 1.19.4](/docs/containers?topic=containers-cl-add-ons-istio#1194)
+
+    * [18 October 2023, Version 1.18.5](/docs/containers?topic=containers-cl-add-ons-istio#1185)
+
+    * [18 October 2023, Version 1.17.8](/docs/containers?topic=containers-cl-add-ons-istio#1178)
+
+    * [10 October 2023, Version 1.19.3](/docs/containers?topic=containers-cl-add-ons-istio#1193)
+
+* [Unsupported: Version 1.18](/docs/containers?topic=containers-cl-add-ons-istio#v118)
+
+    * [3 October 2023, Version 1.18.3](/docs/containers?topic=containers-cl-add-ons-istio#1183)
+
+    * [3 October 2023, Version 1.17.6](/docs/containers?topic=containers-cl-add-ons-istio#1176)
 
 [Cluster autoscaler add-on version change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler)
 
@@ -7450,51 +7582,71 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [ALB OAuth Proxy add-on version change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy)
 
+* [Supported versions](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-supported-versions)
+
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
 
-    * [2.0.0_345210432, released 09 June 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_345210432)
+    * [14 September 2026, Version 2.0.0 - 2.0.0_367915291](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_367915291)
 
-    * [2.0.0_342054714, released 28 May 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_342054714)
+    * [31 August 2026, Version 2.0.0 - 2.0.0_364405571](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_364405571)
 
-    * [2.0.0_339700227, released 21 May 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_339700227)
+    * [17 August 2026, Version 2.0.0 - 2.0.0_360789565](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_360789565)
 
-    * [2.0.0_334964365, released 05 May 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_334964365)
+    * [03 August 2026, Version 2.0.0 - 2.0.0_357166617](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_357166617)
 
-    * [2.0.0_328060981, released 26 March 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_328060981)
+    * [09 July 2026, Version 2.0.0 - 2.0.0_351688260](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_351688260)
 
-    * [2.0.0_325480053, released 24 March 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_325480053)
+    * [25 June 2026, Version 2.0.0 - 2.0.0_348521235](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_348521235)
 
-    * [2.0.0_320412247, released 03 March 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_320412247)
+    * [09 June 2026, Version 2.0.0 - 2.0.0_345210432](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_345210432)
 
-    * [2.0.0_318867667, released 23 February 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_318867667)
+    * [28 May 2026, Version 2.0.0 - 2.0.0_342054714](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_342054714)
 
-    * [2.0.0_315379759, released 10 February 2026](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_315379759)
+    * [21 May 2026, Version 2.0.0 - 2.0.0_339700227](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_339700227)
 
-    * [2.0.0_302041660, released 04 December 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_302041660)
+    * [05 May 2026, Version 2.0.0 - 2.0.0_334964365](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_334964365)
 
-    * [2.0.0_2943, released 18 August 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2943)
+    * [26 March 2026, Version 2.0.0 - 2.0.0_328060981](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_328060981)
 
-    * [2.0.0_2897, released 16 August 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2897)
+    * [24 March 2026, Version 2.0.0 - 2.0.0_325480053](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_325480053)
 
-    * [2.0.0_2817, released 22 July 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2817)
+    * [03 March 2026, Version 2.0.0 - 2.0.0_320412247](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_320412247)
 
-    * [2.0.0_2765, released 23 June 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2765)
+    * [23 February 2026, Version 2.0.0 - 2.0.0_318867667](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_318867667)
 
-    * [2.0.0_2629, released 27 April 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2629)
+    * [10 February 2026, Version 2.0.0 - 2.0.0_315379759](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_315379759)
 
-    * [2.0.0_2557, released 13 March 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2557)
+    * [04 December 2025, Version 2.0.0 - 2.0.0_302041660](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_302041660)
 
-    * [2.0.0_2473, released 15 January 2025](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2473)
+    * [18 August 2025, Version 2.0.0 - 2.0.0_2943](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2943)
 
-    * [2.0.0_2400, released 31 October 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2400)
+    * [16 August 2025, Version 2.0.0 - 2.0.0_2897](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2897)
 
-    * [2.0.0_2340, released 03 September 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2340)
+    * [22 July 2025, Version 2.0.0 - 2.0.0_2817](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2817)
 
-    * [2.0.0_2301, released 06 June 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2301)
+    * [23 June 2025, Version 2.0.0 - 2.0.0_2765](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2765)
 
-    * [2.0.0_2266, released 04 June 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2266)
+    * [27 April 2025, Version 2.0.0 - 2.0.0_2629](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2629)
 
-    * [2.0.0_2250, released 08 May 2024](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2250)
+    * [13 March 2025, Version 2.0.0 - 2.0.0_2557](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2557)
+
+    * [15 January 2025, Version 2.0.0 - 2.0.0_2473](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2473)
+
+    * [31 October 2024, Version 2.0.0 - 2.0.0_2400](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2400)
+
+    * [03 September 2024, Version 2.0.0 - 2.0.0_2340](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2340)
+
+    * [06 June 2024, Version 2.0.0 - 2.0.0_2301](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2301)
+
+    * [04 June 2024, Version 2.0.0 - 2.0.0_2266](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2266)
+
+    * [08 May 2024, Version 2.0.0 - 2.0.0_2250](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2250)
+
+    * [03 April 2024, Version 2.0.0 - 2.0.0_2156](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2156)
+
+    * [16 January 2024, Version 2.0.0 - 2.0.0_2063](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2063)
+
+    * [25 October 2023, Version 2.0.0 - 2.0.0_1901](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_1901)
 
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
 
