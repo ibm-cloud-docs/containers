@@ -461,6 +461,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
 
+    * [30 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep3026)
+
+        * Cluster autoscaler cluster add-on patch updates.
+
     * [29 September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep2926)
 
         * IBM Storage Operator cluster add-on patch updates.
@@ -7041,6 +7045,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-supported-versions)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-2.0.0)
+
+    * [30 September 2026, Version 2.0.0 - v200-19-1_372827987](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-19-1_372827987)
 
     * [17 September 2026, Version 2.0.0 - v200-18-0_369390702](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-18-0_369390702)
 
