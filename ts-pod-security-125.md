@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-08-25"
+lastupdated: "2026-10-01"
 
 
 keywords: kubernetes, 1.25, cluster master operations error, CAE009, containers
@@ -46,7 +46,7 @@ These prerequisites ensure that the cluster's version 1.24 `PodSecurityPolicy` c
 
 Before you begin
 
-- Review the [1.25 version information and update actions](/docs/containers?topic=containers-cs_versions_125).
+- Review the 1.25 version information and update actions (version archived).
 - Review the [Migrating from PSPs to Pod Security Admission](/docs/containers?topic=containers-pod-security-admission-migration) guide.
 
 
@@ -229,6 +229,3 @@ subjects:
 EOF
 ```
 {: codeblock}
-
-
-

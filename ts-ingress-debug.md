@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-09"
+lastupdated: "2026-10-01"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -151,11 +151,16 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
     * If a public ALB has no IP address (classic) or hostname (VPC), see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_subnet_limit).
 
-2. Verify that your ALB IP addresses are reachable by the ALB health check.
+2. Verify that your ALB IP addresses are reachable by the ingress-cluster-healthcheck pod
     
-    * **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 or 443 from the Kubernetes control plane and IBM NS1's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [IBM NS1's source IP addresses](/docs/containers?topic=containers-firewall#firewall-ingress-domain-monitor) on port 80 and the [control plane subnets for the region where your cluster is located](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external}.
+    * **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block traffic to or from your cluster, including the [create a Calico pre-DNAT policy tutorial](/docs/containers?topic=containers-policy_tutorial#lesson3), then:
+        * You must allow inbound access to the IP addresses of your ALBs on port 443, from the cluster workers (since that is where the health check pod runs)
+        * You must also allow outbound access from your cluster workers to the ALB IP addresses to port 443
     
-    * **VPC**: If you have a custom security group on the VPC LBaaS (LoadBalancer-as-a-Service) instances for the cluster ingress, ensure that the security group rules allow the necessary health-check traffic from the Kubernetes [control plane IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/control-plane-ips){: external} to port 443. 
+    * **VPC**: If you have customized any of the VPC security groups for your cluster or the VPC network ACLs for your subnets.
+        * You must ensure the VPC security groups and network ACLs allow inbound access to the IP addresses of your Ingress VPC Load Balancer (LBaaS) on port 443, from the cluster workers (since that is where the health check pod runs)
+        * You must also ensure the VPC security groups and network ACLs allow outbound access from your cluster workers to the LBaaS addresses to port 443
+        * While doing this, remember that addresses for your VPC LBaaS (assuming you are using the ALB which is the default) can change.
 
 3. Check the health of your ALB IPs (classic) or hostname (VPC).
 
@@ -180,7 +185,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         ```
         {: pre}
 
-        Example output
+        Example output:
         ```sh
         healthy
         ```
@@ -194,7 +199,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
     ```
     {: pre}
 
-    Example output
+    Example output:
 
     ```sh
     Ingress Subdomain:      mycluster-<hash>-0000.us-south.containers.appdomain.cloud
@@ -209,7 +214,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
     ```
     {: pre}
 
-    Example output
+    Example output:
 
     ```sh
     NAME                HOSTS                                                    ADDRESS                        PORTS     AGE
@@ -241,7 +246,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         ```
         {: pre}
 
-        Example output
+        Example output:
         ```sh
         www.my-domain.com has address 169.46.52.222
         www.my-domain.com has address 169.62.196.238
@@ -272,7 +277,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
 If you can't access your app through a specific ALB IP, you can temporarily remove the ALB from production by disabling its DNS registration. Then, you can use the ALB's IP address to run debugging tests on that ALB.
 
-For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs have IP addresses `169.46.52.222` and `169.62.196.238`. Although the health check is returning healthy for the second zone's ALB, your app isn't directly reachable through it. You decide to remove that ALB's IP address, `169.62.196.238`, from production for debugging. The first zone's ALB IP, `169.46.52.222`, is registered with your domain and continues to route traffic while you debug the second zone's ALB.
+For example, suppose you have a multizone cluster in 2 zones, and the 2 public ALBs have IP addresses `169.46.52.222` and `169.62.196.238`. Although the health check is returning healthy for the second zone's ALB, your app isn't directly reachable through it. You decide to remove that ALB's IP address, `169.62.196.238`, from production for debugging. The first zone's ALB IP, `169.46.52.222`, is registered with your domain and continues to route traffic while you debug the second zone's ALB.
 
 
 1. Use the following command to remove the IP from the domain name. The update command fully replaces the registered IP addresses, so you have to define only the healthy IP addresses in the command:
@@ -314,7 +319,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     ```
     {: pre}
 
-    Example output
+    Example output:
 
     ```sh
     mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.46.52.222
