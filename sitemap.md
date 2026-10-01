@@ -454,6 +454,18 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 {: #sitemap_important_notices}
 
 
+[Classic cluster creation restrictions](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction)
+
+* [Who is affected by this restriction?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-affected)
+
+* [Why does this restriction exist?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-why)
+
+* [What error do I see when classic cluster creation is blocked?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-error)
+
+* [What are my options if I'm affected?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-next)
+
+* [How do I check whether my account has existing classic clusters?](/docs/containers?topic=containers-classic-create-restriction#classic-create-restriction-check)
+
 [IAM VPE Gateway is being added to your VPC](/docs/containers?topic=containers-notice-vpc-iam-vpe-gateway#notice-vpc-iam-vpe-gateway)
 
 
@@ -462,6 +474,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
+
+* [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
+
+    * [1 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0126)
+
+        * Classic cluster creation restriction
 
 * [September 2026](/docs/containers?topic=containers-containers-relnotes#containers-sep26)
 
