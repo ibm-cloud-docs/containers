@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-09-28"
+lastupdated: "2026-10-01"
 
 
 keywords: change log, version history, 1.33
@@ -13,8 +13,6 @@ subcollection: containers
 ---
 
 {{site.data.keyword.attribute-definition-list}}
-
-<!-- Link checker skip -->
 
 
 

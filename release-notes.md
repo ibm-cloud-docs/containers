@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-30"
+lastupdated: "2026-10-01"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -36,6 +36,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 Cluster autoscaler cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
 
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
+
 ### 29 September 2026
 {: #containers-sep2926}
 {: release-note}
@@ -64,6 +67,13 @@ Istio cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
+
+### 25 September 2026
+{: #containers-sep2526}
+{: release-note}
+
+IBM Object CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
 
 ### 21 September 2026
 {: #containers-sep2126}
