@@ -1,8 +1,8 @@
 ---
 
-copyright: 
+copyright:
   years: 2014, 2026
-lastupdated: "2026-09-18"
+lastupdated: "2026-10-01"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, oc, ks
@@ -25,12 +25,13 @@ In the command line, you are notified when updates to the `ibmcloud` CLI and plu
 
 
 Refer to the following change logs for a summary of changes for each version of the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cli-install), which uses the `ibmcloud ks` alias.
-  
-## Version 1.0
-{: #10}
 
-Review the following changes for 1.0 versions of the CLI plug-in.
-{: shortdesc}
+## Version v1.0.877
+{: #cli-01877}
+
+Version 1.0.877 of the CLI was released on 01 October 2026.
+- Removes `vpc-classic` as a default provider from the [`ibmcloud ks vpc ls`](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli) command. The only supported provider value is now `vpc-gen2`.
+- Updates dependencies to address CVEs.
 
 ## Version v1.0.864
 {: #cli-01864}
@@ -184,7 +185,7 @@ Version 1.0.745 of the CLI was released on 14 January 2026.
 
 
 ## Version v1.0.732
-{: #cli-01732} 
+{: #cli-01732}
 
 - Adds network plug-in details to the output of the `cluster get` command.
 - Includes general refactoring and improvements.
@@ -251,7 +252,7 @@ Version 1.0.679 of the CLI was released on 17 February 2025.
 ## Version v1.0.677
 {: #cli-010677}
 
-- Adds the `--show-os` option to the `ibmcloud ks flavor ls` command. 
+- Adds the `--show-os` option to the `ibmcloud ks flavor ls` command.
 - Deprecates all `ibmcloud ks cluster master private-service-endpoint allowlist` commands.
 - Removes the `--gateway-enabled`option from the `ibmcloud ks cluster create classic` command.
 
@@ -282,8 +283,8 @@ Version 1.0.665 of the CLI was released on 18 September 2024.
 {: #cli-010657}
 
 Version 1.0.657 of the CLI was released on 10 September 2024.
-- `ibmcloud sat sat connector` commands are no longer experimental. 
-- Changes the output of `ibmcloud sat connector ls` to include only one page of results and adds options for pagination. 
+- `ibmcloud sat sat connector` commands are no longer experimental.
+- Changes the output of `ibmcloud sat connector ls` to include only one page of results and adds options for pagination.
 
 
 ## Version v1.0.652
@@ -354,7 +355,7 @@ Version 1.0.618 of the CLI was released on 02 May 2024.
 {: #cli-010617}
 
 Version 1.0.617 of the CLI was released on 24 April 2024.
-- Adds the `ibmcloud ks vpc outbound-traffic-protection disable` and `enable` [commands](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-cli). 
+- Adds the `ibmcloud ks vpc outbound-traffic-protection disable` and `enable` [commands](/docs/containers?topic=containers-kubernetes-service-cli#vpc-outbound-traffic-protection-disable-cli).
 - Adds the `ibmcloud ks vpc ls` [command](/docs/containers?topic=containers-kubernetes-service-cli#vpc-ls-cli).
 - Updates the help text in various languages.
 
@@ -362,7 +363,7 @@ Version 1.0.617 of the CLI was released on 24 April 2024.
 {: #cli-010613}
 
 Version 1.0.613 of the CLI was released on 18 April 2024.
-- Adds the `ibmcloud ks cluster master console-oauth-access get` and `set` [commands](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-cli). 
+- Adds the `ibmcloud ks cluster master console-oauth-access get` and `set` [commands](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-console-oauth-access-get-cli).
 - Adds the `ibmcloud ks security-group ls` [command](/docs/containers?topic=containers-kubernetes-service-cli#security-group-ls-cli).
 - Updates the help text in various languages.
 
@@ -371,13 +372,13 @@ Version 1.0.613 of the CLI was released on 18 April 2024.
 {: #cli-010601}
 
 Version 1.0.601 of the CLI was released on 27 February 2024.
-- Adds the `--disable-outbound-traffic-protection` option for the `ibmcloud ks cluster create vpc-gen2` command. 
+- Adds the `--disable-outbound-traffic-protection` option for the `ibmcloud ks cluster create vpc-gen2` command.
 
 ## Version v1.0.597
 {: #cli-01597}
 
 Version 0.1.597 of the CLI was released on 27 February 2024.
-- Adds the `[-f]` option for the `ibmcloud sat connector remove` command. 
+- Adds the `[-f]` option for the `ibmcloud sat connector remove` command.
 
 ## Version v1.0.595
 {: #cli-01959}
@@ -395,4 +396,4 @@ Version 0.1.589 of the CLI was released on 19 January 2024.
 - Updates to experimental commands.
 - Resolves [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}.
 - Upgrades the golang version.
-- Updates the phrasing of various commands and help text strings. 
+- Updates the phrasing of various commands and help text strings.
