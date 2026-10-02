@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-07-27"
+lastupdated: "2026-10-02"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -104,8 +104,8 @@ The Ingress message provides details of what operation is in progress or informa
 | `The ALB version is no longer supported (ERRAVUS).` | For more information, see [Why does the Ingress status show an ERRAVUS error?](/docs/containers?topic=containers-ts-ingress-erravus).|
 | `The ALB deployment is not found on the cluster (ERRADNF).` | For more information, see [Why does the Ingress status show an ERRADNF error?](/docs/containers?topic=containers-ts-ingress-erradnf).|
 | `One or more ALB pod is not in running state (ERRADRUH).` | For more information, see [Why does the Ingress status show an `ERRADRUH` error?](/docs/containers?topic=containers-ts-ingress-erradruh).|
-| `The ALB health Ingress resource is not found on the cluster (ERRAHINF).` | For more information, see [Why does the Ingress status show an ERRAHINF error?](/docs/containers?topic=containers-ts-ingress-errahinf).|
-| `The ALB health service is not found on the cluster (ERRAHSNF).` | For more information, see [Why does the Ingress status show an ERRAHSNF error?](/docs/containers?topic=containers-ts-ingress-errahsnf).|
+| `One or more ALB health Ingress resource is not found on the cluster (ERRAHINF).` | For more information, see [Why does the Ingress status show an ERRAHINF error?](/docs/containers?topic=containers-ts-ingress-errahinf).|
+| `One or more ALB health service is not found on the cluster (ERRAHSNF).` | For more information, see [Why does the Ingress status show an ERRAHSNF error?](/docs/containers?topic=containers-ts-ingress-errahsnf).|
 | `The ALB is unable to respond to health requests (ERRAHCF).` | For more information, see [Why does the Ingress status show an ERRAHCF error?](/docs/containers?topic=containers-ts-ingress-errahcf).|
 | `Autoscaling is ineffective (ERRHPAETPI).` | For more information, see [Why does the Ingress status show an ERRHPAETPI error?](/docs/containers?topic=containers-ts-ingress-errhpaetpi).|
 | `The cluster does not have enough worker nodes to satisfy the autoscaling configuration (ERRHPAIWC).` | For more information, see [Why does the Ingress status show an ERRHPAIWC error?](/docs/containers?topic=containers-ts-ingress-errhpaiwc).|

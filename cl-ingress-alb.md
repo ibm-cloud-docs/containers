@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-10-01"
+lastupdated: "2026-10-02"
 
 
 keywords: change log, version history, Ingress ALB
@@ -25,20 +25,260 @@ Review the version history for Ingress ALB.
 {: shortdesc}
 
 
+## Version 3.7.13
+{: #cl-ingress-alb-3.7.13}
+
+
+### 28 September 2026, Version 3.7.13 - 3.7.13_371458947_iks
+{: #cl-ingress-alb-3713_371458947_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 3.7.12
+{: #cl-ingress-alb-3.7.12}
+
+
+### 28 September 2026, Version 3.7.12 - 3.7.12_370993582_iks
+{: #cl-ingress-alb-3712_370993582_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 15 September 2026, Version 3.7.12 - 3.7.12_369902319_iks
+{: #cl-ingress-alb-3712_369902319_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 07 September 2026, Version 3.7.12 - 3.7.12_367967461_iks
+{: #cl-ingress-alb-3712_367967461_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 3.7.11
+{: #cl-ingress-alb-3.7.11}
+
+
+### 28 September 2026, Version 3.7.11 - 3.7.11_372218432_iks
+{: #cl-ingress-alb-3711_372218432_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 15 September 2026, Version 3.7.11 - 3.7.11_369902325_iks
+{: #cl-ingress-alb-3711_369902325_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 02 September 2026, Version 3.7.11 - 3.7.11_367269952_iks
+{: #cl-ingress-alb-3711_367269952_iks}
+
+- Resolves the following CVEs: [CVE-2026-56854](https://nvd.nist.gov/vuln/detail/cve-2026-56854){: external}.
+
+
+### 31 August 2026, Version 3.7.11 - 3.7.11_366175407_iks
+{: #cl-ingress-alb-3711_366175407_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 3.7.10
+{: #cl-ingress-alb-3.7.10}
+
+
+### 15 September 2026, Version 3.7.10 - 3.7.10_369998842_iks
+{: #cl-ingress-alb-3710_369998842_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 07 September 2026, Version 3.7.10 - 3.7.10_367635175_iks
+{: #cl-ingress-alb-3710_367635175_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 02 September 2026, Version 3.7.10 - 3.7.10_367269787_iks
+{: #cl-ingress-alb-3710_367269787_iks}
+
+- Resolves the following CVEs: [CVE-2026-56854](https://nvd.nist.gov/vuln/detail/cve-2026-56854){: external}.
+
+
+### 31 August 2026, Version 3.7.10 - 3.7.10_366465868_iks
+{: #cl-ingress-alb-3710_366465868_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 24 August 2026, Version 3.7.10 - 3.7.10_365003730_iks
+{: #cl-ingress-alb-3710_365003730_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 17 August 2026, Version 3.7.10 - 3.7.10_362601619_iks
+{: #cl-ingress-alb-3710_362601619_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 3.7.8
+{: #cl-ingress-alb-3.7.8}
+
+
+### 02 September 2026, Version 3.7.8 - 3.7.8_367267896_iks
+{: #cl-ingress-alb-378_367267896_iks}
+
+- Resolves the following CVEs: [CVE-2026-56854](https://nvd.nist.gov/vuln/detail/cve-2026-56854){: external}.
+
+
+### 31 August 2026, Version 3.7.8 - 3.7.8_366167192_iks
+{: #cl-ingress-alb-378_366167192_iks}
+
+- Resolves the following CVEs: [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/cve-2026-56852){: external}.
+
+
+### 24 August 2026, Version 3.7.8 - 3.7.8_364997849_iks
+{: #cl-ingress-alb-378_364997849_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 17 August 2026, Version 3.7.8 - 3.7.8_360780167_iks
+{: #cl-ingress-alb-378_360780167_iks}
+
+- GO-2026-6061 
+
+
+### 11 August 2026, Version 3.7.8 - 3.7.8_358418506_iks
+{: #cl-ingress-alb-378_358418506_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 3.7.7
+{: #cl-ingress-alb-3.7.7}
+
+
+### 24 August 2026, Version 3.7.7 - 3.7.7_364982600_iks
+{: #cl-ingress-alb-377_364982600_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 11 August 2026, Version 3.7.7 - 3.7.7_360793979_iks
+{: #cl-ingress-alb-377_360793979_iks}
+
+- GO-2026-6061 
+
+
+### 27 July 2026, Version 3.7.7 - 3.7.7_358058274_iks
+{: #cl-ingress-alb-377_358058274_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 3.7.6
+{: #cl-ingress-alb-3.7.6}
+
+
+### 11 August 2026, Version 3.7.6 - 3.7.6_360793471_iks
+{: #cl-ingress-alb-376_360793471_iks}
+
+- Resolves the following CVEs: [GO-2026-6061](https://pkg.go.dev/vuln/go-2026-6061){: external}.
+
+
+### 27 July 2026, Version 3.7.6 - 3.7.6_356947877_iks
+{: #cl-ingress-alb-376_356947877_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 20 July 2026, Version 3.7.6 - 3.7.6_356092760_iks
+{: #cl-ingress-alb-376_356092760_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 3.7.5
+{: #cl-ingress-alb-3.7.5}
+
+
+### 27 July 2026, Version 3.7.5 - 3.7.5_356968537_iks
+{: #cl-ingress-alb-375_356968537_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 20 July 2026, Version 3.7.5 - 3.7.5_356079678_iks
+{: #cl-ingress-alb-375_356079678_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 06 July 2026, Version 3.7.5 - 3.7.5_353228763_iks
+{: #cl-ingress-alb-375_353228763_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 01 July 2026, Version 3.7.5 - 3.7.5_351789633_iks
+{: #cl-ingress-alb-375_351789633_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
 ## Version 3.7.4
 {: #cl-ingress-alb-3.7.4}
 
 
+### 20 July 2026, Version 3.7.4 - 3.7.4_356092722_iks
+{: #cl-ingress-alb-374_356092722_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 06 July 2026, Version 3.7.4 - 3.7.4_353221089_iks
+{: #cl-ingress-alb-374_353221089_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 01 July 2026, Version 3.7.4 - 3.7.4_351769381_iks
+{: #cl-ingress-alb-374_351769381_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
 ### 23 June 2026, Version 3.7.4 - 3.7.4_348800920_iks
 {: #cl-ingress-alb-374_348800920_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ## Version 3.7.3
 {: #cl-ingress-alb-3.7.3}
 
 
+### 06 July 2026, Version 3.7.3 - 3.7.3_353225103_iks
+{: #cl-ingress-alb-373_353225103_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 01 July 2026, Version 3.7.3 - 3.7.3_351769298_iks
+{: #cl-ingress-alb-373_351769298_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
 ### 23 June 2026, Version 3.7.3 - 3.7.3_349786538_iks
 {: #cl-ingress-alb-373_349786538_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ## Version 3.7.1
@@ -48,27 +288,25 @@ Review the version history for Ingress ALB.
 ### 23 June 2026, Version 3.7.1 - 3.7.1_349762936_iks
 {: #cl-ingress-alb-371_349762936_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 15 June 2026, Version 3.7.1 - 3.7.1_347083875_iks
 {: #cl-ingress-alb-371_347083875_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 08 June 2026, Version 3.7.1 - 3.7.1_345548836_iks
 {: #cl-ingress-alb-371_345548836_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 01 June 2026, Version 3.7.1 - 3.7.1_342378879_iks
 {: #cl-ingress-alb-371_342378879_iks}
 
 - Resolves the following CVEs: [CVE-2026-33811](https://nvd.nist.gov/vuln/detail/cve-2026-33811){: external}, [CVE-2026-39823](https://nvd.nist.gov/vuln/detail/cve-2026-39823){: external}, [CVE-2026-39820](https://nvd.nist.gov/vuln/detail/cve-2026-39820){: external}, [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/cve-2026-33814){: external}, [CVE-2026-39836](https://nvd.nist.gov/vuln/detail/cve-2026-39836){: external}, [CVE-2026-39825](https://nvd.nist.gov/vuln/detail/cve-2026-39825){: external}, [CVE-2026-42499](https://nvd.nist.gov/vuln/detail/cve-2026-42499){: external}, and [CVE-2026-39826](https://nvd.nist.gov/vuln/detail/cve-2026-39826){: external}.
-
-
-## Version 1.15.7
-{: #cl-ingress-alb-1.15.7}
-
-
-### 23 June 2026, Version 1.15.7 - 1.15.7_349797741_iks
-{: #cl-ingress-alb-1157_349797741_iks}
 
 
 ## Version 3.7.0
@@ -78,15 +316,174 @@ Review the version history for Ingress ALB.
 ### 15 June 2026, Version 3.7.0 - 3.7.0_346531572_iks
 {: #cl-ingress-alb-370_346531572_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 08 June 2026, Version 3.7.0 - 3.7.0_345548812_iks
 {: #cl-ingress-alb-370_345548812_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 01 June 2026, Version 3.7.0 - 3.7.0_342381291_iks
 {: #cl-ingress-alb-370_342381291_iks}
 
 - Resolves the following CVEs: [CVE-2026-33811](https://nvd.nist.gov/vuln/detail/cve-2026-33811){: external}, [CVE-2026-39823](https://nvd.nist.gov/vuln/detail/cve-2026-39823){: external}, [CVE-2026-39820](https://nvd.nist.gov/vuln/detail/cve-2026-39820){: external}, [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/cve-2026-33814){: external}, [CVE-2026-39836](https://nvd.nist.gov/vuln/detail/cve-2026-39836){: external}, [CVE-2026-39825](https://nvd.nist.gov/vuln/detail/cve-2026-39825){: external}, [CVE-2026-42499](https://nvd.nist.gov/vuln/detail/cve-2026-42499){: external}, and [CVE-2026-39826](https://nvd.nist.gov/vuln/detail/cve-2026-39826){: external}.
+
+
+## Version 1.15.10
+{: #cl-ingress-alb-1.15.10}
+
+
+### 28 September 2026, Version 1.15.10 - 1.15.10_372196798_iks
+{: #cl-ingress-alb-11510_372196798_iks}
+
+[Default version]{: tag-green}
+
+- Updates Go to version `1.26`.
+
+
+### 15 September 2026, Version 1.15.10 - 1.15.10_369973979_iks
+{: #cl-ingress-alb-11510_369973979_iks}
+
+- Resolves the following CVEs: [CVE-2026-10536](https://nvd.nist.gov/vuln/detail/cve-2026-10536){: external}, [CVE-2026-11352](https://nvd.nist.gov/vuln/detail/cve-2026-11352){: external}, [CVE-2026-11564](https://nvd.nist.gov/vuln/detail/cve-2026-11564){: external}, [CVE-2026-11586](https://nvd.nist.gov/vuln/detail/cve-2026-11586){: external}, [CVE-2026-11856](https://nvd.nist.gov/vuln/detail/cve-2026-11856){: external}, [CVE-2026-12064](https://nvd.nist.gov/vuln/detail/cve-2026-12064){: external}, [CVE-2026-13608](https://nvd.nist.gov/vuln/detail/cve-2026-13608){: external}, [CVE-2026-18924](https://nvd.nist.gov/vuln/detail/cve-2026-18924){: external}, [CVE-2026-19931](https://nvd.nist.gov/vuln/detail/cve-2026-19931){: external}, [CVE-2026-80229](https://nvd.nist.gov/vuln/detail/cve-2026-80229){: external}, [CVE-2026-80230](https://nvd.nist.gov/vuln/detail/cve-2026-80230){: external}, [CVE-2026-80231](https://nvd.nist.gov/vuln/detail/cve-2026-80231){: external}, [CVE-2026-80255](https://nvd.nist.gov/vuln/detail/cve-2026-80255){: external}, [CVE-2026-80256](https://nvd.nist.gov/vuln/detail/cve-2026-80256){: external}, [CVE-2026-82208](https://nvd.nist.gov/vuln/detail/cve-2026-82208){: external}, [CVE-2026-82209](https://nvd.nist.gov/vuln/detail/cve-2026-82209){: external}, [CVE-2026-8286](https://nvd.nist.gov/vuln/detail/cve-2026-8286){: external}, [CVE-2026-8458](https://nvd.nist.gov/vuln/detail/cve-2026-8458){: external}, [CVE-2026-8924](https://nvd.nist.gov/vuln/detail/cve-2026-8924){: external}, [CVE-2026-8925](https://nvd.nist.gov/vuln/detail/cve-2026-8925){: external}, [CVE-2026-8926](https://nvd.nist.gov/vuln/detail/cve-2026-8926){: external}, [CVE-2026-8927](https://nvd.nist.gov/vuln/detail/cve-2026-8927){: external}, [CVE-2026-8932](https://nvd.nist.gov/vuln/detail/cve-2026-8932){: external}, [CVE-2026-9079](https://nvd.nist.gov/vuln/detail/cve-2026-9079){: external}, [CVE-2026-9080](https://nvd.nist.gov/vuln/detail/cve-2026-9080){: external}, [CVE-2026-9545](https://nvd.nist.gov/vuln/detail/cve-2026-9545){: external}, [CVE-2026-9546](https://nvd.nist.gov/vuln/detail/cve-2026-9546){: external}, and [CVE-2026-9547](https://nvd.nist.gov/vuln/detail/cve-2026-9547){: external}.
+- Updates Go to version `1.26`.
+
+
+### 07 September 2026, Version 1.15.10 - 1.15.10_368272072_iks
+{: #cl-ingress-alb-11510_368272072_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 02 September 2026, Version 1.15.10 - 1.15.10_367083084_iks
+{: #cl-ingress-alb-11510_367083084_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 31 August 2026, Version 1.15.10 - 1.15.10_366115312_iks
+{: #cl-ingress-alb-11510_366115312_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 24 August 2026, Version 1.15.10 - 1.15.10_365003791_iks
+{: #cl-ingress-alb-11510_365003791_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 17 August 2026, Version 1.15.10 - 1.15.10_362585453_iks
+{: #cl-ingress-alb-11510_362585453_iks}
+
+- Updates Go to version `1.26`.
+
+
+## Version 1.15.8
+{: #cl-ingress-alb-1.15.8}
+
+
+### 31 August 2026, Version 1.15.8 - 1.15.8_366106637_iks
+{: #cl-ingress-alb-1158_366106637_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 24 August 2026, Version 1.15.8 - 1.15.8_364997769_iks
+{: #cl-ingress-alb-1158_364997769_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 17 August 2026, Version 1.15.8 - 1.15.8_362262238_iks
+{: #cl-ingress-alb-1158_362262238_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 11 August 2026, Version 1.15.8 - 1.15.8_359618591_iks
+{: #cl-ingress-alb-1158_359618591_iks}
+
+- Resolves the following CVEs: [CVE-2026-33630](https://nvd.nist.gov/vuln/detail/cve-2026-33630){: external}, and [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/cve-2026-56852){: external}.
+- Updates Go to version `1.26`.
+
+
+### 20 July 2026, Version 1.15.8 - 1.15.8_356092614_iks
+{: #cl-ingress-alb-1158_356092614_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 06 July 2026, Version 1.15.8 - 1.15.8_352185571_iks
+{: #cl-ingress-alb-1158_352185571_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 01 July 2026, Version 1.15.8 - 1.15.8_351852518_iks
+{: #cl-ingress-alb-1158_351852518_iks}
+
+- Resolves the following CVEs: [CVE-2026-25680](https://nvd.nist.gov/vuln/detail/cve-2026-25680){: external}, [CVE-2026-25681](https://nvd.nist.gov/vuln/detail/cve-2026-25681){: external}, [CVE-2026-27136](https://nvd.nist.gov/vuln/detail/cve-2026-27136){: external}, [CVE-2026-39821](https://nvd.nist.gov/vuln/detail/cve-2026-39821){: external}, [CVE-2026-42502](https://nvd.nist.gov/vuln/detail/cve-2026-42502){: external}, and [CVE-2026-42506](https://nvd.nist.gov/vuln/detail/cve-2026-42506){: external}.
+
+
+## Version 1.15.7
+{: #cl-ingress-alb-1.15.7}
+
+
+### 24 August 2026, Version 1.15.7 - 1.15.7_364982634_iks
+{: #cl-ingress-alb-1157_364982634_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 17 August 2026, Version 1.15.7 - 1.15.7_362266907_iks
+{: #cl-ingress-alb-1157_362266907_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 11 August 2026, Version 1.15.7 - 1.15.7_359611426_iks
+{: #cl-ingress-alb-1157_359611426_iks}
+
+- Resolves the following CVEs: [CVE-2026-33630](https://nvd.nist.gov/vuln/detail/cve-2026-33630){: external}, and [CVE-2026-56852](https://nvd.nist.gov/vuln/detail/cve-2026-56852){: external}.
+- Updates Go to version `1.26`.
+
+
+### 27 July 2026, Version 1.15.7 - 1.15.7_358001162_iks
+{: #cl-ingress-alb-1157_358001162_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 20 July 2026, Version 1.15.7 - 1.15.7_356075333_iks
+{: #cl-ingress-alb-1157_356075333_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 13 July 2026, Version 1.15.7 - 1.15.7_354913170_iks
+{: #cl-ingress-alb-1157_354913170_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 06 July 2026, Version 1.15.7 - 1.15.7_352179683_iks
+{: #cl-ingress-alb-1157_352179683_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 01 July 2026, Version 1.15.7 - 1.15.7_351812949_iks
+{: #cl-ingress-alb-1157_351812949_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 23 June 2026, Version 1.15.7 - 1.15.7_349797741_iks
+{: #cl-ingress-alb-1157_349797741_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ## Version 1.15.6
@@ -105,48 +502,6 @@ Review the version history for Ingress ALB.
 - Updates Go to version `1.26`.
 
 
-## Version 1.14.5
-{: #cl-ingress-alb-1.14.5}
-
-
-### 15 June 2026, Version 1.14.5 - 1.14.5_347711954_iks
-{: #cl-ingress-alb-1145_347711954_iks}
-
-[Default version]{: tag-green}
-
-- Updates Go to version `1.26`.
-
-
-### 08 June 2026, Version 1.14.5 - 1.14.5_346240330_iks
-{: #cl-ingress-alb-1145_346240330_iks}
-
-- Updates Go to version `1.26`.
-
-
-### 01 June 2026, Version 1.14.5 - 1.14.5_344257277_iks
-{: #cl-ingress-alb-1145_344257277_iks}
-
-
-### 26 May 2026, Version 1.14.5 - 1.14.5_342376339_iks
-{: #cl-ingress-alb-1145_342376339_iks}
-
-- Resolves the following CVEs: [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/cve-2026-33814){: external}.
-
-
-### 01 May 2026, Version 1.14.5 - 1.14.5_337399223_iks
-{: #cl-ingress-alb-1145_337399223_iks}
-
-
-### 22 April 2026, Version 1.14.5 - 1.14.5_334184664_iks
-{: #cl-ingress-alb-1145_334184664_iks}
-
-- Resolves the following CVEs: [CVE-2026-22184](https://nvd.nist.gov/vuln/detail/cve-2026-22184){: external}, and [CVE-2026-27171](https://nvd.nist.gov/vuln/detail/cve-2026-27171){: external}.
-
-
-### 25 March 2026, Version 1.14.5 - 1.14.5_328030028_iks
-{: #cl-ingress-alb-1145_328030028_iks}
-
-
 ## Version 1.15.1
 {: #cl-ingress-alb-1.15.1}
 
@@ -160,6 +515,8 @@ Review the version history for Ingress ALB.
 ### 01 May 2026, Version 1.15.1 - 1.15.1_337399295_iks
 {: #cl-ingress-alb-1151_337399295_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 24 April 2026, Version 1.15.1 - 1.15.1_336158160_iks
 {: #cl-ingress-alb-1151_336158160_iks}
@@ -170,6 +527,70 @@ Review the version history for Ingress ALB.
 ### 25 March 2026, Version 1.15.1 - 1.15.1_328030458_iks
 {: #cl-ingress-alb-1151_328030458_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 1.14.5
+{: #cl-ingress-alb-1.14.5}
+
+
+### 01 July 2026, Version 1.14.5 - 1.14.5_351813502_iks
+{: #cl-ingress-alb-1145_351813502_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 15 June 2026, Version 1.14.5 - 1.14.5_347711954_iks
+{: #cl-ingress-alb-1145_347711954_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 08 June 2026, Version 1.14.5 - 1.14.5_346240330_iks
+{: #cl-ingress-alb-1145_346240330_iks}
+
+- Updates Go to version `1.26`.
+
+
+### 01 June 2026, Version 1.14.5 - 1.14.5_344257277_iks
+{: #cl-ingress-alb-1145_344257277_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 26 May 2026, Version 1.14.5 - 1.14.5_342376339_iks
+{: #cl-ingress-alb-1145_342376339_iks}
+
+- Resolves the following CVEs: [CVE-2026-33814](https://nvd.nist.gov/vuln/detail/cve-2026-33814){: external}.
+
+
+### 01 May 2026, Version 1.14.5 - 1.14.5_337399223_iks
+{: #cl-ingress-alb-1145_337399223_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 22 April 2026, Version 1.14.5 - 1.14.5_334184664_iks
+{: #cl-ingress-alb-1145_334184664_iks}
+
+- Resolves the following CVEs: [CVE-2026-22184](https://nvd.nist.gov/vuln/detail/cve-2026-22184){: external}, and [CVE-2026-27171](https://nvd.nist.gov/vuln/detail/cve-2026-27171){: external}.
+
+
+### 25 March 2026, Version 1.14.5 - 1.14.5_328030028_iks
+{: #cl-ingress-alb-1145_328030028_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 1.14.4
+{: #cl-ingress-alb-1.14.4}
+
+
+### 19 March 2026, Version 1.14.4 - 1.14.4_326635134_iks
+{: #cl-ingress-alb-1144_326635134_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ## Version 1.13.9
 {: #cl-ingress-alb-1.13.9}
@@ -177,6 +598,8 @@ Review the version history for Ingress ALB.
 
 ### 01 May 2026, Version 1.13.9 - 1.13.9_337399142_iks
 {: #cl-ingress-alb-1139_337399142_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 22 April 2026, Version 1.13.9 - 1.13.9_334184586_iks
@@ -187,6 +610,110 @@ Review the version history for Ingress ALB.
 
 ### 25 March 2026, Version 1.13.9 - 1.13.9_328029561_iks
 {: #cl-ingress-alb-1139_328029561_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 1.13.8
+{: #cl-ingress-alb-1.13.8}
+
+
+### 19 March 2026, Version 1.13.8 - 1.13.8_326635104_iks
+{: #cl-ingress-alb-1138_326635104_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 1.13.7
+{: #cl-ingress-alb-1.13.7}
+
+
+### 14 March 2026, Version 1.13.7 - 1.13.7_325797624_iks
+{: #cl-ingress-alb-1137_325797624_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 12 March 2026, Version 1.13.7 - 1.13.7_324864768_iks
+{: #cl-ingress-alb-1137_324864768_iks}
+
+- Resolves the following CVEs: [CVE-2026-27141](https://nvd.nist.gov/vuln/detail/cve-2026-27141){: external}, [CVE-2026-22184](https://nvd.nist.gov/vuln/detail/cve-2026-22184){: external}, and [CVE-2026-27171](https://nvd.nist.gov/vuln/detail/cve-2026-27171){: external}.
+
+
+### 02 March 2026, Version 1.13.7 - 1.13.7_322286017_iks
+{: #cl-ingress-alb-1137_322286017_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 16 February 2026, Version 1.13.7 - 1.13.7_318877466_iks
+{: #cl-ingress-alb-1137_318877466_iks}
+
+- Resolves the following CVEs: [CVE-2025-68121](https://nvd.nist.gov/vuln/detail/cve-2025-68121){: external}.
+
+
+### 09 February 2026, Version 1.13.7 - 1.13.7_316768386_iks
+{: #cl-ingress-alb-1137_316768386_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 1.13.2
+{: #cl-ingress-alb-1.13.2}
+
+
+### 30 January 2026, Version 1.13.2 - 1.13.2_315158234_iks
+{: #cl-ingress-alb-1132_315158234_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 07 January 2026, Version 1.13.2 - 1.13.2_310260758_iks
+{: #cl-ingress-alb-1132_310260758_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 06 January 2026, Version 1.13.2 - 1.13.2_306610659_iks
+{: #cl-ingress-alb-1132_306610659_iks}
+
+- Resolves the following CVEs: [CVE-2025-62408](https://nvd.nist.gov/vuln/detail/cve-2025-62408){: external}.
+
+
+### 04 December 2025, Version 1.13.2 - 1.13.2_303823545_iks
+{: #cl-ingress-alb-1132_303823545_iks}
+
+- Resolves the following CVEs: [CVE-2024-58251](https://nvd.nist.gov/vuln/detail/cve-2024-58251){: external}, and [CVE-2025-46394](https://nvd.nist.gov/vuln/detail/cve-2025-46394){: external}.
+
+
+### 02 December 2025, Version 1.13.2 - 1.13.2_301309576_iks
+{: #cl-ingress-alb-1132_301309576_iks}
+
+- Resolves the following CVEs: [CVE-2024-58251](https://nvd.nist.gov/vuln/detail/cve-2024-58251){: external}, [CVE-2025-46394](https://nvd.nist.gov/vuln/detail/cve-2025-46394){: external}, [CVE-2025-31133](https://nvd.nist.gov/vuln/detail/cve-2025-31133){: external}, [CVE-2025-52565](https://nvd.nist.gov/vuln/detail/cve-2025-52565){: external}, and [CVE-2025-52881](https://nvd.nist.gov/vuln/detail/cve-2025-52881){: external}.
+
+
+### 17 November 2025, Version 1.13.2 - 1.13.2_297386853_iks
+{: #cl-ingress-alb-1132_297386853_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 28 October 2025, Version 1.13.2 - 1.13.2_291202775_iks
+{: #cl-ingress-alb-1132_291202775_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 14 October 2025, Version 1.13.2 - 1.13.2_288662581_iks
+{: #cl-ingress-alb-1132_288662581_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+### 16 September 2025, Version 1.13.2 - 1.13.2_7820_iks
+{: #cl-ingress-alb-1132_7820_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ## Version 1.12.1
@@ -202,9 +729,13 @@ Review the version history for Ingress ALB.
 ### 19 March 2026, Version 1.12.1 - 1.12.1_326635030_iks
 {: #cl-ingress-alb-1121_326635030_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 14 March 2026, Version 1.12.1 - 1.12.1_325797607_iks
 {: #cl-ingress-alb-1121_325797607_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 12 March 2026, Version 1.12.1 - 1.12.1_324864805_iks
@@ -215,6 +746,8 @@ Review the version history for Ingress ALB.
 
 ### 10 March 2026, Version 1.12.1 - 1.12.1_323806177_iks
 {: #cl-ingress-alb-1121_323806177_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 02 March 2026, Version 1.12.1 - 1.12.1_322295655_iks
@@ -232,9 +765,13 @@ Review the version history for Ingress ALB.
 ### 30 January 2026, Version 1.12.1 - 1.12.1_315163011_iks
 {: #cl-ingress-alb-1121_315163011_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 07 January 2026, Version 1.12.1 - 1.12.1_310259634_iks
 {: #cl-ingress-alb-1121_310259634_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 06 January 2026, Version 1.12.1 - 1.12.1_307024864_iks
@@ -252,9 +789,13 @@ Review the version history for Ingress ALB.
 ### 17 November 2025, Version 1.12.1 - 1.12.1_297379442_iks
 {: #cl-ingress-alb-1121_297379442_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 28 October 2025, Version 1.12.1 - 1.12.1_291242242_iks
 {: #cl-ingress-alb-1121_291242242_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 14 October 2025, Version 1.12.1 - 1.12.1_288662251_iks
@@ -266,6 +807,8 @@ Review the version history for Ingress ALB.
 ### 21 August 2025, Version 1.12.1 - 1.12.1_7792_iks
 {: #cl-ingress-alb-1121_7792_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 16 July 2025, Version 1.12.1 - 1.12.1_7742_iks
 {: #cl-ingress-alb-1121_7742_iks}
@@ -275,6 +818,8 @@ Review the version history for Ingress ALB.
 
 ### 15 July 2025, Version 1.12.1 - 1.12.1_7702_iks
 {: #cl-ingress-alb-1121_7702_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 17 June 2025, Version 1.12.1 - 1.12.1_7643_iks
@@ -309,96 +854,6 @@ Review the version history for Ingress ALB.
 - The `nginx_ingress_controller_ingress_upstream_latency_seconds` metric has been removed, use `nginx_ingress_controller_connect_duration_seconds` instead.
 
 
-## Version 1.14.4
-{: #cl-ingress-alb-1.14.4}
-
-
-### 19 March 2026, Version 1.14.4 - 1.14.4_326635134_iks
-{: #cl-ingress-alb-1144_326635134_iks}
-
-
-## Version 1.13.8
-{: #cl-ingress-alb-1.13.8}
-
-
-### 19 March 2026, Version 1.13.8 - 1.13.8_326635104_iks
-{: #cl-ingress-alb-1138_326635104_iks}
-
-
-## Version 1.13.7
-{: #cl-ingress-alb-1.13.7}
-
-
-### 14 March 2026, Version 1.13.7 - 1.13.7_325797624_iks
-{: #cl-ingress-alb-1137_325797624_iks}
-
-
-### 12 March 2026, Version 1.13.7 - 1.13.7_324864768_iks
-{: #cl-ingress-alb-1137_324864768_iks}
-
-- Resolves the following CVEs: [CVE-2026-27141](https://nvd.nist.gov/vuln/detail/cve-2026-27141){: external}, [CVE-2026-22184](https://nvd.nist.gov/vuln/detail/cve-2026-22184){: external}, and [CVE-2026-27171](https://nvd.nist.gov/vuln/detail/cve-2026-27171){: external}.
-
-
-### 02 March 2026, Version 1.13.7 - 1.13.7_322286017_iks
-{: #cl-ingress-alb-1137_322286017_iks}
-
-
-### 16 February 2026, Version 1.13.7 - 1.13.7_318877466_iks
-{: #cl-ingress-alb-1137_318877466_iks}
-
-- Resolves the following CVEs: [CVE-2025-68121](https://nvd.nist.gov/vuln/detail/cve-2025-68121){: external}.
-
-
-### 09 February 2026, Version 1.13.7 - 1.13.7_316768386_iks
-{: #cl-ingress-alb-1137_316768386_iks}
-
-
-## Version 1.13.2
-{: #cl-ingress-alb-1.13.2}
-
-
-### 30 January 2026, Version 1.13.2 - 1.13.2_315158234_iks
-{: #cl-ingress-alb-1132_315158234_iks}
-
-
-### 07 January 2026, Version 1.13.2 - 1.13.2_310260758_iks
-{: #cl-ingress-alb-1132_310260758_iks}
-
-
-### 06 January 2026, Version 1.13.2 - 1.13.2_306610659_iks
-{: #cl-ingress-alb-1132_306610659_iks}
-
-- Resolves the following CVEs: [CVE-2025-62408](https://nvd.nist.gov/vuln/detail/cve-2025-62408){: external}.
-
-
-### 04 December 2025, Version 1.13.2 - 1.13.2_303823545_iks
-{: #cl-ingress-alb-1132_303823545_iks}
-
-- Resolves the following CVEs: [CVE-2024-58251](https://nvd.nist.gov/vuln/detail/cve-2024-58251){: external}, and [CVE-2025-46394](https://nvd.nist.gov/vuln/detail/cve-2025-46394){: external}.
-
-
-### 02 December 2025, Version 1.13.2 - 1.13.2_301309576_iks
-{: #cl-ingress-alb-1132_301309576_iks}
-
-- Resolves the following CVEs: [CVE-2024-58251](https://nvd.nist.gov/vuln/detail/cve-2024-58251){: external}, [CVE-2025-46394](https://nvd.nist.gov/vuln/detail/cve-2025-46394){: external}, [CVE-2025-31133](https://nvd.nist.gov/vuln/detail/cve-2025-31133){: external}, [CVE-2025-52565](https://nvd.nist.gov/vuln/detail/cve-2025-52565){: external}, and [CVE-2025-52881](https://nvd.nist.gov/vuln/detail/cve-2025-52881){: external}.
-
-
-### 17 November 2025, Version 1.13.2 - 1.13.2_297386853_iks
-{: #cl-ingress-alb-1132_297386853_iks}
-
-
-### 28 October 2025, Version 1.13.2 - 1.13.2_291202775_iks
-{: #cl-ingress-alb-1132_291202775_iks}
-
-
-### 14 October 2025, Version 1.13.2 - 1.13.2_288662581_iks
-{: #cl-ingress-alb-1132_288662581_iks}
-
-
-### 16 September 2025, Version 1.13.2 - 1.13.2_7820_iks
-{: #cl-ingress-alb-1132_7820_iks}
-
-
 ## Version 1.11.2
 {: #cl-ingress-alb-1.11.2}
 
@@ -406,9 +861,13 @@ Review the version history for Ingress ALB.
 ### 30 January 2026, Version 1.11.2 - 1.11.2_315162975_iks
 {: #cl-ingress-alb-1112_315162975_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 07 January 2026, Version 1.11.2 - 1.11.2_310259615_iks
 {: #cl-ingress-alb-1112_310259615_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 06 January 2026, Version 1.11.2 - 1.11.2_306610636_iks
@@ -426,9 +885,13 @@ Review the version history for Ingress ALB.
 ### 17 November 2025, Version 1.11.2 - 1.11.2_297368181_iks
 {: #cl-ingress-alb-1112_297368181_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 28 October 2025, Version 1.11.2 - 1.11.2_291246358_iks
 {: #cl-ingress-alb-1112_291246358_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 14 October 2025, Version 1.11.2 - 1.11.2_288648329_iks
@@ -439,6 +902,8 @@ Review the version history for Ingress ALB.
 
 ### 18 August 2025, Version 1.11.2 - 1.11.2_7782_iks
 {: #cl-ingress-alb-1112_7782_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 21 July 2025, Version 1.11.2 - 1.11.2_7740_iks
@@ -455,6 +920,8 @@ Review the version history for Ingress ALB.
 
 ### 15 July 2025, Version 1.11.2 - 1.11.2_7701_iks
 {: #cl-ingress-alb-1112_7701_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 17 June 2025, Version 1.11.2 - 1.11.2_7646_iks
@@ -556,6 +1023,8 @@ Review the version history for Ingress ALB.
 ### 18 August 2025, Version 1.9.6 - 1.9.6_7781_iks
 {: #cl-ingress-alb-196_7781_iks}
 
+- No feature changes. Updates dependencies and base images to the latest versions.
+
 
 ### 16 July 2025, Version 1.9.6 - 1.9.6_7741_iks
 {: #cl-ingress-alb-196_7741_iks}
@@ -565,6 +1034,8 @@ Review the version history for Ingress ALB.
 
 ### 15 July 2025, Version 1.9.6 - 1.9.6_7700_iks
 {: #cl-ingress-alb-196_7700_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 17 June 2025, Version 1.9.6 - 1.9.6_7645_iks
@@ -699,6 +1170,80 @@ Review the version history for Ingress ALB.
 - Initial release of 1.9.6. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.9.6)
 
 
+## Version 1.9.4
+{: #cl-ingress-alb-1.9.4}
+
+
+### 27 August 2024, Version 1.9.4 - 1.9.4_7028_iks
+{: #cl-ingress-alb-194_7028_iks}
+
+- Resolves the following CVEs: [CVE-2024-6197](https://nvd.nist.gov/vuln/detail/cve-2024-6197){: external}, [CVE-2024-2466](https://nvd.nist.gov/vuln/detail/cve-2024-2466){: external}, [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/cve-2024-2398){: external}, [CVE-2024-2379](https://nvd.nist.gov/vuln/detail/cve-2024-2379){: external}, [CVE-2024-2004](https://nvd.nist.gov/vuln/detail/cve-2024-2004){: external}, [CVE-2024-0853](https://nvd.nist.gov/vuln/detail/cve-2024-0853){: external}, and [CVE-2024-6874](https://nvd.nist.gov/vuln/detail/cve-2024-6874){: external}.
+
+
+### 11 July 2024, Version 1.9.4 - 1.9.4_6848_iks
+{: #cl-ingress-alb-194_6848_iks}
+
+- Resolves the following CVEs: [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/cve-2024-4741){: external}, and [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/cve-2024-5535){: external}.
+
+
+### 20 June 2024, Version 1.9.4 - 1.9.4_6775_iks
+{: #cl-ingress-alb-194_6775_iks}
+
+- Resolves the following CVEs: [CVE-2023-42365](https://nvd.nist.gov/vuln/detail/cve-2023-42365){: external}, [CVE-2023-42364](https://nvd.nist.gov/vuln/detail/cve-2023-42364){: external}, and [CVE-2023-42363](https://nvd.nist.gov/vuln/detail/cve-2023-42363){: external}.
+- Updates Go to version `1.22.4`.
+
+
+### 30 May 2024, Version 1.9.4 - 1.9.4_6675_iks
+{: #cl-ingress-alb-194_6675_iks}
+
+- Resolves the following CVEs: [CVE-2023-42366](https://nvd.nist.gov/vuln/detail/cve-2023-42366){: external}, [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/cve-2024-34459){: external}, and [CVE-2024-4603](https://nvd.nist.gov/vuln/detail/cve-2024-4603){: external}.
+
+
+### 18 May 2024, Version 1.9.4 - 1.9.4_6633_iks
+{: #cl-ingress-alb-194_6633_iks}
+
+- Updates Go to version `1.22.3`.
+
+
+### 03 May 2024, Version 1.9.4 - 1.9.4_6586_iks
+{: #cl-ingress-alb-194_6586_iks}
+
+- Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/cve-2023-45288){: external}.
+
+
+### 17 April 2024, Version 1.9.4 - 1.9.4_6553_iks
+{: #cl-ingress-alb-194_6553_iks}
+
+- Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/cve-2023-45288){: external}.
+- Updates Go to version `1.22.2`.
+
+
+### 08 April 2024, Version 1.9.4 - 1.9.4_6489_iks
+{: #cl-ingress-alb-194_6489_iks}
+
+- Updates Go to version `1.22.1`.
+
+
+### 18 March 2024, Version 1.9.4 - 1.9.4_6447_iks
+{: #cl-ingress-alb-194_6447_iks}
+
+- Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/cve-2024-24786){: external}.
+- CVE-2024-24786 
+
+
+### 26 February 2024, Version 1.9.4 - 1.9.4_6376_iks
+{: #cl-ingress-alb-194_6376_iks}
+
+- Updates Go to version `1.22.0`.
+
+
+### 22 February 2024, Version 1.9.4 - 1.9.4_6359_iks
+{: #cl-ingress-alb-194_6359_iks}
+
+- Resolves the following CVEs: [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/cve-2023-6129){: external}, [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/cve-2023-6237){: external}, [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/cve-2024-0727){: external}, [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/cve-2024-21626){: external}, and [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}.
+- Updates Go to version `1.21.5`.
+
+
 ## Version 1.8.5
 {: #cl-ingress-alb-1.8.5}
 
@@ -816,139 +1361,20 @@ Review the version history for Ingress ALB.
 - Initial release of 1.8.5. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.8.5)
 
 
-## Version 1.9.4
-{: #cl-ingress-alb-1.9.4}
+## Version 1.8.4
+{: #cl-ingress-alb-1.8.4}
 
 
-### 27 August 2024, Version 1.9.4 - 1.9.4_7028_iks
-{: #cl-ingress-alb-194_7028_iks}
-
-- Resolves the following CVEs: [CVE-2024-6197](https://nvd.nist.gov/vuln/detail/cve-2024-6197){: external}, [CVE-2024-2466](https://nvd.nist.gov/vuln/detail/cve-2024-2466){: external}, [CVE-2024-2398](https://nvd.nist.gov/vuln/detail/cve-2024-2398){: external}, [CVE-2024-2379](https://nvd.nist.gov/vuln/detail/cve-2024-2379){: external}, [CVE-2024-2004](https://nvd.nist.gov/vuln/detail/cve-2024-2004){: external}, [CVE-2024-0853](https://nvd.nist.gov/vuln/detail/cve-2024-0853){: external}, and [CVE-2024-6874](https://nvd.nist.gov/vuln/detail/cve-2024-6874){: external}.
-
-
-### 11 July 2024, Version 1.9.4 - 1.9.4_6848_iks
-{: #cl-ingress-alb-194_6848_iks}
-
-- Resolves the following CVEs: [CVE-2024-4741](https://nvd.nist.gov/vuln/detail/cve-2024-4741){: external}, and [CVE-2024-5535](https://nvd.nist.gov/vuln/detail/cve-2024-5535){: external}.
-
-
-### 20 June 2024, Version 1.9.4 - 1.9.4_6775_iks
-{: #cl-ingress-alb-194_6775_iks}
-
-- Resolves the following CVEs: [CVE-2023-42365](https://nvd.nist.gov/vuln/detail/cve-2023-42365){: external}, [CVE-2023-42364](https://nvd.nist.gov/vuln/detail/cve-2023-42364){: external}, and [CVE-2023-42363](https://nvd.nist.gov/vuln/detail/cve-2023-42363){: external}.
-- Updates Go to version `1.22.4`.
-
-
-### 30 May 2024, Version 1.9.4 - 1.9.4_6675_iks
-{: #cl-ingress-alb-194_6675_iks}
-
-- Resolves the following CVEs: [CVE-2023-42366](https://nvd.nist.gov/vuln/detail/cve-2023-42366){: external}, [CVE-2024-34459](https://nvd.nist.gov/vuln/detail/cve-2024-34459){: external}, and [CVE-2024-4603](https://nvd.nist.gov/vuln/detail/cve-2024-4603){: external}.
-
-
-### 18 May 2024, Version 1.9.4 - 1.9.4_6633_iks
-{: #cl-ingress-alb-194_6633_iks}
-
-- Updates Go to version `1.22.3`.
-
-
-### 03 May 2024, Version 1.9.4 - 1.9.4_6586_iks
-{: #cl-ingress-alb-194_6586_iks}
-
-- Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/cve-2023-45288){: external}.
-
-
-### 17 April 2024, Version 1.9.4 - 1.9.4_6553_iks
-{: #cl-ingress-alb-194_6553_iks}
-
-- Resolves the following CVEs: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/cve-2023-45288){: external}.
-- Updates Go to version `1.22.2`.
-
-
-### 08 April 2024, Version 1.9.4 - 1.9.4_6489_iks
-{: #cl-ingress-alb-194_6489_iks}
-
-- Updates Go to version `1.22.1`.
-
-
-### 18 March 2024, Version 1.9.4 - 1.9.4_6447_iks
-{: #cl-ingress-alb-194_6447_iks}
-
-- Resolves the following CVEs: [CVE-2024-24786](https://nvd.nist.gov/vuln/detail/cve-2024-24786){: external}.
-- CVE-2024-24786 
-
-
-### 26 February 2024, Version 1.9.4 - 1.9.4_6376_iks
-{: #cl-ingress-alb-194_6376_iks}
+### 26 February 2024, Version 1.8.4 - 1.8.4_6375_iks
+{: #cl-ingress-alb-184_6375_iks}
 
 - Updates Go to version `1.22.0`.
 
 
-### 22 February 2024, Version 1.9.4 - 1.9.4_6359_iks
-{: #cl-ingress-alb-194_6359_iks}
+### 22 February 2024, Version 1.8.4 - 1.8.4_6363_iks
+{: #cl-ingress-alb-184_6363_iks}
 
-- Resolves the following CVEs: [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/cve-2023-6129){: external}, [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/cve-2023-6237){: external}, [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/cve-2024-0727){: external}, [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/cve-2024-21626){: external}, and [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}.
-- Updates Go to version `1.21.5`.
-
-
-### 19 February 2024, Version 1.9.4_6359_iks
-{: #1.9.4_6359_iks}
-
-- Dependency updates.
-
-
-### 13 February 2024, Version 1.9.4_6346_iks
-{: #1.9.4_6346_iks}
-
-- Dependency updates.
-- CVE remediation for [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/cve-2024-21626){: external}.
-
-
-### 05 February 2024, Version 1.9.4_6292_iks
-{: #1.9.4_6292_iks}
-
-- Dependency updates.
-- CVE remediation for [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/cve-2024-0727){: external}.
-
-
-### 22 January 2024, Version 1.9.4_6251_iks
-{: #1.9.4_6251_iks}
-
-- Dependency updates.
-- CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/cve-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/cve-2023-6237){: external}.
-
-
-### 10 January 2024, Version 1.9.4_6161_iks
-{: #1.9.4_6161_iks}
-
-- Dependency updates.
-- CVE remediation for [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/cve-2023-46219){: external} and [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/cve-2023-46218){: external}.
-
-
-### 04 December 2023, Version 1.9.4_5886_iks
-{: #1.9.4_5886_iks}
-
-- Dependency updates.
-
-
-### 21 November 2023, Version 1.9.4_5756_iks
-{: #1.9.4_5756_iks}
-
-- Fixes [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/cve-2023-5678){: external}.
-
-
-### 07 November 2023, Version 1.9.4_5698_iks
-{: #1.9.4_5698_iks}
-
-- Fixes [CVE-2023-5044](https://nvd.nist.gov/vuln/detail/cve-2023-5044){: external}.
-
-
-### 
-If your Ingress resources use configuration snippets or redirects, their behavior might change with v1.9.4. Validate your configuration before updating. For more information about version 1.9.4, see the [1.9.4 community change log](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.9.4){: external}.
-{: important}
-
-[Default version]{: tag-green}
-
-1.9.4 is the default version for all ALBs that run the Kubernetes Ingress image. If you have Ingress auto update enabled, your ALBs automatically update to use this image.
+- Resolves the following CVEs: [CVE-2024-25062](https://nvd.nist.gov/vuln/detail/cve-2024-25062){: external}, [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/cve-2023-6129){: external}, [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/cve-2023-6237){: external}, [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/cve-2024-0727){: external}, [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/cve-2024-21626){: external}, and [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}.
 
 
 ## Version 1.6.4
@@ -997,453 +1423,3 @@ If your Ingress resources use configuration snippets or redirects, their behavio
 {: #cl-ingress-alb-164_6344_iks}
 
 - Resolves the following CVEs: [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/cve-2024-21626){: external}.
-
-
-### 13 February 2024, Version 1.6.4_6344_iks
-{: #1.6.4_6344_iks}
-
-- Dependency updates.
-- CVE remediation for [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/cve-2024-21626){: external}.
-
-
-### 05 February 2024, Version 1.6.4_6293_iks
-{: #1.6.4_6293_iks}
-
-- Dependency updates. 
-- CVE remediation for [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/cve-2024-0727){: external}.
-
-
-### 22 January 2024, Version 1.6.4_6250_iks
-{: #1.6.4_6250_iks}
-
-- Dependency updates. 
-- CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/cve-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/cve-2023-6237){: external}.
-
-
-### 10 January 2024, Version 1.6.4_6177_iks
-{: #1.6.4_6177_iks}
-
-- Dependency updates.
-- CVE remediation for [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/cve-2023-46219){: external} and [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/cve-2023-46218){: external}.
-
-
-### 04 December 2023, Version 1.6.4_5884_iks
-{: #1.6.4_5884_iks}
-
-- Dependency updates.
-- Fixes [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/cve-2023-5678){: external}.
-
-
-### 21 November 2023, Version 1.6.4_5727_iks
-{: #1.6.4_5727_iks}
-
-- Fixes [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/cve-2023-5678){: external}.
-
-
-### 07 November 2023, Version 1.6.4_5642_iks
-{: #1.6.4_5642_iks}
-
-- Dependency updates.
-
-
-### 17 October 2023, Version 1.6.4_5544_iks
-{: #1.6.4_5544_iks}
-
-
-- [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/cve-2023-39325){: external}
-- [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/cve-2023-38545){: external}
-- [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/cve-2023-38546){: external}
-- [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487){: external}
-
-
-### Version 1.8.1 (unsupported)
-{: #1_8_1}
-
-Version 1.8.1 is no longer supported.
-
-
-#### 17 October 2023, Version 1.8.1_5543_iks
-{: #1.8.1_5543_iks}
-
-
-- [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/cve-2023-39325){: external}
-- [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/cve-2023-38545){: external}
-- [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/cve-2023-38546){: external}
-- [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487){: external}
-
-
-#### 11 October 2023, Version 1.8.1_5434_iks
-{: #1.8.1_5434_iks}
-
-- Go version update.
-
-
-#### 5 October 2023, Version 1.8.1_5384_iks
-{: #1.8.1_5384_iks}
-
-- [CVE-2023-38039](https://nvd.nist.gov/vuln/detail/cve-2023-38039){: external}
-- [CVE-2023-39318](https://nvd.nist.gov/vuln/detail/cve-2023-39318){: external}
-- [CVE-2023-39319](https://nvd.nist.gov/vuln/detail/cve-2023-39319){: external}
-
-
-#### 31 August 2023, Version 1.8.1_5317_iks
-{: #1.8.1_5317_iks}
-
-- Initial release of `1.8.1`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.8.1){: external}.
-
-
-### Version 1.5.1 (unsupported)
-{: #1_5_1}
-
-Version 1.5.1 is no longer supported.
-
-#### 17 October 2023, Version 1.5.1_5542_iks
-{: #1.5.1_5542_iks}
-
-
-- [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/cve-2023-39325){: external}
-- [CVE-2023-38545](https://nvd.nist.gov/vuln/detail/cve-2023-38545){: external}
-- [CVE-2023-38546](https://nvd.nist.gov/vuln/detail/cve-2023-38546){: external}
-
-
-#### 11 October 2023, Version 1.5.1_5436_iks
-{: #1.5.1_5436_iks}
-
-Go version update.
-
-#### 5 October 2023, Version 1.5.1_5407_iks
-{: #1.5.1_5407_iks}
-
-- [CVE-2023-38039](https://nvd.nist.gov/vuln/detail/cve-2023-38039){: external}
-- [CVE-2023-39318](https://nvd.nist.gov/vuln/detail/cve-2023-39318){: external}
-- [CVE-2023-39319](https://nvd.nist.gov/vuln/detail/cve-2023-39319){: external}
-
-#### 31 August 2023, Version 1.5.1_5318_iks
-{: #1.5.1_5318_iks}
-
-- Resolves [CVE-2023-3817](https://nvd.nist.gov/vuln/detail/cve-2023-3817){: external}
-- Updates `golang` version to `1.20.7`.
-
-#### 26 July 2023, Version 1.5.1_5217_iks
-{: #1.5.1_5217_iks}
-
-- [CVE-2023-35945](https://nvd.nist.gov/vuln/detail/cve-2023-35945){: external}
-- [CVE-2023-3446](https://nvd.nist.gov/vuln/detail/cve-2023-3446){: external}
-
-#### 5 July 2023, Version 1.5.1_5160_iks
-{: #1.5.1_5160_iks}
-
-- Resolves [CVE-2023-32731](https://nvd.nist.gov/vuln/detail/cve-2023-32731){: external}
-
-#### 6 June 2023, Version 1.5.1_5074_iks
-{: #1.5.1_5074_iks}
-
-- Updates `golang` version to `1.20.4`.
-- [CVE-2023-29491](https://nvd.nist.gov/vuln/detail/cve-2023-29491){: external}
-- [CVE-2023-2650](https://nvd.nist.gov/vuln/detail/cve-2023-2650){: external}
-
-#### 23 May 2023, Version 1.5.1_4168_iks
-{: #1.5.1_4168_iks}
-
-- [CVE-2023-28319](https://nvd.nist.gov/vuln/detail/cve-2023-28319){: external}
-- [CVE-2023-28320](https://nvd.nist.gov/vuln/detail/cve-2023-28320){: external}
-- [CVE-2023-28321](https://nvd.nist.gov/vuln/detail/cve-2023-28321){: external}
-- [CVE-2023-28322](https://nvd.nist.gov/vuln/detail/cve-2023-28322){: external}
-
-#### 4 May 2023, Version 1.5.1_4113_iks
-{: #1.5.1_4113_iks}
-
-- Image update.
-
-#### 27 April 2023, Version 1.5.1_4064_iks
-{: #1.5.1_4064_iks}
-
-- [CVE-2023-27533](https://nvd.nist.gov/vuln/detail/cve-2023-27533){: external}
-- [CVE-2023-27534](https://nvd.nist.gov/vuln/detail/cve-2023-27534){: external}
-- [CVE-2023-27535](https://nvd.nist.gov/vuln/detail/cve-2023-27535){: external}
-- [CVE-2023-27536](https://nvd.nist.gov/vuln/detail/cve-2023-27536){: external}
-- [CVE-2023-27537](https://nvd.nist.gov/vuln/detail/cve-2023-27537){: external}
-- [CVE-2023-27538](https://nvd.nist.gov/vuln/detail/cve-2023-27538){: external}
-
-#### 12 April 2023, Version 1.5.1_3977_iks
-{: #1.5.1_3977_iks}
-
-Updates `golang` to version `1.20.3`.
-
-#### 4 April 2023, Version 1.5.1_3951_iks
-{: #1.5.1_3951_iks}
-
-- [CVE-2023-25809](https://nvd.nist.gov/vuln/detail/cve-2023-25809){: external}
-- [CVE-2023-28642](https://nvd.nist.gov/vuln/detail/cve-2023-28642){: external}
-- [CVE-2023-0464](https://nvd.nist.gov/vuln/detail/cve-2023-0464){: external}
-- [CVE-2023-0465](https://nvd.nist.gov/vuln/detail/cve-2023-0465){: external}
-
-#### 24 March 2023, Version 1.5.1_3897_iks
-{: #1.5.1_3897_iks}
-
-Updates `golang` version to `1.20.2`.
-
-#### 13 March 2023, Version 1.5.1_3863_iks
-{: #1.5.1_3863_iks}
-
-Dependency updates.
-
-#### 23 February 2023, Version 1.5.1_3809_iks
-{: #1.5.1_3809_iks}
-
-- Updates `golang` version to 1.20.1.
-- Resolves [CVE-2022-41723](https://nvd.nist.gov/vuln/detail/cve-2022-41723){: external}
-
-#### 20 February 2023, Version 1.5.1_3779_iks
-{: #1.5.1_3779_iks}
-
-- [CVE-2022-4304](https://nvd.nist.gov/vuln/detail/cve-2022-4304){: external}
-- [CVE-2022-4450](https://nvd.nist.gov/vuln/detail/cve-2022-4450){: external}
-- [CVE-2023-0215](https://nvd.nist.gov/vuln/detail/cve-2023-0215){: external}
-- [CVE-2023-0286](https://nvd.nist.gov/vuln/detail/cve-2023-0286){: external}
-- [CVE-2023-23914](https://nvd.nist.gov/vuln/detail/cve-2023-23914){: external}
-- [CVE-2023-23915](https://nvd.nist.gov/vuln/detail/cve-2023-23915){: external}
-- [CVE-2023-23916](https://nvd.nist.gov/vuln/detail/cve-2023-23916){: external}
-
-#### 30 January 2023, Version 1.5.1_3705_iks
-{: #1.5.1_3705_iks}
-
-Updates the golang version to 1.19.5.
-
-#### 24 January 2023, Version 1.5.1_3683_iks
-{: #1.5.1_3683_iks}
-
-Introduces support for multiple platform architectures such as AMD64 and s390x.
-
-#### 3 January 2023, Version 1.5.1_3536_iks
-{: #1.5.1_3536_iks}
-
-Initial release of `1.5.1`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.5.1){: external}.
-
-
-### 11 October 2023, Version 1.6.4_5435_iks
-{: #1.6.4_5435_iks}
-
-Go version update.
-
-
-### 5 October 2023, Version 1.6.4_5406_iks
-{: #1.6.4_5406_iks}
-
-- [CVE-2023-38039](https://nvd.nist.gov/vuln/detail/cve-2023-38039){: external}
-- [CVE-2023-39318](https://nvd.nist.gov/vuln/detail/cve-2023-39318){: external}
-- [CVE-2023-39319](https://nvd.nist.gov/vuln/detail/cve-2023-39319){: external}
-
-
-### 31 August 2023, Version 1.6.4_5270_iks
-{: #1.6.4_5270_iks}
-
-- Resolves [CVE-2023-3817](https://nvd.nist.gov/vuln/detail/cve-2023-3817){: external}
-- Updates `golang` version to `1.20.7`.
-
-
-### 26 July 2023, Version 1.6.4_5219_iks
-{: #1.6.4_5219_iks}
-
-- [CVE-2023-35945](https://nvd.nist.gov/vuln/detail/cve-2023-35945){: external}
-- [CVE-2023-3446](https://nvd.nist.gov/vuln/detail/cve-2023-3446){: external}
-
-
-### Version 1.4.0 (unsupported)
-{: #1_4_0}
-
-Version 1.4.0 is no longer supported.
-
-#### 26 July 2023, Version 1.4.0_5218_iks
-{: #1.4.0_5218_iks}
-
-- [CVE-2023-35945](https://nvd.nist.gov/vuln/detail/cve-2023-35945){: external}
-- [CVE-2023-3446](https://nvd.nist.gov/vuln/detail/cve-2023-3446){: external}
-
-#### 5 July 2023, Version 1.4.0_5159_iks
-{: #1.4.0_5159_iks}
-
-- Resolves [CVE-2023-32731](https://nvd.nist.gov/vuln/detail/cve-2023-32731){: external}
-
-#### 6 June 2023, Version 1.4.0_5068_iks
-{: #1.4.0_5068_iks}
-
-- Updates `golang` version to `1.20.4`.
-- [CVE-2023-29491](https://nvd.nist.gov/vuln/detail/cve-2023-29491){: external}
-- [CVE-2023-2650](https://nvd.nist.gov/vuln/detail/cve-2023-2650){: external}
-
-#### 23 May 2023, Version 1.4.0_4169_iks
-{: #1.4.0_4169_iks}
-
-- [CVE-2023-28319](https://nvd.nist.gov/vuln/detail/cve-2023-28319){: external}
-- [CVE-2023-28320](https://nvd.nist.gov/vuln/detail/cve-2023-28320){: external}
-- [CVE-2023-28321](https://nvd.nist.gov/vuln/detail/cve-2023-28321){: external}
-- [CVE-2023-28322](https://nvd.nist.gov/vuln/detail/cve-2023-28322){: external}
-
-#### 4 May 2023, Version 1.4.0_4114_iks
-{: #1.4.0_4114_iks}
-
-- Image update.
-
-#### 27 April 2023, Version 1.4.0_4062_iks
-{: #1.4.0_4062_iks}
-
-- [CVE-2023-27533](https://nvd.nist.gov/vuln/detail/cve-2023-27533){: external}
-- [CVE-2023-27534](https://nvd.nist.gov/vuln/detail/cve-2023-27534){: external}
-- [CVE-2023-27535](https://nvd.nist.gov/vuln/detail/cve-2023-27535){: external}
-- [CVE-2023-27536](https://nvd.nist.gov/vuln/detail/cve-2023-27536){: external}
-- [CVE-2023-27537](https://nvd.nist.gov/vuln/detail/cve-2023-27537){: external}
-- [CVE-2023-27538](https://nvd.nist.gov/vuln/detail/cve-2023-27538){: external}
-
-#### 12 April 2023, Version 1.4.0_3978_iks
-{: #1.4.0_3978_iks}
-
-Updates `golang` to version `1.20.3`.
-
-
-#### 4 April 2023, Version 1.4.0_3953_iks
-{: #1.4.0_3953_iks}
-
-- [CVE-2023-25809](https://nvd.nist.gov/vuln/detail/cve-2023-25809){: external}
-- [CVE-2023-28642](https://nvd.nist.gov/vuln/detail/cve-2023-28642){: external}
-- [CVE-2023-0464](https://nvd.nist.gov/vuln/detail/cve-2023-0464){: external}
-- [CVE-2023-0465](https://nvd.nist.gov/vuln/detail/cve-2023-0465){: external}
-
-#### 24 March 2023, Version 1.4.0_3896_iks
-{: #1.4.0_3896_iks}
-
-Updates `golang` version to `1.20.2`.
-
-#### 13 March 2023, Version 1.4.0_3862_iks
-{: #1.4.0_3862_iks}
-
-Dependency updates.
-
-#### 23 February 2023, Version 1.4.0_3808_iks
-{: #1.4.0_3808_iks}
-
-- Updates `golang` version to 1.20.1.
-- Resolves [CVE-2022-41723](https://nvd.nist.gov/vuln/detail/cve-2022-41723){: external}
-
-#### 20 February 2023, Version 1.4.0_3783_iks
-{: #1.4.0_3783_iks}
-
-- [CVE-2023-23914](https://nvd.nist.gov/vuln/detail/cve-2023-23914){: external}
-- [CVE-2023-23915](https://nvd.nist.gov/vuln/detail/cve-2023-23915){: external}
-- [CVE-2023-23916](https://nvd.nist.gov/vuln/detail/cve-2023-23916){: external}
-
-#### 10 February 2023, Version 1.4.0_3755_iks
-{: #1.4.0_3755_iks}
-
-- [CVE-2022-4304](https://nvd.nist.gov/vuln/detail/cve-2022-4304){: external}
-- [CVE-2022-4450](https://nvd.nist.gov/vuln/detail/cve-2022-4450){: external}
-- [CVE-2023-0215](https://nvd.nist.gov/vuln/detail/cve-2023-0215){: external}
-- [CVE-2023-0286](https://nvd.nist.gov/vuln/detail/cve-2023-0286){: external}
-
-#### 30 January 2023, Version 1.4.0_3703_iks
-{: #1.4.0_3703_iks}
-
-Updates the golang version to 1.19.5.
-
-#### 24 January 2023, Version 1.4.0_3684_iks
-{: #1.4.0_3684_iks}
-
-Introduces support for multiple platform architectures such as AMD64 and s390x.
-
-#### 3 January 2023, Version 1.4.0_3537_iks
-{: #1.4.0_3537_iks}
-
-- [CVE-2022-43551](https://nvd.nist.gov/vuln/detail/cve-2022-43551){: external}
-- [CVE-2022-43552](https://nvd.nist.gov/vuln/detail/cve-2022-43552){: external}
-
-#### 15 December 2022, Version 1.4.0_3297_iks
-{: #1.4.0_3297_iks}
-
-[CVE-2022-41717](https://www.cve.org/cveRecord?id=cve-2022-41717){: external}
-
-#### 12 December 2022, Version 1.4.0_3212_iks
-{: #1.4.0_3212_iks}
-
-Initial release of `1.4.0`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.4.0){: external}.
-
-
-### 5 July 2023, Version 1.6.4_5161_iks
-{: #1.6.4_5161_iks}
-
-- Resolves [CVE-2023-32731](https://nvd.nist.gov/vuln/detail/cve-2023-32731){: external}
-
-
-
-
-
-### 26 February 2024, Version 1.8.4 - 1.8.4_6375_iks
-{: #cl-ingress-alb-184_6375_iks}
-
-- Updates Go to version `1.22.0`.
-
-
-### 22 February 2024, Version 1.8.4 - 1.8.4_6363_iks
-{: #cl-ingress-alb-184_6363_iks}
-
-- Resolves the following CVEs: [CVE-2024-25062](https://nvd.nist.gov/vuln/detail/cve-2024-25062){: external}, [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/cve-2023-6129){: external}, [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/cve-2023-6237){: external}, [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/cve-2024-0727){: external}, [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/cve-2024-21626){: external}, and [CVE-2023-48795](https://nvd.nist.gov/vuln/detail/cve-2023-48795){: external}.
-
-
-### 19 February 2024, Version 1.8.4_6363_iks
-{: #1.8.4_6363_iks}
-
-- Dependency updates.
-- CVE remediation for [CVE-2024-25062](https://nvd.nist.gov/vuln/detail/cve-2024-25062){: external}.
-
-
-### 13 February 2024, Version 1.8.4_6345_iks
-{: #1.8.4_6345_iks}
-
-- Dependency updates.
-- CVE remediation for [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/cve-2024-21626){: external}.
-
-
-### 05 February 2024, Version 1.8.4_6291_iks
-{: #1.8.4_6291_iks}
-
-- Dependency updates. 
-- CVE remediation for [CVE-2024-0727](https://nvd.nist.gov/vuln/detail/cve-2024-0727){: external}.
-
-
-### 22 January 2024, Version 1.8.4_6245_iks
-{: #1.8.4_6245_iks}
-
-- Dependency updates. 
-- CVE remediation for [CVE-2023-6129](https://nvd.nist.gov/vuln/detail/cve-2023-6129){: external} and [CVE-2023-6237](https://nvd.nist.gov/vuln/detail/cve-2023-6237){: external}.
-
-
-### 10 January 2024, Version 1.8.4_6173_iks
-{: #1.8.4_6173_iks}
-
-- Dependency updates.
-- CVE remediation for [CVE-2023-46219](https://nvd.nist.gov/vuln/detail/cve-2023-46219){: external} and [CVE-2023-46218](https://nvd.nist.gov/vuln/detail/cve-2023-46218){: external}.
-
-
-### 04 December 2023, Version 1.8.4_5885_iks
-{: #1.8.4_5885_iks}
-
-- Dependency updates.
-
-
-### 21 November 2023, Version 1.8.4_5757_iks
-{: #1.8.4_5757_iks}
-
-- Fixes [CVE-2023-5678](https://nvd.nist.gov/vuln/detail/cve-2023-5678){: external}.
-
-
-### 07 November 2023, Version 1.8.4_5644_iks
-{: #1.8.4_5644_iks}
-
-- Dependency updates.
-
-
-### 23 October 2023, Version 1.8.4_5586_iks
-{: #1.8.4_5586_iks}
-
-- Initial release of `1.8.4`. For more information, see the [community release documentation](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.8.4){: external}.
-- Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487){: external}
-- Updates `golang` version to `1.21.1`.

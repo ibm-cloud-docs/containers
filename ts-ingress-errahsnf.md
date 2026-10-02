@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-05-12"
+lastupdated: "2026-10-02"
 
 
 keywords: containers, ingress, troubleshoot ingress, errahsnf
@@ -30,40 +30,19 @@ When you check the status of your cluster's Ingress components by running the `i
 {: tsSymptoms}
 
 ```sh
-The ALB health service is not found on the cluster (ERRAHSNF).
+One or more ALB health service is not found on the cluster (ERRAHSNF).
 ```
 {: screen}
 
-{{site.data.keyword.containerlong_notm}} deploys a managed health check service to every cluster. If the service is missing from your cluster, this might result in invalid health check results.
+{{site.data.keyword.containerlong_notm}} deploys managed health check services to every cluster. If one or more service is missing from your cluster, this might result in invalid health check results.
 {: tsCauses}
 
-Manually create the health service.
+Trigger a reconcile on the health ingresses.
 {: tsResolve}
 
-1. Copy the following service configuration and save it to a file called `service.yaml`.
-
-    ```yaml
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: ibm-k8s-controller-health
-      namespace: kube-system
-    spec:
-      ports:
-      - name: http
-        port: 80
-        protocol: TCP
-        targetPort: 8283
-      selector:
-        alb-image-type: community
-      type: ClusterIP
-    ```
-    {: codeblock}
-
-1. Create the health check service in your cluster.
-
+1. Run the following command either for all ALBs or target at least one enabled ALB.
     ```sh
-    kubectl apply -f service.yaml
+    ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB ...] [--output OUTPUT] [-q] [--version VERSION]
     ```
     {: pre}
 
