@@ -141,8 +141,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Manage the lifecycle](/docs/containers?topic=containers-learning-path-admin#admin_lifecycle)
 
-* [Migrate Classic clusters to VPC](/docs/containers?topic=containers-learning-path-admin#admin_migrate)
-
 [Learning path for developers](/docs/containers?topic=containers-learning-path-dev#learning-path-dev)
 
 * [Access the cluster](/docs/containers?topic=containers-learning-path-dev#dev_cluster)
@@ -164,8 +162,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Add app storage](/docs/containers?topic=containers-learning-path-dev#dev_storage)
 
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
-
-* [Migrating from Classic to VPC](/docs/containers?topic=containers-learning-path-dev#dev_migrate)
 
 
 ## Plan your cluster
