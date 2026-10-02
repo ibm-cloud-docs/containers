@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-10-01"
+lastupdated: "2026-10-02"
 
 
 keywords: change log, version history, Istio
@@ -505,19 +505,3 @@ Review the version history for Istio.
 
 ## Unsupported: Version 1.18
 {: #v118}
-
-
-### 3 October 2023, Version 1.18.3
-{: #1183}
-
-
-- See the Istio release notes for [Istio 1.18.3](https://istio.io/latest/news/releases){: external}.
-- Resolves the following CVEs: [CVE-2023-28321](https://www.cve.org/cveRecord?id=cve-2023-28321){: external}, [CVE-2023-28322](https://www.cve.org/cveRecord?id=cve-2023-28322){: external}, [CVE-2023-32001](https://www.cve.org/cveRecord?id=cve-2023-32001){: external}, and usn-6237-2.
-
-
-### 3 October 2023, Version 1.17.6
-{: #1176}
-
-
-- See the Istio release notes for [Istio 1.17.6](https://istio.io/latest/news/releases){: external}.
-- Resolves the following CVEs: [CVE-2023-28321](https://www.cve.org/cveRecord?id=cve-2023-28321){: external}, [CVE-2023-28322](https://www.cve.org/cveRecord?id=cve-2023-28322){: external}, [CVE-2023-32001](https://www.cve.org/cveRecord?id=cve-2023-32001){: external}, and usn-6237-2.

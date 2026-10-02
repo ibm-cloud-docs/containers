@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-10-01"
+lastupdated: "2026-10-02"
 
 
 keywords: kubernetes, containers
@@ -185,17 +185,3 @@ Manage your cluster and worker nodes through each phase of the cluster lifecycle
     - [Kubernetes version information](/docs/containers?topic=containers-cs_versions)
     - [Fluentd and Ingress ALB change log](/docs/containers?topic=containers-cl-ingress-alb)
 - **Removing**: [Remove clusters and clean up related resources](/docs/containers?topic=containers-remove).
-
-## Migrate Classic clusters to VPC
-{: #admin_migrate}
-
-[Classic infrastructure]{: tag-classic-inf}
-
-If you have existing Classic clusters, migrate them to VPC to take advantage of improved security, networking flexibility, and better performance. New Classic cluster creation is restricted on a per-region basis.
-
-- **Overview**: [Migrating from Classic to VPC](/docs/containers?topic=containers-vpc-migrate-overview) — understand what the migration covers, what is not migrated automatically, and what prerequisites you need.
-- **Quickstart**: [Migration tool quickstart guide](/docs/containers?topic=containers-vpc-migrate-quickstart) — access the migration wizard and start the migration in a single guided workflow.
-- **Eligibility**: [Which clusters are eligible for migration](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-cluster) — review cluster, add-on, and workload constraints before you begin.
-
-Need help? Check out troubleshooting [clusters and masters](/docs/containers?topic=containers-debug_clusters), [worker nodes](/docs/containers?topic=containers-debug_worker_nodes), or the [cluster autoscaler](/docs/containers?topic=containers-debug_cluster_autoscaler).
-{: tip}

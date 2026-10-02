@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-09-08"
+lastupdated: "2026-10-02"
 
 keywords: kubernetes, error messages, error codes, troubleshooting reference
 
@@ -97,8 +97,8 @@ The following error codes appear in the output of the `ibmcloud ks ingress statu
 | `ERRADNF` | The ALB deployment is not found on the cluster. | [Ingress error: ERRADNF](/docs/containers?topic=containers-ts-ingress-erradnf) |
 | `ERRADRUH` | One or more ALB pods are not in the running state. | [Ingress error: ERRADRUH](/docs/containers?topic=containers-ts-ingress-erradruh) |
 | `ERRAHCF` | The ALB is unable to respond to health requests. | [Ingress error: ERRAHCF](/docs/containers?topic=containers-ts-ingress-errahcf) |
-| `ERRAHINF` | The ALB health Ingress resource is not found on the cluster. | [Ingress error: ERRAHINF](/docs/containers?topic=containers-ts-ingress-errahinf) |
-| `ERRAHSNF` | The ALB health service is not found on the cluster. | [Ingress error: ERRAHSNF](/docs/containers?topic=containers-ts-ingress-errahsnf) |
+| `ERRAHINF` | One or more ALB health Ingress resource is not found on the cluster. | [Ingress error: ERRAHINF](/docs/containers?topic=containers-ts-ingress-errahinf) |
+| `ERRAHSNF` | One or more ALB health service is not found on the cluster. | [Ingress error: ERRAHSNF](/docs/containers?topic=containers-ts-ingress-errahsnf) |
 | `ERRAVUS` | The ALB version is no longer supported. | [Ingress error: ERRAVUS](/docs/containers?topic=containers-ts-ingress-erravus) |
 | `ERRHPAETPI` | Autoscaling is ineffective. | [Ingress error: ERRHPAETPI](/docs/containers?topic=containers-ts-ingress-errhpaetpi) |
 | `ERRHPAIWC` | The cluster does not have enough worker nodes to satisfy the autoscaling configuration. | [Ingress error: ERRHPAIWC](/docs/containers?topic=containers-ts-ingress-errhpaiwc) |
