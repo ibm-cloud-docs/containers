@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-02"
+lastupdated: "2026-10-05"
 
 
 keywords: containers
@@ -472,6 +472,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
+
+    * [5 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0526)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
 
     * [1 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0126)
 
@@ -7206,10 +7210,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [13 November 2023, Version patch update 1.0.9_195](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#109195_ca)
 
-    * [04 October 2023, Version 1.0.9 - 1.0.9_134](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-109_134)
-
-    * [04 October 2023, Version patch update 1.0.9_134](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#109134_ca)
-
     * [01 February 2024, Version 1.0.8 - 1.0.8_346](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-108_346)
 
     * [27 November 2023, Version 1.0.8 - 1.0.8_292](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-108_292)
@@ -7607,6 +7607,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-supported-versions)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [05 October 2026, Version 2.0.0 - 2.0.0_373110464](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_373110464)
 
     * [14 September 2026, Version 2.0.0 - 2.0.0_367915291](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_367915291)
 
