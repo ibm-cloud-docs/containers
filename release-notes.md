@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-02"
+lastupdated: "2026-10-05"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,18 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2026
 {: #containers-oct26}
+
+### 5 October 2026
+{: #containers-oct0526}
+{: release-note}
+
+
+
+ALB OAuth Proxy cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy).
+
+
+
 
 
 
