@@ -14,19 +14,16 @@ toc:
   - navgroup:
       id: learn
       topics:
-      - topicgroup:
-          label: Containers
-          topics:
-          - topic: getting-started.md
-            navtitle: Getting started
-          - topic: use-cases.md
-            navtitle: Use cases
-          - topic: overview.md
-            navtitle: Understanding the service
-          - topic: cs_tech.md
-            navtitle: Architecture and dependencies
-          - path-admin.md
-          - path-dev.md
+      - topic: getting-started.md
+        navtitle: Getting started
+      - topic: use-cases.md
+        navtitle: Use cases
+      - topic: overview.md
+        navtitle: Understanding the service
+      - topic: cs_tech.md
+        navtitle: Architecture and dependencies
+      - path-admin.md
+      - path-dev.md
       - topicgroup:
           label: Plan your cluster
           topics:
