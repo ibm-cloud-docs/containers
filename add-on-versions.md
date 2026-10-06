@@ -20,6 +20,8 @@ Review the supported cluster add-ons. Each add-on version can be used on any clu
 
 
 
+
+
 ALB OAuth proxy `2.0.0`
 :   Supported Kubernetes versions: `>=1.19.0 <1.38.0`
 
