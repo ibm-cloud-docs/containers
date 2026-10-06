@@ -1,7 +1,7 @@
 ---
 copyright:
   years: 2022, 2026
-lastupdated: "2026-09-23"
+lastupdated: "2026-10-06"
 
 keywords: containers, add-ons, cluster addon
 
@@ -16,8 +16,6 @@ subcollection: containers
 
 Review the supported cluster add-ons. Each add-on version can be used on any cluster version included in the range of supported cluster versions.
 {: shortdesc}
-
-
 
 
 

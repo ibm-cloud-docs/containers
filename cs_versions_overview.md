@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-09-28"
+lastupdated: "2026-10-06"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -36,7 +36,6 @@ For more information about the Kubernetes project versions, see the [Kubernetes 
 
 Dates that are marked with a dagger (`†`) are tentative and subject to change. Operating systems that are marked with an asterisk (`*`) are deprecated. [Migrate any worker nodes](/docs/containers?topic=containers-ubuntu-migrate) that use a deprecated operating system to a newer operating system version. 
 {: note}
-
 
 
 
