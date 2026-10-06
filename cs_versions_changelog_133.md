@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-10-01"
+lastupdated: "2026-10-06"
 
 
 keywords: change log, version history, 1.33
@@ -47,6 +47,52 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.33
 {: #133_components}
+
+
+## 05 October 2026, Master fix pack 1.33.13_1587
+{: #cl-boms_master-13313_1587_M}
+
+The following list shows the components that are in the master fix pack 1.33.13_1587. Master patch updates are applied automatically.
+{: shortdesc}
+
+Cluster health control-plane operator v0.1.31
+:   New version contains updates and security fixes.
+
+
+Cluster health image v1.6.21
+:   New version contains updates and security fixes.
+
+
+etcd v3.5.34
+:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
+
+
+IBM Cloud Block Storage driver and plug-in v2.5.28
+:   New version contains updates and security fixes.
+
+
+IBM Cloud Controller Manager v1.33.13-11
+:   New version contains updates and security fixes.
+
+
+IBM Cloud File Storage plug-in and monitor v457
+:   New version contains updates and security fixes.
+
+
+IBM Cloud RBAC Operator 109756bee2b9174b053ff2f18047c2fe4a3e11f3
+:   New version contains updates and security fixes.
+
+
+Key Management Service provider 2.10.30
+:   New version contains updates and security fixes.
+
+
+Kubernetes add-on resizer 1.8.24
+:   See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.24){: external}.
+
+
+Portieris admission controller v0.15.1
+:   See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.15.1){: external}
 
 
 ## 21 September 2026, Worker node fix pack 1.33.13_1585

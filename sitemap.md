@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-05"
+lastupdated: "2026-10-06"
 
 
 keywords: containers
@@ -476,6 +476,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [5 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0526)
 
         * ALB OAuth Proxy cluster add-on patch updates.
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs are available.
+
+    * [2 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0226)
 
     * [1 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0126)
 
@@ -5496,6 +5500,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+* [05 October 2026, Master fix pack 1.36.5_1535](/docs/containers?topic=containers-changelog_136#cl-boms_master-1365_1535_M)
+
 * [21 September 2026, Worker node fix pack 1.36.3_1530](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1530_W)
 
 * [08 September 2026, Worker node fix pack 1.36.3_1529](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1529_W)
@@ -5576,6 +5582,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+* [05 October 2026, Master fix pack 1.35.9_1546](/docs/containers?topic=containers-changelog_135#cl-boms_master-1359_1546_M)
 
 * [21 September 2026, Worker node fix pack 1.35.7_1544](/docs/containers?topic=containers-changelog_135#cl-boms-1357_1544_W)
 
@@ -5681,6 +5689,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+* [05 October 2026, Master fix pack 1.34.12_1568](/docs/containers?topic=containers-changelog_134#cl-boms_master-13412_1568_M)
 
 * [21 September 2026, Worker node fix pack 1.34.10_1566](/docs/containers?topic=containers-changelog_134#cl-boms-13410_1566_W)
 
@@ -5806,6 +5816,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+* [05 October 2026, Master fix pack 1.33.13_1587](/docs/containers?topic=containers-changelog_133#cl-boms_master-13313_1587_M)
 
 * [21 September 2026, Worker node fix pack 1.33.13_1585](/docs/containers?topic=containers-changelog_133#cl-boms-13313_1585_W)
 

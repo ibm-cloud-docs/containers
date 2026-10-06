@@ -3,7 +3,7 @@
 copyright:
   years: 2026, 2026
 
-lastupdated: "2026-10-01"
+lastupdated: "2026-10-06"
 
 
 keywords: change log, version history, 1.36
@@ -39,6 +39,84 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.36
 {: #136_components}
+
+
+## 05 October 2026, Master fix pack 1.36.5_1535
+{: #cl-boms_master-1365_1535_M}
+
+The following list shows the components that are in the master fix pack 1.36.5_1535. Master patch updates are applied automatically.
+{: shortdesc}
+
+Aqua Security kube-bench v0.16.0
+:   See the [Aqua Security kube-bench release notes](https://github.com/aquasecurity/kube-bench/releases/tag/vv0.16.0){: external}.
+
+
+Calico v3.31.7
+:   See the [Calico release notes](https://docs.tigera.io/calico/3.31/release-notes/#calico-open-source-3317-bug-fix-release){: external}.
+
+
+Calico API server v3.31.7
+:   See the [Calico release notes](https://docs.projectcalico.org/releases){: external}.
+
+
+Calico Typha v3.31.7
+:   See the [Calico release notes](https://docs.projectcalico.org/releases){: external}.
+
+
+Cluster health control-plane operator v0.1.31
+:   New version contains updates and security fixes.
+
+
+Cluster health image v1.6.21
+:   New version contains updates and security fixes.
+
+
+etcd v3.5.34
+:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
+
+
+IBM Cloud Block Storage driver and plug-in v2.5.28
+:   New version contains updates and security fixes.
+
+
+IBM Cloud Controller Manager v1.36.4-3
+:   New version contains updates and security fixes.
+
+
+IBM Cloud File Storage plug-in and monitor v457
+:   New version contains updates and security fixes.
+
+
+IBM Cloud Kubernetes binaries armada_1.36-158-v1.36.5-base
+:   New version contains updates and security fixes.
+
+
+IBM Cloud RBAC Operator 109756bee2b9174b053ff2f18047c2fe4a3e11f3
+:   New version contains updates and security fixes.
+
+
+Key Management Service provider 2.10.30
+:   New version contains updates and security fixes.
+
+
+Kubernetes v1.36.5
+:   See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.36.5){: external}.
+
+
+Kubernetes add-on resizer 1.8.24
+:   See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.24){: external}.
+
+
+kubx-deployer kubectl version 1.35.8
+:   https://github.com/kubernetes/kubernetes/releases/tag/v1.35.8
+
+
+Portieris admission controller v0.15.1
+:   See the [Portieris admission controller release notes](https://github.com/IBM/portieris/releases/tag/v0.15.1){: external}
+
+
+Tigera Operator v1.40.15
+:   See the [Tigera Operator release notes](https://github.com/tigera/operator/releases/tag/v1.40.15){: external}.
 
 
 ## 21 September 2026, Worker node fix pack 1.36.3_1530
