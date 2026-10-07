@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-06"
+lastupdated: "2026-10-07"
 
 
 keywords: containers
@@ -498,6 +498,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
 
+    * [7 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0726)
+
+        * Cluster autoscaler cluster add-on patch updates.
+
     * [5 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0526)
 
         * ALB OAuth Proxy cluster add-on patch updates.
@@ -651,6 +655,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * IBM Storage Operator cluster add-on patch updates.
 
         * VPC File CSI Driver cluster add-on patch updates.
+
+    * [4 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0426)
+
+        * ACM cluster add-on patch updates.
 
     * [3 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0326)
 
@@ -6309,6 +6317,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`ibmcloud ks experimental trusted-profile set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-cli)
 
+    * [`ibmcloud ks experimental update-versions`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-update-versions-cli)
+
 * [Flavor commands](/docs/containers?topic=containers-kubernetes-service-cli#flavor-cli)
 
     * [`ibmcloud ks flavor get`](/docs/containers?topic=containers-kubernetes-service-cli#flavor-get-cli)
@@ -7096,6 +7106,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-supported-versions)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-2.0.0)
+
+    * [07 October 2026, Version 2.0.0 - v200-20-0_374701188](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-20-0_374701188)
 
     * [30 September 2026, Version 2.0.0 - v200-19-1_372827987](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-19-1_372827987)
 
