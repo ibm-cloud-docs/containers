@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-07"
+lastupdated: "2026-10-08"
 
 
 keywords: containers
@@ -501,6 +501,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [7 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0726)
 
         * Cluster autoscaler cluster add-on patch updates.
+
+    * [6 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0626)
+
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
     * [5 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0526)
 
@@ -5533,6 +5537,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+* [06 October 2026, Worker node fix pack 1.36.5_1536](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1536_W)
+
 * [05 October 2026, Master fix pack 1.36.5_1535](/docs/containers?topic=containers-changelog_136#cl-boms_master-1365_1535_M)
 
 * [21 September 2026, Worker node fix pack 1.36.3_1530](/docs/containers?topic=containers-changelog_136#cl-boms-1363_1530_W)
@@ -5615,6 +5621,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+* [06 October 2026, Worker node fix pack 1.35.9_1547](/docs/containers?topic=containers-changelog_135#cl-boms-1359_1547_W)
 
 * [05 October 2026, Master fix pack 1.35.9_1546](/docs/containers?topic=containers-changelog_135#cl-boms_master-1359_1546_M)
 
@@ -5722,6 +5730,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+* [06 October 2026, Worker node fix pack 1.34.12_1569](/docs/containers?topic=containers-changelog_134#cl-boms-13412_1569_W)
 
 * [05 October 2026, Master fix pack 1.34.12_1568](/docs/containers?topic=containers-changelog_134#cl-boms_master-13412_1568_M)
 
@@ -5849,6 +5859,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_133#changelog_overview_133)
 
 * [Version 1.33](/docs/containers?topic=containers-changelog_133#133_components)
+
+* [06 October 2026, Worker node fix pack 1.33.13_1587](/docs/containers?topic=containers-changelog_133#cl-boms-13313_1587_W)
 
 * [05 October 2026, Master fix pack 1.33.13_1587](/docs/containers?topic=containers-changelog_133#cl-boms_master-13313_1587_M)
 
@@ -7756,9 +7768,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 3.7.13](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.13)
 
+    * [08 October 2026, Version 3.7.13 - 3.7.13_375345780_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3713_375345780_iks)
+
     * [28 September 2026, Version 3.7.13 - 3.7.13_371458947_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3713_371458947_iks)
 
 * [Version 3.7.12](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.12)
+
+    * [08 October 2026, Version 3.7.12 - 3.7.12_375345834_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3712_375345834_iks)
 
     * [28 September 2026, Version 3.7.12 - 3.7.12_370993582_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3712_370993582_iks)
 
@@ -7767,6 +7783,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [07 September 2026, Version 3.7.12 - 3.7.12_367967461_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3712_367967461_iks)
 
 * [Version 3.7.11](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3.7.11)
+
+    * [08 October 2026, Version 3.7.11 - 3.7.11_375898575_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_375898575_iks)
 
     * [28 September 2026, Version 3.7.11 - 3.7.11_372218432_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-3711_372218432_iks)
 
@@ -7865,6 +7883,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [01 June 2026, Version 3.7.0 - 3.7.0_342381291_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-370_342381291_iks)
 
 * [Version 1.15.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.10)
+
+    * [08 October 2026, Version 1.15.10 - 1.15.10_373802345_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_373802345_iks)
 
     * [28 September 2026, Version 1.15.10 - 1.15.10_372196798_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_372196798_iks)
 
