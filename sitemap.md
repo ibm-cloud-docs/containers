@@ -6315,6 +6315,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Experimental commands](/docs/containers?topic=containers-kubernetes-service-cli#experimental-cli)
 
+    * [`ibmcloud ks experimental cluster help`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-cluster-help-cli)
+
+    * [`ibmcloud ks experimental cluster master help`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-cluster-master-help-cli)
+
+    * [`ibmcloud ks experimental cluster master update-versions`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-cluster-master-update-versions-cli)
+
     * [`ibmcloud ks experimental help`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-help-cli)
 
     * [`ibmcloud ks experimental trusted-profile default get`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-default-get-cli)
@@ -6328,8 +6334,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [`ibmcloud ks experimental trusted-profile help`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-help-cli)
 
     * [`ibmcloud ks experimental trusted-profile set`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-trusted-profile-set-cli)
-
-    * [`ibmcloud ks experimental update-versions`](/docs/containers?topic=containers-kubernetes-service-cli#experimental-update-versions-cli)
 
 * [Flavor commands](/docs/containers?topic=containers-kubernetes-service-cli#flavor-cli)
 
