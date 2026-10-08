@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-10-06"
+lastupdated: "2026-10-07"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -95,31 +95,31 @@ Patch updates (x.x.4_1510)
 ## Release lifecycle
 {: #release_lifecycle}
 
-Each supported version of {{site.data.keyword.containerlong_notm}} goes through a lifecycle of testing, development, general release, support, deprecation, and becoming unsupported. Review the descriptions of each phase of a version's lifecycle. 
+Each supported version of {{site.data.keyword.containerlong_notm}} goes through a lifecycle of testing, development, general release, support, deprecation, and becoming unsupported. Review the descriptions of each phase of a version's lifecycle.
 
 Estimated days and versions are provided for general understanding. Actual availability and release dates are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 {: note}
 
 1. **Community release**: The community releases the new version. IBM engineers begin testing and hardening the community version in preparation to release a supported {{site.data.keyword.containerlong_notm}} version.
 2. **Supported version lifecycle**:
-    
+
     Development release
-    :   Release is under development and might be available as a Beta to select customers. IBM provides best effort support for the release.
+    :   Release is under development and might be available as a Beta to select customers. IBM provides best-effort support for the release.
 
     General availability
-    :   Release is generally available (GA). IBM provides full support for the release. IBM provides a tentative target date for the release to be unsupported. Release becomes the default version used during cluster creation once there are minimal restrictions and a reasonable adoption rate for the release.
+    :   Release is generally available (GA). IBM provides full support for the release and provides a tentative target date for when the release becomes unsupported. The release becomes the default version used during cluster creation once there are minimal restrictions and a reasonable adoption rate.
 
     Maintenance
     :   Release has entered maintenance support as defined by the Kubernetes community. IBM provides maintenance support for Kubernetes based on community policy. IBM provides full support otherwise.
 
-3. **Deprecated version**: The version is deprecated. IBM provides an updated unsupported target date for the release. An unsupported countdown to this date is provided at least 45 days before the release becomes unsupported. IBM provides minimal support for the release in alignment with the Kubernetes community. This support phase is generally the final phase before the release becomes unsupported and overrides the maintenance and extended support phases should there be any overlap. Security patch updates might not be provided. During the deprecation period, the version is still supported and your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities. For example, by adding or reloading worker nodes.
+3. **Deprecated version**: The version is deprecated. IBM provides an updated unsupported target date for the release. An unsupported countdown to this date is provided at least 45 days before the release becomes unsupported. IBM provides support for the release in alignment with Kubernetes community policy during this phase. This support phase is the final phase before the release becomes unsupported and overrides the maintenance and extended support phases if there is any overlap. Security patch updates might not be provided. During the deprecation period, the version is still supported and your cluster is still functional, but you must update your cluster control plane and worker nodes to a supported version to fix security vulnerabilities.
 
-4. **Unsupported version**: The version is unsupported. IBM only provides support to upgrade to a supported release. The version is unsupported. Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. If the cluster master runs two or more versions behind the oldest supported version, you can no longer apply updates and must delete the cluster and create a new one.
+4. **Unsupported version**: The version is unsupported. IBM provides support only to help you upgrade to a supported release. Unsupported clusters are not provided with security or patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster control plane or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. If the cluster control plane runs two or more versions behind the oldest supported version, you can no longer apply updates and must delete the cluster and create a new one.
 
     Clusters running an unsupported version will eventually fail because cluster certificates expire. Failures might include, but aren't limited to, an unavailable cluster control plane, `NotReady` worker nodes, or an unhealthy Ingress.
     {: important}
 
-5. **Archived**: The version is unsupported with no upgrade path. IBM provides no support. IBM reserves the right to shut down the control planes for such clusters.
+5. **Archived**: The version is unsupported with no upgrade path available. IBM provides no support and reserves the right to shut down the control planes for archived clusters.
 
 
 
@@ -128,7 +128,7 @@ Estimated days and versions are provided for general understanding. Actual avail
 {{site.data.keyword.containerlong_notm}} has **not** expanded its supported skew between core node and control plane components by one minor version.  The supported skew remains `n-2`. For more information, see [Changes to supported skew between control plane and node versions](https://kubernetes.io/blog/2023/08/15/kubernetes-v1-28-release/#changes-to-supported-skew-between-control-plane-and-node-versions) for the Kubernetes community information.
 {: note}
 
-If you wait until your cluster is two or more minor versions behind the oldest supported version, you can't update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster. To avoid this issue, update deprecated clusters to a supported version that is one or two behind the current version, such as 1.21 or 1.22 and then update to the latest version, 1.23. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. While unsupported versions are not supported by IBM Cloud Support, [IBM Technology Expert Labs](https://www.ibm.com/products/expertlabs){: external} has build services available that can assist you in resolving problems with unsupported versions. Select “Partner with IBM Technology Expert Labs” in the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog/services/partner-with-technology-expert-labs){: external} to get started with their services. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support. You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
+If you wait until your cluster is two or more minor versions behind the oldest supported version, you can't update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster. To avoid this issue, update deprecated clusters to a supported version before updating to the latest version. If the worker nodes run a version two or more behind the control plane, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the control plane. While unsupported versions are not supported by IBM Cloud Support, [IBM Technology Expert Labs](https://www.ibm.com/products/expertlabs){: external} has build services available that can assist you in resolving problems with unsupported versions. Select "Partner with IBM Technology Expert Labs" in the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog/services/partner-with-technology-expert-labs){: external} to get started with their services. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support. You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
 {: important}
 
 

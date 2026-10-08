@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-06"
+lastupdated: "2026-10-08"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,33 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2026
 {: #containers-oct26}
+
+### 7 October 2026
+{: #containers-oct0726}
+{: release-note}
+
+Cluster autoscaler cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
+
+### 6 October 2026
+{: #containers-oct0626}
+{: release-note}
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
+:   Fix packs can be applied in the following ways. 
+:   **Classic infrastructure**: Update or reload the worker node.
+:   **VPC infrastructure**: Replace the worker node.
+:   **VPC Bare Metal**: Reload the worker node.
+:   Review the change logs for your cluster version.
+:   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
+:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+
+
+
 
 ### 5 October 2026
 {: #containers-oct0526}
@@ -420,6 +447,13 @@ VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
 
+
+### 4 August 2026
+{: #containers-aug0426}
+{: release-note}
+
+ACM cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-acm).
 
 ### 3 August 2026
 {: #containers-aug0326}

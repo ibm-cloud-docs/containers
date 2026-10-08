@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-29"
+lastupdated: "2026-10-07"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
@@ -370,6 +370,8 @@ For VPC VSI workers, the worker node is deleted and replaced with a new node. Fo
 
 If you have Portworx deployed in your cluster, follow the steps to [update VPC worker nodes with Portworx volumes](/docs/containers?topic=containers-storage_portworx_update#portworx_vpc_up) instead of the steps on this page.
 {: important}
+
+
 
 #### Pre-update actions (complete in order)
 {: #vpc-worker-prereq-actions}
