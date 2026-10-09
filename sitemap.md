@@ -498,6 +498,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
 
+    * [9 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0926)
+
+        * New CLI version `1.0.892` available.
+
     * [7 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0726)
 
         * Cluster autoscaler cluster add-on patch updates.
@@ -6772,6 +6776,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [`ibmcloud ks zone rm`](/docs/containers?topic=containers-kubernetes-service-cli#zone-rm-cli)
 
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
+
+* [Version v1.0.892](/docs/containers?topic=containers-cs_cli_changelog#cli-01892)
 
 * [Version v1.0.877](/docs/containers?topic=containers-cs_cli_changelog#cli-01877)
 
