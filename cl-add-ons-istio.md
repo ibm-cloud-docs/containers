@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-10-02"
+lastupdated: "2026-10-09"
 
 
 keywords: change log, version history, Istio
@@ -491,17 +491,3 @@ Review the version history for Istio.
 - See the Istio release notes for [Istio 1.17.8](https://istio.io/latest/news/releases){: external}.
 - Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487) and [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/cve-2023-39325).
 - For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}
-
-
-### 10 October 2023, Version 1.19.3
-{: #1193}
-
-
-- For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}
-- See the Istio release notes for [Istio 1.19.3](https://istio.io/latest/news/releases){: external}.
-- Upstream announcement for [Istio 1.19.0](https://istio.io/latest/news/releases){: external}.
-- `Addon-Istio` does not support ambient mesh at this time
-
-
-## Unsupported: Version 1.18
-{: #v118}

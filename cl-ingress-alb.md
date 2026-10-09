@@ -356,13 +356,13 @@ Review the version history for Ingress ALB.
 ### 08 October 2026, Version 1.15.10 - 1.15.10_373802345_iks
 {: #cl-ingress-alb-11510_373802345_iks}
 
+[Default version]{: tag-green}
+
 - Updates Go to version `1.26`.
 
 
 ### 28 September 2026, Version 1.15.10 - 1.15.10_372196798_iks
 {: #cl-ingress-alb-11510_372196798_iks}
-
-[Default version]{: tag-green}
 
 - Updates Go to version `1.26`.
 
