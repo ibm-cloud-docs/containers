@@ -2871,6 +2871,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Non-shared VPE gateways](/docs/containers?topic=containers-vpc-security-group-reference#non-shared-gateways)
 
+    * [Accessing the cluster master VPE gateway from another VPC](/docs/containers?topic=containers-vpc-security-group-reference#non-shared-gateway-cross-vpc)
+
 * [Managed security groups](/docs/containers?topic=containers-vpc-security-group-reference#sbd-managed-groups)
 
     * [Worker security group](/docs/containers?topic=containers-vpc-security-group-reference#vpc-sg-kube-clusterid)
