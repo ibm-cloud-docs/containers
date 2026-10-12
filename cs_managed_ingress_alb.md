@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-08-06"
+lastupdated: "2026-10-12"
 
 
 keywords: ingress, alb, manage albs, update, alb image
@@ -35,6 +35,10 @@ ALBs can be updated to the default version automatically, or you can choose to d
 
 When you enable automatic updates, your ALBs are updated to the version that is marked as the default. When a newer version becomes the default version, your ALBs are automatically updated to that version.
 {: shortdesc}
+
+To check if automatic updates are enabled for your cluster, use the [`ibmcloud ks ingress alb autoupdate get -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-get-cli) command.
+
+You can enable automatic updates for your ALBs by running [`ibmcloud ks ingress alb autoupdate enable -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-enable-cli).
 
 If only one worker node exists in a zone in your cluster, and you set the number of ALB replicas to 1, this single ALB pod is deleted and a new pod is created whenever updates are applied. This process might cause traffic disruptions even if you have worker nodes and ALB replicas in other zones. To prevent traffic disruptions, ensure that at least two worker nodes exist in each zone, and that [two replicas exist for each ALB](#alb_replicas). Note that during the update process, only new connections are routed to the second ALB pod; existing connections on the updating ALB pod are safely terminated. For existing connections that are terminated during the update, initiate a retry in client applications.
 {: important}
@@ -78,9 +82,7 @@ To set a time for automatic updates, you set the `updateStartTime` and `updateEn
 To receive bug fixes and security updates, keep automatic updates enabled. When automatic updates are disabled, you are responsible for updating your ALBs manually.
 {: important}
 
-You can disable automatic updates for your ALBs by running [`ibmcloud ks ingress alb autoupdate disable -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-enable-cli).
-
-To check if automatic updates are enabled for your cluster, use the [`ibmcloud ks ingress alb autoupdate get -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-get-cli) command. If you decide to enable automatic updates again, you can run [`ibmcloud ks ingress alb autoupdate enable -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-disable-cli).
+You can disable automatic updates for your ALBs by running [`ibmcloud ks ingress alb autoupdate disable -c CLUSTER_NAME_OR_ID`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-disable-cli).
 
 
 ### Applying manual updates
@@ -89,7 +91,7 @@ To check if automatic updates are enabled for your cluster, use the [`ibmcloud k
 You can manually apply a one-time update of your Ingress ALB pods with the `ibmcloud ks ingress alb update` command. This command applies the default ALB image version, but you can apply a different version by including the  `--version` option. For more information or command options, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli).
 {: shortdesc}
 
-To update your ALB image to a specific version with the `--version` option, you must [disable automatic ALB updates](#autoupdate) and then keep them disabled for as long as you want to run the specified version. Automatic updates always apply the default version and overwrite any manual updates you apply. If you want to use a different version, you cannot enable automatic updates.
+To update your ALB image to a specific version with the `--version` option, you must [disable automatic ALB updates](#autoupdate_disable) and then keep them disabled for as long as you want to run the specified version. Automatic updates always apply the default version and overwrite any manual updates you apply. If you want to use a different version, you cannot enable automatic updates.
 {: important}
 
 * To list the available ALB versions, run the following command.
@@ -131,7 +133,7 @@ To update your ALB image to a specific version with the `--version` option, you 
 
 When you [create a new ALB](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-create-classic-cli), [enable an ALB](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-update-cli) that was previously disabled, or [manually update(#update-alb) an ALB], you can specify an image version for your ALB with the `--version` option. If you omit the `--version` option when you enable or update an existing ALB, the ALB runs the default version of the same image that the ALB previously ran; either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image.
 
-Automatic updates only apply the default version. To specify a version other than the default, you must [disable automatic updates](#autoupdate) by running the [`ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-disable-cli) command. 
+Automatic updates only apply the default version. To specify a version other than the default, you must [disable automatic updates](#autoupdate_disable) by running the [`ibmcloud ks ingress alb autoupdate disable`](/docs/containers?topic=containers-kubernetes-service-cli#ingress-alb-autoupdate-disable-cli) command.
 {: note}
 
 ### Viewing supported image versions
@@ -165,7 +167,7 @@ For the changes that are in each version of the Ingress images, see the [Ingress
 If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest image version build, you can use the [`ibmcloud ks ingress alb update`](#update-alb) command with the `--version` option to roll back ALB pods to an earlier, supported version. The image version that you change your ALB to must be a supported image version that is listed in the output of `ibmcloud ks ingress alb versions`. 
 {: shortdesc}
 
-Note that if you revert to an earlier version, you must [disable automatic ALB updates](#autoupdate) and then keep them disabled for as long as you want to run the earlier version. Automatic updates always apply the latest version and overwrite any manual updates you apply. If you want to use an earlier version, you cannot enable automatic updates. 
+Note that if you revert to an earlier version, you must [disable automatic ALB updates](#autoupdate_disable) and then keep them disabled for as long as you want to run the earlier version. Automatic updates always apply the latest version and overwrite any manual updates you apply. If you want to use an earlier version, you cannot enable automatic updates.
 
 ## Manually scaling your ALBs
 {: #scale_albs}
