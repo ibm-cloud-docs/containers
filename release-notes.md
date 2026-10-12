@@ -39,6 +39,13 @@ IBM Storage Operator cluster add-on patch updates.
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
 
+
+
+Istio cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
+
+
+
 ### 9 October 2026
 {: #containers-oct0926}
 {: release-note}
