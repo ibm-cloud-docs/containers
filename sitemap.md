@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-09"
+lastupdated: "2026-10-12"
 
 
 keywords: containers
@@ -497,6 +497,16 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
+
+    * [12 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1226)
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+    * [9 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0926)
+
+        * New CLI version `1.0.892` available.
 
     * [7 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0726)
 
@@ -6773,6 +6783,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
+* [Version v1.0.892](/docs/containers?topic=containers-cs_cli_changelog#cli-01892)
+
 * [Version v1.0.877](/docs/containers?topic=containers-cs_cli_changelog#cli-01877)
 
 * [Version v1.0.864](/docs/containers?topic=containers-cs_cli_changelog#cli-01864)
@@ -7293,6 +7305,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [12 October 2026, Version 1.0 - v1.0.62_374966560](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1062_374966560)
+
     * [29 September 2026, Version 1.0 - v1.0.61_372201350](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1061_372201350)
 
     * [15 September 2026, Version 1.0 - v1.0.59_369240550](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1059_369240550)
@@ -7508,6 +7522,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-supported-versions)
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
+
+    * [12 October 2026, Version 2.0 - v2.0.55_374967197](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2055_374967197)
 
     * [29 September 2026, Version 2.0 - v2.0.54_372210496](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2054_372210496)
 
