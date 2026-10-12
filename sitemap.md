@@ -504,6 +504,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * VPC File CSI Driver cluster add-on patch updates.
 
+        * Istio cluster add-on patch updates.
+
     * [9 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0926)
 
         * New CLI version `1.0.892` available.
@@ -7009,11 +7011,15 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.31](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.31)
 
+    * [12 October 2026, Version 1.31 - 1.31.1](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1311)
+
     * [28 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
 
     * [23 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
 
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
+
+    * [12 October 2026, Version 1.30 - 1.30.5](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1305)
 
     * [10 September 2026, Version 1.30 - 1.30.4](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1304)
 
@@ -7022,6 +7028,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [21 July 2026, Version 1.30 - 1.30.2](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1302)
 
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
+
+    * [12 October 2026, Version 1.29 - 1.29.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1298)
 
     * [10 September 2026, Version 1.29 - 1.29.7](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1297)
 
