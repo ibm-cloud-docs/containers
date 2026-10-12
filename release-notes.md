@@ -96,10 +96,6 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
-### 2 October 2026
-{: #containers-oct0226}
-{: release-note}
-
 
 
 ### 1 October 2026
