@@ -522,8 +522,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * {{site.data.keyword.containerlong_notm}} master fix packs are available.
 
-    * [2 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0226)
-
     * [1 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct0126)
 
         * Classic cluster creation restriction
