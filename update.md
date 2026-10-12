@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-07"
+lastupdated: "2026-10-12"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master
@@ -358,6 +358,8 @@ What if I replace multiple worker nodes at the same time?
 
 What if a replacement worker node is not created?
 :   A replacement worker node is not created if the worker pool does not have [automatic rebalancing enabled](/docs/containers?topic=containers-auto-rebalance-off).
+
+
 
 ### Prerequisites
 {: #vpc_worker_prereqs}
