@@ -390,12 +390,6 @@ toc:
               - cs_versions_134.md
               - cs_versions_changelog_134.md
               - cs_benchmarks_134.md
-          - topicgroup:
-              label: Version 1.33
-              topics:
-              - cs_versions_133.md
-              - cs_versions_changelog_133.md
-              - cs_benchmarks_133.md
       - topicgroup:
           label: CLI reference
           topics:
