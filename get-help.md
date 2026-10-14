@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-08-03"
+lastupdated: "2026-10-14"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, support, get help
@@ -55,8 +55,6 @@ Looking for the Diagnostics and Debug tool? That add-on is no longer supported. 
         {: pre}
 
 3. For issues with resources within your cluster such as pods or services, log in to the cluster and use the Kubernetes API to get more information about them.
-
-
 
 ## Open a support case
 {: #support-case}
