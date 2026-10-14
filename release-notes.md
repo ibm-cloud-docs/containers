@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-13"
+lastupdated: "2026-10-14"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,17 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2026
 {: #containers-oct26}
+
+
+
+### 14 October 2026
+{: #containers-oct1426}
+{: release-note}
+
+Kubernetes version 1.33 is no longer supported.
+:   Update your cluster to at least [version 1.34](/docs/containers?topic=containers-cs_versions_134) as soon as possible.
+
+
 
 
 
