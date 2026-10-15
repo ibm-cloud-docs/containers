@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-14"
+lastupdated: "2026-10-15"
 
 
 keywords: containers
@@ -501,6 +501,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [15 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1526)
 
         * Migrate {{site.data.keyword.cos_full_notm}} PVCs from FlexVolume to CSI.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Object CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
 
     * [14 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1426)
 
@@ -7212,6 +7218,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [15 October 2026, Version 1.0 - v1.0.63_377107229](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1063_377107229)
+
     * [12 October 2026, Version 1.0 - v1.0.62_374966560](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1062_374966560)
 
     * [29 September 2026, Version 1.0 - v1.0.61_372201350](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1061_372201350)
@@ -7430,6 +7438,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
+    * [15 October 2026, Version 2.0 - v2.0.56_377110066](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2056_377110066)
+
     * [12 October 2026, Version 2.0 - v2.0.55_374967197](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2055_374967197)
 
     * [29 September 2026, Version 2.0 - v2.0.54_372210496](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2054_372210496)
@@ -7525,6 +7535,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-supported-versions)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [15 October 2026, Version 1.0 - v1.0.30_379049185](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1030_379049185)
 
     * [25 September 2026, Version 1.0 - v1.0.29_373392591](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1029_373392591)
 
