@@ -498,7 +498,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
 
-    * [15 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1526)
+    * [16 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1626)
 
         * Migrate {{site.data.keyword.cos_full_notm}} PVCs from FlexVolume to CSI.
 
@@ -4997,6 +4997,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Troubleshooting](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-troubleshooting)
 
     * [Resolving blocked PVCs](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-auto-delete-bucket)
+
+    * [Resolving PVCs that fail to bind](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-failed-bind)
 
 * [Limitations](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-limitations)
 
