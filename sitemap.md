@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-14"
+lastupdated: "2026-10-15"
 
 
 keywords: containers
@@ -497,6 +497,16 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
+
+    * [16 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1626)
+
+        * Migrate {{site.data.keyword.cos_full_notm}} PVCs from FlexVolume to CSI.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Object CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
 
     * [14 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1426)
 
@@ -4952,6 +4962,50 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Redeploy your app in Account 2](/docs/containers?topic=containers-storage-cos-app-migration#cos-app-redploy)
 
+[Migrating {{site.data.keyword.cos_full_notm}} PVCs from FlexVolume to CSI](/docs/containers?topic=containers-storage-cos-flex-to-csi#storage-cos-flex-to-csi)
+
+* [Why migrate to the CSI driver?](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-why)
+
+* [Differences between FlexVolume and CSI](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-differences)
+
+* [How the migration process works](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-how-it-works)
+
+* [Before you begin](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-prereqs)
+
+* [Required permissions](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-permissions)
+
+* [Installing the migration tool](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-install)
+
+* [Discovering FlexVolume PVCs](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-discover)
+
+* [Previewing the migration with a dry run](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-dry-run)
+
+* [Migrating your PVCs](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-migrate)
+
+* [Verifying the migration and updating workloads](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-verify)
+
+* [Understanding migrated resource names](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-naming)
+
+    * [Single secret used by multiple PVCs](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-naming-shared-secret)
+
+    * [Single secret used by single PVC](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-naming-dedicated-secret)
+
+* [CLI reference](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-cli-reference)
+
+* [Self-upgrade](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-upgrade)
+
+* [Troubleshooting](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-troubleshooting)
+
+    * [Resolving blocked PVCs](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-auto-delete-bucket)
+
+    * [Resolving PVCs that fail to bind](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-failed-bind)
+
+* [Limitations](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-limitations)
+
+* [Next steps](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-next-steps)
+
+* [Related links](/docs/containers?topic=containers-storage-cos-flex-to-csi#cos-flex-to-csi-related)
+
 [Storage class reference](/docs/containers?topic=containers-storage_cos_reference#storage_cos_reference)
 
 * [{{site.data.keyword.cos_full_notm}} Helm chart storage classes](/docs/containers?topic=containers-storage_cos_reference#cos-sc-ref-helm)
@@ -7166,6 +7220,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
 
+    * [15 October 2026, Version 1.0 - v1.0.63_377107229](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1063_377107229)
+
     * [12 October 2026, Version 1.0 - v1.0.62_374966560](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1062_374966560)
 
     * [29 September 2026, Version 1.0 - v1.0.61_372201350](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1061_372201350)
@@ -7384,6 +7440,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
+    * [15 October 2026, Version 2.0 - v2.0.56_377110066](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2056_377110066)
+
     * [12 October 2026, Version 2.0 - v2.0.55_374967197](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2055_374967197)
 
     * [29 September 2026, Version 2.0 - v2.0.54_372210496](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2054_372210496)
@@ -7479,6 +7537,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-supported-versions)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
+
+    * [15 October 2026, Version 1.0 - v1.0.30_379049185](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1030_379049185)
 
     * [25 September 2026, Version 1.0 - v1.0.29_373392591](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1029_373392591)
 
