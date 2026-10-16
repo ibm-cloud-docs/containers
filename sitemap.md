@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-15"
+lastupdated: "2026-10-16"
 
 
 keywords: containers
@@ -7677,6 +7677,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-supported-versions)
 
 * [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
+
+    * [16 October 2026, Version 0.1.0 - headlamp-0.1.0-377245860](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-377245860)
 
     * [29 September 2026, Version 0.1.0 - headlamp-0.1.0-371553758](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-371553758)
 
