@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-10-12"
+lastupdated: "2026-10-16"
 
 
 keywords: change log, version history, Istio
@@ -45,7 +45,6 @@ ibmcloud ks cluster addon versions
 | `1.29` | `>=1.31.0 <1.36.0` |
 | `1.28` | `>=1.31.0 <1.35.0` |
 | `1.27` | `>=1.31.0 <1.34.0` |
-| `1.26` | `>=1.31.0 <1.34.0` |
 {: caption="Supported Istio add-on versions" caption-side="bottom"}
 
 

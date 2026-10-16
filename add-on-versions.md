@@ -1,7 +1,7 @@
 ---
 copyright:
   years: 2022, 2026
-lastupdated: "2026-10-06"
+lastupdated: "2026-10-16"
 
 keywords: containers, add-ons, cluster addon
 
@@ -27,9 +27,6 @@ ALB OAuth proxy `2.0.0`
 
 Headlamp `0.1.0`
 :   Supported Kubernetes versions: `>=1.31.0 <1.38.0`
-
-Istio `1.26`
-:   Supported Kubernetes versions: `>=1.31.0 <1.34.0`
 
 Istio `1.27`
 :   Supported Kubernetes versions: `>=1.31.0 <1.34.0`

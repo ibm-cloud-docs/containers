@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-10-01"
+lastupdated: "2026-10-16"
 
 
 keywords: change log, version history, Headlamp
@@ -50,6 +50,15 @@ Review the version history for Headlamp.
 
 ## Version 0.1.0
 {: #cl-add-ons-headlamp-0.1.0}
+
+
+### 16 October 2026, Version 0.1.0 - headlamp-0.1.0-377245860
+{: #cl-add-ons-headlamp-headlamp-010-377245860}
+
+[Default version]{: tag-green}
+
+- Headlamp deployment restarts when a dependency configmap/secret changes 
+- `nginx 0.1.0-377245860`
 
 
 ### 29 September 2026, Version 0.1.0 - headlamp-0.1.0-371553758
