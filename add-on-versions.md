@@ -1,7 +1,7 @@
 ---
 copyright:
   years: 2022, 2026
-lastupdated: "2026-10-16"
+lastupdated: "2026-10-19"
 
 keywords: containers, add-ons, cluster addon
 
@@ -41,4 +41,4 @@ Istio `1.30`
 :   Supported Kubernetes versions: `>=1.32.0 <1.37.0`
 
 Istio `1.31`
-:   Supported Kubernetes versions: `>=1.32.0 <1.37.0`
+:   Supported Kubernetes versions: `>=1.32.0 <1.38.0`

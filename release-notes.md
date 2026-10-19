@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-15"
+lastupdated: "2026-10-19"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2026
 {: #containers-oct26}
+
+### 19 October 2026
+{: #containers-oct1926}
+{: release-note}
+
+Add-on OpenShift AI version `421` is available.
+:   For more information, see the [add-on change log](/docs/containers?topic=containers-cl-add-ons).
 
 ### 16 October 2026
 {: #containers-oct1626}
