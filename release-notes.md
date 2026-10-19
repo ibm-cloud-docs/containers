@@ -33,9 +33,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-oct1926}
 {: release-note}
 
-Add-on OpenShift AI version `421` is available.
-:   For more information, see the [add-on change log](/docs/containers?topic=containers-cl-add-ons).
-
 ### 16 October 2026
 {: #containers-oct1626}
 {: release-note}
