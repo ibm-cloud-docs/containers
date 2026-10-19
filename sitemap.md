@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-16"
+lastupdated: "2026-10-19"
 
 
 keywords: containers
@@ -497,6 +497,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
+
+    * [19 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1926)
 
     * [16 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1626)
 
@@ -6811,13 +6813,21 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`addVirtualNetworkInterfaceToBareMetalNode`](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnode)
 
+    * [`createKubernetesWorkloadMigrationPlan`](/docs/containers?topic=containers-cs-graphql-api#createkubernetesworkloadmigrationplan)
+
     * [`createSatelliteConnector`](/docs/containers?topic=containers-cs-graphql-api#createsatelliteconnector)
+
+    * [`createVPCKubernetesClusterFromTemplate`](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclusterfromtemplate)
+
+    * [`createVPCKubernetesClusterTemplate`](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclustertemplate)
 
     * [`reinitializeKubernetesNode`](/docs/containers?topic=containers-cs-graphql-api#reinitializekubernetesnode)
 
     * [`removeSatelliteConnector`](/docs/containers?topic=containers-cs-graphql-api#removesatelliteconnector)
 
     * [`removeVirtualNetworkInterfaceFromNode`](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnode)
+
+    * [`startKubernetesWorkloadMigration`](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigration)
 
     * [`updateSatelliteLocation`](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocation)
 
@@ -6831,9 +6841,39 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [BareMetalVirtualNetworkInterface](/docs/containers?topic=containers-cs-graphql-api#baremetalvirtualnetworkinterface)
 
+    * [ClassicKubernetesClusterServiceEndpointsTemplate](/docs/containers?topic=containers-cs-graphql-api#classickubernetesclusterserviceendpointstemplate)
+
+    * [ClassicKubernetesClusterTemplate](/docs/containers?topic=containers-cs-graphql-api#classickubernetesclustertemplate)
+
+    * [ClassicKubernetesClusterVPCMigrationStatus](/docs/containers?topic=containers-cs-graphql-api#classickubernetesclustervpcmigrationstatus)
+
+    * [ClassicKubernetesNamespaceTemplate](/docs/containers?topic=containers-cs-graphql-api#classickubernetesnamespacetemplate)
+
+    * [CreateKubernetesWorkloadMigrationPlanPayload](/docs/containers?topic=containers-cs-graphql-api#createkubernetesworkloadmigrationplanpayload)
+
     * [CreateSatelliteConnectorPayload](/docs/containers?topic=containers-cs-graphql-api#createsatelliteconnectorpayload)
 
+    * [CreateVPCKubernetesClusterFromTemplatePayload](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclusterfromtemplatepayload)
+
+    * [CreateVPCKubernetesClusterTemplatePayload](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclustertemplatepayload)
+
+    * [KeyValuePair](/docs/containers?topic=containers-cs-graphql-api#keyvaluepair)
+
     * [KubernetesCluster](/docs/containers?topic=containers-cs-graphql-api#kubernetescluster)
+
+    * [KubernetesClusterAddOnTemplate](/docs/containers?topic=containers-cs-graphql-api#kubernetesclusteraddontemplate)
+
+    * [KubernetesClusterKeyManagementTemplate](/docs/containers?topic=containers-cs-graphql-api#kubernetesclusterkeymanagementtemplate)
+
+    * [KubernetesClusterVPCMigration](/docs/containers?topic=containers-cs-graphql-api#kubernetesclustervpcmigration)
+
+    * [KubernetesClusterVPCMigrationPlan](/docs/containers?topic=containers-cs-graphql-api#kubernetesclustervpcmigrationplan)
+
+    * [KubernetesNodePoolTemplate](/docs/containers?topic=containers-cs-graphql-api#kubernetesnodepooltemplate)
+
+    * [KubernetesWorkloadMigrationPlan](/docs/containers?topic=containers-cs-graphql-api#kubernetesworkloadmigrationplan)
+
+    * [KubernetesWorkloadMigrationPlanDetails](/docs/containers?topic=containers-cs-graphql-api#kubernetesworkloadmigrationplandetails)
 
     * [Region](/docs/containers?topic=containers-cs-graphql-api#region)
 
@@ -6851,11 +6891,55 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [SecurityGroup](/docs/containers?topic=containers-cs-graphql-api#securitygroup)
 
+    * [StartKubernetesWorkloadMigrationPayload](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigrationpayload)
+
     * [Subnet](/docs/containers?topic=containers-cs-graphql-api#subnet)
 
     * [UpdateSatelliteLocationPayload](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocationpayload)
 
     * [VPCBareMetalKubernetesNode](/docs/containers?topic=containers-cs-graphql-api#vpcbaremetalkubernetesnode)
+
+    * [VPCKubernetesClusterTemplate](/docs/containers?topic=containers-cs-graphql-api#vpckubernetesclustertemplate)
+
+    * [VPCMigrationCalicoNetworkPolicy](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationcaliconetworkpolicy)
+
+    * [VPCMigrationComponentAddOnStatus](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationcomponentaddonstatus)
+
+    * [VPCMigrationComponentClusterStatus](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationcomponentclusterstatus)
+
+    * [VPCMigrationComponentGlobalResourcesStatus](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationcomponentglobalresourcesstatus)
+
+    * [VPCMigrationComponentPolicyStatus](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationcomponentpolicystatus)
+
+    * [VPCMigrationExternalName](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationexternalname)
+
+    * [VPCMigrationHost](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationhost)
+
+    * [VPCMigrationHostMapping](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationhostmapping)
+
+    * [VPCMigrationIngress](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationingress)
+
+    * [VPCMigrationKubernetesNetworkPolicy](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationkubernetesnetworkpolicy)
+
+    * [VPCMigrationLoadBalancer](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationloadbalancer)
+
+    * [VPCMigrationLoadBalancerTypeMapping](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationloadbalancertypemapping)
+
+    * [VPCMigrationNamespaceDetails](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationnamespacedetails)
+
+    * [VPCMigrationNamespaceNetworking](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationnamespacenetworking)
+
+    * [VPCMigrationNamespaceStatus](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationnamespacestatus)
+
+    * [VPCMigrationNodePort](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationnodeport)
+
+    * [VPCMigrationNote](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationnote)
+
+    * [VPCMigrationRoute](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationroute)
+
+    * [VPCMigrationStorage](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationstorage)
+
+    * [VPCMigrationStorageClassNameMapping](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationstorageclassnamemapping)
 
 * [Interface types](/docs/containers?topic=containers-cs-graphql-api#interface-types)
 
@@ -6875,13 +6959,25 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [AddVirtualNetworkInterfaceToBareMetalNodeInput](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnodeinput)
 
+    * [CreateKubernetesWorkloadMigrationPlanInput](/docs/containers?topic=containers-cs-graphql-api#createkubernetesworkloadmigrationplaninput)
+
     * [CreateSatelliteConnectorInput](/docs/containers?topic=containers-cs-graphql-api#createsatelliteconnectorinput)
+
+    * [CreateVPCKubernetesClusterFromTemplateInput](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclusterfromtemplateinput)
+
+    * [CreateVPCKubernetesClusterTemplateInput](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclustertemplateinput)
+
+    * [KeyValuePairInput](/docs/containers?topic=containers-cs-graphql-api#keyvaluepairinput)
+
+    * [KubernetesNodePoolVPCMigrationOverride](/docs/containers?topic=containers-cs-graphql-api#kubernetesnodepoolvpcmigrationoverride)
 
     * [ReinitializeKubernetesNodeInput](/docs/containers?topic=containers-cs-graphql-api#reinitializekubernetesnodeinput)
 
     * [RemoveSatelliteConnectorInput](/docs/containers?topic=containers-cs-graphql-api#removesatelliteconnectorinput)
 
     * [RemoveVirtualNetworkInterfaceFromNodeInput](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnodeinput)
+
+    * [StartKubernetesWorkloadMigrationInput](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigrationinput)
 
     * [UpdateSatelliteLocationInput](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocationinput)
 
@@ -7037,10 +7133,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Unsupported: Version 1.19](/docs/containers?topic=containers-cl-add-ons-istio#v119)
 
     * [5 December 2023, Version 1.19.4](/docs/containers?topic=containers-cl-add-ons-istio#1194)
-
-    * [18 October 2023, Version 1.18.5](/docs/containers?topic=containers-cl-add-ons-istio#1185)
-
-    * [18 October 2023, Version 1.17.8](/docs/containers?topic=containers-cl-add-ons-istio#1178)
 
 [Cluster autoscaler add-on version change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler)
 

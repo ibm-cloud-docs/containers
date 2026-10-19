@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-10-16"
+lastupdated: "2026-10-19"
 
 
 keywords: change log, version history, Istio
@@ -40,7 +40,7 @@ ibmcloud ks cluster addon versions
 
 | Add-on version | Supported Kubernetes versions |
 |---|---|
-| `1.31` | `>=1.32.0 <1.37.0` |
+| `1.31` | `>=1.32.0 <1.38.0` |
 | `1.30` | `>=1.32.0 <1.37.0` |
 | `1.29` | `>=1.31.0 <1.36.0` |
 | `1.28` | `>=1.31.0 <1.35.0` |
@@ -493,21 +493,3 @@ Review the version history for Istio.
 
 - See the Istio release notes for [Istio 1.19.64](https://istio.io/latest/news/releases){: external}.
 - Resolves the following CVEs: [CVE-2023-2975](https://www.cve.org/cveRecord?id=cve-2023-2975){: external}, [CVE-2023-3446](https://www.cve.org/cveRecord?id=cve-2023-3446){: external}, [CVE-2023-38545](https://www.cve.org/cveRecord?id=cve-2023-38545){: external}, [CVE-2023-38546](https://www.cve.org/cveRecord?id=cve-2023-38546){: external}, [CVE-2023-3817](https://www.cve.org/cveRecord?id=cve-2023-3817){: external}, [CVE-2023-4911](https://www.cve.org/cveRecord?id=cve-2023-4911){: external}, [CVE-2023-5363](https://www.cve.org/cveRecord?id=cve-2023-5363){: external}, [CVE-2023-36054](https://www.cve.org/cveRecord?id=cve-2023-36054){: external}, [usn-6429-1](https://ubuntu.com/security/notices/USN-6429-1){: external}, and [usn-6450-1](https://ubuntu.com/security/notices/USN-6450-1){: external}.
-
-
-### 18 October 2023, Version 1.18.5
-{: #1185}
-
-
-- See the Istio release notes for [Istio 1.18.5](https://istio.io/latest/news/releases){: external}.
-- Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487){: external} and [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/cve-2023-39325){: external}.
-- For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}.
-
-
-### 18 October 2023, Version 1.17.8
-{: #1178}
-
-
-- See the Istio release notes for [Istio 1.17.8](https://istio.io/latest/news/releases){: external}.
-- Resolves [CVE-2023-44487](https://nvd.nist.gov/vuln/detail/cve-2023-44487) and [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/cve-2023-39325).
-- For more information, see the [Istio security bulletin 2023-004](https://istio.io/latest/news/security/istio-security-2023-004/){: external}
