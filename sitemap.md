@@ -498,8 +498,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
 
-    * [19 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1926)
-
     * [16 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct1626)
 
         * Migrate {{site.data.keyword.cos_full_notm}} PVCs from FlexVolume to CSI.

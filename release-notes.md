@@ -96,7 +96,7 @@ Cluster autoscaler cluster add-on patch updates.
 
 
 Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
-:   Fix packs can be applied in the following ways. 
+:   Fix packs can be applied in the following ways.
 :   **Classic infrastructure**: Update or reload the worker node.
 :   **VPC infrastructure**: Replace the worker node.
 :   **VPC Bare Metal**: Reload the worker node.
@@ -202,7 +202,7 @@ IBM Object CSI Driver cluster add-on patch updates.
 
 
 Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
-:   Fix packs can be applied in the following ways. 
+:   Fix packs can be applied in the following ways.
 :   **Classic infrastructure**: Update or reload the worker node.
 :   **VPC infrastructure**: Replace the worker node.
 :   **VPC Bare Metal**: Reload the worker node.
@@ -293,7 +293,7 @@ Kubernetes version 1.36 is now the default version for {{site.data.keyword.conta
 :   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
 
 Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
-:   Fix packs can be applied in the following ways. 
+:   Fix packs can be applied in the following ways.
 :   **Classic infrastructure**: Update or reload the worker node.
 :   **VPC infrastructure**: Replace the worker node.
 :   **VPC Bare Metal**: Reload the worker node.
