@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-10-08"
+lastupdated: "2026-10-20"
 
 
 keywords: change log, version history, Ingress ALB
@@ -25,8 +25,24 @@ Review the version history for Ingress ALB.
 {: shortdesc}
 
 
+## Version 3.7.14
+{: #cl-ingress-alb-3.7.14}
+
+
+### 20 October 2026, Version 3.7.14 - 3.7.14_379840236_iks
+{: #cl-ingress-alb-3714_379840236_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
 ## Version 3.7.13
 {: #cl-ingress-alb-3.7.13}
+
+
+### 20 October 2026, Version 3.7.13 - 3.7.13_379020891_iks
+{: #cl-ingress-alb-3713_379020891_iks}
+
+- Resolves the following CVEs: [CVE-2026-88031](https://nvd.nist.gov/vuln/detail/cve-2026-88031){: external}, [CVE-2026-78669](https://nvd.nist.gov/vuln/detail/cve-2026-78669){: external}, [CVE-2026-78663](https://nvd.nist.gov/vuln/detail/cve-2026-78663){: external}, [CVE-2026-97032](https://nvd.nist.gov/vuln/detail/cve-2026-97032){: external}, and [CVE-2026-84445](https://nvd.nist.gov/vuln/detail/cve-2026-84445){: external}.
 
 
 ### 08 October 2026, Version 3.7.13 - 3.7.13_375345780_iks
@@ -43,6 +59,12 @@ Review the version history for Ingress ALB.
 
 ## Version 3.7.12
 {: #cl-ingress-alb-3.7.12}
+
+
+### 20 October 2026, Version 3.7.12 - 3.7.12_379572444_iks
+{: #cl-ingress-alb-3712_379572444_iks}
+
+- Resolves the following CVEs: [CVE-2026-88031](https://nvd.nist.gov/vuln/detail/cve-2026-88031){: external}, [CVE-2026-78662](https://nvd.nist.gov/vuln/detail/cve-2026-78662){: external}, [CVE-2026-56855](https://nvd.nist.gov/vuln/detail/cve-2026-56855){: external}, [CVE-2026-78669](https://nvd.nist.gov/vuln/detail/cve-2026-78669){: external}, [CVE-2026-78663](https://nvd.nist.gov/vuln/detail/cve-2026-78663){: external}, [CVE-2026-97032](https://nvd.nist.gov/vuln/detail/cve-2026-97032){: external}, [CVE-2026-84445](https://nvd.nist.gov/vuln/detail/cve-2026-84445){: external}, and [CVE-2026-84304](https://nvd.nist.gov/vuln/detail/cve-2026-84304){: external}.
 
 
 ### 08 October 2026, Version 3.7.12 - 3.7.12_375345834_iks
@@ -351,6 +373,13 @@ Review the version history for Ingress ALB.
 
 ## Version 1.15.10
 {: #cl-ingress-alb-1.15.10}
+
+
+### 20 October 2026, Version 1.15.10 - 1.15.10_379572403_iks
+{: #cl-ingress-alb-11510_379572403_iks}
+
+- Resolves the following CVEs: [CVE-2026-78663](https://nvd.nist.gov/vuln/detail/cve-2026-78663){: external}, [CVE-2026-97032](https://nvd.nist.gov/vuln/detail/cve-2026-97032){: external}, [CVE-2026-78669](https://nvd.nist.gov/vuln/detail/cve-2026-78669){: external}, [CVE-2026-78660](https://nvd.nist.gov/vuln/detail/cve-2026-78660){: external}, [CVE-2026-78659](https://nvd.nist.gov/vuln/detail/cve-2026-78659){: external}, [CVE-2026-56851](https://nvd.nist.gov/vuln/detail/cve-2026-56851){: external}, and [CVE-2026-85091](https://nvd.nist.gov/vuln/detail/cve-2026-85091){: external}.
+- Updates Go to version `1.26`.
 
 
 ### 08 October 2026, Version 1.15.10 - 1.15.10_373802345_iks
