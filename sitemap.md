@@ -8449,8 +8449,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [VPC worker node flavors](/docs/containers?topic=containers-vpc-flavors#vpc-flavors)
 
-* [Chennai (`in-che`)](/docs/containers?topic=containers-vpc-flavors#chennai-in-che)
-
 * [Dallas (`us-south`)](/docs/containers?topic=containers-vpc-flavors#dallas-us-south)
 
 * [Frankfurt (`eu-de`)](/docs/containers?topic=containers-vpc-flavors#frankfurt-eu-de)
@@ -8460,8 +8458,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Madrid (`eu-es`)](/docs/containers?topic=containers-vpc-flavors#madrid-eu-es)
 
 * [Montreal (`ca-mon`)](/docs/containers?topic=containers-vpc-flavors#montreal-ca-mon)
-
-* [Mumbai (`in-mum`)](/docs/containers?topic=containers-vpc-flavors#mumbai-in-mum)
 
 * [Osaka (`jp-osa`)](/docs/containers?topic=containers-vpc-flavors#osaka-jp-osa)
 
