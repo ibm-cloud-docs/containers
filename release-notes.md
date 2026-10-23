@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-22"
+lastupdated: "2026-10-23"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -29,12 +29,46 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## October 2026
 {: #containers-oct26}
 
+### 23 October 2026
+{: #containers-oct2326}
+{: release-note}
+
+Add-on OpenShift AI version `421` is available.
+:   For more information, see the [add-on change log](/docs/containers?topic=containers-cl-add-ons).
+
+### 22 October 2026
+{: #containers-oct2226}
+{: release-note}
+
+VPC File CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
+IBM Storage Operator cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator).
+
+
+
 ### 20 October 2026
 {: #containers-oct2026}
 {: release-note}
 
 New CLI version `1.0.896` available.
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
+:   Fix packs can be applied in the following ways. 
+:   **Classic infrastructure**: Update or reload the worker node.
+:   **VPC infrastructure**: Replace the worker node.
+:   **VPC Bare Metal**: Reload the worker node.
+:   Review the change logs for your cluster version.
+:   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
+:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+
+
+
 
 ### 16 October 2026
 {: #containers-oct1626}
@@ -81,6 +115,9 @@ Istio cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-istio).
 
 
+
+VPC Block CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-block-csi-driver).
 
 ### 9 October 2026
 {: #containers-oct0926}
