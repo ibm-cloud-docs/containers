@@ -500,6 +500,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [23 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2326)
 
+        * New CLI version `1.0.899` available.
+
         * Add-on OpenShift AI version `421` is available.
 
     * [22 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2226)

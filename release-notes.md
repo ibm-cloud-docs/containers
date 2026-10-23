@@ -33,6 +33,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 {: #containers-oct2326}
 {: release-note}
 
+New CLI version `1.0.899` available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 Add-on OpenShift AI version `421` is available.
 :   For more information, see the [add-on change log](/docs/containers?topic=containers-cl-add-ons).
 
