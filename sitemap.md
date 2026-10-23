@@ -6716,6 +6716,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
+* [Version v1.0.899](/docs/containers?topic=containers-cs_cli_changelog#cli-01899)
+
 * [Version v1.0.896](/docs/containers?topic=containers-cs_cli_changelog#cli-01896)
 
 * [Version v1.0.892](/docs/containers?topic=containers-cs_cli_changelog#cli-01892)
