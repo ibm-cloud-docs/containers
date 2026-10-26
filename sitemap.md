@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-23"
+lastupdated: "2026-10-26"
 
 
 keywords: containers
@@ -499,6 +499,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
 
     * [23 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2326)
+
+        * New CLI version `1.0.899` available.
 
         * Add-on OpenShift AI version `421` is available.
 
@@ -6716,6 +6718,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
+* [Version v1.0.899](/docs/containers?topic=containers-cs_cli_changelog#cli-01899)
+
 * [Version v1.0.896](/docs/containers?topic=containers-cs_cli_changelog#cli-01896)
 
 * [Version v1.0.892](/docs/containers?topic=containers-cs_cli_changelog#cli-01892)
@@ -7797,8 +7801,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [03 April 2024, Version 2.0.0 - 2.0.0_2156](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2156)
 
     * [16 January 2024, Version 2.0.0 - 2.0.0_2063](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2063)
-
-    * [25 October 2023, Version 2.0.0 - 2.0.0_1901](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_1901)
 
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
 

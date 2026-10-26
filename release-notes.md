@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-23"
+lastupdated: "2026-10-26"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -32,6 +32,11 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ### 23 October 2026
 {: #containers-oct2326}
 {: release-note}
+
+
+
+New CLI version `1.0.899` available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 Add-on OpenShift AI version `421` is available.
 :   For more information, see the [add-on change log](/docs/containers?topic=containers-cl-add-ons).
