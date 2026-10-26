@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-06-26"
+lastupdated: "2026-10-26"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}
@@ -64,8 +64,7 @@ Admission controllers
 :   `StorageObjectInUseProtection`
 :   `PersistentVolumeClaimResize`
 :   `Priority`
-:   `PodSecurity` (Optional in Kubernetes version 1.24, enabled in version 1.25 and later)
-:   `PodSecurityPolicy` (Kubernetes version 1.24 and earlier)
+:   `PodSecurity`
 :   `NodeRestriction`
 :   `TaintNodesByCondition`
 :   `CertificateApproval` 
@@ -133,9 +132,9 @@ Review the default settings for the `kubelet` worker node component in {{site.da
 
 `imageMaximumGCAge: 336h` (Kubernetes version 1.31 and later)
 
-`imageGCHighThresholdPercent: 75` (Kubernetes version 1.26 and later)
+`imageGCHighThresholdPercent: 75`
 
-`imageGCLowThresholdPercent: 65` (Kubernetes version 1.26 and later)
+`imageGCLowThresholdPercent: 65`
 
 `kubeAPIQPS: 50` (Kubernetes version 1.27 and later)
 

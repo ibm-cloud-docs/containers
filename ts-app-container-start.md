@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-10-02"
+lastupdated: "2026-10-26"
 
 
 keywords: kubernetes, containers, containers not starting
@@ -85,9 +85,6 @@ First, check for and release individual IP addresses that were not cleanly remov
 {: shortdesc}
 
 1. Follow the steps in [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies) to download version 3.18 or later of the `calicoctl` client, use the correct Calico configuration for your cluster, and verify that the Calico configuration is working correctly for your targeted cluster. Note that even if your cluster runs an older version of Calico, you can still use `calicoctl` version 3.18 to run the commands in the following steps.
-
-    If you recently updated your classic cluster from Kubernetes version 1.18 to 1.19, the cluster uses the KDD datastore for Calico. Ensure that you follow the steps for 1.19 clusters to set the `DATASTORE_TYPE` environment variable to `kubernetes` and the `KUBECONFIG` environment variable to the `kube-config` file for your cluster. The old `calicoctl.cfg` points to outdated data in etcd that does not work with the following steps.
-    {: note}
 
 2. Check for any IP addresses that are incorrectly detected as in use by the Calico IPAM.
     ```sh
@@ -178,7 +175,7 @@ Next, check for and clean up entire blocks of IP addresses that are assigned to 
 
 Occasionally, when a worker node is assigned a second or third block of IP addresses, entire blocks of IP addresses that the worker node previously used might later be completely unused. Additionally, when you remove or replace a worker node, the cleanup of the IP address block by the Calico IPAM might fail due to the lack of a worker node for the `calico-kube-controllers` to temporarily run on, or due to problems with the CNI plug-in or `containerd` runtime when the worker node is removed or replaced.
 
-Ensuring that IP blocks are free is especially important for all classic clusters that run Kubernetes version 1.19 or later and all VPC clusters. In these clusters, the `strictAffinity` Calico setting is set to `true`, which forces a worker node to use IP addresses that are from its assigned IP blocks only, as opposed to using IP addresses from blocks that are assigned to other worker nodes. Over time, the blocks that are assigned to nodes but that are unused can accumulate until no more IP address blocks can be assigned to worker nodes.
+Ensuring that IP blocks are free is especially important for all Classic and VPC clusters. In these clusters, the `strictAffinity` Calico setting is set to `true`, which forces a worker node to use IP addresses that are from its assigned IP blocks only, as opposed to using IP addresses from blocks that are assigned to other worker nodes. Over time, the blocks that are assigned to nodes but that are unused can accumulate until no more IP address blocks can be assigned to worker nodes.
 
 1. Follow the steps to [release individual IP addresses](#individual-ips).
 

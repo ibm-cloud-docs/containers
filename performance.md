@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-08-21"
+lastupdated: "2026-10-26"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
@@ -466,7 +466,7 @@ You might need to repeat this process a few times to reach a stable configuratio
 
 [Classic infrastructure]{: tag-classic-inf} [Virtual Private Cloud]{: tag-vpc}
 
-You can enable the [Kubernetes `HugePages` scheduling](https://kubernetes.io/docs/tasks/manage-hugepages/scheduling-hugepages/){: external} in clusters that run Kubernetes version 1.19 or later. The only supported page size is 2 MB per page, which is the default size of the Kubernetes feature gate.
+You can enable [Kubernetes `HugePages` scheduling](https://kubernetes.io/docs/tasks/manage-hugepages/scheduling-hugepages/){: external} in your cluster. The only supported page size is 2 MB per page, which is the default size of the Kubernetes feature gate.
 {: shortdesc}
 
 Huge pages scheduling is a beta feature in {{site.data.keyword.containerlong_notm}} and is subject to change.

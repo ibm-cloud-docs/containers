@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2022, 2026
-lastupdated: "2026-08-25"
+lastupdated: "2026-10-26"
 
 
 keywords: kubernetes, deploy, containers, pod security admission, pod security, security profiles
@@ -145,13 +145,6 @@ exemptions:
 
 
 The cluster-wide Pod Security Admission plug-in configuration sets `enforce`, `audit`, and `warn` behavior for all namespaces that don't have pod security labels or exemptions.
-
-
-
-For Kubernetes 1.24 clusters the `apiVersion` must be `pod-security.admission.config.k8s.io/v1beta`. For 1.25 and later `pod-security.admission.config.k8s.io/v1` is preferred, but the `v1beta` API version can still be used.
-{: note}
-
-
 
 1. Create a YAML file containing a `PodSecurityConfiguration` resource. You can use the default configuration to start.
 
