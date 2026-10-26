@@ -29,6 +29,13 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## October 2026
 {: #containers-oct26}
 
+### 26 October 2026
+{: #containers-oct2626}
+{: release-note}
+
+Cluster autoscaler cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler).
+
 ### 23 October 2026
 {: #containers-oct2326}
 {: release-note}
