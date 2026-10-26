@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026
-lastupdated: "2026-09-29"
+lastupdated: "2026-10-26"
 
 keywords: kubernetes, gpu, nvidia, driver, migration, 1.36
 
@@ -79,6 +79,12 @@ By completing these preparation steps early, you reduce the work required during
 - Review the [NVIDIA GPU Operator documentation](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html){: external}.
 - Ensure you have cluster administrator access.
 - Plan your upgrade strategy based on your cluster configuration (single GPU node vs. multiple GPU nodes).
+- Outbound traffic protection disabled on the VPC cluster. This is required so that worker nodes can reach `nvcr.io` to pull GPU Operator images.
+
+    ```sh
+    ibmcloud ks vpc outbound-traffic-protection disable --cluster CLUSTER
+    ```
+    {: pre}
 
 ## Migration examples
 {: #gpu-migrate-examples}
