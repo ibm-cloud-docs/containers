@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-10-20"
+lastupdated: "2026-10-27"
 
 
 keywords: kubernetes, node scaling, ca, autoscaler
@@ -138,7 +138,6 @@ These conditions might impact cluster flavor availability:
 | ox2.64x512  \n(Storage optimized) | us-south-1  \nus-south-2  \nus-south-3 | 64 cores  \n512GB memory  \n25Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | ox2.8x64  \n(Storage optimized) | us-south-1  \nus-south-2  \nus-south-3 | 8 cores  \n64GB memory  \n12Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | ox2.96x768  \n(Storage optimized) | us-south-1  \nus-south-2  \nus-south-3 | 96 cores  \n768GB memory  \n25Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
-| gx3d.160x1792.8h200  \n(GPU) | us-south-3 | 160 cores  \n1792GB memory  \n32Gbps network speed  \n8 H200 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 {: class="simple-tab-table"}
 {: caption="VSI flavors in Dallas." caption-side="bottom"}
 {: #us-south-virtual-table}
@@ -276,7 +275,6 @@ These conditions might impact cluster flavor availability:
 | ox2.8x64  \n(Storage optimized) | eu-de-1  \neu-de-2  \neu-de-3 | 8 cores  \n64GB memory  \n12Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | ox2.96x768  \n(Storage optimized) | eu-de-1  \neu-de-2  \neu-de-3 | 96 cores  \n768GB memory  \n25Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | gx3d.160x1792.8h100  \n(GPU) | eu-de-2 | 160 cores  \n1792GB memory  \n32Gbps network speed  \n8 H100 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
-| gx3d.160x1792.8h200  \n(GPU) | eu-de-2 | 160 cores  \n1792GB memory  \n32Gbps network speed  \n8 H200 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 {: class="simple-tab-table"}
 {: caption="VSI flavors in Frankfurt." caption-side="bottom"}
 {: #eu-de-virtual-table}
@@ -380,7 +378,6 @@ These conditions might impact cluster flavor availability:
 | gx3.32x160.2l4  \n(GPU) | eu-gb-1  \neu-gb-2  \neu-gb-3 | 32 cores  \n160GB memory  \n32Gbps network speed  \n2 L4 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | gx3.48x240.2l40s  \n(GPU) | eu-gb-1  \neu-gb-2  \neu-gb-3 | 48 cores  \n240GB memory  \n32Gbps network speed  \n2 L40S GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | gx3.64x320.4l4  \n(GPU) | eu-gb-1  \neu-gb-2  \neu-gb-3 | 64 cores  \n320GB memory  \n32Gbps network speed  \n4 L4 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
-| gx3d.160x1792.8h200  \n(GPU) | eu-gb-1 | 160 cores  \n1792GB memory  \n32Gbps network speed  \n8 H200 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | mx2.128x1024  \n(Memory) | eu-gb-1  \neu-gb-2  \neu-gb-3 | 128 cores  \n1024GB memory  \n25Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | mx2.16x128  \n(Memory) | eu-gb-1  \neu-gb-2  \neu-gb-3 | 16 cores  \n128GB memory  \n24Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | mx2.16x128.2000gb  \n(Memory) | eu-gb-1  \neu-gb-2  \neu-gb-3 | 16 cores  \n128GB memory  \n24Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | 2000GB BLOCK | N/A|
@@ -1174,7 +1171,6 @@ These conditions might impact cluster flavor availability:
 | ox2.8x64  \n(Storage optimized) | ca-tor-1  \nca-tor-2  \nca-tor-3 | 8 cores  \n64GB memory  \n12Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | ox2.96x768  \n(Storage optimized) | ca-tor-1  \nca-tor-2  \nca-tor-3 | 96 cores  \n768GB memory  \n25Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | gx3d.160x1792.8h100  \n(GPU) | ca-tor-3 | 160 cores  \n1792GB memory  \n32Gbps network speed  \n8 H100 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
-| gx3d.160x1792.8h200  \n(GPU) | ca-tor-3 | 160 cores  \n1792GB memory  \n32Gbps network speed  \n8 H200 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 {: class="simple-tab-table"}
 {: caption="VSI flavors in Toronto." caption-side="bottom"}
 {: #ca-tor-virtual-table}
@@ -1298,7 +1294,6 @@ These conditions might impact cluster flavor availability:
 | ox2.8x64  \n(Storage optimized) | us-east-1  \nus-east-2  \nus-east-3 | 8 cores  \n64GB memory  \n12Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | ox2.96x768  \n(Storage optimized) | us-east-1  \nus-east-2  \nus-east-3 | 96 cores  \n768GB memory  \n25Gbps network speed  \n No GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 | gx3d.160x1792.8h100  \n(GPU) | us-east-2  \nus-east-3 | 160 cores  \n1792GB memory  \n32Gbps network speed  \n8 H100 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
-| gx3d.160x1792.8h200  \n(GPU) | us-east-2  \nus-east-3 | 160 cores  \n1792GB memory  \n32Gbps network speed  \n8 H200 GPUs |  UBUNTU_24_64  \n| 100GB BLOCK | N/A | 300 / 5  \n 300 / 10  \n 600 / 5  \n 600 / 10  \n 900 / 5  \n 900 / 10  \n 1200 / 5  \n 1200 / 10  \n 1600 / 5  \n 1600 / 10  \n 2400 / 10  \n 3000 / 10  \n 4000 / 10  \n|
 {: class="simple-tab-table"}
 {: caption="VSI flavors in Washington DC." caption-side="bottom"}
 {: #us-east-virtual-table}

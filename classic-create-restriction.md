@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-10-01"
+lastupdated: "2026-10-27"
 
 keywords: containers, classic, cluster, create, restriction, blocked, vpc
 
@@ -50,9 +50,14 @@ E501e: Classic cluster creation is not supported in regions that do not have exi
 
 If your account is affected, consider the following options:
 
-- **Create a VPC cluster.** VPC clusters are the recommended option for new workloads. To get started, see [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2).
-- **Use a region where you already have a classic cluster.** If your account has a classic cluster in another region, you can create additional classic clusters in that region.
-- **Request an exception.** If you have a specific use case that requires classic infrastructure in a new region and you cannot migrate to VPC, [open a support case](/unifiedsupport/cases/add) and provide your account ID, the target region, and the reason that VPC infrastructure does not meet your requirements.
+Create a VPC cluster
+:   VPC clusters are the recommended option for new workloads. To get started, see [Creating VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2).
+
+Use a region where you already have a classic cluster
+:   If your account has a classic cluster in another region, you can create additional classic clusters in that region.
+
+Request an exception
+:   If you have a specific use case that requires classic infrastructure in a new region and you cannot migrate to VPC, [open a support case](/unifiedsupport/cases/add) and provide your account ID, the target region, and the reason that VPC infrastructure does not meet your requirements.
 
 ## How do I check whether my account has existing classic clusters?
 {: #classic-create-restriction-check}

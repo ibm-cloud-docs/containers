@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-26"
+lastupdated: "2026-10-27"
 
 
 keywords: containers
@@ -31,8 +31,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 
-## Getting started
-{: #sitemap_getting_started}
+## Containers
+{: #sitemap_containers}
 
 
 [Getting started](/docs/containers?topic=containers-getting-started#getting-started)
@@ -54,11 +54,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Quick actions](/docs/containers?topic=containers-getting-started#getting-started-quick-actions)
 
 * [What's next?](/docs/containers?topic=containers-getting-started#getting-started-whats-next)
-
-
-## Use cases
-{: #sitemap_use_cases}
-
 
 [Use cases](/docs/containers?topic=containers-use-cases#use-cases)
 
@@ -92,11 +87,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [Improve collaboration velocity with open data](/docs/containers?topic=containers-use-cases#uc-gov-data)
 
-
-## Understanding the service
-{: #sitemap_understanding_the_service}
-
-
 [Understanding the service](/docs/containers?topic=containers-overview#overview)
 
 * [What is Kubernetes?](/docs/containers?topic=containers-overview#what-is-kube-overview)
@@ -110,11 +100,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Comparison between {{site.data.keyword.redhat_openshift_notm}} and Kubernetes clusters](/docs/containers?topic=containers-overview#openshift_kubernetes)
 
 * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
-
-
-## Architecture and dependencies
-{: #sitemap_architecture_and_dependencies}
-
 
 [Architecture and dependencies](/docs/containers?topic=containers-service-arch#service-arch)
 
@@ -136,11 +121,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
 
-
-## Learning path for administrators
-{: #sitemap_learning_path_for_administrators}
-
-
 [Learning path for administrators](/docs/containers?topic=containers-learning-path-admin#learning-path-admin)
 
 * [Plan your environment](/docs/containers?topic=containers-learning-path-admin#admin_plan)
@@ -160,11 +140,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Add integrations](/docs/containers?topic=containers-learning-path-admin#admin_integrate)
 
 * [Manage the lifecycle](/docs/containers?topic=containers-learning-path-admin#admin_lifecycle)
-
-
-## Learning path for developers
-{: #sitemap_learning_path_for_developers}
-
 
 [Learning path for developers](/docs/containers?topic=containers-learning-path-dev#learning-path-dev)
 
@@ -189,7 +164,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
 
 
-## Plan your cluster
+### Plan your cluster
 {: #sitemap_plan_your_cluster}
 
 
@@ -448,7 +423,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
 
 
-## Your responsibilities
+### Your responsibilities
 {: #sitemap_your_responsibilities}
 
 
@@ -497,6 +472,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
+
+    * ALB OAuth Proxy cluster add-on patch updates.
 
     * [26 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2626)
 
@@ -2130,7 +2107,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 ## Containers
-{: #sitemap_containers}
+{: #sitemap_containers1}
 
 
 [Create a VPC cluster with the CLI (recommended)](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial)
@@ -7747,6 +7724,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-supported-versions)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-2.0.0)
+
+    * [27 October 2026, Version 2.0.0 - 2.0.0_379572292](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_379572292)
 
     * [05 October 2026, Version 2.0.0 - 2.0.0_373110464](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_373110464)
 

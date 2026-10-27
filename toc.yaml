@@ -14,30 +14,33 @@ toc:
   - navgroup:
       id: learn
       topics:
-      - topic: getting-started.md
-        navtitle: Getting started
-      - topic: use-cases.md
-        navtitle: Use cases
-      - topic: overview.md
-        navtitle: Understanding the service
-      - topic: cs_tech.md
-        navtitle: Architecture and dependencies
-      - path-admin.md
-      - path-dev.md
       - topicgroup:
-          label: Plan your cluster
+          label: Containers
           topics:
-          - strategy.md
-          - cluster-plan-network-vpc.md
-          - cluster-plan-network-classic.md
-          - encryption.md
-          - document-environment.md
-          - topic: secure.md
-            navtitle: Security overview
-      - topicgroup:
-          label: Your responsibilities
-          topics:
-          - responsibilities.md
+          - topic: getting-started.md
+            navtitle: Getting started
+          - topic: use-cases.md
+            navtitle: Use cases
+          - topic: overview.md
+            navtitle: Understanding the service
+          - topic: cs_tech.md
+            navtitle: Architecture and dependencies
+          - path-admin.md
+          - path-dev.md
+          - topicgroup:
+              label: Plan your cluster
+              topics:
+              - strategy.md
+              - cluster-plan-network-vpc.md
+              - cluster-plan-network-classic.md
+              - encryption.md
+              - document-environment.md
+              - topic: secure.md
+                navtitle: Security overview
+          - topicgroup:
+              label: Your responsibilities
+              topics:
+              - responsibilities.md
       - topicgroup:
           label: Important notices
           topics:
