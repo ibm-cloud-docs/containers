@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-20"
+lastupdated: "2026-10-26"
 
 
 keywords: kubernetes, envoy, sidecar, mesh, bookinfo
@@ -392,7 +392,7 @@ After customizing the default gateway that has one gateway deployment, you might
 
     # Define the security context for the pod.
     # If unset, this will be automatically set to the minimum privileges required to bind to port 80 and 443.
-    # On Kubernetes 1.22+, this only requires the `net.ipv4.ip_unprivileged_port_start` sysctl.
+    # This only requires the `net.ipv4.ip_unprivileged_port_start` sysctl.
     securityContext:
       runAsGroup: 1337
       runAsNonRoot: true

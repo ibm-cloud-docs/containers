@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2025
-lastupdated: "2025-08-12"
+  years: 2014, 2026
+lastupdated: "2026-10-26"
 
 
 keywords: kubernetes, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
@@ -33,7 +33,7 @@ To enable Envoy access logs for the entire mesh, you can use the `managed-istio-
 ## Enabling access logs for individual containers
 {: #enable_logs_individual}
 
-Starting from version 1.18, the Istio add-on provides the option to enable Envoy access logs for individual containers by using telemetry CRs. To set up telemetry CRs, use the following telemetry definition.
+The Istio add-on provides the option to enable Envoy access logs for individual containers by using telemetry CRs. To set up telemetry CRs, use the following telemetry definition.
 
 ```yaml
 apiVersion: telemetry.istio.io/v1alpha1

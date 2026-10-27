@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-28"
+lastupdated: "2026-10-26"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -405,7 +405,7 @@ To see the components of each Cloud Pak, consult the [Cloud Pak documentation](h
 ## What else do I need to know to use Cloud Paks?
 {: #cloud_paks_other}
 
-When you set up your Cloud Pak, you might need to work with {{site.data.keyword.redhat_openshift_notm}}-specific resources, such as security context constraints. Make sure that you use the [`oc` CLI or `kubectl` version 1.12 CLI](/docs/containers?topic=containers-cli-install) to interact with these resources, such as `oc get scc`. The `kubectl` CLI version 1.11 has a bug that yields an error when you run commands against {{site.data.keyword.redhat_openshift_notm}}-specific resources, such as `kubectl get scc`.
+When you set up your Cloud Pak, you might need to work with {{site.data.keyword.redhat_openshift_notm}}-specific resources, such as security context constraints. Make sure that you use the [`oc` CLI or `kubectl` CLI](/docs/containers?topic=containers-cli-install) to interact with these resources, such as `oc get scc`.
 
 
 ## Does IBM support third-party and open source tools that I use with my cluster?

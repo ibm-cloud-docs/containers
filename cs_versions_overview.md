@@ -3,7 +3,7 @@
 copyright:
   years: 2014, 2026
 
-lastupdated: "2026-10-15"
+lastupdated: "2026-10-26"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -77,7 +77,7 @@ To keep your nodes secure, you must install worker node fix packs as soon as pos
 
 Major and minor updates (1.x)
 :   First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).
-    - You can't update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.22 and you want to update to 1.24, you must update to 1.23 first.
+    - You can't update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.34 and you want to update to 1.36, you must update to 1.35 first.
     - Worker nodes can't run a Kubernetes major or minor version that is greater than the masters. Additionally, your worker nodes can be only up to two versions behind the master version (`n-2`).
     - If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cli-install) up-to-date.
 

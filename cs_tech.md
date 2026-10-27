@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-03"
+lastupdated: "2026-10-26"
 
 
 keywords: kubernetes, docker, containers
@@ -95,7 +95,7 @@ The following tables describe the components of a worker node.
 :   The kubelet is a pod that runs on every worker node and is responsible for monitoring the health of pods that run on the worker node and for watching the events that the Kubernetes API server sends. Based on the events, the kubelet creates or removes pods, ensures liveness and readiness probes, and reports back the status of the pods to the Kubernetes API server.
 
 `coredns`
-:   By default, Kubernetes schedules a CoreDNS pod (or KubeDNS pod in version 1.12 and earlier) and service on the cluster. Containers automatically use the DNS service's IP to resolve DNS names in their searches for other pods and services.
+:   By default, Kubernetes schedules a CoreDNS pod and service on the cluster. Containers automatically use the DNS service's IP to resolve DNS names in their searches for other pods and services.
 
 `calico`
 :   Calico manages network policies for your cluster, and comprises a few components as follows.
@@ -157,12 +157,3 @@ The following architectural overviews are specific to the VPC infrastructure pro
 | App networking | You can create a Kubernetes `LoadBalancer` service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. For more information, see [Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpclb-about). Calico is used as the cluster networking policy fabric. |
 | Storage | You can set up only block persistent storage. Block storage is available as a cluster add-on. For more information, see [Setting up IBM Block Storage for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-block_storage). |
 {: caption="Kubernetes cluster in a VPC" caption-side="bottom"}
-
-
-
-
-
-
-
-
-
