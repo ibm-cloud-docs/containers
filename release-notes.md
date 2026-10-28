@@ -56,7 +56,6 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   **VPC infrastructure**: Replace the worker node.
 :   **VPC Bare Metal**: Reload the worker node.
 :   Review the change logs for your cluster version.
-:   [Version 1.37 change log](/docs/containers?topic=containers-changelog_137)
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
