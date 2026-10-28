@@ -7715,6 +7715,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 2.2](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2.2)
 
+    * [28 October 2026, Version 2.2 - 2.2.60](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2260)
+
     * [27 August 2026, Version 2.2 - 2.2.59](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2259)
 
     * [15 August 2026, Version 2.2 - 2.2.58](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2258)
