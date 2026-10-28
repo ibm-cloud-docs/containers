@@ -470,6 +470,7 @@ toc:
               - ts-cluster-master.md
               - ts-cluster-master-upgrade.md
               - ts-resource-migration.md
+              - ts-migrate-lb-quota.md
               - ts-cluster-cli.md
               - ts-cluster-create-delete.md
               - ts-cluster-no-vpc.md
@@ -602,6 +603,7 @@ toc:
               - ts-ingress-app.md
               - ts-ingress-vpc-app.md
               - ts-ingress-iks-no-subdomain-create.md
+              - ts-migrate-alb-traefik.md
               - ts-ingress-subdomain-dupe-name.md
               - ts-ingress-alb-pods-nodes.md
               - ts-ingress-alb-no-deploy-zone.md

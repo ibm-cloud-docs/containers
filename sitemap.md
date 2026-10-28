@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-27"
+lastupdated: "2026-10-28"
 
 
 keywords: containers
@@ -473,7 +473,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
 
-    * ALB OAuth Proxy cluster add-on patch updates.
+    * [27 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2726)
+
+        * ALB OAuth Proxy cluster add-on patch updates.
+
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
     * [26 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2626)
 
@@ -5610,6 +5614,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+* [27 October 2026, Worker node fix pack 1.36.5_1539](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1539_W)
+
 * [20 October 2026, Worker node fix pack 1.36.5_1538](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1538_W)
 
 * [06 October 2026, Worker node fix pack 1.36.5_1536](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1536_W)
@@ -5696,6 +5702,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+* [27 October 2026, Worker node fix pack 1.35.9_1550](/docs/containers?topic=containers-changelog_135#cl-boms-1359_1550_W)
 
 * [20 October 2026, Worker node fix pack 1.35.9_1549](/docs/containers?topic=containers-changelog_135#cl-boms-1359_1549_W)
 
@@ -5807,6 +5815,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+* [27 October 2026, Worker node fix pack 1.34.12_1572](/docs/containers?topic=containers-changelog_134#cl-boms-13412_1572_W)
 
 * [20 October 2026, Worker node fix pack 1.34.12_1571](/docs/containers?topic=containers-changelog_134#cl-boms-13412_1571_W)
 
@@ -6816,11 +6826,15 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`node`](/docs/containers?topic=containers-cs-graphql-api#node)
 
+    * [`resourceGroup`](/docs/containers?topic=containers-cs-graphql-api#resourcegroup)
+
     * [`satelliteConnectors`](/docs/containers?topic=containers-cs-graphql-api#satelliteconnectors)
 
 * [Mutations](/docs/containers?topic=containers-cs-graphql-api#mutations)
 
     * [`addVirtualNetworkInterfaceToBareMetalNode`](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnode)
+
+    * [`addVirtualNetworkInterfaceToVirtualNode`](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetovirtualnode)
 
     * [`createKubernetesWorkloadMigrationPlan`](/docs/containers?topic=containers-cs-graphql-api#createkubernetesworkloadmigrationplan)
 
@@ -6836,6 +6850,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`removeVirtualNetworkInterfaceFromNode`](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnode)
 
+    * [`setKubernetesClusterTrustedProfile`](/docs/containers?topic=containers-cs-graphql-api#setkubernetesclustertrustedprofile)
+
     * [`startKubernetesWorkloadMigration`](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigration)
 
     * [`updateSatelliteLocation`](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocation)
@@ -6845,6 +6861,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Account](/docs/containers?topic=containers-cs-graphql-api#account)
 
     * [AddVirtualNetworkInterfaceToBareMetalNodePayload](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnodepayload)
+
+    * [AddVirtualNetworkInterfaceToVirtualNodePayload](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetovirtualnodepayload)
 
     * [BareMetalNetworkAttachmentByVLAN](/docs/containers?topic=containers-cs-graphql-api#baremetalnetworkattachmentbyvlan)
 
@@ -6865,6 +6883,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [CreateVPCKubernetesClusterFromTemplatePayload](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclusterfromtemplatepayload)
 
     * [CreateVPCKubernetesClusterTemplatePayload](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclustertemplatepayload)
+
+    * [InstanceNetworkAttachment](/docs/containers?topic=containers-cs-graphql-api#instancenetworkattachment)
 
     * [KeyValuePair](/docs/containers?topic=containers-cs-graphql-api#keyvaluepair)
 
@@ -6900,9 +6920,17 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [SecurityGroup](/docs/containers?topic=containers-cs-graphql-api#securitygroup)
 
+    * [SetKubernetesClusterTrustedProfilePayload](/docs/containers?topic=containers-cs-graphql-api#setkubernetesclustertrustedprofilepayload)
+
+    * [SetResourceGroupDefaultTrustedProfileInput](/docs/containers?topic=containers-cs-graphql-api#setresourcegroupdefaulttrustedprofileinput)
+
+    * [SetResourceGroupDefaultTrustedProfilePayload](/docs/containers?topic=containers-cs-graphql-api#setresourcegroupdefaulttrustedprofilepayload)
+
     * [StartKubernetesWorkloadMigrationPayload](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigrationpayload)
 
     * [Subnet](/docs/containers?topic=containers-cs-graphql-api#subnet)
+
+    * [TrustedProfile](/docs/containers?topic=containers-cs-graphql-api#trustedprofile)
 
     * [UpdateSatelliteLocationPayload](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocationpayload)
 
@@ -6950,6 +6978,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [VPCMigrationStorageClassNameMapping](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationstorageclassnamemapping)
 
+    * [VPCVirtualKubernetesNode](/docs/containers?topic=containers-cs-graphql-api#vpcvirtualkubernetesnode)
+
+    * [VirtualServerVirtualNetworkInterface](/docs/containers?topic=containers-cs-graphql-api#virtualservervirtualnetworkinterface)
+
 * [Interface types](/docs/containers?topic=containers-cs-graphql-api#interface-types)
 
     * [KubernetesNode](/docs/containers?topic=containers-cs-graphql-api#kubernetesnode)
@@ -6968,6 +7000,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [AddVirtualNetworkInterfaceToBareMetalNodeInput](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnodeinput)
 
+    * [AddVirtualNetworkInterfaceToVirtualNodeInput](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetovirtualnodeinput)
+
     * [CreateKubernetesWorkloadMigrationPlanInput](/docs/containers?topic=containers-cs-graphql-api#createkubernetesworkloadmigrationplaninput)
 
     * [CreateSatelliteConnectorInput](/docs/containers?topic=containers-cs-graphql-api#createsatelliteconnectorinput)
@@ -6985,6 +7019,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [RemoveSatelliteConnectorInput](/docs/containers?topic=containers-cs-graphql-api#removesatelliteconnectorinput)
 
     * [RemoveVirtualNetworkInterfaceFromNodeInput](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnodeinput)
+
+    * [SetKubernetesClusterTrustedProfileInput](/docs/containers?topic=containers-cs-graphql-api#setkubernetesclustertrustedprofileinput)
 
     * [StartKubernetesWorkloadMigrationInput](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigrationinput)
 
@@ -7074,6 +7110,16 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [05 November 2025, Version 1.25.5](/docs/containers?topic=containers-cl-add-ons-istio#1255)
 
     * [21 January 2025, Version 1.26 - 1.26.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1268)
+
+* [Unsupported: Version 1.24](/docs/containers?topic=containers-cl-add-ons-istio#v124)
+
+    * [26 September 2025, Version 1.24.6](/docs/containers?topic=containers-cl-add-ons-istio#1246)
+
+* [Unsupported: Version 1.23](/docs/containers?topic=containers-cl-add-ons-istio#v123)
+
+    * [29 April 2025, Version 1.23.6](/docs/containers?topic=containers-cl-add-ons-istio#1236)
+
+    * [4 March 2025, Version 1.23.5](/docs/containers?topic=containers-cl-add-ons-istio#1235)
 
 * [Unsupported: Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
 
@@ -7689,6 +7735,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 2.2](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2.2)
 
+    * [28 October 2026, Version 2.2 - 2.2.60](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2260)
+
     * [27 August 2026, Version 2.2 - 2.2.59](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2259)
 
     * [15 August 2026, Version 2.2 - 2.2.58](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2258)
@@ -7788,6 +7836,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [03 April 2024, Version 2.0.0 - 2.0.0_2156](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2156)
 
     * [16 January 2024, Version 2.0.0 - 2.0.0_2063](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2063)
+
+    * [25 October 2023, Version 2.0.0 - 2.0.0_1901](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_1901)
 
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
 
@@ -8742,6 +8792,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Resolving cluster master upgrade issues: Migration in progress error](/docs/containers?topic=containers-ts-resource-migration#ts-resource-migration)
 
+[Why is my Classic-to-VPC migration stuck in global resource migration?](/docs/containers?topic=containers-ts-migrate-lb-quota#ts-migrate-lb-quota)
+
 [Debugging common CLI issues with clusters](/docs/containers?topic=containers-ts_clis#ts_clis)
 
 * [Firewall prevents running CLI commands](/docs/containers?topic=containers-ts_clis#ts_firewall_clis)
@@ -9267,6 +9319,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Classic clusters](/docs/containers?topic=containers-ingress_subdomain#no-ingress-subdomain-classic)
 
     * [VPC clusters](/docs/containers?topic=containers-ingress_subdomain#no-ingress-subdomain-vpc)
+
+[Why do migrated custom ALBs use NGINX instead of Traefik?](/docs/containers?topic=containers-ts-migrate-alb-traefik#ts-migrate-alb-traefik)
 
 [Why does no Ingress subdomain exist after I create clusters of the same or similar name?](/docs/containers?topic=containers-cs_rate_limit#cs_rate_limit)
 

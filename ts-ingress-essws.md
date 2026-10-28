@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-08-12"
+lastupdated: "2026-10-28"
 
 
 keywords: kubernetes, help, network, connectivity, essws
@@ -40,7 +40,7 @@ There was an error when attempting to apply the secret to your cluster.
 {: tsCauses}
 
 To view the specific error, run the **`ibmcloud ks ingress secret ls`** commands and review the `Status` column.
-{: tsResovle}
+{: tsResolve}
 
 `Error api_request_failed`
 :   There was an issue uploading the new certificate to the registered instance for the cluster. Verify the instance details using the **`ibmcloud ks ingress instance ls`** command.
