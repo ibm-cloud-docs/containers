@@ -48,6 +48,22 @@ ALB OAuth Proxy cluster add-on patch updates.
 
 
 
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
+:   Fix packs can be applied in the following ways. 
+:   **Classic infrastructure**: Update or reload the worker node.
+:   **VPC infrastructure**: Replace the worker node.
+:   **VPC Bare Metal**: Reload the worker node.
+:   Review the change logs for your cluster version.
+:   [Version 1.37 change log](/docs/containers?topic=containers-changelog_137)
+:   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
+:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+
+
+
+
 ### 26 October 2026
 {: #containers-oct2626}
 {: release-note}
@@ -1067,7 +1083,6 @@ IBM Storage Operator cluster add-on patch updates.
 
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
-
 
 
 ### 12 May 2026

@@ -477,6 +477,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * ALB OAuth Proxy cluster add-on patch updates.
 
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
+
     * [26 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2626)
 
         * Cluster autoscaler cluster add-on patch updates.
@@ -5612,6 +5614,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+* [27 October 2026, Worker node fix pack 1.36.5_1539](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1539_W)
+
 * [20 October 2026, Worker node fix pack 1.36.5_1538](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1538_W)
 
 * [06 October 2026, Worker node fix pack 1.36.5_1536](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1536_W)
@@ -5698,6 +5702,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+* [27 October 2026, Worker node fix pack 1.35.9_1550](/docs/containers?topic=containers-changelog_135#cl-boms-1359_1550_W)
 
 * [20 October 2026, Worker node fix pack 1.35.9_1549](/docs/containers?topic=containers-changelog_135#cl-boms-1359_1549_W)
 
@@ -5809,6 +5815,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+* [27 October 2026, Worker node fix pack 1.34.12_1572](/docs/containers?topic=containers-changelog_134#cl-boms-13412_1572_W)
 
 * [20 October 2026, Worker node fix pack 1.34.12_1571](/docs/containers?topic=containers-changelog_134#cl-boms-13412_1571_W)
 
@@ -7103,6 +7111,16 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [21 January 2025, Version 1.26 - 1.26.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1268)
 
+* [Unsupported: Version 1.24](/docs/containers?topic=containers-cl-add-ons-istio#v124)
+
+    * [26 September 2025, Version 1.24.6](/docs/containers?topic=containers-cl-add-ons-istio#1246)
+
+* [Unsupported: Version 1.23](/docs/containers?topic=containers-cl-add-ons-istio#v123)
+
+    * [29 April 2025, Version 1.23.6](/docs/containers?topic=containers-cl-add-ons-istio#1236)
+
+    * [4 March 2025, Version 1.23.5](/docs/containers?topic=containers-cl-add-ons-istio#1235)
+
 * [Unsupported: Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
 
     * [20 September 2024, Version 1.23.1](/docs/containers?topic=containers-cl-add-ons-istio#1231)
@@ -7818,6 +7836,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [03 April 2024, Version 2.0.0 - 2.0.0_2156](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2156)
 
     * [16 January 2024, Version 2.0.0 - 2.0.0_2063](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2063)
+
+    * [25 October 2023, Version 2.0.0 - 2.0.0_1901](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_1901)
 
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
 
