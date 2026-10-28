@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-27"
+lastupdated: "2026-10-28"
 
 
 keywords: containers
@@ -6816,11 +6816,15 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`node`](/docs/containers?topic=containers-cs-graphql-api#node)
 
+    * [`resourceGroup`](/docs/containers?topic=containers-cs-graphql-api#resourcegroup)
+
     * [`satelliteConnectors`](/docs/containers?topic=containers-cs-graphql-api#satelliteconnectors)
 
 * [Mutations](/docs/containers?topic=containers-cs-graphql-api#mutations)
 
     * [`addVirtualNetworkInterfaceToBareMetalNode`](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnode)
+
+    * [`addVirtualNetworkInterfaceToVirtualNode`](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetovirtualnode)
 
     * [`createKubernetesWorkloadMigrationPlan`](/docs/containers?topic=containers-cs-graphql-api#createkubernetesworkloadmigrationplan)
 
@@ -6836,6 +6840,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`removeVirtualNetworkInterfaceFromNode`](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnode)
 
+    * [`setKubernetesClusterTrustedProfile`](/docs/containers?topic=containers-cs-graphql-api#setkubernetesclustertrustedprofile)
+
     * [`startKubernetesWorkloadMigration`](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigration)
 
     * [`updateSatelliteLocation`](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocation)
@@ -6845,6 +6851,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Account](/docs/containers?topic=containers-cs-graphql-api#account)
 
     * [AddVirtualNetworkInterfaceToBareMetalNodePayload](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnodepayload)
+
+    * [AddVirtualNetworkInterfaceToVirtualNodePayload](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetovirtualnodepayload)
 
     * [BareMetalNetworkAttachmentByVLAN](/docs/containers?topic=containers-cs-graphql-api#baremetalnetworkattachmentbyvlan)
 
@@ -6865,6 +6873,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [CreateVPCKubernetesClusterFromTemplatePayload](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclusterfromtemplatepayload)
 
     * [CreateVPCKubernetesClusterTemplatePayload](/docs/containers?topic=containers-cs-graphql-api#createvpckubernetesclustertemplatepayload)
+
+    * [InstanceNetworkAttachment](/docs/containers?topic=containers-cs-graphql-api#instancenetworkattachment)
 
     * [KeyValuePair](/docs/containers?topic=containers-cs-graphql-api#keyvaluepair)
 
@@ -6900,9 +6910,17 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [SecurityGroup](/docs/containers?topic=containers-cs-graphql-api#securitygroup)
 
+    * [SetKubernetesClusterTrustedProfilePayload](/docs/containers?topic=containers-cs-graphql-api#setkubernetesclustertrustedprofilepayload)
+
+    * [SetResourceGroupDefaultTrustedProfileInput](/docs/containers?topic=containers-cs-graphql-api#setresourcegroupdefaulttrustedprofileinput)
+
+    * [SetResourceGroupDefaultTrustedProfilePayload](/docs/containers?topic=containers-cs-graphql-api#setresourcegroupdefaulttrustedprofilepayload)
+
     * [StartKubernetesWorkloadMigrationPayload](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigrationpayload)
 
     * [Subnet](/docs/containers?topic=containers-cs-graphql-api#subnet)
+
+    * [TrustedProfile](/docs/containers?topic=containers-cs-graphql-api#trustedprofile)
 
     * [UpdateSatelliteLocationPayload](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocationpayload)
 
@@ -6950,6 +6968,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [VPCMigrationStorageClassNameMapping](/docs/containers?topic=containers-cs-graphql-api#vpcmigrationstorageclassnamemapping)
 
+    * [VPCVirtualKubernetesNode](/docs/containers?topic=containers-cs-graphql-api#vpcvirtualkubernetesnode)
+
+    * [VirtualServerVirtualNetworkInterface](/docs/containers?topic=containers-cs-graphql-api#virtualservervirtualnetworkinterface)
+
 * [Interface types](/docs/containers?topic=containers-cs-graphql-api#interface-types)
 
     * [KubernetesNode](/docs/containers?topic=containers-cs-graphql-api#kubernetesnode)
@@ -6968,6 +6990,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [AddVirtualNetworkInterfaceToBareMetalNodeInput](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetobaremetalnodeinput)
 
+    * [AddVirtualNetworkInterfaceToVirtualNodeInput](/docs/containers?topic=containers-cs-graphql-api#addvirtualnetworkinterfacetovirtualnodeinput)
+
     * [CreateKubernetesWorkloadMigrationPlanInput](/docs/containers?topic=containers-cs-graphql-api#createkubernetesworkloadmigrationplaninput)
 
     * [CreateSatelliteConnectorInput](/docs/containers?topic=containers-cs-graphql-api#createsatelliteconnectorinput)
@@ -6985,6 +7009,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [RemoveSatelliteConnectorInput](/docs/containers?topic=containers-cs-graphql-api#removesatelliteconnectorinput)
 
     * [RemoveVirtualNetworkInterfaceFromNodeInput](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnodeinput)
+
+    * [SetKubernetesClusterTrustedProfileInput](/docs/containers?topic=containers-cs-graphql-api#setkubernetesclustertrustedprofileinput)
 
     * [StartKubernetesWorkloadMigrationInput](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigrationinput)
 
