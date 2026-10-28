@@ -2,8 +2,8 @@
 
 copyright:
   years: 2014, 2026
+lastupdated: "2026-10-28"
 
-lastupdated: "2026-10-26"
 
 keywords: kubernetes, versions, update, upgrade
 
@@ -25,8 +25,6 @@ For more information about the Kubernetes project versions, see the [Kubernetes 
 
 ## Available {{site.data.keyword.containerlong_notm}} versions
 {: #cs_versions_available}
-
-<!--<qna:latest-version>-->
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (`n`) is released, versions up to 2 behind (`n-2`) are supported. Versions more than 2 behind the latest (`n-3`) are first deprecated and then unsupported. To continue receiving important security patch updates, make sure that your clusters always run a supported Kubernetes version. Deprecated clusters might not receive security updates. For more information, see [Release lifecycle](#release_lifecycle).
 
@@ -52,8 +50,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 
-
-<!--</qna:latest-version>-->
 
 ## Update types
 {: #update_types}

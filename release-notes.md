@@ -33,6 +33,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 
 
+### 27 October 2026
+{: #containers-oct2726}
+{: release-note}
+
+
+
 
 
 ALB OAuth Proxy cluster add-on patch updates.

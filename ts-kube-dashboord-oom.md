@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-04-08"
+lastupdated: "2026-10-28"
 
 
 keywords: kubernetes, oomkilled, out of memory
@@ -19,7 +19,7 @@ content-type: troubleshoot
 {: support}
 
 When listing pods in large clusters, the dashboard interface performs poorly and terminates in a `OOMKilled` error.
-{: ts_symptoms}
+{: tsSymptoms}
 
 ```sh
 Last State:     Terminated
@@ -29,10 +29,10 @@ Last State:     Terminated
 {: screen}
 
 The Kubernetes dashboard for your cluster requires a large amount of memory.
-{: ts_causes}
+{: tsCauses}
 
 You can resolve this issue by changing the `resource auto-refresh` time interval to `60` for the Kubernetes dashboard.
-{: ts_resolve}
+{: tsResolve}
 
 
 ## Changing the resource auto refresh time interval from the Kubernetes dashboard
