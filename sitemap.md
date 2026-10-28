@@ -471,6 +471,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
+
     * [27 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2726)
 
         * ALB OAuth Proxy cluster add-on patch updates.
