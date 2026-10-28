@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-06-30"
+lastupdated: "2026-10-28"
 
 
 keywords: kubernetes, containers, containers
@@ -30,6 +30,7 @@ When a new [Kubernetes version](/docs/containers?topic=containers-cs_versions) i
 {: #cis-benchmark-versions}
 
 Use the list to find CIS Kubernetes Benchmark results for supported versions.
+
 
 - [Version 1.36](/docs/containers?topic=containers-cis-benchmark-136)
 - [Version 1.35](/docs/containers?topic=containers-cis-benchmark-135)
