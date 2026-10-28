@@ -8768,6 +8768,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Resolving cluster master upgrade issues: Migration in progress error](/docs/containers?topic=containers-ts-resource-migration#ts-resource-migration)
 
+[Why is my Classic-to-VPC migration stuck in global resource migration?](/docs/containers?topic=containers-ts-migrate-lb-quota#ts-migrate-lb-quota)
+
 [Debugging common CLI issues with clusters](/docs/containers?topic=containers-ts_clis#ts_clis)
 
 * [Firewall prevents running CLI commands](/docs/containers?topic=containers-ts_clis#ts_firewall_clis)
@@ -9293,6 +9295,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Classic clusters](/docs/containers?topic=containers-ingress_subdomain#no-ingress-subdomain-classic)
 
     * [VPC clusters](/docs/containers?topic=containers-ingress_subdomain#no-ingress-subdomain-vpc)
+
+[Why do migrated custom ALBs use NGINX instead of Traefik?](/docs/containers?topic=containers-ts-migrate-alb-traefik#ts-migrate-alb-traefik)
 
 [Why does no Ingress subdomain exist after I create clusters of the same or similar name?](/docs/containers?topic=containers-cs_rate_limit#cs_rate_limit)
 
