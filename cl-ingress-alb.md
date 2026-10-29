@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-10-21"
+lastupdated: "2026-10-29"
 
 
 keywords: change log, version history, Ingress ALB
@@ -25,8 +25,34 @@ Review the version history for Ingress ALB.
 {: shortdesc}
 
 
+## Version 3.7.16
+{: #cl-ingress-alb-3.7.16}
+
+
+### 29 October 2026, Version 3.7.16 - 3.7.16_382127996_iks
+{: #cl-ingress-alb-3716_382127996_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
+## Version 3.7.15
+{: #cl-ingress-alb-3.7.15}
+
+
+### 29 October 2026, Version 3.7.15 - 3.7.15_382127968_iks
+{: #cl-ingress-alb-3715_382127968_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
+
+
 ## Version 3.7.14
 {: #cl-ingress-alb-3.7.14}
+
+
+### 29 October 2026, Version 3.7.14 - 3.7.14_382121212_iks
+{: #cl-ingress-alb-3714_382121212_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 20 October 2026, Version 3.7.14 - 3.7.14_379840236_iks
@@ -37,6 +63,12 @@ Review the version history for Ingress ALB.
 
 ## Version 3.7.13
 {: #cl-ingress-alb-3.7.13}
+
+
+### 29 October 2026, Version 3.7.13 - 3.7.13_382110373_iks
+{: #cl-ingress-alb-3713_382110373_iks}
+
+- No feature changes. Updates dependencies and base images to the latest versions.
 
 
 ### 20 October 2026, Version 3.7.13 - 3.7.13_379020891_iks
@@ -373,6 +405,13 @@ Review the version history for Ingress ALB.
 
 ## Version 1.15.10
 {: #cl-ingress-alb-1.15.10}
+
+
+### 29 October 2026, Version 1.15.10 - 1.15.10_381939429_iks
+{: #cl-ingress-alb-11510_381939429_iks}
+
+- Resolves the following CVEs: [CVE-2026-107928](https://nvd.nist.gov/vuln/detail/cve-2026-107928){: external}, [CVE-2026-107929](https://nvd.nist.gov/vuln/detail/cve-2026-107929){: external}, [CVE-2026-86409](https://nvd.nist.gov/vuln/detail/cve-2026-86409){: external}, [CVE-2026-86410](https://nvd.nist.gov/vuln/detail/cve-2026-86410){: external}, [CVE-2026-86411](https://nvd.nist.gov/vuln/detail/cve-2026-86411){: external}, [CVE-2026-86412](https://nvd.nist.gov/vuln/detail/cve-2026-86412){: external}, [CVE-2026-86413](https://nvd.nist.gov/vuln/detail/cve-2026-86413){: external}, [CVE-2026-86414](https://nvd.nist.gov/vuln/detail/cve-2026-86414){: external}, [CVE-2026-86415](https://nvd.nist.gov/vuln/detail/cve-2026-86415){: external}, [CVE-2026-87861](https://nvd.nist.gov/vuln/detail/cve-2026-87861){: external}, [CVE-2026-87862](https://nvd.nist.gov/vuln/detail/cve-2026-87862){: external}, [CVE-2026-87863](https://nvd.nist.gov/vuln/detail/cve-2026-87863){: external}, [CVE-2026-87864](https://nvd.nist.gov/vuln/detail/cve-2026-87864){: external}, [CVE-2026-87865](https://nvd.nist.gov/vuln/detail/cve-2026-87865){: external}, [CVE-2026-87866](https://nvd.nist.gov/vuln/detail/cve-2026-87866){: external}, [CVE-2026-92386](https://nvd.nist.gov/vuln/detail/cve-2026-92386){: external}, [CVE-2026-92387](https://nvd.nist.gov/vuln/detail/cve-2026-92387){: external}, [CVE-2026-92388](https://nvd.nist.gov/vuln/detail/cve-2026-92388){: external}, [CVE-2026-92389](https://nvd.nist.gov/vuln/detail/cve-2026-92389){: external}, [CVE-2026-92390](https://nvd.nist.gov/vuln/detail/cve-2026-92390){: external}, [CVE-2026-92391](https://nvd.nist.gov/vuln/detail/cve-2026-92391){: external}, [CVE-2026-92392](https://nvd.nist.gov/vuln/detail/cve-2026-92392){: external}, [CVE-2026-94265](https://nvd.nist.gov/vuln/detail/cve-2026-94265){: external}, [CVE-2026-94266](https://nvd.nist.gov/vuln/detail/cve-2026-94266){: external}, and [CVE-2026-107891](https://nvd.nist.gov/vuln/detail/cve-2026-107891){: external}.
+- Updates Go to version `1.26`.
 
 
 ### 20 October 2026, Version 1.15.10 - 1.15.10_379572403_iks
