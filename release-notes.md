@@ -26,18 +26,23 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
-
-
+## October 2026
+{: #containers-oct26}
 
 
 ### 29 October 2026
 {: #containers-oct2926}
 {: release-note}
 
+
+New! Migrate Classic clusters to VPC by using the migration wizard.
+:   Use the migration wizard to move your {{site.data.keyword.containerlong_notm}} workloads from Classic infrastructure to VPC. VPC provides improved security, networking flexibility, and better performance, including private worker nodes, VPC Application Load Balancer integration with Ingress, and encrypted VPC Block Storage. For more information, see [Migrating from Classic to VPC](/docs/containers?topic=containers-vpc-migrate-overview).
+
+
+
+
 New! VPC bare metal worker node flavors are available for {{site.data.keyword.containerlong_notm}} version 1.35 with Ubuntu 24.
 :   New VPC bare metal worker node flavors are now available in select regions and provide high-performance bare metal infrastructure for demanding workloads. For more information, see [VPC flavors](/docs/containers?topic=containers-vpc-flavors).
-
-
 
 
 

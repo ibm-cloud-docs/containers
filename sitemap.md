@@ -446,6 +446,45 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
 
+## Classic to VPC migration
+{: #sitemap_classic_to_vpc_migration}
+
+
+[Migrating Classic clusters to VPC overview](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview)
+
+* [Why should I migrate from Classic to VPC?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-why)
+
+* [What do I need before I start?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-prereqs)
+
+* [Which clusters are eligible for migration?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-cluster)
+
+* [What is migrated automatically and what is not?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations)
+
+    * [Which add-ons are migrated?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-addons)
+
+    * [Which network policies are migrated?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-networking)
+
+    * [What happens to my storage?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-storage)
+
+    * [What workload considerations should I know about?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-workloads)
+
+* [How does the migration work?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-how)
+
+* [What are the migration steps?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-phases)
+
+* [What happens to my IAM and access configuration?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-iam)
+
+* [How does BRS copy my data?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-brs)
+
+* [How do I cut over traffic and delete the Classic cluster?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-cutover)
+
+* [Is my Classic cluster affected while migration is in progress?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-classic-impact)
+
+* [Does migration affect my pricing or license?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-pricing)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-next)
+
+
 ## Important notices
 {: #sitemap_important_notices}
 
@@ -471,7 +510,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
+* [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
+
     * [29 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2926)
+
+        * New! Migrate Classic clusters to VPC by using the migration wizard.
 
         * New! VPC bare metal worker node flavors are available for {{site.data.keyword.containerlong_notm}} version 1.35 with Ubuntu 24.
 
@@ -2159,6 +2202,25 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 
+## Classic to VPC migration
+{: #sitemap_classic_to_vpc_migration1}
+
+
+[Migration wizard quickstart guide](/docs/containers?topic=containers-vpc-migrate-quickstart#vpc-migrate-quickstart)
+
+* [Before you begin](/docs/containers?topic=containers-vpc-migrate-quickstart#vpc-migrate-quickstart-prereqs)
+
+* [Step 1: Open the migration wizard](/docs/containers?topic=containers-vpc-migrate-quickstart#vpc-migrate-quickstart-open)
+
+    * [Open the wizard from the Migration hub](/docs/containers?topic=containers-vpc-migrate-quickstart#vpc-migrate-quickstart-hub)
+
+    * [Open the wizard from the Containers page](/docs/containers?topic=containers-vpc-migrate-quickstart#vpc-migrate-quickstart-containers)
+
+* [Step 2: Follow the migration wizard](/docs/containers?topic=containers-vpc-migrate-quickstart#vpc-migrate-quickstart-wizard)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-quickstart#vpc-migrate-quickstart-next)
+
+
 ## Before you begin
 {: #sitemap_before_you_begin}
 
@@ -2599,6 +2661,353 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Removing {{site.data.keyword.satelliteshort}} worker nodes or clusters](/docs/containers?topic=containers-remove#satcluster-rm)
 
 * [Next steps](/docs/containers?topic=containers-remove#cluster-remove-next-steps)
+
+
+## Migrate clusters from Classic to VPC
+{: #sitemap_migrate_clusters_from_classic_to_vpc}
+
+
+
+### Migration wizard
+{: #sitemap_migration_wizard}
+
+
+[Migration wizard overview](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview)
+
+* [Why should I migrate from Classic to VPC?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-why)
+
+* [What do I need before I start?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-prereqs)
+
+* [Which clusters are eligible for migration?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-cluster)
+
+* [What is migrated automatically and what is not?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations)
+
+    * [Which add-ons are migrated?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-addons)
+
+    * [Which network policies are migrated?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-networking)
+
+    * [What happens to my storage?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-storage)
+
+    * [What workload considerations should I know about?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-limitations-workloads)
+
+* [How does the migration work?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-how)
+
+* [What are the migration steps?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-phases)
+
+* [What happens to my IAM and access configuration?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-iam)
+
+* [How does BRS copy my data?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-brs)
+
+* [How do I cut over traffic and delete the Classic cluster?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-cutover)
+
+* [Is my Classic cluster affected while migration is in progress?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-classic-impact)
+
+* [Does migration affect my pricing or license?](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-faq-pricing)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-overview#vpc-migrate-overview-next)
+
+[Assessing your Classic cluster](/docs/containers?topic=containers-vpc-migrate-assess#vpc-migrate-assess)
+
+* [Before you begin](/docs/containers?topic=containers-vpc-migrate-assess#vpc-migrate-assess-prereqs)
+
+* [Generate VPC metadata](/docs/containers?topic=containers-vpc-migrate-assess#vpc-migrate-assess-generate)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-assess&interface=ui#vpc-migrate-assess-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-assess&interface=cli#vpc-migrate-assess-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-assess&interface=api#vpc-migrate-assess-api)
+
+* [Review add-on compatibility](/docs/containers?topic=containers-vpc-migrate-assess&interface=api#vpc-migrate-assess-addons)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-assess&interface=ui#vpc-migrate-assess-addons-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-assess&interface=cli#vpc-migrate-assess-addons-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-assess&interface=api#vpc-migrate-assess-addons-api)
+
+* [Review persistent storage](/docs/containers?topic=containers-vpc-migrate-assess&interface=api#vpc-migrate-assess-storage)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-assess&interface=ui#vpc-migrate-assess-storage-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-assess&interface=cli#vpc-migrate-assess-storage-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-assess&interface=api#vpc-migrate-assess-storage-api)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-assess&interface=api#vpc-migrate-assess-next)
+
+[Planning your VPC environment](/docs/containers?topic=containers-vpc-migrate-plan#vpc-migrate-plan)
+
+* [Step 1: Confirm the VPC and subnets](/docs/containers?topic=containers-vpc-migrate-plan#vpc-migrate-plan-vpc)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-plan&interface=ui#vpc-migrate-plan-vpc-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-plan&interface=cli#vpc-migrate-plan-vpc-cli)
+
+* [Step 2: Confirm worker pool flavors](/docs/containers?topic=containers-vpc-migrate-plan&interface=cli#vpc-migrate-plan-flavors)
+
+* [Step 3: Review your network policies](/docs/containers?topic=containers-vpc-migrate-plan&interface=cli#vpc-migrate-plan-network-policies)
+
+* [Step 4: Plan private connectivity](/docs/containers?topic=containers-vpc-migrate-plan&interface=cli#vpc-migrate-plan-connectivity)
+
+* [Step 5: Plan the Ingress migration](/docs/containers?topic=containers-vpc-migrate-plan&interface=cli#vpc-migrate-plan-ingress)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-plan&interface=cli#vpc-migrate-plan-next)
+
+[Creating your target VPC cluster](/docs/containers?topic=containers-vpc-migrate-create#vpc-migrate-create)
+
+* [Before you begin](/docs/containers?topic=containers-vpc-migrate-create#vpc-migrate-create-prereqs)
+
+* [Create the VPC cluster](/docs/containers?topic=containers-vpc-migrate-create#vpc-migrate-create-cluster)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-create&interface=ui#vpc-migrate-create-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-create&interface=cli#vpc-migrate-create-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-create&interface=api#vpc-migrate-create-api)
+
+* [Monitor cluster provisioning](/docs/containers?topic=containers-vpc-migrate-create&interface=api#vpc-migrate-create-wait)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-create&interface=ui#vpc-migrate-create-wait-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-create&interface=cli#vpc-migrate-create-wait-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-create&interface=api#vpc-migrate-create-wait-api)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-create&interface=api#vpc-migrate-create-next)
+
+[Monitoring global resource migration](/docs/containers?topic=containers-vpc-migrate-global-resources#vpc-migrate-global-resources)
+
+* [Before you begin](/docs/containers?topic=containers-vpc-migrate-global-resources#vpc-migrate-global-prereqs)
+
+* [What is migrated automatically](/docs/containers?topic=containers-vpc-migrate-global-resources#vpc-migrate-global-auto)
+
+* [Monitor migration status](/docs/containers?topic=containers-vpc-migrate-global-resources#vpc-migrate-global-monitor)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-global-resources&interface=ui#vpc-migrate-global-monitor-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-global-resources&interface=cli#vpc-migrate-global-monitor-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-global-resources&interface=api#vpc-migrate-global-monitor-api)
+
+* [Understanding network policy migration](/docs/containers?topic=containers-vpc-migrate-global-resources&interface=api#vpc-migrate-global-network-policies)
+
+* [Troubleshoot a failed sub-operation](/docs/containers?topic=containers-vpc-migrate-global-resources&interface=api#vpc-migrate-global-troubleshoot)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-global-resources&interface=ui#vpc-migrate-global-troubleshoot-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-global-resources&interface=cli#vpc-migrate-global-troubleshoot-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-global-resources&interface=api#vpc-migrate-global-troubleshoot-api)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-global-resources&interface=api#vpc-migrate-global-next)
+
+[Migrating workloads](/docs/containers?topic=containers-vpc-migrate-workloads#vpc-migrate-workloads)
+
+* [Before you begin](/docs/containers?topic=containers-vpc-migrate-workloads#vpc-migrate-workloads-prereqs)
+
+* [Workload migration prerequisites](/docs/containers?topic=containers-vpc-migrate-workloads#vpc-migrate-workloads-prereqs-workload)
+
+* [Preparing a worker pool for BRS connectors](/docs/containers?topic=containers-vpc-migrate-workloads#vpc-migrate-workloads-prereqs-brs-pool)
+
+    * [Option 1: Create a dedicated worker pool (recommended)](/docs/containers?topic=containers-vpc-migrate-workloads#vpc-migrate-brs-pool-dedicated)
+
+    * [Option 2: Use an existing worker pool](/docs/containers?topic=containers-vpc-migrate-workloads#vpc-migrate-brs-pool-existing)
+
+* [Step 1: Select a backup and recovery instance](/docs/containers?topic=containers-vpc-migrate-workloads#vpc-migrate-workloads-brs)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-brs-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-workloads&interface=cli#vpc-migrate-workloads-brs-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-brs-api)
+
+* [Step 2: List namespaces](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-namespaces)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-ns-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-workloads&interface=cli#vpc-migrate-workloads-ns-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-ns-api)
+
+* [Step 3: Create a migration plan](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-plan)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-plan-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-workloads&interface=cli#vpc-migrate-workloads-plan-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-plan-api)
+
+* [Step 4: Review the migration plan](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-review-plan)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-review-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-workloads&interface=cli#vpc-migrate-workloads-review-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-review-api)
+
+* [Step 5: Start workload migration](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-start)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-start-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-workloads&interface=cli#vpc-migrate-workloads-start-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-start-api)
+
+* [Step 6: Verify workloads](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-verify)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-verify-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-workloads&interface=cli#vpc-migrate-workloads-verify-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-verify-api)
+
+* [Re-running a migration](/docs/containers?topic=containers-vpc-migrate-workloads&interface=api#vpc-migrate-workloads-rerun)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-rerun-ui)
+
+* [Migrating cluster-scoped resources](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-cluster-scoped)
+
+    * [Step 1: Log in to the Classic cluster](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-cluster-scoped-login-classic)
+
+    * [Step 2: Discover cluster-scoped resource types](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-cluster-scoped-discover)
+
+    * [Step 3: Identify and export resources](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-cluster-scoped-export)
+
+    * [Step 4: Log in to the target VPC cluster](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-cluster-scoped-login-vpc)
+
+    * [Step 5: Apply manifests to the target VPC cluster](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-cluster-scoped-apply)
+
+    * [Step 6: Verify resource creation](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-cluster-scoped-verify)
+
+* [Cleaning up Backup and Recovery Service (BRS) registrations](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-brs-cleanup)
+
+    * [Step 1: Delete the protection group in the BRS dashboard](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-brs-cleanup-protection-group)
+
+    * [Step 2: Deregister the data source in the BRS dashboard](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-brs-cleanup-deregister)
+
+    * [Step 3: Remove the connector in the BRS dashboard](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-brs-cleanup-remove-connector)
+
+    * [Step 4: Uninstall the BRS Helm chart from the cluster](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-brs-cleanup-helm)
+
+    * [Step 5: Delete BRS-labeled namespaces and connector namespace](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-brs-cleanup-namespaces)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-workloads&interface=ui#vpc-migrate-workloads-next)
+
+[Cutting over to VPC](/docs/containers?topic=containers-vpc-migrate-cutover#vpc-migrate-cutover)
+
+* [Before you begin](/docs/containers?topic=containers-vpc-migrate-cutover#vpc-migrate-cutover-prereqs)
+
+* [Step 1: Perform a final data sync](/docs/containers?topic=containers-vpc-migrate-cutover#vpc-migrate-cutover-sync)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-cutover&interface=ui#vpc-migrate-cutover-sync-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-cutover&interface=cli#vpc-migrate-cutover-sync-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-sync-api)
+
+* [Step 2: Get the VPC cluster Ingress ALB addresses](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-alb)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-cutover&interface=ui#vpc-migrate-cutover-alb-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-cutover&interface=cli#vpc-migrate-cutover-alb-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-alb-api)
+
+* [Step 3: Redirect DNS](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-dns)
+
+    * [Transfer custom domains](/docs/containers?topic=containers-vpc-migrate-cutover&interface=ui#vpc-migrate-cutover-dns-domains)
+
+* [Step 4: Validate workloads](/docs/containers?topic=containers-vpc-migrate-cutover&interface=ui#vpc-migrate-cutover-validate)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-cutover&interface=ui#vpc-migrate-cutover-validate-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-cutover&interface=cli#vpc-migrate-cutover-validate-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-validate-api)
+
+* [Step 5: Stabilization period](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-stabilize)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-cutover&interface=ui#vpc-migrate-cutover-stabilize-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-cutover&interface=cli#vpc-migrate-cutover-stabilize-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-stabilize-api)
+
+* [Step 6: Restore DNS TTLs](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-ttl)
+
+* [Step 7: Finish migration](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-finish)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-cutover&interface=api#vpc-migrate-cutover-next)
+
+[Deleting Classic clusters](/docs/containers?topic=containers-vpc-migrate-decommission#vpc-migrate-decommission)
+
+* [Before you begin](/docs/containers?topic=containers-vpc-migrate-decommission#vpc-migrate-decommission-prereqs)
+
+* [Step 1: Verify no active traffic on the Classic cluster](/docs/containers?topic=containers-vpc-migrate-decommission#vpc-migrate-decommission-verify)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-decommission&interface=ui#vpc-migrate-decommission-verify-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-decommission&interface=cli#vpc-migrate-decommission-verify-cli)
+
+* [Step 2: Remove any remaining Classic-specific resources](/docs/containers?topic=containers-vpc-migrate-decommission&interface=cli#vpc-migrate-decommission-cleanup)
+
+* [Step 3: Delete the Classic cluster](/docs/containers?topic=containers-vpc-migrate-decommission&interface=cli#vpc-migrate-decommission-delete)
+
+    * [From the console](/docs/containers?topic=containers-vpc-migrate-decommission&interface=ui#vpc-migrate-decommission-delete-ui)
+
+    * [From the CLI](/docs/containers?topic=containers-vpc-migrate-decommission&interface=cli#vpc-migrate-decommission-delete-cli)
+
+    * [From the API](/docs/containers?topic=containers-vpc-migrate-decommission&interface=api#vpc-migrate-decommission-delete-api)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-decommission&interface=api#vpc-migrate-decommission-next)
+
+[Classic-to-VPC concept mapping](/docs/containers?topic=containers-vpc-migrate-concept-map#vpc-migrate-concept-map)
+
+* [Networking](/docs/containers?topic=containers-vpc-migrate-concept-map#vpc-migrate-concept-map-networking)
+
+* [Load balancers](/docs/containers?topic=containers-vpc-migrate-concept-map#vpc-migrate-concept-map-lb)
+
+* [Storage](/docs/containers?topic=containers-vpc-migrate-concept-map#vpc-migrate-concept-map-storage)
+
+    * [Storage class name mapping](/docs/containers?topic=containers-vpc-migrate-concept-map#vpc-migrate-concept-map-storage-classes)
+
+* [Regions and zones](/docs/containers?topic=containers-vpc-migrate-concept-map#vpc-migrate-concept-map-regions)
+
+* [Cluster infrastructure](/docs/containers?topic=containers-vpc-migrate-concept-map#vpc-migrate-concept-map-cluster)
+
+* [IAM and access](/docs/containers?topic=containers-vpc-migrate-concept-map#vpc-migrate-concept-map-iam)
+
+* [CLI commands](/docs/containers?topic=containers-vpc-migrate-concept-map#vpc-migrate-concept-map-cli)
+
+
+### Manual migration
+{: #sitemap_manual_migration}
+
+
+[Migrating manually without the wizard](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual)
+
+* [Step 1: Assess your Classic environment](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-assess)
+
+* [Step 2: Create a VPC environment](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-vpc-env)
+
+* [Step 3: Configure VPC security groups](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-sg)
+
+* [Step 4: Create the VPC cluster](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-create)
+
+* [Step 5: Set up your deployment and replicate data](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-deploy)
+
+* [Step 6: Configure load balancers](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-lb)
+
+* [Step 7: Validate and test](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-validate)
+
+* [Step 8: Update DNS and routing](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-dns)
+
+* [Step 9: Cut over to VPC](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-cutover)
+
+* [Step 10: Monitor and optimize](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-monitor)
+
+* [Next steps](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-next)
 
 
 ## Security and access
