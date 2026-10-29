@@ -471,11 +471,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
-* [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
-
     * [29 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2926)
 
         * New! VPC bare metal worker node flavors are available for {{site.data.keyword.containerlong_notm}} version 1.35 with Ubuntu 24.
+
+        * IBM Object CSI Driver cluster add-on patch updates.
 
     * [27 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2726)
 
@@ -7115,16 +7115,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [21 January 2025, Version 1.26 - 1.26.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1268)
 
-* [Unsupported: Version 1.24](/docs/containers?topic=containers-cl-add-ons-istio#v124)
-
-    * [26 September 2025, Version 1.24.6](/docs/containers?topic=containers-cl-add-ons-istio#1246)
-
-* [Unsupported: Version 1.23](/docs/containers?topic=containers-cl-add-ons-istio#v123)
-
-    * [29 April 2025, Version 1.23.6](/docs/containers?topic=containers-cl-add-ons-istio#1236)
-
-    * [4 March 2025, Version 1.23.5](/docs/containers?topic=containers-cl-add-ons-istio#1235)
-
 * [Unsupported: Version 1.25](/docs/containers?topic=containers-cl-add-ons-istio#v125)
 
     * [20 September 2024, Version 1.23.1](/docs/containers?topic=containers-cl-add-ons-istio#1231)
@@ -7705,6 +7695,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-1.0)
 
+    * [29 October 2026, Version 1.0 - v1.0.31_379588168](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1031_379588168)
+
     * [15 October 2026, Version 1.0 - v1.0.30_379049185](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1030_379049185)
 
     * [25 September 2026, Version 1.0 - v1.0.29_373392591](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver#cl-add-ons-ibm-object-csi-driver-v1029_373392591)
@@ -7840,8 +7832,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [03 April 2024, Version 2.0.0 - 2.0.0_2156](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2156)
 
     * [16 January 2024, Version 2.0.0 - 2.0.0_2063](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_2063)
-
-    * [25 October 2023, Version 2.0.0 - 2.0.0_1901](/docs/containers?topic=containers-cl-add-ons-alb-oauth-proxy#cl-add-ons-alb-oauth-proxy-200_1901)
 
 [Headlamp add-on version change log](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp)
 

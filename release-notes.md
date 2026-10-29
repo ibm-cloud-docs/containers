@@ -26,8 +26,6 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
-## October 2026
-{: #containers-oct26}
 
 
 
@@ -42,6 +40,9 @@ New! VPC bare metal worker node flavors are available for {{site.data.keyword.co
 
 
 
+
+IBM Object CSI Driver cluster add-on patch updates.
+:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-ibm-object-csi-driver).
 
 
 
@@ -1093,6 +1094,7 @@ IBM Storage Operator cluster add-on patch updates.
 
 VPC File CSI Driver cluster add-on patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver).
+
 
 
 ### 12 May 2026
