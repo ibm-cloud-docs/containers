@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-28"
+lastupdated: "2026-10-29"
 
 
 keywords: containers
@@ -472,6 +472,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
+
+    * [29 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2926)
+
+        * New! VPC bare metal worker node flavors are available for {{site.data.keyword.containerlong_notm}} version 1.35 with Ubuntu 24.
 
     * [27 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2726)
 
