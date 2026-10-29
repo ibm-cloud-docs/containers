@@ -38,6 +38,9 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 New! Migrate Classic clusters to VPC by using the migration wizard.
 :   Use the migration wizard to move your {{site.data.keyword.containerlong_notm}} workloads from Classic infrastructure to VPC. VPC provides improved security, networking flexibility, and better performance, including private worker nodes, VPC Application Load Balancer integration with Ingress, and encrypted VPC Block Storage. For more information, see [Migrating from Classic to VPC](/docs/containers?topic=containers-vpc-migrate-overview).
 
+CLI version 1.0.901 is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 
 
 

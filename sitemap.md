@@ -516,6 +516,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * New! Migrate Classic clusters to VPC by using the migration wizard.
 
+        * CLI version 1.0.901 is available.
+
         * New! VPC bare metal worker node flavors are available for {{site.data.keyword.containerlong_notm}} version 1.35 with Ubuntu 24.
 
         * IBM Object CSI Driver cluster add-on patch updates.
@@ -7121,6 +7123,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [`ibmcloud ks zone rm`](/docs/containers?topic=containers-kubernetes-service-cli#zone-rm-cli)
 
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
+
+* [Version v1.0.901](/docs/containers?topic=containers-cs_cli_changelog#cli-01901)
 
 * [Version v1.0.899](/docs/containers?topic=containers-cs_cli_changelog#cli-01899)
 
