@@ -481,6 +481,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * IBM Object CSI Driver cluster add-on patch updates.
 
+        * {{site.data.keyword.containerlong_notm}} master fix packs are available.
+
     * [27 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2726)
 
         * ALB OAuth Proxy cluster add-on patch updates.
@@ -5622,6 +5624,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+* [29 October 2026, Master fix pack 1.36.5_1537](/docs/containers?topic=containers-changelog_136#cl-boms_master-1365_1537_M)
+
 * [27 October 2026, Worker node fix pack 1.36.5_1539](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1539_W)
 
 * [20 October 2026, Worker node fix pack 1.36.5_1538](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1538_W)
@@ -5710,6 +5714,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+* [29 October 2026, Master fix pack 1.35.9_1548](/docs/containers?topic=containers-changelog_135#cl-boms_master-1359_1548_M)
 
 * [27 October 2026, Worker node fix pack 1.35.9_1550](/docs/containers?topic=containers-changelog_135#cl-boms-1359_1550_W)
 
@@ -5823,6 +5829,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+* [29 October 2026, Master fix pack 1.34.12_1570](/docs/containers?topic=containers-changelog_134#cl-boms_master-13412_1570_M)
 
 * [27 October 2026, Worker node fix pack 1.34.12_1572](/docs/containers?topic=containers-changelog_134#cl-boms-13412_1572_W)
 

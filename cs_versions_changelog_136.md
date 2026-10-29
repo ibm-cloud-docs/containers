@@ -3,7 +3,7 @@
 copyright:
   years: 2026, 2026
 
-lastupdated: "2026-10-28"
+lastupdated: "2026-10-29"
 
 
 keywords: change log, version history, 1.36
@@ -39,6 +39,36 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.36
 {: #136_components}
+
+
+## 29 October 2026, Master fix pack 1.36.5_1537
+{: #cl-boms_master-1365_1537_M}
+
+The following list shows the components that are in the master fix pack 1.36.5_1537. Master patch updates are applied automatically.
+{: shortdesc}
+
+CoreDNS v1.14.7
+:   See the [CoreDNS release notes](https://coredns.io/tags/notes/){: external}.
+
+
+etcd v3.5.34
+:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
+
+
+IBM Cloud Controller Manager v1.36.5-2
+:   New version contains updates and security fixes.
+
+
+IBM Cloud File Storage for Classic plug-in and monitor v458
+:   New version contains updates and security fixes.
+
+
+Key Management Service provider 2.10.31
+:   New version contains updates and security fixes.
+
+
+Load balancer and load balancer monitor for IBM Cloud Provider 3563
+:   New version contains updates and security fixes.
 
 
 ## 27 October 2026, Worker node fix pack 1.36.5_1539
