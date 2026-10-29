@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-10-28"
+lastupdated: "2026-10-29"
 
 
 keywords: change log, version history, 1.34
@@ -47,6 +47,32 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.34
 {: #134_components}
+
+
+## 29 October 2026, Master fix pack 1.34.12_1570
+{: #cl-boms_master-13412_1570_M}
+
+The following list shows the components that are in the master fix pack 1.34.12_1570. Master patch updates are applied automatically.
+{: shortdesc}
+
+etcd v3.5.34
+:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
+
+
+IBM Cloud Controller Manager v1.34.12-2
+:   New version contains updates and security fixes.
+
+
+IBM Cloud File Storage for Classic plug-in and monitor v458
+:   New version contains updates and security fixes.
+
+
+Key Management Service provider 2.10.31
+:   New version contains updates and security fixes.
+
+
+Load balancer and load balancer monitor for IBM Cloud Provider 3563
+:   New version contains updates and security fixes.
 
 
 ## 27 October 2026, Worker node fix pack 1.34.12_1572
