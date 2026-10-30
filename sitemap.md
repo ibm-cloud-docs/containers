@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-29"
+lastupdated: "2026-10-30"
 
 
 keywords: containers
@@ -6617,6 +6617,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`ibmcloud ks vni attach help`](/docs/containers?topic=containers-kubernetes-service-cli#vni-attach-help-cli)
 
+    * [`ibmcloud ks vni attach virtual`](/docs/containers?topic=containers-kubernetes-service-cli#vni-attach-virtual-cli)
+
     * [`ibmcloud ks vni detach`](/docs/containers?topic=containers-kubernetes-service-cli#vni-detach-cli)
 
     * [`ibmcloud ks vni help`](/docs/containers?topic=containers-kubernetes-service-cli#vni-help-cli)
@@ -7694,10 +7696,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [10 January 2024, Version 1.2.5_107](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.2.5_107_is_file_relnote)
 
     * [27 November 2023, Version 1.2.3_97](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.2.3_97_is_file_relnote)
-
-    * [31 October 2023, Version version 1.2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#0120_is_file)
-
-* [Version 1.1](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#011_is_file)
 
     * [27 November 2023, Version 1.1.10_93](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#1.1.10_93_is_file_relnote)
 
