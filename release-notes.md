@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-29"
+lastupdated: "2026-10-30"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -28,6 +28,14 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## October 2026
 {: #containers-oct26}
+
+### 30 October 2026
+{: #containers-oct3026}
+{: release-note}
+
+CLI version 1.0.904 is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
+
 
 ### 29 October 2026
 {: #containers-oct2926}
