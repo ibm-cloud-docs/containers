@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-10-30"
+lastupdated: "2026-11-02"
 
 
 keywords: containers
@@ -6878,6 +6878,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [`setKubernetesClusterTrustedProfile`](/docs/containers?topic=containers-cs-graphql-api#setkubernetesclustertrustedprofile)
 
+    * [`setResourceGroupDefaultTrustedProfile`](/docs/containers?topic=containers-cs-graphql-api#setresourcegroupdefaulttrustedprofile)
+
     * [`startKubernetesWorkloadMigration`](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigration)
 
     * [`updateSatelliteLocation`](/docs/containers?topic=containers-cs-graphql-api#updatesatellitelocation)
@@ -6947,8 +6949,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [SecurityGroup](/docs/containers?topic=containers-cs-graphql-api#securitygroup)
 
     * [SetKubernetesClusterTrustedProfilePayload](/docs/containers?topic=containers-cs-graphql-api#setkubernetesclustertrustedprofilepayload)
-
-    * [SetResourceGroupDefaultTrustedProfileInput](/docs/containers?topic=containers-cs-graphql-api#setresourcegroupdefaulttrustedprofileinput)
 
     * [SetResourceGroupDefaultTrustedProfilePayload](/docs/containers?topic=containers-cs-graphql-api#setresourcegroupdefaulttrustedprofilepayload)
 
@@ -7047,6 +7047,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [RemoveVirtualNetworkInterfaceFromNodeInput](/docs/containers?topic=containers-cs-graphql-api#removevirtualnetworkinterfacefromnodeinput)
 
     * [SetKubernetesClusterTrustedProfileInput](/docs/containers?topic=containers-cs-graphql-api#setkubernetesclustertrustedprofileinput)
+
+    * [SetResourceGroupDefaultTrustedProfileInput](/docs/containers?topic=containers-cs-graphql-api#setresourcegroupdefaulttrustedprofileinput)
 
     * [StartKubernetesWorkloadMigrationInput](/docs/containers?topic=containers-cs-graphql-api#startkubernetesworkloadmigrationinput)
 
