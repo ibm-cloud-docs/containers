@@ -3,7 +3,7 @@
 copyright:
   years: 2026, 2026
 
-lastupdated: "2026-10-29"
+lastupdated: "2026-10-30"
 
 
 keywords: change log, version history, 1.36
@@ -78,11 +78,11 @@ The following list shows the components included in the worker node fix pack 1.3
 {: shortdesc}
 
 UBUNTU 24 (VPC) 6.8.0-146-generic
-:   Resolves the following CVEs: [USN-8944-1](https://ubuntu.com/security/notices/usn-8944-1){: external}, [USN-8947-1](https://ubuntu.com/security/notices/usn-8947-1){: external}, [CVE-2026-11386](https://nvd.nist.gov/vuln/detail/cve-2026-11386){: external}, [CVE-2026-12391](https://nvd.nist.gov/vuln/detail/cve-2026-12391){: external}, [CVE-2026-85091](https://nvd.nist.gov/vuln/detail/cve-2026-85091){: external}, and [CVE-2026-9494](https://nvd.nist.gov/vuln/detail/cve-2026-9494){: external}.
+:   Resolves the following CVEs: [USN-8944-1](https://ubuntu.com/security/notices/USN-8944-1){: external}, [USN-8947-1](https://ubuntu.com/security/notices/USN-8947-1){: external}, [CVE-2026-11386](https://nvd.nist.gov/vuln/detail/cve-2026-11386){: external}, [CVE-2026-12391](https://nvd.nist.gov/vuln/detail/cve-2026-12391){: external}, [CVE-2026-85091](https://nvd.nist.gov/vuln/detail/cve-2026-85091){: external}, and [CVE-2026-9494](https://nvd.nist.gov/vuln/detail/cve-2026-9494){: external}.
 
 
 UBUNTU 24 (Classic) 6.8.0-146-generic
-:   Resolves the following CVEs: [USN-8944-1](https://ubuntu.com/security/notices/usn-8944-1){: external}, [USN-8947-1](https://ubuntu.com/security/notices/usn-8947-1){: external}, [CVE-2026-11386](https://nvd.nist.gov/vuln/detail/cve-2026-11386){: external}, [CVE-2026-12391](https://nvd.nist.gov/vuln/detail/cve-2026-12391){: external}, [CVE-2026-85091](https://nvd.nist.gov/vuln/detail/cve-2026-85091){: external}, and [CVE-2026-9494](https://nvd.nist.gov/vuln/detail/cve-2026-9494){: external}.
+:   Resolves the following CVEs: [USN-8944-1](https://ubuntu.com/security/notices/USN-8944-1){: external}, [USN-8947-1](https://ubuntu.com/security/notices/USN-8947-1){: external}, [CVE-2026-11386](https://nvd.nist.gov/vuln/detail/cve-2026-11386){: external}, [CVE-2026-12391](https://nvd.nist.gov/vuln/detail/cve-2026-12391){: external}, [CVE-2026-85091](https://nvd.nist.gov/vuln/detail/cve-2026-85091){: external}, and [CVE-2026-9494](https://nvd.nist.gov/vuln/detail/cve-2026-9494){: external}.
 
 
 Kubernetes 1.36.5
@@ -94,11 +94,11 @@ containerd 2.2.10
 
 
 HAProxy a0d552a2759d3396f874ee765dc912055898f8bb
-:   
+:   New version contains updates and security fixes.
 
 
 GPU Device Plug-in and Installer 233d8fb3566b2f7a387eedffd104ad0389757cfb
-:   
+:   New version contains updates and security fixes.
 
 
 ## 20 October 2026, Worker node fix pack 1.36.5_1538

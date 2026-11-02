@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-29"
+lastupdated: "2026-11-02"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -26,15 +26,29 @@ Use the release notes to learn about the latest changes to the documentation tha
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status).
 {: tip}
 
+## November 2026
+{: #containers-nov26}
+
+### 2 November 2026
+{: #containers-nov0226}
+{: release-note}
+
+New! Migrate Classic clusters to VPC by using the migration wizard.
+:   Use the migration wizard to move your {{site.data.keyword.containerlong_notm}} workloads from Classic infrastructure to VPC. VPC provides improved security, networking flexibility, and better performance, including private worker nodes, VPC Application Load Balancer integration with Ingress, and encrypted VPC Block Storage. For more information, see [Migrating from Classic to VPC](/docs/containers?topic=containers-vpc-migrate-overview).
+
 ## October 2026
 {: #containers-oct26}
+
+### 30 October 2026
+{: #containers-oct3026}
+{: release-note}
+
+CLI version 1.0.904 is available.
+:   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
 ### 29 October 2026
 {: #containers-oct2926}
 {: release-note}
-
-
-
 
 CLI version 1.0.901 is available.
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).

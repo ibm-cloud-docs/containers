@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-03"
+lastupdated: "2026-10-30"
 
 
 keywords: kubernetes, infrastructure, rbac, policy, http2, quota, app protocol, application protocol
@@ -164,7 +164,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | -------- | ----------- |
 | {{site.data.keyword.block_storage_is_short}} cluster add-on | The {{site.data.keyword.block_storage_is_short}} cluster add-on is enabled by default on VPC clusters. However, the add-on is not currently supported for clusters with `UBUNTU_18_S390X` worker nodes. When you create a VPC cluster with `UBUNTU_18_S390X` worker nodes, the add-on pods will remain in a `Pending` state. You can disable the add-on by running the `ibmcloud ks cluster addon disable` command. | 
 | Storage class for profile sizes | For more information, see [available volume profiles](/docs/vpc?topic=vpc-block-storage-profiles). |
-| Supported types | You can set up {{site.data.keyword.block_storage_is_short}}, {{site.data.keyword.cos_full_notm}} and {{site.data.keyword.databases-for}} only. \n - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block) is available as a cluster add-on. Make sure to [attach a public gateway to all the VPC subnets](/docs/vpc?topic=vpc-creating-vpc-resources-with-cli-and-api&interface=cli#attach-public-gateway-cli) that the cluster uses so that you can provision {{site.data.keyword.block_storage_is_short}}. \n - [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage_cos_install) is available as a Helm chart.  |
+| Supported types | You can set up {{site.data.keyword.block_storage_is_short}}, {{site.data.keyword.cos_full_notm}} and {{site.data.keyword.databases-for}} only. \n - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block) is available as a cluster add-on. Make sure to [attach a public gateway to all the VPC subnets](/docs/vpc?topic=vpc-creating-vpc-resources-with-cli-and-api&interface=cli#attach-public-gateway-cli) that the cluster uses so that you can provision {{site.data.keyword.block_storage_is_short}}. \n - [{{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-storage-cos-install-addon) is available as a cluster add-on, which is the recommended option. The legacy [Helm chart](/docs/containers?topic=containers-storage_cos_install) is also available.  |
 | Volume attachments | See [Volume attachment limits](/docs/vpc?topic=vpc-attaching-block-storage#vol-attach-limits).|
 | Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-storage_portworx_plan#portworx_limitations). |
 | {{site.data.keyword.block_storage_is_short}} | The default storage class in VPC clusters cannot be changed. However, you can [create your own storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class). |
