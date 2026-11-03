@@ -29,6 +29,24 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 ## November 2026
 {: #containers-nov26}
 
+
+ 
+### 3 November 2026
+{: #containers-nov0326}
+{: release-note}
+
+
+
+New! {{site.data.keyword.containerlong_notm}} version 1.37.
+:   You can now create or [update clusters to Kubernetes version 1.37](/docs/containers?topic=containers-cs_versions_137). With Kubernetes 1.37, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+
+
+{{site.data.keyword.containerlong_notm}} master fix packs are available.
+:   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
+:   [Version 1.37 change log](/docs/containers?topic=containers-changelog_137)
+
+
+
 ### 2 November 2026
 {: #containers-nov0226}
 {: release-note}

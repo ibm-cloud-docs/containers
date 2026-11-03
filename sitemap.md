@@ -518,6 +518,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov26)
 
+    * [3 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0326)
+
+        * New! {{site.data.keyword.containerlong_notm}} version 1.37.
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs are available.
+
     * [2 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0226)
 
         * New! Migrate Classic clusters to VPC by using the migration wizard.
@@ -6027,6 +6033,77 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [What else can I do to increase the security and compliance of my cluster?](/docs/containers?topic=containers-cis-benchmark#benchmark-what-else)
 
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
+
+
+### Version 1.37
+{: #sitemap_version_137}
+
+
+[1.37 version information and update actions](/docs/containers?topic=containers-cs_versions_137#cs_versions_137)
+
+* [Release timeline](/docs/containers?topic=containers-cs_versions_137#release_timeline_137)
+
+* [Preparing to update](/docs/containers?topic=containers-cs_versions_137#prep-up-137)
+
+    * [Update before master](/docs/containers?topic=containers-cs_versions_137#before-master-137)
+
+    * [Update after master](/docs/containers?topic=containers-cs_versions_137#after-master-137)
+
+[1.37 version change log](/docs/containers?topic=containers-changelog_137#changelog_137)
+
+* [Overview](/docs/containers?topic=containers-changelog_137#changelog_overview_137)
+
+* [Version 1.37](/docs/containers?topic=containers-changelog_137#137_components)
+
+* [03 November 2026, Master fix pack 1.37.1_1517](/docs/containers?topic=containers-changelog_137#cl-boms_master-1371_1517_M)
+
+* [02 November 2026, Worker node fix pack 1.37.1_1521](/docs/containers?topic=containers-changelog_137#cl-boms-1371_1521_W)
+
+* [27 October 2026, Worker node fix pack 1.37.1_1520](/docs/containers?topic=containers-changelog_137#cl-boms-1371_1520_W)
+
+[1.37 CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark-137#cis-benchmark-137)
+
+* [1 Control plane components](/docs/containers?topic=containers-cis-benchmark-137#1-control-plane-components-137)
+
+    * [1.1 Control plane node configuration files](/docs/containers?topic=containers-cis-benchmark-137#11-control-plane-node-configuration-files-137)
+
+    * [1.2 API server](/docs/containers?topic=containers-cis-benchmark-137#12-api-server-137)
+
+    * [1.3 Controller manager](/docs/containers?topic=containers-cis-benchmark-137#13-controller-manager-137)
+
+    * [1.4 Scheduler](/docs/containers?topic=containers-cis-benchmark-137#14-scheduler-137)
+
+* [2 Etcd](/docs/containers?topic=containers-cis-benchmark-137#2-etcd-137)
+
+* [3 Control plane configuration](/docs/containers?topic=containers-cis-benchmark-137#3-control-plane-configuration-137)
+
+    * [3.1 Authentication and authorization](/docs/containers?topic=containers-cis-benchmark-137#31-authentication-and-authorization-137)
+
+    * [3.2 Logging](/docs/containers?topic=containers-cis-benchmark-137#32-logging-137)
+
+* [4 Worker nodes](/docs/containers?topic=containers-cis-benchmark-137#4-worker-nodes-137)
+
+    * [4.1 Worker node configuration files](/docs/containers?topic=containers-cis-benchmark-137#41-worker-node-configuration-files-137)
+
+    * [4.2 Kubelet](/docs/containers?topic=containers-cis-benchmark-137#42-kubelet-137)
+
+    * [4.3 Kube-proxy](/docs/containers?topic=containers-cis-benchmark-137#43-kube-proxy-137)
+
+* [5 Policies](/docs/containers?topic=containers-cis-benchmark-137#5-policies-137)
+
+    * [5.1 RBAC and service accounts](/docs/containers?topic=containers-cis-benchmark-137#51-rbac-and-service-accounts-137)
+
+    * [5.2 Pod security standards](/docs/containers?topic=containers-cis-benchmark-137#52-pod-security-standards-137)
+
+    * [5.3 Network policies and CNI](/docs/containers?topic=containers-cis-benchmark-137#53-network-policies-and-cni-137)
+
+    * [5.4 Secrets management](/docs/containers?topic=containers-cis-benchmark-137#54-secrets-management-137)
+
+    * [5.5 Extensible admission control](/docs/containers?topic=containers-cis-benchmark-137#55-extensible-admission-control-137)
+
+    * [5.6 General policies](/docs/containers?topic=containers-cis-benchmark-137#56-general-policies-137)
+
+* [{{site.data.keyword.IBM_notm}} remediations and explanations](/docs/containers?topic=containers-cis-benchmark-137#ibm-remediations-and-explanations-137)
 
 
 ### Version 1.36

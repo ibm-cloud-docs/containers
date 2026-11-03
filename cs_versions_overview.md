@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-29"
+lastupdated: "2026-11-03"
 
 
 keywords: kubernetes, versions, update, upgrade
@@ -43,7 +43,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 |Version|Release date|End of support|Operating systems|Related links|
 |---|---|---|---|---|
-|1.37|None|None†|UBUNTU 24 64| - [1.37 details and update actions](/docs/containers?topic=containers-cs_versions_137)  \n - [Change log](/docs/containers?topic=containers-changelog_137)|
+|1.37|03 November 2026|26 October 2027†|UBUNTU 24 64| - [1.37 details and update actions](/docs/containers?topic=containers-cs_versions_137)  \n - [Change log](/docs/containers?topic=containers-changelog_137)|
 |1.36 [Default]{: tag-purple} |26 June 2026|01 August 2027†|UBUNTU 24 64| - [1.36 details and update actions](/docs/containers?topic=containers-cs_versions_136)  \n - [Change log](/docs/containers?topic=containers-changelog_136)|
 |1.35|05 March 2026|28 April 2027†|UBUNTU 24 64| - [1.35 details and update actions](/docs/containers?topic=containers-cs_versions_135)  \n - [Change log](/docs/containers?topic=containers-changelog_135)|
 |1.34 [Deprecated]{: tag-deprecated} |20 November 2025|20 January 2027|UBUNTU 24 64| - [1.34 details and update actions](/docs/containers?topic=containers-cs_versions_134)  \n - [Change log](/docs/containers?topic=containers-changelog_134)|
