@@ -3,7 +3,7 @@
 copyright:
   years: 2026
 
-lastupdated: "2026-09-16"
+lastupdated: "2026-11-03"
 
 keywords: kubernetes, traefik, ingress controller
 
@@ -370,8 +370,8 @@ The `ibm-ingress-deploy-config` ConfigMap controls ALB-level settings such as re
       name: ibm-ingress-deploy-config
       namespace: kube-system
     data:
-      <alb1-id>: '{"replicas":<number_of_replicas>, "ingressClass":"<class>", "httpsPort":"<port>", "httpPort":"<port>", "logLevel": "<TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC>", "ingressProvider": "<ingress|ingress-nginx>", "processTraefikCRDs": <true|false>, "traefikIngressNginxAllowExternalNameServices": <true|false>, "traefikCRDAllowCrossNamespace": <true|false>, "traefikCRDAllowExternalNameServices": <true|false>, "forwardedHeadersTrustedIPs": ["<IP>", "<CIDR>"], "httpReadTimeout": <seconds>, "httpWriteTimeout": <seconds>, "httpIdleTimeout": <seconds>, "httpsReadTimeout": <seconds>, "httpsWriteTimeout": <seconds>, "httpsIdleTimeout": <seconds>, "httpsRedirect": <true|false>, "customEntryPoints": {"<name>": {"port": <port>, "protocol": "<TCP|UDP>", "readTimeout": <seconds|0>, "writeTimeout": <seconds|0>, "idleTimeout": <seconds|0>, "udpTimeout": <seconds>}}, "tolerations": [{"key":"<key>","operator":"<Equal|Exists>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
-      <alb2-id>: '{"replicas":<number_of_replicas>, "ingressClass":"<class>", "httpsPort":"<port>", "httpPort":"<port>", "logLevel": "<TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC>", "ingressProvider": "<ingress|ingress-nginx>", "processTraefikCRDs": <true|false>, "traefikIngressNginxAllowExternalNameServices": <true|false>, "traefikCRDAllowCrossNamespace": <true|false>, "traefikCRDAllowExternalNameServices": <true|false>, "forwardedHeadersTrustedIPs": ["<IP>", "<CIDR>"], "httpReadTimeout": <seconds>, "httpWriteTimeout": <seconds>, "httpIdleTimeout": <seconds>, "httpsReadTimeout": <seconds>, "httpsWriteTimeout": <seconds>, "httpsIdleTimeout": <seconds>, "httpsRedirect": <true|false>, "customEntryPoints": {"<name>": {"port": <port>, "protocol": "<TCP|UDP>", "readTimeout": <seconds|0>, "writeTimeout": <seconds|0>, "idleTimeout": <seconds|0>, "udpTimeout": <seconds>}}, "tolerations": [{"key":"<key>","operator":"<Equal|Exists>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
+      <alb1-id>: '{"replicas":<number_of_replicas>, "ingressClass":"<class>", "httpsPort":"<port>", "httpPort":"<port>", "logLevel": "<TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC>", "ingressProvider": "<ingress|ingress-nginx>", "processTraefikCRDs": <true|false>, "traefikIngressNginxAllowExternalNameServices": <true|false>, "traefikIngressNginxAllowSnippetAnnotations": <true|false>, "traefikIngressNginxStrictValidatePathType": <true|false>, "traefikCRDAllowCrossNamespace": <true|false>, "traefikCRDAllowExternalNameServices": <true|false>, "forwardedHeadersTrustedIPs": ["<IP>", "<CIDR>"], "httpReadTimeout": <seconds>, "httpWriteTimeout": <seconds>, "httpIdleTimeout": <seconds>, "httpsReadTimeout": <seconds>, "httpsWriteTimeout": <seconds>, "httpsIdleTimeout": <seconds>, "httpsRedirect": <true|false>, "customEntryPoints": {"<name>": {"port": <port>, "protocol": "<TCP|UDP>", "readTimeout": <seconds|0>, "writeTimeout": <seconds|0>, "idleTimeout": <seconds|0>, "udpTimeout": <seconds>}}, "tolerations": [{"key":"<key>","operator":"<Equal|Exists>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
+      <alb2-id>: '{"replicas":<number_of_replicas>, "ingressClass":"<class>", "httpsPort":"<port>", "httpPort":"<port>", "logLevel": "<TRACE|DEBUG|INFO|WARN|ERROR|FATAL|PANIC>", "ingressProvider": "<ingress|ingress-nginx>", "processTraefikCRDs": <true|false>, "traefikIngressNginxAllowExternalNameServices": <true|false>, "traefikIngressNginxAllowSnippetAnnotations": <true|false>, "traefikIngressNginxStrictValidatePathType": <true|false>, "traefikCRDAllowCrossNamespace": <true|false>, "traefikCRDAllowExternalNameServices": <true|false>, "forwardedHeadersTrustedIPs": ["<IP>", "<CIDR>"], "httpReadTimeout": <seconds>, "httpWriteTimeout": <seconds>, "httpIdleTimeout": <seconds>, "httpsReadTimeout": <seconds>, "httpsWriteTimeout": <seconds>, "httpsIdleTimeout": <seconds>, "httpsRedirect": <true|false>, "customEntryPoints": {"<name>": {"port": <port>, "protocol": "<TCP|UDP>", "readTimeout": <seconds|0>, "writeTimeout": <seconds|0>, "idleTimeout": <seconds|0>, "udpTimeout": <seconds>}}, "tolerations": [{"key":"<key>","operator":"<Equal|Exists>","value":"<value>","effect":"<NoSchedule|PreferNoSchedule|NoExecute>"}]}'
     ```
     {: codeblock}
 
@@ -401,6 +401,14 @@ The `ibm-ingress-deploy-config` ConfigMap controls ALB-level settings such as re
 
     `traefikIngressNginxAllowExternalNameServices`
     :   Enables support for ExternalName services for Ingress objects that are processed by the `ingress-nginx` provider. This option applies only when `ingressProvider` is set to `ingress-nginx`.
+    :   Default: `true`.
+
+    `traefikIngressNginxAllowSnippetAnnotations`
+    :   Enables support for processing of ingress-nginx snippet annotations for Ingress objects that are processed by the `ingress-nginx` provider. This option applies only when `ingressProvider` is set to `ingress-nginx`.
+    :   Default: `false`.
+
+    `traefikIngressNginxStrictValidatePathType`
+    :   Enables strict validation of path types for Ingress objects that are processed by the `ingress-nginx` provider. When set to `true`, the ALB rejects the entire Ingress resource if any path contains regex characters and its `pathType` is `Prefix` or `Exact`. When set to `false`, the ALB does not reject these Ingress resources. This option applies only when `ingressProvider` is set to `ingress-nginx`.
     :   Default: `true`.
 
     `traefikCRDAllowCrossNamespace`
