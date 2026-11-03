@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-11-02"
+lastupdated: "2026-11-03"
 
 
 keywords: kubernetes, release notes, containers, {{site.data.keyword.containerlong_notm}}
@@ -35,6 +35,22 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 New! Migrate Classic clusters to VPC by using the migration wizard.
 :   Use the migration wizard to move your {{site.data.keyword.containerlong_notm}} workloads from Classic infrastructure to VPC. VPC provides improved security, networking flexibility, and better performance, including private worker nodes, VPC Application Load Balancer integration with Ingress, and encrypted VPC Block Storage. For more information, see [Migrating from Classic to VPC](/docs/containers?topic=containers-vpc-migrate-overview).
+
+
+
+Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
+:   Fix packs can be applied in the following ways. 
+:   **Classic infrastructure**: Update or reload the worker node.
+:   **VPC infrastructure**: Replace the worker node.
+:   **VPC Bare Metal**: Reload the worker node.
+:   Review the change logs for your cluster version.
+:   [Version 1.37 change log](/docs/containers?topic=containers-changelog_137)
+:   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
+:   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
+:   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
+
+
+
 
 ## October 2026
 {: #containers-oct26}
