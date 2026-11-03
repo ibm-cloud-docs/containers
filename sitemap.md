@@ -518,6 +518,12 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov26)
 
+    * [3 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0326)
+
+        * New! {{site.data.keyword.containerlong_notm}} version 1.37.
+
+        * {{site.data.keyword.containerlong_notm}} master fix packs are available.
+
     * [2 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0226)
 
         * New! Migrate Classic clusters to VPC by using the migration wizard.
