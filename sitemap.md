@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-11-02"
+lastupdated: "2026-11-03"
 
 
 keywords: containers
@@ -521,6 +521,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [2 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0226)
 
         * New! Migrate Classic clusters to VPC by using the migration wizard.
+
+        * Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}.
 
 * [October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct26)
 
@@ -6047,6 +6049,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.36](/docs/containers?topic=containers-changelog_136#136_components)
 
+* [02 November 2026, Worker node fix pack 1.36.5_1540](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1540_W)
+
 * [29 October 2026, Master fix pack 1.36.5_1537](/docs/containers?topic=containers-changelog_136#cl-boms_master-1365_1537_M)
 
 * [27 October 2026, Worker node fix pack 1.36.5_1539](/docs/containers?topic=containers-changelog_136#cl-boms-1365_1539_W)
@@ -6137,6 +6141,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_135#changelog_overview_135)
 
 * [Version 1.35](/docs/containers?topic=containers-changelog_135#135_components)
+
+* [02 November 2026, Worker node fix pack 1.35.9_1551](/docs/containers?topic=containers-changelog_135#cl-boms-1359_1551_W)
 
 * [29 October 2026, Master fix pack 1.35.9_1548](/docs/containers?topic=containers-changelog_135#cl-boms_master-1359_1548_M)
 
@@ -6252,6 +6258,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Overview](/docs/containers?topic=containers-changelog_134#changelog_overview_134)
 
 * [Version 1.34](/docs/containers?topic=containers-changelog_134#134_components)
+
+* [02 November 2026, Worker node fix pack 1.34.12_1573](/docs/containers?topic=containers-changelog_134#cl-boms-13412_1573_W)
 
 * [29 October 2026, Master fix pack 1.34.12_1570](/docs/containers?topic=containers-changelog_134#cl-boms_master-13412_1570_M)
 
@@ -8277,6 +8285,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-supported-versions)
 
 * [Version 0.1.0](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-0.1.0)
+
+    * [03 November 2026, Version 0.1.0 - headlamp-0.1.0-380724406](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-380724406)
+
+    * [03 November 2026, Version 0.1.0 - headlamp-0.1.0-381793236](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-381793236)
 
     * [16 October 2026, Version 0.1.0 - headlamp-0.1.0-377245860](/docs/containers?topic=containers-cl-add-ons-headlamp#cl-add-ons-headlamp-headlamp-010-377245860)
 

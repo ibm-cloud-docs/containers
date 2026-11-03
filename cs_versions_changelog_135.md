@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-10-30"
+lastupdated: "2026-11-03"
 
 
 keywords: change log, version history, 1.35
@@ -39,6 +39,38 @@ Some change logs are for _worker node fix packs_, and apply only to worker nodes
 
 ## Version 1.35
 {: #135_components}
+
+
+## 02 November 2026, Worker node fix pack 1.35.9_1551
+{: #cl-boms-1359_1551_W}
+
+The following list shows the components included in the worker node fix pack 1.35.9_1551. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+UBUNTU 24 (VPC) 6.8.0-147-generic
+:   Resolves the following CVEs: [CVE-2026-111497](https://nvd.nist.gov/vuln/detail/cve-2026-111497){: external}.
+
+
+UBUNTU 24 (Classic) 6.8.0-147-generic
+:   Resolves the following CVEs: [CVE-2026-111497](https://nvd.nist.gov/vuln/detail/cve-2026-111497){: external}.
+
+
+
+
+Kubernetes 1.35.9
+:   For more information, see the [change logs](https://github.com/kubernetes/kubernetes/releases/tag/v1.35.9){: external}.
+
+
+containerd 2.2.10
+:   For more information, see the [change logs](https://github.com/containerd/containerd/releases/tag/v2.2.10){: external}.
+
+
+HAProxy e4345026edf8a112257b2c50ed3c8d373c87f59f
+:   Resolves the following CVEs: [CVE-2026-80489](https://nvd.nist.gov/vuln/detail/cve-2026-80489){: external}, [CVE-2026-89158](https://nvd.nist.gov/vuln/detail/cve-2026-89158){: external}, [CVE-2026-77117](https://nvd.nist.gov/vuln/detail/cve-2026-77117){: external}, [CVE-2026-19542](https://nvd.nist.gov/vuln/detail/cve-2026-19542){: external}, [CVE-2026-86142](https://nvd.nist.gov/vuln/detail/cve-2026-86142){: external}, [CVE-2026-6368](https://nvd.nist.gov/vuln/detail/cve-2026-6368){: external}, [CVE-2026-89157](https://nvd.nist.gov/vuln/detail/cve-2026-89157){: external}, [CVE-2026-18374](https://nvd.nist.gov/vuln/detail/cve-2026-18374){: external}, [CVE-2026-6791](https://nvd.nist.gov/vuln/detail/cve-2026-6791){: external}, [CVE-2026-86145](https://nvd.nist.gov/vuln/detail/cve-2026-86145){: external}, and [CVE-2026-103111](https://nvd.nist.gov/vuln/detail/cve-2026-103111){: external}.
+
+
+GPU Device Plug-in and Installer d2def2bba2034981c2a949fc5919ff4c35b191e1
+:   Resolves the following CVEs: [CVE-2026-6791](https://nvd.nist.gov/vuln/detail/cve-2026-6791){: external}, [CVE-2026-77117](https://nvd.nist.gov/vuln/detail/cve-2026-77117){: external}, [CVE-2026-18374](https://nvd.nist.gov/vuln/detail/cve-2026-18374){: external}, [CVE-2026-19445](https://nvd.nist.gov/vuln/detail/cve-2026-19445){: external}, [CVE-2026-114406](https://nvd.nist.gov/vuln/detail/cve-2026-114406){: external}, [CVE-2026-19542](https://nvd.nist.gov/vuln/detail/cve-2026-19542){: external}, [CVE-2026-80489](https://nvd.nist.gov/vuln/detail/cve-2026-80489){: external}, [CVE-2026-6368](https://nvd.nist.gov/vuln/detail/cve-2026-6368){: external}, [CVE-2026-84782](https://nvd.nist.gov/vuln/detail/cve-2026-84782){: external}, [CVE-2026-63072](https://nvd.nist.gov/vuln/detail/cve-2026-63072){: external}, [CVE-2026-19553](https://nvd.nist.gov/vuln/detail/cve-2026-19553){: external}, and [CVE-2026-12345](https://nvd.nist.gov/vuln/detail/cve-2026-12345){: external}.
 
 
 ## 29 October 2026, Master fix pack 1.35.9_1548
