@@ -82,7 +82,7 @@ CoreDNS v1.14.7
 
 
 etcd v3.5.34
-:   See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.34){: external}.
+:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
 
 
 IBM Cloud Controller Manager v1.36.5-2
@@ -198,7 +198,7 @@ The following list shows the components that are in the master fix pack 1.36.5_1
 {: shortdesc}
 
 Aqua Security kube-bench v0.16.0
-:   See the [Aqua Security kube-bench release notes](https://github.com/aquasecurity/kube-bench/releases/tag/v0.16.0){: external}.
+:   See the [Aqua Security kube-bench release notes](https://github.com/aquasecurity/kube-bench/releases/tag/vv0.16.0){: external}.
 
 
 Calico v3.31.7
@@ -222,7 +222,7 @@ Cluster health image v1.6.21
 
 
 etcd v3.5.34
-:   See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.34){: external}.
+:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
 
 
 IBM Cloud Block Storage driver and plug-in v2.5.28

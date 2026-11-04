@@ -80,7 +80,7 @@ The following list shows the components that are in the master fix pack 1.35.9_1
 {: shortdesc}
 
 etcd v3.5.34
-:   See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.34){: external}.
+:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
 
 
 IBM Cloud Controller Manager v1.35.9-2
@@ -202,7 +202,7 @@ The following list shows the components that are in the master fix pack 1.35.9_1
 {: shortdesc}
 
 Aqua Security kube-bench v0.16.0
-:   See the [Aqua Security kube-bench release notes](https://github.com/aquasecurity/kube-bench/releases/tag/v0.16.0){: external}.
+:   See the [Aqua Security kube-bench release notes](https://github.com/aquasecurity/kube-bench/releases/tag/vv0.16.0){: external}.
 
 
 Calico v3.31.7
@@ -226,7 +226,7 @@ Cluster health image v1.6.21
 
 
 etcd v3.5.34
-:   See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.34){: external}.
+:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
 
 
 IBM Cloud Block Storage driver and plug-in v2.5.28
@@ -708,7 +708,7 @@ The following list shows the components that are in the master fix pack 1.35.5_1
 {: shortdesc}
 
 Calico v3.30.7
-:   See the [Calico release notes](https://archive-os-3-30.netlify.app/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release){: external}.
+:   See the [Calico release notes](https://docs.tigera.io/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release){: external}.
 
 
 etcd v3.5.29
@@ -806,7 +806,7 @@ The following list shows the components that are in the master fix pack 1.35.4_1
 {: shortdesc}
 
 Calico v3.30.7
-:   See the [Calico release notes](https://archive-os-3-30.netlify.app/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release){: external}.
+:   See the [Calico release notes](https://docs.tigera.io/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release){: external}.
 
 
 etcd v3.5.29
