@@ -3,7 +3,7 @@
 copyright:
   years: 2026, 2026
 
-lastupdated: "2026-11-03"
+lastupdated: "2026-11-04"
 
 
 keywords: change log, version history, 1.37
@@ -48,7 +48,7 @@ The following list shows the components that are in the master fix pack 1.37.1_1
 {: shortdesc}
 
 Aqua Security kube-bench v0.16.0
-:   See the [Aqua Security kube-bench release notes](https://github.com/aquasecurity/kube-bench/releases/tag/vv0.16.0){: external}.
+:   See the [Aqua Security kube-bench release notes](https://github.com/aquasecurity/kube-bench/releases/tag/v0.16.0){: external}.
 
 
 Calico v3.32.2

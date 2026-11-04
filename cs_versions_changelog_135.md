@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-11-03"
+lastupdated: "2026-11-04"
 
 
 keywords: change log, version history, 1.35
@@ -964,7 +964,7 @@ The following list shows the components included in the worker node fix pack 1.3
 {: shortdesc}
 
 Calico v3.30.6
-:   See the [Calico release notes](https://docs.tigera.io/calico/3.30/release-notes/#calico-open-source-3306-bug-fix-release){: external}.
+:   See the [Calico release notes](https://archive-os-3-30.netlify.app/calico/3.30/release-notes/#calico-open-source-3306-bug-fix-release){: external}.
 Cluster health image v1.6.14
 :   New version contains updates and security fixes.
 CoreDNS v1.12.4

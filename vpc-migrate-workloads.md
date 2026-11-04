@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-11-03"
+lastupdated: "2026-11-04"
 
 keywords: containers, classic, vpc, migrate, workloads, migration plan, createMigrationPlan, startWorkloadMigration, BRS, storage class
 
@@ -480,7 +480,7 @@ Common user-action items include:
 
 | Item | What to do |
 |------|-----------|
-| Load balancer type change (NLB → ALB or vice versa) | Confirm the proposed type mapping or update the Service annotation on the VPC cluster. To enable source IP preservation on VPC, annotate the Service with `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: nlb`. See [VPC load balancer annotations](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_annotations). |
+| Load balancer type change (NLB → ALB or vice versa) | Confirm the proposed type mapping or update the Service annotation on the VPC cluster. To enable source IP preservation on VPC, annotate the Service with `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: nlb`. See [VPC ALB annotations](/docs/containers?topic=containers-setup_vpc_alb#vpc_alb_annotations) and [VPC NLB annotations](/docs/containers?topic=containers-setup_vpc_nlb#vpc_nlb_annotations). |
 | Ingress host mapping | Confirm the VPC Ingress subdomain mapping is correct. Update external DNS at cutover. |
 | Storage class not mapped | Confirm or override the storage class mapping in step 5. |
 | Security group rule limit warning | Consolidate security group rules before proceeding. |
@@ -709,7 +709,7 @@ After the migration completes, verify that all pods are running correctly on the
    ```
    {: screen}
 
-2. Check recent logs for errors in each deployment. Look for stack traces, connection refused messages, or repeated restart cycles that indicate a workload did not migrate cleanly. If you see these errors, see [Debugging app deployments](/docs/containers?topic=containers-ts-app-01-debug) or [Why is my pod in a CrashLoopBackOff state?](/docs/containers?topic=containers-ts-app-container-start).
+2. Check recent logs for errors in each deployment. Look for stack traces, connection refused messages, or repeated restart cycles that indicate a workload did not migrate cleanly. If you see these errors, see [Debugging app deployments](/docs/containers?topic=containers-debug_apps) or [Why is my pod in a CrashLoopBackOff state?](/docs/containers?topic=containers-ts-app-container-start).
 
    ```sh
    kubectl logs -n NAMESPACE DEPLOYMENT_NAME --tail=100

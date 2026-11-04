@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-11-03"
+lastupdated: "2026-11-04"
 
 
 keywords: containers
@@ -560,8 +560,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
         * New CLI version `1.0.899` available.
 
-        * Add-on OpenShift AI version `421` is available.
-
     * [22 October 2026](/docs/containers?topic=containers-containers-relnotes#containers-oct2226)
 
         * VPC File CSI Driver cluster add-on patch updates.
@@ -763,8 +761,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
         * VPC File CSI Driver cluster add-on patch updates.
 
     * [4 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0426)
-
-        * ACM cluster add-on patch updates.
 
     * [3 August 2026](/docs/containers?topic=containers-containers-relnotes#containers-aug0326)
 
