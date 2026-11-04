@@ -2,7 +2,7 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-04-15"
+lastupdated: "2026-11-04"
 
 
 keywords: cbr, context based restrictions, security
@@ -134,11 +134,11 @@ Review the [limitations](#cbr-limitations) before you create network zones.
 {: #create-network-zone-api}
 {: api}
 
-You can create network zones by using the `/v1/zones` API. For more information, see the [API docs](/apidocs/context-based-restrictions#create-zone). You can add the `containers-kubernetes` service to your network zones to allow {{site.data.keyword.containerlong_notm}} to access resources and services in your account.
+You can create network zones by using the `/v1/zones` API. For more information, see the [API docs](/docs/apis/context-based-restrictions#create-zone). You can add the `containers-kubernetes` service to your network zones to allow {{site.data.keyword.containerlong_notm}} to access resources and services in your account.
 
 
 
-You can include multiple address types in your network zone payload. For more information, see the example payload in the [API docs](/apidocs/context-based-restrictions#create-zone).
+You can include multiple address types in your network zone payload. For more information, see the example payload in the [API docs](/docs/apis/context-based-restrictions#create-zone).
 {: tip}
 
 Example payload to add {{site.data.keyword.containerlong_notm}} to a network zone. The `serviceRef` attribute for {{site.data.keyword.containerlong_notm}} is `containers-kubernetes`.
@@ -269,7 +269,7 @@ Review the [limitations](#cbr-limitations) before you create rules.
 {: #create-cbr-rule-api}
 {: api}
 
-Review the following example requests to create rules. For more information about the `v1/rules` API, see the [API docs](/apidocs/context-based-restrictions#create-rule).
+Review the following example requests to create rules. For more information about the `v1/rules` API, see the [API docs](/docs/apis/context-based-restrictions#create-rule).
 
 After you create a rule, it might take up to 10 minutes to before you can update that rule due to IAM TTL response caching.
 {: note}

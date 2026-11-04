@@ -156,8 +156,7 @@ Cluster autoscaler cluster add-on patch updates.
 New CLI version `1.0.899` available.
 :   For more information, see the [CLI change log](/docs/containers?topic=containers-cs_cli_changelog).
 
-Add-on OpenShift AI version `421` is available.
-:   For more information, see the [add-on change log](/docs/containers?topic=containers-cl-add-ons).
+
 
 ### 22 October 2026
 {: #containers-oct2226}
@@ -271,7 +270,6 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -295,7 +293,6 @@ ALB OAuth Proxy cluster add-on patch updates.
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -377,7 +374,6 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -468,7 +464,6 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -551,7 +546,6 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -634,7 +628,6 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -668,8 +661,7 @@ VPC File CSI Driver cluster add-on patch updates.
 {: #containers-aug0426}
 {: release-note}
 
-ACM cluster add-on patch updates.
-:   For more information, see the [change log](/docs/containers?topic=containers-cl-add-ons-acm).
+
 
 ### 3 August 2026
 {: #containers-aug0326}
@@ -710,7 +702,6 @@ VPC Block CSI Driver cluster add-on patch updates.
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -727,7 +718,6 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -785,7 +775,6 @@ Worker node fix packs are available for {{site.data.keyword.containerlong_notm}}
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -832,7 +821,6 @@ CLI version 1.0.791 is available.
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -859,7 +847,6 @@ New! {{site.data.keyword.containerlong_notm}} version 1.36.
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -910,7 +897,6 @@ IBM Object CSI Driver cluster add-on patch updates.
 :   [Version 1.36 change log](/docs/containers?topic=containers-changelog_136)
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -987,7 +973,6 @@ VPC File CSI Driver cluster add-on patch updates.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1042,7 +1027,7 @@ VPC File CSI Driver cluster add-on patch updates.
 
 
 Kubernetes version 1.32 is no longer supported.
-:   Kubernetes version 1.32 is unsupported as of 27 May 2026. Update your cluster to at least [version 1.33](/docs/containers?topic=containers-cs_versions_133) as soon as possible.
+:   Kubernetes version 1.32 is unsupported as of 27 May 2026. Update your cluster to at least version 1.33 as soon as possible.
 
 Version 1.35 is now the default version for {{site.data.keyword.containerlong_notm}}.
 :   For a complete list of available versions, see the [version information](/docs/containers?topic=containers-cs_versions).
@@ -1087,7 +1072,6 @@ Static Route cluster add-on patch updates.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1101,7 +1085,6 @@ Static Route cluster add-on patch updates.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1212,7 +1195,6 @@ ALB OAuth Proxy cluster add-on patch updates.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1281,7 +1263,6 @@ Istio add-on patch updates.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1321,7 +1302,7 @@ Headlamp add-on beta is now available
 {: release-note}
 
 Kubernetes version 1.31 is unsupported
-:   Kubernetes version 1.31 is unsupported as of 22 April 2026. Update your cluster to at least [version 1.33](/docs/containers?topic=containers-cs_versions_133) as soon as possible.
+:   Kubernetes version 1.31 is unsupported as of 22 April 2026. Update your cluster to at least version 1.33 as soon as possible.
 
 Ingress ALB patch updates.
 :   For more information, see the [change log](/docs/containers?topic=containers-cl-ingress-alb).
@@ -1348,7 +1329,6 @@ CLI version 1.0.759 is available
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1394,7 +1374,6 @@ IBM Storage Operator cluster add-on patch updates.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1415,7 +1394,6 @@ CLI version 1.0.756 is available
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1445,7 +1423,6 @@ VPC File CSI Driver cluster add-on patch updates.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1512,7 +1489,7 @@ Cluster autoscaler cluster add-on patch updates.
 
 
 {{site.data.keyword.containerlong_notm}} version 1.32 is deprecated.
-:   Support for 1.32 ends on {{site.data.keyword.kubernetes_132_unsupported_date}}. Update your cluster to [version 1.33](/docs/containers?topic=containers-cs_versions_133) as soon as possible.
+:   Support for 1.32 ends on {{site.data.keyword.kubernetes_132_unsupported_date}}. Update your cluster to version 1.33 as soon as possible.
 
 
 
@@ -1542,7 +1519,6 @@ Ingress ALB patch updates.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.35 change log](/docs/containers?topic=containers-changelog_135)
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1613,7 +1589,6 @@ VPC Block CSI Driver cluster add-on patch updates.
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1661,7 +1636,6 @@ ALB OAuth Proxy cluster add-on patch updates.
 {{site.data.keyword.containerlong_notm}} master fix packs.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1711,7 +1685,6 @@ VPC Block CSI Driver cluster add-on patch updates.
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1758,7 +1731,6 @@ Version 1.34 is now the default version for {{site.data.keyword.containerlong_no
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   Note that beginning at this patch version, VPC worker nodes include the following changes: the local time is set to UTC, the root filesystem has changed from ext4 to XFS, and the boot mode has changed from BIOS to UEFI.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1775,7 +1747,6 @@ Version 1.34 is now the default version for {{site.data.keyword.containerlong_no
 {{site.data.keyword.containerlong_notm}} master fix packs.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1801,7 +1772,6 @@ VPC Block CSI Driver cluster add-on patch updates.
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1831,7 +1801,6 @@ CLI version `1.0.745` is available.
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1862,7 +1831,6 @@ Ingress ALB patch updates.
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1878,7 +1846,6 @@ Ingress ALB patch updates.
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1896,7 +1863,6 @@ Ingress ALB patch updates.
 {{site.data.keyword.containerlong_notm}} master fix packs.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1945,7 +1911,6 @@ ALB OAuth Proxy cluster add-on patch updates.
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
 :   [Version 1.34 change log](/docs/containers?topic=containers-changelog_134)
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
 
 
 
@@ -1981,7 +1946,7 @@ Ingress ALB cluster add-on patch updates.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2009,7 +1974,7 @@ Ingress ALB cluster add-on patch updates.
 {: release-note}
 
 {{site.data.keyword.containerlong_notm}} version 1.30 is unsupported.
-:   Update your cluster to at least [version 1.33](/docs/containers?topic=containers-cs_versions_133) as soon as possible.
+:   Update your cluster to at least version 1.33 as soon as possible.
 
 
 
@@ -2023,7 +1988,7 @@ Ingress ALB cluster add-on patch updates.
 
 {{site.data.keyword.containerlong_notm}} master fix packs.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2068,10 +2033,10 @@ The strongSwan IPSec VPN Service is deprecated
 
 
 {{site.data.keyword.containerlong_notm}} version 1.31 is deprecated.
-:   Support for 1.31 ends on {{site.data.keyword.kubernetes_131_unsupported_date}}. Update your cluster to [version 1.33](/docs/containers?topic=containers-cs_versions_133) as soon as possible.
+:   Support for 1.31 ends on {{site.data.keyword.kubernetes_131_unsupported_date}}. Update your cluster to version 1.33 as soon as possible.
 
 {{site.data.keyword.containerlong_notm}} version 1.30 is deprecated.
-:   Support for 1.30 ends on {{site.data.keyword.kubernetes_130_unsupported_date}}. Update your cluster to [version 1.33](/docs/containers?topic=containers-cs_versions_133) as soon as possible.
+:   Support for 1.30 ends on {{site.data.keyword.kubernetes_130_unsupported_date}}. Update your cluster to version 1.33 as soon as possible.
 
 
 
@@ -2097,7 +2062,7 @@ CLI version `1.0.727` is available.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2128,7 +2093,7 @@ New! General availability of the {{site.data.keyword.cos_full_notm}} cluster add
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2145,7 +2110,7 @@ New! General availability of the {{site.data.keyword.cos_full_notm}} cluster add
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2171,7 +2136,7 @@ Version 1.33 is now the default version for {{site.data.keyword.containerlong_no
 
 {{site.data.keyword.containerlong_notm}} master fix packs.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2212,7 +2177,7 @@ CLI version `1.0.718` is available.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2251,7 +2216,7 @@ Ingress ALB cluster add-on patch updates.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2288,7 +2253,7 @@ CLI version `1.0.717` is available.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2310,7 +2275,7 @@ VPC File CSI Driver cluster add-on patch updates.
 
 {{site.data.keyword.containerlong_notm}} master fix packs.
 :   Master fix packs are applied automatically over the course of several days. You can choose to use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply the patch. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2342,7 +2307,7 @@ Ingress ALB cluster add-on patch updates.
 
 {{site.data.keyword.containerlong_notm}} worker node fix packs are available.
 :   Worker node fix packs can be applied by updating or reloading the worker node in classic infrastructure, or replacing the worker node in VPC infrastructure. Review the following change logs for your cluster version.
-:   [Version 1.33 change log](/docs/containers?topic=containers-changelog_133)
+:   Version 1.33 change log
 
 
 
@@ -2359,7 +2324,7 @@ CLI version `1.0.715` is available.
 {: release-note}
 
 {{site.data.keyword.containerlong_notm}} version 1.33 Kubernetes certification
-:   {{site.data.keyword.containerlong_notm}} version [1.33](/docs/containers?topic=containers-cs_versions_133) is now Kubernetes certified.
+:   {{site.data.keyword.containerlong_notm}} version 1.33 is now Kubernetes certified.
 
 
 
@@ -2397,10 +2362,10 @@ CLI version `1.0.714` is available.
 :   Version 1.29 change log
 
 New! {{site.data.keyword.containerlong_notm}} version 1.33.
-:   You can now create or [update clusters to Kubernetes version 1.33](/docs/containers?topic=containers-cs_versions_133). With Kubernetes 1.33, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
+:   You can now create or update clusters to Kubernetes version 1.33. With Kubernetes 1.33, you get the latest stable enhancements from the Kubernetes community as well as enhancements to the {{site.data.keyword.cloud_notm}} product.
 
 {{site.data.keyword.containerlong_notm}} version 1.30 is deprecated.
-:   Support for 1.30 ends on {{site.data.keyword.kubernetes_130_unsupported_date}}. Update your cluster to [version 1.33](/docs/containers?topic=containers-cs_versions_133) as soon as possible.
+:   Support for 1.30 ends on {{site.data.keyword.kubernetes_130_unsupported_date}}. Update your cluster to version 1.33 as soon as possible.
 
 {{site.data.keyword.containerlong_notm}} version 1.29 is unsupported.
 :   Update your cluster to at least version 1.30 as soon as possible.

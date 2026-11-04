@@ -3,7 +3,7 @@
 copyright:
   years: 2025, 2026
 
-lastupdated: "2026-11-03"
+lastupdated: "2026-11-04"
 
 
 keywords: change log, version history, 1.34
@@ -88,7 +88,7 @@ The following list shows the components that are in the master fix pack 1.34.12_
 {: shortdesc}
 
 etcd v3.5.34
-:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
+:   See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.34){: external}.
 
 
 IBM Cloud Controller Manager v1.34.12-2
@@ -230,7 +230,7 @@ Cluster health image v1.6.21
 
 
 etcd v3.5.34
-:   See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.5.34){: external}.
+:   See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.5.34){: external}.
 
 
 IBM Cloud Block Storage driver and plug-in v2.5.28
@@ -706,7 +706,7 @@ The following list shows the components that are in the master fix pack 1.34.8_1
 {: shortdesc}
 
 Calico v3.30.7
-:   See the [Calico release notes](https://docs.tigera.io/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release){: external}.
+:   See the [Calico release notes](https://archive-os-3-30.netlify.app/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release){: external}.
 
 
 etcd v3.5.29
@@ -808,7 +808,7 @@ The following list shows the components that are in the master fix pack 1.34.7_1
 {: shortdesc}
 
 Calico v3.30.7
-:   See the [Calico release notes](https://docs.tigera.io/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release){: external}.
+:   See the [Calico release notes](https://archive-os-3-30.netlify.app/calico/3.30/release-notes/#calico-open-source-3307-bug-fix-release){: external}.
 
 
 Cluster health image v1.6.15

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-11-02"
+lastupdated: "2026-11-04"
 
 keywords: containers, classic, vpc, migrate, migration, overview, replatform, limitations, add-ons, version support, eligible clusters
 
@@ -124,7 +124,7 @@ The migration service migrates a subset of managed add-ons. You must re-enable t
 | `image-key-synchronizer` | Yes | No action required. |
 | `static-route` | Yes | No action required. |
 | `openshift-data-foundation` | No | Install ODF on the VPC cluster before you start the workload migration step. See [VPC: Installing ODF](/docs/openshift?topic=openshift-deploy-odf-vpc). |
-| `openshift-ai` | No | Reinstall the add-on after migration. OpenShift AI workloads that use cluster-local services are unavailable until you reinstall it. See [Setting up OpenShift AI](/docs/containers?topic=containers-cl-add-ons-openshift-ai). |
+| `openshift-ai` | No | Reinstall the add-on after migration. OpenShift AI workloads that use cluster-local services are unavailable until you reinstall it. See [Setting up OpenShift AI](/docs/openshift?topic=openshift-cl-add-ons-openshift-ai). |
 | `hpcs-router` | No | Re-enable the add-on by running the [`ibmcloud ks cluster addon enable hpcs-router`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-addon-enable-hpcs-router-cli) command, and update the instance bindings after migration. Workloads that rely on HPCS-managed secrets cannot retrieve keys until you do. |
 {: caption="Add-on migration behavior for OpenShift clusters" caption-side="bottom"}
 {: class="simple-tab-table"}
