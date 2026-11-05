@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-11-04"
+lastupdated: "2026-11-05"
 
 
 keywords: containers
@@ -517,6 +517,16 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov26)
+
+    * [5 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0526)
+
+        * Cluster autoscaler cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * Istio cluster add-on patch updates.
 
     * [3 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0326)
 
@@ -7587,6 +7597,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.31](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.31)
 
+    * [05 November 2026, Version 1.31 - 1.31.3](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1313)
+
     * [12 October 2026, Version 1.31 - 1.31.1](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1311)
 
     * [28 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
@@ -7594,6 +7606,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [23 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
 
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
+
+    * [05 November 2026, Version 1.30 - 1.30.7](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1307)
 
     * [12 October 2026, Version 1.30 - 1.30.5](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1305)
 
@@ -7604,6 +7618,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [21 July 2026, Version 1.30 - 1.30.2](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1302)
 
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
+
+    * [05 November 2026, Version 1.29 - 1.29.10](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-12910)
 
     * [12 October 2026, Version 1.29 - 1.29.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1298)
 
@@ -7712,6 +7728,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-supported-versions)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-2.0.0)
+
+    * [05 November 2026, Version 2.0.0 - v200-22-0_380357599](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-22-0_380357599)
 
     * [26 October 2026, Version 2.0.0 - v200-21-0_380175534](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-21-0_380175534)
 
@@ -7888,6 +7906,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-supported-versions)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
+
+    * [05 November 2026, Version 1.0 - v1.0.68_381690929](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1068_381690929)
 
     * [22 October 2026, Version 1.0 - v1.0.64_379022441](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1064_379022441)
 
@@ -8119,6 +8139,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
+    * [05 November 2026, Version 2.0 - v2.0.60_381677618](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2060_381677618)
+
     * [22 October 2026, Version 2.0 - v2.0.57_379023073](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2057_379023073)
 
     * [15 October 2026, Version 2.0 - v2.0.56_377110066](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2056_377110066)
@@ -8250,6 +8272,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Object Storage plug in](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in)
 
 * [Version 2.2](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2.2)
+
+    * [02 November 2026, Version 2.2 - 2.2.61](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2261)
 
     * [28 October 2026, Version 2.2 - 2.2.60](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2260)
 
@@ -8528,7 +8552,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [01 June 2026, Version 3.7.0 - 3.7.0_342381291_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-370_342381291_iks)
 
+* [Version 1.15.12](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.12)
+
+    * [05 November 2026, Version 1.15.12 - 1.15.12_382791975_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11512_382791975_iks)
+
 * [Version 1.15.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.10)
+
+    * [05 November 2026, Version 1.15.10 - 1.15.10_382472523_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_382472523_iks)
 
     * [29 October 2026, Version 1.15.10 - 1.15.10_381939429_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_381939429_iks)
 
