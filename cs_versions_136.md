@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-09-08"
+lastupdated: "2026-11-05"
 
 
 keywords: kubernetes, containers, 136, version 136, 136 update actions
@@ -51,6 +51,8 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 For a complete list of changes that might impact your deployed apps when you update your cluster, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.36.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_136) for version 1.36. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
+
+When you are ready to update, see [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update).
 
 Kubernetes API server and Konnectivity tunnel served over port 443
 :   The Kubernetes API server and Konnectivity tunnel are now served over the standard HTTPS port 443 instead of a dynamically assigned node port (for example, a port in the `20000–32767` range). Traffic is routed to the correct backend service using hostname-based routing, which is why each function has a dedicated hostname even though all services share port 443. This change makes it easier to connect to your cluster from restrictive network environments because you no longer need to allow a non-standard port through your firewalls and egress controls. Your cluster exposes two purpose-built hostnames through its private and public service endpoints:

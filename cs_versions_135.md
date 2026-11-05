@@ -2,7 +2,7 @@
 
 copyright:
   years: 2025, 2026
-lastupdated: "2026-05-20"
+lastupdated: "2026-11-05"
 
 
 keywords: kubernetes, containers, 135, version 135, 135 update actions
@@ -50,6 +50,8 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 For a complete list of changes that might impact your deployed apps when you update your cluster, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.35.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_135) for version 1.35. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
+
+When you are ready to update, see [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update).
 
 ### NodeLocal DNS enabled by default
 {: #nodelocal-dns-135}

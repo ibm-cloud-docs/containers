@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-08-12"
+lastupdated: "2026-11-05"
 
 
 keywords: kubernetes, help, network, connectivity
@@ -53,4 +53,4 @@ Back up your data and reload your worker node.
     ```
     {: pre}
 
-For a long-term fix, [update the flavor of your worker pool](/docs/containers?topic=containers-update#machine_type).
+For a long-term fix, [update the flavor of your worker pool](/docs/containers?topic=containers-update-flavors).

@@ -2472,9 +2472,40 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
 
 
-### Updating and maintaining worker nodes
-{: #sitemap_updating_and_maintaining_worker_nodes}
+### Changing worker pools
+{: #sitemap_changing_worker_pools}
 
+
+[Updating flavors (machine types)](/docs/containers?topic=containers-update-flavors#update-flavors)
+
+* [Before you begin](/docs/containers?topic=containers-update-flavors#machine-type-prereqs)
+
+* [Updating the flavor](/docs/containers?topic=containers-update-flavors#machine-type-steps)
+
+* [Next steps](/docs/containers?topic=containers-update-flavors#update-flavors-next)
+
+* [Related links](/docs/containers?topic=containers-update-flavors#update-flavors-related)
+
+[How worker pools are scaled down](/docs/containers?topic=containers-worker-scaledown-logic#worker-scaledown-logic)
+
+* [Related links](/docs/containers?topic=containers-worker-scaledown-logic#worker-scaledown-related)
+
+
+### Updating clusters and worker nodes
+{: #sitemap_updating_clusters_and_worker_nodes}
+
+
+[Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
+
+* [Update checklist](/docs/containers?topic=containers-update#update-checklist)
+
+* [Other update tasks](/docs/containers?topic=containers-update#update-other-tasks)
+
+* [Troubleshooting update problems](/docs/containers?topic=containers-update#update-troubleshooting)
+
+* [Next steps](/docs/containers?topic=containers-update#update-next-steps)
+
+* [Related links](/docs/containers?topic=containers-update#update-related-links)
 
 [Checking your cluster version, operating system, and Kubernetes server version](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
 
@@ -2488,45 +2519,78 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Checking your worker node operating system in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-os-check)
 
-[Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
+* [Next steps](/docs/containers?topic=containers-flavor-os-check&interface=cli#flavor-os-check-next)
 
-* [Updating the master](/docs/containers?topic=containers-update#master)
+[Preparing to update your cluster](/docs/containers?topic=containers-update-prepare#update-prepare)
 
-    * [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps)
+* [Before you begin](/docs/containers?topic=containers-update-prepare#update-prepare-permissions)
 
-* [Updating classic worker nodes](/docs/containers?topic=containers-update#worker_node)
+* [Reviewing version changes and backing up](/docs/containers?topic=containers-update-prepare#update-prepare-steps)
 
-    * [Prerequisites](/docs/containers?topic=containers-update#worker-up-prereqs)
+* [Checking add-ons](/docs/containers?topic=containers-update-prepare#update-prepare-addons)
 
-    * [Updating classic worker nodes in the CLI with a configmap](/docs/containers?topic=containers-update#worker-up-configmap)
+* [Checking plug-ins](/docs/containers?topic=containers-update-prepare#update-prepare-plugins)
 
-    * [Updating classic worker nodes in the console](/docs/containers?topic=containers-update#worker_up_console)
+* [Next steps](/docs/containers?topic=containers-update-prepare#update-prepare-next)
 
-* [Updating VPC worker nodes](/docs/containers?topic=containers-update#vpc_worker_node)
+* [Related links](/docs/containers?topic=containers-update-prepare#update-prepare-related)
 
-    * [Prerequisites](/docs/containers?topic=containers-update#vpc_worker_prereqs)
+[Updating the cluster master](/docs/containers?topic=containers-update-master#update-master)
 
-    * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update&interface=cli#vpc_worker_cli)
+* [How master updates work](/docs/containers?topic=containers-update-master#master-update-faq)
 
-    * [Firmware updates during VPC bare metal worker reload](/docs/containers?topic=containers-update&interface=cli#vpc_bm_firmware)
+* [Steps to update the cluster master](/docs/containers?topic=containers-update-master#master-steps)
 
-    * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update&interface=ui#vpc_worker_ui)
+* [Next steps](/docs/containers?topic=containers-update-master#update-master-next)
 
-* [Updating flavors (machine types)](/docs/containers?topic=containers-update&interface=ui#machine_type)
+* [Related links](/docs/containers?topic=containers-update-master#update-master-related)
 
-    * [Before you begin](/docs/containers?topic=containers-update&interface=ui#machine-type-prereqs)
+[Updating classic worker nodes](/docs/containers?topic=containers-update-workers-classic#update-workers-classic)
 
-    * [To update flavors](/docs/containers?topic=containers-update&interface=ui#machine-type-steps)
+* [How classic worker node updates work](/docs/containers?topic=containers-update-workers-classic#classic-worker-faq)
 
-* [How are worker pools scaled down?](/docs/containers?topic=containers-update&interface=ui#worker-scaledown-logic)
+* [Prerequisites](/docs/containers?topic=containers-update-workers-classic#worker-up-prereqs)
 
-* [Updating cluster components](/docs/containers?topic=containers-update&interface=ui#components)
+* [Updating classic worker nodes in the CLI with a ConfigMap](/docs/containers?topic=containers-update-workers-classic&interface=cli#worker-up-configmap)
 
-    * [Managing automatic updates for Fluentd](/docs/containers?topic=containers-update&interface=ui#logging-up)
+* [Updating classic worker nodes in the console](/docs/containers?topic=containers-update-workers-classic&interface=ui#worker-up-console)
 
-    * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update&interface=ui#alb)
+* [Next steps](/docs/containers?topic=containers-update-workers-classic&interface=ui#classic-worker-next-steps)
 
-* [Updating managed add-ons](/docs/containers?topic=containers-update&interface=ui#addons-update)
+* [Related links](/docs/containers?topic=containers-update-workers-classic&interface=ui#classic-worker-related)
+
+[Updating VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc#update-workers-vpc)
+
+* [How VPC worker node updates work](/docs/containers?topic=containers-update-workers-vpc#vpc-worker-faq)
+
+* [Prerequisites](/docs/containers?topic=containers-update-workers-vpc#vpc-worker-prereqs)
+
+* [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update-workers-vpc&interface=cli#vpc-worker-cli)
+
+* [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update-workers-vpc&interface=ui#vpc-worker-ui)
+
+* [Next steps](/docs/containers?topic=containers-update-workers-vpc&interface=ui#vpc-worker-next-steps)
+
+* [Related links](/docs/containers?topic=containers-update-workers-vpc&interface=ui#vpc-worker-related)
+
+[Updating cluster components and managed add-ons](/docs/containers?topic=containers-update-components#update-components)
+
+* [Understanding cluster components](/docs/containers?topic=containers-update-components#components)
+
+* [Managing automatic updates for Fluentd](/docs/containers?topic=containers-update-components#logging-up)
+
+* [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update-components#alb)
+
+* [Updating managed add-ons](/docs/containers?topic=containers-update-components#addons-update)
+
+* [Next steps](/docs/containers?topic=containers-update-components#update-components-next)
+
+* [Related links](/docs/containers?topic=containers-update-components#update-components-related)
+
+
+### Maintaining worker nodes
+{: #sitemap_maintaining_worker_nodes}
+
 
 [Creating and managing dedicated hosts on VPC infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
 
@@ -6014,7 +6078,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Available {{site.data.keyword.containerlong_notm}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
 
-* [Update types](/docs/containers?topic=containers-cs_versions#update_types)
+* [Update types](/docs/containers?topic=containers-cs_versions#update-types)
 
 * [Release lifecycle](/docs/containers?topic=containers-cs_versions#release_lifecycle)
 

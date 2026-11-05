@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-08-06"
+lastupdated: "2026-11-05"
 
 
 keywords: kubernetes, helm
@@ -59,7 +59,7 @@ Review the following links for specific update steps for each add-on.
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
 - [Cluster Autoscaler](/docs/containers?topic=containers-cluster-scaling-install-addon#cluster-scaling-install-addon-update-addon)
 - [{{site.data.keyword.filestorage_vpc_full_notm}}](/docs/containers?topic=containers-storage-file-vpc-managing)
-- [Istio](/docs/containers?topic=containers-istio-update#istio_update)
+- [Istio](/docs/containers?topic=containers-istio-update#istio_minor)
 
 
 ## Reviewing add-on states and statuses

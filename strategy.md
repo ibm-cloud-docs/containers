@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-09-28"
+lastupdated: "2026-11-05"
 
 keywords: kubernetes, kubernetes environment, moving to kubernetes, moving to containers, clusters, cluster sizing, containers, {{site.data.keyword.containerlong_notm}}
 
@@ -271,7 +271,7 @@ After your cluster is running, follow these best practices to keep it secure and
 ### Keep your cluster environment up to date
 {: #bp-1}
 
-Check monthly for available security and operating system patches to [update your worker nodes](/docs/containers?topic=containers-update#worker_node). Make sure to [update your cluster](/docs/containers?topic=containers-update) regularly to remain on a supported version of {{site.data.keyword.containershort}}.
+Check monthly for available security and operating system patches to [update your worker nodes](/docs/containers?topic=containers-update#update-checklist). Make sure to [update your cluster](/docs/containers?topic=containers-update) regularly to remain on a supported version of {{site.data.keyword.containershort}}.
 
 ### Keep your command line tools up to date
 {: #bp-2}

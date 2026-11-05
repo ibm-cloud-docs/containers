@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-11-03"
+lastupdated: "2026-11-05"
 
 
 keywords: kubernetes, containers, 137, version 137, 137 update actions
@@ -45,6 +45,8 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 For a complete list of changes that might impact your deployed apps when you update your cluster, review the [community Kubernetes change log](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.37.md){: external} and [IBM version change log](/docs/containers?topic=containers-changelog_137) for version 1.37. You can also review the [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
+
+When you are ready to update, see [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update).
 
 The [cluster autoscaler](/docs/containers?topic=containers-cluster-scaling-classic-vpc) does not yet support version 1.37. If your cluster uses the cluster autoscaler, do not update your cluster to version 1.37.
 {: important}

@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-09-28"
+lastupdated: "2026-11-05"
 
 
 keywords: kubernetes, vlan
@@ -54,7 +54,7 @@ Did you create a cluster with only a private cloud service endpoint before you e
     ```
     {: pre}
 
-5. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+5. [Create a configmap](/docs/containers?topic=containers-update-workers-classic#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 6. Update all the worker nodes in your cluster to pick up the private cloud service endpoint configuration.
 
     By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must [reload the worker nodes manually](/docs/containers?topic=containers-kubernetes-service-cli). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.
@@ -101,7 +101,7 @@ If you previously disabled the public endpoint, you can re-enable it.
     ```
     {: pre}
 
-3. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+3. [Create a configmap](/docs/containers?topic=containers-update-workers-classic#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 4. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.
     ```sh
     ibmcloud ks worker update --cluster CLUSTER_NAME_OR_ID --worker WORKER1,WORKER2
@@ -133,7 +133,7 @@ To disable the public cloud service endpoint, you must first enable the private 
     ```
     {: pre}
 
-4. [Create a ConfigMap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+4. [Create a ConfigMap](/docs/containers?topic=containers-update-workers-classic#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 
 5. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.
     ```sh
@@ -172,7 +172,7 @@ You can't disable the private cloud service endpoint after you enable it.
     ```
     {: pre}
 
-5. [Create a ConfigMap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
+5. [Create a ConfigMap](/docs/containers?topic=containers-update-workers-classic#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the ConfigMap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 
 6. Update all the worker nodes in your cluster to pick up the private cloud service endpoint configuration.
 
@@ -316,5 +316,3 @@ To change the VLANs that a worker pool uses to provision worker nodes:
 
 9. The default ALBs in your cluster are still bound to the old VLAN because their IP addresses are from a subnet on that VLAN. Because ALBs can't be moved across VLANs, you can instead [create ALBs on the new VLANs and disable ALBs on the old VLANs](/docs/containers?topic=containers-ingress-alb-manage#migrate-alb-vlan).
 10. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
-
-

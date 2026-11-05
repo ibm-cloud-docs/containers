@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2014, 2026
-lastupdated: "2026-10-26"
+lastupdated: "2026-11-05"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, kubernetes, kernel, performance
@@ -54,7 +54,7 @@ Modifications to the operating system are not supported. If you modify the defau
 
 To change the compute hardware, such as the CPU and memory per worker node, choose among the following options.
 * Create a worker pool. The instructions vary depending on the type of infrastructure for the cluster, such as classic, VPC, or {{site.data.keyword.satelliteshort}}. For more information, see [Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic) or [Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc). 
-* [Update the flavor](/docs/containers?topic=containers-update#machine_type) in your cluster by creating a worker pool and removing the previous worker pool.
+* [Update the flavor](/docs/containers?topic=containers-update-flavors) in your cluster by creating a worker pool and removing the previous worker pool.
 
 
 

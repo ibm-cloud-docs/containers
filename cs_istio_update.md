@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-07-27"
+lastupdated: "2026-11-05"
 
 
 keywords: istio migration, istio updates, istio upgrades
@@ -158,6 +158,6 @@ For example, the patch version of your add-on might be updated automatically by 
 Update your [Istio components](/docs/containers?topic=containers-istio-update#istio_minor) to the latest patch version that is supported by {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-`addon-istio` 1.26.8 is unsupported on 10 August 2026. Before that date, update to the latest patch version of `addon-istio` 1.29 that is supported by {{site.data.keyword.containerlong_notm}}.
+`addon-istio` 1.26.8 became unsupported on 10 August 2026. If you still use this version, update to the latest patch version of `addon-istio` 1.29 that is supported by {{site.data.keyword.containerlong_notm}}.
 
 `addon-istio` 1.29 is available and supported on {{site.data.keyword.containerlong_notm}} versions 1.33, 1.34 and 1.35. To upgrade from 1.26 to 1.29, complete all minor upgrades, from 1.26 to 1.27, from 1.27 to 1.28 and from 1.28 to 1.29, by following [Updating to a minor version of the Istio add-on](#istio_minor).
