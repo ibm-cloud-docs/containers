@@ -2728,8 +2728,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Migrating workloads from reservations](/docs/containers?topic=containers-reservations#reservations-deprecation-migrate)
 
-* [About reservations](/docs/containers?topic=containers-reservations#ri-about)
-
 * [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
 
 * [Next steps](/docs/containers?topic=containers-reservations#reservations-next)
