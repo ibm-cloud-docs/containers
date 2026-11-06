@@ -2,12 +2,13 @@
 
 copyright:
   years: 2022, 2026
-lastupdated: "2026-02-20"
+lastupdated: "2026-11-05"
 
 
 keywords: ubuntu, operating system, migrate, ubuntu version, worker nodes
 
 subcollection: containers
+content-type: howto
 
 ---
 
@@ -58,7 +59,7 @@ Migrate your worker nodes to use Ubuntu 24. These steps apply to all supported c
 
 1. Update each worker node in the worker pool.
 
-    Make sure that you have enough worker nodes to support your workload while you update or replace the relevant worker nodes. For more information, see [Updating VPC worker nodes](/docs/containers?topic=containers-update&interface=ui#vpc_worker_node) or [Updating classic worker nodes](/docs/containers?topic=containers-update&interface=ui#worker_node).
+    Make sure that you have enough worker nodes to support your workload while you update or replace the relevant worker nodes. For more information, see [Updating VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc) or [Updating classic worker nodes](/docs/containers?topic=containers-update-workers-classic).
     {: tip}
 
     **Classic worker nodes.**
@@ -89,9 +90,9 @@ Migrate your worker nodes to use Ubuntu 24. These steps apply to all supported c
 
 1. If you use the Object Storage plug-in, you must uninstall and reinstall it in your cluster after migrating to a new Ubuntu version. If you don't complete this step, then the Object Storage driver pods can't run in the cluster which leads to not being able to provision or mount volumes.
 
-    1. [Follow the steps to uninstall the Object Storage plug-in](/docs/openshift?topic=openshift-storage_cos_install#remove_cos_plugin).
+    1. [Follow the steps to uninstall the Object Storage plug-in](/docs/containers?topic=containers-storage_cos_install#remove_cos_plugin).
 
-    1. [Reinstall the plug-in](/docs/openshift?topic=openshift-storage_cos_install#remove_cos_plugin).
+    1. [Reinstall the plug-in](/docs/containers?topic=containers-storage_cos_install#storage_cos_install_helm).
 
 
 

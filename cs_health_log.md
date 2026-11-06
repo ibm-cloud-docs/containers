@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-08-31"
+lastupdated: "2026-11-05"
 
 
 keywords: kubernetes, logmet, logs, metrics, recovery, autorecovery
@@ -130,7 +130,7 @@ What are the sources that I can configure log forwarding for?
 
 
 Am I responsible for keeping Fluentd updated?
-:   To change your logging or filter configurations, the Fluentd logging component must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster components: Fluentd for logging](/docs/containers?topic=containers-update#logging-up).
+:   To change your logging or filter configurations, the Fluentd logging component must be at the latest version. By default, automatic updates to the add-on are enabled. To disable automatic updates, see [Updating cluster components: Fluentd for logging](/docs/containers?topic=containers-update-components#logging-up).
 
 Can I forward some logs, but not others, from one source in my cluster?
 :   Yes. For example, if you have a particularly chatty pod, you might want to prevent logs from that pod from taking up log storage space, while still allowing other pods' logs to be forwarded. To prevent logs from a specific pod from being forwarded, see [Filtering logs](#filter-logs).

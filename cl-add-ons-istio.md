@@ -3,7 +3,7 @@
 copyright:
   years: 2024, 2026
 
-lastupdated: "2026-10-30"
+lastupdated: "2026-11-05"
 
 
 keywords: change log, version history, Istio
@@ -56,6 +56,15 @@ Review the version history for Istio.
 {: #cl-add-ons-istio-1.31}
 
 
+### 05 November 2026, Version 1.31 - 1.31.3
+{: #cl-add-ons-istio-1313}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-87864](https://nvd.nist.gov/vuln/detail/cve-2026-87864){: external}, [CVE-2026-86409](https://nvd.nist.gov/vuln/detail/cve-2026-86409){: external}, [CVE-2026-87862](https://nvd.nist.gov/vuln/detail/cve-2026-87862){: external}, [CVE-2026-87863](https://nvd.nist.gov/vuln/detail/cve-2026-87863){: external}, [CVE-2026-92391](https://nvd.nist.gov/vuln/detail/cve-2026-92391){: external}, [CVE-2026-92388](https://nvd.nist.gov/vuln/detail/cve-2026-92388){: external}, [CVE-2026-94266](https://nvd.nist.gov/vuln/detail/cve-2026-94266){: external}, [CVE-2026-86414](https://nvd.nist.gov/vuln/detail/cve-2026-86414){: external}, [CVE-2026-18924](https://nvd.nist.gov/vuln/detail/cve-2026-18924){: external}, [CVE-2026-82209](https://nvd.nist.gov/vuln/detail/cve-2026-82209){: external}, [CVE-2026-80230](https://nvd.nist.gov/vuln/detail/cve-2026-80230){: external}, [CVE-2026-13608](https://nvd.nist.gov/vuln/detail/cve-2026-13608){: external}, [CVE-2026-92389](https://nvd.nist.gov/vuln/detail/cve-2026-92389){: external}, [CVE-2026-84782](https://nvd.nist.gov/vuln/detail/cve-2026-84782){: external}, [CVE-2026-75806](https://nvd.nist.gov/vuln/detail/cve-2026-75806){: external}, [CVE-2026-75805](https://nvd.nist.gov/vuln/detail/cve-2026-75805){: external}, [CVE-2026-54872](https://nvd.nist.gov/vuln/detail/cve-2026-54872){: external}, [CVE-2026-77696](https://nvd.nist.gov/vuln/detail/cve-2026-77696){: external}, [CVE-2026-35189](https://nvd.nist.gov/vuln/detail/cve-2026-35189){: external}, [CVE-2026-82474](https://nvd.nist.gov/vuln/detail/cve-2026-82474){: external}, [CVE-2026-96512](https://nvd.nist.gov/vuln/detail/cve-2026-96512){: external}, [CVE-2026-0799](https://nvd.nist.gov/vuln/detail/cve-2026-0799){: external}, [CVE-2026-59843](https://nvd.nist.gov/vuln/detail/cve-2026-59843){: external}, [CVE-2026-59845](https://nvd.nist.gov/vuln/detail/cve-2026-59845){: external}, [CVE-2026-59846](https://nvd.nist.gov/vuln/detail/cve-2026-59846){: external}, [CVE-2026-59847](https://nvd.nist.gov/vuln/detail/cve-2026-59847){: external}, [CVE-2026-59848](https://nvd.nist.gov/vuln/detail/cve-2026-59848){: external}, [CVE-2026-59850](https://nvd.nist.gov/vuln/detail/cve-2026-59850){: external}, [CVE-2026-53910](https://nvd.nist.gov/vuln/detail/cve-2026-53910){: external}, [CVE-2026-57062](https://nvd.nist.gov/vuln/detail/cve-2026-57062){: external}, [CVE-2026-27456](https://nvd.nist.gov/vuln/detail/cve-2026-27456){: external}, [CVE-2026-27171](https://nvd.nist.gov/vuln/detail/cve-2026-27171){: external}, [CVE-2026-53612](https://nvd.nist.gov/vuln/detail/cve-2026-53612){: external}, [CVE-2026-53613](https://nvd.nist.gov/vuln/detail/cve-2026-53613){: external}, [CVE-2026-53614](https://nvd.nist.gov/vuln/detail/cve-2026-53614){: external}, [CVE-2026-53615](https://nvd.nist.gov/vuln/detail/cve-2026-53615){: external}, [CVE-2026-13595](https://nvd.nist.gov/vuln/detail/cve-2026-13595){: external}, [CVE-2026-77117](https://nvd.nist.gov/vuln/detail/cve-2026-77117){: external}, [CVE-2026-19499](https://nvd.nist.gov/vuln/detail/cve-2026-19499){: external}, [CVE-2026-19542](https://nvd.nist.gov/vuln/detail/cve-2026-19542){: external}, [CVE-2026-80489](https://nvd.nist.gov/vuln/detail/cve-2026-80489){: external}, [CVE-2026-6791](https://nvd.nist.gov/vuln/detail/cve-2026-6791){: external}, [CVE-2026-6368](https://nvd.nist.gov/vuln/detail/cve-2026-6368){: external}, [CVE-2026-54371](https://nvd.nist.gov/vuln/detail/cve-2026-54371){: external}, [CVE-2026-42250](https://nvd.nist.gov/vuln/detail/cve-2026-42250){: external}, [CVE-2026-15534](https://nvd.nist.gov/vuln/detail/cve-2026-15534){: external}, [CVE-2026-19487](https://nvd.nist.gov/vuln/detail/cve-2026-19487){: external}, [CVE-2025-6141](https://nvd.nist.gov/vuln/detail/cve-2025-6141){: external}, [CVE-2025-5278](https://nvd.nist.gov/vuln/detail/cve-2025-5278){: external}, and [CVE-2024-2236](https://nvd.nist.gov/vuln/detail/cve-2024-2236){: external}.
+- Updates in this version: See the Istio release notes for [Istio 1.31.2](https://istio.io/latest/news/releases/1.31.x/announcing-1.31.2/){: external}. and [Istio 1.31.3](https://istio.io/latest/news/releases/1.31.x/announcing-1.31.3/){: external}.
+
+
 ### 12 October 2026, Version 1.31 - 1.31.1
 {: #cl-add-ons-istio-1311}
 
@@ -79,6 +88,15 @@ Review the version history for Istio.
 
 ## Version 1.30
 {: #cl-add-ons-istio-1.30}
+
+
+### 05 November 2026, Version 1.30 - 1.30.7
+{: #cl-add-ons-istio-1307}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-87864](https://nvd.nist.gov/vuln/detail/cve-2026-87864){: external}, [CVE-2026-86409](https://nvd.nist.gov/vuln/detail/cve-2026-86409){: external}, [CVE-2026-87862](https://nvd.nist.gov/vuln/detail/cve-2026-87862){: external}, [CVE-2026-87863](https://nvd.nist.gov/vuln/detail/cve-2026-87863){: external}, [CVE-2026-92391](https://nvd.nist.gov/vuln/detail/cve-2026-92391){: external}, [CVE-2026-92388](https://nvd.nist.gov/vuln/detail/cve-2026-92388){: external}, [CVE-2026-94266](https://nvd.nist.gov/vuln/detail/cve-2026-94266){: external}, [CVE-2026-86414](https://nvd.nist.gov/vuln/detail/cve-2026-86414){: external}, [CVE-2026-18924](https://nvd.nist.gov/vuln/detail/cve-2026-18924){: external}, [CVE-2026-82209](https://nvd.nist.gov/vuln/detail/cve-2026-82209){: external}, [CVE-2026-80230](https://nvd.nist.gov/vuln/detail/cve-2026-80230){: external}, [CVE-2026-13608](https://nvd.nist.gov/vuln/detail/cve-2026-13608){: external}, [CVE-2026-92389](https://nvd.nist.gov/vuln/detail/cve-2026-92389){: external}, [CVE-2026-84782](https://nvd.nist.gov/vuln/detail/cve-2026-84782){: external}, [CVE-2026-75806](https://nvd.nist.gov/vuln/detail/cve-2026-75806){: external}, [CVE-2026-75805](https://nvd.nist.gov/vuln/detail/cve-2026-75805){: external}, [CVE-2026-54872](https://nvd.nist.gov/vuln/detail/cve-2026-54872){: external}, [CVE-2026-77696](https://nvd.nist.gov/vuln/detail/cve-2026-77696){: external}, [CVE-2026-35189](https://nvd.nist.gov/vuln/detail/cve-2026-35189){: external}, [CVE-2026-82474](https://nvd.nist.gov/vuln/detail/cve-2026-82474){: external}, [CVE-2026-96512](https://nvd.nist.gov/vuln/detail/cve-2026-96512){: external}, and [CVE-2026-0799](https://nvd.nist.gov/vuln/detail/cve-2026-0799){: external}.
+- Updates in this version: See the Istio release notes for [Istio 1.30.6](https://istio.io/latest/news/releases/1.30.x/announcing-1.30.6/){: external} and [Istio 1.30.7](https://istio.io/latest/news/releases/1.30.x/announcing-1.30.7/){: external}
 
 
 ### 12 October 2026, Version 1.30 - 1.30.5
@@ -109,6 +127,15 @@ Review the version history for Istio.
 
 ## Version 1.29
 {: #cl-add-ons-istio-1.29}
+
+
+### 05 November 2026, Version 1.29 - 1.29.10
+{: #cl-add-ons-istio-12910}
+
+[Default version]{: tag-green}
+
+- Resolves the following CVEs: [CVE-2026-87864](https://nvd.nist.gov/vuln/detail/cve-2026-87864){: external}, [CVE-2026-86409](https://nvd.nist.gov/vuln/detail/cve-2026-86409){: external}, [CVE-2026-87862](https://nvd.nist.gov/vuln/detail/cve-2026-87862){: external}, [CVE-2026-87863](https://nvd.nist.gov/vuln/detail/cve-2026-87863){: external}, [CVE-2026-92391](https://nvd.nist.gov/vuln/detail/cve-2026-92391){: external}, [CVE-2026-92388](https://nvd.nist.gov/vuln/detail/cve-2026-92388){: external}, [CVE-2026-94266](https://nvd.nist.gov/vuln/detail/cve-2026-94266){: external}, [CVE-2026-86414](https://nvd.nist.gov/vuln/detail/cve-2026-86414){: external}, [CVE-2026-18924](https://nvd.nist.gov/vuln/detail/cve-2026-18924){: external}, [CVE-2026-82209](https://nvd.nist.gov/vuln/detail/cve-2026-82209){: external}, [CVE-2026-80230](https://nvd.nist.gov/vuln/detail/cve-2026-80230){: external}, [CVE-2026-13608](https://nvd.nist.gov/vuln/detail/cve-2026-13608){: external}, [CVE-2026-92389](https://nvd.nist.gov/vuln/detail/cve-2026-92389){: external}, [CVE-2026-84782](https://nvd.nist.gov/vuln/detail/cve-2026-84782){: external}, [CVE-2026-75806](https://nvd.nist.gov/vuln/detail/cve-2026-75806){: external}, [CVE-2026-75805](https://nvd.nist.gov/vuln/detail/cve-2026-75805){: external}, [CVE-2026-54872](https://nvd.nist.gov/vuln/detail/cve-2026-54872){: external}, [CVE-2026-77696](https://nvd.nist.gov/vuln/detail/cve-2026-77696){: external}, [CVE-2026-35189](https://nvd.nist.gov/vuln/detail/cve-2026-35189){: external}, [CVE-2026-82474](https://nvd.nist.gov/vuln/detail/cve-2026-82474){: external}, [CVE-2026-96512](https://nvd.nist.gov/vuln/detail/cve-2026-96512){: external}, and [CVE-2026-0799](https://nvd.nist.gov/vuln/detail/cve-2026-0799){: external}.
+- Updates in this version: See the Istio release notes for [Istio 1.29.9](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.9/){: external}. and [Istio 1.29.10](https://istio.io/latest/news/releases/1.29.x/announcing-1.29.10/){: external}.
 
 
 ### 12 October 2026, Version 1.29 - 1.29.8

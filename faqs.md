@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-10-26"
+lastupdated: "2026-11-06"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -89,11 +89,11 @@ Kubernetes
 {: #managed_master_worker}
 {: faq}
 
-Every cluster in {{site.data.keyword.containerlong_notm}} is controlled by a dedicated Kubernetes master that is managed by IBM in an IBM-owned {{site.data.keyword.cloud_notm}} infrastructure account. The Kubernetes master, including all the master components, compute, networking, and storage resources, is continuously monitored by IBM Site Reliability Engineers (SREs). The SREs apply the latest security standards, detect and remediate malicious activities, and work to ensure reliability and availability of {{site.data.keyword.containerlong_notm}}. Add-ons, such as Fluentd for logging, that are installed automatically when you provision the cluster are automatically updated by IBM. However, you can choose to disable automatic updates for some add-ons and manually update them separately from the master and worker nodes. For more information, see [Updating cluster add-ons](/docs/containers?topic=containers-update#addons-update).
+Every cluster in {{site.data.keyword.containerlong_notm}} is controlled by a dedicated Kubernetes master that is managed by IBM in an IBM-owned {{site.data.keyword.cloud_notm}} infrastructure account. The Kubernetes master, including all the master components, compute, networking, and storage resources, is continuously monitored by IBM Site Reliability Engineers (SREs). The SREs apply the latest security standards, detect and remediate malicious activities, and work to ensure reliability and availability of {{site.data.keyword.containerlong_notm}}. Add-ons, such as Fluentd for logging, that are installed automatically when you provision the cluster are automatically updated by IBM. However, you can choose to disable automatic updates for some add-ons and manually update them separately from the master and worker nodes. For more information, see [Updating cluster add-ons](/docs/containers?topic=containers-update-components#addons-update).
 
-Periodically, Kubernetes releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#update_types). These updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM automatically updates the patch version, but you must update the master major and minor versions. For more information, see [Updating the master](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
+Periodically, Kubernetes releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#update-types). These updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM automatically updates the patch version, but you must update the master major and minor versions. For more information, see [Updating the master](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 
-Worker nodes in standard clusters are provisioned in to your {{site.data.keyword.cloud_notm}} infrastructure account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches. Security updates and patches are made available by IBM Site Reliability Engineers (SREs) who continuously monitor the Linux image that is installed on your worker nodes to detect vulnerabilities and security compliance issues. For more information, see [Updating worker nodes](/docs/containers?topic=containers-update#worker_node).
+Worker nodes in standard clusters are provisioned in to your {{site.data.keyword.cloud_notm}} infrastructure account. The worker nodes are dedicated to your account and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches. Security updates and patches are made available by IBM Site Reliability Engineers (SREs) who continuously monitor the Linux image that is installed on your worker nodes to detect vulnerabilities and security compliance issues. For more information, see [Updating worker nodes](/docs/containers?topic=containers-update-workers-classic).
 
 ## What kinds of workloads can I move to {{site.data.keyword.containerlong_notm}}?
 {: #move_to_cloud}
@@ -439,7 +439,7 @@ No, you cannot move cluster to a different account from the one it was created i
 - Make sure that your cluster always runs a [supported Kubernetes version](/docs/containers?topic=containers-cs_versions).
 - When a new Kubernetes minor version is released, an older version is shortly deprecated after and then becomes unsupported.
 
-For more information, see [Updating the master](/docs/containers?topic=containers-update#master), [Classic worker nodes](/docs/containers?topic=containers-update#worker_node), and [VPC worker nodes](/docs/containers?topic=containers-update#vpc_worker_node).
+For more information, see [Updating the master](/docs/containers?topic=containers-update-master), [VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc), and [Classic worker nodes](/docs/containers?topic=containers-update-workers-classic).
 
 ## What operations are blocked if my cluster is running an unsupported operating system?
 {: #unsupported_os}

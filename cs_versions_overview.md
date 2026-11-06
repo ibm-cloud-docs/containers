@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-11-03"
+lastupdated: "2026-11-05"
 
 
 keywords: kubernetes, versions, update, upgrade
@@ -56,9 +56,9 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 
 ## Update types
-{: #update_types}
+{: #update-types}
 
-Your Kubernetes cluster has three types of updates: major, minor, and patch. As updates become available, you are notified when you view information about the cluster master or worker nodes, such as with the `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get` commands.
+Your cluster has three types of updates: major, minor, and patch. As updates become available, you are notified when you view information about the cluster master or worker nodes, such as with the `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get` commands.
 {: shortdesc}
 
 IBM provides bi-weekly worker node fix packs. IBM's goal is to remediate detected, legitimate vulnerabilities within an appropriate time for the risks they represent. To ensure the quality and stability of the release, fix packs might be delayed.
@@ -67,8 +67,7 @@ Fix packs are applied to the latest upstream stable kernel version that is provi
 
 To keep your nodes secure, you must install worker node fix packs as soon as possible. You can subscribe to notifications to be alerted when a new update is available.
 
-
-|Update type|Examples of version labels|Updated by|Impact
+|Update type|Examples of version labels|Updated by|Impact|
 |-----|-----|-----|-----|
 |Major|1.x.x|You|Operation changes for clusters, including scripts or deployments.|
 |Minor|x.22.x|You|Operation changes for clusters, including scripts or deployments.|
@@ -76,20 +75,21 @@ To keep your nodes secure, you must install worker node fix packs as soon as pos
 {: caption="Impacts of Kubernetes updates" caption-side="bottom"}
 
 Major and minor updates (1.x)
-:   First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).
+:   First, [update your master node](/docs/containers?topic=containers-update-master) and then [update the worker nodes](/docs/containers?topic=containers-update#update-checklist).
     - You can't update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.34 and you want to update to 1.36, you must update to 1.35 first.
     - Worker nodes can't run a Kubernetes major or minor version that is greater than the masters. Additionally, your worker nodes can be only up to two versions behind the master version (`n-2`).
-    - If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cli-install) up-to-date.
+    - If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your cluster and [CLI versions](/docs/containers?topic=containers-cli-install) up-to-date.
 
 Patch updates (x.x.4_1510)
 :   Changes across patches are documented in the change log of each version. Master patches are applied automatically, but you initiate worker node patches and updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the following commands: `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get`.
 :   Patches can be for worker nodes, masters, or both.
     - **Worker node patches**: Check monthly to see whether an update is available. The command to use depends on your cluster infrastructure type and worker node flavor.
         - **Classic clusters**: Use the [`ibmcloud ks worker update`](/docs/containers?topic=containers-kubernetes-service-cli#worker-update-cli) or [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#worker-reload-cli) command. During an update or reload, the worker node machine is reimaged and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage-plan).
-        - **VPC virtual server instance (VSI) workers**: Use the [`ibmcloud ks worker replace`](/docs/containers?topic=containers-kubernetes-service-cli#worker-replace-cli) command. The old worker node is deleted and a new one is provisioned in its place. Data is deleted if not stored outside the worker node.
-        - **VPC bare metal workers**: Use the [`ibmcloud ks worker reload`](/docs/containers?topic=containers-kubernetes-service-cli#worker-reload-cli) command. The node is reloaded in place and retains its IP address. Data on local disks is deleted if not stored outside the worker node.
+        
+        
+        - **VPC workers (virtual server instance and bare metal)**: Use the [`ibmcloud ks worker replace`](/docs/containers?topic=containers-kubernetes-service-cli#worker-replace-cli) command. The old worker node is deleted and a new one is provisioned in its place. Data is deleted if not stored outside the worker node.
+        
     - **Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the change log, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-kubernetes-service-cli#cluster-master-update-cli) command yourself without waiting for the update automation to apply.
-
 
 ## Release lifecycle
 {: #release_lifecycle}
@@ -140,6 +140,8 @@ If you wait until your cluster is two or more minor versions behind the oldest s
 {: shortdesc}
 
 For actions you should take before and after updating your cluster, see the version information links in [Available {{site.data.keyword.containerlong}} versions](#cs_versions_available).
+
+Before you update, see [Preparing to update your cluster](/docs/containers?topic=containers-update-prepare). For steps to update your cluster, see [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update).
 
 ## Archive
 {: #k8s_version_archive}

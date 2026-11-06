@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-11-04"
+lastupdated: "2026-11-06"
 
 
 keywords: containers
@@ -517,6 +517,16 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov26)
+
+    * [5 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0526)
+
+        * Cluster autoscaler cluster add-on patch updates.
+
+        * VPC File CSI Driver cluster add-on patch updates.
+
+        * IBM Storage Operator cluster add-on patch updates.
+
+        * Istio cluster add-on patch updates.
 
     * [3 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0326)
 
@@ -2243,8 +2253,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Next steps](/docs/containers?topic=containers-vpc-migrate-quickstart#vpc-migrate-quickstart-next)
 
 
-## Before you begin
-{: #sitemap_before_you_begin}
+## Prepare to create clusters
+{: #sitemap_prepare_to_create_clusters}
 
 
 [Preparing your account to create clusters](/docs/containers?topic=containers-clusters#clusters)
@@ -2281,8 +2291,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Suggested classic infrastructure permissions](/docs/containers?topic=containers-iam-platform-access-roles#classic-rbac-suggested)
 
 
-## Setting up your tools
-{: #sitemap_setting_up_your_tools}
+## Set up your tools
+{: #sitemap_set_up_your_tools}
 
 
 [Installing the CLI](/docs/containers?topic=containers-cli-install#cli-install)
@@ -2320,8 +2330,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Refreshing IAM access tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 
-## Cluster creation
-{: #sitemap_cluster_creation}
+## Create clusters
+{: #sitemap_create_clusters}
 
 
 [Creating VPC clusters (recommended)](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
@@ -2355,8 +2365,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
 
-## Cluster access
-{: #sitemap_cluster_access}
+## Access clusters
+{: #sitemap_access_clusters}
 
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster#access_cluster)
@@ -2436,9 +2446,106 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Assigning IAM user access to {{site.data.keyword.containershort}} clusters](/docs/containers?topic=containers-terraform-setup#terraform-cluster-IAM)
 
 
-## Cluster management
-{: #sitemap_cluster_management}
+## Manage clusters
+{: #sitemap_manage_clusters}
 
+
+
+### Updating clusters and worker nodes
+{: #sitemap_updating_clusters_and_worker_nodes}
+
+
+[Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
+
+* [Update checklist](/docs/containers?topic=containers-update#update-checklist)
+
+* [Other update tasks](/docs/containers?topic=containers-update#update-other-tasks)
+
+* [Troubleshooting update problems](/docs/containers?topic=containers-update#update-troubleshooting)
+
+* [Next steps](/docs/containers?topic=containers-update#update-next-steps)
+
+* [Related links](/docs/containers?topic=containers-update#update-related-links)
+
+[Checking your cluster version, operating system, and Kubernetes server version](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
+
+* [Checking your cluster master version, worker node version, and worker node operating system in the console](/docs/containers?topic=containers-flavor-os-check&interface=ui#cluster-version-ui)
+
+* [Checking your cluster master version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#cluster-version-cli)
+
+* [Checking your worker node version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-version-cli)
+
+* [Checking a cluster's Kubernetes server version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#kube-version-check)
+
+* [Checking your worker node operating system in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-os-check)
+
+* [Next steps](/docs/containers?topic=containers-flavor-os-check&interface=cli#flavor-os-check-next)
+
+[Preparing to update your cluster](/docs/containers?topic=containers-update-prepare#update-prepare)
+
+* [Before you begin](/docs/containers?topic=containers-update-prepare#update-prepare-permissions)
+
+* [Reviewing version changes and backing up](/docs/containers?topic=containers-update-prepare#update-prepare-steps)
+
+* [Checking add-ons](/docs/containers?topic=containers-update-prepare#update-prepare-addons)
+
+* [Checking plug-ins](/docs/containers?topic=containers-update-prepare#update-prepare-plugins)
+
+* [Next steps](/docs/containers?topic=containers-update-prepare#update-prepare-next)
+
+* [Related links](/docs/containers?topic=containers-update-prepare#update-prepare-related)
+
+[Updating the cluster master](/docs/containers?topic=containers-update-master#update-master)
+
+* [How master updates work](/docs/containers?topic=containers-update-master#master-update-faq)
+
+* [Steps to update the cluster master](/docs/containers?topic=containers-update-master#master-steps)
+
+* [Next steps](/docs/containers?topic=containers-update-master#update-master-next)
+
+* [Related links](/docs/containers?topic=containers-update-master#update-master-related)
+
+[Updating VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc#update-workers-vpc)
+
+* [How VPC worker node updates work](/docs/containers?topic=containers-update-workers-vpc#vpc-worker-faq)
+
+* [Prerequisites](/docs/containers?topic=containers-update-workers-vpc#vpc-worker-prereqs)
+
+* [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update-workers-vpc&interface=cli#vpc-worker-cli)
+
+* [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update-workers-vpc&interface=ui#vpc-worker-ui)
+
+* [Next steps](/docs/containers?topic=containers-update-workers-vpc&interface=ui#vpc-worker-next-steps)
+
+* [Related links](/docs/containers?topic=containers-update-workers-vpc&interface=ui#vpc-worker-related)
+
+[Updating classic worker nodes](/docs/containers?topic=containers-update-workers-classic#update-workers-classic)
+
+* [How classic worker node updates work](/docs/containers?topic=containers-update-workers-classic#classic-worker-faq)
+
+* [Prerequisites](/docs/containers?topic=containers-update-workers-classic#worker-up-prereqs)
+
+* [Updating classic worker nodes in the CLI with a ConfigMap](/docs/containers?topic=containers-update-workers-classic&interface=cli#worker-up-configmap)
+
+* [Updating classic worker nodes in the console](/docs/containers?topic=containers-update-workers-classic&interface=ui#worker-up-console)
+
+* [Next steps](/docs/containers?topic=containers-update-workers-classic&interface=ui#classic-worker-next-steps)
+
+* [Related links](/docs/containers?topic=containers-update-workers-classic&interface=ui#classic-worker-related)
+
+[Updating cluster components and managed add-ons](/docs/containers?topic=containers-update-components#update-components)
+
+* [Understanding cluster components](/docs/containers?topic=containers-update-components#components)
+
+* [Managing automatic updates for Fluentd](/docs/containers?topic=containers-update-components#logging-up)
+
+* [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update-components#alb)
+
+* [Updating managed add-ons](/docs/containers?topic=containers-update-components#addons-update)
+
+* [Next steps](/docs/containers?topic=containers-update-components#update-components-next)
+
+* [Related links](/docs/containers?topic=containers-update-components#update-components-related)
 
 
 ### Adding worker nodes
@@ -2462,61 +2569,41 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
 
 
-### Updating and maintaining worker nodes
-{: #sitemap_updating_and_maintaining_worker_nodes}
+### Managing worker pools
+{: #sitemap_managing_worker_pools}
 
 
-[Checking your cluster version, operating system, and Kubernetes server version](/docs/containers?topic=containers-flavor-os-check#flavor-os-check)
+[Updating flavors (machine types)](/docs/containers?topic=containers-update-flavors#update-flavors)
 
-* [Checking your cluster master version, worker node version, and worker node operating system in the console](/docs/containers?topic=containers-flavor-os-check&interface=ui#cluster-version-ui)
+* [Before you begin](/docs/containers?topic=containers-update-flavors#machine-type-prereqs)
 
-* [Checking your cluster master version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#cluster-version-cli)
+* [Updating the flavor](/docs/containers?topic=containers-update-flavors#machine-type-steps)
 
-* [Checking your worker node version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-version-cli)
+* [Next steps](/docs/containers?topic=containers-update-flavors#update-flavors-next)
 
-* [Checking a cluster's Kubernetes server version in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#kube-version-check)
+* [Related links](/docs/containers?topic=containers-update-flavors#update-flavors-related)
 
-* [Checking your worker node operating system in the CLI](/docs/containers?topic=containers-flavor-os-check&interface=cli#worker-os-check)
+[How worker pools are scaled down](/docs/containers?topic=containers-worker-scaledown-logic#worker-scaledown-logic)
 
-[Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update#update)
+* [Related links](/docs/containers?topic=containers-worker-scaledown-logic#worker-scaledown-related)
 
-* [Updating the master](/docs/containers?topic=containers-update#master)
 
-    * [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps)
+### Migrating worker node operating systems
+{: #sitemap_migrating_worker_node_operating_systems}
 
-* [Updating classic worker nodes](/docs/containers?topic=containers-update#worker_node)
 
-    * [Prerequisites](/docs/containers?topic=containers-update#worker-up-prereqs)
+[Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
 
-    * [Updating classic worker nodes in the CLI with a configmap](/docs/containers?topic=containers-update#worker-up-configmap)
+* [Default operating system by cluster version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-default)
 
-    * [Updating classic worker nodes in the console](/docs/containers?topic=containers-update#worker_up_console)
+* [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
 
-* [Updating VPC worker nodes](/docs/containers?topic=containers-update#vpc_worker_node)
+* [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
 
-    * [Prerequisites](/docs/containers?topic=containers-update#vpc_worker_prereqs)
 
-    * [Updating VPC worker nodes in the CLI](/docs/containers?topic=containers-update&interface=cli#vpc_worker_cli)
+### Managing worker node hosts
+{: #sitemap_managing_worker_node_hosts}
 
-    * [Firmware updates during VPC bare metal worker reload](/docs/containers?topic=containers-update&interface=cli#vpc_bm_firmware)
-
-    * [Updating VPC worker nodes in the console](/docs/containers?topic=containers-update&interface=ui#vpc_worker_ui)
-
-* [Updating flavors (machine types)](/docs/containers?topic=containers-update&interface=ui#machine_type)
-
-    * [Before you begin](/docs/containers?topic=containers-update&interface=ui#machine-type-prereqs)
-
-    * [To update flavors](/docs/containers?topic=containers-update&interface=ui#machine-type-steps)
-
-* [How are worker pools scaled down?](/docs/containers?topic=containers-update&interface=ui#worker-scaledown-logic)
-
-* [Updating cluster components](/docs/containers?topic=containers-update&interface=ui#components)
-
-    * [Managing automatic updates for Fluentd](/docs/containers?topic=containers-update&interface=ui#logging-up)
-
-    * [Managing automatic updates for Ingress ALBs](/docs/containers?topic=containers-update&interface=ui#alb)
-
-* [Updating managed add-ons](/docs/containers?topic=containers-update&interface=ui#addons-update)
 
 [Creating and managing dedicated hosts on VPC infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
 
@@ -2528,14 +2615,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
 
-[Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
-
-* [Default operating system by cluster version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-default)
-
-* [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
-
-* [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
-
 [Preparing IBM Cloud host maintenance updates security enhancements](/docs/containers?topic=containers-host-maintenance#host-maintenance)
 
 * [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
@@ -2545,6 +2624,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Workers in Classic clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-classic)
 
     * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
+
+
+### Managing worker node resources
+{: #sitemap_managing_worker_node_resources}
+
 
 [Tagging and labeling clusters and services](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
 
@@ -2641,8 +2725,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
 
 [Reservations for classic worker node costs](/docs/containers?topic=containers-reservations#reservations)
-
-* [Deprecation timeline](/docs/containers?topic=containers-reservations#reservations-deprecation-timeline)
 
 * [Migrating workloads from reservations](/docs/containers?topic=containers-reservations#reservations-deprecation-migrate)
 
@@ -3034,8 +3116,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Next steps](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-next)
 
 
-## Security and access
-{: #sitemap_security_and_access}
+## Secure clusters and manage access
+{: #sitemap_secure_clusters_and_manage_access}
 
 
 
@@ -3318,8 +3400,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
 
-## Networking
-{: #sitemap_networking}
+## Configure networking
+{: #sitemap_configure_networking}
 
 
 
@@ -3653,8 +3735,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
 
-## Autoscaling
-{: #sitemap_autoscaling}
+## Autoscale clusters
+{: #sitemap_autoscale_clusters}
 
 
 [Preparing your cluster for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
@@ -3761,8 +3843,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Example daemonset to update a containerd custom registry configuration](/docs/containers?topic=containers-registry#ds-example-registry)
 
 
-## App deployment
-{: #sitemap_app_deployment}
+## Deploy apps
+{: #sitemap_deploy_apps}
 
 
 [Planning app deployments](/docs/containers?topic=containers-plan_deploy#plan_deploy)
@@ -4002,8 +4084,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
 
 
-## App exposure
-{: #sitemap_app_exposure}
+## Expose apps
+{: #sitemap_expose_apps}
 
 
 [Choosing an app exposure service](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
@@ -4762,8 +4844,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
-## Headlamp dashboard add-on
-{: #sitemap_headlamp_dashboard_add-on}
+## Use the Headlamp dashboard add-on
+{: #sitemap_use_the_headlamp_dashboard_add-on}
 
 
 [Setting up the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-addon)
@@ -4807,8 +4889,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Pods are not running](/docs/containers?topic=containers-headlamp-addon#headlamp-ts-pods)
 
 
-## Istio service mesh
-{: #sitemap_istio_service_mesh}
+## Set up Istio service mesh
+{: #sitemap_set_up_istio_service_mesh}
 
 
 [Getting started with Istio](/docs/containers?topic=containers-istio-qs#istio-qs)
@@ -4988,8 +5070,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Envoy](/docs/containers?topic=containers-istio-health#envoy)
 
 
-## Add-ons and operators
-{: #sitemap_add-ons_and_operators}
+## Install add-ons and operators
+{: #sitemap_install_add-ons_and_operators}
 
 
 [IBM Cloud services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-3rd-party-integrations)
@@ -5045,8 +5127,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
 
-## Storage
-{: #sitemap_storage}
+## Set up storage
+{: #sitemap_set_up_storage}
 
 
 [Storage overview](/docs/containers?topic=containers-storage-plan#storage-plan)
@@ -5821,8 +5903,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Assigning trusted profiles to file storage](/docs/containers?topic=containers-file_storage#file-classic-trusted-profile)
 
 
-## Observability
-{: #sitemap_observability}
+## Set up observability
+{: #sitemap_set_up_observability}
 
 
 [Logging for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-logging#logging)
@@ -6004,7 +6086,7 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Available {{site.data.keyword.containerlong_notm}} versions](/docs/containers?topic=containers-cs_versions#cs_versions_available)
 
-* [Update types](/docs/containers?topic=containers-cs_versions#update_types)
+* [Update types](/docs/containers?topic=containers-cs_versions#update-types)
 
 * [Release lifecycle](/docs/containers?topic=containers-cs_versions#release_lifecycle)
 
@@ -7587,6 +7669,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 1.31](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.31)
 
+    * [05 November 2026, Version 1.31 - 1.31.3](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1313)
+
     * [12 October 2026, Version 1.31 - 1.31.1](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1311)
 
     * [28 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
@@ -7594,6 +7678,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [23 September 2026, Version 1.31 - 1.31.0](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1310)
 
 * [Version 1.30](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.30)
+
+    * [05 November 2026, Version 1.30 - 1.30.7](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1307)
 
     * [12 October 2026, Version 1.30 - 1.30.5](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1305)
 
@@ -7604,6 +7690,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [21 July 2026, Version 1.30 - 1.30.2](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1302)
 
 * [Version 1.29](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1.29)
+
+    * [05 November 2026, Version 1.29 - 1.29.10](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-12910)
 
     * [12 October 2026, Version 1.29 - 1.29.8](/docs/containers?topic=containers-cl-add-ons-istio#cl-add-ons-istio-1298)
 
@@ -7712,6 +7800,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-supported-versions)
 
 * [Version 2.0.0](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-2.0.0)
+
+    * [05 November 2026, Version 2.0.0 - v200-22-0_380357599](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-22-0_380357599)
 
     * [26 October 2026, Version 2.0.0 - v200-21-0_380175534](/docs/containers?topic=containers-cl-add-ons-cluster-autoscaler#cl-add-ons-cluster-autoscaler-v200-21-0_380175534)
 
@@ -7888,6 +7978,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Supported versions](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-supported-versions)
 
 * [Version 1.0](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-1.0)
+
+    * [05 November 2026, Version 1.0 - v1.0.68_381690929](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1068_381690929)
 
     * [22 October 2026, Version 1.0 - v1.0.64_379022441](/docs/containers?topic=containers-cl-add-ons-ibm-storage-operator#cl-add-ons-ibm-storage-operator-v1064_379022441)
 
@@ -8119,6 +8211,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Version 2.0](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-2.0)
 
+    * [05 November 2026, Version 2.0 - v2.0.60_381677618](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2060_381677618)
+
     * [22 October 2026, Version 2.0 - v2.0.57_379023073](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2057_379023073)
 
     * [15 October 2026, Version 2.0 - v2.0.56_377110066](/docs/containers?topic=containers-cl-add-ons-vpc-file-csi-driver#cl-add-ons-vpc-file-csi-driver-v2056_377110066)
@@ -8250,6 +8344,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Object Storage plug in](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in)
 
 * [Version 2.2](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2.2)
+
+    * [02 November 2026, Version 2.2 - 2.2.61](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2261)
 
     * [28 October 2026, Version 2.2 - 2.2.60](/docs/containers?topic=containers-cl-object-storage-plug-in#cl-object-storage-plug-in-2260)
 
@@ -8528,7 +8624,13 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
     * [01 June 2026, Version 3.7.0 - 3.7.0_342381291_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-370_342381291_iks)
 
+* [Version 1.15.12](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.12)
+
+    * [05 November 2026, Version 1.15.12 - 1.15.12_382791975_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11512_382791975_iks)
+
 * [Version 1.15.10](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-1.15.10)
+
+    * [05 November 2026, Version 1.15.10 - 1.15.10_382472523_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_382472523_iks)
 
     * [29 October 2026, Version 1.15.10 - 1.15.10_381939429_iks](/docs/containers?topic=containers-cl-ingress-alb#cl-ingress-alb-11510_381939429_iks)
 

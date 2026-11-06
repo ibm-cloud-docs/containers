@@ -2,7 +2,7 @@
 
 copyright: 
   years: 2025, 2026
-lastupdated: "2026-07-30"
+lastupdated: "2026-11-05"
 
 
 keywords: kubernetes, rebalance, resize, node scaling, ca, autoscaler, containers
@@ -46,7 +46,7 @@ Before you can rebalance or resize your worker pool, you must remove the worker 
 
 3. [Resize](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-resize-cli) or [rebalance](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool-rebalance-cli) your worker pool.
 
-4. **Optional** [Update your VPC worker nodes](/docs/containers?topic=containers-update#vpc_worker_node).
+4. **Optional** [Update your VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc).
 
 5. Add the worker pool to the `iks-ca-configmap`.
     ```sh
