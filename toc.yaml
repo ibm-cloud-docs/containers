@@ -74,7 +74,7 @@ toc:
       id: howto
       topics:
       - topicgroup:
-          label: Before you begin
+          label: Prepare to create clusters
           topics:
           - cluster-create.md
           - topicgroup:
@@ -82,21 +82,21 @@ toc:
               topics:
               - iam-platform-access-roles.md
       - topicgroup:
-          label: Setting up your tools
+          label: Set up your tools
           topics:
           - cli-install.md
           - cli-update.md
           - include: ../cli/reference/ibmcloud/uninstall_cli.md
           - api-install.md
       - topicgroup:
-          label: Cluster creation
+          label: Create clusters
           topics:
           - topic: cluster-create-vpc-gen2.md
             navtitle: Creating VPC clusters (recommended)
           - cluster-create-classic.md
           - cluster-create-dedicated-hosts.md
       - topicgroup:
-          label: Cluster access
+          label: Access clusters
           topics:
           - cs_cluster_access.md
           - cluster-access-public.md
@@ -108,7 +108,7 @@ toc:
           - cluster-access-wireguard.md
           - terraform-cluster-access.md
       - topicgroup:
-          label: Cluster management
+          label: Manage clusters
           topics:
           - topicgroup:
               label: Updating clusters and worker nodes
@@ -117,8 +117,8 @@ toc:
               - worker-os-check.md
               - update-prepare.md
               - update-master.md
-              - update-workers-classic.md
               - update-workers-vpc.md
+              - update-workers-classic.md
               - update-components.md
           - topicgroup:
               label: Adding worker nodes
@@ -126,13 +126,22 @@ toc:
               - add-workers-vpc.md
               - add-workers-classic.md
           - topicgroup:
-              label: Maintaining worker nodes
+              label: Managing worker pools
               topics:
               - update-flavors.md
               - worker-pool-scaledown.md
-              - dedicated-hosts.md
+          - topicgroup:
+              label: Migrating worker node operating systems
+              topics:
               - ubuntu-migrate.md
+          - topicgroup:
+              label: Managing worker node hosts
+              topics:
+              - dedicated-hosts.md
               - host-maintenance.md
+          - topicgroup:
+              label: Managing worker node resources
+              topics:
               - worker-tag-label.md
               - resource-limit-node.md
           - topicgroup:
@@ -185,7 +194,7 @@ toc:
               - topic: vpc-migrate-manual.md
                 navtitle: Migrating manually without the wizard
       - topicgroup:
-          label: Security and access
+          label: Secure clusters and manage access
           topics:
           - topicgroup:
               label: Access management
@@ -213,7 +222,7 @@ toc:
               - pod-security-admission.md
               - pod-security-admission-migration.md
       - topicgroup:
-          label: Networking
+          label: Configure networking
           topics:
           - topicgroup:
               label: VPC clusters
@@ -241,7 +250,7 @@ toc:
               - network-cluster.md
               - vpn.md
       - topicgroup:
-          label: Autoscaling
+          label: Autoscale clusters
           topics:
           - cluster-scaling-classic-vpc.md
           - cluster-scaling-install-addon.md
@@ -252,7 +261,7 @@ toc:
       - topic: registry.md
         navtitle: Image registry
       - topicgroup:
-          label: App deployment
+          label: Deploy apps
           topics:
           - app-plan.md
           - app-resiliency.md
@@ -263,7 +272,7 @@ toc:
           - nodeport.md
           - app-update.md
       - topicgroup:
-          label: App exposure
+          label: Expose apps
           topics:
           - cs_network_planning.md
           - topicgroup:
@@ -313,11 +322,11 @@ toc:
               - edge-vpc-lb.md
               - lb-dns.md
       - topicgroup:
-          label: Headlamp dashboard add-on
+          label: Use the Headlamp dashboard add-on
           topics:
           - addon-headlamp.md
       - topicgroup:
-          label: Istio service mesh
+          label: Set up Istio service mesh
           topics:
           - cs_istio_qs.md
           - cs_istio_about.md
@@ -328,14 +337,14 @@ toc:
           - cs_istio_custom_gateway.md
           - cs_istio_health.md
       - topicgroup:
-          label: Add-ons and operators
+          label: Install add-ons and operators
           topics:
           - integrations-ibm-third-party.md
           - integrations-addons.md
           - integrations-helm.md
           - integrations-svcbind.md
       - topicgroup:
-          label: Storage
+          label: Set up storage
           topics:
           - topic: storage-plan.md
             navtitle: Storage overview
@@ -405,7 +414,7 @@ toc:
           - topic: storage-file.md
             navtitle: File Storage for Classic
       - topicgroup:
-          label: Observability
+          label: Set up observability
           topics:
           - logging.md
           - monitoring.md

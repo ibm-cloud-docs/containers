@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-11-05"
+lastupdated: "2026-11-06"
 
 
 keywords: kubernetes, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, kubernetes charges, kubernetes service charges, kubernetes price, kubernetes service price,   kubernetes billing, kubernetes service billing, kubernetes costs, kubernetes service costs, 
@@ -439,7 +439,7 @@ No, you cannot move cluster to a different account from the one it was created i
 - Make sure that your cluster always runs a [supported Kubernetes version](/docs/containers?topic=containers-cs_versions).
 - When a new Kubernetes minor version is released, an older version is shortly deprecated after and then becomes unsupported.
 
-For more information, see [Updating the master](/docs/containers?topic=containers-update-master), [Classic worker nodes](/docs/containers?topic=containers-update-workers-classic), and [VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc).
+For more information, see [Updating the master](/docs/containers?topic=containers-update-master), [VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc), and [Classic worker nodes](/docs/containers?topic=containers-update-workers-classic).
 
 ## What operations are blocked if my cluster is running an unsupported operating system?
 {: #unsupported_os}

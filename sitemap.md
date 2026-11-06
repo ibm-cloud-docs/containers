@@ -2253,8 +2253,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Next steps](/docs/containers?topic=containers-vpc-migrate-quickstart#vpc-migrate-quickstart-next)
 
 
-## Before you begin
-{: #sitemap_before_you_begin}
+## Prepare to create clusters
+{: #sitemap_prepare_to_create_clusters}
 
 
 [Preparing your account to create clusters](/docs/containers?topic=containers-clusters#clusters)
@@ -2291,8 +2291,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Suggested classic infrastructure permissions](/docs/containers?topic=containers-iam-platform-access-roles#classic-rbac-suggested)
 
 
-## Setting up your tools
-{: #sitemap_setting_up_your_tools}
+## Set up your tools
+{: #sitemap_set_up_your_tools}
 
 
 [Installing the CLI](/docs/containers?topic=containers-cli-install#cli-install)
@@ -2330,8 +2330,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Refreshing IAM access tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 
-## Cluster creation
-{: #sitemap_cluster_creation}
+## Create clusters
+{: #sitemap_create_clusters}
 
 
 [Creating VPC clusters (recommended)](/docs/containers?topic=containers-cluster-create-vpc-gen2#cluster-create-vpc-gen2)
@@ -2365,8 +2365,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
 
-## Cluster access
-{: #sitemap_cluster_access}
+## Access clusters
+{: #sitemap_access_clusters}
 
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster#access_cluster)
@@ -2446,8 +2446,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Assigning IAM user access to {{site.data.keyword.containershort}} clusters](/docs/containers?topic=containers-terraform-setup#terraform-cluster-IAM)
 
 
-## Cluster management
-{: #sitemap_cluster_management}
+## Manage clusters
+{: #sitemap_manage_clusters}
 
 
 
@@ -2505,20 +2505,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Related links](/docs/containers?topic=containers-update-master#update-master-related)
 
-[Updating classic worker nodes](/docs/containers?topic=containers-update-workers-classic#update-workers-classic)
-
-* [How classic worker node updates work](/docs/containers?topic=containers-update-workers-classic#classic-worker-faq)
-
-* [Prerequisites](/docs/containers?topic=containers-update-workers-classic#worker-up-prereqs)
-
-* [Updating classic worker nodes in the CLI with a ConfigMap](/docs/containers?topic=containers-update-workers-classic&interface=cli#worker-up-configmap)
-
-* [Updating classic worker nodes in the console](/docs/containers?topic=containers-update-workers-classic&interface=ui#worker-up-console)
-
-* [Next steps](/docs/containers?topic=containers-update-workers-classic&interface=ui#classic-worker-next-steps)
-
-* [Related links](/docs/containers?topic=containers-update-workers-classic&interface=ui#classic-worker-related)
-
 [Updating VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc#update-workers-vpc)
 
 * [How VPC worker node updates work](/docs/containers?topic=containers-update-workers-vpc#vpc-worker-faq)
@@ -2532,6 +2518,20 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Next steps](/docs/containers?topic=containers-update-workers-vpc&interface=ui#vpc-worker-next-steps)
 
 * [Related links](/docs/containers?topic=containers-update-workers-vpc&interface=ui#vpc-worker-related)
+
+[Updating classic worker nodes](/docs/containers?topic=containers-update-workers-classic#update-workers-classic)
+
+* [How classic worker node updates work](/docs/containers?topic=containers-update-workers-classic#classic-worker-faq)
+
+* [Prerequisites](/docs/containers?topic=containers-update-workers-classic#worker-up-prereqs)
+
+* [Updating classic worker nodes in the CLI with a ConfigMap](/docs/containers?topic=containers-update-workers-classic&interface=cli#worker-up-configmap)
+
+* [Updating classic worker nodes in the console](/docs/containers?topic=containers-update-workers-classic&interface=ui#worker-up-console)
+
+* [Next steps](/docs/containers?topic=containers-update-workers-classic&interface=ui#classic-worker-next-steps)
+
+* [Related links](/docs/containers?topic=containers-update-workers-classic&interface=ui#classic-worker-related)
 
 [Updating cluster components and managed add-ons](/docs/containers?topic=containers-update-components#update-components)
 
@@ -2569,8 +2569,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
 
 
-### Maintaining worker nodes
-{: #sitemap_maintaining_worker_nodes}
+### Managing worker pools
+{: #sitemap_managing_worker_pools}
 
 
 [Updating flavors (machine types)](/docs/containers?topic=containers-update-flavors#update-flavors)
@@ -2587,6 +2587,24 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Related links](/docs/containers?topic=containers-worker-scaledown-logic#worker-scaledown-related)
 
+
+### Migrating worker node operating systems
+{: #sitemap_migrating_worker_node_operating_systems}
+
+
+[Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
+
+* [Default operating system by cluster version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-default)
+
+* [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
+
+* [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
+
+
+### Managing worker node hosts
+{: #sitemap_managing_worker_node_hosts}
+
+
 [Creating and managing dedicated hosts on VPC infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
 
 * [Setting up dedicated hosts in the CLI](/docs/containers?topic=containers-dedicated-hosts#setup-dedicated-host-cli)
@@ -2597,14 +2615,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Removing dedicated hosts pools in the CLI](/docs/containers?topic=containers-dedicated-hosts#remove-dedicated-host-pool-cli)
 
-[Migrating to a new Ubuntu version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate)
-
-* [Default operating system by cluster version](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-default)
-
-* [Ubuntu 24 limitations](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-24-lim)
-
-* [Migration steps](/docs/containers?topic=containers-ubuntu-migrate#ubuntu-migrate-steps)
-
 [Preparing IBM Cloud host maintenance updates security enhancements](/docs/containers?topic=containers-host-maintenance#host-maintenance)
 
 * [Identifying your affected workers](/docs/containers?topic=containers-host-maintenance#worker-maintenance-list)
@@ -2614,6 +2624,11 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Workers in Classic clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-classic)
 
     * [Workers in VPC clusters](/docs/containers?topic=containers-host-maintenance#worker-maintenance-vpc)
+
+
+### Managing worker node resources
+{: #sitemap_managing_worker_node_resources}
+
 
 [Tagging and labeling clusters and services](/docs/containers?topic=containers-worker-tag-label#worker-tag-label)
 
@@ -3101,8 +3116,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Next steps](/docs/containers?topic=containers-vpc-migrate-manual#vpc-migrate-manual-next)
 
 
-## Security and access
-{: #sitemap_security_and_access}
+## Secure clusters and manage access
+{: #sitemap_secure_clusters_and_manage_access}
 
 
 
@@ -3385,8 +3400,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [References](/docs/containers?topic=containers-pod-security-admission-migration#psa-migration-references)
 
 
-## Networking
-{: #sitemap_networking}
+## Configure networking
+{: #sitemap_configure_networking}
 
 
 
@@ -3720,8 +3735,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
 
-## Autoscaling
-{: #sitemap_autoscaling}
+## Autoscale clusters
+{: #sitemap_autoscale_clusters}
 
 
 [Preparing your cluster for autoscaling](/docs/containers?topic=containers-cluster-scaling-classic-vpc#cluster-scaling-classic-vpc)
@@ -3828,8 +3843,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Example daemonset to update a containerd custom registry configuration](/docs/containers?topic=containers-registry#ds-example-registry)
 
 
-## App deployment
-{: #sitemap_app_deployment}
+## Deploy apps
+{: #sitemap_deploy_apps}
 
 
 [Planning app deployments](/docs/containers?topic=containers-plan_deploy#plan_deploy)
@@ -4069,8 +4084,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
 
 
-## App exposure
-{: #sitemap_app_exposure}
+## Expose apps
+{: #sitemap_expose_apps}
 
 
 [Choosing an app exposure service](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
@@ -4829,8 +4844,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 
-## Headlamp dashboard add-on
-{: #sitemap_headlamp_dashboard_add-on}
+## Use the Headlamp dashboard add-on
+{: #sitemap_use_the_headlamp_dashboard_add-on}
 
 
 [Setting up the Headlamp add-on](/docs/containers?topic=containers-headlamp-addon#headlamp-addon)
@@ -4874,8 +4889,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Pods are not running](/docs/containers?topic=containers-headlamp-addon#headlamp-ts-pods)
 
 
-## Istio service mesh
-{: #sitemap_istio_service_mesh}
+## Set up Istio service mesh
+{: #sitemap_set_up_istio_service_mesh}
 
 
 [Getting started with Istio](/docs/containers?topic=containers-istio-qs#istio-qs)
@@ -5055,8 +5070,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [Envoy](/docs/containers?topic=containers-istio-health#envoy)
 
 
-## Add-ons and operators
-{: #sitemap_add-ons_and_operators}
+## Install add-ons and operators
+{: #sitemap_install_add-ons_and_operators}
 
 
 [IBM Cloud services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-3rd-party-integrations)
@@ -5112,8 +5127,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
 
-## Storage
-{: #sitemap_storage}
+## Set up storage
+{: #sitemap_set_up_storage}
 
 
 [Storage overview](/docs/containers?topic=containers-storage-plan#storage-plan)
@@ -5888,8 +5903,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Assigning trusted profiles to file storage](/docs/containers?topic=containers-file_storage#file-classic-trusted-profile)
 
 
-## Observability
-{: #sitemap_observability}
+## Set up observability
+{: #sitemap_set_up_observability}
 
 
 [Logging for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-logging#logging)

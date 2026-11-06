@@ -2,7 +2,7 @@
 
 copyright:
   years: 2026, 2026
-lastupdated: "2026-11-05"
+lastupdated: "2026-11-06"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, update cluster master, upgrade master, master patch, api server
@@ -33,7 +33,7 @@ How many versions behind the latest can the master be?
 
 
 Can my worker nodes run a later version than the master?
-:   Your worker nodes can't run a later `major.minor` Kubernetes version than the master. Additionally, your worker nodes can be only up to two minor versions behind the master version (`n-2`). First, [update your master](#master-steps) to the latest Kubernetes version. Then, update the worker nodes in your cluster by following the steps for [classic](/docs/containers?topic=containers-update-workers-classic) or [VPC](/docs/containers?topic=containers-update-workers-vpc) worker nodes.
+:   Your worker nodes can't run a later `major.minor` Kubernetes version than the master. Additionally, your worker nodes can be only up to two minor versions behind the master version (`n-2`). First, [update your master](#master-steps) to the latest Kubernetes version. Then, update the worker nodes in your cluster by following the steps for [VPC](/docs/containers?topic=containers-update-workers-vpc) or [classic](/docs/containers?topic=containers-update-workers-classic) worker nodes.
 
 Worker nodes can run later patch versions than the master, such as patch versions that are specific to worker nodes for security updates.
 
@@ -72,8 +72,8 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 When the master update is complete, update your worker nodes. The method depends on your infrastructure type:
 
-* [Updating classic worker nodes](/docs/containers?topic=containers-update-workers-classic) uses a rolling update that is controlled by a ConfigMap and the `worker update` command.
 * [Updating VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc) uses `worker replace --update` for VPC VSI workers and VPC bare metal workers. The ConfigMap rolling update procedure is not yet supported for VPC worker nodes.
+* [Updating classic worker nodes](/docs/containers?topic=containers-update-workers-classic) uses a rolling update that is controlled by a ConfigMap and the `worker update` command.
 
 ## Related links
 {: #update-master-related}

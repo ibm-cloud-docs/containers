@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2026
-lastupdated: "2026-11-05"
+lastupdated: "2026-11-06"
 
 
 keywords: containers, {{site.data.keyword.containerlong_notm}}, upgrade, version, update cluster, update worker nodes, update cluster components, update cluster master, update checklist
@@ -28,7 +28,6 @@ For information about which updates IBM applies and which updates you apply, see
 {: #update-checklist}
 
 Complete updates in the following order. Each step links to the topic that contains the procedure.
-{: shortdesc}
 
 Not sure which infrastructure type you have? In the {{site.data.keyword.cloud_notm}} console, click your cluster and check the **Infrastructure** field on the Overview tab. It shows **Classic**, **VPC**, or **Satellite**.
 
@@ -36,8 +35,8 @@ Not sure which infrastructure type you have? In the {{site.data.keyword.cloud_no
 2. [Prepare to update your cluster](/docs/containers?topic=containers-update-prepare). Review version changes, back up, and check add-ons, plug-ins, and permissions.
 3. [Update the cluster master](/docs/containers?topic=containers-update-master).
 4. Update your worker nodes. The topic to use depends on your infrastructure type.
-    * [Classic worker nodes](/docs/containers?topic=containers-update-workers-classic)
     * [VPC worker nodes](/docs/containers?topic=containers-update-workers-vpc)
+    * [Classic worker nodes](/docs/containers?topic=containers-update-workers-classic)
     * [Satellite worker nodes](/docs/satellite?topic=satellite-host-update-workers)
 5. [Update cluster components and managed add-ons](/docs/containers?topic=containers-update-components), such as Fluentd and Ingress ALBs if you manage them manually.
 
@@ -61,7 +60,6 @@ To change the operating system version of the worker nodes in a worker pool, see
 {: #update-troubleshooting}
 
 If an update does not complete or a cluster or worker node enters an unexpected state, start with the following topics.
-{: shortdesc}
 
 To check the health of the master, see [Reviewing master health](/docs/containers?topic=containers-debug_master). If a webhook blocks the update, see [Troubleshooting webhook errors](/docs/containers?topic=containers-ts-webhook-debug). If replacing a worker node does not create a new worker node, see [Why doesn't replacing a worker node create a worker node?](/docs/containers?topic=containers-auto-rebalance-off). If duplicate nodes appear after an update, see [After a worker node updates or reloads, why do duplicate nodes and pods appear?](/docs/containers?topic=containers-cs_duplicate_nodes).
 
