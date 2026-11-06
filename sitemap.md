@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-11-05"
+lastupdated: "2026-11-06"
 
 
 keywords: containers
@@ -2451,46 +2451,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 
 
-### Adding worker nodes
-{: #sitemap_adding_worker_nodes}
-
-
-[Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
-
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
-
-* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
-
-* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
-
-[Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic#add-workers-classic)
-
-* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-classic#add_pool)
-
-* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-classic#resize-pool)
-
-* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
-
-
-### Changing worker pools
-{: #sitemap_changing_worker_pools}
-
-
-[Updating flavors (machine types)](/docs/containers?topic=containers-update-flavors#update-flavors)
-
-* [Before you begin](/docs/containers?topic=containers-update-flavors#machine-type-prereqs)
-
-* [Updating the flavor](/docs/containers?topic=containers-update-flavors#machine-type-steps)
-
-* [Next steps](/docs/containers?topic=containers-update-flavors#update-flavors-next)
-
-* [Related links](/docs/containers?topic=containers-update-flavors#update-flavors-related)
-
-[How worker pools are scaled down](/docs/containers?topic=containers-worker-scaledown-logic#worker-scaledown-logic)
-
-* [Related links](/docs/containers?topic=containers-worker-scaledown-logic#worker-scaledown-related)
-
-
 ### Updating clusters and worker nodes
 {: #sitemap_updating_clusters_and_worker_nodes}
 
@@ -2588,9 +2548,44 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Related links](/docs/containers?topic=containers-update-components#update-components-related)
 
 
+### Adding worker nodes
+{: #sitemap_adding_worker_nodes}
+
+
+[Adding worker nodes to VPC clusters](/docs/containers?topic=containers-add-workers-vpc#add-workers-vpc)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-vpc#resize-pool-vpc)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-vpc#vpc_add_zone)
+
+[Adding worker nodes to Classic clusters](/docs/containers?topic=containers-add-workers-classic#add-workers-classic)
+
+* [Creating a new worker pool](/docs/containers?topic=containers-add-workers-classic#add_pool)
+
+* [Resizing a worker pool](/docs/containers?topic=containers-add-workers-classic#resize-pool)
+
+* [Adding a zone to a worker pool](/docs/containers?topic=containers-add-workers-classic#add_zone)
+
+
 ### Maintaining worker nodes
 {: #sitemap_maintaining_worker_nodes}
 
+
+[Updating flavors (machine types)](/docs/containers?topic=containers-update-flavors#update-flavors)
+
+* [Before you begin](/docs/containers?topic=containers-update-flavors#machine-type-prereqs)
+
+* [Updating the flavor](/docs/containers?topic=containers-update-flavors#machine-type-steps)
+
+* [Next steps](/docs/containers?topic=containers-update-flavors#update-flavors-next)
+
+* [Related links](/docs/containers?topic=containers-update-flavors#update-flavors-related)
+
+[How worker pools are scaled down](/docs/containers?topic=containers-worker-scaledown-logic#worker-scaledown-logic)
+
+* [Related links](/docs/containers?topic=containers-worker-scaledown-logic#worker-scaledown-related)
 
 [Creating and managing dedicated hosts on VPC infrastructure](/docs/containers?topic=containers-dedicated-hosts#dedicated-hosts)
 
@@ -2715,8 +2710,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
 
 [Reservations for classic worker node costs](/docs/containers?topic=containers-reservations#reservations)
-
-* [Deprecation timeline](/docs/containers?topic=containers-reservations#reservations-deprecation-timeline)
 
 * [Migrating workloads from reservations](/docs/containers?topic=containers-reservations#reservations-deprecation-migrate)
 
