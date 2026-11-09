@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2026
-lastupdated: "2026-11-06"
+lastupdated: "2026-11-09"
 
 
 keywords: containers
@@ -517,6 +517,10 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 [Release notes](/docs/containers?topic=containers-containers-relnotes#containers-relnotes)
 
 * [November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov26)
+
+    * [6 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0626)
+
+        * CLI version 1.0.905 is available.
 
     * [5 November 2026](/docs/containers?topic=containers-containers-relnotes#containers-nov0526)
 
@@ -7310,6 +7314,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
     * [`ibmcloud ks zone rm`](/docs/containers?topic=containers-kubernetes-service-cli#zone-rm-cli)
 
 [CLI change log](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
+
+* [Version v1.0.905](/docs/containers?topic=containers-cs_cli_changelog#cli-01905)
 
 * [Version v1.0.904](/docs/containers?topic=containers-cs_cli_changelog#cli-01904)
 
