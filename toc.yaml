@@ -93,8 +93,8 @@ toc:
           topics:
           - topic: cluster-create-vpc-gen2.md
             navtitle: Creating VPC clusters (recommended)
-          - cluster-create-classic.md
           - cluster-create-dedicated-hosts.md
+          - cluster-create-classic.md
       - topicgroup:
           label: Access clusters
           topics:
@@ -156,7 +156,7 @@ toc:
               - costs.md
               - costs-reserved.md
           - topicgroup:
-              label: Credentials and certificates
+              label: Managing credentials and certificates
               topics:
               - access-apikey.md
               - ca-rotate.md
