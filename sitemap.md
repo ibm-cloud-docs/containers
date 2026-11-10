@@ -2358,6 +2358,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 
 * [Next steps for VPC clusters](/docs/containers?topic=containers-cluster-create-vpc-gen2&interface=terraform#cluster-create-vpc-next-steps)
 
+[Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
+
 [Creating classic clusters](/docs/containers?topic=containers-cluster-create-classic#cluster-create-classic)
 
 * [Prerequisites](/docs/containers?topic=containers-cluster-create-classic#classic-cluster-prereqs)
@@ -2371,8 +2373,6 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Creating a single-zone classic cluster with Terraform](/docs/containers?topic=containers-cluster-create-classic&interface=terraform#cluster_classic_tf)
 
 * [Next steps for Classic clusters](/docs/containers?topic=containers-cluster-create-classic&interface=terraform#cluster-create-classic-next-steps)
-
-[Creating clusters on dedicated hosts for VPC](/docs/containers?topic=containers-cluster-create-dedicated-hosts#cluster-create-dedicated-hosts)
 
 
 ## Access clusters
@@ -2743,8 +2743,8 @@ Browse the site map for {{site.data.keyword.containerlong_notm}} documentation t
 * [Next steps](/docs/containers?topic=containers-reservations#reservations-next)
 
 
-### Credentials and certificates
-{: #sitemap_credentials_and_certificates}
+### Managing credentials and certificates
+{: #sitemap_managing_credentials_and_certificates}
 
 
 [Setting the cluster credentials](/docs/containers?topic=containers-access-creds#access-creds)
