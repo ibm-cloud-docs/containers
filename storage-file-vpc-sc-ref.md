@@ -59,3 +59,14 @@ For more information about each of the classes view the details from the web con
 kubectl get sc CLASS
 ```
 {: pre}
+
+## Storage classes for OpenShift Virtualization
+{: #storage-file-vpc-sc-ocpvirt}
+
+The following storage classes are supported for {{site.data.keyword.openshiftshort}} Virtualization. For more information about {{site.data.keyword.openshiftshort}} Virtualization, see [File Storage for VPC with virtualization](https://cloud.ibm.com/docs/virtualization-solutions?topic=virtualization-solutions-file-storage-vpc-virtualization).
+
+| Name | Description | Generation |
+| --- | --- | --- |
+| ibmc-vpc-file-ocpvirt-1000-iops | 1000 IOPs, `Immediate` binding and `Delete` reclaim policy. Also supported for {{site.data.keyword.openshiftshort}} Virtualization use cases and has round-off capability. | First generation |
+| ibmc-vpc-file-ocpvirt-3000-iops | 3000 IOPs, `Immediate` binding and `Delete` reclaim policy. Also supported for {{site.data.keyword.openshiftshort}} Virtualization use cases and has round-off capability. | First generation |
+{: caption="Storage classes for OpenShift Virtualization" caption-side="bottom"}
